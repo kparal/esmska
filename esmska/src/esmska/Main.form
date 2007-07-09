@@ -147,7 +147,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="senderNumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -167,7 +167,7 @@
           <Properties>
             <Property name="columns" type="int" value="9"/>
             <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new InputVerifier() {&#xa;    public boolean verify(JComponent input) {&#xa;        JTextField tf = (JTextField) input;&#xa;        if (tf.getText().length() != 9)&#xa;            return false;&#xa;        for (Character c : tf.getText().toCharArray()) {&#xa;            if (!Character.isDigit(c))&#xa;                return false;&#xa;        }&#xa;        return true;&#xa;    }&#xa;}" type="code"/>
+              <Connection code="new InputVerifier() {&#xa;    public boolean verify(JComponent input) {&#xa;        JTextField tf = (JTextField) input;&#xa;        if (tf.getText().length() != 9&#xa;                &amp;&amp; tf.getText().length() != 0)&#xa;            return false;&#xa;        for (Character c : tf.getText().toCharArray()) {&#xa;            if (!Character.isDigit(c))&#xa;                return false;&#xa;        }&#xa;        return true;&#xa;    }&#xa;}" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -278,7 +278,9 @@
               <Component id="jSeparator1" alignment="0" pref="624" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="568" max="32767" attributes="0"/>
+                  <EmptySpace pref="408" max="32767" attributes="0"/>
+                  <Component id="smsDelayProgressBar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -288,9 +290,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="statusMessageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="statusAnimationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="statusMessageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="statusAnimationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="smsDelayProgressBar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -309,6 +314,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/esmska/resources/task-idle.png"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JProgressBar" name="smsDelayProgressBar">
+          <Properties>
+            <Property name="maximum" type="int" value="15"/>
+            <Property name="string" type="java.lang.String" value="Pros&#xed;m &#x10d;ekejte..."/>
+            <Property name="stringPainted" type="boolean" value="true"/>
           </Properties>
         </Component>
       </SubComponents>

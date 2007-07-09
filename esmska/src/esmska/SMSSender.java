@@ -27,6 +27,7 @@ public class SMSSender {
     private ArrayList<SMS> smsQueue;
     private boolean running; // sending sms in this moment
     private boolean paused; // queue paused
+    private boolean delayed; //waiting for delay to send another sms
     private SMSWorker smsWorker;
     private Main parent;
     
@@ -43,7 +44,7 @@ public class SMSSender {
     }
     
     private void prepareSending() {
-        if (!isPaused() && !running && !smsQueue.isEmpty()) {
+        if (!isDelayed() && !isPaused() && !running && !smsQueue.isEmpty()) {
             running = true;
             SMS sms = smsQueue.get(0);
             sms.setStatus(SMS.Status.PROBLEMATIC);
@@ -62,6 +63,7 @@ public class SMSSender {
             smsQueue.remove(sms);
             parent.printStatusMessage("Zpráva pro " + sms.getNumber()
             + " byla úspěšně odeslána.");
+            parent.setSMSDelay();
         }
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             parent.printStatusMessage("Zprávu pro " + sms.getNumber()
@@ -75,7 +77,6 @@ public class SMSSender {
         parent.smsQueueChanged();
         parent.setTaskRunning(false);
         running = false;
-        prepareSending();
     }
     
     private class SMSWorker extends SwingWorker<Void, Void> {
@@ -94,20 +95,21 @@ public class SMSSender {
             Operator operator = sms.getOperator();
             sms.setImage(operator.getSecurityImage());
             
-            SwingUtilities.invokeAndWait(new Runnable() {
-                public void run() {
-                    JPanel panel = new JPanel();
-                    JLabel label = new JLabel("Opište kód z obrázku:",
-                            new ImageIcon(sms.getImage()), JLabel.CENTER);
-                    label.setHorizontalTextPosition(JLabel.CENTER);
-                    label.setVerticalTextPosition(JLabel.TOP);
-                    panel.add(label);
-                    String imageCode = JOptionPane.showInputDialog(parent, panel, "Kontrolní kód",
-                            JOptionPane.QUESTION_MESSAGE);
-                    if (imageCode != null)
+            if (sms.getImage() != null) {
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    public void run() {
+                        JPanel panel = new JPanel();
+                        JLabel label = new JLabel("Opište kód z obrázku:",
+                                new ImageIcon(sms.getImage()), JLabel.CENTER);
+                        label.setHorizontalTextPosition(JLabel.CENTER);
+                        label.setVerticalTextPosition(JLabel.TOP);
+                        panel.add(label);
+                        String imageCode = JOptionPane.showInputDialog(parent, panel, "Kontrolní kód",
+                                JOptionPane.QUESTION_MESSAGE);
                         sms.setImageCode(imageCode);
-                }
-            });
+                    }
+                });
+            }
             
             boolean success = operator.send(sms);
             if (success)
@@ -126,5 +128,13 @@ public class SMSSender {
         this.paused = paused;
         if (paused == false)
             prepareSending();
+    }
+
+    public boolean isDelayed() {
+        return delayed;
+    }
+
+    public void setDelayed(boolean delayed) {
+        this.delayed = delayed;
     }
 }

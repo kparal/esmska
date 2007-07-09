@@ -34,7 +34,6 @@ public enum OperatorEnum {
         public static Operator getOperator(OperatorEnum operatorEnum) {
             switch(operatorEnum) {
                 case Vodafone : return new Vodafone();
-//                case T_Mobile : return new Vodafone();
                 case O2 : return new O2();
                 default : throw new IllegalArgumentException("operatorEnum");
             }

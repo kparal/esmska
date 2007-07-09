@@ -8,7 +8,9 @@ package esmska;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -21,6 +23,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import operators.Operator;
@@ -42,6 +45,7 @@ public class Main extends javax.swing.JFrame {
     /** actual queue of sms's */
     private ArrayList<SMS> smsQueue = new ArrayList<SMS>();
     private SMSSender smsSender = new SMSSender(smsQueue, this);
+    private Timer smsDelayTimer = new Timer(1000,new SMSDelayActionListener());
     
     /** Creates new form Main */
     public Main() {
@@ -49,10 +53,13 @@ public class Main extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
         
         initComponents();
+        
         deleteSMSAction.setEnabled(false);
         editSMSAction.setEnabled(false);
+        smsDelayProgressBar.setVisible(false);
+        smsDelayTimer.setInitialDelay(0);
     }
-    
+      
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -80,6 +87,7 @@ public class Main extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
+        smsDelayProgressBar = new javax.swing.JProgressBar();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -91,7 +99,8 @@ public class Main extends javax.swing.JFrame {
         smsNumberTextField.setInputVerifier(new InputVerifier() {
             public boolean verify(JComponent input) {
                 JTextField tf = (JTextField) input;
-                if (tf.getText().length() != 9)
+                if (tf.getText().length() != 9
+                    && tf.getText().length() != 0)
                 return false;
                 for (Character c : tf.getText().toCharArray()) {
                     if (!Character.isDigit(c))
@@ -200,7 +209,7 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(pauseButton)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,6 +224,10 @@ public class Main extends javax.swing.JFrame {
 
         statusAnimationLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/task-idle.png")));
 
+        smsDelayProgressBar.setMaximum(15);
+        smsDelayProgressBar.setString("Pros\u00edm \u010dekejte...");
+        smsDelayProgressBar.setStringPainted(true);
+
         javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
@@ -222,7 +235,9 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 408, Short.MAX_VALUE)
+                .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel))
         );
         statusPanelLayout.setVerticalGroup(
@@ -230,9 +245,11 @@ public class Main extends javax.swing.JFrame {
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(statusMessageLabel)
-                    .addComponent(statusAnimationLabel)))
+                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(statusMessageLabel)
+                        .addComponent(statusAnimationLabel))
+                    .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jMenu1.setText("Program");
@@ -272,6 +289,7 @@ public class Main extends javax.swing.JFrame {
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         if (aboutFrame == null)
             aboutFrame = new AboutFrame();
+        aboutFrame.setLocationRelativeTo(this);
         aboutFrame.setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
     
@@ -331,6 +349,11 @@ public class Main extends javax.swing.JFrame {
     
     public void pauseSMSQueue() {
         smsQueuePauseAction.actionPerformed(null);
+    }
+    
+    public void setSMSDelay() {
+        smsSender.setDelayed(true);
+        smsDelayTimer.start();
     }
     
     /** Action to send sms to queue */
@@ -438,6 +461,25 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
+    /** progress bar action listener after sending sms */
+    private class SMSDelayActionListener implements ActionListener {
+        private int seconds = 0;
+        public void actionPerformed(ActionEvent e) {
+            if (seconds <= 15) {
+                if (seconds == 0)
+                    smsDelayProgressBar.setVisible(true);
+                smsDelayProgressBar.setValue(seconds);
+                seconds++;
+            } else {
+                smsDelayTimer.stop();
+                smsDelayProgressBar.setVisible(false);
+                seconds = 0;
+                smsSender.setDelayed(false);
+                smsSender.announceNewSMS();
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton deleteButton;
@@ -457,6 +499,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton sendButton;
     private javax.swing.JTextField senderNameTextField;
     private javax.swing.JTextField senderNumberTextField;
+    private javax.swing.JProgressBar smsDelayProgressBar;
     private javax.swing.JTextField smsNumberTextField;
     private javax.swing.JList smsQueueList;
     private javax.swing.JTextArea smsTextArea;
