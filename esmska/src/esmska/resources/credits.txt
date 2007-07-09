@@ -4,4 +4,4 @@ Napsali:
 Grafika:
   Tango Desktop Project <http://tango.freedesktop.org>
   Ubuntu <http://www.ubuntu.com>
-
+  Gajim <http://www.gajim.org>
