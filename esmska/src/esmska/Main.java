@@ -88,7 +88,6 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esmska");
         smsNumberTextField.setColumns(9);
-        smsNumberTextField.setText("608827347");
         smsNumberTextField.setInputVerifier(new InputVerifier() {
             public boolean verify(JComponent input) {
                 JTextField tf = (JTextField) input;
