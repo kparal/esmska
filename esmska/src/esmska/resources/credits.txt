@@ -1,0 +1,7 @@
+Napsali:
+  Kamil Páral <ripper42@gmail.com>
+
+Grafika:
+  Tango Desktop Project <http://tango.freedesktop.org>
+  Ubuntu <http://www.ubuntu.com>
+

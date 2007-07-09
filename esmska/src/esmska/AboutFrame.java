@@ -6,14 +6,14 @@
 
 package esmska;
 
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 /**
@@ -25,6 +25,7 @@ public class AboutFrame extends javax.swing.JFrame {
     /** Creates new form AboutFrame */
     public AboutFrame() {
         initComponents();
+        linkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
     
     /** This method is called from within the constructor to
@@ -37,13 +38,14 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        linkLabel = new javax.swing.JLabel();
         creditsButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         licenseButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         setTitle("O Esmska");
+        setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
         setLocationByPlatform(true);
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/esmska.png")));
@@ -55,8 +57,13 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Pos\u00edl\u00e1n\u00ed SMS p\u0159es Internet.");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("<html><a href=\"http://esmska\">http://esmska</a></html>");
+        linkLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        linkLabel.setText("<html><a href=\"http://code.google.com/p/esmska/\">http://code.google.com/p/esmska/</a></html>");
+        linkLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                linkLabelMouseClicked(evt);
+            }
+        });
 
         creditsButton.setText("Pod\u011bkov\u00e1n\u00ed");
         creditsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +106,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                    .addComponent(linkLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -112,7 +119,7 @@ public class AboutFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(28, 28, 28)
-                .addComponent(jLabel4)
+                .addComponent(linkLabel)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
@@ -124,6 +131,17 @@ public class AboutFrame extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void linkLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkLabelMouseClicked
+        if (!Desktop.isDesktopSupported())
+            return;
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            desktop.browse(new URL("http://code.google.com/p/esmska/").toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_linkLabelMouseClicked
     
     private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         try {
@@ -142,37 +160,35 @@ public class AboutFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_licenseButtonActionPerformed
     
     private void creditsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsButtonActionPerformed
-        String s =
-                "Napsali:\n" +
-                "  Kamil Páral <ripper42@gmail.com>\n" +
-                "\n" +
-                "Grafika:\n" +
-                "  Tango Project <url>\n" +
-                "  Ubuntu <url>\n";
-        JTextPane tp = new JTextPane();
-        tp.setText(s);
-        tp.setEditable(false);
-        JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
-                JOptionPane.DEFAULT_OPTION);
-        JDialog dialog = op.createDialog(this,"Poděkování");
-        dialog.setResizable(true);
-        dialog.setVisible(true);
+        try {
+            URL url = getClass().getResource("resources/credits.txt");
+            JTextPane tp = new JTextPane();
+            tp.setPage(url);
+            tp.setEditable(false);
+            JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
+                    JOptionPane.DEFAULT_OPTION);
+            JDialog dialog = op.createDialog(this,"Poděkování");
+            dialog.setResizable(true);
+            dialog.setVisible(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_creditsButtonActionPerformed
     
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_closeButtonActionPerformed
     
-   
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     private javax.swing.JButton creditsButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton licenseButton;
+    private javax.swing.JLabel linkLabel;
     // End of variables declaration//GEN-END:variables
     
 }

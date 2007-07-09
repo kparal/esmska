@@ -18,11 +18,11 @@ import javax.swing.AbstractListModel;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
@@ -31,7 +31,6 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import operators.Operator;
 import operators.OperatorEnum;
-import operators.Vodafone;
 
 /**
  *
@@ -44,6 +43,7 @@ public class Main extends javax.swing.JFrame {
     private Action smsQueuePauseAction = new SMSQueuePauseAction();
     private Action deleteSMSAction = new DeleteSMSAction();
     private Action editSMSAction = new EditSMSAction();
+    private Action aboutAction = new AboutAction();
     private JFrame aboutFrame;
     
     /** actual queue of sms's */
@@ -53,9 +53,6 @@ public class Main extends javax.swing.JFrame {
     
     /** Creates new form Main */
     public Main() {
-        //set program icon
-        this.setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
-        
         initComponents();
         
         deleteSMSAction.setEnabled(false);
@@ -105,6 +102,7 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esmska");
+        setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
         smsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Zpr\u00e1va"));
         jLabel4.setText("\u010c\u00edslo");
 
@@ -175,7 +173,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sendButton)
                 .addContainerGap())
@@ -227,7 +225,7 @@ public class Main extends javax.swing.JFrame {
 
         queuePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Fronta"));
         smsQueueList.setModel(new SMSQueueListModel());
-        smsQueueList.setCellRenderer(new smsQueueListRenderer());
+        smsQueueList.setCellRenderer(new SMSQueueListRenderer());
         smsQueueList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 smsQueueListValueChanged(evt);
@@ -267,9 +265,9 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(pauseButton))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -333,13 +331,8 @@ public class Main extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Program");
+        aboutMenuItem.setAction(aboutAction);
         aboutMenuItem.setText("O programu");
-        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutMenuItemActionPerformed(evt);
-            }
-        });
-
         jMenu1.add(aboutMenuItem);
 
         exitMenuItem.setAction(quitAction);
@@ -365,14 +358,7 @@ public class Main extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        if (aboutFrame == null)
-            aboutFrame = new AboutFrame();
-        aboutFrame.setLocationRelativeTo(this);
-        aboutFrame.setVisible(true);
-    }//GEN-LAST:event_aboutMenuItemActionPerformed
-    
+        
     private void smsQueueListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_smsQueueListValueChanged
         if (!evt.getValueIsAdjusting()) {
             deleteSMSAction.setEnabled(smsQueueList.getModel().getSize() != 0
@@ -436,10 +422,23 @@ public class Main extends javax.swing.JFrame {
         smsDelayTimer.start();
     }
     
+    /** show about frame */
+    private class AboutAction extends AbstractAction {
+        public AboutAction() {
+            super("O programu", new ImageIcon(Main.this.getClass().getResource("resources/about-small.png")));
+        }
+        public void actionPerformed(ActionEvent e) {
+            if (aboutFrame == null)
+                aboutFrame = new AboutFrame();
+            aboutFrame.setLocationRelativeTo(Main.this);
+            aboutFrame.setVisible(true);
+        }
+    }
+    
     /** Action to send sms to queue */
     private class SendAction extends AbstractAction {
         public SendAction() {
-            super("Poslat");
+            super("Poslat", new ImageIcon(Main.this.getClass().getResource("resources/send.png")));
         }
         public void actionPerformed(ActionEvent e) {
             if (smsNumberTextField.getText().isEmpty()) {
@@ -465,15 +464,17 @@ public class Main extends javax.swing.JFrame {
     private class SMSQueuePauseAction extends AbstractAction {
         private boolean makePause = true;
         public SMSQueuePauseAction() {
-            super("Zastavit");
+            super("Zastavit", new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
         }
         public void actionPerformed(ActionEvent e) {
             if (makePause) {
                 smsSender.setPaused(true);
                 this.putValue(AbstractAction.NAME,"Pokračovat");
+                this.putValue(AbstractAction.LARGE_ICON_KEY, new ImageIcon(Main.this.getClass().getResource("resources/start.png")));
             } else {
                 smsSender.setPaused(false);
                 this.putValue(AbstractAction.NAME,"Zastavit");
+                this.putValue(AbstractAction.LARGE_ICON_KEY,new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
             }
             makePause = !makePause;
         }
@@ -482,7 +483,7 @@ public class Main extends javax.swing.JFrame {
     /** erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
         public DeleteSMSAction() {
-            super("Smazat");
+            super("Smazat", new ImageIcon(Main.this.getClass().getResource("resources/delete.png")));
         }
         public void actionPerformed(ActionEvent e) {
             Object[] smsArray = smsQueueList.getSelectedValues();
@@ -497,7 +498,7 @@ public class Main extends javax.swing.JFrame {
     /** action to quit the program */
     private class QuitAction extends AbstractAction {
         public QuitAction() {
-            super("Ukončit");
+            super("Ukončit", new ImageIcon(Main.this.getClass().getResource("resources/exit-small.png")));
         }
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
@@ -507,7 +508,7 @@ public class Main extends javax.swing.JFrame {
     /** edit sms from queue */
     private class EditSMSAction extends AbstractAction {
         public EditSMSAction() {
-            super("Upravit");
+            super("Upravit", new ImageIcon(Main.this.getClass().getResource("resources/edit.png")));
         }
         public void actionPerformed(ActionEvent e) {
             SMS sms = (SMS) smsQueueList.getSelectedValue();
@@ -566,7 +567,8 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    private class smsQueueListRenderer implements ListCellRenderer {
+    /** renderer for items in queue list */
+    private class SMSQueueListRenderer implements ListCellRenderer {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
             if ((((SMS)value).getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
