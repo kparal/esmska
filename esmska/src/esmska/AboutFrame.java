@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -130,11 +131,15 @@ public class AboutFrame extends javax.swing.JFrame {
     
     private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         try {
-            JTextPane tp = new JTextPane();
             URL url = getClass().getResource("resources/license.txt");
+            JTextPane tp = new JTextPane();
             tp.setPage(url);
             tp.setEditable(false);
-            JOptionPane.showMessageDialog(this,new JScrollPane(tp));
+            JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
+                    JOptionPane.DEFAULT_OPTION);
+            JDialog dialog = op.createDialog(this,"Licence");
+            dialog.setResizable(true);
+            dialog.setVisible(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -151,7 +156,11 @@ public class AboutFrame extends javax.swing.JFrame {
         JTextPane tp = new JTextPane();
         tp.setText(s);
         tp.setEditable(false);
-        JOptionPane.showMessageDialog(this,new JScrollPane(tp));
+        JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
+                JOptionPane.DEFAULT_OPTION);
+        JDialog dialog = op.createDialog(this,"Poděkování");
+        dialog.setResizable(true);
+        dialog.setVisible(true);
     }//GEN-LAST:event_creditsButtonActionPerformed
     
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
