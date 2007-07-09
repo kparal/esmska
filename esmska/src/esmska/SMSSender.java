@@ -47,7 +47,6 @@ public class SMSSender {
         if (!isDelayed() && !isPaused() && !running && !smsQueue.isEmpty()) {
             running = true;
             SMS sms = smsQueue.get(0);
-            sms.setStatus(SMS.Status.PROBLEMATIC);
             parent.setTaskRunning(true);
             parent.printStatusMessage("Posílám zprávu pro " + sms.getNumber()
             + " (" + sms.getOperator() + ") ...");
@@ -112,8 +111,7 @@ public class SMSSender {
             }
             
             boolean success = operator.send(sms);
-            if (success)
-                sms.setStatus(SMS.Status.SENT_OK);
+            sms.setStatus(success?SMS.Status.SENT_OK:SMS.Status.PROBLEMATIC);
             
             return null;
         }
@@ -129,11 +127,11 @@ public class SMSSender {
         if (paused == false)
             prepareSending();
     }
-
+    
     public boolean isDelayed() {
         return delayed;
     }
-
+    
     public void setDelayed(boolean delayed) {
         this.delayed = delayed;
     }
