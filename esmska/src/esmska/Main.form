@@ -57,10 +57,11 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="mainPanel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="queuePanel" max="32767" attributes="2"/>
-                  <Component id="senderPanel" alignment="0" max="32767" attributes="2"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="senderPanel" max="32767" attributes="2"/>
+                  <Component id="queuePanel" alignment="0" max="32767" attributes="2"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -320,10 +321,10 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="senderNumberTextField" pref="73" max="32767" attributes="2"/>
+                          <Component id="senderNumberTextField" pref="61" max="32767" attributes="2"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Component id="senderNameTextField" alignment="0" pref="119" max="32767" attributes="2"/>
+                      <Component id="senderNameTextField" alignment="0" pref="107" max="32767" attributes="2"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -394,7 +395,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="131" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="119" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="pauseButton" linkSize="1" alignment="0" min="-2" max="-2" attributes="1"/>
