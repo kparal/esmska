@@ -19,7 +19,6 @@ import javax.swing.AbstractListModel;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
@@ -35,7 +34,10 @@ import javax.swing.event.DocumentEvent.EventType;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
 import javax.swing.text.Element;
 import operators.Operator;
 import operators.OperatorEnum;
@@ -107,7 +109,7 @@ public class Main extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        programMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
 
@@ -337,15 +339,15 @@ public class Main extends javax.swing.JFrame {
 
         queuePanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {deleteButton, editButton, pauseButton});
 
-        jMenu1.setText("Program");
+        programMenu.setText("Program");
         aboutMenuItem.setAction(aboutAction);
         aboutMenuItem.setText("O programu");
-        jMenu1.add(aboutMenuItem);
+        programMenu.add(aboutMenuItem);
 
         exitMenuItem.setAction(quitAction);
-        jMenu1.add(exitMenuItem);
+        programMenu.add(exitMenuItem);
 
-        menuBar.add(jMenu1);
+        menuBar.add(programMenu);
 
         setJMenuBar(menuBar);
 
@@ -604,15 +606,32 @@ public class Main extends javax.swing.JFrame {
             Operator op = (Operator)operatorComboBox.getSelectedItem();
             smsCounterLabel.setText("Napsáno " +  chars
                     + " znaků (" + op.getSMSCount(chars) + " sms).");
+            if (chars > op.getMaxChars()) {
+                smsCounterLabel.setForeground(Color.RED);
+                smsCounterLabel.setText("Napsáno " +  chars
+                        + " znaků (nelze odeslat!).");
+            } else
+                smsCounterLabel.setForeground(SystemColor.textText);
+        }
+        private void colorDocument() {
+//            StyledDocument doc = smsTextPane.getStyledDocument();
+//            Style highlight = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+//            Style regular = doc.addStyle("regular", def);
+//            StyleConstants.setItalic(highlight, true);
+//            doc.setLogicalStyle(0,highlight);
+//
         }
         public void changedUpdate(DocumentEvent e) {
             countChars(e);
+            colorDocument();
         }
         public void insertUpdate(DocumentEvent e) {
             countChars(e);
+            colorDocument();
         }
         public void removeUpdate(DocumentEvent e) {
             countChars(e);
+            colorDocument();
         }
     }
     
@@ -638,6 +657,25 @@ public class Main extends javax.swing.JFrame {
             };
             smsTextPaneListener.insertUpdate(event);
             
+            ((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(
+                    new SMSTextPaneSizeFilter(((Operator)operatorComboBox.getSelectedItem()).getMaxChars()));
+        }
+    }
+    
+    /** limits maximum sms length */
+    private class SMSTextPaneSizeFilter extends DocumentFilter {
+        private int maxChars;
+        public SMSTextPaneSizeFilter(int maxChars) {
+            super();
+            this.maxChars = maxChars;
+        }
+        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+            if ((fb.getDocument().getLength() + text.length() - length) <= maxChars)
+                super.replace(fb, offset, length, text, attrs);
+        }
+        public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+            if ((fb.getDocument().getLength() + string.length()) <= maxChars)
+                super.insertString(fb, offset, string, attr);
         }
     }
     
@@ -652,7 +690,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -660,6 +697,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JComboBox operatorComboBox;
     private javax.swing.JButton pauseButton;
+    private javax.swing.JMenu programMenu;
     private javax.swing.JPanel queuePanel;
     private javax.swing.JButton sendButton;
     private javax.swing.JTextField senderNameTextField;

@@ -9,6 +9,9 @@
 
 package esmska;
 
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.ImageIcon;
@@ -98,8 +101,10 @@ public class SMSSender {
                 SwingUtilities.invokeAndWait(new Runnable() {
                     public void run() {
                         JPanel panel = new JPanel();
+                        Image image = Toolkit.getDefaultToolkit().getImage(sms.getImage());
+                        image.flush();
                         JLabel label = new JLabel("Opište kód z obrázku:",
-                                new ImageIcon(sms.getImage()), JLabel.CENTER);
+                                new ImageIcon(image), JLabel.CENTER);
                         label.setHorizontalTextPosition(JLabel.CENTER);
                         label.setVerticalTextPosition(JLabel.TOP);
                         panel.add(label);

@@ -85,6 +85,7 @@ public class Vodafone implements Operator {
             + "&imgid=" + URLEncoder.encode(imgid!=null?imgid:"","UTF-8")
             + "&ppp=" + URLEncoder.encode(ppp!=null?ppp:"","UTF-8")
             + "&pictogram=" + URLEncoder.encode(sms.getImageCode()!=null?sms.getImageCode():"","UTF-8")
+            + "&send=" + URLEncoder.encode("Odeslat!","UTF-8")
             );
             wr.flush();
             wr.close();
