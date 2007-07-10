@@ -664,8 +664,8 @@ public class Main extends javax.swing.JFrame {
         private int smsLength;
         StyledDocument doc;
         Style regular, highlight;
-        Timer timer = new Timer(500, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        Timer timer = new Timer(500, new ActionListener() { //updating after each event slow,
+            public void actionPerformed(ActionEvent e) {    //therefore timer
                 colorDocument(0,doc.getLength());
             }
         });
@@ -690,27 +690,28 @@ public class Main extends javax.swing.JFrame {
             }
         }
         private Style getStyle(int offset) {
-            if ((offset / smsLength) % 2 == 0)
+            if ((offset / smsLength) % 2 == 0) //even sms
                 return regular;
             else
                 return highlight;
         }
         public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            if ((fb.getDocument().getLength() + text.length() - length) > maxChars)
+            if ((fb.getDocument().getLength() + text.length() - length) > maxChars) //reached size limit
                 return;
             super.replace(fb, offset, length, text, getStyle(offset));
-            if (offset + (text!=null?text.length():0) != fb.getDocument().getLength())
+            if ((offset + (text!=null?text.length():0) != fb.getDocument().getLength()) //not adding to end
+            || (text!=null?text.length():1)!=1) //adding more than 1 char
                 timer.restart();
         }
         public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-            if ((fb.getDocument().getLength() + string.length()) > maxChars)
+            if ((fb.getDocument().getLength() + string.length()) > maxChars) //reached size limit
                 return;
             super.insertString(fb, offset, string, attr);
             timer.restart();
         }
         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
             super.remove(fb, offset, length);
-            if (offset != fb.getDocument().getLength())
+            if (offset != fb.getDocument().getLength()) //not removing from end
                 timer.restart();
         }
     }
