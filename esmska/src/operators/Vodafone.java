@@ -39,7 +39,7 @@ public class Vodafone implements Operator {
             url = new URL("http://sms.vodafone.cz/");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             BufferedReader br = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
+                    new InputStreamReader(con.getInputStream(),"UTF-8"));
             
             String content = "";
             String s = "";
@@ -74,8 +74,8 @@ public class Vodafone implements Operator {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setDoOutput(true);
             con.setUseCaches(false);
-            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+            OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
             wr.write("message=" + URLEncoder.encode(sms.getText()!=null?sms.getText():"","UTF-8")
             + "&number=" + URLEncoder.encode(sms.getNumber()!=null?sms.getNumber():"","UTF-8")
             + "&mynumber=" + URLEncoder.encode(sms.getSenderNumber()!=null?sms.getSenderNumber():"","UTF-8")
@@ -88,7 +88,7 @@ public class Vodafone implements Operator {
             wr.close();
             
             BufferedReader br = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
+                    new InputStreamReader(con.getInputStream(), "UTF-8"));
             
             String content = "";
             String s = "";
