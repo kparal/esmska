@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  */
 public class O2 implements Operator {
     private final int MAX_CHARS = 60;
-    private final int SMS_CHARS = 60;
+    private final int SMS_LENGTH = 60;
     
     /**
      * Creates a new instance of O2
@@ -100,8 +100,13 @@ public class O2 implements Operator {
         return MAX_CHARS;
     }
     
-    public int getSMSCount(int chars) {
-        return (int)Math.ceil((double)chars / SMS_CHARS);
+    public int getSMSLength() {
+        return SMS_LENGTH;
     }
+    
+    public int getSMSCount(int chars) {
+        return (int)Math.ceil((double)chars / SMS_LENGTH);
+    }
+
     
 }

@@ -39,6 +39,10 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.Element;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 import operators.Operator;
 import operators.OperatorEnum;
 
@@ -149,6 +153,7 @@ public class Main extends javax.swing.JFrame {
 
         operatorComboBox.setModel(new DefaultComboBoxModel(OperatorEnum.getAsList().toArray()));
         operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
+        operatorComboBox.setSelectedItem(operatorComboBox.getSelectedItem());
 
         sendButton.setAction(sendAction);
 
@@ -613,25 +618,14 @@ public class Main extends javax.swing.JFrame {
             } else
                 smsCounterLabel.setForeground(SystemColor.textText);
         }
-        private void colorDocument() {
-//            StyledDocument doc = smsTextPane.getStyledDocument();
-//            Style highlight = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-//            Style regular = doc.addStyle("regular", def);
-//            StyleConstants.setItalic(highlight, true);
-//            doc.setLogicalStyle(0,highlight);
-//
-        }
         public void changedUpdate(DocumentEvent e) {
             countChars(e);
-            colorDocument();
         }
         public void insertUpdate(DocumentEvent e) {
             countChars(e);
-            colorDocument();
         }
         public void removeUpdate(DocumentEvent e) {
             countChars(e);
-            colorDocument();
         }
     }
     
@@ -657,27 +651,70 @@ public class Main extends javax.swing.JFrame {
             };
             smsTextPaneListener.insertUpdate(event);
             
+            //set size and color filter
             ((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(
-                    new SMSTextPaneSizeFilter(((Operator)operatorComboBox.getSelectedItem()).getMaxChars()));
+                    new SMSTextPaneDocumentFilter(((Operator)operatorComboBox.getSelectedItem()).getMaxChars(),
+                    ((Operator)operatorComboBox.getSelectedItem()).getSMSLength()));
         }
     }
     
-    /** limits maximum sms length */
-    private class SMSTextPaneSizeFilter extends DocumentFilter {
+    /** limits maximum sms length and colors it */
+    private class SMSTextPaneDocumentFilter extends DocumentFilter {
         private int maxChars;
-        public SMSTextPaneSizeFilter(int maxChars) {
+        private int smsLength;
+        StyledDocument doc;
+        Style regular, highlight;
+        Timer timer = new Timer(500, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                colorDocument(0,doc.getLength());
+            }
+        });
+        public SMSTextPaneDocumentFilter(int maxChars, int smsLength) {
             super();
             this.maxChars = maxChars;
+            this.smsLength = smsLength;
+            timer.setRepeats(false);
+            doc = smsTextPane.getStyledDocument();
+            Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+            regular = doc.addStyle("regular", def);
+            StyleConstants.setForeground(regular,SystemColor.textText);
+            highlight = doc.addStyle("highlight", def);
+            StyleConstants.setForeground(highlight, Color.BLUE);
+        }
+        private void colorDocument(int from, int length) {
+            while (from < length) {
+                int to = ((from / smsLength) + 1) * smsLength - 1;
+                to = to<length-1?to:length-1;
+                doc.setCharacterAttributes(from,to-from+1,getStyle(from),false);
+                from = to + 1;
+            }
+        }
+        private Style getStyle(int offset) {
+            if ((offset / smsLength) % 2 == 0)
+                return regular;
+            else
+                return highlight;
         }
         public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            if ((fb.getDocument().getLength() + text.length() - length) <= maxChars)
-                super.replace(fb, offset, length, text, attrs);
+            if ((fb.getDocument().getLength() + text.length() - length) > maxChars)
+                return;
+            super.replace(fb, offset, length, text, getStyle(offset));
+            if (offset + (text!=null?text.length():0) != fb.getDocument().getLength())
+                timer.restart();
         }
         public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-            if ((fb.getDocument().getLength() + string.length()) <= maxChars)
-                super.insertString(fb, offset, string, attr);
+            if ((fb.getDocument().getLength() + string.length()) > maxChars)
+                return;
+            super.insertString(fb, offset, string, attr);
+            timer.restart();
+        }
+        public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+            super.remove(fb, offset, length);
+            if (offset != fb.getDocument().getLength())
+                timer.restart();
         }
     }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;

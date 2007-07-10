@@ -27,7 +27,7 @@ public class Vodafone implements Operator {
     private String imgid;
     private String ppp;
     private final int MAX_CHARS = 760;
-    private final int SMS_CHARS = 152;
+    private final int SMS_LENGTH = 152;
     
     /**
      * Creates a new instance of Vodafone
@@ -126,9 +126,13 @@ public class Vodafone implements Operator {
     public int getMaxChars() {
         return MAX_CHARS;
     }
+    
+    public int getSMSLength() {
+        return SMS_LENGTH;
+    }
 
     public int getSMSCount(int chars) {
-        return (int)Math.ceil((double)chars / SMS_CHARS);
+        return (int)Math.ceil((double)chars / SMS_LENGTH);
     }
     
     

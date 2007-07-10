@@ -27,4 +27,6 @@ public interface Operator {
     int getMaxChars();
     /** number of sms for int chars */
     int getSMSCount(int chars);
+    /** length of one sms */
+    int getSMSLength();
 }
