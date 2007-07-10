@@ -8,6 +8,8 @@ package esmska;
 
 import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
 import javax.swing.ImageIcon;
@@ -145,10 +147,12 @@ public class AboutFrame extends javax.swing.JFrame {
     
     private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         try {
+            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
             URL url = getClass().getResource("resources/license.txt");
             JTextPane tp = new JTextPane();
             tp.setPage(url);
             tp.setEditable(false);
+            tp.setPreferredSize(new Dimension((int)d.getWidth()/2,(int)d.getHeight()/2)); //reasonable size
             JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
                     JOptionPane.DEFAULT_OPTION);
             JDialog dialog = op.createDialog(this,"Licence");
@@ -163,6 +167,7 @@ public class AboutFrame extends javax.swing.JFrame {
         try {
             URL url = getClass().getResource("resources/credits.txt");
             JTextPane tp = new JTextPane();
+            tp.setContentType("text/plain; charset=utf-8");
             tp.setPage(url);
             tp.setEditable(false);
             JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
