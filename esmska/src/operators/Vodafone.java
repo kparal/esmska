@@ -24,8 +24,10 @@ import java.util.regex.Pattern;
  * @author ripper
  */
 public class Vodafone implements Operator {
-    String imgid;
-    String ppp;
+    private String imgid;
+    private String ppp;
+    private final int MAX_CHARS = 760;
+    private final int SMS_CHARS = 152;
     
     /**
      * Creates a new instance of Vodafone
@@ -118,6 +120,14 @@ public class Vodafone implements Operator {
     
     public String toString() {
         return "Vodafone";
+    }
+
+    public int getMaxChars() {
+        return MAX_CHARS;
+    }
+
+    public int getSMSCount(int chars) {
+        return (int)Math.ceil((double)chars / SMS_CHARS);
     }
     
     

@@ -23,4 +23,8 @@ public interface Operator {
     boolean send(SMS sms);
     /** operator name */
     String toString();
+    /** maximum sendable chars */
+    int getMaxChars();
+    /** number of sms for int chars */
+    int getSMSCount(int chars);
 }
