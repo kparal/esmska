@@ -72,9 +72,9 @@ public class SMSSender {
             + " se nepodařilo odeslat!");
             parent.pauseSMSQueue();
             
-            JOptionPane.showMessageDialog(parent,
-                    "Zprávu se nepovedlo odeslat!\n\nDůvod: " + sms.getErrMsg(),
-                    "Chyba odesílání",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(parent, new JLabel("<html>"
+                    + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
+                    + "</html>"), "Chyba odesílání", JOptionPane.WARNING_MESSAGE);
         }
         parent.smsQueueChanged();
         parent.setTaskRunning(false);

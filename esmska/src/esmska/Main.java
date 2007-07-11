@@ -43,8 +43,10 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
+import operators.O2;
 import operators.Operator;
 import operators.OperatorEnum;
+import operators.Vodafone;
 
 /**
  *
@@ -632,6 +634,7 @@ public class Main extends javax.swing.JFrame {
     /** another operator selected */
     private class OperatorComboBoxActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            //update text editor listeners
             DocumentEvent event = new DocumentEvent() {
                 public ElementChange getChange(Element elem) {
                     return null;
@@ -655,6 +658,16 @@ public class Main extends javax.swing.JFrame {
             ((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(
                     new SMSTextPaneDocumentFilter(((Operator)operatorComboBox.getSelectedItem()).getMaxChars(),
                     ((Operator)operatorComboBox.getSelectedItem()).getSMSLength()));
+            
+            //change controls
+            if (operatorComboBox.getSelectedItem() instanceof Vodafone) {
+                senderNameTextField.setEnabled(true);
+                senderNumberTextField.setEnabled(true);
+            };
+            if (operatorComboBox.getSelectedItem() instanceof O2) {
+                senderNameTextField.setEnabled(false);
+                senderNumberTextField.setEnabled(false);
+            };
         }
     }
     
