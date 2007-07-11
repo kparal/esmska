@@ -402,6 +402,17 @@ public class Main extends javax.swing.JFrame {
             smsNumberTextField.setBackground(Color.RED);
         else
             smsNumberTextField.setBackground(Color.GREEN);
+        
+        //guess operator
+        Operator op = OperatorEnum.getOperator(smsNumberTextField.getText());
+        if (op != null) {
+            for (int i=0; i<operatorComboBox.getItemCount(); i++) {
+                if (operatorComboBox.getItemAt(i).getClass().equals(op.getClass())) {
+                    operatorComboBox.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
     }//GEN-LAST:event_smsNumberTextFieldKeyReleased
     
     /**
