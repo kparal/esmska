@@ -1,0 +1,10 @@
+Esmska 0.1.0
+~~~~~~~~~~~~
+
+Program pro zasílání SMS přes Internet.
+
+Domovská stránka: http://code.google.com/p/esmska/
+
+Požadavky: Java 6 (http://www.java.com/)
+
+Spuštění: Spusťte soubor esmska.jar, případně esmska.sh (v Linuxu apod.) či esmska.bat (ve Windows).

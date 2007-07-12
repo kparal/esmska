@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $# != 1 ]; then
+    echo "Usage: $0 version_dir"
+    echo "Example: $0 esmska-0.1.0"
+    exit 1
+fi
+
+FINALNAME="$1"
+TMPDIR="/tmp/esmska-packaging.$$"
+
+mkdir "$TMPDIR"
+mkdir "$TMPDIR/$FINALNAME"
+
+cp "../../../tags/$FINALNAME/dist/esmska.jar" "$TMPDIR/$FINALNAME"
+cp -r include/* "$TMPDIR/$FINALNAME"
+
+cd "$TMPDIR"
+zip -rq9 "$FINALNAME.zip" "$FINALNAME"
+cd "$OLDPWD"
+mv "$TMPDIR/$FINALNAME.zip" .
+
+rm -rf "$TMPDIR"
