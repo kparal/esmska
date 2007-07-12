@@ -160,7 +160,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="124" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="122" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -232,7 +232,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="smsCounterLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Naps&#xe1;no 0 znak&#x16f;."/>
+                <Property name="text" type="java.lang.String" value="Naps&#xe1;no 0 znak&#x16f; (0 sms)."/>
               </Properties>
             </Component>
           </SubComponents>
@@ -414,10 +414,10 @@
                           <Component id="editButton" linkSize="2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="deleteButton" linkSize="2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="36" max="32767" attributes="0"/>
+                          <EmptySpace pref="34" max="32767" attributes="0"/>
                           <Component id="pauseButton" linkSize="2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane2" alignment="1" pref="72" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="1" pref="70" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

@@ -74,7 +74,7 @@ public class SMSSender {
             
             JOptionPane.showMessageDialog(parent, new JLabel("<html>"
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
-                    + "</html>"), "Chyba odesílání", JOptionPane.WARNING_MESSAGE);
+                    + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
         }
         parent.smsQueueChanged();
         parent.setTaskRunning(false);
