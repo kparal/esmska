@@ -12,7 +12,7 @@ TMPDIR="/tmp/esmska-packaging.$$"
 mkdir "$TMPDIR"
 mkdir "$TMPDIR/$FINALNAME"
 
-cp "../../../tags/$FINALNAME/dist/esmska.jar" "$TMPDIR/$FINALNAME"
+cp "../dist/esmska.jar" "$TMPDIR/$FINALNAME"
 cp -r include/* "$TMPDIR/$FINALNAME"
 
 cd "$TMPDIR"
