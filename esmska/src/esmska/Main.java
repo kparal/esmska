@@ -55,7 +55,7 @@ import operators.Vodafone;
 public class Main extends javax.swing.JFrame {
     
     private Action quitAction = new QuitAction();
-    private Action sendAction = new SendAction();
+    private SendAction sendAction = new SendAction();
     private Action smsQueuePauseAction = new SMSQueuePauseAction();
     private Action deleteSMSAction = new DeleteSMSAction();
     private Action editSMSAction = new EditSMSAction();
@@ -415,6 +415,9 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         }
+        
+        //update send action
+        sendAction.updateStatus();
     }//GEN-LAST:event_smsNumberTextFieldKeyReleased
     
     /**
@@ -485,6 +488,7 @@ public class Main extends javax.swing.JFrame {
     private class SendAction extends AbstractAction {
         public SendAction() {
             super("Poslat", new ImageIcon(Main.this.getClass().getResource("resources/send.png")));
+            this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
             //text must be non-empty
@@ -505,6 +509,18 @@ public class Main extends javax.swing.JFrame {
             smsSender.announceNewSMS();
             
             smsTextPane.setText(null);
+        }
+        /** update status according to conditions  */
+        public void updateStatus() {
+            boolean ok = true;
+            // valid number
+            if (ok && !smsNumberTextField.getInputVerifier().verify(smsNumberTextField))
+                ok = false;
+            // non-empty sms text
+            if (ok && smsTextPane.getText().length() == 0)
+                ok = false;
+            
+            this.setEnabled(ok);
         }
     }
     
@@ -644,14 +660,21 @@ public class Main extends javax.swing.JFrame {
             } else //chars ok
                 smsCounterLabel.setForeground(SystemColor.textText);
         }
+        /** update form components */
+        private void updateUI(DocumentEvent e) {
+            sendAction.updateStatus();
+        }
         public void changedUpdate(DocumentEvent e) {
             countChars(e);
+            updateUI(e);
         }
         public void insertUpdate(DocumentEvent e) {
             countChars(e);
+            updateUI(e);
         }
         public void removeUpdate(DocumentEvent e) {
             countChars(e);
+            updateUI(e);
         }
     }
     
