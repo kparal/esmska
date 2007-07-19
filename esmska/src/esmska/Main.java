@@ -11,6 +11,7 @@ import java.awt.Component;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,6 +62,7 @@ public class Main extends javax.swing.JFrame {
     private Action editSMSAction = new EditSMSAction();
     private Action aboutAction = new AboutAction();
     private JFrame aboutFrame;
+    private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     
     /** actual queue of sms's */
     private ArrayList<SMS> smsQueue = new ArrayList<SMS>();
@@ -68,8 +70,10 @@ public class Main extends javax.swing.JFrame {
     private SMSSender smsSender = new SMSSender(smsQueue, this);
     /** timer to send another sms after defined delay */
     private Timer smsDelayTimer = new Timer(1000,new SMSDelayActionListener());
-    
-    private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
+    /** manager of persistence data */
+    PersistenceManager persistenceManager;
+    /** whether program should remember last settings */
+    private boolean rememberSettings = true;
     
     /** Creates new form Main */
     public Main() {
@@ -77,6 +81,13 @@ public class Main extends javax.swing.JFrame {
         
         smsDelayProgressBar.setVisible(false);
         smsDelayTimer.setInitialDelay(0);
+        try {
+            persistenceManager = PersistenceManager.getPersistenceManager();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!");
+        }
+        loadConfig();
     }
     
     /** This method is called from within the constructor to
@@ -122,6 +133,12 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esmska");
         setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
         smsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Zpr\u00e1va"));
         jLabel4.setText("\u010c\u00edslo");
 
@@ -197,7 +214,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sendButton)
@@ -338,9 +355,9 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(pauseButton))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -386,6 +403,10 @@ public class Main extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        saveConfig();
+    }//GEN-LAST:event_formWindowClosing
     
     private void smsQueueListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_smsQueueListValueChanged
         //update delete and edit actions
@@ -469,6 +490,37 @@ public class Main extends javax.swing.JFrame {
     public void setSMSDelay() {
         smsSender.setDelayed(true);
         smsDelayTimer.start();
+    }
+    
+    /** save program configuration */
+    private void saveConfig() {
+        if (!rememberSettings)
+            return;
+        ConfigBean config = persistenceManager.getConfig();
+        config.setSenderName(senderNameTextField.getText());
+        config.setSenderNumber(senderNumberTextField.getText());
+        try {
+            persistenceManager.saveConfig();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            printStatusMessage("Nepodařilo se uložit nastavení!");
+        }
+    }
+    
+    /** load program configuration */
+    private void loadConfig() {
+        try {
+            persistenceManager.loadConfig();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            printStatusMessage("Nepodařilo se načíst konfiguraci!");
+            return;
+        }
+        ConfigBean config = persistenceManager.getConfig();
+        if (!config.isRememberSettings())
+            return;
+        senderNameTextField.setText(config.getSenderName());
+        senderNumberTextField.setText(config.getSenderNumber());
     }
     
     /** Show about frame */
