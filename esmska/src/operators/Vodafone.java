@@ -19,7 +19,7 @@ import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
+/** Vodafone operator
  *
  * @author ripper
  */
@@ -52,6 +52,7 @@ public class Vodafone implements Operator {
             br.close();
             con.disconnect();
             
+            //find imgid and image url
             Pattern p = Pattern.compile("<input type=\"hidden\" name=\"imgid\" value=\"(.*)\" />");
             Matcher m = p.matcher(content);
             if (m.find()) {
@@ -59,6 +60,7 @@ public class Vodafone implements Operator {
                 url = new URL("http://sms.vodafone.cz/imgcode.php?id=" + imgid);
             }
             
+            //find ppp
             p = Pattern.compile("<input type=\"hidden\" name=\"ppp\" value=\"(.*)\" />");
             m = p.matcher(content);
             if (m.find())
@@ -78,6 +80,7 @@ public class Vodafone implements Operator {
             con.setUseCaches(false);
             con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
             OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
+            //send POST request
             wr.write("message=" + URLEncoder.encode(sms.getText()!=null?sms.getText():"","UTF-8")
             + "&number=" + URLEncoder.encode(sms.getNumber()!=null?sms.getNumber():"","UTF-8")
             + "&mynumber=" + URLEncoder.encode(sms.getSenderNumber()!=null?sms.getSenderNumber():"","UTF-8")
@@ -90,6 +93,7 @@ public class Vodafone implements Operator {
             wr.flush();
             wr.close();
             
+            //get reply
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(con.getInputStream(), "UTF-8"));
             
@@ -102,10 +106,12 @@ public class Vodafone implements Operator {
             br.close();
             con.disconnect();
             
+            //find whether sent ok
             Pattern p = Pattern.compile("<div id=\"thanks\">");
             Matcher m = p.matcher(content);
             boolean ok = m.find();
             
+            //find errors
             p = Pattern.compile("<div id=\"errmsg\">\n<p>(.*?)</p>");
             m = p.matcher(content);
             if (m.find())

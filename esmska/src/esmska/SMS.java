@@ -13,7 +13,7 @@ import java.net.URL;
 import java.text.Normalizer;
 import operators.Operator;
 
-/**
+/** SMS entity class
  *
  * @author ripper
  */
@@ -29,16 +29,21 @@ public class SMS {
     private Status status; //sms status
     private String errMsg; //potential error
     
+    /** Status of SMS */
     public enum Status {
-        WAITING, //new, waiting for sending
-        PROBLEMATIC, //some error occured during sending
-        SENT_OK; //sent ok
+        /** new, waiting for sending */
+        WAITING, 
+        /** some error occured during sending */
+        PROBLEMATIC,
+        /** sent ok */
+        SENT_OK; 
     }
     
     /** Creates a new instance of SMS */
     public SMS() {
     }
     
+    /** remove diacritical marks from text */
     private String removeAccents(String text) {
         return Normalizer.normalize(text, Normalizer.Form.NFD).
                 replaceAll("\\p{InCombiningDiacriticalMarks}+", "");

@@ -48,7 +48,7 @@ import operators.Operator;
 import operators.OperatorEnum;
 import operators.Vodafone;
 
-/**
+/** Main form
  *
  * @author  ripper
  */
@@ -64,7 +64,9 @@ public class Main extends javax.swing.JFrame {
     
     /** actual queue of sms's */
     private ArrayList<SMS> smsQueue = new ArrayList<SMS>();
+    /** sender of sms */
     private SMSSender smsSender = new SMSSender(smsQueue, this);
+    /** timer to send another sms after defined delay */
     private Timer smsDelayTimer = new Timer(1000,new SMSDelayActionListener());
     
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
@@ -73,8 +75,6 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         
-        deleteSMSAction.setEnabled(false);
-        editSMSAction.setEnabled(false);
         smsDelayProgressBar.setVisible(false);
         smsDelayTimer.setInitialDelay(0);
     }
@@ -388,6 +388,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void smsQueueListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_smsQueueListValueChanged
+        //update delete and edit actions
         if (!evt.getValueIsAdjusting()) {
             deleteSMSAction.setEnabled(smsQueueList.getModel().getSize() != 0
                     && smsQueueList.getSelectedIndices().length != 0);
@@ -397,6 +398,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_smsQueueListValueChanged
     
     private void smsNumberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smsNumberTextFieldKeyReleased
+        //color background (number ok/not ok)
         boolean ok = smsNumberTextField.getInputVerifier().verify(smsNumberTextField);
         if (!ok || smsNumberTextField.getText().isEmpty())
             smsNumberTextField.setBackground(Color.RED);
@@ -434,10 +436,12 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
+    /** Prints message to status bar */
     public void printStatusMessage(String message) {
         statusMessageLabel.setText(message);
     }
     
+    /** Tells main form whether it should display task busy icon */
     public void setTaskRunning(boolean b) {
         if (b == false)
             statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource("resources/task-idle.png")));
@@ -445,6 +449,7 @@ public class Main extends javax.swing.JFrame {
             statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource("resources/task-busy.gif")));
     }
     
+    /** Notifies about change in sms queue */
     public void smsQueueChanged() {
         ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
                 smsQueueList.getModel(), 0, smsQueue.size());
@@ -452,16 +457,18 @@ public class Main extends javax.swing.JFrame {
                 smsQueueList,0,smsQueueList.getModel().getSize(),false));
     }
     
+    /** Pauses sms queue */
     public void pauseSMSQueue() {
         smsQueuePauseAction.actionPerformed(null);
     }
     
+    /** Forces delay before sending another sms */
     public void setSMSDelay() {
         smsSender.setDelayed(true);
         smsDelayTimer.start();
     }
     
-    /** show about frame */
+    /** Show about frame */
     private class AboutAction extends AbstractAction {
         public AboutAction() {
             super("O programu", new ImageIcon(Main.this.getClass().getResource("resources/about-small.png")));
@@ -474,16 +481,18 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** Action to send sms to queue */
+    /** Send sms to queue */
     private class SendAction extends AbstractAction {
         public SendAction() {
             super("Poslat", new ImageIcon(Main.this.getClass().getResource("resources/send.png")));
         }
         public void actionPerformed(ActionEvent e) {
+            //text must be non-empty
             if (smsNumberTextField.getText().isEmpty()) {
                 smsNumberTextField.requestFocusInWindow();
                 return;
             }
+            
             SMS sms = new SMS();
             sms.setNumber(smsNumberTextField.getText());
             sms.setText(smsTextPane.getText());
@@ -499,7 +508,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** pause/unpause the sms queue */
+    /** Pause/unpause the sms queue */
     private class SMSQueuePauseAction extends AbstractAction {
         private boolean makePause = true;
         public SMSQueuePauseAction() {
@@ -519,10 +528,11 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** erase sms from queue list */
+    /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
         public DeleteSMSAction() {
             super("Smazat", new ImageIcon(Main.this.getClass().getResource("resources/delete.png")));
+            this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
             Object[] smsArray = smsQueueList.getSelectedValues();
@@ -534,7 +544,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** action to quit the program */
+    /** Quit the program */
     private class QuitAction extends AbstractAction {
         public QuitAction() {
             super("Ukončit", new ImageIcon(Main.this.getClass().getResource("resources/exit-small.png")));
@@ -544,10 +554,11 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** edit sms from queue */
+    /** Edit sms from queue */
     private class EditSMSAction extends AbstractAction {
         public EditSMSAction() {
             super("Upravit", new ImageIcon(Main.this.getClass().getResource("resources/edit.png")));
+            this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
             SMS sms = (SMS) smsQueueList.getSelectedValue();
@@ -585,18 +596,18 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** progress bar action listener after sending sms */
+    /** Progress bar action listener after sending sms */
     private class SMSDelayActionListener implements ActionListener {
         private final int DELAY = 15;
         private int seconds = 0;
         public void actionPerformed(ActionEvent e) {
-            if (seconds <= DELAY) {
+            if (seconds <= DELAY) { //still wainting
                 smsDelayProgressBar.setValue(seconds);
                 smsDelayProgressBar.setString("Další sms za: " + (DELAY-seconds) + "s");
                 if (seconds == 0)
                     smsDelayProgressBar.setVisible(true);
                 seconds++;
-            } else {
+            } else { //delay finished
                 smsDelayTimer.stop();
                 smsDelayProgressBar.setVisible(false);
                 seconds = 0;
@@ -606,10 +617,11 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** renderer for items in queue list */
+    /** Renderer for items in queue list */
     private class SMSQueueListRenderer implements ListCellRenderer {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            //problematic sms colored
             if ((((SMS)value).getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
                 c.setBackground(Color.RED);
             }
@@ -617,18 +629,19 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** listener counting number of chars in sms */
+    /** Listener for sms text pane */
     private class SMSTextPaneListener implements DocumentListener {
+        /** count number of chars in sms and take action */
         private void countChars(DocumentEvent e) {
             int chars = e.getDocument().getLength();
             Operator op = (Operator)operatorComboBox.getSelectedItem();
             smsCounterLabel.setText("Napsáno " +  chars
                     + " znaků (" + op.getSMSCount(chars) + " sms).");
-            if (chars > op.getMaxChars()) {
+            if (chars > op.getMaxChars()) { //chars more than max
                 smsCounterLabel.setForeground(Color.RED);
                 smsCounterLabel.setText("Napsáno " +  chars
                         + " znaků (nelze odeslat!).");
-            } else
+            } else //chars ok
                 smsCounterLabel.setForeground(SystemColor.textText);
         }
         public void changedUpdate(DocumentEvent e) {
@@ -642,7 +655,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** another operator selected */
+    /** Another operator selected */
     private class OperatorComboBoxActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //update text editor listeners
@@ -665,12 +678,12 @@ public class Main extends javax.swing.JFrame {
             };
             smsTextPaneListener.insertUpdate(event);
             
-            //set size and color filter
+            //set size and color filter to text editor
             ((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(
                     new SMSTextPaneDocumentFilter(((Operator)operatorComboBox.getSelectedItem()).getMaxChars(),
                     ((Operator)operatorComboBox.getSelectedItem()).getSMSLength()));
             
-            //change controls
+            //change optional form controls
             if (operatorComboBox.getSelectedItem() instanceof Vodafone) {
                 senderNameTextField.setEnabled(true);
                 senderNumberTextField.setEnabled(true);
@@ -682,14 +695,14 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** limits maximum sms length and colors it */
+    /** Limit maximum sms length and color it */
     private class SMSTextPaneDocumentFilter extends DocumentFilter {
-        private int maxChars;
-        private int smsLength;
+        private int maxChars;  //max chars in message
+        private int smsLength; //length of 1 sms
         StyledDocument doc;
         Style regular, highlight;
-        Timer timer = new Timer(500, new ActionListener() { //updating after each event slow,
-            public void actionPerformed(ActionEvent e) {    //therefore timer
+        Timer timer = new Timer(500, new ActionListener() { //updating after each event is slow,
+            public void actionPerformed(ActionEvent e) {    //therefore there is timer
                 colorDocument(0,doc.getLength());
             }
         });
@@ -698,6 +711,7 @@ public class Main extends javax.swing.JFrame {
             this.maxChars = maxChars;
             this.smsLength = smsLength;
             timer.setRepeats(false);
+            //set styles
             doc = smsTextPane.getStyledDocument();
             Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
             regular = doc.addStyle("regular", def);
@@ -705,6 +719,7 @@ public class Main extends javax.swing.JFrame {
             highlight = doc.addStyle("highlight", def);
             StyleConstants.setForeground(highlight, Color.BLUE);
         }
+        /** color parts of sms */
         private void colorDocument(int from, int length) {
             while (from < length) {
                 int to = ((from / smsLength) + 1) * smsLength - 1;
@@ -713,6 +728,7 @@ public class Main extends javax.swing.JFrame {
                 from = to + 1;
             }
         }
+        /** calculate which style is appropriate for given position */
         private Style getStyle(int offset) {
             if ((offset / smsLength) % 2 == 0) //even sms
                 return regular;

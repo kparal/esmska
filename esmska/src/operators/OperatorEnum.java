@@ -13,7 +13,7 @@ import esmska.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/** Enum of operators
  *
  * @author ripper
  */
@@ -25,10 +25,11 @@ public enum OperatorEnum {
     private static final String[] O2_ANTENUMBERS = {"601","602","606","607",
     "720","721","722","723","724","725","726","727","728","729"};
     
+    /** get operators as List */
     public static List<Operator> getAsList() {
         List<Operator> list = new ArrayList<Operator>();
         for (OperatorEnum oe : OperatorEnum.values())
-            list.add(Resolver.getOperator(oe));
+            list.add(getOperator(oe));
         return list;
     }
     
@@ -49,13 +50,11 @@ public enum OperatorEnum {
     }
     
     /** translate OperatorEnum to Operator */
-    public static class Resolver {
-        public static Operator getOperator(OperatorEnum operatorEnum) {
-            switch(operatorEnum) {
-                case Vodafone : return new Vodafone();
-                case O2 : return new O2();
-                default : throw new IllegalArgumentException("operatorEnum");
-            }
+    public static Operator getOperator(OperatorEnum operatorEnum) {
+        switch(operatorEnum) {
+            case Vodafone : return new Vodafone();
+            case O2 : return new O2();
+            default : throw new IllegalArgumentException("operatorEnum");
         }
     }
 }

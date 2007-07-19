@@ -22,7 +22,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import operators.Operator;
 
-/**
+/** Sender of SMS
  *
  * @author ripper
  */
@@ -31,8 +31,8 @@ public class SMSSender {
     private boolean running; // sending sms in this moment
     private boolean paused; // queue paused
     private boolean delayed; //waiting for delay to send another sms
-    private SMSWorker smsWorker;
-    private Main parent;
+    private SMSWorker smsWorker; //worker for background thread
+    private Main parent; //reference to main form
     
     /** Creates a new instance of SMSSender */
     public SMSSender(ArrayList<SMS> smsQueue, Main parent) {
@@ -42,6 +42,7 @@ public class SMSSender {
         this.parent = parent;
     }
     
+    /** notify about new sms */
     public void announceNewSMS() {
         prepareSending();
     }
@@ -81,6 +82,7 @@ public class SMSSender {
         running = false;
     }
     
+    /** send sms over internet */
     private class SMSWorker extends SwingWorker<Void, Void> {
         private SMS sms;
         
@@ -97,6 +99,7 @@ public class SMSSender {
             Operator operator = sms.getOperator();
             sms.setImage(operator.getSecurityImage());
             
+            //have the user resolve the code from the image
             if (sms.getImage() != null) {
                 SwingUtilities.invokeAndWait(new Runnable() {
                     public void run() {
@@ -115,6 +118,7 @@ public class SMSSender {
                 });
             }
             
+            //send sms
             boolean success = operator.send(sms);
             sms.setStatus(success?SMS.Status.SENT_OK:SMS.Status.PROBLEMATIC);
             
@@ -123,20 +127,24 @@ public class SMSSender {
         
     }
     
+    /** Whether queue is paused */
     public boolean isPaused() {
         return paused;
     }
     
+    /** Pause/unpause queue */
     public void setPaused(boolean paused) {
         this.paused = paused;
         if (paused == false)
             prepareSending();
     }
     
+    /** Whether queue is delayed */
     public boolean isDelayed() {
         return delayed;
     }
     
+    /** Delay/undelay queue */
     public void setDelayed(boolean delayed) {
         this.delayed = delayed;
     }

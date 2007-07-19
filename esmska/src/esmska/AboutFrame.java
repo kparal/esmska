@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-/**
+/** About form
  *
  * @author  ripper
  */
@@ -137,6 +137,7 @@ public class AboutFrame extends javax.swing.JFrame {
     private void linkLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkLabelMouseClicked
         if (!Desktop.isDesktopSupported())
             return;
+        //start browser
         Desktop desktop = Desktop.getDesktop();
         try {
             desktop.browse(new URL("http://code.google.com/p/esmska/").toURI());
@@ -146,6 +147,7 @@ public class AboutFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_linkLabelMouseClicked
     
     private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
+        //show licence
         try {
             Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
             URL url = getClass().getResource("resources/license.txt");
@@ -164,6 +166,7 @@ public class AboutFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_licenseButtonActionPerformed
     
     private void creditsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsButtonActionPerformed
+        //show credits
         try {
             URL url = getClass().getResource("resources/credits.txt");
             JTextPane tp = new JTextPane();
@@ -181,6 +184,7 @@ public class AboutFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_creditsButtonActionPerformed
     
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        //close form
         this.setVisible(false);
     }//GEN-LAST:event_closeButtonActionPerformed
     

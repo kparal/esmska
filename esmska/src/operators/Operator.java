@@ -12,7 +12,7 @@ package operators;
 import esmska.*;
 import java.net.URL;
 
-/**
+/** Interface to operators
  *
  * @author ripper
  */
