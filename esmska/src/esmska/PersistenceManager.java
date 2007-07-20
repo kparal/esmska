@@ -66,11 +66,15 @@ public class PersistenceManager {
     }
     
     public ConfigBean loadConfig() throws IOException {
-        XMLDecoder xmlDecoder = new XMLDecoder(
-                new BufferedInputStream(new FileInputStream(CONFIG_FILE)));
-        ConfigBean config = (ConfigBean) xmlDecoder.readObject();
-        xmlDecoder.close();
-        this.config = config;
+        if (CONFIG_FILE.exists()) {
+            XMLDecoder xmlDecoder = new XMLDecoder(
+                    new BufferedInputStream(new FileInputStream(CONFIG_FILE)));
+            ConfigBean config = (ConfigBean) xmlDecoder.readObject();
+            xmlDecoder.close();
+            this.config = config;
+        } else {
+            config = new ConfigBean();
+        }
         return config;
     }
     

@@ -30,7 +30,7 @@ public class SMS {
     private String errMsg; //potential error
     
     /** Status of SMS */
-    public enum Status {
+    public static enum Status {
         /** new, waiting for sending */
         WAITING, 
         /** some error occured during sending */
@@ -44,7 +44,7 @@ public class SMS {
     }
     
     /** remove diacritical marks from text */
-    private String removeAccents(String text) {
+    private static String removeAccents(String text) {
         return Normalizer.normalize(text, Normalizer.Form.NFD).
                 replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
