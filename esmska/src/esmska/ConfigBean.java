@@ -44,9 +44,9 @@ public class ConfigBean extends Object implements Serializable {
     }
     
     public void setSenderName(String senderName) {
-        String oldValue = this.senderName;
+        String old = this.senderName;
         this.senderName = senderName;
-        propertySupport.firePropertyChange(PROP_SENDER_NAME, oldValue, senderName);
+        propertySupport.firePropertyChange(PROP_SENDER_NAME, old, senderName);
     }
     
     public String getSenderNumber() {
@@ -54,9 +54,9 @@ public class ConfigBean extends Object implements Serializable {
     }
     
     public void setSenderNumber(String senderNumber) {
-        String oldValue = this.senderNumber;
+        String old = this.senderNumber;
         this.senderNumber = senderNumber;
-        propertySupport.firePropertyChange(PROP_SENDER_NUMBER, oldValue, senderNumber);
+        propertySupport.firePropertyChange(PROP_SENDER_NUMBER, old, senderNumber);
     }
 
     public boolean isRememberSettings() {
@@ -64,9 +64,9 @@ public class ConfigBean extends Object implements Serializable {
     }
 
     public void setRememberSettings(boolean rememberSettings) {
-        boolean oldValue = this.rememberSettings;
+        boolean old = this.rememberSettings;
         this.rememberSettings = rememberSettings;
-        propertySupport.firePropertyChange(PROP_REMEMBER_SETTINGS, oldValue, rememberSettings);
+        propertySupport.firePropertyChange(PROP_REMEMBER_SETTINGS, old, rememberSettings);
     }
 
     public ArrayList<SMS> getSmsQueue() {
@@ -74,9 +74,9 @@ public class ConfigBean extends Object implements Serializable {
     }
 
     public void setSmsQueue(ArrayList<SMS> smsQueue) {
-        ArrayList<SMS> oldValue = this.smsQueue;
+        ArrayList<SMS> old = this.smsQueue;
         this.smsQueue = smsQueue;
-        propertySupport.firePropertyChange(PROP_SMS_QUEUE, oldValue, smsQueue);
+        propertySupport.firePropertyChange(PROP_SMS_QUEUE, old, smsQueue);
     }
 
 }

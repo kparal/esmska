@@ -28,6 +28,7 @@ import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.Timer;
+import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentEvent.ElementChange;
@@ -61,7 +62,8 @@ public class Main extends javax.swing.JFrame {
     private Action deleteSMSAction = new DeleteSMSAction();
     private Action editSMSAction = new EditSMSAction();
     private Action aboutAction = new AboutAction();
-    private JFrame aboutFrame;
+    private Action configAction = new ConfigAction();
+    private JFrame aboutFrame, configFrame;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     
     /** actual queue of sms's */
@@ -72,15 +74,15 @@ public class Main extends javax.swing.JFrame {
     private Timer smsDelayTimer = new Timer(1000,new SMSDelayActionListener());
     /** manager of persistence data */
     PersistenceManager persistenceManager;
-    /** whether program should remember last settings */
-    private boolean rememberSettings = true;
+    /** program configuration */
+    ConfigBean config;
     
     /** Creates new form Main */
     public Main() {
         initComponents();
-        
-        smsDelayProgressBar.setVisible(false);
-        smsDelayTimer.setInitialDelay(0);
+        //set tooltip delay
+        ToolTipManager.sharedInstance().setDismissDelay(10000);
+        //load config
         try {
             persistenceManager = PersistenceManager.getPersistenceManager();
         } catch (IOException ex) {
@@ -88,6 +90,10 @@ public class Main extends javax.swing.JFrame {
             printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!");
         }
         loadConfig();
+        //init custom components
+        smsDelayProgressBar.setVisible(false);
+        smsDelayTimer.setInitialDelay(0);
+        configAction.setEnabled(config != null);
     }
     
     /** This method is called from within the constructor to
@@ -127,6 +133,7 @@ public class Main extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
+        configMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
 
@@ -214,7 +221,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sendButton)
@@ -310,7 +317,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         queuePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Fronta"));
@@ -355,15 +362,18 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(pauseButton))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         queuePanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {deleteButton, editButton, pauseButton});
 
         programMenu.setText("Program");
+        configMenuItem.setAction(configAction);
+        programMenu.add(configMenuItem);
+
         aboutMenuItem.setAction(aboutAction);
         aboutMenuItem.setText("O programu");
         programMenu.add(aboutMenuItem);
@@ -384,8 +394,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(senderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(queuePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(queuePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(senderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -395,7 +405,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(queuePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -494,14 +504,10 @@ public class Main extends javax.swing.JFrame {
     
     /** save program configuration */
     private void saveConfig() {
-        if (!rememberSettings)
-            return;
-        ConfigBean config = persistenceManager.getConfig();
-        
         config.setSenderName(senderNameTextField.getText());
         config.setSenderNumber(senderNumberTextField.getText());
         //save sms queue
-        if (smsQueue.size() != 0) { 
+        if (smsQueue.size() != 0) {
             ArrayList<SMS> list = new ArrayList<SMS>();
             for (SMS sms : smsQueue) {
                 //erase connection properties
@@ -533,7 +539,7 @@ public class Main extends javax.swing.JFrame {
             printStatusMessage("Nepodařilo se načíst konfiguraci!");
             return;
         }
-        ConfigBean config = persistenceManager.getConfig();
+        config = persistenceManager.getConfig();
         if (!config.isRememberSettings())
             return;
         
@@ -557,6 +563,20 @@ public class Main extends javax.swing.JFrame {
                 aboutFrame = new AboutFrame();
             aboutFrame.setLocationRelativeTo(Main.this);
             aboutFrame.setVisible(true);
+        }
+    }
+    
+    /** Show config frame */
+    private class ConfigAction extends AbstractAction {
+        public ConfigAction() {
+            super("Nastavení", new ImageIcon(Main.this.getClass().getResource("resources/config-small.png")));
+            this.setEnabled(false);
+        }
+        public void actionPerformed(ActionEvent e) {
+            if (configFrame == null)
+                configFrame = new ConfigFrame(config);
+            configFrame.setLocationRelativeTo(Main.this);
+            configFrame.setVisible(true);
         }
     }
     
@@ -858,6 +878,7 @@ public class Main extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JMenuItem configMenuItem;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JMenuItem exitMenuItem;
