@@ -49,6 +49,8 @@ import operators.O2;
 import operators.Operator;
 import operators.OperatorEnum;
 import operators.Vodafone;
+import persistence.ConfigBean;
+import persistence.PersistenceManager;
 
 /** Main form
  *

@@ -4,8 +4,9 @@
  * Created on 19. červenec 2007, 20:56
  */
 
-package esmska;
+package persistence;
 
+import esmska.SMS;
 import java.beans.*;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -7,8 +7,9 @@
  * and open the template in the editor.
  */
 
-package esmska;
+package persistence;
 
+import esmska.*;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;

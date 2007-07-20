@@ -8,6 +8,7 @@ package esmska;
 
 import java.io.IOException;
 import javax.swing.ImageIcon;
+import persistence.ConfigBean;
 
 /**
  *
