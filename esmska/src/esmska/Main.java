@@ -509,20 +509,16 @@ public class Main extends javax.swing.JFrame {
         config.setSenderName(senderNameTextField.getText());
         config.setSenderNumber(senderNumberTextField.getText());
         //save sms queue
-        if (smsQueue.size() != 0) {
-            ArrayList<SMS> list = new ArrayList<SMS>();
-            for (SMS sms : smsQueue) {
-                //erase connection properties
-                sms.setErrMsg(null);
-                sms.setImage(null);
-                sms.setImageCode(null);
-                sms.setStatus(null);
-                list.add(sms);
-            }
-            config.setSmsQueue(list);
-        } else {
-            config.setSmsQueue(null);
+        ArrayList<SMS> list = new ArrayList<SMS>();
+        for (SMS sms : smsQueue) {
+            //erase connection properties
+            sms.setErrMsg(null);
+            sms.setImage(null);
+            sms.setImageCode(null);
+            sms.setStatus(null);
+            list.add(sms);
         }
+        config.setSmsQueue(list);
         
         try {
             persistenceManager.saveConfig();
@@ -548,11 +544,10 @@ public class Main extends javax.swing.JFrame {
         senderNameTextField.setText(config.getSenderName());
         senderNumberTextField.setText(config.getSenderNumber());
         //load sms queue
-        if (config.getSmsQueue() != null) {
+        if (config.getSmsQueue().size() != 0)
             pauseSMSQueue();
-            smsQueue.addAll(config.getSmsQueue());
-            smsQueueChanged();
-        }
+        smsQueue.addAll(config.getSmsQueue());
+        smsQueueChanged();
     }
     
     /** Show about frame */

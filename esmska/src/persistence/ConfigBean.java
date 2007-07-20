@@ -22,9 +22,9 @@ public class ConfigBean extends Object implements Serializable {
     public static final String PROP_SMS_QUEUE = "smsQueue";
     
     private boolean rememberSettings = true;
-    private String senderName;
-    private String senderNumber;
-    private ArrayList<SMS> smsQueue;
+    private String senderName = "";
+    private String senderNumber = "";
+    private ArrayList<SMS> smsQueue = new ArrayList<SMS>();
     
     private PropertyChangeSupport propertySupport;
     
