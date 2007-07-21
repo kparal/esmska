@@ -13,7 +13,7 @@ import operators.Operator;
 /** SMS Contact
  * @author ripper
  */
-public class Contact extends Object implements Serializable {
+public class Contact extends Object implements Serializable, Comparable<Contact> {
     
     private String name;
     private String number;
@@ -94,5 +94,16 @@ public class Contact extends Object implements Serializable {
         this.operator = operator;
         propertySupport.firePropertyChange("operator", oldOperator, operator);
     }
-    
+
+    public int compareTo(Contact c) {
+        if (this.getName() != null && this.getName().compareTo(c.getName()) != 0)
+            return this.getName().compareTo(c.getName());
+        else if (this.getNumber() != null && this.getNumber().compareTo(c.getNumber()) != 0)
+            return this.getNumber().compareTo(c.getNumber());
+        else if (this.getOperator() != null && this.getOperator().toString().compareTo(c.getOperator().toString()) != 0)
+            return this.getOperator().toString().compareTo(c.getOperator().toString());
+        else
+            return 0;
+    }
+
 }

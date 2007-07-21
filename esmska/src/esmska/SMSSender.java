@@ -52,7 +52,7 @@ public class SMSSender {
             running = true;
             SMS sms = smsQueue.get(0);
             parent.setTaskRunning(true);
-            parent.printStatusMessage("Posílám zprávu pro " + sms.getNumber()
+            parent.printStatusMessage("Posílám zprávu pro " + sms
             + " (" + sms.getOperator() + ") ...");
             
             //send in worker thread
@@ -64,12 +64,12 @@ public class SMSSender {
     private void finishedSending(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
             smsQueue.remove(sms);
-            parent.printStatusMessage("Zpráva pro " + sms.getNumber()
+            parent.printStatusMessage("Zpráva pro " + sms
             + " byla úspěšně odeslána.");
             parent.setSMSDelay();
         }
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
-            parent.printStatusMessage("Zprávu pro " + sms.getNumber()
+            parent.printStatusMessage("Zprávu pro " + sms
             + " se nepodařilo odeslat!");
             parent.pauseSMSQueue();
             

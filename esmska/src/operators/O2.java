@@ -160,7 +160,7 @@ public class O2 implements Operator {
             }
             
             return true;
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -184,5 +184,12 @@ public class O2 implements Operator {
         return (int)Math.ceil((double)chars / SMS_LENGTH);
     }
     
+    public int hashCode() {
+        return getClass().getName().hashCode();
+    }
+    
+    public boolean equals(Object obj) {
+        return (obj instanceof O2);
+    }
     
 }

@@ -50,7 +50,7 @@ public class SMS {
     }
     
     public String toString() {
-        return getName()!=null?getName():getNumber();
+        return getName()!=null&&!getName().equals("")?getName():getNumber();
     }
     
     public String getNumber() {

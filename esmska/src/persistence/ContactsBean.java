@@ -9,6 +9,7 @@ package persistence;
 import java.beans.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author ripper
@@ -47,6 +48,10 @@ public class ContactsBean extends Object implements Serializable {
         ArrayList<Contact> oldContacts = this.contacts;
         this.contacts = contacts;
         propertySupport.firePropertyChange("contacts", oldContacts, contacts);
+    }
+    
+    public void sortContacts() {
+        Collections.sort(contacts);
     }
     
 }

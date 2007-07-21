@@ -21,12 +21,15 @@ public interface Operator {
     URL getSecurityImage();
     /** send the sms */
     boolean send(SMS sms);
-    /** operator name */
-    String toString();
     /** maximum sendable chars */
     int getMaxChars();
     /** number of sms for int chars */
     int getSMSCount(int chars);
     /** length of one sms */
     int getSMSLength();
+    
+    /** operator name */
+    String toString();
+    boolean equals(Object obj);
+    int hashCode();
 }

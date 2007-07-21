@@ -140,6 +140,13 @@ public class Vodafone implements Operator {
     public int getSMSCount(int chars) {
         return (int)Math.ceil((double)chars / SMS_LENGTH);
     }
-    
+
+    public int hashCode() {
+        return getClass().getName().hashCode();
+    }
+
+    public boolean equals(Object obj) {
+        return (obj instanceof Vodafone);
+    }
     
 }
