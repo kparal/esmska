@@ -135,12 +135,6 @@ public class Main extends javax.swing.JFrame {
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
         smsDelayProgressBar = new javax.swing.JProgressBar();
-        senderPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        senderNumberTextField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        senderNameTextField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         tabbedPane = new javax.swing.JTabbedPane();
         queuePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -219,50 +213,6 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(statusMessageLabel)
                         .addComponent(statusAnimationLabel))
                     .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        senderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Odesilatel"));
-        jLabel2.setText("+420");
-
-        senderNumberTextField.setColumns(9);
-        senderNumberTextField.setInputVerifier(smsNumberTextField.getInputVerifier());
-
-        jLabel3.setText("Jm\u00e9no");
-
-        jLabel6.setText("\u010c\u00edslo");
-
-        javax.swing.GroupLayout senderPanelLayout = new javax.swing.GroupLayout(senderPanel);
-        senderPanel.setLayout(senderPanelLayout);
-        senderPanelLayout.setHorizontalGroup(
-            senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(senderPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(senderPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(senderNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addComponent(senderNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        senderPanelLayout.setVerticalGroup(
-            senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(senderPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2)
-                    .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         smsQueueList.setModel(new SMSQueueListModel());
@@ -382,7 +332,6 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("+420");
 
-        smsNumberTextField.setColumns(9);
         smsNumberTextField.setInputVerifier(new InputVerifier() {
             public boolean verify(JComponent input) {
                 JTextField tf = (JTextField) input;
@@ -482,9 +431,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(statusPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(senderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(smsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(smsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addContainerGap())
@@ -496,8 +443,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(smsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(103, 103, 103))
                     .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -596,8 +542,6 @@ public class Main extends javax.swing.JFrame {
     
     /** save program configuration */
     private void saveConfig() {
-        config.setSenderName(senderNameTextField.getText());
-        config.setSenderNumber(senderNumberTextField.getText());
         //save sms queue
         ArrayList<SMS> list = new ArrayList<SMS>();
         for (SMS sms : smsQueue) {
@@ -631,8 +575,6 @@ public class Main extends javax.swing.JFrame {
         if (!config.isRememberSettings())
             return;
         
-        senderNameTextField.setText(config.getSenderName());
-        senderNumberTextField.setText(config.getSenderNumber());
         //load sms queue
         if (config.getSmsQueue().size() != 0)
             pauseSMSQueue();
@@ -707,8 +649,10 @@ public class Main extends javax.swing.JFrame {
             sms.setNumber(smsNumberTextField.getText());
             sms.setText(smsTextPane.getText());
             sms.setOperator((Operator)operatorComboBox.getSelectedItem());
-            sms.setSenderNumber(senderNumberTextField.getText());
-            sms.setSenderName(senderNameTextField.getText());
+            if (config.isUseSenderID()) {
+                sms.setSenderNumber(config.getSenderNumber());
+                sms.setSenderName(config.getSenderName());
+            }
             //add recepient name if exists
             if (!contactTable.getSelectionModel().isSelectionEmpty()) {
                 int row = contactTable.getSelectedRow();
@@ -798,8 +742,6 @@ public class Main extends javax.swing.JFrame {
             smsNumberTextField.setText(sms.getNumber());
             smsTextPane.setText(sms.getText());
             operatorComboBox.setSelectedItem(sms.getOperator());
-            senderNameTextField.setText(sms.getSenderName());
-            senderNumberTextField.setText(sms.getSenderNumber());
             smsQueue.remove(sms);
             smsQueueChanged();
         }
@@ -968,16 +910,6 @@ public class Main extends javax.swing.JFrame {
             ((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(
                     new SMSTextPaneDocumentFilter(((Operator)operatorComboBox.getSelectedItem()).getMaxChars(),
                     ((Operator)operatorComboBox.getSelectedItem()).getSMSLength()));
-            
-            //change optional form controls
-            if (operatorComboBox.getSelectedItem() instanceof Vodafone) {
-                senderNameTextField.setEnabled(true);
-                senderNumberTextField.setEnabled(true);
-            };
-            if (operatorComboBox.getSelectedItem() instanceof O2) {
-                senderNameTextField.setEnabled(false);
-                senderNumberTextField.setEnabled(false);
-            };
         }
     }
     
@@ -1126,11 +1058,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1143,9 +1072,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel queuePanel;
     private javax.swing.JButton removeContactButton;
     private javax.swing.JButton sendButton;
-    private javax.swing.JTextField senderNameTextField;
-    private javax.swing.JTextField senderNumberTextField;
-    private javax.swing.JPanel senderPanel;
     private javax.swing.JLabel smsCounterLabel;
     private javax.swing.JProgressBar smsDelayProgressBar;
     private javax.swing.JTextField smsNumberTextField;

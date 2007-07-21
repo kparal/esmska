@@ -16,15 +16,11 @@ import java.util.ArrayList;
  */
 public class ConfigBean extends Object implements Serializable {
     
-    public static final String PROP_SENDER_NAME = "senderName";
-    public static final String PROP_SENDER_NUMBER = "senderNumber";
-    public static final String PROP_REMEMBER_SETTINGS = "rememberSettings";
-    public static final String PROP_SMS_QUEUE = "smsQueue";
-    
     private boolean rememberSettings = true;
     private String senderName = "";
     private String senderNumber = "";
     private ArrayList<SMS> smsQueue = new ArrayList<SMS>();
+    private boolean useSenderID = false;
     
     private PropertyChangeSupport propertySupport;
     
@@ -47,7 +43,7 @@ public class ConfigBean extends Object implements Serializable {
     public void setSenderName(String senderName) {
         String old = this.senderName;
         this.senderName = senderName;
-        propertySupport.firePropertyChange(PROP_SENDER_NAME, old, senderName);
+        propertySupport.firePropertyChange("senderName", old, senderName);
     }
     
     public String getSenderNumber() {
@@ -57,27 +53,46 @@ public class ConfigBean extends Object implements Serializable {
     public void setSenderNumber(String senderNumber) {
         String old = this.senderNumber;
         this.senderNumber = senderNumber;
-        propertySupport.firePropertyChange(PROP_SENDER_NUMBER, old, senderNumber);
+        propertySupport.firePropertyChange("senderNumber", old, senderNumber);
     }
-
+    
     public boolean isRememberSettings() {
         return rememberSettings;
     }
-
+    
     public void setRememberSettings(boolean rememberSettings) {
         boolean old = this.rememberSettings;
         this.rememberSettings = rememberSettings;
-        propertySupport.firePropertyChange(PROP_REMEMBER_SETTINGS, old, rememberSettings);
+        propertySupport.firePropertyChange("rememberSettings", old, rememberSettings);
     }
-
+    
     public ArrayList<SMS> getSmsQueue() {
         return smsQueue;
     }
-
+    
     public void setSmsQueue(ArrayList<SMS> smsQueue) {
         ArrayList<SMS> old = this.smsQueue;
         this.smsQueue = smsQueue;
-        propertySupport.firePropertyChange(PROP_SMS_QUEUE, old, smsQueue);
+        propertySupport.firePropertyChange("smsQueue", old, smsQueue);
     }
-
+    
+    
+    /**
+     * Getter for property useSenderID.
+     * @return Value of property useSenderID.
+     */
+    public boolean isUseSenderID() {
+        return this.useSenderID;
+    }
+    
+    /**
+     * Setter for property useSenderID.
+     * @param useSenderID New value of property useSenderID.
+     */
+    public void setUseSenderID(boolean useSenderID) {
+        boolean oldUseSenderID = this.useSenderID;
+        this.useSenderID = useSenderID;
+        propertySupport.firePropertyChange("useSenderID", new Boolean(oldUseSenderID), new Boolean(useSenderID));
+    }
+    
 }
