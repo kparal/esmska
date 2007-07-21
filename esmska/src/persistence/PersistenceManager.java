@@ -28,8 +28,10 @@ public class PersistenceManager {
     private static PersistenceManager persistenceManager;
     private static final File PROGRAM_DIR =
             new File(System.getProperty("user.home"), ".esmska");
-    private static final File CONFIG_FILE = new File(PROGRAM_DIR, "config.xml");
+    private static final File CONFIG_FILE = new File(PROGRAM_DIR, "nastaveni.xml");
+    private static final File CONTACTS_FILE = new File(PROGRAM_DIR, "kontakty.xml");
     private static ConfigBean config;
+    private static ContactsBean contacts;
     
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
@@ -49,10 +51,18 @@ public class PersistenceManager {
         return persistenceManager;
     }
     
+    /** return config */
     public ConfigBean getConfig() {
         if (config == null)
             config = new ConfigBean();
         return config;
+    }
+    
+    /** return contacts */
+    public ContactsBean getContacs() {
+        if (contacts == null)
+            contacts = new ContactsBean();
+        return contacts;
     }
     
     /** Save program configuration */
@@ -66,6 +76,7 @@ public class PersistenceManager {
         xmlEncoder.close();
     }
     
+    /** Load program configuration */
     public ConfigBean loadConfig() throws IOException {
         if (CONFIG_FILE.exists()) {
             XMLDecoder xmlDecoder = new XMLDecoder(
@@ -79,4 +90,28 @@ public class PersistenceManager {
         return config;
     }
     
+    /** Save contacts */
+    public void saveContacts() throws IOException {
+        if (contacts == null)
+            return;
+        CONTACTS_FILE.createNewFile();
+        XMLEncoder xmlEncoder = new XMLEncoder(
+                new BufferedOutputStream(new FileOutputStream(CONTACTS_FILE)));
+        xmlEncoder.writeObject(contacts);
+        xmlEncoder.close();
+    }
+    
+    /** Load contacts */
+    public ContactsBean loadContacts() throws IOException {
+        if (CONTACTS_FILE.exists()) {
+            XMLDecoder xmlDecoder = new XMLDecoder(
+                    new BufferedInputStream(new FileInputStream(CONTACTS_FILE)));
+            ContactsBean contacts = (ContactsBean) xmlDecoder.readObject();
+            xmlDecoder.close();
+            this.contacts = contacts;
+        } else {
+            contacts = new ContactsBean();
+        }
+        return contacts;
+    }
 }
