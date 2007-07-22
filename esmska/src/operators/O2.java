@@ -38,11 +38,12 @@ public class O2 implements Operator {
      * Creates a new instance of O2
      */
     public O2() {
-        manager = new CookieManager();
-        manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
     }
     
     public URL getSecurityImage() {
+        CookieHandler.setDefault(null);
+        manager = new CookieManager();
+        manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
         URL url = null;
         try {
             url = new URL("http://www2.cz.o2.com/sms/SMSGWChargingClient?action=edit");

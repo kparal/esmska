@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class ConfigBean extends Object implements Serializable {
     
-    private boolean rememberSettings = true;
+    private boolean rememberQueue = true;
     private String senderName = "";
     private String senderNumber = "";
     private ArrayList<SMS> smsQueue = new ArrayList<SMS>();
@@ -56,14 +56,14 @@ public class ConfigBean extends Object implements Serializable {
         propertySupport.firePropertyChange("senderNumber", old, senderNumber);
     }
     
-    public boolean isRememberSettings() {
-        return rememberSettings;
+    public boolean isRememberQueue() {
+        return rememberQueue;
     }
     
-    public void setRememberSettings(boolean rememberSettings) {
-        boolean old = this.rememberSettings;
-        this.rememberSettings = rememberSettings;
-        propertySupport.firePropertyChange("rememberSettings", old, rememberSettings);
+    public void setRememberQueue(boolean rememberQueue) {
+        boolean old = this.rememberQueue;
+        this.rememberQueue = rememberQueue;
+        propertySupport.firePropertyChange("rememberQueue", old, rememberQueue);
     }
     
     public ArrayList<SMS> getSmsQueue() {

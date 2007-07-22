@@ -36,7 +36,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void initComponents() {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        rememberSettingsCheckBox = new javax.swing.JCheckBox();
+        rememberQueueCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -56,14 +56,14 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        rememberSettingsCheckBox.setSelected(config.isRememberSettings());
-        rememberSettingsCheckBox.setText("Pamatovat posledn\u00ed nastaven\u00ed programu");
-        rememberSettingsCheckBox.setToolTipText("<html>\nPamatovat posledn\u00ed hodnoty polo\u017eek jednotliv\u00fdch prvk\u016f seznamu.<br>\nP\u0159i ukon\u010den\u00ed programu uchov\u00e1v\u00e1 nap\u0159\u00edklad frontu neodeslan\u00fdch sms, \u010d\u00edslo a jm\u00e9no odesilatele, atd.\n</html>");
-        rememberSettingsCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        rememberSettingsCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        rememberSettingsCheckBox.addActionListener(new java.awt.event.ActionListener() {
+        rememberQueueCheckBox.setSelected(config.isRememberQueue());
+        rememberQueueCheckBox.setText("Pamatovat frontu neodeslan\u00fdch sms");
+        rememberQueueCheckBox.setToolTipText("<html>\nP\u0159i ukon\u010den\u00ed programu uchov\u00e1v\u00e1 frontu neodeslan\u00fdch sms pro p\u0159\u00ed\u0161t\u00ed spu\u0161t\u011bn\u00ed programu.\n</html>");
+        rememberQueueCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        rememberQueueCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        rememberQueueCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rememberSettingsCheckBoxActionPerformed(evt);
+                rememberQueueCheckBoxActionPerformed(evt);
             }
         });
 
@@ -73,14 +73,14 @@ public class ConfigFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rememberSettingsCheckBox)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(rememberQueueCheckBox)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rememberSettingsCheckBox)
+                .addComponent(rememberQueueCheckBox)
                 .addContainerGap(139, Short.MAX_VALUE))
         );
         jTabbedPane1.addTab("Obecn\u00e9", jPanel1);
@@ -207,9 +207,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         config.setUseSenderID(useSenderIDCheckBox.isSelected());
     }//GEN-LAST:event_useSenderIDCheckBoxActionPerformed
     
-    private void rememberSettingsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberSettingsCheckBoxActionPerformed
-        config.setRememberSettings(rememberSettingsCheckBox.isSelected());
-    }//GEN-LAST:event_rememberSettingsCheckBoxActionPerformed
+    private void rememberQueueCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberQueueCheckBoxActionPerformed
+        config.setRememberQueue(rememberQueueCheckBox.isSelected());
+    }//GEN-LAST:event_rememberQueueCheckBoxActionPerformed
     
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         //close form
@@ -224,7 +224,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JCheckBox rememberSettingsCheckBox;
+    private javax.swing.JCheckBox rememberQueueCheckBox;
     private javax.swing.JTextField senderNameTextField;
     private javax.swing.JTextField senderNumberTextField;
     private javax.swing.JCheckBox useSenderIDCheckBox;

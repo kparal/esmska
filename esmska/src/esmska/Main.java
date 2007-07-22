@@ -588,14 +588,13 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         config = persistenceManager.getConfig();
-        if (!config.isRememberSettings())
-            return;
         
-        //load sms queue
-        if (config.getSmsQueue().size() != 0)
-            pauseSMSQueue();
-        smsQueue.addAll(config.getSmsQueue());
-        smsQueueChanged();
+        if (config.isRememberQueue()) { //load sms queue
+            if (config.getSmsQueue().size() != 0)
+                pauseSMSQueue();
+            smsQueue.addAll(config.getSmsQueue());
+            smsQueueChanged();
+        }
     }
     
     /** load contacts */

@@ -65,8 +65,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rememberSettingsCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <Component id="rememberQueueCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -74,20 +74,20 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rememberSettingsCheckBox" min="-2" max="-2" attributes="0"/>
+                      <Component id="rememberQueueCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="139" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JCheckBox" name="rememberSettingsCheckBox">
+            <Component class="javax.swing.JCheckBox" name="rememberQueueCheckBox">
               <Properties>
                 <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="config.isRememberSettings()" type="code"/>
+                  <Connection code="config.isRememberQueue()" type="code"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pamatovat posledn&#xed; nastaven&#xed; programu"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Pamatovat posledn&#xed; hodnoty polo&#x17e;ek jednotliv&#xfd;ch prvk&#x16f; seznamu.&lt;br&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; nap&#x159;&#xed;klad frontu neodeslan&#xfd;ch sms, &#x10d;&#xed;slo a jm&#xe9;no odesilatele, atd.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="Pamatovat frontu neodeslan&#xfd;ch sms"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; frontu neodeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu.&#xa;&lt;/html&gt;"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                     <EmptyBorder bottom="0" left="0" right="0" top="0"/>
@@ -98,7 +98,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rememberSettingsCheckBoxActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rememberQueueCheckBoxActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
