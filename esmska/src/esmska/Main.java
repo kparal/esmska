@@ -13,6 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -40,6 +43,8 @@ import javax.swing.event.DocumentEvent.EventType;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -78,11 +83,13 @@ public class Main extends javax.swing.JFrame {
     private Action configAction = new ConfigAction();
     private Action addContactAction = new AddContactAction();
     private Action removeContactAction = new RemoveContactAction();
+    private Action smsUpAction = new SMSUpAction();
+    private Action smsDownAction = new SMSDownAction();
     private JFrame aboutFrame, configFrame;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     
     /** actual queue of sms's */
-    private ArrayList<SMS> smsQueue = new ArrayList<SMS>();
+    private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
     /** sender of sms */
     private SMSSender smsSender = new SMSSender(smsQueue, this);
     /** timer to send another sms after defined delay */
@@ -120,6 +127,7 @@ public class Main extends javax.swing.JFrame {
         JComboBox comboBox = new JComboBox();
         comboBox.setModel(new DefaultComboBoxModel(OperatorEnum.getAsList().toArray()));
         opColumn.setCellEditor(new DefaultCellEditor(comboBox));
+        contactTable.getModel().addTableModelListener(new ContactTableModelListener());
     }
     
     /** This method is called from within the constructor to
@@ -153,6 +161,8 @@ public class Main extends javax.swing.JFrame {
         pauseButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        smsUpButton = new javax.swing.JButton();
+        smsDownButton = new javax.swing.JButton();
         contactPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         contactTable = new javax.swing.JTable();
@@ -196,10 +206,10 @@ public class Main extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
                 .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel))
@@ -299,7 +309,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sendButton)
@@ -330,13 +340,24 @@ public class Main extends javax.swing.JFrame {
         deleteButton.setBorderPainted(false);
         deleteButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
+        smsUpButton.setAction(smsUpAction);
+        smsUpButton.setBorderPainted(false);
+        smsUpButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        smsDownButton.setAction(smsDownAction);
+        smsDownButton.setBorderPainted(false);
+        smsDownButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
         javax.swing.GroupLayout queuePanelLayout = new javax.swing.GroupLayout(queuePanel);
         queuePanel.setLayout(queuePanelLayout);
         queuePanelLayout.setHorizontalGroup(
             queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(queuePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addGroup(queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(smsUpButton)
+                    .addComponent(smsDownButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(queuePanelLayout.createSequentialGroup()
@@ -347,22 +368,27 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        queuePanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, editButton, pauseButton});
+        queuePanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
 
         queuePanelLayout.setVerticalGroup(
             queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queuePanelLayout.createSequentialGroup()
-                .addGroup(queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, queuePanelLayout.createSequentialGroup()
-                        .addComponent(editButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pauseButton)))
+            .addGroup(queuePanelLayout.createSequentialGroup()
+                .addGroup(queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, queuePanelLayout.createSequentialGroup()
+                            .addComponent(editButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                            .addComponent(pauseButton)))
+                    .addGroup(queuePanelLayout.createSequentialGroup()
+                        .addComponent(smsUpButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(smsDownButton)))
                 .addContainerGap())
         );
 
-        queuePanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {deleteButton, editButton, pauseButton});
+        queuePanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
 
         contactPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kontakty"));
         contactTable.setAutoCreateRowSorter(true);
@@ -395,7 +421,7 @@ public class Main extends javax.swing.JFrame {
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -413,7 +439,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(addContactButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(removeContactButton))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -470,12 +496,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
     
     private void smsQueueListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_smsQueueListValueChanged
-        //update delete and edit actions
+        //update form components
         if (!evt.getValueIsAdjusting()) {
-            deleteSMSAction.setEnabled(smsQueueList.getModel().getSize() != 0
-                    && smsQueueList.getSelectedIndices().length != 0);
-            editSMSAction.setEnabled(smsQueueList.getModel().getSize() != 0
-                    && smsQueueList.getSelectedIndices().length == 1);
+            int queueSize = smsQueueList.getModel().getSize();
+            int selectedItems = smsQueueList.getSelectedIndices().length;
+            deleteSMSAction.setEnabled(queueSize != 0 && selectedItems != 0);
+            editSMSAction.setEnabled(queueSize != 0 && selectedItems == 1);
+            smsUpAction.setEnabled(queueSize != 0 && selectedItems == 1);
+            smsDownAction.setEnabled(queueSize != 0 && selectedItems == 1);
         }
     }//GEN-LAST:event_smsQueueListValueChanged
     
@@ -538,11 +566,17 @@ public class Main extends javax.swing.JFrame {
     }
     
     /** Notifies about change in sms queue */
-    public void smsQueueChanged() {
-        ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
-                smsQueueList.getModel(), 0, smsQueue.size());
-        smsQueueListValueChanged(new ListSelectionEvent(
-                smsQueueList,0,smsQueueList.getModel().getSize(),false));
+    public void smsProcessed(SMS sms) {
+        int index = smsQueue.indexOf(sms);
+        if (sms.getStatus() == SMS.Status.SENT_OK) {
+            smsQueue.remove(sms);
+            ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
+                    smsQueueList.getModel(), index, index);
+        }
+        if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
+            ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
+                    smsQueueList.getModel(), index, index);
+        }
     }
     
     /** Pauses sms queue */
@@ -593,7 +627,9 @@ public class Main extends javax.swing.JFrame {
             if (config.getSmsQueue().size() != 0)
                 pauseSMSQueue();
             smsQueue.addAll(config.getSmsQueue());
-            smsQueueChanged();
+            if (config.getSmsQueue().size() != 0)
+                ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
+                        smsQueueList.getModel(), 0, smsQueue.size()-1);
         }
     }
     
@@ -671,7 +707,9 @@ public class Main extends javax.swing.JFrame {
             sms.setName(nameLabel.getText());
             
             smsQueue.add(sms);
-            smsQueueChanged();
+            int index = smsQueue.indexOf(sms);
+            ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
+                    smsQueueList.getModel(), index, index);
             smsSender.announceNewSMS();
             
             smsTextPane.setText(null);
@@ -694,7 +732,7 @@ public class Main extends javax.swing.JFrame {
     private class SMSQueuePauseAction extends AbstractAction {
         private boolean makePause = true;
         public SMSQueuePauseAction() {
-            super("", new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
+            super(null, new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
             this.putValue(Action.SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
         }
         public void actionPerformed(ActionEvent e) {
@@ -716,7 +754,7 @@ public class Main extends javax.swing.JFrame {
     /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
         public DeleteSMSAction() {
-            super("", new ImageIcon(Main.this.getClass().getResource("resources/delete.png")));
+            super(null, new ImageIcon(Main.this.getClass().getResource("resources/delete.png")));
             this.putValue(Action.SHORT_DESCRIPTION,"Odstranit označené zprávy");
             this.setEnabled(false);
         }
@@ -724,9 +762,11 @@ public class Main extends javax.swing.JFrame {
             Object[] smsArray = smsQueueList.getSelectedValues();
             for (Object o : smsArray) {
                 SMS sms = (SMS) o;
+                int index = smsQueue.indexOf(sms);
                 smsQueue.remove(sms);
+                ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
+                        smsQueueList.getModel(), index, index);
             }
-            smsQueueChanged();
         }
     }
     
@@ -743,7 +783,7 @@ public class Main extends javax.swing.JFrame {
     /** Edit sms from queue */
     private class EditSMSAction extends AbstractAction {
         public EditSMSAction() {
-            super("", new ImageIcon(Main.this.getClass().getResource("resources/edit.png")));
+            super(null, new ImageIcon(Main.this.getClass().getResource("resources/edit.png")));
             this.putValue(Action.SHORT_DESCRIPTION,"Upravit označenou zprávu");
             this.setEnabled(false);
         }
@@ -755,15 +795,18 @@ public class Main extends javax.swing.JFrame {
             smsTextPane.setText(sms.getText());
             operatorComboBox.setSelectedItem(sms.getOperator());
             nameLabel.setText(sms.getName());
+            int index = smsQueue.indexOf(sms);
             smsQueue.remove(sms);
-            smsQueueChanged();
+            ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
+                    smsQueueList.getModel(), index, index);
+            contactTable.clearSelection();
         }
     }
     
     /** Add contact to contact table */
     private class AddContactAction extends AbstractAction {
         public AddContactAction() {
-            super("",new ImageIcon(Main.this.getClass().getResource("resources/add.png")));
+            super(null,new ImageIcon(Main.this.getClass().getResource("resources/add.png")));
             this.putValue(Action.SHORT_DESCRIPTION,"Přidat nový kontakt");
         }
         public void actionPerformed(ActionEvent e) {
@@ -788,7 +831,7 @@ public class Main extends javax.swing.JFrame {
     /** Remove contact from contact table */
     private class RemoveContactAction extends AbstractAction {
         public RemoveContactAction() {
-            super("",new ImageIcon(Main.this.getClass().getResource("resources/remove.png")));
+            super(null,new ImageIcon(Main.this.getClass().getResource("resources/remove.png")));
             this.putValue(Action.SHORT_DESCRIPTION,"Odstranit označené kontakty");
             this.setEnabled(false);
         }
@@ -805,6 +848,52 @@ public class Main extends javax.swing.JFrame {
                 list.add(contacts.getContacts().get(contactTable.convertRowIndexToModel(i)));
             contacts.getContacts().removeAll(list);
             ((ContactTableModel)contactTable.getModel()).fireTableDataChanged();
+        }
+    }
+    
+    /** move sms up in sms queue */
+    private class SMSUpAction extends AbstractAction {
+        public SMSUpAction() {
+            super(null,new ImageIcon(Main.this.getClass().getResource("resources/up.png")));
+            this.putValue(Action.SHORT_DESCRIPTION,"Posunout sms ve frontě výše");
+            this.setEnabled(false);
+        }
+        public void actionPerformed(ActionEvent e) {
+            int index = smsQueueList.getSelectedIndex();
+            if (index <= 0) //cannot move up first item
+                return;
+            synchronized(smsQueue) {
+                SMS sms = smsQueue.get(index);
+                smsQueue.set(index,smsQueue.get(index-1));
+                smsQueue.set(index-1,sms);
+            }
+            ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
+                    smsQueueList.getModel(), index-1, index);
+            smsQueueList.setSelectedIndex(index-1);
+            smsQueueList.ensureIndexIsVisible(index-1);
+        }
+    }
+    
+    /** move sms down in sms queue */
+    private class SMSDownAction extends AbstractAction {
+        public SMSDownAction() {
+            super(null,new ImageIcon(Main.this.getClass().getResource("resources/down.png")));
+            this.putValue(Action.SHORT_DESCRIPTION,"Posunout sms ve frontě níže");
+            this.setEnabled(false);
+        }
+        public void actionPerformed(ActionEvent e) {
+            int index = smsQueueList.getSelectedIndex();
+            if (index < 0 || index >= smsQueueList.getModel().getSize() - 1) //cannot move down last item
+                return;
+            synchronized(smsQueue) {
+                SMS sms = smsQueue.get(index);
+                smsQueue.set(index,smsQueue.get(index+1));
+                smsQueue.set(index+1,sms);
+            }
+            ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
+                    smsQueueList.getModel(), index, index+1);
+            smsQueueList.setSelectedIndex(index+1);
+            smsQueueList.ensureIndexIsVisible(index+1);
         }
     }
     
@@ -1033,6 +1122,7 @@ public class Main extends javax.swing.JFrame {
                 case 1: contact.setNumber((String)aValue); break;
                 case 2: contact.setOperator((Operator)aValue); break;
             }
+            super.fireTableCellUpdated(rowIndex,columnIndex);
         }
         public void fireTableDataChanged() {
             super.fireTableDataChanged();
@@ -1058,6 +1148,14 @@ public class Main extends javax.swing.JFrame {
                         (Operator)contactTable.getValueAt(i,contactTable.convertColumnIndexToView(2)));
                 smsTextPane.requestFocusInWindow();
             }
+        }
+    }
+    
+    /** Listener for changes in contact table model */
+    private class ContactTableModelListener implements TableModelListener {
+        public void tableChanged(TableModelEvent e) {
+            contactTable.clearSelection();
+            contactTable.getSelectionModel().setSelectionInterval(e.getFirstRow(),e.getFirstRow());
         }
     }
     
@@ -1089,10 +1187,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton sendButton;
     private javax.swing.JLabel smsCounterLabel;
     private javax.swing.JProgressBar smsDelayProgressBar;
+    private javax.swing.JButton smsDownButton;
     private javax.swing.JTextField smsNumberTextField;
     private javax.swing.JPanel smsPanel;
     private javax.swing.JList smsQueueList;
     private javax.swing.JTextPane smsTextPane;
+    private javax.swing.JButton smsUpButton;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;

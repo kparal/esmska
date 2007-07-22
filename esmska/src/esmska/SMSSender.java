@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -27,7 +28,7 @@ import operators.Operator;
  * @author ripper
  */
 public class SMSSender {
-    private ArrayList<SMS> smsQueue;
+    private List<SMS> smsQueue;
     private boolean running; // sending sms in this moment
     private boolean paused; // queue paused
     private boolean delayed; //waiting for delay to send another sms
@@ -35,7 +36,7 @@ public class SMSSender {
     private Main parent; //reference to main form
     
     /** Creates a new instance of SMSSender */
-    public SMSSender(ArrayList<SMS> smsQueue, Main parent) {
+    public SMSSender(List<SMS> smsQueue, Main parent) {
         if (smsQueue == null)
             throw new NullPointerException("smsQueue");
         this.smsQueue = smsQueue;
@@ -63,7 +64,6 @@ public class SMSSender {
     
     private void finishedSending(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
-            smsQueue.remove(sms);
             parent.printStatusMessage("Zpráva pro " + sms
             + " byla úspěšně odeslána.");
             parent.setSMSDelay();
@@ -77,7 +77,7 @@ public class SMSSender {
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
                     + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
         }
-        parent.smsQueueChanged();
+        parent.smsProcessed(sms);
         parent.setTaskRunning(false);
         running = false;
     }

@@ -10,6 +10,8 @@ import esmska.SMS;
 import java.beans.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /** Config properties of the whole program
  * @author ripper
@@ -19,7 +21,7 @@ public class ConfigBean extends Object implements Serializable {
     private boolean rememberQueue = true;
     private String senderName = "";
     private String senderNumber = "";
-    private ArrayList<SMS> smsQueue = new ArrayList<SMS>();
+    private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
     private boolean useSenderID = false;
     
     private PropertyChangeSupport propertySupport;
@@ -66,12 +68,12 @@ public class ConfigBean extends Object implements Serializable {
         propertySupport.firePropertyChange("rememberQueue", old, rememberQueue);
     }
     
-    public ArrayList<SMS> getSmsQueue() {
+    public List<SMS> getSmsQueue() {
         return smsQueue;
     }
     
-    public void setSmsQueue(ArrayList<SMS> smsQueue) {
-        ArrayList<SMS> old = this.smsQueue;
+    public void setSmsQueue(List<SMS> smsQueue) {
+        List<SMS> old = this.smsQueue;
         this.smsQueue = smsQueue;
         propertySupport.firePropertyChange("smsQueue", old, smsQueue);
     }
