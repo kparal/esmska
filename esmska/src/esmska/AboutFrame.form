@@ -81,7 +81,7 @@
           <Font name="Dialog" size="36" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Esmska 0.1.0"/>
+        <Property name="text" type="java.lang.String" value="Esmska 0.2.0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

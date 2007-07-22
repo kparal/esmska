@@ -53,7 +53,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Esmska 0.1.0");
+        jLabel2.setText("Esmska 0.2.0");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Pos\u00edl\u00e1n\u00ed SMS p\u0159es Internet.");
