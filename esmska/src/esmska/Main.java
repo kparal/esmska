@@ -692,7 +692,7 @@ public class Main extends javax.swing.JFrame {
     private class SendAction extends AbstractAction {
         public SendAction() {
             super("Poslat", new ImageIcon(Main.this.getClass().getResource("resources/send.png")));
-            putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_S));
+            putValue(MNEMONIC_KEY, KeyEvent.VK_S);
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
