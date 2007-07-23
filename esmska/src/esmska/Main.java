@@ -805,6 +805,7 @@ public class Main extends javax.swing.JFrame {
             ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
                     smsQueueList.getModel(), index, index);
             contactTable.clearSelection();
+            smsTextPane.requestFocusInWindow();
         }
     }
     
