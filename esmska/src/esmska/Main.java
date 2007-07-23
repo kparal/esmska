@@ -962,7 +962,27 @@ public class Main extends javax.swing.JFrame {
             if (sms.getOperator() instanceof O2) {
                 ((JLabel)c).setIcon(new ImageIcon(sms.getOperator().getClass().getResource("resources/O2.png")));
             }
+            //set tooltip
+            ((JLabel)c).setToolTipText(wrapToHTML(sms.getText()));
+            
             return c;
+        }
+        /** transform string to html with linebreaks */
+        private String wrapToHTML(String text) {
+            StringBuilder output = new StringBuilder();
+            output.append("<html>");
+            int from = 0;
+            while (from < text.length()) {
+                int to = from + 50;
+                to = text.indexOf(' ',to);
+                if (to < 0)
+                    to = text.length();
+                output.append(text.substring(from, to));
+                output.append("<br>");
+                from = to + 1;
+            }
+            output.append("</html>");
+            return output.toString();
         }
     }
     
