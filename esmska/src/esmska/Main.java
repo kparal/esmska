@@ -206,10 +206,10 @@ public class Main extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE)
                 .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel))
@@ -257,6 +257,8 @@ public class Main extends javax.swing.JFrame {
         jLabel5.setText("Text");
 
         operatorComboBox.setModel(new DefaultComboBoxModel(OperatorEnum.getAsList().toArray()));
+        operatorComboBox.setRenderer(new OperatorComboBoxRenderer());
+        //operatorComboBox.setRenderer(operatorComboBox.getRenderer());
         operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
         operatorComboBox.setSelectedItem(operatorComboBox.getSelectedItem());
 
@@ -283,16 +285,16 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(smsPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(smsNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                        .addComponent(smsNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(operatorComboBox, 0, 62, Short.MAX_VALUE))
+                        .addComponent(operatorComboBox, 0, 84, Short.MAX_VALUE))
                     .addComponent(nameLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                     .addGroup(smsPanelLayout.createSequentialGroup()
-                        .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sendButton)))
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
         smsPanelLayout.setVerticalGroup(
             smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,12 +306,12 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel1)
-                    .addComponent(smsNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(smsNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sendButton)
@@ -320,6 +322,8 @@ public class Main extends javax.swing.JFrame {
         queuePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Fronta"));
         smsQueueList.setModel(new SMSQueueListModel());
         smsQueueList.setCellRenderer(new SMSQueueListRenderer());
+        smsQueueList.setLayoutOrientation(javax.swing.JList.VERTICAL_WRAP);
+        smsQueueList.setVisibleRowCount(-1);
         smsQueueList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 smsQueueListValueChanged(evt);
@@ -357,7 +361,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(smsUpButton)
                     .addComponent(smsDownButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(queuePanelLayout.createSequentialGroup()
@@ -421,7 +425,7 @@ public class Main extends javax.swing.JFrame {
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -439,7 +443,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(addContactButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(removeContactButton))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -713,6 +717,7 @@ public class Main extends javax.swing.JFrame {
             smsSender.announceNewSMS();
             
             smsTextPane.setText(null);
+            smsTextPane.requestFocusInWindow();
         }
         /** update status according to conditions  */
         public void updateStatus() {
@@ -944,9 +949,32 @@ public class Main extends javax.swing.JFrame {
     private class SMSQueueListRenderer implements ListCellRenderer {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            SMS sms = (SMS)value;
             //problematic sms colored
-            if ((((SMS)value).getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
+            if ((sms.getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
                 c.setBackground(Color.RED);
+            }
+            //add operator logo
+            if (sms.getOperator() instanceof Vodafone) {
+                ((JLabel)c).setIcon(new ImageIcon(sms.getOperator().getClass().getResource("resources/Vodafone.png")));
+            }
+            if (sms.getOperator() instanceof O2) {
+                ((JLabel)c).setIcon(new ImageIcon(sms.getOperator().getClass().getResource("resources/O2.png")));
+            }
+            return c;
+        }
+    }
+    
+    /** Renderer for items in operator combo box */
+    private class OperatorComboBoxRenderer implements ListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            Operator operator = (Operator)value;
+            if (operator instanceof Vodafone) {
+                ((JLabel)c).setIcon(new ImageIcon(operator.getClass().getResource("resources/Vodafone.png")));
+            }
+            if (operator instanceof O2) {
+                ((JLabel)c).setIcon(new ImageIcon(operator.getClass().getResource("resources/O2.png")));
             }
             return c;
         }
