@@ -11,6 +11,7 @@ import java.awt.Component;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -691,6 +692,7 @@ public class Main extends javax.swing.JFrame {
     private class SendAction extends AbstractAction {
         public SendAction() {
             super("Poslat", new ImageIcon(Main.this.getClass().getResource("resources/send.png")));
+            putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_S));
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
@@ -738,19 +740,17 @@ public class Main extends javax.swing.JFrame {
         private boolean makePause = true;
         public SMSQueuePauseAction() {
             super(null, new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
-            this.putValue(Action.SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
+            this.putValue(SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
         }
         public void actionPerformed(ActionEvent e) {
             if (makePause) {
                 smsSender.setPaused(true);
-//                this.putValue(AbstractAction.NAME,"Pokračovat");
-                this.putValue(AbstractAction.LARGE_ICON_KEY, new ImageIcon(Main.this.getClass().getResource("resources/start.png")));
-                this.putValue(Action.SHORT_DESCRIPTION,"Pokračovat v odesílání sms ve frontě");
+                this.putValue(LARGE_ICON_KEY, new ImageIcon(Main.this.getClass().getResource("resources/start.png")));
+                this.putValue(SHORT_DESCRIPTION,"Pokračovat v odesílání sms ve frontě");
             } else {
                 smsSender.setPaused(false);
-//                this.putValue(AbstractAction.NAME,"Zastavit");
-                this.putValue(AbstractAction.LARGE_ICON_KEY,new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
-                this.putValue(Action.SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
+                this.putValue(LARGE_ICON_KEY,new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
+                this.putValue(SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
             }
             makePause = !makePause;
         }
@@ -760,7 +760,7 @@ public class Main extends javax.swing.JFrame {
     private class DeleteSMSAction extends AbstractAction {
         public DeleteSMSAction() {
             super(null, new ImageIcon(Main.this.getClass().getResource("resources/delete.png")));
-            this.putValue(Action.SHORT_DESCRIPTION,"Odstranit označené zprávy");
+            this.putValue(SHORT_DESCRIPTION,"Odstranit označené zprávy");
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
@@ -789,7 +789,7 @@ public class Main extends javax.swing.JFrame {
     private class EditSMSAction extends AbstractAction {
         public EditSMSAction() {
             super(null, new ImageIcon(Main.this.getClass().getResource("resources/edit.png")));
-            this.putValue(Action.SHORT_DESCRIPTION,"Upravit označenou zprávu");
+            this.putValue(SHORT_DESCRIPTION,"Upravit označenou zprávu");
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
@@ -813,7 +813,7 @@ public class Main extends javax.swing.JFrame {
     private class AddContactAction extends AbstractAction {
         public AddContactAction() {
             super(null,new ImageIcon(Main.this.getClass().getResource("resources/add.png")));
-            this.putValue(Action.SHORT_DESCRIPTION,"Přidat nový kontakt");
+            this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
         }
         public void actionPerformed(ActionEvent e) {
             Contact c = new Contact("Nový","",new Vodafone());
@@ -838,7 +838,7 @@ public class Main extends javax.swing.JFrame {
     private class RemoveContactAction extends AbstractAction {
         public RemoveContactAction() {
             super(null,new ImageIcon(Main.this.getClass().getResource("resources/remove.png")));
-            this.putValue(Action.SHORT_DESCRIPTION,"Odstranit označené kontakty");
+            this.putValue(SHORT_DESCRIPTION,"Odstranit označené kontakty");
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
@@ -861,7 +861,7 @@ public class Main extends javax.swing.JFrame {
     private class SMSUpAction extends AbstractAction {
         public SMSUpAction() {
             super(null,new ImageIcon(Main.this.getClass().getResource("resources/up.png")));
-            this.putValue(Action.SHORT_DESCRIPTION,"Posunout sms ve frontě výše");
+            this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě výše");
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
@@ -884,7 +884,7 @@ public class Main extends javax.swing.JFrame {
     private class SMSDownAction extends AbstractAction {
         public SMSDownAction() {
             super(null,new ImageIcon(Main.this.getClass().getResource("resources/down.png")));
-            this.putValue(Action.SHORT_DESCRIPTION,"Posunout sms ve frontě níže");
+            this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě níže");
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
