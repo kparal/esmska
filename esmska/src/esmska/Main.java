@@ -864,8 +864,8 @@ public class Main extends javax.swing.JFrame {
             Contact c = new Contact("Nový","",new Vodafone());
             contacts.getContacts().add(c);
             contacts.sortContacts();
-            ((ContactTableModel)contactTable.getModel()).fireTableDataChanged();
             int contactIndex = contactTable.convertRowIndexToView(contacts.getContacts().indexOf(c));
+            ((ContactTableModel)contactTable.getModel()).fireTableRowsInserted(contactIndex,contactIndex);
             contactTable.getSelectionModel().setSelectionInterval(contactIndex,contactIndex);
             //ensure new item is visible
             contactTable.scrollRectToVisible(contactTable.getCellRect(contactIndex,0,true));
@@ -893,12 +893,14 @@ public class Main extends javax.swing.JFrame {
             }
             //remove selected rows
             int[] selectedRows = contactTable.getSelectedRows();
+            int minIndex = contactTable.getSelectionModel().getMinSelectionIndex();
+            int maxIndex = contactTable.getSelectionModel().getMaxSelectionIndex();
             ArrayList<Contact> list = new ArrayList<Contact>();
             //TODO sorting
             for (int i : selectedRows)
                 list.add(contacts.getContacts().get(contactTable.convertRowIndexToModel(i)));
             contacts.getContacts().removeAll(list);
-            ((ContactTableModel)contactTable.getModel()).fireTableDataChanged();
+            ((ContactTableModel)contactTable.getModel()).fireTableRowsDeleted(minIndex,maxIndex);
         }
     }
     
@@ -1229,6 +1231,12 @@ public class Main extends javax.swing.JFrame {
         public void fireTableDataChanged() {
             super.fireTableDataChanged();
         }
+        public void fireTableRowsInserted(int firstRow, int lastRow) {
+            super.fireTableRowsInserted(firstRow, lastRow);
+        }
+        public void fireTableRowsDeleted(int firstRow, int lastRow) {
+            super.fireTableRowsDeleted(firstRow, lastRow);
+        }
     }
     
     /** Listener for contact table */
@@ -1256,8 +1264,11 @@ public class Main extends javax.swing.JFrame {
     /** Listener for changes in contact table model */
     private class ContactTableModelListener implements TableModelListener {
         public void tableChanged(TableModelEvent e) {
-            contactTable.clearSelection();
-            contactTable.getSelectionModel().setSelectionInterval(e.getFirstRow(),e.getFirstRow());
+            //select new or updated row
+            if (e.getType() == e.INSERT || e.getType() == e.UPDATE) {
+                contactTable.clearSelection();
+                contactTable.getSelectionModel().setSelectionInterval(e.getFirstRow(),e.getFirstRow());
+            }
         }
     }
     
