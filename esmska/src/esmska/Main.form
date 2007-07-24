@@ -226,7 +226,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="153" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="151" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -268,7 +268,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="smsTextPane">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="smsTextPane.setBackground(SystemColor.text);&#xa;smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="smsTextPane.setBackground(SystemColor.text);&#xa;smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);&#xa;smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();&#xa;((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(smsTextPaneDocumentFilter);&#xa;&#xa;//set undo and redo actions and bind them&#xa;smsTextUndoManager.setLimit(-1);&#xa;smsTextUndoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canUndo()) {&#xa;            smsTextUndoManager.undo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextRedoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canRedo()) {&#xa;            smsTextUndoManager.redo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextPane.getDocument().addUndoableEditListener(new UndoableEditListener() {&#xa;    public void undoableEditHappened(UndoableEditEvent e) {&#xa;        if (e.getEdit().getPresentationName().contains(&quot;style&quot;))&#xa;            return;&#xa;        smsTextUndoManager.addEdit(e.getEdit());&#xa;    }&#xa;});&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK),&quot;undo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,&#xa;        KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getActionMap().put(&quot;undo&quot;,smsTextUndoAction);&#xa;smsTextPane.getActionMap().put(&quot;redo&quot;,smsTextRedoAction);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -493,7 +493,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="removeContactButton" linkSize="6" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane3" alignment="0" pref="137" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" alignment="0" pref="135" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
