@@ -66,7 +66,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="rememberQueueCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="91" max="32767" attributes="0"/>
+                      <EmptySpace pref="108" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -86,7 +86,7 @@
                 <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="config.isRememberQueue()" type="code"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pamatovat frontu neodeslan&#xfd;ch sms"/>
+                <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat frontu neodeslan&#xfd;ch sms"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; frontu neodeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu.&#xa;&lt;/html&gt;"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">

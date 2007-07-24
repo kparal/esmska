@@ -57,7 +57,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         });
 
         rememberQueueCheckBox.setSelected(config.isRememberQueue());
-        rememberQueueCheckBox.setText("Pamatovat frontu neodeslan\u00fdch sms");
+        rememberQueueCheckBox.setText("Ukl\u00e1dat frontu neodeslan\u00fdch sms");
         rememberQueueCheckBox.setToolTipText("<html>\nP\u0159i ukon\u010den\u00ed programu uchov\u00e1v\u00e1 frontu neodeslan\u00fdch sms pro p\u0159\u00ed\u0161t\u00ed spu\u0161t\u011bn\u00ed programu.\n</html>");
         rememberQueueCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         rememberQueueCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -74,7 +74,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(rememberQueueCheckBox)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
