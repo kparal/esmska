@@ -83,6 +83,9 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="rememberQueueCheckBox">
               <Properties>
+                <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="KeyEvent.VK_U" type="code"/>
+                </Property>
                 <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="config.isRememberQueue()" type="code"/>
                 </Property>
@@ -164,6 +167,9 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="useSenderIDCheckBox">
               <Properties>
+                <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="KeyEvent.VK_P" type="code"/>
+                </Property>
                 <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="config.isUseSenderID()" type="code"/>
                 </Property>
@@ -225,6 +231,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="closeButton">
       <Properties>
+        <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="KeyEvent.VK_Z" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Zav&#x159;&#xed;t"/>
       </Properties>
       <Events>

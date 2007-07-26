@@ -73,6 +73,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/esmska/resources/esmska.png"/>
         </Property>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -82,16 +83,21 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Esmska 0.2.0"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Pos&#xed;l&#xe1;n&#xed; SMS p&#x159;es Internet."/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="creditsButton">
       <Properties>
+        <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="KeyEvent.VK_P" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pod&#x11b;kov&#xe1;n&#xed;"/>
       </Properties>
       <Events>
@@ -100,6 +106,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="closeButton">
       <Properties>
+        <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="KeyEvent.VK_Z" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Zav&#x159;&#xed;t"/>
       </Properties>
       <Events>
@@ -108,6 +117,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="licenseButton">
       <Properties>
+        <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="KeyEvent.VK_L" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Licence"/>
       </Properties>
       <Events>
@@ -118,13 +130,13 @@
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="&#xa9; 2007 Kamil P&#xe1;ral"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;a href=&quot;http://code.google.com/p/esmska/&quot;&gt;http://code.google.com/p/esmska/&lt;/a&gt;&lt;/html&gt;"/>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

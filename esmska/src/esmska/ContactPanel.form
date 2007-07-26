@@ -86,7 +86,7 @@
     <Component class="javax.swing.JTextField" name="numberTextField">
       <Properties>
         <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="main.smsNumberTextField.getInputVerifier()" type="code"/>
+          <Connection code="new InputVerifier() {&#xa;    public boolean verify(JComponent input) {&#xa;        JTextField tf = (JTextField) input;&#xa;        if (tf.getText().length() != 9)&#xa;            return false;&#xa;        for (Character c : tf.getText().toCharArray()) {&#xa;            if (!Character.isDigit(c))&#xa;                return false;&#xa;        }&#xa;        return true;&#xa;    }&#xa;}" type="code"/>
         </Property>
       </Properties>
       <Events>

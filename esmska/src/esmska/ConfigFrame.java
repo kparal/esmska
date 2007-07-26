@@ -6,11 +6,8 @@
 
 package esmska;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import persistence.ConfigBean;
 
 /**
@@ -25,6 +22,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         this.config = config;
         initComponents();
         useSenderIDCheckBoxActionPerformed(null);
+        closeButton.requestFocusInWindow();
     }
     
     /** This method is called from within the constructor to
@@ -56,6 +54,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        rememberQueueCheckBox.setMnemonic(KeyEvent.VK_U);
         rememberQueueCheckBox.setSelected(config.isRememberQueue());
         rememberQueueCheckBox.setText("Ukl\u00e1dat frontu neodeslan\u00fdch sms");
         rememberQueueCheckBox.setToolTipText("<html>\nP\u0159i ukon\u010den\u00ed programu uchov\u00e1v\u00e1 frontu neodeslan\u00fdch sms pro p\u0159\u00ed\u0161t\u00ed spu\u0161t\u011bn\u00ed programu.\n</html>");
@@ -85,6 +84,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
         jTabbedPane1.addTab("Obecn\u00e9", jPanel1);
 
+        useSenderIDCheckBox.setMnemonic(KeyEvent.VK_P);
         useSenderIDCheckBox.setSelected(config.isUseSenderID());
         useSenderIDCheckBox.setText("P\u0159ipojovat podpis odesilatele");
         useSenderIDCheckBox.setToolTipText("<html>P\u0159i p\u0159ipojen\u00ed podpisu p\u0159ijde sms adres\u00e1tovi ze zadan\u00e9ho \u010d\u00edsla<br>\na s dan\u00fdm jm\u00e9nem napsan\u00fdm na konci zpr\u00e1vy.</html>");
@@ -158,6 +158,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
         jTabbedPane1.addTab("Vodafone", jPanel2);
 
+        closeButton.setMnemonic(KeyEvent.VK_Z);
         closeButton.setText("Zav\u0159\u00edt");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -207,11 +207,16 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        statusPanel.setFocusable(false);
+
         statusMessageLabel.setText("V\u00edtejte");
+        statusMessageLabel.setFocusable(false);
 
         statusAnimationLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/task-idle.png")));
+        statusAnimationLabel.setFocusable(false);
 
         smsDelayProgressBar.setMaximum(15);
+        smsDelayProgressBar.setFocusable(false);
         smsDelayProgressBar.setString("Dal\u0161\u00ed sms za: ");
         smsDelayProgressBar.setStringPainted(true);
 
@@ -247,7 +252,7 @@ public class Main extends javax.swing.JFrame {
         smsNumberTextField.setInputVerifier(new InputVerifier() {
             public boolean verify(JComponent input) {
                 JTextField tf = (JTextField) input;
-                if (tf.getText().length() != 9)
+                if (tf.getText().length() != 9 && tf.getText().length() != 0)
                 return false;
                 for (Character c : tf.getText().toCharArray()) {
                     if (!Character.isDigit(c))
@@ -725,6 +730,7 @@ public class Main extends javax.swing.JFrame {
     private class AboutAction extends AbstractAction {
         public AboutAction() {
             super("O programu", new ImageIcon(Main.this.getClass().getResource("resources/about-small.png")));
+            this.putValue(MNEMONIC_KEY,KeyEvent.VK_O);
         }
         public void actionPerformed(ActionEvent e) {
             if (aboutFrame == null)
@@ -738,6 +744,7 @@ public class Main extends javax.swing.JFrame {
     private class QuitAction extends AbstractAction {
         public QuitAction() {
             super("Ukončit", new ImageIcon(Main.this.getClass().getResource("resources/exit-small.png")));
+            this.putValue(MNEMONIC_KEY,KeyEvent.VK_U);
         }
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
@@ -748,6 +755,7 @@ public class Main extends javax.swing.JFrame {
     private class ConfigAction extends AbstractAction {
         public ConfigAction() {
             super("Nastavení", new ImageIcon(Main.this.getClass().getResource("resources/config-small.png")));
+            this.putValue(MNEMONIC_KEY,KeyEvent.VK_N);
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {

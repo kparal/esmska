@@ -56,7 +56,18 @@ public class ContactPanel extends javax.swing.JPanel {
             }
         });
 
-        numberTextField.setInputVerifier(main.smsNumberTextField.getInputVerifier());
+        numberTextField.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                JTextField tf = (JTextField) input;
+                if (tf.getText().length() != 9)
+                return false;
+                for (Character c : tf.getText().toCharArray()) {
+                    if (!Character.isDigit(c))
+                    return false;
+                }
+                return true;
+            }
+        });
         numberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 numberTextFieldKeyReleased(evt);

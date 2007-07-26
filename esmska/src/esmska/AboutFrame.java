@@ -6,10 +6,10 @@
 
 package esmska;
 
-import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import javax.swing.ImageIcon;
@@ -27,6 +27,7 @@ public class AboutFrame extends javax.swing.JFrame {
     /** Creates new form AboutFrame */
     public AboutFrame() {
         initComponents();
+        closeButton.requestFocusInWindow();
     }
     
     /** This method is called from within the constructor to
@@ -50,14 +51,18 @@ public class AboutFrame extends javax.swing.JFrame {
         setLocationByPlatform(true);
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/esmska.png")));
+        jLabel1.setFocusable(false);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Esmska 0.2.0");
+        jLabel2.setFocusable(false);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Pos\u00edl\u00e1n\u00ed SMS p\u0159es Internet.");
+        jLabel3.setFocusable(false);
 
+        creditsButton.setMnemonic(KeyEvent.VK_P);
         creditsButton.setText("Pod\u011bkov\u00e1n\u00ed");
         creditsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,6 +70,7 @@ public class AboutFrame extends javax.swing.JFrame {
             }
         });
 
+        closeButton.setMnemonic(KeyEvent.VK_Z);
         closeButton.setText("Zav\u0159\u00edt");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +78,7 @@ public class AboutFrame extends javax.swing.JFrame {
             }
         });
 
+        licenseButton.setMnemonic(KeyEvent.VK_L);
         licenseButton.setText("Licence");
         licenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,10 +88,10 @@ public class AboutFrame extends javax.swing.JFrame {
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("\u00a9 2007 Kamil P\u00e1ral");
+        jLabel5.setFocusable(false);
 
         jButton1.setText("<html><a href=\"http://code.google.com/p/esmska/\">http://code.google.com/p/esmska/</a></html>");
         jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
