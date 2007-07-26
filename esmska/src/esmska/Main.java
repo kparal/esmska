@@ -1307,6 +1307,8 @@ public class Main extends javax.swing.JFrame {
                 panel.numberTextField.setText(null);
                 panel.operatorComboBox.setSelectedIndex(0);
             }
+            panel.nameTextField.requestFocusInWindow();
+            panel.nameTextField.selectAll();
             setVisible(true);
         }
         public void propertyChange(PropertyChangeEvent e) {
