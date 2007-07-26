@@ -141,12 +141,19 @@ public class Main extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        mainPanel = new javax.swing.JPanel();
         statusPanel = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
         smsDelayProgressBar = new javax.swing.JProgressBar();
+        horizontalSplitPane = new javax.swing.JSplitPane();
+        contactPanel = new javax.swing.JPanel();
+        addContactButton = new javax.swing.JButton();
+        removeContactButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        contactList = new javax.swing.JList();
+        editContactButton = new javax.swing.JButton();
+        verticalSplitPane = new javax.swing.JSplitPane();
         smsPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -167,28 +174,11 @@ public class Main extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         smsUpButton = new javax.swing.JButton();
         smsDownButton = new javax.swing.JButton();
-        contactPanel = new javax.swing.JPanel();
-        addContactButton = new javax.swing.JButton();
-        removeContactButton = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        contactList = new javax.swing.JList();
-        editContactButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         configMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esmska");
@@ -216,10 +206,10 @@ public class Main extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE)
                 .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel))
@@ -236,6 +226,65 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        horizontalSplitPane.setBorder(null);
+        horizontalSplitPane.setResizeWeight(0.5);
+        horizontalSplitPane.setOneTouchExpandable(true);
+        contactPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kontakty"));
+        addContactButton.setAction(addContactAction);
+        addContactButton.setBorderPainted(false);
+        addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        removeContactButton.setAction(removeContactAction);
+        removeContactButton.setBorderPainted(false);
+        removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        contactList.setCellRenderer(new ContactListRenderer());
+        contactList.getSelectionModel().addListSelectionListener(new ContactListSelectionListener());
+        jScrollPane4.setViewportView(contactList);
+
+        editContactButton.setAction(editContactAction);
+        editContactButton.setBorderPainted(false);
+        editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        javax.swing.GroupLayout contactPanelLayout = new javax.swing.GroupLayout(contactPanel);
+        contactPanel.setLayout(contactPanelLayout);
+        contactPanelLayout.setHorizontalGroup(
+            contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contactPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contactPanelLayout.createSequentialGroup()
+                        .addComponent(addContactButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editContactButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeContactButton))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        contactPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
+
+        contactPanelLayout.setVerticalGroup(
+            contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addContactButton)
+                    .addComponent(editContactButton)
+                    .addComponent(removeContactButton))
+                .addContainerGap())
+        );
+
+        contactPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
+
+        horizontalSplitPane.setRightComponent(contactPanel);
+
+        verticalSplitPane.setBorder(null);
+        verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        verticalSplitPane.setResizeWeight(1.0);
+        verticalSplitPane.setOneTouchExpandable(true);
         smsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Zpr\u00e1va"));
         jLabel4.setText("\u010c\u00edslo");
 
@@ -327,15 +376,15 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(smsPanelLayout.createSequentialGroup()
                     .addComponent(jLabel1)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(smsNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                    .addComponent(smsNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(operatorComboBox, 0, 85, Short.MAX_VALUE))
+                    .addComponent(operatorComboBox, 0, 110, Short.MAX_VALUE))
                 .addComponent(nameLabel)
                 .addGroup(smsPanelLayout.createSequentialGroup()
-                    .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                    .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(sendButton))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
             .addContainerGap())
     );
     smsPanelLayout.setVerticalGroup(
@@ -353,13 +402,14 @@ public class Main extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
                 .addComponent(smsCounterLabel))
             .addContainerGap())
     );
+    verticalSplitPane.setLeftComponent(smsPanel);
 
     queuePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Fronta"));
     smsQueueList.setModel(new SMSQueueListModel());
@@ -403,10 +453,10 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(smsUpButton)
                 .addComponent(smsDownButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(queuePanelLayout.createSequentialGroup()
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queuePanelLayout.createSequentialGroup()
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(pauseButton))
@@ -427,65 +477,19 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(smsUpButton)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(smsDownButton))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queuePanelLayout.createSequentialGroup()
+                .addGroup(queuePanelLayout.createSequentialGroup()
                     .addComponent(editButton)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(deleteButton))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
             .addContainerGap())
     );
 
     queuePanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
 
-    contactPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kontakty"));
-    addContactButton.setAction(addContactAction);
-    addContactButton.setBorderPainted(false);
-    addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+    verticalSplitPane.setRightComponent(queuePanel);
 
-    removeContactButton.setAction(removeContactAction);
-    removeContactButton.setBorderPainted(false);
-    removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-
-    contactList.setCellRenderer(new ContactListRenderer());
-    contactList.getSelectionModel().addListSelectionListener(new ContactListSelectionListener());
-    jScrollPane4.setViewportView(contactList);
-
-    editContactButton.setAction(editContactAction);
-    editContactButton.setBorderPainted(false);
-    editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-
-    javax.swing.GroupLayout contactPanelLayout = new javax.swing.GroupLayout(contactPanel);
-    contactPanel.setLayout(contactPanelLayout);
-    contactPanelLayout.setHorizontalGroup(
-        contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(contactPanelLayout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(contactPanelLayout.createSequentialGroup()
-                    .addComponent(addContactButton)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(editContactButton)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(removeContactButton))
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
-            .addContainerGap())
-    );
-
-    contactPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
-
-    contactPanelLayout.setVerticalGroup(
-        contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(addContactButton)
-                .addComponent(editContactButton)
-                .addComponent(removeContactButton))
-            .addContainerGap())
-    );
-
-    contactPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
+    horizontalSplitPane.setLeftComponent(verticalSplitPane);
 
     programMenu.setMnemonic(KeyEvent.VK_R);
     programMenu.setText("Program");
@@ -508,25 +512,16 @@ public class Main extends javax.swing.JFrame {
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addComponent(statusPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGroup(layout.createSequentialGroup()
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(queuePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(smsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(contactPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
             .addContainerGap())
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(smsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(queuePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(contactPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
@@ -763,7 +758,8 @@ public class Main extends javax.swing.JFrame {
     private class SendAction extends AbstractAction {
         public SendAction() {
             super("Poslat", new ImageIcon(Main.this.getClass().getResource("resources/send.png")));
-            putValue(MNEMONIC_KEY, KeyEvent.VK_S);
+            this.putValue(SHORT_DESCRIPTION,"Odeslat zprávu (Alt-S)");
+            this.putValue(MNEMONIC_KEY, KeyEvent.VK_S);
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
@@ -1255,6 +1251,7 @@ public class Main extends javax.swing.JFrame {
                 Contact c = (Contact) contactList.getModel().getElementAt(i);
                 nameLabel.setText(c.getName());
                 smsNumberTextField.setText(c.getNumber());
+                smsNumberTextFieldKeyReleased(null);
                 operatorComboBox.setSelectedItem(c.getOperator());
                 smsTextPane.requestFocusInWindow();
             }
@@ -1364,6 +1361,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JButton editContactButton;
     private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JSplitPane horizontalSplitPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -1372,7 +1370,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JLabel nameLabel;
     javax.swing.JComboBox operatorComboBox;
@@ -1392,5 +1389,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JSplitPane verticalSplitPane;
     // End of variables declaration//GEN-END:variables
 }
