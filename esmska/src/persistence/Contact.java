@@ -106,4 +106,8 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
             return 0;
     }
 
+    public String toString() {
+        return getName();
+    }
+
 }
