@@ -24,12 +24,10 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
-import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.InputVerifier;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -49,20 +47,14 @@ import javax.swing.event.DocumentEvent.EventType;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.Element;
-import javax.swing.text.JTextComponent;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
@@ -494,7 +486,7 @@ public class Main extends javax.swing.JFrame {
 
     contactPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
 
-    programMenu.setMnemonic(KeyEvent.VK_P);
+    programMenu.setMnemonic(KeyEvent.VK_R);
     programMenu.setText("Program");
     configMenuItem.setAction(configAction);
     programMenu.add(configMenuItem);
@@ -528,8 +520,8 @@ public class Main extends javax.swing.JFrame {
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createSequentialGroup()
                     .addComponent(contactPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(queuePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -909,6 +901,18 @@ public class Main extends javax.swing.JFrame {
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
+            //confirm
+            StringBuilder warning = new StringBuilder();
+            warning.append("<html><b>Opravdu smazat následující kontakty?</b><br><br>");
+            for (Object o : contactList.getSelectedValues())
+                warning.append(((Contact)o).getName() + "<br>");
+            warning.append("<br></html>");
+            
+            int result = JOptionPane.showOptionDialog(Main.this,new JLabel(warning.toString()),"Opravdu smazat?",
+                    JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,null,JOptionPane.NO_OPTION);
+            if (result != JOptionPane.YES_OPTION)
+                return;
+            //delete
             int minIndex = contactList.getMinSelectionIndex();
             int maxIndex = contactList.getMaxSelectionIndex();
             contacts.getContacts().removeAll(Arrays.asList(contactList.getSelectedValues()));
@@ -965,19 +969,22 @@ public class Main extends javax.swing.JFrame {
     /** Pause/unpause the sms queue */
     private class SMSQueuePauseAction extends AbstractAction {
         private boolean makePause = true;
+        private final String descRunning = "Pozastavit odesílání sms ve frontě (Alt-P)";
+        private final String descStopped = "Pokračovat v odesílání sms ve frontě (Alt-P)";
         public SMSQueuePauseAction() {
             super(null, new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
-            this.putValue(SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
+            this.putValue(SHORT_DESCRIPTION,descRunning);
+            putValue(MNEMONIC_KEY, KeyEvent.VK_P);
         }
         public void actionPerformed(ActionEvent e) {
             if (makePause) {
                 smsSender.setPaused(true);
                 this.putValue(LARGE_ICON_KEY, new ImageIcon(Main.this.getClass().getResource("resources/start.png")));
-                this.putValue(SHORT_DESCRIPTION,"Pokračovat v odesílání sms ve frontě");
+                this.putValue(SHORT_DESCRIPTION,descStopped);
             } else {
                 smsSender.setPaused(false);
                 this.putValue(LARGE_ICON_KEY,new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
-                this.putValue(SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
+                this.putValue(SHORT_DESCRIPTION,descRunning);
             }
             makePause = !makePause;
         }
@@ -1004,7 +1011,7 @@ public class Main extends javax.swing.JFrame {
             super.fireContentsChanged(source, index0, index1);
         }
     }
-      
+    
     /** Renderer for items in queue list */
     private class SMSQueueListRenderer implements ListCellRenderer {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -1044,7 +1051,7 @@ public class Main extends javax.swing.JFrame {
             return output.toString();
         }
     }
-   
+    
     /** Progress bar action listener after sending sms */
     private class SMSDelayActionListener implements ActionListener {
         private final int DELAY = 15;
