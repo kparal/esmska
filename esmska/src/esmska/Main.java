@@ -91,6 +91,7 @@ public class Main extends javax.swing.JFrame {
     private Action aboutAction = new AboutAction();
     private Action configAction = new ConfigAction();
     private Action addContactAction = new AddContactAction();
+    private Action editContactAction = new EditContactAction();
     private Action removeContactAction = new RemoveContactAction();
     private Action smsUpAction = new SMSUpAction();
     private Action smsDownAction = new SMSDownAction();
@@ -179,6 +180,7 @@ public class Main extends javax.swing.JFrame {
         removeContactButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         contactList = new javax.swing.JList();
+        editContactButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         configMenuItem = new javax.swing.JMenuItem();
@@ -450,6 +452,10 @@ public class Main extends javax.swing.JFrame {
     contactList.getSelectionModel().addListSelectionListener(new ContactListSelectionListener());
     jScrollPane4.setViewportView(contactList);
 
+    editContactButton.setAction(editContactAction);
+    editContactButton.setBorderPainted(false);
+    editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
     javax.swing.GroupLayout contactPanelLayout = new javax.swing.GroupLayout(contactPanel);
     contactPanel.setLayout(contactPanelLayout);
     contactPanelLayout.setHorizontalGroup(
@@ -460,11 +466,12 @@ public class Main extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(addContactButton)
+                .addComponent(editContactButton)
                 .addComponent(removeContactButton))
             .addContainerGap())
     );
 
-    contactPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addContactButton, removeContactButton});
+    contactPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
 
     contactPanelLayout.setVerticalGroup(
         contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,13 +480,16 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(contactPanelLayout.createSequentialGroup()
                     .addComponent(addContactButton)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(editContactButton)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(removeContactButton))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
             .addContainerGap())
     );
 
-    contactPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addContactButton, removeContactButton});
+    contactPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
 
+    programMenu.setMnemonic(KeyEvent.VK_P);
     programMenu.setText("Program");
     configMenuItem.setAction(configAction);
     programMenu.add(configMenuItem);
@@ -724,6 +734,16 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
+    /** Quit the program */
+    private class QuitAction extends AbstractAction {
+        public QuitAction() {
+            super("Ukončit", new ImageIcon(Main.this.getClass().getResource("resources/exit-small.png")));
+        }
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
+    }
+    
     /** Show config frame */
     private class ConfigAction extends AbstractAction {
         public ConfigAction() {
@@ -786,27 +806,6 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** Pause/unpause the sms queue */
-    private class SMSQueuePauseAction extends AbstractAction {
-        private boolean makePause = true;
-        public SMSQueuePauseAction() {
-            super(null, new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
-            this.putValue(SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
-        }
-        public void actionPerformed(ActionEvent e) {
-            if (makePause) {
-                smsSender.setPaused(true);
-                this.putValue(LARGE_ICON_KEY, new ImageIcon(Main.this.getClass().getResource("resources/start.png")));
-                this.putValue(SHORT_DESCRIPTION,"Pokračovat v odesílání sms ve frontě");
-            } else {
-                smsSender.setPaused(false);
-                this.putValue(LARGE_ICON_KEY,new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
-                this.putValue(SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
-            }
-            makePause = !makePause;
-        }
-    }
-    
     /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
         public DeleteSMSAction() {
@@ -823,16 +822,6 @@ public class Main extends javax.swing.JFrame {
                 ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
                         smsQueueList.getModel(), index, index);
             }
-        }
-    }
-    
-    /** Quit the program */
-    private class QuitAction extends AbstractAction {
-        public QuitAction() {
-            super("Ukončit", new ImageIcon(Main.this.getClass().getResource("resources/exit-small.png")));
-        }
-        public void actionPerformed(ActionEvent e) {
-            System.exit(0);
         }
     }
     
@@ -860,7 +849,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** Add contact to contact table */
+    /** Add contact to contact list */
     private class AddContactAction extends AbstractAction {
         public AddContactAction() {
             super(null,new ImageIcon(Main.this.getClass().getResource("resources/add.png")));
@@ -880,7 +869,31 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /** Remove contact from contact table */
+    /** Edit contact from contact list */
+    private class EditContactAction extends AbstractAction {
+        public EditContactAction() {
+            super(null,new ImageIcon(Main.this.getClass().getResource("resources/edit.png")));
+            this.putValue(SHORT_DESCRIPTION,"Upravit označený kontakt");
+            this.setEnabled(false);
+        }
+        public void actionPerformed(ActionEvent e) {
+            Contact contact = (Contact)contactList.getSelectedValue();
+            contactDialog.show(contact);
+            Contact c = contactDialog.getResult();
+            if (c == null)
+                return;
+            contacts.getContacts().remove(contact);
+            contacts.getContacts().add(c);
+            contacts.sortContacts();
+            
+            ((ContactListModel)contactList.getModel()).fireContentsChanged(
+                    contactList.getModel(),0,contacts.getContacts().size()-1);
+            contactList.clearSelection();
+            contactList.setSelectedValue(c, true);
+        }
+    }
+    
+    /** Remove contact from contact list */
     private class RemoveContactAction extends AbstractAction {
         public RemoveContactAction() {
             super(null,new ImageIcon(Main.this.getClass().getResource("resources/remove.png")));
@@ -941,6 +954,27 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
+    /** Pause/unpause the sms queue */
+    private class SMSQueuePauseAction extends AbstractAction {
+        private boolean makePause = true;
+        public SMSQueuePauseAction() {
+            super(null, new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
+            this.putValue(SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
+        }
+        public void actionPerformed(ActionEvent e) {
+            if (makePause) {
+                smsSender.setPaused(true);
+                this.putValue(LARGE_ICON_KEY, new ImageIcon(Main.this.getClass().getResource("resources/start.png")));
+                this.putValue(SHORT_DESCRIPTION,"Pokračovat v odesílání sms ve frontě");
+            } else {
+                smsSender.setPaused(false);
+                this.putValue(LARGE_ICON_KEY,new ImageIcon(Main.this.getClass().getResource("resources/pause.png")));
+                this.putValue(SHORT_DESCRIPTION,"Pozastavit odesílání sms ve frontě");
+            }
+            makePause = !makePause;
+        }
+    }
+    
     /** Model for SMSQueueList */
     private class SMSQueueListModel extends AbstractListModel {
         public Object getElementAt(int index) {
@@ -962,28 +996,7 @@ public class Main extends javax.swing.JFrame {
             super.fireContentsChanged(source, index0, index1);
         }
     }
-    
-    /** Progress bar action listener after sending sms */
-    private class SMSDelayActionListener implements ActionListener {
-        private final int DELAY = 15;
-        private int seconds = 0;
-        public void actionPerformed(ActionEvent e) {
-            if (seconds <= DELAY) { //still wainting
-                smsDelayProgressBar.setValue(seconds);
-                smsDelayProgressBar.setString("Další sms za: " + (DELAY-seconds) + "s");
-                if (seconds == 0)
-                    smsDelayProgressBar.setVisible(true);
-                seconds++;
-            } else { //delay finished
-                smsDelayTimer.stop();
-                smsDelayProgressBar.setVisible(false);
-                seconds = 0;
-                smsSender.setDelayed(false);
-                smsSender.announceNewSMS();
-            }
-        }
-    }
-    
+      
     /** Renderer for items in queue list */
     private class SMSQueueListRenderer implements ListCellRenderer {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -1023,6 +1036,27 @@ public class Main extends javax.swing.JFrame {
             return output.toString();
         }
     }
+   
+    /** Progress bar action listener after sending sms */
+    private class SMSDelayActionListener implements ActionListener {
+        private final int DELAY = 15;
+        private int seconds = 0;
+        public void actionPerformed(ActionEvent e) {
+            if (seconds <= DELAY) { //still wainting
+                smsDelayProgressBar.setValue(seconds);
+                smsDelayProgressBar.setString("Další sms za: " + (DELAY-seconds) + "s");
+                if (seconds == 0)
+                    smsDelayProgressBar.setVisible(true);
+                seconds++;
+            } else { //delay finished
+                smsDelayTimer.stop();
+                smsDelayProgressBar.setVisible(false);
+                seconds = 0;
+                smsSender.setDelayed(false);
+                smsSender.announceNewSMS();
+            }
+        }
+    }
     
     /** Renderer for items in operator combo box */
     private class OperatorComboBoxRenderer implements ListCellRenderer {
@@ -1036,37 +1070,6 @@ public class Main extends javax.swing.JFrame {
                 ((JLabel)c).setIcon(new ImageIcon(operator.getClass().getResource("resources/O2.png")));
             }
             return c;
-        }
-    }
-    
-    /** Listener for sms text pane */
-    private class SMSTextPaneListener implements DocumentListener {
-        /** count number of chars in sms and take action */
-        private void countChars(DocumentEvent e) {
-            int chars = e.getDocument().getLength();
-            Operator op = (Operator)operatorComboBox.getSelectedItem();
-            smsCounterLabel.setText(chars + " znaků (" + op.getSMSCount(chars) + " sms)");
-            if (chars > op.getMaxChars()) { //chars more than max
-                smsCounterLabel.setForeground(Color.RED);
-                smsCounterLabel.setText(chars + " znaků (nelze odeslat!)");
-            } else //chars ok
-                smsCounterLabel.setForeground(SystemColor.textText);
-        }
-        /** update form components */
-        private void updateUI(DocumentEvent e) {
-            sendAction.updateStatus();
-        }
-        public void changedUpdate(DocumentEvent e) {
-            countChars(e);
-            updateUI(e);
-        }
-        public void insertUpdate(DocumentEvent e) {
-            countChars(e);
-            updateUI(e);
-        }
-        public void removeUpdate(DocumentEvent e) {
-            countChars(e);
-            updateUI(e);
         }
     }
     
@@ -1098,6 +1101,37 @@ public class Main extends javax.swing.JFrame {
             smsTextPaneDocumentFilter.setSmsLength(((Operator)operatorComboBox.getSelectedItem()).getSMSLength());
             
             updateNameLabel();
+        }
+    }
+    
+    /** Listener for sms text pane */
+    private class SMSTextPaneListener implements DocumentListener {
+        /** count number of chars in sms and take action */
+        private void countChars(DocumentEvent e) {
+            int chars = e.getDocument().getLength();
+            Operator op = (Operator)operatorComboBox.getSelectedItem();
+            smsCounterLabel.setText(chars + " znaků (" + op.getSMSCount(chars) + " sms)");
+            if (chars > op.getMaxChars()) { //chars more than max
+                smsCounterLabel.setForeground(Color.RED);
+                smsCounterLabel.setText(chars + " znaků (nelze odeslat!)");
+            } else //chars ok
+                smsCounterLabel.setForeground(SystemColor.textText);
+        }
+        /** update form components */
+        private void updateUI(DocumentEvent e) {
+            sendAction.updateStatus();
+        }
+        public void changedUpdate(DocumentEvent e) {
+            countChars(e);
+            updateUI(e);
+        }
+        public void insertUpdate(DocumentEvent e) {
+            countChars(e);
+            updateUI(e);
+        }
+        public void removeUpdate(DocumentEvent e) {
+            countChars(e);
+            updateUI(e);
         }
     }
     
@@ -1198,6 +1232,7 @@ public class Main extends javax.swing.JFrame {
             ListSelectionModel lsm = (ListSelectionModel)e.getSource();
             // update components
             removeContactAction.setEnabled(!lsm.isSelectionEmpty());
+            editContactAction.setEnabled(contactList.getSelectedIndices().length == 1);
             // fill sms components with current contact
             int i;
             if ((i = lsm.getMinSelectionIndex()) >=0 ) {
@@ -1251,9 +1286,11 @@ public class Main extends javax.swing.JFrame {
             if (c != null) {
                 panel.nameTextField.setText(c.getName());
                 panel.numberTextField.setText(c.getNumber());
+                panel.operatorComboBox.setSelectedItem(c.getOperator());
             } else {
                 panel.nameTextField.setText(null);
                 panel.numberTextField.setText(null);
+                panel.operatorComboBox.setSelectedIndex(0);
             }
             setVisible(true);
         }
@@ -1307,6 +1344,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel contactPanel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
+    private javax.swing.JButton editContactButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
