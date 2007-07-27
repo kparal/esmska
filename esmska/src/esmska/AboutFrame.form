@@ -82,7 +82,7 @@
           <Font name="Dialog" size="36" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Esmska 0.2.0"/>
+        <Property name="text" type="java.lang.String" value="Esmska 0.3.0"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
