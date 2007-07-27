@@ -1263,8 +1263,9 @@ public class Main extends javax.swing.JFrame {
                 timer.restart();
         }
         public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-            if ((fb.getDocument().getLength() + string.length()) > maxChars) //reached size limit
-                return;
+            //commented out because we need to edit sms longer than allowed (edit sms action)
+//            if ((fb.getDocument().getLength() + string.length()) > maxChars) //reached size limit
+//                return;
             super.insertString(fb, offset, string, attr);
             timer.restart();
         }
