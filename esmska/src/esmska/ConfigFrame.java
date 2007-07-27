@@ -35,6 +35,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         rememberQueueCheckBox = new javax.swing.JCheckBox();
+        rememberLayoutCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -54,15 +55,25 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        rememberQueueCheckBox.setMnemonic(KeyEvent.VK_U);
+        rememberQueueCheckBox.setMnemonic(KeyEvent.VK_F);
         rememberQueueCheckBox.setSelected(config.isRememberQueue());
         rememberQueueCheckBox.setText("Ukl\u00e1dat frontu neodeslan\u00fdch sms");
         rememberQueueCheckBox.setToolTipText("<html>\nP\u0159i ukon\u010den\u00ed programu uchov\u00e1v\u00e1 frontu neodeslan\u00fdch sms pro p\u0159\u00ed\u0161t\u00ed spu\u0161t\u011bn\u00ed programu.\n</html>");
-        rememberQueueCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         rememberQueueCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         rememberQueueCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rememberQueueCheckBoxActionPerformed(evt);
+            }
+        });
+
+        rememberLayoutCheckBox.setMnemonic(KeyEvent.VK_R);
+        rememberLayoutCheckBox.setSelected(config.isRememberLayout());
+        rememberLayoutCheckBox.setText("Pamatovat rozvr\u017een\u00ed formul\u00e1\u0159e");
+        rememberLayoutCheckBox.setToolTipText("<html>\nPou\u017eije aktu\u00e1ln\u00ed rozm\u011bry programu a prvk\u016f formul\u00e1\u0159e p\u0159i p\u0159\u00ed\u0161t\u00edm spu\u0161t\u011bn\u00ed programu.\n</html>");
+        rememberLayoutCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        rememberLayoutCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rememberLayoutCheckBoxActionPerformed(evt);
             }
         });
 
@@ -72,15 +83,19 @@ public class ConfigFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rememberQueueCheckBox)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rememberLayoutCheckBox)
+                    .addComponent(rememberQueueCheckBox))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(rememberLayoutCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rememberQueueCheckBox)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         jTabbedPane1.addTab("Obecn\u00e9", jPanel1);
 
@@ -88,7 +103,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         useSenderIDCheckBox.setSelected(config.isUseSenderID());
         useSenderIDCheckBox.setText("P\u0159ipojovat podpis odesilatele");
         useSenderIDCheckBox.setToolTipText("<html>P\u0159i p\u0159ipojen\u00ed podpisu p\u0159ijde sms adres\u00e1tovi ze zadan\u00e9ho \u010d\u00edsla<br>\na s dan\u00fdm jm\u00e9nem napsan\u00fdm na konci zpr\u00e1vy.</html>");
-        useSenderIDCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         useSenderIDCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         useSenderIDCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +152,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(senderNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))))
-                .addContainerGap(117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(119, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,6 +203,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rememberLayoutCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberLayoutCheckBoxActionPerformed
+        config.setRememberLayout(rememberLayoutCheckBox.isSelected());
+    }//GEN-LAST:event_rememberLayoutCheckBoxActionPerformed
+
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
         senderNameTextFieldActionPerformed(null);
         senderNumberTextFieldActionPerformed(null);
@@ -225,6 +243,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;
     private javax.swing.JTextField senderNameTextField;
     private javax.swing.JTextField senderNumberTextField;

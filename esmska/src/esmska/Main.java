@@ -8,6 +8,7 @@ package esmska;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -662,6 +663,11 @@ public class Main extends javax.swing.JFrame {
         }
         config.setSmsQueue(list);
         
+        //save frame layout
+        config.setMainDimension(this.getSize());
+        config.setHorizontalSplitPaneLocation(horizontalSplitPane.getDividerLocation());
+        config.setVerticalSplitPaneLocation(verticalSplitPane.getDividerLocation());
+        
         try {
             persistenceManager.saveConfig();
         } catch (IOException ex) {
@@ -688,6 +694,18 @@ public class Main extends javax.swing.JFrame {
             if (config.getSmsQueue().size() != 0)
                 ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
                         smsQueueList.getModel(), 0, smsQueue.size()-1);
+        }
+        
+        if (config.isRememberLayout()) { //set frame layout
+            Dimension mainDimension = config.getMainDimension();
+            Integer horizontalSplitPaneLocation = config.getHorizontalSplitPaneLocation();
+            Integer verticalSplitPaneLocation = config.getVerticalSplitPaneLocation();
+            if (mainDimension != null)
+                this.setSize(mainDimension);
+            if (horizontalSplitPaneLocation != null)
+                horizontalSplitPane.setDividerLocation(horizontalSplitPaneLocation);
+            if (verticalSplitPaneLocation != null)
+                verticalSplitPane.setDividerLocation(verticalSplitPaneLocation);
         }
     }
     
