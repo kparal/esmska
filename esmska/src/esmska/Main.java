@@ -94,6 +94,7 @@ public class Main extends javax.swing.JFrame {
     private ContactDialog contactDialog;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
+    private boolean multiSendMode = false;
     
     /** actual queue of sms's */
     private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
@@ -649,6 +650,25 @@ public class Main extends javax.swing.JFrame {
             nameLabel.setText("");
     }
     
+    /** prepare components for multisend mode or normal mode */
+    private void setMultiSendMode(boolean b) {
+        multiSendMode = b;
+        if (multiSendMode) {
+            nameLabel.setText("Hromadné odesílání");
+            smsNumberTextField.setText("");
+            smsNumberTextField.setEnabled(false);
+            smsNumberTextField.setToolTipText("<html>Pro zrušení módu hromadného odesílání<br>"
+                    + "označte v seznamu kontaktů jediný kontakt</html>");
+            operatorComboBox.setEnabled(false);
+        } else {
+            nameLabel.setText("");
+            smsNumberTextField.setEnabled(true);
+            smsNumberTextField.setToolTipText(null);
+            operatorComboBox.setEnabled(true);
+        }
+        sendAction.updateStatus();
+    }
+    
     /** save program configuration */
     private void saveConfig() {
         //save sms queue
@@ -781,6 +801,17 @@ public class Main extends javax.swing.JFrame {
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
+            if (multiSendMode)
+                sendMultiSMS();
+            else
+                sendSingleSMS();
+            
+            smsTextPane.setText(null);
+            smsTextUndoManager.discardAllEdits();
+            smsTextPane.requestFocusInWindow();
+        }
+        /** standard mode */
+        private void sendSingleSMS() {
             //text must be non-empty
             if (smsNumberTextField.getText().isEmpty()) {
                 smsNumberTextField.requestFocusInWindow();
@@ -802,16 +833,36 @@ public class Main extends javax.swing.JFrame {
             ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
                     smsQueueList.getModel(), index, index);
             smsSender.announceNewSMS();
-            
-            smsTextPane.setText(null);
-            smsTextUndoManager.discardAllEdits();
-            smsTextPane.requestFocusInWindow();
+        }
+        /** multisend mode */
+        private void sendMultiSMS() {
+            ArrayList<Contact> contacts = new ArrayList<Contact>();
+            for (Object o : contactList.getSelectedValues())
+                contacts.add((Contact)o);
+            for (Contact c : contacts) {
+                SMS sms = new SMS();
+                sms.setNumber(c.getNumber());
+                sms.setText(smsTextPane.getText());
+                sms.setOperator(c.getOperator());
+                if (config.isUseSenderID()) { //append signature if requested
+                    sms.setSenderNumber(config.getSenderNumber());
+                    sms.setSenderName(config.getSenderName());
+                }
+                sms.setName(c.getName());
+                
+                smsQueue.add(sms);
+                int index = smsQueue.indexOf(sms);
+                ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
+                        smsQueueList.getModel(), index, index);
+                smsSender.announceNewSMS();
+            }
         }
         /** update status according to conditions  */
         public void updateStatus() {
             boolean ok = true;
-            // valid number
-            if (ok && !smsNumberTextField.getInputVerifier().verify(smsNumberTextField))
+            // valid number or multisend mode
+            if (ok && !smsNumberTextField.getInputVerifier().verify(smsNumberTextField)
+            && !multiSendMode)
                 ok = false;
             // non-empty sms text
             if (ok && smsTextPane.getText().length() == 0)
@@ -851,6 +902,7 @@ public class Main extends javax.swing.JFrame {
             SMS sms = (SMS) smsQueueList.getSelectedValue();
             if (sms == null)
                 return;
+            contactList.clearSelection();
             smsNumberTextField.setText(sms.getNumber());
             smsTextPane.setText(sms.getText());
             operatorComboBox.setSelectedItem(sms.getOperator());
@@ -859,7 +911,6 @@ public class Main extends javax.swing.JFrame {
             smsQueue.remove(sms);
             ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
                     smsQueueList.getModel(), index, index);
-            contactList.clearSelection();
             smsTextPane.requestFocusInWindow();
         }
     }
@@ -1260,19 +1311,23 @@ public class Main extends javax.swing.JFrame {
             if (e.getValueIsAdjusting())
                 return;
             ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+            int index = lsm.getMinSelectionIndex();
+            int count = contactList.getSelectedIndices().length;
             // update components
-            removeContactAction.setEnabled(!lsm.isSelectionEmpty());
-            editContactAction.setEnabled(contactList.getSelectedIndices().length == 1);
+            setMultiSendMode(false);
+            removeContactAction.setEnabled(count != 0);
+            editContactAction.setEnabled(count == 1);
             // fill sms components with current contact
-            int i;
-            if ((i = lsm.getMinSelectionIndex()) >=0 ) {
-                Contact c = (Contact) contactList.getModel().getElementAt(i);
-                nameLabel.setText(c.getName());
+            if (count == 1) { //only one contact selected
+                Contact c = (Contact) contactList.getModel().getElementAt(index);
                 smsNumberTextField.setText(c.getNumber());
                 smsNumberTextFieldKeyReleased(null);
                 operatorComboBox.setSelectedItem(c.getOperator());
-                smsTextPane.requestFocusInWindow();
+                nameLabel.setText(c.getName());
+            } else if (count > 1) { //multiple contacts selected
+                setMultiSendMode(true);
             }
+            smsTextPane.requestFocusInWindow();
         }
     }
     
