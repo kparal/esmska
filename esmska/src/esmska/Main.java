@@ -861,8 +861,8 @@ public class Main extends javax.swing.JFrame {
         public void updateStatus() {
             boolean ok = true;
             // valid number or multisend mode
-            if (ok && !smsNumberTextField.getInputVerifier().verify(smsNumberTextField)
-            && !multiSendMode)
+            if ((!smsNumberTextField.getInputVerifier().verify(smsNumberTextField)
+            || smsNumberTextField.getText().length() == 0) && !multiSendMode)
                 ok = false;
             // non-empty sms text
             if (ok && smsTextPane.getText().length() == 0)
