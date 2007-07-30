@@ -153,6 +153,7 @@
           <Border info="null"/>
         </Property>
         <Property name="resizeWeight" type="double" value="0.5"/>
+        <Property name="continuousLayout" type="boolean" value="true"/>
         <Property name="oneTouchExpandable" type="boolean" value="true"/>
       </Properties>
 
@@ -198,7 +199,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane4" pref="332" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="329" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="addContactButton" linkSize="6" min="-2" max="-2" attributes="0"/>
@@ -272,6 +273,7 @@
             </Property>
             <Property name="orientation" type="int" value="0"/>
             <Property name="resizeWeight" type="double" value="1.0"/>
+            <Property name="continuousLayout" type="boolean" value="true"/>
             <Property name="oneTouchExpandable" type="boolean" value="true"/>
           </Properties>
           <Constraints>
@@ -348,7 +350,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" pref="190" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" pref="193" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -500,7 +502,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="deleteButton" linkSize="8" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane2" alignment="0" pref="35" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" pref="26" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>

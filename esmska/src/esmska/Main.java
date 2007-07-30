@@ -230,6 +230,7 @@ public class Main extends javax.swing.JFrame {
 
         horizontalSplitPane.setBorder(null);
         horizontalSplitPane.setResizeWeight(0.5);
+        horizontalSplitPane.setContinuousLayout(true);
         horizontalSplitPane.setOneTouchExpandable(true);
         contactPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kontakty"));
         addContactButton.setAction(addContactAction);
@@ -270,7 +271,7 @@ public class Main extends javax.swing.JFrame {
         contactPanelLayout.setVerticalGroup(
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -286,6 +287,7 @@ public class Main extends javax.swing.JFrame {
         verticalSplitPane.setBorder(null);
         verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         verticalSplitPane.setResizeWeight(1.0);
+        verticalSplitPane.setContinuousLayout(true);
         verticalSplitPane.setOneTouchExpandable(true);
         smsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Zpr\u00e1va"));
         jLabel4.setText("\u010c\u00edslo");
@@ -404,7 +406,7 @@ public class Main extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -483,7 +485,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(editButton)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(deleteButton))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
             .addContainerGap())
     );
 
