@@ -231,7 +231,6 @@ public class Main extends javax.swing.JFrame {
         horizontalSplitPane.setBorder(null);
         horizontalSplitPane.setResizeWeight(0.5);
         horizontalSplitPane.setContinuousLayout(true);
-        horizontalSplitPane.setOneTouchExpandable(true);
         contactPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kontakty"));
         addContactButton.setAction(addContactAction);
         addContactButton.setBorderPainted(false);
@@ -288,7 +287,6 @@ public class Main extends javax.swing.JFrame {
         verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         verticalSplitPane.setResizeWeight(1.0);
         verticalSplitPane.setContinuousLayout(true);
-        verticalSplitPane.setOneTouchExpandable(true);
         smsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Zpr\u00e1va"));
         jLabel4.setText("\u010c\u00edslo");
 

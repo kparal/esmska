@@ -154,7 +154,6 @@
         </Property>
         <Property name="resizeWeight" type="double" value="0.5"/>
         <Property name="continuousLayout" type="boolean" value="true"/>
-        <Property name="oneTouchExpandable" type="boolean" value="true"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
@@ -274,7 +273,6 @@
             <Property name="orientation" type="int" value="0"/>
             <Property name="resizeWeight" type="double" value="1.0"/>
             <Property name="continuousLayout" type="boolean" value="true"/>
-            <Property name="oneTouchExpandable" type="boolean" value="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
