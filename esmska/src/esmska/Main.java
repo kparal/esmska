@@ -931,6 +931,7 @@ public class Main extends javax.swing.JFrame {
             
             int contactIndex = contacts.getContacts().indexOf(c);
             ((ContactListModel)contactList.getModel()).fireIntervalAdded(contactList.getModel(),contactIndex,contactIndex);
+            contactList.clearSelection();
             contactList.setSelectedValue(c, true);
         }
     }
