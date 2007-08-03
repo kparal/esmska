@@ -998,9 +998,7 @@ public class Main extends javax.swing.JFrame {
             if (index <= 0) //cannot move up first item
                 return;
             synchronized(smsQueue) {
-                SMS sms = smsQueue.get(index);
-                smsQueue.set(index,smsQueue.get(index-1));
-                smsQueue.set(index-1,sms);
+                Collections.swap(smsQueue,index,index-1);
             }
             ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
                     smsQueueList.getModel(), index-1, index);
@@ -1021,9 +1019,7 @@ public class Main extends javax.swing.JFrame {
             if (index < 0 || index >= smsQueueList.getModel().getSize() - 1) //cannot move down last item
                 return;
             synchronized(smsQueue) {
-                SMS sms = smsQueue.get(index);
-                smsQueue.set(index,smsQueue.get(index+1));
-                smsQueue.set(index+1,sms);
+                Collections.swap(smsQueue,index,index+1);
             }
             ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
                     smsQueueList.getModel(), index, index+1);
