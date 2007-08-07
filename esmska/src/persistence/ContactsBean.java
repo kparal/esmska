@@ -8,8 +8,11 @@ package persistence;
 
 import java.beans.*;
 import java.io.Serializable;
+import java.text.CollationKey;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * @author ripper
@@ -51,7 +54,12 @@ public class ContactsBean extends Object implements Serializable {
     }
     
     public void sortContacts() {
-        Collections.sort(contacts);
+        Collections.sort(contacts, new Comparator<Contact>() {
+            Collator collator = Collator.getInstance();
+            public int compare(Contact o1, Contact o2) {
+                return collator.compare(o1.getName(), o2.getName());
+            }
+        });
     }
     
 }
