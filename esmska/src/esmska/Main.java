@@ -773,6 +773,7 @@ public class Main extends javax.swing.JFrame {
             this.putValue(MNEMONIC_KEY,KeyEvent.VK_U);
         }
         public void actionPerformed(ActionEvent e) {
+            Main.this.formWindowClosing(null);
             System.exit(0);
         }
     }
