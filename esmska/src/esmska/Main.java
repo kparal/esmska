@@ -28,14 +28,11 @@ import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
-import javax.swing.InputVerifier;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
@@ -270,7 +267,7 @@ public class Main extends javax.swing.JFrame {
         contactPanelLayout.setVerticalGroup(
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -292,18 +289,6 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("+420");
 
-        smsNumberTextField.setInputVerifier(new InputVerifier() {
-            public boolean verify(JComponent input) {
-                JTextField tf = (JTextField) input;
-                if (tf.getText().length() != 9 && tf.getText().length() != 0)
-                return false;
-                for (Character c : tf.getText().toCharArray()) {
-                    if (!Character.isDigit(c))
-                    return false;
-                }
-                return true;
-            }
-        });
         smsNumberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 smsNumberTextFieldKeyReleased(evt);
@@ -404,7 +389,7 @@ public class Main extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -551,13 +536,6 @@ public class Main extends javax.swing.JFrame {
         //update name label
         updateNameLabel();
         
-        //color background (number ok/not ok)
-        boolean ok = smsNumberTextField.getInputVerifier().verify(smsNumberTextField);
-        if (!ok || smsNumberTextField.getText().isEmpty())
-            smsNumberTextField.setBackground(Color.RED);
-        else
-            smsNumberTextField.setBackground(Color.GREEN);
-        
         //guess operator
         Operator op = OperatorEnum.getOperator(smsNumberTextField.getText());
         if (op != null) {
@@ -648,6 +626,21 @@ public class Main extends javax.swing.JFrame {
             nameLabel.setText(contact.getName());
         else
             nameLabel.setText("");
+    }
+    
+    /** validates sms form and returns status */
+    private boolean validateForm(boolean transferFocus) {
+        if (!FormChecker.checkSMSNumber(smsNumberTextField.getText())) {
+            if (transferFocus)
+                smsNumberTextField.requestFocusInWindow();
+            return false;
+        }
+        if (FormChecker.isEmpty(smsTextPane.getText())) {
+            if (transferFocus)
+                smsTextPane.requestFocusInWindow();
+            return false;
+        }
+        return true;
     }
     
     /** prepare components for multisend mode or normal mode */
@@ -813,11 +806,8 @@ public class Main extends javax.swing.JFrame {
         }
         /** standard mode */
         private void sendSingleSMS() {
-            //text must be non-empty
-            if (smsNumberTextField.getText().isEmpty()) {
-                smsNumberTextField.requestFocusInWindow();
+            if (!validateForm(true))
                 return;
-            }
             
             SMS sms = new SMS();
             sms.setNumber(smsNumberTextField.getText());
@@ -837,6 +827,11 @@ public class Main extends javax.swing.JFrame {
         }
         /** multisend mode */
         private void sendMultiSMS() {
+            if (smsTextPane.getText().length() == 0) {
+                validateForm(true);
+                return;
+            }
+            
             ArrayList<Contact> contacts = new ArrayList<Contact>();
             for (Object o : contactList.getSelectedValues())
                 contacts.add((Contact)o);
@@ -862,8 +857,7 @@ public class Main extends javax.swing.JFrame {
         public void updateStatus() {
             boolean ok = true;
             // valid number or multisend mode
-            if ((!smsNumberTextField.getInputVerifier().verify(smsNumberTextField)
-            || smsNumberTextField.getText().length() == 0) && !multiSendMode)
+            if (!validateForm(false) && !multiSendMode)
                 ok = false;
             // non-empty sms text
             if (ok && smsTextPane.getText().length() == 0)
@@ -1359,11 +1353,11 @@ public class Main extends javax.swing.JFrame {
             panel = new ContactPanel(Main.this);
             optionPane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE,
                     JOptionPane.OK_CANCEL_OPTION);
+            optionPane.addPropertyChangeListener(this);
             setContentPane(optionPane);
             pack();
             setLocationRelativeTo(Main.this);
             setDefaultCloseOperation(HIDE_ON_CLOSE);
-            optionPane.addPropertyChangeListener(this);
         }
         public void show(Contact c) {
             optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
@@ -1399,16 +1393,8 @@ public class Main extends javax.swing.JFrame {
                 }
                 if ((Integer)value == JOptionPane.OK_OPTION) {
                     //verify inputs
-                    boolean ok = panel.nameTextField.getInputVerifier().verify(panel.nameTextField);
-                    if (!ok) {
+                    if (!panel.validateForm()) {
                         optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
-                        panel.nameTextField.requestFocusInWindow();
-                        return;
-                    }
-                    ok = panel.numberTextField.getInputVerifier().verify(panel.numberTextField);
-                    if (!ok) {
-                        optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
-                        panel.numberTextField.requestFocusInWindow();
                         return;
                     }
                 }

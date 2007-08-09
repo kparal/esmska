@@ -37,6 +37,7 @@ public class ContactPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
+        nameTextField.requestFocusInWindow();
         numberTextField = new javax.swing.JTextField();
         operatorComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
@@ -47,27 +48,6 @@ public class ContactPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Oper\u00e1tor");
 
-        nameTextField.setInputVerifier(new InputVerifier() {
-            public boolean verify(JComponent input) {
-                JTextField tf = (JTextField) input;
-                if (tf.getText() == null || tf.getText().length() == 0)
-                return false;
-                return true;
-            }
-        });
-
-        numberTextField.setInputVerifier(new InputVerifier() {
-            public boolean verify(JComponent input) {
-                JTextField tf = (JTextField) input;
-                if (tf.getText().length() != 9)
-                return false;
-                for (Character c : tf.getText().toCharArray()) {
-                    if (!Character.isDigit(c))
-                    return false;
-                }
-                return true;
-            }
-        });
         numberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 numberTextFieldKeyReleased(evt);
@@ -119,6 +99,19 @@ public class ContactPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /** @returns if the form is valid */
+    public boolean validateForm() {
+        if (!FormChecker.checkContactName(nameTextField.getText())) {
+            nameTextField.requestFocusInWindow();
+            return false;
+        }
+        if (!FormChecker.checkSMSNumber(numberTextField.getText())) {
+            numberTextField.requestFocusInWindow();
+            return false;
+        }
+        return true;
+    }
+    
     private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
         //guess operator
         Operator op = OperatorEnum.getOperator(numberTextField.getText());
