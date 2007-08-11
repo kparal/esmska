@@ -22,6 +22,8 @@ public class ConfigFrame extends javax.swing.JFrame {
         this.config = config;
         initComponents();
         useSenderIDCheckBoxActionPerformed(null);
+        tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
+        tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
         closeButton.requestFocusInWindow();
     }
     
@@ -32,7 +34,7 @@ public class ConfigFrame extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         rememberQueueCheckBox = new javax.swing.JCheckBox();
         rememberLayoutCheckBox = new javax.swing.JCheckBox();
@@ -55,7 +57,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        rememberQueueCheckBox.setMnemonic(KeyEvent.VK_F);
+        rememberQueueCheckBox.setMnemonic('f');
         rememberQueueCheckBox.setSelected(config.isRememberQueue());
         rememberQueueCheckBox.setText("Ukl\u00e1dat frontu neodeslan\u00fdch sms");
         rememberQueueCheckBox.setToolTipText("<html>\nP\u0159i ukon\u010den\u00ed programu uchov\u00e1v\u00e1 frontu neodeslan\u00fdch sms pro p\u0159\u00ed\u0161t\u00ed spu\u0161t\u011bn\u00ed programu.\n</html>");
@@ -66,7 +68,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        rememberLayoutCheckBox.setMnemonic(KeyEvent.VK_R);
+        rememberLayoutCheckBox.setMnemonic('r');
         rememberLayoutCheckBox.setSelected(config.isRememberLayout());
         rememberLayoutCheckBox.setText("Pamatovat rozvr\u017een\u00ed formul\u00e1\u0159e");
         rememberLayoutCheckBox.setToolTipText("<html>\nPou\u017eije aktu\u00e1ln\u00ed rozm\u011bry programu a prvk\u016f formul\u00e1\u0159e p\u0159i p\u0159\u00ed\u0161t\u00edm spu\u0161t\u011bn\u00ed programu.\n</html>");
@@ -97,9 +99,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(rememberQueueCheckBox)
                 .addContainerGap(116, Short.MAX_VALUE))
         );
-        jTabbedPane1.addTab("Obecn\u00e9", jPanel1);
+        tabbedPane.addTab("Obecn\u00e9", jPanel1);
 
-        useSenderIDCheckBox.setMnemonic(KeyEvent.VK_P);
+        useSenderIDCheckBox.setMnemonic('p');
         useSenderIDCheckBox.setSelected(config.isUseSenderID());
         useSenderIDCheckBox.setText("P\u0159ipojovat podpis odesilatele");
         useSenderIDCheckBox.setToolTipText("<html>P\u0159i p\u0159ipojen\u00ed podpisu p\u0159ijde sms adres\u00e1tovi ze zadan\u00e9ho \u010d\u00edsla<br>\na s dan\u00fdm jm\u00e9nem napsan\u00fdm na konci zpr\u00e1vy.</html>");
@@ -110,6 +112,8 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setDisplayedMnemonic('l');
+        jLabel1.setLabelFor(senderNumberTextField);
         jLabel1.setText("\u010c\u00edslo");
 
         jLabel2.setText("+420");
@@ -122,6 +126,8 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setDisplayedMnemonic('m');
+        jLabel3.setLabelFor(senderNameTextField);
         jLabel3.setText("Jm\u00e9no");
 
         senderNameTextField.setText(config.getSenderName());
@@ -170,9 +176,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
-        jTabbedPane1.addTab("Vodafone", jPanel2);
+        tabbedPane.addTab("Vodafone", jPanel2);
 
-        closeButton.setMnemonic(KeyEvent.VK_Z);
+        closeButton.setMnemonic('z');
         closeButton.setText("Zav\u0159\u00edt");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +193,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addComponent(tabbedPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                     .addComponent(closeButton))
                 .addContainerGap())
         );
@@ -195,7 +201,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeButton)
                 .addContainerGap())
@@ -242,11 +248,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;
     private javax.swing.JTextField senderNameTextField;
     private javax.swing.JTextField senderNumberTextField;
+    private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JCheckBox useSenderIDCheckBox;
     // End of variables declaration//GEN-END:variables
     

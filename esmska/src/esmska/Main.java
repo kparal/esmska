@@ -267,7 +267,7 @@ public class Main extends javax.swing.JFrame {
         contactPanelLayout.setVerticalGroup(
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -285,6 +285,8 @@ public class Main extends javax.swing.JFrame {
         verticalSplitPane.setResizeWeight(1.0);
         verticalSplitPane.setContinuousLayout(true);
         smsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Zpr\u00e1va"));
+        jLabel4.setDisplayedMnemonic('l');
+        jLabel4.setLabelFor(smsNumberTextField);
         jLabel4.setText("\u010c\u00edslo");
 
         jLabel1.setText("+420");
@@ -333,6 +335,8 @@ public class Main extends javax.swing.JFrame {
     smsTextPane.getActionMap().put("redo",smsTextRedoAction);
     jScrollPane1.setViewportView(smsTextPane);
 
+    jLabel5.setDisplayedMnemonic('t');
+    jLabel5.setLabelFor(smsTextPane);
     jLabel5.setText("Text");
 
     operatorComboBox.setModel(new DefaultComboBoxModel(OperatorEnum.getAsList().toArray()));
@@ -389,7 +393,7 @@ public class Main extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)

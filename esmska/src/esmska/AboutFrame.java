@@ -62,7 +62,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel3.setText("Pos\u00edl\u00e1n\u00ed SMS p\u0159es Internet.");
         jLabel3.setFocusable(false);
 
-        creditsButton.setMnemonic(KeyEvent.VK_P);
+        creditsButton.setMnemonic('p');
         creditsButton.setText("Pod\u011bkov\u00e1n\u00ed");
         creditsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +70,7 @@ public class AboutFrame extends javax.swing.JFrame {
             }
         });
 
-        closeButton.setMnemonic(KeyEvent.VK_Z);
+        closeButton.setMnemonic('z');
         closeButton.setText("Zav\u0159\u00edt");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +78,7 @@ public class AboutFrame extends javax.swing.JFrame {
             }
         });
 
-        licenseButton.setMnemonic(KeyEvent.VK_L);
+        licenseButton.setMnemonic('l');
         licenseButton.setText("Licence");
         licenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
