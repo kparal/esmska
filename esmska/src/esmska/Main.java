@@ -291,6 +291,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("+420");
 
+        smsNumberTextField.setColumns(9);
         smsNumberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 smsNumberTextFieldKeyReleased(evt);

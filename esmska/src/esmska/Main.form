@@ -376,6 +376,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="smsNumberTextField">
+                  <Properties>
+                    <Property name="columns" type="int" value="9"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smsNumberTextFieldKeyReleased"/>
                   </Events>

@@ -48,6 +48,7 @@ public class ContactPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Oper\u00e1tor");
 
+        numberTextField.setColumns(9);
         numberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 numberTextFieldKeyReleased(evt);
