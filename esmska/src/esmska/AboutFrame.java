@@ -90,7 +90,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel5.setText("\u00a9 2007 Kamil P\u00e1ral");
         jLabel5.setFocusable(false);
 
-        jButton1.setText("<html><a href=\"http://code.google.com/p/esmska/\">http://code.google.com/p/esmska/</a></html>");
+        jButton1.setText("<html><a href=\"http://esmska.googlecode.com/\">http://esmska.googlecode.com/</a></html>");
         jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +147,7 @@ public class AboutFrame extends javax.swing.JFrame {
         //start browser
         Desktop desktop = Desktop.getDesktop();
         try {
-            desktop.browse(new URL("http://code.google.com/p/esmska/").toURI());
+            desktop.browse(new URL("http://esmska.googlecode.com/").toURI());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -129,7 +129,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;a href=&quot;http://code.google.com/p/esmska/&quot;&gt;http://code.google.com/p/esmska/&lt;/a&gt;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;a href=&quot;http://esmska.googlecode.com/&quot;&gt;http://esmska.googlecode.com/&lt;/a&gt;&lt;/html&gt;"/>
         <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>

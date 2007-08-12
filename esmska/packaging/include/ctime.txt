@@ -3,7 +3,7 @@ Esmska 0.3.0
 
 Program pro zasílání SMS přes Internet.
 
-Domovská stránka: http://code.google.com/p/esmska/
+Domovská stránka: http://esmska.googlecode.com/
 
 Požadavky: Java 6 (http://www.java.com/)
 
