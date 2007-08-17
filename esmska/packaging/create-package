@@ -14,7 +14,7 @@ mkdir "$TMPDIR/$FINALNAME"
 
 cp "../dist/esmska.jar" "$TMPDIR/$FINALNAME"
 cp -r include/* "$TMPDIR/$FINALNAME"
-unix2dos "$TMPDIR/$FINALNAME"/*.txt
+unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/*.bat
 
 cd "$TMPDIR"
 zip -rq9 "$FINALNAME.zip" "$FINALNAME"
