@@ -30,6 +30,8 @@ public class Vodafone implements Operator {
     private final int MAX_CHARS = 760;
     private final int SMS_LENGTH = 152;
     private final int MAX_PARTS = 1;
+    private final int SIGNATURE_EXTRA_LENGTH = 5;
+    private final boolean SUPPORTS_SIGNATURE = true;
     
     /**
      * Creates a new instance of Vodafone
@@ -118,7 +120,7 @@ public class Vodafone implements Operator {
             m = p.matcher(content);
             if (m.find())
                 sms.setErrMsg(m.group(1));
-             
+            
             return ok;
             
         } catch (Exception e) {
@@ -130,7 +132,7 @@ public class Vodafone implements Operator {
     public String toString() {
         return "Vodafone";
     }
-
+    
     public int getMaxChars() {
         return MAX_CHARS;
     }
@@ -138,17 +140,25 @@ public class Vodafone implements Operator {
     public int getSMSLength() {
         return SMS_LENGTH;
     }
-
+    
     public int hashCode() {
         return getClass().getName().hashCode();
     }
-
+    
     public boolean equals(Object obj) {
         return (obj instanceof Vodafone);
     }
     
     public int getMaxParts() {
         return MAX_PARTS;
+    }
+    
+    public int getSignatureExtraLength() {
+        return SIGNATURE_EXTRA_LENGTH;
+    }
+    
+    public boolean isSignatureSupported() {
+        return SUPPORTS_SIGNATURE;
     }
     
 }

@@ -1157,7 +1157,7 @@ public class Main extends javax.swing.JFrame {
         /** count number of chars in sms and take action */
         private void countChars(DocumentEvent e) {
             int chars = e.getDocument().getLength();
-            int smsCount = chars < 1 ? 0 : chars / envelope.getSMSLength() + 1;
+            int smsCount = envelope != null? envelope.getSMSCount(chars) : 0;
             smsCounterLabel.setText(chars + " znaků (" +  smsCount + " sms)");
             if (envelope != null && chars > envelope.getMaxTextLength()) { //chars more than max
                 smsCounterLabel.setForeground(Color.RED);

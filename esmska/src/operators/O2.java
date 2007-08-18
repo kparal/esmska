@@ -34,6 +34,8 @@ public class O2 implements Operator {
     private final int MAX_CHARS = 60;
     private final int SMS_LENGTH = 60;
     private final int MAX_PARTS = 5;
+    private final int SIGNATURE_EXTRA_LENGTH = 0;
+    private final boolean SUPPORTS_SIGNATURE = false;
     CookieManager manager;
     
     /**
@@ -190,9 +192,17 @@ public class O2 implements Operator {
     public boolean equals(Object obj) {
         return (obj instanceof O2);
     }
-
+    
     public int getMaxParts() {
         return MAX_PARTS;
+    }
+    
+    public int getSignatureExtraLength() {
+        return SIGNATURE_EXTRA_LENGTH;
+    }
+
+    public boolean isSignatureSupported() {
+        return SUPPORTS_SIGNATURE;
     }
     
 }

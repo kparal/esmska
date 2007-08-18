@@ -53,8 +53,11 @@ public class Envelope {
     /** get maximum length of sendable message */
     public int getMaxTextLength() {
         int min = Integer.MAX_VALUE;
-        for (Contact c : contacts)
-            min = Math.min(min,c.getOperator().getMaxChars() * c.getOperator().getMaxParts());
+        for (Contact c : contacts) {
+            int value = c.getOperator().getMaxChars() * c.getOperator().getMaxParts();
+            value -= getSignatureLength(c); //subtract signature length
+            min = Math.min(min,value);
+        }
         return min;
     }
     
@@ -65,6 +68,20 @@ public class Envelope {
             min = Math.min(min, c.getOperator().getSMSLength());
         }
         return min;
+    }
+    
+    /** get number of sms from these characters */
+    public int getSMSCount(int chars) {
+        int worstOperator = Integer.MAX_VALUE;
+        for (Contact c : contacts) {
+            worstOperator = Math.min(worstOperator,
+                    c.getOperator().getSMSLength() - getSignatureLength(c));
+        }
+        
+        int count = chars / worstOperator;
+        if (chars % worstOperator != 0)
+            count++;
+        return count;
     }
     
     /** get list of sms's to send */
@@ -90,4 +107,13 @@ public class Envelope {
         return list;
     }
     
+    /** get length of signature needed to be substracted from message length */
+    private int getSignatureLength(Contact c) {
+        if (config.isUseSenderID() && c.getOperator().isSignatureSupported() &&
+                config.getSenderName() != null &&
+                config.getSenderName().length() != 0)
+            return c.getOperator().getSignatureExtraLength() + config.getSenderName().length();
+        else
+            return 0;
+    }
 }

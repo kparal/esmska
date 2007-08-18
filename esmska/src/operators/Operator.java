@@ -28,6 +28,11 @@ public interface Operator {
     int getSMSLength();
     /** number of allowed sms's user can send at once */
     int getMaxParts();
+    /** whether signature is supported */
+    boolean isSignatureSupported();
+    /** number of characters needed to add to signature,
+     * therefore strip from message length */
+    int getSignatureExtraLength();
     
     /** operator name */
     String toString();
