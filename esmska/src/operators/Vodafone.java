@@ -18,6 +18,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import persistence.SMS;
 
 /** Vodafone operator
  *
@@ -28,6 +29,7 @@ public class Vodafone implements Operator {
     private String ppp;
     private final int MAX_CHARS = 760;
     private final int SMS_LENGTH = 152;
+    private final int MAX_PARTS = 1;
     
     /**
      * Creates a new instance of Vodafone
@@ -137,16 +139,16 @@ public class Vodafone implements Operator {
         return SMS_LENGTH;
     }
 
-    public int getSMSCount(int chars) {
-        return (int)Math.ceil((double)chars / SMS_LENGTH);
-    }
-
     public int hashCode() {
         return getClass().getName().hashCode();
     }
 
     public boolean equals(Object obj) {
         return (obj instanceof Vodafone);
+    }
+    
+    public int getMaxParts() {
+        return MAX_PARTS;
     }
     
 }

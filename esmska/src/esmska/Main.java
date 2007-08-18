@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -66,6 +68,7 @@ import persistence.ConfigBean;
 import persistence.Contact;
 import persistence.ContactsBean;
 import persistence.PersistenceManager;
+import persistence.SMS;
 
 /** Main form
  *
@@ -91,12 +94,13 @@ public class Main extends javax.swing.JFrame {
     private ContactDialog contactDialog;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
-    private boolean multiSendMode = false;
     
     /** actual queue of sms's */
     private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
     /** sender of sms */
     private SMSSender smsSender = new SMSSender(smsQueue, this);
+    /** box for messages */
+    private Envelope envelope;
     /** timer to send another sms after defined delay */
     private Timer smsDelayTimer = new Timer(1000,new SMSDelayActionListener());
     /** support for undo and redo in sms text pane */
@@ -116,7 +120,7 @@ public class Main extends javax.swing.JFrame {
         ToolTipManager.sharedInstance().setDismissDelay(60000);
         //load config
         try {
-            persistenceManager = PersistenceManager.getPersistenceManager();
+            persistenceManager = PersistenceManager.getInstance();
         } catch (IOException ex) {
             ex.printStackTrace();
             printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!");
@@ -124,11 +128,12 @@ public class Main extends javax.swing.JFrame {
         loadConfig();
         //load contacts
         loadContacts();
+        
         //init custom components
+        envelope = new Envelope(config);
         smsDelayProgressBar.setVisible(false);
         smsDelayTimer.setInitialDelay(0);
         configAction.setEnabled(config != null);
-        
         contactList.setModel(new ContactListModel());
         contactDialog = new ContactDialog();
     }
@@ -539,18 +544,27 @@ public class Main extends javax.swing.JFrame {
     
     private void smsNumberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smsNumberTextFieldKeyReleased
         //update name label
-        updateNameLabel();
+        boolean found = lookupContact();
         
-        //guess operator
-        Operator op = OperatorEnum.getOperator(smsNumberTextField.getText());
-        if (op != null) {
-            for (int i=0; i<operatorComboBox.getItemCount(); i++) {
-                if (operatorComboBox.getItemAt(i).getClass().equals(op.getClass())) {
-                    operatorComboBox.setSelectedIndex(i);
-                    break;
+        if (!found) {
+            nameLabel.setText("");
+            //guess operator
+            Operator op = OperatorEnum.getOperator(smsNumberTextField.getText());
+            if (op != null) {
+                for (int i=0; i<operatorComboBox.getItemCount(); i++) {
+                    if (operatorComboBox.getItemAt(i).getClass().equals(op.getClass())) {
+                        operatorComboBox.setSelectedIndex(i);
+                        break;
+                    }
                 }
             }
         }
+        
+        //update envelope
+        Set<Contact> set = new HashSet<Contact>();
+        set.add(new Contact(nameLabel.getText(),smsNumberTextField.getText(),
+                (Operator)operatorComboBox.getSelectedItem()));
+        envelope.setContacts(set);
         
         //update send action
         sendAction.updateStatus();
@@ -564,7 +578,8 @@ public class Main extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {
-            Logger.getLogger("global").log(Level.SEVERE, "Error setting L&F", ex);
+            System.err.println("Error setting L&F");
+            ex.printStackTrace();
         }
         
         //start main frame
@@ -614,9 +629,9 @@ public class Main extends javax.swing.JFrame {
     }
     
     /** updates name according to number and operator */
-    private void updateNameLabel() {
+    private boolean lookupContact() {
         if (contacts == null)
-            return;
+            return false;
         String number = smsNumberTextField.getText();
         Operator operator = (Operator)operatorComboBox.getSelectedItem();
         Contact contact = null;
@@ -627,44 +642,43 @@ public class Main extends javax.swing.JFrame {
                 break;
             }
         }
-        if (contact != null)
-            nameLabel.setText(contact.getName());
-        else
-            nameLabel.setText("");
+        
+        if (contact != null) {
+            contactList.setSelectedValue(contact,true);
+            return true;
+        } else {
+            contactList.clearSelection();
+            return false;
+        }
     }
     
     /** validates sms form and returns status */
     private boolean validateForm(boolean transferFocus) {
-        if (!FormChecker.checkSMSNumber(smsNumberTextField.getText())) {
-            if (transferFocus)
-                smsNumberTextField.requestFocusInWindow();
+        if (envelope == null)
             return false;
-        }
-        if (FormChecker.isEmpty(smsTextPane.getText())) {
+        if (FormChecker.isEmpty(envelope.getText())) {
             if (transferFocus)
                 smsTextPane.requestFocusInWindow();
             return false;
         }
-        return true;
-    }
-    
-    /** prepare components for multisend mode or normal mode */
-    private void setMultiSendMode(boolean b) {
-        multiSendMode = b;
-        if (multiSendMode) {
-            nameLabel.setText("Hromadné odesílání");
-            smsNumberTextField.setText("");
-            smsNumberTextField.setEnabled(false);
-            smsNumberTextField.setToolTipText("<html>Pro zrušení módu hromadného odesílání<br>"
-                    + "označte v seznamu kontaktů jediný kontakt</html>");
-            operatorComboBox.setEnabled(false);
-        } else {
-            nameLabel.setText("");
-            smsNumberTextField.setEnabled(true);
-            smsNumberTextField.setToolTipText(null);
-            operatorComboBox.setEnabled(true);
+        if (envelope.getText().length() > envelope.getMaxTextLength()) {
+            if (transferFocus)
+                smsTextPane.requestFocusInWindow();
+            return false;
         }
-        sendAction.updateStatus();
+        if (envelope.getContacts().size() <= 0) {
+            if (transferFocus)
+                smsNumberTextField.requestFocusInWindow();
+            return false;
+        }
+        for (Contact c : envelope.getContacts()) {
+            if (!FormChecker.checkSMSNumber(c.getNumber())) {
+                if (transferFocus)
+                    smsNumberTextField.requestFocusInWindow();
+                return false;
+            }
+        }
+        return true;
     }
     
     /** save program configuration */
@@ -800,75 +814,24 @@ public class Main extends javax.swing.JFrame {
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
-            if (multiSendMode)
-                sendMultiSMS();
-            else
-                sendSingleSMS();
-            
-            smsTextPane.setText(null);
-            smsTextUndoManager.discardAllEdits();
-            smsTextPane.requestFocusInWindow();
-        }
-        /** standard mode */
-        private void sendSingleSMS() {
             if (!validateForm(true))
                 return;
             
-            SMS sms = new SMS();
-            sms.setNumber(smsNumberTextField.getText());
-            sms.setText(smsTextPane.getText());
-            sms.setOperator((Operator)operatorComboBox.getSelectedItem());
-            if (config.isUseSenderID()) { //append signature if requested
-                sms.setSenderNumber(config.getSenderNumber());
-                sms.setSenderName(config.getSenderName());
-            }
-            sms.setName(nameLabel.getText());
-            
-            smsQueue.add(sms);
-            int index = smsQueue.indexOf(sms);
-            ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
-                    smsQueueList.getModel(), index, index);
-            smsSender.announceNewSMS();
-        }
-        /** multisend mode */
-        private void sendMultiSMS() {
-            if (smsTextPane.getText().length() == 0) {
-                validateForm(true);
-                return;
-            }
-            
-            ArrayList<Contact> contacts = new ArrayList<Contact>();
-            for (Object o : contactList.getSelectedValues())
-                contacts.add((Contact)o);
-            for (Contact c : contacts) {
-                SMS sms = new SMS();
-                sms.setNumber(c.getNumber());
-                sms.setText(smsTextPane.getText());
-                sms.setOperator(c.getOperator());
-                if (config.isUseSenderID()) { //append signature if requested
-                    sms.setSenderNumber(config.getSenderNumber());
-                    sms.setSenderName(config.getSenderName());
-                }
-                sms.setName(c.getName());
-                
+            for (SMS sms : envelope.send()) {
                 smsQueue.add(sms);
                 int index = smsQueue.indexOf(sms);
                 ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
                         smsQueueList.getModel(), index, index);
                 smsSender.announceNewSMS();
             }
+            
+            smsTextPane.setText(null);
+            smsTextUndoManager.discardAllEdits();
+            smsTextPane.requestFocusInWindow();
         }
         /** update status according to conditions  */
         public void updateStatus() {
-            boolean ok = true;
-            // valid number or multisend mode
-            if (!validateForm(false) && !multiSendMode)
-                ok = false;
-            // non-empty sms text
-            if (ok && smsTextPane.getText().length() == 0)
-                ok = false;
-            
-            this.setEnabled(ok);
+            this.setEnabled(validateForm(false));
         }
     }
     
@@ -1054,7 +1017,7 @@ public class Main extends javax.swing.JFrame {
     }
     
     /** Model for SMSQueueList */
-    private class SMSQueueListModel extends AbstractListModel {
+    private class SMSQueueListModel extends AbstractListModel { //TODO: rework to DefaultListModel
         public Object getElementAt(int index) {
             return smsQueue.get(index);
         }
@@ -1174,11 +1137,18 @@ public class Main extends javax.swing.JFrame {
             };
             smsTextPaneListener.insertUpdate(event);
             
-            //set size and color filter to text editor
-            smsTextPaneDocumentFilter.setMaxChars(((Operator)operatorComboBox.getSelectedItem()).getMaxChars());
-            smsTextPaneDocumentFilter.setSmsLength(((Operator)operatorComboBox.getSelectedItem()).getSMSLength());
+            lookupContact();
             
-            updateNameLabel();
+            //update envelope
+            if (envelope != null) {
+                Set<Contact> set = new HashSet<Contact>();
+                set.add(new Contact(nameLabel.getText(),smsNumberTextField.getText(),
+                        (Operator)operatorComboBox.getSelectedItem()));
+                envelope.setContacts(set);
+            }
+            
+            //update components
+            smsTextPaneDocumentFilter.requestUpdate();
         }
     }
     
@@ -1187,9 +1157,9 @@ public class Main extends javax.swing.JFrame {
         /** count number of chars in sms and take action */
         private void countChars(DocumentEvent e) {
             int chars = e.getDocument().getLength();
-            Operator op = (Operator)operatorComboBox.getSelectedItem();
-            smsCounterLabel.setText(chars + " znaků (" + op.getSMSCount(chars) + " sms)");
-            if (chars > op.getMaxChars()) { //chars more than max
+            int smsCount = chars < 1 ? 0 : chars / envelope.getSMSLength() + 1;
+            smsCounterLabel.setText(chars + " znaků (" +  smsCount + " sms)");
+            if (envelope != null && chars > envelope.getMaxTextLength()) { //chars more than max
                 smsCounterLabel.setForeground(Color.RED);
                 smsCounterLabel.setText(chars + " znaků (nelze odeslat!)");
             } else //chars ok
@@ -1197,6 +1167,13 @@ public class Main extends javax.swing.JFrame {
         }
         /** update form components */
         private void updateUI(DocumentEvent e) {
+            if (envelope != null) {
+                try {
+                    envelope.setText(e.getDocument().getText(0,e.getDocument().getLength()));
+                } catch (BadLocationException ex) {
+                    ex.printStackTrace();
+                }
+            }
             sendAction.updateStatus();
         }
         public void changedUpdate(DocumentEvent e) {
@@ -1215,12 +1192,10 @@ public class Main extends javax.swing.JFrame {
     
     /** Limit maximum sms length and color it */
     private class SMSTextPaneDocumentFilter extends DocumentFilter {
-        private int maxChars;  //max chars in message
-        private int smsLength; //length of 1 sms
         private StyledDocument doc;
         private Style regular, highlight;
         private Timer timer = new Timer(500, new ActionListener() { //updating after each event is slow,
-            public void actionPerformed(ActionEvent e) {    //therefore there is timer
+            public void actionPerformed(ActionEvent e) {            //therefore there is timer
                 colorDocument(0,doc.getLength());
             }
         });
@@ -1238,7 +1213,7 @@ public class Main extends javax.swing.JFrame {
         /** color parts of sms */
         private void colorDocument(int from, int length) {
             while (from < length) {
-                int to = ((from / smsLength) + 1) * smsLength - 1;
+                int to = ((from / envelope.getSMSLength()) + 1) * envelope.getSMSLength() - 1;
                 to = to<length-1?to:length-1;
                 doc.setCharacterAttributes(from,to-from+1,getStyle(from),false);
                 from = to + 1;
@@ -1246,46 +1221,34 @@ public class Main extends javax.swing.JFrame {
         }
         /** calculate which style is appropriate for given position */
         private Style getStyle(int offset) {
-            if ((offset / smsLength) % 2 == 0) //even sms
+            if ((offset / envelope.getSMSLength()) % 2 == 0) //even sms
                 return regular;
             else
                 return highlight;
         }
         public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            if ((fb.getDocument().getLength() + text.length() - length) > maxChars) //reached size limit
+            if ((fb.getDocument().getLength() + text.length() - length) > envelope.getMaxTextLength()) //reached size limit
                 return;
             super.replace(fb, offset, length, text, getStyle(offset));
-            if ((offset + (text!=null?text.length():0) != fb.getDocument().getLength()) //not adding to end
-            || (text!=null?text.length():1)!=1) //adding more than 1 char
-                timer.restart();
+            timer.restart();
         }
         public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-            //commented out because we need to edit sms longer than allowed (edit sms action)
-//            if ((fb.getDocument().getLength() + string.length()) > maxChars) //reached size limit
-//                return;
             super.insertString(fb, offset, string, attr);
             timer.restart();
         }
         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
             super.remove(fb, offset, length);
-            if (offset != fb.getDocument().getLength()) //not removing from end
-                timer.restart();
+            timer.restart();
         }
         /** request recoloring externally */
         public void requestUpdate() {
             timer.restart();
         }
-        public void setMaxChars(int maxChars) {
-            this.maxChars = maxChars;
-        }
-        public void setSmsLength(int smsLength) {
-            this.smsLength = smsLength;
-        }
         
     }
     
     /** Model for contact list */
-    private class ContactListModel extends AbstractListModel {
+    private class ContactListModel extends AbstractListModel { //TODO: rework to DefaultListModel
         public int getSize() {
             return contacts.getContacts().size();
         }
@@ -1311,21 +1274,55 @@ public class Main extends javax.swing.JFrame {
             ListSelectionModel lsm = (ListSelectionModel)e.getSource();
             int index = lsm.getMinSelectionIndex();
             int count = contactList.getSelectedIndices().length;
-            // update components
-            setMultiSendMode(false);
-            removeContactAction.setEnabled(count != 0);
-            editContactAction.setEnabled(count == 1);
+            
             // fill sms components with current contact
             if (count == 1) { //only one contact selected
                 Contact c = (Contact) contactList.getModel().getElementAt(index);
                 smsNumberTextField.setText(c.getNumber());
-                smsNumberTextFieldKeyReleased(null);
                 operatorComboBox.setSelectedItem(c.getOperator());
                 nameLabel.setText(c.getName());
-            } else if (count > 1) { //multiple contacts selected
-                setMultiSendMode(true);
             }
-            smsTextPane.requestFocusInWindow();
+
+            setMultiSendMode(count > 1);
+            
+            //update envelope
+            Set<Contact> set = new HashSet<Contact>();
+            for (Object o : contactList.getSelectedValues())
+                set.add((Contact)o);
+            if (count < 1)
+                set.add(new Contact(nameLabel.getText(),smsNumberTextField.getText(),
+                        (Operator)operatorComboBox.getSelectedItem()));
+            envelope.setContacts(set);
+            
+            // update components
+            removeContactAction.setEnabled(count != 0);
+            editContactAction.setEnabled(count == 1);
+            sendAction.updateStatus();
+            smsTextPaneDocumentFilter.requestUpdate();
+            if (count > 0)
+                smsTextPane.requestFocusInWindow();
+        }
+        
+        /** prepare components for multisend mode or normal mode */
+        private void setMultiSendMode(boolean enable) {
+            String sendLabel = "Hromadné odesílání";
+            if (enable) {
+                String tooltip = "<html>Pro zrušení módu hromadného odesílání<br>"
+                        + "označte v seznamu kontaktů jediný kontakt</html>";
+                nameLabel.setText(sendLabel);
+                nameLabel.setToolTipText(tooltip);
+                smsNumberTextField.setText("");
+                smsNumberTextField.setToolTipText(tooltip);
+                smsNumberTextField.setEnabled(false);
+                operatorComboBox.setEnabled(false);
+            } else {
+                if (nameLabel.getText().equals(sendLabel))
+                    nameLabel.setText("");
+                nameLabel.setToolTipText(null);
+                smsNumberTextField.setEnabled(true);
+                smsNumberTextField.setToolTipText(null);
+                operatorComboBox.setEnabled(true);
+            }
         }
     }
     

@@ -24,6 +24,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import persistence.SMS;
 
 /** O2 operator
  *
@@ -32,6 +33,7 @@ import java.util.regex.Pattern;
 public class O2 implements Operator {
     private final int MAX_CHARS = 60;
     private final int SMS_LENGTH = 60;
+    private final int MAX_PARTS = 5;
     CookieManager manager;
     
     /**
@@ -181,16 +183,16 @@ public class O2 implements Operator {
         return SMS_LENGTH;
     }
     
-    public int getSMSCount(int chars) {
-        return (int)Math.ceil((double)chars / SMS_LENGTH);
-    }
-    
     public int hashCode() {
         return getClass().getName().hashCode();
     }
     
     public boolean equals(Object obj) {
         return (obj instanceof O2);
+    }
+
+    public int getMaxParts() {
+        return MAX_PARTS;
     }
     
 }

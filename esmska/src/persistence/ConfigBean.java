@@ -6,7 +6,7 @@
 
 package persistence;
 
-import esmska.SMS;
+import persistence.SMS;
 import java.awt.Dimension;
 import java.beans.*;
 import java.io.Serializable;

@@ -45,7 +45,7 @@ public class PersistenceManager {
     }
     
     /** Get PersistenceManager */
-    public static PersistenceManager getPersistenceManager() throws IOException {
+    public static PersistenceManager getInstance() throws IOException {
         if (persistenceManager == null)
             persistenceManager = new PersistenceManager();
         return persistenceManager;

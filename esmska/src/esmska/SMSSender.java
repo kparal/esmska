@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import operators.Operator;
+import persistence.SMS;
 
 /** Sender of SMS
  *

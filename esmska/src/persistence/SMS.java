@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package esmska;
+package persistence;
 
 import java.net.URL;
 import java.text.Normalizer;

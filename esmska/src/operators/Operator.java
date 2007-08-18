@@ -11,6 +11,7 @@ package operators;
 
 import esmska.*;
 import java.net.URL;
+import persistence.SMS;
 
 /** Interface to operators
  *
@@ -23,10 +24,10 @@ public interface Operator {
     boolean send(SMS sms);
     /** maximum sendable chars */
     int getMaxChars();
-    /** number of sms for int chars */
-    int getSMSCount(int chars);
     /** length of one sms */
     int getSMSLength();
+    /** number of allowed sms's user can send at once */
+    int getMaxParts();
     
     /** operator name */
     String toString();
