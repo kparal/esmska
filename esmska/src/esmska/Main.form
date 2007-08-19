@@ -6,9 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="programMenu">
           <Properties>
-            <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="KeyEvent.VK_R" type="code"/>
-            </Property>
+            <Property name="mnemonic" type="int" value="114"/>
             <Property name="text" type="java.lang.String" value="Program"/>
           </Properties>
           <SubComponents>
@@ -24,13 +22,27 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="aboutAction" type="code"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="O programu"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="quitAction" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="toolsMenu">
+          <Properties>
+            <Property name="mnemonic" type="int" value="110"/>
+            <Property name="text" type="java.lang.String" value="N&#xe1;stroje"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="importMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="importAction" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>

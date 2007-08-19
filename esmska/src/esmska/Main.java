@@ -90,6 +90,7 @@ public class Main extends javax.swing.JFrame {
     private Action smsDownAction = new SMSDownAction();
     private Action smsTextUndoAction;
     private Action smsTextRedoAction;
+    ImportAction importAction = new ImportAction();
     private JFrame aboutFrame, configFrame;
     private ContactDialog contactDialog;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
@@ -106,9 +107,9 @@ public class Main extends javax.swing.JFrame {
     /** support for undo and redo in sms text pane */
     private UndoManager smsTextUndoManager = new UndoManager();
     /** manager of persistence data */
-    PersistenceManager persistenceManager;
+    private PersistenceManager persistenceManager;
     /** program configuration */
-    ConfigBean config;
+    private ConfigBean config;
     /** sms contacts */
     ContactsBean contacts;
     
@@ -183,6 +184,8 @@ public class Main extends javax.swing.JFrame {
         configMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
+        toolsMenu = new javax.swing.JMenu();
+        importMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esmska");
@@ -272,7 +275,7 @@ public class Main extends javax.swing.JFrame {
         contactPanelLayout.setVerticalGroup(
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -399,7 +402,7 @@ public class Main extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -488,19 +491,25 @@ public class Main extends javax.swing.JFrame {
 
     horizontalSplitPane.setLeftComponent(verticalSplitPane);
 
-    programMenu.setMnemonic(KeyEvent.VK_R);
+    programMenu.setMnemonic('r');
     programMenu.setText("Program");
     configMenuItem.setAction(configAction);
     programMenu.add(configMenuItem);
 
     aboutMenuItem.setAction(aboutAction);
-    aboutMenuItem.setText("O programu");
     programMenu.add(aboutMenuItem);
 
     exitMenuItem.setAction(quitAction);
     programMenu.add(exitMenuItem);
 
     menuBar.add(programMenu);
+
+    toolsMenu.setMnemonic('n');
+    toolsMenu.setText("N\u00e1stroje");
+    importMenuItem.setAction(importAction);
+    toolsMenu.add(importMenuItem);
+
+    menuBar.add(toolsMenu);
 
     setJMenuBar(menuBar);
 
@@ -634,6 +643,13 @@ public class Main extends javax.swing.JFrame {
             return false;
         String number = smsNumberTextField.getText();
         Operator operator = (Operator)operatorComboBox.getSelectedItem();
+        
+        // skip if already selected right contact
+        Contact selected = (Contact) contactList.getSelectedValue();
+        if (selected != null && selected.getNumber().equals(number) &&
+                selected.getOperator().equals(operator))
+            return true;
+        
         Contact contact = null;
         for (Contact c : contacts.getContacts()) {
             if (c.getNumber() != null && c.getNumber().equals(number) &&
@@ -1016,6 +1032,23 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
+    /** import data from other programs */
+    class ImportAction extends AbstractAction {
+        public ImportAction() {
+            super("Import kontaktů", new ImageIcon(Main.this.getClass().getResource("resources/contact-small.png")));
+            this.putValue(SHORT_DESCRIPTION,"Importovat kontakty z jiných aplikací");
+            putValue(MNEMONIC_KEY, KeyEvent.VK_I);
+        }
+        public void actionPerformed(ActionEvent e) {
+            ImportFrame importFrame = new ImportFrame(Main.this);
+            importFrame.setLocationRelativeTo(Main.this);
+            importFrame.setVisible(true);
+        }
+        public void updateContacts() {
+            contactList.setModel(new ContactListModel());
+        }
+    }
+    
     /** Model for SMSQueueList */
     private class SMSQueueListModel extends AbstractListModel { //TODO: rework to DefaultListModel
         public Object getElementAt(int index) {
@@ -1282,7 +1315,7 @@ public class Main extends javax.swing.JFrame {
                 operatorComboBox.setSelectedItem(c.getOperator());
                 nameLabel.setText(c.getName());
             }
-
+            
             setMultiSendMode(count > 1);
             
             //update envelope
@@ -1422,6 +1455,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton editContactButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JSplitPane horizontalSplitPane;
+    private javax.swing.JMenuItem importMenuItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -1449,6 +1483,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JMenu toolsMenu;
     private javax.swing.JSplitPane verticalSplitPane;
     // End of variables declaration//GEN-END:variables
 }
