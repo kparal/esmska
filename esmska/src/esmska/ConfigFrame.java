@@ -24,6 +24,8 @@ public class ConfigFrame extends javax.swing.JFrame {
         useSenderIDCheckBoxActionPerformed(null);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
+        tabbedPane.setIconAt(0, new ImageIcon(this.getClass().getResource("resources/config-small.png")));
+        tabbedPane.setIconAt(1, new ImageIcon(this.getClass().getResource("/operators/resources/Vodafone.png")));
         closeButton.requestFocusInWindow();
     }
     
