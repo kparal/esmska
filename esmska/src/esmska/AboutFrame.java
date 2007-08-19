@@ -6,10 +6,10 @@
 
 package esmska;
 
+import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import javax.swing.ImageIcon;
@@ -28,6 +28,7 @@ public class AboutFrame extends javax.swing.JFrame {
     public AboutFrame() {
         initComponents();
         closeButton.requestFocusInWindow();
+        linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
     
     /** This method is called from within the constructor to
@@ -44,7 +45,7 @@ public class AboutFrame extends javax.swing.JFrame {
         closeButton = new javax.swing.JButton();
         licenseButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        linkButton = new javax.swing.JButton();
 
         setTitle("O Esmska");
         setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
@@ -90,11 +91,11 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel5.setText("\u00a9 2007 Kamil P\u00e1ral");
         jLabel5.setFocusable(false);
 
-        jButton1.setText("<html><a href=\"http://esmska.googlecode.com/\">http://esmska.googlecode.com/</a></html>");
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        linkButton.setText("<html><a href=\"http://esmska.googlecode.com/\">http://esmska.googlecode.com/</a></html>");
+        linkButton.setBorderPainted(false);
+        linkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                linkButtonActionPerformed(evt);
             }
         });
 
@@ -114,7 +115,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(linkButton, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -128,7 +129,7 @@ public class AboutFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(24, 24, 24)
-                .addComponent(jButton1)
+                .addComponent(linkButton)
                 .addGap(23, 23, 23)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
@@ -141,7 +142,7 @@ public class AboutFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void linkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkButtonActionPerformed
         if (!Desktop.isDesktopSupported())
             return;
         //start browser
@@ -151,7 +152,7 @@ public class AboutFrame extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_linkButtonActionPerformed
         
     private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         //show licence
@@ -199,12 +200,12 @@ public class AboutFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     private javax.swing.JButton creditsButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton licenseButton;
+    private javax.swing.JButton linkButton;
     // End of variables declaration//GEN-END:variables
     
 }

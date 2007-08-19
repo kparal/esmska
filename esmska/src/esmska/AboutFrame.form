@@ -35,7 +35,7 @@
                   <Component id="jLabel5" alignment="1" pref="287" max="32767" attributes="0"/>
                   <Component id="jLabel2" alignment="1" pref="287" max="32767" attributes="0"/>
                   <Component id="jLabel1" alignment="0" pref="287" max="32767" attributes="0"/>
-                  <Component id="jButton1" alignment="0" pref="287" max="32767" attributes="0"/>
+                  <Component id="linkButton" alignment="0" pref="287" max="32767" attributes="0"/>
                   <Component id="jLabel3" alignment="1" pref="287" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -52,7 +52,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="linkButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="53" max="32767" attributes="0"/>
@@ -127,13 +127,13 @@
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="linkButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;a href=&quot;http://esmska.googlecode.com/&quot;&gt;http://esmska.googlecode.com/&lt;/a&gt;&lt;/html&gt;"/>
         <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
