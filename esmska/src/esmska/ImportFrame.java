@@ -26,6 +26,7 @@ import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
 import operators.O2;
 import operators.Operator;
+import operators.OperatorEnum;
 import operators.Vodafone;
 import persistence.Contact;
 import persistence.ContactsBean;
@@ -36,7 +37,7 @@ import persistence.ContactsBean;
  */
 public class ImportFrame extends javax.swing.JFrame {
     private CardLayout cardLayout;
-    private KubikWorker kubikWorker; //worker for background thread
+    private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
     private ContactsBean contacts;
     private Main mainFrame;
     
@@ -47,6 +48,7 @@ public class ImportFrame extends javax.swing.JFrame {
         initComponents();
         cardLayout = (CardLayout)this.getContentPane().getLayout();
         progressBar.setVisible(false);
+        progressBar1.setVisible(false);
     }
     
     /** This method is called from within the constructor to
@@ -56,13 +58,14 @@ public class ImportFrame extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        appButtonGroup = new javax.swing.ButtonGroup();
         applicationPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         kubikRadioButton = new javax.swing.JRadioButton();
         appButton = new javax.swing.JButton();
-        filePanel = new javax.swing.JPanel();
+        dreamcomSERadioButton = new javax.swing.JRadioButton();
+        kubikPanel = new javax.swing.JPanel();
         fileTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         parseButton = new javax.swing.JButton();
@@ -72,6 +75,16 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        dreamcomSEPanel = new javax.swing.JPanel();
+        fileTextField1 = new javax.swing.JTextField();
+        browseButton1 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        parseButton1 = new javax.swing.JButton();
+        progressBar1 = new javax.swing.JProgressBar();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         resultsPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -85,11 +98,11 @@ public class ImportFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Import kontakt\u016f");
         setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
-        jLabel2.setText("<html>\nImport kontakt\u016f v\u00e1m dovol\u00ed na\u010d\u00edst va\u0161e kontakty z jin\u00e9 aplikace a zkop\u00edrovat je do Esmsky.<br>\nV p\u016fvodn\u00ed aplikaci z\u016fstanou va\u0161e kontakty nedot\u010deny.\n</html>");
+        jLabel2.setText("<html>\nImport kontakt\u016f v\u00e1m dovol\u00ed na\u010d\u00edst va\u0161e kontakty z jin\u00e9 aplikace a zkop\u00edrovat je do Esmsky. V p\u016fvodn\u00ed aplikaci z\u016fstanou va\u0161e kontakty nedot\u010deny.\n</html>");
 
         jLabel3.setText("Vyberte, ze kter\u00e9 aplikace chcete importovat kontakty:");
 
-        buttonGroup1.add(kubikRadioButton);
+        appButtonGroup.add(kubikRadioButton);
         kubikRadioButton.setSelected(true);
         kubikRadioButton.setText("Kub\u00edk SMS DreamCom");
         kubikRadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -102,6 +115,10 @@ public class ImportFrame extends javax.swing.JFrame {
             }
         });
 
+        appButtonGroup.add(dreamcomSERadioButton);
+        dreamcomSERadioButton.setText("DreamCom SE");
+        dreamcomSERadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+
         javax.swing.GroupLayout applicationPanelLayout = new javax.swing.GroupLayout(applicationPanel);
         applicationPanel.setLayout(applicationPanelLayout);
         applicationPanelLayout.setHorizontalGroup(
@@ -109,12 +126,14 @@ public class ImportFrame extends javax.swing.JFrame {
             .addGroup(applicationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(applicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(appButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(applicationPanelLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(kubikRadioButton))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                    .addComponent(jLabel3)
-                    .addComponent(appButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(applicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dreamcomSERadioButton)
+                            .addComponent(kubikRadioButton))))
                 .addContainerGap())
         );
         applicationPanelLayout.setVerticalGroup(
@@ -126,11 +145,13 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(kubikRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dreamcomSERadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(appButton)
                 .addContainerGap())
         );
-        getContentPane().add(applicationPanel, "card4");
+        getContentPane().add(applicationPanel, "applicationPanel");
 
         browseButton.setMnemonic('r');
         browseButton.setText("Proch\u00e1zet...");
@@ -152,7 +173,7 @@ public class ImportFrame extends javax.swing.JFrame {
         progressBar.setString("Pros\u00edm \u010dekejte...");
         progressBar.setStringPainted(true);
 
-        jLabel4.setText("<html>\nNejprve mus\u00edte exportovat kontakty z programu Kub\u00edk SMS Dreamcom. Spus\u0165te uveden\u00fd program, p\u0159ejd\u011bte do adres\u00e1\u0159e kontakt\u016f a pomoc\u00ed prav\u00e9ho my\u0161\u00edtka exportujte v\u0161echny sv\u00e9 kontakty do CSV souboru. Tento soubor zde n\u00e1sledn\u011b vyberte.\n</html>");
+        jLabel4.setText("<html>\nNejprve mus\u00edte exportovat kontakty z programu Kub\u00edk SMS DreamCom. Spus\u0165te uveden\u00fd program, p\u0159ejd\u011bte do adres\u00e1\u0159e kontakt\u016f a pomoc\u00ed prav\u00e9ho my\u0161\u00edtka exportujte v\u0161echny sv\u00e9 kontakty do CSV souboru. Tento soubor zde n\u00e1sledn\u011b vyberte.\n</html>");
 
         jLabel5.setText("Zvolte CSV soubor:");
 
@@ -164,48 +185,47 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png")));
         jLabel9.setText("<html>\nProgram p\u0159edpokl\u00e1d\u00e1, \u017ee soubor je v k\u00f3dov\u00e1n\u00ed windows-1250 (v\u00fdchoz\u00ed k\u00f3dov\u00e1n\u00ed soubor\u016f pro \u010desk\u00e9 MS Windows).\n</html>");
 
-        javax.swing.GroupLayout filePanelLayout = new javax.swing.GroupLayout(filePanel);
-        filePanel.setLayout(filePanelLayout);
-        filePanelLayout.setHorizontalGroup(
-            filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filePanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout kubikPanelLayout = new javax.swing.GroupLayout(kubikPanel);
+        kubikPanel.setLayout(kubikPanelLayout);
+        kubikPanelLayout.setHorizontalGroup(
+            kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kubikPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(filePanelLayout.createSequentialGroup()
-                        .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePanelLayout.createSequentialGroup()
-                                .addComponent(fileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kubikPanelLayout.createSequentialGroup()
+                        .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kubikPanelLayout.createSequentialGroup()
+                                .addComponent(fileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(browseButton)))
                         .addContainerGap())
-                    .addGroup(filePanelLayout.createSequentialGroup()
+                    .addGroup(kubikPanelLayout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addContainerGap(363, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                        .addContainerGap(390, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kubikPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(filePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-                        .addGap(63, 63, 63))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePanelLayout.createSequentialGroup()
-                        .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kubikPanelLayout.createSequentialGroup()
+                        .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(parseButton)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kubikPanelLayout.createSequentialGroup()
+                        .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
                         .addContainerGap())))
         );
-        filePanelLayout.setVerticalGroup(
-            filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filePanelLayout.createSequentialGroup()
+        kubikPanelLayout.setVerticalGroup(
+            kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kubikPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fileTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,13 +234,92 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(parseButton)
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-        getContentPane().add(filePanel, "card2");
+        getContentPane().add(kubikPanel, "kubikPanel");
+
+        browseButton1.setMnemonic('r');
+        browseButton1.setText("Proch\u00e1zet...");
+        browseButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png")));
+        jLabel13.setText("<html>\nPokud budete m\u00edt probl\u00e9my s importem, ov\u011b\u0159te, zda nevy\u0161la nov\u011bj\u0161\u00ed verze Esmsky, a zkuste to v n\u00ed.\n</html>");
+
+        parseButton1.setMnemonic('p');
+        parseButton1.setText("Pokra\u010dovat");
+        parseButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parseButton1ActionPerformed(evt);
+            }
+        });
+
+        progressBar1.setIndeterminate(true);
+        progressBar1.setString("Pros\u00edm \u010dekejte...");
+        progressBar1.setStringPainted(true);
+
+        jLabel10.setText("<html>\nNejprve mus\u00edte exportovat kontakty z programu DreamCom SE. Spus\u0165te uveden\u00fd program, p\u0159ejd\u011bte do adres\u00e1\u0159e kontakt\u016f a pomoc\u00ed prav\u00e9ho my\u0161\u00edtka exportujte v\u0161echny sv\u00e9 kontakty do CSV souboru. Tento soubor zde n\u00e1sledn\u011b vyberte.\n</html>");
+
+        jLabel11.setText("Zvolte CSV soubor:");
+
+        jLabel12.setText("<html>\nSoubor bude prozkoum\u00e1n a n\u00e1sledn\u011b v\u00e1m bude vyps\u00e1n seznam kontakt\u016f dostupn\u00fdch pro import. \u017d\u00e1dn\u00e9 zm\u011bny zat\u00edm nebudou provedeny.\n</html>");
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png")));
+        jLabel14.setText("<html>\nProgram p\u0159edpokl\u00e1d\u00e1, \u017ee soubor je v k\u00f3dov\u00e1n\u00ed windows-1250 (v\u00fdchoz\u00ed k\u00f3dov\u00e1n\u00ed soubor\u016f pro \u010desk\u00e9 MS Windows).\n</html>");
+
+        javax.swing.GroupLayout dreamcomSEPanelLayout = new javax.swing.GroupLayout(dreamcomSEPanel);
+        dreamcomSEPanel.setLayout(dreamcomSEPanelLayout);
+        dreamcomSEPanelLayout.setHorizontalGroup(
+            dreamcomSEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dreamcomSEPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dreamcomSEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel11)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dreamcomSEPanelLayout.createSequentialGroup()
+                        .addComponent(progressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(parseButton1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dreamcomSEPanelLayout.createSequentialGroup()
+                        .addComponent(fileTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(browseButton1))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        dreamcomSEPanelLayout.setVerticalGroup(
+            dreamcomSEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dreamcomSEPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dreamcomSEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(browseButton1)
+                    .addComponent(fileTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(dreamcomSEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(parseButton1)
+                    .addComponent(progressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        getContentPane().add(dreamcomSEPanel, "dreamcomSEPanel");
 
         jLabel1.setText("Byly nalezeny n\u00e1sleduj\u00edc\u00ed kontakty:");
 
@@ -265,8 +364,8 @@ public class ImportFrame extends javax.swing.JFrame {
             .addGroup(resultsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addComponent(importButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(skipExistingCheckBox)
                     .addComponent(jLabel8))
@@ -283,15 +382,36 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(skipExistingCheckBox)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(importButton)
                 .addContainerGap())
         );
-        getContentPane().add(resultsPanel, "card3");
+        getContentPane().add(resultsPanel, "resultsPanel");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void browseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton1ActionPerformed
+        String file = doBrowseButton();
+        if (file != null) {
+            fileTextField1.setText(file);
+        };
+    }//GEN-LAST:event_browseButton1ActionPerformed
+    
+    private void parseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parseButton1ActionPerformed
+        File file = new File(fileTextField1.getText());
+        if (!(file.isFile() && file.canRead())) {
+            JOptionPane.showMessageDialog(this, "Soubor " + file.getAbsolutePath() + " nelze přečíst!",
+                    "Chyba při čtení souboru", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        progressBar1.setVisible(true);
+        parseButton1.setEnabled(false);
+        worker = new DreamcomSEWorker(file);
+        worker.execute();
+    }//GEN-LAST:event_parseButton1ActionPerformed
+    
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
         DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
         ArrayList<Contact> existing = contacts.getContacts();
@@ -312,7 +432,7 @@ public class ImportFrame extends javax.swing.JFrame {
             DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
             contactListModel.clear();
             try {
-                for (Contact c : kubikWorker.get())
+                for (Contact c : worker.get())
                     contactListModel.addElement(c);
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -322,24 +442,19 @@ public class ImportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_skipExistingCheckBoxActionPerformed
     
     private void appButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appButtonActionPerformed
-        cardLayout.next(this.getContentPane());
+        String nextCard = null;
+        if (kubikRadioButton.isSelected())
+            nextCard = "kubikPanel";
+        else if (dreamcomSERadioButton.isSelected())
+            nextCard = "dreamcomSEPanel";
+        
+        cardLayout.show(this.getContentPane(), nextCard);
     }//GEN-LAST:event_appButtonActionPerformed
     
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.setApproveButtonText("Zvolit");
-        chooser.setDialogTitle("Vyberte soubor s exportovanými kontakty");
-        chooser.setMultiSelectionEnabled(false);
-        chooser.setFileFilter(new FileFilter() {
-            public boolean accept(File f) {
-                return f.getName().toLowerCase().endsWith(".csv") || f.isDirectory();
-            }
-            public String getDescription() {
-                return "CSV soubory (*.csv)";
-            }
-        });
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            fileTextField.setText(chooser.getSelectedFile().getAbsolutePath());
+        String file = doBrowseButton();
+        if (file != null) {
+            fileTextField.setText(file);
         };
     }//GEN-LAST:event_browseButtonActionPerformed
     
@@ -353,9 +468,28 @@ public class ImportFrame extends javax.swing.JFrame {
         
         progressBar.setVisible(true);
         parseButton.setEnabled(false);
-        kubikWorker = new KubikWorker(file);
-        kubikWorker.execute();
+        worker = new KubikWorker(file);
+        worker.execute();
     }//GEN-LAST:event_parseButtonActionPerformed
+    
+    private String doBrowseButton() {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setApproveButtonText("Zvolit");
+        chooser.setDialogTitle("Vyberte soubor s exportovanými kontakty");
+        chooser.setMultiSelectionEnabled(false);
+        chooser.setFileFilter(new FileFilter() {
+            public boolean accept(File f) {
+                return f.getName().toLowerCase().endsWith(".csv") || f.isDirectory();
+            }
+            public String getDescription() {
+                return "CSV soubory (*.csv)";
+            }
+        });
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            return chooser.getSelectedFile().getAbsolutePath();
+        };
+        return null;
+    }
     
     private void removeExistingContacts() {
         DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
@@ -418,7 +552,63 @@ public class ImportFrame extends javax.swing.JFrame {
                     contactListModel.addElement(c);
                 if (skipExistingCheckBox.isSelected())
                     removeExistingContacts();
-                cardLayout.next(ImportFrame.this.getContentPane());
+                cardLayout.show(ImportFrame.this.getContentPane(), "resultsPanel");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(ImportFrame.this, "Nastala chyba při zpracování!",
+                        "Chyba při zpracování souboru", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    /** parse contacts from DreamCom SE's CSV file*/
+    private class DreamcomSEWorker extends SwingWorker<ArrayList<Contact>, Void> {
+        private File file;
+        public DreamcomSEWorker(File file) {
+            super();
+            this.file = file;
+        }
+        protected ArrayList<Contact> doInBackground() throws Exception {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    new FileInputStream(file),"windows-1250"));
+            String line;
+            Pattern pattern = Pattern.compile("^\"(.+?)\";\"(.+?)\";\"(.*?)\"$");
+            ArrayList<Contact> contacts = new ArrayList<Contact>();
+            while ((line = reader.readLine()) != null) {
+                Matcher matcher = pattern.matcher(line);
+                if (matcher.find()) {
+                    Contact c = new Contact();
+                    c.setName(matcher.group(1));
+                    c.setNumber(matcher.group(2).substring(4));
+                    String operatorString = matcher.group(3);
+                    Operator operator = null;
+                    if (!operatorString.equals("")) {
+                        if (operatorString.startsWith("Vodafone"))
+                            operator = new Vodafone();
+                        else if (operatorString.startsWith("O2"))
+                            operator = new O2();
+                    }
+                    if (operator == null) {
+                        operator = OperatorEnum.getOperator(c.getNumber());
+                    }
+                    if (operator == null)
+                        continue;
+                    c.setOperator(operator);
+                    contacts.add(c);
+                }
+            }
+            reader.close();
+            return contacts;
+        }
+        protected void done() {
+            try {
+                DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
+                contactListModel.clear();
+                for (Contact c : get())
+                    contactListModel.addElement(c);
+                if (skipExistingCheckBox.isSelected())
+                    removeExistingContacts();
+                cardLayout.show(ImportFrame.this.getContentPane(), "resultsPanel");
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(ImportFrame.this, "Nastala chyba při zpracování!",
@@ -429,14 +619,22 @@ public class ImportFrame extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appButton;
+    private javax.swing.ButtonGroup appButtonGroup;
     private javax.swing.JPanel applicationPanel;
     private javax.swing.JButton browseButton;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton browseButton1;
     private javax.swing.JList contactList;
-    private javax.swing.JPanel filePanel;
+    private javax.swing.JPanel dreamcomSEPanel;
+    private javax.swing.JRadioButton dreamcomSERadioButton;
     private javax.swing.JTextField fileTextField;
+    private javax.swing.JTextField fileTextField1;
     javax.swing.JButton importButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -446,9 +644,12 @@ public class ImportFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel kubikPanel;
     private javax.swing.JRadioButton kubikRadioButton;
     private javax.swing.JButton parseButton;
+    private javax.swing.JButton parseButton1;
     private javax.swing.JProgressBar progressBar;
+    private javax.swing.JProgressBar progressBar1;
     private javax.swing.JPanel resultsPanel;
     private javax.swing.JCheckBox skipExistingCheckBox;
     // End of variables declaration//GEN-END:variables
