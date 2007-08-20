@@ -75,6 +75,7 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         dreamcomSEPanel = new javax.swing.JPanel();
         fileTextField1 = new javax.swing.JTextField();
         browseButton1 = new javax.swing.JButton();
@@ -85,6 +86,7 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         resultsPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -147,7 +149,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(kubikRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dreamcomSERadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                 .addComponent(appButton)
                 .addContainerGap())
         );
@@ -185,6 +187,9 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png")));
         jLabel9.setText("<html>\nProgram p\u0159edpokl\u00e1d\u00e1, \u017ee soubor je v k\u00f3dov\u00e1n\u00ed windows-1250 (v\u00fdchoz\u00ed k\u00f3dov\u00e1n\u00ed soubor\u016f pro \u010desk\u00e9 MS Windows).\n</html>");
 
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning.png")));
+        jLabel15.setText("<html>\nBudou importov\u00e1ny pouze kontakty s oper\u00e1tory podporovan\u00fdmi Esmskou.\n</html>");
+
         javax.swing.GroupLayout kubikPanelLayout = new javax.swing.GroupLayout(kubikPanel);
         kubikPanel.setLayout(kubikPanelLayout);
         kubikPanelLayout.setHorizontalGroup(
@@ -192,30 +197,21 @@ public class ImportFrame extends javax.swing.JFrame {
             .addGroup(kubikPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kubikPanelLayout.createSequentialGroup()
-                        .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kubikPanelLayout.createSequentialGroup()
-                                .addComponent(fileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(browseButton)))
-                        .addContainerGap())
-                    .addGroup(kubikPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addContainerGap(390, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kubikPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(fileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(browseButton))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kubikPanelLayout.createSequentialGroup()
                         .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(parseButton)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kubikPanelLayout.createSequentialGroup()
-                        .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(parseButton))
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                .addContainerGap())
         );
         kubikPanelLayout.setVerticalGroup(
             kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,10 +227,12 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(kubikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(parseButton)
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -274,6 +272,9 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png")));
         jLabel14.setText("<html>\nProgram p\u0159edpokl\u00e1d\u00e1, \u017ee soubor je v k\u00f3dov\u00e1n\u00ed windows-1250 (v\u00fdchoz\u00ed k\u00f3dov\u00e1n\u00ed soubor\u016f pro \u010desk\u00e9 MS Windows).\n</html>");
 
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning.png")));
+        jLabel16.setText("<html>\nBudou importov\u00e1ny pouze kontakty s oper\u00e1tory podporovan\u00fdmi Esmskou.\n</html>");
+
         javax.swing.GroupLayout dreamcomSEPanelLayout = new javax.swing.GroupLayout(dreamcomSEPanel);
         dreamcomSEPanel.setLayout(dreamcomSEPanelLayout);
         dreamcomSEPanelLayout.setHorizontalGroup(
@@ -292,8 +293,9 @@ public class ImportFrame extends javax.swing.JFrame {
                         .addComponent(fileTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browseButton1))
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dreamcomSEPanelLayout.setVerticalGroup(
@@ -310,10 +312,12 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(dreamcomSEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(parseButton1)
                     .addComponent(progressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -382,7 +386,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(skipExistingCheckBox)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(importButton)
                 .addContainerGap())
         );
@@ -535,6 +539,9 @@ public class ImportFrame extends javax.swing.JFrame {
                         operator = new Vodafone();
                     else if (operatorString.equals("Eurotel"))
                         operator = new O2();
+                    if (operator == null) {
+                        operator = OperatorEnum.getOperator(c.getNumber());
+                    }
                     if (operator == null)
                         continue;
                     c.setOperator(operator);
@@ -582,12 +589,10 @@ public class ImportFrame extends javax.swing.JFrame {
                     c.setNumber(matcher.group(2).substring(4));
                     String operatorString = matcher.group(3);
                     Operator operator = null;
-                    if (!operatorString.equals("")) {
-                        if (operatorString.startsWith("Vodafone"))
-                            operator = new Vodafone();
-                        else if (operatorString.startsWith("O2"))
-                            operator = new O2();
-                    }
+                    if (operatorString.startsWith("Vodafone"))
+                        operator = new Vodafone();
+                    else if (operatorString.startsWith("O2"))
+                        operator = new O2();
                     if (operator == null) {
                         operator = OperatorEnum.getOperator(c.getNumber());
                     }
@@ -635,6 +640,8 @@ public class ImportFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
