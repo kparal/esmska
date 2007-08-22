@@ -91,6 +91,7 @@ public class Main extends javax.swing.JFrame {
     private Action smsTextUndoAction;
     private Action smsTextRedoAction;
     ImportAction importAction = new ImportAction();
+    private Action exportAction = new ExportAction();
     private JFrame aboutFrame, configFrame;
     private ContactDialog contactDialog;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
@@ -186,6 +187,7 @@ public class Main extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         toolsMenu = new javax.swing.JMenu();
         importMenuItem = new javax.swing.JMenuItem();
+        exportMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esmska");
@@ -275,7 +277,7 @@ public class Main extends javax.swing.JFrame {
         contactPanelLayout.setVerticalGroup(
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -402,7 +404,7 @@ public class Main extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -508,6 +510,9 @@ public class Main extends javax.swing.JFrame {
     toolsMenu.setText("N\u00e1stroje");
     importMenuItem.setAction(importAction);
     toolsMenu.add(importMenuItem);
+
+    exportMenuItem.setAction(exportAction);
+    toolsMenu.add(exportMenuItem);
 
     menuBar.add(toolsMenu);
 
@@ -1049,6 +1054,18 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
+    /** export data for other programs */
+    class ExportAction extends AbstractAction {
+        public ExportAction() {
+            super("Export kontaktů", new ImageIcon(Main.this.getClass().getResource("resources/contact-small.png")));
+            this.putValue(SHORT_DESCRIPTION,"Exportovat kontakty do souboru");
+            putValue(MNEMONIC_KEY, KeyEvent.VK_E);
+        }
+        public void actionPerformed(ActionEvent e) {
+            ExportManager.exportContacts(Main.this,contacts.getContacts());
+        }
+    }
+    
     /** Model for SMSQueueList */
     private class SMSQueueListModel extends AbstractListModel { //TODO: rework to DefaultListModel
         public Object getElementAt(int index) {
@@ -1454,6 +1471,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JButton editContactButton;
     private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JSplitPane horizontalSplitPane;
     private javax.swing.JMenuItem importMenuItem;
     private javax.swing.JLabel jLabel1;
