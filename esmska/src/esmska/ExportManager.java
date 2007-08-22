@@ -75,11 +75,13 @@ public class ExportManager {
             writer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(file,false),"UTF-8"));
             for (Contact contact : contacts) {
-                writer.write("\"" + contact.getName() + "\",\"+420" + contact.getNumber() +
-                        "\",\"" + contact.getOperator().toString() + "\"");
+                //escape quotes
+                String name = contact.getName().replaceAll("\"","\"\"");
+                String operator = contact.getOperator().toString().replaceAll("\"","\"\"");
+                writer.write("\"" + name + "\",\"+420" + contact.getNumber() +
+                        "\",\"" + operator + "\"");
                 writer.newLine();
             }
-            writer.newLine();
             writer.close();
             writer = null;
             JOptionPane.showMessageDialog(parent,"Export úspěšně dokončen!","Export hotov",
