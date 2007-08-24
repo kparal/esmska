@@ -101,7 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** actual queue of sms's */
     private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
     /** sender of sms */
-    private SMSSender smsSender = new SMSSender(smsQueue);
+    private SMSSender smsSender;
     /** box for messages */
     private Envelope envelope;
     /** timer to send another sms after defined delay */
@@ -136,6 +136,7 @@ public class MainFrame extends javax.swing.JFrame {
         loadContacts();
         
         //init custom components
+        smsSender = new SMSSender(smsQueue);
         envelope = new Envelope();
         smsDelayProgressBar.setVisible(false);
         smsDelayTimer.setInitialDelay(0);
@@ -712,7 +713,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         try {
             persistenceManager.saveConfig();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             printStatusMessage("Nepodařilo se uložit nastavení!");
         }
@@ -752,7 +753,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void saveContacts() {
         try {
             persistenceManager.saveContacts();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             printStatusMessage("Nepodařilo se uložit kontakty!");
         }
