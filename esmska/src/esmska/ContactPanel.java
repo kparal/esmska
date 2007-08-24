@@ -18,11 +18,11 @@ import operators.OperatorEnum;
  * @author  ripper
  */
 public class ContactPanel extends javax.swing.JPanel {
-    Main main;
+    MainFrame main;
     
     /** Creates new form ContactPanel */
-    public ContactPanel(Main main) {
-        this.main = main;
+    public ContactPanel() {
+        this.main = MainFrame.getInstance();
         initComponents();
     }
     

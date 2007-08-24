@@ -47,6 +47,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         linkButton = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("O Esmska");
         setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
         setLocationByPlatform(true);
@@ -192,8 +193,8 @@ public class AboutFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_creditsButtonActionPerformed
     
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-        //close form
         this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
     
     

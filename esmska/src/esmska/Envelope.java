@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import persistence.ConfigBean;
 import persistence.Contact;
+import persistence.PersistenceManager;
 import persistence.SMS;
 
 /** Class for preparing attributes of sms (single or multiple)
@@ -26,8 +27,8 @@ public class Envelope {
     //TODO: add possibility of event listeners
     
     /** Creates a new instance of Envelope */
-    public Envelope(ConfigBean config) {
-        this.config = config;
+    public Envelope() {
+        this.config = PersistenceManager.getConfig();
     }
     
     /** get text of sms */

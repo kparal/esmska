@@ -7,19 +7,27 @@
 package esmska;
 
 import java.awt.event.KeyEvent;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import persistence.ConfigBean;
+import persistence.PersistenceManager;
 
 /**
  *
  * @author  ripper
  */
 public class ConfigFrame extends javax.swing.JFrame {
-    private ConfigBean config;
+    private ConfigBean config = PersistenceManager.getConfig();
+    private boolean fullyInicialized;
+    private boolean restartAnnounced;
+    private final String LAF_SYSTEM = "Systémový";
+    private final String LAF_CROSSPLATFORM = "Meziplatformní";
     
     /** Creates new form ConfigFrame */
-    public ConfigFrame(ConfigBean config) {
-        this.config = config;
+    public ConfigFrame() {
         initComponents();
         useSenderIDCheckBoxActionPerformed(null);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
@@ -27,6 +35,14 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setIconAt(0, new ImageIcon(this.getClass().getResource("resources/config-small.png")));
         tabbedPane.setIconAt(1, new ImageIcon(this.getClass().getResource("/operators/resources/Vodafone.png")));
         closeButton.requestFocusInWindow();
+        
+        lafComboBox.setModel(new DefaultComboBoxModel(new String[] {LAF_SYSTEM, LAF_CROSSPLATFORM}));
+        if (config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM))
+            lafComboBox.setSelectedItem(LAF_SYSTEM);
+        else if (config.getLookAndFeel().equals(ThemeManager.LAF_CROSSPLATFORM))
+            lafComboBox.setSelectedItem(LAF_CROSSPLATFORM);
+        
+        fullyInicialized = true;
     }
     
     /** This method is called from within the constructor to
@@ -40,6 +56,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         rememberQueueCheckBox = new javax.swing.JCheckBox();
         rememberLayoutCheckBox = new javax.swing.JCheckBox();
+        lafComboBox = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -49,6 +68,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         senderNameTextField = new javax.swing.JTextField();
         closeButton = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastaven\u00ed");
         setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -81,6 +101,21 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        lafComboBox.setToolTipText("<html>\nUmo\u017en\u00ed v\u00e1m zm\u011bnit vzhled programu.\n</html>");
+        lafComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lafComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setDisplayedMnemonic('m');
+        jLabel4.setLabelFor(lafComboBox);
+        jLabel4.setText("Motiv vzhledu:");
+        jLabel4.setToolTipText(lafComboBox.getToolTipText());
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 2, 12));
+        jLabel5.setText("(nutn\u00fd restart programu)");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,8 +124,14 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rememberLayoutCheckBox)
-                    .addComponent(rememberQueueCheckBox))
-                .addContainerGap(106, Short.MAX_VALUE))
+                    .addComponent(rememberQueueCheckBox)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +140,12 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(rememberLayoutCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rememberQueueCheckBox)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         tabbedPane.addTab("Obecn\u00e9", jPanel1);
 
@@ -146,7 +192,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(useSenderIDCheckBox)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -154,13 +200,13 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(senderNumberTextField))
-                            .addComponent(senderNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))))
-                .addGap(119, 119, 119))
+                                .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(senderNameTextField))))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +222,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         tabbedPane.addTab("Vodafone", jPanel2);
 
@@ -192,29 +238,47 @@ public class ConfigFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tabbedPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                    .addComponent(closeButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(closeButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeButton)
                 .addContainerGap())
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void lafComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lafComboBoxActionPerformed
+        if (!fullyInicialized)
+            return;
+        String laf = (String) lafComboBox.getSelectedItem();
+        
+        if (laf.equals(LAF_SYSTEM))
+            config.setLookAndFeel(ThemeManager.LAF_SYSTEM);
+        else if (laf.equals(LAF_CROSSPLATFORM))
+            config.setLookAndFeel(ThemeManager.LAF_CROSSPLATFORM);
+        
+        if (!restartAnnounced) {
+            restartAnnounced = true;
+            JOptionPane.showMessageDialog(this, "Pro projevení všech změn " +
+                    "v nastavení je nutné restartovat program!", 
+                    "Nutný restart programu", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_lafComboBoxActionPerformed
+    
     private void rememberLayoutCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberLayoutCheckBoxActionPerformed
         config.setRememberLayout(rememberLayoutCheckBox.isSelected());
     }//GEN-LAST:event_rememberLayoutCheckBoxActionPerformed
-
+    
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
         senderNameTextFieldActionPerformed(null);
         senderNumberTextFieldActionPerformed(null);
@@ -239,8 +303,8 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_rememberQueueCheckBoxActionPerformed
     
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-        //close form
         this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -248,8 +312,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JComboBox lafComboBox;
     private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;
     private javax.swing.JTextField senderNameTextField;

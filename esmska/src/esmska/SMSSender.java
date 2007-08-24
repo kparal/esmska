@@ -34,14 +34,14 @@ public class SMSSender {
     private boolean paused; // queue paused
     private boolean delayed; //waiting for delay to send another sms
     private SMSWorker smsWorker; //worker for background thread
-    private Main parent; //reference to main form
+    private MainFrame mainFrame; //reference to main form
     
     /** Creates a new instance of SMSSender */
-    public SMSSender(List<SMS> smsQueue, Main parent) {
+    public SMSSender(List<SMS> smsQueue) {
         if (smsQueue == null)
             throw new NullPointerException("smsQueue");
         this.smsQueue = smsQueue;
-        this.parent = parent;
+        this.mainFrame = MainFrame.getInstance();
     }
     
     /** notify about new sms */
@@ -53,8 +53,8 @@ public class SMSSender {
         if (!isDelayed() && !isPaused() && !running && !smsQueue.isEmpty()) {
             running = true;
             SMS sms = smsQueue.get(0);
-            parent.setTaskRunning(true);
-            parent.printStatusMessage("Posílám zprávu pro " + sms
+            mainFrame.setTaskRunning(true);
+            mainFrame.printStatusMessage("Posílám zprávu pro " + sms
             + " (" + sms.getOperator() + ") ...");
             
             //send in worker thread
@@ -65,21 +65,21 @@ public class SMSSender {
     
     private void finishedSending(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
-            parent.printStatusMessage("Zpráva pro " + sms
+            mainFrame.printStatusMessage("Zpráva pro " + sms
             + " byla úspěšně odeslána.");
-            parent.setSMSDelay();
+            mainFrame.setSMSDelay();
         }
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
-            parent.printStatusMessage("Zprávu pro " + sms
+            mainFrame.printStatusMessage("Zprávu pro " + sms
             + " se nepodařilo odeslat!");
-            parent.pauseSMSQueue();
+            mainFrame.pauseSMSQueue();
             
-            JOptionPane.showMessageDialog(parent, new JLabel("<html>"
+            JOptionPane.showMessageDialog(mainFrame, new JLabel("<html>"
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
                     + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
         }
-        parent.smsProcessed(sms);
-        parent.setTaskRunning(false);
+        mainFrame.smsProcessed(sms);
+        mainFrame.setTaskRunning(false);
         running = false;
     }
     
@@ -112,7 +112,7 @@ public class SMSSender {
                         label.setHorizontalTextPosition(JLabel.CENTER);
                         label.setVerticalTextPosition(JLabel.TOP);
                         panel.add(label);
-                        String imageCode = JOptionPane.showInputDialog(parent, panel, "Kontrolní kód",
+                        String imageCode = JOptionPane.showInputDialog(mainFrame, panel, "Kontrolní kód",
                                 JOptionPane.QUESTION_MESSAGE);
                         sms.setImageCode(imageCode);
                     }

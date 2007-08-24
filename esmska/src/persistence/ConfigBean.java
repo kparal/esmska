@@ -6,6 +6,7 @@
 
 package persistence;
 
+import esmska.ThemeManager;
 import persistence.SMS;
 import java.awt.Dimension;
 import java.beans.*;
@@ -28,6 +29,7 @@ public class ConfigBean extends Object implements Serializable {
     private Dimension mainDimension;
     private Integer horizontalSplitPaneLocation;
     private Integer verticalSplitPaneLocation;
+    private String lookAndFeel = ThemeManager.LAF_SYSTEM;
     
     private PropertyChangeSupport propertySupport;
     
@@ -172,6 +174,24 @@ public class ConfigBean extends Object implements Serializable {
         Integer oldVerticalSplitPaneLocation = this.verticalSplitPaneLocation;
         this.verticalSplitPaneLocation = verticalSplitPaneLocation;
         propertySupport.firePropertyChange ("verticalSplitPaneLocation", oldVerticalSplitPaneLocation, verticalSplitPaneLocation);
+    }
+
+    /**
+     * Getter for property lookAndFeel.
+     * @return Value of property lookAndFeel.
+     */
+    public String getLookAndFeel() {
+        return this.lookAndFeel;
+    }
+
+    /**
+     * Setter for property lookAndFeel.
+     * @param lookAndFeel New value of property lookAndFeel.
+     */
+    public void setLookAndFeel(String lookAndFeel) {
+        String oldLookAndFeel = this.lookAndFeel;
+        this.lookAndFeel = lookAndFeel;
+        propertySupport.firePropertyChange ("lookAndFeel", oldLookAndFeel, lookAndFeel);
     }
     
 }

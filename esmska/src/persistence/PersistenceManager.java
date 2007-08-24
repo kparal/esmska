@@ -20,7 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
+/** Load and store settings and data
  *
  * @author ripper
  */
@@ -30,8 +30,8 @@ public class PersistenceManager {
             new File(System.getProperty("user.home"), ".esmska");
     private static final File CONFIG_FILE = new File(PROGRAM_DIR, "nastaveni.xml");
     private static final File CONTACTS_FILE = new File(PROGRAM_DIR, "kontakty.xml");
-    private static ConfigBean config;
-    private static ContactsBean contacts;
+    private static ConfigBean config = new ConfigBean();
+    private static ContactsBean contacts = new ContactsBean();
     
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
@@ -52,23 +52,17 @@ public class PersistenceManager {
     }
     
     /** return config */
-    public ConfigBean getConfig() {
-        if (config == null)
-            config = new ConfigBean();
+    public static ConfigBean getConfig() {
         return config;
     }
     
     /** return contacts */
-    public ContactsBean getContacs() {
-        if (contacts == null)
-            contacts = new ContactsBean();
+    public static ContactsBean getContacs() {
         return contacts;
     }
     
     /** Save program configuration */
     public void saveConfig() throws IOException {
-        if (config == null)
-            return;
         CONFIG_FILE.createNewFile();
         XMLEncoder xmlEncoder = new XMLEncoder(
                 new BufferedOutputStream(new FileOutputStream(CONFIG_FILE)));
@@ -84,16 +78,12 @@ public class PersistenceManager {
             ConfigBean config = (ConfigBean) xmlDecoder.readObject();
             xmlDecoder.close();
             this.config = config;
-        } else {
-            config = new ConfigBean();
         }
         return config;
     }
     
     /** Save contacts */
     public void saveContacts() throws IOException {
-        if (contacts == null)
-            return;
         CONTACTS_FILE.createNewFile();
         XMLEncoder xmlEncoder = new XMLEncoder(
                 new BufferedOutputStream(new FileOutputStream(CONTACTS_FILE)));
@@ -109,8 +99,6 @@ public class PersistenceManager {
             ContactsBean contacts = (ContactsBean) xmlDecoder.readObject();
             xmlDecoder.close();
             this.contacts = contacts;
-        } else {
-            contacts = new ContactsBean();
         }
         return contacts;
     }

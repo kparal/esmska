@@ -30,6 +30,7 @@ import operators.OperatorEnum;
 import operators.Vodafone;
 import persistence.Contact;
 import persistence.ContactsBean;
+import persistence.PersistenceManager;
 
 /** Import contacts from external applications
  *
@@ -39,12 +40,12 @@ public class ImportFrame extends javax.swing.JFrame {
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
     private ContactsBean contacts;
-    private Main mainFrame;
+    private MainFrame mainFrame;
     
     /** Creates new form ImportFrame */
-    public ImportFrame(Main mainFrame) {
-        this.mainFrame = mainFrame;
-        this.contacts = mainFrame.contacts;
+    public ImportFrame() {
+        this.mainFrame = mainFrame.getInstance();
+        this.contacts = PersistenceManager.getContacs();
         initComponents();
         cardLayout = (CardLayout)this.getContentPane().getLayout();
         progressBar.setVisible(false);
@@ -539,6 +540,7 @@ public class ImportFrame extends javax.swing.JFrame {
         
         mainFrame.importAction.updateContacts();
         
+        this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_importButtonActionPerformed
     
