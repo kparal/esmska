@@ -526,7 +526,7 @@
                       <Component id="jScrollPane1" alignment="0" pref="496" max="32767" attributes="0"/>
                       <Component id="importButton" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="skipExistingCheckBox" alignment="0" pref="496" max="32767" attributes="0"/>
+                      <Component id="skipExistingCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

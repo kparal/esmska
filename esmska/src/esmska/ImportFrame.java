@@ -465,7 +465,7 @@ public class ImportFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addComponent(importButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
-                    .addComponent(skipExistingCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                    .addComponent(skipExistingCheckBox))
                 .addContainerGap())
         );
         resultsPanelLayout.setVerticalGroup(
