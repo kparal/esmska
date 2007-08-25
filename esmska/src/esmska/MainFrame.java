@@ -22,8 +22,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
@@ -31,7 +29,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -64,6 +61,7 @@ import operators.O2;
 import operators.Operator;
 import operators.OperatorEnum;
 import operators.Vodafone;
+import org.jvnet.substance.SubstanceLookAndFeel;
 import persistence.ConfigBean;
 import persistence.Contact;
 import persistence.ContactsBean;
@@ -257,10 +255,12 @@ public class MainFrame extends javax.swing.JFrame {
         addContactButton.setAction(addContactAction);
         addContactButton.setBorderPainted(false);
         addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         removeContactButton.setAction(removeContactAction);
         removeContactButton.setBorderPainted(false);
         removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         contactList.setCellRenderer(new ContactListRenderer());
         contactList.getSelectionModel().addListSelectionListener(new ContactListSelectionListener());
@@ -269,6 +269,7 @@ public class MainFrame extends javax.swing.JFrame {
         editContactButton.setAction(editContactAction);
         editContactButton.setBorderPainted(false);
         editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         javax.swing.GroupLayout contactPanelLayout = new javax.swing.GroupLayout(contactPanel);
         contactPanel.setLayout(contactPanelLayout);
@@ -323,7 +324,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        //GTK JTextArea bug fix
+        if (config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM))
         smsTextPane.setBackground(SystemColor.text);
+
         smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);
         smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();
         ((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(smsTextPaneDocumentFilter);
@@ -443,22 +447,27 @@ public class MainFrame extends javax.swing.JFrame {
     pauseButton.setAction(smsQueuePauseAction);
     pauseButton.setBorderPainted(false);
     pauseButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+    pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     editButton.setAction(editSMSAction);
     editButton.setBorderPainted(false);
     editButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+    editButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     deleteButton.setAction(deleteSMSAction);
     deleteButton.setBorderPainted(false);
     deleteButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+    deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     smsUpButton.setAction(smsUpAction);
     smsUpButton.setBorderPainted(false);
     smsUpButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+    smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     smsDownButton.setAction(smsDownAction);
     smsDownButton.setBorderPainted(false);
     smsDownButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+    smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     javax.swing.GroupLayout queuePanelLayout = new javax.swing.GroupLayout(queuePanel);
     queuePanel.setLayout(queuePanelLayout);
@@ -1204,7 +1213,7 @@ public class MainFrame extends javax.swing.JFrame {
                 smsCounterLabel.setForeground(Color.RED);
                 smsCounterLabel.setText(chars + " znaků (nelze odeslat!)");
             } else //chars ok
-                smsCounterLabel.setForeground(SystemColor.textText);
+                smsCounterLabel.setForeground(UIManager.getColor("Label.foreground"));
         }
         /** update form components */
         private void updateUI(DocumentEvent e) {
@@ -1247,7 +1256,7 @@ public class MainFrame extends javax.swing.JFrame {
             doc = smsTextPane.getStyledDocument();
             Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
             regular = doc.addStyle("regular", def);
-            StyleConstants.setForeground(regular,SystemColor.textText);
+            StyleConstants.setForeground(regular,UIManager.getColor("TextArea.foreground"));
             highlight = doc.addStyle("highlight", def);
             StyleConstants.setForeground(highlight, Color.BLUE);
         }

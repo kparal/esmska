@@ -241,6 +241,9 @@
                   <Insets value="[2, 2, 2, 2]"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="removeContactButton">
               <Properties>
@@ -252,6 +255,9 @@
                   <Insets value="[2, 2, 2, 2]"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+              </AuxValues>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane4">
               <AuxValues>
@@ -282,6 +288,9 @@
                   <Insets value="[2, 2, 2, 2]"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -415,7 +424,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JTextPane" name="smsTextPane">
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="smsTextPane.setBackground(SystemColor.text);&#xa;smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);&#xa;smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();&#xa;((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(smsTextPaneDocumentFilter);&#xa;&#xa;//set undo and redo actions and bind them&#xa;smsTextUndoManager.setLimit(-1);&#xa;smsTextUndoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canUndo()) {&#xa;            smsTextUndoManager.undo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextRedoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canRedo()) {&#xa;            smsTextUndoManager.redo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextPane.getDocument().addUndoableEditListener(new UndoableEditListener() {&#xa;    public void undoableEditHappened(UndoableEditEvent e) {&#xa;        if (e.getEdit().getPresentationName().contains(&quot;style&quot;))&#xa;            return;&#xa;        smsTextUndoManager.addEdit(e.getEdit());&#xa;    }&#xa;});&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK),&quot;undo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,&#xa;        KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getActionMap().put(&quot;undo&quot;,smsTextUndoAction);&#xa;smsTextPane.getActionMap().put(&quot;redo&quot;,smsTextRedoAction);"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="//GTK JTextArea bug fix&#xa;if (config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM))&#xa;    smsTextPane.setBackground(SystemColor.text);&#xa;&#xa;smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);&#xa;smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();&#xa;((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(smsTextPaneDocumentFilter);&#xa;&#xa;//set undo and redo actions and bind them&#xa;smsTextUndoManager.setLimit(-1);&#xa;smsTextUndoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canUndo()) {&#xa;            smsTextUndoManager.undo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextRedoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canRedo()) {&#xa;            smsTextUndoManager.redo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextPane.getDocument().addUndoableEditListener(new UndoableEditListener() {&#xa;    public void undoableEditHappened(UndoableEditEvent e) {&#xa;        if (e.getEdit().getPresentationName().contains(&quot;style&quot;))&#xa;            return;&#xa;        smsTextUndoManager.addEdit(e.getEdit());&#xa;    }&#xa;});&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK),&quot;undo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,&#xa;        KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getActionMap().put(&quot;undo&quot;,smsTextUndoAction);&#xa;smsTextPane.getActionMap().put(&quot;redo&quot;,smsTextRedoAction);"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
@@ -567,6 +576,9 @@
                       <Insets value="[2, 2, 2, 2]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="editButton">
                   <Properties>
@@ -578,6 +590,9 @@
                       <Insets value="[2, 2, 2, 2]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="deleteButton">
                   <Properties>
@@ -589,6 +604,9 @@
                       <Insets value="[2, 2, 2, 2]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="smsUpButton">
                   <Properties>
@@ -600,6 +618,9 @@
                       <Insets value="[2, 2, 2, 2]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="smsDownButton">
                   <Properties>
@@ -611,6 +632,9 @@
                       <Insets value="[2, 2, 2, 2]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

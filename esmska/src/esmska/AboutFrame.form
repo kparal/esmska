@@ -24,22 +24,28 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="creditsButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="licenseButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel5" alignment="1" pref="287" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="1" pref="287" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" pref="287" max="32767" attributes="0"/>
-                  <Component id="linkButton" alignment="0" pref="287" max="32767" attributes="0"/>
-                  <Component id="jLabel3" alignment="1" pref="287" max="32767" attributes="0"/>
+                  <Component id="jLabel5" alignment="1" pref="267" max="32767" attributes="0"/>
+                  <Component id="jLabel2" alignment="1" pref="267" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="267" max="32767" attributes="0"/>
+                  <Component id="jLabel3" alignment="1" pref="267" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel6" pref="4" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="linkButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel4" pref="3" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,7 +59,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Component id="linkButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel6" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="linkButton" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="53" max="32767" attributes="0"/>
@@ -136,6 +146,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkButtonActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
     </Component>
   </SubComponents>
 </Form>

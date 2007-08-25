@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 /** About form
  *
@@ -46,6 +47,8 @@ public class AboutFrame extends javax.swing.JFrame {
         licenseButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         linkButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("O Esmska");
@@ -94,6 +97,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
         linkButton.setText("<html><a href=\"http://esmska.googlecode.com/\">http://esmska.googlecode.com/</a></html>");
         linkButton.setBorderPainted(false);
+        linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         linkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkButtonActionPerformed(evt);
@@ -111,13 +115,18 @@ public class AboutFrame extends javax.swing.JFrame {
                         .addComponent(creditsButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(licenseButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(closeButton))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                    .addComponent(linkButton, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 4, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(linkButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 3, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -130,7 +139,10 @@ public class AboutFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(24, 24, 24)
-                .addComponent(linkButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(linkButton)
+                    .addComponent(jLabel4))
                 .addGap(23, 23, 23)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
@@ -140,6 +152,9 @@ public class AboutFrame extends javax.swing.JFrame {
                     .addComponent(licenseButton))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel4, jLabel6, linkButton});
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
@@ -204,7 +219,9 @@ public class AboutFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton licenseButton;
     private javax.swing.JButton linkButton;
     // End of variables declaration//GEN-END:variables
