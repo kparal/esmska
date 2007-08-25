@@ -30,6 +30,7 @@ public class ConfigBean extends Object implements Serializable {
     private Integer horizontalSplitPaneLocation;
     private Integer verticalSplitPaneLocation;
     private String lookAndFeel = ThemeManager.LAF_SYSTEM;
+    private String lafJGoodiesTheme = "Experience Blue";
     
     private PropertyChangeSupport propertySupport;
     
@@ -192,6 +193,24 @@ public class ConfigBean extends Object implements Serializable {
         String oldLookAndFeel = this.lookAndFeel;
         this.lookAndFeel = lookAndFeel;
         propertySupport.firePropertyChange ("lookAndFeel", oldLookAndFeel, lookAndFeel);
+    }
+
+    /**
+     * Getter for property lafJGoodiesTheme.
+     * @return Value of property lafJGoodiesTheme.
+     */
+    public String getLafJGoodiesTheme() {
+        return this.lafJGoodiesTheme;
+    }
+
+    /**
+     * Setter for property lafJGoodiesTheme.
+     * @param lafJGoodiesTheme New value of property lafJGoodiesTheme.
+     */
+    public void setLafJGoodiesTheme(String lafJGoodiesTheme) {
+        String oldLafJGoodiesTheme = this.lafJGoodiesTheme;
+        this.lafJGoodiesTheme = lafJGoodiesTheme;
+        propertySupport.firePropertyChange ("lafJGoodiesTheme", oldLafJGoodiesTheme, lafJGoodiesTheme);
     }
     
 }

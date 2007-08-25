@@ -6,12 +6,12 @@
 
 package esmska;
 
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+import com.jgoodies.looks.plastic.PlasticTheme;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import persistence.ConfigBean;
 import persistence.PersistenceManager;
 
@@ -22,9 +22,9 @@ import persistence.PersistenceManager;
 public class ConfigFrame extends javax.swing.JFrame {
     private ConfigBean config = PersistenceManager.getConfig();
     private boolean fullyInicialized;
-    private boolean restartAnnounced;
     private final String LAF_SYSTEM = "Systémový";
     private final String LAF_CROSSPLATFORM = "Meziplatformní";
+    private final String LAF_JGOODIES = "JGoodies";
     
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
@@ -36,13 +36,32 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setIconAt(1, new ImageIcon(this.getClass().getResource("/operators/resources/Vodafone.png")));
         closeButton.requestFocusInWindow();
         
-        lafComboBox.setModel(new DefaultComboBoxModel(new String[] {LAF_SYSTEM, LAF_CROSSPLATFORM}));
+        lafComboBox.setModel(new DefaultComboBoxModel(
+                new String[] {LAF_SYSTEM, LAF_CROSSPLATFORM, LAF_JGOODIES}));
         if (config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM))
             lafComboBox.setSelectedItem(LAF_SYSTEM);
         else if (config.getLookAndFeel().equals(ThemeManager.LAF_CROSSPLATFORM))
             lafComboBox.setSelectedItem(LAF_CROSSPLATFORM);
+        else if (config.getLookAndFeel().equals(ThemeManager.LAF_JGOODIES))
+            lafComboBox.setSelectedItem(LAF_JGOODIES);
+        
+        updateThemeComboBox();
         
         fullyInicialized = true;
+    }
+    
+    private void updateThemeComboBox() {
+        themeComboBox.setEnabled(false);
+        String laf = (String) lafComboBox.getSelectedItem();
+        
+        if (laf.equals(LAF_JGOODIES)) {
+            ArrayList<String> themes = new ArrayList<String>();
+            for (Object o : PlasticLookAndFeel.getInstalledThemes())
+                themes.add(((PlasticTheme)o).getName());
+            themeComboBox.setModel(new DefaultComboBoxModel(themes.toArray()));
+            themeComboBox.setSelectedItem(config.getLafJGoodiesTheme());
+            themeComboBox.setEnabled(true);
+        }
     }
     
     /** This method is called from within the constructor to
@@ -59,6 +78,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         lafComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        themeComboBox = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -110,11 +132,22 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         jLabel4.setDisplayedMnemonic('m');
         jLabel4.setLabelFor(lafComboBox);
-        jLabel4.setText("Motiv vzhledu:");
+        jLabel4.setText("Vzhled:");
         jLabel4.setToolTipText(lafComboBox.getToolTipText());
 
         jLabel5.setFont(new java.awt.Font("Dialog", 2, 12));
         jLabel5.setText("(nutn\u00fd restart programu)");
+
+        jLabel6.setText("Motiv:");
+
+        themeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                themeComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 2, 12));
+        jLabel7.setText("(nutn\u00fd restart programu)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,13 +159,24 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(rememberLayoutCheckBox)
                     .addComponent(rememberQueueCheckBox)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)))
-                .addContainerGap(142, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)))))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lafComboBox, themeComboBox});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -143,10 +187,18 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
-                .addContainerGap(159, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lafComboBox, themeComboBox});
+
         tabbedPane.addTab("Obecn\u00e9", jPanel1);
 
         useSenderIDCheckBox.setMnemonic('p');
@@ -256,6 +308,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void themeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeComboBoxActionPerformed
+        String laf = (String) lafComboBox.getSelectedItem();
+        
+        if (laf.equals(LAF_JGOODIES))
+            config.setLafJGoodiesTheme((String)themeComboBox.getSelectedItem());
+    }//GEN-LAST:event_themeComboBoxActionPerformed
     
     private void lafComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lafComboBoxActionPerformed
         if (!fullyInicialized)
@@ -266,13 +325,10 @@ public class ConfigFrame extends javax.swing.JFrame {
             config.setLookAndFeel(ThemeManager.LAF_SYSTEM);
         else if (laf.equals(LAF_CROSSPLATFORM))
             config.setLookAndFeel(ThemeManager.LAF_CROSSPLATFORM);
+        else if (laf.equals(LAF_JGOODIES))
+            config.setLookAndFeel(ThemeManager.LAF_JGOODIES);
         
-        if (!restartAnnounced) {
-            restartAnnounced = true;
-            JOptionPane.showMessageDialog(this, "Pro projevení všech změn " +
-                    "v nastavení je nutné restartovat program!", 
-                    "Nutný restart programu", JOptionPane.WARNING_MESSAGE);
-        }
+        updateThemeComboBox();
     }//GEN-LAST:event_lafComboBoxActionPerformed
     
     private void rememberLayoutCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberLayoutCheckBoxActionPerformed
@@ -314,6 +370,8 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox lafComboBox;
@@ -322,6 +380,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JTextField senderNameTextField;
     private javax.swing.JTextField senderNumberTextField;
     private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JComboBox themeComboBox;
     private javax.swing.JCheckBox useSenderIDCheckBox;
     // End of variables declaration//GEN-END:variables
     
