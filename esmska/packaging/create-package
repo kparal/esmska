@@ -13,6 +13,7 @@ mkdir "$TMPDIR"
 mkdir "$TMPDIR/$FINALNAME"
 
 cp "../dist/esmska.jar" "$TMPDIR/$FINALNAME"
+cp -r "../dist/lib" "$TMPDIR/$FINALNAME"
 cp -r include/* "$TMPDIR/$FINALNAME"
 unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/*.bat
 
