@@ -24,7 +24,7 @@ import org.jvnet.substance.skin.SkinInfo;
 import persistence.ConfigBean;
 import persistence.PersistenceManager;
 
-/**
+/** Manage and set look and feel
  *
  * @author ripper
  */
@@ -37,6 +37,7 @@ public class ThemeManager {
     private ThemeManager() {
     }
     
+    /* Set look and feel found in configuration */
     public static void setLaF() throws Exception {
         ConfigBean config = PersistenceManager.getConfig();
         String laf = config.getLookAndFeel();
