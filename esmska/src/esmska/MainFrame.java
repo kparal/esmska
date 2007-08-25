@@ -739,8 +739,12 @@ public class MainFrame extends javax.swing.JFrame {
         if (config.isRememberQueue()) { //load sms queue
             if (config.getSmsQueue().size() != 0)
                 pauseSMSQueue();
-            smsQueue.addAll(config.getSmsQueue());
-            if (config.getSmsQueue().size() != 0)
+//            smsQueue.addAll(config.getSmsQueue());
+            for (SMS sms : config.getSmsQueue()) {
+                if (sms != null)    //backwards compatibility issues
+                    smsQueue.add(sms);
+            }
+            if (smsQueue.size() != 0)
                 ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
                         smsQueueList.getModel(), 0, smsQueue.size()-1);
         }
