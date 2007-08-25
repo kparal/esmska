@@ -15,7 +15,10 @@ import com.jgoodies.looks.plastic.PlasticTheme;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.ExperienceBlue;
 import com.jgoodies.looks.plastic.theme.ExperienceGreen;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
+import persistence.ConfigBean;
 import persistence.PersistenceManager;
 
 /**
@@ -31,7 +34,11 @@ public class ThemeManager {
     }
     
     public static void setLaF() throws Exception {
-        String laf = PersistenceManager.getConfig().getLookAndFeel();
+        ConfigBean config = PersistenceManager.getConfig();
+        String laf = config.getLookAndFeel();
+        
+        JFrame.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());
+        JDialog.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());
         
         if (laf.equals(LAF_SYSTEM)) {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -40,7 +47,7 @@ public class ThemeManager {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             
         } else if (laf.equals(LAF_JGOODIES)) {
-            String themeString = PersistenceManager.getConfig().getLafJGoodiesTheme();
+            String themeString = config.getLafJGoodiesTheme();
             PlasticTheme theme = null;
             for (Object o : PlasticLookAndFeel.getInstalledThemes()) {
                 PlasticTheme ptheme = (PlasticTheme) o;

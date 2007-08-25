@@ -8,10 +8,12 @@ package esmska;
 
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import persistence.ConfigBean;
 import persistence.PersistenceManager;
 
@@ -31,9 +33,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         initComponents();
         useSenderIDCheckBoxActionPerformed(null);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
+        tabbedPane.setMnemonicAt(1, KeyEvent.VK_H);
+        tabbedPane.setMnemonicAt(2, KeyEvent.VK_V);
         tabbedPane.setIconAt(0, new ImageIcon(this.getClass().getResource("resources/config-small.png")));
-        tabbedPane.setIconAt(1, new ImageIcon(this.getClass().getResource("/operators/resources/Vodafone.png")));
+        tabbedPane.setIconAt(1, new ImageIcon(this.getClass().getResource("resources/appearance-small.png")));
+        tabbedPane.setIconAt(2, new ImageIcon(this.getClass().getResource("/operators/resources/Vodafone.png")));
         closeButton.requestFocusInWindow();
         
         lafComboBox.setModel(new DefaultComboBoxModel(
@@ -75,12 +79,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         rememberQueueCheckBox = new javax.swing.JCheckBox();
         rememberLayoutCheckBox = new javax.swing.JCheckBox();
-        lafComboBox = new javax.swing.JComboBox();
+        jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        themeComboBox = new javax.swing.JComboBox();
+        lafComboBox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
+        themeComboBox = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        windowDecorationsCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -123,32 +128,6 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        lafComboBox.setToolTipText("<html>\nUmo\u017en\u00ed v\u00e1m zm\u011bnit vzhled programu.\n</html>");
-        lafComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lafComboBoxActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setDisplayedMnemonic('m');
-        jLabel4.setLabelFor(lafComboBox);
-        jLabel4.setText("Vzhled:");
-        jLabel4.setToolTipText(lafComboBox.getToolTipText());
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 2, 12));
-        jLabel5.setText("(nutn\u00fd restart programu)");
-
-        jLabel6.setText("Motiv:");
-
-        themeComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                themeComboBoxActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 2, 12));
-        jLabel7.setText("(nutn\u00fd restart programu)");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,26 +136,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rememberLayoutCheckBox)
-                    .addComponent(rememberQueueCheckBox)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)))))
-                .addContainerGap(188, Short.MAX_VALUE))
+                    .addComponent(rememberQueueCheckBox))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lafComboBox, themeComboBox});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -184,22 +146,91 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(rememberLayoutCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rememberQueueCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
+        );
+        tabbedPane.addTab("Obecn\u00e9", jPanel1);
+
+        jLabel4.setDisplayedMnemonic('v');
+        jLabel4.setLabelFor(lafComboBox);
+        jLabel4.setText("Vzhled:");
+        jLabel4.setToolTipText(lafComboBox.getToolTipText());
+
+        lafComboBox.setToolTipText("<html>\nUmo\u017en\u00ed v\u00e1m zm\u011bnit vzhled programu.\n</html>");
+        lafComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lafComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(jLabel7.getFont().deriveFont(Font.ITALIC));
+        jLabel7.setText("Pro projeven\u00ed zm\u011bn je nutn\u00fd restart programu!");
+
+        themeComboBox.setToolTipText("<html>\nBarevn\u00e1 sch\u00e9mata pro zvolen\u00fd vzhled.\n</html>");
+        themeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                themeComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setDisplayedMnemonic('m');
+        jLabel6.setLabelFor(themeComboBox);
+        jLabel6.setText("Motiv:");
+        jLabel6.setToolTipText(themeComboBox.getToolTipText());
+
+        windowDecorationsCheckBox.setMnemonic('p');
+        windowDecorationsCheckBox.setSelected(config.isLafWindowDecorated());
+        windowDecorationsCheckBox.setText("Pou\u017e\u00edt vzhled i na okraje oken");
+        windowDecorationsCheckBox.setToolTipText("<html>\nZda m\u00e1 m\u00edsto opera\u010dn\u00edho syst\u00e9mu vykreslovat<br>\nr\u00e1me\u010dky oken zvolen\u00fd vzhled.\n</html>");
+        windowDecorationsCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        windowDecorationsCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                windowDecorationsCheckBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(windowDecorationsCheckBox)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lafComboBox, themeComboBox});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lafComboBox, themeComboBox});
 
-        tabbedPane.addTab("Obecn\u00e9", jPanel1);
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(windowDecorationsCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addContainerGap())
+        );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lafComboBox, themeComboBox});
+
+        tabbedPane.addTab("Vzhled", jPanel3);
 
         useSenderIDCheckBox.setMnemonic('p');
         useSenderIDCheckBox.setSelected(config.isUseSenderID());
@@ -309,6 +340,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void windowDecorationsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_windowDecorationsCheckBoxActionPerformed
+        config.setLafWindowDecorated(windowDecorationsCheckBox.isSelected());
+    }//GEN-LAST:event_windowDecorationsCheckBoxActionPerformed
+
     private void themeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeComboBoxActionPerformed
         String laf = (String) lafComboBox.getSelectedItem();
         
@@ -369,11 +404,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JComboBox lafComboBox;
     private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;
@@ -382,6 +417,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JComboBox themeComboBox;
     private javax.swing.JCheckBox useSenderIDCheckBox;
+    private javax.swing.JCheckBox windowDecorationsCheckBox;
     // End of variables declaration//GEN-END:variables
     
 }
