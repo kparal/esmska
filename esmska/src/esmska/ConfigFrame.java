@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import org.jvnet.substance.SubstanceLookAndFeel;
+import org.jvnet.substance.skin.SkinInfo;
 import persistence.ConfigBean;
 import persistence.PersistenceManager;
 
@@ -27,6 +29,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private final String LAF_SYSTEM = "Systémový";
     private final String LAF_CROSSPLATFORM = "Meziplatformní";
     private final String LAF_JGOODIES = "JGoodies";
+    private final String LAF_SUBSTANCE = "Substance";
     
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
@@ -40,14 +43,16 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setIconAt(2, new ImageIcon(this.getClass().getResource("/operators/resources/Vodafone.png")));
         closeButton.requestFocusInWindow();
         
-        lafComboBox.setModel(new DefaultComboBoxModel(
-                new String[] {LAF_SYSTEM, LAF_CROSSPLATFORM, LAF_JGOODIES}));
+        lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
+            LAF_SYSTEM, LAF_CROSSPLATFORM, LAF_JGOODIES, LAF_SUBSTANCE}));
         if (config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM))
             lafComboBox.setSelectedItem(LAF_SYSTEM);
         else if (config.getLookAndFeel().equals(ThemeManager.LAF_CROSSPLATFORM))
             lafComboBox.setSelectedItem(LAF_CROSSPLATFORM);
         else if (config.getLookAndFeel().equals(ThemeManager.LAF_JGOODIES))
             lafComboBox.setSelectedItem(LAF_JGOODIES);
+        else if (config.getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE))
+            lafComboBox.setSelectedItem(LAF_SUBSTANCE);
         
         updateThemeComboBox();
         
@@ -64,6 +69,16 @@ public class ConfigFrame extends javax.swing.JFrame {
                 themes.add(((PlasticTheme)o).getName());
             themeComboBox.setModel(new DefaultComboBoxModel(themes.toArray()));
             themeComboBox.setSelectedItem(config.getLafJGoodiesTheme());
+            themeComboBox.setEnabled(true);
+        }
+        
+        else if (laf.equals(LAF_SUBSTANCE)) {
+            ArrayList<String> themes = new ArrayList<String>();
+            new SubstanceLookAndFeel();
+            for (SkinInfo skinInfo : SubstanceLookAndFeel.getAllSkins().values())
+                themes.add(skinInfo.getDisplayName());
+            themeComboBox.setModel(new DefaultComboBoxModel(themes.toArray()));
+            themeComboBox.setSelectedItem(config.getLafSubstanceSkin());
             themeComboBox.setEnabled(true);
         }
     }
@@ -339,16 +354,18 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void windowDecorationsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_windowDecorationsCheckBoxActionPerformed
         config.setLafWindowDecorated(windowDecorationsCheckBox.isSelected());
     }//GEN-LAST:event_windowDecorationsCheckBoxActionPerformed
-
+    
     private void themeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeComboBoxActionPerformed
         String laf = (String) lafComboBox.getSelectedItem();
         
         if (laf.equals(LAF_JGOODIES))
             config.setLafJGoodiesTheme((String)themeComboBox.getSelectedItem());
+        else if (laf.equals(LAF_SUBSTANCE))
+            config.setLafSubstanceSkin((String)themeComboBox.getSelectedItem());
     }//GEN-LAST:event_themeComboBoxActionPerformed
     
     private void lafComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lafComboBoxActionPerformed
@@ -362,6 +379,8 @@ public class ConfigFrame extends javax.swing.JFrame {
             config.setLookAndFeel(ThemeManager.LAF_CROSSPLATFORM);
         else if (laf.equals(LAF_JGOODIES))
             config.setLookAndFeel(ThemeManager.LAF_JGOODIES);
+        else if (laf.equals(LAF_SUBSTANCE))
+            config.setLookAndFeel(ThemeManager.LAF_SUBSTANCE);
         
         updateThemeComboBox();
     }//GEN-LAST:event_lafComboBoxActionPerformed

@@ -121,9 +121,15 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         instance = this;
         initComponents();
+        
         //set tooltip delay
         ToolTipManager.sharedInstance().setInitialDelay(750);
         ToolTipManager.sharedInstance().setDismissDelay(60000);
+        
+        //init custom components
+        smsSender = new SMSSender(smsQueue);
+        envelope = new Envelope();
+        
         //load config
         try {
             persistenceManager = PersistenceManager.getInstance();
@@ -135,9 +141,7 @@ public class MainFrame extends javax.swing.JFrame {
         //load contacts
         loadContacts();
         
-        //init custom components
-        smsSender = new SMSSender(smsQueue);
-        envelope = new Envelope();
+        //setup components
         smsDelayProgressBar.setVisible(false);
         smsDelayTimer.setInitialDelay(0);
         contactList.setModel(new ContactListModel());

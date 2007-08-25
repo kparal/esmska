@@ -18,6 +18,9 @@ import com.jgoodies.looks.plastic.theme.ExperienceGreen;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import org.jvnet.substance.SubstanceLookAndFeel;
+import org.jvnet.substance.skin.FieldOfWheatSkin;
+import org.jvnet.substance.skin.SkinInfo;
 import persistence.ConfigBean;
 import persistence.PersistenceManager;
 
@@ -29,6 +32,7 @@ public class ThemeManager {
     public static String LAF_SYSTEM = "System";
     public static String LAF_CROSSPLATFORM =  "Crossplatform";
     public static String LAF_JGOODIES = "JGoodies";
+    public static String LAF_SUBSTANCE = "Substance";
     
     private ThemeManager() {
     }
@@ -58,6 +62,19 @@ public class ThemeManager {
             }
             PlasticLookAndFeel.setPlasticTheme(theme != null? theme : new ExperienceBlue());
             UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
+            
+        } else if (laf.equals(LAF_SUBSTANCE)) {
+            String skinString = config.getLafSubstanceSkin();
+            String skin = null;
+            new SubstanceLookAndFeel();
+            for (SkinInfo skinInfo : SubstanceLookAndFeel.getAllSkins().values()) {
+                if (skinInfo.getDisplayName().equals(skinString)) {
+                    skin = skinInfo.getClassName();
+                    break;
+                }
+            }
+            SubstanceLookAndFeel.setSkin(skin != null? skin : new FieldOfWheatSkin().getClass().getName());
+            UIManager.setLookAndFeel(new SubstanceLookAndFeel());
             
         } else {
             throw new IllegalArgumentException("Unknown LaF name");

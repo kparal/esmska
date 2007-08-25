@@ -30,8 +30,9 @@ public class ConfigBean extends Object implements Serializable {
     private Integer horizontalSplitPaneLocation;
     private Integer verticalSplitPaneLocation;
     private String lookAndFeel = ThemeManager.LAF_SYSTEM;
-    private String lafJGoodiesTheme = "Experience Blue";
     private boolean lafWindowDecorated = false;
+    private String lafJGoodiesTheme = "Experience Blue";
+    private String lafSubstanceSkin = "Field of Wheat";
     
     private PropertyChangeSupport propertySupport;
     
@@ -230,6 +231,24 @@ public class ConfigBean extends Object implements Serializable {
         boolean oldLafWindowDecorated = this.lafWindowDecorated;
         this.lafWindowDecorated = lafWindowDecorated;
         propertySupport.firePropertyChange ("lafWindowDecorated", new Boolean (oldLafWindowDecorated), new Boolean (lafWindowDecorated));
+    }
+
+    /**
+     * Getter for property lafSubstanceSkin.
+     * @return Value of property lafSubstanceSkin.
+     */
+    public String getLafSubstanceSkin() {
+        return this.lafSubstanceSkin;
+    }
+
+    /**
+     * Setter for property lafSubstanceSkin.
+     * @param lafSubstanceSkin New value of property lafSubstanceSkin.
+     */
+    public void setLafSubstanceSkin(String lafSubstanceSkin) {
+        String oldLafSubstanceSkin = this.lafSubstanceSkin;
+        this.lafSubstanceSkin = lafSubstanceSkin;
+        propertySupport.firePropertyChange ("lafSubstanceSkin", oldLafSubstanceSkin, lafSubstanceSkin);
     }
     
 }

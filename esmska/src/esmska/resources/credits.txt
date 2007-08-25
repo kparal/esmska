@@ -5,3 +5,5 @@ Grafika:
   Tango Desktop Project <http://tango.freedesktop.org>
   Ubuntu <http://www.ubuntu.com>
   Gajim <http://www.gajim.org>
+  JGoodies <http://jgoodies.com/>
+  Substance <https://substance.dev.java.net/>
