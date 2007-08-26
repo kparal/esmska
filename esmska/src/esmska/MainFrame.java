@@ -1443,16 +1443,15 @@ public class MainFrame extends javax.swing.JFrame {
                     //ignore reset
                     return;
                 }
-                if ((Integer)value == JOptionPane.CANCEL_OPTION) {
+                if ((Integer)value != JOptionPane.OK_OPTION) {
                     setVisible(false);
                     return;
                 }
-                if ((Integer)value == JOptionPane.OK_OPTION) {
-                    //verify inputs
-                    if (!panel.validateForm()) {
-                        optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
-                        return;
-                    }
+                
+                //verify inputs
+                if (!panel.validateForm()) {
+                    optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
+                    return;
                 }
                 //inputs verified, all ok
                 contact = new Contact(panel.nameTextField.getText(), panel.numberTextField.getText(),
