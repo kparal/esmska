@@ -293,7 +293,7 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanelLayout.setVerticalGroup(
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -363,6 +363,11 @@ public class MainFrame extends javax.swing.JFrame {
             KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK),"redo");
     smsTextPane.getActionMap().put("undo",smsTextUndoAction);
     smsTextPane.getActionMap().put("redo",smsTextRedoAction);
+
+    //ctrl+enter
+    smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,KeyEvent.CTRL_DOWN_MASK),"send");
+    smsTextPane.getActionMap().put("send",sendAction);
+
     jScrollPane1.setViewportView(smsTextPane);
 
     jLabel5.setDisplayedMnemonic('t');
@@ -423,7 +428,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -829,7 +834,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class SendAction extends AbstractAction {
         public SendAction() {
             super("Poslat", new ImageIcon(MainFrame.this.getClass().getResource("resources/send.png")));
-            this.putValue(SHORT_DESCRIPTION,"Odeslat zprávu (Alt-S)");
+            this.putValue(SHORT_DESCRIPTION,"Odeslat zprávu (Alt+S, Ctrl+Enter)");
             this.putValue(MNEMONIC_KEY, KeyEvent.VK_S);
             this.setEnabled(false);
         }
@@ -1015,8 +1020,8 @@ public class MainFrame extends javax.swing.JFrame {
     /** Pause/unpause the sms queue */
     private class SMSQueuePauseAction extends AbstractAction {
         private boolean makePause = true;
-        private final String descRunning = "Pozastavit odesílání sms ve frontě (Alt-P)";
-        private final String descStopped = "Pokračovat v odesílání sms ve frontě (Alt-P)";
+        private final String descRunning = "Pozastavit odesílání sms ve frontě (Alt+P)";
+        private final String descStopped = "Pokračovat v odesílání sms ve frontě (Alt+P)";
         public SMSQueuePauseAction() {
             super(null, new ImageIcon(MainFrame.this.getClass().getResource("resources/pause.png")));
             this.putValue(SHORT_DESCRIPTION,descRunning);
