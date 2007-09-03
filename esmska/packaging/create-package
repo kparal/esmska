@@ -14,7 +14,9 @@ mkdir "$TMPDIR/$FINALNAME"
 
 cp "../dist/esmska.jar" "$TMPDIR/$FINALNAME"
 cp -r "../dist/lib" "$TMPDIR/$FINALNAME"
-cp -r include/* "$TMPDIR/$FINALNAME"
+cp include/* "$TMPDIR/$FINALNAME"
+mkdir "$TMPDIR/$FINALNAME/ikony"
+cp include/ikony/* "$TMPDIR/$FINALNAME/ikony"
 unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/*.bat
 
 cd "$TMPDIR"
