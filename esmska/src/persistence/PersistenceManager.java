@@ -26,10 +26,13 @@ import java.io.IOException;
  */
 public class PersistenceManager {
     private static PersistenceManager persistenceManager;
-    private static final File PROGRAM_DIR =
-            new File(System.getProperty("user.home"), ".esmska");
-    private static final File CONFIG_FILE = new File(PROGRAM_DIR, "nastaveni.xml");
-    private static final File CONTACTS_FILE = new File(PROGRAM_DIR, "kontakty.xml");
+    private static final String PROGRAM_DIRNAME = ".esmska";
+    private static final String CONFIG_FILENAME = "nastaveni.xml";
+    private static final String CONTACTS_FILENAME = "kontakty.xml";
+    private static File PROGRAM_DIR =
+            new File(System.getProperty("user.home"), PROGRAM_DIRNAME);
+    private static File CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
+    private static File CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
     private static ConfigBean config = new ConfigBean();
     private static ContactsBean contacts = new ContactsBean();
     
@@ -42,6 +45,15 @@ public class PersistenceManager {
             throw new IOException("Can't create program dir");
         if (!(PROGRAM_DIR.canWrite() && PROGRAM_DIR.canExecute()))
             throw new IOException("Can't write or execute the program dir");
+    }
+    
+    public static void setProgramDir(String path) {
+        if (persistenceManager != null)
+            throw new IllegalStateException("Persistence manager already exists");
+        
+        PROGRAM_DIR = new File(path);
+        CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
+        CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
     }
     
     /** Get PersistenceManager */
