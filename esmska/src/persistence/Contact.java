@@ -94,20 +94,40 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
         this.operator = operator;
         propertySupport.firePropertyChange("operator", oldOperator, operator);
     }
-
+    
     public int compareTo(Contact c) {
-        if (this.getName() != null && this.getName().compareTo(c.getName()) != 0)
-            return this.getName().compareTo(c.getName());
-        else if (this.getNumber() != null && this.getNumber().compareTo(c.getNumber()) != 0)
-            return this.getNumber().compareTo(c.getNumber());
-        else if (this.getOperator() != null && this.getOperator().toString().compareTo(c.getOperator().toString()) != 0)
-            return this.getOperator().toString().compareTo(c.getOperator().toString());
-        else
-            return 0;
+        int result = 0;
+        //name
+        if (this.getName() == null) {
+            if (c.getName() != null)
+                result = -1;
+        } else {
+            result = this.getName().compareTo(c.getName());
+        }
+        if (result != 0)
+            return result;
+        //number
+        if (this.getNumber() == null) {
+            if (c.getNumber() != null)
+                result = -1;
+        } else {
+            result = this.getNumber().compareTo(c.getNumber());
+        }
+        if (result != 0)
+            return result;
+        //operator
+        if (this.getOperator() == null) {
+            if (c.getOperator() != null)
+                result = -1;
+        } else {
+            result = this.getOperator().toString().compareTo(c.getOperator().toString());
+        }
+        
+        return result;
     }
-
+    
     public String toString() {
         return getName();
     }
-
+    
 }
