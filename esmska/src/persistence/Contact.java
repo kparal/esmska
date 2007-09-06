@@ -8,6 +8,8 @@ package persistence;
 
 import java.beans.*;
 import java.io.Serializable;
+import java.text.Collator;
+import java.util.Comparator;
 import operators.Operator;
 
 /** SMS Contact
@@ -97,22 +99,14 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
     
     public int compareTo(Contact c) {
         int result = 0;
+        Collator collator = Collator.getInstance();
+        
         //name
-        if (this.getName() == null) {
-            if (c.getName() != null)
-                result = -1;
-        } else {
-            result = this.getName().compareTo(c.getName());
-        }
+        result = collator.compare(this.getName(), c.getName());
         if (result != 0)
             return result;
         //number
-        if (this.getNumber() == null) {
-            if (c.getNumber() != null)
-                result = -1;
-        } else {
-            result = this.getNumber().compareTo(c.getNumber());
-        }
+            result = collator.compare(this.getNumber(), c.getNumber());
         if (result != 0)
             return result;
         //operator
