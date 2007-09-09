@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
-import persistence.ConfigBean;
+import persistence.Config;
 import persistence.PersistenceManager;
 
 /**
@@ -24,7 +24,7 @@ import persistence.PersistenceManager;
  * @author  ripper
  */
 public class ConfigFrame extends javax.swing.JFrame {
-    private ConfigBean config = PersistenceManager.getConfig();
+    private Config config = PersistenceManager.getConfig();
     private boolean fullyInicialized;
     private final String LAF_SYSTEM = "Systémový";
     private final String LAF_CROSSPLATFORM = "Meziplatformní";

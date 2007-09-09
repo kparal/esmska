@@ -1,5 +1,5 @@
 /*
- * ConfigBean.java
+ * Config.java
  *
  * Created on 19. červenec 2007, 20:56
  */
@@ -18,8 +18,10 @@ import java.util.List;
 /** Config properties of the whole program
  * @author ripper
  */
-public class ConfigBean extends Object implements Serializable {
+public class Config extends Object implements Serializable {
+    public static String LATEST_VERSION = "0.4.0";
     
+    private String version = LATEST_VERSION;
     private boolean rememberQueue = true;
     private String senderName = "";
     private String senderNumber = "";
@@ -36,7 +38,7 @@ public class ConfigBean extends Object implements Serializable {
     
     private PropertyChangeSupport propertySupport;
     
-    public ConfigBean() {
+    public Config() {
         propertySupport = new PropertyChangeSupport(this);
     }
     
@@ -250,5 +252,23 @@ public class ConfigBean extends Object implements Serializable {
         this.lafSubstanceSkin = lafSubstanceSkin;
         propertySupport.firePropertyChange ("lafSubstanceSkin", oldLafSubstanceSkin, lafSubstanceSkin);
     }
-    
+
+    /**
+     * Getter for property version.
+     * @return Value of property version.
+     */
+    public String getVersion() {
+        return this.version;
+    }
+
+    /**
+     * Setter for property version.
+     * @param version New value of property version.
+     */
+    public void setVersion(String version) {
+        String oldVersion = this.version;
+        this.version = version;
+        propertySupport.firePropertyChange ("version", oldVersion, version);
+    }
+
 }

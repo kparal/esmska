@@ -21,7 +21,7 @@ import javax.swing.UIManager;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.FieldOfWheatSkin;
 import org.jvnet.substance.skin.SkinInfo;
-import persistence.ConfigBean;
+import persistence.Config;
 import persistence.PersistenceManager;
 
 /** Manage and set look and feel
@@ -39,7 +39,7 @@ public class ThemeManager {
     
     /* Set look and feel found in configuration */
     public static void setLaF() throws Exception {
-        ConfigBean config = PersistenceManager.getConfig();
+        Config config = PersistenceManager.getConfig();
         String laf = config.getLookAndFeel();
         
         JFrame.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());

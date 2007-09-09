@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import persistence.ConfigBean;
+import persistence.Config;
 import persistence.Contact;
 import persistence.PersistenceManager;
 import persistence.SMS;
@@ -21,7 +21,7 @@ import persistence.SMS;
  * @author ripper
  */
 public class Envelope {
-    private ConfigBean config;
+    private Config config;
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
     //TODO: add possibility of event listeners

@@ -18,12 +18,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import org.jvnet.substance.SubstanceLookAndFeel;
+import persistence.Config;
+import persistence.PersistenceManager;
 
 /** About form
  *
  * @author  ripper
  */
 public class AboutFrame extends javax.swing.JFrame {
+    private Config config = PersistenceManager.getConfig();
     
     /** Creates new form AboutFrame */
     public AboutFrame() {
@@ -60,7 +63,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Esmska 0.4.0");
+        jLabel2.setText("Esmska " + config.getVersion());
         jLabel2.setFocusable(false);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

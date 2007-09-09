@@ -33,7 +33,7 @@ public class PersistenceManager {
             new File(System.getProperty("user.home"), PROGRAM_DIRNAME);
     private static File CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
     private static File CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
-    private static ConfigBean config = new ConfigBean();
+    private static Config config = new Config();
     private static ContactsBean contacts = new ContactsBean();
     
     /** Creates a new instance of PersistenceManager */
@@ -64,7 +64,7 @@ public class PersistenceManager {
     }
     
     /** return config */
-    public static ConfigBean getConfig() {
+    public static Config getConfig() {
         return config;
     }
     
@@ -83,13 +83,14 @@ public class PersistenceManager {
     }
     
     /** Load program configuration */
-    public ConfigBean loadConfig() throws IOException {
+    public Config loadConfig() throws IOException {
         if (CONFIG_FILE.exists()) {
             XMLDecoder xmlDecoder = new XMLDecoder(
                     new BufferedInputStream(new FileInputStream(CONFIG_FILE)));
-            ConfigBean config = (ConfigBean) xmlDecoder.readObject();
+            Config config = (Config) xmlDecoder.readObject();
             xmlDecoder.close();
-            this.config = config;
+            if (config != null)
+                this.config = config;
         }
         return config;
     }
@@ -110,7 +111,8 @@ public class PersistenceManager {
                     new BufferedInputStream(new FileInputStream(CONTACTS_FILE)));
             ContactsBean contacts = (ContactsBean) xmlDecoder.readObject();
             xmlDecoder.close();
-            this.contacts = contacts;
+            if (contacts != null)
+                this.contacts = contacts;
         }
         return contacts;
     }
