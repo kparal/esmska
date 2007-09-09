@@ -29,10 +29,10 @@ public class ConfigBean extends Object implements Serializable {
     private Dimension mainDimension;
     private Integer horizontalSplitPaneLocation;
     private Integer verticalSplitPaneLocation;
-    private String lookAndFeel = ThemeManager.LAF_SYSTEM;
-    private boolean lafWindowDecorated = false;
+    private String lookAndFeel = ThemeManager.LAF_SUBSTANCE;
+    private boolean lafWindowDecorated = true;
     private String lafJGoodiesTheme = "Experience Blue";
-    private String lafSubstanceSkin = "Field of Wheat";
+    private String lafSubstanceSkin = "Sahara";
     
     private PropertyChangeSupport propertySupport;
     
