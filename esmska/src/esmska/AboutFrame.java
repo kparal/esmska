@@ -33,6 +33,7 @@ public class AboutFrame extends javax.swing.JFrame {
         initComponents();
         closeButton.requestFocusInWindow();
         linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.getRootPane().setDefaultButton(closeButton);
     }
     
     /** This method is called from within the constructor to

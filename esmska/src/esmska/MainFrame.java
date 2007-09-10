@@ -254,12 +254,10 @@ public class MainFrame extends javax.swing.JFrame {
         horizontalSplitPane.setContinuousLayout(true);
         contactPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kontakty"));
         addContactButton.setAction(addContactAction);
-        addContactButton.setBorderPainted(false);
         addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         removeContactButton.setAction(removeContactAction);
-        removeContactButton.setBorderPainted(false);
         removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -268,7 +266,6 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane4.setViewportView(contactList);
 
         editContactButton.setAction(editContactAction);
-        editContactButton.setBorderPainted(false);
         editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -294,7 +291,7 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanelLayout.setVerticalGroup(
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -429,7 +426,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -451,27 +448,22 @@ public class MainFrame extends javax.swing.JFrame {
     jScrollPane2.setViewportView(smsQueueList);
 
     pauseButton.setAction(smsQueuePauseAction);
-    pauseButton.setBorderPainted(false);
     pauseButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
     pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     editButton.setAction(editSMSAction);
-    editButton.setBorderPainted(false);
     editButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
     editButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     deleteButton.setAction(deleteSMSAction);
-    deleteButton.setBorderPainted(false);
     deleteButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
     deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     smsUpButton.setAction(smsUpAction);
-    smsUpButton.setBorderPainted(false);
     smsUpButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
     smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
     smsDownButton.setAction(smsDownAction);
-    smsDownButton.setBorderPainted(false);
     smsDownButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
     smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
