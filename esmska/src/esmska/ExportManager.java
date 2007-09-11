@@ -9,6 +9,7 @@
 
 package esmska;
 
+import com.csvreader.CsvWriter;
 import java.awt.Component;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Collection;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -63,6 +65,9 @@ public class ExportManager {
             return;
         
         File file = chooser.getSelectedFile();
+        if (! file.getName().toLowerCase().endsWith(".csv"))
+            file = new File(file.getPath() + ".csv");
+        
         if (file.exists() && !file.canWrite()) {
             JOptionPane.showMessageDialog(parent,"Do souboru " + file.getAbsolutePath() +
                     " nelze zapisovat!","Chyba výběru souboru", JOptionPane.ERROR_MESSAGE);
@@ -70,20 +75,14 @@ public class ExportManager {
         }
         
         //save
-        BufferedWriter writer = null;
+        CsvWriter writer = null;
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(file,false),"UTF-8"));
+            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
             for (Contact contact : contacts) {
-                //escape quotes
-                String name = contact.getName().replaceAll("\"","\"\"");
-                String operator = contact.getOperator().toString().replaceAll("\"","\"\"");
-                writer.write("\"" + name + "\",\"+420" + contact.getNumber() +
-                        "\",\"" + operator + "\"");
-                writer.newLine();
+                writer.writeRecord(new String[] {
+                    contact.getName(), "+420" + contact.getNumber(), contact.getOperator().toString()
+                });
             }
-            writer.close();
-            writer = null;
             JOptionPane.showMessageDialog(parent,"Export úspěšně dokončen!","Export hotov",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
@@ -91,13 +90,9 @@ public class ExportManager {
             JOptionPane.showMessageDialog(parent,"Export selhal!","Chyba při exportu",
                     JOptionPane.ERROR_MESSAGE);
         } finally {
-            try {
-                if (writer != null)
-                    writer.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            writer.close();
         }
+        
     }
     
 }
