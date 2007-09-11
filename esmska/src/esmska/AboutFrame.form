@@ -93,9 +93,7 @@
           <Font name="Dialog" size="36" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;Esmska &quot; + config.getVersion()" type="code"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Esmska 0.4.0"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -143,7 +141,6 @@
     <Component class="javax.swing.JButton" name="linkButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;a href=&quot;http://esmska.googlecode.com/&quot;&gt;http://esmska.googlecode.com/&lt;/a&gt;&lt;/html&gt;"/>
-        <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkButtonActionPerformed"/>
