@@ -57,6 +57,7 @@ public class ImportFrame extends javax.swing.JFrame {
         initComponents();
         cardLayout = (CardLayout) cardPanel.getLayout();
         progressBar.setVisible(false);
+        backButton.setVisible(false);
     }
     
     /** This method is called from within the constructor to
@@ -107,6 +108,7 @@ public class ImportFrame extends javax.swing.JFrame {
         skipExistingCheckBox = new javax.swing.JCheckBox();
         nextButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Import kontakt\u016f");
@@ -394,7 +396,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(skipExistingCheckBox)
                 .addGap(18, 18, 18)
@@ -415,33 +417,75 @@ public class ImportFrame extends javax.swing.JFrame {
         progressBar.setString("Pros\u00edm \u010dekejte...");
         progressBar.setStringPainted(true);
 
+        backButton.setText("Zp\u011bt");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(backButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextButton)
                 .addContainerGap())
             .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {backButton, nextButton});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nextButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nextButton)
+                        .addComponent(backButton))
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {nextButton, progressBar});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {backButton, nextButton, progressBar});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        //parsovani
+        if (actualCard.equals("esmskaPanel") || actualCard.equals("kubikPanel") ||
+                actualCard.equals("dreamcomSEPanel")) {
+            
+            backButton.setVisible(false);
+            cardLayout.show(cardPanel, "applicationPanel");
+            actualCard = "applicationPanel";
+            return;
+        }
+        //vysledek
+        if (actualCard.equals("resultsPanel")) {
+            String nextCard = null;
+            if (kubikRadioButton.isSelected())
+                nextCard = "kubikPanel";
+            else if (dreamcomSERadioButton.isSelected())
+                nextCard = "dreamcomSEPanel";
+            else if (esmskaRadioButton.isSelected())
+                nextCard = "esmskaPanel";
+            
+            nextButton.setText("Pokračovat");
+            nextButton.setIcon(null);
+            
+            cardLayout.show(cardPanel, nextCard);
+            actualCard = nextCard;
+        }
+    }//GEN-LAST:event_backButtonActionPerformed
     
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         //uvodni panel
@@ -456,6 +500,7 @@ public class ImportFrame extends javax.swing.JFrame {
             
             cardLayout.show(cardPanel, nextCard);
             actualCard = nextCard;
+            backButton.setVisible(true);
             return;
         }
         //parsovani
@@ -484,6 +529,7 @@ public class ImportFrame extends javax.swing.JFrame {
             
             progressBar.setVisible(true);
             nextButton.setEnabled(false);
+            backButton.setEnabled(false);
             worker = new ContactParser(file, type);
             worker.addPropertyChangeListener(new ParseContactsFinishedListener());
             worker.execute();
@@ -607,6 +653,7 @@ public class ImportFrame extends javax.swing.JFrame {
             } finally {
                 progressBar.setVisible(false);
                 nextButton.setEnabled(true);
+                backButton.setEnabled(true);
             }
         }
     }
@@ -614,6 +661,7 @@ public class ImportFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup appButtonGroup;
     private javax.swing.JPanel applicationPanel;
+    private javax.swing.JButton backButton;
     private javax.swing.JButton browseButton;
     private javax.swing.JButton browseButton1;
     private javax.swing.JButton browseButton2;
