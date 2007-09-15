@@ -507,16 +507,16 @@ public class ImportFrame extends javax.swing.JFrame {
         if (actualCard.equals("esmskaPanel") || actualCard.equals("kubikPanel") ||
                 actualCard.equals("dreamcomSEPanel")) {
             
-            Integer type = null;
+            ContactParser.ContactType type = null;
             String filename = null;
             if (actualCard.equals("esmskaPanel")) {
-                type = ContactParser.ESMSKA_FILE;
+                type = ContactParser.ContactType.ESMSKA_FILE;
                 filename = fileTextFieldEsmska.getText();
             } else if (actualCard.equals("kubikPanel")) {
-                type = ContactParser.KUBIK_DREAMCOM_FILE;
+                type = ContactParser.ContactType.KUBIK_DREAMCOM_FILE;
                 filename = fileTextFieldKubik.getText();
             } else if (actualCard.equals("dreamcomSEPanel")) {
-                type = ContactParser.DREAMCOM_SE_FILE;
+                type = ContactParser.ContactType.DREAMCOM_SE_FILE;
                 filename = fileTextFieldDreamcomSE.getText();
             }
             
@@ -589,7 +589,8 @@ public class ImportFrame extends javax.swing.JFrame {
             fileTextFieldKubik.setText(file);
         };
     }//GEN-LAST:event_browseButtonActionPerformed
-        
+       
+    /** browse for file */
     private String doBrowseButton() {
         JFileChooser chooser = new JFileChooser();
         chooser.setApproveButtonText("Zvolit");
@@ -609,6 +610,7 @@ public class ImportFrame extends javax.swing.JFrame {
         return null;
     }
     
+    /** remove contacts already present in contact list */
     private void removeExistingContacts() {
         DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
         ArrayList<Contact> existing = contacts.getContacts();

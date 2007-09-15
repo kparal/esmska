@@ -26,7 +26,7 @@ public class SMS {
     private URL image; //security image
     private String imageCode; //security image code
     private Operator operator;
-    private Status status; //sms status
+    private Status status = Status.WAITING; //sms status
     private String errMsg; //potential error
     
     /** Status of SMS */

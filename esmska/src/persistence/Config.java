@@ -25,7 +25,6 @@ public class Config extends Object implements Serializable {
     private boolean rememberQueue = true;
     private String senderName = "";
     private String senderNumber = "";
-    private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
     private boolean useSenderID = false;
     private boolean rememberLayout = true;
     private Dimension mainDimension;
@@ -79,17 +78,7 @@ public class Config extends Object implements Serializable {
         this.rememberQueue = rememberQueue;
         propertySupport.firePropertyChange("rememberQueue", old, rememberQueue);
     }
-    
-    public List<SMS> getSmsQueue() {
-        return smsQueue;
-    }
-    
-    public void setSmsQueue(List<SMS> smsQueue) {
-        List<SMS> old = this.smsQueue;
-        this.smsQueue = smsQueue;
-        propertySupport.firePropertyChange("smsQueue", old, smsQueue);
-    }
-    
+
     
     /**
      * Getter for property useSenderID.

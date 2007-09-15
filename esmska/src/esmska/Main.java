@@ -64,7 +64,12 @@ public class Main {
             }
             try {
                 pm.loadContacts();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                pm.loadQueue();
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } catch (IOException ex) {

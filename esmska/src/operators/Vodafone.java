@@ -77,6 +77,10 @@ public class Vodafone implements Operator {
     }
     
     public boolean send(SMS sms) {
+        String number = sms.getNumber().replaceFirst("\\+420", "");
+        String senderNumber = sms.getSenderNumber();
+        if (senderNumber != null)
+            senderNumber = senderNumber.replaceFirst("\\+420", "");
         try {
             URL url = new URL("http://sms.vodafone.cz/send.php");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -86,8 +90,8 @@ public class Vodafone implements Operator {
             OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
             //send POST request
             wr.write("message=" + URLEncoder.encode(sms.getText()!=null?sms.getText():"","UTF-8")
-            + "&number=" + URLEncoder.encode(sms.getNumber()!=null?sms.getNumber():"","UTF-8")
-            + "&mynumber=" + URLEncoder.encode(sms.getSenderNumber()!=null?sms.getSenderNumber():"","UTF-8")
+            + "&number=" + URLEncoder.encode(number,"UTF-8")
+            + "&mynumber=" + URLEncoder.encode(senderNumber!=null?senderNumber:"","UTF-8")
             + "&sender=" + URLEncoder.encode(sms.getSenderName()!=null?sms.getSenderName():"","UTF-8")
             + "&imgid=" + URLEncoder.encode(imgid!=null?imgid:"","UTF-8")
             + "&ppp=" + URLEncoder.encode(ppp!=null?ppp:"","UTF-8")

@@ -97,7 +97,8 @@ public class MainFrame extends javax.swing.JFrame {
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
     
     /** actual queue of sms's */
-    private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
+//    private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
+    private List<SMS> smsQueue = PersistenceManager.getQueue();
     /** sender of sms */
     private SMSSender smsSender;
     /** box for messages */
@@ -136,8 +137,9 @@ public class MainFrame extends javax.swing.JFrame {
             printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!");
         }
         loadConfig();
-        //load contacts
-        loadContacts();
+        contacts.sortContacts();
+        if (smsQueue.size() > 0)
+            pauseSMSQueue();
         
         //setup components
         smsDelayProgressBar.setVisible(false);
@@ -564,6 +566,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         saveConfig();
         saveContacts();
+        saveQueue();
     }//GEN-LAST:event_formWindowClosing
     
     private void smsQueueListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_smsQueueListValueChanged
@@ -598,7 +601,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         //update envelope
         Set<Contact> set = new HashSet<Contact>();
-        set.add(new Contact(nameLabel.getText(),smsNumberTextField.getText(),
+        set.add(new Contact(nameLabel.getText(), "+420", smsNumberTextField.getText(),
                 (Operator)operatorComboBox.getSelectedItem()));
         envelope.setContacts(set);
         
@@ -706,18 +709,6 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** save program configuration */
     private void saveConfig() {
-        //save sms queue
-        ArrayList<SMS> list = new ArrayList<SMS>();
-        for (SMS sms : smsQueue) {
-            //erase connection properties
-            sms.setErrMsg(null);
-            sms.setImage(null);
-            sms.setImageCode(null);
-            sms.setStatus(null);
-            list.add(sms);
-        }
-        config.setSmsQueue(list);
-        
         //save frame layout
         config.setMainDimension(this.getSize());
         config.setHorizontalSplitPaneLocation(horizontalSplitPane.getDividerLocation());
@@ -733,20 +724,6 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** load program configuration */
     private void loadConfig() {
-        
-        if (config.isRememberQueue()) { //load sms queue
-            if (config.getSmsQueue().size() != 0)
-                pauseSMSQueue();
-//            smsQueue.addAll(config.getSmsQueue());
-            for (SMS sms : config.getSmsQueue()) {
-                if (sms != null)    //backwards compatibility issues
-                    smsQueue.add(sms);
-            }
-            if (smsQueue.size() != 0)
-                ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
-                        smsQueueList.getModel(), 0, smsQueue.size()-1);
-        }
-        
         if (config.isRememberLayout()) { //set frame layout
             Dimension mainDimension = config.getMainDimension();
             Integer horizontalSplitPaneLocation = config.getHorizontalSplitPaneLocation();
@@ -760,11 +737,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
-    /** load contacts */
-    private void loadContacts() {
-        contacts.sortContacts();
-    }
-    
     /** save contacts */
     private void saveContacts() {
         try {
@@ -772,6 +744,16 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
             printStatusMessage("Nepodařilo se uložit kontakty!");
+        }
+    }
+    
+    /** save sms queue */
+    private void saveQueue() {
+        try {
+            persistenceManager.saveQueue();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            printStatusMessage("Nepodařilo se uložit frontu sms!");
         }
     }
     
@@ -1194,7 +1176,7 @@ public class MainFrame extends javax.swing.JFrame {
             //update envelope
             if (envelope != null) {
                 Set<Contact> set = new HashSet<Contact>();
-                set.add(new Contact(nameLabel.getText(),smsNumberTextField.getText(),
+                set.add(new Contact(nameLabel.getText(), "+420", smsNumberTextField.getText(),
                         (Operator)operatorComboBox.getSelectedItem()));
                 envelope.setContacts(set);
             }
@@ -1342,7 +1324,7 @@ public class MainFrame extends javax.swing.JFrame {
             for (Object o : contactList.getSelectedValues())
                 set.add((Contact)o);
             if (count < 1)
-                set.add(new Contact(nameLabel.getText(),smsNumberTextField.getText(),
+                set.add(new Contact(nameLabel.getText(), "+420", smsNumberTextField.getText(),
                         (Operator)operatorComboBox.getSelectedItem()));
             envelope.setContacts(set);
             
@@ -1415,18 +1397,8 @@ public class MainFrame extends javax.swing.JFrame {
         }
         public void show(Contact c) {
             optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
-            contact = null;
-            if (c != null) {
-                panel.nameTextField.setText(c.getName());
-                panel.numberTextField.setText(c.getNumber());
-                panel.operatorComboBox.setSelectedItem(c.getOperator());
-            } else {
-                panel.nameTextField.setText(null);
-                panel.numberTextField.setText(null);
-                panel.operatorComboBox.setSelectedIndex(0);
-            }
-            panel.nameTextField.requestFocusInWindow();
-            panel.nameTextField.selectAll();
+            panel.setContact(c);
+            panel.prepareForShow();
             setVisible(true);
         }
         public void propertyChange(PropertyChangeEvent e) {
@@ -1452,8 +1424,7 @@ public class MainFrame extends javax.swing.JFrame {
                     return;
                 }
                 //inputs verified, all ok
-                contact = new Contact(panel.nameTextField.getText(), panel.numberTextField.getText(),
-                        (Operator)panel.operatorComboBox.getSelectedItem());
+                contact = panel.getContact();
                 setVisible(false);
             }
         }

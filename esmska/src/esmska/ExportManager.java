@@ -11,13 +11,8 @@ package esmska;
 
 import com.csvreader.CsvWriter;
 import java.awt.Component;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import javax.swing.JFileChooser;
@@ -25,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import persistence.Contact;
+import persistence.SMS;
 
 /** Export program data
  *
@@ -36,6 +32,7 @@ public class ExportManager {
     private ExportManager() {
     }
     
+    /** Export contacts with info and file chooser dialog */
     public static void exportContacts(Component parent, Collection<Contact> contacts) {
         //show info
         String message =
@@ -75,24 +72,61 @@ public class ExportManager {
         }
         
         //save
-        CsvWriter writer = null;
         try {
-            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            for (Contact contact : contacts) {
-                writer.writeRecord(new String[] {
-                    contact.getName(), "+420" + contact.getNumber(), contact.getOperator().toString()
-                });
-            }
-            JOptionPane.showMessageDialog(parent,"Export úspěšně dokončen!","Export hotov",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
+            exportContacts(contacts, file);
+        } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(parent,"Export selhal!","Chyba při exportu",
                     JOptionPane.ERROR_MESSAGE);
-        } finally {
-            writer.close();
+            return;
         }
+        
+        JOptionPane.showMessageDialog(parent,"Export úspěšně dokončen!","Export hotov",
+                    JOptionPane.INFORMATION_MESSAGE);
         
     }
     
+    /** Export contacts to file */
+    public static void exportContacts(Collection<Contact> contacts, File file)
+    throws IOException {
+        CsvWriter writer = null;
+        try {
+            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
+            writer.writeComment("Seznam kontaktů");
+            for (Contact contact : contacts) {
+                writer.writeRecord(new String[] {
+                    contact.getName(),
+                    contact.getCountryCode() + contact.getNumber(),
+                    contact.getOperator().toString()
+                });
+            }
+        } catch (IOException ex) {
+            throw new IOException(ex);
+        } finally {
+            writer.close();
+        }
+    }
+    
+    /** Export sms queue to file */
+    public static void exportQueue(Collection<SMS> queue, File file) throws IOException {
+        CsvWriter writer = null;
+        try {
+            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
+            writer.writeComment("Fronta sms k odeslání");
+            for (SMS sms : queue) {
+                writer.writeRecord(new String[] {
+                    sms.getName() != null ? sms.getName() : "",
+                    sms.getNumber(),
+                    sms.getOperator().toString(),
+                    sms.getText(),
+                    sms.getSenderName() != null ? sms.getSenderName() : "",
+                    sms.getSenderNumber() != null ? sms.getSenderNumber() : ""
+                });
+            }
+        } catch (IOException ex) {
+            throw new IOException(ex);
+        } finally {
+            writer.close();
+        }
+    }
 }

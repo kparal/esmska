@@ -19,16 +19,18 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
     
     private String name;
     private String number;
+    private String countryCode;
     private Operator operator;
     
     private PropertyChangeSupport propertySupport;
     
     public Contact() {
-        this(null,null,null);
+        this(null,null,null,null);
     }
     
-    public Contact(String name, String number, Operator operator) {
+    public Contact(String name, String countryCode, String number, Operator operator) {
         this.name = name;
+        this.countryCode = countryCode;
         this.number = number;
         this.operator = operator;
         propertySupport = new PropertyChangeSupport(this);
@@ -97,6 +99,24 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
         propertySupport.firePropertyChange("operator", oldOperator, operator);
     }
     
+    /**
+     * Getter for property countryCode.
+     * @return Value of property countryCode.
+     */
+    public String getCountryCode() {
+        return this.countryCode;
+    }
+
+    /**
+     * Setter for property countryCode.
+     * @param countryCode New value of property countryCode.
+     */
+    public void setCountryCode(String countryCode) {
+        String oldCountryCode = this.countryCode;
+        this.countryCode = countryCode;
+        propertySupport.firePropertyChange ("countryCode", oldCountryCode, countryCode);
+    }
+    
     public int compareTo(Contact c) {
         int result = 0;
         Collator collator = Collator.getInstance();
@@ -123,5 +143,5 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
     public String toString() {
         return getName();
     }
-    
+
 }

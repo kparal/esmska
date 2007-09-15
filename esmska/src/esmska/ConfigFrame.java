@@ -399,7 +399,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_senderNameTextFieldActionPerformed
     
     private void senderNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senderNumberTextFieldActionPerformed
-        config.setSenderNumber(senderNumberTextField.getText());
+        config.setSenderNumber("+420" + senderNumberTextField.getText());
     }//GEN-LAST:event_senderNumberTextFieldActionPerformed
     
     private void useSenderIDCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useSenderIDCheckBoxActionPerformed

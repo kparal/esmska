@@ -12,6 +12,7 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 import operators.Operator;
 import operators.OperatorEnum;
+import persistence.Contact;
 
 /**
  *
@@ -99,7 +100,7 @@ public class ContactPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     /** @returns if the form is valid */
     public boolean validateForm() {
         if (!FormChecker.checkContactName(nameTextField.getText())) {
@@ -126,15 +127,40 @@ public class ContactPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_numberTextFieldKeyReleased
     
+    public void setContact(Contact contact) {
+        if (contact == null) {
+            nameTextField.setText(null);
+            numberTextField.setText(null);
+            operatorComboBox.setSelectedItem(0);
+        } else {
+            nameTextField.setText(contact.getName());
+            numberTextField.setText(contact.getNumber());
+            operatorComboBox.setSelectedItem(contact.getOperator());
+        }
+    }
+    
+    public Contact getContact() {
+        Contact c = new Contact();
+        c.setName(nameTextField.getText());
+        c.setNumber(numberTextField.getText());
+        c.setOperator((Operator) operatorComboBox.getSelectedItem());
+        c.setCountryCode("+420");
+        return c;
+    }
+    
+    public void prepareForShow() {
+        nameTextField.requestFocusInWindow();
+        nameTextField.selectAll();
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    javax.swing.JTextField nameTextField;
-    javax.swing.JTextField numberTextField;
-    javax.swing.JComboBox operatorComboBox;
+    private javax.swing.JTextField nameTextField;
+    private javax.swing.JTextField numberTextField;
+    private javax.swing.JComboBox operatorComboBox;
     // End of variables declaration//GEN-END:variables
     
 }

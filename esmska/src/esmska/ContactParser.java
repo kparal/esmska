@@ -25,14 +25,14 @@ import persistence.Contact;
  * @author ripper
  */
 public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
-    public static final int ESMSKA_FILE = 0;
-    public static final int KUBIK_DREAMCOM_FILE = 1;
-    public static final int DREAMCOM_SE_FILE = 2;
+    public static enum ContactType {
+        ESMSKA_FILE, KUBIK_DREAMCOM_FILE, DREAMCOM_SE_FILE
+    }
     
     private File file;
-    private Integer type;
+    private ContactType type;
     
-    public ContactParser(File file, Integer type) {
+    public ContactParser(File file, ContactType type) {
         super();
         this.file = file;
         this.type = type;
@@ -41,33 +41,38 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
         Charset charset = Charset.forName("UTF-8");
         char separator = ',';
         switch (type) {
-            case ContactParser.KUBIK_DREAMCOM_FILE:
-            case ContactParser.DREAMCOM_SE_FILE:
+            case KUBIK_DREAMCOM_FILE:
+            case DREAMCOM_SE_FILE:
                 charset = Charset.forName("windows-1250");
                 separator = ';';
         }
         CsvReader reader = new CsvReader(file.getPath(), separator, charset);
+        reader.setUseComments(true);
         ArrayList<Contact> contacts = new ArrayList<Contact>();
         while (reader.readRecord()) {
             Contact c = new Contact();
             String name = "";
             String number = "";
+            String countryCode = "";
             String operatorString = "";
             
             switch (type) {
-                case ContactParser.KUBIK_DREAMCOM_FILE:
+                case KUBIK_DREAMCOM_FILE:
                     name = reader.get(5);
+                    countryCode = reader.get(6).substring(0,4);
                     number = reader.get(6).substring(4);
                     operatorString = reader.get(20).equals("") ?
                         reader.get(21) : reader.get(20);
                     break;
-                case ContactParser.DREAMCOM_SE_FILE:
-                case ContactParser.ESMSKA_FILE:
+                case DREAMCOM_SE_FILE:
+                case ESMSKA_FILE:
                     name = reader.get(0);
+                    countryCode = reader.get(1).substring(0,4);
                     number = reader.get(1).substring(4);
                     operatorString = reader.get(2);
             }
             c.setName(name);
+            c.setCountryCode(countryCode);
             c.setNumber(number);
             Operator operator = null;
             if (operatorString.equals("Vodafone"))

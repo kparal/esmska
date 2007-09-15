@@ -38,6 +38,8 @@ public enum OperatorEnum {
         if (antenumber == null || antenumber.equals(""))
             return null;
         
+        antenumber = antenumber.replaceFirst("\\+420", "");
+        
         for (String an : VODAFONE_ANTENUMBERS) {
             if (antenumber.startsWith(an))
                 return new Vodafone();

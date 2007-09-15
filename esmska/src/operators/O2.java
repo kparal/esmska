@@ -75,6 +75,7 @@ public class O2 implements Operator {
     }
     
     public boolean send(SMS sms) {
+        String number = sms.getNumber().replaceFirst("\\+420", "");
         try {
             URL url = new URL("http://www2.cz.o2.com/sms/SMSGWChargingClient");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -85,7 +86,7 @@ public class O2 implements Operator {
             //send POST request
             wr.write("action=" + URLEncoder.encode("confirm","windows-1250")
             + "&msgText=" + URLEncoder.encode(sms.getText()!=null?sms.getText():"","windows-1250")
-            + "&sn=" + URLEncoder.encode(sms.getNumber()!=null?sms.getNumber():"","windows-1250")
+            + "&sn=" + URLEncoder.encode(number,"windows-1250")
             + "&code=" + URLEncoder.encode(sms.getImageCode()!=null?sms.getImageCode():"","windows-1250")
             + "&reply=" + URLEncoder.encode("0","windows-1250")
             + "&intruder=" + URLEncoder.encode("0","windows-1250")
