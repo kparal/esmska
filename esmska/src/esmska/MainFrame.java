@@ -95,9 +95,9 @@ public class MainFrame extends javax.swing.JFrame {
     private ContactDialog contactDialog;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
+    private SMSQueueListModel smsQueueListModel = new SMSQueueListModel();
     
     /** actual queue of sms's */
-//    private List<SMS> smsQueue = Collections.synchronizedList(new ArrayList<SMS>());
     private List<SMS> smsQueue = PersistenceManager.getQueue();
     /** sender of sms */
     private SMSSender smsSender;
@@ -438,7 +438,7 @@ public class MainFrame extends javax.swing.JFrame {
     verticalSplitPane.setLeftComponent(smsPanel);
 
     queuePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Fronta"));
-    smsQueueList.setModel(new SMSQueueListModel());
+    smsQueueList.setModel(smsQueueListModel);
     smsQueueList.setCellRenderer(new SMSQueueListRenderer());
     smsQueueList.setVisibleRowCount(4);
     smsQueueList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -572,7 +572,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void smsQueueListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_smsQueueListValueChanged
         //update form components
         if (!evt.getValueIsAdjusting()) {
-            int queueSize = smsQueueList.getModel().getSize();
+            int queueSize = smsQueueListModel.getSize();
             int selectedItems = smsQueueList.getSelectedIndices().length;
             deleteSMSAction.setEnabled(queueSize != 0 && selectedItems != 0);
             editSMSAction.setEnabled(queueSize != 0 && selectedItems == 1);
@@ -624,15 +624,13 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Notifies about change in sms queue */
     public void smsProcessed(SMS sms) {
-        int index = smsQueue.indexOf(sms);
+        int index = smsQueueListModel.indexOf(sms);
         if (sms.getStatus() == SMS.Status.SENT_OK) {
-            smsQueue.remove(sms);
-            ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
-                    smsQueueList.getModel(), index, index);
+            smsQueueListModel.remove(sms);
         }
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
-            ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
-                    smsQueueList.getModel(), index, index);
+            smsQueueListModel.fireContentsChanged(
+                    smsQueueListModel, index, index);
         }
     }
     
@@ -818,10 +816,7 @@ public class MainFrame extends javax.swing.JFrame {
                 return;
             
             for (SMS sms : envelope.send()) {
-                smsQueue.add(sms);
-                int index = smsQueue.indexOf(sms);
-                ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalAdded(
-                        smsQueueList.getModel(), index, index);
+                smsQueueListModel.add(sms);
                 smsSender.announceNewSMS();
             }
             
@@ -846,10 +841,7 @@ public class MainFrame extends javax.swing.JFrame {
             Object[] smsArray = smsQueueList.getSelectedValues();
             for (Object o : smsArray) {
                 SMS sms = (SMS) o;
-                int index = smsQueue.indexOf(sms);
-                smsQueue.remove(sms);
-                ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
-                        smsQueueList.getModel(), index, index);
+                smsQueueListModel.remove(sms);
             }
         }
     }
@@ -866,14 +858,11 @@ public class MainFrame extends javax.swing.JFrame {
             if (sms == null)
                 return;
             contactList.clearSelection();
-            smsNumberTextField.setText(sms.getNumber());
+            smsNumberTextField.setText(sms.getNumber().substring(4));
             smsTextPane.setText(sms.getText());
             operatorComboBox.setSelectedItem(sms.getOperator());
             nameLabel.setText(sms.getName());
-            int index = smsQueue.indexOf(sms);
-            smsQueue.remove(sms);
-            ((SMSQueueListModel)smsQueueList.getModel()).fireIntervalRemoved(
-                    smsQueueList.getModel(), index, index);
+            smsQueueListModel.remove(sms);
             smsTextPane.requestFocusInWindow();
         }
     }
@@ -964,8 +953,8 @@ public class MainFrame extends javax.swing.JFrame {
             synchronized(smsQueue) {
                 Collections.swap(smsQueue,index,index-1);
             }
-            ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
-                    smsQueueList.getModel(), index-1, index);
+            smsQueueListModel.fireContentsChanged(
+                    smsQueueListModel, index-1, index);
             smsQueueList.setSelectedIndex(index-1);
             smsQueueList.ensureIndexIsVisible(index-1);
         }
@@ -980,13 +969,13 @@ public class MainFrame extends javax.swing.JFrame {
         }
         public void actionPerformed(ActionEvent e) {
             int index = smsQueueList.getSelectedIndex();
-            if (index < 0 || index >= smsQueueList.getModel().getSize() - 1) //cannot move down last item
+            if (index < 0 || index >= smsQueueListModel.getSize() - 1) //cannot move down last item
                 return;
             synchronized(smsQueue) {
                 Collections.swap(smsQueue,index,index+1);
             }
-            ((SMSQueueListModel)smsQueueList.getModel()).fireContentsChanged(
-                    smsQueueList.getModel(), index, index+1);
+            smsQueueListModel.fireContentsChanged(
+                    smsQueueListModel, index, index+1);
             smsQueueList.setSelectedIndex(index+1);
             smsQueueList.ensureIndexIsVisible(index+1);
         }
@@ -1051,22 +1040,44 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     /** Model for SMSQueueList */
-    private class SMSQueueListModel extends AbstractListModel { //TODO: rework to DefaultListModel
-        public Object getElementAt(int index) {
+    private class SMSQueueListModel extends AbstractListModel {
+        public SMS getElementAt(int index) {
             return smsQueue.get(index);
         }
         public int getSize() {
             return smsQueue.size();
         }
-        
+        public int indexOf(SMS element) {
+            return smsQueue.indexOf(element);
+        }
+        public void add(SMS element) {
+            if (smsQueue.add(element)) {
+                int index = smsQueue.indexOf(element);
+                fireIntervalAdded(this, index, index);
+            }
+        }
+        public void clear() {
+            int size = smsQueue.size();
+            smsQueue.clear();
+            fireIntervalRemoved(this, 0, size);
+        }
+        public boolean contains(SMS element) {
+            return smsQueue.contains(element);
+        }
+        public boolean remove(SMS element) {
+            int index = smsQueue.indexOf(element);
+            boolean removed = smsQueue.remove(element);
+            if (removed) {
+                fireIntervalRemoved(this, index, index);
+            }
+            return removed;
+        }
         protected void fireIntervalRemoved(Object source, int index0, int index1) {
             super.fireIntervalRemoved(source, index0, index1);
         }
-        
         protected void fireIntervalAdded(Object source, int index0, int index1) {
             super.fireIntervalAdded(source, index0, index1);
         }
-        
         protected void fireContentsChanged(Object source, int index0, int index1) {
             super.fireContentsChanged(source, index0, index1);
         }
