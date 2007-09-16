@@ -125,6 +125,10 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
         result = collator.compare(this.getName(), c.getName());
         if (result != 0)
             return result;
+        //country code
+            result = collator.compare(this.getCountryCode(), c.getCountryCode());
+        if (result != 0)
+            return result;
         //number
             result = collator.compare(this.getNumber(), c.getNumber());
         if (result != 0)
@@ -144,4 +148,15 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
         return getName();
     }
 
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Contact))
+            return false;
+        Contact c = (Contact) obj;
+        
+        return getName().equals(c.getName()) && getCountryCode().equals(c.getCountryCode()) &&
+                getNumber().equals(c.getNumber()) && getOperator().equals(c.getOperator());
+    }
+
+    
+    
 }

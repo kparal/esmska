@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeSet;
 
 /** Load and store settings and data
  *
@@ -42,7 +43,7 @@ public class PersistenceManager {
     private static File QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
     
     private static Config config = new Config();
-    private static ContactsBean contacts = new ContactsBean();
+    private static TreeSet<Contact> contacts = new TreeSet<Contact>();
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
     
     /** Creates a new instance of PersistenceManager */
@@ -79,7 +80,7 @@ public class PersistenceManager {
     }
     
     /** return contacts */
-    public static ContactsBean getContacs() {
+    public static TreeSet<Contact> getContacs() {
         return contacts;
     }
     
@@ -110,7 +111,7 @@ public class PersistenceManager {
     
     /** Save contacts */
     public void saveContacts() throws IOException {
-        ExportManager.exportContacts(contacts.getContacts(), CONTACTS_FILE);
+        ExportManager.exportContacts(contacts, CONTACTS_FILE);
     }
     
     /** Load contacts */
@@ -118,7 +119,8 @@ public class PersistenceManager {
         if (CONTACTS_FILE.exists()) {
             ArrayList<Contact> newContacts = ImportManager.importContacts(CONTACTS_FILE,
                     ContactParser.ContactType.ESMSKA_FILE);
-            contacts.setContacts(newContacts);
+            contacts.clear();
+            contacts.addAll(newContacts);
         }
     }
     

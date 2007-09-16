@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultListCellRenderer;
@@ -36,7 +37,6 @@ import operators.Operator;
 import operators.OperatorEnum;
 import operators.Vodafone;
 import persistence.Contact;
-import persistence.ContactsBean;
 import persistence.PersistenceManager;
 
 /** Import contacts from external applications
@@ -46,14 +46,13 @@ import persistence.PersistenceManager;
 public class ImportFrame extends javax.swing.JFrame {
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
-    private ContactsBean contacts;
+    private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     private MainFrame mainFrame;
     private String actualCard = "applicationPanel";
     
     /** Creates new form ImportFrame */
     public ImportFrame() {
         this.mainFrame = mainFrame.getInstance();
-        this.contacts = PersistenceManager.getContacs();
         initComponents();
         cardLayout = (CardLayout) cardPanel.getLayout();
         progressBar.setVisible(false);
@@ -539,13 +538,12 @@ public class ImportFrame extends javax.swing.JFrame {
         //vysledek
         if (actualCard.equals("resultsPanel")) {
             DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
-            ArrayList<Contact> existing = contacts.getContacts();
+            ArrayList<Contact> newContacts = new ArrayList<Contact>();
             
             for (Object o : contactListModel.toArray())
-                existing.add((Contact) o);
-            contacts.sortContacts();
+                newContacts.add((Contact) o);
             
-            mainFrame.importAction.updateContacts();
+            mainFrame.importContacts(newContacts);
             
             this.setVisible(false);
             this.dispose();
@@ -613,11 +611,10 @@ public class ImportFrame extends javax.swing.JFrame {
     /** remove contacts already present in contact list */
     private void removeExistingContacts() {
         DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
-        ArrayList<Contact> existing = contacts.getContacts();
         Object[] imported = contactListModel.toArray();
         ArrayList<Object> skipped = new ArrayList<Object>();
         for (Object impor : imported) {
-            for (Contact exist : existing) {
+            for (Contact exist : contacts) {
                 if (exist.compareTo((Contact) impor) == 0) {
                     skipped.add(impor);
                     break;

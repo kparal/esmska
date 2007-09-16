@@ -6,9 +6,11 @@
 
 package esmska;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.ScrollPane;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,10 +20,12 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
@@ -32,6 +36,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
@@ -64,7 +71,6 @@ import operators.Vodafone;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import persistence.Config;
 import persistence.Contact;
-import persistence.ContactsBean;
 import persistence.PersistenceManager;
 import persistence.SMS;
 
@@ -90,12 +96,13 @@ public class MainFrame extends javax.swing.JFrame {
     private Action smsDownAction = new SMSDownAction();
     private Action smsTextUndoAction;
     private Action smsTextRedoAction;
-    ImportAction importAction = new ImportAction();
+    private ImportAction importAction = new ImportAction();
     private Action exportAction = new ExportAction();
     private ContactDialog contactDialog;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
     private SMSQueueListModel smsQueueListModel = new SMSQueueListModel();
+    private ContactListModel contactListModel = new ContactListModel();
     
     /** actual queue of sms's */
     private List<SMS> smsQueue = PersistenceManager.getQueue();
@@ -112,7 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** program configuration */
     private Config config = PersistenceManager.getConfig();
     /** sms contacts */
-    ContactsBean contacts = PersistenceManager.getContacs();
+    TreeSet<Contact> contacts = PersistenceManager.getContacs();
     
     /**
      * Creates new form MainFrame
@@ -137,14 +144,12 @@ public class MainFrame extends javax.swing.JFrame {
             printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!");
         }
         loadConfig();
-        contacts.sortContacts();
         if (smsQueue.size() > 0)
             pauseSMSQueue();
         
         //setup components
         smsDelayProgressBar.setVisible(false);
         smsDelayTimer.setInitialDelay(0);
-        contactList.setModel(new ContactListModel());
         contactDialog = new ContactDialog();
     }
     
@@ -263,6 +268,7 @@ public class MainFrame extends javax.swing.JFrame {
         removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
+        contactList.setModel(contactListModel);
         contactList.setCellRenderer(new ContactListRenderer());
         contactList.getSelectionModel().addListSelectionListener(new ContactListSelectionListener());
         jScrollPane4.setViewportView(contactList);
@@ -645,23 +651,33 @@ public class MainFrame extends javax.swing.JFrame {
         smsDelayTimer.start();
     }
     
+    /** Import additional contacts */
+    public void importContacts(Collection<Contact> contacts) {
+        contactList.clearSelection();
+        contactListModel.addAll(contacts);
+    }
+    
     /** updates name according to number and operator */
     private boolean lookupContact() {
         if (contacts == null)
             return false;
+        
+        String countryCode = "+420";
         String number = smsNumberTextField.getText();
         Operator operator = (Operator)operatorComboBox.getSelectedItem();
         
         // skip if already selected right contact
         Contact selected = (Contact) contactList.getSelectedValue();
-        if (selected != null && selected.getNumber().equals(number) &&
+        if (selected != null && selected.getCountryCode().equals(countryCode) &&
+                selected.getNumber().equals(number) &&
                 selected.getOperator().equals(operator))
             return true;
         
         Contact contact = null;
-        for (Contact c : contacts.getContacts()) {
-            if (c.getNumber() != null && c.getNumber().equals(number) &&
-                    c.getOperator() != null && c.getOperator().getClass().equals(operator.getClass())) {
+        for (Contact c : contacts) {
+            if (c.getCountryCode() != null && c.getCountryCode().equals(countryCode) &&
+                    c.getNumber() != null && c.getNumber().equals(number) &&
+                    c.getOperator() != null && c.getOperator().equals(operator)) {
                 contact = c;
                 break;
             }
@@ -878,11 +894,8 @@ public class MainFrame extends javax.swing.JFrame {
             Contact c = contactDialog.getResult();
             if (c == null)
                 return;
-            contacts.getContacts().add(c);
-            contacts.sortContacts();
+            contactListModel.add(c);
             
-            int contactIndex = contacts.getContacts().indexOf(c);
-            ((ContactListModel)contactList.getModel()).fireIntervalAdded(contactList.getModel(),contactIndex,contactIndex);
             contactList.clearSelection();
             contactList.setSelectedValue(c, true);
         }
@@ -901,12 +914,9 @@ public class MainFrame extends javax.swing.JFrame {
             Contact c = contactDialog.getResult();
             if (c == null)
                 return;
-            contacts.getContacts().remove(contact);
-            contacts.getContacts().add(c);
-            contacts.sortContacts();
+            contactListModel.remove(contact);
+            contactListModel.add(c);
             
-            ((ContactListModel)contactList.getModel()).fireContentsChanged(
-                    contactList.getModel(),0,contacts.getContacts().size()-1);
             contactList.clearSelection();
             contactList.setSelectedValue(c, true);
         }
@@ -920,22 +930,25 @@ public class MainFrame extends javax.swing.JFrame {
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
-            //confirm
-            StringBuilder warning = new StringBuilder();
-            warning.append("<html><b>Opravdu smazat následující kontakty?</b><br><br>");
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            JLabel label = new JLabel("<html><b>Opravdu smazat následující kontakty?</b></html>");
+            JTextArea area = new JTextArea();
+            area.setEditable(false);
+            area.setRows(5);
             for (Object o : contactList.getSelectedValues())
-                warning.append(((Contact)o).getName() + "<br>");
-            warning.append("<br></html>");
-            
-            int result = JOptionPane.showOptionDialog(MainFrame.this,new JLabel(warning.toString()),"Opravdu smazat?",
+                area.append(((Contact)o).getName() + "\n");
+            area.setCaretPosition(0);
+            panel.add(label, BorderLayout.PAGE_START);
+            panel.add(new JScrollPane(area), BorderLayout.CENTER);
+            //confirm
+            int result = JOptionPane.showOptionDialog(MainFrame.this,panel,"Opravdu smazat?",
                     JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,null,JOptionPane.NO_OPTION);
             if (result != JOptionPane.YES_OPTION)
                 return;
             //delete
-            int minIndex = contactList.getMinSelectionIndex();
-            int maxIndex = contactList.getMaxSelectionIndex();
-            contacts.getContacts().removeAll(Arrays.asList(contactList.getSelectedValues()));
-            ((ContactListModel)contactList.getModel()).fireIntervalRemoved(contactList.getModel(),minIndex,maxIndex);
+            List<Object> list = Arrays.asList(contactList.getSelectedValues());
+            contactListModel.removeAll(list);
         }
     }
     
@@ -1006,7 +1019,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     /** import data from other programs */
-    class ImportAction extends AbstractAction {
+    private class ImportAction extends AbstractAction {
         private ImportFrame importFrame;
         public ImportAction() {
             super("Import kontaktů", new ImageIcon(MainFrame.this.getClass().getResource("resources/contact-small.png")));
@@ -1022,20 +1035,17 @@ public class MainFrame extends javax.swing.JFrame {
                 importFrame.setVisible(true);
             }
         }
-        public void updateContacts() {
-            contactList.setModel(new ContactListModel());
-        }
     }
     
     /** export data for other programs */
-    class ExportAction extends AbstractAction {
+    private class ExportAction extends AbstractAction {
         public ExportAction() {
             super("Export kontaktů", new ImageIcon(MainFrame.this.getClass().getResource("resources/contact-small.png")));
             this.putValue(SHORT_DESCRIPTION,"Exportovat kontakty do souboru");
             putValue(MNEMONIC_KEY, KeyEvent.VK_E);
         }
         public void actionPerformed(ActionEvent e) {
-            ExportManager.exportContacts(MainFrame.this,contacts.getContacts());
+            ExportManager.exportContacts(MainFrame.this,contacts);
         }
     }
     
@@ -1055,11 +1065,6 @@ public class MainFrame extends javax.swing.JFrame {
                 int index = smsQueue.indexOf(element);
                 fireIntervalAdded(this, index, index);
             }
-        }
-        public void clear() {
-            int size = smsQueue.size();
-            smsQueue.clear();
-            fireIntervalRemoved(this, 0, size);
         }
         public boolean contains(SMS element) {
             return smsQueue.contains(element);
@@ -1293,12 +1298,41 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     /** Model for contact list */
-    private class ContactListModel extends AbstractListModel { //TODO: rework to DefaultListModel
+    private class ContactListModel extends AbstractListModel {
         public int getSize() {
-            return contacts.getContacts().size();
+            return contacts.size();
         }
-        public Object getElementAt(int index) {
-            return contacts.getContacts().get(index);
+        public Contact getElementAt(int index) {
+            return contacts.toArray(new Contact[0])[index];
+        }
+        public int indexOf(Contact element) {
+            return new ArrayList<Contact>(contacts).indexOf(element);
+        }
+        public void add(Contact element) {
+            if (contacts.add(element)) {
+                int index = indexOf(element);
+                fireIntervalAdded(this, index, index);
+            }
+        }
+        public boolean contains(Contact element) {
+            return contacts.contains(element);
+        }
+        public boolean remove(Contact element) {
+            int index = indexOf(element);
+            boolean removed = contacts.remove(element);
+            if (removed) {
+                fireIntervalRemoved(this, index, index);
+            }
+            return removed;
+        }
+        public void removeAll(Collection<Object> elements) {
+            int size = getSize();
+            contacts.removeAll(elements);
+            fireIntervalRemoved(this, 0, size);
+        }
+        public void addAll(Collection<Contact> elements) {
+            contacts.addAll(elements);
+            fireContentsChanged(this, 0, getSize());
         }
         protected void fireIntervalRemoved(Object source, int index0, int index1) {
             super.fireIntervalRemoved(source, index0, index1);
