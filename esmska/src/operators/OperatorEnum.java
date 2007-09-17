@@ -21,7 +21,7 @@ public enum OperatorEnum {
     Vodafone,
     O2;
     
-    private static final String[] VODAFONE_ANTENUMBERS = {"608","775","776","777"};
+    private static final String[] VODAFONE_ANTENUMBERS = {"608","773","775","776","777"};
     private static final String[] O2_ANTENUMBERS = {"601","602","606","607",
     "720","721","722","723","724","725","726","727","728","729"};
     
