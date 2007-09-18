@@ -1098,12 +1098,7 @@ public class MainFrame extends javax.swing.JFrame {
                 c.setBackground(Color.RED);
             }
             //add operator logo
-            if (sms.getOperator() instanceof Vodafone) {
-                ((JLabel)c).setIcon(new ImageIcon(sms.getOperator().getClass().getResource("resources/Vodafone.png")));
-            }
-            if (sms.getOperator() instanceof O2) {
-                ((JLabel)c).setIcon(new ImageIcon(sms.getOperator().getClass().getResource("resources/O2.png")));
-            }
+            ((JLabel)c).setIcon(sms.getOperator().getIcon());
             //set tooltip
             ((JLabel)c).setToolTipText(wrapToHTML(sms.getText()));
             
@@ -1154,12 +1149,7 @@ public class MainFrame extends javax.swing.JFrame {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
             Operator operator = (Operator)value;
-            if (operator instanceof Vodafone) {
-                ((JLabel)c).setIcon(new ImageIcon(operator.getClass().getResource("resources/Vodafone.png")));
-            }
-            if (operator instanceof O2) {
-                ((JLabel)c).setIcon(new ImageIcon(operator.getClass().getResource("resources/O2.png")));
-            }
+            ((JLabel)c).setIcon(operator.getIcon());
             return c;
         }
     }
@@ -1326,6 +1316,8 @@ public class MainFrame extends javax.swing.JFrame {
             return removed;
         }
         public void removeAll(Collection<Object> elements) {
+//            for (Object o : elements)
+//                remove((Contact)o); //TODO fix 'out of memory' when using remove()
             int size = getSize();
             contacts.removeAll(elements);
             fireIntervalRemoved(this, 0, size);
@@ -1411,12 +1403,7 @@ public class MainFrame extends javax.swing.JFrame {
             Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
             Contact contact = (Contact)value;
             //add operator logo
-            if (contact.getOperator() instanceof Vodafone) {
-                ((JLabel)c).setIcon(new ImageIcon(contact.getOperator().getClass().getResource("resources/Vodafone.png")));
-            }
-            if (contact.getOperator() instanceof O2) {
-                ((JLabel)c).setIcon(new ImageIcon(contact.getOperator().getClass().getResource("resources/O2.png")));
-            }
+            ((JLabel)c).setIcon(contact.getOperator().getIcon());
             //set tooltip
             ((JLabel)c).setToolTipText(contact.getNumber());
             

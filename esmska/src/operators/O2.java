@@ -24,6 +24,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import persistence.SMS;
 
 /** O2 operator
@@ -31,11 +32,12 @@ import persistence.SMS;
  * @author ripper
  */
 public class O2 implements Operator {
-    private final int MAX_CHARS = 60;
-    private final int SMS_LENGTH = 60;
-    private final int MAX_PARTS = 5;
-    private final int SIGNATURE_EXTRA_LENGTH = 0;
-    private final boolean SUPPORTS_SIGNATURE = false;
+    private static final int MAX_CHARS = 60;
+    private static final int SMS_LENGTH = 60;
+    private static final int MAX_PARTS = 5;
+    private static final int SIGNATURE_EXTRA_LENGTH = 0;
+    private static final boolean SUPPORTS_SIGNATURE = false;
+    private static final ImageIcon ICON = new ImageIcon(Vodafone.class.getResource("resources/O2.png"));
     CookieManager manager;
     
     /**
@@ -204,6 +206,10 @@ public class O2 implements Operator {
 
     public boolean isSignatureSupported() {
         return SUPPORTS_SIGNATURE;
+    }
+
+    public ImageIcon getIcon() {
+        return ICON;
     }
     
 }

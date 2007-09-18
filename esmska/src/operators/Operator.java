@@ -11,6 +11,7 @@ package operators;
 
 import esmska.*;
 import java.net.URL;
+import javax.swing.ImageIcon;
 import persistence.SMS;
 
 /** Interface to operators
@@ -33,6 +34,8 @@ public interface Operator {
     /** number of characters needed to add to signature,
      * therefore strip from message length */
     int getSignatureExtraLength();
+    /** operator icon */
+    ImageIcon getIcon();
     
     /** operator name */
     String toString();
