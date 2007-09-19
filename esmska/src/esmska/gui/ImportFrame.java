@@ -4,12 +4,13 @@
  * Created on 18. srpen 2007, 23:11
  */
 
-package esmska;
+package esmska.gui;
 
 import com.csvreader.CsvReader;
-import esmska.ContactParser;
-import esmska.ContactParser;
-import esmska.ContactParser;
+import esmska.*;
+import esmska.persistence.ContactParser;
+import esmska.persistence.ContactParser;
+import esmska.persistence.ContactParser;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
@@ -32,18 +33,19 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
-import operators.O2;
-import operators.Operator;
-import operators.OperatorEnum;
-import operators.Vodafone;
-import persistence.Contact;
-import persistence.PersistenceManager;
+import esmska.operators.O2;
+import esmska.operators.Operator;
+import esmska.operators.OperatorEnum;
+import esmska.operators.Vodafone;
+import esmska.data.Contact;
+import esmska.persistence.PersistenceManager;
 
 /** Import contacts from external applications
  *
  * @author  ripper
  */
 public class ImportFrame extends javax.swing.JFrame {
+    private static final String RES = "/esmska/resources/";
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
@@ -111,7 +113,7 @@ public class ImportFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Import kontakt\u016f");
-        setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
         cardPanel.setLayout(new java.awt.CardLayout());
 
         jLabel2.setText("<html>\nImport kontakt\u016f v\u00e1m dovol\u00ed na\u010d\u00edst va\u0161e kontakty z jin\u00e9 aplikace a zkop\u00edrovat je do Esmsky. V p\u016fvodn\u00ed aplikaci z\u016fstanou va\u0161e kontakty nedot\u010deny.\n</html>");
@@ -457,7 +459,7 @@ public class ImportFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         //parsovani
         if (actualCard.equals("esmskaPanel") || actualCard.equals("kubikPanel") ||
@@ -550,7 +552,7 @@ public class ImportFrame extends javax.swing.JFrame {
             return;
         }
     }//GEN-LAST:event_nextButtonActionPerformed
-        
+    
     private void browseButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton2ActionPerformed
         String file = doBrowseButton();
         if (file != null) {
@@ -564,7 +566,7 @@ public class ImportFrame extends javax.swing.JFrame {
             fileTextFieldDreamcomSE.setText(file);
         };
     }//GEN-LAST:event_browseButton1ActionPerformed
-            
+    
     private void skipExistingCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipExistingCheckBoxActionPerformed
         if (skipExistingCheckBox.isSelected()) {
             removeExistingContacts();
@@ -580,14 +582,14 @@ public class ImportFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_skipExistingCheckBoxActionPerformed
-        
+    
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         String file = doBrowseButton();
         if (file != null) {
             fileTextFieldKubik.setText(file);
         };
     }//GEN-LAST:event_browseButtonActionPerformed
-       
+    
     /** browse for file */
     private String doBrowseButton() {
         JFileChooser chooser = new JFileChooser();
@@ -642,7 +644,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 
                 nextButton.setText("Importovat");
                 nextButton.setIcon(new ImageIcon(
-                        ImportFrame.class.getResource("resources/contact-small.png")));
+                        ImportFrame.class.getResource(RES + "contact-small.png")));
                 cardLayout.show(cardPanel, "resultsPanel");
                 actualCard = "resultsPanel";
             } catch (Exception ex) {

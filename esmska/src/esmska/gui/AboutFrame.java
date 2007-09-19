@@ -4,28 +4,31 @@
  * Created on 8. červenec 2007, 13:18
  */
 
-package esmska;
+package esmska.gui;
 
+import esmska.*;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import org.jvnet.substance.SubstanceLookAndFeel;
-import persistence.Config;
-import persistence.PersistenceManager;
+import esmska.data.Config;
+import esmska.persistence.PersistenceManager;
 
 /** About form
  *
  * @author  ripper
  */
 public class AboutFrame extends javax.swing.JFrame {
+    private static final String RES = "/esmska/resources/";
     private Config config = PersistenceManager.getConfig();
     
     /** Creates new form AboutFrame */
@@ -56,7 +59,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("O Esmska");
-        setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
         setLocationByPlatform(true);
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/esmska.png")));
@@ -177,7 +180,7 @@ public class AboutFrame extends javax.swing.JFrame {
         //show licence
         try {
             Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-            URL url = getClass().getResource("resources/license.txt");
+            URL url = getClass().getResource(RES + "license.txt");
             JTextPane tp = new JTextPane();
             tp.setPage(url);
             tp.setEditable(false);
@@ -195,7 +198,7 @@ public class AboutFrame extends javax.swing.JFrame {
     private void creditsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsButtonActionPerformed
         //show credits
         try {
-            URL url = getClass().getResource("resources/credits.txt");
+            URL url = getClass().getResource(RES + "credits.txt");
             JTextPane tp = new JTextPane();
             tp.setContentType("text/plain; charset=utf-8");
             tp.setPage(url);

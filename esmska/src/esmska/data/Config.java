@@ -4,10 +4,9 @@
  * Created on 19. červenec 2007, 20:56
  */
 
-package persistence;
+package esmska.data;
 
 import esmska.ThemeManager;
-import persistence.SMS;
 import java.awt.Dimension;
 import java.beans.*;
 import java.io.Serializable;

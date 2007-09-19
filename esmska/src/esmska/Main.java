@@ -9,6 +9,7 @@
 
 package esmska;
 
+import esmska.gui.MainFrame;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -16,7 +17,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import persistence.PersistenceManager;
+import esmska.persistence.PersistenceManager;
 
 /** Starter class for the whole program
  *
@@ -30,7 +31,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         //parse commandline arguments
         parseArgs(args);
         

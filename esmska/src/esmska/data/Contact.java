@@ -4,13 +4,13 @@
  * Created on 21. červenec 2007, 0:57
  */
 
-package persistence;
+package esmska.data;
 
 import java.beans.*;
 import java.io.Serializable;
 import java.text.Collator;
 import java.util.Comparator;
-import operators.Operator;
+import esmska.operators.Operator;
 
 /** SMS Contact
  * @author ripper

@@ -7,9 +7,10 @@
  * and open the template in the editor.
  */
 
-package esmska;
+package esmska.persistence;
 
 import com.csvreader.CsvWriter;
+import esmska.data.*;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +20,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
-import persistence.Contact;
-import persistence.SMS;
+import esmska.data.Contact;
+import esmska.data.SMS;
 
 /** Export program data
  *

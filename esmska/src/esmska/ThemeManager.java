@@ -21,8 +21,8 @@ import javax.swing.UIManager;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.FieldOfWheatSkin;
 import org.jvnet.substance.skin.SkinInfo;
-import persistence.Config;
-import persistence.PersistenceManager;
+import esmska.data.Config;
+import esmska.persistence.PersistenceManager;
 
 /** Manage and set look and feel
  *

@@ -4,10 +4,11 @@
  * Created on 20. červenec 2007, 18:59
  */
 
-package esmska;
+package esmska.gui;
 
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
+import esmska.*;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -16,14 +17,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
-import persistence.Config;
-import persistence.PersistenceManager;
+import esmska.data.Config;
+import esmska.persistence.PersistenceManager;
 
 /**
  *
  * @author  ripper
  */
 public class ConfigFrame extends javax.swing.JFrame {
+    private static final String RES = "/esmska/resources/";
     private Config config = PersistenceManager.getConfig();
     private boolean fullyInicialized;
     private final String LAF_SYSTEM = "Systémový";
@@ -38,9 +40,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_H);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_V);
-        tabbedPane.setIconAt(0, new ImageIcon(this.getClass().getResource("resources/config-small.png")));
-        tabbedPane.setIconAt(1, new ImageIcon(this.getClass().getResource("resources/appearance-small.png")));
-        tabbedPane.setIconAt(2, new ImageIcon(this.getClass().getResource("/operators/resources/Vodafone.png")));
+        tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-small.png")));
+        tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-small.png")));
+        tabbedPane.setIconAt(2, new ImageIcon(getClass().getResource(RES + "operators/Vodafone.png")));
         closeButton.requestFocusInWindow();
         
         lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
@@ -112,7 +114,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastaven\u00ed");
-        setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }

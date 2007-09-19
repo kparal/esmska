@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package esmska;
+package esmska.data;
 
 /** Checks for validity of form components
  *

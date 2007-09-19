@@ -7,18 +7,19 @@
  * and open the template in the editor.
  */
 
-package esmska;
+package esmska.persistence;
 
 import com.csvreader.CsvReader;
+import esmska.data.*;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import javax.swing.SwingWorker;
-import operators.O2;
-import operators.Operator;
-import operators.OperatorEnum;
-import operators.Vodafone;
-import persistence.Contact;
+import esmska.operators.O2;
+import esmska.operators.Operator;
+import esmska.operators.OperatorEnum;
+import esmska.operators.Vodafone;
+import esmska.data.Contact;
 
 /** Parse contacts from csv file of different programs
  *

@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package operators;
+package esmska.operators;
 
 import esmska.*;
 import java.util.ArrayList;

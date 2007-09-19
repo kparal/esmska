@@ -5,16 +5,16 @@
  *
  */
 
-package esmska;
+package esmska.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import persistence.Config;
-import persistence.Contact;
-import persistence.PersistenceManager;
-import persistence.SMS;
+import esmska.data.Config;
+import esmska.data.Contact;
+import esmska.persistence.PersistenceManager;
+import esmska.data.SMS;
 
 /** Class for preparing attributes of sms (single or multiple)
  *

@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package operators;
+package esmska.operators;
 
 import esmska.*;
 import java.io.BufferedReader;
@@ -19,22 +19,23 @@ import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
-import persistence.SMS;
+import esmska.data.SMS;
 
 /** Vodafone operator
  *
  * @author ripper
  */
 public class Vodafone implements Operator {
-    private String imgid;
-    private String ppp;
+    private static final String RES = "/esmska/resources/";
     private static final int MAX_CHARS = 760;
     private static final int SMS_LENGTH = 152;
     private static final int MAX_PARTS = 1;
     private static final int SIGNATURE_EXTRA_LENGTH = 5;
     private static final boolean SUPPORTS_SIGNATURE = true;
-    private static final ImageIcon ICON = new ImageIcon(Vodafone.class.getResource("resources/Vodafone.png"));
-    
+    private static final ImageIcon ICON = 
+            new ImageIcon(Vodafone.class.getResource(RES + "operators/Vodafone.png"));
+    private String imgid;
+    private String ppp;
     /**
      * Creates a new instance of Vodafone
      */
@@ -166,7 +167,7 @@ public class Vodafone implements Operator {
     public boolean isSignatureSupported() {
         return SUPPORTS_SIGNATURE;
     }
-
+    
     public ImageIcon getIcon() {
         return ICON;
     }

@@ -7,12 +7,11 @@
  * and open the template in the editor.
  */
 
-package operators;
+package esmska.operators;
 
-import esmska.*;
 import java.net.URL;
-import javax.swing.ImageIcon;
-import persistence.SMS;
+import esmska.data.SMS;
+import javax.swing.Icon;
 
 /** Interface to operators
  *
@@ -35,7 +34,7 @@ public interface Operator {
      * therefore strip from message length */
     int getSignatureExtraLength();
     /** operator icon */
-    ImageIcon getIcon();
+    Icon getIcon();
     
     /** operator name */
     String toString();

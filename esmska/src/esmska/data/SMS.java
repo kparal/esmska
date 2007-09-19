@@ -7,11 +7,11 @@
  * and open the template in the editor.
  */
 
-package persistence;
+package esmska.data;
 
 import java.net.URL;
 import java.text.Normalizer;
-import operators.Operator;
+import esmska.operators.Operator;
 
 /** SMS entity class
  *

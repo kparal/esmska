@@ -7,11 +7,14 @@
  * and open the template in the editor.
  */
 
-package persistence;
+package esmska.persistence;
 
-import esmska.ContactParser;
-import esmska.ExportManager;
-import esmska.ImportManager;
+import esmska.data.Config;
+import esmska.data.Contact;
+import esmska.persistence.ContactParser;
+import esmska.persistence.ExportManager;
+import esmska.persistence.ImportManager;
+import esmska.data.SMS;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;

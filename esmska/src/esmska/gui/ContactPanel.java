@@ -4,15 +4,17 @@
  * Created on 26. červenec 2007, 11:50
  */
 
-package esmska;
+package esmska.gui;
 
+import esmska.*;
+import esmska.data.FormChecker;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import operators.Operator;
-import operators.OperatorEnum;
-import persistence.Contact;
+import esmska.operators.Operator;
+import esmska.operators.OperatorEnum;
+import esmska.data.Contact;
 
 /**
  *

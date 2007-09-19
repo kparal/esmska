@@ -7,8 +7,9 @@
  * and open the template in the editor.
  */
 
-package esmska;
+package esmska.transfer;
 
+import esmska.gui.MainFrame;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
@@ -21,8 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import operators.Operator;
-import persistence.SMS;
+import esmska.operators.Operator;
+import esmska.data.SMS;
 
 /** Sender of SMS
  *

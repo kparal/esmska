@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package operators;
+package esmska.operators;
 
 import esmska.*;
 import java.io.BufferedReader;
@@ -25,19 +25,21 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
-import persistence.SMS;
+import esmska.data.SMS;
 
 /** O2 operator
  *
  * @author ripper
  */
 public class O2 implements Operator {
+    private static final String RES = "/esmska/resources/";
     private static final int MAX_CHARS = 60;
     private static final int SMS_LENGTH = 60;
     private static final int MAX_PARTS = 5;
     private static final int SIGNATURE_EXTRA_LENGTH = 0;
     private static final boolean SUPPORTS_SIGNATURE = false;
-    private static final ImageIcon ICON = new ImageIcon(Vodafone.class.getResource("resources/O2.png"));
+    private static final ImageIcon ICON = 
+            new ImageIcon(Vodafone.class.getResource(RES + "operators/O2.png"));
     CookieManager manager;
     
     /**
@@ -203,11 +205,11 @@ public class O2 implements Operator {
     public int getSignatureExtraLength() {
         return SIGNATURE_EXTRA_LENGTH;
     }
-
+    
     public boolean isSignatureSupported() {
         return SUPPORTS_SIGNATURE;
     }
-
+    
     public ImageIcon getIcon() {
         return ICON;
     }

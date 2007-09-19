@@ -4,8 +4,13 @@
  * Created on 6. červenec 2007, 15:37
  */
 
-package esmska;
+package esmska.gui;
 
+import esmska.*;
+import esmska.data.Envelope;
+import esmska.persistence.ExportManager;
+import esmska.data.FormChecker;
+import esmska.transfer.SMSSender;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -64,15 +69,15 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 import javax.swing.undo.UndoManager;
-import operators.O2;
-import operators.Operator;
-import operators.OperatorEnum;
-import operators.Vodafone;
+import esmska.operators.O2;
+import esmska.operators.Operator;
+import esmska.operators.OperatorEnum;
+import esmska.operators.Vodafone;
 import org.jvnet.substance.SubstanceLookAndFeel;
-import persistence.Config;
-import persistence.Contact;
-import persistence.PersistenceManager;
-import persistence.SMS;
+import esmska.data.Config;
+import esmska.data.Contact;
+import esmska.persistence.PersistenceManager;
+import esmska.data.SMS;
 
 /**
  * MainFrame form
@@ -81,6 +86,7 @@ import persistence.SMS;
  */
 public class MainFrame extends javax.swing.JFrame {
     private static MainFrame instance;
+    private static final String RES = "/esmska/resources/";
     
     private Action quitAction = new QuitAction();
     private SendAction sendAction = new SendAction();
@@ -119,7 +125,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** program configuration */
     private Config config = PersistenceManager.getConfig();
     /** sms contacts */
-    TreeSet<Contact> contacts = PersistenceManager.getContacs();
+    private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     
     /**
      * Creates new form MainFrame
@@ -210,7 +216,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esmska");
-        setIconImage(new ImageIcon(getClass().getResource("resources/esmska.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
         setLocationByPlatform(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -299,7 +305,7 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanelLayout.setVerticalGroup(
             contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -434,7 +440,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -623,9 +629,9 @@ public class MainFrame extends javax.swing.JFrame {
     /** Tells main form whether it should display task busy icon */
     public void setTaskRunning(boolean b) {
         if (b == false)
-            statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource("resources/task-idle.png")));
+            statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource(RES + "task-idle.png")));
         else
-            statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource("resources/task-busy.gif")));
+            statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource(RES + "task-busy.gif")));
     }
     
     /** Notifies about change in sms queue */
@@ -775,7 +781,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class AboutAction extends AbstractAction {
         AboutFrame aboutFrame;
         public AboutAction() {
-            super("O programu", new ImageIcon(MainFrame.this.getClass().getResource("resources/about-small.png")));
+            super("O programu", new ImageIcon(MainFrame.class.getResource(RES + "about-small.png")));
             this.putValue(MNEMONIC_KEY,KeyEvent.VK_O);
         }
         public void actionPerformed(ActionEvent e) {
@@ -792,7 +798,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** Quit the program */
     private class QuitAction extends AbstractAction {
         public QuitAction() {
-            super("Ukončit", new ImageIcon(MainFrame.this.getClass().getResource("resources/exit-small.png")));
+            super("Ukončit", new ImageIcon(MainFrame.class.getResource(RES + "exit-small.png")));
             this.putValue(MNEMONIC_KEY,KeyEvent.VK_U);
         }
         public void actionPerformed(ActionEvent e) {
@@ -805,7 +811,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class ConfigAction extends AbstractAction {
         private ConfigFrame configFrame;
         public ConfigAction() {
-            super("Nastavení", new ImageIcon(MainFrame.this.getClass().getResource("resources/config-small.png")));
+            super("Nastavení", new ImageIcon(MainFrame.class.getResource(RES + "config-small.png")));
             this.putValue(MNEMONIC_KEY,KeyEvent.VK_N);
         }
         public void actionPerformed(ActionEvent e) {
@@ -822,7 +828,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
         public SendAction() {
-            super("Poslat", new ImageIcon(MainFrame.this.getClass().getResource("resources/send.png")));
+            super("Poslat", new ImageIcon(MainFrame.class.getResource(RES + "send.png")));
             this.putValue(SHORT_DESCRIPTION,"Odeslat zprávu (Alt+S, Ctrl+Enter)");
             this.putValue(MNEMONIC_KEY, KeyEvent.VK_S);
             this.setEnabled(false);
@@ -849,7 +855,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
         public DeleteSMSAction() {
-            super(null, new ImageIcon(MainFrame.this.getClass().getResource("resources/delete.png")));
+            super(null, new ImageIcon(MainFrame.class.getResource(RES + "delete.png")));
             this.putValue(SHORT_DESCRIPTION,"Odstranit označené zprávy");
             this.setEnabled(false);
         }
@@ -865,7 +871,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** Edit sms from queue */
     private class EditSMSAction extends AbstractAction {
         public EditSMSAction() {
-            super(null, new ImageIcon(MainFrame.this.getClass().getResource("resources/edit.png")));
+            super(null, new ImageIcon(MainFrame.class.getResource(RES + "edit.png")));
             this.putValue(SHORT_DESCRIPTION,"Upravit označenou zprávu");
             this.setEnabled(false);
         }
@@ -886,10 +892,11 @@ public class MainFrame extends javax.swing.JFrame {
     /** Add contact to contact list */
     private class AddContactAction extends AbstractAction {
         public AddContactAction() {
-            super(null,new ImageIcon(MainFrame.this.getClass().getResource("resources/add.png")));
+            super(null,new ImageIcon(MainFrame.class.getResource(RES + "add.png")));
             this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
         }
         public void actionPerformed(ActionEvent e) {
+            contactDialog.setTitle("Nový kontakt");
             contactDialog.show(null);
             Contact c = contactDialog.getResult();
             if (c == null)
@@ -904,12 +911,13 @@ public class MainFrame extends javax.swing.JFrame {
     /** Edit contact from contact list */
     private class EditContactAction extends AbstractAction {
         public EditContactAction() {
-            super(null,new ImageIcon(MainFrame.this.getClass().getResource("resources/edit.png")));
+            super(null,new ImageIcon(MainFrame.class.getResource(RES + "edit.png")));
             this.putValue(SHORT_DESCRIPTION,"Upravit označený kontakt");
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
             Contact contact = (Contact)contactList.getSelectedValue();
+            contactDialog.setTitle("Upravit kontakt");
             contactDialog.show(contact);
             Contact c = contactDialog.getResult();
             if (c == null)
@@ -925,7 +933,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** Remove contact from contact list */
     private class RemoveContactAction extends AbstractAction {
         public RemoveContactAction() {
-            super(null,new ImageIcon(MainFrame.this.getClass().getResource("resources/remove.png")));
+            super(null,new ImageIcon(MainFrame.class.getResource(RES + "remove.png")));
             this.putValue(SHORT_DESCRIPTION,"Odstranit označené kontakty");
             this.setEnabled(false);
         }
@@ -955,7 +963,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** move sms up in sms queue */
     private class SMSUpAction extends AbstractAction {
         public SMSUpAction() {
-            super(null,new ImageIcon(MainFrame.this.getClass().getResource("resources/up.png")));
+            super(null,new ImageIcon(MainFrame.class.getResource(RES + "up.png")));
             this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě výše");
             this.setEnabled(false);
         }
@@ -976,7 +984,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** move sms down in sms queue */
     private class SMSDownAction extends AbstractAction {
         public SMSDownAction() {
-            super(null,new ImageIcon(MainFrame.this.getClass().getResource("resources/down.png")));
+            super(null,new ImageIcon(MainFrame.class.getResource(RES + "down.png")));
             this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě níže");
             this.setEnabled(false);
         }
@@ -1000,18 +1008,20 @@ public class MainFrame extends javax.swing.JFrame {
         private final String descRunning = "Pozastavit odesílání sms ve frontě (Alt+P)";
         private final String descStopped = "Pokračovat v odesílání sms ve frontě (Alt+P)";
         public SMSQueuePauseAction() {
-            super(null, new ImageIcon(MainFrame.this.getClass().getResource("resources/pause.png")));
+            super(null, new ImageIcon(MainFrame.class.getResource(RES + "pause.png")));
             this.putValue(SHORT_DESCRIPTION,descRunning);
             putValue(MNEMONIC_KEY, KeyEvent.VK_P);
         }
         public void actionPerformed(ActionEvent e) {
             if (makePause) {
                 smsSender.setPaused(true);
-                this.putValue(LARGE_ICON_KEY, new ImageIcon(MainFrame.this.getClass().getResource("resources/start.png")));
+                this.putValue(LARGE_ICON_KEY,
+                        new ImageIcon(MainFrame.class.getResource(RES + "start.png")));
                 this.putValue(SHORT_DESCRIPTION,descStopped);
             } else {
                 smsSender.setPaused(false);
-                this.putValue(LARGE_ICON_KEY,new ImageIcon(MainFrame.this.getClass().getResource("resources/pause.png")));
+                this.putValue(LARGE_ICON_KEY,
+                        new ImageIcon(MainFrame.class.getResource(RES + "pause.png")));
                 this.putValue(SHORT_DESCRIPTION,descRunning);
             }
             makePause = !makePause;
@@ -1022,7 +1032,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class ImportAction extends AbstractAction {
         private ImportFrame importFrame;
         public ImportAction() {
-            super("Import kontaktů", new ImageIcon(MainFrame.this.getClass().getResource("resources/contact-small.png")));
+            super("Import kontaktů", new ImageIcon(MainFrame.class.getResource(RES + "contact-small.png")));
             this.putValue(SHORT_DESCRIPTION,"Importovat kontakty z jiných aplikací");
             putValue(MNEMONIC_KEY, KeyEvent.VK_I);
         }
@@ -1040,7 +1050,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** export data for other programs */
     private class ExportAction extends AbstractAction {
         public ExportAction() {
-            super("Export kontaktů", new ImageIcon(MainFrame.this.getClass().getResource("resources/contact-small.png")));
+            super("Export kontaktů", new ImageIcon(MainFrame.class.getResource(RES + "contact-small.png")));
             this.putValue(SHORT_DESCRIPTION,"Exportovat kontakty do souboru");
             putValue(MNEMONIC_KEY, KeyEvent.VK_E);
         }
