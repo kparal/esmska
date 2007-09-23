@@ -114,7 +114,7 @@ public class Main {
                 }
                 config = (String) it.next();
             } else {
-                System.err.println("Neznámá volba!");
+                System.err.println("Neznámá volba '" + arg + "'!");
                 printUsage();
                 System.exit(1);
             }
@@ -128,8 +128,8 @@ public class Main {
                 "\n" +
                 "Dostupné volby:\n" +
                 "   -h, --help                  Zobrazí tuto nápovědu\n" +
-                "   -p, --portable              Zapnutí přenosného módu, " +
-                "zeptá se na umístění konfiguračních souborů, pokud je nenajde v aktuálním adresáři\n" +
+                "   -p, --portable              Zapnutí přenosného módu - " +
+                "zeptá se na umístění konfiguračních souborů (možno upřesnit pomocí '-c')\n" +
                 "   -c, --config <cesta>        Nastavení cesty ke konfiguračním souborům";
         System.out.println(usage);
     }
