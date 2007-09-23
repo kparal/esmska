@@ -24,19 +24,21 @@ import esmska.persistence.PersistenceManager;
  * @author ripper
  */
 public class Main {
-    private static boolean portable;
-    private static String config;
+    private static String configPath; //path to config files
     
-    /** Program starter class
+    /** Program starter method
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
         //parse commandline arguments
-        parseArgs(args);
+        CommandLineParser clp = new CommandLineParser();
+        if (! clp.parseArgs(args))
+            System.exit(1);
+        configPath = clp.getConfigPath();
         
         //portable mode
-        if (portable && config == null) {
+        if (clp.isPortable() && configPath == null) {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception ex) {
@@ -50,13 +52,13 @@ public class Main {
             chooser.setMultiSelectionEnabled(false);
             int result = chooser.showOpenDialog(null);
             if (result == JFileChooser.APPROVE_OPTION)
-                config = chooser.getSelectedFile().getPath();
+                configPath = chooser.getSelectedFile().getPath();
         }
         
         //load user files
         try {
-            if (config != null)
-                PersistenceManager.setProgramDir(config);
+            if (configPath != null)
+                PersistenceManager.setProgramDir(configPath);
             PersistenceManager pm = PersistenceManager.getInstance();
             try {
                 pm.loadConfig();
@@ -95,42 +97,4 @@ public class Main {
         });
     }
     
-    /** Parse commandline arguments */
-    private static void parseArgs(String[] args) {
-        List<String> arguments = Arrays.asList(args);
-        
-        for (Iterator it = arguments.iterator(); it.hasNext(); ) {
-            String arg = (String) it.next();
-            if (arg.equals("-h") || arg.equals("--help")) {
-                printUsage();
-                System.exit(1);
-            } else if (arg.equals("-p") || arg.equals("--portable")) {
-                portable = true;
-            } else if (arg.equals("-c") || arg.equals("--config")) {
-                if (!it.hasNext()) {
-                    System.err.println("Chybí cesta!");
-                    printUsage();
-                    System.exit(1);
-                }
-                config = (String) it.next();
-            } else {
-                System.err.println("Neznámá volba '" + arg + "'!");
-                printUsage();
-                System.exit(1);
-            }
-        }
-    }
-    
-    /** Print usage help */
-    private static void printUsage() {
-        String usage =
-                "Použití: java -jar esmska.jar [VOLBY]\n" +
-                "\n" +
-                "Dostupné volby:\n" +
-                "   -h, --help                  Zobrazí tuto nápovědu\n" +
-                "   -p, --portable              Zapnutí přenosného módu - " +
-                "zeptá se na umístění konfiguračních souborů (možno upřesnit pomocí '-c')\n" +
-                "   -c, --config <cesta>        Nastavení cesty ke konfiguračním souborům";
-        System.out.println(usage);
-    }
 }
