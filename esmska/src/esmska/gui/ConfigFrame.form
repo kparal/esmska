@@ -336,7 +336,7 @@
               <Properties>
                 <Property name="columns" type="int" value="9"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="config.getSenderNumber()" type="code"/>
+                  <Connection code="(config.getSenderNumber() != null ?&#xa;    config.getSenderNumber().substring(4) : null)" type="code"/>
                 </Property>
               </Properties>
               <Events>
