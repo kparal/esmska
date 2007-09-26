@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import esmska.persistence.PersistenceManager;
+import org.jvnet.lafwidget.LafWidget;
 
 /** Starter class for the whole program
  *
@@ -88,6 +89,9 @@ public class Main {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
+        //set Substance specific addons
+        UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
         
         //start main frame
         java.awt.EventQueue.invokeLater(new java.lang.Runnable() {
