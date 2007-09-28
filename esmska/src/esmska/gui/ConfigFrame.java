@@ -268,7 +268,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         senderNumberTextField.setColumns(9);
         senderNumberTextField.setText((config.getSenderNumber() != null ?
-            config.getSenderNumber().substring(4) : null));
+            config.getSenderNumber().replaceFirst("^\\+420", "") : null));
     senderNumberTextField.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             senderNumberTextFieldActionPerformed(evt);
