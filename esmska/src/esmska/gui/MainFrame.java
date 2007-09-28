@@ -1277,7 +1277,7 @@ public class MainFrame extends javax.swing.JFrame {
                 return highlight;
         }
         public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            if ((fb.getDocument().getLength() + text.length() - length) > envelope.getMaxTextLength()) //reached size limit
+            if ((fb.getDocument().getLength() + (text!=null?text.length():0) - length) > envelope.getMaxTextLength()) //reached size limit
                 return;
             super.replace(fb, offset, length, text, getStyle(offset));
             timer.restart();
