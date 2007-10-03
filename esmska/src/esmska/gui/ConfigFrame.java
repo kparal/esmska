@@ -20,7 +20,7 @@ import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
 
-/**
+/** Configure settings form
  *
  * @author  ripper
  */

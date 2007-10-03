@@ -1,32 +1,89 @@
 /*
  * ContactPanel.java
  *
- * Created on 26. červenec 2007, 11:50
+ * Created on 3. říjen 2007, 18:48
  */
 
 package esmska.gui;
 
-import esmska.*;
-import esmska.data.FormChecker;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.InputVerifier;
-import javax.swing.JComponent;
-import javax.swing.JTextField;
-import esmska.operators.Operator;
-import esmska.operators.OperatorEnum;
 import esmska.data.Contact;
+import esmska.operators.Operator;
+import esmska.persistence.PersistenceManager;
+import esmska.utils.ActionEventSupport;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import javax.swing.AbstractAction;
+import javax.swing.AbstractListModel;
+import javax.swing.Action;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**
  *
  * @author  ripper
  */
 public class ContactPanel extends javax.swing.JPanel {
-    MainFrame main;
+    public static final int ACTION_CONTACT_SELECTION_CHANGED = 0;
+    
+    private static final String RES = "/esmska/resources/";
+    private ActionEventSupport actionEventSupport;
+    private TreeSet<Contact> contacts = PersistenceManager.getContacs();
+    
+    private Action addContactAction = new AddContactAction();
+    private Action editContactAction = new EditContactAction();
+    private Action removeContactAction = new RemoveContactAction();
+    private ContactListModel contactListModel = new ContactListModel();
+    private ContactDialog contactDialog = new ContactDialog();
     
     /** Creates new form ContactPanel */
     public ContactPanel() {
-        this.main = MainFrame.getInstance();
         initComponents();
+        actionEventSupport = new ActionEventSupport(this);
+    }
+    
+    public void clearSelection() {
+        contactList.clearSelection();
+    }
+    
+    public void setSelectedContact(Contact contact) {
+        contactList.setSelectedValue(contact, true);
+    }
+    
+    /** Return selected contacts
+     * @return Collection of selected contacts. Zero length collection if noone selected.
+     */
+    public HashSet<Contact> getSelectedContacts() {
+        HashSet<Contact> contacts = new HashSet<Contact>();
+        for (Object o : contactList.getSelectedValues())
+            contacts.add((Contact) o);
+        return contacts;
+    }
+    
+    public void addContacts(Collection<Contact> contacts) {
+        contactListModel.addAll(contacts);
     }
     
     /** This method is called from within the constructor to
@@ -36,133 +93,280 @@ public class ContactPanel extends javax.swing.JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        nameTextField = new javax.swing.JTextField();
-        nameTextField.requestFocusInWindow();
-        numberTextField = new javax.swing.JTextField();
-        operatorComboBox = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
+        addContactButton = new javax.swing.JButton();
+        removeContactButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        contactList = new javax.swing.JList();
+        editContactButton = new javax.swing.JButton();
 
-        jLabel1.setText("Jm\u00e9no");
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Kontakty"));
+        addContactButton.setAction(addContactAction);
+        addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
-        jLabel2.setText("\u010c\u00edslo");
+        removeContactButton.setAction(removeContactAction);
+        removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
-        jLabel3.setText("Oper\u00e1tor");
+        contactList.setModel(contactListModel);
+        contactList.setCellRenderer(new ContactListRenderer());
+        contactList.getSelectionModel().addListSelectionListener(new ContactListSelectionListener());
+        jScrollPane4.setViewportView(contactList);
 
-        numberTextField.setColumns(9);
-        numberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                numberTextFieldKeyReleased(evt);
-            }
-        });
-
-        operatorComboBox.setModel(new DefaultComboBoxModel(OperatorEnum.getAsList().toArray()));
-        operatorComboBox.setRenderer(main.operatorComboBox.getRenderer());
-
-        jLabel4.setText("+420");
+        editContactButton.setAction(editContactAction);
+        editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(operatorComboBox, 0, 174, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addContainerGap()
+                        .addComponent(addContactButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
+                        .addComponent(editContactButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeContactButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(numberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(editContactButton)
+                    .addComponent(removeContactButton)
+                    .addComponent(addContactButton))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    /** @returns if the form is valid */
-    public boolean validateForm() {
-        if (!FormChecker.checkContactName(nameTextField.getText())) {
-            nameTextField.requestFocusInWindow();
-            return false;
+    /** Add contact to contact list */
+    private class AddContactAction extends AbstractAction {
+        public AddContactAction() {
+            super(null,new ImageIcon(ContactPanel.class.getResource(RES + "add.png")));
+            this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
         }
-        if (!FormChecker.checkSMSNumber(numberTextField.getText())) {
-            numberTextField.requestFocusInWindow();
-            return false;
+        public void actionPerformed(ActionEvent e) {
+            contactDialog.setTitle("Nový kontakt");
+            contactDialog.show(null);
+            Contact c = contactDialog.getResult();
+            if (c == null)
+                return;
+            contactListModel.add(c);
+            
+            contactList.clearSelection();
+            contactList.setSelectedValue(c, true);
         }
-        return true;
     }
     
-    private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
-        //guess operator
-        Operator op = OperatorEnum.getOperator(numberTextField.getText());
-        if (op != null) {
-            for (int i=0; i<operatorComboBox.getItemCount(); i++) {
-                if (operatorComboBox.getItemAt(i).getClass().equals(op.getClass())) {
-                    operatorComboBox.setSelectedIndex(i);
-                    break;
-                }
+    /** Edit contact from contact list */
+    private class EditContactAction extends AbstractAction {
+        public EditContactAction() {
+            super(null,new ImageIcon(ContactPanel.class.getResource(RES + "edit.png")));
+            this.putValue(SHORT_DESCRIPTION,"Upravit označený kontakt");
+            this.setEnabled(false);
+        }
+        public void actionPerformed(ActionEvent e) {
+            Contact contact = (Contact)contactList.getSelectedValue();
+            contactDialog.setTitle("Upravit kontakt");
+            contactDialog.show(contact);
+            Contact c = contactDialog.getResult();
+            if (c == null)
+                return;
+            contactListModel.remove(contact);
+            contactListModel.add(c);
+            
+            contactList.clearSelection();
+            contactList.setSelectedValue(c, true);
+        }
+    }
+    
+    /** Remove contact from contact list */
+    private class RemoveContactAction extends AbstractAction {
+        public RemoveContactAction() {
+            super(null,new ImageIcon(ContactPanel.class.getResource(RES + "remove.png")));
+            this.putValue(SHORT_DESCRIPTION,"Odstranit označené kontakty");
+            this.setEnabled(false);
+        }
+        public void actionPerformed(ActionEvent e) {
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            JLabel label = new JLabel("<html><b>Opravdu smazat následující kontakty?</b></html>");
+            JTextArea area = new JTextArea();
+            area.setEditable(false);
+            area.setRows(5);
+            for (Object o : contactList.getSelectedValues())
+                area.append(((Contact)o).getName() + "\n");
+            area.setCaretPosition(0);
+            panel.add(label, BorderLayout.PAGE_START);
+            panel.add(new JScrollPane(area), BorderLayout.CENTER);
+            //confirm
+            int result = JOptionPane.showOptionDialog(MainFrame.getInstance(),panel,"Opravdu smazat?",
+                    JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,null,JOptionPane.NO_OPTION);
+            if (result != JOptionPane.YES_OPTION)
+                return;
+            //delete
+            List<Object> list = Arrays.asList(contactList.getSelectedValues());
+            contactListModel.removeAll(list);
+        }
+    }
+    
+    /** Model for contact list */
+    private class ContactListModel extends AbstractListModel {
+        public int getSize() {
+            return contacts.size();
+        }
+        public Contact getElementAt(int index) {
+            return contacts.toArray(new Contact[0])[index];
+        }
+        public int indexOf(Contact element) {
+            return new ArrayList<Contact>(contacts).indexOf(element);
+        }
+        public void add(Contact element) {
+            if (contacts.add(element)) {
+                int index = indexOf(element);
+                fireIntervalAdded(this, index, index);
             }
         }
-    }//GEN-LAST:event_numberTextFieldKeyReleased
-    
-    public void setContact(Contact contact) {
-        if (contact == null) {
-            nameTextField.setText(null);
-            numberTextField.setText(null);
-            operatorComboBox.setSelectedItem(0);
-        } else {
-            nameTextField.setText(contact.getName());
-            numberTextField.setText(contact.getNumber());
-            operatorComboBox.setSelectedItem(contact.getOperator());
+        public boolean contains(Contact element) {
+            return contacts.contains(element);
+        }
+        public boolean remove(Contact element) {
+            int index = indexOf(element);
+            boolean removed = contacts.remove(element);
+            if (removed) {
+                fireIntervalRemoved(this, index, index);
+            }
+            return removed;
+        }
+        public void removeAll(Collection<Object> elements) {
+//            for (Object o : elements)
+//                remove((Contact)o); //TODO fix 'out of memory' when using remove()
+            int size = getSize();
+            contacts.removeAll(elements);
+            fireIntervalRemoved(this, 0, size);
+        }
+        public void addAll(Collection<Contact> elements) {
+            contacts.addAll(elements);
+            fireContentsChanged(this, 0, getSize());
+        }
+        protected void fireIntervalRemoved(Object source, int index0, int index1) {
+            super.fireIntervalRemoved(source, index0, index1);
+        }
+        protected void fireIntervalAdded(Object source, int index0, int index1) {
+            super.fireIntervalAdded(source, index0, index1);
+        }
+        protected void fireContentsChanged(Object source, int index0, int index1) {
+            super.fireContentsChanged(source, index0, index1);
         }
     }
     
-    public Contact getContact() {
-        Contact c = new Contact();
-        c.setName(nameTextField.getText());
-        c.setNumber(numberTextField.getText());
-        c.setOperator((Operator) operatorComboBox.getSelectedItem());
-        c.setCountryCode("+420");
-        return c;
+    /** dialog for creating and editing contact */
+    private class ContactDialog extends JDialog implements PropertyChangeListener {
+        EditContactPanel panel;
+        JOptionPane optionPane;
+        Contact contact;
+        public ContactDialog() {
+            super(MainFrame.getInstance(), "Kontakt", true);
+            panel = new EditContactPanel();
+            optionPane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE,
+                    JOptionPane.OK_CANCEL_OPTION);
+            optionPane.addPropertyChangeListener(this);
+            setContentPane(optionPane);
+            pack();
+            setDefaultCloseOperation(HIDE_ON_CLOSE);
+        }
+        public void show(Contact c) {
+            setLocationRelativeTo(MainFrame.getInstance());
+            optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
+            panel.setContact(c);
+            panel.prepareForShow();
+            setVisible(true);
+        }
+        public void propertyChange(PropertyChangeEvent e) {
+            String prop = e.getPropertyName();
+            
+            if (isVisible()
+            && (e.getSource() == optionPane)
+            && (JOptionPane.VALUE_PROPERTY.equals(prop))) {
+                Object value = optionPane.getValue();
+                
+                if (value == JOptionPane.UNINITIALIZED_VALUE) {
+                    //ignore reset
+                    return;
+                }
+                if ((Integer)value != JOptionPane.OK_OPTION) {
+                    setVisible(false);
+                    return;
+                }
+                
+                //verify inputs
+                if (!panel.validateForm()) {
+                    optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
+                    return;
+                }
+                //inputs verified, all ok
+                contact = panel.getContact();
+                setVisible(false);
+            }
+        }
+        public Contact getResult() {
+            return contact;
+        }
     }
     
-    public void prepareForShow() {
-        nameTextField.requestFocusInWindow();
-        nameTextField.selectAll();
+    /** Renderer for items in contact list */
+    private class ContactListRenderer implements ListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            Contact contact = (Contact)value;
+            //add operator logo
+            ((JLabel)c).setIcon(contact.getOperator().getIcon());
+            //set tooltip
+            ((JLabel)c).setToolTipText(contact.getNumber());
+            
+            return c;
+        }
+    }
+    
+    /** Listener for contact list */
+    private class ContactListSelectionListener implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent e) {
+            if (e.getValueIsAdjusting())
+                return;
+            
+            // update components
+            int count = contactList.getSelectedIndices().length;
+            removeContactAction.setEnabled(count != 0);
+            editContactAction.setEnabled(count == 1);
+            
+            //fire event
+            actionEventSupport.fireActionPerformed(ACTION_CONTACT_SELECTION_CHANGED, null);
+        }
+    }
+    
+    public void addActionListener(ActionListener actionListener) {
+        actionEventSupport.addActionListener(actionListener);
+    }
+    
+    public void removeActionListener(ActionListener actionListener) {
+        actionEventSupport.removeActionListener(actionListener);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField nameTextField;
-    private javax.swing.JTextField numberTextField;
-    private javax.swing.JComboBox operatorComboBox;
+    private javax.swing.JButton addContactButton;
+    private javax.swing.JList contactList;
+    private javax.swing.JButton editContactButton;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton removeContactButton;
     // End of variables declaration//GEN-END:variables
     
 }

@@ -11,20 +11,14 @@ import esmska.data.Envelope;
 import esmska.persistence.ExportManager;
 import esmska.data.FormChecker;
 import esmska.transfer.SMSSender;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.ScrollPane;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -37,16 +31,10 @@ import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
-import javax.swing.ListSelectionModel;
 import javax.swing.Timer;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
@@ -54,8 +42,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentEvent.ElementChange;
 import javax.swing.event.DocumentEvent.EventType;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.text.AbstractDocument;
@@ -69,10 +55,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 import javax.swing.undo.UndoManager;
-import esmska.operators.O2;
 import esmska.operators.Operator;
 import esmska.operators.OperatorEnum;
-import esmska.operators.Vodafone;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import esmska.data.Config;
 import esmska.data.Contact;
@@ -95,20 +79,15 @@ public class MainFrame extends javax.swing.JFrame {
     private Action editSMSAction = new EditSMSAction();
     private Action aboutAction = new AboutAction();
     private Action configAction = new ConfigAction();
-    private Action addContactAction = new AddContactAction();
-    private Action editContactAction = new EditContactAction();
-    private Action removeContactAction = new RemoveContactAction();
     private Action smsUpAction = new SMSUpAction();
     private Action smsDownAction = new SMSDownAction();
     private Action smsTextUndoAction;
     private Action smsTextRedoAction;
     private ImportAction importAction = new ImportAction();
     private Action exportAction = new ExportAction();
-    private ContactDialog contactDialog;
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
     private SMSQueueListModel smsQueueListModel = new SMSQueueListModel();
-    private ContactListModel contactListModel = new ContactListModel();
     
     /** actual queue of sms's */
     private List<SMS> smsQueue = PersistenceManager.getQueue();
@@ -154,9 +133,7 @@ public class MainFrame extends javax.swing.JFrame {
             pauseSMSQueue();
         
         //setup components
-        smsDelayProgressBar.setVisible(false);
         smsDelayTimer.setInitialDelay(0);
-        contactDialog = new ContactDialog();
     }
     
     public static MainFrame getInstance() {
@@ -164,6 +141,54 @@ public class MainFrame extends javax.swing.JFrame {
             instance = new MainFrame();
         return instance;
     }
+    
+    /** Executed when selection is changed in contact list */
+    private void contactListSelectionChanged() {
+            HashSet<Contact> selectedContacts = contactPanel.getSelectedContacts();
+            int count = selectedContacts.size();
+            
+            // fill sms components with current contact
+            if (count == 1) { //only one contact selected
+                Contact c = selectedContacts.iterator().next();
+                smsNumberTextField.setText(c.getNumber());
+                operatorComboBox.setSelectedItem(c.getOperator());
+                nameLabel.setText(c.getName());
+            }
+            
+            //set multisend mode
+            boolean multiSendMode = (count > 1);
+            String sendLabel = "Hromadné odesílání";
+            if (multiSendMode) {
+                String tooltip = "<html>Pro zrušení módu hromadného odesílání<br>"
+                        + "označte v seznamu kontaktů jediný kontakt</html>";
+                nameLabel.setText(sendLabel);
+                nameLabel.setToolTipText(tooltip);
+                smsNumberTextField.setText("");
+                smsNumberTextField.setToolTipText(tooltip);
+            } else {
+                if (nameLabel.getText().equals(sendLabel))
+                    nameLabel.setText("");
+                nameLabel.setToolTipText(null);
+                smsNumberTextField.setToolTipText(null);
+            }
+            smsNumberTextField.setEnabled(! multiSendMode);
+            operatorComboBox.setEnabled(! multiSendMode);
+            
+            //update envelope
+            Set<Contact> set = new HashSet<Contact>();
+            set.addAll(selectedContacts);
+            if (count < 1)
+                set.add(new Contact(nameLabel.getText(), "+420", smsNumberTextField.getText(),
+                        (Operator)operatorComboBox.getSelectedItem()));
+            envelope.setContacts(set);
+            
+            // update components
+            sendAction.updateStatus();
+            smsTextPaneDocumentFilter.requestUpdate();
+            if (count > 0)
+                smsTextPane.requestFocusInWindow();
+    }
+            
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -178,12 +203,6 @@ public class MainFrame extends javax.swing.JFrame {
         statusAnimationLabel = new javax.swing.JLabel();
         smsDelayProgressBar = new javax.swing.JProgressBar();
         horizontalSplitPane = new javax.swing.JSplitPane();
-        contactPanel = new javax.swing.JPanel();
-        addContactButton = new javax.swing.JButton();
-        removeContactButton = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        contactList = new javax.swing.JList();
-        editContactButton = new javax.swing.JButton();
         verticalSplitPane = new javax.swing.JSplitPane();
         smsPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -205,6 +224,7 @@ public class MainFrame extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         smsUpButton = new javax.swing.JButton();
         smsDownButton = new javax.swing.JButton();
+        contactPanel = new esmska.gui.ContactPanel();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         configMenuItem = new javax.swing.JMenuItem();
@@ -236,6 +256,7 @@ public class MainFrame extends javax.swing.JFrame {
         smsDelayProgressBar.setFocusable(false);
         smsDelayProgressBar.setString("Dal\u0161\u00ed sms za: ");
         smsDelayProgressBar.setStringPainted(true);
+        smsDelayProgressBar.setVisible(false);
 
         javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
         statusPanel.setLayout(statusPanelLayout);
@@ -265,59 +286,6 @@ public class MainFrame extends javax.swing.JFrame {
         horizontalSplitPane.setBorder(null);
         horizontalSplitPane.setResizeWeight(0.5);
         horizontalSplitPane.setContinuousLayout(true);
-        contactPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Kontakty"));
-        addContactButton.setAction(addContactAction);
-        addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-
-        removeContactButton.setAction(removeContactAction);
-        removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-
-        contactList.setModel(contactListModel);
-        contactList.setCellRenderer(new ContactListRenderer());
-        contactList.getSelectionModel().addListSelectionListener(new ContactListSelectionListener());
-        jScrollPane4.setViewportView(contactList);
-
-        editContactButton.setAction(editContactAction);
-        editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-
-        javax.swing.GroupLayout contactPanelLayout = new javax.swing.GroupLayout(contactPanel);
-        contactPanel.setLayout(contactPanelLayout);
-        contactPanelLayout.setHorizontalGroup(
-            contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contactPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contactPanelLayout.createSequentialGroup()
-                        .addComponent(addContactButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editContactButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeContactButton))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        contactPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
-
-        contactPanelLayout.setVerticalGroup(
-            contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contactPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(contactPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addContactButton)
-                    .addComponent(editContactButton)
-                    .addComponent(removeContactButton))
-                .addContainerGap())
-        );
-
-        contactPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addContactButton, editContactButton, removeContactButton});
-
-        horizontalSplitPane.setRightComponent(contactPanel);
-
         verticalSplitPane.setBorder(null);
         verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         verticalSplitPane.setResizeWeight(1.0);
@@ -414,15 +382,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(smsPanelLayout.createSequentialGroup()
                     .addComponent(jLabel1)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(smsNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .addComponent(smsNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(operatorComboBox, 0, 111, Short.MAX_VALUE))
+                    .addComponent(operatorComboBox, 0, 97, Short.MAX_VALUE))
                 .addComponent(nameLabel)
                 .addGroup(smsPanelLayout.createSequentialGroup()
-                    .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(sendButton))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
             .addContainerGap())
     );
     smsPanelLayout.setVerticalGroup(
@@ -440,7 +408,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(smsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -491,7 +459,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(smsUpButton)
                 .addComponent(smsDownButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(queuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queuePanelLayout.createSequentialGroup()
@@ -519,7 +487,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(editButton)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(deleteButton))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
             .addContainerGap())
     );
 
@@ -528,6 +496,13 @@ public class MainFrame extends javax.swing.JFrame {
     verticalSplitPane.setRightComponent(queuePanel);
 
     horizontalSplitPane.setLeftComponent(verticalSplitPane);
+
+    contactPanel.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            contactListSelectionChanged();
+        }
+    });
+    horizontalSplitPane.setRightComponent(contactPanel);
 
     programMenu.setMnemonic('r');
     programMenu.setText("Program");
@@ -659,8 +634,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Import additional contacts */
     public void importContacts(Collection<Contact> contacts) {
-        contactList.clearSelection();
-        contactListModel.addAll(contacts);
+        contactPanel.clearSelection();
+        contactPanel.addContacts(contacts);
     }
     
     /** updates name according to number and operator */
@@ -673,7 +648,10 @@ public class MainFrame extends javax.swing.JFrame {
         Operator operator = (Operator)operatorComboBox.getSelectedItem();
         
         // skip if already selected right contact
-        Contact selected = (Contact) contactList.getSelectedValue();
+        Contact selected = null;
+        HashSet<Contact> selecteds = contactPanel.getSelectedContacts();
+        if (selecteds.size() > 0)
+            selected = selecteds.iterator().next();
         if (selected != null && selected.getCountryCode().equals(countryCode) &&
                 selected.getNumber().equals(number) &&
                 selected.getOperator().equals(operator))
@@ -690,10 +668,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         if (contact != null) {
-            contactList.setSelectedValue(contact,true);
+            contactPanel.setSelectedContact(contact);
             return true;
         } else {
-            contactList.clearSelection();
+            contactPanel.clearSelection();
             return false;
         }
     }
@@ -879,84 +857,13 @@ public class MainFrame extends javax.swing.JFrame {
             SMS sms = (SMS) smsQueueList.getSelectedValue();
             if (sms == null)
                 return;
-            contactList.clearSelection();
+            contactPanel.clearSelection();
             smsNumberTextField.setText(sms.getNumber().substring(4));
             smsTextPane.setText(sms.getText());
             operatorComboBox.setSelectedItem(sms.getOperator());
             nameLabel.setText(sms.getName());
             smsQueueListModel.remove(sms);
             smsTextPane.requestFocusInWindow();
-        }
-    }
-    
-    /** Add contact to contact list */
-    private class AddContactAction extends AbstractAction {
-        public AddContactAction() {
-            super(null,new ImageIcon(MainFrame.class.getResource(RES + "add.png")));
-            this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
-        }
-        public void actionPerformed(ActionEvent e) {
-            contactDialog.setTitle("Nový kontakt");
-            contactDialog.show(null);
-            Contact c = contactDialog.getResult();
-            if (c == null)
-                return;
-            contactListModel.add(c);
-            
-            contactList.clearSelection();
-            contactList.setSelectedValue(c, true);
-        }
-    }
-    
-    /** Edit contact from contact list */
-    private class EditContactAction extends AbstractAction {
-        public EditContactAction() {
-            super(null,new ImageIcon(MainFrame.class.getResource(RES + "edit.png")));
-            this.putValue(SHORT_DESCRIPTION,"Upravit označený kontakt");
-            this.setEnabled(false);
-        }
-        public void actionPerformed(ActionEvent e) {
-            Contact contact = (Contact)contactList.getSelectedValue();
-            contactDialog.setTitle("Upravit kontakt");
-            contactDialog.show(contact);
-            Contact c = contactDialog.getResult();
-            if (c == null)
-                return;
-            contactListModel.remove(contact);
-            contactListModel.add(c);
-            
-            contactList.clearSelection();
-            contactList.setSelectedValue(c, true);
-        }
-    }
-    
-    /** Remove contact from contact list */
-    private class RemoveContactAction extends AbstractAction {
-        public RemoveContactAction() {
-            super(null,new ImageIcon(MainFrame.class.getResource(RES + "remove.png")));
-            this.putValue(SHORT_DESCRIPTION,"Odstranit označené kontakty");
-            this.setEnabled(false);
-        }
-        public void actionPerformed(ActionEvent e) {
-            JPanel panel = new JPanel();
-            panel.setLayout(new BorderLayout());
-            JLabel label = new JLabel("<html><b>Opravdu smazat následující kontakty?</b></html>");
-            JTextArea area = new JTextArea();
-            area.setEditable(false);
-            area.setRows(5);
-            for (Object o : contactList.getSelectedValues())
-                area.append(((Contact)o).getName() + "\n");
-            area.setCaretPosition(0);
-            panel.add(label, BorderLayout.PAGE_START);
-            panel.add(new JScrollPane(area), BorderLayout.CENTER);
-            //confirm
-            int result = JOptionPane.showOptionDialog(MainFrame.this,panel,"Opravdu smazat?",
-                    JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,null,JOptionPane.NO_OPTION);
-            if (result != JOptionPane.YES_OPTION)
-                return;
-            //delete
-            List<Object> list = Arrays.asList(contactList.getSelectedValues());
-            contactListModel.removeAll(list);
         }
     }
     
@@ -1297,193 +1204,13 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
-    /** Model for contact list */
-    private class ContactListModel extends AbstractListModel {
-        public int getSize() {
-            return contacts.size();
-        }
-        public Contact getElementAt(int index) {
-            return contacts.toArray(new Contact[0])[index];
-        }
-        public int indexOf(Contact element) {
-            return new ArrayList<Contact>(contacts).indexOf(element);
-        }
-        public void add(Contact element) {
-            if (contacts.add(element)) {
-                int index = indexOf(element);
-                fireIntervalAdded(this, index, index);
-            }
-        }
-        public boolean contains(Contact element) {
-            return contacts.contains(element);
-        }
-        public boolean remove(Contact element) {
-            int index = indexOf(element);
-            boolean removed = contacts.remove(element);
-            if (removed) {
-                fireIntervalRemoved(this, index, index);
-            }
-            return removed;
-        }
-        public void removeAll(Collection<Object> elements) {
-//            for (Object o : elements)
-//                remove((Contact)o); //TODO fix 'out of memory' when using remove()
-            int size = getSize();
-            contacts.removeAll(elements);
-            fireIntervalRemoved(this, 0, size);
-        }
-        public void addAll(Collection<Contact> elements) {
-            contacts.addAll(elements);
-            fireContentsChanged(this, 0, getSize());
-        }
-        protected void fireIntervalRemoved(Object source, int index0, int index1) {
-            super.fireIntervalRemoved(source, index0, index1);
-        }
-        protected void fireIntervalAdded(Object source, int index0, int index1) {
-            super.fireIntervalAdded(source, index0, index1);
-        }
-        protected void fireContentsChanged(Object source, int index0, int index1) {
-            super.fireContentsChanged(source, index0, index1);
-        }
-    }
-    
-    /** Listener for contact list */
-    private class ContactListSelectionListener implements ListSelectionListener {
-        public void valueChanged(ListSelectionEvent e) {
-            if (e.getValueIsAdjusting())
-                return;
-            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-            int index = lsm.getMinSelectionIndex();
-            int count = contactList.getSelectedIndices().length;
-            
-            // fill sms components with current contact
-            if (count == 1) { //only one contact selected
-                Contact c = (Contact) contactList.getModel().getElementAt(index);
-                smsNumberTextField.setText(c.getNumber());
-                operatorComboBox.setSelectedItem(c.getOperator());
-                nameLabel.setText(c.getName());
-            }
-            
-            setMultiSendMode(count > 1);
-            
-            //update envelope
-            Set<Contact> set = new HashSet<Contact>();
-            for (Object o : contactList.getSelectedValues())
-                set.add((Contact)o);
-            if (count < 1)
-                set.add(new Contact(nameLabel.getText(), "+420", smsNumberTextField.getText(),
-                        (Operator)operatorComboBox.getSelectedItem()));
-            envelope.setContacts(set);
-            
-            // update components
-            removeContactAction.setEnabled(count != 0);
-            editContactAction.setEnabled(count == 1);
-            sendAction.updateStatus();
-            smsTextPaneDocumentFilter.requestUpdate();
-            if (count > 0)
-                smsTextPane.requestFocusInWindow();
-        }
-        
-        /** prepare components for multisend mode or normal mode */
-        private void setMultiSendMode(boolean enable) {
-            String sendLabel = "Hromadné odesílání";
-            if (enable) {
-                String tooltip = "<html>Pro zrušení módu hromadného odesílání<br>"
-                        + "označte v seznamu kontaktů jediný kontakt</html>";
-                nameLabel.setText(sendLabel);
-                nameLabel.setToolTipText(tooltip);
-                smsNumberTextField.setText("");
-                smsNumberTextField.setToolTipText(tooltip);
-                smsNumberTextField.setEnabled(false);
-                operatorComboBox.setEnabled(false);
-            } else {
-                if (nameLabel.getText().equals(sendLabel))
-                    nameLabel.setText("");
-                nameLabel.setToolTipText(null);
-                smsNumberTextField.setEnabled(true);
-                smsNumberTextField.setToolTipText(null);
-                operatorComboBox.setEnabled(true);
-            }
-        }
-    }
-    
-    /** Renderer for items in contact list */
-    private class ContactListRenderer implements ListCellRenderer {
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
-            Contact contact = (Contact)value;
-            //add operator logo
-            ((JLabel)c).setIcon(contact.getOperator().getIcon());
-            //set tooltip
-            ((JLabel)c).setToolTipText(contact.getNumber());
-            
-            return c;
-        }
-    }
-    
-    /** dialog for creating and editing contact */
-    private class ContactDialog extends JDialog implements PropertyChangeListener {
-        ContactPanel panel;
-        JOptionPane optionPane;
-        Contact contact;
-        public ContactDialog() {
-            super(MainFrame.this, "Kontakt", true);
-            panel = new ContactPanel();
-            optionPane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE,
-                    JOptionPane.OK_CANCEL_OPTION);
-            optionPane.addPropertyChangeListener(this);
-            setContentPane(optionPane);
-            pack();
-            setLocationRelativeTo(MainFrame.this);
-            setDefaultCloseOperation(HIDE_ON_CLOSE);
-        }
-        public void show(Contact c) {
-            optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
-            panel.setContact(c);
-            panel.prepareForShow();
-            setVisible(true);
-        }
-        public void propertyChange(PropertyChangeEvent e) {
-            String prop = e.getPropertyName();
-            
-            if (isVisible()
-            && (e.getSource() == optionPane)
-            && (JOptionPane.VALUE_PROPERTY.equals(prop))) {
-                Object value = optionPane.getValue();
-                
-                if (value == JOptionPane.UNINITIALIZED_VALUE) {
-                    //ignore reset
-                    return;
-                }
-                if ((Integer)value != JOptionPane.OK_OPTION) {
-                    setVisible(false);
-                    return;
-                }
-                
-                //verify inputs
-                if (!panel.validateForm()) {
-                    optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
-                    return;
-                }
-                //inputs verified, all ok
-                contact = panel.getContact();
-                setVisible(false);
-            }
-        }
-        public Contact getResult() {
-            return contact;
-        }
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JButton addContactButton;
     private javax.swing.JMenuItem configMenuItem;
-    private javax.swing.JList contactList;
-    private javax.swing.JPanel contactPanel;
+    private esmska.gui.ContactPanel contactPanel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
-    private javax.swing.JButton editContactButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JSplitPane horizontalSplitPane;
@@ -1494,15 +1221,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JLabel nameLabel;
-    javax.swing.JComboBox operatorComboBox;
+    private javax.swing.JComboBox operatorComboBox;
     private javax.swing.JButton pauseButton;
     private javax.swing.JMenu programMenu;
     private javax.swing.JPanel queuePanel;
-    private javax.swing.JButton removeContactButton;
     private javax.swing.JButton sendButton;
     private javax.swing.JLabel smsCounterLabel;
     private javax.swing.JProgressBar smsDelayProgressBar;
