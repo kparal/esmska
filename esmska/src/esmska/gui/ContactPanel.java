@@ -29,6 +29,7 @@ import javax.swing.Action;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -37,11 +38,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
-/**
+/** Contact list panel
  *
  * @author  ripper
  */
@@ -110,7 +112,12 @@ public class ContactPanel extends javax.swing.JPanel {
 
         contactList.setModel(contactListModel);
         contactList.setCellRenderer(new ContactListRenderer());
-        contactList.getSelectionModel().addListSelectionListener(new ContactListSelectionListener());
+        contactList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                contactListValueChanged(evt);
+            }
+        });
+
         jScrollPane4.setViewportView(contactList);
 
         editContactButton.setAction(editContactAction);
@@ -138,7 +145,7 @@ public class ContactPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(editContactButton)
@@ -147,6 +154,19 @@ public class ContactPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void contactListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_contactListValueChanged
+        if (evt.getValueIsAdjusting())
+            return;
+        
+        // update components
+        int count = contactList.getSelectedIndices().length;
+        removeContactAction.setEnabled(count != 0);
+        editContactAction.setEnabled(count == 1);
+        
+        //fire event
+        actionEventSupport.fireActionPerformed(ACTION_CONTACT_SELECTION_CHANGED, null);
+    }//GEN-LAST:event_contactListValueChanged
     
     /** Add contact to contact list */
     private class AddContactAction extends AbstractAction {
@@ -275,7 +295,8 @@ public class ContactPanel extends javax.swing.JPanel {
         JOptionPane optionPane;
         Contact contact;
         public ContactDialog() {
-            super(MainFrame.getInstance(), "Kontakt", true);
+            super((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, ContactPanel.this),
+                    "Kontakt", true);
             panel = new EditContactPanel();
             optionPane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE,
                     JOptionPane.OK_CANCEL_OPTION);
@@ -334,22 +355,6 @@ public class ContactPanel extends javax.swing.JPanel {
             ((JLabel)c).setToolTipText(contact.getNumber());
             
             return c;
-        }
-    }
-    
-    /** Listener for contact list */
-    private class ContactListSelectionListener implements ListSelectionListener {
-        public void valueChanged(ListSelectionEvent e) {
-            if (e.getValueIsAdjusting())
-                return;
-            
-            // update components
-            int count = contactList.getSelectedIndices().length;
-            removeContactAction.setEnabled(count != 0);
-            editContactAction.setEnabled(count == 1);
-            
-            //fire event
-            actionEventSupport.fireActionPerformed(ACTION_CONTACT_SELECTION_CHANGED, null);
         }
     }
     

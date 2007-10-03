@@ -73,7 +73,7 @@ public class SMSSender {
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             mainFrame.printStatusMessage("Zprávu pro " + sms
             + " se nepodařilo odeslat!");
-            mainFrame.pauseSMSQueue();
+            mainFrame.pauseSMSQueue(true);
             
             JOptionPane.showMessageDialog(mainFrame, new JLabel("<html>"
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
