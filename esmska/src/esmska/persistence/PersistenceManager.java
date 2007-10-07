@@ -93,6 +93,9 @@ public class PersistenceManager {
     
     /** Save program configuration */
     public void saveConfig() throws IOException {
+        //store current program version into config
+        config.setVersion(Config.getLatestVersion());
+        
         CONFIG_FILE.createNewFile();
         XMLEncoder xmlEncoder = new XMLEncoder(
                 new BufferedOutputStream(new FileOutputStream(CONFIG_FILE)));

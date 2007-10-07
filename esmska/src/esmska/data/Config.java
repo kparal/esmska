@@ -20,7 +20,7 @@ import java.util.List;
 public class Config extends Object implements Serializable {
     public static String LATEST_VERSION = "0.4.0";
     
-    private String version = LATEST_VERSION;
+    private String version = "";
     private boolean rememberQueue = true;
     private String senderName = "";
     private String senderNumber = "";
@@ -38,6 +38,10 @@ public class Config extends Object implements Serializable {
     
     public Config() {
         propertySupport = new PropertyChangeSupport(this);
+    }
+    
+    public static String getLatestVersion() {
+        return LATEST_VERSION;
     }
     
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -243,7 +247,8 @@ public class Config extends Object implements Serializable {
 
     /**
      * Getter for property version.
-     * @return Value of property version.
+     * @return Version of program, that lastly saved configuration.
+     * May return empty string, which means latest version.
      */
     public String getVersion() {
         return this.version;
