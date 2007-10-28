@@ -26,6 +26,7 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import esmska.data.SMS;
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**
  * MainFrame form
@@ -172,10 +173,14 @@ public class MainFrame extends javax.swing.JFrame {
         horizontalSplitPane.setBorder(null);
         horizontalSplitPane.setResizeWeight(0.5);
         horizontalSplitPane.setContinuousLayout(true);
+        horizontalSplitPane.setOneTouchExpandable(true);
+        horizontalSplitPane.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         verticalSplitPane.setBorder(null);
         verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         verticalSplitPane.setResizeWeight(1.0);
         verticalSplitPane.setContinuousLayout(true);
+        verticalSplitPane.setOneTouchExpandable(true);
+        verticalSplitPane.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         smsPanel.addActionListener(new SMSListener());
         verticalSplitPane.setLeftComponent(smsPanel);
 
