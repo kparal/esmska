@@ -64,7 +64,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="139" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="140" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -135,6 +135,9 @@
           <Connection code="sendAction" type="code"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value=" sendButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="smsCounterLabel">
       <Properties>

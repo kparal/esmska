@@ -52,6 +52,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 import javax.swing.undo.UndoManager;
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 /** Panel for writing and sending sms, and for setting immediate contact
  *
@@ -303,6 +304,7 @@ public class SMSPanel extends javax.swing.JPanel {
     operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
 
     sendButton.setAction(sendAction);
+    sendButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
 
     smsCounterLabel.setText("0 znak\u016f (0 sms)");
 
@@ -353,7 +355,7 @@ public class SMSPanel extends javax.swing.JPanel {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sendButton)
@@ -570,7 +572,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox operatorComboBox;
     private javax.swing.JButton sendButton;
     private javax.swing.JLabel smsCounterLabel;
-    private javax.swing.JTextField smsNumberTextField;
+    javax.swing.JTextField smsNumberTextField;
     private javax.swing.JTextPane smsTextPane;
     // End of variables declaration//GEN-END:variables
     
