@@ -209,7 +209,7 @@
           <SubComponents>
             <Component class="esmska.gui.SMSPanel" name="smsPanel">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="smsPanel.addActionListener(new SMSListener());"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="smsPanel.addActionListener(new SMSListener());&#xa;smsPanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
@@ -219,7 +219,7 @@
             </Component>
             <Component class="esmska.gui.QueuePanel" name="queuePanel">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="queuePanel.addActionListener(new QueueListener());"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="queuePanel.addActionListener(new QueueListener());&#xa;queuePanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
@@ -231,7 +231,7 @@
         </Container>
         <Component class="esmska.gui.ContactPanel" name="contactPanel">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="contactPanel.addActionListener(new ContactListener());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="contactPanel.addActionListener(new ContactListener());&#xa;contactPanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">

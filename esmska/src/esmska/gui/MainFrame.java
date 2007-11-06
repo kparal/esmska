@@ -182,14 +182,17 @@ public class MainFrame extends javax.swing.JFrame {
         verticalSplitPane.setOneTouchExpandable(true);
         verticalSplitPane.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         smsPanel.addActionListener(new SMSListener());
+        smsPanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         verticalSplitPane.setLeftComponent(smsPanel);
 
         queuePanel.addActionListener(new QueueListener());
+        queuePanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         verticalSplitPane.setRightComponent(queuePanel);
 
         horizontalSplitPane.setLeftComponent(verticalSplitPane);
 
         contactPanel.addActionListener(new ContactListener());
+        contactPanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         horizontalSplitPane.setRightComponent(contactPanel);
 
         programMenu.setMnemonic('r');
