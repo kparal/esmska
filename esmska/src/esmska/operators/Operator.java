@@ -9,17 +9,17 @@
 
 package esmska.operators;
 
-import java.net.URL;
 import esmska.data.SMS;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /** Interface to operators
  *
  * @author ripper
  */
 public interface Operator {
-    /** get image url so user can type the code */
-    URL getSecurityImage();
+    /** get icon so user can type the code */
+    ImageIcon getSecurityImage();
     /** send the sms */
     boolean send(SMS sms);
     /** maximum sendable chars */

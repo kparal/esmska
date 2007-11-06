@@ -9,9 +9,10 @@
 
 package esmska.data;
 
-import java.net.URL;
 import java.text.Normalizer;
 import esmska.operators.Operator;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /** SMS entity class
  *
@@ -23,7 +24,7 @@ public class SMS {
     private String text; //message text
     private String senderNumber;
     private String senderName;
-    private URL image; //security image
+    private ImageIcon image; //security image
     private String imageCode; //security image code
     private Operator operator;
     private Status status = Status.WAITING; //sms status
@@ -85,11 +86,11 @@ public class SMS {
         this.senderName = senderName;
     }
     
-    public URL getImage() {
+    public ImageIcon getImage() {
         return image;
     }
     
-    public void setImage(URL image) {
+    public void setImage(ImageIcon image) {
         this.image = image;
     }
     

@@ -11,6 +11,8 @@ package esmska.operators;
 
 import esmska.*;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.CookieHandler;
@@ -24,6 +26,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import esmska.data.SMS;
 
@@ -38,8 +41,9 @@ public class O2 implements Operator {
     private static final int MAX_PARTS = 5;
     private static final int SIGNATURE_EXTRA_LENGTH = 0;
     private static final boolean SUPPORTS_SIGNATURE = false;
-    private static final ImageIcon ICON = 
+    private static final ImageIcon ICON =
             new ImageIcon(Vodafone.class.getResource(RES + "operators/O2.png"));
+    private static final String referer = "http://www.cz.o2.com/mobile/cz/smsGateway/";
     CookieManager manager;
     
     /**
@@ -48,14 +52,15 @@ public class O2 implements Operator {
     public O2() {
     }
     
-    public URL getSecurityImage() {
+    public ImageIcon getSecurityImage() {
         CookieHandler.setDefault(null);
         manager = new CookieManager();
         manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        URL url = null;
+        ImageIcon image = null;
         try {
-            url = new URL("http://www2.cz.o2.com/sms/SMSGWChargingClient?action=edit");
+            URL url = new URL("http://www2.cz.o2.com/sms/SMSGWChargingClient?action=edit");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestProperty("Referer",referer);
             List<String> cookies = con.getHeaderFields().get("Set-Cookie");
             con.disconnect();
             
@@ -72,10 +77,20 @@ public class O2 implements Operator {
             }
             
             url = new URL("http://www2.cz.o2.com/sms/SMSGWChargingClient?action=image");
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestProperty("Referer",referer);
+            InputStream is = con.getInputStream();
+            byte[] buffer = new byte[1024];
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            int count = 0;
+            while ((count = is.read(buffer)) >= 0)
+                os.write(buffer,0,count);
+            image = new ImageIcon(os.toByteArray());
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return url;
+        return image;
     }
     
     public boolean send(SMS sms) {
@@ -83,6 +98,7 @@ public class O2 implements Operator {
         try {
             URL url = new URL("http://www2.cz.o2.com/sms/SMSGWChargingClient");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestProperty("Referer",referer);
             con.setDoOutput(true);
             con.setUseCaches(false);
             con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=windows-1250");
@@ -132,6 +148,7 @@ public class O2 implements Operator {
             con = (HttpURLConnection) url.openConnection();
             con.setDoOutput(true);
             con.setUseCaches(false);
+            con.setRequestProperty("Referer",referer);
             con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=windows-1250");
             wr = new OutputStreamWriter(con.getOutputStream(), "windows-1250");
             //send POST request

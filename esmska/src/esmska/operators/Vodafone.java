@@ -9,7 +9,6 @@
 
 package esmska.operators;
 
-import esmska.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -20,6 +19,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import esmska.data.SMS;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /** Vodafone operator
  *
@@ -32,7 +33,7 @@ public class Vodafone implements Operator {
     private static final int MAX_PARTS = 1;
     private static final int SIGNATURE_EXTRA_LENGTH = 5;
     private static final boolean SUPPORTS_SIGNATURE = true;
-    private static final ImageIcon ICON = 
+    private static final ImageIcon ICON =
             new ImageIcon(Vodafone.class.getResource(RES + "operators/Vodafone.png"));
     private String imgid;
     private String ppp;
@@ -42,10 +43,10 @@ public class Vodafone implements Operator {
     public Vodafone() {
     }
     
-    public URL getSecurityImage() {
-        URL url = null;
+    public ImageIcon getSecurityImage() {
+        ImageIcon image = null;
         try {
-            url = new URL("http://sms.vodafone.cz/");
+            URL url = new URL("http://sms.vodafone.cz/");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(con.getInputStream(),"UTF-8"));
@@ -73,10 +74,19 @@ public class Vodafone implements Operator {
             if (m.find())
                 ppp = m.group(1);
             
+            con = (HttpURLConnection) url.openConnection();
+            InputStream is = con.getInputStream();
+            byte[] buffer = new byte[1024];
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            int count = 0;
+            while ((count = is.read(buffer)) >= 0)
+                os.write(buffer,0,count);
+            image = new ImageIcon(os.toByteArray());
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return url;
+        return image;
     }
     
     public boolean send(SMS sms) {

@@ -106,10 +106,8 @@ public class SMSSender {
                 SwingUtilities.invokeAndWait(new Runnable() {
                     public void run() {
                         JPanel panel = new JPanel();
-                        Image image = Toolkit.getDefaultToolkit().getImage(sms.getImage());
-                        image.flush();
                         JLabel label = new JLabel("Opište kód z obrázku:",
-                                new ImageIcon(image), JLabel.CENTER);
+                                sms.getImage(), JLabel.CENTER);
                         label.setHorizontalTextPosition(JLabel.CENTER);
                         label.setVerticalTextPosition(JLabel.TOP);
                         panel.add(label);
