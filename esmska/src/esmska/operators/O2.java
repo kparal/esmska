@@ -212,7 +212,7 @@ public class O2 implements Operator {
     }
     
     public boolean equals(Object obj) {
-        return (obj instanceof O2);
+        return (obj == this || obj instanceof O2);
     }
     
     public int getMaxParts() {

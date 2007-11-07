@@ -163,7 +163,7 @@ public class Vodafone implements Operator {
     }
     
     public boolean equals(Object obj) {
-        return (obj instanceof Vodafone);
+        return (obj == this || obj instanceof Vodafone);
     }
     
     public int getMaxParts() {

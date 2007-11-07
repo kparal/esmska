@@ -106,7 +106,7 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
     public String getCountryCode() {
         return this.countryCode;
     }
-
+    
     /**
      * Setter for property countryCode.
      * @param countryCode New value of property countryCode.
@@ -114,7 +114,7 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
     public void setCountryCode(String countryCode) {
         String oldCountryCode = this.countryCode;
         this.countryCode = countryCode;
-        propertySupport.firePropertyChange ("countryCode", oldCountryCode, countryCode);
+        propertySupport.firePropertyChange("countryCode", oldCountryCode, countryCode);
     }
     
     public int compareTo(Contact c) {
@@ -126,11 +126,11 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
         if (result != 0)
             return result;
         //country code
-            result = collator.compare(this.getCountryCode(), c.getCountryCode());
+        result = collator.compare(this.getCountryCode(), c.getCountryCode());
         if (result != 0)
             return result;
         //number
-            result = collator.compare(this.getNumber(), c.getNumber());
+        result = collator.compare(this.getNumber(), c.getNumber());
         if (result != 0)
             return result;
         //operator
@@ -147,8 +147,10 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
     public String toString() {
         return getName();
     }
-
+    
     public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
         if (!(obj instanceof Contact))
             return false;
         Contact c = (Contact) obj;
@@ -156,7 +158,13 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
         return getName().equals(c.getName()) && getCountryCode().equals(c.getCountryCode()) &&
                 getNumber().equals(c.getNumber()) && getOperator().equals(c.getOperator());
     }
-
+    
+    public int hashCode() {
+        return (getName() == null ? 13 : getName().hashCode()) *
+                (getCountryCode() == null ? 17 : getCountryCode().hashCode()) *
+                (getNumber() == null ? 23 : getNumber().hashCode()) *
+                (getOperator() == null ? 31 : getOperator().toString().hashCode());
+    }
     
     
 }
