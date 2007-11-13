@@ -1,2 +1,2 @@
 #!/bin/sh
-java -jar esmska.jar
+java -jar esmska.jar $*

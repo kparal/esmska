@@ -7,4 +7,4 @@ Domovská stránka: http://esmska.googlecode.com/
 
 Požadavky: Java 6 (http://www.java.com/)
 
-Spuštění: Spusťte soubor esmska.jar, případně esmska.sh (v Linuxu apod.) či esmska.bat (ve Windows).
+Spuštění: Spusťte soubor esmska.jar, případně esmska.sh (v Linuxu apod.) či esmska.bat (ve Windows). Pokročilou nápovědu získáte parametrem '--help'.
