@@ -46,7 +46,7 @@ public class Vodafone implements Operator {
     public ImageIcon getSecurityImage() {
         ImageIcon image = null;
         try {
-            URL url = new URL("http://sms.vodafone.cz/");
+            URL url = new URL("http://www.vodafonesms.cz/");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(con.getInputStream(),"UTF-8"));
@@ -65,7 +65,7 @@ public class Vodafone implements Operator {
             Matcher m = p.matcher(content);
             if (m.find()) {
                 imgid = m.group(1);
-                url = new URL("http://sms.vodafone.cz/imgcode.php?id=" + imgid);
+                url = new URL("http://www.vodafonesms.cz/imgcode.php?id=" + imgid);
             }
             
             //find ppp
@@ -95,7 +95,7 @@ public class Vodafone implements Operator {
         if (senderNumber != null)
             senderNumber = senderNumber.replaceFirst("\\+420", "");
         try {
-            URL url = new URL("http://sms.vodafone.cz/send.php");
+            URL url = new URL("http://www.vodafonesms.cz/send.php");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setDoOutput(true);
             con.setUseCaches(false);
