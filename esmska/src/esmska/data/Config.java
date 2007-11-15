@@ -18,7 +18,7 @@ import java.util.List;
  * @author ripper
  */
 public class Config extends Object implements Serializable {
-    public static String LATEST_VERSION = "0.5.0";
+    public static String LATEST_VERSION = "0.5.1";
     
     private String version = "";
     private boolean rememberQueue = true;
