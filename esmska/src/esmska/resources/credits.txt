@@ -7,3 +7,6 @@ Grafika:
   Gajim <http://www.gajim.org>
   JGoodies <http://jgoodies.com/>
   Substance <https://substance.dev.java.net/>
+
+Sponzoři:
+  Vladimír Burian
