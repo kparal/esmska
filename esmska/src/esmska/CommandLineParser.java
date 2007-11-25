@@ -36,7 +36,7 @@ public class CommandLineParser {
             String arg = (String) it.next();
             if (arg.equals("-h") || arg.equals("--help")) {
                 printUsage();
-                System.exit(1);
+                System.exit(0);
             } else if (arg.equals("-p") || arg.equals("--portable")) {
                 portable = true;
             } else if (arg.equals("-c") || arg.equals("--config")) {
