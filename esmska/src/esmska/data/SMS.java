@@ -9,9 +9,7 @@
 
 package esmska.data;
 
-import java.text.Normalizer;
 import esmska.operators.Operator;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /** SMS entity class
@@ -44,12 +42,6 @@ public class SMS {
     public SMS() {
     }
     
-    /** remove diacritical marks from text */
-    private static String removeAccents(String text) {
-        return Normalizer.normalize(text, Normalizer.Form.NFD).
-                replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-    }
-    
     public String toString() {
         return getName()!=null&&!getName().equals("")?getName():getNumber();
     }
@@ -67,7 +59,7 @@ public class SMS {
     }
     
     public void setText(String text) {
-        this.text = removeAccents(text);
+        this.text = text;
     }
     
     public String getSenderNumber() {

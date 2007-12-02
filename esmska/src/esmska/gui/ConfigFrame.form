@@ -64,11 +64,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="rememberLayoutCheckBox" min="-2" max="-2" attributes="0"/>
                           <Component id="rememberQueueCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="removeAccentsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="202" max="32767" attributes="0"/>
                   </Group>
@@ -81,7 +82,9 @@
                       <Component id="rememberLayoutCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="rememberQueueCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="187" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="166" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -117,6 +120,22 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rememberLayoutCheckBoxActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="removeAccentsCheckBox">
+              <Properties>
+                <Property name="mnemonic" type="int" value="100"/>
+                <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="config.isRemoveAccents()" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Ze zpr&#xe1;v odstra&#x148;ovat diakritiku"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;ed odesl&#xe1;n&#xed;m zpr&#xe1;vy z n&#xed; odstran&#xed; v&#x161;echna diakritick&#xe1; znam&#xe9;nka.&#xa;&lt;/html&gt;"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[0, 0, 0, 0]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeAccentsCheckBoxActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

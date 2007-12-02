@@ -96,6 +96,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         rememberQueueCheckBox = new javax.swing.JCheckBox();
         rememberLayoutCheckBox = new javax.swing.JCheckBox();
+        removeAccentsCheckBox = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lafComboBox = new javax.swing.JComboBox();
@@ -145,6 +146,17 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        removeAccentsCheckBox.setMnemonic('d');
+        removeAccentsCheckBox.setSelected(config.isRemoveAccents());
+        removeAccentsCheckBox.setText("Ze zpr\u00e1v odstra\u0148ovat diakritiku");
+        removeAccentsCheckBox.setToolTipText("<html>\nP\u0159ed odesl\u00e1n\u00edm zpr\u00e1vy z n\u00ed odstran\u00ed v\u0161echna diakritick\u00e1 znam\u00e9nka.\n</html>");
+        removeAccentsCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        removeAccentsCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeAccentsCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,7 +165,8 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rememberLayoutCheckBox)
-                    .addComponent(rememberQueueCheckBox))
+                    .addComponent(rememberQueueCheckBox)
+                    .addComponent(removeAccentsCheckBox))
                 .addContainerGap(202, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,7 +176,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(rememberLayoutCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rememberQueueCheckBox)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(removeAccentsCheckBox)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         tabbedPane.addTab("Obecn\u00e9", jPanel1);
 
@@ -357,6 +372,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     );
     pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void removeAccentsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAccentsCheckBoxActionPerformed
+        config.setRemoveAccents(removeAccentsCheckBox.isSelected());
+    }//GEN-LAST:event_removeAccentsCheckBoxActionPerformed
     
     private void windowDecorationsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_windowDecorationsCheckBoxActionPerformed
         config.setLafWindowDecorated(windowDecorationsCheckBox.isSelected());
@@ -434,6 +453,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox lafComboBox;
     private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;
+    private javax.swing.JCheckBox removeAccentsCheckBox;
     private javax.swing.JTextField senderNameTextField;
     private javax.swing.JTextField senderNumberTextField;
     private javax.swing.JTabbedPane tabbedPane;

@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import esmska.data.Config;
-import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
-import esmska.data.SMS;
+import java.text.Normalizer;
 
 /** Class for preparing attributes of sms (single or multiple)
  *
@@ -38,6 +36,8 @@ public class Envelope {
     
     /** set text of sms */
     public void setText(String text) {
+        if (config.isRemoveAccents())
+            text = removeAccents(text);
         this.text = text;
     }
     
@@ -116,5 +116,11 @@ public class Envelope {
             return c.getOperator().getSignatureExtraLength() + config.getSenderName().length();
         else
             return 0;
+    }
+    
+    /** remove diacritical marks from text */
+    private static String removeAccents(String text) {
+        return Normalizer.normalize(text, Normalizer.Form.NFD).
+                replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 }

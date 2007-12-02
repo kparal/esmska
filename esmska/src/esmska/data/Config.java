@@ -33,6 +33,7 @@ public class Config extends Object implements Serializable {
     private boolean lafWindowDecorated = true;
     private String lafJGoodiesTheme = "Experience Blue";
     private String lafSubstanceSkin = "Sahara";
+    private boolean removeAccents = true;
     
     private PropertyChangeSupport propertySupport;
     
@@ -262,6 +263,24 @@ public class Config extends Object implements Serializable {
         String oldVersion = this.version;
         this.version = version;
         propertySupport.firePropertyChange ("version", oldVersion, version);
+    }
+
+    /**
+     * Getter for property removeAccents.
+     * @return Value of property removeAccents.
+     */
+    public boolean isRemoveAccents() {
+        return this.removeAccents;
+    }
+
+    /**
+     * Setter for property removeAccents.
+     * @param removeAccents New value of property removeAccents.
+     */
+    public void setRemoveAccents(boolean removeAccents) {
+        boolean oldRemoveAccents = this.removeAccents;
+        this.removeAccents = removeAccents;
+        propertySupport.firePropertyChange ("removeAccents", new Boolean (oldRemoveAccents), new Boolean (removeAccents));
     }
 
 }
