@@ -42,6 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Action configAction = new ConfigAction();
     private ImportAction importAction = new ImportAction();
     private Action exportAction = new ExportAction();
+    private Action compressAction = new CompressAction();
     
     /** actual queue of sms's */
     private List<SMS> smsQueue = PersistenceManager.getQueue();
@@ -120,6 +121,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu = new javax.swing.JMenu();
         importMenuItem = new javax.swing.JMenuItem();
         exportMenuItem = new javax.swing.JMenuItem();
+        compressMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esmska");
@@ -216,6 +218,9 @@ public class MainFrame extends javax.swing.JFrame {
         exportMenuItem.setAction(exportAction);
         toolsMenu.add(exportMenuItem);
 
+        compressMenuItem.setAction(compressAction);
+        toolsMenu.add(compressMenuItem);
+
         menuBar.add(toolsMenu);
 
         setJMenuBar(menuBar);
@@ -246,7 +251,7 @@ public class MainFrame extends javax.swing.JFrame {
         saveContacts();
         saveQueue();
     }//GEN-LAST:event_formWindowClosing
-        
+    
     /** Prints message to status bar */
     public void printStatusMessage(String message) {
         statusMessageLabel.setText(message);
@@ -411,6 +416,18 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
+    /** compress current sms text by rewriting it to CamelCase */
+    private class CompressAction extends AbstractAction {
+        public CompressAction() {
+            super("Zkomprimovat zprávu", new ImageIcon(MainFrame.class.getResource(RES + "compress.png")));
+            this.putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\".");
+            putValue(MNEMONIC_KEY, KeyEvent.VK_K);
+        }
+        public void actionPerformed(ActionEvent e) {
+            smsPanel.compressSMS();
+        }
+    }
+    
     /** Progress bar action listener after sending sms */
     private class SMSDelayActionListener implements ActionListener {
         private final int DELAY = 15;
@@ -482,6 +499,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JMenuItem compressMenuItem;
     private javax.swing.JMenuItem configMenuItem;
     private esmska.gui.ContactPanel contactPanel;
     private javax.swing.JMenuItem exitMenuItem;

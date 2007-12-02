@@ -26,6 +26,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
@@ -152,6 +154,25 @@ public class SMSPanel extends javax.swing.JPanel {
             actionEventSupport.fireActionPerformed(ACTION_REQUEST_CLEAR_CONTACT_SELECTION, null);
             return false;
         }
+    }
+    
+    /** compress current sms text by rewriting it to CamelCase */
+    public void compressSMS() {
+        String text = smsTextPane.getText();
+        if (text == null || text.equals(""))
+            return;
+        
+        text = text.replaceAll("\\s", " "); //all whitespace to spaces
+        text = Pattern.compile("(\\s)\\s+", Pattern.DOTALL).matcher(text).replaceAll("$1"); //remove duplicate whitespaces
+        Pattern pattern = Pattern.compile("\\s+(.)", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()) { //find next space+character
+            text = matcher.replaceFirst(matcher.group(1).toUpperCase()); //replace by upper character
+            matcher = pattern.matcher(text);
+        }
+        text = text.replaceAll(" $",""); //remove trailing space
+        
+        smsTextPane.setText(text);
     }
     
     /** get contact which was requested to be selected in contact list */
