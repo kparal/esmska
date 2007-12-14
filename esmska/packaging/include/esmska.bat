@@ -1,1 +1,1 @@
-java -jar esmska.jar %*
+@start javaw -jar esmska.jar %*
