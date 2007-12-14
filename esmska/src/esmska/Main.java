@@ -86,7 +86,7 @@ public class Main {
         //set L&F
         try {
             ThemeManager.setLaF();
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             ex.printStackTrace();
         }
         
