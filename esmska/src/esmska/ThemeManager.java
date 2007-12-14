@@ -9,12 +9,11 @@
 
 package esmska;
 
-import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.ExperienceBlue;
-import com.jgoodies.looks.plastic.theme.ExperienceGreen;
+import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -30,7 +29,8 @@ import esmska.persistence.PersistenceManager;
  */
 public class ThemeManager {
     public static String LAF_SYSTEM = "System";
-    public static String LAF_CROSSPLATFORM =  "Crossplatform";
+    public static String LAF_CROSSPLATFORM = "Crossplatform";
+    public static String LAF_GTK = "GTK";
     public static String LAF_JGOODIES = "JGoodies";
     public static String LAF_SUBSTANCE = "Substance";
     
@@ -50,6 +50,9 @@ public class ThemeManager {
             
         } else if (laf.equals(LAF_CROSSPLATFORM)) {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            
+        } else if (laf.equals(LAF_GTK)) {
+            UIManager.setLookAndFeel(GTKLookAndFeel.class.getName());
             
         } else if (laf.equals(LAF_JGOODIES)) {
             String themeString = config.getLafJGoodiesTheme();

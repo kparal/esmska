@@ -30,6 +30,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private boolean fullyInicialized;
     private final String LAF_SYSTEM = "Systémový";
     private final String LAF_CROSSPLATFORM = "Meziplatformní";
+    private final String LAF_GTK = "GTK";
     private final String LAF_JGOODIES = "JGoodies";
     private final String LAF_SUBSTANCE = "Substance";
     
@@ -46,11 +47,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         closeButton.requestFocusInWindow();
         
         lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
-            LAF_SYSTEM, LAF_CROSSPLATFORM, LAF_JGOODIES, LAF_SUBSTANCE}));
+            LAF_SYSTEM, LAF_CROSSPLATFORM, LAF_GTK, LAF_JGOODIES, LAF_SUBSTANCE}));
         if (config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM))
             lafComboBox.setSelectedItem(LAF_SYSTEM);
         else if (config.getLookAndFeel().equals(ThemeManager.LAF_CROSSPLATFORM))
             lafComboBox.setSelectedItem(LAF_CROSSPLATFORM);
+        else if (config.getLookAndFeel().equals(ThemeManager.LAF_GTK))
+            lafComboBox.setSelectedItem(LAF_GTK);
         else if (config.getLookAndFeel().equals(ThemeManager.LAF_JGOODIES))
             lafComboBox.setSelectedItem(LAF_JGOODIES);
         else if (config.getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE))
@@ -399,6 +402,8 @@ public class ConfigFrame extends javax.swing.JFrame {
             config.setLookAndFeel(ThemeManager.LAF_SYSTEM);
         else if (laf.equals(LAF_CROSSPLATFORM))
             config.setLookAndFeel(ThemeManager.LAF_CROSSPLATFORM);
+        else if (laf.equals(LAF_GTK))
+            config.setLookAndFeel(ThemeManager.LAF_GTK);
         else if (laf.equals(LAF_JGOODIES))
             config.setLookAndFeel(ThemeManager.LAF_JGOODIES);
         else if (laf.equals(LAF_SUBSTANCE))
