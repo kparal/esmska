@@ -26,6 +26,7 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import esmska.data.SMS;
+import esmska.utils.UpdateChecker;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**
@@ -88,6 +89,13 @@ public class MainFrame extends javax.swing.JFrame {
         
         //setup components
         smsDelayTimer.setInitialDelay(0);
+        
+        //check for updates
+        if (config.isCheckForUpdates()) {
+            UpdateChecker updateChecker = new UpdateChecker();
+            updateChecker.addActionListener(new UpdateListener());
+            updateChecker.checkForUpdates();
+        }
     }
     
     public static MainFrame getInstance() {
@@ -494,6 +502,12 @@ public class MainFrame extends javax.swing.JFrame {
                     break;
                 default: System.err.println("Uknown sms event type: " + e.getID());
             }
+        }
+    }
+    
+    private class UpdateListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            printStatusMessage("Byla vydána nová verze programu!");
         }
     }
     

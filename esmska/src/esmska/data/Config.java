@@ -10,15 +10,12 @@ import esmska.ThemeManager;
 import java.awt.Dimension;
 import java.beans.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /** Config properties of the whole program
  * @author ripper
  */
 public class Config extends Object implements Serializable {
-    public static String LATEST_VERSION = "0.5.1";
+    private static final String LATEST_VERSION = "0.5.1";
     
     private String version = "";
     private boolean rememberQueue = true;
@@ -34,14 +31,15 @@ public class Config extends Object implements Serializable {
     private String lafJGoodiesTheme = "Experience Blue";
     private String lafSubstanceSkin = "Sahara";
     private boolean removeAccents = true;
-    
+    private boolean checkForUpdates = true;
+
     private PropertyChangeSupport propertySupport;
     
     public Config() {
         propertySupport = new PropertyChangeSupport(this);
     }
     
-    public static String getLatestVersion() {
+    public static final String getLatestVersion() {
         return LATEST_VERSION;
     }
     
@@ -283,4 +281,11 @@ public class Config extends Object implements Serializable {
         propertySupport.firePropertyChange ("removeAccents", new Boolean (oldRemoveAccents), new Boolean (removeAccents));
     }
 
+    public boolean isCheckForUpdates() {
+        return checkForUpdates;
+    }
+
+    public void setCheckForUpdates(boolean checkForUpdates) {
+        this.checkForUpdates = checkForUpdates;
+    }
 }
