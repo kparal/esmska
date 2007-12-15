@@ -26,7 +26,7 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import esmska.data.SMS;
-import esmska.utils.UpdateChecker;
+import esmska.UpdateChecker;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**

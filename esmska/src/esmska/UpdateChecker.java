@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package esmska.utils;
+package esmska;
 
+import esmska.utils.*;
 import esmska.data.Config;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -47,7 +48,7 @@ public class UpdateChecker {
      */
     private boolean parseUpdateFile(String text) {
         String downloadedVersion = "0.0.0";
-        Pattern pattern = Pattern.compile("Esmska: (.+)");
+        Pattern pattern = Pattern.compile("^Esmska: ([0-9.]+)$", Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {
             downloadedVersion = matcher.group(1);
@@ -83,6 +84,7 @@ public class UpdateChecker {
                 String line = "";
                 while ((line = br.readLine()) != null) {
                     builder.append(line);
+                    builder.append('\n');
                 }
                 con.disconnect();
 
