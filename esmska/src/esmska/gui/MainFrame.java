@@ -453,7 +453,7 @@ public class MainFrame extends javax.swing.JFrame {
         private final int DELAY = 15;
         private int seconds = 0;
         public void actionPerformed(ActionEvent e) {
-            if (seconds <= DELAY) { //still wainting
+            if (seconds <= DELAY) { //still waiting
                 smsDelayProgressBar.setValue(seconds);
                 smsDelayProgressBar.setString("Další sms za: " + (DELAY-seconds) + "s");
                 if (seconds == 0)
