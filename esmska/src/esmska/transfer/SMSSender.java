@@ -56,7 +56,7 @@ public class SMSSender {
             SMS sms = smsQueue.get(0);
             mainFrame.setTaskRunning(true);
             mainFrame.printStatusMessage("Posílám zprávu pro " + sms
-            + " (" + sms.getOperator() + ") ...");
+            + " (" + sms.getOperator() + ") ...", true);
             
             //send in worker thread
             smsWorker = new SMSWorker(sms);
@@ -67,12 +67,12 @@ public class SMSSender {
     private void finishedSending(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
             mainFrame.printStatusMessage("Zpráva pro " + sms
-            + " byla úspěšně odeslána.");
+            + " odeslána.", true);
             mainFrame.setSMSDelay();
         }
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             mainFrame.printStatusMessage("Zprávu pro " + sms
-            + " se nepodařilo odeslat!");
+            + " se nepodařilo odeslat!", true);
             mainFrame.pauseSMSQueue(true);
             
             JOptionPane.showMessageDialog(mainFrame, new JLabel("<html>"

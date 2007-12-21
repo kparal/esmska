@@ -27,6 +27,8 @@ import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import esmska.data.SMS;
 import esmska.UpdateChecker;
+import java.text.DateFormat;
+import java.util.Date;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**
@@ -37,6 +39,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 public class MainFrame extends javax.swing.JFrame {
     private static MainFrame instance;
     private static final String RES = "/esmska/resources/";
+    private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
     
     private Action quitAction = new QuitAction();
     private Action aboutAction = new AboutAction();
@@ -81,7 +84,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager = PersistenceManager.getInstance();
         } catch (IOException ex) {
             ex.printStackTrace();
-            printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!");
+            printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!", true);
         }
         loadConfig();
         if (smsQueue.size() > 0)
@@ -260,11 +263,20 @@ public class MainFrame extends javax.swing.JFrame {
         saveQueue();
     }//GEN-LAST:event_formWindowClosing
     
-    /** Prints message to status bar */
-    public void printStatusMessage(String message) {
-        statusMessageLabel.setText(message);
+    /** Prints message to status bar
+     * 
+     * @param message text
+     * @param printTime show timestamp before text
+     */
+    public void printStatusMessage(String message, boolean printTime) {
+        if (printTime) {
+            String time = shortTimeFormat.format(new Date());
+            statusMessageLabel.setText("[" + time + "] " + message);
+        } else {
+            statusMessageLabel.setText(message);
+        }
     }
-    
+
     /** Tells main form whether it should display task busy icon */
     public void setTaskRunning(boolean b) {
         if (b == false)
@@ -306,7 +318,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager.saveConfig();
         } catch (Exception ex) {
             ex.printStackTrace();
-            printStatusMessage("Nepodařilo se uložit nastavení!");
+            printStatusMessage("Nepodařilo se uložit nastavení!", true);
         }
     }
     
@@ -331,7 +343,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager.saveContacts();
         } catch (Exception ex) {
             ex.printStackTrace();
-            printStatusMessage("Nepodařilo se uložit kontakty!");
+            printStatusMessage("Nepodařilo se uložit kontakty!", true);
         }
     }
     
@@ -341,7 +353,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager.saveQueue();
         } catch (IOException ex) {
             ex.printStackTrace();
-            printStatusMessage("Nepodařilo se uložit frontu sms!");
+            printStatusMessage("Nepodařilo se uložit frontu sms!", true);
         }
     }
     
@@ -507,7 +519,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     private class UpdateListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            printStatusMessage("Byla vydána nová verze programu!");
+            printStatusMessage("Byla vydána nová verze programu!", true);
         }
     }
     
