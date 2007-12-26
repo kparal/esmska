@@ -11,9 +11,6 @@ package esmska.persistence;
 
 import esmska.data.Config;
 import esmska.data.Contact;
-import esmska.persistence.ContactParser;
-import esmska.persistence.ExportManager;
-import esmska.persistence.ImportManager;
 import esmska.data.SMS;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -35,12 +32,13 @@ import java.util.TreeSet;
 public class PersistenceManager {
     private static PersistenceManager persistenceManager;
     
-    private static final String PROGRAM_DIRNAME = ".esmska";
+    private static final String PROGRAM_DIRNAME = "esmska";
     private static final String CONFIG_FILENAME = "nastaveni.xml";
     private static final String CONTACTS_FILENAME = "kontakty.csv";
     private static final String QUEUE_FILENAME = "fronta.csv";
     private static File PROGRAM_DIR =
-            new File(System.getProperty("user.home"), PROGRAM_DIRNAME);
+            new File(System.getProperty("user.home") + File.separator + ".config",
+            PROGRAM_DIRNAME);
     private static File CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
     private static File CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
     private static File QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
@@ -51,9 +49,19 @@ public class PersistenceManager {
     
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
+        //adjust program dir according to operating system
+        String path = System.getenv("XDG_CONFIG_HOME");
+        if ((path == null || path.equals("")) &&
+                System.getProperty("os.name").toLowerCase().contains("windows"))
+            path = System.getenv("APPDATA");
+        if (path != null && !path.equals("")) {
+            setProgramDir(path + File.separator + PROGRAM_DIRNAME);
+        }
+        
+        //create program dir if necessary
         boolean ok = true;
         if (!PROGRAM_DIR.exists())
-            ok = PROGRAM_DIR.mkdir();
+            ok = PROGRAM_DIR.mkdirs();
         if (!ok)
             throw new IOException("Can't create program dir");
         if (!(PROGRAM_DIR.canWrite() && PROGRAM_DIR.canExecute()))
