@@ -32,6 +32,7 @@ public class Config extends Object implements Serializable {
     private String lafSubstanceSkin = "Sahara";
     private boolean removeAccents = true;
     private boolean checkForUpdates = true;
+    private boolean rememberHistory = true;
 
     private PropertyChangeSupport propertySupport;
     
@@ -287,5 +288,13 @@ public class Config extends Object implements Serializable {
 
     public void setCheckForUpdates(boolean checkForUpdates) {
         this.checkForUpdates = checkForUpdates;
+    }
+
+    public boolean isRememberHistory() {
+        return rememberHistory;
+    }
+
+    public void setRememberHistory(boolean rememberHistory) {
+        this.rememberHistory = rememberHistory;
     }
 }

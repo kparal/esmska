@@ -76,6 +76,11 @@ public class Main {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+            try {
+                pm.loadHistory();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Nepodařilo se vytvořit adresář " +

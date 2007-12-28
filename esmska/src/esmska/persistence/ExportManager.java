@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
 import esmska.data.SMS;
+import java.text.DateFormat;
+import java.util.Locale;
 
 /** Export program data
  *
@@ -101,8 +103,6 @@ public class ExportManager {
                     contact.getOperator().toString()
                 });
             }
-        } catch (IOException ex) {
-            throw new IOException(ex);
         } finally {
             writer.close();
         }
@@ -124,8 +124,30 @@ public class ExportManager {
                     sms.getSenderNumber() != null ? sms.getSenderNumber() : ""
                 });
             }
-        } catch (IOException ex) {
-            throw new IOException(ex);
+        } finally {
+            writer.close();
+        }
+    }
+    
+    /** Export sms history to file */
+    public static void exportHistory(Collection<History> history, File file) throws IOException {
+        CsvWriter writer = null;
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG, 
+                DateFormat.LONG, Locale.ROOT);
+        try {
+            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
+            writer.writeComment("Historie odeslaných sms");
+            for (History hist : history) {
+                writer.writeRecord(new String[] {
+                    df.format(hist.getDate()),
+                    hist.getName() != null ? hist.getName() : "",
+                    hist.getNumber(),
+                    hist.getOperator(),
+                    hist.getText(),
+                    hist.getSenderName() != null ? hist.getSenderName() : "",
+                    hist.getSenderNumber() != null ? hist.getSenderNumber() : ""
+                });
+            }
         } finally {
             writer.close();
         }

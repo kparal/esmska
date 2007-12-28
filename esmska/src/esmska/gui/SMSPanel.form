@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -9,7 +9,9 @@
     </Property>
   </Properties>
   <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -37,9 +39,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="smsNumberTextField" pref="98" max="32767" attributes="0"/>
+                      <Component id="smsNumberTextField" pref="100" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="operatorComboBox" pref="114" max="32767" attributes="0"/>
+                      <Component id="operatorComboBox" pref="116" max="32767" attributes="0"/>
                   </Group>
                   <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -108,7 +110,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextPane" name="smsTextPane">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="//GTK JTextArea bug fix&#xa;if (config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM))&#xa;    smsTextPane.setBackground(SystemColor.text);&#xa;&#xa;smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);&#xa;smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();&#xa;((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(smsTextPaneDocumentFilter);&#xa;&#xa;//set undo and redo actions and bind them&#xa;smsTextUndoManager.setLimit(-1);&#xa;smsTextUndoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canUndo()) {&#xa;            smsTextUndoManager.undo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextRedoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canRedo()) {&#xa;            smsTextUndoManager.redo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextPane.getDocument().addUndoableEditListener(new UndoableEditListener() {&#xa;    public void undoableEditHappened(UndoableEditEvent e) {&#xa;        if (e.getEdit().getPresentationName().contains(&quot;style&quot;))&#xa;            return;&#xa;        smsTextUndoManager.addEdit(e.getEdit());&#xa;    }&#xa;});&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK),&quot;undo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,&#xa;        KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getActionMap().put(&quot;undo&quot;,smsTextUndoAction);&#xa;smsTextPane.getActionMap().put(&quot;redo&quot;,smsTextRedoAction);&#xa;&#xa;//ctrl+enter&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,KeyEvent.CTRL_DOWN_MASK),&quot;send&quot;);&#xa;smsTextPane.getActionMap().put(&quot;send&quot;,sendAction);&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);&#xa;smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();&#xa;((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(smsTextPaneDocumentFilter);&#xa;&#xa;//set undo and redo actions and bind them&#xa;smsTextUndoManager.setLimit(-1);&#xa;smsTextUndoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canUndo()) {&#xa;            smsTextUndoManager.undo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextRedoAction = new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        if (smsTextUndoManager.canRedo()) {&#xa;            smsTextUndoManager.redo();&#xa;            smsTextPaneDocumentFilter.requestUpdate();&#xa;        }&#xa;    }&#xa;};&#xa;smsTextPane.getDocument().addUndoableEditListener(new UndoableEditListener() {&#xa;    public void undoableEditHappened(UndoableEditEvent e) {&#xa;        if (e.getEdit().getPresentationName().contains(&quot;style&quot;))&#xa;            return;&#xa;        smsTextUndoManager.addEdit(e.getEdit());&#xa;    }&#xa;});&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK),&quot;undo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,&#xa;        KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK),&quot;redo&quot;);&#xa;smsTextPane.getActionMap().put(&quot;undo&quot;,smsTextUndoAction);&#xa;smsTextPane.getActionMap().put(&quot;redo&quot;,smsTextRedoAction);&#xa;&#xa;//ctrl+enter&#xa;smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,KeyEvent.CTRL_DOWN_MASK),&quot;send&quot;);&#xa;smsTextPane.getActionMap().put(&quot;send&quot;,sendAction);&#xa;"/>
           </AuxValues>
         </Component>
       </SubComponents>

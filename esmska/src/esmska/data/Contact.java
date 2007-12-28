@@ -7,18 +7,16 @@
 package esmska.data;
 
 import java.beans.*;
-import java.io.Serializable;
 import java.text.Collator;
-import java.util.Comparator;
 import esmska.operators.Operator;
 
 /** SMS Contact
  * @author ripper
  */
-public class Contact extends Object implements Serializable, Comparable<Contact> {
+public class Contact extends Object implements Comparable<Contact> {
     
     private String name;
-    private String number;
+    private String number; //phone number not including the country code
     private String countryCode;
     private Operator operator;
     
@@ -144,10 +142,12 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
         return result;
     }
     
+    @Override
     public String toString() {
         return getName();
     }
     
+    @Override
     public boolean equals(Object obj) {
         if (obj == this)
             return true;
@@ -159,6 +159,7 @@ public class Contact extends Object implements Serializable, Comparable<Contact>
                 getNumber().equals(c.getNumber()) && getOperator().equals(c.getOperator());
     }
     
+    @Override
     public int hashCode() {
         return (getName() == null ? 13 : getName().hashCode()) *
                 (getCountryCode() == null ? 17 : getCountryCode().hashCode()) *

@@ -10,13 +10,7 @@
 package esmska.transfer;
 
 import esmska.gui.MainFrame;
-import java.awt.Image;
-import java.awt.MediaTracker;
-import java.awt.Toolkit;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -36,7 +30,7 @@ public class SMSSender {
     private boolean delayed; //waiting for delay to send another sms
     private SMSWorker smsWorker; //worker for background thread
     private MainFrame mainFrame; //reference to main form
-    
+
     /** Creates a new instance of SMSSender */
     public SMSSender(List<SMS> smsQueue) {
         if (smsQueue == null)
@@ -65,22 +59,7 @@ public class SMSSender {
     }
     
     private void finishedSending(SMS sms) {
-        if (sms.getStatus() == SMS.Status.SENT_OK) {
-            mainFrame.printStatusMessage("Zpráva pro " + sms
-            + " odeslána.", true);
-            mainFrame.setSMSDelay();
-        }
-        if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
-            mainFrame.printStatusMessage("Zprávu pro " + sms
-            + " se nepodařilo odeslat!", true);
-            mainFrame.pauseSMSQueue(true);
-            
-            JOptionPane.showMessageDialog(mainFrame, new JLabel("<html>"
-                    + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
-                    + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
-        }
         mainFrame.smsProcessed(sms);
-        mainFrame.setTaskRunning(false);
         running = false;
     }
     
@@ -93,6 +72,7 @@ public class SMSSender {
             this.sms = sms;
         }
         
+        @Override
         protected void done() {
             finishedSending(sms);
         }

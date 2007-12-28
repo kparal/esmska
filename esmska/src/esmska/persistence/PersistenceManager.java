@@ -11,6 +11,7 @@ package esmska.persistence;
 
 import esmska.data.Config;
 import esmska.data.Contact;
+import esmska.data.History;
 import esmska.data.SMS;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -36,16 +37,19 @@ public class PersistenceManager {
     private static final String CONFIG_FILENAME = "nastaveni.xml";
     private static final String CONTACTS_FILENAME = "kontakty.csv";
     private static final String QUEUE_FILENAME = "fronta.csv";
+    private static final String HISTORY_FILENAME = "historie.csv";
     private static File PROGRAM_DIR =
             new File(System.getProperty("user.home") + File.separator + ".config",
             PROGRAM_DIRNAME);
     private static File CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
     private static File CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
     private static File QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
+    private static File HISTORY_FILE = new File(PROGRAM_DIR, HISTORY_FILENAME);
     
     private static Config config = new Config();
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
+    private static List<History> history = new ArrayList<History>();
     
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
@@ -76,6 +80,7 @@ public class PersistenceManager {
         CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
         CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
         QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
+        HISTORY_FILE = new File(PROGRAM_DIR, HISTORY_FILENAME);
     }
     
     /** Get PersistenceManager */
@@ -97,6 +102,10 @@ public class PersistenceManager {
     
     public static List<SMS> getQueue() {
         return queue;
+    }
+    
+    public static List<History> getHistory() {
+        return history;
     }
     
     /** Save program configuration */
@@ -149,6 +158,20 @@ public class PersistenceManager {
             ArrayList<SMS> newQueue = ImportManager.importQueue(QUEUE_FILE);
             queue.clear();
             queue.addAll(newQueue);
+        }
+    }
+    
+    /** Save sms history */
+    public void saveHistory() throws IOException {
+        ExportManager.exportHistory(history, HISTORY_FILE);
+    }
+    
+    /** Load sms history */
+    public void loadHistory() throws Exception {
+        if (HISTORY_FILE.exists()) {
+            ArrayList<History> newHistory = ImportManager.importHistory(HISTORY_FILE);
+            history.clear();
+            history.addAll(newHistory);
         }
     }
 }

@@ -15,6 +15,7 @@ import esmska.data.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.text.ParseException;
 import java.util.ArrayList;
 import esmska.operators.O2;
 import esmska.operators.Operator;
@@ -22,6 +23,9 @@ import esmska.operators.OperatorEnum;
 import esmska.operators.Vodafone;
 import esmska.data.Contact;
 import esmska.data.SMS;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /** Import program data
  *
@@ -73,6 +77,39 @@ public class ImportManager {
             queue.add(sms);
         }
         return queue;
+    }
+    
+    /** Import sms history from file */
+    public static ArrayList<History> importHistory(File file)
+            throws IOException, ParseException {
+        CsvReader reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
+        reader.setUseComments(true);
+        ArrayList<History> history = new ArrayList<History>();
+        while (reader.readRecord()) {
+            String dateString = reader.get(0);
+            String name = reader.get(1);
+            String number = reader.get(2);
+            String operator = reader.get(3);
+            String text = reader.get(4);
+            String senderName = reader.get(5);
+            String senderNumber = reader.get(6);
+
+            DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG, 
+                    DateFormat.LONG, Locale.ROOT);
+            Date date = df.parse(dateString);
+            
+            History hist = new History();
+            hist.setDate(date);
+            hist.setName(name);
+            hist.setNumber(number);
+            hist.setOperator(operator);
+            hist.setText(text);
+            hist.setSenderName(senderName);
+            hist.setSenderNumber(senderNumber);
+            
+            history.add(hist);
+        }
+        return history;
     }
     
 }

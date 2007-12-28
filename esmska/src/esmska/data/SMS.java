@@ -42,6 +42,7 @@ public class SMS {
     public SMS() {
     }
     
+    @Override
     public String toString() {
         return getName()!=null&&!getName().equals("")?getName():getNumber();
     }

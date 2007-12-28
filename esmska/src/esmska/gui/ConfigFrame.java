@@ -40,7 +40,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_H);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_V);
-        tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-small.png")));
+        tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-16.png")));
         tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-small.png")));
         tabbedPane.setIconAt(2, new ImageIcon(getClass().getResource(RES + "operators/Vodafone.png")));
         closeButton.requestFocusInWindow();
@@ -101,9 +101,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         rememberLayoutCheckBox = new javax.swing.JCheckBox();
         removeAccentsCheckBox = new javax.swing.JCheckBox();
         checkUpdatesCheckBox = new javax.swing.JCheckBox();
+        rememberHistoryCheckBox = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         lafComboBox = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         themeComboBox = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
@@ -113,13 +114,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         senderNumberTextField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         senderNameTextField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavení");
-        setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource(RES + "config-48.png")).getImage());
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
@@ -131,7 +132,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         rememberQueueCheckBox.setMnemonic('f');
         rememberQueueCheckBox.setSelected(config.isRememberQueue());
         rememberQueueCheckBox.setText("Ukládat frontu neodeslaných sms");
-        rememberQueueCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává frontu neodeslaných sms pro příští spuštění programu.\n</html>");
+        rememberQueueCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává frontu neodeslaných sms pro příští spuštění programu\n</html>");
         rememberQueueCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         rememberQueueCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +143,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         rememberLayoutCheckBox.setMnemonic('r');
         rememberLayoutCheckBox.setSelected(config.isRememberLayout());
         rememberLayoutCheckBox.setText("Pamatovat rozvržení formuláře");
-        rememberLayoutCheckBox.setToolTipText("<html>\nPoužije aktuální rozměry programu a prvků formuláře při příštím spuštění programu.\n</html>");
+        rememberLayoutCheckBox.setToolTipText("<html>\nPoužije aktuální rozměry programu a prvků formuláře při příštím spuštění programu\n</html>");
         rememberLayoutCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         rememberLayoutCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +154,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         removeAccentsCheckBox.setMnemonic('d');
         removeAccentsCheckBox.setSelected(config.isRemoveAccents());
         removeAccentsCheckBox.setText("Ze zpráv odstraňovat diakritiku");
-        removeAccentsCheckBox.setToolTipText("<html>\nPřed odesláním zprávy z ní odstraní všechna diakritická znaménka.\n</html>");
+        removeAccentsCheckBox.setToolTipText("<html>\nPřed odesláním zprávy z ní odstraní všechna diakritická znaménka\n</html>");
         removeAccentsCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         removeAccentsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,11 +165,22 @@ public class ConfigFrame extends javax.swing.JFrame {
         checkUpdatesCheckBox.setMnemonic('n');
         checkUpdatesCheckBox.setSelected(config.isCheckForUpdates());
         checkUpdatesCheckBox.setText("Kontrolovat po startu novou verzi programu");
-        checkUpdatesCheckBox.setToolTipText("<html>\nPo spuštění programu zkontrolovat, zda nevyšla novější<br>\nverze programu, a případně upozornit ve stavovém řádku.\n</html>");
+        checkUpdatesCheckBox.setToolTipText("<html>\nPo spuštění programu zkontrolovat, zda nevyšla novější<br>\nverze programu, a případně upozornit ve stavovém řádku\n</html>");
         checkUpdatesCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         checkUpdatesCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkUpdatesCheckBoxActionPerformed(evt);
+            }
+        });
+
+        rememberHistoryCheckBox.setMnemonic('h');
+        rememberHistoryCheckBox.setSelected(config.isRememberHistory());
+        rememberHistoryCheckBox.setText("Ukládat historii odeslaných sms");
+        rememberHistoryCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává historii odeslaných sms pro příští spuštění programu\n</html>");
+        rememberHistoryCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        rememberHistoryCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rememberHistoryCheckBoxActionPerformed(evt);
             }
         });
 
@@ -179,6 +191,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rememberHistoryCheckBox)
                     .addComponent(rememberLayoutCheckBox)
                     .addComponent(rememberQueueCheckBox)
                     .addComponent(removeAccentsCheckBox)
@@ -193,30 +206,32 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rememberQueueCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rememberHistoryCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(removeAccentsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkUpdatesCheckBox)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Obecné", jPanel1);
 
-        jLabel4.setDisplayedMnemonic('v');
-        jLabel4.setLabelFor(lafComboBox);
-        jLabel4.setText("Vzhled:");
-        jLabel4.setToolTipText(lafComboBox.getToolTipText());
-
-        lafComboBox.setToolTipText("<html>\nUmožní vám změnit vzhled programu.\n</html>");
+        lafComboBox.setToolTipText("<html>\nUmožní vám změnit vzhled programu\n</html>");
         lafComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lafComboBoxActionPerformed(evt);
             }
         });
 
+        jLabel4.setDisplayedMnemonic('v');
+        jLabel4.setLabelFor(lafComboBox);
+        jLabel4.setText("Vzhled:");
+        jLabel4.setToolTipText(lafComboBox.getToolTipText());
+
         jLabel7.setFont(jLabel7.getFont().deriveFont(Font.ITALIC));
         jLabel7.setText("Pro projevení změn je nutný restart programu!");
 
-        themeComboBox.setToolTipText("<html>\nBarevná schémata pro zvolený vzhled.\n</html>");
+        themeComboBox.setToolTipText("<html>\nBarevná schémata pro zvolený vzhled\n</html>");
         themeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 themeComboBoxActionPerformed(evt);
@@ -231,7 +246,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         windowDecorationsCheckBox.setMnemonic('p');
         windowDecorationsCheckBox.setSelected(config.isLafWindowDecorated());
         windowDecorationsCheckBox.setText("Použít vzhled i na okraje oken");
-        windowDecorationsCheckBox.setToolTipText("<html>\nZda má místo operačního systému vykreslovat<br>\nrámečky oken zvolený vzhled.\n</html>");
+        windowDecorationsCheckBox.setToolTipText("<html>\nZda má místo operačního systému vykreslovat<br>\nrámečky oken zvolený vzhled\n</html>");
         windowDecorationsCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         windowDecorationsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,7 +301,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         useSenderIDCheckBox.setMnemonic('p');
         useSenderIDCheckBox.setSelected(config.isUseSenderID());
         useSenderIDCheckBox.setText("Připojovat podpis odesilatele");
-        useSenderIDCheckBox.setToolTipText("<html>Při připojení podpisu přijde sms adresátovi ze zadaného čísla<br>\na s daným jménem napsaným na konci zprávy.</html>");
+        useSenderIDCheckBox.setToolTipText("<html>Při připojení podpisu přijde sms adresátovi ze zadaného čísla<br>\na s daným jménem napsaným na konci zprávy</html>");
         useSenderIDCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         useSenderIDCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,17 +324,18 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
     });
 
-    jLabel3.setDisplayedMnemonic('m');
-    jLabel3.setLabelFor(senderNameTextField);
-    jLabel3.setText("Jméno");
-
     senderNameTextField.setText(config.getSenderName());
-    senderNameTextField.setToolTipText("<html>Při vyplnění jména je připojeno na konec zprávy,<br>\ntakže je sms ve skutečnosti o něco delší.</html>");
+    senderNameTextField.setToolTipText("<html>Při vyplnění jména je připojeno na konec zprávy,<br>\ntakže je sms ve skutečnosti o něco delší</html>");
     senderNameTextField.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             senderNameTextFieldActionPerformed(evt);
         }
     });
+
+    jLabel3.setDisplayedMnemonic('m');
+    jLabel3.setLabelFor(senderNameTextField);
+    jLabel3.setText("Jméno");
+    jLabel3.setToolTipText(senderNameTextField.getToolTipText());
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
@@ -465,6 +481,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void checkUpdatesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkUpdatesCheckBoxActionPerformed
         config.setCheckForUpdates(checkUpdatesCheckBox.isSelected());
     }//GEN-LAST:event_checkUpdatesCheckBoxActionPerformed
+
+    private void rememberHistoryCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberHistoryCheckBoxActionPerformed
+        config.setRememberHistory(rememberHistoryCheckBox.isSelected());
+    }//GEN-LAST:event_rememberHistoryCheckBoxActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkUpdatesCheckBox;
@@ -479,6 +499,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JComboBox lafComboBox;
+    private javax.swing.JCheckBox rememberHistoryCheckBox;
     private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;
     private javax.swing.JCheckBox removeAccentsCheckBox;
