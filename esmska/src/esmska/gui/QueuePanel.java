@@ -89,7 +89,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private void initComponents() {
         jScrollPane2 = new javax.swing.JScrollPane();
         smsQueueList = new javax.swing.JList();
-        pauseButton = new javax.swing.JButton();
+        pauseButton = new javax.swing.JToggleButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         smsUpButton = new javax.swing.JButton();
@@ -269,20 +269,23 @@ public class QueuePanel extends javax.swing.JPanel {
         private boolean paused = false;
         private final String descRunning = "Pozastavit odesílání sms ve frontě (Alt+P)";
         private final String descStopped = "Pokračovat v odesílání sms ve frontě (Alt+P)";
+        private final ImageIcon pauseIcon = new ImageIcon(MainFrame.class.getResource(RES + "pause.png"));
+        private final ImageIcon startIcon = new ImageIcon(MainFrame.class.getResource(RES + "start.png"));
         public SMSQueuePauseAction() {
             super(null, new ImageIcon(MainFrame.class.getResource(RES + "pause.png")));
-            this.putValue(SHORT_DESCRIPTION,descRunning);
+            putValue(SHORT_DESCRIPTION,descRunning);
             putValue(MNEMONIC_KEY, KeyEvent.VK_P);
+            putValue(SELECTED_KEY, false);
         }
         public void actionPerformed(ActionEvent e) {
             if (paused) {
-                this.putValue(LARGE_ICON_KEY,
-                        new ImageIcon(MainFrame.class.getResource(RES + "pause.png")));
-                this.putValue(SHORT_DESCRIPTION,descRunning);
+                putValue(LARGE_ICON_KEY,pauseIcon);
+                putValue(SHORT_DESCRIPTION,descRunning);
+                putValue(SELECTED_KEY, false);
             } else {
-                this.putValue(LARGE_ICON_KEY,
-                        new ImageIcon(MainFrame.class.getResource(RES + "start.png")));
-                this.putValue(SHORT_DESCRIPTION,descStopped);
+                putValue(LARGE_ICON_KEY, startIcon);
+                putValue(SHORT_DESCRIPTION,descStopped);
+                putValue(SELECTED_KEY, true);
             }
             paused = !paused;
             
@@ -388,7 +391,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton pauseButton;
+    private javax.swing.JToggleButton pauseButton;
     private javax.swing.JButton smsDownButton;
     private javax.swing.JList smsQueueList;
     private javax.swing.JButton smsUpButton;

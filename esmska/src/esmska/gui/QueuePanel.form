@@ -92,7 +92,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="pauseButton">
+    <Component class="javax.swing.JToggleButton" name="pauseButton">
       <Properties>
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="smsQueuePauseAction" type="code"/>
