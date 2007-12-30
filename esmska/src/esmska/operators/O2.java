@@ -26,15 +26,17 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import esmska.data.SMS;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** O2 operator
  *
  * @author ripper
  */
 public class O2 implements Operator {
+    private static final Logger logger = Logger.getLogger(O2.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final int MAX_CHARS = 60;
     private static final int SMS_LENGTH = 60;
@@ -88,7 +90,7 @@ public class O2 implements Operator {
             image = new ImageIcon(os.toByteArray());
             
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not get security image", ex);
         }
         return image;
     }
@@ -189,12 +191,13 @@ public class O2 implements Operator {
             return true;
             
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, "Could not send sms", e);
         }
         CookieHandler.setDefault(null);
         return false;
     }
     
+    @Override
     public String toString() {
         return "O2";
     }
@@ -207,10 +210,12 @@ public class O2 implements Operator {
         return SMS_LENGTH;
     }
     
+    @Override
     public int hashCode() {
         return getClass().getName().hashCode();
     }
     
+    @Override
     public boolean equals(Object obj) {
         return (obj == this || obj instanceof O2);
     }

@@ -21,12 +21,15 @@ import javax.swing.ImageIcon;
 import esmska.data.SMS;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Vodafone operator
  *
  * @author ripper
  */
 public class Vodafone implements Operator {
+    private static final Logger logger = Logger.getLogger(Vodafone.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final int MAX_CHARS = 760;
     private static final int SMS_LENGTH = 152;
@@ -84,7 +87,7 @@ public class Vodafone implements Operator {
             image = new ImageIcon(os.toByteArray());
             
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not get security image", ex);
         }
         return image;
     }
@@ -141,11 +144,12 @@ public class Vodafone implements Operator {
             return ok;
             
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, "Could not send sms", e);
         }
         return false;
     }
     
+    @Override
     public String toString() {
         return "Vodafone";
     }
@@ -158,10 +162,12 @@ public class Vodafone implements Operator {
         return SMS_LENGTH;
     }
     
+    @Override
     public int hashCode() {
         return getClass().getName().hashCode();
     }
     
+    @Override
     public boolean equals(Object obj) {
         return (obj == this || obj instanceof Vodafone);
     }

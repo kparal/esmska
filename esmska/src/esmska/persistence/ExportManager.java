@@ -24,12 +24,15 @@ import esmska.data.Contact;
 import esmska.data.SMS;
 import java.text.DateFormat;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Export program data
  *
  * @author ripper
  */
 public class ExportManager {
+    private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
     
     /** Creates a new instance of ExportManager */
     private ExportManager() {
@@ -78,7 +81,7 @@ public class ExportManager {
         try {
             exportContacts(contacts, file);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not export contacts to file", ex);
             JOptionPane.showMessageDialog(parent,"Export selhal!","Chyba při exportu",
                     JOptionPane.ERROR_MESSAGE);
             return;

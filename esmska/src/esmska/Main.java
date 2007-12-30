@@ -11,13 +11,12 @@ package esmska;
 
 import esmska.gui.MainFrame;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import esmska.persistence.PersistenceManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jvnet.lafwidget.LafWidget;
 
 /** Starter class for the whole program
@@ -25,6 +24,7 @@ import org.jvnet.lafwidget.LafWidget;
  * @author ripper
  */
 public class Main {
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
     private static String configPath; //path to config files
     
     /** Program starter method
@@ -43,7 +43,7 @@ public class Main {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception ex) {
-                ex.printStackTrace();
+                logger.log(Level.WARNING, "Could not set system Look and Feel", ex);
             }
             JFileChooser chooser = new JFileChooser();
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -64,25 +64,25 @@ public class Main {
             try {
                 pm.loadConfig();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                logger.log(Level.WARNING, "Could not load config file", ex);
             }
             try {
                 pm.loadContacts();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                logger.log(Level.WARNING, "Could not load contacts file", ex);
             }
             try {
                 pm.loadQueue();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                logger.log(Level.WARNING, "Could not load queue file", ex);
             }
             try {
                 pm.loadHistory();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                logger.log(Level.WARNING, "Could not load history file", ex);
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not create program dir or read config files", ex);
             JOptionPane.showMessageDialog(null, "Nepodařilo se vytvořit adresář " +
                     "nebo číst z adresáře s konfigurací!",
                     "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
@@ -92,7 +92,7 @@ public class Main {
         try {
             ThemeManager.setLaF();
         } catch (Throwable ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not set Look and Feel", ex);
         }
         
         //set Substance specific addons

@@ -24,6 +24,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
@@ -62,6 +64,7 @@ public class SMSPanel extends javax.swing.JPanel {
     public static final int ACTION_REQUEST_SELECT_CONTACT = 1;
     public static final int ACTION_SEND_SMS = 2;
     
+    private static final Logger logger = Logger.getLogger(SMSPanel.class.getName());
     private static final String RES = "/esmska/resources/";
     private ActionEventSupport actionEventSupport;
     private Config config = PersistenceManager.getConfig();
@@ -494,7 +497,7 @@ public class SMSPanel extends javax.swing.JPanel {
             try {
                 envelope.setText(e.getDocument().getText(0,e.getDocument().getLength()));
             } catch (BadLocationException ex) {
-                ex.printStackTrace();
+                logger.log(Level.SEVERE, "Error getting sms text", ex);
             }
             sendAction.updateStatus();
         }

@@ -90,9 +90,9 @@ public class UpdateChecker {
 
                 updateAvailable = parseUpdateFile(builder.toString());
             } catch (MalformedURLException ex) {
-                logger.log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, "URL not correct", ex);
             } catch (IOException ex) {
-                logger.log(Level.WARNING, "Nelze stáhnout aktualizační soubor", ex);
+                logger.log(Level.WARNING, "Can't download update file", ex);
             }
             return updateAvailable;
         }

@@ -31,6 +31,8 @@ import esmska.data.History;
 import esmska.operators.OperatorEnum;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -43,6 +45,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
  */
 public class MainFrame extends javax.swing.JFrame {
     private static MainFrame instance;
+    private static final Logger logger = Logger.getLogger(MainFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
     
@@ -91,7 +94,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             persistenceManager = PersistenceManager.getInstance();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not create program dir with config files", ex);
             printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!", true);
         }
         loadConfig();
@@ -312,6 +315,7 @@ public class MainFrame extends javax.swing.JFrame {
             createHistory(sms);
         }
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
+            logger.info("Message for " + sms + " could not be sent");
             printStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!", true);
             pauseSMSQueue(true);
             
@@ -365,7 +369,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             persistenceManager.saveConfig();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not save config", ex);
             printStatusMessage("Nepodařilo se uložit nastavení!", true);
         }
     }
@@ -390,7 +394,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             persistenceManager.saveContacts();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not save contacts", ex);
             printStatusMessage("Nepodařilo se uložit kontakty!", true);
         }
     }
@@ -402,7 +406,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             persistenceManager.saveQueue();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not save queue", ex);
             printStatusMessage("Nepodařilo se uložit frontu sms!", true);
         }
     }
@@ -414,7 +418,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             persistenceManager.saveHistory();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not save history", ex);
             printStatusMessage("Nepodařilo se uložit historii sms!", true);
         }
     }

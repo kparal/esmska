@@ -6,7 +6,6 @@
 
 package esmska.gui;
 
-import com.csvreader.CsvReader;
 import esmska.*;
 import esmska.persistence.ContactParser;
 import esmska.persistence.ContactParser;
@@ -15,15 +14,9 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -33,18 +26,17 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
-import esmska.operators.O2;
-import esmska.operators.Operator;
-import esmska.operators.OperatorEnum;
-import esmska.operators.Vodafone;
 import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Import contacts from external applications
  *
  * @author  ripper
  */
 public class ImportFrame extends javax.swing.JFrame {
+    private static final Logger logger = Logger.getLogger(ImportFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
@@ -54,7 +46,7 @@ public class ImportFrame extends javax.swing.JFrame {
     
     /** Creates new form ImportFrame */
     public ImportFrame() {
-        this.mainFrame = mainFrame.getInstance();
+        this.mainFrame = MainFrame.getInstance();
         initComponents();
         cardLayout = (CardLayout) cardPanel.getLayout();
         progressBar.setVisible(false);
@@ -564,14 +556,14 @@ public class ImportFrame extends javax.swing.JFrame {
         String file = doBrowseButton();
         if (file != null) {
             fileTextFieldEsmska.setText(file);
-        };
+        }
     }//GEN-LAST:event_browseButton2ActionPerformed
     
     private void browseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButton1ActionPerformed
         String file = doBrowseButton();
         if (file != null) {
             fileTextFieldDreamcomSE.setText(file);
-        };
+        }
     }//GEN-LAST:event_browseButton1ActionPerformed
     
     private void skipExistingCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipExistingCheckBoxActionPerformed
@@ -584,7 +576,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 for (Contact c : worker.get())
                     contactListModel.addElement(c);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                logger.log(Level.SEVERE, "Problem getting new contacts", ex);
             }
         }
         
@@ -594,7 +586,7 @@ public class ImportFrame extends javax.swing.JFrame {
         String file = doBrowseButton();
         if (file != null) {
             fileTextFieldKubik.setText(file);
-        };
+        }
     }//GEN-LAST:event_browseButtonActionPerformed
     
     /** browse for file */
@@ -613,7 +605,7 @@ public class ImportFrame extends javax.swing.JFrame {
         });
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             return chooser.getSelectedFile().getAbsolutePath();
-        };
+        }
         return null;
     }
     
@@ -655,7 +647,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 cardLayout.show(cardPanel, "resultsPanel");
                 actualCard = "resultsPanel";
             } catch (Exception ex) {
-                ex.printStackTrace();
+                logger.log(Level.WARNING, "Error while parsing file", ex);
                 JOptionPane.showMessageDialog(ImportFrame.this, "Nastala chyba při zpracování souboru!",
                         "Chyba při zpracování souboru", JOptionPane.ERROR_MESSAGE);
             } finally {

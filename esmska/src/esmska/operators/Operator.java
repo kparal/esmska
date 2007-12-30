@@ -37,7 +37,10 @@ public interface Operator {
     Icon getIcon();
     
     /** operator name */
+    @Override
     String toString();
+    @Override
     boolean equals(Object obj);
+    @Override
     int hashCode();
 }

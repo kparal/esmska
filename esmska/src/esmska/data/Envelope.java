@@ -22,7 +22,6 @@ public class Envelope {
     private Config config;
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
-    //TODO: add possibility of event listeners
     
     /** Creates a new instance of Envelope */
     public Envelope() {

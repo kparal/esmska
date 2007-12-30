@@ -13,6 +13,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
  * @author  ripper
  */
 public class AboutFrame extends javax.swing.JFrame {
+    private static final Logger logger = Logger.getLogger(AboutFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     
     /** Creates new form AboutFrame */
@@ -171,7 +174,7 @@ public class AboutFrame extends javax.swing.JFrame {
         try {
             desktop.browse(new URL("http://esmska.googlecode.com/").toURI());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, "Could not launch browser", e);
         }
     }//GEN-LAST:event_linkButtonActionPerformed
         
@@ -190,7 +193,7 @@ public class AboutFrame extends javax.swing.JFrame {
             dialog.setResizable(true);
             dialog.setVisible(true);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, "Could not show license", ex);
         }
     }//GEN-LAST:event_licenseButtonActionPerformed
     
@@ -208,7 +211,7 @@ public class AboutFrame extends javax.swing.JFrame {
             dialog.setResizable(true);
             dialog.setVisible(true);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, "Could not show credits", e);
         }
     }//GEN-LAST:event_creditsButtonActionPerformed
     
