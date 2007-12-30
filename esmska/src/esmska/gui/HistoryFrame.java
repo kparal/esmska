@@ -428,6 +428,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             senderNameLabel.setText(hist.getSenderName());
             senderNumberLabel.setText(hist.getSenderNumber());
             textArea.setText(hist.getText());
+            textArea.setCaretPosition(0);
 
             selectedHistory = hist;
         }
