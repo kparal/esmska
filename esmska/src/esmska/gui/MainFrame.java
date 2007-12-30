@@ -73,6 +73,8 @@ public class MainFrame extends javax.swing.JFrame {
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     /** sms history */
     private List<History> history = PersistenceManager.getHistory();
+    /** whether user data were saved successfully */
+    private boolean saveOk = true;
     
     /**
      * Creates new form MainFrame
@@ -283,6 +285,13 @@ public class MainFrame extends javax.swing.JFrame {
         saveContacts();
         saveQueue();
         saveHistory();
+        
+        if (!saveOk) { //some data were not saved
+            logger.warning("Some config files were not saved");
+            JOptionPane.showMessageDialog(this,
+                    "Některé konfigurační soubory nemohly být uloženy!",
+                    "Chyba ukládání",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_formWindowClosing
     
     /** Prints message to status bar
@@ -370,7 +379,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager.saveConfig();
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save config", ex);
-            printStatusMessage("Nepodařilo se uložit nastavení!", true);
+            saveOk = false;
         }
     }
     
@@ -395,7 +404,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager.saveContacts();
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save contacts", ex);
-            printStatusMessage("Nepodařilo se uložit kontakty!", true);
+            saveOk = false;
         }
     }
     
@@ -407,7 +416,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager.saveQueue();
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not save queue", ex);
-            printStatusMessage("Nepodařilo se uložit frontu sms!", true);
+            saveOk = false;
         }
     }
     
@@ -419,7 +428,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager.saveHistory();
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not save history", ex);
-            printStatusMessage("Nepodařilo se uložit historii sms!", true);
+            saveOk = false;
         }
     }
     
