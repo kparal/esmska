@@ -269,10 +269,10 @@ public class QueuePanel extends javax.swing.JPanel {
         private boolean paused = false;
         private final String descRunning = "Pozastavit odesílání sms ve frontě (Alt+P)";
         private final String descStopped = "Pokračovat v odesílání sms ve frontě (Alt+P)";
-        private final ImageIcon pauseIcon = new ImageIcon(MainFrame.class.getResource(RES + "pause.png"));
-        private final ImageIcon startIcon = new ImageIcon(MainFrame.class.getResource(RES + "start.png"));
+        private final ImageIcon pauseIcon = new ImageIcon(QueuePanel.class.getResource(RES + "pause.png"));
+        private final ImageIcon startIcon = new ImageIcon(QueuePanel.class.getResource(RES + "start.png"));
         public SMSQueuePauseAction() {
-            super(null, new ImageIcon(MainFrame.class.getResource(RES + "pause.png")));
+            super(null, new ImageIcon(QueuePanel.class.getResource(RES + "pause.png")));
             putValue(SHORT_DESCRIPTION,descRunning);
             putValue(MNEMONIC_KEY, KeyEvent.VK_P);
             putValue(SELECTED_KEY, false);

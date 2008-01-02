@@ -412,7 +412,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
         public SendAction() {
-            super("Poslat", new ImageIcon(MainFrame.class.getResource(RES + "send.png")));
+            super("Poslat", new ImageIcon(SMSPanel.class.getResource(RES + "send.png")));
             putValue(SHORT_DESCRIPTION,"Odeslat zprávu (Alt+S, Ctrl+Enter)");
             putValue(MNEMONIC_KEY, KeyEvent.VK_S);
             setEnabled(false);
