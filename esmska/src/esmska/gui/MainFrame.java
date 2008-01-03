@@ -606,9 +606,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
             
             SMS sms = new SMS();
-            sms.setName(hist.getName());
             sms.setNumber(hist.getNumber());
-            sms.setOperator(OperatorEnum.getOperator(hist.getNumber()));
+            sms.setOperator(OperatorEnum.parseOperator(hist.getOperator()));
             sms.setText(hist.getText());
             
             contactPanel.clearSelection();

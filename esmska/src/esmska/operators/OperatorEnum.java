@@ -59,4 +59,16 @@ public enum OperatorEnum {
             default : throw new IllegalArgumentException("operatorEnum");
         }
     }
+    
+    /** translate operator string to Operator */
+    public static Operator parseOperator(String operator) {
+        if (operator == null)
+            throw new NullPointerException("operator");
+        
+        if (operator.equals(new O2().toString()))
+            return getOperator(O2);
+        else if (operator.equals(new Vodafone().toString()))
+            return getOperator(Vodafone);
+        else return null;
+    }
 }

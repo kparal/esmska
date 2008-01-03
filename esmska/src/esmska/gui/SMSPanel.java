@@ -195,6 +195,8 @@ public class SMSPanel extends javax.swing.JPanel {
             smsNumberTextField.setText(c.getNumber());
             operatorComboBox.setSelectedItem(c.getOperator());
             nameLabel.setText(c.getName());
+        } else if (count < 1) {
+            nameLabel.setText(null);
         }
         
         boolean multiSendMode = (count > 1);
@@ -207,7 +209,7 @@ public class SMSPanel extends javax.swing.JPanel {
             smsNumberTextField.setText("");
             smsNumberTextField.setToolTipText(tooltip);
         } else {
-            if (nameLabel.getText().equals(sendLabel))
+            if (sendLabel.equals(nameLabel.getText()))
                 nameLabel.setText("");
             nameLabel.setToolTipText(null);
             smsNumberTextField.setToolTipText(null);
@@ -232,10 +234,11 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** set sms to display and edit */
     public void setSMS(SMS sms) {
+        nameLabel.setText(sms.getName());
         smsNumberTextField.setText(sms.getNumber().substring(4));
         smsTextPane.setText(sms.getText());
-        operatorComboBox.setSelectedItem(sms.getOperator());
-        nameLabel.setText(sms.getName());
+        if (sms.getOperator() != null)
+            operatorComboBox.setSelectedItem(sms.getOperator());
         smsTextPane.requestFocusInWindow();
     }
     
