@@ -82,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         instance = this;
         initComponents();
-        
+
         //set tooltip delay
         ToolTipManager.sharedInstance().setInitialDelay(750);
         ToolTipManager.sharedInstance().setDismissDelay(60000);
@@ -105,6 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         //setup components
         smsDelayTimer.setInitialDelay(0);
+        contactPanel.requestFocusInWindow();
         
         //check for updates
         if (config.isCheckForUpdates()) {
@@ -322,15 +323,24 @@ public class MainFrame extends javax.swing.JFrame {
             printStatusMessage("Zpráva pro " + sms + " odeslána.", true);
             setSMSDelay();
             createHistory(sms);
-        }
-        if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
-            logger.info("Message for " + sms + " could not be sent");
-            printStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!", true);
-            pauseSMSQueue(true);
             
+            if (smsPanel.getText().length() > 0)
+                smsPanel.requestFocusInWindow();
+            else
+                contactPanel.requestFocusInWindow();
+        }
+        else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
+            logger.info("Message for " + sms + " could not be sent");
+            pauseSMSQueue(true);
+            printStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!", true);
             JOptionPane.showMessageDialog(this, new JLabel("<html>"
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
                     + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
+            
+            if (smsPanel.getText().length() > 0)
+                smsPanel.requestFocusInWindow();
+            else
+                queuePanel.requestFocusInWindow();
         }
         setTaskRunning(false);
         
@@ -590,7 +600,8 @@ public class MainFrame extends javax.swing.JFrame {
                 case QueuePanel.ACTION_QUEUE_PAUSE_CHANGED:
                     smsSender.setPaused(queuePanel.isPaused());
                     break;
-                default: System.err.println("Uknown queue event type: " + e.getID());
+                default: 
+                    logger.severe("Uknown queue event type: " + e.getID());
             }
         }
     }
@@ -618,7 +629,16 @@ public class MainFrame extends javax.swing.JFrame {
     /** Listens for changes in contact list */
     private class ContactListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            smsPanel.setContacts(contactPanel.getSelectedContacts());
+            switch (e.getID()) {
+                case ContactPanel.ACTION_CONTACT_SELECTION_CHANGED:
+                    smsPanel.setContacts(contactPanel.getSelectedContacts());
+                    break;
+                case ContactPanel.ACTION_CONTACT_CHOSEN:
+                    smsPanel.requestFocusInWindow();
+                    break;
+                default:
+                    logger.severe("Unknown contact event type: " + e.getID());
+            }
         }
     }
     
@@ -638,7 +658,8 @@ public class MainFrame extends javax.swing.JFrame {
                         smsSender.announceNewSMS();
                     }
                     break;
-                default: System.err.println("Uknown sms event type: " + e.getID());
+                default: 
+                    logger.severe("Uknown sms event type: " + e.getID());
             }
         }
     }

@@ -228,8 +228,6 @@ public class SMSPanel extends javax.swing.JPanel {
         // update components
         sendAction.updateStatus();
         smsTextPaneDocumentFilter.requestUpdate();
-        if (count > 0)
-            smsTextPane.requestFocusInWindow();
     }
     
     /** set sms to display and edit */
@@ -240,6 +238,14 @@ public class SMSPanel extends javax.swing.JPanel {
         if (sms.getOperator() != null)
             operatorComboBox.setSelectedItem(sms.getOperator());
         smsTextPane.requestFocusInWindow();
+    }
+    
+    /** get currently written sms text
+     * @return currently written sms text or empty string; never null
+     */
+    public String getText() {
+        String text = smsTextPane.getText();
+        return text != null ? text : "";
     }
     
     /** This method is called from within the constructor to
@@ -263,6 +269,11 @@ public class SMSPanel extends javax.swing.JPanel {
         nameLabel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Zpráva"));
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jLabel4.setDisplayedMnemonic('l');
         jLabel4.setText("Číslo");
@@ -411,6 +422,10 @@ public class SMSPanel extends javax.swing.JPanel {
         //update send action
         sendAction.updateStatus();
     }//GEN-LAST:event_smsNumberTextFieldKeyReleased
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        smsTextPane.requestFocusInWindow();
+    }//GEN-LAST:event_formFocusGained
     
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
