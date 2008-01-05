@@ -34,10 +34,10 @@ public class PersistenceManager {
     private static PersistenceManager persistenceManager;
     
     private static final String PROGRAM_DIRNAME = "esmska";
-    private static final String CONFIG_FILENAME = "nastaveni.xml";
-    private static final String CONTACTS_FILENAME = "kontakty.csv";
-    private static final String QUEUE_FILENAME = "fronta.csv";
-    private static final String HISTORY_FILENAME = "historie.csv";
+    private static final String CONFIG_FILENAME = "settings.xml";
+    private static final String CONTACTS_FILENAME = "contacts.csv";
+    private static final String QUEUE_FILENAME = "queue.csv";
+    private static final String HISTORY_FILENAME = "history.csv";
     private static File PROGRAM_DIR =
             new File(System.getProperty("user.home") + File.separator + ".config",
             PROGRAM_DIRNAME);
