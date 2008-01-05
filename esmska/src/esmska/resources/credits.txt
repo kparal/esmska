@@ -2,11 +2,11 @@ Napsali:
   Kamil Páral <ripper42@gmail.com>
 
 Grafika:
-  Substance <https://substance.dev.java.net/>
+  Substance <https://substance.dev.java.net>
   Tango Desktop Project <http://tango.freedesktop.org>
   Ubuntu <http://www.ubuntu.com>
   Gajim <http://www.gajim.org>
-  JGoodies <http://jgoodies.com/>
+  JGoodies <http://jgoodies.com>
 
 Sponzoři:
   Vladimír Burian
