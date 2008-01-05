@@ -97,7 +97,8 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager = PersistenceManager.getInstance();
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not create program dir with config files", ex);
-            printStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!", true);
+            statusPanel.setStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!",
+                    true, StatusPanel.ICON_ERROR);
         }
         loadConfig();
         if (smsQueue.size() > 0)
@@ -129,16 +130,12 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        statusPanel = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
-        statusMessageLabel = new javax.swing.JLabel();
-        statusAnimationLabel = new javax.swing.JLabel();
-        smsDelayProgressBar = new javax.swing.JProgressBar();
         horizontalSplitPane = new javax.swing.JSplitPane();
         verticalSplitPane = new javax.swing.JSplitPane();
         smsPanel = new esmska.gui.SMSPanel();
         queuePanel = new esmska.gui.QueuePanel();
         contactPanel = new esmska.gui.ContactPanel();
+        statusPanel = new esmska.gui.StatusPanel();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         configMenuItem = new javax.swing.JMenuItem();
@@ -159,45 +156,6 @@ public class MainFrame extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
-
-        statusPanel.setFocusable(false);
-
-        statusMessageLabel.setText("Vítejte");
-        statusMessageLabel.setFocusable(false);
-
-        statusAnimationLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/task-idle.png"))); // NOI18N
-        statusAnimationLabel.setFocusable(false);
-
-        smsDelayProgressBar.setMaximum(15);
-        smsDelayProgressBar.setFocusable(false);
-        smsDelayProgressBar.setString("Další sms za: ");
-        smsDelayProgressBar.setStringPainted(true);
-        smsDelayProgressBar.setVisible(false);
-
-        javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
-        statusPanel.setLayout(statusPanelLayout);
-        statusPanelLayout.setHorizontalGroup(
-            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statusPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 387, Short.MAX_VALUE)
-                .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusAnimationLabel))
-        );
-        statusPanelLayout.setVerticalGroup(
-            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(statusPanelLayout.createSequentialGroup()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(statusAnimationLabel)
-                    .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(smsDelayProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(statusMessageLabel))))
-        );
 
         horizontalSplitPane.setBorder(null);
         horizontalSplitPane.setResizeWeight(0.5);
@@ -263,8 +221,8 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
                 .addContainerGap())
@@ -273,7 +231,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -300,27 +258,20 @@ public class MainFrame extends javax.swing.JFrame {
      * @param message text
      * @param printTime show timestamp before text
      */
-    public void printStatusMessage(String message, boolean printTime) {
-        if (printTime) {
-            String time = shortTimeFormat.format(new Date());
-            statusMessageLabel.setText("[" + time + "] " + message);
-        } else {
-            statusMessageLabel.setText(message);
-        }
+    public void printStatusMessage(String message, boolean printTime, ImageIcon icon) { //TODO remove
+        statusPanel.setStatusMessage(message, printTime, icon);
     }
 
     /** Tells main form whether it should display task busy icon */
-    public void setTaskRunning(boolean b) {
-        if (b == false)
-            statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource(RES + "task-idle.png")));
-        else
-            statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource(RES + "task-busy.gif")));
+    public void setTaskRunning(boolean b) { //TODO remove
+        statusPanel.setTaskRunning(b);
     }
     
     /** Notifies about change in sms queue */
     public void smsProcessed(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
-            printStatusMessage("Zpráva pro " + sms + " odeslána.", true);
+            statusPanel.setStatusMessage("Zpráva pro " + sms + " odeslána.",
+                    true, StatusPanel.ICON_MESSAGE);
             setSMSDelay();
             createHistory(sms);
             
@@ -332,7 +283,8 @@ public class MainFrame extends javax.swing.JFrame {
         else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             logger.info("Message for " + sms + " could not be sent");
             pauseSMSQueue(true);
-            printStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!", true);
+            statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
+                    true, StatusPanel.ICON_WARNING);
             JOptionPane.showMessageDialog(this, new JLabel("<html>"
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
                     + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
@@ -570,14 +522,14 @@ public class MainFrame extends javax.swing.JFrame {
         private int seconds = 0;
         public void actionPerformed(ActionEvent e) {
             if (seconds <= DELAY) { //still waiting
-                smsDelayProgressBar.setValue(seconds);
-                smsDelayProgressBar.setString("Další sms za: " + (DELAY-seconds) + "s");
+                statusPanel.setProgress(seconds, "Další sms za: " + (DELAY-seconds) + "s",
+                        null, null);
                 if (seconds == 0)
-                    smsDelayProgressBar.setVisible(true);
+                    statusPanel.setProgress(null, null, null, true);
                 seconds++;
             } else { //delay finished
                 smsDelayTimer.stop();
-                smsDelayProgressBar.setVisible(false);
+                statusPanel.setProgress(null, null, null, false);
                 seconds = 0;
                 smsSender.setDelayed(false);
                 smsSender.announceNewSMS();
@@ -666,7 +618,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     private class UpdateListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            printStatusMessage("Byla vydána nová verze programu!", true);
+            statusPanel.setStatusMessage("Byla vydána nová verze programu!", 
+                    false, StatusPanel.ICON_INFO);
         }
     }
     
@@ -680,15 +633,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem historyMenuItem;
     private javax.swing.JSplitPane horizontalSplitPane;
     private javax.swing.JMenuItem importMenuItem;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu programMenu;
     private esmska.gui.QueuePanel queuePanel;
-    private javax.swing.JProgressBar smsDelayProgressBar;
     private esmska.gui.SMSPanel smsPanel;
-    private javax.swing.JLabel statusAnimationLabel;
-    private javax.swing.JLabel statusMessageLabel;
-    private javax.swing.JPanel statusPanel;
+    private esmska.gui.StatusPanel statusPanel;
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JSplitPane verticalSplitPane;
     // End of variables declaration//GEN-END:variables

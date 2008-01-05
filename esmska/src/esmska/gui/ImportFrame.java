@@ -177,7 +177,7 @@ public class ImportFrame extends javax.swing.JFrame {
 
         jLabel19.setText("<html>\nSoubor bude prozkoumán a následně vám bude vypsán seznam kontaktů dostupných pro import. Žádné změny zatím nebudou provedeny.\n</html>");
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
         jLabel20.setText("<html>\nProgram předpokládá, že soubor je v kódování UTF-8.\n</html>");
 
         javax.swing.GroupLayout esmskaPanelLayout = new javax.swing.GroupLayout(esmskaPanel);
@@ -231,13 +231,13 @@ public class ImportFrame extends javax.swing.JFrame {
 
         jLabel6.setText("<html>\nSoubor bude prozkoumán a následně vám bude vypsán seznam kontaktů dostupných pro import. Žádné změny zatím nebudou provedeny.\n</html>");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
         jLabel7.setText("<html>\nPokud budete mít problémy s importem, ověřte, zda nevyšla novější verze Esmsky, a zkuste to v ní.\n</html>");
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
         jLabel9.setText("<html>\nProgram předpokládá, že soubor je v kódování windows-1250 (výchozí kódování souborů pro české MS Windows).\n</html>");
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning.png"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning-22.png"))); // NOI18N
         jLabel15.setText("<html>\nBudou importovány pouze kontakty s operátory podporovanými Esmskou.\n</html>");
 
         javax.swing.GroupLayout kubikPanelLayout = new javax.swing.GroupLayout(kubikPanel);
@@ -291,7 +291,7 @@ public class ImportFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
         jLabel13.setText("<html>\nPokud budete mít problémy s importem, ověřte, zda nevyšla novější verze Esmsky, a zkuste to v ní.\n</html>");
 
         jLabel10.setText("<html>\nNejprve musíte exportovat kontakty z programu DreamCom SE. Spusťte uvedený program, přejděte do adresáře kontaktů a pomocí pravého myšítka exportujte všechny své kontakty do CSV souboru. Tento soubor zde následně vyberte.\n</html>");
@@ -300,10 +300,10 @@ public class ImportFrame extends javax.swing.JFrame {
 
         jLabel12.setText("<html>\nSoubor bude prozkoumán a následně vám bude vypsán seznam kontaktů dostupných pro import. Žádné změny zatím nebudou provedeny.\n</html>");
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
         jLabel14.setText("<html>\nProgram předpokládá, že soubor je v kódování windows-1250 (výchozí kódování souborů pro české MS Windows).\n</html>");
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning.png"))); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning-22.png"))); // NOI18N
         jLabel16.setText("<html>\nBudou importovány pouze kontakty s operátory podporovanými Esmskou.\n</html>");
 
         javax.swing.GroupLayout dreamcomSEPanelLayout = new javax.swing.GroupLayout(dreamcomSEPanel);

@@ -199,7 +199,7 @@
                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="225" max="32767" attributes="0"/>
+                      <EmptySpace pref="197" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -234,7 +234,7 @@
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/info.png"/>
+                  <Image iconType="3" name="/esmska/resources/info-22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Program p&#x159;edpokl&#xe1;d&#xe1;, &#x17e;e soubor je v k&#xf3;dov&#xe1;n&#xed; UTF-8.&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -290,7 +290,7 @@
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="169" max="32767" attributes="0"/>
+                      <EmptySpace pref="115" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -325,7 +325,7 @@
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/info.png"/>
+                  <Image iconType="3" name="/esmska/resources/info-22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Pokud budete m&#xed;t probl&#xe9;my s importem, ov&#x11b;&#x159;te, zda nevy&#x161;la nov&#x11b;j&#x161;&#xed; verze Esmsky, a zkuste to v n&#xed;.&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -333,7 +333,7 @@
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/info.png"/>
+                  <Image iconType="3" name="/esmska/resources/info-22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Program p&#x159;edpokl&#xe1;d&#xe1;, &#x17e;e soubor je v k&#xf3;dov&#xe1;n&#xed; windows-1250 (v&#xfd;choz&#xed; k&#xf3;dov&#xe1;n&#xed; soubor&#x16f; pro &#x10d;esk&#xe9; MS Windows).&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -341,7 +341,7 @@
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/warning.png"/>
+                  <Image iconType="3" name="/esmska/resources/warning-22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Budou importov&#xe1;ny pouze kontakty s oper&#xe1;tory podporovan&#xfd;mi Esmskou.&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -397,7 +397,7 @@
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="169" max="32767" attributes="0"/>
+                      <EmptySpace pref="115" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -417,7 +417,7 @@
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/info.png"/>
+                  <Image iconType="3" name="/esmska/resources/info-22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Pokud budete m&#xed;t probl&#xe9;my s importem, ov&#x11b;&#x159;te, zda nevy&#x161;la nov&#x11b;j&#x161;&#xed; verze Esmsky, a zkuste to v n&#xed;.&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -440,7 +440,7 @@
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/info.png"/>
+                  <Image iconType="3" name="/esmska/resources/info-22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Program p&#x159;edpokl&#xe1;d&#xe1;, &#x17e;e soubor je v k&#xf3;dov&#xe1;n&#xed; windows-1250 (v&#xfd;choz&#xed; k&#xf3;dov&#xe1;n&#xed; soubor&#x16f; pro &#x10d;esk&#xe9; MS Windows).&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -448,7 +448,7 @@
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/warning.png"/>
+                  <Image iconType="3" name="/esmska/resources/warning-22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Budou importov&#xe1;ny pouze kontakty s oper&#xe1;tory podporovan&#xfd;mi Esmskou.&#xa;&lt;/html&gt;"/>
               </Properties>

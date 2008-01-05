@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import esmska.operators.Operator;
 import esmska.data.SMS;
+import esmska.gui.StatusPanel;
 
 /** Sender of SMS
  *
@@ -50,7 +51,7 @@ public class SMSSender {
             SMS sms = smsQueue.get(0);
             mainFrame.setTaskRunning(true);
             mainFrame.printStatusMessage("Posílám zprávu pro " + sms
-            + " (" + sms.getOperator() + ") ...", true);
+            + " (" + sms.getOperator() + ") ...", true, StatusPanel.ICON_INFO);
             
             //send in worker thread
             smsWorker = new SMSWorker(sms);
