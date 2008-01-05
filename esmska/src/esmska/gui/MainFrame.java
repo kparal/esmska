@@ -98,7 +98,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not create program dir with config files", ex);
             statusPanel.setStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!",
-                    true, StatusPanel.ICON_ERROR);
+                    false, StatusPanel.ICON_ERROR);
         }
         loadConfig();
         if (smsQueue.size() > 0)
@@ -240,16 +240,20 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        saveConfig();
-        saveContacts();
-        saveQueue();
-        saveHistory();
-        
-        if (!saveOk) { //some data were not saved
-            logger.warning("Some config files were not saved");
-            JOptionPane.showMessageDialog(this,
-                    "Některé konfigurační soubory nemohly být uloženy!",
-                    "Chyba ukládání",JOptionPane.WARNING_MESSAGE);
+        try {
+            saveConfig();
+            saveContacts();
+            saveQueue();
+            saveHistory();
+        } catch (Throwable t) {
+            logger.log(Level.SEVERE, "Exception during saving", t);
+        } finally {
+            if (!saveOk) { //some data were not saved
+                logger.warning("Some config files were not saved");
+                JOptionPane.showMessageDialog(this,
+                        "Některé konfigurační soubory nemohly být uloženy!",
+                        "Chyba ukládání", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_formWindowClosing
     
@@ -376,7 +380,7 @@ public class MainFrame extends javax.swing.JFrame {
             smsQueue.clear();
         try {
             persistenceManager.saveQueue();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save queue", ex);
             saveOk = false;
         }
@@ -388,7 +392,7 @@ public class MainFrame extends javax.swing.JFrame {
             history.clear();
         try {
             persistenceManager.saveHistory();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save history", ex);
             saveOk = false;
         }
