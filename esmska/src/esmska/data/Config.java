@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @author ripper
  */
 public class Config extends Object implements Serializable {
-    private static final String LATEST_VERSION = "0.5.1";
+    private static final String LATEST_VERSION = "0.6.0";
     
     private String version = "";
     private boolean rememberQueue = true;

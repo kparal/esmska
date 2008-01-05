@@ -96,7 +96,7 @@
           <Font name="Dialog" size="36" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Esmska 0.5.1"/>
+        <Property name="text" type="java.lang.String" value="Esmska 0.6.0"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -142,7 +142,7 @@
           </FontInfo>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="&#xa9; 2007 Kamil P&#xe1;ral"/>
+        <Property name="text" type="java.lang.String" value="&#xa9; 2007-2008 Kamil P&#xe1;ral"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>

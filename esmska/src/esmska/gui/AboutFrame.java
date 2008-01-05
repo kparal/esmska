@@ -67,7 +67,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Esmska 0.5.1");
+        jLabel2.setText("Esmska 0.6.0");
         jLabel2.setFocusable(false);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -100,7 +100,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
         jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getSize()-2f));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("© 2007 Kamil Páral");
+        jLabel5.setText("© 2007-2008 Kamil Páral");
         jLabel5.setFocusable(false);
 
         linkButton.setText("<html><a href=\"http://esmska.googlecode.com/\">http://esmska.googlecode.com/</a></html>");
