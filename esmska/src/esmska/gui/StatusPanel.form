@@ -15,11 +15,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSeparator1" alignment="0" pref="233" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="55" max="32767" attributes="0"/>
               <Component id="progressBar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
@@ -28,23 +27,15 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="statusAnimationLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="progressBar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="statusMessageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="statusAnimationLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+              <Component id="progressBar" alignment="1" max="32767" attributes="1"/>
+              <Component id="statusMessageLabel" alignment="1" pref="19" max="32767" attributes="2"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JSeparator" name="jSeparator1">
-    </Component>
     <Component class="javax.swing.JLabel" name="statusMessageLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="V&#xed;tejte"/>

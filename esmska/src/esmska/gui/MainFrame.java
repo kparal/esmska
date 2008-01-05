@@ -136,6 +136,7 @@ public class MainFrame extends javax.swing.JFrame {
         queuePanel = new esmska.gui.QueuePanel();
         contactPanel = new esmska.gui.ContactPanel();
         statusPanel = new esmska.gui.StatusPanel();
+        jSeparator1 = new javax.swing.JSeparator();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         configMenuItem = new javax.swing.JMenuItem();
@@ -222,6 +223,7 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
@@ -231,8 +233,10 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -637,6 +641,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem historyMenuItem;
     private javax.swing.JSplitPane horizontalSplitPane;
     private javax.swing.JMenuItem importMenuItem;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu programMenu;
     private esmska.gui.QueuePanel queuePanel;
