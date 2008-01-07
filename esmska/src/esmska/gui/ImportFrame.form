@@ -104,7 +104,7 @@
                       <Component id="kubikRadioButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dreamcomSERadioButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="211" max="32767" attributes="0"/>
+                      <EmptySpace pref="205" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -126,9 +126,6 @@
                   <ComponentRef name="appButtonGroup"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Kub&#xed;k SMS DreamCom"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="dreamcomSERadioButton">
@@ -137,9 +134,6 @@
                   <ComponentRef name="appButtonGroup"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="DreamCom SE"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="esmskaRadioButton">
@@ -149,9 +143,6 @@
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Esmska"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
             </Component>
           </SubComponents>

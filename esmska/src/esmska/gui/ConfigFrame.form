@@ -76,7 +76,7 @@
                           <Component id="removeAccentsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="checkUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="174" max="32767" attributes="0"/>
+                      <EmptySpace pref="172" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -93,7 +93,7 @@
                       <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="130" max="32767" attributes="0"/>
+                      <EmptySpace pref="120" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -107,9 +107,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat frontu neodeslan&#xfd;ch sms"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; frontu neodeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rememberQueueCheckBoxActionPerformed"/>
@@ -123,9 +120,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pamatovat rozvr&#x17e;en&#xed; formul&#xe1;&#x159;e"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Pou&#x17e;ije aktu&#xe1;ln&#xed; rozm&#x11b;ry programu a prvk&#x16f; formul&#xe1;&#x159;e p&#x159;i p&#x159;&#xed;&#x161;t&#xed;m spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rememberLayoutCheckBoxActionPerformed"/>
@@ -139,9 +133,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ze zpr&#xe1;v odstra&#x148;ovat diakritiku"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;ed odesl&#xe1;n&#xed;m zpr&#xe1;vy z n&#xed; odstran&#xed; v&#x161;echna diakritick&#xe1; znam&#xe9;nka&#xa;&lt;/html&gt;"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeAccentsCheckBoxActionPerformed"/>
@@ -155,9 +146,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Kontrolovat po startu novou verzi programu"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Po spu&#x161;t&#x11b;n&#xed; programu zkontrolovat, zda nevy&#x161;la nov&#x11b;j&#x161;&#xed;&lt;br&gt;&#xa;verze programu, a p&#x159;&#xed;padn&#x11b; upozornit ve stavov&#xe9;m &#x159;&#xe1;dku&#xa;&lt;/html&gt;"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkUpdatesCheckBoxActionPerformed"/>
@@ -171,9 +159,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat historii odeslan&#xfd;ch sms"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; historii odeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rememberHistoryCheckBoxActionPerformed"/>
@@ -193,9 +178,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="windowCenteredCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -207,8 +193,8 @@
                                   <Component id="lafComboBox" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="windowDecorationsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="0" pref="419" max="32767" attributes="0"/>
+                          <Component id="windowDecorationsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -229,7 +215,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="windowDecorationsCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="126" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="windowCenteredCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="102" max="32767" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -293,12 +281,22 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;t vzhled i na okraje oken"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Zda m&#xe1; m&#xed;sto opera&#x10d;n&#xed;ho syst&#xe9;mu vykreslovat&lt;br&gt;&#xa;r&#xe1;me&#x10d;ky oken zvolen&#xfd; vzhled&#xa;&lt;/html&gt;"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="windowDecorationsCheckBoxActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="windowCenteredCheckBox">
+              <Properties>
+                <Property name="mnemonic" type="int" value="117"/>
+                <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="config.isStartCentered()" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Spustit program uprost&#x159;ed obrazovky"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Zda-li nechat um&#xed;st&#x11b;n&#xed; okna programu na opera&#x10d;n&#xed;m syst&#xe9;mu,&lt;br&gt;&#xa;nebo ho um&#xed;stit v&#x17e;dy doprost&#x159;ed obrazovky&lt;/html&gt;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="windowCenteredCheckBoxActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -336,7 +334,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="235" max="32767" attributes="0"/>
+                      <EmptySpace pref="237" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -370,9 +368,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="P&#x159;ipojovat podpis odesilatele"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;P&#x159;i p&#x159;ipojen&#xed; podpisu p&#x159;ijde sms adres&#xe1;tovi ze zadan&#xe9;ho &#x10d;&#xed;sla&lt;br&gt;&#xa;a s dan&#xfd;m jm&#xe9;nem napsan&#xfd;m na konci zpr&#xe1;vy&lt;/html&gt;"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="useSenderIDCheckBoxActionPerformed"/>

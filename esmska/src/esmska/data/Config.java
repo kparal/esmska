@@ -33,6 +33,7 @@ public class Config extends Object implements Serializable {
     private boolean removeAccents = true;
     private boolean checkForUpdates = true;
     private boolean rememberHistory = true;
+    private boolean startCentered = false;
 
     private PropertyChangeSupport propertySupport;
     
@@ -296,5 +297,13 @@ public class Config extends Object implements Serializable {
 
     public void setRememberHistory(boolean rememberHistory) {
         this.rememberHistory = rememberHistory;
+    }
+
+    public boolean isStartCentered() {
+        return startCentered;
+    }
+
+    public void setStartCentered(boolean startCentered) {
+        this.startCentered = startCentered;
     }
 }

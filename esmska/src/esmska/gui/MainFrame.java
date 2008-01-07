@@ -29,6 +29,8 @@ import esmska.data.SMS;
 import esmska.UpdateChecker;
 import esmska.data.History;
 import esmska.operators.OperatorEnum;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -365,6 +367,11 @@ public class MainFrame extends javax.swing.JFrame {
                 horizontalSplitPane.setDividerLocation(horizontalSplitPaneLocation);
             if (verticalSplitPaneLocation != null)
                 verticalSplitPane.setDividerLocation(verticalSplitPaneLocation);
+        }
+        
+        if (config.isStartCentered()) { //set window centered
+            Point desktopCenter = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+            setLocation(desktopCenter.x - getWidth() / 2, desktopCenter.y - getHeight() / 2);
         }
     }
     

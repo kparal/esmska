@@ -116,16 +116,13 @@ public class ImportFrame extends javax.swing.JFrame {
 
         appButtonGroup.add(kubikRadioButton);
         kubikRadioButton.setText("Kubík SMS DreamCom");
-        kubikRadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         appButtonGroup.add(dreamcomSERadioButton);
         dreamcomSERadioButton.setText("DreamCom SE");
-        dreamcomSERadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         appButtonGroup.add(esmskaRadioButton);
         esmskaRadioButton.setSelected(true);
         esmskaRadioButton.setText("Esmska");
-        esmskaRadioButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         javax.swing.GroupLayout applicationPanelLayout = new javax.swing.GroupLayout(applicationPanel);
         applicationPanel.setLayout(applicationPanelLayout);
@@ -158,7 +155,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(kubikRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dreamcomSERadioButton)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         cardPanel.add(applicationPanel, "applicationPanel");
