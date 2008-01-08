@@ -36,7 +36,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
         initComponents();
-        useSenderIDCheckBoxActionPerformed(null);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_H);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_V);
@@ -352,6 +351,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         senderNumberTextField.setColumns(9);
         senderNumberTextField.setText((config.getSenderNumber() != null ?
             config.getSenderNumber().replaceFirst("^\\+420", "") : null));
+    senderNumberTextField.setEnabled(useSenderIDCheckBox.isSelected());
     senderNumberTextField.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             senderNumberTextFieldActionPerformed(evt);
@@ -360,6 +360,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
     senderNameTextField.setText(config.getSenderName());
     senderNameTextField.setToolTipText("<html>Při vyplnění jména je připojeno na konec zprávy,<br>\ntakže je sms ve skutečnosti o něco delší</html>");
+    senderNameTextField.setEnabled(useSenderIDCheckBox.isSelected());
     senderNameTextField.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             senderNameTextFieldActionPerformed(evt);
@@ -498,9 +499,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_senderNumberTextFieldActionPerformed
     
     private void useSenderIDCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useSenderIDCheckBoxActionPerformed
-        senderNameTextField.setEnabled(useSenderIDCheckBox.isSelected());
-        senderNumberTextField.setEnabled(useSenderIDCheckBox.isSelected());
-        config.setUseSenderID(useSenderIDCheckBox.isSelected());
+        boolean selected = useSenderIDCheckBox.isSelected();
+        senderNameTextField.setEnabled(selected);
+        senderNumberTextField.setEnabled(selected);
+        config.setUseSenderID(selected);
     }//GEN-LAST:event_useSenderIDCheckBoxActionPerformed
     
     private void rememberQueueCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberQueueCheckBoxActionPerformed

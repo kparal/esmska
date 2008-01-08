@@ -278,13 +278,13 @@ public class HistoryFrame extends javax.swing.JFrame {
         if (evt.getClickCount() != 2) { //only on double click
             return;
         }
-        resendAction.actionPerformed(null);
+        resendButton.doClick(0);
     }//GEN-LAST:event_historyTableMouseClicked
 
     private void historyTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_historyTableKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             evt.consume();
-            resendAction.actionPerformed(null);
+            resendButton.doClick(0);
         }
     }//GEN-LAST:event_historyTableKeyPressed
 
@@ -339,7 +339,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             }
             //fire event and close
             actionEventSupport.fireActionPerformed(ACTION_RESEND_SMS, null);
-            closeButtonActionPerformed(null);
+            closeButton.doClick(0);
         }
     }
 
