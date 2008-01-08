@@ -546,7 +546,7 @@ public class MainFrame extends javax.swing.JFrame {
             putValue(MNEMONIC_KEY, KeyEvent.VK_E);
         }
         public void actionPerformed(ActionEvent e) {
-            ExportManager.exportContacts(MainFrame.this,contacts);
+            ExportManager.exportContacts(MainFrame.this, contacts);
         }
     }
     

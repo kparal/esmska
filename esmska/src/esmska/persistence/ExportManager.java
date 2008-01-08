@@ -26,6 +26,7 @@ import java.text.DateFormat;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /** Export program data
  *
@@ -33,7 +34,8 @@ import java.util.logging.Logger;
  */
 public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
-    
+    private static final String RES = "/esmska/resources/";
+
     /** Creates a new instance of ExportManager */
     private ExportManager() {
     }
@@ -51,7 +53,8 @@ public class ExportManager {
                 "do jiného programu) využijte nějaký tabulkový procesor,<br>" +
                 "např. zdarma dostupný OpenOffice Calc (www.openoffice.cz).</html>";
         JOptionPane.showMessageDialog(parent,new JLabel(message),"Export kontaktů",
-                JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE, 
+                new ImageIcon(ExportManager.class.getResource(RES + "contact-48.png")));
         
         //choose file
         JFileChooser chooser = new JFileChooser();

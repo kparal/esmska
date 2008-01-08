@@ -167,7 +167,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(kubikRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dreamcomSERadioButton)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         cardPanel.add(applicationPanel, "applicationPanel");
@@ -187,7 +187,7 @@ public class ImportFrame extends javax.swing.JFrame {
 
         jLabel19.setText("<html>\nSoubor bude prozkoumán a následně vám bude vypsán seznam kontaktů dostupných pro import. Žádné změny zatím nebudou provedeny.\n</html>");
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
         jLabel20.setText("<html>\nProgram předpokládá, že soubor je v kódování UTF-8.\n</html>");
 
         javax.swing.GroupLayout esmskaPanelLayout = new javax.swing.GroupLayout(esmskaPanel);
@@ -222,7 +222,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel20)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         cardPanel.add(esmskaPanel, "esmskaPanel");
@@ -242,13 +242,13 @@ public class ImportFrame extends javax.swing.JFrame {
 
         jLabel6.setText("<html>\nSoubor bude prozkoumán a následně vám bude vypsán seznam kontaktů dostupných pro import. Žádné změny zatím nebudou provedeny.\n</html>");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
         jLabel7.setText("<html>\nPokud budete mít problémy s importem, ověřte, zda nevyšla novější verze Esmsky, a zkuste to v ní.\n</html>");
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
         jLabel9.setText("<html>\nProgram předpokládá, že soubor je v kódování windows-1250 (výchozí kódování souborů pro české MS Windows).\n</html>");
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning-22.png"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning-32.png"))); // NOI18N
         jLabel15.setText("<html>\nBudou importovány pouze kontakty s operátory podporovanými Esmskou.\n</html>");
 
         javax.swing.GroupLayout kubikPanelLayout = new javax.swing.GroupLayout(kubikPanel);
@@ -289,7 +289,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         cardPanel.add(kubikPanel, "kubikPanel");
@@ -302,7 +302,7 @@ public class ImportFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
         jLabel13.setText("<html>\nPokud budete mít problémy s importem, ověřte, zda nevyšla novější verze Esmsky, a zkuste to v ní.\n</html>");
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
@@ -312,10 +312,10 @@ public class ImportFrame extends javax.swing.JFrame {
 
         jLabel12.setText("<html>\nSoubor bude prozkoumán a následně vám bude vypsán seznam kontaktů dostupných pro import. Žádné změny zatím nebudou provedeny.\n</html>");
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
         jLabel14.setText("<html>\nProgram předpokládá, že soubor je v kódování windows-1250 (výchozí kódování souborů pro české MS Windows).\n</html>");
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning-22.png"))); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning-32.png"))); // NOI18N
         jLabel16.setText("<html>\nBudou importovány pouze kontakty s operátory podporovanými Esmskou.\n</html>");
 
         javax.swing.GroupLayout dreamcomSEPanelLayout = new javax.swing.GroupLayout(dreamcomSEPanel);
@@ -356,7 +356,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         cardPanel.add(dreamcomSEPanel, "dreamcomSEPanel");
@@ -408,12 +408,12 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(skipExistingCheckBox)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addGap(109, 109, 109))
+                .addGap(128, 128, 128))
         );
 
         cardPanel.add(resultsPanel, "resultsPanel");
@@ -457,7 +457,7 @@ public class ImportFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

@@ -324,15 +324,16 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** dialog for creating and editing contact */
     private class ContactDialog extends JDialog implements PropertyChangeListener {
-        EditContactPanel panel;
-        JOptionPane optionPane;
-        Contact contact;
+        private final ImageIcon contactIcon = new ImageIcon(ContactPanel.class.getResource(RES + "contact-48.png"));
+        private EditContactPanel panel;
+        private JOptionPane optionPane;
+        private Contact contact;
         public ContactDialog() {
             super((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, ContactPanel.this),
                     "Kontakt", true);
             panel = new EditContactPanel();
             optionPane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE,
-                    JOptionPane.OK_CANCEL_OPTION);
+                    JOptionPane.OK_CANCEL_OPTION, contactIcon);
             optionPane.addPropertyChangeListener(this);
             setContentPane(optionPane);
             pack();
