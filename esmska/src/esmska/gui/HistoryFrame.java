@@ -111,6 +111,11 @@ public class HistoryFrame extends javax.swing.JFrame {
                 historyTableMouseClicked(evt);
             }
         });
+        historyTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                historyTableKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(historyTable);
 
         jLabel2.setText("Jméno:");
@@ -270,12 +275,18 @@ public class HistoryFrame extends javax.swing.JFrame {
 }//GEN-LAST:event_closeButtonActionPerformed
 
     private void historyTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historyTableMouseClicked
-        if (evt.getClickCount() != 2) //only on double click
-        {
+        if (evt.getClickCount() != 2) { //only on double click
             return;
         }
         resendAction.actionPerformed(null);
     }//GEN-LAST:event_historyTableMouseClicked
+
+    private void historyTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_historyTableKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            evt.consume();
+            resendAction.actionPerformed(null);
+        }
+    }//GEN-LAST:event_historyTableKeyPressed
 
     /** Delete sms from history */
     private class DeleteAction extends AbstractAction {

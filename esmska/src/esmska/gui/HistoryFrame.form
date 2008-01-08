@@ -80,6 +80,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="historyTableMouseClicked"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="historyTableKeyPressed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="historyTable.setDefaultRenderer(Date.class, new TableDateRenderer());&#xa;&#xa;List&lt;RowSorter.SortKey&gt; sortKeys = new ArrayList&lt;RowSorter.SortKey&gt;();&#xa;sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));&#xa;historyTable.getRowSorter().setSortKeys(sortKeys);&#xa;&#xa;historyTable.getSelectionModel().addListSelectionListener(new HistoryTableListener());"/>
