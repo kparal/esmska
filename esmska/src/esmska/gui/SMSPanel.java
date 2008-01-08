@@ -172,7 +172,9 @@ public class SMSPanel extends javax.swing.JPanel {
         }
         text = text.replaceAll(" $",""); //remove trailing space
         
-        smsTextPane.setText(text);
+        if (!text.equals(smsTextPane.getText())) { //do not replace if already compressed
+            smsTextPane.setText(text);
+        }
     }
     
     /** get contact which was requested to be selected in contact list */
