@@ -28,6 +28,8 @@ import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.ActionEventSupport;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,21 +38,30 @@ import java.util.logging.Logger;
  * @author  ripper
  */
 public class ImportFrame extends javax.swing.JFrame {
+    public static final int ACTION_IMPORT_CONTACTS = 0;
     private static final Logger logger = Logger.getLogger(ImportFrame.class.getName());
     private static final String RES = "/esmska/resources/";
+    private ActionEventSupport actionEventSupport;
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
+    private ArrayList<Contact> importedContacts = new ArrayList<Contact>(); //results from import
     private MainFrame mainFrame;
     private String actualCard = "applicationPanel";
     
     /** Creates new form ImportFrame */
     public ImportFrame() {
-        this.mainFrame = MainFrame.getInstance();
+        actionEventSupport = new ActionEventSupport(this);
+        mainFrame = MainFrame.getInstance();
         initComponents();
         cardLayout = (CardLayout) cardPanel.getLayout();
         progressBar.setVisible(false);
         backButton.setVisible(false);
+    }
+    
+    /** get list of imported contacts */
+    public ArrayList<Contact> getImportedContacts() {
+        return importedContacts;
     }
     
     /** This method is called from within the constructor to
@@ -110,6 +121,7 @@ public class ImportFrame extends javax.swing.JFrame {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         jLabel2.setText("<html>\nImport kontaktů vám dovolí načíst vaše kontakty z jiné aplikace a zkopírovat je do Esmsky. V původní aplikaci zůstanou vaše kontakty nedotčeny.\n</html>");
 
         jLabel3.setText("Vyberte, ze které aplikace chcete importovat kontakty:");
@@ -147,7 +159,7 @@ public class ImportFrame extends javax.swing.JFrame {
             .addGroup(applicationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(esmskaRadioButton)
@@ -155,11 +167,12 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(kubikRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dreamcomSERadioButton)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         cardPanel.add(applicationPanel, "applicationPanel");
 
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         jLabel17.setText("<html>\nPro import kontaktů potřebujete mít nachystaný CSV soubor vytvořený pomocí funkce \"Exportovat kontakty\". Tento soubor zde vyberte.\n</html>");
 
         jLabel18.setText("Zvolte CSV soubor:");
@@ -209,7 +222,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel20)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         cardPanel.add(esmskaPanel, "esmskaPanel");
@@ -222,6 +235,7 @@ public class ImportFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         jLabel4.setText("<html>\nNejprve musíte exportovat kontakty z programu Kubík SMS DreamCom. Spusťte uvedený program, přejděte do adresáře kontaktů a pomocí pravého myšítka exportujte všechny své kontakty do CSV souboru. Tento soubor zde následně vyberte.\n</html>");
 
         jLabel5.setText("Zvolte CSV soubor:");
@@ -275,7 +289,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         cardPanel.add(kubikPanel, "kubikPanel");
@@ -291,6 +305,7 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
         jLabel13.setText("<html>\nPokud budete mít problémy s importem, ověřte, zda nevyšla novější verze Esmsky, a zkuste to v ní.\n</html>");
 
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         jLabel10.setText("<html>\nNejprve musíte exportovat kontakty z programu DreamCom SE. Spusťte uvedený program, přejděte do adresáře kontaktů a pomocí pravého myšítka exportujte všechny své kontakty do CSV souboru. Tento soubor zde následně vyberte.\n</html>");
 
         jLabel11.setText("Zvolte CSV soubor:");
@@ -341,7 +356,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         cardPanel.add(dreamcomSEPanel, "dreamcomSEPanel");
@@ -361,6 +376,7 @@ public class ImportFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(contactList);
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         jLabel8.setText("Pokud chcete tyto kontakty importovat, stiskněte Importovat.");
 
         skipExistingCheckBox.setSelected(true);
@@ -382,8 +398,8 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addComponent(jLabel8)
-                    .addComponent(skipExistingCheckBox))
+                    .addComponent(skipExistingCheckBox)
+                    .addComponent(jLabel8))
                 .addContainerGap())
         );
         resultsPanelLayout.setVerticalGroup(
@@ -536,13 +552,11 @@ public class ImportFrame extends javax.swing.JFrame {
         //vysledek
         if (actualCard.equals("resultsPanel")) {
             DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
-            ArrayList<Contact> newContacts = new ArrayList<Contact>();
-            
+            importedContacts.clear();
             for (Object o : contactListModel.toArray())
-                newContacts.add((Contact) o);
+                importedContacts.add((Contact) o);
             
-            mainFrame.importContacts(newContacts);
-            
+            actionEventSupport.fireActionPerformed(ACTION_IMPORT_CONTACTS, null);
             this.setVisible(false);
             this.dispose();
             return;
@@ -645,7 +659,8 @@ public class ImportFrame extends javax.swing.JFrame {
                 actualCard = "resultsPanel";
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Error while parsing file", ex);
-                JOptionPane.showMessageDialog(ImportFrame.this, "Nastala chyba při zpracování souboru!",
+                JOptionPane.showMessageDialog(ImportFrame.this, "Nastala chyba při zpracování souboru!\n" +
+                        "Soubor zřejmě neobsahuje platné údaje.",
                         "Chyba při zpracování souboru", JOptionPane.ERROR_MESSAGE);
             } finally {
                 progressBar.setVisible(false);
@@ -653,6 +668,14 @@ public class ImportFrame extends javax.swing.JFrame {
                 backButton.setEnabled(true);
             }
         }
+    }
+    
+    public void addActionListener(ActionListener actionListener) {
+        actionEventSupport.addActionListener(actionListener);
+    }
+    
+    public void removeActionListener(ActionListener actionListener) {
+        actionEventSupport.removeActionListener(actionListener);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

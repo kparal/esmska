@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
 import javax.swing.AbstractAction;
@@ -78,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
     private List<History> history = PersistenceManager.getHistory();
     /** whether user data were saved successfully */
     private boolean saveOk = true;
+    
     
     /**
      * Creates new form MainFrame
@@ -382,12 +382,6 @@ public class MainFrame extends javax.swing.JFrame {
         smsDelayTimer.start();
     }
     
-    /** Import additional contacts */
-    public void importContacts(Collection<Contact> contacts) {
-        contactPanel.clearSelection();
-        contactPanel.addContacts(contacts);
-    }
-    
     /** Set visibility of main frame toolbar */
     public void setToolbarVisible(boolean visible) {
         toolBar.setVisible(visible);
@@ -535,8 +529,12 @@ public class MainFrame extends javax.swing.JFrame {
             } else {
                 importFrame = new ImportFrame();
                 importFrame.setLocationRelativeTo(MainFrame.this);
+                importFrame.addActionListener(new ImportListener());
                 importFrame.setVisible(true);
             }
+        }
+        public ImportFrame getImportFrame() {
+            return importFrame;
         }
     }
     
@@ -638,7 +636,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     /** Listens for events from sms history table */
     private class HistoryListener implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
             //resend sms
             History hist = historyAction.getHistoryFrame().getSelectedHistory();
@@ -653,6 +650,20 @@ public class MainFrame extends javax.swing.JFrame {
             
             contactPanel.clearSelection();
             smsPanel.setSMS(sms);
+        }
+    }
+    
+    /** Listener for new imported contacts */
+    private class ImportListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            switch (e.getID()) {
+                case ImportFrame.ACTION_IMPORT_CONTACTS:
+                    contactPanel.clearSelection();
+                    contactPanel.addContacts(importAction.getImportFrame().getImportedContacts());
+                    break;
+                default:
+                    logger.severe("Unknown import event type: " + e.getID());
+            }
         }
     }
 

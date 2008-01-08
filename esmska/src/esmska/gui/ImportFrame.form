@@ -73,7 +73,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" alignment="1" pref="496" max="32767" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -96,15 +96,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="esmskaRadioButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="kubikRadioButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dreamcomSERadioButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="205" max="32767" attributes="0"/>
+                      <EmptySpace pref="189" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -112,6 +112,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/contact-48.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Import kontakt&#x16f; v&#xe1;m dovol&#xed; na&#x10d;&#xed;st va&#x161;e kontakty z jin&#xe9; aplikace a zkop&#xed;rovat je do Esmsky. V p&#x16f;vodn&#xed; aplikaci z&#x16f;stanou va&#x161;e kontakty nedot&#x10d;eny.&#xa;&lt;/html&gt;"/>
               </Properties>
             </Component>
@@ -190,7 +193,7 @@
                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="197" max="32767" attributes="0"/>
+                      <EmptySpace pref="177" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -198,6 +201,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/contact-48.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Pro import kontakt&#x16f; pot&#x159;ebujete m&#xed;t nachystan&#xfd; CSV soubor vytvo&#x159;en&#xfd; pomoc&#xed; funkce &quot;Exportovat kontakty&quot;. Tento soubor zde vyberte.&#xa;&lt;/html&gt;"/>
               </Properties>
             </Component>
@@ -281,7 +287,7 @@
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="115" max="32767" attributes="0"/>
+                      <EmptySpace pref="101" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -300,6 +306,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/contact-48.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Nejprve mus&#xed;te exportovat kontakty z programu Kub&#xed;k SMS DreamCom. Spus&#x165;te uveden&#xfd; program, p&#x159;ejd&#x11b;te do adres&#xe1;&#x159;e kontakt&#x16f; a pomoc&#xed; prav&#xe9;ho my&#x161;&#xed;tka exportujte v&#x161;echny sv&#xe9; kontakty do CSV souboru. Tento soubor zde n&#xe1;sledn&#x11b; vyberte.&#xa;&lt;/html&gt;"/>
               </Properties>
             </Component>
@@ -388,7 +397,7 @@
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="115" max="32767" attributes="0"/>
+                      <EmptySpace pref="109" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -415,6 +424,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/contact-48.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Nejprve mus&#xed;te exportovat kontakty z programu DreamCom SE. Spus&#x165;te uveden&#xfd; program, p&#x159;ejd&#x11b;te do adres&#xe1;&#x159;e kontakt&#x16f; a pomoc&#xed; prav&#xe9;ho my&#x161;&#xed;tka exportujte v&#x161;echny sv&#xe9; kontakty do CSV souboru. Tento soubor zde n&#xe1;sledn&#x11b; vyberte.&#xa;&lt;/html&gt;"/>
               </Properties>
             </Component>
@@ -461,8 +473,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" alignment="0" pref="496" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" pref="496" max="32767" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="skipExistingCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -473,11 +485,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="154" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="skipExistingCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                   </Group>
@@ -511,6 +523,9 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/contact-48.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Pokud chcete tyto kontakty importovat, stiskn&#x11b;te Importovat."/>
               </Properties>
             </Component>
