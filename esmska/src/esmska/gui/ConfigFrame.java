@@ -110,6 +110,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         windowDecorationsCheckBox = new javax.swing.JCheckBox();
         windowCenteredCheckBox = new javax.swing.JCheckBox();
+        toolbarVisibleCheckBox = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -225,7 +228,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel4.setToolTipText(lafComboBox.getToolTipText());
 
         jLabel7.setFont(jLabel7.getFont().deriveFont(Font.ITALIC));
-        jLabel7.setText("Pro projevení změn je nutný restart programu!");
+        jLabel7.setText("* Pro projevení změn je nutný restart programu!");
 
         themeComboBox.setToolTipText("<html>\nBarevná schémata pro zvolený vzhled\n</html>");
         themeComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +244,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         windowDecorationsCheckBox.setMnemonic('p');
         windowDecorationsCheckBox.setSelected(config.isLafWindowDecorated());
-        windowDecorationsCheckBox.setText("Použít vzhled i na okraje oken");
+        windowDecorationsCheckBox.setText("Použít vzhled i na okraje oken *");
         windowDecorationsCheckBox.setToolTipText("<html>\nZda má místo operačního systému vykreslovat<br>\nrámečky oken zvolený vzhled\n</html>");
         windowDecorationsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,6 +262,19 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        toolbarVisibleCheckBox.setSelected(config.isToolbarVisible());
+        toolbarVisibleCheckBox.setText("Zobrazit panel nástrojů");
+        toolbarVisibleCheckBox.setToolTipText("<html>\nZobrazit panel nástrojů, který umožňuje rychlejší ovládání myší některých akcí\n</html>");
+        toolbarVisibleCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolbarVisibleCheckBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("*");
+
+        jLabel8.setText("*");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -266,6 +282,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(toolbarVisibleCheckBox)
                     .addComponent(windowCenteredCheckBox)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,8 +290,14 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5))))
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
                     .addComponent(windowDecorationsCheckBox))
                 .addContainerGap())
@@ -288,16 +311,20 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(windowDecorationsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(windowCenteredCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(toolbarVisibleCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
         );
@@ -496,6 +523,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void windowCenteredCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_windowCenteredCheckBoxActionPerformed
         config.setStartCentered(windowCenteredCheckBox.isSelected());
     }//GEN-LAST:event_windowCenteredCheckBoxActionPerformed
+
+    private void toolbarVisibleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolbarVisibleCheckBoxActionPerformed
+        config.setToolbarVisible(toolbarVisibleCheckBox.isSelected());
+        MainFrame.getInstance().setToolbarVisible(toolbarVisibleCheckBox.isSelected());
+    }//GEN-LAST:event_toolbarVisibleCheckBoxActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkUpdatesCheckBox;
@@ -504,8 +536,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -518,6 +552,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JTextField senderNumberTextField;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JComboBox themeComboBox;
+    private javax.swing.JCheckBox toolbarVisibleCheckBox;
     private javax.swing.JCheckBox useSenderIDCheckBox;
     private javax.swing.JCheckBox windowCenteredCheckBox;
     private javax.swing.JCheckBox windowDecorationsCheckBox;

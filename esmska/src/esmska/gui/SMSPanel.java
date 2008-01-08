@@ -74,8 +74,8 @@ public class SMSPanel extends javax.swing.JPanel {
     private UndoManager smsTextUndoManager = new UndoManager();
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     
-    private Action smsTextUndoAction;
-    private Action smsTextRedoAction;
+    private Action undoAction = new UndoAction();
+    private Action redoAction = new RedoAction();
     private SendAction sendAction = new SendAction();
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
@@ -248,6 +248,16 @@ public class SMSPanel extends javax.swing.JPanel {
         return text != null ? text : "";
     }
     
+    /** get undo action used in sms text pane */
+    public Action getUndoAction() {
+        return undoAction;
+    }
+    
+    /** get redo action used in sms text pane */
+    public Action getRedoAction() {
+        return redoAction;
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -291,24 +301,8 @@ public class SMSPanel extends javax.swing.JPanel {
         smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();
         ((AbstractDocument)smsTextPane.getStyledDocument()).setDocumentFilter(smsTextPaneDocumentFilter);
 
-        //set undo and redo actions and bind them
+        //bind actions and listeners
         smsTextUndoManager.setLimit(-1);
-        smsTextUndoAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (smsTextUndoManager.canUndo()) {
-                    smsTextUndoManager.undo();
-                    smsTextPaneDocumentFilter.requestUpdate();
-                }
-            }
-        };
-        smsTextRedoAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (smsTextUndoManager.canRedo()) {
-                    smsTextUndoManager.redo();
-                    smsTextPaneDocumentFilter.requestUpdate();
-                }
-            }
-        };
         smsTextPane.getDocument().addUndoableEditListener(new UndoableEditListener() {
             public void undoableEditHappened(UndoableEditEvent e) {
                 if (e.getEdit().getPresentationName().contains("style"))
@@ -320,8 +314,8 @@ public class SMSPanel extends javax.swing.JPanel {
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK),"redo");
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
             KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK),"redo");
-    smsTextPane.getActionMap().put("undo",smsTextUndoAction);
-    smsTextPane.getActionMap().put("redo",smsTextRedoAction);
+    smsTextPane.getActionMap().put("undo",undoAction);
+    smsTextPane.getActionMap().put("redo",redoAction);
 
     //ctrl+enter
     smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,KeyEvent.CTRL_DOWN_MASK),"send");
@@ -451,6 +445,34 @@ public class SMSPanel extends javax.swing.JPanel {
         }
     }
     
+    /** undo in sms text pane */
+    private class UndoAction extends AbstractAction {
+        public UndoAction() {
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "undo-32.png")));
+            putValue(SHORT_DESCRIPTION, "Zpět (Ctrl+Z)");
+        }
+        public void actionPerformed(ActionEvent e) {
+            if (smsTextUndoManager.canUndo()) {
+                smsTextUndoManager.undo();
+                smsTextPaneDocumentFilter.requestUpdate();
+            }
+        }
+    }
+    
+    /** redo in sms text pane */
+    private class RedoAction extends AbstractAction {
+        public RedoAction() {
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "redo-32.png")));
+            putValue(SHORT_DESCRIPTION, "Vpřed (Ctrl+Y)");
+        }
+        public void actionPerformed(ActionEvent e) {
+            if (smsTextUndoManager.canRedo()) {
+                smsTextUndoManager.redo();
+                smsTextPaneDocumentFilter.requestUpdate();
+            }
+        }
+    }
+
     /** Renderer for items in operator combo box */
     private class OperatorComboBoxRenderer implements ListCellRenderer {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {

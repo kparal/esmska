@@ -34,6 +34,7 @@ public class Config extends Object implements Serializable {
     private boolean checkForUpdates = true;
     private boolean rememberHistory = true;
     private boolean startCentered = false;
+    private boolean toolbarVisible = false;
 
     private PropertyChangeSupport propertySupport;
     
@@ -305,5 +306,13 @@ public class Config extends Object implements Serializable {
 
     public void setStartCentered(boolean startCentered) {
         this.startCentered = startCentered;
+    }
+
+    public boolean isToolbarVisible() {
+        return toolbarVisible;
+    }
+
+    public void setToolbarVisible(boolean toolbarVisible) {
+        this.toolbarVisible = toolbarVisible;
     }
 }

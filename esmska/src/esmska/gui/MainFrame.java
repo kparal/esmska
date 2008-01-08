@@ -35,6 +35,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -139,6 +140,15 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanel = new esmska.gui.ContactPanel();
         statusPanel = new esmska.gui.StatusPanel();
         jSeparator1 = new javax.swing.JSeparator();
+        toolBar = new javax.swing.JToolBar();
+        compressButton = new javax.swing.JButton();
+        undoButton = new javax.swing.JButton();
+        redoButton = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        historyButton = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        configButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         configMenuItem = new javax.swing.JMenuItem();
@@ -187,6 +197,42 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         horizontalSplitPane.setRightComponent(contactPanel);
 
+        toolBar.setFloatable(false);
+        toolBar.setRollover(true);
+        toolBar.add(Box.createRigidArea(new Dimension(5, 1)));
+
+        compressButton.setAction(compressAction);
+        compressButton.setFocusable(false);
+        compressButton.setText(null);
+        toolBar.add(compressButton);
+
+        undoButton.setAction(smsPanel.getUndoAction());
+        undoButton.setFocusable(false);
+        undoButton.setText(null);
+        toolBar.add(undoButton);
+
+        redoButton.setAction(smsPanel.getRedoAction());
+        redoButton.setFocusable(false);
+        redoButton.setText(null);
+        toolBar.add(redoButton);
+        toolBar.add(jSeparator2);
+
+        historyButton.setAction(historyAction);
+        historyButton.setFocusable(false);
+        historyButton.setText(null);
+        toolBar.add(historyButton);
+        toolBar.add(jSeparator3);
+
+        configButton.setAction(configAction);
+        configButton.setFocusable(false);
+        configButton.setText(null);
+        toolBar.add(configButton);
+
+        exitButton.setAction(quitAction);
+        exitButton.setFocusable(false);
+        exitButton.setText(null);
+        toolBar.add(exitButton);
+
         programMenu.setMnemonic('r');
         programMenu.setText("Program");
 
@@ -230,12 +276,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(toolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -340,6 +388,11 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanel.addContacts(contacts);
     }
     
+    /** Set visibility of main frame toolbar */
+    public void setToolbarVisible(boolean visible) {
+        toolBar.setVisible(visible);
+    }
+    
     /** save program configuration */
     private void saveConfig() {
         //save frame layout
@@ -373,6 +426,8 @@ public class MainFrame extends javax.swing.JFrame {
             Point desktopCenter = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
             setLocation(desktopCenter.x - getWidth() / 2, desktopCenter.y - getHeight() / 2);
         }
+        
+        toolBar.setVisible(config.isToolbarVisible()); //display or hide toolbar
     }
     
     /** save contacts */
@@ -431,7 +486,9 @@ public class MainFrame extends javax.swing.JFrame {
     /** Quit the program */
     private class QuitAction extends AbstractAction {
         public QuitAction() {
-            super("Ukončit", new ImageIcon(MainFrame.class.getResource(RES + "exit-small.png")));
+            super("Ukončit");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "exit-16.png")));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "exit-32.png")));
             putValue(SHORT_DESCRIPTION,"Ukončit program");
             putValue(MNEMONIC_KEY,KeyEvent.VK_U);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, 
@@ -447,7 +504,9 @@ public class MainFrame extends javax.swing.JFrame {
     private class ConfigAction extends AbstractAction {
         private ConfigFrame configFrame;
         public ConfigAction() {
-            super("Nastavení", new ImageIcon(MainFrame.class.getResource(RES + "config-16.png")));
+            super("Nastavení");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "config-16.png")));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "config-32.png")));
             putValue(SHORT_DESCRIPTION,"Nastavit chování programu");
             putValue(MNEMONIC_KEY,KeyEvent.VK_N);
         }
@@ -496,7 +555,9 @@ public class MainFrame extends javax.swing.JFrame {
     /** compress current sms text by rewriting it to CamelCase */
     private class CompressAction extends AbstractAction {
         public CompressAction() {
-            super("Zkomprimovat zprávu", new ImageIcon(MainFrame.class.getResource(RES + "compress-small.png")));
+            super("Zkomprimovat zprávu");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "compress-16.png")));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
             this.putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\"");
             putValue(MNEMONIC_KEY, KeyEvent.VK_K);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K, 
@@ -510,7 +571,9 @@ public class MainFrame extends javax.swing.JFrame {
     private class HistoryAction extends AbstractAction {
         private HistoryFrame historyFrame;
         public HistoryAction() {
-            super("Historie zpráv", new ImageIcon(MainFrame.class.getResource(RES + "history-16.png")));
+            super("Historie zpráv");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "history-16.png")));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "history-32.png")));
             this.putValue(SHORT_DESCRIPTION,"Zobrazit historii odeslaných zpráv");
             putValue(MNEMONIC_KEY, KeyEvent.VK_H);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, 
@@ -640,21 +703,30 @@ public class MainFrame extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JButton compressButton;
     private javax.swing.JMenuItem compressMenuItem;
+    private javax.swing.JButton configButton;
     private javax.swing.JMenuItem configMenuItem;
     private esmska.gui.ContactPanel contactPanel;
+    private javax.swing.JButton exitButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenuItem exportMenuItem;
+    private javax.swing.JButton historyButton;
     private javax.swing.JMenuItem historyMenuItem;
     private javax.swing.JSplitPane horizontalSplitPane;
     private javax.swing.JMenuItem importMenuItem;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu programMenu;
     private esmska.gui.QueuePanel queuePanel;
+    private javax.swing.JButton redoButton;
     private esmska.gui.SMSPanel smsPanel;
     private esmska.gui.StatusPanel statusPanel;
+    private javax.swing.JToolBar toolBar;
     private javax.swing.JMenu toolsMenu;
+    private javax.swing.JButton undoButton;
     private javax.swing.JSplitPane verticalSplitPane;
     // End of variables declaration//GEN-END:variables
 }
