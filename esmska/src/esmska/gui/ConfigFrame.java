@@ -16,7 +16,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
-import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
 
 /** Configure settings form
@@ -25,7 +24,6 @@ import esmska.persistence.PersistenceManager;
  */
 public class ConfigFrame extends javax.swing.JFrame {
     private static final String RES = "/esmska/resources/";
-    private Config config = PersistenceManager.getConfig();
     private boolean fullyInicialized;
     private final String LAF_SYSTEM = "Systémový";
     private final String LAF_CROSSPLATFORM = "Meziplatformní";
@@ -93,16 +91,18 @@ public class ConfigFrame extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        config = PersistenceManager.getConfig();
         tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         rememberQueueCheckBox = new javax.swing.JCheckBox();
-        rememberLayoutCheckBox = new javax.swing.JCheckBox();
         removeAccentsCheckBox = new javax.swing.JCheckBox();
         checkUpdatesCheckBox = new javax.swing.JCheckBox();
         rememberHistoryCheckBox = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         lafComboBox = new javax.swing.JComboBox();
+        rememberLayoutCheckBox = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         themeComboBox = new javax.swing.JComboBox();
@@ -133,54 +133,32 @@ public class ConfigFrame extends javax.swing.JFrame {
         });
 
         rememberQueueCheckBox.setMnemonic('f');
-        rememberQueueCheckBox.setSelected(config.isRememberQueue());
         rememberQueueCheckBox.setText("Ukládat frontu neodeslaných sms");
         rememberQueueCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává frontu neodeslaných sms pro příští spuštění programu\n</html>");
-        rememberQueueCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rememberQueueCheckBoxActionPerformed(evt);
-            }
-        });
 
-        rememberLayoutCheckBox.setMnemonic('r');
-        rememberLayoutCheckBox.setSelected(config.isRememberLayout());
-        rememberLayoutCheckBox.setText("Pamatovat rozvržení formuláře");
-        rememberLayoutCheckBox.setToolTipText("<html>\nPoužije aktuální rozměry programu a prvků formuláře při příštím spuštění programu\n</html>");
-        rememberLayoutCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rememberLayoutCheckBoxActionPerformed(evt);
-            }
-        });
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberQueue}"), rememberQueueCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         removeAccentsCheckBox.setMnemonic('d');
-        removeAccentsCheckBox.setSelected(config.isRemoveAccents());
         removeAccentsCheckBox.setText("Ze zpráv odstraňovat diakritiku");
         removeAccentsCheckBox.setToolTipText("<html>\nPřed odesláním zprávy z ní odstraní všechna diakritická znaménka\n</html>");
-        removeAccentsCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeAccentsCheckBoxActionPerformed(evt);
-            }
-        });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${removeAccents}"), removeAccentsCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         checkUpdatesCheckBox.setMnemonic('n');
-        checkUpdatesCheckBox.setSelected(config.isCheckForUpdates());
         checkUpdatesCheckBox.setText("Kontrolovat po startu novou verzi programu");
         checkUpdatesCheckBox.setToolTipText("<html>\nPo spuštění programu zkontrolovat, zda nevyšla novější<br>\nverze programu, a případně upozornit ve stavovém řádku\n</html>");
-        checkUpdatesCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkUpdatesCheckBoxActionPerformed(evt);
-            }
-        });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${checkForUpdates}"), checkUpdatesCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         rememberHistoryCheckBox.setMnemonic('h');
-        rememberHistoryCheckBox.setSelected(config.isRememberHistory());
         rememberHistoryCheckBox.setText("Ukládat historii odeslaných sms");
         rememberHistoryCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává historii odeslaných sms pro příští spuštění programu\n</html>");
-        rememberHistoryCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rememberHistoryCheckBoxActionPerformed(evt);
-            }
-        });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberHistory}"), rememberHistoryCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -190,18 +168,15 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rememberHistoryCheckBox)
-                    .addComponent(rememberLayoutCheckBox)
                     .addComponent(rememberQueueCheckBox)
                     .addComponent(removeAccentsCheckBox)
                     .addComponent(checkUpdatesCheckBox))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rememberLayoutCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rememberQueueCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rememberHistoryCheckBox)
@@ -209,7 +184,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(removeAccentsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkUpdatesCheckBox)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Obecné", jPanel1);
@@ -220,6 +195,13 @@ public class ConfigFrame extends javax.swing.JFrame {
                 lafComboBoxActionPerformed(evt);
             }
         });
+
+        rememberLayoutCheckBox.setMnemonic('r');
+        rememberLayoutCheckBox.setText("Pamatovat rozvržení formuláře");
+        rememberLayoutCheckBox.setToolTipText("<html>\nPoužije aktuální rozměry programu a prvků formuláře při příštím spuštění programu\n</html>");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberLayout}"), rememberLayoutCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         jLabel4.setDisplayedMnemonic('v');
         jLabel4.setLabelFor(lafComboBox);
@@ -242,33 +224,24 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel6.setToolTipText(themeComboBox.getToolTipText());
 
         windowDecorationsCheckBox.setMnemonic('p');
-        windowDecorationsCheckBox.setSelected(config.isLafWindowDecorated());
         windowDecorationsCheckBox.setText("Použít vzhled i na okraje oken *");
         windowDecorationsCheckBox.setToolTipText("<html>\nZda má místo operačního systému vykreslovat<br>\nrámečky oken zvolený vzhled\n</html>");
-        windowDecorationsCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                windowDecorationsCheckBoxActionPerformed(evt);
-            }
-        });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${lafWindowDecorated}"), windowDecorationsCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         windowCenteredCheckBox.setMnemonic('u');
-        windowCenteredCheckBox.setSelected(config.isStartCentered());
         windowCenteredCheckBox.setText("Spustit program uprostřed obrazovky");
         windowCenteredCheckBox.setToolTipText("<html>Zda-li nechat umístění okna programu na operačním systému,<br>\nnebo ho umístit vždy doprostřed obrazovky</html>");
-        windowCenteredCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                windowCenteredCheckBoxActionPerformed(evt);
-            }
-        });
 
-        toolbarVisibleCheckBox.setSelected(config.isToolbarVisible());
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${startCentered}"), windowCenteredCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+
         toolbarVisibleCheckBox.setText("Zobrazit panel nástrojů");
         toolbarVisibleCheckBox.setToolTipText("<html>\nZobrazit panel nástrojů, který umožňuje rychlejší ovládání myší některých akcí\n</html>");
-        toolbarVisibleCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toolbarVisibleCheckBoxActionPerformed(evt);
-            }
-        });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${toolbarVisible}"), toolbarVisibleCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         jLabel5.setText("*");
 
@@ -297,8 +270,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                                 .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5))))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-                    .addComponent(windowDecorationsCheckBox))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                    .addComponent(windowDecorationsCheckBox)
+                    .addComponent(rememberLayoutCheckBox))
                 .addContainerGap())
         );
 
@@ -320,10 +294,12 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(windowDecorationsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rememberLayoutCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(windowCenteredCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(toolbarVisibleCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
         );
@@ -333,14 +309,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.addTab("Vzhled", jPanel3);
 
         useSenderIDCheckBox.setMnemonic('p');
-        useSenderIDCheckBox.setSelected(config.isUseSenderID());
         useSenderIDCheckBox.setText("Připojovat podpis odesilatele");
         useSenderIDCheckBox.setToolTipText("<html>Při připojení podpisu přijde sms adresátovi ze zadaného čísla<br>\na s daným jménem napsaným na konci zprávy</html>");
-        useSenderIDCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                useSenderIDCheckBoxActionPerformed(evt);
-            }
-        });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${useSenderID}"), useSenderIDCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         jLabel1.setDisplayedMnemonic('l');
         jLabel1.setLabelFor(senderNumberTextField);
@@ -349,110 +322,105 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel2.setText("+420");
 
         senderNumberTextField.setColumns(9);
-        senderNumberTextField.setText((config.getSenderNumber() != null ?
-            config.getSenderNumber().replaceFirst("^\\+420", "") : null));
-    senderNumberTextField.setEnabled(useSenderIDCheckBox.isSelected());
-    senderNumberTextField.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            senderNumberTextFieldActionPerformed(evt);
-        }
-    });
+        senderNumberTextField.setText(config.getSenderNumber() != null ?
+            config.getSenderNumber().replaceFirst("^\\+420", "") : null);
 
-    senderNameTextField.setText(config.getSenderName());
-    senderNameTextField.setToolTipText("<html>Při vyplnění jména je připojeno na konec zprávy,<br>\ntakže je sms ve skutečnosti o něco delší</html>");
-    senderNameTextField.setEnabled(useSenderIDCheckBox.isSelected());
-    senderNameTextField.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            senderNameTextFieldActionPerformed(evt);
-        }
-    });
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useSenderIDCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), senderNumberTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
 
-    jLabel3.setDisplayedMnemonic('m');
-    jLabel3.setLabelFor(senderNameTextField);
-    jLabel3.setText("Jméno");
-    jLabel3.setToolTipText(senderNameTextField.getToolTipText());
+        senderNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                senderNumberTextFieldActionPerformed(evt);
+            }
+        });
 
-    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-    jPanel2.setLayout(jPanel2Layout);
-    jPanel2Layout.setHorizontalGroup(
-        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel2Layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        senderNameTextField.setToolTipText("<html>Při vyplnění jména je připojeno na konec zprávy,<br>\ntakže je sms ve skutečnosti o něco delší</html>");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${senderName}"), senderNameTextField, org.jdesktop.beansbinding.BeanProperty.create("text_ON_ACTION_OR_FOCUS_LOST"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useSenderIDCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), senderNameTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jLabel3.setDisplayedMnemonic('m');
+        jLabel3.setLabelFor(senderNameTextField);
+        jLabel3.setText("Jméno");
+        jLabel3.setToolTipText(senderNameTextField.getToolTipText());
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(useSenderIDCheckBox)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(senderNameTextField))))
+                .addContainerGap(254, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(useSenderIDCheckBox)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel1))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(senderNameTextField))))
-            .addContainerGap(237, Short.MAX_VALUE))
-    );
-    jPanel2Layout.setVerticalGroup(
-        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel2Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(useSenderIDCheckBox)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel1)
-                .addComponent(jLabel2)
-                .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel3)
-                .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(164, Short.MAX_VALUE))
-    );
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(205, Short.MAX_VALUE))
+        );
 
-    tabbedPane.addTab("Vodafone", jPanel2);
+        tabbedPane.addTab("Vodafone", jPanel2);
 
-    closeButton.setMnemonic('z');
-    closeButton.setText("Zavřít");
-    closeButton.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            closeButtonActionPerformed(evt);
-        }
-    });
+        closeButton.setMnemonic('z');
+        closeButton.setText("Zavřít");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(closeButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE))
-            .addContainerGap())
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(closeButton)
-            .addContainerGap())
-    );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(closeButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(closeButton)
+                .addContainerGap())
+        );
 
-    pack();
+        bindingGroup.bind();
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void removeAccentsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAccentsCheckBoxActionPerformed
-        config.setRemoveAccents(removeAccentsCheckBox.isSelected());
-    }//GEN-LAST:event_removeAccentsCheckBoxActionPerformed
-    
-    private void windowDecorationsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_windowDecorationsCheckBoxActionPerformed
-        config.setLafWindowDecorated(windowDecorationsCheckBox.isSelected());
-    }//GEN-LAST:event_windowDecorationsCheckBoxActionPerformed
-    
+        
     private void themeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeComboBoxActionPerformed
         String laf = (String) lafComboBox.getSelectedItem();
         
@@ -480,60 +448,24 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         updateThemeComboBox();
     }//GEN-LAST:event_lafComboBoxActionPerformed
-    
-    private void rememberLayoutCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberLayoutCheckBoxActionPerformed
-        config.setRememberLayout(rememberLayoutCheckBox.isSelected());
-    }//GEN-LAST:event_rememberLayoutCheckBoxActionPerformed
-    
+        
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        senderNameTextFieldActionPerformed(null);
         senderNumberTextFieldActionPerformed(null);
     }//GEN-LAST:event_formWindowLostFocus
-    
-    private void senderNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senderNameTextFieldActionPerformed
-        config.setSenderName(senderNameTextField.getText());
-    }//GEN-LAST:event_senderNameTextFieldActionPerformed
-    
+        
     private void senderNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senderNumberTextFieldActionPerformed
         config.setSenderNumber("+420" + senderNumberTextField.getText());
     }//GEN-LAST:event_senderNumberTextFieldActionPerformed
-    
-    private void useSenderIDCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useSenderIDCheckBoxActionPerformed
-        boolean selected = useSenderIDCheckBox.isSelected();
-        senderNameTextField.setEnabled(selected);
-        senderNumberTextField.setEnabled(selected);
-        config.setUseSenderID(selected);
-    }//GEN-LAST:event_useSenderIDCheckBoxActionPerformed
-    
-    private void rememberQueueCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberQueueCheckBoxActionPerformed
-        config.setRememberQueue(rememberQueueCheckBox.isSelected());
-    }//GEN-LAST:event_rememberQueueCheckBoxActionPerformed
-    
+            
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
-
-    private void checkUpdatesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkUpdatesCheckBoxActionPerformed
-        config.setCheckForUpdates(checkUpdatesCheckBox.isSelected());
-    }//GEN-LAST:event_checkUpdatesCheckBoxActionPerformed
-
-    private void rememberHistoryCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberHistoryCheckBoxActionPerformed
-        config.setRememberHistory(rememberHistoryCheckBox.isSelected());
-    }//GEN-LAST:event_rememberHistoryCheckBoxActionPerformed
-
-    private void windowCenteredCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_windowCenteredCheckBoxActionPerformed
-        config.setStartCentered(windowCenteredCheckBox.isSelected());
-    }//GEN-LAST:event_windowCenteredCheckBoxActionPerformed
-
-    private void toolbarVisibleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolbarVisibleCheckBoxActionPerformed
-        config.setToolbarVisible(toolbarVisibleCheckBox.isSelected());
-        MainFrame.getInstance().setToolbarVisible(toolbarVisibleCheckBox.isSelected());
-    }//GEN-LAST:event_toolbarVisibleCheckBoxActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkUpdatesCheckBox;
     private javax.swing.JButton closeButton;
+    private esmska.data.Config config;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -558,6 +490,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox useSenderIDCheckBox;
     private javax.swing.JCheckBox windowCenteredCheckBox;
     private javax.swing.JCheckBox windowDecorationsCheckBox;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     
 }

@@ -30,7 +30,6 @@ import esmska.data.History;
 import esmska.operators.OperatorEnum;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +37,11 @@ import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Binding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.beansbinding.Bindings;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**
@@ -49,8 +53,11 @@ public class MainFrame extends javax.swing.JFrame {
     private static MainFrame instance;
     private static final Logger logger = Logger.getLogger(MainFrame.class.getName());
     private static final String RES = "/esmska/resources/";
-    private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
+
+    /** custom beans binding group */
+    private BindingGroup bindGroup = new BindingGroup();
     
+    // actions
     private Action quitAction = new QuitAction();
     private Action aboutAction = new AboutAction();
     private Action configAction = new ConfigAction();
@@ -58,7 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Action exportAction = new ExportAction();
     private Action compressAction = new CompressAction();
     private HistoryAction historyAction = new HistoryAction();
-    
+
     /** actual queue of sms's */
     private List<SMS> smsQueue = PersistenceManager.getQueue();
     /** sender of sms */
@@ -110,6 +117,12 @@ public class MainFrame extends javax.swing.JFrame {
         //setup components
         smsDelayTimer.setInitialDelay(0);
         contactPanel.requestFocusInWindow();
+        
+        //use bindings
+        Binding bind = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ,
+                config, BeanProperty.create("toolbarVisible"), toolBar, BeanProperty.create("visible"));
+        bindGroup.addBinding(bind);
+        bindGroup.bind();
         
         //check for updates
         if (config.isCheckForUpdates()) {
@@ -382,11 +395,6 @@ public class MainFrame extends javax.swing.JFrame {
         smsDelayTimer.start();
     }
     
-    /** Set visibility of main frame toolbar */
-    public void setToolbarVisible(boolean visible) {
-        toolBar.setVisible(visible);
-    }
-    
     /** save program configuration */
     private void saveConfig() {
         //save frame layout
@@ -420,8 +428,6 @@ public class MainFrame extends javax.swing.JFrame {
             Point desktopCenter = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
             setLocation(desktopCenter.x - getWidth() / 2, desktopCenter.y - getHeight() / 2);
         }
-        
-        toolBar.setVisible(config.isToolbarVisible()); //display or hide toolbar
     }
     
     /** save contacts */
@@ -556,7 +562,7 @@ public class MainFrame extends javax.swing.JFrame {
             super("Zkomprimovat zprávu");
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "compress-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
-            this.putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\"");
+            putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\"");
             putValue(MNEMONIC_KEY, KeyEvent.VK_K);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K, 
                     KeyEvent.CTRL_DOWN_MASK));
