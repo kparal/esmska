@@ -41,18 +41,25 @@ public class ImportFrame extends javax.swing.JFrame {
     public static final int ACTION_IMPORT_CONTACTS = 0;
     private static final Logger logger = Logger.getLogger(ImportFrame.class.getName());
     private static final String RES = "/esmska/resources/";
-    private ActionEventSupport actionEventSupport;
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     private ArrayList<Contact> importedContacts = new ArrayList<Contact>(); //results from import
-    private MainFrame mainFrame;
     private String actualCard = "applicationPanel";
+    
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+    
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
     
     /** Creates new form ImportFrame */
     public ImportFrame() {
-        actionEventSupport = new ActionEventSupport(this);
-        mainFrame = MainFrame.getInstance();
         initComponents();
         cardLayout = (CardLayout) cardPanel.getLayout();
         progressBar.setVisible(false);
@@ -556,7 +563,7 @@ public class ImportFrame extends javax.swing.JFrame {
             for (Object o : contactListModel.toArray())
                 importedContacts.add((Contact) o);
             
-            actionEventSupport.fireActionPerformed(ACTION_IMPORT_CONTACTS, null);
+            actionSupport.fireActionPerformed(ACTION_IMPORT_CONTACTS, null);
             this.setVisible(false);
             this.dispose();
             return;
@@ -668,14 +675,6 @@ public class ImportFrame extends javax.swing.JFrame {
                 backButton.setEnabled(true);
             }
         }
-    }
-    
-    public void addActionListener(ActionListener actionListener) {
-        actionEventSupport.addActionListener(actionListener);
-    }
-    
-    public void removeActionListener(ActionListener actionListener) {
-        actionEventSupport.removeActionListener(actionListener);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

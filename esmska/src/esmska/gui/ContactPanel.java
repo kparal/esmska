@@ -50,7 +50,6 @@ public class ContactPanel extends javax.swing.JPanel {
     public static final int ACTION_CONTACT_CHOSEN = 1;
     
     private static final String RES = "/esmska/resources/";
-    private ActionEventSupport actionEventSupport;
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     
     private Action addContactAction = new AddContactAction();
@@ -60,10 +59,20 @@ public class ContactPanel extends javax.swing.JPanel {
     private ContactListModel contactListModel = new ContactListModel();
     private ContactDialog contactDialog = new ContactDialog();
     
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+    
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
+    
     /** Creates new form ContactPanel */
     public ContactPanel() {
         initComponents();
-        actionEventSupport = new ActionEventSupport(this);
     }
     
     public void clearSelection() {
@@ -178,7 +187,7 @@ public class ContactPanel extends javax.swing.JPanel {
         editContactAction.setEnabled(count == 1);
         
         //fire event
-        actionEventSupport.fireActionPerformed(ACTION_CONTACT_SELECTION_CHANGED, null);
+        actionSupport.fireActionPerformed(ACTION_CONTACT_SELECTION_CHANGED, null);
     }//GEN-LAST:event_contactListValueChanged
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
@@ -265,7 +274,7 @@ public class ContactPanel extends javax.swing.JPanel {
     /** Choose contact in contact list by keyboard or mouse */
     private class ChooseContactAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
-            actionEventSupport.fireActionPerformed(ACTION_CONTACT_CHOSEN, null);
+            actionSupport.fireActionPerformed(ACTION_CONTACT_CHOSEN, null);
         }
     }
     
@@ -390,14 +399,6 @@ public class ContactPanel extends javax.swing.JPanel {
             
             return c;
         }
-    }
-    
-    public void addActionListener(ActionListener actionListener) {
-        actionEventSupport.addActionListener(actionListener);
-    }
-    
-    public void removeActionListener(ActionListener actionListener) {
-        actionEventSupport.removeActionListener(actionListener);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

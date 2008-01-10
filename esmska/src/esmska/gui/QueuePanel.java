@@ -35,7 +35,6 @@ public class QueuePanel extends javax.swing.JPanel {
     public static final int ACTION_QUEUE_PAUSE_CHANGED = 1;
     
     private static final String RES = "/esmska/resources/";
-    private ActionEventSupport actionEventSupport;
     private List<SMS> smsQueue = PersistenceManager.getQueue();
     
     private SMSQueuePauseAction smsQueuePauseAction = new SMSQueuePauseAction();
@@ -47,10 +46,20 @@ public class QueuePanel extends javax.swing.JPanel {
     
     private SMS editRequestedSMS;
     
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+    
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
+    
     /** Creates new form QueuePanel */
     public QueuePanel() {
         initComponents();
-        actionEventSupport = new ActionEventSupport(this);
     }
     
     public SMS getEditRequestedSMS() {
@@ -228,7 +237,7 @@ public class QueuePanel extends javax.swing.JPanel {
             smsQueueListModel.remove(sms);
             
             //fire event
-            actionEventSupport.fireActionPerformed(ACTION_REQUEST_EDIT_SMS, null);
+            actionSupport.fireActionPerformed(ACTION_REQUEST_EDIT_SMS, null);
         }
     }
     
@@ -300,7 +309,7 @@ public class QueuePanel extends javax.swing.JPanel {
             paused = !paused;
             
             //fire event
-            actionEventSupport.fireActionPerformed(ACTION_QUEUE_PAUSE_CHANGED, null);
+            actionSupport.fireActionPerformed(ACTION_QUEUE_PAUSE_CHANGED, null);
         }
         public boolean isPaused() {
             return paused;
@@ -387,14 +396,6 @@ public class QueuePanel extends javax.swing.JPanel {
             output.append("</html>");
             return output.toString();
         }
-    }
-    
-    public void addActionListener(ActionListener actionListener) {
-        actionEventSupport.addActionListener(actionListener);
-    }
-    
-    public void removeActionListener(ActionListener actionListener) {
-        actionEventSupport.removeActionListener(actionListener);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

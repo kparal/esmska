@@ -49,7 +49,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="compressMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="compressAction" type="code"/>
+                  <Connection code="smsPanel.getCompressAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -214,7 +214,7 @@
         <Component class="javax.swing.JButton" name="compressButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="compressAction" type="code"/>
+              <Connection code="smsPanel.getCompressAction()" type="code"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>

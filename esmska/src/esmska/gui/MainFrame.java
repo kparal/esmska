@@ -63,7 +63,6 @@ public class MainFrame extends javax.swing.JFrame {
     private Action configAction = new ConfigAction();
     private ImportAction importAction = new ImportAction();
     private Action exportAction = new ExportAction();
-    private Action compressAction = new CompressAction();
     private HistoryAction historyAction = new HistoryAction();
 
     /** actual queue of sms's */
@@ -214,7 +213,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.setRollover(true);
         toolBar.add(Box.createRigidArea(new Dimension(5, 1)));
 
-        compressButton.setAction(compressAction);
+        compressButton.setAction(smsPanel.getCompressAction());
         compressButton.setFocusable(false);
         compressButton.setText(null);
         toolBar.add(compressButton);
@@ -266,7 +265,7 @@ public class MainFrame extends javax.swing.JFrame {
         historyMenuItem.setAction(historyAction);
         toolsMenu.add(historyMenuItem);
 
-        compressMenuItem.setAction(compressAction);
+        compressMenuItem.setAction(smsPanel.getCompressAction());
         toolsMenu.add(compressMenuItem);
 
         importMenuItem.setAction(importAction);
@@ -556,22 +555,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
-    /** compress current sms text by rewriting it to CamelCase */
-    private class CompressAction extends AbstractAction {
-        public CompressAction() {
-            super("Zkomprimovat zprávu");
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "compress-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
-            putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\"");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_K);
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K, 
-                    KeyEvent.CTRL_DOWN_MASK));
-        }
-        public void actionPerformed(ActionEvent e) {
-            smsPanel.compressSMS();
-        }
-    }
-    
+    /** show the history frame */
     private class HistoryAction extends AbstractAction {
         private HistoryFrame historyFrame;
         public HistoryAction() {

@@ -6,7 +6,6 @@
 
 package esmska.gui;
 
-import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Envelope;
 import esmska.data.FormChecker;
@@ -66,8 +65,6 @@ public class SMSPanel extends javax.swing.JPanel {
     
     private static final Logger logger = Logger.getLogger(SMSPanel.class.getName());
     private static final String RES = "/esmska/resources/";
-    private ActionEventSupport actionEventSupport;
-    private Config config = PersistenceManager.getConfig();
     /** box for messages */
     private Envelope envelope = new Envelope();
     /** support for undo and redo in sms text pane */
@@ -76,19 +73,29 @@ public class SMSPanel extends javax.swing.JPanel {
     
     private Action undoAction = new UndoAction();
     private Action redoAction = new RedoAction();
+    private Action compressAction = new CompressAction();
     private SendAction sendAction = new SendAction();
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
     
     private Contact requestedContactSelection;
     
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+    
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
+    
     /** Creates new form SMSPanel */
     public SMSPanel() {
         initComponents();
-        actionEventSupport = new ActionEventSupport(this);
         operatorComboBox.setSelectedItem(operatorComboBox.getSelectedItem());
     }
-    
     
     /** validates sms form and returns status */
     private boolean validateForm(boolean transferFocus) {
@@ -148,32 +155,11 @@ public class SMSPanel extends javax.swing.JPanel {
         
         if (contact != null) {
             requestedContactSelection = contact;
-            actionEventSupport.fireActionPerformed(ACTION_REQUEST_SELECT_CONTACT, null);
+            actionSupport.fireActionPerformed(ACTION_REQUEST_SELECT_CONTACT, null);
             return true;
         } else {
-            actionEventSupport.fireActionPerformed(ACTION_REQUEST_CLEAR_CONTACT_SELECTION, null);
+            actionSupport.fireActionPerformed(ACTION_REQUEST_CLEAR_CONTACT_SELECTION, null);
             return false;
-        }
-    }
-    
-    /** compress current sms text by rewriting it to CamelCase */
-    public void compressSMS() {
-        String text = smsTextPane.getText();
-        if (text == null || text.equals(""))
-            return;
-        
-        text = text.replaceAll("\\s", " "); //all whitespace to spaces
-        text = Pattern.compile("(\\s)\\s+", Pattern.DOTALL).matcher(text).replaceAll("$1"); //remove duplicate whitespaces
-        Pattern pattern = Pattern.compile("\\s+(.)", Pattern.DOTALL);
-        Matcher matcher = pattern.matcher(text);
-        while (matcher.find()) { //find next space+character
-            text = matcher.replaceFirst(matcher.group(1).toUpperCase()); //replace by upper character
-            matcher = pattern.matcher(text);
-        }
-        text = text.replaceAll(" $",""); //remove trailing space
-        
-        if (!text.equals(smsTextPane.getText())) { //do not replace if already compressed
-            smsTextPane.setText(text);
         }
     }
     
@@ -182,6 +168,7 @@ public class SMSPanel extends javax.swing.JPanel {
         return requestedContactSelection;
     }
     
+    /** set envelope */
     public void setEnvelope(Envelope envelope) {
         this.envelope = envelope;
     }
@@ -258,6 +245,11 @@ public class SMSPanel extends javax.swing.JPanel {
     /** get redo action used in sms text pane */
     public Action getRedoAction() {
         return redoAction;
+    }
+    
+    /** get compress action used for compressing sms text */
+    public Action getCompressAction() {
+        return compressAction;
     }
     
     /** This method is called from within the constructor to
@@ -435,7 +427,7 @@ public class SMSPanel extends javax.swing.JPanel {
             if (!validateForm(true))
                 return;
             
-            actionEventSupport.fireActionPerformed(ACTION_SEND_SMS, null);
+            actionSupport.fireActionPerformed(ACTION_SEND_SMS, null);
             
             smsTextPane.setText(null);
             smsTextUndoManager.discardAllEdits();
@@ -471,6 +463,39 @@ public class SMSPanel extends javax.swing.JPanel {
             if (smsTextUndoManager.canRedo()) {
                 smsTextUndoManager.redo();
                 smsTextPaneDocumentFilter.requestUpdate();
+            }
+        }
+    }
+    
+    /** compress current sms text by rewriting it to CamelCase */
+    private class CompressAction extends AbstractAction {
+        public CompressAction() {
+            super("Zkomprimovat zprávu");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "compress-16.png")));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
+            putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\"");
+            putValue(MNEMONIC_KEY, KeyEvent.VK_K);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K,
+                    KeyEvent.CTRL_DOWN_MASK));
+        }
+        public void actionPerformed(ActionEvent e) {
+            String text = smsTextPane.getText();
+            if (text == null || text.equals("")) {
+                return;
+            }
+
+            text = text.replaceAll("\\s", " "); //all whitespace to spaces
+            text = Pattern.compile("(\\s)\\s+", Pattern.DOTALL).matcher(text).replaceAll("$1"); //remove duplicate whitespaces
+            Pattern pattern = Pattern.compile("\\s+(.)", Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(text);
+            while (matcher.find()) { //find next space+character
+                text = matcher.replaceFirst(matcher.group(1).toUpperCase()); //replace by upper character
+                matcher = pattern.matcher(text);
+            }
+            text = text.replaceAll(" $", ""); //remove trailing space
+
+            if (!text.equals(smsTextPane.getText())) { //do not replace if already compressed
+                smsTextPane.setText(text);
             }
         }
     }
@@ -614,14 +639,6 @@ public class SMSPanel extends javax.swing.JPanel {
         public void requestUpdate() {
             timer.restart();
         }
-    }
-    
-    public void addActionListener(ActionListener actionListener) {
-        actionEventSupport.addActionListener(actionListener);
-    }
-    
-    public void removeActionListener(ActionListener actionListener) {
-        actionEventSupport.removeActionListener(actionListener);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

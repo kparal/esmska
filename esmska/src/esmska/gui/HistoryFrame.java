@@ -38,7 +38,6 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 public class HistoryFrame extends javax.swing.JFrame {
 
     public static final int ACTION_RESEND_SMS = 0;
-    private ActionEventSupport actionEventSupport;
     private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(HistoryFrame.class.getName());
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
@@ -48,10 +47,20 @@ public class HistoryFrame extends javax.swing.JFrame {
     private Action resendAction = new ResendAction();
     private History selectedHistory;
 
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+    
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
+    
     /** Creates new form HistoryFrame */
     public HistoryFrame() {
         initComponents();
-        actionEventSupport = new ActionEventSupport(this);
 
         //select first row
         if (historyTableModel.getRowCount() > 0) {
@@ -338,7 +347,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                 return;
             }
             //fire event and close
-            actionEventSupport.fireActionPerformed(ACTION_RESEND_SMS, null);
+            actionSupport.fireActionPerformed(ACTION_RESEND_SMS, null);
             closeButton.doClick(0);
         }
     }
@@ -460,13 +469,6 @@ public class HistoryFrame extends javax.swing.JFrame {
         }
     }
 
-    public void addActionListener(ActionListener actionListener) {
-        actionEventSupport.addActionListener(actionListener);
-    }
-
-    public void removeActionListener(ActionListener actionListener) {
-        actionEventSupport.removeActionListener(actionListener);
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     private javax.swing.JLabel dateLabel;
