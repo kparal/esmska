@@ -216,6 +216,9 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="smsPanel.getCompressAction()" type="code"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="smsPanel.getCompressAction().getValue(Action.NAME).toString() + &quot; (Ctrl+K)&quot;" type="code"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
@@ -251,6 +254,9 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="historyAction" type="code"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="historyAction.getValue(Action.NAME).toString() + &quot; (Ctrl+T)&quot;" type="code"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
@@ -264,6 +270,9 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="configAction" type="code"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="configAction.getValue(Action.NAME).toString()" type="code"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
@@ -274,6 +283,9 @@
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="quitAction" type="code"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="quitAction.getValue(Action.NAME).toString() + &quot; (Ctrl+Q)&quot;" type="code"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>

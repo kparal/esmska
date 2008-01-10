@@ -73,7 +73,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     private Action undoAction = new UndoAction();
     private Action redoAction = new RedoAction();
-    private Action compressAction = new CompressAction();
+    private CompressAction compressAction = new CompressAction();
     private SendAction sendAction = new SendAction();
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
@@ -498,6 +498,9 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextPane.setText(text);
             }
         }
+        public void updateStatus() {
+            setEnabled(getText().length() > 0);
+        }
     }
 
     /** Renderer for items in operator combo box */
@@ -589,6 +592,7 @@ public class SMSPanel extends javax.swing.JPanel {
         private Timer timer = new Timer(500, new ActionListener() { //updating after each event is slow,
             public void actionPerformed(ActionEvent e) {            //therefore there is timer
                 colorDocument(0,doc.getLength());
+                updateUI();
             }
         });
         public SMSTextPaneDocumentFilter() {
@@ -601,6 +605,10 @@ public class SMSPanel extends javax.swing.JPanel {
             StyleConstants.setForeground(regular,UIManager.getColor("TextArea.foreground"));
             highlight = doc.addStyle("highlight", def);
             StyleConstants.setForeground(highlight, Color.BLUE);
+        }
+        /** update components and actions */
+        private void updateUI() {
+            compressAction.updateStatus();
         }
         /** color parts of sms */
         private void colorDocument(int from, int length) {

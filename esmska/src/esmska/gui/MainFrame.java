@@ -37,7 +37,7 @@ import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -118,8 +118,8 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanel.requestFocusInWindow();
         
         //use bindings
-        Binding bind = Bindings.createAutoBinding(AutoBinding.UpdateStrategy.READ,
-                config, BeanProperty.create("toolbarVisible"), toolBar, BeanProperty.create("visible"));
+        Binding bind = Bindings.createAutoBinding(UpdateStrategy.READ, config, 
+                BeanProperty.create("toolbarVisible"), toolBar, BeanProperty.create("visible"));
         bindGroup.addBinding(bind);
         bindGroup.bind();
         
@@ -214,6 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(Box.createRigidArea(new Dimension(5, 1)));
 
         compressButton.setAction(smsPanel.getCompressAction());
+        compressButton.setToolTipText(smsPanel.getCompressAction().getValue(Action.NAME).toString() + " (Ctrl+K)");
         compressButton.setFocusable(false);
         compressButton.setText(null);
         toolBar.add(compressButton);
@@ -230,17 +231,20 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(jSeparator2);
 
         historyButton.setAction(historyAction);
+        historyButton.setToolTipText(historyAction.getValue(Action.NAME).toString() + " (Ctrl+T)");
         historyButton.setFocusable(false);
         historyButton.setText(null);
         toolBar.add(historyButton);
         toolBar.add(jSeparator3);
 
         configButton.setAction(configAction);
+        configButton.setToolTipText(configAction.getValue(Action.NAME).toString());
         configButton.setFocusable(false);
         configButton.setText(null);
         toolBar.add(configButton);
 
         exitButton.setAction(quitAction);
+        exitButton.setToolTipText(quitAction.getValue(Action.NAME).toString() + " (Ctrl+Q)");
         exitButton.setFocusable(false);
         exitButton.setText(null);
         toolBar.add(exitButton);
