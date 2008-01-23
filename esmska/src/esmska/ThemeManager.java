@@ -18,10 +18,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.skin.FieldOfWheatSkin;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
+import org.jvnet.substance.skin.SaharaSkin;
 
 /** Manage and set look and feel
  *
@@ -77,7 +77,7 @@ public class ThemeManager {
                     break;
                 }
             }
-            SubstanceLookAndFeel.setSkin(skin != null? skin : new FieldOfWheatSkin().getClass().getName());
+            SubstanceLookAndFeel.setSkin(skin != null? skin : new SaharaSkin().getClass().getName());
             UIManager.setLookAndFeel(new SubstanceLookAndFeel());
             
         } else {
