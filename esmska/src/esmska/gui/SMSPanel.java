@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Envelope;
 import esmska.data.FormChecker;
@@ -19,6 +20,8 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -65,6 +68,8 @@ public class SMSPanel extends javax.swing.JPanel {
     
     private static final Logger logger = Logger.getLogger(SMSPanel.class.getName());
     private static final String RES = "/esmska/resources/";
+    private static final Config config = PersistenceManager.getConfig();
+    
     /** box for messages */
     private Envelope envelope = new Envelope();
     /** support for undo and redo in sms text pane */
@@ -602,9 +607,19 @@ public class SMSPanel extends javax.swing.JPanel {
             doc = smsTextPane.getStyledDocument();
             Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
             regular = doc.addStyle("regular", def);
-            StyleConstants.setForeground(regular,UIManager.getColor("TextArea.foreground"));
+            StyleConstants.setForeground(regular, UIManager.getColor("TextArea.foreground"));
             highlight = doc.addStyle("highlight", def);
             StyleConstants.setForeground(highlight, Color.BLUE);
+            
+            // listen for changes in Look and Feel and change color of regular text
+            UIManager.addPropertyChangeListener(new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if ("lookAndFeel".equals(evt.getPropertyName())) {
+                        StyleConstants.setForeground(regular, UIManager.getColor("TextArea.foreground"));
+                        SMSTextPaneDocumentFilter.this.requestUpdate();
+                    }
+                }
+            });
         }
         /** update components and actions */
         private void updateUI() {

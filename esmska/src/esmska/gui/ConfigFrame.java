@@ -12,24 +12,31 @@ import esmska.*;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.persistence.PersistenceManager;
+import javax.swing.SwingUtilities;
 
 /** Configure settings form
  *
  * @author  ripper
  */
 public class ConfigFrame extends javax.swing.JFrame {
+    private static final Logger logger = Logger.getLogger(ConfigFrame.class.getName());
     private static final String RES = "/esmska/resources/";
+    /* when to take updates seriously */
     private boolean fullyInicialized;
     private final String LAF_SYSTEM = "Systémový";
     private final String LAF_CROSSPLATFORM = "Meziplatformní";
     private final String LAF_GTK = "GTK";
     private final String LAF_JGOODIES = "JGoodies";
     private final String LAF_SUBSTANCE = "Substance";
+    /* the active LaF when dialog is opened, needed for live-updating LaF skins */
+    private String lafWhenLoaded;
     
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
@@ -54,6 +61,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             lafComboBox.setSelectedItem(LAF_JGOODIES);
         else if (config.getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE))
             lafComboBox.setSelectedItem(LAF_SUBSTANCE);
+        lafWhenLoaded = (String) lafComboBox.getSelectedItem();
         
         updateThemeComboBox();
         
@@ -111,7 +119,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         windowCenteredCheckBox = new javax.swing.JCheckBox();
         toolbarVisibleCheckBox = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -245,8 +252,6 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         jLabel5.setText("*");
 
-        jLabel8.setText("*");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -262,10 +267,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8))
+                            .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -289,8 +291,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(windowDecorationsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -423,11 +424,23 @@ public class ConfigFrame extends javax.swing.JFrame {
         
     private void themeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeComboBoxActionPerformed
         String laf = (String) lafComboBox.getSelectedItem();
-        
-        if (laf.equals(LAF_JGOODIES))
-            config.setLafJGoodiesTheme((String)themeComboBox.getSelectedItem());
-        else if (laf.equals(LAF_SUBSTANCE))
-            config.setLafSubstanceSkin((String)themeComboBox.getSelectedItem());
+
+        if (laf.equals(LAF_JGOODIES)) {
+            config.setLafJGoodiesTheme((String) themeComboBox.getSelectedItem());
+        } else if (laf.equals(LAF_SUBSTANCE)) {
+            config.setLafSubstanceSkin((String) themeComboBox.getSelectedItem());
+        }
+
+        //update skin in realtime
+        if (fullyInicialized && lafWhenLoaded.equals(lafComboBox.getSelectedItem())) {
+            try {
+                ThemeManager.setLaF();
+                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance());
+                SwingUtilities.updateComponentTreeUI(this);
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Problem while live-updating the look&feel skin", ex);
+            }
+        }
     }//GEN-LAST:event_themeComboBoxActionPerformed
     
     private void lafComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lafComboBoxActionPerformed
@@ -473,7 +486,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
