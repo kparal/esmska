@@ -129,7 +129,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nastavení");
+        setTitle("Nastavení - Esmska");
         setIconImage(new ImageIcon(getClass().getResource(RES + "config-48.png")).getImage());
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {

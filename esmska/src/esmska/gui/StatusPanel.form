@@ -39,8 +39,15 @@
     <Component class="javax.swing.JLabel" name="statusMessageLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="V&#xed;tejte"/>
+        <Property name="toolTipText" type="java.lang.String" value="Klikn&#x11b;te pro zobrazen&#xed; aplika&#x10d;n&#xed;ho protokolu..."/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="statusMessageLabelMouseClicked"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="statusMessageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="statusAnimationLabel">
       <Properties>

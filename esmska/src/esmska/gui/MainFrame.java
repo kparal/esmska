@@ -27,6 +27,7 @@ import esmska.persistence.PersistenceManager;
 import esmska.data.SMS;
 import esmska.UpdateChecker;
 import esmska.data.History;
+import esmska.data.Icons;
 import esmska.operators.OperatorEnum;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -107,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not create program dir with config files", ex);
             statusPanel.setStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!",
-                    false, StatusPanel.ICON_ERROR);
+                    false, Icons.STATUS_ERROR);
         }
         loadConfig();
         if (smsQueue.size() > 0)
@@ -169,6 +170,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu = new javax.swing.JMenu();
         historyMenuItem = new javax.swing.JMenuItem();
         compressMenuItem = new javax.swing.JMenuItem();
+        logMenuItem = new javax.swing.JMenuItem();
         importMenuItem = new javax.swing.JMenuItem();
         exportMenuItem = new javax.swing.JMenuItem();
 
@@ -272,6 +274,9 @@ public class MainFrame extends javax.swing.JFrame {
         compressMenuItem.setAction(smsPanel.getCompressAction());
         toolsMenu.add(compressMenuItem);
 
+        logMenuItem.setAction(statusPanel.getLogAction());
+        toolsMenu.add(logMenuItem);
+
         importMenuItem.setAction(importAction);
         toolsMenu.add(importMenuItem);
 
@@ -345,7 +350,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void smsProcessed(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
             statusPanel.setStatusMessage("Zpráva pro " + sms + " odeslána.",
-                    true, StatusPanel.ICON_MESSAGE);
+                    true, Icons.STATUS_MESSAGE);
             setSMSDelay();
             createHistory(sms);
             
@@ -358,7 +363,7 @@ public class MainFrame extends javax.swing.JFrame {
             logger.info("Message for " + sms + " could not be sent");
             pauseSMSQueue(true);
             statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
-                    true, StatusPanel.ICON_WARNING);
+                    true, Icons.STATUS_WARNING);
             JOptionPane.showMessageDialog(this, new JLabel("<html>"
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
                     + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
@@ -478,6 +483,7 @@ public class MainFrame extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             if (aboutFrame != null && aboutFrame.isVisible()) {
                 aboutFrame.requestFocus();
+                aboutFrame.toFront();
             } else {
                 aboutFrame = new AboutFrame();
                 aboutFrame.setLocationRelativeTo(MainFrame.this);
@@ -516,6 +522,7 @@ public class MainFrame extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             if (configFrame != null && configFrame.isVisible()) {
                 configFrame.requestFocus();
+                configFrame.toFront();
             } else {
                 configFrame = new ConfigFrame();
                 configFrame.setLocationRelativeTo(MainFrame.this);
@@ -535,6 +542,7 @@ public class MainFrame extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             if (importFrame != null && importFrame.isVisible()) {
                 importFrame.requestFocus();
+                importFrame.toFront();
             } else {
                 importFrame = new ImportFrame();
                 importFrame.setLocationRelativeTo(MainFrame.this);
@@ -574,6 +582,7 @@ public class MainFrame extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             if (historyFrame != null && historyFrame.isVisible()) {
                 historyFrame.requestFocus();
+                historyFrame.toFront();
             } else {
                 historyFrame = new HistoryFrame();
                 historyFrame.setLocationRelativeTo(MainFrame.this);
@@ -702,7 +711,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class UpdateListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             statusPanel.setStatusMessage("Byla vydána nová verze programu!", 
-                    false, StatusPanel.ICON_INFO);
+                    false, Icons.STATUS_INFO);
         }
     }
     
@@ -723,6 +732,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JMenuItem logMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu programMenu;
     private esmska.gui.QueuePanel queuePanel;

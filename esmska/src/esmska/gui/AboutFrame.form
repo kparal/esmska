@@ -34,11 +34,11 @@
                   <Component id="jLabel2" alignment="2" pref="245" max="32767" attributes="0"/>
                   <Component id="jLabel1" alignment="2" pref="245" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="creditsButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="creditsButton" linkSize="10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="licenseButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
-                      <Component id="closeButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="licenseButton" linkSize="10" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <Component id="closeButton" linkSize="10" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel4" max="32767" attributes="0"/>
@@ -84,9 +84,9 @@
               </Group>
               <EmptySpace type="separate" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="creditsButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="licenseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="creditsButton" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="closeButton" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="licenseButton" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>

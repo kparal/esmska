@@ -5,9 +5,15 @@
  */
 package esmska.gui;
 
+import esmska.data.Log;
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 
 /** Status bar panel
@@ -19,16 +25,21 @@ public class StatusPanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(StatusPanel.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
-    public static final ImageIcon ICON_MESSAGE = new ImageIcon(StatusPanel.class.getResource(RES + "message-16.png"));
-    public static final ImageIcon ICON_WARNING = new ImageIcon(StatusPanel.class.getResource(RES + "warning-16.png"));
-    public static final ImageIcon ICON_INFO = new ImageIcon(StatusPanel.class.getResource(RES + "info-16.png"));
-    public static final ImageIcon ICON_ERROR = new ImageIcon(StatusPanel.class.getResource(RES + "error-16.png"));
-
+    private Log log = new Log();
+    private LogAction logAction = new LogAction();
+    
     /** Creates new form StatusPanel */
     public StatusPanel() {
         initComponents();
+        addToLog("Spuštění programu", new Date(), null);
     }
 
+    /** add record to log */
+    private void addToLog(String message, Date time, ImageIcon icon) {
+        Log.Record record = log.new Record(message, time, icon);
+        log.addRecord(record);
+    }
+    
     /** Prints message to status bar
      * 
      * @param message text
@@ -36,13 +47,17 @@ public class StatusPanel extends javax.swing.JPanel {
      * @param icon show icon with text. Use null for no icon.
      */
     public void setStatusMessage(String message, boolean printTime, ImageIcon icon) {
+        Date time = new Date();
         if (printTime) {
-            String time = shortTimeFormat.format(new Date());
-            statusMessageLabel.setText("[" + time + "] " + message);
+            String timestamp = shortTimeFormat.format(new Date());
+            statusMessageLabel.setText("[" + timestamp + "] " + message);
         } else {
             statusMessageLabel.setText(message);
         }
         statusMessageLabel.setIcon(icon);
+        
+        //add to log
+        addToLog(message, time, icon);
     }
 
     /** Tells main form whether it should display task busy icon */
@@ -71,6 +86,11 @@ public class StatusPanel extends javax.swing.JPanel {
             progressBar.setVisible(visible);
         }
     }
+    
+    /** get action to show log frame */
+    public Action getLogAction() {
+        return logAction;
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -85,7 +105,14 @@ public class StatusPanel extends javax.swing.JPanel {
         progressBar = new javax.swing.JProgressBar();
 
         statusMessageLabel.setText("Vítejte");
+        statusMessageLabel.setToolTipText("Klikněte pro zobrazení aplikačního protokolu...");
         statusMessageLabel.setFocusable(false);
+        statusMessageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        statusMessageLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                statusMessageLabelMouseClicked(evt);
+            }
+        });
 
         statusAnimationLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/task-idle.png"))); // NOI18N
         statusAnimationLabel.setFocusable(false);
@@ -116,6 +143,34 @@ public class StatusPanel extends javax.swing.JPanel {
                 .addComponent(statusMessageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void statusMessageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statusMessageLabelMouseClicked
+       logAction.actionPerformed(null);
+    }//GEN-LAST:event_statusMessageLabelMouseClicked
+
+    /** show the log frame */
+    private class LogAction extends AbstractAction {
+        private LogFrame logFrame;
+        public LogAction() {
+            super("Protokol");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "log-16.png")));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "log-48.png")));
+            this.putValue(SHORT_DESCRIPTION,"Zobrazit aplikační protokol");
+            putValue(MNEMONIC_KEY, KeyEvent.VK_P);
+        }
+        public void actionPerformed(ActionEvent e) {
+            if (logFrame != null && logFrame.isVisible()) {
+                logFrame.requestFocus();
+                logFrame.toFront();
+            } else {
+                logFrame = new LogFrame();
+                logFrame.setLog(log);
+                logFrame.setLocationRelativeTo(MainFrame.getInstance());
+                logFrame.setVisible(true);
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;

@@ -103,7 +103,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Historie odeslaných zpráv");
+        setTitle("Historie odeslaných zpráv - Esmska");
         setIconImage(new ImageIcon(getClass().getResource(RES + "history-48.png")).getImage());
 
         historyTable.setAutoCreateRowSorter(true);

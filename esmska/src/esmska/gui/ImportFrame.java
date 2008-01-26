@@ -123,7 +123,7 @@ public class ImportFrame extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Import kontaktů");
+        setTitle("Import kontaktů - Esmska");
         setIconImage(new ImageIcon(getClass().getResource(RES + "contact-48.png")).getImage());
 
         cardPanel.setLayout(new java.awt.CardLayout());
