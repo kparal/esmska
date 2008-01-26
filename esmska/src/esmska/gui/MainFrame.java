@@ -167,9 +167,13 @@ public class MainFrame extends javax.swing.JFrame {
         configMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
+        messageMenu = new javax.swing.JMenu();
+        undoMenuItem = new javax.swing.JMenuItem();
+        redoMenuItem = new javax.swing.JMenuItem();
+        compressMenuItem = new javax.swing.JMenuItem();
+        sendMenuItem = new javax.swing.JMenuItem();
         toolsMenu = new javax.swing.JMenu();
         historyMenuItem = new javax.swing.JMenuItem();
-        compressMenuItem = new javax.swing.JMenuItem();
         logMenuItem = new javax.swing.JMenuItem();
         importMenuItem = new javax.swing.JMenuItem();
         exportMenuItem = new javax.swing.JMenuItem();
@@ -216,39 +220,41 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(Box.createRigidArea(new Dimension(5, 1)));
 
         compressButton.setAction(smsPanel.getCompressAction());
-        compressButton.setToolTipText(smsPanel.getCompressAction().getValue(Action.NAME).toString() + " (Ctrl+K)");
+        compressButton.setToolTipText("Zkomprimovat zprávu (Ctrl+K)");
         compressButton.setFocusable(false);
-        compressButton.setText(null);
+        compressButton.setHideActionText(true);
         toolBar.add(compressButton);
 
         undoButton.setAction(smsPanel.getUndoAction());
+        undoButton.setToolTipText("Zpět (Ctrl+Z)");
         undoButton.setFocusable(false);
-        undoButton.setText(null);
+        undoButton.setHideActionText(true);
         toolBar.add(undoButton);
 
         redoButton.setAction(smsPanel.getRedoAction());
+        redoButton.setToolTipText("Vpřed (Ctrl+Y)");
         redoButton.setFocusable(false);
-        redoButton.setText(null);
+        redoButton.setHideActionText(true);
         toolBar.add(redoButton);
         toolBar.add(jSeparator2);
 
         historyButton.setAction(historyAction);
         historyButton.setToolTipText(historyAction.getValue(Action.NAME).toString() + " (Ctrl+T)");
         historyButton.setFocusable(false);
-        historyButton.setText(null);
+        historyButton.setHideActionText(true);
         toolBar.add(historyButton);
         toolBar.add(jSeparator3);
 
         configButton.setAction(configAction);
         configButton.setToolTipText(configAction.getValue(Action.NAME).toString());
         configButton.setFocusable(false);
-        configButton.setText(null);
+        configButton.setHideActionText(true);
         toolBar.add(configButton);
 
         exitButton.setAction(quitAction);
         exitButton.setToolTipText(quitAction.getValue(Action.NAME).toString() + " (Ctrl+Q)");
         exitButton.setFocusable(false);
-        exitButton.setText(null);
+        exitButton.setHideActionText(true);
         toolBar.add(exitButton);
 
         programMenu.setMnemonic('r');
@@ -265,14 +271,28 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(programMenu);
 
+        messageMenu.setMnemonic('z');
+        messageMenu.setText("Zpráva");
+
+        undoMenuItem.setAction(smsPanel.getUndoAction());
+        messageMenu.add(undoMenuItem);
+
+        redoMenuItem.setAction(smsPanel.getRedoAction());
+        messageMenu.add(redoMenuItem);
+
+        compressMenuItem.setAction(smsPanel.getCompressAction());
+        messageMenu.add(compressMenuItem);
+
+        sendMenuItem.setAction(smsPanel.getSendAction());
+        messageMenu.add(sendMenuItem);
+
+        menuBar.add(messageMenu);
+
         toolsMenu.setMnemonic('n');
         toolsMenu.setText("Nástroje");
 
         historyMenuItem.setAction(historyAction);
         toolsMenu.add(historyMenuItem);
-
-        compressMenuItem.setAction(smsPanel.getCompressAction());
-        toolsMenu.add(compressMenuItem);
 
         logMenuItem.setAction(statusPanel.getLogAction());
         toolsMenu.add(logMenuItem);
@@ -734,14 +754,18 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JMenuItem logMenuItem;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu messageMenu;
     private javax.swing.JMenu programMenu;
     private esmska.gui.QueuePanel queuePanel;
     private javax.swing.JButton redoButton;
+    private javax.swing.JMenuItem redoMenuItem;
+    private javax.swing.JMenuItem sendMenuItem;
     private esmska.gui.SMSPanel smsPanel;
     private esmska.gui.StatusPanel statusPanel;
     private javax.swing.JToolBar toolBar;
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JButton undoButton;
+    private javax.swing.JMenuItem undoMenuItem;
     private javax.swing.JSplitPane verticalSplitPane;
     // End of variables declaration//GEN-END:variables
 }

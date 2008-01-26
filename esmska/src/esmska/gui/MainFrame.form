@@ -33,6 +33,42 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="messageMenu">
+          <Properties>
+            <Property name="mnemonic" type="int" value="122"/>
+            <Property name="text" type="java.lang.String" value="Zpr&#xe1;va"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="undoMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="smsPanel.getUndoAction()" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="redoMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="smsPanel.getRedoAction()" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="compressMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="smsPanel.getCompressAction()" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="sendMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="smsPanel.getSendAction()" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="toolsMenu">
           <Properties>
             <Property name="mnemonic" type="int" value="110"/>
@@ -43,13 +79,6 @@
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="historyAction" type="code"/>
-                </Property>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="compressMenuItem">
-              <Properties>
-                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="smsPanel.getCompressAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -223,36 +252,30 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="smsPanel.getCompressAction()" type="code"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="smsPanel.getCompressAction().getValue(Action.NAME).toString() + &quot; (Ctrl+K)&quot;" type="code"/>
-            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Zkomprimovat zpr&#xe1;vu (Ctrl+K)"/>
             <Property name="focusable" type="boolean" value="false"/>
+            <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="compressButton.setText(null);"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="undoButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="smsPanel.getUndoAction()" type="code"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Zp&#x11b;t (Ctrl+Z)"/>
             <Property name="focusable" type="boolean" value="false"/>
+            <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="undoButton.setText(null);"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="redoButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="smsPanel.getRedoAction()" type="code"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Vp&#x159;ed (Ctrl+Y)"/>
             <Property name="focusable" type="boolean" value="false"/>
+            <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="redoButton.setText(null);"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
         </Component>
@@ -265,10 +288,8 @@
               <Connection code="historyAction.getValue(Action.NAME).toString() + &quot; (Ctrl+T)&quot;" type="code"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
+            <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="historyButton.setText(null);"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
         </Component>
@@ -281,10 +302,8 @@
               <Connection code="configAction.getValue(Action.NAME).toString()" type="code"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
+            <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="configButton.setText(null);"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="exitButton">
           <Properties>
@@ -295,10 +314,8 @@
               <Connection code="quitAction.getValue(Action.NAME).toString() + &quot; (Ctrl+Q)&quot;" type="code"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
+            <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="exitButton.setText(null);"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

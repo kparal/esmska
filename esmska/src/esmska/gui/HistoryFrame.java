@@ -336,7 +336,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     private class ResendAction extends AbstractAction {
 
         public ResendAction() {
-            super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "send.png")));
+            super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "send-22.png")));
             this.putValue(SHORT_DESCRIPTION, "Přeposlat zprávu někomu jinému (Alt+S)");
             putValue(MNEMONIC_KEY, KeyEvent.VK_S);
             this.setEnabled(false);

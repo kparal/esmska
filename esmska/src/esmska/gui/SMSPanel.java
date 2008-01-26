@@ -257,6 +257,11 @@ public class SMSPanel extends javax.swing.JPanel {
         return compressAction;
     }
     
+    /** get send action used for sending the sms */
+    public Action getSendAction() {
+        return sendAction;
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -309,6 +314,8 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextUndoManager.addEdit(e.getEdit());
             }
         });
+
+        //this mapping is here bcz of some weird performance improvements when holding undo key stroke
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK),"undo");
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK),"redo");
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
@@ -329,6 +336,7 @@ public class SMSPanel extends javax.swing.JPanel {
     operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
 
     sendButton.setAction(sendAction);
+    sendButton.setToolTipText("Odeslat zprávu (Alt+S, Ctrl+Enter)");
 
     smsCounterLabel.setText("0 znaků (0 sms)");
 
@@ -423,9 +431,13 @@ public class SMSPanel extends javax.swing.JPanel {
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
         public SendAction() {
-            super("Poslat", new ImageIcon(SMSPanel.class.getResource(RES + "send.png")));
-            putValue(SHORT_DESCRIPTION,"Odeslat zprávu (Alt+S, Ctrl+Enter)");
+            super("Poslat");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "send-16.png")));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "send-22.png")));
+            putValue(SHORT_DESCRIPTION,"Odeslat zprávu");
             putValue(MNEMONIC_KEY, KeyEvent.VK_S);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
+                    KeyEvent.CTRL_DOWN_MASK));
             setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
@@ -447,8 +459,13 @@ public class SMSPanel extends javax.swing.JPanel {
     /** undo in sms text pane */
     private class UndoAction extends AbstractAction {
         public UndoAction() {
+            super("Zpět");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "undo-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "undo-32.png")));
-            putValue(SHORT_DESCRIPTION, "Zpět (Ctrl+Z)");
+            putValue(SHORT_DESCRIPTION, "Vrátit změnu v textu zprávy");
+            putValue(MNEMONIC_KEY, KeyEvent.VK_Z);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+                    KeyEvent.CTRL_DOWN_MASK));
         }
         public void actionPerformed(ActionEvent e) {
             if (smsTextUndoManager.canUndo()) {
@@ -464,8 +481,13 @@ public class SMSPanel extends javax.swing.JPanel {
     /** redo in sms text pane */
     private class RedoAction extends AbstractAction {
         public RedoAction() {
+            super("Vpřed");
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "redo-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "redo-32.png")));
-            putValue(SHORT_DESCRIPTION, "Vpřed (Ctrl+Y)");
+            putValue(SHORT_DESCRIPTION, "Zopakovat vrácenou změnu v textu zprávy");
+            putValue(MNEMONIC_KEY, KeyEvent.VK_V);
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Y,
+                    KeyEvent.CTRL_DOWN_MASK));
         }
         public void actionPerformed(ActionEvent e) {
             if (smsTextUndoManager.canRedo()) {
@@ -481,7 +503,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** compress current sms text by rewriting it to CamelCase */
     private class CompressAction extends AbstractAction {
         public CompressAction() {
-            super("Zkomprimovat zprávu");
+            super("Zkomprimovat");
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "compress-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
             putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\"");
