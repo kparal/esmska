@@ -76,8 +76,8 @@ public class SMSPanel extends javax.swing.JPanel {
     private UndoManager smsTextUndoManager = new UndoManager();
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     
-    private Action undoAction = new UndoAction();
-    private Action redoAction = new RedoAction();
+    private UndoAction undoAction = new UndoAction();
+    private RedoAction redoAction = new RedoAction();
     private CompressAction compressAction = new CompressAction();
     private SendAction sendAction = new SendAction();
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
@@ -456,6 +456,9 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextPaneDocumentFilter.requestUpdate();
             }
         }
+        public void updateStatus() {
+            setEnabled(smsTextUndoManager.canUndo());
+        }
     }
     
     /** redo in sms text pane */
@@ -469,6 +472,9 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextUndoManager.redo();
                 smsTextPaneDocumentFilter.requestUpdate();
             }
+        }
+        public void updateStatus() {
+            setEnabled(smsTextUndoManager.canRedo());
         }
     }
     
@@ -624,6 +630,8 @@ public class SMSPanel extends javax.swing.JPanel {
         /** update components and actions */
         private void updateUI() {
             compressAction.updateStatus();
+            undoAction.updateStatus();
+            redoAction.updateStatus();
         }
         /** color parts of sms */
         private void colorDocument(int from, int length) {
