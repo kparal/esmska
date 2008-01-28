@@ -207,7 +207,7 @@ public class ContactPanel extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             contactDialog.setTitle("Nový kontakt");
             contactDialog.show(null);
-            Contact c = contactDialog.getResult();
+            Contact c = contactDialog.getContact();
             if (c == null)
                 return;
             contactListModel.add(c);
@@ -228,7 +228,7 @@ public class ContactPanel extends javax.swing.JPanel {
             Contact contact = (Contact)contactList.getSelectedValue();
             contactDialog.setTitle("Upravit kontakt");
             contactDialog.show(contact);
-            Contact c = contactDialog.getResult();
+            Contact c = contactDialog.getContact();
             if (c == null)
                 return;
             contactListModel.remove(contact);
@@ -338,15 +338,19 @@ public class ContactPanel extends javax.swing.JPanel {
         public ContactDialog() {
             super((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, ContactPanel.this),
                     "Kontakt", true);
+            init();
+            setDefaultCloseOperation(HIDE_ON_CLOSE);
+        }
+        private void init() {
             panel = new EditContactPanel();
             optionPane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE,
                     JOptionPane.OK_CANCEL_OPTION, contactIcon);
             optionPane.addPropertyChangeListener(this);
             setContentPane(optionPane);
             pack();
-            setDefaultCloseOperation(HIDE_ON_CLOSE);
         }
         public void show(Contact c) {
+            init();
             setLocationRelativeTo(MainFrame.getInstance());
             optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
             panel.setContact(c);
@@ -380,7 +384,7 @@ public class ContactPanel extends javax.swing.JPanel {
                 setVisible(false);
             }
         }
-        public Contact getResult() {
+        public Contact getContact() {
             return contact;
         }
     }
