@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import esmska.persistence.PersistenceManager;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.text.Normalizer;
 
 /** Class for preparing attributes of sms (single or multiple)
@@ -22,6 +24,18 @@ public class Envelope {
     private Config config;
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
+    
+    // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
+    }
+    // </editor-fold>
     
     /** Creates a new instance of Envelope */
     public Envelope() {
@@ -35,9 +49,11 @@ public class Envelope {
     
     /** set text of sms */
     public void setText(String text) {
+        String oldText = this.text;
         if (config.isRemoveAccents())
             text = removeAccents(text);
         this.text = text;
+        changeSupport.firePropertyChange("text", oldText, text);
     }
     
     /** get all recipients */
@@ -47,7 +63,9 @@ public class Envelope {
     
     /** set all recipients */
     public void setContacts(Set<Contact> contacts) {
+        Set<Contact> oldContacts = this.contacts;
         this.contacts = contacts;
+        changeSupport.firePropertyChange("contacts", oldContacts, contacts);
     }
     
     /** get maximum length of sendable message */

@@ -36,7 +36,7 @@ public class StatusPanel extends javax.swing.JPanel {
 
     /** add record to log */
     private void addToLog(String message, Date time, ImageIcon icon) {
-        Log.Record record = log.new Record(message, time, icon);
+        Log.Record record = new Log.Record(message, time, icon);
         log.addRecord(record);
     }
     

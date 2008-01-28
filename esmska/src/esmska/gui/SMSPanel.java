@@ -176,6 +176,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** set envelope */
     public void setEnvelope(Envelope envelope) {
         this.envelope = envelope;
+        envelope.addPropertyChangeListener(new EnvelopePropertyListener());
     }
     
     /** set selected contacts in contact list or contact to display */
@@ -271,6 +272,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
+        smsProgressBar = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         smsNumberTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -291,6 +293,8 @@ public class SMSPanel extends javax.swing.JPanel {
 
         jLabel4.setDisplayedMnemonic('l');
         jLabel4.setText("Číslo");
+
+        smsProgressBar.setMaximum(1000);
 
         jLabel1.setText("+420");
 
@@ -353,9 +357,11 @@ public class SMSPanel extends javax.swing.JPanel {
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel2)
-                .addComponent(jLabel5)
-                .addComponent(jLabel4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addComponent(smsProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
@@ -386,12 +392,15 @@ public class SMSPanel extends javax.swing.JPanel {
                 .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jLabel5)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(smsProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(sendButton)
-                .addComponent(smsCounterLabel))
+                .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addContainerGap())
     );
     }// </editor-fold>//GEN-END:initComponents
@@ -582,6 +591,15 @@ public class SMSPanel extends javax.swing.JPanel {
         }
     }
     
+    /** Listener for envelope */
+    private class EnvelopePropertyListener implements PropertyChangeListener {
+        public void propertyChange(PropertyChangeEvent evt) {
+            if (evt.getPropertyName().equals("contacts")) {
+                smsProgressBar.setMaximum(envelope.getMaxTextLength());
+            }
+        }
+    }
+    
     /** Listener for sms text pane */
     private class SMSTextPaneListener implements DocumentListener {
         /** count number of chars in sms and take action */
@@ -602,7 +620,6 @@ public class SMSPanel extends javax.swing.JPanel {
             } catch (BadLocationException ex) {
                 logger.log(Level.SEVERE, "Error getting sms text", ex);
             }
-            sendAction.updateStatus();
         }
         public void changedUpdate(DocumentEvent e) {
             countChars(e);
@@ -622,7 +639,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private class SMSTextPaneDocumentFilter extends DocumentFilter {
         private StyledDocument doc;
         private Style regular, highlight;
-        private Timer timer = new Timer(500, new ActionListener() { //updating after each event is slow,
+        private Timer timer = new Timer(250, new ActionListener() { //updating after each event is slow,
             public void actionPerformed(ActionEvent e) {            //therefore there is timer
                 colorDocument(0,doc.getLength());
                 updateUI();
@@ -654,6 +671,8 @@ public class SMSPanel extends javax.swing.JPanel {
             compressAction.updateStatus();
             undoAction.updateStatus();
             redoAction.updateStatus();
+            sendAction.updateStatus();
+            smsProgressBar.setValue(smsTextPane.getText().length());
         }
         /** color parts of sms */
         private void colorDocument(int from, int length) {
@@ -705,6 +724,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private javax.swing.JButton sendButton;
     private javax.swing.JLabel smsCounterLabel;
     javax.swing.JTextField smsNumberTextField;
+    private javax.swing.JProgressBar smsProgressBar;
     private javax.swing.JTextPane smsTextPane;
     // End of variables declaration//GEN-END:variables
     

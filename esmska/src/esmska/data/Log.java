@@ -57,7 +57,7 @@ public class Log {
     
     /** Single log record
      */
-    public class Record {
+    public static class Record {
 
         private String message;
         private ImageIcon icon;
