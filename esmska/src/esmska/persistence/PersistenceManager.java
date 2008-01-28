@@ -49,7 +49,7 @@ public class PersistenceManager {
     private static Config config = new Config();
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
-    private static List<History> history = new ArrayList<History>();
+    private static History history = new History();
     
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
@@ -104,7 +104,7 @@ public class PersistenceManager {
         return queue;
     }
     
-    public static List<History> getHistory() {
+    public static History getHistory() {
         return history;
     }
     
@@ -163,15 +163,15 @@ public class PersistenceManager {
     
     /** Save sms history */
     public void saveHistory() throws IOException {
-        ExportManager.exportHistory(history, HISTORY_FILE);
+        ExportManager.exportHistory(history.getRecords(), HISTORY_FILE);
     }
     
     /** Load sms history */
     public void loadHistory() throws Exception {
         if (HISTORY_FILE.exists()) {
-            ArrayList<History> newHistory = ImportManager.importHistory(HISTORY_FILE);
-            history.clear();
-            history.addAll(newHistory);
+            ArrayList<History.Record> records = ImportManager.importHistory(HISTORY_FILE);
+            history.clearRecords();
+            history.addRecords(records);
         }
     }
 }

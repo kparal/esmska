@@ -41,11 +41,11 @@ public class HistoryFrame extends javax.swing.JFrame {
     private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(HistoryFrame.class.getName());
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
-    private List<History> history = PersistenceManager.getHistory();
+    private History history = PersistenceManager.getHistory();
     private HistoryTableModel historyTableModel = new HistoryTableModel();
     private Action deleteAction = new DeleteAction();
     private Action resendAction = new ResendAction();
-    private History selectedHistory;
+    private History.Record selectedHistory;
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -61,15 +61,15 @@ public class HistoryFrame extends javax.swing.JFrame {
     /** Creates new form HistoryFrame */
     public HistoryFrame() {
         initComponents();
-
         //select first row
         if (historyTableModel.getRowCount() > 0) {
             historyTable.getSelectionModel().setSelectionInterval(0, 0);
         }
+        history.addActionListener(new HistoryActionListener());
     }
 
     /** Return currently selected sms history */
-    public History getSelectedHistory() {
+    public History.Record getSelectedHistory() {
         return selectedHistory;
     }
 
@@ -320,12 +320,12 @@ public class HistoryFrame extends javax.swing.JFrame {
                 return;
             }
             //confirmed, let's delete it
-            ArrayList<History> histToDelete = new ArrayList<History>();
+            ArrayList<History.Record> histToDelete = new ArrayList<History.Record>();
             for (int i : rows) {
                 i = historyTable.getRowSorter().convertRowIndexToModel(i);
-                histToDelete.add(history.get(i));
+                histToDelete.add(history.getRecord(i));
             }
-            history.removeAll(histToDelete);
+            history.removeRecords(histToDelete);
             //refresh table
             historyTableModel.fireTableDataChanged();
             historyTable.getSelectionModel().clearSelection();
@@ -352,11 +352,19 @@ public class HistoryFrame extends javax.swing.JFrame {
         }
     }
 
+    /** Listener for history changes */
+    private class HistoryActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            historyTableModel.fireTableDataChanged();
+            historyTable.getSelectionModel().clearSelection();
+        }
+    }
+    
     /** Table model for showing sms history */
     private class HistoryTableModel extends AbstractTableModel {
 
         public int getRowCount() {
-            return history.size();
+            return history.getRecords().size();
         }
 
         public int getColumnCount() {
@@ -364,15 +372,15 @@ public class HistoryFrame extends javax.swing.JFrame {
         }
 
         public Object getValueAt(int rowIndex, int columnIndex) {
-            History hist = history.get(rowIndex);
+            History.Record record = history.getRecord(rowIndex);
             switch (columnIndex) {
                 case 0:
-                    return hist.getDate();
+                    return record.getDate();
                 case 1:
-                    String name = hist.getName();
-                    return name != null && !name.equals("") ? name : hist.getNumber();
+                    String name = record.getName();
+                    return name != null && !name.equals("") ? name : record.getNumber();
                 case 2:
-                    return hist.getText().replaceAll("\n+", " "); //show spaces instead of linebreaks
+                    return record.getText().replaceAll("\n+", " "); //show spaces instead of linebreaks
                 default:
                     logger.warning("Index out of bounds!");
                     return null;
@@ -440,17 +448,17 @@ public class HistoryFrame extends javax.swing.JFrame {
             }
             index = historyTable.getRowSorter().convertRowIndexToModel(index);
 
-            History hist = history.get(index);
-            dateLabel.setText(df.format(hist.getDate()));
-            nameLabel.setText(hist.getName());
-            numberLabel.setText(hist.getNumber());
-            operatorLabel.setText(hist.getOperator());
-            senderNameLabel.setText(hist.getSenderName());
-            senderNumberLabel.setText(hist.getSenderNumber());
-            textArea.setText(hist.getText());
+            History.Record record = history.getRecord(index);
+            dateLabel.setText(df.format(record.getDate()));
+            nameLabel.setText(record.getName());
+            numberLabel.setText(record.getNumber());
+            operatorLabel.setText(record.getOperator());
+            senderNameLabel.setText(record.getSenderName());
+            senderNumberLabel.setText(record.getSenderNumber());
+            textArea.setText(record.getText());
             textArea.setCaretPosition(0);
 
-            selectedHistory = hist;
+            selectedHistory = record;
         }
     }
 

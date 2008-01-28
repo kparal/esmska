@@ -80,11 +80,11 @@ public class ImportManager {
     }
     
     /** Import sms history from file */
-    public static ArrayList<History> importHistory(File file)
+    public static ArrayList<History.Record> importHistory(File file)
             throws IOException, ParseException {
         CsvReader reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
         reader.setUseComments(true);
-        ArrayList<History> history = new ArrayList<History>();
+        ArrayList<History.Record> history = new ArrayList<History.Record>();
         while (reader.readRecord()) {
             String dateString = reader.get(0);
             String name = reader.get(1);
@@ -98,16 +98,16 @@ public class ImportManager {
                     DateFormat.LONG, Locale.ROOT);
             Date date = df.parse(dateString);
             
-            History hist = new History();
-            hist.setDate(date);
-            hist.setName(name);
-            hist.setNumber(number);
-            hist.setOperator(operator);
-            hist.setText(text);
-            hist.setSenderName(senderName);
-            hist.setSenderNumber(senderNumber);
+            History.Record record = new History.Record();
+            record.setDate(date);
+            record.setName(name);
+            record.setNumber(number);
+            record.setOperator(operator);
+            record.setText(text);
+            record.setSenderName(senderName);
+            record.setSenderNumber(senderNumber);
             
-            history.add(hist);
+            history.add(record);
         }
         return history;
     }

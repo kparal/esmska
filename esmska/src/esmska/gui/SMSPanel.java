@@ -295,6 +295,7 @@ public class SMSPanel extends javax.swing.JPanel {
         jLabel4.setText("Číslo");
 
         smsProgressBar.setMaximum(1000);
+        smsProgressBar.setToolTipText("Graficky zobrazuje zbývající volné místo ve zprávě");
 
         jLabel1.setText("+420");
 

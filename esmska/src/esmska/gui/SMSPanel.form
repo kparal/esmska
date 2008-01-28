@@ -99,6 +99,7 @@
     <Component class="javax.swing.JProgressBar" name="smsProgressBar">
       <Properties>
         <Property name="maximum" type="int" value="1000"/>
+        <Property name="toolTipText" type="java.lang.String" value="Graficky zobrazuje zb&#xfd;vaj&#xed;c&#xed; voln&#xe9; m&#xed;sto ve zpr&#xe1;v&#x11b;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

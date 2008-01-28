@@ -136,22 +136,22 @@ public class ExportManager {
     }
     
     /** Export sms history to file */
-    public static void exportHistory(Collection<History> history, File file) throws IOException {
+    public static void exportHistory(Collection<History.Record> history, File file) throws IOException {
         CsvWriter writer = null;
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG, 
                 DateFormat.LONG, Locale.ROOT);
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
             writer.writeComment("Historie odeslaných sms");
-            for (History hist : history) {
+            for (History.Record record : history) {
                 writer.writeRecord(new String[] {
-                    df.format(hist.getDate()),
-                    hist.getName() != null ? hist.getName() : "",
-                    hist.getNumber(),
-                    hist.getOperator(),
-                    hist.getText(),
-                    hist.getSenderName() != null ? hist.getSenderName() : "",
-                    hist.getSenderNumber() != null ? hist.getSenderNumber() : ""
+                    df.format(record.getDate()),
+                    record.getName() != null ? record.getName() : "",
+                    record.getNumber(),
+                    record.getOperator(),
+                    record.getText(),
+                    record.getSenderName() != null ? record.getSenderName() : "",
+                    record.getSenderNumber() != null ? record.getSenderNumber() : ""
                 });
             }
         } finally {

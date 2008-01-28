@@ -17,7 +17,9 @@ import javax.swing.ImageIcon;
 public class Log {
     /** new record added */
     public static final int ACTION_ADD_RECORD = 0;
+    /** existing record removed */
     public static final int ACTION_REMOVE_RECORD = 1;
+    /** all records deleted */
     public static final int ACTION_CLEAR_RECORDS = 2;
     private ArrayList<Record> records = new ArrayList<Record>();
     
@@ -33,18 +35,18 @@ public class Log {
     // </editor-fold>
     
     /** get all records */
-    public ArrayList<Log.Record> getRecords() {
+    public ArrayList<Record> getRecords() {
         return records;
     }
 
     /** add new record */
-    public void addRecord(Log.Record record) {
+    public void addRecord(Record record) {
         records.add(record);
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
     }
     
     /** remove existing record */
-    public void removeRecord(Log.Record record) {
+    public void removeRecord(Record record) {
         records.remove(record);
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
     }

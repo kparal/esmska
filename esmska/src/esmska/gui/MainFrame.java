@@ -81,7 +81,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** sms contacts */
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     /** sms history */
-    private List<History> history = PersistenceManager.getHistory();
+    private History history = PersistenceManager.getHistory();
     /** whether user data were saved successfully */
     private boolean saveOk = true;
     
@@ -400,16 +400,16 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Saves history of sent sms */
     private void createHistory(SMS sms) {
-        History hist = new History();
-        hist.setDate(new Date());
-        hist.setName(sms.getName());
-        hist.setNumber(sms.getNumber());
-        hist.setOperator(sms.getOperator().toString());
-        hist.setSenderName(sms.getSenderName());
-        hist.setSenderNumber(sms.getSenderNumber());
-        hist.setText(sms.getText());
+        History.Record record = new History.Record();
+        record.setDate(new Date());
+        record.setName(sms.getName());
+        record.setNumber(sms.getNumber());
+        record.setOperator(sms.getOperator().toString());
+        record.setSenderName(sms.getSenderName());
+        record.setSenderNumber(sms.getSenderNumber());
+        record.setText(sms.getText());
         
-        history.add(hist);
+        history.addRecord(record);
     }
     
     /** Pauses sms queue */
@@ -483,7 +483,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** save sms history */
     private void saveHistory() {
         if (!config.isRememberHistory())
-            history.clear();
+            history.clearRecords();
         try {
             persistenceManager.saveHistory();
         } catch (Exception ex) {
@@ -661,15 +661,15 @@ public class MainFrame extends javax.swing.JFrame {
     private class HistoryListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //resend sms
-            History hist = historyAction.getHistoryFrame().getSelectedHistory();
-            if (hist == null) {
+            History.Record record = historyAction.getHistoryFrame().getSelectedHistory();
+            if (record == null) {
                 return;
             }
             
             SMS sms = new SMS();
-            sms.setNumber(hist.getNumber());
-            sms.setOperator(OperatorEnum.parseOperator(hist.getOperator()));
-            sms.setText(hist.getText());
+            sms.setNumber(record.getNumber());
+            sms.setOperator(OperatorEnum.parseOperator(record.getOperator()));
+            sms.setText(record.getText());
             
             contactPanel.clearSelection();
             smsPanel.setSMS(sms);
