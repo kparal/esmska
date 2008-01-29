@@ -28,14 +28,25 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="553" max="32767" attributes="0"/>
-                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="resendButton" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="closeButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="deleteButton" linkSize="5" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" pref="553" max="32767" attributes="0"/>
+                          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="deleteButton" linkSize="5" min="-2" max="-2" attributes="0"/>
+                          <Component id="resendButton" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="closeButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="searchField" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="clearButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -45,11 +56,19 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="searchField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="clearButton" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="325" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="301" max="32767" attributes="0"/>
                   <Component id="deleteButton" linkSize="6" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="1" attributes="1">
                       <Component id="resendButton" linkSize="6" min="-2" max="-2" attributes="0"/>
@@ -73,7 +92,6 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="historyTable">
           <Properties>
-            <Property name="autoCreateRowSorter" type="boolean" value="true"/>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="historyTableModel" type="code"/>
             </Property>
@@ -83,7 +101,7 @@
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="historyTableKeyPressed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="historyTable.setDefaultRenderer(Date.class, new TableDateRenderer());&#xa;&#xa;List&lt;RowSorter.SortKey&gt; sortKeys = new ArrayList&lt;RowSorter.SortKey&gt;();&#xa;sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));&#xa;historyTable.getRowSorter().setSortKeys(sortKeys);&#xa;&#xa;historyTable.getSelectionModel().addListSelectionListener(new HistoryTableListener());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="historyTable.setDefaultRenderer(Date.class, new TableDateRenderer());&#xa;historyTable.getSelectionModel().addListSelectionListener(new HistoryTableListener());&#xa;&#xa;List&lt;RowSorter.SortKey&gt; sortKeys = new ArrayList&lt;RowSorter.SortKey&gt;();&#xa;sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));&#xa;historyTableSorter.setSortKeys(sortKeys);&#xa;historyTable.setRowSorter(historyTableSorter);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -282,6 +300,48 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closeButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="searchField">
+      <Properties>
+        <Property name="columns" type="int" value="15"/>
+        <Property name="toolTipText" type="java.lang.String" value="Zadejte v&#xfd;raz pro vyhled&#xe1;n&#xed; v historii zpr&#xe1;v"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="searchFieldFocusGained"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;    @Override&#xa;    public void onUpdate(DocumentEvent e) {&#xa;        historyTableFilter.requestUpdate();&#xa;    }&#xa;});"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="displayedMnemonic" type="int" value="104"/>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="searchField"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Hledat:"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection component="searchField" name="toolTipText" type="property"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="clearButton">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/esmska/resources/clear-22.png"/>
+        </Property>
+        <Property name="mnemonic" type="int" value="118"/>
+        <Property name="toolTipText" type="java.lang.String" value="Vy&#x10d;istit hledan&#xfd; v&#xfd;raz (Alt+V)"/>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[2, 2, 2, 2]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

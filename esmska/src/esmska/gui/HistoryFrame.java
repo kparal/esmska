@@ -7,6 +7,7 @@ package esmska.gui;
 
 import esmska.data.History;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -23,15 +24,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableRowSorter;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
-/**
+/** Display all sent messages in a frame
  *
  * @author  ripper
  */
@@ -43,6 +48,8 @@ public class HistoryFrame extends javax.swing.JFrame {
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
     private History history = PersistenceManager.getHistory();
     private HistoryTableModel historyTableModel = new HistoryTableModel();
+    private TableRowSorter<HistoryTableModel> historyTableSorter = new TableRowSorter<HistoryTableModel>(historyTableModel);
+    private HistoryRowFilter historyTableFilter = new HistoryRowFilter();
     private Action deleteAction = new DeleteAction();
     private Action resendAction = new ResendAction();
     private History.Record selectedHistory;
@@ -66,6 +73,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             historyTable.getSelectionModel().setSelectionInterval(0, 0);
         }
         history.addActionListener(new HistoryActionListener());
+        historyTable.requestFocusInWindow();
     }
 
     /** Return currently selected sms history */
@@ -101,20 +109,22 @@ public class HistoryFrame extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         resendButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Historie odeslaných zpráv - Esmska");
         setIconImage(new ImageIcon(getClass().getResource(RES + "history-48.png")).getImage());
 
-        historyTable.setAutoCreateRowSorter(true);
         historyTable.setModel(historyTableModel);
         historyTable.setDefaultRenderer(Date.class, new TableDateRenderer());
+        historyTable.getSelectionModel().addListSelectionListener(new HistoryTableListener());
 
         List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
         sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
-        historyTable.getRowSorter().setSortKeys(sortKeys);
-
-        historyTable.getSelectionModel().addListSelectionListener(new HistoryTableListener());
+        historyTableSorter.setSortKeys(sortKeys);
+        historyTable.setRowSorter(historyTableSorter);
         historyTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 historyTableMouseClicked(evt);
@@ -238,6 +248,36 @@ public class HistoryFrame extends javax.swing.JFrame {
             }
         });
 
+        searchField.setColumns(15);
+        searchField.setToolTipText("Zadejte výraz pro vyhledání v historii zpráv");
+        searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                historyTableFilter.requestUpdate();
+            }
+        });
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchFieldFocusGained(evt);
+            }
+        });
+
+        jLabel7.setDisplayedMnemonic('h');
+        jLabel7.setLabelFor(searchField);
+        jLabel7.setText("Hledat:");
+        jLabel7.setToolTipText(searchField.getToolTipText());
+
+        clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
+        clearButton.setMnemonic('v');
+        clearButton.setToolTipText("Vyčistit hledaný výraz (Alt+V)");
+        clearButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -245,13 +285,21 @@ public class HistoryFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resendButton)
-                    .addComponent(closeButton)
-                    .addComponent(deleteButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deleteButton)
+                            .addComponent(resendButton)
+                            .addComponent(closeButton)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clearButton)))
                 .addContainerGap())
         );
 
@@ -261,8 +309,14 @@ public class HistoryFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7))
+                    .addComponent(clearButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                     .addComponent(deleteButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -297,6 +351,15 @@ public class HistoryFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_historyTableKeyPressed
 
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        searchField.setText(null);
+        searchField.requestFocusInWindow();
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void searchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusGained
+        searchField.selectAll();
+    }//GEN-LAST:event_searchFieldFocusGained
+
     /** Delete sms from history */
     private class DeleteAction extends AbstractAction {
 
@@ -329,6 +392,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             //refresh table
             historyTableModel.fireTableDataChanged();
             historyTable.getSelectionModel().clearSelection();
+            historyTable.requestFocusInWindow();
         }
     }
 
@@ -476,8 +540,43 @@ public class HistoryFrame extends javax.swing.JFrame {
             return label;
         }
     }
+    
+    /** Filter for searching in history table */
+    private class HistoryRowFilter extends RowFilter<HistoryTableModel, Integer> {
+        private Timer timer = new Timer(500, new ActionListener() { //updating after each event is slow,
+            public void actionPerformed(ActionEvent e) {            //therefore there is timer
+                historyTableSorter.setRowFilter(HistoryRowFilter.this);
+            }
+        });
+        public HistoryRowFilter() {
+            timer.setRepeats(false);
+        }
+        public boolean include(Entry<? extends HistoryTableModel, ? extends Integer> entry) {
+            History.Record record = history.getRecord(entry.getIdentifier());
+            String pattern = searchField.getText().toLowerCase();
+            //search through text, name, number and date
+            if (record.getText() != null && record.getText().toLowerCase().contains(pattern)) {
+                return true;
+            }
+            if (record.getNumber() != null && record.getNumber().toLowerCase().contains(pattern)) {
+                return true;
+            }
+            if (record.getName() != null && record.getName().toLowerCase().contains(pattern)) {
+                return true;
+            }
+            if (record.getDate() != null && df.format(record.getDate()).toLowerCase().contains(pattern)) {
+                return true;
+            }
+            return false;
+        }
+        /** request history search filter to be updated */
+        public void requestUpdate() {
+            timer.restart();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clearButton;
     private javax.swing.JButton closeButton;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JButton deleteButton;
@@ -488,6 +587,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -495,6 +595,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel numberLabel;
     private javax.swing.JLabel operatorLabel;
     private javax.swing.JButton resendButton;
+    private javax.swing.JTextField searchField;
     private javax.swing.JLabel senderNameLabel;
     private javax.swing.JLabel senderNumberLabel;
     private javax.swing.JTextArea textArea;
