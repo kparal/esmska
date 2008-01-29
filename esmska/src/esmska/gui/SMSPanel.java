@@ -14,6 +14,7 @@ import esmska.data.SMS;
 import esmska.operators.Operator;
 import esmska.operators.OperatorEnum;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
 import java.awt.Color;
 import java.awt.Component;
@@ -42,7 +43,6 @@ import javax.swing.ListCellRenderer;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.text.AbstractDocument;
@@ -577,7 +577,7 @@ public class SMSPanel extends javax.swing.JPanel {
                     return EventType.INSERT;
                 }
             };
-            smsTextPaneListener.insertUpdate(event);
+            smsTextPaneListener.onUpdate(event);
             
             lookupContact();
             
@@ -602,7 +602,7 @@ public class SMSPanel extends javax.swing.JPanel {
     }
     
     /** Listener for sms text pane */
-    private class SMSTextPaneListener implements DocumentListener {
+    private class SMSTextPaneListener extends AbstractDocumentListener {
         /** count number of chars in sms and take action */
         private void countChars(DocumentEvent e) {
             int chars = e.getDocument().getLength();
@@ -622,15 +622,8 @@ public class SMSPanel extends javax.swing.JPanel {
                 logger.log(Level.SEVERE, "Error getting sms text", ex);
             }
         }
-        public void changedUpdate(DocumentEvent e) {
-            countChars(e);
-            updateUI(e);
-        }
-        public void insertUpdate(DocumentEvent e) {
-            countChars(e);
-            updateUI(e);
-        }
-        public void removeUpdate(DocumentEvent e) {
+        @Override
+        public void onUpdate(DocumentEvent e) {
             countChars(e);
             updateUI(e);
         }
