@@ -51,15 +51,20 @@ public class PersistenceManager {
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
     private static History history = new History();
     
+    private static boolean customPathSet;
+    
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
         //adjust program dir according to operating system
-        String path = System.getenv("XDG_CONFIG_HOME");
-        if ((path == null || path.equals("")) &&
-                System.getProperty("os.name").toLowerCase().contains("windows"))
-            path = System.getenv("APPDATA");
-        if (path != null && !path.equals("")) {
-            setProgramDir(path + File.separator + PROGRAM_DIRNAME);
+        if (!customPathSet) {
+            String path = System.getenv("XDG_CONFIG_HOME");
+            if ((path == null || path.equals("")) &&
+                    System.getProperty("os.name").toLowerCase().contains("windows")) {
+                path = System.getenv("APPDATA");
+            }
+            if (path != null && !path.equals("")) {
+                setProgramDir(path + File.separator + PROGRAM_DIRNAME);
+            }
         }
         
         //create program dir if necessary
@@ -81,6 +86,7 @@ public class PersistenceManager {
         CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
         QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
         HISTORY_FILE = new File(PROGRAM_DIR, HISTORY_FILENAME);
+        customPathSet = true;
     }
     
     /** Get PersistenceManager */
