@@ -321,16 +321,19 @@ public class SMSPanel extends javax.swing.JPanel {
         });
 
         //this mapping is here bcz of some weird performance improvements when holding undo key stroke
-        smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK),"undo");
-        smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK),"redo");
+        String command = "undo";
+        smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK), command);
+        smsTextPane.getActionMap().put("undo",undoAction);
+        command = "redo";
+        smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK), command);
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-            KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK),"redo");
-    smsTextPane.getActionMap().put("undo",undoAction);
-    smsTextPane.getActionMap().put("redo",redoAction);
+            KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK), command);
+    smsTextPane.getActionMap().put(command, redoAction);
 
     //ctrl+enter
-    smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,KeyEvent.CTRL_DOWN_MASK),"send");
-    smsTextPane.getActionMap().put("send",sendAction);
+    command = "send";
+    smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,KeyEvent.CTRL_DOWN_MASK), command);
+    smsTextPane.getActionMap().put(command, sendAction);
     jScrollPane1.setViewportView(smsTextPane);
 
     jLabel5.setDisplayedMnemonic('t');

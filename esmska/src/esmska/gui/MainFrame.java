@@ -29,12 +29,14 @@ import esmska.UpdateChecker;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.operators.OperatorEnum;
+import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -117,6 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
         //setup components
         smsDelayTimer.setInitialDelay(0);
         contactPanel.requestFocusInWindow();
+        contactPanel.ensureContactSelected();
         
         //use bindings
         Binding bind = Bindings.createAutoBinding(UpdateStrategy.READ, config, 
@@ -256,6 +259,13 @@ public class MainFrame extends javax.swing.JFrame {
         exitButton.setFocusable(false);
         exitButton.setHideActionText(true);
         toolBar.add(exitButton);
+
+        //disable mnemonics for buttons
+        for (Component comp : toolBar.getComponents()) {
+            if (comp instanceof JButton) {
+                ((JButton)comp).setMnemonic(0);
+            }
+        }
 
         programMenu.setMnemonic('r');
         programMenu.setText("Program");

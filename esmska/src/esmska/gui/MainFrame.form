@@ -243,6 +243,7 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="toolBar.add(Box.createRigidArea(new Dimension(5, 1)));"/>
+        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="//disable mnemonics for buttons&#xa;for (Component comp : toolBar.getComponents()) {&#xa;    if (comp instanceof JButton) {&#xa;        ((JButton)comp).setMnemonic(0);&#xa;    }&#xa;}"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>

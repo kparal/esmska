@@ -28,6 +28,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.Action;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -75,10 +76,12 @@ public class ContactPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    /** clear selection of contact list */
     public void clearSelection() {
         contactList.clearSelection();
     }
     
+    /** set selected contact in contact list */
     public void setSelectedContact(Contact contact) {
         contactList.setSelectedValue(contact, true);
     }
@@ -93,8 +96,15 @@ public class ContactPanel extends javax.swing.JPanel {
         return selectedContacts;
     }
     
+    /** add new contacts to the contact list */
     public void addContacts(Collection<Contact> contacts) {
         contactListModel.addAll(contacts);
+    }
+    
+    /** select first contact in contact list, if possible and no other contact selected */
+    public void ensureContactSelected() {
+        if (contactList.getSelectedIndex() < 0 && contactListModel.getSize() > 0)
+            contactList.setSelectedIndex(0);
     }
     
     /** This method is called from within the constructor to
@@ -127,9 +137,21 @@ public class ContactPanel extends javax.swing.JPanel {
         removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         contactList.setModel(contactListModel);
+        contactList.setToolTipText("Seznam kontaktů (Alt+K)");
         contactList.setCellRenderer(new ContactListRenderer());
-        contactList.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "choose");
-        contactList.getActionMap().put("choose", chooseContactAction);
+        //key shortcuts
+        String command = "choose contact";
+        contactList.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), command);
+        contactList.getActionMap().put(command, chooseContactAction);
+
+        command = "focus contacts";
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_K,KeyEvent.ALT_DOWN_MASK), command);
+        getActionMap().put(command, new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                contactList.requestFocusInWindow();
+            }
+        });
         contactList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 contactListMouseClicked(evt);
