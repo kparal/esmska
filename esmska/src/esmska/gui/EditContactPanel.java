@@ -124,7 +124,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    /** @returns if the form is valid */
+    /** @return if the form is valid */
     public boolean validateForm() {
         boolean valid = true;
         boolean focusTransfered = false;
