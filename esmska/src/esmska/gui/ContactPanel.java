@@ -205,6 +205,7 @@ public class ContactPanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
         }
         public void actionPerformed(ActionEvent e) {
+            contactList.requestFocusInWindow(); //always transfer focus
             contactDialog.setTitle("Nový kontakt");
             contactDialog.show(null);
             Contact c = contactDialog.getContact();
@@ -225,6 +226,7 @@ public class ContactPanel extends javax.swing.JPanel {
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
+            contactList.requestFocusInWindow(); //always transfer focus
             Contact contact = (Contact)contactList.getSelectedValue();
             contactDialog.setTitle("Upravit kontakt");
             contactDialog.show(contact);
@@ -247,6 +249,7 @@ public class ContactPanel extends javax.swing.JPanel {
             this.setEnabled(false);
         }
         public void actionPerformed(ActionEvent e) {
+            contactList.requestFocusInWindow(); //always transfer focus
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
             JLabel label = new JLabel("<html><b>Opravdu smazat následující kontakty?</b></html>");

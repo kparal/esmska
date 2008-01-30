@@ -218,6 +218,11 @@ public class QueuePanel extends javax.swing.JPanel {
                 SMS sms = (SMS) o;
                 smsQueueListModel.remove(sms);
             }
+            //transfer focus
+            if (smsQueueListModel.getSize() > 0)
+                smsQueueList.requestFocusInWindow();
+            else
+                pauseButton.requestFocusInWindow();
         }
     }
     

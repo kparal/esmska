@@ -371,6 +371,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         }
 
         public void actionPerformed(ActionEvent e) {
+            historyTable.requestFocusInWindow(); //always transfer focus
             int[] rows = historyTable.getSelectedRows();
             if (rows.length <= 0) {
                 return;
@@ -392,7 +393,6 @@ public class HistoryFrame extends javax.swing.JFrame {
             //refresh table
             historyTableModel.fireTableDataChanged();
             historyTable.getSelectionModel().clearSelection();
-            historyTable.requestFocusInWindow();
         }
     }
 
