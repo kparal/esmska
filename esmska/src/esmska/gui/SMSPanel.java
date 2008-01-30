@@ -292,6 +292,7 @@ public class SMSPanel extends javax.swing.JPanel {
         });
 
         jLabel4.setDisplayedMnemonic('l');
+        jLabel4.setLabelFor(smsNumberTextField);
         jLabel4.setText("Číslo");
 
         smsProgressBar.setMaximum(1000);
@@ -337,6 +338,7 @@ public class SMSPanel extends javax.swing.JPanel {
     jScrollPane1.setViewportView(smsTextPane);
 
     jLabel5.setDisplayedMnemonic('t');
+    jLabel5.setLabelFor(smsTextPane);
     jLabel5.setText("Text");
 
     operatorComboBox.setModel(new DefaultComboBoxModel(OperatorEnum.getAsList().toArray()));

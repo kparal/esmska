@@ -10,6 +10,7 @@ import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,6 +41,7 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /** Contact list panel
@@ -57,9 +59,10 @@ public class ContactPanel extends javax.swing.JPanel {
     private Action editContactAction = new EditContactAction();
     private Action removeContactAction = new RemoveContactAction();
     private Action chooseContactAction = new ChooseContactAction();
+    private SearchContactAction searchContactAction = new SearchContactAction();
     private ContactListModel contactListModel = new ContactListModel();
     private ContactDialog contactDialog = new ContactDialog();
-    
+
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
     public void addActionListener(ActionListener actionListener) {
@@ -162,6 +165,14 @@ public class ContactPanel extends javax.swing.JPanel {
                 contactListValueChanged(evt);
             }
         });
+        contactList.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                contactListKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contactListKeyTyped(evt);
+            }
+        });
         jScrollPane4.setViewportView(contactList);
 
         editContactButton.setAction(editContactAction);
@@ -219,6 +230,31 @@ public class ContactPanel extends javax.swing.JPanel {
         if (evt.getButton() != MouseEvent.BUTTON1 || evt.getClickCount() > 1)
             chooseContactAction.actionPerformed(null);
     }//GEN-LAST:event_contactListMouseClicked
+
+    private void contactListKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactListKeyTyped
+        //do not catch keyboard shortcuts
+        if (evt.isActionKey() || evt.isAltDown() || evt.isAltGraphDown() ||
+                evt.isControlDown() || evt.isMetaDown()) {
+            return;
+        }
+        //skip when not letter nor digit nor whitespace
+        if (! Character.isLetterOrDigit(evt.getKeyChar()) && ! Character.isWhitespace(evt.getKeyChar())) {
+            return;
+        }
+    
+        String searchString = searchContactAction.getSearchString();
+        searchString += Character.toLowerCase(evt.getKeyChar());
+        searchContactAction.setSearchString(searchString);
+        searchContactAction.actionPerformed(null);
+    }//GEN-LAST:event_contactListKeyTyped
+
+    private void contactListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactListKeyPressed
+        //prolong delay when searching and using arrows
+        if ((evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) &&
+                !searchContactAction.getSearchString().equals("")) {
+            searchContactAction.restartTimer();
+        }
+    }//GEN-LAST:event_contactListKeyPressed
     
     /** Add contact to contact list */
     private class AddContactAction extends AbstractAction {
@@ -298,6 +334,62 @@ public class ContactPanel extends javax.swing.JPanel {
     private class ChooseContactAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
             actionSupport.fireActionPerformed(ACTION_CONTACT_CHOSEN, null);
+        }
+    }
+    
+     /** Search for contact in contact list */
+    private class SearchContactAction extends AbstractAction {
+        private String searchString = "";
+        /** "forgetting" timer, time to forget the searched string */
+        private Timer timer = new Timer(2000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                searchString = "";
+                SearchContactAction.this.actionPerformed(null);
+            }
+        });
+        public SearchContactAction() {
+            timer.setRepeats(false);
+        }
+        /** update the graphical highlighting */
+        private void updateRendering() {
+            ListCellRenderer renderer = contactList.getCellRenderer();
+            contactList.setCellRenderer(null);
+            contactList.setCellRenderer(renderer);
+        }
+        /** do the search */
+        public void actionPerformed(ActionEvent e) {
+            if (searchString.equals("")) {
+                updateRendering();
+                return;
+            }
+            for (int i = 0; i < contactListModel.getSize(); i++) {
+                Contact contact = contactListModel.getElementAt(i);
+                if (isContactMatched(contact)) {
+                    contactList.setSelectedValue(contact, true);
+                    break;
+                }
+            }
+            updateRendering();
+            restartTimer();
+        }
+        /** @return true if contact is matched by search string, false otherwise */
+        public boolean isContactMatched(Contact contact) {
+            if (searchString.equals(""))
+                return true;
+            return (contact.getName().toLowerCase().contains(searchString) ||
+                        contact.getCountryCode().concat(contact.getNumber()).contains(searchString));
+        }
+        /** set string to be searched in contact list */
+        public void setSearchString(String searchString) {
+            this.searchString = searchString;
+        }
+        /** get string searched in contact list */
+        public String getSearchString() {
+            return searchString;
+        }
+        /** force the search timer to restart (therefore prolong the delay) */
+        public void restartTimer() {
+            timer.restart();
         }
     }
     
@@ -423,7 +515,10 @@ public class ContactPanel extends javax.swing.JPanel {
             ((JLabel)c).setIcon(contact.getOperator().getIcon());
             //set tooltip
             ((JLabel)c).setToolTipText(contact.getNumber());
-            
+            //set background on non-matching contacts when searching
+            if (!searchContactAction.getSearchString().equals("") &&
+                    !searchContactAction.isContactMatched(contact))
+                ((JLabel)c).setBackground(Color.GRAY);
             return c;
         }
     }

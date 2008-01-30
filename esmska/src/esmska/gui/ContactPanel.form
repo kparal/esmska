@@ -102,6 +102,8 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="contactListMouseClicked"/>
             <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="contactListValueChanged"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="contactListKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="contactListKeyTyped"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="//key shortcuts&#xa;String command = &quot;choose contact&quot;;&#xa;contactList.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), command);&#xa;contactList.getActionMap().put(command, chooseContactAction);&#xa;&#xa;command = &quot;focus contacts&quot;;&#xa;getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(&#xa;        KeyStroke.getKeyStroke(KeyEvent.VK_K,KeyEvent.ALT_DOWN_MASK), command);&#xa;getActionMap().put(command, new AbstractAction() {&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        contactList.requestFocusInWindow();&#xa;    }&#xa;});"/>

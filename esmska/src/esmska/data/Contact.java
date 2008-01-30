@@ -16,7 +16,8 @@ import esmska.operators.Operator;
 public class Contact extends Object implements Comparable<Contact> {
     
     private String name;
-    private String number; //phone number not including the country code
+    /** phone number not including the country code */
+    private String number;
     private String countryCode;
     private Operator operator;
     
@@ -63,7 +64,7 @@ public class Contact extends Object implements Comparable<Contact> {
     
     /**
      * Getter for property number.
-     * @return Value of property number.
+     * @return phone number not including the country code
      */
     public String getNumber() {
         return this.number;
