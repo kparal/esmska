@@ -248,9 +248,30 @@ public class ContactPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_contactListKeyTyped
 
     private void contactListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactListKeyPressed
-        //prolong delay when searching and using arrows
+        //move to another matching contact when searching and using arrows (and prolong the delay)
         if ((evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) &&
                 !searchContactAction.getSearchString().equals("")) {
+            int index = Math.max(contactList.getSelectedIndex(), 0);
+            if (evt.getKeyCode() == KeyEvent.VK_DOWN) { //go to next matching contact
+                index++;
+                for (; index < contactListModel.getSize(); index++) {
+                    Contact contact = contactListModel.getElementAt(index);
+                    if (searchContactAction.isContactMatched(contact)) {
+                        contactList.setSelectedValue(contact, true);
+                        break;
+                    }
+                }
+            } else { //go to previous matching contact
+                index--;
+                for (; index >= 0; index--) {
+                    Contact contact = contactListModel.getElementAt(index);
+                    if (searchContactAction.isContactMatched(contact)) {
+                        contactList.setSelectedValue(contact, true);
+                        break;
+                    }
+                }
+            }
+            evt.consume();
             searchContactAction.restartTimer();
         }
     }//GEN-LAST:event_contactListKeyPressed
