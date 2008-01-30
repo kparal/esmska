@@ -10,7 +10,6 @@ import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -511,15 +510,17 @@ public class ContactPanel extends javax.swing.JPanel {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
             Contact contact = (Contact)value;
+            JLabel label = ((JLabel)c);
             //add operator logo
-            ((JLabel)c).setIcon(contact.getOperator().getIcon());
+            label.setIcon(contact.getOperator().getIcon());
             //set tooltip
-            ((JLabel)c).setToolTipText(contact.getNumber());
+            label.setToolTipText(contact.getNumber());
             //set background on non-matching contacts when searching
             if (!searchContactAction.getSearchString().equals("") &&
-                    !searchContactAction.isContactMatched(contact))
-                ((JLabel)c).setBackground(Color.GRAY);
-            return c;
+                    !searchContactAction.isContactMatched(contact)) {
+                label.setBackground(label.getBackground().darker());
+            }
+            return label;
         }
     }
     
