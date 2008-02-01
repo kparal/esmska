@@ -30,8 +30,6 @@ import esmska.data.History;
 import esmska.data.Icons;
 import esmska.operators.OperatorEnum;
 import java.awt.Component;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -463,8 +461,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         if (config.isStartCentered()) { //set window centered
-            Point desktopCenter = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
-            setLocation(desktopCenter.x - getWidth() / 2, desktopCenter.y - getHeight() / 2);
+            setLocationRelativeTo(null);
         }
     }
     
