@@ -248,6 +248,17 @@ public class ContactPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_contactListKeyTyped
 
     private void contactListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactListKeyPressed
+        //process backspace
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            String searchString = searchContactAction.getSearchString();
+            if (searchString.length() > 0) {
+                searchString = searchString.substring(0, searchString.length() - 1);
+                searchContactAction.setSearchString(searchString);
+                searchContactAction.actionPerformed(null);
+            }
+            return;
+        }
+
         //move to another matching contact when searching and using arrows (and prolong the delay)
         if ((evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) &&
                 !searchContactAction.getSearchString().equals("")) {
@@ -385,7 +396,13 @@ public class ContactPanel extends javax.swing.JPanel {
             for (int i = 0; i < contactListModel.getSize(); i++) {
                 Contact contact = contactListModel.getElementAt(i);
                 if (isContactMatched(contact)) {
-                    contactList.setSelectedValue(contact, true);
+                    contactList.setSelectedIndex(i);
+                    //let 5 contacts be visible before and after the selected contact
+                    for (int j = i - 5; j <= i + 5; j++) {
+                        if (j >= 0 && j < contactListModel.getSize())
+                            contactList.ensureIndexIsVisible(j);
+                    }
+                    contactList.ensureIndexIsVisible(i);
                     break;
                 }
             }
