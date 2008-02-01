@@ -638,7 +638,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private class SMSTextPaneDocumentFilter extends DocumentFilter {
         private StyledDocument doc;
         private Style regular, highlight;
-        private Timer timer = new Timer(250, new ActionListener() { //updating after each event is slow,
+        private Timer timer = new Timer(100, new ActionListener() { //updating after each event is slow,
             public void actionPerformed(ActionEvent e) {            //therefore there is timer
                 colorDocument(0,doc.getLength());
                 updateUI();
