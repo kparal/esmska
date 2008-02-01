@@ -540,6 +540,7 @@ public class ContactPanel extends javax.swing.JPanel {
             if (!searchContactAction.getSearchString().equals("") &&
                     !searchContactAction.isContactMatched(contact)) {
                 label.setBackground(label.getBackground().darker());
+                label.setForeground(label.getForeground().darker());
             }
             return label;
         }
