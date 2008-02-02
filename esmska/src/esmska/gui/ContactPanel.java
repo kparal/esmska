@@ -11,6 +11,7 @@ import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -37,6 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
@@ -109,6 +111,19 @@ public class ContactPanel extends javax.swing.JPanel {
             contactList.setSelectedIndex(0);
     }
     
+    /** sets selected index in contact list with making intelligent
+     * margins of 3 other contacts visible around the selected one
+     */
+    private void setSelectedContactIndexWithMargins(int index) {
+        contactList.setSelectedIndex(index);
+        //let 3 contacts be visible before and after the selected contact
+        for (int j = index - 3; j <= index + 3; j++) {
+            if (j >= 0 && j < contactListModel.getSize())
+                contactList.ensureIndexIsVisible(j);
+        }
+        contactList.ensureIndexIsVisible(index);
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -120,7 +135,7 @@ public class ContactPanel extends javax.swing.JPanel {
         addContactButton = new javax.swing.JButton();
         removeContactButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        contactList = new javax.swing.JList();
+        contactList = new ContactList();
         editContactButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Kontakty"));
@@ -258,6 +273,13 @@ public class ContactPanel extends javax.swing.JPanel {
             }
             return;
         }
+        
+        //process escape
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            searchContactAction.setSearchString("");
+            searchContactAction.actionPerformed(null);
+            return;
+        }
 
         //move to another matching contact when searching and using arrows (and prolong the delay)
         if ((evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) &&
@@ -268,7 +290,7 @@ public class ContactPanel extends javax.swing.JPanel {
                 for (; index < contactListModel.getSize(); index++) {
                     Contact contact = contactListModel.getElementAt(index);
                     if (searchContactAction.isContactMatched(contact)) {
-                        contactList.setSelectedValue(contact, true);
+                        setSelectedContactIndexWithMargins(index);
                         break;
                     }
                 }
@@ -277,13 +299,14 @@ public class ContactPanel extends javax.swing.JPanel {
                 for (; index >= 0; index--) {
                     Contact contact = contactListModel.getElementAt(index);
                     if (searchContactAction.isContactMatched(contact)) {
-                        contactList.setSelectedValue(contact, true);
+                        setSelectedContactIndexWithMargins(index);
                         break;
                     }
                 }
             }
             evt.consume();
             searchContactAction.restartTimer();
+            ((ContactList)contactList).repaintSearchField();
         }
     }//GEN-LAST:event_contactListKeyPressed
     
@@ -368,7 +391,7 @@ public class ContactPanel extends javax.swing.JPanel {
         }
     }
     
-     /** Search for contact in contact list */
+    /** Search for contact in contact list */
     private class SearchContactAction extends AbstractAction {
         private String searchString = "";
         /** "forgetting" timer, time to forget the searched string */
@@ -378,15 +401,17 @@ public class ContactPanel extends javax.swing.JPanel {
                 SearchContactAction.this.actionPerformed(null);
             }
         });
+        
         public SearchContactAction() {
             timer.setRepeats(false);
         }
+        
         /** update the graphical highlighting */
         private void updateRendering() {
-            ListCellRenderer renderer = contactList.getCellRenderer();
-            contactList.setCellRenderer(null);
-            contactList.setCellRenderer(renderer);
+            ((ContactList)contactList).showSearchField(searchString);
+            contactList.repaint();
         }
+        
         /** do the search */
         public void actionPerformed(ActionEvent e) {
             if (searchString.equals("")) {
@@ -396,19 +421,14 @@ public class ContactPanel extends javax.swing.JPanel {
             for (int i = 0; i < contactListModel.getSize(); i++) {
                 Contact contact = contactListModel.getElementAt(i);
                 if (isContactMatched(contact)) {
-                    contactList.setSelectedIndex(i);
-                    //let 5 contacts be visible before and after the selected contact
-                    for (int j = i - 5; j <= i + 5; j++) {
-                        if (j >= 0 && j < contactListModel.getSize())
-                            contactList.ensureIndexIsVisible(j);
-                    }
-                    contactList.ensureIndexIsVisible(i);
+                    setSelectedContactIndexWithMargins(i);
                     break;
                 }
             }
             updateRendering();
             restartTimer();
         }
+        
         /** @return true if contact is matched by search string, false otherwise */
         public boolean isContactMatched(Contact contact) {
             if (searchString.equals(""))
@@ -416,17 +436,73 @@ public class ContactPanel extends javax.swing.JPanel {
             return (contact.getName().toLowerCase().contains(searchString) ||
                         contact.getCountryCode().concat(contact.getNumber()).contains(searchString));
         }
+        
         /** set string to be searched in contact list */
         public void setSearchString(String searchString) {
             this.searchString = searchString;
         }
+        
         /** get string searched in contact list */
         public String getSearchString() {
             return searchString;
         }
+        
         /** force the search timer to restart (therefore prolong the delay) */
         public void restartTimer() {
             timer.restart();
+        }
+    }
+    
+    /** JList with contacts */
+    private class ContactList extends JList {
+        JTextField searchField = new JTextField();
+
+        public ContactList() {
+            searchField.setFocusable(false);
+        }
+        
+        /** show search field in contact list or hide it
+         * @param text text to show; empty or null string hides the field
+         */
+        public void showSearchField(String text) {
+            if (text == null || "".equals(text)) {
+                remove(searchField);
+            } else {
+                searchField.setText(text);
+                if (searchField.getParent() == null) {
+                    add(searchField);
+                }
+            }
+            searchField.invalidate();
+            validate();
+        }
+        
+        /** repaints only the search field, not the whole container */
+        public void repaintSearchField() {
+            Rectangle oldBounds = searchField.getBounds();
+            searchField.invalidate();
+            contactList.validate();
+            contactList.repaint(oldBounds); //repaint old bounds
+            contactList.repaint(searchField.getBounds()); //repaint new bounds
+        }
+        
+        @Override
+        public void doLayout() {
+            super.doLayout();
+            
+            Rectangle visibleRect = getVisibleRect();
+            int height = (int) searchField.getPreferredSize().getHeight();
+            //+1 bcz first char was cutt off sometimes
+            int width = (int) searchField.getPreferredSize().getWidth() + 1;
+            searchField.setBounds(visibleRect.x + visibleRect.width - width,
+                visibleRect.y + visibleRect.height - height, width, height);
+        }
+
+        @Override
+        public void updateUI() {
+            super.updateUI();
+            if (searchField != null)
+                searchField.updateUI();
         }
     }
     
