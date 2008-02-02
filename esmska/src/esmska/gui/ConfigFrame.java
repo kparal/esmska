@@ -160,7 +160,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${checkForUpdates}"), checkUpdatesCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        rememberHistoryCheckBox.setMnemonic('h');
+        rememberHistoryCheckBox.setMnemonic('s');
         rememberHistoryCheckBox.setText("Ukládat historii odeslaných sms");
         rememberHistoryCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává historii odeslaných sms pro příští spuštění programu\n</html>");
 
@@ -210,7 +210,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberLayout}"), rememberLayoutCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        jLabel4.setDisplayedMnemonic('v');
+        jLabel4.setDisplayedMnemonic('d');
         jLabel4.setLabelFor(lafComboBox);
         jLabel4.setText("Vzhled:");
         jLabel4.setToolTipText(lafComboBox.getToolTipText());
@@ -244,6 +244,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${startCentered}"), windowCenteredCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
+        toolbarVisibleCheckBox.setMnemonic('z');
         toolbarVisibleCheckBox.setText("Zobrazit panel nástrojů");
         toolbarVisibleCheckBox.setToolTipText("<html>\nZobrazit panel nástrojů, který umožňuje rychlejší ovládání myší některých akcí\n</html>");
 

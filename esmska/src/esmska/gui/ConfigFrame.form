@@ -135,7 +135,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="rememberHistoryCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="104"/>
+                <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat historii odeslan&#xfd;ch sms"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; historii odeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -235,7 +235,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="118"/>
+                <Property name="displayedMnemonic" type="int" value="100"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="lafComboBox"/>
                 </Property>
@@ -295,6 +295,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="toolbarVisibleCheckBox">
               <Properties>
+                <Property name="mnemonic" type="int" value="122"/>
                 <Property name="text" type="java.lang.String" value="Zobrazit panel n&#xe1;stroj&#x16f;"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Zobrazit panel n&#xe1;stroj&#x16f;, kter&#xfd; umo&#x17e;&#x148;uje rychlej&#x161;&#xed; ovl&#xe1;d&#xe1;n&#xed; my&#x161;&#xed; n&#x11b;kter&#xfd;ch akc&#xed;&#xa;&lt;/html&gt;"/>
               </Properties>
