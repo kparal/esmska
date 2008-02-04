@@ -92,7 +92,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="displayedMnemonic" type="int" value="108"/>
+        <Property name="displayedMnemonic" type="int" value="111"/>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="smsNumberTextField"/>
         </Property>

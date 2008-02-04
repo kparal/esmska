@@ -291,7 +291,7 @@ public class SMSPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setDisplayedMnemonic('l');
+        jLabel4.setDisplayedMnemonic('o');
         jLabel4.setLabelFor(smsNumberTextField);
         jLabel4.setText("Číslo");
 
