@@ -21,7 +21,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
@@ -313,6 +312,10 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Add contact to contact list */
     private class AddContactAction extends AbstractAction {
+        private final String createOption = "Vytvořit";
+        private final String cancelOption = "Zrušit";
+        private final String[] options = new String[]{createOption, cancelOption};
+        
         public AddContactAction() {
             super(null,new ImageIcon(ContactPanel.class.getResource(RES + "add.png")));
             this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
@@ -320,6 +323,7 @@ public class ContactPanel extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
             contactDialog.setTitle("Nový kontakt");
+            contactDialog.setOptions(options, createOption);
             contactDialog.show(null);
             Contact c = contactDialog.getContact();
             if (c == null)
@@ -333,6 +337,10 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Edit contact from contact list */
     private class EditContactAction extends AbstractAction {
+        private final String saveOption = "Uložit";
+        private final String cancelOption = "Zrušit";
+        private final String[] options = new String[]{saveOption, cancelOption};
+        
         public EditContactAction() {
             super(null,new ImageIcon(ContactPanel.class.getResource(RES + "edit.png")));
             this.putValue(SHORT_DESCRIPTION,"Upravit označený kontakt");
@@ -342,6 +350,7 @@ public class ContactPanel extends javax.swing.JPanel {
             contactList.requestFocusInWindow(); //always transfer focus
             Contact contact = (Contact)contactList.getSelectedValue();
             contactDialog.setTitle("Upravit kontakt");
+            contactDialog.setOptions(options, saveOption);
             contactDialog.show(contact);
             Contact c = contactDialog.getContact();
             if (c == null)
@@ -356,6 +365,10 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Remove contact from contact list */
     private class RemoveContactAction extends AbstractAction {
+        private final String deleteOption = "Odstranit";
+        private final String cancelOption = "Zrušit";
+        private final String[] options = new String[]{deleteOption, cancelOption};
+        
         public RemoveContactAction() {
             super(null,new ImageIcon(ContactPanel.class.getResource(RES + "remove.png")));
             this.putValue(SHORT_DESCRIPTION,"Odstranit označené kontakty");
@@ -374,9 +387,6 @@ public class ContactPanel extends javax.swing.JPanel {
             area.setCaretPosition(0);
             panel.add(label, BorderLayout.PAGE_START);
             panel.add(new JScrollPane(area), BorderLayout.CENTER);
-            String deleteOption = "Odstranit";
-            String cancelOption = "Zrušit";
-            String[] options = new String[]{deleteOption, cancelOption};
             //confirm
             int result = JOptionPane.showOptionDialog(MainFrame.getInstance(),panel,"Opravdu odstranit?",
                     JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,
@@ -570,6 +580,8 @@ public class ContactPanel extends javax.swing.JPanel {
         private EditContactPanel panel;
         private JOptionPane optionPane;
         private Contact contact;
+        private Object[] options;
+        private Object initialValue;
         public ContactDialog() {
             super((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, ContactPanel.this),
                     "Kontakt", true);
@@ -579,10 +591,14 @@ public class ContactPanel extends javax.swing.JPanel {
         private void init() {
             panel = new EditContactPanel();
             optionPane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE,
-                    JOptionPane.OK_CANCEL_OPTION, contactIcon);
+                    JOptionPane.DEFAULT_OPTION, contactIcon, options, initialValue);
             optionPane.addPropertyChangeListener(this);
             setContentPane(optionPane);
             pack();
+        }
+        public void setOptions(Object[] options, Object initialValue) {
+            this.options = options;
+            this.initialValue = initialValue;
         }
         public void show(Contact c) {
             init();
@@ -604,7 +620,7 @@ public class ContactPanel extends javax.swing.JPanel {
                     //ignore reset
                     return;
                 }
-                if ((Integer)value != JOptionPane.OK_OPTION) {
+                if (!value.equals(options[0])) { //not confirmed (confirm is first option)
                     setVisible(false);
                     return;
                 }
