@@ -21,6 +21,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
@@ -364,7 +365,7 @@ public class ContactPanel extends javax.swing.JPanel {
             contactList.requestFocusInWindow(); //always transfer focus
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
-            JLabel label = new JLabel("<html><b>Opravdu smazat následující kontakty?</b></html>");
+            JLabel label = new JLabel("<html><b>Opravdu odstranit následující kontakty?</b></html>");
             JTextArea area = new JTextArea();
             area.setEditable(false);
             area.setRows(5);
@@ -373,10 +374,14 @@ public class ContactPanel extends javax.swing.JPanel {
             area.setCaretPosition(0);
             panel.add(label, BorderLayout.PAGE_START);
             panel.add(new JScrollPane(area), BorderLayout.CENTER);
+            String deleteOption = "Odstranit";
+            String cancelOption = "Zrušit";
+            String[] options = new String[]{deleteOption, cancelOption};
             //confirm
-            int result = JOptionPane.showOptionDialog(MainFrame.getInstance(),panel,"Opravdu smazat?",
-                    JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,null,JOptionPane.NO_OPTION);
-            if (result != JOptionPane.YES_OPTION)
+            int result = JOptionPane.showOptionDialog(MainFrame.getInstance(),panel,"Opravdu odstranit?",
+                    JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,
+                    options, cancelOption);
+            if (result < 0 || !options[result].equals(deleteOption))
                 return;
             //delete
             List<Object> list = Arrays.asList(contactList.getSelectedValues());
