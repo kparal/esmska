@@ -106,7 +106,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel5.setText("© 2007-2008 Kamil Páral");
         jLabel5.setFocusable(false);
 
-        linkButton.setText("<html><a href=\"http://esmska.googlecode.com/\">http://esmska.googlecode.com/</a></html>");
+        linkButton.setText("<html><a href=\"http://esmska.googlecode.com/\">Domovská stránka</a></html>");
         linkButton.setToolTipText("<html>\nZobrazit domovskou stránku programu\n</html>");
         linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
@@ -152,11 +152,11 @@ public class AboutFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addComponent(closeButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(linkButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -179,7 +179,7 @@ public class AboutFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(linkButton)
@@ -225,8 +225,9 @@ public class AboutFrame extends javax.swing.JFrame {
             tp.setPage(url);
             tp.setEditable(false);
             tp.setPreferredSize(new Dimension((int)d.getWidth()/2,(int)d.getHeight()/2)); //reasonable size
+            String option = "Beru na vědomí";
             JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
-                    JOptionPane.DEFAULT_OPTION);
+                    JOptionPane.DEFAULT_OPTION, null, new Object[]{option}, option);
             JDialog dialog = op.createDialog(this,"Licence");
             dialog.setResizable(true);
             dialog.setVisible(true);
@@ -243,8 +244,9 @@ public class AboutFrame extends javax.swing.JFrame {
             tp.setContentType("text/plain; charset=utf-8");
             tp.setPage(url);
             tp.setEditable(false);
+            String option = "Děkuji";
             JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
-                    JOptionPane.DEFAULT_OPTION);
+                    JOptionPane.DEFAULT_OPTION, null, new Object[]{option}, option);
             JDialog dialog = op.createDialog(this,"Zásluhy");
             dialog.setResizable(true);
             dialog.setVisible(true);
