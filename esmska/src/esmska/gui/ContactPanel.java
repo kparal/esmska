@@ -251,13 +251,18 @@ public class ContactPanel extends javax.swing.JPanel {
                 evt.isControlDown() || evt.isMetaDown()) {
             return;
         }
-        //skip when not letter nor digit nor whitespace
-        if (! Character.isLetterOrDigit(evt.getKeyChar()) && ! Character.isWhitespace(evt.getKeyChar())) {
+        
+        char chr = evt.getKeyChar();
+
+        //skip when not letter nor digit nor whitespace, or is enter
+        if ((!Character.isLetterOrDigit(chr) && !Character.isWhitespace(chr)) ||
+                Character.getNumericValue(chr) == Character.getNumericValue(KeyEvent.VK_ENTER)) {
             return;
         }
-    
+
+        //search
         String searchString = searchContactAction.getSearchString();
-        searchString += Character.toLowerCase(evt.getKeyChar());
+        searchString += Character.toLowerCase(chr);
         searchContactAction.setSearchString(searchString);
         searchContactAction.actionPerformed(null);
     }//GEN-LAST:event_contactListKeyTyped
