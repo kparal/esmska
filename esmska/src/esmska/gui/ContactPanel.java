@@ -90,6 +90,21 @@ public class ContactPanel extends javax.swing.JPanel {
         contactList.setSelectedValue(contact, true);
     }
     
+    /** set selected contact in contact list based on contact name
+     * @return true, if contact with same name was found, false otherwise
+     */
+    public boolean setSelectedContact(String name) {
+        if (name == null || name.length() == 0)
+            return false;
+        for (Contact c : contacts) {
+            if (c.getName().equals(name)) {
+                contactList.setSelectedValue(c, true);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /** Return selected contacts
      * @return Collection of selected contacts. Zero length collection if noone selected.
      */

@@ -463,6 +463,10 @@ public class MainFrame extends javax.swing.JFrame {
         if (config.isStartCentered()) { //set window centered
             setLocationRelativeTo(null);
         }
+        
+        //select last contact
+        if (history.getRecords().size() > 0)
+            contactPanel.setSelectedContact(history.getRecord(0).getName());    
     }
     
     /** save contacts */
