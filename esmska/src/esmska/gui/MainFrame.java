@@ -465,8 +465,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         //select last contact
-        if (history.getRecords().size() > 0)
-            contactPanel.setSelectedContact(history.getRecord(0).getName());    
+        if (history.getRecords().size() > 0) {
+            contactPanel.setSelectedContact(
+                    history.getRecord(history.getRecords().size()-1).getName());    
+        }
     }
     
     /** save contacts */
