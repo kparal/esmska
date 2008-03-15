@@ -67,6 +67,11 @@ public class Main {
                 logger.log(Level.WARNING, "Could not load config file", ex);
             }
             try {
+                pm.loadOperators();
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, "Could not load operators", ex);
+            }
+            try {
                 pm.loadContacts();
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not load contacts file", ex);

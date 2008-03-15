@@ -15,7 +15,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -23,14 +23,14 @@
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="nameTextField" alignment="0" pref="174" max="32767" attributes="0"/>
-                  <Component id="operatorComboBox" alignment="0" pref="174" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="nameTextField" alignment="0" pref="166" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="numberTextField" pref="132" max="32767" attributes="0"/>
+                      <Component id="numberTextField" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="operatorComboBox" alignment="1" pref="166" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -86,27 +86,19 @@
     </Component>
     <Component class="javax.swing.JTextField" name="numberTextField">
       <Properties>
-        <Property name="columns" type="int" value="9"/>
+        <Property name="columns" type="int" value="12"/>
       </Properties>
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="numberTextFieldFocusLost"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="numberTextFieldKeyReleased"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="operatorComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new DefaultComboBoxModel(OperatorEnum.getAsList().toArray())" type="code"/>
-        </Property>
-        <Property name="renderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new OperatorComboBoxRenderer()" type="code"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="+420"/>
       </Properties>
+    </Component>
+    <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
     </Component>
   </SubComponents>
 </Form>

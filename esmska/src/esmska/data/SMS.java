@@ -24,7 +24,7 @@ public class SMS {
     private String senderName;
     private ImageIcon image; //security image
     private String imageCode; //security image code
-    private Operator operator;
+    private String operator;
     private Status status = Status.WAITING; //sms status
     private String errMsg; //potential error
     
@@ -95,11 +95,11 @@ public class SMS {
         this.imageCode = imageCode;
     }
     
-    public Operator getOperator() {
+    public String getOperator() {
         return operator;
     }
     
-    public void setOperator(Operator operator) {
+    public void setOperator(String operator) {
         this.operator = operator;
     }
     

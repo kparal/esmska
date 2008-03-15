@@ -26,7 +26,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
@@ -35,7 +35,7 @@
                   </Group>
                   <Component id="smsProgressBar" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jScrollPane1" pref="264" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
@@ -46,13 +46,16 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="smsNumberTextField" pref="100" max="32767" attributes="0"/>
+                      <Component id="smsNumberTextField" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="operatorComboBox" pref="116" max="32767" attributes="0"/>
+                      <Component id="operatorComboBox" pref="92" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,8 +70,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="smsNumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="operatorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="smsNumberTextField" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="operatorComboBox" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -112,7 +115,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="smsNumberTextField">
       <Properties>
-        <Property name="columns" type="int" value="9"/>
+        <Property name="columns" type="int" value="12"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smsNumberTextFieldKeyReleased"/>
@@ -144,16 +147,6 @@
         <Property name="text" type="java.lang.String" value="Text"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="operatorComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new DefaultComboBoxModel(OperatorEnum.getAsList().toArray())" type="code"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBox.setRenderer(new OperatorComboBoxRenderer());&#xa;operatorComboBox.addActionListener(new OperatorComboBoxActionListener());"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JButton" name="sendButton">
       <Properties>
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -181,6 +174,11 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="nameLabel.setText(null);"/>
+      </AuxValues>
+    </Component>
+    <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBox.addActionListener(new OperatorComboBoxActionListener());"/>
       </AuxValues>
     </Component>
   </SubComponents>

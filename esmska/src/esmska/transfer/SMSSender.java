@@ -11,20 +11,25 @@ package esmska.transfer;
 
 import esmska.data.Icons;
 import esmska.gui.MainFrame;
+import java.io.File;
 import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import esmska.operators.Operator;
 import esmska.data.SMS;
+import esmska.operators.Operator;
+import esmska.operators.OperatorInterpreter;
+import esmska.operators.OperatorUtil;
+import esmska.operators.OperatorVariable;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Sender of SMS
  *
  * @author ripper
  */
 public class SMSSender {
+    private static final Logger logger = Logger.getLogger(SMSSender.class.getName());
+        
     private List<SMS> smsQueue;
     private boolean running; // sending sms in this moment
     private boolean paused; // queue paused
@@ -78,34 +83,58 @@ public class SMSSender {
             finishedSending(sms);
         }
         
-        protected Void doInBackground() throws Exception {
-            Operator operator = sms.getOperator();
-            sms.setImage(operator.getSecurityImage());
-            
-            //have the user resolve the code from the image
-            if (sms.getImage() != null) {
-                SwingUtilities.invokeAndWait(new Runnable() {
-                    public void run() {
-                        JPanel panel = new JPanel();
-                        JLabel label = new JLabel("Opište kód z obrázku:",
-                                sms.getImage(), JLabel.CENTER);
-                        label.setHorizontalTextPosition(JLabel.CENTER);
-                        label.setVerticalTextPosition(JLabel.TOP);
-                        panel.add(label);
-                        String imageCode = JOptionPane.showInputDialog(mainFrame, panel, "Kontrolní kód",
-                                JOptionPane.QUESTION_MESSAGE);
-                        sms.setImageCode(imageCode);
-                    }
-                });
+        protected Void doInBackground() {
+            boolean success = false;
+            try {
+                OperatorInterpreter interpreter = new OperatorInterpreter();
+                success = interpreter.sendMessage(OperatorUtil.getOperator(sms.getOperator()),
+                        extractVariables(sms));
+                if (!success)
+                    sms.setErrMsg(interpreter.getErrorMessage());
+            } catch (Exception ex) {
+                logger.log(Level.WARNING, "Error while sending sms", ex);
+            } finally {
+                sms.setStatus(success ? SMS.Status.SENT_OK : SMS.Status.PROBLEMATIC);
             }
+
+
             
-            //send sms
-            boolean success = operator.send(sms);
-            sms.setStatus(success?SMS.Status.SENT_OK:SMS.Status.PROBLEMATIC);
+//            Operator operator = sms.getOperator();
+//            sms.setImage(operator.getSecurityImage());
+//            
+//            //have the user resolve the code from the image
+//            if (sms.getImage() != null) {
+//                SwingUtilities.invokeAndWait(new Runnable() {
+//                    public void run() {
+//                        JPanel panel = new JPanel();
+//                        JLabel label = new JLabel("Opište kód z obrázku:",
+//                                sms.getImage(), JLabel.CENTER);
+//                        label.setHorizontalTextPosition(JLabel.CENTER);
+//                        label.setVerticalTextPosition(JLabel.TOP);
+//                        panel.add(label);
+//                        String imageCode = JOptionPane.showInputDialog(mainFrame, panel, "Kontrolní kód",
+//                                JOptionPane.QUESTION_MESSAGE);
+//                        sms.setImageCode(imageCode);
+//                    }
+//                });
+//            }
+//            
+//            //send sms
+//            boolean success = operator.send(sms);
+//            sms.setStatus(success?SMS.Status.SENT_OK:SMS.Status.PROBLEMATIC);
             
             return null;
         }
         
+    }
+    
+    private static HashMap<OperatorVariable,String> extractVariables(SMS sms) {
+        HashMap<OperatorVariable,String> map = new HashMap<OperatorVariable, String>();
+        map.put(OperatorVariable.NUMBER, sms.getNumber());
+        map.put(OperatorVariable.MESSAGE, sms.getText());
+        map.put(OperatorVariable.SENDERNAME, sms.getSenderName());
+        map.put(OperatorVariable.SENDERNUMBER, sms.getSenderNumber());
+        return map;
     }
     
     /** Whether queue is paused */

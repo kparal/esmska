@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  *
  * @author ripper
  */
-public class Vodafone implements Operator {
+public class Vodafone implements OldOperator {
     private static final Logger logger = Logger.getLogger(Vodafone.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final int MAX_CHARS = 760;
@@ -187,5 +187,5 @@ public class Vodafone implements Operator {
     public ImageIcon getIcon() {
         return ICON;
     }
-    
+
 }

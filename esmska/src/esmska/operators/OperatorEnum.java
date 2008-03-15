@@ -26,15 +26,15 @@ public enum OperatorEnum {
     "720","721","722","723","724","725","726","727","728","729"};
     
     /** get operators as List */
-    public static List<Operator> getAsList() {
-        List<Operator> list = new ArrayList<Operator>();
+    public static List<OldOperator> getAsList() {
+        List<OldOperator> list = new ArrayList<OldOperator>();
         for (OperatorEnum oe : OperatorEnum.values())
             list.add(getOperator(oe));
         return list;
     }
     
     /** return operator corresponding to beginning of sms number */
-    public static Operator getOperator(String antenumber) {
+    public static OldOperator getOperator(String antenumber) {
         if (antenumber == null || antenumber.equals(""))
             return null;
         
@@ -52,7 +52,7 @@ public enum OperatorEnum {
     }
     
     /** translate OperatorEnum to Operator */
-    public static Operator getOperator(OperatorEnum operatorEnum) {
+    public static OldOperator getOperator(OperatorEnum operatorEnum) {
         switch(operatorEnum) {
             case Vodafone : return new Vodafone();
             case O2 : return new O2();
@@ -61,7 +61,7 @@ public enum OperatorEnum {
     }
     
     /** translate operator string to Operator */
-    public static Operator parseOperator(String operator) {
+    public static OldOperator parseOperator(String operator) {
         if (operator == null)
             throw new NullPointerException("operator");
         

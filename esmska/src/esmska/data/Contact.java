@@ -19,7 +19,7 @@ public class Contact extends Object implements Comparable<Contact> {
     /** phone number not including the country code */
     private String number;
     private String countryCode;
-    private Operator operator;
+    private String operator;
     
     private PropertyChangeSupport propertySupport;
     
@@ -27,7 +27,7 @@ public class Contact extends Object implements Comparable<Contact> {
         this(null,null,null,null);
     }
     
-    public Contact(String name, String countryCode, String number, Operator operator) {
+    public Contact(String name, String countryCode, String number, String operator) {
         this.name = name;
         this.countryCode = countryCode;
         this.number = number;
@@ -84,7 +84,7 @@ public class Contact extends Object implements Comparable<Contact> {
      * Getter for property operator.
      * @return Value of property operator.
      */
-    public Operator getOperator() {
+    public String getOperator() {
         return this.operator;
     }
     
@@ -92,8 +92,8 @@ public class Contact extends Object implements Comparable<Contact> {
      * Setter for property operator.
      * @param operator New value of property operator.
      */
-    public void setOperator(Operator operator) {
-        Operator oldOperator = this.operator;
+    public void setOperator(String operator) {
+        String oldOperator = this.operator;
         this.operator = operator;
         propertySupport.firePropertyChange("operator", oldOperator, operator);
     }

@@ -7,21 +7,14 @@
 package esmska.gui;
 
 import esmska.data.FormChecker;
-import javax.swing.DefaultComboBoxModel;
 import esmska.operators.Operator;
-import esmska.operators.OperatorEnum;
 import esmska.data.Contact;
+import esmska.operators.OperatorUtil;
 import java.awt.Color;
-import java.awt.Component;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JTextField;
-import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 /** Add new or edit current contact
  *
@@ -52,8 +45,8 @@ public class EditContactPanel extends javax.swing.JPanel {
         nameTextField = new javax.swing.JTextField();
         nameTextField.requestFocusInWindow();
         numberTextField = new javax.swing.JTextField();
-        operatorComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
+        operatorComboBox = new esmska.gui.OperatorComboBox();
 
         jLabel1.setText("Jméno");
 
@@ -67,7 +60,7 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
-        numberTextField.setColumns(9);
+        numberTextField.setColumns(12);
         numberTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 numberTextFieldFocusLost(evt);
@@ -78,9 +71,6 @@ public class EditContactPanel extends javax.swing.JPanel {
                 numberTextFieldKeyReleased(evt);
             }
         });
-
-        operatorComboBox.setModel(new DefaultComboBoxModel(OperatorEnum.getAsList().toArray()));
-        operatorComboBox.setRenderer(new OperatorComboBoxRenderer());
 
         jLabel4.setText("+420");
 
@@ -95,13 +85,13 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(operatorComboBox, 0, 174, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)))
+                        .addComponent(numberTextField))
+                    .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -162,15 +152,15 @@ public class EditContactPanel extends javax.swing.JPanel {
     
     private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
         //guess operator
-        Operator op = OperatorEnum.getOperator(numberTextField.getText());
-        if (op != null) {
-            for (int i=0; i<operatorComboBox.getItemCount(); i++) {
-                if (operatorComboBox.getItemAt(i).getClass().equals(op.getClass())) {
-                    operatorComboBox.setSelectedIndex(i);
-                    break;
-                }
-            }
-        }
+//        Operator op = OperatorEnum.getOperator(numberTextField.getText());
+//        if (op != null) {
+//            for (int i=0; i<operatorComboBox.getItemCount(); i++) {
+//                if (operatorComboBox.getItemAt(i).getClass().equals(op.getClass())) {
+//                    operatorComboBox.setSelectedIndex(i);
+//                    break;
+//                }
+//            }
+//        }
     }//GEN-LAST:event_numberTextFieldKeyReleased
 
     private void nameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
@@ -185,11 +175,14 @@ public class EditContactPanel extends javax.swing.JPanel {
         if (contact == null) {
             nameTextField.setText(null);
             numberTextField.setText(null);
-            operatorComboBox.setSelectedItem(0);
+            if (operatorComboBox.getModel().getSize() > 0)
+                operatorComboBox.setSelectedIndex(0);
+            else
+                operatorComboBox.setSelectedItem(null);
         } else {
             nameTextField.setText(contact.getName());
             numberTextField.setText(contact.getNumber());
-            operatorComboBox.setSelectedItem(contact.getOperator());
+            operatorComboBox.setSelectedOperator(OperatorUtil.getOperator(contact.getOperator()));
         }
     }
     
@@ -197,7 +190,8 @@ public class EditContactPanel extends javax.swing.JPanel {
         Contact c = new Contact();
         c.setName(nameTextField.getText());
         c.setNumber(numberTextField.getText());
-        c.setOperator((Operator) operatorComboBox.getSelectedItem());
+        Operator operator = operatorComboBox.getSelectedOperator();
+        c.setOperator(operator != null ? operator.getName() : null);
         c.setCountryCode("+420");
         return c;
     }
@@ -207,16 +201,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         nameTextField.selectAll();
     }
     
-    /** Renderer for items in operator combo box */
-    private class OperatorComboBoxRenderer implements ListCellRenderer {
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
-            Operator operator = (Operator)value;
-            ((JLabel)c).setIcon(operator.getIcon());
-            return c;
-        }
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -224,7 +208,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JTextField numberTextField;
-    private javax.swing.JComboBox operatorComboBox;
+    private esmska.gui.OperatorComboBox operatorComboBox;
     // End of variables declaration//GEN-END:variables
     
 }

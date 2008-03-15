@@ -7,6 +7,9 @@
 package esmska.gui;
 
 import esmska.data.Contact;
+import esmska.data.Icons;
+import esmska.operators.Operator;
+import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import java.awt.BorderLayout;
@@ -667,7 +670,8 @@ public class ContactPanel extends javax.swing.JPanel {
             Contact contact = (Contact)value;
             JLabel label = ((JLabel)c);
             //add operator logo
-            label.setIcon(contact.getOperator().getIcon());
+            Operator operator = OperatorUtil.getOperator(contact.getOperator());
+            label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             label.setToolTipText(contact.getNumber());
             //set background on non-matching contacts when searching

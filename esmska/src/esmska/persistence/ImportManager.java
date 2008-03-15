@@ -17,22 +17,26 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.util.ArrayList;
-import esmska.operators.O2;
 import esmska.operators.Operator;
-import esmska.operators.OperatorEnum;
-import esmska.operators.Vodafone;
 import esmska.data.Contact;
 import esmska.data.SMS;
+import esmska.operators.DefaultOperator;
+import esmska.operators.Operator;
+import java.io.FileFilter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Import program data
  *
  * @author ripper
  */
 public class ImportManager {
-    
+    private static final Logger logger = Logger.getLogger(ImportManager.class.getName());
+        
     /** Creates a new instance of ImportManager */
     private ImportManager() {
     }
@@ -53,7 +57,7 @@ public class ImportManager {
         while (reader.readRecord()) {
             String name = reader.get(0);
             String number = reader.get(1);
-            String operatorString = reader.get(2);
+            String operator = reader.get(2);
             String text = reader.get(3);
             String senderName = reader.get(4);
             String senderNumber = reader.get(5);
@@ -64,15 +68,6 @@ public class ImportManager {
             sms.setText(text);
             sms.setSenderName(senderName);
             sms.setSenderNumber(senderNumber);
-            Operator operator = null;
-            if (operatorString.equals("Vodafone"))
-                operator = new Vodafone();
-            else if (operatorString.equals("O2"))
-                operator = new O2();
-            if (operator == null)
-                operator = OperatorEnum.getOperator(sms.getNumber());
-            if (operator == null)
-                continue;
             sms.setOperator(operator);
             queue.add(sms);
         }
@@ -112,4 +107,26 @@ public class ImportManager {
         return history;
     }
     
+    public static TreeSet<Operator> importOperators(File directory) throws IOException {
+        TreeSet<Operator> operators = new TreeSet<Operator>();
+        if (!directory.canRead() || !directory.isDirectory())
+            throw new IOException("Invalid operator directory.");
+        
+        File[] files = directory.listFiles(new FileFilter() {
+            public boolean accept(File pathname) {
+                return pathname.getAbsolutePath().endsWith(".operator") && pathname.canRead();
+            }
+        });
+        
+        for (File file : files) {
+            try {
+                DefaultOperator operator = new DefaultOperator(file);
+                operators.add(operator);
+            } catch (Exception ex) {
+                logger.log(Level.WARNING, "Ivalid operator file " + file.getAbsolutePath(), ex);
+            }
+        }
+        
+        return operators;
+    }
 }

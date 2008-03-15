@@ -28,7 +28,6 @@ import esmska.data.SMS;
 import esmska.UpdateChecker;
 import esmska.data.History;
 import esmska.data.Icons;
-import esmska.operators.OperatorEnum;
 import java.awt.Component;
 import java.util.Date;
 import java.util.logging.Level;
@@ -393,7 +392,7 @@ public class MainFrame extends javax.swing.JFrame {
             statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
                     true, Icons.STATUS_WARNING);
             JOptionPane.showMessageDialog(this, new JLabel("<html>"
-                    + "<h2>Zprávu se nepovedlo odeslat!</h2>Důvod: " + sms.getErrMsg()
+                    + "<h2>Zprávu se nepovedlo odeslat!</h2>" + sms.getErrMsg()
                     + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
             
             if (smsPanel.getText().length() > 0)
@@ -681,7 +680,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             SMS sms = new SMS();
             sms.setNumber(record.getNumber());
-            sms.setOperator(OperatorEnum.parseOperator(record.getOperator()));
+            sms.setOperator(record.getOperator());
             sms.setText(record.getText());
             
             contactPanel.clearSelection();

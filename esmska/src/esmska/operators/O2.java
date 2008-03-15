@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  *
  * @author ripper
  */
-public class O2 implements Operator {
+public class O2 implements OldOperator {
     private static final Logger logger = Logger.getLogger(O2.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final int MAX_CHARS = 60;
@@ -235,5 +235,5 @@ public class O2 implements Operator {
     public ImageIcon getIcon() {
         return ICON;
     }
-    
+
 }

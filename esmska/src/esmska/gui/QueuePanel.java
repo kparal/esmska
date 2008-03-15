@@ -7,6 +7,7 @@
 package esmska.gui;
 
 import esmska.data.SMS;
+import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import java.awt.Color;
@@ -378,7 +379,7 @@ public class QueuePanel extends javax.swing.JPanel {
                 c.setBackground(Color.RED);
             }
             //add operator logo
-            ((JLabel)c).setIcon(sms.getOperator().getIcon());
+            ((JLabel)c).setIcon(OperatorUtil.getOperator(sms.getOperator()).getIcon());
             //set tooltip
             ((JLabel)c).setToolTipText(wrapToHTML(sms.getText()));
             

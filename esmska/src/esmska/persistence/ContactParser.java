@@ -15,10 +15,6 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import javax.swing.SwingWorker;
-import esmska.operators.O2;
-import esmska.operators.Operator;
-import esmska.operators.OperatorEnum;
-import esmska.operators.Vodafone;
 import esmska.data.Contact;
 
 /** Parse contacts from csv file of different programs
@@ -55,14 +51,14 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
             String name = "";
             String number = "";
             String countryCode = "";
-            String operatorString = "";
+            String operator = "";
             
             switch (type) {
                 case KUBIK_DREAMCOM_FILE:
                     name = reader.get(5);
                     countryCode = reader.get(6).substring(0,4);
                     number = reader.get(6).substring(4);
-                    operatorString = reader.get(20).equals("") ?
+                    operator = reader.get(20).equals("") ?
                         reader.get(21) : reader.get(20);
                     break;
                 case DREAMCOM_SE_FILE:
@@ -70,20 +66,22 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     name = reader.get(0);
                     countryCode = reader.get(1).substring(0,4);
                     number = reader.get(1).substring(4);
-                    operatorString = reader.get(2);
+                    operator = reader.get(2);
             }
             c.setName(name);
             c.setCountryCode(countryCode);
             c.setNumber(number);
-            Operator operator = null;
-            if (operatorString.equals("Vodafone"))
-                operator = new Vodafone();
-            else if (operatorString.equals("O2"))
-                operator = new O2();
-            if (operator == null)
-                operator = OperatorEnum.getOperator(c.getNumber());
-            if (operator == null)
-                continue;
+            switch (type) {
+                case KUBIK_DREAMCOM_FILE:
+                case DREAMCOM_SE_FILE:
+                case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
+                    if (operator.equals("Vodafone")) {
+                        operator = "[CZ]Vodafone";
+                    } else if (operator.equals("O2")) {
+                        operator = "[CZ]O2";
+                    }
+                    break;
+            }
             c.setOperator(operator);
             contacts.add(c);
         }

@@ -13,6 +13,7 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.History;
 import esmska.data.SMS;
+import esmska.operators.Operator;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -34,6 +35,7 @@ public class PersistenceManager {
     private static PersistenceManager persistenceManager;
     
     private static final String PROGRAM_DIRNAME = "esmska";
+    private static final String OPERATOR_DIRNAME = "operators";
     private static final String CONFIG_FILENAME = "settings.xml";
     private static final String CONTACTS_FILENAME = "contacts.csv";
     private static final String QUEUE_FILENAME = "queue.csv";
@@ -41,6 +43,7 @@ public class PersistenceManager {
     private static File PROGRAM_DIR =
             new File(System.getProperty("user.home") + File.separator + ".config",
             PROGRAM_DIRNAME);
+    private static File OPERATOR_DIR = new File(OPERATOR_DIRNAME);
     private static File CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
     private static File CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
     private static File QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
@@ -50,6 +53,7 @@ public class PersistenceManager {
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
     private static History history = new History();
+    private static TreeSet<Operator> operators = new TreeSet<Operator>();
     
     private static boolean customPathSet;
     
@@ -112,6 +116,10 @@ public class PersistenceManager {
     
     public static History getHistory() {
         return history;
+    }
+    
+    public static TreeSet<Operator> getOperators() {
+        return operators;
     }
     
     /** Save program configuration */
@@ -178,6 +186,16 @@ public class PersistenceManager {
             ArrayList<History.Record> records = ImportManager.importHistory(HISTORY_FILE);
             history.clearRecords();
             history.addRecords(records);
+        }
+    }
+    
+    public void loadOperators() throws IOException {
+        if (OPERATOR_DIR.exists()) {
+            TreeSet<Operator> newOperators = ImportManager.importOperators(OPERATOR_DIR);
+            operators.clear();
+            operators.addAll(newOperators);
+        } else {
+            throw new IOException("Operators directory doesn't exist.");
         }
     }
 }
