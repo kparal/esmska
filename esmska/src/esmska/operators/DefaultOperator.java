@@ -7,6 +7,8 @@ package esmska.operators;
 import esmska.data.Icons;
 import java.io.File;
 import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -20,6 +22,7 @@ public class DefaultOperator implements Operator {
     private File script;
     private String name;
     private String countryPrefix;
+    private String[] operatorPrefixes;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength;
     private Icon icon;
 
@@ -32,6 +35,7 @@ public class DefaultOperator implements Operator {
             }
             name = info.getName();
             countryPrefix = info.getCountryPrefix() != null ? info.getCountryPrefix() : "";
+            operatorPrefixes = info.getOperatorPrefixes();
             smsLength = info.getSMSLength();
             maxParts = info.getMaxParts();
             maxChars = info.getMaxChars();
@@ -85,6 +89,10 @@ public class DefaultOperator implements Operator {
         return countryPrefix;
     }
 
+    public String[] getOperatorPrefixes() {
+        return operatorPrefixes;
+    }
+    
     public int getSMSLength() {
         return smsLength;
     }
@@ -100,5 +108,5 @@ public class DefaultOperator implements Operator {
     public int getSignatureExtraLength() {
         return signatureExtraLength;
     }
-
+    
 }

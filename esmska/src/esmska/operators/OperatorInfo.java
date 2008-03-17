@@ -26,6 +26,14 @@ public interface OperatorInfo {
      */
     String getCountryPrefix();
     
+    /** Array of operator prefixes.
+     * You can specify here list of default operator prefixes. This list will be then used
+     * to automatically guess correct operator when user is typing phone number.
+     * All the prefixes must be declared <b>including</b> the country prefix!
+     * This is just a user-convenience function, you can easily declare an empty array here.
+     */
+    String[] getOperatorPrefixes();
+    
     /** Length of one SMS.
      * Usually, this wil be around 160. Many operators add some characters when sending
      * from their website, therefore this number can be smaller.
