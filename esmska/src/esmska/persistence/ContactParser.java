@@ -17,26 +17,39 @@ import java.util.ArrayList;
 import javax.swing.SwingWorker;
 import esmska.data.Contact;
 
-/** Parse contacts from csv file of different programs
- *
+/** Parse contacts from csv file of different programs. Works in background thread.
+ * Returns collection of parsed contacts.
  * @author ripper
  */
 public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
+    /** Types of parseable file formats */
     public static enum ContactType {
-        ESMSKA_FILE, KUBIK_DREAMCOM_FILE, DREAMCOM_SE_FILE
+        /** Native file format for Esmska */
+        ESMSKA_FILE,
+        /** File format of the Kubík SMS DreamCom */
+        KUBIK_DREAMCOM_FILE,
+        /** File format of the DreamCom SE */
+        DREAMCOM_SE_FILE
     }
     
     private File file;
     private ContactType type;
     
+    /** Creates new ContactParser.
+     * 
+     * @param file File to parse.
+     * @param type Which program was used to save the file.
+     */
     public ContactParser(File file, ContactType type) {
         super();
         this.file = file;
         this.type = type;
     }
+    
     protected ArrayList<Contact> doInBackground() throws Exception {
         Charset charset = Charset.forName("UTF-8");
         char separator = ',';
+        //set charset
         switch (type) {
             case KUBIK_DREAMCOM_FILE:
             case DREAMCOM_SE_FILE:
@@ -46,12 +59,14 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
         CsvReader reader = new CsvReader(file.getPath(), separator, charset);
         reader.setUseComments(true);
         ArrayList<Contact> contacts = new ArrayList<Contact>();
+        //read all the records
         while (reader.readRecord()) {
             Contact c = new Contact();
             String name = "";
             String number = "";
             String operator = "";
             
+            //read record items
             switch (type) {
                 case KUBIK_DREAMCOM_FILE:
                     name = reader.get(5);
@@ -65,8 +80,10 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     number = reader.get(1);
                     operator = reader.get(2);
             }
+            
             c.setName(name);
             c.setNumber(number);
+            //convert known operators to our operators
             switch (type) {
                 case KUBIK_DREAMCOM_FILE:
                 case DREAMCOM_SE_FILE:
@@ -79,6 +96,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     break;
             }
             c.setOperator(operator);
+            
             contacts.add(c);
         }
         return contacts;

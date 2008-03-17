@@ -28,31 +28,41 @@ public interface OperatorInfo {
     
     /** Array of operator prefixes.
      * You can specify here list of default operator prefixes. This list will be then used
-     * to automatically guess correct operator when user is typing phone number.
+     * to automatically guess correct operator when user is typing in the phone number.
      * All the prefixes must be declared <b>including</b> the country prefix!
      * This is just a user-convenience function, you can easily declare an empty array here.
      */
     String[] getOperatorPrefixes();
     
     /** Length of one SMS.
-     * Usually, this wil be around 160. Many operators add some characters when sending
-     * from their website, therefore this number can be smaller.
+     * Usually, this number wil be around 160. Many operators add some characters when sending
+     * from their website, therefore this number can be often smaller.
      */
     int getSMSLength();
     
-    /** Number of allowed messages which user can send at once.
-     * If getMaxChars() is too small, we can multiply the number here and autosplit
-     * the message in the program.
-     */
-    int getMaxParts();
-    
-    /** Maximum sendable chars in one pass.
-     * The operator can allow to write multiple messages and split it automatically.
+    /** Maximum message length the operator allows to send.
+     * This is the maximum number of characters the user is allowed to type in
+     * into the textarea on the operators website.
      */
     int getMaxChars();
     
-    /** number of characters needed to add to signature,
-     * therefore strip from message length */
+    /** Number of allowed messages which user can send at once.
+     * This is a multiplier of the getMaxChars() number. Some operators offer only
+     * very short crippled messages (eg. max 60 chars, rest with advertisement).
+     * You can allow user to write a multiple of this number. The message will be
+     * split in the program and send as separate standard messages. Be judicius when
+     * specifying this number. Eg. in case of forementioned 60 chars max, multiplier
+     * of 5 (therefore writing up to 300 chars) should be absolutely sufficient.
+     * For "non-crippled" operators, you should declare '1' here.
+     */
+    int getMaxParts();
+    
+    /** Number of extra characters used to display signature.
+     * Some operators allow to add signature at the end of the message.
+     * This is the number of characters used for "From: " label or something similar.
+     * This number will be subtracted from the maximum message length.
+     * If your operator doesn't support signatures, declare '0' here.
+     */
     int getSignatureExtraLength();
     
 }

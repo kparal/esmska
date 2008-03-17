@@ -26,6 +26,9 @@ package esmska.utils;
 
 import java.util.Comparator;
 
+/** Class for sorting numeric strings in numeric order (as opposed to default lexicographic)
+ * Use this class as a Comparator in Collections.sort(list, comparator) method.
+ */
 public class AlphanumComparator implements Comparator
 {
   // TO USE THIS:

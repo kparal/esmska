@@ -50,6 +50,7 @@ public class SMSSender {
         prepareSending();
     }
     
+    /** Make arrangements needed for sending SMS */
     private void prepareSending() {
         if (!isDelayed() && !isPaused() && !running && !smsQueue.isEmpty()) {
             running = true;
@@ -64,6 +65,7 @@ public class SMSSender {
         }
     }
     
+    /** Handle processed SMS */
     private void finishedSending(SMS sms) {
         mainFrame.smsProcessed(sms);
         running = false;
@@ -96,38 +98,13 @@ public class SMSSender {
             } finally {
                 sms.setStatus(success ? SMS.Status.SENT_OK : SMS.Status.PROBLEMATIC);
             }
-
-
-            
-//            Operator operator = sms.getOperator();
-//            sms.setImage(operator.getSecurityImage());
-//            
-//            //have the user resolve the code from the image
-//            if (sms.getImage() != null) {
-//                SwingUtilities.invokeAndWait(new Runnable() {
-//                    public void run() {
-//                        JPanel panel = new JPanel();
-//                        JLabel label = new JLabel("Opište kód z obrázku:",
-//                                sms.getImage(), JLabel.CENTER);
-//                        label.setHorizontalTextPosition(JLabel.CENTER);
-//                        label.setVerticalTextPosition(JLabel.TOP);
-//                        panel.add(label);
-//                        String imageCode = JOptionPane.showInputDialog(mainFrame, panel, "Kontrolní kód",
-//                                JOptionPane.QUESTION_MESSAGE);
-//                        sms.setImageCode(imageCode);
-//                    }
-//                });
-//            }
-//            
-//            //send sms
-//            boolean success = operator.send(sms);
-//            sms.setStatus(success?SMS.Status.SENT_OK:SMS.Status.PROBLEMATIC);
             
             return null;
         }
         
     }
     
+    /** Extract variables from SMS to a map */
     private static HashMap<OperatorVariable,String> extractVariables(SMS sms) {
         HashMap<OperatorVariable,String> map = new HashMap<OperatorVariable, String>();
         map.put(OperatorVariable.NUMBER, sms.getNumber());

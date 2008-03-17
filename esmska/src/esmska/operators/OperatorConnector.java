@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
+/** Class for connecting to HTTP resources and sending GET and POST requests.
  *
  * @author ripper
  */
@@ -32,7 +32,6 @@ public class OperatorConnector {
 
     private static final Logger logger = Logger.getLogger(OperatorConnector.class.getName());
     private URL url;
-    private String params;
     private String postData;
     private boolean doPost;
     private String textContent;
@@ -40,74 +39,104 @@ public class OperatorConnector {
     private String referer;
     private boolean useCookies;
 
-    public void setURL(String url) {
-        try {
-            this.url = new URL(url);
-        } catch (MalformedURLException ex) {
-            logger.log(Level.SEVERE, "Wrong URL: " + url, ex);
-        }
+    // <editor-fold defaultstate="collapsed" desc="Get Methods">
+    /** URL where to connect */
+    public URL getURL() {
+        return url;
     }
 
-    public void setParams(String params) {
-        this.params = params;
+    /** Data to be sent in the POST request. They must be in the url-encoded name1=value1&name2=value2 form. */
+    public String getPostData() {
+        return postData;
     }
 
-    public void setPostData(String postData) {
-        this.postData = postData;
+    /** True if set to do POST, false if GET. Default is false. */
+    public boolean isDoPost() {
+        return doPost;
     }
 
-    public void setDoPost(boolean doPost) {
-        this.doPost = doPost;
-    }
-
+    /** True if received response is textual, false if binary */
     public boolean isTextContent() {
         return textContent != null;
     }
 
+    /** Get text response */
     public String getTextContent() {
         return textContent;
     }
 
+    /** Get binary response */
     public byte[] getBinaryContent() {
         return binaryContent;
     }
 
-    public void setReferer(String referer) {
-        this.referer = referer;
-    }
-
+    /** Get referer. Default is empty string. */
     public String getReferer() {
         return referer;
     }
 
+    /** Whether to use cookies. Default is false. */
+    public boolean isUseCookies() {
+        return useCookies;
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Set Methods">
+    /** URL where to connect */
+    public void setURL(String url) throws MalformedURLException {
+        this.url = new URL(url);
+    }
+
+    /** Data to be sent in the POST request. 
+     * They must be in the url-encoded name1=value1&name2=value2 form.
+     */
+    public void setPostData(String postData) {
+        this.postData = postData;
+    }
+
+    /** True if set to do POST, false if GET. Default is false. */
+    public void setDoPost(boolean doPost) {
+        this.doPost = doPost;
+    }
+
+    /** Set referer. Default is empty string. */
+    public void setReferer(String referer) {
+        this.referer = referer;
+    }
+
+    /** Whether to use cookies. Default is false. */
     public void setUseCookies(boolean useCookies) {
         this.useCookies = useCookies;
     }
-
-    public boolean getUseCookies() {
-        return useCookies;
-    }
-
+    // </editor-fold>
+    
+    /** Perform a connection (GET or POST, depending on configuration).
+     * @throws IOException when there is a problem with connection
+     */
     public boolean connect() throws IOException {
         if (url == null) {
-            throw new IOException("URL empty");
+            throw new MalformedURLException("URL empty");
         }
 
+        //delete previous response to allow repeated usage
         textContent = null;
         binaryContent = null;
 
+        //set referer
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         if (referer != null) {
             con.setRequestProperty("Referer", referer);
         }
 
-        if (doPost) {
-            return doPost(con, postData);
+        //connect
+        if (isDoPost()) {
+            return doPost(con, getPostData());
         } else {
             return doGet(con);
         }
     }
 
+    /** Perform GET request */
     private boolean doGet(HttpURLConnection con) throws IOException {
         con.connect();
         if (con.getResponseCode() >= 400) {
@@ -116,13 +145,15 @@ public class OperatorConnector {
             return false;
         }
 
-        if (useCookies && CookieHandler.getDefault() instanceof CookieManager) {
+        //handle cookies by hand, there is something very sick about the default Java behaviour
+        if (isUseCookies() && CookieHandler.getDefault() instanceof CookieManager) {
             //workaround Sun's Java bug: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6610534
             Locale locale = Locale.getDefault();
             Locale.setDefault(Locale.US);
-            
+            //temporarily disable default CookieManager
             CookieManager manager = (CookieManager) CookieHandler.getDefault();
             CookieHandler.setDefault(null);
+            //get cookies
             List<String> cookies = new ArrayList<String>();
             List<String> c1 = con.getHeaderFields().get("Set-Cookie");
             List<String> c2 = con.getHeaderFields().get("Set-Cookie2");
@@ -135,6 +166,7 @@ public class OperatorConnector {
             //headers are in reversed order compared to the http response, dunno why
             Collections.reverse(cookies);
             try {
+                //save cookies
                 for (String c : cookies) {
                     List<HttpCookie> cooks = HttpCookie.parse(c);
                     for (HttpCookie cook : cooks) {
@@ -144,17 +176,21 @@ public class OperatorConnector {
             } catch (URISyntaxException ex) {
                 logger.log(Level.WARNING, "Problem saving cookie", ex);
             }
+            //return to initial state
             CookieHandler.setDefault(manager);
             Locale.setDefault(locale);
         }
 
+        //parse content type
         String encoding = con.getContentEncoding();
         if (encoding == null) {
             encoding = con.getContentType().replaceFirst("^.*charset=", "").trim();
         }
         String contentType = con.getContentType();
+        //decide whether text or binary response
         boolean text = contentType != null && contentType.startsWith("text");
 
+        //read response
         if (text) { //text content
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(con.getInputStream(),
@@ -183,7 +219,9 @@ public class OperatorConnector {
         return true;
     }
 
+    /** Perform POST request */
     private boolean doPost(HttpURLConnection con, String postData) throws IOException {
+        //setup parametres
         con.setDoOutput(true);
         con.setUseCaches(false);
         con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");

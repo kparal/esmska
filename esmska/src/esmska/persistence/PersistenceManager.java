@@ -81,11 +81,13 @@ public class PersistenceManager {
             throw new IOException("Can't write or execute the program dir");
     }
     
+    /** Set program dir to custom path */
     public static void setProgramDir(String path) {
         if (persistenceManager != null)
             throw new IllegalStateException("Persistence manager already exists");
         
         PROGRAM_DIR = new File(path);
+        OPERATOR_DIR = new File(PROGRAM_DIR, OPERATOR_DIRNAME);
         CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
         CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
         QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
@@ -110,14 +112,17 @@ public class PersistenceManager {
         return contacts;
     }
     
+    /** return queue */
     public static List<SMS> getQueue() {
         return queue;
     }
     
+    /** return history */
     public static History getHistory() {
         return history;
     }
     
+    /** return operators */
     public static TreeSet<Operator> getOperators() {
         return operators;
     }
@@ -189,6 +194,7 @@ public class PersistenceManager {
         }
     }
     
+    /** Load operators */
     public void loadOperators() throws IOException {
         if (OPERATOR_DIR.exists()) {
             TreeSet<Operator> newOperators = ImportManager.importOperators(OPERATOR_DIR);

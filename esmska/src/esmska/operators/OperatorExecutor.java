@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-/**
+/** Class containing methods, which can be called from operator scripts.
  *
  * @author ripper
  */
@@ -30,6 +30,9 @@ public class OperatorExecutor {
     private String referer;
     private boolean useCookies;
 
+    /** Make a GET request to a provided URL
+     * @throws IOException when there is some problem in connecting
+     */
     public Object getURL(String url) throws IOException {
         OperatorConnector connector = new OperatorConnector();
         connector.setURL(url);
@@ -48,35 +51,10 @@ public class OperatorExecutor {
         }
     }
 
-    public String recognizeImage(byte[] imageBytes) throws InterruptedException,
-            InvocationTargetException, ExecutionException {
-        if (imageBytes == null) {
-            return "";
-        }
-
-        ImageIcon image = new ImageIcon(imageBytes);
-
-        final JPanel panel = new JPanel();
-        JLabel label = new JLabel("Opište kód z obrázku:",
-                image, JLabel.CENTER);
-        label.setHorizontalTextPosition(JLabel.CENTER);
-        label.setVerticalTextPosition(JLabel.TOP);
-        panel.add(label);
-        FutureTask<String> task = new FutureTask<String>(new Callable<String>() {
-
-            public String call() {
-                String imageCode = JOptionPane.showInputDialog(MainFrame.getInstance(),
-                        panel, "Kontrolní kód",
-                        JOptionPane.QUESTION_MESSAGE);
-                return imageCode;
-            }
-            });
-        SwingUtilities.invokeAndWait(task);
-        String imageCode = task.get();
-
-        return imageCode != null ? imageCode : "";
-    }
-
+    /** Make a POST request with specified data to a provided URL.
+     * Data must be in form name1=value1&name2=value2.
+     * @throws IOException when there is some problem in connecting
+     */
     public Object postURL(String url, String postData) throws IOException {
         OperatorConnector connector = new OperatorConnector();
         connector.setURL(url);
@@ -97,26 +75,66 @@ public class OperatorExecutor {
         }
     }
 
+    /** Ask user to recognize provided image code
+     * @return Recognized image code. Never returns null, may return empty string.
+     */
+    public String recognizeImage(byte[] imageBytes) throws InterruptedException,
+            InvocationTargetException, ExecutionException {
+        if (imageBytes == null) {
+            return "";
+        }
+
+        ImageIcon image = new ImageIcon(imageBytes);
+
+        //display dialog
+        final JPanel panel = new JPanel();
+        JLabel label = new JLabel("Opište kód z obrázku:",
+                image, JLabel.CENTER);
+        label.setHorizontalTextPosition(JLabel.CENTER);
+        label.setVerticalTextPosition(JLabel.TOP);
+        panel.add(label);
+        FutureTask<String> task = new FutureTask<String>(new Callable<String>() {
+
+            public String call() {
+                String imageCode = JOptionPane.showInputDialog(MainFrame.getInstance(),
+                        panel, "Kontrolní kód",
+                        JOptionPane.QUESTION_MESSAGE);
+                return imageCode;
+            }
+            });
+        SwingUtilities.invokeAndWait(task);
+        //receive result
+        String imageCode = task.get();
+
+        return imageCode != null ? imageCode : "";
+    }
+    
+    /** Whether sending was successful or not. Default is false. */
     public void setSuccess(boolean success) {
         this.success = success;
     }
 
+    /** Whether sending was successful or not. Default is false. */
     public boolean getSuccess() {
         return success != null ? success : false;
     }
 
+    /** Error message displayed when sending was unsuccessful. */
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
+    /** Error message displayed when sending was unsuccessful. */
     public String getErrorMessage() {
         return errorMessage;
     }
 
+    /** Referer used for the following requests. */
     public void setReferer(String referer) {
         this.referer = referer;
     }
 
+    /** Whether to recieve and send cookies in the following requests. */
     public void setUseCookies(boolean useCookies) {
         this.useCookies = useCookies;
         if (useCookies) {

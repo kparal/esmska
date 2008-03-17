@@ -36,7 +36,7 @@ public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
     private static final String RES = "/esmska/resources/";
 
-    /** Creates a new instance of ExportManager */
+    /** Disabled constructor */
     private ExportManager() {
     }
     

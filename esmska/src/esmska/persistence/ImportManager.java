@@ -29,6 +29,7 @@ import java.util.Locale;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.script.ScriptException;
 
 /** Import program data
  *
@@ -37,7 +38,7 @@ import java.util.logging.Logger;
 public class ImportManager {
     private static final Logger logger = Logger.getLogger(ImportManager.class.getName());
         
-    /** Creates a new instance of ImportManager */
+    /** Disabled constructor */
     private ImportManager() {
     }
     
@@ -107,6 +108,7 @@ public class ImportManager {
         return history;
     }
     
+    /** Import all operators from directory */
     public static TreeSet<Operator> importOperators(File directory) throws IOException {
         TreeSet<Operator> operators = new TreeSet<Operator>();
         if (!directory.canRead() || !directory.isDirectory())
@@ -122,7 +124,9 @@ public class ImportManager {
             try {
                 DefaultOperator operator = new DefaultOperator(file);
                 operators.add(operator);
-            } catch (Exception ex) {
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, "Problem accessing file " + file.getAbsolutePath(), ex);
+            } catch (ScriptException ex) {
                 logger.log(Level.WARNING, "Ivalid operator file " + file.getAbsolutePath(), ex);
             }
         }
