@@ -472,7 +472,7 @@ public class ContactPanel extends javax.swing.JPanel {
             if (searchString.equals(""))
                 return true;
             return (contact.getName().toLowerCase().contains(searchString) ||
-                        contact.getCountryCode().concat(contact.getNumber()).contains(searchString));
+                        contact.getNumber().contains(searchString));
         }
         
         /** set string to be searched in contact list */

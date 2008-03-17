@@ -8,7 +8,6 @@ package esmska.data;
 
 import java.beans.*;
 import java.text.Collator;
-import esmska.operators.Operator;
 
 /** SMS Contact
  * @author ripper
@@ -16,20 +15,18 @@ import esmska.operators.Operator;
 public class Contact extends Object implements Comparable<Contact> {
     
     private String name;
-    /** phone number not including the country code */
+    /** full phone number including the country code (starting with "+") */
     private String number;
-    private String countryCode;
     private String operator;
     
     private PropertyChangeSupport propertySupport;
     
     public Contact() {
-        this(null,null,null,null);
+        this(null,null,null);
     }
     
-    public Contact(String name, String countryCode, String number, String operator) {
+    public Contact(String name, String number, String operator) {
         this.name = name;
-        this.countryCode = countryCode;
         this.number = number;
         this.operator = operator;
         propertySupport = new PropertyChangeSupport(this);
@@ -98,34 +95,12 @@ public class Contact extends Object implements Comparable<Contact> {
         propertySupport.firePropertyChange("operator", oldOperator, operator);
     }
     
-    /**
-     * Getter for property countryCode.
-     * @return Value of property countryCode.
-     */
-    public String getCountryCode() {
-        return this.countryCode;
-    }
-    
-    /**
-     * Setter for property countryCode.
-     * @param countryCode New value of property countryCode.
-     */
-    public void setCountryCode(String countryCode) {
-        String oldCountryCode = this.countryCode;
-        this.countryCode = countryCode;
-        propertySupport.firePropertyChange("countryCode", oldCountryCode, countryCode);
-    }
-    
     public int compareTo(Contact c) {
         int result = 0;
         Collator collator = Collator.getInstance();
         
         //name
         result = collator.compare(this.getName(), c.getName());
-        if (result != 0)
-            return result;
-        //country code
-        result = collator.compare(this.getCountryCode(), c.getCountryCode());
         if (result != 0)
             return result;
         //number
@@ -156,14 +131,13 @@ public class Contact extends Object implements Comparable<Contact> {
             return false;
         Contact c = (Contact) obj;
         
-        return getName().equals(c.getName()) && getCountryCode().equals(c.getCountryCode()) &&
-                getNumber().equals(c.getNumber()) && getOperator().equals(c.getOperator());
+        return getName().equals(c.getName()) && getNumber().equals(c.getNumber()) 
+                && getOperator().equals(c.getOperator());
     }
     
     @Override
     public int hashCode() {
         return (getName() == null ? 13 : getName().hashCode()) *
-                (getCountryCode() == null ? 17 : getCountryCode().hashCode()) *
                 (getNumber() == null ? 23 : getNumber().hashCode()) *
                 (getOperator() == null ? 31 : getOperator().toString().hashCode());
     }

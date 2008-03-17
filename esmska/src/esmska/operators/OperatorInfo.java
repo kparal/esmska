@@ -32,12 +32,15 @@ public interface OperatorInfo {
      */
     int getSMSLength();
     
-    /** Number of allowed SMS's which user can send at once.
-     * The operator can allow to write multiple messages and split it automatically.
+    /** Number of allowed messages which user can send at once.
+     * If getMaxChars() is too small, we can multiply the number here and autosplit
+     * the message in the program.
      */
     int getMaxParts();
     
-    /** maximum sendable chars in one pass */
+    /** Maximum sendable chars in one pass.
+     * The operator can allow to write multiple messages and split it automatically.
+     */
     int getMaxChars();
     
     /** number of characters needed to add to signature,

@@ -28,7 +28,10 @@ public class FormChecker {
     public static boolean checkSMSNumber(String number) {
         if (number == null)
             return false;
-        if (number.length() != 9)
+        if (!number.startsWith("+"))
+            return false;
+        number = number.substring(1); //strip the "+"
+        if (number.length() < 1 || number.length() > 15)
             return false;
         for (Character c : number.toCharArray()) {
             if (!Character.isDigit(c))

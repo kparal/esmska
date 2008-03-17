@@ -27,10 +27,10 @@ function send() {
     var re, match, content
     
     //change variables to correct form
-    NUMBER = NUMBER.substring(4)
-    if (SENDERNUMBER.length > 4) {
+    if (NUMBER.indexOf("+420") == 0)
+        NUMBER = NUMBER.substring(4)
+    if (SENDERNUMBER.indexOf("+420") == 0)
         SENDERNUMBER = SENDERNUMBER.substring(4);
-    }
 
     // Uvodni stranka
     content = EXEC.getURL("http://www.vodafonesms.cz/")

@@ -116,7 +116,7 @@ public class Envelope {
             for (int i=0;i<text.length();i+=limit) {
                 String cutText = text.substring(i,Math.min(i+limit,text.length()));
                 SMS sms = new SMS();
-                sms.setNumber(c.getCountryCode() + c.getNumber());
+                sms.setNumber(c.getNumber());
                 sms.setText(cutText);
                 sms.setOperator(c.getOperator());
                 sms.setName(c.getName());

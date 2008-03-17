@@ -105,7 +105,7 @@ public class ExportManager {
             for (Contact contact : contacts) {
                 writer.writeRecord(new String[] {
                     contact.getName(),
-                    contact.getCountryCode() + contact.getNumber(),
+                    contact.getNumber(),
                     contact.getOperator().toString()
                 });
             }

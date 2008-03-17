@@ -7,6 +7,9 @@ package esmska.operators;
 import esmska.gui.MainFrame;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -24,10 +27,14 @@ public class OperatorExecutor {
 
     private Boolean success;
     private String errorMessage;
+    private String referer;
+    private boolean useCookies;
 
     public Object getURL(String url) throws IOException {
         OperatorConnector connector = new OperatorConnector();
         connector.setURL(url);
+        connector.setReferer(referer);
+        connector.setUseCookies(useCookies);
 
         boolean ok = connector.connect();
         if (!ok) {
@@ -73,6 +80,8 @@ public class OperatorExecutor {
     public Object postURL(String url, String postData) throws IOException {
         OperatorConnector connector = new OperatorConnector();
         connector.setURL(url);
+        connector.setReferer(referer);
+        connector.setUseCookies(useCookies);
         connector.setDoPost(true);
         connector.setPostData(postData);
 
@@ -102,5 +111,20 @@ public class OperatorExecutor {
 
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    public void setReferer(String referer) {
+        this.referer = referer;
+    }
+
+    public void setUseCookies(boolean useCookies) {
+        this.useCookies = useCookies;
+        if (useCookies) {
+            CookieManager manager = new CookieManager();
+            manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+            CookieHandler.setDefault(manager);
+        } else {
+            CookieHandler.setDefault(null);
+        }
     }
 }

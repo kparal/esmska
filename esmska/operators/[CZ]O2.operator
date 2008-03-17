@@ -8,57 +8,52 @@ function getCountryPrefix() {
 }
 
 function getSMSLength() {
-    return 152
+    return 60
 }
 
 function getMaxParts() {
-    return 1
+    return 5
 }
 
 function getMaxChars() {
-    return 760
+    return 60
 }
 
 function getSignatureExtraLength() {
-    return 5
+    return 0
 }
 
 function send() {
     var re, match, content
-    
+
     //change variables to correct form
-    NUMBER = NUMBER.substring(4)
-    if (SENDERNUMBER.length > 4) {
+    if (NUMBER.indexOf("+420") == 0)
+        NUMBER = NUMBER.substring(4)
+    if (SENDERNUMBER.indexOf("+420") == 0)
         SENDERNUMBER = SENDERNUMBER.substring(4);
-    }
 
     // Uvodni stranka
-    content = EXEC.getURL("http://www.vodafonesms.cz/")
-    
+    EXEC.setUseCookies(true);
+    content = EXEC.getURL("http://www.1188.cz/?sms=gate")
+
     // Nacteni id obrazku
-    re = /<input type="hidden" name="imgid" value="(.*)" \/>/
+    re = /<img src="(.*)" title="potvrzovací kód"/
     match = re.exec(content);
-    var imgid = match[1]
-    
-    re = /<input type="hidden" name="ppp" value="(.*)" \/>/
-    match = re.exec(content);
-    var ppp = match[1]
+    var image = match[1]
     
     // Stazeni obrazku
-    content = EXEC.getURL("http://www.vodafonesms.cz/imgcode.php?id=" + imgid)
+    content = EXEC.getURL("http://www.1188.cz" + image)
     
     // Zobrazeni obrazku
-    var pictogram = EXEC.recognizeImage(content)
+    var code = EXEC.recognizeImage(content)
 
     // Poslani zpravy
-    content = EXEC.postURL("http://www.vodafonesms.cz/send.php",
-        "message=" + MESSAGE + "&number=" + NUMBER + 
-        "&mynumber=" + SENDERNUMBER + "&sender=" + SENDERNAME +
-        "&imgid=" + imgid + "&ppp=" + ppp + 
-        "&pictogram=" + pictogram);
+    content = EXEC.postURL("http://www.1188.cz/?sms",
+        "adress=" + NUMBER + "&code=" + code + 
+        "&text=" + MESSAGE + "&send=ODESLAT");
 
     // Zda byla zpráva odeslána v pořádku
-    re = /<div id="thanks">/
+    re = /Zpráva byla úspěšně odeslána\./
     match = re.exec(content)
     if (undefined != match) {
         EXEC.setSuccess(true)
@@ -66,7 +61,15 @@ function send() {
     }
     
     // Prohledani chybovych zprav
-    re = /<div id="errmsg">\n<p>(.+?)<\/p>/
+    re = /Odesílání zprávy selhalo - Session vypršela nebo nebyla vytvořena/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setSuccess(false)
+        EXEC.setErrorMessage("Pravděpodobně jste špatně opsali bezpečnostní kód.")
+        return
+    }
+
+    re = /Zpráva nebyla odeslána:(.*)(<\/div>)?/
     match = re.exec(content)
     if (undefined != match) {
         EXEC.setSuccess(false)

@@ -50,26 +50,22 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
             Contact c = new Contact();
             String name = "";
             String number = "";
-            String countryCode = "";
             String operator = "";
             
             switch (type) {
                 case KUBIK_DREAMCOM_FILE:
                     name = reader.get(5);
-                    countryCode = reader.get(6).substring(0,4);
-                    number = reader.get(6).substring(4);
+                    number = reader.get(6);
                     operator = reader.get(20).equals("") ?
                         reader.get(21) : reader.get(20);
                     break;
                 case DREAMCOM_SE_FILE:
                 case ESMSKA_FILE:
                     name = reader.get(0);
-                    countryCode = reader.get(1).substring(0,4);
-                    number = reader.get(1).substring(4);
+                    number = reader.get(1);
                     operator = reader.get(2);
             }
             c.setName(name);
-            c.setCountryCode(countryCode);
             c.setNumber(number);
             switch (type) {
                 case KUBIK_DREAMCOM_FILE:

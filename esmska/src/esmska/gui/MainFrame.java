@@ -392,7 +392,7 @@ public class MainFrame extends javax.swing.JFrame {
             statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
                     true, Icons.STATUS_WARNING);
             JOptionPane.showMessageDialog(this, new JLabel("<html>"
-                    + "<h2>Zprávu se nepovedlo odeslat!</h2>" + sms.getErrMsg()
+                    + "<h2>Zprávu se nepovedlo odeslat!</h2>" + sms.getErrMsg().trim()
                     + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
             
             if (smsPanel.getText().length() > 0)
