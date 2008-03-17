@@ -46,7 +46,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_V);
         tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-16.png")));
         tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-small.png")));
-        tabbedPane.setIconAt(2, new ImageIcon(getClass().getResource(RES + "operators/Vodafone.png")));
+//        tabbedPane.setIconAt(2, new ImageIcon(getClass().getResource(RES + "operators/Vodafone.png")));
         closeButton.requestFocusInWindow();
         
         lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
