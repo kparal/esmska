@@ -63,18 +63,22 @@ public class QueuePanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    /** Get SMS which was requested to be edited */
     public SMS getEditRequestedSMS() {
         return editRequestedSMS;
     }
     
+    /** Whether queue is currently paused */
     public boolean isPaused() {
         return smsQueuePauseAction.isPaused();
     }
     
+    /** Sets whether queue is currently paused */
     public void setPaused(boolean paused) {
         smsQueuePauseAction.setPaused(paused);
     }
     
+    /** Updates status of selected SMS */
     public void smsProcessed(SMS sms) {
         int index = smsQueueListModel.indexOf(sms);
         if (sms.getStatus() == SMS.Status.SENT_OK) {
@@ -86,6 +90,7 @@ public class QueuePanel extends javax.swing.JPanel {
         }
     }
     
+    /** Adds new SMS to the queue */
     public void addSMS(SMS sms) {
         smsQueueListModel.add(sms);
     }

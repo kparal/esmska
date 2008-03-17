@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class History {
     
-     /** new record added */
+    /** new record added */
     public static final int ACTION_ADD_RECORD = 0;
     /** existing record removed */
     public static final int ACTION_REMOVE_RECORD = 1;
@@ -88,60 +88,64 @@ public class History {
         private String operator;
         private Date date;
 
+        // <editor-fold defaultstate="collapsed" desc="Get Methods">
         public String getNumber() {
             return number;
-        }
-
-        public void setNumber(String number) {
-            this.number = number;
         }
 
         public String getName() {
             return name;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
         public String getText() {
             return text;
-        }
-
-        public void setText(String text) {
-            this.text = text;
         }
 
         public String getSenderNumber() {
             return senderNumber;
         }
 
-        public void setSenderNumber(String senderNumber) {
-            this.senderNumber = senderNumber;
-        }
-
         public String getSenderName() {
             return senderName;
-        }
-
-        public void setSenderName(String senderName) {
-            this.senderName = senderName;
         }
 
         public String getOperator() {
             return operator;
         }
 
-        public void setOperator(String operator) {
-            this.operator = operator;
-        }
-
         public Date getDate() {
             return date;
         }
-
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Set Methods">
+        public void setNumber(String number) {
+            this.number = number;
+        }
+        
+        public void setName(String name) {
+            this.name = name;
+        }
+        
+        public void setText(String text) {
+            this.text = text;
+        }
+        
+        public void setSenderNumber(String senderNumber) {
+            this.senderNumber = senderNumber;
+        }
+        
+        public void setSenderName(String senderName) {
+            this.senderName = senderName;
+        }
+        
+        public void setOperator(String operator) {
+            this.operator = operator;
+        }
+        
         public void setDate(Date date) {
             this.date = date;
         }
+        // </editor-fold>
     }
 }

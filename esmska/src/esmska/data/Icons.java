@@ -6,7 +6,7 @@ package esmska.data;
 
 import javax.swing.ImageIcon;
 
-/**
+/** Class with static references to frequently used icons
  *
  * @author ripper
  */

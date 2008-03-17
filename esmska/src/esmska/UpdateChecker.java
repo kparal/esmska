@@ -26,14 +26,20 @@ import javax.swing.SwingWorker;
 public class UpdateChecker {
 
     public static final int ACTION_UPDATE_FOUND = 0;
-    private static final String UPDATE_FILE_URL = "http://esmska.googlecode.com/svn/files/version.txt";
     private static final Logger logger = Logger.getLogger(UpdateChecker.class.getName());
-    private ActionEventSupport actionEventSupport;
+    private static final String UPDATE_FILE_URL = "http://esmska.googlecode.com/svn/files/version.txt";
 
-    public UpdateChecker() {
-        actionEventSupport = new ActionEventSupport(this);
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
     }
-
+    
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
+    
     /** Checks for updates and if updates are found notifies all added listeners
      */
     public void checkForUpdates() {
@@ -56,14 +62,6 @@ public class UpdateChecker {
         String currentVersion = Config.getLatestVersion();
         AlphanumComparator comparator = new AlphanumComparator();
         return comparator.compare(downloadedVersion, currentVersion) > 0;
-    }
-
-    public void addActionListener(ActionListener actionListener) {
-        actionEventSupport.addActionListener(actionListener);
-    }
-
-    public void removeActionListener(ActionListener actionListener) {
-        actionEventSupport.removeActionListener(actionListener);
     }
 
     /** SwingWorker which checks downloads and check update file in another thread
@@ -100,7 +98,7 @@ public class UpdateChecker {
         @Override
         protected void done() {
             if (updateAvailable) {
-                actionEventSupport.fireActionPerformed(ACTION_UPDATE_FOUND, null);
+                actionSupport.fireActionPerformed(ACTION_UPDATE_FOUND, null);
             }
         }
     }

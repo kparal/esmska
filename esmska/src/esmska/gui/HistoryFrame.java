@@ -45,7 +45,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     public static final int ACTION_RESEND_SMS = 0;
     private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(HistoryFrame.class.getName());
-    DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
+    private DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
     private History history = PersistenceManager.getHistory();
     private HistoryTableModel historyTableModel = new HistoryTableModel();
     private TableRowSorter<HistoryTableModel> historyTableSorter = new TableRowSorter<HistoryTableModel>(historyTableModel);

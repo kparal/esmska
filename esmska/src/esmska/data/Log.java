@@ -76,7 +76,8 @@ public class Log {
             this.time = time;
             this.icon = icon;
         }
-
+        
+        // <editor-fold defaultstate="collapsed" desc="Get Methods">
         public ImageIcon getIcon() {
             return icon;
         }
@@ -88,5 +89,6 @@ public class Log {
         public Date getTime() {
             return time;
         }
+        // </editor-fold>
     }
 }

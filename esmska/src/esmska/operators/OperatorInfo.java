@@ -5,8 +5,8 @@
 
 package esmska.operators;
 
-/**
- *
+/** Interface pro operator scripts.
+ * All operator scripts must implement this interface in order to be used in the program.
  * @author ripper
  */
 public interface OperatorInfo {

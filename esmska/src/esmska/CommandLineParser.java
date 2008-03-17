@@ -56,10 +56,12 @@ public class CommandLineParser {
         return true;
     }
     
+    /** Whether portable mode is enabled or disabled */
     public boolean isPortable() {
         return portable;
     }
     
+    /** User custom path to configuration files */
     public String getConfigPath() {
         return configPath;
     }

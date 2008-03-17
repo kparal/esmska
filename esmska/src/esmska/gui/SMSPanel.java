@@ -460,7 +460,7 @@ public class SMSPanel extends javax.swing.JPanel {
             smsTextUndoManager.discardAllEdits();
             smsTextPane.requestFocusInWindow();
         }
-        /** update status according to conditions  */
+        /** update status according to current conditions */
         public void updateStatus() {
             this.setEnabled(validateForm(false));
         }
@@ -483,6 +483,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextPaneDocumentFilter.requestUpdate();
             }
         }
+        /** update status according to current conditions */
         public void updateStatus() {
             setEnabled(smsTextUndoManager.canUndo());
         }
@@ -505,6 +506,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextPaneDocumentFilter.requestUpdate();
             }
         }
+        /** update status according to current conditions */
         public void updateStatus() {
             setEnabled(smsTextUndoManager.canRedo());
         }
@@ -541,6 +543,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextPane.setText(text);
             }
         }
+        /** update status according to current conditions */
         public void updateStatus() {
             setEnabled(getText().length() > 0);
         }

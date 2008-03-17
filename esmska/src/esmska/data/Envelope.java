@@ -23,7 +23,7 @@ import java.text.Normalizer;
  * @author ripper
  */
 public class Envelope {
-    private Config config;
+    private Config config = PersistenceManager.getConfig();;
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
     
@@ -38,11 +38,6 @@ public class Envelope {
         changeSupport.removePropertyChangeListener(listener);
     }
     // </editor-fold>
-    
-    /** Creates a new instance of Envelope */
-    public Envelope() {
-        this.config = PersistenceManager.getConfig();
-    }
     
     /** get text of sms */
     public String getText() {
@@ -107,8 +102,8 @@ public class Envelope {
         return count;
     }
     
-    /** get list of sms's to send */
-    public ArrayList<SMS> send() {
+    /** generate list of sms's to send */
+    public ArrayList<SMS> generate() {
         ArrayList<SMS> list = new ArrayList<SMS>();
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());

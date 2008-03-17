@@ -9,7 +9,7 @@ package esmska.data;
 import java.beans.*;
 import java.text.Collator;
 
-/** SMS Contact
+/** SMS Contact entity
  * @author ripper
  */
 public class Contact extends Object implements Comparable<Contact> {
@@ -19,7 +19,17 @@ public class Contact extends Object implements Comparable<Contact> {
     private String number;
     private String operator;
     
-    private PropertyChangeSupport propertySupport;
+    // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
+    }
+    // </editor-fold>
     
     public Contact() {
         this(null,null,null);
@@ -29,71 +39,41 @@ public class Contact extends Object implements Comparable<Contact> {
         this.name = name;
         this.number = number;
         this.operator = operator;
-        propertySupport = new PropertyChangeSupport(this);
     }
     
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertySupport.addPropertyChangeListener(listener);
-    }
-    
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertySupport.removePropertyChangeListener(listener);
-    }
-    
-    
-    /**
-     * Getter for property name.
-     * @return Value of property name.
-     */
+    // <editor-fold defaultstate="collapsed" desc="Get Methods">
     public String getName() {
         return this.name;
     }
     
-    /**
-     * Setter for property name.
-     * @param name New value of property name.
-     */
-    public void setName(String name) {
-        String oldName = this.name;
-        this.name = name;
-        propertySupport.firePropertyChange("name", oldName, name);
-    }
-    
-    /**
-     * Getter for property number.
-     * @return phone number not including the country code
-     */
     public String getNumber() {
         return this.number;
     }
     
-    /**
-     * Setter for property number.
-     * @param number New value of property number.
-     */
-    public void setNumber(String number) {
-        String oldNumber = this.number;
-        this.number = number;
-        propertySupport.firePropertyChange("number", oldNumber, number);
-    }
-    
-    /**
-     * Getter for property operator.
-     * @return Value of property operator.
-     */
     public String getOperator() {
         return this.operator;
     }
+    // </editor-fold>
     
-    /**
-     * Setter for property operator.
-     * @param operator New value of property operator.
-     */
+    // <editor-fold defaultstate="collapsed" desc="Set Methods">
+    public void setName(String name) {
+        String oldName = this.name;
+        this.name = name;
+        changeSupport.firePropertyChange("name", oldName, name);
+    }
+    
+    public void setNumber(String number) {
+        String oldNumber = this.number;
+        this.number = number;
+        changeSupport.firePropertyChange("number", oldNumber, number);
+    }
+    
     public void setOperator(String operator) {
         String oldOperator = this.operator;
         this.operator = operator;
-        propertySupport.firePropertyChange("operator", oldOperator, operator);
+        changeSupport.firePropertyChange("operator", oldOperator, operator);
     }
+    // </editor-fold>
     
     public int compareTo(Contact c) {
         int result = 0;

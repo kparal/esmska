@@ -164,6 +164,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         checkValid(numberTextField);
     }//GEN-LAST:event_numberTextFieldFocusLost
     
+    /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
         if (contact == null) {
             nameTextField.setText(null);
@@ -179,6 +180,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         }
     }
     
+    /** Get currently edited contact */
     public Contact getContact() {
         Contact c = new Contact();
         c.setName(nameTextField.getText());
@@ -188,6 +190,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         return c;
     }
     
+    /** Improve focus etc. before displaying panel */
     public void prepareForShow() {
         nameTextField.requestFocusInWindow();
         nameTextField.selectAll();

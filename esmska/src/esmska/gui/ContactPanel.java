@@ -619,10 +619,12 @@ public class ContactPanel extends javax.swing.JPanel {
             setContentPane(optionPane);
             pack();
         }
+        /** Set options to display as buttons */
         public void setOptions(Object[] options, Object initialValue) {
             this.options = options;
             this.initialValue = initialValue;
         }
+        /** Show dialog with existing or new (null) contact */
         public void show(Contact c) {
             init();
             setLocationRelativeTo(MainFrame.getInstance());
@@ -658,6 +660,7 @@ public class ContactPanel extends javax.swing.JPanel {
                 setVisible(false);
             }
         }
+        /** Get currently displayed contact */
         public Contact getContact() {
             return contact;
         }

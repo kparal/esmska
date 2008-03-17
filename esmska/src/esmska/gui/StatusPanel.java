@@ -22,7 +22,6 @@ import javax.swing.ImageIcon;
  */
 public class StatusPanel extends javax.swing.JPanel {
 
-    private static final Logger logger = Logger.getLogger(StatusPanel.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
     private Log log = new Log();

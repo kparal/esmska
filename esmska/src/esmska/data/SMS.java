@@ -9,7 +9,6 @@
 
 package esmska.data;
 
-import esmska.operators.Operator;
 import javax.swing.ImageIcon;
 
 /** SMS entity class
@@ -38,93 +37,92 @@ public class SMS {
         SENT_OK; 
     }
     
-    /** Creates a new instance of SMS */
-    public SMS() {
-    }
-    
-    @Override
-    public String toString() {
-        return getName()!=null&&!getName().equals("")?getName():getNumber();
-    }
-    
+    // <editor-fold defaultstate="collapsed" desc="Get Methods">
     public String getNumber() {
         return number;
-    }
-    
-    public void setNumber(String number) {
-        this.number = number;
     }
     
     public String getText() {
         return text;
     }
     
-    public void setText(String text) {
-        this.text = text;
-    }
-    
     public String getSenderNumber() {
         return senderNumber;
-    }
-    
-    public void setSenderNumber(String senderNumber) {
-        this.senderNumber = senderNumber;
     }
     
     public String getSenderName() {
         return senderName;
     }
     
-    public void setSenderName(String senderName) {
-        this.senderName = senderName;
-    }
-    
     public ImageIcon getImage() {
         return image;
-    }
-    
-    public void setImage(ImageIcon image) {
-        this.image = image;
     }
     
     public String getImageCode() {
         return imageCode;
     }
     
-    public void setImageCode(String imageCode) {
-        this.imageCode = imageCode;
-    }
-    
     public String getOperator() {
         return operator;
-    }
-    
-    public void setOperator(String operator) {
-        this.operator = operator;
     }
     
     public Status getStatus() {
         return status;
     }
     
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-    
     public String getErrMsg() {
         return errMsg;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Set Methods">
+    public void setNumber(String number) {
+        this.number = number;
+    }
+    
+    public void setText(String text) {
+        this.text = text;
+    }
+    
+    public void setSenderNumber(String senderNumber) {
+        this.senderNumber = senderNumber;
+    }
+    
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+    
+    public void setImage(ImageIcon image) {
+        this.image = image;
+    }
+    
+    public void setImageCode(String imageCode) {
+        this.imageCode = imageCode;
+    }
+    
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+    
+    public void setStatus(Status status) {
+        this.status = status;
     }
     
     public void setErrMsg(String errMsg) {
         this.errMsg = errMsg;
     }
     
-    public String getName() {
-        return name;
-    }
-    
     public void setName(String name) {
         this.name = name;
     }
+    // </editor-fold>
     
+    @Override
+    public String toString() {
+        return getName()!=null&&!getName().equals("")?getName():getNumber();
+    }
 }

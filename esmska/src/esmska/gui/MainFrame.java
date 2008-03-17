@@ -132,6 +132,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
+    /** Get current instance */
     public static MainFrame getInstance() {
         if (instance == null)
             instance = new MainFrame();
@@ -729,7 +730,7 @@ public class MainFrame extends javax.swing.JFrame {
                     contactPanel.setSelectedContact(smsPanel.getRequestedContactSelection());
                     break;
                 case SMSPanel.ACTION_SEND_SMS:
-                    for (SMS sms : envelope.send()) {
+                    for (SMS sms : envelope.generate()) {
                         queuePanel.addSMS(sms);
                         smsSender.announceNewSMS();
                     }
@@ -740,6 +741,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
+    /** Listens for events from update checker */
     private class UpdateListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             statusPanel.setStatusMessage("Byla vydána nová verze programu!", 

@@ -15,16 +15,16 @@ package esmska.data;
  */
 public class FormChecker {
     
-    /** Creates a new instance of FormChecker */
-    private FormChecker() {
-    }
-    
-    /** Check valid name */
+    /** Check valid name
+     * @return true if name is not empty ("" or null), false otherwise
+     */
     public static boolean checkContactName(String name) {
         return !isEmpty(name);
     }
     
-    /** Check valid number */
+    /** Check valid number
+     * @return true if number is in form +[0-9]{1,15}, false otherwise
+     */
     public static boolean checkSMSNumber(String number) {
         if (number == null)
             return false;
@@ -40,7 +40,9 @@ public class FormChecker {
         return true;
     }
     
-    /** Check for emptiness */
+    /** Check for emptiness
+     * @return true if string is empty or null, false otherwise
+     */
     public static boolean isEmpty(String s) {
         return (s == null || s.equals(""));
     }
