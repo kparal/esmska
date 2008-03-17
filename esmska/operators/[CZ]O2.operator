@@ -67,22 +67,14 @@ function send() {
     }
     
     // Prohledani chybovych zprav
-    re = /Odesílání zprávy selhalo - Session vypršela nebo nebyla vytvořena/
-    match = re.exec(content)
-    if (undefined != match) {
-        EXEC.setSuccess(false)
-        EXEC.setErrorMessage("Pravděpodobně jste špatně opsali bezpečnostní kód.")
-        return
-    }
-
-    re = /Zpráva nebyla odeslána:(.*)(<\/div>)?/
+    re = /<div class="error">([\s\S]*?)<\/div>/
     match = re.exec(content)
     if (undefined != match) {
         EXEC.setSuccess(false)
         EXEC.setErrorMessage("Zpráva od operátora:<br>" + match[1])
         return
     }
-    
+
     // Pokud se nenašla potvrzovací ani chybová hláška
     var msg = "Došlo k neznámé chybě. Operátor možná změnil<br>" + 
     "své webové stránky, nebo s nimi má aktuálně potíže.<br>" + 
