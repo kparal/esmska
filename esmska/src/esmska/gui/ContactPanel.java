@@ -65,7 +65,6 @@ public class ContactPanel extends javax.swing.JPanel {
     private Action chooseContactAction = new ChooseContactAction();
     private SearchContactAction searchContactAction = new SearchContactAction();
     private ContactListModel contactListModel = new ContactListModel();
-    private ContactDialog contactDialog = new ContactDialog();
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -345,6 +344,7 @@ public class ContactPanel extends javax.swing.JPanel {
         }
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
+            ContactDialog contactDialog = new ContactDialog();
             contactDialog.setTitle("Nový kontakt");
             contactDialog.setOptions(options, createOption);
             contactDialog.show(null);
@@ -372,6 +372,7 @@ public class ContactPanel extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
             Contact contact = (Contact)contactList.getSelectedValue();
+            ContactDialog contactDialog = new ContactDialog();
             contactDialog.setTitle("Upravit kontakt");
             contactDialog.setOptions(options, saveOption);
             contactDialog.show(contact);
@@ -625,11 +626,12 @@ public class ContactPanel extends javax.swing.JPanel {
             this.initialValue = initialValue;
         }
         /** Show dialog with existing or new (null) contact */
-        public void show(Contact c) {
+        public void show(Contact contact) {
+            this.contact = contact;
             init();
             setLocationRelativeTo(MainFrame.getInstance());
             optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
-            panel.setContact(c);
+            panel.setContact(contact);
             panel.prepareForShow();
             setVisible(true);
         }
@@ -646,6 +648,7 @@ public class ContactPanel extends javax.swing.JPanel {
                     return;
                 }
                 if (!value.equals(options[0])) { //not confirmed (confirm is first option)
+                    contact = null;
                     setVisible(false);
                     return;
                 }

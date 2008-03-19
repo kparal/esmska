@@ -8,7 +8,7 @@ package esmska.gui;
 
 import esmska.data.Contact;
 import esmska.data.Envelope;
-import esmska.data.FormChecker;
+import esmska.gui.FormChecker;
 import esmska.data.SMS;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;

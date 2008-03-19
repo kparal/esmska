@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package esmska.data;
+package esmska.gui;
 
 /** Checks for validity of form components
  *
@@ -34,6 +34,39 @@ public class FormChecker {
         if (number.length() < 1 || number.length() > 15)
             return false;
         for (Character c : number.toCharArray()) {
+            if (!Character.isDigit(c))
+                return false;
+        }
+        return true;
+    }
+    
+    /** Check valid number without country prefix
+     * @return true if number is in form [0-9]{1,14}, false otherwise
+     */
+    public static boolean checkSMSNumberWithoutPrefix(String number) {
+        if (number == null)
+            return false;
+        if (number.length() < 1 || number.length() > 14)
+            return false;
+        for (Character c : number.toCharArray()) {
+            if (!Character.isDigit(c))
+                return false;
+        }
+        return true;
+    }
+    
+    /** Check valid country prefix
+     * @return true if prefix is in form +[0-9]{1,3}, false otherwise
+     */
+    public static boolean checkCountryPrefix(String prefix) {
+        if (prefix == null)
+            return false;
+        if (!prefix.startsWith("+"))
+            return false;
+        prefix = prefix.substring(1); //strip the "+"
+        if (prefix.length() < 1 || prefix.length() > 3)
+            return false;
+        for (Character c : prefix.toCharArray()) {
             if (!Character.isDigit(c))
                 return false;
         }

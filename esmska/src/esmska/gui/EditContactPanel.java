@@ -6,12 +6,13 @@
 
 package esmska.gui;
 
-import esmska.data.FormChecker;
+import esmska.gui.FormChecker;
 import esmska.operators.Operator;
 import esmska.data.Contact;
 import esmska.operators.OperatorUtil;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -22,7 +23,8 @@ import javax.swing.border.Border;
  */
 public class EditContactPanel extends javax.swing.JPanel {
     private static final Border fieldBorder = new JTextField().getBorder();
-    private static final Border fieldRedBorder = BorderFactory.createLineBorder(Color.RED);
+    private static final Border comboBorder = new JComboBox().getBorder();
+    private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);
     
     /**
      * Creates new form EditContactPanel
@@ -46,20 +48,28 @@ public class EditContactPanel extends javax.swing.JPanel {
         nameTextField.requestFocusInWindow();
         numberTextField = new javax.swing.JTextField();
         operatorComboBox = new esmska.gui.OperatorComboBox();
+        prefixComboBox = new esmska.gui.CountryPrefixComboBox();
 
+        jLabel1.setDisplayedMnemonic('j');
+        jLabel1.setLabelFor(nameTextField);
         jLabel1.setText("Jméno");
 
+        jLabel2.setDisplayedMnemonic('s');
+        jLabel2.setLabelFor(numberTextField);
         jLabel2.setText("Číslo");
 
+        jLabel3.setDisplayedMnemonic('o');
+        jLabel3.setLabelFor(operatorComboBox);
         jLabel3.setText("Operátor");
 
+        nameTextField.setToolTipText("Jméno kontaktu");
         nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 nameTextFieldFocusLost(evt);
             }
         });
 
-        numberTextField.setColumns(12);
+        numberTextField.setColumns(11);
         numberTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 numberTextFieldFocusLost(evt);
@@ -68,6 +78,12 @@ public class EditContactPanel extends javax.swing.JPanel {
         numberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 numberTextFieldKeyReleased(evt);
+            }
+        });
+
+        prefixComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                prefixComboBoxItemStateChanged(evt);
             }
         });
 
@@ -82,10 +98,13 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(numberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(operatorComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(prefixComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numberTextField)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -98,6 +117,7 @@ public class EditContactPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
+                    .addComponent(prefixComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(numberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -105,13 +125,16 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {nameTextField, numberTextField, prefixComboBox});
+
     }// </editor-fold>//GEN-END:initComponents
     
     /** Check if the form is valid */
     public boolean validateForm() {
         boolean valid = true;
         boolean focusTransfered = false;
-        JComponent[] comps = new JComponent[] {nameTextField, numberTextField};
+        JComponent[] comps = new JComponent[] {nameTextField, prefixComboBox, numberTextField};
         for (JComponent c : comps) {
             valid = checkValid(c) && valid;
             if (!valid && !focusTransfered) {
@@ -128,8 +151,19 @@ public class EditContactPanel extends javax.swing.JPanel {
         if (c == nameTextField) {
             valid = FormChecker.checkContactName(nameTextField.getText());
             updateBorder(c, valid);
+        } else if (c == prefixComboBox) {
+            String prefix = prefixComboBox.getSelectedPrefix();
+            if (prefix == null || prefix.length() == 0) {
+                valid = true;
+            } else {
+                valid = FormChecker.checkCountryPrefix(prefix);
+            }
+            updateBorder(c, valid);
         } else if (c == numberTextField) {
-            valid = FormChecker.checkSMSNumber(numberTextField.getText());
+            valid = FormChecker.checkSMSNumberWithoutPrefix(numberTextField.getText());
+            String prefix = prefixComboBox.getSelectedPrefix();
+            String number = (prefix != null ? prefix : "") + numberTextField.getText();
+            valid = valid && FormChecker.checkSMSNumber(number);
             updateBorder(c, valid);
         }
         return valid;
@@ -137,10 +171,14 @@ public class EditContactPanel extends javax.swing.JPanel {
     
     /** sets highlighted border on non-valid components and regular border on valid ones */
     private void updateBorder(JComponent c, boolean valid) {
-        if (valid)
-            c.setBorder(fieldBorder);
-        else
-            c.setBorder(fieldRedBorder);
+        if (valid) {
+            if (c instanceof JComboBox)
+                c.setBorder(comboBorder);
+            else
+                c.setBorder(fieldBorder);
+        } else {
+            c.setBorder(lineRedBorder);
+        }
     }
     
     private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
@@ -163,19 +201,35 @@ public class EditContactPanel extends javax.swing.JPanel {
     private void numberTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_numberTextFieldFocusLost
         checkValid(numberTextField);
     }//GEN-LAST:event_numberTextFieldFocusLost
+
+    private void prefixComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_prefixComboBoxItemStateChanged
+        checkValid(prefixComboBox);
+        checkValid(numberTextField);
+    }//GEN-LAST:event_prefixComboBoxItemStateChanged
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
         if (contact == null) {
             nameTextField.setText(null);
             numberTextField.setText(null);
+            prefixComboBox.setVisible(true);
             if (operatorComboBox.getModel().getSize() > 0)
                 operatorComboBox.setSelectedIndex(0);
             else
                 operatorComboBox.setSelectedItem(null);
         } else {
             nameTextField.setText(contact.getName());
-            numberTextField.setText(contact.getNumber());
+            String prefix = OperatorUtil.getCountryPrefix(contact.getNumber());
+            if (prefix != null) {
+                prefixComboBox.setSelectedPrefix(prefix);
+                numberTextField.setText(contact.getNumber().substring(prefix.length()));
+                numberTextField.setToolTipText("Telefonní číslo kontaktu bez předčíslí země");
+            } else {
+                prefixComboBox.setSelectedPrefix(null);
+                numberTextField.setText(contact.getNumber());
+                numberTextField.setToolTipText("Telefonní číslo kontaktu včetně předčíslí země");
+            }
+            prefixComboBox.setVisible(prefix != null);
             operatorComboBox.setSelectedOperator(OperatorUtil.getOperator(contact.getOperator()));
         }
     }
@@ -184,7 +238,8 @@ public class EditContactPanel extends javax.swing.JPanel {
     public Contact getContact() {
         Contact c = new Contact();
         c.setName(nameTextField.getText());
-        c.setNumber(numberTextField.getText());
+        String prefix = prefixComboBox.getSelectedPrefix();
+        c.setNumber((prefix != null ? prefix : "") + numberTextField.getText());
         Operator operator = operatorComboBox.getSelectedOperator();
         c.setOperator(operator != null ? operator.getName() : null);
         return c;
@@ -203,6 +258,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     private javax.swing.JTextField nameTextField;
     private javax.swing.JTextField numberTextField;
     private esmska.gui.OperatorComboBox operatorComboBox;
+    private esmska.gui.CountryPrefixComboBox prefixComboBox;
     // End of variables declaration//GEN-END:variables
     
 }
