@@ -31,10 +31,16 @@ function send() {
     var re, match, content
     
     //change variables to correct form
-    if (NUMBER.indexOf("+420") == 0)
-        NUMBER = NUMBER.substring(4)
-    if (SENDERNUMBER.indexOf("+420") == 0)
-        SENDERNUMBER = SENDERNUMBER.substring(4);
+    var number = EXEC.urlDecode(NUMBER)
+    if (number.indexOf("+420") == 0) {
+        number = number.substring(4)
+        NUMBER = EXEC.urlEncode(number)
+    }
+    var senderNumber = EXEC.urlDecode(SENDERNUMBER);
+    if (senderNumber.indexOf("+420") == 0) {
+        senderNumber = senderNumber.substring(4)
+        SENDERNUMBER = EXEC.urlEncode(senderNumber)
+    }
 
     // Uvodni stranka
     content = EXEC.getURL("http://www.vodafonesms.cz/")

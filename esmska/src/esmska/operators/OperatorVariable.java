@@ -6,7 +6,9 @@
 package esmska.operators;
 
 /** Enum of operator variables applicable in the operator script.
- *
+ * Beware that values of all these variables are encoded in the x-www-form-urlencoded
+ * format (which you would want to use anyway, except maybe for some format checking
+ * of recepient and sender number).
  * @author ripper
  */
 public enum OperatorVariable {

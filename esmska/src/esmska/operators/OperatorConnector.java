@@ -224,7 +224,6 @@ public class OperatorConnector {
         //setup parametres
         con.setDoOutput(true);
         con.setUseCaches(false);
-        con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
 
         //send POST request

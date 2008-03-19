@@ -6,10 +6,13 @@ package esmska.operators;
 
 import esmska.gui.MainFrame;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -107,6 +110,22 @@ public class OperatorExecutor {
         String imageCode = task.get();
 
         return imageCode != null ? imageCode : "";
+    }
+    
+    /** Encode input string into x-www-form-urlencoded format. All parametres used
+     * in HTTP GET or POST request must be encoded this way. Uses UTF-8 as character encoding.
+     * @return input string in the x-www-form-urlencoded format
+     */
+    public String urlEncode(String input) throws UnsupportedEncodingException {
+        return URLEncoder.encode(input, "UTF-8");
+    }
+    
+    /** Decode input string from x-www-form-urlencoded format to plain string.
+     * Uses UTF-8 as character encoding.
+     * @return plain string decoded from the x-www-form-urlencoded format
+     */
+    public String urlDecode(String input) throws UnsupportedEncodingException {
+        return URLDecoder.decode(input, "UTF-8");
     }
     
     /** Whether sending was successful or not. Default is false. */
