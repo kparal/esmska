@@ -3,6 +3,14 @@ function getName() {
     return "[CZ]Vodafone"
 }
 
+function getVersion() {
+    return "2008-03-19"
+}
+
+function getAuthor() {
+    return "Kamil Páral <ripper42@gmail.com>"
+}
+
 function getCountryPrefix() {
     return "+420"
 }
@@ -15,12 +23,12 @@ function getSMSLength() {
     return 152
 }
 
-function getMaxParts() {
-    return 1
-}
-
 function getMaxChars() {
     return 760
+}
+
+function getMaxParts() {
+    return 1
 }
 
 function getSignatureExtraLength() {

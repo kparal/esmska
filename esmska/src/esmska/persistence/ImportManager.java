@@ -15,6 +15,7 @@ import esmska.data.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.security.PrivilegedActionException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import esmska.operators.Operator;
@@ -126,11 +127,11 @@ public class ImportManager {
                 operators.add(operator);
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "Problem accessing file " + file.getAbsolutePath(), ex);
-            } catch (ScriptException ex) {
+            } catch (Exception ex) {
                 logger.log(Level.WARNING, "Ivalid operator file " + file.getAbsolutePath(), ex);
             }
         }
-        
+
         return operators;
     }
 }

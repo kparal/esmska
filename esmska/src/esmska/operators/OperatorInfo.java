@@ -19,6 +19,17 @@ public interface OperatorInfo {
      */
     String getName();
     
+    /** Version of the script.
+     * This is the the datum of last script modification in the YYYY-MM-DD format.
+     */
+    String getVersion();
+    
+    /** Author of the script.
+     * This is the name and email of the author or latest contributor of the script.
+     * The author must be in format "NAME <EMAIL>". Name and email are mandatory.
+     */
+    String getAuthor();
+    
     /** Telephone country prefix.
      * The prefix starts with "+" sign and is 1-3 digits long.
      * List of country calling codes is on <a href="http://en.wikipedia.org/wiki/Country_calling_codes">Wikipedia</a>.

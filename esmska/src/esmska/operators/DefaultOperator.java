@@ -7,6 +7,7 @@ package esmska.operators;
 import esmska.data.Icons;
 import java.io.File;
 import java.io.IOException;
+import java.security.PrivilegedActionException;
 import java.text.Collator;
 import javax.script.ScriptException;
 import javax.swing.Icon;
@@ -20,8 +21,7 @@ public class DefaultOperator implements Operator {
 
     private static final OperatorInterpreter interpreter = new OperatorInterpreter();
     private File script;
-    private String name;
-    private String countryPrefix;
+    private String name, version, author, countryPrefix;
     private String[] operatorPrefixes;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength;
     private Icon icon;
@@ -29,10 +29,11 @@ public class DefaultOperator implements Operator {
     /** Creates new DefaultOperator.
      * 
      * @param script operator script
-     * @throws java.io.IOException When there are problem accessing the script file
-     * @throws javax.script.ScriptException When operator script is invalid
+     * @throws IOException When there are problem accessing the script file
+     * @throws ScriptException When operator script is invalid
+     * @throws PrivilegedActionException When operator script is invalid
      */
-    public DefaultOperator(File script) throws IOException, ScriptException {
+    public DefaultOperator(File script) throws IOException, ScriptException, PrivilegedActionException {
         this.script = script;
         
         OperatorInfo info = interpreter.parseInfo(script);
@@ -43,6 +44,8 @@ public class DefaultOperator implements Operator {
         //remember all the values from OperatorInfo interface internally in order
         //to increase speed (Java code vs JavaScript execution for every method access).
         name = info.getName();
+        version = info.getVersion();
+        author = info.getAuthor();
         countryPrefix = info.getCountryPrefix();
         operatorPrefixes = info.getOperatorPrefixes();
         smsLength = info.getSMSLength();
@@ -94,6 +97,14 @@ public class DefaultOperator implements Operator {
         return name;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+    
     public String getCountryPrefix() {
         return countryPrefix;
     }

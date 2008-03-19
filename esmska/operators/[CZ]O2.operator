@@ -3,6 +3,14 @@ function getName() {
     return "[CZ]O2"
 }
 
+function getVersion() {
+    return "2008-03-19"
+}
+
+function getAuthor() {
+    return "Kamil Páral <ripper42@gmail.com>"
+}
+
 function getCountryPrefix() {
     return "+420"
 }
@@ -17,12 +25,12 @@ function getSMSLength() {
     return 60
 }
 
-function getMaxParts() {
-    return 5
-}
-
 function getMaxChars() {
     return 60
+}
+
+function getMaxParts() {
+    return 5
 }
 
 function getSignatureExtraLength() {
