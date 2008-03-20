@@ -59,7 +59,7 @@ public class DefaultOperator implements Operator {
         if (new File(filename).exists()) {
             icon = new ImageIcon(filename);
         } else {
-            icon = Icons.OPERATOR_BLANK;
+            icon = Icons.OPERATOR_DEFAULT;
         }
     }
 
