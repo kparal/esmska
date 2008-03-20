@@ -7,9 +7,15 @@ package esmska.gui;
 
 import esmska.operators.Operator;
 import esmska.persistence.PersistenceManager;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.TreeSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /** JComboBox showing all available telephone country prefixes. Combobox is editable.
  *
@@ -44,6 +50,9 @@ public class CountryPrefixComboBox extends JComboBox {
      */
     public void setSelectedPrefix(String prefix) {
         setSelectedItem(prefix);
+        //deselect text
+        JTextField field = (JTextField) getEditor().getEditorComponent();
+        field.select(0, 0);
     }
     
 }

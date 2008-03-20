@@ -24,10 +24,10 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="nameTextField" alignment="0" pref="192" max="32767" attributes="0"/>
-                  <Component id="operatorComboBox" alignment="1" pref="192" max="32767" attributes="0"/>
+                  <Component id="nameTextField" alignment="0" pref="190" max="32767" attributes="0"/>
+                  <Component id="operatorComboBox" alignment="1" pref="190" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="prefixComboBox" min="-2" pref="72" max="-2" attributes="0"/>
+                      <Component id="prefixComboBox" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="numberTextField" max="32767" attributes="0"/>
                   </Group>
