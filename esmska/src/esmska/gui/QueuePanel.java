@@ -6,7 +6,9 @@
 
 package esmska.gui;
 
+import esmska.data.Icons;
 import esmska.data.SMS;
+import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
@@ -384,7 +386,8 @@ public class QueuePanel extends javax.swing.JPanel {
                 c.setBackground(Color.RED);
             }
             //add operator logo
-            ((JLabel)c).setIcon(OperatorUtil.getOperator(sms.getOperator()).getIcon());
+            Operator operator = OperatorUtil.getOperator(sms.getOperator());
+            ((JLabel)c).setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             ((JLabel)c).setToolTipText(wrapToHTML(sms.getText()));
             

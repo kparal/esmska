@@ -188,7 +188,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         } else {
             nameTextField.setText(contact.getName());
             numberTextField.setText(contact.getNumber());
-            operatorComboBox.setSelectedOperator(OperatorUtil.getOperator(contact.getOperator()));
+            operatorComboBox.setSelectedOperator(contact.getOperator());
         }
     }
     
@@ -197,8 +197,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         Contact c = new Contact();
         c.setName(nameTextField.getText());
         c.setNumber(numberTextField.getText());
-        Operator operator = operatorComboBox.getSelectedOperator();
-        c.setOperator(operator != null ? operator.getName() : null);
+        c.setOperator(operatorComboBox.getSelectedOperatorName());
         return c;
     }
     

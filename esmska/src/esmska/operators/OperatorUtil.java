@@ -19,7 +19,7 @@ public class OperatorUtil {
      * @param name Name of the operator. Search is case sensitive.
      * @return Operator implementation, when an operator with such name is found.
      *         If multiple such operators are found, returns the first one found.
-     *         Return null if no operator is found or provided name was null.
+     *         Returns null if no operator is found or provided name was null.
      */
     public static Operator getOperator(String name) {
         if (name == null)

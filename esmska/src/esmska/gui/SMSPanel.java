@@ -124,8 +124,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** updates name according to number and operator */
     private boolean lookupContact() {
         String number = smsNumberTextField.getText();
-        Operator operator = operatorComboBox.getSelectedOperator();
-        String operatorName = operator != null ? operator.getName() : null;
+        String operatorName = operatorComboBox.getSelectedOperatorName();
         
         //TODO find out if neccessary
         // skip if already selected right contact
@@ -179,7 +178,7 @@ public class SMSPanel extends javax.swing.JPanel {
         if (count == 1) {
             Contact c = contacts.iterator().next();
             smsNumberTextField.setText(c.getNumber());
-            operatorComboBox.setSelectedOperator(OperatorUtil.getOperator(c.getOperator()));
+            operatorComboBox.setSelectedOperator(c.getOperator());
             nameLabel.setText(c.getName());
         } else if (count < 1) {
             nameLabel.setText(null);
@@ -207,9 +206,8 @@ public class SMSPanel extends javax.swing.JPanel {
         Set<Contact> set = new HashSet<Contact>();
         set.addAll(contacts);
         if (count < 1) {
-            Operator operator = operatorComboBox.getSelectedOperator();
             set.add(new Contact(nameLabel.getText(), smsNumberTextField.getText(),
-                    operator != null ? operator.getName() : ""));
+                    operatorComboBox.getSelectedOperatorName()));
         }
         envelope.setContacts(set);
         
@@ -224,7 +222,7 @@ public class SMSPanel extends javax.swing.JPanel {
         smsNumberTextField.setText(sms.getNumber());
         smsTextPane.setText(sms.getText());
         if (sms.getOperator() != null) {
-            operatorComboBox.setSelectedOperator(OperatorUtil.getOperator(sms.getOperator()));
+            operatorComboBox.setSelectedOperator(sms.getOperator());
         }
         smsTextPane.requestFocusInWindow();
     }
@@ -423,9 +421,8 @@ public class SMSPanel extends javax.swing.JPanel {
         
         //update envelope
         Set<Contact> set = new HashSet<Contact>();
-        Operator operator = operatorComboBox.getSelectedOperator();
         set.add(new Contact(nameLabel.getText(), smsNumberTextField.getText(),
-                operator != null ? operator.getName() : null));
+                operatorComboBox.getSelectedOperatorName()));
         envelope.setContacts(set);
         
         //update send action
@@ -575,9 +572,8 @@ public class SMSPanel extends javax.swing.JPanel {
             //update envelope
             Set<Contact> set = new HashSet<Contact>();
             
-            Operator operator = operatorComboBox.getSelectedOperator();
             set.add(new Contact(nameLabel.getText(), smsNumberTextField.getText(),
-                operator != null ? operator.getName() : null));
+                operatorComboBox.getSelectedOperatorName()));
             envelope.setContacts(set);
             
             //update components

@@ -23,7 +23,7 @@ import java.text.Normalizer;
  * @author ripper
  */
 public class Envelope {
-    private Config config = PersistenceManager.getConfig();;
+    private static final Config config = PersistenceManager.getConfig();;
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
     
@@ -70,6 +70,8 @@ public class Envelope {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());
+            if (operator == null)
+                continue;
             int value = operator.getMaxChars() * operator.getMaxParts();
             value -= getSignatureLength(c); //subtract signature length
             min = Math.min(min,value);
@@ -82,6 +84,8 @@ public class Envelope {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());
+            if (operator == null)
+                continue;
             min = Math.min(min, operator.getSMSLength());
         }
         return min;
@@ -92,6 +96,8 @@ public class Envelope {
         int worstOperator = Integer.MAX_VALUE;
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());
+            if (operator == null)
+                continue;
             worstOperator = Math.min(worstOperator,
                     operator.getSMSLength() - getSignatureLength(c));
         }
@@ -107,7 +113,7 @@ public class Envelope {
         ArrayList<SMS> list = new ArrayList<SMS>();
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());
-            int limit = operator.getMaxChars();
+            int limit = (operator != null ? operator.getMaxChars() : Integer.MAX_VALUE);
             for (int i=0;i<text.length();i+=limit) {
                 String cutText = text.substring(i,Math.min(i+limit,text.length()));
                 SMS sms = new SMS();
@@ -128,7 +134,7 @@ public class Envelope {
     /** get length of signature needed to be substracted from message length */
     private int getSignatureLength(Contact c) {
         Operator operator = OperatorUtil.getOperator(c.getOperator());
-        if (config.isUseSenderID() &&
+        if (operator != null && config.isUseSenderID() &&
                 config.getSenderName() != null &&
                 config.getSenderName().length() != 0) {
             return operator.getSignatureExtraLength() + config.getSenderName().length();
