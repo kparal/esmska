@@ -123,9 +123,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** updates name according to number and operator */
     private boolean lookupContact() {
-        String prefix = prefixComboBox.getSelectedPrefix();
-        prefix = (prefix != null ? prefix : "");
-        String number = prefix + smsNumberTextField.getText();
+        String number = smsNumberTextField.getText();
         Operator operator = operatorComboBox.getSelectedOperator();
         String operatorName = operator != null ? operator.getName() : null;
         
@@ -176,20 +174,11 @@ public class SMSPanel extends javax.swing.JPanel {
             throw new NullPointerException("contacts");
 
         int count = contacts.size();
-        smsNumberTextField.setToolTipText("Telefonní číslo kontaktu bez předčíslí země");
+        smsNumberTextField.setToolTipText("Telefonní číslo kontaktu včetně předčíslí země");
         
         if (count == 1) {
             Contact c = contacts.iterator().next();
-            String prefix = OperatorUtil.getCountryPrefix(c.getNumber());
-            if (prefix != null) {
-                prefixComboBox.setSelectedPrefix(prefix);
-                smsNumberTextField.setText(c.getNumber().substring(prefix.length()));
-            } else {
-                prefixComboBox.setSelectedPrefix(null);
-                smsNumberTextField.setText(c.getNumber());
-                smsNumberTextField.setToolTipText("Telefonní číslo kontaktu včetně předčíslí země");
-            }
-            prefixComboBox.setVisible(prefix != null);
+            smsNumberTextField.setText(c.getNumber());
             operatorComboBox.setSelectedOperator(OperatorUtil.getOperator(c.getOperator()));
             nameLabel.setText(c.getName());
         } else if (count < 1) {
@@ -205,7 +194,6 @@ public class SMSPanel extends javax.swing.JPanel {
             nameLabel.setToolTipText(tooltip);
             smsNumberTextField.setText("");
             smsNumberTextField.setToolTipText(tooltip);
-            prefixComboBox.setSelectedPrefix(null);
         } else {
             if (sendLabel.equals(nameLabel.getText())) {
                 nameLabel.setText("");
@@ -214,16 +202,13 @@ public class SMSPanel extends javax.swing.JPanel {
         }
         smsNumberTextField.setEnabled(! multiSendMode);
         operatorComboBox.setEnabled(! multiSendMode);
-        prefixComboBox.setEnabled(! multiSendMode);
         
         //update envelope
         Set<Contact> set = new HashSet<Contact>();
         set.addAll(contacts);
         if (count < 1) {
             Operator operator = operatorComboBox.getSelectedOperator();
-            String prefix = prefixComboBox.getSelectedPrefix();
-            prefix = (prefix != null ? prefix : "");
-            set.add(new Contact(nameLabel.getText(), prefix + smsNumberTextField.getText(),
+            set.add(new Contact(nameLabel.getText(), smsNumberTextField.getText(),
                     operator != null ? operator.getName() : ""));
         }
         envelope.setContacts(set);
@@ -236,16 +221,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** set sms to display and edit */
     public void setSMS(SMS sms) {
         nameLabel.setText(sms.getName());
-        String prefix = OperatorUtil.getCountryPrefix(sms.getNumber());
-        if (prefix != null) {
-            prefixComboBox.setSelectedPrefix(prefix);
-            smsNumberTextField.setText(sms.getNumber().substring(prefix.length()));
-        } else {
-            prefixComboBox.setSelectedPrefix(null);
-            smsNumberTextField.setText(sms.getNumber());
-            smsNumberTextField.setToolTipText("Telefonní číslo kontaktu včetně předčíslí země");
-        }
-        prefixComboBox.setVisible(prefix != null);
+        smsNumberTextField.setText(sms.getNumber());
         smsTextPane.setText(sms.getText());
         if (sms.getOperator() != null) {
             operatorComboBox.setSelectedOperator(OperatorUtil.getOperator(sms.getOperator()));
@@ -300,7 +276,6 @@ public class SMSPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         operatorComboBox = new esmska.gui.OperatorComboBox();
-        prefixComboBox = new esmska.gui.CountryPrefixComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Zpráva"));
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -316,7 +291,7 @@ public class SMSPanel extends javax.swing.JPanel {
         smsProgressBar.setMaximum(1000);
         smsProgressBar.setToolTipText("Graficky zobrazuje zbývající volné místo ve zprávě");
 
-        smsNumberTextField.setColumns(11);
+        smsNumberTextField.setColumns(12);
         smsNumberTextField.setToolTipText("Telefonní číslo kontaktu bez předčíslí země");
         smsNumberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -371,12 +346,6 @@ public class SMSPanel extends javax.swing.JPanel {
 
     operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
 
-    prefixComboBox.addItemListener(new java.awt.event.ItemListener() {
-        public void itemStateChanged(java.awt.event.ItemEvent evt) {
-            prefixComboBoxItemStateChanged(evt);
-        }
-    });
-
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -397,11 +366,9 @@ public class SMSPanel extends javax.swing.JPanel {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(sendButton))
                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                    .addComponent(prefixComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(smsNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(smsNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+                    .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                     .addComponent(nameLabel)
                     .addGap(115, 115, 115)))
@@ -416,9 +383,8 @@ public class SMSPanel extends javax.swing.JPanel {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel4)
-                .addComponent(prefixComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(smsNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(smsNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -458,9 +424,7 @@ public class SMSPanel extends javax.swing.JPanel {
         //update envelope
         Set<Contact> set = new HashSet<Contact>();
         Operator operator = operatorComboBox.getSelectedOperator();
-        String prefix = prefixComboBox.getSelectedPrefix();
-        prefix = (prefix != null ? prefix : "");
-        set.add(new Contact(nameLabel.getText(), prefix + smsNumberTextField.getText(),
+        set.add(new Contact(nameLabel.getText(), smsNumberTextField.getText(),
                 operator != null ? operator.getName() : null));
         envelope.setContacts(set);
         
@@ -471,10 +435,6 @@ public class SMSPanel extends javax.swing.JPanel {
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         smsTextPane.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
-
-    private void prefixComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_prefixComboBoxItemStateChanged
-        smsNumberTextFieldKeyReleased(null);
-    }//GEN-LAST:event_prefixComboBoxItemStateChanged
     
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
@@ -616,9 +576,7 @@ public class SMSPanel extends javax.swing.JPanel {
             Set<Contact> set = new HashSet<Contact>();
             
             Operator operator = operatorComboBox.getSelectedOperator();
-            String prefix = prefixComboBox.getSelectedPrefix();
-            prefix = (prefix != null ? prefix : "");
-            set.add(new Contact(nameLabel.getText(), prefix + smsNumberTextField.getText(),
+            set.add(new Contact(nameLabel.getText(), smsNumberTextField.getText(),
                 operator != null ? operator.getName() : null));
             envelope.setContacts(set);
             
@@ -749,7 +707,6 @@ public class SMSPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
     private esmska.gui.OperatorComboBox operatorComboBox;
-    private esmska.gui.CountryPrefixComboBox prefixComboBox;
     private javax.swing.JButton sendButton;
     private javax.swing.JLabel smsCounterLabel;
     javax.swing.JTextField smsNumberTextField;

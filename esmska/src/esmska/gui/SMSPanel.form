@@ -44,11 +44,9 @@
                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="prefixComboBox" min="-2" pref="70" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="smsNumberTextField" pref="101" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="operatorComboBox" pref="81" max="32767" attributes="0"/>
+                      <Component id="smsNumberTextField" pref="125" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="operatorComboBox" pref="133" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
@@ -69,9 +67,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="prefixComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="smsNumberTextField" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="operatorComboBox" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="smsNumberTextField" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -110,7 +107,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="smsNumberTextField">
       <Properties>
-        <Property name="columns" type="int" value="11"/>
+        <Property name="columns" type="int" value="12"/>
         <Property name="toolTipText" type="java.lang.String" value="Telefonn&#xed; &#x10d;&#xed;slo kontaktu bez p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;"/>
       </Properties>
       <Events>
@@ -176,11 +173,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBox.addActionListener(new OperatorComboBoxActionListener());"/>
       </AuxValues>
-    </Component>
-    <Component class="esmska.gui.CountryPrefixComboBox" name="prefixComboBox">
-      <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="prefixComboBoxItemStateChanged"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
