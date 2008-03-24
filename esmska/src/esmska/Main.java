@@ -63,12 +63,12 @@ public class Main {
             PersistenceManager pm = PersistenceManager.getInstance();
             try {
                 pm.loadConfig();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not load config file", ex);
             }
             try {
                 pm.loadOperators();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not load operators", ex);
             }
             try {
@@ -86,7 +86,7 @@ public class Main {
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not load history file", ex);
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not create program dir or read config files", ex);
             JOptionPane.showMessageDialog(null, "Nepodařilo se vytvořit adresář " +
                     "nebo číst z adresáře s konfigurací!",
@@ -96,7 +96,7 @@ public class Main {
         //set L&F
         try {
             ThemeManager.setLaF();
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not set Look and Feel", ex);
         }
         
