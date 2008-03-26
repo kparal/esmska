@@ -319,20 +319,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="useSenderIDCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" max="-2" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="senderNumberTextField" max="32767" attributes="1"/>
-                                  <Component id="senderNameTextField" alignment="1" min="-2" pref="136" max="-2" attributes="1"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="senderNumberTextField" min="-2" max="-2" attributes="1"/>
+                                  <Component id="senderNameTextField" alignment="0" min="-2" max="-2" attributes="1"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -340,8 +340,13 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="countryPrefixTextField" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="operatorFilterTextField" pref="190" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="91" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -354,8 +359,13 @@
                           <Component id="countryPrefixTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="operatorFilterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="useSenderIDCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="senderNumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -365,7 +375,7 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="senderNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="179" max="32767" attributes="0"/>
+                      <EmptySpace pref="157" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -373,8 +383,8 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="useSenderIDCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="112"/>
-                <Property name="text" type="java.lang.String" value="P&#x159;ipojovat k SMS podpis odesilatele u podporuj&#xed;c&#xed;ch oper&#xe1;tor&#x16f;"/>
+                <Property name="mnemonic" type="int" value="100"/>
+                <Property name="text" type="java.lang.String" value="P&#x159;ipojovat ke zpr&#xe1;v&#x11b; podpis odesilatele"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i p&#x159;ipojen&#xed; podpisu p&#x159;ijde SMS adres&#xe1;tovi ze zadan&#xe9;ho &#x10d;&#xed;sla&lt;br&gt;&#xa;a podepsan&#xe1; dan&#xfd;m jm&#xe9;nem. Tuto funkci podporuj&#xed; pouze n&#x11b;kte&#x159;&#xed; oper&#xe1;to&#x159;i.&#xa;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
@@ -449,6 +459,28 @@
                 <Property name="text" type="java.lang.String" value="V&#xfd;choz&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;:"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="countryPrefixTextField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="operatorFilterTextField">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;V seznamu oper&#xe1;tor&#x16f; budou zobrazeni pouze ti, kte&#x159;&#xed; budou&lt;br&gt;&#xa;obsahovat ve sv&#xe9;m n&#xe1;zvu vzor zadan&#xfd; v tomto poli. Jednodu&#x161;e tak&lt;br&gt;&#xa;lze nap&#x159;&#xed;klad zobrazit pouze oper&#xe1;tory pro zemi XX zad&#xe1;n&#xed;m vzoru [XX].&lt;br&gt;&#xa;Lze zadat v&#xed;ce vzor&#x16f; odd&#x11b;len&#xfd;ch &#x10d;&#xe1;rkou.&#xa;&lt;/html&gt;"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="config" sourcePath="${operatorFilter}" target="operatorFilterTextField" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel8">
+              <Properties>
+                <Property name="displayedMnemonic" type="int" value="116"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="operatorFilterTextField"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Zobrazovat pouze oper&#xe1;tory maj&#xed;c&#xed; v n&#xe1;zvu:"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="operatorFilterTextField" name="toolTipText" type="property"/>
                 </Property>
               </Properties>
             </Component>

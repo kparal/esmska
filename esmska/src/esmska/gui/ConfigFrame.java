@@ -128,6 +128,8 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         countryPrefixTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        operatorFilterTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -305,8 +307,8 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         tabbedPane.addTab("Vzhled", jPanel3);
 
-        useSenderIDCheckBox.setMnemonic('p');
-        useSenderIDCheckBox.setText("Připojovat k SMS podpis odesilatele u podporujících operátorů");
+        useSenderIDCheckBox.setMnemonic('d');
+        useSenderIDCheckBox.setText("Připojovat ke zprávě podpis odesilatele");
         useSenderIDCheckBox.setToolTipText("<html>\nPři připojení podpisu přijde SMS adresátovi ze zadaného čísla<br>\na podepsaná daným jménem. Tuto funkci podporují pouze někteří operátoři.\n</html>");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${useSenderID}"), useSenderIDCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
@@ -349,6 +351,16 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel2.setText("Výchozí předčíslí země:");
         jLabel2.setToolTipText(countryPrefixTextField.getToolTipText());
 
+        operatorFilterTextField.setToolTipText("<html>\nV seznamu operátorů budou zobrazeni pouze ti, kteří budou<br>\nobsahovat ve svém názvu vzor zadaný v tomto poli. Jednoduše tak<br>\nlze například zobrazit pouze operátory pro zemi XX zadáním vzoru [XX].<br>\nLze zadat více vzorů oddělených čárkou.\n</html>");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${operatorFilter}"), operatorFilterTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabel8.setDisplayedMnemonic('t');
+        jLabel8.setLabelFor(operatorFilterTextField);
+        jLabel8.setText("Zobrazovat pouze operátory mající v názvu:");
+        jLabel8.setToolTipText(operatorFilterTextField.getToolTipText());
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -363,15 +375,22 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(senderNumberTextField)
-                            .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                        .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(operatorFilterTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
+                .addContainerGap())
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3});
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -380,8 +399,12 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(operatorFilterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(useSenderIDCheckBox)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -389,7 +412,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Operátoři", jPanel2);
@@ -485,10 +508,12 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JComboBox lafComboBox;
+    private javax.swing.JTextField operatorFilterTextField;
     private javax.swing.JCheckBox rememberHistoryCheckBox;
     private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;

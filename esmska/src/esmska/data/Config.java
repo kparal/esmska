@@ -36,6 +36,7 @@ public class Config extends Object implements Serializable {
     private boolean startCentered = false;
     private boolean toolbarVisible = false;
     private String countryPrefix = "";
+    private String operatorFilter = "";
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -128,6 +129,10 @@ public class Config extends Object implements Serializable {
     
     public String getCountryPrefix() {
         return countryPrefix;
+    }
+
+    public String getOperatorFilter() {
+        return operatorFilter;
     }
     
     // </editor-fold>
@@ -245,6 +250,12 @@ public class Config extends Object implements Serializable {
         String old = this.countryPrefix;
         this.countryPrefix = countryPrefix;
         changeSupport.firePropertyChange("countryPrefix", old, countryPrefix);
+    }
+    
+    public void setOperatorFilter(String operatorFilter) {
+        String old = this.operatorFilter;
+        this.operatorFilter = operatorFilter;
+        changeSupport.firePropertyChange("operatorFilter", old, operatorFilter);
     }
     
     // </editor-fold>
