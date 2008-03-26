@@ -26,12 +26,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
 
 /** Load and store settings and data
  *
  * @author ripper
  */
 public class PersistenceManager {
+    private static final Logger logger = Logger.getLogger(PersistenceManager.class.getName());
     private static PersistenceManager persistenceManager;
     
     private static final String PROGRAM_DIRNAME = "esmska";
@@ -132,11 +136,12 @@ public class PersistenceManager {
         //store current program version into config
         config.setVersion(Config.getLatestVersion());
         
-        CONFIG_FILE.createNewFile();
+        File temp = createTempFile();
         XMLEncoder xmlEncoder = new XMLEncoder(
-                new BufferedOutputStream(new FileOutputStream(CONFIG_FILE)));
+                new BufferedOutputStream(new FileOutputStream(temp)));
         xmlEncoder.writeObject(config);
         xmlEncoder.close();
+        moveFileSafely(temp, CONFIG_FILE);
     }
     
     /** Load program configuration */
@@ -153,9 +158,11 @@ public class PersistenceManager {
     
     /** Save contacts */
     public void saveContacts() throws IOException {
-        ExportManager.exportContacts(contacts, CONTACTS_FILE);
+        File temp = createTempFile();
+        ExportManager.exportContacts(contacts, temp);
+        moveFileSafely(temp, CONTACTS_FILE);
     }
-    
+       
     /** Load contacts */
     public void loadContacts() throws Exception {
         if (CONTACTS_FILE.exists()) {
@@ -168,7 +175,9 @@ public class PersistenceManager {
     
     /** Save sms queue */
     public void saveQueue() throws IOException {
-        ExportManager.exportQueue(queue, QUEUE_FILE);
+        File temp = createTempFile();
+        ExportManager.exportQueue(queue, temp);
+        moveFileSafely(temp, QUEUE_FILE);
     }
     
     /** Load sms queue */
@@ -182,7 +191,9 @@ public class PersistenceManager {
     
     /** Save sms history */
     public void saveHistory() throws IOException {
-        ExportManager.exportHistory(history.getRecords(), HISTORY_FILE);
+        File temp = createTempFile();
+        ExportManager.exportHistory(history.getRecords(), temp);
+        moveFileSafely(temp, HISTORY_FILE);
     }
     
     /** Load sms history */
@@ -203,5 +214,43 @@ public class PersistenceManager {
         } else {
             throw new IOException("Operators directory doesn't exist.");
         }
+    }
+
+    /** Moves file from srcFile to destFile safely (using backup of destFile).
+     * If move fails, exception is thrown and attempt to restore destFile from
+     * backup is made.
+     */
+    private void moveFileSafely(File srcFile, File destFile) throws IOException {
+        File backup = backupFile(destFile);
+        try {
+            FileUtils.moveFile(srcFile, destFile);
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Moving of " + srcFile.getAbsolutePath() + " to " +
+                    destFile.getAbsolutePath() + " failed, trying to restore from backup");
+            FileUtils.deleteQuietly(destFile);
+            FileUtils.moveFile(backup, destFile);
+            throw ex;
+        }
+        FileUtils.deleteQuietly(backup);
+    }
+
+    
+    /** Create temp file and return it. */
+    private File createTempFile() throws IOException {
+        return File.createTempFile("esmska", null);
+    }
+    
+    /** Copies original file to backup file with same filename, but ending with "~".
+     * DELETES original file!
+     * @return newly created backup file, or null if original file doesn't exist
+     */
+    private File backupFile(File file) throws IOException {
+        if (!file.exists())
+            return null;
+        String backupName = file.getAbsolutePath() + "~";
+        File backup = new File(backupName);
+        FileUtils.copyFile(file, backup);
+        file.delete();
+        return backup;
     }
 }

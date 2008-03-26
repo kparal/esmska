@@ -349,7 +349,7 @@ public class MainFrame extends javax.swing.JFrame {
             saveQueue();
             saveHistory();
         } catch (Throwable t) {
-            logger.log(Level.SEVERE, "Exception during saving", t);
+            logger.log(Level.SEVERE, "Serious error during saving", t);
         } finally {
             if (!saveOk) { //some data were not saved
                 logger.warning("Some config files were not saved");
