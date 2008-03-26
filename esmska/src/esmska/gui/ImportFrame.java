@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
+import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import java.awt.event.ActionListener;
@@ -102,7 +103,6 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         dreamcomSEPanel = new javax.swing.JPanel();
         fileTextFieldDreamcomSE = new javax.swing.JTextField();
         browseButton1 = new javax.swing.JButton();
@@ -111,13 +111,12 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         resultsPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         contactList = new javax.swing.JList();
         jLabel8 = new javax.swing.JLabel();
-        skipExistingCheckBox = new javax.swing.JCheckBox();
+        validOperatorCheckBox = new javax.swing.JCheckBox();
         nextButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         backButton = new javax.swing.JButton();
@@ -255,9 +254,6 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
         jLabel9.setText("<html>\nProgram předpokládá, že soubor je v kódování windows-1250 (výchozí kódování souborů pro české MS Windows).\n</html>");
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning-32.png"))); // NOI18N
-        jLabel15.setText("<html>\nBudou importovány pouze kontakty s operátory podporovanými Esmskou.\n</html>");
-
         javax.swing.GroupLayout kubikPanelLayout = new javax.swing.GroupLayout(kubikPanel);
         kubikPanel.setLayout(kubikPanelLayout);
         kubikPanelLayout.setHorizontalGroup(
@@ -272,9 +268,8 @@ public class ImportFrame extends javax.swing.JFrame {
                         .addComponent(browseButton))
                     .addComponent(jLabel5)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
                 .addContainerGap())
         );
         kubikPanelLayout.setVerticalGroup(
@@ -291,12 +286,10 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         cardPanel.add(kubikPanel, "kubikPanel");
@@ -322,9 +315,6 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
         jLabel14.setText("<html>\nProgram předpokládá, že soubor je v kódování windows-1250 (výchozí kódování souborů pro české MS Windows).\n</html>");
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/warning-32.png"))); // NOI18N
-        jLabel16.setText("<html>\nBudou importovány pouze kontakty s operátory podporovanými Esmskou.\n</html>");
-
         javax.swing.GroupLayout dreamcomSEPanelLayout = new javax.swing.GroupLayout(dreamcomSEPanel);
         dreamcomSEPanel.setLayout(dreamcomSEPanelLayout);
         dreamcomSEPanelLayout.setHorizontalGroup(
@@ -339,9 +329,8 @@ public class ImportFrame extends javax.swing.JFrame {
                         .addComponent(fileTextFieldDreamcomSE, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browseButton1))
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dreamcomSEPanelLayout.setVerticalGroup(
@@ -358,17 +347,15 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         cardPanel.add(dreamcomSEPanel, "dreamcomSEPanel");
 
-        jLabel1.setText("Byly nalezeny následující kontakty:");
+        jLabel1.setText("Byly nalezeny následující nové kontakty:");
 
         contactList.setModel(new DefaultListModel());
         contactList.setCellRenderer(new DefaultListCellRenderer() {
@@ -386,13 +373,12 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         jLabel8.setText("Pokud chcete tyto kontakty importovat, stiskněte Importovat.");
 
-        skipExistingCheckBox.setSelected(true);
-        skipExistingCheckBox.setText("Neimportovat již existující kontakty");
-        skipExistingCheckBox.setToolTipText("<html>\nPokud budou v importovaném souboru nalezeny kontakty<br>\njiž v Esmsce existující, nezobrazí se ve výše uvedeném seznamu<br>\na nebudou importovány do adresáře Esmsky\n</html>");
-        skipExistingCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        skipExistingCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                skipExistingCheckBoxActionPerformed(evt);
+        validOperatorCheckBox.setSelected(true);
+        validOperatorCheckBox.setText("Importovat pouze kontakty se známým operátorem");
+        validOperatorCheckBox.setToolTipText("<html>\nPokud je pole zatrhnuto, zobrazí se v seznamu a budou importovány<br>\npouze ty kontakty, s jejichž operátory umí tento program pracovat\n</html>");
+        validOperatorCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                validOperatorCheckBoxStateChanged(evt);
             }
         });
 
@@ -403,9 +389,9 @@ public class ImportFrame extends javax.swing.JFrame {
             .addGroup(resultsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(validOperatorCheckBox)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                    .addComponent(skipExistingCheckBox)
                     .addComponent(jLabel8))
                 .addContainerGap())
         );
@@ -415,12 +401,12 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(skipExistingCheckBox)
+                .addComponent(validOperatorCheckBox)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addGap(128, 128, 128))
+                .addContainerGap())
         );
 
         cardPanel.add(resultsPanel, "resultsPanel");
@@ -583,29 +569,29 @@ public class ImportFrame extends javax.swing.JFrame {
             fileTextFieldDreamcomSE.setText(file);
         }
     }//GEN-LAST:event_browseButton1ActionPerformed
-    
-    private void skipExistingCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipExistingCheckBoxActionPerformed
-        if (skipExistingCheckBox.isSelected()) {
-            removeExistingContacts();
-        } else {
-            DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
-            contactListModel.clear();
-            try {
-                for (Contact c : worker.get())
-                    contactListModel.addElement(c);
-            } catch (Exception ex) {
-                logger.log(Level.SEVERE, "Problem getting new contacts", ex);
-            }
-        }
         
-    }//GEN-LAST:event_skipExistingCheckBoxActionPerformed
-    
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         String file = doBrowseButton();
         if (file != null) {
             fileTextFieldKubik.setText(file);
         }
     }//GEN-LAST:event_browseButtonActionPerformed
+
+    private void validOperatorCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_validOperatorCheckBoxStateChanged
+        if (validOperatorCheckBox.isSelected()) {
+            removeInvalidOperators();
+        } else {
+            DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
+            contactListModel.clear();
+            try {
+                for (Contact c : worker.get())
+                    contactListModel.addElement(c);
+                removeExistingContacts();
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Problem getting new contacts", ex);
+            }
+        }
+    }//GEN-LAST:event_validOperatorCheckBoxStateChanged
     
     /** browse for file */
     private String doBrowseButton() {
@@ -644,6 +630,20 @@ public class ImportFrame extends javax.swing.JFrame {
             contactListModel.removeElement(skip);
     }
     
+    /** remove contacts without known operator */
+    private void removeInvalidOperators() {
+        DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
+        Object[] imported = contactListModel.toArray();
+        ArrayList<Object> skipped = new ArrayList<Object>();
+        for (Object impor : imported) {
+            Contact c = (Contact) impor;
+            if (OperatorUtil.getOperator(c.getOperator()) == null)
+                skipped.add(c);
+        }
+        for (Object skip : skipped)
+            contactListModel.removeElement(skip);
+    }
+    
     /** handle end of parsing contacts */
     private class ParseContactsFinishedListener implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent evt) {
@@ -656,8 +656,8 @@ public class ImportFrame extends javax.swing.JFrame {
                 contactListModel.clear();
                 for (Contact c : worker.get())
                     contactListModel.addElement(c);
-                if (skipExistingCheckBox.isSelected())
-                    removeExistingContacts();
+                removeExistingContacts();
+                validOperatorCheckBoxStateChanged(null);
                 
                 nextButton.setText("Importovat");
                 nextButton.setIcon(new ImageIcon(
@@ -699,8 +699,6 @@ public class ImportFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -719,7 +717,7 @@ public class ImportFrame extends javax.swing.JFrame {
     private javax.swing.JButton nextButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JPanel resultsPanel;
-    private javax.swing.JCheckBox skipExistingCheckBox;
+    private javax.swing.JCheckBox validOperatorCheckBox;
     // End of variables declaration//GEN-END:variables
     
 }

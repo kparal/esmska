@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import javax.swing.SwingWorker;
 import esmska.data.Contact;
+import esmska.gui.FormChecker;
 
 /** Parse contacts from csv file of different programs. Works in background thread.
  * Returns collection of parsed contacts.
@@ -81,12 +82,26 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     operator = reader.get(2);
             }
             
+            if (!FormChecker.checkContactName(name))
+                continue;
             c.setName(name);
+            if (!FormChecker.checkSMSNumber(number))
+                continue;
             c.setNumber(number);
             //convert known operators to our operators
             switch (type) {
                 case KUBIK_DREAMCOM_FILE:
+                    if (operator.startsWith("Oskar")) {
+                        operator = "[CZ]Vodafone";
+                    } else if (operator.startsWith("Eurotel")) {
+                        operator = "[CZ]O2";
+                    }
                 case DREAMCOM_SE_FILE:
+                    if (operator.startsWith("O2")) {
+                        operator = "[CZ]O2";
+                    } else if (operator.startsWith("Vodafone")) {
+                        operator = "[CZ]Vodafone";
+                    }
                 case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
                     if ("Vodafone".equals(operator)) {
                         operator = "[CZ]Vodafone";

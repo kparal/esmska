@@ -260,9 +260,8 @@
                           </Group>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="1" pref="496" max="32767" attributes="0"/>
-                          <Component id="jLabel15" alignment="0" pref="496" max="32767" attributes="0"/>
-                          <Component id="jLabel9" alignment="1" pref="496" max="32767" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" pref="496" max="32767" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" pref="496" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="1" pref="496" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -283,12 +282,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="102" max="32767" attributes="0"/>
+                      <EmptySpace pref="140" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -339,14 +336,6 @@
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Program p&#x159;edpokl&#xe1;d&#xe1;, &#x17e;e soubor je v k&#xf3;dov&#xe1;n&#xed; windows-1250 (v&#xfd;choz&#xed; k&#xf3;dov&#xe1;n&#xed; soubor&#x16f; pro &#x10d;esk&#xe9; MS Windows).&#xa;&lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel15">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/warning-32.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Budou importov&#xe1;ny pouze kontakty s oper&#xe1;tory podporovan&#xfd;mi Esmskou.&#xa;&lt;/html&gt;"/>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="dreamcomSEPanel">
@@ -370,9 +359,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="browseButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel16" alignment="1" pref="496" max="32767" attributes="0"/>
-                          <Component id="jLabel14" alignment="0" pref="496" max="32767" attributes="0"/>
-                          <Component id="jLabel13" alignment="0" pref="496" max="32767" attributes="0"/>
+                          <Component id="jLabel14" alignment="1" pref="496" max="32767" attributes="0"/>
+                          <Component id="jLabel13" alignment="1" pref="496" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -393,12 +381,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                      <EmptySpace pref="148" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -449,14 +435,6 @@
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Program p&#x159;edpokl&#xe1;d&#xe1;, &#x17e;e soubor je v k&#xf3;dov&#xe1;n&#xed; windows-1250 (v&#xfd;choz&#xed; k&#xf3;dov&#xe1;n&#xed; soubor&#x16f; pro &#x10d;esk&#xe9; MS Windows).&#xa;&lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel16">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/warning-32.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Budou importov&#xe1;ny pouze kontakty s oper&#xe1;tory podporovan&#xfd;mi Esmskou.&#xa;&lt;/html&gt;"/>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="resultsPanel">
@@ -470,11 +448,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="validOperatorCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" pref="496" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" pref="496" max="32767" attributes="0"/>
-                          <Component id="skipExistingCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -487,12 +465,12 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="120" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="234" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="skipExistingCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="validOperatorCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -500,7 +478,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Byly nalezeny n&#xe1;sleduj&#xed;c&#xed; kontakty:"/>
+                <Property name="text" type="java.lang.String" value="Byly nalezeny n&#xe1;sleduj&#xed;c&#xed; nov&#xe9; kontakty:"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -530,17 +508,14 @@
                 <Property name="text" type="java.lang.String" value="Pokud chcete tyto kontakty importovat, stiskn&#x11b;te Importovat."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="skipExistingCheckBox">
+            <Component class="javax.swing.JCheckBox" name="validOperatorCheckBox">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Neimportovat ji&#x17e; existuj&#xed;c&#xed; kontakty"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Pokud budou v importovan&#xe9;m souboru nalezeny kontakty&lt;br&gt;&#xa;ji&#x17e; v Esmsce existuj&#xed;c&#xed;, nezobraz&#xed; se ve v&#xfd;&#x161;e uveden&#xe9;m seznamu&lt;br&gt;&#xa;a nebudou importov&#xe1;ny do adres&#xe1;&#x159;e Esmsky&#xa;&lt;/html&gt;"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[0, 0, 0, 0]"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="Importovat pouze kontakty se zn&#xe1;m&#xfd;m oper&#xe1;torem"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Pokud je pole zatrhnuto, zobraz&#xed; se v seznamu a budou importov&#xe1;ny&lt;br&gt;&#xa;pouze ty kontakty, s jejich&#x17e; oper&#xe1;tory um&#xed; tento program pracovat&#xa;&lt;/html&gt;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="skipExistingCheckBoxActionPerformed"/>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="validOperatorCheckBoxStateChanged"/>
               </Events>
             </Component>
           </SubComponents>
