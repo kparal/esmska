@@ -66,4 +66,19 @@
     nbproject/build-impl.xml file. 
 
     -->
+    
+    <target name="-post-jar">
+        <!-- delete defaultly created README.TXT -->
+        <delete file="dist/README.TXT"/>
+        <!-- copy additional files to dist -->
+        <copy todir="dist">
+            <!-- operators -->
+            <fileset dir=".">
+                <include name="operators/**"/>
+            </fileset>
+            <!-- other included files -->
+            <fileset dir="include"/>
+        </copy>
+    </target>
+    
 </project>

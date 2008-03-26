@@ -12,12 +12,9 @@ TMPDIR="/tmp/esmska-packaging.$$"
 mkdir "$TMPDIR"
 mkdir "$TMPDIR/$FINALNAME"
 
-cp "../dist/esmska.jar" "$TMPDIR/$FINALNAME"
-cp -r "../dist/lib" "$TMPDIR/$FINALNAME"
-cp include/* "$TMPDIR/$FINALNAME"
-mkdir "$TMPDIR/$FINALNAME/ikony"
-cp include/ikony/* "$TMPDIR/$FINALNAME/ikony"
+cp -r ../dist/* "$TMPDIR/$FINALNAME/"
 unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/*.bat
+chmod 755 "$TMPDIR/$FINALNAME"/esmska.sh
 
 cd "$TMPDIR"
 zip -rq9 "$FINALNAME.zip" "$FINALNAME"
