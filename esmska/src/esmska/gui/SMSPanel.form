@@ -108,7 +108,7 @@
     <Component class="javax.swing.JTextField" name="smsNumberTextField">
       <Properties>
         <Property name="columns" type="int" value="12"/>
-        <Property name="toolTipText" type="java.lang.String" value="Telefonn&#xed; &#x10d;&#xed;slo kontaktu bez p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Telefonn&#xed; &#x10d;&#xed;slo kontaktu v&#x10d;etn&#x11b; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;.&lt;br&gt;&#xa;P&#x159;e&#x10d;&#xed;sl&#xed; zem&#x11b; nemus&#xed; b&#xfd;t vypln&#x11b;no, pokud je nastaveno&lt;br&gt;&#xa;v&#xfd;choz&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; v nastaven&#xed; programu.&#xa;&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smsNumberTextFieldKeyReleased"/>

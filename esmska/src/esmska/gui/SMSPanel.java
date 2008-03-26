@@ -6,12 +6,11 @@
 
 package esmska.gui;
 
+import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Envelope;
 import esmska.gui.FormChecker;
 import esmska.data.SMS;
-import esmska.operators.Operator;
-import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
@@ -68,7 +67,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** support for undo and redo in sms text pane */
     private UndoManager smsTextUndoManager = new UndoManager();
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
-    private TreeSet<Operator> operators = PersistenceManager.getOperators();
+    private Config config = PersistenceManager.getConfig();
     
     private UndoAction undoAction = new UndoAction();
     private RedoAction redoAction = new RedoAction();
@@ -125,6 +124,8 @@ public class SMSPanel extends javax.swing.JPanel {
     /** updates name according to number and operator */
     private boolean lookupContact() {
         String number = smsNumberTextField.getText();
+        if (!number.startsWith("+"))
+            number = config.getCountryPrefix() + number;
         String operatorName = operatorComboBox.getSelectedOperatorName();
         
         //TODO find out if neccessary
@@ -174,7 +175,6 @@ public class SMSPanel extends javax.swing.JPanel {
             throw new NullPointerException("contacts");
 
         int count = contacts.size();
-        smsNumberTextField.setToolTipText("Telefonní číslo kontaktu včetně předčíslí země");
         
         if (count == 1) {
             Contact c = contacts.iterator().next();
@@ -193,7 +193,6 @@ public class SMSPanel extends javax.swing.JPanel {
             nameLabel.setText(sendLabel);
             nameLabel.setToolTipText(tooltip);
             smsNumberTextField.setText("");
-            smsNumberTextField.setToolTipText(tooltip);
         } else {
             if (sendLabel.equals(nameLabel.getText())) {
                 nameLabel.setText("");
@@ -291,7 +290,7 @@ public class SMSPanel extends javax.swing.JPanel {
         smsProgressBar.setToolTipText("Graficky zobrazuje zbývající volné místo ve zprávě");
 
         smsNumberTextField.setColumns(12);
-        smsNumberTextField.setToolTipText("Telefonní číslo kontaktu bez předčíslí země");
+        smsNumberTextField.setToolTipText("<html>\nTelefonní číslo kontaktu včetně předčíslí země.<br>\nPřečíslí země nemusí být vyplněno, pokud je nastaveno<br>\nvýchozí předčíslí v nastavení programu.\n</html>");
         smsNumberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 smsNumberTextFieldKeyReleased(evt);
@@ -422,7 +421,10 @@ public class SMSPanel extends javax.swing.JPanel {
         
         //update envelope
         Set<Contact> set = new HashSet<Contact>();
-        set.add(new Contact(nameLabel.getText(), smsNumberTextField.getText(),
+        String number = smsNumberTextField.getText();
+        if (!number.startsWith("+"))
+            number = config.getCountryPrefix() + number;
+        set.add(new Contact(nameLabel.getText(), number,
                 operatorComboBox.getSelectedOperatorName()));
         envelope.setContacts(set);
         

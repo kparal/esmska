@@ -6,10 +6,10 @@
 
 package esmska.gui;
 
+import esmska.data.Config;
 import esmska.gui.FormChecker;
-import esmska.operators.Operator;
 import esmska.data.Contact;
-import esmska.operators.OperatorUtil;
+import esmska.persistence.PersistenceManager;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -23,6 +23,8 @@ import javax.swing.border.Border;
 public class EditContactPanel extends javax.swing.JPanel {
     private static final Border fieldBorder = new JTextField().getBorder();
     private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);
+    
+    private Config config = PersistenceManager.getConfig();
     
     /**
      * Creates new form EditContactPanel
@@ -180,7 +182,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     public void setContact(Contact contact) {
         if (contact == null) {
             nameTextField.setText(null);
-            numberTextField.setText(null);
+            numberTextField.setText(config.getCountryPrefix());
             if (operatorComboBox.getModel().getSize() > 0)
                 operatorComboBox.setSelectedIndex(0);
             else

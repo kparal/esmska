@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.data.Config;
 import esmska.data.Icons;
 import esmska.data.SMS;
 import esmska.operators.Operator;
@@ -26,7 +27,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /** SMS queue panel
@@ -39,6 +39,7 @@ public class QueuePanel extends javax.swing.JPanel {
     
     private static final String RES = "/esmska/resources/";
     private List<SMS> smsQueue = PersistenceManager.getQueue();
+    private Config config = PersistenceManager.getConfig();
     
     private SMSQueuePauseAction smsQueuePauseAction = new SMSQueuePauseAction();
     private Action deleteSMSAction = new DeleteSMSAction();
@@ -377,10 +378,17 @@ public class QueuePanel extends javax.swing.JPanel {
     }
     
     /** Renderer for items in queue list */
-    private class SMSQueueListRenderer implements ListCellRenderer {
+    private class SMSQueueListRenderer extends DefaultListCellRenderer {
+        @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            Component c = super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
             SMS sms = (SMS)value;
+            
+            //set text
+            String text = sms.toString();
+            if (text.startsWith(config.getCountryPrefix()))
+                text = text.substring(config.getCountryPrefix().length());
+            ((JLabel)c).setText(text);
             //problematic sms colored
             if ((sms.getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
                 c.setBackground(Color.RED);

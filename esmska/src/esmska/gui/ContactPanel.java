@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Icons;
 import esmska.operators.Operator;
@@ -43,7 +44,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
-import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -58,6 +58,7 @@ public class ContactPanel extends javax.swing.JPanel {
     
     private static final String RES = "/esmska/resources/";
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
+    private Config config = PersistenceManager.getConfig();
     
     private Action addContactAction = new AddContactAction();
     private Action editContactAction = new EditContactAction();
@@ -670,16 +671,20 @@ public class ContactPanel extends javax.swing.JPanel {
     }
     
     /** Renderer for items in contact list */
-    private class ContactListRenderer implements ListCellRenderer {
+    private class ContactListRenderer extends DefaultListCellRenderer {
+        @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            Component c = super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
             Contact contact = (Contact)value;
             JLabel label = ((JLabel)c);
             //add operator logo
             Operator operator = OperatorUtil.getOperator(contact.getOperator());
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
-            label.setToolTipText(contact.getNumber());
+            String number = contact.getNumber();
+            if (number.startsWith(config.getCountryPrefix()))
+                number = number.substring(config.getCountryPrefix().length());
+            label.setToolTipText(number);
             //set background on non-matching contacts when searching
             if (!searchContactAction.getSearchString().equals("") &&
                     !searchContactAction.isContactMatched(contact)) {

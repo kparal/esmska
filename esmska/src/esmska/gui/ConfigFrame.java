@@ -9,6 +9,7 @@ package esmska.gui;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import esmska.*;
+import esmska.data.Icons;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -43,10 +44,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         initComponents();
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_H);
-        tabbedPane.setMnemonicAt(2, KeyEvent.VK_V);
+        tabbedPane.setMnemonicAt(2, KeyEvent.VK_P);
         tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-16.png")));
         tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-small.png")));
-//        tabbedPane.setIconAt(2, new ImageIcon(getClass().getResource(RES + "operators/Vodafone.png")));
+        tabbedPane.setIconAt(2, Icons.OPERATOR_DEFAULT);
         closeButton.requestFocusInWindow();
         
         lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
@@ -64,7 +65,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         lafWhenLoaded = (String) lafComboBox.getSelectedItem();
         
         updateThemeComboBox();
-        
+
         fullyInicialized = true;
     }
     
@@ -121,23 +122,17 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         senderNumberTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         senderNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        countryPrefixTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavení - Esmska");
         setIconImage(new ImageIcon(getClass().getResource(RES + "config-48.png")).getImage());
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
 
         rememberQueueCheckBox.setMnemonic('f');
         rememberQueueCheckBox.setText("Ukládat frontu neodeslaných sms");
@@ -311,32 +306,27 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.addTab("Vzhled", jPanel3);
 
         useSenderIDCheckBox.setMnemonic('p');
-        useSenderIDCheckBox.setText("Připojovat podpis odesilatele");
-        useSenderIDCheckBox.setToolTipText("<html>Při připojení podpisu přijde sms adresátovi ze zadaného čísla<br>\na s daným jménem napsaným na konci zprávy</html>");
+        useSenderIDCheckBox.setText("Připojovat k SMS podpis odesilatele u podporujících operátorů");
+        useSenderIDCheckBox.setToolTipText("<html>\nPři připojení podpisu přijde SMS adresátovi ze zadaného čísla<br>\na podepsaná daným jménem. Tuto funkci podporují pouze někteří operátoři.\n</html>");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${useSenderID}"), useSenderIDCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+
+        senderNumberTextField.setColumns(13);
+        senderNumberTextField.setToolTipText("Číslo odesilatele v mezinárodním formátu (začínající na znak \"+\")");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${senderNumber}"), senderNumberTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useSenderIDCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), senderNumberTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jLabel1.setDisplayedMnemonic('l');
         jLabel1.setLabelFor(senderNumberTextField);
         jLabel1.setText("Číslo");
+        jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
 
-        jLabel2.setText("+420");
-
-        senderNumberTextField.setColumns(9);
-        senderNumberTextField.setText(config.getSenderNumber() != null ?
-            config.getSenderNumber().replaceFirst("^\\+420", "") : null);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useSenderIDCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), senderNumberTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        senderNumberTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                senderNumberTextFieldActionPerformed(evt);
-            }
-        });
-
-        senderNameTextField.setToolTipText("<html>Při vyplnění jména je připojeno na konec zprávy,<br>\ntakže je sms ve skutečnosti o něco delší</html>");
+        senderNameTextField.setColumns(13);
+        senderNameTextField.setToolTipText("<html>Při vyplnění jména je jméno vepsáno do zprávy,<br>\ntakže je sms ve skutečnosti o něco delší</html>");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${senderName}"), senderNameTextField, org.jdesktop.beansbinding.BeanProperty.create("text_ON_ACTION_OR_FOCUS_LOST"));
         bindingGroup.addBinding(binding);
@@ -348,13 +338,24 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel3.setText("Jméno");
         jLabel3.setToolTipText(senderNameTextField.getToolTipText());
 
+        countryPrefixTextField.setColumns(5);
+        countryPrefixTextField.setToolTipText("<html>\nMezinárodní předčíslí země, začínající na znak \"+\".<br>\nPři vyplnění se dané předčíslí bude předpokládat u všech čísel, které nebudou<br>\nzadány v mezinárodním formátu. Taktéž se zkrátí zobrazení těchto čísel v mnoha popiscích.\n</html>");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${countryPrefix}"), countryPrefixTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabel2.setDisplayedMnemonic('p');
+        jLabel2.setLabelFor(countryPrefixTextField);
+        jLabel2.setText("Výchozí předčíslí země:");
+        jLabel2.setToolTipText(countryPrefixTextField.getToolTipText());
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(useSenderIDCheckBox)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -362,32 +363,36 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(senderNameTextField))))
-                .addContainerGap(254, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(senderNumberTextField)
+                            .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(useSenderIDCheckBox)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(useSenderIDCheckBox)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
                     .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("Vodafone", jPanel2);
+        tabbedPane.addTab("Operátoři", jPanel2);
 
         closeButton.setMnemonic('z');
         closeButton.setText("Zavřít");
@@ -462,15 +467,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         updateThemeComboBox();
     }//GEN-LAST:event_lafComboBoxActionPerformed
-        
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        senderNumberTextFieldActionPerformed(null);
-    }//GEN-LAST:event_formWindowLostFocus
-        
-    private void senderNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senderNumberTextFieldActionPerformed
-        config.setSenderNumber("+420" + senderNumberTextField.getText());
-    }//GEN-LAST:event_senderNumberTextFieldActionPerformed
-            
+                            
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
         this.dispose();
@@ -480,6 +477,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkUpdatesCheckBox;
     private javax.swing.JButton closeButton;
     private esmska.data.Config config;
+    private javax.swing.JTextField countryPrefixTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

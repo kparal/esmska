@@ -18,9 +18,6 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
-  <Events>
-    <EventHandler event="windowLostFocus" listener="java.awt.event.WindowFocusListener" parameters="java.awt.event.WindowEvent" handler="formWindowLostFocus"/>
-  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -313,8 +310,8 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Vodafone">
-                <Property name="tabTitle" type="java.lang.String" value="Vodafone"/>
+              <JTabbedPaneConstraints tabName="Oper&#xe1;to&#x159;i">
+                <Property name="tabTitle" type="java.lang.String" value="Oper&#xe1;to&#x159;i"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -322,9 +319,9 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" max="-2" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="useSenderIDCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" max="-2" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -332,18 +329,19 @@
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="senderNumberTextField" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="senderNameTextField" max="32767" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="senderNumberTextField" max="32767" attributes="1"/>
+                                  <Component id="senderNameTextField" alignment="1" min="-2" pref="136" max="-2" attributes="1"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="countryPrefixTextField" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="254" max="32767" attributes="0"/>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -351,11 +349,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="useSenderIDCheckBox" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="countryPrefixTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="useSenderIDCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="senderNumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -363,7 +365,7 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="senderNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="205" max="32767" attributes="0"/>
+                      <EmptySpace pref="179" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -372,11 +374,23 @@
             <Component class="javax.swing.JCheckBox" name="useSenderIDCheckBox">
               <Properties>
                 <Property name="mnemonic" type="int" value="112"/>
-                <Property name="text" type="java.lang.String" value="P&#x159;ipojovat podpis odesilatele"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;P&#x159;i p&#x159;ipojen&#xed; podpisu p&#x159;ijde sms adres&#xe1;tovi ze zadan&#xe9;ho &#x10d;&#xed;sla&lt;br&gt;&#xa;a s dan&#xfd;m jm&#xe9;nem napsan&#xfd;m na konci zpr&#xe1;vy&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="P&#x159;ipojovat k SMS podpis odesilatele u podporuj&#xed;c&#xed;ch oper&#xe1;tor&#x16f;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i p&#x159;ipojen&#xed; podpisu p&#x159;ijde SMS adres&#xe1;tovi ze zadan&#xe9;ho &#x10d;&#xed;sla&lt;br&gt;&#xa;a podepsan&#xe1; dan&#xfd;m jm&#xe9;nem. Tuto funkci podporuj&#xed; pouze n&#x11b;kte&#x159;&#xed; oper&#xe1;to&#x159;i.&#xa;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${useSenderID}" target="useSenderIDCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="senderNumberTextField">
+              <Properties>
+                <Property name="columns" type="int" value="13"/>
+                <Property name="toolTipText" type="java.lang.String" value="&#x10c;&#xed;slo odesilatele v mezin&#xe1;rodn&#xed;m form&#xe1;tu (za&#x10d;&#xed;naj&#xed;c&#xed; na znak &quot;+&quot;)"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="config" sourcePath="${senderNumber}" target="senderNumberTextField" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+                <BindingProperty name="enabled" source="useSenderIDCheckBox" sourcePath="${selected}" target="senderNumberTextField" targetPath="enabled" updateStrategy="1" immediately="false"/>
               </BindingProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -386,30 +400,15 @@
                   <ComponentRef name="senderNumberTextField"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="+420"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="senderNumberTextField">
-              <Properties>
-                <Property name="columns" type="int" value="9"/>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="config.getSenderNumber() != null ?&#xa;    config.getSenderNumber().replaceFirst(&quot;^\\+420&quot;, &quot;&quot;) : null" type="code"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="senderNumberTextField" name="toolTipText" type="property"/>
                 </Property>
               </Properties>
-              <BindingProperties>
-                <BindingProperty name="enabled" source="useSenderIDCheckBox" sourcePath="${selected}" target="senderNumberTextField" targetPath="enabled" updateStrategy="1" immediately="false"/>
-              </BindingProperties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="senderNumberTextFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="senderNameTextField">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;P&#x159;i vypln&#x11b;n&#xed; jm&#xe9;na je p&#x159;ipojeno na konec zpr&#xe1;vy,&lt;br&gt;&#xa;tak&#x17e;e je sms ve skute&#x10d;nosti o n&#x11b;co del&#x161;&#xed;&lt;/html&gt;"/>
+                <Property name="columns" type="int" value="13"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;P&#x159;i vypln&#x11b;n&#xed; jm&#xe9;na je jm&#xe9;no veps&#xe1;no do zpr&#xe1;vy,&lt;br&gt;&#xa;tak&#x17e;e je sms ve skute&#x10d;nosti o n&#x11b;co del&#x161;&#xed;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${senderName}" target="senderNameTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -427,6 +426,29 @@
                 <Property name="text" type="java.lang.String" value="Jm&#xe9;no"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="senderNameTextField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="countryPrefixTextField">
+              <Properties>
+                <Property name="columns" type="int" value="5"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Mezin&#xe1;rodn&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;, za&#x10d;&#xed;naj&#xed;c&#xed; na znak &quot;+&quot;.&lt;br&gt;&#xa;P&#x159;i vypln&#x11b;n&#xed; se dan&#xe9; p&#x159;ed&#x10d;&#xed;sl&#xed; bude p&#x159;edpokl&#xe1;dat u v&#x161;ech &#x10d;&#xed;sel, kter&#xe9; nebudou&lt;br&gt;&#xa;zad&#xe1;ny v mezin&#xe1;rodn&#xed;m form&#xe1;tu. Takt&#xe9;&#x17e; se zkr&#xe1;t&#xed; zobrazen&#xed; t&#x11b;chto &#x10d;&#xed;sel v mnoha popisc&#xed;ch.&#xa;&lt;/html&gt;"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="config" sourcePath="${countryPrefix}" target="countryPrefixTextField" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="displayedMnemonic" type="int" value="112"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="countryPrefixTextField"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="V&#xfd;choz&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;:"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="countryPrefixTextField" name="toolTipText" type="property"/>
                 </Property>
               </Properties>
             </Component>

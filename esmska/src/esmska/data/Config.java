@@ -35,6 +35,7 @@ public class Config extends Object implements Serializable {
     private boolean rememberHistory = true;
     private boolean startCentered = false;
     private boolean toolbarVisible = false;
+    private String countryPrefix = "";
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -124,6 +125,11 @@ public class Config extends Object implements Serializable {
     public boolean isToolbarVisible() {
         return toolbarVisible;
     }
+    
+    public String getCountryPrefix() {
+        return countryPrefix;
+    }
+    
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
@@ -234,5 +240,12 @@ public class Config extends Object implements Serializable {
         this.toolbarVisible = toolbarVisible;
         changeSupport.firePropertyChange("toolbarVisible", old, toolbarVisible);
     }
+    
+    public void setCountryPrefix(String countryPrefix) {
+        String old = this.countryPrefix;
+        this.countryPrefix = countryPrefix;
+        changeSupport.firePropertyChange("countryPrefix", old, countryPrefix);
+    }
+    
     // </editor-fold>
 }
