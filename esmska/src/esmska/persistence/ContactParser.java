@@ -88,9 +88,9 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                 case KUBIK_DREAMCOM_FILE:
                 case DREAMCOM_SE_FILE:
                 case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
-                    if (operator.equals("Vodafone")) {
+                    if ("Vodafone".equals(operator)) {
                         operator = "[CZ]Vodafone";
-                    } else if (operator.equals("O2")) {
+                    } else if ("O2".equals(operator)) {
                         operator = "[CZ]O2";
                     }
                     break;

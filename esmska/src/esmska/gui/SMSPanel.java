@@ -15,6 +15,7 @@ import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
+import esmska.utils.Nullator;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -140,7 +141,7 @@ public class SMSPanel extends javax.swing.JPanel {
         Contact contact = null;
             for (Contact c : contacts) {
                 if (c.getNumber() != null && c.getNumber().equals(number) &&
-                        c.getOperator() != null && c.getOperator().equals(operatorName)) {
+                        Nullator.isEqual(c.getOperator(), operatorName)) {
                     contact = c;
                     break;
                 }

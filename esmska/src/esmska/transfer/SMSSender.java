@@ -19,6 +19,7 @@ import esmska.operators.Operator;
 import esmska.operators.OperatorInterpreter;
 import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
+import esmska.utils.Nullator;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,8 +57,10 @@ public class SMSSender {
             running = true;
             SMS sms = smsQueue.get(0);
             mainFrame.setTaskRunning(true);
+            String operator = Nullator.isEmpty(sms.getOperator()) ? 
+                "Žádný operátor" : sms.getOperator();
             mainFrame.printStatusMessage("Posílám zprávu pro " + sms
-            + " (" + sms.getOperator() + ") ...", true, Icons.STATUS_INFO);
+            + " (" + operator + ") ...", true, Icons.STATUS_INFO);
             
             //send in worker thread
             smsWorker = new SMSWorker(sms);

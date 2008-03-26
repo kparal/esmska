@@ -413,7 +413,7 @@ public class MainFrame extends javax.swing.JFrame {
         record.setDate(new Date());
         record.setName(sms.getName());
         record.setNumber(sms.getNumber());
-        record.setOperator(sms.getOperator().toString());
+        record.setOperator(sms.getOperator());
         record.setSenderName(sms.getSenderName());
         record.setSenderNumber(sms.getSenderNumber());
         record.setText(sms.getText());

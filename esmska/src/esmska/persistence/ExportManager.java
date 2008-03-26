@@ -106,7 +106,7 @@ public class ExportManager {
                 writer.writeRecord(new String[] {
                     contact.getName(),
                     contact.getNumber(),
-                    contact.getOperator().toString()
+                    contact.getOperator()
                 });
             }
         } finally {
@@ -122,12 +122,12 @@ public class ExportManager {
             writer.writeComment("Fronta sms k odeslání");
             for (SMS sms : queue) {
                 writer.writeRecord(new String[] {
-                    sms.getName() != null ? sms.getName() : "",
+                    sms.getName(),
                     sms.getNumber(),
-                    sms.getOperator().toString(),
+                    sms.getOperator(),
                     sms.getText(),
-                    sms.getSenderName() != null ? sms.getSenderName() : "",
-                    sms.getSenderNumber() != null ? sms.getSenderNumber() : ""
+                    sms.getSenderName(),
+                    sms.getSenderNumber()
                 });
             }
         } finally {
@@ -146,12 +146,12 @@ public class ExportManager {
             for (History.Record record : history) {
                 writer.writeRecord(new String[] {
                     df.format(record.getDate()),
-                    record.getName() != null ? record.getName() : "",
+                    record.getName(),
                     record.getNumber(),
                     record.getOperator(),
                     record.getText(),
-                    record.getSenderName() != null ? record.getSenderName() : "",
-                    record.getSenderNumber() != null ? record.getSenderNumber() : ""
+                    record.getSenderName(),
+                    record.getSenderNumber()
                 });
             }
         } finally {

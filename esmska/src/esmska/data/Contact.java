@@ -92,7 +92,7 @@ public class Contact extends Object implements Comparable<Contact> {
             if (c.getOperator() != null)
                 result = -1;
         } else {
-            result = this.getOperator().toString().compareTo(c.getOperator().toString());
+            result = this.getOperator().compareTo(c.getOperator());
         }
         
         return result;
@@ -119,7 +119,7 @@ public class Contact extends Object implements Comparable<Contact> {
     public int hashCode() {
         return (getName() == null ? 13 : getName().hashCode()) *
                 (getNumber() == null ? 23 : getNumber().hashCode()) *
-                (getOperator() == null ? 31 : getOperator().toString().hashCode());
+                (getOperator() == null ? 31 : getOperator().hashCode());
     }
     
     
