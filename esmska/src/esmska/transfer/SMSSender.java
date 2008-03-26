@@ -11,11 +11,9 @@ package esmska.transfer;
 
 import esmska.data.Icons;
 import esmska.gui.MainFrame;
-import java.io.File;
 import java.util.List;
 import javax.swing.SwingWorker;
 import esmska.data.SMS;
-import esmska.operators.Operator;
 import esmska.operators.OperatorInterpreter;
 import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;

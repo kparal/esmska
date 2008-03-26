@@ -88,15 +88,12 @@ function send() {
     match = re.exec(content)
     if (undefined != match) {
         EXEC.setSuccess(false)
-        EXEC.setErrorMessage("Zpráva od operátora:<br>" + match[1])
+        EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
         return
     }
     
     // Pokud se nenašla potvrzovací ani chybová hláška
-    var msg = "Došlo k neznámé chybě. Operátor možná změnil<br>" + 
-    "své webové stránky, nebo s nimi má aktuálně potíže.<br>" + 
-    "Zkuste to později, případně zkontrolujte aktualizaci programu."
     EXEC.setSuccess(false)
-    EXEC.setErrorMessage(msg)
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
     return
 }

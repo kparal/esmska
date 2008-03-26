@@ -27,7 +27,30 @@ import javax.swing.SwingUtilities;
  * @author ripper
  */
 public class OperatorExecutor {
-
+    /** Message that recepient number was wrong. */
+    public static final String ERROR_WRONG_NUMBER =
+            "Zadali jste nesprávné číslo příjemce.";
+    /** Message that security code was wrong. */
+    public static final String ERROR_WRONG_CODE =
+            "Špatně jste opsali bezpečnostní kód.";
+    /** Message that message text was wrong. */
+    public static final String ERROR_WRONG_TEXT =
+            "Zadali jste nesprávný text zprávy. Prázdný, nebo příliš dlouhý?";
+    /** Message that sender signature was wrong. */
+    public static final String ERROR_WRONG_SIGNATURE =
+            "Zadali jste nesprávný podpis odesilatele (číslo či jméno).";
+    /** Message that login or password was wrong. */
+    public static final String ERROR_WRONG_AUTH =
+            "Zadali jste nesprávné přihlašovací údaje.";
+    /** Message preceding operator provided error message. */
+    public static final String ERROR_OPERATOR_MESSAGE =
+            "Zpráva od operátora:<br>";
+    /** Message that uknown error happened. */
+    public static final String ERROR_UKNOWN =
+            "Došlo k neznámé chybě. Operátor možná změnil<br>" +
+            "své webové stránky, nebo s nimi má aktuálně potíže.<br>" +
+            "Zkuste to později, případně zkontrolujte aktualizaci programu.";
+    
     private Boolean success;
     private String errorMessage;
     private String referer;
