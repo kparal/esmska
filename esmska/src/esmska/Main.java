@@ -9,12 +9,13 @@
 
 package esmska;
 
+import esmska.data.CountryPrefix;
 import esmska.gui.MainFrame;
-import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import esmska.persistence.PersistenceManager;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jvnet.lafwidget.LafWidget;
@@ -57,10 +58,11 @@ public class Main {
         }
         
         //load user files
+        PersistenceManager pm = null;
         try {
             if (configPath != null)
                 PersistenceManager.setProgramDir(configPath);
-            PersistenceManager pm = PersistenceManager.getInstance();
+            pm = PersistenceManager.getInstance();
             try {
                 pm.loadConfig();
             } catch (Exception ex) {
@@ -102,6 +104,13 @@ public class Main {
         
         //set Substance specific addons
         UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
+
+        //do some incialization if this is the first run
+        if (pm != null && pm.isFirstRun()) {
+            //set country prefix from locale
+            PersistenceManager.getConfig().setCountryPrefix(
+                    CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
+        }
         
         //start main frame
         java.awt.EventQueue.invokeLater(new java.lang.Runnable() {
