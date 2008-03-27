@@ -17,9 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.persistence.PersistenceManager;
+import javax.swing.InputVerifier;
 import javax.swing.SwingUtilities;
 
 /** Configure settings form
@@ -135,6 +137,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavení - Esmska");
         setIconImage(new ImageIcon(getClass().getResource(RES + "config-48.png")).getImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         rememberQueueCheckBox.setMnemonic('f');
         rememberQueueCheckBox.setText("Ukládat frontu neodeslaných sms");
@@ -346,6 +353,14 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${countryPrefix}"), countryPrefixTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        countryPrefixTextField.setInputVerifier(new InputVerifier() {
+            @Override
+            public boolean verify(JComponent input) {
+                String prefix = countryPrefixTextField.getText();
+                return prefix.length() == 0 || FormChecker.checkCountryPrefix(prefix);
+            }
+        });
+
         jLabel2.setDisplayedMnemonic('p');
         jLabel2.setLabelFor(countryPrefixTextField);
         jLabel2.setText("Výchozí předčíslí země:");
@@ -495,6 +510,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        //check validity of country prefix
+        String prefix = countryPrefixTextField.getText();
+        if (prefix.length() > 0 && !FormChecker.checkCountryPrefix(prefix))
+            config.setCountryPrefix("");
+    }//GEN-LAST:event_formWindowClosed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkUpdatesCheckBox;
