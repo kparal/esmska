@@ -6,13 +6,10 @@ package esmska.operators;
 
 import esmska.gui.MainFrame;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -57,11 +54,17 @@ public class OperatorExecutor {
     private boolean useCookies;
 
     /** Make a GET request to a provided URL
+     * @param url base url where to connect, without any parameters or "?" at the end
+     *            In special cases when you don't use params, you can use url as a full url.
+     *            But don't forget that parameters values must be url-encoded, which you can't
+     *            do properly in JavaScript.
+     * @param params array of url params in form [key1,value1,key2,value2,...]
      * @throws IOException when there is some problem in connecting
      */
-    public Object getURL(String url) throws IOException {
+    public Object getURL(String url, String[] params) throws IOException {
         OperatorConnector connector = new OperatorConnector();
         connector.setURL(url);
+        connector.setParams(params);
         connector.setReferer(referer);
         connector.setUseCookies(useCookies);
 
@@ -78,16 +81,21 @@ public class OperatorExecutor {
     }
 
     /** Make a POST request with specified data to a provided URL.
-     * Data must be in form name1=value1&name2=value2.
+     * @param url base url where to connect, without any parameters or "?" at the end.
+     *            In special cases when you don't use params, you can use url as a full url.
+     *            But don't forget that parameters values must be url-encoded, which you can't
+     *            do properly in JavaScript.
+     * @param params array of url params in form [key1,value1,key2,value2,...]
      * @throws IOException when there is some problem in connecting
      */
-    public Object postURL(String url, String postData) throws IOException {
+    public Object postURL(String url, String[] params, String[] postData) throws IOException {
         OperatorConnector connector = new OperatorConnector();
         connector.setURL(url);
+        connector.setParams(params);
+        connector.setPostData(postData);
         connector.setReferer(referer);
         connector.setUseCookies(useCookies);
         connector.setDoPost(true);
-        connector.setPostData(postData);
 
         boolean ok = connector.connect();
         if (!ok) {
@@ -133,22 +141,6 @@ public class OperatorExecutor {
         String imageCode = task.get();
 
         return imageCode != null ? imageCode : "";
-    }
-    
-    /** Encode input string into x-www-form-urlencoded format. All parametres used
-     * in HTTP GET or POST request must be encoded this way. Uses UTF-8 as character encoding.
-     * @return input string in the x-www-form-urlencoded format
-     */
-    public String urlEncode(String input) throws UnsupportedEncodingException {
-        return URLEncoder.encode(input, "UTF-8");
-    }
-    
-    /** Decode input string from x-www-form-urlencoded format to plain string.
-     * Uses UTF-8 as character encoding.
-     * @return plain string decoded from the x-www-form-urlencoded format
-     */
-    public String urlDecode(String input) throws UnsupportedEncodingException {
-        return URLDecoder.decode(input, "UTF-8");
     }
     
     /** Whether sending was successful or not. Default is false. */

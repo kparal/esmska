@@ -110,8 +110,7 @@ public class OperatorInterpreter {
     private void forwardVariables() throws UnsupportedEncodingException {
         for (OperatorVariable var : OperatorVariable.values()) {
             String value = variables.get(var);
-            engine.put(var.toString(), 
-                    value != null ? URLEncoder.encode(value, "UTF-8") : "");
+            engine.put(var.toString(), value != null ? value : "");
         }
 
         engine.put("EXEC", executor);

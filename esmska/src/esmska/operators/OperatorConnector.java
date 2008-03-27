@@ -4,12 +4,14 @@
  */
 package esmska.operators;
 
+import esmska.utils.Nullator;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpCookie;
@@ -17,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,8 +34,9 @@ import java.util.logging.Logger;
 public class OperatorConnector {
 
     private static final Logger logger = Logger.getLogger(OperatorConnector.class.getName());
-    private URL url;
-    private String postData;
+    private String url;
+    private String[] params;
+    private String[] postData;
     private boolean doPost;
     private String textContent;
     private byte[] binaryContent;
@@ -41,12 +45,17 @@ public class OperatorConnector {
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
     /** URL where to connect */
-    public URL getURL() {
+    public String getURL() {
         return url;
     }
 
-    /** Data to be sent in the POST request. They must be in the url-encoded name1=value1&name2=value2 form. */
-    public String getPostData() {
+    /** Additional parameters to the URL. The array is in the form [key1,value1,key2,value2,...]. */
+    public String[] getParams() {
+        return params;
+    }
+    
+    /** Data to be sent in the POST request. The array is in the form [key1,value1,key2,value2,...]. */
+    public String[] getPostData() {
         return postData;
     }
 
@@ -83,14 +92,19 @@ public class OperatorConnector {
 
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
     /** URL where to connect */
-    public void setURL(String url) throws MalformedURLException {
-        this.url = new URL(url);
+    public void setURL(String url) {
+        this.url = url;
     }
 
+    /** Additional parameters to the URL. The arrays is in the form [key1,value1,key2,value2,...]. */
+    public void setParams(String[] params) {
+        this.params = params;
+    }
+    
     /** Data to be sent in the POST request. 
-     * They must be in the url-encoded name1=value1&name2=value2 form.
+     * The array is in the form [key1,value1,key2,value2,...].
      */
-    public void setPostData(String postData) {
+    public void setPostData(String[] postData) {
         this.postData = postData;
     }
 
@@ -122,8 +136,16 @@ public class OperatorConnector {
         textContent = null;
         binaryContent = null;
 
+        //create final url
+        String fullURL = url;
+        String param = convertParamsToString(params);
+        if (param.length() > 0) {
+            fullURL += "?" + param;
+        }
+        URL address = new URL(fullURL);
+        
         //set referer
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        HttpURLConnection con = (HttpURLConnection) address.openConnection();
         if (referer != null) {
             con.setRequestProperty("Referer", referer);
         }
@@ -220,18 +242,42 @@ public class OperatorConnector {
     }
 
     /** Perform POST request */
-    private boolean doPost(HttpURLConnection con, String postData) throws IOException {
+    private boolean doPost(HttpURLConnection con, String[] postData) throws IOException {
         //setup parametres
         con.setDoOutput(true);
         con.setUseCaches(false);
         OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
 
         //send POST request
-        wr.write(postData);
+        wr.write(convertParamsToString(postData));
         wr.flush();
         wr.close();
 
         //get reply
         return doGet(con);
+    }
+    
+    /** Convert url parameters to string
+     * @param params input array in form [key1,value1,key2,value2,...]
+     * @return string key1=value1&key2=value2&... in the x-www-form-urlencoded format
+     */
+    private String convertParamsToString(String[] params) throws UnsupportedEncodingException {
+        String string = "";
+        for (int i = 0; i < params.length; i++) {
+            //skip the even ones
+            if (i % 2 == 0) 
+                continue;
+            String value = params[i];
+            String key = params[i-1];
+            //skip empty keys
+            if (Nullator.isEmpty(key))
+                continue;
+            string += key + "=";
+            string += URLEncoder.encode(value, "UTF-8") + "&";
+        }
+        if (string.endsWith("&")) {
+                string = string.substring(0, string.length()-1);
+        }
+        return string;
     }
 }

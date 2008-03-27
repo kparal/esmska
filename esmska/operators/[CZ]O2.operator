@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-03-19"
+    return "2008-03-27"
 }
 
 function getAuthor() {
@@ -38,35 +38,35 @@ function getSignatureExtraLength() {
 }
 
 function send() {
-    var re, match, content
+    var re, match, content, params, postData
 
-    //change variables to correct form
+    // change variables to correct form
     if (NUMBER.indexOf("+420") == 0)
         NUMBER = NUMBER.substring(4)
     if (SENDERNUMBER.indexOf("+420") == 0)
         SENDERNUMBER = SENDERNUMBER.substring(4);
 
-    // Uvodni stranka
+    // start page
     EXEC.setUseCookies(true);
-    content = EXEC.getURL("http://www.1188.cz/?sms=gate")
+    content = EXEC.getURL("http://www.1188.cz/?sms=gate", [])
 
-    // Nacteni id obrazku
+    // get image id
     re = /<img src="(.*)" title="potvrzovací kód"/
     match = re.exec(content);
     var image = match[1]
     
-    // Stazeni obrazku
-    content = EXEC.getURL("http://www.1188.cz" + image)
+    // download image
+    content = EXEC.getURL("http://www.1188.cz" + image, [])
     
-    // Zobrazeni obrazku
+    // show image
     var code = EXEC.recognizeImage(content)
 
-    // Poslani zpravy
-    content = EXEC.postURL("http://www.1188.cz/?sms",
-        "adress=" + NUMBER + "&code=" + code + 
-        "&text=" + MESSAGE + "&send=ODESLAT");
+    // send message
+    postData = ["adress", NUMBER, "code", code, 
+                "text", MESSAGE, "send", "ODESLAT"]
+    content = EXEC.postURL("http://www.1188.cz/?sms", [], postData)
 
-    // Zda byla zpráva odeslána v pořádku
+    // check if message was successfully sent
     re = /Zpráva byla úspěšně odeslána\./
     match = re.exec(content)
     if (undefined != match) {
@@ -74,7 +74,7 @@ function send() {
         return
     }
     
-    // Prohledani chybovych zprav
+    // look for possible error messages
     re = /<div class="error">([\s\S]*?)<\/div>/
     match = re.exec(content)
     if (undefined != match) {
@@ -83,7 +83,7 @@ function send() {
         return
     }
 
-    // Pokud se nenašla potvrzovací ani chybová hláška
+    // if neither success nor error message was found
     EXEC.setSuccess(false)
     EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
     return

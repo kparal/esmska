@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-03-19"
+    return "2008-03-27"
 }
 
 function getAuthor() {
@@ -36,24 +36,20 @@ function getSignatureExtraLength() {
 }
 
 function send() {
-    var re, match, content
+    var re, match, content, params, postData
     
-    //change variables to correct form
-    var number = EXEC.urlDecode(NUMBER)
-    if (number.indexOf("+420") == 0) {
-        number = number.substring(4)
-        NUMBER = EXEC.urlEncode(number)
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
     }
-    var senderNumber = EXEC.urlDecode(SENDERNUMBER);
-    if (senderNumber.indexOf("+420") == 0) {
-        senderNumber = senderNumber.substring(4)
-        SENDERNUMBER = EXEC.urlEncode(senderNumber)
+    if (SENDERNUMBER.indexOf("+420") == 0) {
+        SENDERNUMBER = SENDERNUMBER.substring(4)
     }
 
-    // Uvodni stranka
-    content = EXEC.getURL("http://www.vodafonesms.cz/")
+    // start page
+    content = EXEC.getURL("http://www.vodafonesms.cz/", [])
     
-    // Nacteni id obrazku
+    // get image id
     re = /<input type="hidden" name="imgid" value="(.*)" \/>/
     match = re.exec(content);
     var imgid = match[1]
@@ -62,20 +58,20 @@ function send() {
     match = re.exec(content);
     var ppp = match[1]
     
-    // Stazeni obrazku
-    content = EXEC.getURL("http://www.vodafonesms.cz/imgcode.php?id=" + imgid)
+    // download image
+    params = ["id", imgid]
+    content = EXEC.getURL("http://www.vodafonesms.cz/imgcode.php", params)
     
-    // Zobrazeni obrazku
+    // show image
     var pictogram = EXEC.recognizeImage(content)
 
-    // Poslani zpravy
-    content = EXEC.postURL("http://www.vodafonesms.cz/send.php",
-        "message=" + MESSAGE + "&number=" + NUMBER + 
-        "&mynumber=" + SENDERNUMBER + "&sender=" + SENDERNAME +
-        "&imgid=" + imgid + "&ppp=" + ppp + 
-        "&pictogram=" + pictogram);
+    // send message
+    postData = ["message", MESSAGE, "number", NUMBER, 
+        "mynumber", SENDERNUMBER, "sender", SENDERNAME,
+        "imgid", imgid, "ppp", ppp, "pictogram", pictogram]
+    content = EXEC.postURL("http://www.vodafonesms.cz/send.php", [], postData)
 
-    // Zda byla zpráva odeslána v pořádku
+    // check if message was successfully sent
     re = /<div id="thanks">/
     match = re.exec(content)
     if (undefined != match) {
@@ -83,7 +79,7 @@ function send() {
         return
     }
     
-    // Prohledani chybovych zprav
+    // look for possible error messages
     re = /<div id="errmsg">\n<p>(.+?)<\/p>/
     match = re.exec(content)
     if (undefined != match) {
@@ -92,7 +88,7 @@ function send() {
         return
     }
     
-    // Pokud se nenašla potvrzovací ani chybová hláška
+    // if neither success nor error message was found
     EXEC.setSuccess(false)
     EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
     return
