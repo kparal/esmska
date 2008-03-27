@@ -97,12 +97,15 @@
     <Component class="javax.swing.JTextField" name="numberTextField">
       <Properties>
         <Property name="columns" type="int" value="13"/>
-        <Property name="toolTipText" type="java.lang.String" value="Telefonn&#xed; &#x10d;&#xed;slo kontaktu v&#x10d;etn&#x11b; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Telefonn&#xed; &#x10d;&#xed;slo kontaktu v&#x10d;etn&#x11b; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;.&lt;br&gt;&#xa;P&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b; nemus&#xed; b&#xfd;t vypln&#x11b;no, pokud je nastaveno&lt;br&gt;&#xa;v&#xfd;choz&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b; v nastaven&#xed; programu.&#xa;&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="numberTextFieldFocusLost"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="numberTextFieldKeyReleased"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField() {&#xa;    @Override&#xa;    public String getText() {&#xa;        String text = super.getText();&#xa;        if (!text.startsWith(&quot;+&quot;))&#xa;            text = config.getCountryPrefix() + text;&#xa;        return text;&#xa;    }&#xa;}&#xa;"/>
+      </AuxValues>
     </Component>
     <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
     </Component>

@@ -46,7 +46,16 @@ public class EditContactPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
         nameTextField.requestFocusInWindow();
-        numberTextField = new javax.swing.JTextField();
+        numberTextField = new javax.swing.JTextField() {
+            @Override
+            public String getText() {
+                String text = super.getText();
+                if (!text.startsWith("+"))
+                text = config.getCountryPrefix() + text;
+                return text;
+            }
+        }
+        ;
         operatorComboBox = new esmska.gui.OperatorComboBox();
 
         jLabel1.setDisplayedMnemonic('j');
@@ -69,7 +78,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         });
 
         numberTextField.setColumns(13);
-        numberTextField.setToolTipText("Telefonní číslo kontaktu včetně předčíslí země");
+        numberTextField.setToolTipText("<html>\nTelefonní číslo kontaktu včetně předčíslí země.<br>\nPředčíslí země nemusí být vyplněno, pokud je nastaveno<br>\nvýchozí předčíslí země v nastavení programu.\n</html>");
         numberTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 numberTextFieldFocusLost(evt);
@@ -159,15 +168,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     
     private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
         //guess operator
-//        Operator op = OperatorEnum.getOperator(numberTextField.getText());
-//        if (op != null) {
-//            for (int i=0; i<operatorComboBox.getItemCount(); i++) {
-//                if (operatorComboBox.getItemAt(i).getClass().equals(op.getClass())) {
-//                    operatorComboBox.setSelectedIndex(i);
-//                    break;
-//                }
-//            }
-//        }
+        operatorComboBox.suggestOperator(numberTextField.getText());
     }//GEN-LAST:event_numberTextFieldKeyReleased
 
     private void nameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
@@ -183,10 +184,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         if (contact == null) {
             nameTextField.setText(null);
             numberTextField.setText(config.getCountryPrefix());
-            if (operatorComboBox.getModel().getSize() > 0)
-                operatorComboBox.setSelectedIndex(0);
-            else
-                operatorComboBox.setSelectedItem(null);
+            operatorComboBox.suggestOperator(numberTextField.getText());
         } else {
             nameTextField.setText(contact.getName());
             numberTextField.setText(contact.getNumber());

@@ -90,6 +90,45 @@ public class OperatorComboBox extends JComboBox {
             setSelectedItem(operator);
     }
     
+    /** Select operator according to phone number or phone number prefix.
+     * Searches through operators and finds the first one supporting this phone number, either
+     * by operator prefix or country prefix. Doesn't change selection if no operator is found.
+     * Doesn't change selection if no operator prefix matched and operator witch matching country
+     * prefix is already selected.
+     * @param number phone number or it's prefix. The minimum length is two characters,
+     *               for shorter input (or null) the method does nothing.
+     */
+    public void suggestOperator(String number) {
+        if (number == null || number.length() < 2)
+            return;
+        
+        //search in operator prefixes
+        for (int i = 0; i < model.getSize(); i++) {
+            Operator op = (Operator) model.getElementAt(i);
+            for (String prefix : op.getOperatorPrefixes()) {
+                if (number.startsWith(prefix)) {
+                    setSelectedOperator(op.getName());
+                    return;
+                }
+            }
+        }
+        
+        //return if already selected operator with matching country prefix
+        Operator operator = getSelectedOperator();
+        if (operator != null && number.startsWith(operator.getCountryPrefix()))
+            return;
+        
+        //search in country prefixes
+        for (int i = 0; i < model.getSize(); i++) {
+            Operator op = (Operator) model.getElementAt(i);
+            if (number.startsWith(op.getCountryPrefix())) {
+                setSelectedOperator(op.getName());
+                return;
+            }
+        }
+    }
+            
+    
     /** Renderer for items in OperatorComboBox */
     private static class OperatorComboBoxRenderer extends DefaultListCellRenderer {
         @Override

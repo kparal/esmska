@@ -33,7 +33,7 @@
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="smsProgressBar" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
+                  <Component id="progressBar" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -44,7 +44,7 @@
                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="smsNumberTextField" pref="125" max="32767" attributes="0"/>
+                      <Component id="numberTextField" pref="125" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="operatorComboBox" pref="133" max="32767" attributes="0"/>
                   </Group>
@@ -68,14 +68,14 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="operatorComboBox" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="smsNumberTextField" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="numberTextField" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="smsProgressBar" min="-2" pref="10" max="-2" attributes="1"/>
+                      <Component id="progressBar" min="-2" pref="10" max="-2" attributes="1"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="1" pref="142" max="32767" attributes="0"/>
               </Group>
@@ -94,26 +94,27 @@
       <Properties>
         <Property name="displayedMnemonic" type="int" value="111"/>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="smsNumberTextField"/>
+          <ComponentRef name="numberTextField"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="smsProgressBar">
+    <Component class="javax.swing.JProgressBar" name="progressBar">
       <Properties>
         <Property name="maximum" type="int" value="1000"/>
         <Property name="toolTipText" type="java.lang.String" value="Graficky zobrazuje zb&#xfd;vaj&#xed;c&#xed; voln&#xe9; m&#xed;sto ve zpr&#xe1;v&#x11b;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="smsNumberTextField">
+    <Component class="javax.swing.JTextField" name="numberTextField">
       <Properties>
         <Property name="columns" type="int" value="12"/>
         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Telefonn&#xed; &#x10d;&#xed;slo kontaktu v&#x10d;etn&#x11b; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;.&lt;br&gt;&#xa;P&#x159;e&#x10d;&#xed;sl&#xed; zem&#x11b; nemus&#xed; b&#xfd;t vypln&#x11b;no, pokud je nastaveno&lt;br&gt;&#xa;v&#xfd;choz&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; v nastaven&#xed; programu.&#xa;&lt;/html&gt;"/>
       </Properties>
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smsNumberTextFieldKeyReleased"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="numberTextFieldKeyReleased"/>
       </Events>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField() {&#xa;    @Override&#xa;    public String getText() {&#xa;        String text = super.getText();&#xa;        if (!text.startsWith(&quot;+&quot;))&#xa;        text = config.getCountryPrefix() + text;&#xa;        return text;&#xa;    }&#xa;}&#xa;"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
       </AuxValues>
     </Component>
