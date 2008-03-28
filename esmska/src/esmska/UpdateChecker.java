@@ -47,8 +47,8 @@ public class UpdateChecker {
         updateCheckerWorker.execute();
     }
 
-    /** Check whether downloaded file text indicates newer version available
-     * 
+    /** Check whether downloaded file text indicates newer version available.
+     * Handles if current version is marked as beta.
      * @param text contents of the update file
      * @return true if new program version is available, otherwise false
      */
@@ -60,8 +60,17 @@ public class UpdateChecker {
             downloadedVersion = matcher.group(1);
         }
         String currentVersion = Config.getLatestVersion();
+        
+        //handle beta versions
+        boolean beta = currentVersion.toLowerCase().contains("beta");
+        if (beta) {
+            currentVersion = currentVersion.substring(0, 
+                    currentVersion.toLowerCase().indexOf("beta")).trim();
+        }
+
         AlphanumComparator comparator = new AlphanumComparator();
-        return comparator.compare(downloadedVersion, currentVersion) > 0;
+        return (beta ? comparator.compare(downloadedVersion, currentVersion) >= 0
+                : comparator.compare(downloadedVersion, currentVersion) > 0);
     }
 
     /** SwingWorker which checks downloads and check update file in another thread

@@ -104,7 +104,7 @@ public class StatusPanel extends javax.swing.JPanel {
         progressBar = new javax.swing.JProgressBar();
 
         statusMessageLabel.setText("Vítejte");
-        statusMessageLabel.setToolTipText("Klikněte pro zobrazení aplikačního protokolu...");
+        statusMessageLabel.setToolTipText("Klikněte pro zobrazení aplikačního protokolu");
         statusMessageLabel.setFocusable(false);
         statusMessageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         statusMessageLabel.addMouseListener(new java.awt.event.MouseAdapter() {
