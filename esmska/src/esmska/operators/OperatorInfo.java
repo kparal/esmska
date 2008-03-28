@@ -76,4 +76,14 @@ public interface OperatorInfo {
      */
     int getSignatureExtraLength();
     
+    /** Maximum number of messages that can be sent per day. The counter is cleared
+     * by midnight. Use '0' for unlimited.
+     */
+    int getMaxMessagesPerDay();
+    
+    /** The delay in seconds that must be kept between sending messages. The program
+     * will wait for at least this number of seconds before attempting to send
+     * another message. If there are no operator restrictions, use '0'.
+     */
+    int getDelayBetweenMessages();
 }

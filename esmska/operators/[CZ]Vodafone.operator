@@ -35,6 +35,14 @@ function getSignatureExtraLength() {
     return 5
 }
 
+function getMaxMessagesPerDay() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 15
+}
+
 function send() {
     var re, match, content, params, postData
     
