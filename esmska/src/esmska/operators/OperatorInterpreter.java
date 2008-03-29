@@ -4,13 +4,13 @@
  */
 package esmska.operators;
 
+import java.beans.IntrospectionException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -47,9 +47,12 @@ public class OperatorInterpreter {
      * @return OperatorInfo implementation
      * @throws IOException when there is problem accessing the script file
      * @throws ScriptException when the script is not valid
+     * @throws IntrospectionException when current JRE does not support JavaScript execution
      */
-    public OperatorInfo parseInfo(File file) throws IOException, ScriptException {
+    public OperatorInfo parseInfo(File file) throws IOException, ScriptException, IntrospectionException {
         init();
+        if (engine == null)
+            throw new IntrospectionException("JavaScript execution not supported");
         Reader reader = null;
         try {
             reader = new InputStreamReader(new FileInputStream(file), "UTF-8");

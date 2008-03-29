@@ -5,6 +5,7 @@
 package esmska.operators;
 
 import esmska.data.Icons;
+import java.beans.IntrospectionException;
 import java.io.File;
 import java.io.IOException;
 import java.security.PrivilegedActionException;
@@ -34,8 +35,10 @@ public class DefaultOperator implements Operator {
      * @throws IOException When there are problem accessing the script file
      * @throws ScriptException When operator script is invalid
      * @throws PrivilegedActionException When operator script is invalid
+     * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
-    public DefaultOperator(File script) throws IOException, ScriptException, PrivilegedActionException {
+    public DefaultOperator(File script) throws IOException, ScriptException,
+            PrivilegedActionException, IntrospectionException {
         this.script = script;
         
         OperatorInfo info = interpreter.parseInfo(script);

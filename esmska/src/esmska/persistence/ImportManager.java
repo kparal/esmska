@@ -15,7 +15,6 @@ import esmska.data.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.security.PrivilegedActionException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import esmska.operators.Operator;
@@ -23,6 +22,7 @@ import esmska.data.Contact;
 import esmska.data.SMS;
 import esmska.operators.DefaultOperator;
 import esmska.operators.Operator;
+import java.beans.IntrospectionException;
 import java.io.FileFilter;
 import java.text.DateFormat;
 import java.util.Date;
@@ -30,7 +30,6 @@ import java.util.Locale;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.script.ScriptException;
 
 /** Import program data
  *
@@ -109,8 +108,12 @@ public class ImportManager {
         return history;
     }
     
-    /** Import all operators from directory */
-    public static TreeSet<Operator> importOperators(File directory) throws IOException {
+    /** Import all operators from directory
+     * @throws IOException When there is problem accessing operator directory or files
+     * @throws IntrospectionException When current JRE does not support JavaScript execution
+     */
+    public static TreeSet<Operator> importOperators(File directory) throws 
+            IOException, IntrospectionException {
         TreeSet<Operator> operators = new TreeSet<Operator>();
         if (!directory.canRead() || !directory.isDirectory())
             throw new IOException("Invalid operator directory.");
@@ -127,6 +130,8 @@ public class ImportManager {
                 operators.add(operator);
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "Problem accessing file " + file.getAbsolutePath(), ex);
+            } catch (IntrospectionException ex) {
+                throw ex;
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Ivalid operator file " + file.getAbsolutePath(), ex);
             }

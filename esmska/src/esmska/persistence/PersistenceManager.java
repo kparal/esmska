@@ -14,6 +14,7 @@ import esmska.data.Contact;
 import esmska.data.History;
 import esmska.data.SMS;
 import esmska.operators.Operator;
+import java.beans.IntrospectionException;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -205,8 +206,11 @@ public class PersistenceManager {
         }
     }
     
-    /** Load operators */
-    public void loadOperators() throws IOException {
+    /** Load operators
+     * @throws IOException When there is problem accessing operator directory or files
+     * @throws IntrospectionException When current JRE does not support JavaScript execution
+     */
+    public void loadOperators() throws IOException, IntrospectionException {
         if (OPERATOR_DIR.exists()) {
             TreeSet<Operator> newOperators = ImportManager.importOperators(OPERATOR_DIR);
             operators.clear();

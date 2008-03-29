@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.Nullator;
+import java.beans.IntrospectionException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,15 +72,16 @@ public class Main {
             }
             try {
                 pm.loadOperators();
+            } catch (IntrospectionException ex) { //OpenJDK 6 seems not to support JavaScript
+                logger.log(Level.SEVERE, "Current JRE doesn't support JavaScript execution", ex);
+                JOptionPane.showMessageDialog(null, 
+                    "<html>Vaše aktuální Java nepodporuje vykonávání JavaScriptových souborů,<br>" +
+                    "což je ke správné funkci programu nezbytné. Je doporučené používat<br>" +
+                    "Javu od firmy Sun. Program se nyní ukončí.",
+                    "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
+                System.exit(1);
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Could not load operators", ex);
-                JOptionPane.showMessageDialog(null, 
-                    "<html><h2>Nepodařilo se nalézt žádné operátory!</h2>" +
-                    "Bez operátorů je program nepoužitelný. Buď je vaše instalace<br>" +
-                    "nekompletní, nebo operační systém špatně nastavil cestu k programu.<br>" +
-                    "Zkuste místo poklikání na <i>esmska.jar</i> raději program spustit pomocí<br>" +
-                    "souboru <i>esmska.sh</i> (v Linuxu, apod) nebo <i>esmska.bat</i> (ve Windows).</html>",
-                    "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
             }
             try {
                 pm.loadContacts();

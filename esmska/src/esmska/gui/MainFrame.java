@@ -118,6 +118,21 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanel.requestFocusInWindow();
         contactPanel.ensureContactSelected();
         
+        //check for valid operators
+        if (PersistenceManager.getOperators().size() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "<html><h2>Nepodařilo se nalézt žádné operátory!</h2>" +
+                    "Bez operátorů je program nepoužitelný. Problém může pramenit " +
+                    "z těchto příčin:<br>" +
+                    "<ul><li>Váš program je nekorektně nainstalován a chybí mu některé<br>" +
+                    "soubory nebo jsou poškozeny. Zkuste jej stáhnout znovu.</li>" +
+                    "<li>Operační systém špatně nastavil cestu k programu.<br>" +
+                    "Zkuste místo poklikání na <i>esmska.jar</i> raději program spustit pomocí<br>" +
+                    "souboru <i>esmska.sh</i> (v Linuxu, apod) nebo <i>esmska.bat</i> (ve Windows).</li>" +
+                    "</ul></html>",
+                    "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
+        }
+        
         //use bindings
         Binding bind = Bindings.createAutoBinding(UpdateStrategy.READ, config, 
                 BeanProperty.create("toolbarVisible"), toolBar, BeanProperty.create("visible"));
