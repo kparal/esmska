@@ -102,6 +102,16 @@ public class Main {
                     "nebo číst z adresáře s konfigurací!",
                     "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
         }
+
+        //do some incialization if this is the first run
+        if (Nullator.isEmpty(PersistenceManager.getConfig().getVersion())) { //first run means version is empty
+            //set country prefix from locale
+            PersistenceManager.getConfig().setCountryPrefix(
+                    CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
+        }
+        
+        //update from older versions
+        LegacyUpdater.update();
         
         //set L&F
         try {
@@ -113,13 +123,6 @@ public class Main {
         //set Substance specific addons
         UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
 
-        //do some incialization if this is the first run
-        if (Nullator.isEmpty(PersistenceManager.getConfig().getVersion())) { //first run means version is empty
-            //set country prefix from locale
-            PersistenceManager.getConfig().setCountryPrefix(
-                    CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
-        }
-        
         //start main frame
         java.awt.EventQueue.invokeLater(new java.lang.Runnable() {
             public void run() {
