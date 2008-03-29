@@ -26,7 +26,7 @@ public interface OperatorInfo {
     
     /** Author of the script.
      * This is the name and email of the author or latest contributor of the script.
-     * The author must be in format "NAME <EMAIL>". Name and email are mandatory.
+     * The author must be in format "NAME &lt;EMAIL&gt;". Name and email are mandatory.
      */
     String getAuthor();
     

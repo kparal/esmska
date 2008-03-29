@@ -59,6 +59,8 @@ public class OperatorExecutor {
      *            But don't forget that parameters values must be url-encoded, which you can't
      *            do properly in JavaScript.
      * @param params array of url params in form [key1,value1,key2,value2,...]
+     * @return content of the response. It may be String (when requesting HTML page) or
+     *         just an array of bytes (when requesting eg. an image).
      * @throws IOException when there is some problem in connecting
      */
     public Object getURL(String url, String[] params) throws IOException {
@@ -86,6 +88,8 @@ public class OperatorExecutor {
      *            But don't forget that parameters values must be url-encoded, which you can't
      *            do properly in JavaScript.
      * @param params array of url params in form [key1,value1,key2,value2,...]
+     * @return content of the response. It may be String (when requesting HTML page) or
+     *         just an array of bytes (when requesting eg. an image).
      * @throws IOException when there is some problem in connecting
      */
     public Object postURL(String url, String[] params, String[] postData) throws IOException {
