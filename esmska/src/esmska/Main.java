@@ -71,7 +71,14 @@ public class Main {
             try {
                 pm.loadOperators();
             } catch (Exception ex) {
-                logger.log(Level.WARNING, "Could not load operators", ex);
+                logger.log(Level.SEVERE, "Could not load operators", ex);
+                JOptionPane.showMessageDialog(null, 
+                    "<html><h2>Nepodařilo se nalézt žádné operátory!</h2>" +
+                    "Bez operátorů je program nepoužitelný. Buď je vaše instalace<br>" +
+                    "nekompletní, nebo operační systém špatně nastavil cestu k programu.<br>" +
+                    "Zkuste místo poklikání na <i>esmska.jar</i> raději program spustit pomocí<br>" +
+                    "souboru <i>esmska.sh</i> (v Linuxu, apod) nebo <i>esmska.bat</i> (ve Windows).</html>",
+                    "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
             }
             try {
                 pm.loadContacts();
@@ -89,7 +96,7 @@ public class Main {
                 logger.log(Level.WARNING, "Could not load history file", ex);
             }
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "Could not create program dir or read config files", ex);
+            logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
             JOptionPane.showMessageDialog(null, "Nepodařilo se vytvořit adresář " +
                     "nebo číst z adresáře s konfigurací!",
                     "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
