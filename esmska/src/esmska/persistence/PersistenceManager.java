@@ -216,13 +216,6 @@ public class PersistenceManager {
         }
     }
 
-    /** Tells if this is the first run of the program.
-     * The method decision is based on existence of the configuration file.
-     */
-    public boolean isFirstRun() {
-        return !CONFIG_FILE.exists();
-    }
-    
     /** Moves file from srcFile to destFile safely (using backup of destFile).
      * If move fails, exception is thrown and attempt to restore destFile from
      * backup is made.

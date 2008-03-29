@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.Nullator;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -113,7 +114,7 @@ public class Main {
         UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
 
         //do some incialization if this is the first run
-        if (pm != null && pm.isFirstRun()) {
+        if (Nullator.isEmpty(PersistenceManager.getConfig().getVersion())) { //first run means version is empty
             //set country prefix from locale
             PersistenceManager.getConfig().setCountryPrefix(
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
