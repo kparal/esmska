@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,6 +47,7 @@ public class PersistenceManager {
     private static final String CONTACTS_FILENAME = "contacts.csv";
     private static final String QUEUE_FILENAME = "queue.csv";
     private static final String HISTORY_FILENAME = "history.csv";
+    private static final String LOCK_FILENAME = "running.lock";
     private static File PROGRAM_DIR =
             new File(System.getProperty("user.home") + File.separator + ".config",
             PROGRAM_DIRNAME);
@@ -53,6 +56,7 @@ public class PersistenceManager {
     private static File CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
     private static File QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
     private static File HISTORY_FILE = new File(PROGRAM_DIR, HISTORY_FILENAME);
+    private static File LOCK_FILE = new File(PROGRAM_DIR, LOCK_FILENAME);
     
     private static Config config = new Config();
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
@@ -61,6 +65,7 @@ public class PersistenceManager {
     private static TreeSet<Operator> operators = new TreeSet<Operator>();
     
     private static boolean customPathSet;
+    private FileLock lock;
     
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
@@ -97,6 +102,7 @@ public class PersistenceManager {
         CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
         QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
         HISTORY_FILE = new File(PROGRAM_DIR, HISTORY_FILENAME);
+        LOCK_FILE = new File(PROGRAM_DIR, LOCK_FILENAME);
         customPathSet = true;
     }
     
@@ -218,6 +224,26 @@ public class PersistenceManager {
         } else {
             throw new IOException("Operators directory doesn't exist.");
         }
+    }
+    
+    /** Checks if this is the first instance of the program.
+     * Manages instances by using an exclusive lock on a file.
+     * @return true if this is the first instance run; false otherwise
+     */
+    public boolean isFirstInstance() {
+        try {
+            FileOutputStream out = new FileOutputStream(LOCK_FILE);
+            FileChannel channel = out.getChannel();
+            lock = channel.tryLock();
+            if (lock == null) {
+                return false;
+            }
+            LOCK_FILE.deleteOnExit();
+        } catch (Throwable t) {
+            logger.log(Level.INFO, "Program lock could not be obtained", t);
+            return false;
+        }
+        return true;
     }
 
     /** Moves file from srcFile to destFile safely (using backup of destFile).

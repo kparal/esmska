@@ -104,6 +104,23 @@ public class Main {
                     "nebo číst z adresáře s konfigurací!",
                     "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
         }
+        
+        //warn if other program instance is already running
+        if (pm != null && !pm.isFirstInstance()) {
+            logger.warning("Some other instance of the program is already running");
+            String runOption = "Přesto spustit";
+            String quitOption = "Ukončit";
+            String[] options = new String[]{quitOption, runOption};
+            int result = JOptionPane.showOptionDialog(null,
+                    "<html><h2>Esmska již jednou běží!</h2>" +
+                    "Esmska je již jednou spuštěna. Důrazně nedoporučujeme spouštět další<br>" +
+                    "instance programu, neboť může dojít ke ztrátě uživatelských dat.<br>",
+                    "Vícenásobné spuštění", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.WARNING_MESSAGE, null,
+                    options, quitOption);
+            if (result != 1)
+                System.exit(0);
+        }
 
         //do some incialization if this is the first run
         if (Nullator.isEmpty(PersistenceManager.getConfig().getVersion())) { //first run means version is empty
