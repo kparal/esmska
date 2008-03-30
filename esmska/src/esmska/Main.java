@@ -63,7 +63,7 @@ public class Main {
         PersistenceManager pm = null;
         try {
             if (configPath != null)
-                PersistenceManager.setProgramDir(configPath);
+                PersistenceManager.setUserDir(configPath);
             pm = PersistenceManager.getInstance();
             try {
                 pm.loadConfig();

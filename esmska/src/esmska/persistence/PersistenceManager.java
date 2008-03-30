@@ -41,22 +41,22 @@ public class PersistenceManager {
     private static final Logger logger = Logger.getLogger(PersistenceManager.class.getName());
     private static PersistenceManager persistenceManager;
     
-    private static final String PROGRAM_DIRNAME = "esmska";
+    private static final String USER_DIRNAME = "esmska";
     private static final String OPERATOR_DIRNAME = "operators";
     private static final String CONFIG_FILENAME = "settings.xml";
     private static final String CONTACTS_FILENAME = "contacts.csv";
     private static final String QUEUE_FILENAME = "queue.csv";
     private static final String HISTORY_FILENAME = "history.csv";
     private static final String LOCK_FILENAME = "running.lock";
-    private static File PROGRAM_DIR =
+    private static File USER_DIR =
             new File(System.getProperty("user.home") + File.separator + ".config",
-            PROGRAM_DIRNAME);
+            USER_DIRNAME);
     private static File OPERATOR_DIR = new File(OPERATOR_DIRNAME);
-    private static File CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
-    private static File CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
-    private static File QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
-    private static File HISTORY_FILE = new File(PROGRAM_DIR, HISTORY_FILENAME);
-    private static File LOCK_FILE = new File(PROGRAM_DIR, LOCK_FILENAME);
+    private static File CONFIG_FILE = new File(USER_DIR, CONFIG_FILENAME);
+    private static File CONTACTS_FILE = new File(USER_DIR, CONTACTS_FILENAME);
+    private static File QUEUE_FILE = new File(USER_DIR, QUEUE_FILENAME);
+    private static File HISTORY_FILE = new File(USER_DIR, HISTORY_FILENAME);
+    private static File LOCK_FILE = new File(USER_DIR, LOCK_FILENAME);
     
     private static Config config = new Config();
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
@@ -77,32 +77,31 @@ public class PersistenceManager {
                 path = System.getenv("APPDATA");
             }
             if (path != null && !path.equals("")) {
-                setProgramDir(path + File.separator + PROGRAM_DIRNAME);
+                setUserDir(path + File.separator + USER_DIRNAME);
             }
         }
         
         //create program dir if necessary
         boolean ok = true;
-        if (!PROGRAM_DIR.exists())
-            ok = PROGRAM_DIR.mkdirs();
+        if (!USER_DIR.exists())
+            ok = USER_DIR.mkdirs();
         if (!ok)
             throw new IOException("Can't create program dir");
-        if (!(PROGRAM_DIR.canWrite() && PROGRAM_DIR.canExecute()))
+        if (!(USER_DIR.canWrite() && USER_DIR.canExecute()))
             throw new IOException("Can't write or execute the program dir");
     }
     
-    /** Set program dir to custom path */
-    public static void setProgramDir(String path) {
+    /** Set user directory to custom path */
+    public static void setUserDir(String path) {
         if (persistenceManager != null)
             throw new IllegalStateException("Persistence manager already exists");
         
-        PROGRAM_DIR = new File(path);
-        OPERATOR_DIR = new File(PROGRAM_DIR, OPERATOR_DIRNAME);
-        CONFIG_FILE = new File(PROGRAM_DIR, CONFIG_FILENAME);
-        CONTACTS_FILE = new File(PROGRAM_DIR, CONTACTS_FILENAME);
-        QUEUE_FILE = new File(PROGRAM_DIR, QUEUE_FILENAME);
-        HISTORY_FILE = new File(PROGRAM_DIR, HISTORY_FILENAME);
-        LOCK_FILE = new File(PROGRAM_DIR, LOCK_FILENAME);
+        USER_DIR = new File(path);
+        CONFIG_FILE = new File(USER_DIR, CONFIG_FILENAME);
+        CONTACTS_FILE = new File(USER_DIR, CONTACTS_FILENAME);
+        QUEUE_FILE = new File(USER_DIR, QUEUE_FILENAME);
+        HISTORY_FILE = new File(USER_DIR, HISTORY_FILENAME);
+        LOCK_FILE = new File(USER_DIR, LOCK_FILENAME);
         customPathSet = true;
     }
     
@@ -222,7 +221,8 @@ public class PersistenceManager {
             operators.clear();
             operators.addAll(newOperators);
         } else {
-            throw new IOException("Operators directory doesn't exist.");
+            throw new IOException("Operators directory '" + OPERATOR_DIR.getAbsolutePath()
+                    + "' doesn't exist.");
         }
     }
     

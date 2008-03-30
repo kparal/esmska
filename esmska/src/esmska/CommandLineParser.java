@@ -74,8 +74,8 @@ public class CommandLineParser {
                 "Dostupné volby:\n" +
                 "   -h, --help                  Zobrazí tuto nápovědu\n" +
                 "   -p, --portable              Zapnutí přenosného módu - " +
-                "zeptá se na umístění konfiguračních souborů\n" +
-                "   -c, --config <cesta>        Nastavení cesty ke konfiguračním souborům";
+                "zeptá se na umístění uživatelského adresáře\n" +
+                "   -c, --config <cesta>        Nastavení cesty k uživatelskému adresáři";
         System.out.println(usage);
     }
 }
