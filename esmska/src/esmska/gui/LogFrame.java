@@ -9,9 +9,15 @@ package esmska.gui;
 import esmska.data.Icons;
 import esmska.data.Log;
 import java.awt.Component;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -25,6 +31,7 @@ import javax.swing.ListCellRenderer;
  */
 public class LogFrame extends javax.swing.JFrame {
     private static final String RES = "/esmska/resources/";
+    private static final Logger logger = Logger.getLogger(LogFrame.class.getName());
     private static final DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.MEDIUM);
     private Log log = new Log();
     private DefaultListModel logModel = new DefaultListModel();
@@ -76,6 +83,7 @@ public class LogFrame extends javax.swing.JFrame {
         logList = new javax.swing.JList();
         closeButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
+        copyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Protokol - Esmska");
@@ -103,6 +111,16 @@ public class LogFrame extends javax.swing.JFrame {
             }
         });
 
+        copyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/copy-22.png"))); // NOI18N
+        copyButton.setMnemonic('s');
+        copyButton.setText("Zkopírovat do schránky");
+        copyButton.setToolTipText("Zkopíruje celý obsah protokolu do systémové schránky");
+        copyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,26 +131,27 @@ public class LogFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(clearButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(copyButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addComponent(closeButton)))
                 .addContainerGap())
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {clearButton, closeButton});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(closeButton)
-                    .addComponent(clearButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(closeButton)
+                        .addComponent(clearButton))
+                    .addComponent(copyButton))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {clearButton, closeButton});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {clearButton, closeButton, copyButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,6 +164,24 @@ public class LogFrame extends javax.swing.JFrame {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         log.clearRecords();
     }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
+        try {
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            StringBuilder builder = new StringBuilder();
+            for (Log.Record record : log.getRecords()) {
+                builder.append("[");
+                builder.append(timeFormat.format(record.getTime()));
+                builder.append("] ");
+                builder.append(record.getMessage());
+                builder.append("\n");
+            }
+            Transferable text = new StringSelection(builder.toString());
+            clipboard.setContents(text, null);
+        } catch (IllegalStateException ex) {
+            logger.log(Level.WARNING, "System clipboard not available", ex);
+        }
+    }//GEN-LAST:event_copyButtonActionPerformed
     
     /** update log frame on log change*/
     private class LogListener implements ActionListener {
@@ -179,6 +216,7 @@ public class LogFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearButton;
     private javax.swing.JButton closeButton;
+    private javax.swing.JButton copyButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList logList;
     // End of variables declaration//GEN-END:variables
