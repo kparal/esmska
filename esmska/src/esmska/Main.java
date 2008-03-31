@@ -98,6 +98,11 @@ public class Main {
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not load history file", ex);
             }
+            try {
+                pm.loadKeyring();
+            } catch (Exception ex) {
+                logger.log(Level.WARNING, "Could not load keyring file", ex);
+            }
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
             JOptionPane.showMessageDialog(null, "Nepodařilo se vytvořit adresář " +

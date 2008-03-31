@@ -15,6 +15,7 @@ import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
 import java.util.Collection;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -152,6 +153,34 @@ public class ExportManager {
                     record.getText(),
                     record.getSenderName(),
                     record.getSenderNumber()
+                });
+            }
+        } finally {
+            writer.close();
+        }
+    }
+    
+    /** Export keyring to file.
+     * @param keyring Keyring to export.
+     * @param file File where to export.
+     * @throws java.io.IOException When some error occur during file processing.
+     * @throws java.security.GeneralSecurityException When there is problem with
+     *         key encryption.
+     */
+    public static void exportKeyring(Keyring keyring, File file)
+            throws IOException, GeneralSecurityException {
+        CsvWriter writer = null;
+        try {
+            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
+            writer.writeComment("Uživatelská jména a hesla k jednotlivým operátorům");
+            for (String operatorName : keyring.getOperatorNames()) {
+                String[] key = keyring.getKey(operatorName);
+                String login = key[0];
+                String password = Keyring.encrypt(key[1]);
+                writer.writeRecord(new String[] {
+                    operatorName,
+                    login,
+                    password
                 });
             }
         } finally {

@@ -10,6 +10,7 @@
 package esmska.transfer;
 
 import esmska.data.Icons;
+import esmska.data.Keyring;
 import esmska.gui.MainFrame;
 import java.util.List;
 import javax.swing.SwingWorker;
@@ -17,6 +18,7 @@ import esmska.data.SMS;
 import esmska.operators.OperatorInterpreter;
 import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
+import esmska.persistence.PersistenceManager;
 import esmska.utils.Nullator;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -28,7 +30,8 @@ import java.util.logging.Logger;
  */
 public class SMSSender {
     private static final Logger logger = Logger.getLogger(SMSSender.class.getName());
-        
+    private static final Keyring keyring = PersistenceManager.getKeyring();   
+    
     private List<SMS> smsQueue;
     private boolean running; // sending sms in this moment
     private boolean paused; // queue paused
@@ -112,6 +115,13 @@ public class SMSSender {
         map.put(OperatorVariable.MESSAGE, sms.getText());
         map.put(OperatorVariable.SENDERNAME, sms.getSenderName());
         map.put(OperatorVariable.SENDERNUMBER, sms.getSenderNumber());
+        
+        String[] key = keyring.getKey(sms.getOperator());
+        if (key != null) {
+            map.put(OperatorVariable.LOGIN, key[0]);
+            map.put(OperatorVariable.PASSWORD, key[1]);
+        }
+        
         return map;
     }
     

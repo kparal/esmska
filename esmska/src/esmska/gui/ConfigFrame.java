@@ -10,6 +10,8 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import esmska.*;
 import esmska.data.Icons;
+import esmska.data.Keyring;
+import esmska.operators.Operator;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -18,9 +20,12 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.event.DocumentEvent;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.AbstractDocumentListener;
+import esmska.utils.Nullator;
 import javax.swing.InputVerifier;
 import javax.swing.SwingUtilities;
 
@@ -31,6 +36,7 @@ import javax.swing.SwingUtilities;
 public class ConfigFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(ConfigFrame.class.getName());
     private static final String RES = "/esmska/resources/";
+    private static final Keyring keyring = PersistenceManager.getKeyring();
     /* when to take updates seriously */
     private boolean fullyInicialized;
     private final String LAF_SYSTEM = "Systémový";
@@ -45,11 +51,13 @@ public class ConfigFrame extends javax.swing.JFrame {
     public ConfigFrame() {
         initComponents();
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_H);
+        tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_P);
+        tabbedPane.setMnemonicAt(3, KeyEvent.VK_H);
         tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-16.png")));
         tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-small.png")));
         tabbedPane.setIconAt(2, Icons.OPERATOR_DEFAULT);
+        tabbedPane.setIconAt(3, new ImageIcon(getClass().getResource(RES + "password-16.png")));
         closeButton.requestFocusInWindow();
         
         lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
@@ -71,6 +79,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         fullyInicialized = true;
     }
     
+    /** Update theme according to L&F */
     private void updateThemeComboBox() {
         themeComboBox.setEnabled(false);
         String laf = (String) lafComboBox.getSelectedItem();
@@ -92,6 +101,24 @@ public class ConfigFrame extends javax.swing.JFrame {
             themeComboBox.setModel(new DefaultComboBoxModel(themes.toArray()));
             themeComboBox.setSelectedItem(config.getLafSubstanceSkin());
             themeComboBox.setEnabled(true);
+        }
+    }
+    
+    /** Operator key (login, password) changed */
+    private void keyUpdated() {
+        Operator operator = operatorComboBox.getSelectedOperator();
+        if (operator == null)
+            return;
+        
+        String[] key = new String[]{loginTextField.getText(), 
+            new String(passwordField.getPassword())};
+        
+        if (Nullator.isEmpty(key[0]) && Nullator.isEmpty(key[1])) {
+            //if both empty, remove the key
+            keyring.removeKey(operator.getName());
+        } else {
+            //else update/set the key
+            keyring.putKey(operator.getName(), key);
         }
     }
     
@@ -132,6 +159,16 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         operatorFilterTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        operatorComboBox = new esmska.gui.OperatorComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        loginTextField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
+        jLabel12 = new javax.swing.JLabel();
+        clearKeyringButton = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -182,7 +219,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(rememberQueueCheckBox)
                     .addComponent(removeAccentsCheckBox)
                     .addComponent(checkUpdatesCheckBox))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +271,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel6.setText("Motiv:");
         jLabel6.setToolTipText(themeComboBox.getToolTipText());
 
-        windowDecorationsCheckBox.setMnemonic('p');
+        windowDecorationsCheckBox.setMnemonic('k');
         windowDecorationsCheckBox.setText("Použít vzhled i na okraje oken *");
         windowDecorationsCheckBox.setToolTipText("<html>\nZda má místo operačního systému vykreslovat<br>\nrámečky oken zvolený vzhled\n</html>");
 
@@ -248,7 +285,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${startCentered}"), windowCenteredCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        toolbarVisibleCheckBox.setMnemonic('z');
+        toolbarVisibleCheckBox.setMnemonic('n');
         toolbarVisibleCheckBox.setText("Zobrazit panel nástrojů");
         toolbarVisibleCheckBox.setToolTipText("<html>\nZobrazit panel nástrojů, který umožňuje rychlejší ovládání myší některých akcí\n</html>");
 
@@ -277,7 +314,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                                 .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5))))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                     .addComponent(windowDecorationsCheckBox)
                     .addComponent(rememberLayoutCheckBox))
                 .addContainerGap())
@@ -361,7 +398,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setDisplayedMnemonic('p');
+        jLabel2.setDisplayedMnemonic('d');
         jLabel2.setLabelFor(countryPrefixTextField);
         jLabel2.setText("Výchozí předčíslí země:");
         jLabel2.setToolTipText(countryPrefixTextField.getToolTipText());
@@ -400,7 +437,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(operatorFilterTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
+                        .addComponent(operatorFilterTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -432,6 +469,118 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         tabbedPane.addTab("Operátoři", jPanel2);
 
+        operatorComboBoxItemStateChanged(null);
+        operatorComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                operatorComboBoxItemStateChanged(evt);
+            }
+        });
+
+        jLabel9.setText("<html>\nZde si můžete nastavit své přihlašovací údaje pro operátory, kteří to vyžadují.\n</html>");
+
+        jLabel10.setDisplayedMnemonic('r');
+        jLabel10.setLabelFor(operatorComboBox);
+        jLabel10.setText("Operátor:");
+        jLabel10.setToolTipText(operatorComboBox.getToolTipText());
+
+        loginTextField.setColumns(15);
+        loginTextField.setToolTipText("Uživatelské jméno potřebné k přihlášení k webové bráně operátora");
+        loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                keyUpdated();
+            }
+        });
+
+        jLabel11.setDisplayedMnemonic('u');
+        jLabel11.setLabelFor(loginTextField);
+        jLabel11.setText("Uživatelské jméno:");
+        jLabel11.setToolTipText(loginTextField.getToolTipText());
+
+        passwordField.setColumns(15);
+        passwordField.setToolTipText("Heslo příslušející k danému uživatelskému jménu");
+        passwordField.enableInputMethods(true);
+        passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                keyUpdated();
+            }
+        });
+
+        jLabel12.setDisplayedMnemonic('s');
+        jLabel12.setLabelFor(passwordField);
+        jLabel12.setText("Heslo:");
+        jLabel12.setToolTipText(passwordField.getToolTipText());
+
+        clearKeyringButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
+        clearKeyringButton.setMnemonic('d');
+        clearKeyringButton.setText("Odstranit všechny přihlašovací údaje");
+        clearKeyringButton.setToolTipText("Vymaže uživatelské jména a hesla u všech operátorů");
+        clearKeyringButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearKeyringButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("<html><i>\nAčkoliv se hesla ukládají šifrovaně, lze se k původnímu obsahu dostat. Důrazně doporučujeme nastavit si přístupová práva tak, aby k <u>adresáři s konfiguračními soubory programu</u> neměl přístup žádný jiný uživatel.\n</i></html>");
+        jLabel13.setToolTipText("<html>Uživatelský adresář programu:<br>"
+            + PersistenceManager.getUserDir().getAbsolutePath()
+            + "</html>");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(passwordField))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addComponent(clearKeyringButton))
+                .addContainerGap())
+        );
+
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
+
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(clearKeyringButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addContainerGap())
+        );
+
+        tabbedPane.addTab("Přihlašovací údaje", jPanel4);
+
         closeButton.setMnemonic('z');
         closeButton.setText("Zavřít");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -448,7 +597,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(closeButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                    .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -517,13 +666,35 @@ public class ConfigFrame extends javax.swing.JFrame {
         if (prefix.length() > 0 && !FormChecker.checkCountryPrefix(prefix))
             config.setCountryPrefix("");
     }//GEN-LAST:event_formWindowClosed
+
+    private void operatorComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
+        Operator operator = operatorComboBox.getSelectedOperator();
+        String[] key = keyring.getKey(operator != null ? operator.getName() : null);
+        if (key == null) {
+            loginTextField.setText(null);
+            passwordField.setText(null);
+        } else {
+            loginTextField.setText(key[0]);
+            passwordField.setText(key[1]);
+        }
+    }//GEN-LAST:event_operatorComboBoxItemStateChanged
+
+    private void clearKeyringButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
+        keyring.clearKeys();
+        operatorComboBoxItemStateChanged(null);
+    }//GEN-LAST:event_clearKeyringButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkUpdatesCheckBox;
+    private javax.swing.JButton clearKeyringButton;
     private javax.swing.JButton closeButton;
     private esmska.data.Config config;
     private javax.swing.JTextField countryPrefixTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -531,11 +702,16 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JComboBox lafComboBox;
+    private javax.swing.JTextField loginTextField;
+    private esmska.gui.OperatorComboBox operatorComboBox;
     private javax.swing.JTextField operatorFilterTextField;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JCheckBox rememberHistoryCheckBox;
     private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;

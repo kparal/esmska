@@ -12,6 +12,7 @@ package esmska.persistence;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.History;
+import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.operators.Operator;
 import java.beans.IntrospectionException;
@@ -47,6 +48,7 @@ public class PersistenceManager {
     private static final String CONTACTS_FILENAME = "contacts.csv";
     private static final String QUEUE_FILENAME = "queue.csv";
     private static final String HISTORY_FILENAME = "history.csv";
+    private static final String KEYRING_FILENAME = "keyring.csv";
     private static final String LOCK_FILENAME = "running.lock";
     private static File USER_DIR =
             new File(System.getProperty("user.home") + File.separator + ".config",
@@ -56,6 +58,7 @@ public class PersistenceManager {
     private static File CONTACTS_FILE = new File(USER_DIR, CONTACTS_FILENAME);
     private static File QUEUE_FILE = new File(USER_DIR, QUEUE_FILENAME);
     private static File HISTORY_FILE = new File(USER_DIR, HISTORY_FILENAME);
+    private static File KEYRING_FILE = new File(USER_DIR, KEYRING_FILENAME);
     private static File LOCK_FILE = new File(USER_DIR, LOCK_FILENAME);
     
     private static Config config = new Config();
@@ -63,6 +66,7 @@ public class PersistenceManager {
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
     private static History history = new History();
     private static TreeSet<Operator> operators = new TreeSet<Operator>();
+    private static Keyring keyring = new Keyring();
     
     private static boolean customPathSet;
     private FileLock lock;
@@ -101,8 +105,14 @@ public class PersistenceManager {
         CONTACTS_FILE = new File(USER_DIR, CONTACTS_FILENAME);
         QUEUE_FILE = new File(USER_DIR, QUEUE_FILENAME);
         HISTORY_FILE = new File(USER_DIR, HISTORY_FILENAME);
+        KEYRING_FILE = new File(USER_DIR, KEYRING_FILENAME);
         LOCK_FILE = new File(USER_DIR, LOCK_FILENAME);
         customPathSet = true;
+    }
+    
+    /** Get user configuration dir */
+    public static File getUserDir() {
+        return USER_DIR;
     }
     
     /** Get PersistenceManager */
@@ -137,6 +147,11 @@ public class PersistenceManager {
         return operators;
     }
     
+    /** return keyring */
+    public static Keyring getKeyring() {
+        return keyring;
+    }
+    
     /** Save program configuration */
     public void saveConfig() throws IOException {
         //store current program version into config
@@ -155,10 +170,11 @@ public class PersistenceManager {
         if (CONFIG_FILE.exists()) {
             XMLDecoder xmlDecoder = new XMLDecoder(
                     new BufferedInputStream(new FileInputStream(CONFIG_FILE)));
-            Config config = (Config) xmlDecoder.readObject();
+            Config newConfig = (Config) xmlDecoder.readObject();
             xmlDecoder.close();
-            if (config != null)
-                this.config = config;
+            if (newConfig != null) {
+                config = newConfig;
+            }
         }
     }
     
@@ -208,6 +224,20 @@ public class PersistenceManager {
             ArrayList<History.Record> records = ImportManager.importHistory(HISTORY_FILE);
             history.clearRecords();
             history.addRecords(records);
+        }
+    }
+    
+    /** Save keyring. */
+    public void saveKeyring() throws Exception {
+        File temp = createTempFile();
+        ExportManager.exportKeyring(keyring, temp);
+        moveFileSafely(temp, KEYRING_FILE);
+    }
+    
+    /** Load keyring. */
+    public void loadKeyring() throws Exception {
+        if (KEYRING_FILE.exists()) {
+            keyring = ImportManager.importKeyring(KEYRING_FILE);
         }
     }
     

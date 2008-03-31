@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -110,7 +109,7 @@ public class OperatorInterpreter {
     /** Forward all the declared variables into the script.
      * All variable values are transformed to the x-www-form-urlencoded format.
      */
-    private void forwardVariables() throws UnsupportedEncodingException {
+    private void forwardVariables() {
         for (OperatorVariable var : OperatorVariable.values()) {
             String value = variables.get(var);
             engine.put(var.toString(), value != null ? value : "");

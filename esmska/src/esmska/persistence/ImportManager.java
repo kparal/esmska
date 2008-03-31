@@ -15,6 +15,7 @@ import esmska.data.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import esmska.operators.Operator;
@@ -26,6 +27,7 @@ import java.beans.IntrospectionException;
 import java.io.FileFilter;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.TreeSet;
 import java.util.logging.Level;
@@ -138,5 +140,28 @@ public class ImportManager {
         }
 
         return operators;
+    }
+    
+    /** Import keyring data from file.
+     * @param file File to import from.
+     * @return New keyring.
+     * @throws java.io.IOException When some error occur during file processing.
+     * @throws java.security.GeneralSecurityException When there is problem with
+     *         key decryption.
+     */
+    public static Keyring importKeyring(File file) 
+            throws IOException, GeneralSecurityException {
+        CsvReader reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
+        reader.setUseComments(true);
+        Keyring keyring = new Keyring();
+        while (reader.readRecord()) {
+            String operatorName = reader.get(0);
+            String login = reader.get(1);
+            String password = Keyring.decrypt(reader.get(2));
+
+            String[] key = new String[]{login, password};
+            keyring.putKey(operatorName, key);
+        }
+        return keyring;
     }
 }

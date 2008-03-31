@@ -38,7 +38,8 @@ public class OperatorExecutor {
             "Zadali jste nesprávný podpis odesilatele (číslo či jméno).";
     /** Message that login or password was wrong. */
     public static final String ERROR_WRONG_AUTH =
-            "Zadali jste nesprávné přihlašovací údaje.";
+            "Zadali jste nesprávné přihlašovací údaje.<br>" +
+            "Možná jste je jen zapomněli vyplnit v nastavení programu.";
     /** Message preceding operator provided error message. */
     public static final String ERROR_OPERATOR_MESSAGE =
             "Zpráva od operátora:<br>";
@@ -157,7 +158,9 @@ public class OperatorExecutor {
         return success != null ? success : false;
     }
 
-    /** Error message displayed when sending was unsuccessful. */
+    /** Error message displayed when sending was unsuccessful.
+     * You can use simple HTML tags (HTML 3.2).
+     */
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }

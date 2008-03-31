@@ -39,7 +39,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="closeButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="tabbedPane" alignment="0" pref="465" max="32767" attributes="0"/>
+                  <Component id="tabbedPane" alignment="0" pref="472" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -82,7 +82,7 @@
                           <Component id="removeAccentsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="checkUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="189" max="32767" attributes="0"/>
+                      <EmptySpace pref="196" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -177,7 +177,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel7" alignment="0" pref="436" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" pref="443" max="32767" attributes="0"/>
                           <Component id="windowDecorationsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="rememberLayoutCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -275,7 +275,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="windowDecorationsCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="112"/>
+                <Property name="mnemonic" type="int" value="107"/>
                 <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;t vzhled i na okraje oken *"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Zda m&#xe1; m&#xed;sto opera&#x10d;n&#xed;ho syst&#xe9;mu vykreslovat&lt;br&gt;&#xa;r&#xe1;me&#x10d;ky oken zvolen&#xfd; vzhled&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -295,7 +295,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="toolbarVisibleCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="122"/>
+                <Property name="mnemonic" type="int" value="110"/>
                 <Property name="text" type="java.lang.String" value="Zobrazit panel n&#xe1;stroj&#x16f;"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Zobrazit panel n&#xe1;stroj&#x16f;, kter&#xfd; umo&#x17e;&#x148;uje rychlej&#x161;&#xed; ovl&#xe1;d&#xe1;n&#xed; my&#x161;&#xed; n&#x11b;kter&#xfd;ch akc&#xed;&#xa;&lt;/html&gt;"/>
               </Properties>
@@ -346,7 +346,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="operatorFilterTextField" pref="190" max="32767" attributes="0"/>
+                              <Component id="operatorFilterTextField" pref="197" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -458,7 +458,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="112"/>
+                <Property name="displayedMnemonic" type="int" value="100"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="countryPrefixTextField"/>
                 </Property>
@@ -487,6 +487,166 @@
                 <Property name="text" type="java.lang.String" value="Zobrazovat pouze oper&#xe1;tory maj&#xed;c&#xed; v n&#xe1;zvu:"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="operatorFilterTextField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="P&#x159;ihla&#x161;ovac&#xed; &#xfa;daje">
+                <Property name="tabTitle" type="java.lang.String" value="P&#x159;ihla&#x161;ovac&#xed; &#xfa;daje"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel9" alignment="0" pref="443" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="1">
+                                  <Component id="jLabel12" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="passwordField" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="1">
+                                  <Component id="jLabel10" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="operatorComboBox" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel11" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="loginTextField" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabel13" alignment="0" pref="443" max="32767" attributes="0"/>
+                          <Component id="clearKeyringButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="operatorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="loginTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="passwordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="operatorComboBoxItemStateChanged"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBoxItemStateChanged(null);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel9">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Zde si m&#x16f;&#x17e;ete nastavit sv&#xe9; p&#x159;ihla&#x161;ovac&#xed; &#xfa;daje pro oper&#xe1;tory, kte&#x159;&#xed; to vy&#x17e;aduj&#xed;.&#xa;&lt;/html&gt;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel10">
+              <Properties>
+                <Property name="displayedMnemonic" type="int" value="114"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="operatorComboBox"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Oper&#xe1;tor:"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="operatorComboBox" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="loginTextField">
+              <Properties>
+                <Property name="columns" type="int" value="15"/>
+                <Property name="toolTipText" type="java.lang.String" value="U&#x17e;ivatelsk&#xe9; jm&#xe9;no pot&#x159;ebn&#xe9; k p&#x159;ihl&#xe1;&#x161;en&#xed; k webov&#xe9; br&#xe1;n&#x11b; oper&#xe1;tora"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                keyUpdated();&#xa;            }&#xa;        });"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel11">
+              <Properties>
+                <Property name="displayedMnemonic" type="int" value="117"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="loginTextField"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="U&#x17e;ivatelsk&#xe9; jm&#xe9;no:"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="loginTextField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="passwordField">
+              <Properties>
+                <Property name="columns" type="int" value="15"/>
+                <Property name="toolTipText" type="java.lang.String" value="Heslo p&#x159;&#xed;slu&#x161;ej&#xed;c&#xed; k dan&#xe9;mu u&#x17e;ivatelsk&#xe9;mu jm&#xe9;nu"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="passwordField.enableInputMethods(true);&#xa;passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                keyUpdated();&#xa;            }&#xa;        });"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel12">
+              <Properties>
+                <Property name="displayedMnemonic" type="int" value="115"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="passwordField"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Heslo:"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="passwordField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="clearKeyringButton">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/clear-22.png"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="100"/>
+                <Property name="text" type="java.lang.String" value="Odstranit v&#x161;echny p&#x159;ihla&#x161;ovac&#xed; &#xfa;daje"/>
+                <Property name="toolTipText" type="java.lang.String" value="Vyma&#x17e;e u&#x17e;ivatelsk&#xe9; jm&#xe9;na a hesla u v&#x161;ech oper&#xe1;tor&#x16f;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearKeyringButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel13">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;i&gt;&#xa;A&#x10d;koliv se hesla ukl&#xe1;daj&#xed; &#x161;ifrovan&#x11b;, lze se k p&#x16f;vodn&#xed;mu obsahu dostat. D&#x16f;razn&#x11b; doporu&#x10d;ujeme nastavit si p&#x159;&#xed;stupov&#xe1; pr&#xe1;va tak, aby k &lt;u&gt;adres&#xe1;&#x159;i s konfigura&#x10d;n&#xed;mi soubory programu&lt;/u&gt; nem&#x11b;l p&#x159;&#xed;stup &#x17e;&#xe1;dn&#xfd; jin&#xfd; u&#x17e;ivatel.&#xa;&lt;/i&gt;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;&lt;html&gt;U&#x17e;ivatelsk&#xfd; adres&#xe1;&#x159; programu:&lt;br&gt;&quot;&#xa;        + PersistenceManager.getUserDir().getAbsolutePath()&#xa;        + &quot;&lt;/html&gt;&quot;" type="code"/>
                 </Property>
               </Properties>
             </Component>

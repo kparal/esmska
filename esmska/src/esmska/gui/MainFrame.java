@@ -363,6 +363,7 @@ public class MainFrame extends javax.swing.JFrame {
             saveContacts();
             saveQueue();
             saveHistory();
+            saveKeyring();
         } catch (Throwable t) {
             logger.log(Level.SEVERE, "Serious error during saving", t);
         } finally {
@@ -517,6 +518,16 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager.saveHistory();
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save history", ex);
+            saveOk = false;
+        }
+    }
+    
+    /** save keyring */
+    private void saveKeyring() {
+        try {
+            persistenceManager.saveKeyring();
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, "Could not save keyring", ex);
             saveOk = false;
         }
     }
