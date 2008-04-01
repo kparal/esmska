@@ -403,7 +403,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel2.setText("Výchozí předčíslí země:");
         jLabel2.setToolTipText(countryPrefixTextField.getToolTipText());
 
-        operatorFilterTextField.setToolTipText("<html>\nV seznamu operátorů budou zobrazeni pouze ti, kteří budou<br>\nobsahovat ve svém názvu vzor zadaný v tomto poli. Jednoduše tak<br>\nlze například zobrazit pouze operátory pro zemi XX zadáním vzoru [XX].<br>\nLze zadat více vzorů oddělených čárkou.\n</html>");
+        operatorFilterTextField.setToolTipText("<html>\nV seznamu operátorů budou zobrazeni pouze ti, kteří budou<br>\nobsahovat ve svém názvu vzor zadaný v tomto poli. Jednoduše tak<br>\nlze například zobrazit pouze operátory pro zemi XX zadáním vzoru [XX].<br>\nLze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n</html>");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${operatorFilter}"), operatorFilterTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);

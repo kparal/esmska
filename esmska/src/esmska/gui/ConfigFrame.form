@@ -470,7 +470,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="operatorFilterTextField">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;V seznamu oper&#xe1;tor&#x16f; budou zobrazeni pouze ti, kte&#x159;&#xed; budou&lt;br&gt;&#xa;obsahovat ve sv&#xe9;m n&#xe1;zvu vzor zadan&#xfd; v tomto poli. Jednodu&#x161;e tak&lt;br&gt;&#xa;lze nap&#x159;&#xed;klad zobrazit pouze oper&#xe1;tory pro zemi XX zad&#xe1;n&#xed;m vzoru [XX].&lt;br&gt;&#xa;Lze zadat v&#xed;ce vzor&#x16f; odd&#x11b;len&#xfd;ch &#x10d;&#xe1;rkou.&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;V seznamu oper&#xe1;tor&#x16f; budou zobrazeni pouze ti, kte&#x159;&#xed; budou&lt;br&gt;&#xa;obsahovat ve sv&#xe9;m n&#xe1;zvu vzor zadan&#xfd; v tomto poli. Jednodu&#x161;e tak&lt;br&gt;&#xa;lze nap&#x159;&#xed;klad zobrazit pouze oper&#xe1;tory pro zemi XX zad&#xe1;n&#xed;m vzoru [XX].&lt;br&gt;&#xa;Lze zadat v&#xed;ce vzor&#x16f; odd&#x11b;len&#xfd;ch &#x10d;&#xe1;rkou. Bere se ohled na velikost p&#xed;smen.&#xa;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${operatorFilter}" target="operatorFilterTextField" targetPath="text" updateStrategy="0" immediately="false">
