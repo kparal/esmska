@@ -34,6 +34,8 @@ import java.util.logging.Logger;
 public class OperatorConnector {
 
     private static final Logger logger = Logger.getLogger(OperatorConnector.class.getName());
+    private static final String USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686; cs-CZ; rv:1.8.1.13)" +
+            " Gecko/20080325 Ubuntu/7.10 (gutsy) Firefox/2.0.0.13";
     private String url;
     private String[] params;
     private String[] postData;
@@ -149,6 +151,9 @@ public class OperatorConnector {
         if (referer != null) {
             con.setRequestProperty("Referer", referer);
         }
+        
+        //set user-agent - just to be sure that the server won't screw us
+        con.setRequestProperty("User-Agent", USER_AGENT);
 
         //connect
         if (isDoPost()) {
