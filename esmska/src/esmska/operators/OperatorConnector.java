@@ -205,7 +205,7 @@ public class OperatorConnector {
 
         //parse content type
         String encoding = con.getContentEncoding();
-        if (encoding == null) {
+        if (encoding == null && con.getContentType().contains("charset=")) {
             encoding = con.getContentType().replaceFirst("^.*charset=", "").trim();
         }
         String contentType = con.getContentType();

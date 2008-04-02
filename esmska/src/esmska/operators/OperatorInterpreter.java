@@ -83,6 +83,7 @@ public class OperatorInterpreter {
         }
         
         Reader reader = null;
+        boolean sentOk = false;
         try {
             reader = new InputStreamReader(new FileInputStream(operator.getScript()), "UTF-8");
             
@@ -91,9 +92,10 @@ public class OperatorInterpreter {
             engine.eval(reader);
 
             //send the message
-            invocable.invokeFunction("send", new Object[0]);
+            sentOk = (Boolean) invocable.invokeFunction("send", new Object[0]);
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Error executing operator script file", ex);
+            executor.setErrorMessage(OperatorExecutor.ERROR_UKNOWN);
             return false;
         } finally {
             try {
@@ -103,7 +105,7 @@ public class OperatorInterpreter {
             }
         }
 
-        return executor.getSuccess();
+        return sentOk;
     }
 
     /** Forward all the declared variables into the script.

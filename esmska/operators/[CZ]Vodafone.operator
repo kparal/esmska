@@ -83,21 +83,18 @@ function send() {
     re = /<div id="thanks">/
     match = re.exec(content)
     if (undefined != match) {
-        EXEC.setSuccess(true)
-        return
+        return true
     }
     
     // look for possible error messages
     re = /<div id="errmsg">\n<p>(.+?)<\/p>/
     match = re.exec(content)
     if (undefined != match) {
-        EXEC.setSuccess(false)
         EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
-        return
+        return false
     }
     
     // if neither success nor error message was found
-    EXEC.setSuccess(false)
     EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
-    return
+    return false
 }

@@ -47,9 +47,11 @@ public class OperatorExecutor {
     public static final String ERROR_UKNOWN =
             "Došlo k neznámé chybě. Operátor možná změnil<br>" +
             "své webové stránky, nebo s nimi má aktuálně potíže.<br>" +
-            "Zkuste to později, případně zkontrolujte aktualizaci programu.";
+            "Zkuste to později, případně zkontrolujte aktualizaci programu.<br>" +
+            "<br>" +
+            "Pokud potíže přetrvají a webová brána operátora funguje,<br>" +
+            "nahlaste problém na domovských stránkách programu.";
     
-    private Boolean success;
     private String errorMessage;
     private String referer;
     private boolean useCookies;
@@ -148,16 +150,6 @@ public class OperatorExecutor {
         return imageCode != null ? imageCode : "";
     }
     
-    /** Whether sending was successful or not. Default is false. */
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    /** Whether sending was successful or not. Default is false. */
-    public boolean getSuccess() {
-        return success != null ? success : false;
-    }
-
     /** Error message displayed when sending was unsuccessful.
      * You can use simple HTML tags (HTML 3.2).
      */
