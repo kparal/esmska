@@ -16,7 +16,7 @@ function getCountryPrefix() {
 }
 
 function getOperatorPrefixes() {
-    return ["+420608","+420773","+420775","+420776","+420777"]
+    return ["+420608","+420773","+420774","+420775","+420776","+420777"]
 }
 
 function getSMSLength() {
