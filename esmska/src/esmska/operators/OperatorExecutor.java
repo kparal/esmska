@@ -167,13 +167,15 @@ public class OperatorExecutor {
         this.referer = referer;
     }
 
-    /** Whether to recieve and send cookies in the following requests. */
+    /** Whether to recieve and send cookies in the following requests.
+     * Default is false.
+     */
     public void setUseCookies(boolean useCookies) {
         this.useCookies = useCookies;
         if (useCookies) {
             CookieManager manager = new CookieManager();
             manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-            CookieHandler.setDefault(manager);
+            CookieHandler.setDefault(manager); //TODO: will concurrent SMS sending interfere?
         } else {
             CookieHandler.setDefault(null);
         }
