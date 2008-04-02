@@ -7,9 +7,7 @@ package esmska;
 import esmska.utils.*;
 import esmska.data.Config;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,6 +16,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.SwingWorker;
+import org.apache.commons.io.IOUtils;
 
 /** Checks for newer version of the program on program's website
  *
@@ -113,18 +112,12 @@ public class UpdateChecker {
             try {
                 URL url = new URL(UPDATE_FILE_URL);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                BufferedReader br = new BufferedReader(
-                        new InputStreamReader(con.getInputStream()));
-
-                StringBuilder builder = new StringBuilder();
-                String line = "";
-                while ((line = br.readLine()) != null) {
-                    builder.append(line);
-                    builder.append('\n');
-                }
+                
+                String content = IOUtils.toString(con.getInputStream(), "UTF-8");
+                con.getInputStream().close();
                 con.disconnect();
 
-                updateAvailable = parseUpdateFile(builder.toString());
+                updateAvailable = parseUpdateFile(content);
             } catch (MalformedURLException ex) {
                 logger.log(Level.SEVERE, "URL not correct", ex);
             } catch (IOException ex) {

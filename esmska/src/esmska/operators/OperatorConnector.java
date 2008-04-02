@@ -5,11 +5,7 @@
 package esmska.operators;
 
 import esmska.utils.Nullator;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
@@ -26,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.IOUtils;
 
 /** Class for connecting to HTTP resources and sending GET and POST requests.
  *
@@ -219,30 +216,15 @@ public class OperatorConnector {
 
         //read response
         if (text) { //text content
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(con.getInputStream(),
-                    encoding != null ? encoding : "UTF-8"));
-
-            textContent = "";
-            String s = "";
-            while ((s = br.readLine()) != null) {
-                textContent += s + "\n";
-            }
-            br.close();
+            textContent = IOUtils.toString(con.getInputStream(),
+                    encoding != null ? encoding : "UTF-8");
+            con.getInputStream().close();
         } else { //binary content
-            InputStream is = con.getInputStream();
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-
-            byte[] buffer = new byte[1024];
-            int count = 0;
-            while ((count = is.read(buffer)) >= 0) {
-                os.write(buffer, 0, count);
-            }
-            binaryContent = os.toByteArray();
-            is.close();
+            binaryContent = IOUtils.toByteArray(con.getInputStream());
+            con.getInputStream().close();
         }
 
-        con.disconnect();
+//        con.disconnect(); //TODO: should it be here or not?
         return true;
     }
 
