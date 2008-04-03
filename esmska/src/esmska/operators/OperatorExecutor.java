@@ -13,6 +13,8 @@ import java.net.CookiePolicy;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ import javax.swing.SwingUtilities;
  */
 public class OperatorExecutor {
 
+    private static final Logger logger = Logger.getLogger(OperatorExecutor.class.getName());
     /** Message that recepient number was wrong. */
     public static final String ERROR_WRONG_NUMBER =
             "Zadali jste nesprávné číslo příjemce.";
@@ -67,21 +70,29 @@ public class OperatorExecutor {
      * @throws IOException when there is some problem in connecting
      */
     public Object getURL(String url, String[] params) throws IOException {
-        OperatorConnector connector = new OperatorConnector();
-        connector.setURL(url);
-        connector.setParams(params);
-        connector.setReferer(referer);
-        connector.setUseCookies(useCookies);
+        try {
+            OperatorConnector connector = new OperatorConnector();
+            connector.setURL(url);
+            connector.setParams(params);
+            connector.setReferer(referer);
+            connector.setUseCookies(useCookies);
 
-        boolean ok = connector.connect();
-        if (!ok) {
-            throw new IOException("Could not connect to URL");
-        }
+            boolean ok = connector.connect();
+            if (!ok) {
+                throw new IOException("Could not connect to URL");
+            }
 
-        if (connector.isTextContent()) {
-            return connector.getTextContent();
-        } else {
-            return connector.getBinaryContent();
+            if (connector.isTextContent()) {
+                return connector.getTextContent();
+            } else {
+                return connector.getBinaryContent();
+            }
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, "Could not execute getURL", ex);
+            throw ex;
+        } catch (RuntimeException ex) {
+            logger.log(Level.WARNING, "Could not execute getURL", ex);
+            throw ex;
         }
     }
 
@@ -96,23 +107,31 @@ public class OperatorExecutor {
      * @throws IOException when there is some problem in connecting
      */
     public Object postURL(String url, String[] params, String[] postData) throws IOException {
-        OperatorConnector connector = new OperatorConnector();
-        connector.setURL(url);
-        connector.setParams(params);
-        connector.setPostData(postData);
-        connector.setReferer(referer);
-        connector.setUseCookies(useCookies);
-        connector.setDoPost(true);
+        try {
+            OperatorConnector connector = new OperatorConnector();
+            connector.setURL(url);
+            connector.setParams(params);
+            connector.setPostData(postData);
+            connector.setReferer(referer);
+            connector.setUseCookies(useCookies);
+            connector.setDoPost(true);
 
-        boolean ok = connector.connect();
-        if (!ok) {
-            throw new IOException("Could not connect to URL");
-        }
+            boolean ok = connector.connect();
+            if (!ok) {
+                throw new IOException("Could not connect to URL");
+            }
 
-        if (connector.isTextContent()) {
-            return connector.getTextContent();
-        } else {
-            return connector.getBinaryContent();
+            if (connector.isTextContent()) {
+                return connector.getTextContent();
+            } else {
+                return connector.getBinaryContent();
+            }
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, "Could not execute postURL", ex);
+            throw ex;
+        } catch (RuntimeException ex) {
+            logger.log(Level.WARNING, "Could not execute postURL", ex);
+            throw ex;
         }
     }
 
@@ -121,33 +140,47 @@ public class OperatorExecutor {
      */
     public String recognizeImage(byte[] imageBytes) throws InterruptedException,
             InvocationTargetException, ExecutionException {
-        if (imageBytes == null) {
-            return "";
-        }
-
-        ImageIcon image = new ImageIcon(imageBytes);
-
-        //display dialog
-        final JPanel panel = new JPanel();
-        JLabel label = new JLabel("Opište kód z obrázku:",
-                image, JLabel.CENTER);
-        label.setHorizontalTextPosition(JLabel.CENTER);
-        label.setVerticalTextPosition(JLabel.TOP);
-        panel.add(label);
-        FutureTask<String> task = new FutureTask<String>(new Callable<String>() {
-
-            public String call() {
-                String imageCode = JOptionPane.showInputDialog(MainFrame.getInstance(),
-                        panel, "Kontrolní kód",
-                        JOptionPane.QUESTION_MESSAGE);
-                return imageCode;
+        try {
+            if (imageBytes == null) {
+                return "";
             }
-            });
-        SwingUtilities.invokeAndWait(task);
-        //receive result
-        String imageCode = task.get();
 
-        return imageCode != null ? imageCode : "";
+            ImageIcon image = new ImageIcon(imageBytes);
+
+            //display dialog
+            final JPanel panel = new JPanel();
+            JLabel label = new JLabel("Opište kód z obrázku:",
+                    image, JLabel.CENTER);
+            label.setHorizontalTextPosition(JLabel.CENTER);
+            label.setVerticalTextPosition(JLabel.TOP);
+            panel.add(label);
+            FutureTask<String> task = new FutureTask<String>(new Callable<String>() {
+
+                public String call() {
+                    String imageCode = JOptionPane.showInputDialog(MainFrame.getInstance(),
+                            panel, "Kontrolní kód",
+                            JOptionPane.QUESTION_MESSAGE);
+                    return imageCode;
+                }
+            });
+            SwingUtilities.invokeAndWait(task);
+            //receive result
+            String imageCode = task.get();
+
+            return imageCode != null ? imageCode : "";
+        } catch (InterruptedException ex) {
+            logger.log(Level.WARNING, "Could not execute recognizeImage", ex);
+            throw ex;
+        } catch (ExecutionException ex) {
+            logger.log(Level.WARNING, "Could not execute recognizeImage", ex);
+            throw ex;
+        } catch (InvocationTargetException ex) {
+            logger.log(Level.WARNING, "Could not execute recognizeImage", ex);
+            throw ex;
+        } catch (RuntimeException ex) {
+            logger.log(Level.WARNING, "Could not execute recognizeImage", ex);
+            throw ex;
+        }
     }
 
     /** Error message displayed when sending was unsuccessful.
