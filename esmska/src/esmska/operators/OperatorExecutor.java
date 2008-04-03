@@ -24,6 +24,7 @@ import javax.swing.SwingUtilities;
  * @author ripper
  */
 public class OperatorExecutor {
+
     /** Message that recepient number was wrong. */
     public static final String ERROR_WRONG_NUMBER =
             "Zadali jste nesprávné číslo příjemce.";
@@ -51,7 +52,6 @@ public class OperatorExecutor {
             "<br>" +
             "Pokud potíže přetrvají a webová brána operátora funguje,<br>" +
             "nahlaste problém na domovských stránkách programu.";
-    
     private String errorMessage;
     private String referer;
     private boolean useCookies;
@@ -149,7 +149,7 @@ public class OperatorExecutor {
 
         return imageCode != null ? imageCode : "";
     }
-    
+
     /** Error message displayed when sending was unsuccessful.
      * You can use simple HTML tags (HTML 3.2).
      */
@@ -173,9 +173,11 @@ public class OperatorExecutor {
     public void setUseCookies(boolean useCookies) {
         this.useCookies = useCookies;
         if (useCookies) {
-            CookieManager manager = new CookieManager();
-            manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-            CookieHandler.setDefault(manager); //TODO: will concurrent SMS sending interfere?
+            if (CookieHandler.getDefault() == null) {
+                CookieManager manager = new CookieManager();
+                manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+                CookieHandler.setDefault(manager); //TODO: will concurrent SMS sending interfere?
+            }
         } else {
             CookieHandler.setDefault(null);
         }
