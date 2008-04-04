@@ -56,10 +56,12 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_P);
         tabbedPane.setMnemonicAt(3, KeyEvent.VK_H);
+        tabbedPane.setMnemonicAt(4, KeyEvent.VK_N);
         tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-16.png")));
         tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-small.png")));
         tabbedPane.setIconAt(2, Icons.OPERATOR_DEFAULT);
         tabbedPane.setIconAt(3, new ImageIcon(getClass().getResource(RES + "password-16.png")));
+        tabbedPane.setIconAt(4, new ImageIcon(getClass().getResource(RES + "connection-16.png")));
         closeButton.requestFocusInWindow();
         
         lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
@@ -190,13 +192,14 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         useProxyCheckBox = new javax.swing.JCheckBox();
-        jLabel14 = new javax.swing.JLabel();
         httpProxyTextField = new javax.swing.JTextField();
         sameProxyCheckBox = new javax.swing.JCheckBox();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         httpsProxyTextField = new javax.swing.JTextField();
         socksProxyTextField = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -610,7 +613,9 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         tabbedPane.addTab("Přihlašovací údaje", jPanel4);
 
-        useProxyCheckBox.setText("Používat proxy server");
+        useProxyCheckBox.setMnemonic('x');
+        useProxyCheckBox.setText("Používat proxy server *");
+        useProxyCheckBox.setToolTipText("Zda pro připojení používat proxy server");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${useProxy}"), useProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
@@ -621,9 +626,8 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setText("HTTP proxy:");
-
         httpProxyTextField.setColumns(20);
+        httpProxyTextField.setToolTipText("<html>\nAdresa HTTP proxy serveru ve formátu \"host\" nebo \"host:port\".\nNapříklad: proxy.firma.com:80\n</html>");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${httpProxy}"), httpProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
@@ -637,7 +641,9 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        sameProxyCheckBox.setText("Pro všechny protokoly použít stejnou proxy");
+        sameProxyCheckBox.setMnemonic('t');
+        sameProxyCheckBox.setText("Pro všechny protokoly použít tuto proxy");
+        sameProxyCheckBox.setToolTipText("Pro všechny protokoly se použije adresa zadaná v políčku \"HTTP proxy\".");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${sameProxy}"), sameProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
@@ -650,9 +656,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel15.setText("HTTPS proxy:");
-
-        jLabel16.setText("SOCKS proxy:");
+        httpsProxyTextField.setToolTipText("<html>\nAdresa HTTPS proxy serveru ve formátu \"host\" nebo \"host:port\".\nNapříklad: proxy.firma.com:443\n</html>");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${httpsProxy}"), httpsProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
@@ -666,6 +670,8 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        socksProxyTextField.setToolTipText("<html>\nAdresa SOCKS proxy serveru ve formátu \"host\" nebo \"host:port\".\nNapříklad: proxy.firma.com:1080\n</html>");
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${socksProxy}"), socksProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, sameProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${enabled && !selected}"), socksProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -678,6 +684,23 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setDisplayedMnemonic('t');
+        jLabel14.setLabelFor(httpProxyTextField);
+        jLabel14.setText("HTTP proxy:");
+        jLabel14.setToolTipText(httpProxyTextField.getToolTipText());
+
+        jLabel15.setDisplayedMnemonic('s');
+        jLabel15.setLabelFor(httpsProxyTextField);
+        jLabel15.setText("HTTPS proxy:");
+        jLabel15.setToolTipText(httpsProxyTextField.getToolTipText());
+
+        jLabel16.setDisplayedMnemonic('c');
+        jLabel16.setLabelFor(socksProxyTextField);
+        jLabel16.setText("SOCKS proxy:");
+        jLabel16.setToolTipText(socksProxyTextField.getToolTipText());
+
+        jLabel17.setText("<html><i>\n* Pokud nejste k Internetu připojeni přímo, je nutné, aby vaše proxy fungovala jako SOCKS proxy server.\n</i></html>");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -685,6 +708,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
                     .addComponent(useProxyCheckBox)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -704,7 +728,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(socksProxyTextField)))))
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel14, jLabel15, jLabel16});
@@ -728,7 +752,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(socksProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addContainerGap())
         );
 
         tabbedPane.addTab("Připojení", jPanel5);
@@ -860,6 +886,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

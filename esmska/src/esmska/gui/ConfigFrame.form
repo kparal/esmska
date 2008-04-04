@@ -668,6 +668,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel17" alignment="0" pref="554" max="32767" attributes="0"/>
                           <Component id="useProxyCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="21" pref="21" max="21" attributes="0"/>
@@ -694,7 +695,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="259" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -720,7 +721,9 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="210" max="32767" attributes="0"/>
+                      <EmptySpace pref="170" max="32767" attributes="0"/>
+                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -728,7 +731,9 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="useProxyCheckBox">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;vat proxy server"/>
+                <Property name="mnemonic" type="int" value="120"/>
+                <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;vat proxy server *"/>
+                <Property name="toolTipText" type="java.lang.String" value="Zda pro p&#x159;ipojen&#xed; pou&#x17e;&#xed;vat proxy server"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${useProxy}" target="useProxyCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -737,14 +742,10 @@
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="useProxyCheckBoxItemStateChanged"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel14">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="HTTP proxy:"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="httpProxyTextField">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Adresa HTTP proxy serveru ve form&#xe1;tu &quot;host&quot; nebo &quot;host:port&quot;.&#xa;Nap&#x159;&#xed;klad: proxy.firma.com:80&#xa;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${httpProxy}" target="httpProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -758,7 +759,9 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="sameProxyCheckBox">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pro v&#x161;echny protokoly pou&#x17e;&#xed;t stejnou proxy"/>
+                <Property name="mnemonic" type="int" value="116"/>
+                <Property name="text" type="java.lang.String" value="Pro v&#x161;echny protokoly pou&#x17e;&#xed;t tuto proxy"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pro v&#x161;echny protokoly se pou&#x17e;ije adresa zadan&#xe1; v pol&#xed;&#x10d;ku &quot;HTTP proxy&quot;."/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${sameProxy}" target="sameProxyCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -768,17 +771,10 @@
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="sameProxyCheckBoxItemStateChanged"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel15">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="HTTPS proxy:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel16">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="SOCKS proxy:"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="httpsProxyTextField">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Adresa HTTPS proxy serveru ve form&#xe1;tu &quot;host&quot; nebo &quot;host:port&quot;.&#xa;Nap&#x159;&#xed;klad: proxy.firma.com:443&#xa;&lt;/html&gt;"/>
+              </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${httpsProxy}" target="httpsProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
                   <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
@@ -790,6 +786,9 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="socksProxyTextField">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Adresa SOCKS proxy serveru ve form&#xe1;tu &quot;host&quot; nebo &quot;host:port&quot;.&#xa;Nap&#x159;&#xed;klad: proxy.firma.com:1080&#xa;&lt;/html&gt;"/>
+              </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${socksProxy}" target="socksProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
                   <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
@@ -799,6 +798,47 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                proxyUpdated();&#xa;            }&#xa;        });"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel14">
+              <Properties>
+                <Property name="displayedMnemonic" type="int" value="116"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="httpProxyTextField"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="HTTP proxy:"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="httpProxyTextField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel15">
+              <Properties>
+                <Property name="displayedMnemonic" type="int" value="115"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="httpsProxyTextField"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="HTTPS proxy:"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="httpsProxyTextField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel16">
+              <Properties>
+                <Property name="displayedMnemonic" type="int" value="99"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="socksProxyTextField"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="SOCKS proxy:"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="socksProxyTextField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel17">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;i&gt;&#xa;* Pokud nejste k Internetu p&#x159;ipojeni p&#x159;&#xed;mo, je nutn&#xe9;, aby va&#x161;e proxy fungovala jako SOCKS proxy server.&#xa;&lt;/i&gt;&lt;/html&gt;"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

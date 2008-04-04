@@ -772,7 +772,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class UpdateListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             statusPanel.setStatusMessage("Byla vydána nová verze programu!", 
-                    false, Icons.STATUS_INFO);
+                    false, Icons.STATUS_UPDATE);
         }
     }
     
