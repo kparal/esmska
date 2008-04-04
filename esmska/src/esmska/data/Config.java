@@ -37,6 +37,11 @@ public class Config extends Object implements Serializable {
     private boolean toolbarVisible = false;
     private String countryPrefix = "";
     private String operatorFilter = "";
+    private boolean useProxy = false;
+    private boolean sameProxy = true;
+    private String httpProxy = "";
+    private String httpsProxy = "";
+    private String socksProxy = "";
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -133,6 +138,26 @@ public class Config extends Object implements Serializable {
 
     public String getOperatorFilter() {
         return operatorFilter;
+    }
+
+    public boolean isUseProxy() {
+        return useProxy;
+    }
+    
+    public boolean isSameProxy() {
+        return sameProxy;
+    }
+    
+    public String getHttpProxy() {
+        return httpProxy;
+    }
+
+    public String getHttpsProxy() {
+        return httpsProxy;
+    }
+
+    public String getSocksProxy() {
+        return socksProxy;
     }
     
     // </editor-fold>
@@ -256,6 +281,36 @@ public class Config extends Object implements Serializable {
         String old = this.operatorFilter;
         this.operatorFilter = operatorFilter;
         changeSupport.firePropertyChange("operatorFilter", old, operatorFilter);
+    }
+
+    public void setUseProxy(boolean useProxy) {
+        boolean old = this.useProxy;
+        this.useProxy = useProxy;
+        changeSupport.firePropertyChange("useProxy", old, useProxy);
+    }
+    
+    public void setSameProxy(boolean sameProxy) {
+        boolean old = this.sameProxy;
+        this.sameProxy = sameProxy;
+        changeSupport.firePropertyChange("sameProxy", old, sameProxy);
+    }
+    
+    public void setHttpProxy(String httpProxy) {
+        String old = this.httpProxy;
+        this.httpProxy = httpProxy;
+        changeSupport.firePropertyChange("httpProxy", old, httpProxy);
+    }
+
+    public void setHttpsProxy(String httpsProxy) {
+        String old = this.httpsProxy;
+        this.httpsProxy = httpsProxy;
+        changeSupport.firePropertyChange("httpsProxy", old, httpsProxy);
+    }
+
+    public void setSocksProxy(String socksProxy) {
+        String old = this.socksProxy;
+        this.socksProxy = socksProxy;
+        changeSupport.firePropertyChange("socksProxy", old, socksProxy);
     }
     
     // </editor-fold>

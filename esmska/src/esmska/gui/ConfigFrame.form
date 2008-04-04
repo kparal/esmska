@@ -39,7 +39,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="closeButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="tabbedPane" alignment="0" pref="472" max="32767" attributes="0"/>
+                  <Component id="tabbedPane" alignment="0" pref="583" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -49,7 +49,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabbedPane" pref="305" max="32767" attributes="0"/>
+              <Component id="tabbedPane" pref="354" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="closeButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -82,7 +82,7 @@
                           <Component id="removeAccentsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="checkUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="196" max="32767" attributes="0"/>
+                      <EmptySpace pref="307" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -97,7 +97,7 @@
                       <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="183" max="32767" attributes="0"/>
+                      <EmptySpace pref="232" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -177,7 +177,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel7" alignment="0" pref="443" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" pref="554" max="32767" attributes="0"/>
                           <Component id="windowDecorationsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="rememberLayoutCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -207,7 +207,7 @@
                       <Component id="windowCenteredCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="toolbarVisibleCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="99" max="32767" attributes="0"/>
+                      <EmptySpace pref="148" max="32767" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -322,9 +322,9 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" max="-2" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="useSenderIDCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" max="-2" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -345,11 +345,11 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="operatorFilterTextField" pref="197" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="operatorFilterTextField" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -378,7 +378,7 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="senderNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="157" max="32767" attributes="0"/>
+                      <EmptySpace pref="206" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -470,6 +470,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="operatorFilterTextField">
               <Properties>
+                <Property name="columns" type="int" value="13"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;V seznamu oper&#xe1;tor&#x16f; budou zobrazeni pouze ti, kte&#x159;&#xed; budou&lt;br&gt;&#xa;obsahovat ve sv&#xe9;m n&#xe1;zvu vzor zadan&#xfd; v tomto poli. Jednodu&#x161;e tak&lt;br&gt;&#xa;lze nap&#x159;&#xed;klad zobrazit pouze oper&#xe1;tory pro zemi XX zad&#xe1;n&#xed;m vzoru [XX].&lt;br&gt;&#xa;Lze zadat v&#xed;ce vzor&#x16f; odd&#x11b;len&#xfd;ch &#x10d;&#xe1;rkou. Bere se ohled na velikost p&#xed;smen.&#xa;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
@@ -507,7 +508,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel9" alignment="0" pref="443" max="32767" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" pref="554" max="32767" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="jLabel12" linkSize="4" min="-2" max="-2" attributes="0"/>
@@ -525,7 +526,7 @@
                                   <Component id="loginTextField" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jLabel13" alignment="0" pref="443" max="32767" attributes="0"/>
+                          <Component id="jLabel13" alignment="0" pref="554" max="32767" attributes="0"/>
                           <Component id="clearKeyringButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -554,7 +555,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace pref="115" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -649,6 +650,155 @@
                   <Connection code="&quot;&lt;html&gt;U&#x17e;ivatelsk&#xfd; adres&#xe1;&#x159; programu:&lt;br&gt;&quot;&#xa;        + PersistenceManager.getUserDir().getAbsolutePath()&#xa;        + &quot;&lt;/html&gt;&quot;" type="code"/>
                 </Property>
               </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel5">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="P&#x159;ipojen&#xed;">
+                <Property name="tabTitle" type="java.lang.String" value="P&#x159;ipojen&#xed;"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="useProxyCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="21" pref="21" max="21" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+                                      <Component id="sameProxyCheckBox" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel14" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="httpProxyTextField" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="1">
+                                      <Component id="jLabel15" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="httpsProxyTextField" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="1">
+                                      <Component id="jLabel16" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="socksProxyTextField" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="259" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="useProxyCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="httpProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="sameProxyCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="httpsProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="socksProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="210" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JCheckBox" name="useProxyCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;vat proxy server"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="selected" source="config" sourcePath="${useProxy}" target="useProxyCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="useProxyCheckBoxItemStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel14">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="HTTP proxy:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="httpProxyTextField">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="config" sourcePath="${httpProxy}" target="httpProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+                <BindingProperty name="enabled" source="useProxyCheckBox" sourcePath="${selected}" target="httpProxyTextField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+              </BindingProperties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                proxyUpdated();&#xa;            }&#xa;        });"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="sameProxyCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pro v&#x161;echny protokoly pou&#x17e;&#xed;t stejnou proxy"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="selected" source="config" sourcePath="${sameProxy}" target="sameProxyCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="enabled" source="useProxyCheckBox" sourcePath="${selected}" target="sameProxyCheckBox" targetPath="enabled" updateStrategy="1" immediately="false"/>
+              </BindingProperties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="sameProxyCheckBoxItemStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel15">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="HTTPS proxy:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel16">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="SOCKS proxy:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="httpsProxyTextField">
+              <BindingProperties>
+                <BindingProperty name="text" source="config" sourcePath="${httpsProxy}" target="httpsProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+                <BindingProperty name="enabled" source="sameProxyCheckBox" sourcePath="${enabled &amp;&amp; !selected}" target="httpsProxyTextField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+              </BindingProperties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="httpsProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                proxyUpdated();&#xa;            }&#xa;        });"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="socksProxyTextField">
+              <BindingProperties>
+                <BindingProperty name="text" source="config" sourcePath="${socksProxy}" target="socksProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+                <BindingProperty name="enabled" source="sameProxyCheckBox" sourcePath="${enabled &amp;&amp; !selected}" target="socksProxyTextField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+              </BindingProperties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                proxyUpdated();&#xa;            }&#xa;        });"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

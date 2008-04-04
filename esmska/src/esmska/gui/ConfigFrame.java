@@ -24,8 +24,10 @@ import javax.swing.event.DocumentEvent;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.persistence.PersistenceManager;
+import esmska.transfer.ProxyManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.Nullator;
+import java.util.Arrays;
 import javax.swing.InputVerifier;
 import javax.swing.SwingUtilities;
 
@@ -104,7 +106,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
     }
     
-    /** Operator key (login, password) changed */
+    /** Reaction for operator key (login, password) change */
     private void keyUpdated() {
         Operator operator = operatorComboBox.getSelectedOperator();
         if (operator == null)
@@ -119,6 +121,23 @@ public class ConfigFrame extends javax.swing.JFrame {
         } else {
             //else update/set the key
             keyring.putKey(operator.getName(), key);
+        }
+    }
+    
+    /** Reaction to proxy configuration change */
+    private void proxyUpdated() {
+        boolean useProxy = useProxyCheckBox.isSelected();
+        boolean sameProxy = sameProxyCheckBox.isSelected();
+        if (useProxy) {
+            if (sameProxy) {
+                ProxyManager.setProxy(httpProxyTextField.getText());
+            } else {
+                ProxyManager.setProxy(httpProxyTextField.getText(),
+                        httpsProxyTextField.getText(),
+                        socksProxyTextField.getText());
+            }
+        } else {
+            ProxyManager.setProxy(null);
         }
     }
     
@@ -169,6 +188,15 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         clearKeyringButton = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        useProxyCheckBox = new javax.swing.JCheckBox();
+        jLabel14 = new javax.swing.JLabel();
+        httpProxyTextField = new javax.swing.JTextField();
+        sameProxyCheckBox = new javax.swing.JCheckBox();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        httpsProxyTextField = new javax.swing.JTextField();
+        socksProxyTextField = new javax.swing.JTextField();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -219,7 +247,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(rememberQueueCheckBox)
                     .addComponent(removeAccentsCheckBox)
                     .addComponent(checkUpdatesCheckBox))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +260,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(removeAccentsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkUpdatesCheckBox)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Obecné", jPanel1);
@@ -314,7 +342,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                                 .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5))))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
                     .addComponent(windowDecorationsCheckBox)
                     .addComponent(rememberLayoutCheckBox))
                 .addContainerGap())
@@ -342,7 +370,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(windowCenteredCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(toolbarVisibleCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
         );
@@ -403,6 +431,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel2.setText("Výchozí předčíslí země:");
         jLabel2.setToolTipText(countryPrefixTextField.getToolTipText());
 
+        operatorFilterTextField.setColumns(13);
         operatorFilterTextField.setToolTipText("<html>\nV seznamu operátorů budou zobrazeni pouze ti, kteří budou<br>\nobsahovat ve svém názvu vzor zadaný v tomto poli. Jednoduše tak<br>\nlze například zobrazit pouze operátory pro zemi XX zadáním vzoru [XX].<br>\nLze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n</html>");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${operatorFilter}"), operatorFilterTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -419,7 +448,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(useSenderIDCheckBox)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -437,7 +466,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(operatorFilterTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
+                        .addComponent(operatorFilterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -464,7 +493,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Operátoři", jPanel2);
@@ -534,7 +563,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                             .addComponent(jLabel12)
@@ -548,7 +577,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
                     .addComponent(clearKeyringButton))
                 .addContainerGap())
         );
@@ -574,12 +603,135 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(clearKeyringButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addContainerGap())
         );
 
         tabbedPane.addTab("Přihlašovací údaje", jPanel4);
+
+        useProxyCheckBox.setText("Používat proxy server");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${useProxy}"), useProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+
+        useProxyCheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                useProxyCheckBoxItemStateChanged(evt);
+            }
+        });
+
+        jLabel14.setText("HTTP proxy:");
+
+        httpProxyTextField.setColumns(20);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${httpProxy}"), httpProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), httpProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                proxyUpdated();
+            }
+        });
+
+        sameProxyCheckBox.setText("Pro všechny protokoly použít stejnou proxy");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${sameProxy}"), sameProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), sameProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        sameProxyCheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                sameProxyCheckBoxItemStateChanged(evt);
+            }
+        });
+
+        jLabel15.setText("HTTPS proxy:");
+
+        jLabel16.setText("SOCKS proxy:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${httpsProxy}"), httpsProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, sameProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${enabled && !selected}"), httpsProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        httpsProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                proxyUpdated();
+            }
+        });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${socksProxy}"), socksProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, sameProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${enabled && !selected}"), socksProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                proxyUpdated();
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(useProxyCheckBox)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(sameProxyCheckBox))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(httpProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(httpsProxyTextField))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(socksProxyTextField)))))
+                .addContainerGap(259, Short.MAX_VALUE))
+        );
+
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel14, jLabel15, jLabel16});
+
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(useProxyCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(httpProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sameProxyCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(httpsProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(socksProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(210, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("Připojení", jPanel5);
 
         closeButton.setMnemonic('z');
         closeButton.setText("Zavřít");
@@ -597,14 +749,14 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(closeButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+                    .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeButton)
                 .addContainerGap())
@@ -683,6 +835,14 @@ public class ConfigFrame extends javax.swing.JFrame {
         keyring.clearKeys();
         operatorComboBoxItemStateChanged(null);
     }//GEN-LAST:event_clearKeyringButtonActionPerformed
+
+    private void useProxyCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_useProxyCheckBoxItemStateChanged
+        proxyUpdated();
+    }//GEN-LAST:event_useProxyCheckBoxItemStateChanged
+
+    private void sameProxyCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sameProxyCheckBoxItemStateChanged
+        proxyUpdated();
+    }//GEN-LAST:event_sameProxyCheckBoxItemStateChanged
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkUpdatesCheckBox;
@@ -690,11 +850,16 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JButton closeButton;
     private esmska.data.Config config;
     private javax.swing.JTextField countryPrefixTextField;
+    private javax.swing.JTextField httpProxyTextField;
+    private javax.swing.JTextField httpsProxyTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -707,6 +872,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JComboBox lafComboBox;
     private javax.swing.JTextField loginTextField;
     private esmska.gui.OperatorComboBox operatorComboBox;
@@ -716,11 +882,14 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox rememberQueueCheckBox;
     private javax.swing.JCheckBox removeAccentsCheckBox;
+    private javax.swing.JCheckBox sameProxyCheckBox;
     private javax.swing.JTextField senderNameTextField;
     private javax.swing.JTextField senderNumberTextField;
+    private javax.swing.JTextField socksProxyTextField;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JComboBox themeComboBox;
     private javax.swing.JCheckBox toolbarVisibleCheckBox;
+    private javax.swing.JCheckBox useProxyCheckBox;
     private javax.swing.JCheckBox useSenderIDCheckBox;
     private javax.swing.JCheckBox windowCenteredCheckBox;
     private javax.swing.JCheckBox windowDecorationsCheckBox;

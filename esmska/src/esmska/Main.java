@@ -9,12 +9,14 @@
 
 package esmska;
 
+import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.gui.MainFrame;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import esmska.persistence.PersistenceManager;
+import esmska.transfer.ProxyManager;
 import esmska.utils.Nullator;
 import java.beans.IntrospectionException;
 import java.util.Locale;
@@ -142,6 +144,17 @@ public class Main {
             ThemeManager.setLaF();
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not set Look and Feel", ex);
+        }
+        
+        //set proxy
+        Config config = PersistenceManager.getConfig();
+        if (config.isUseProxy()) {
+            if (config.isSameProxy()) {
+                ProxyManager.setProxy(config.getHttpProxy());
+            } else {
+                ProxyManager.setProxy(config.getHttpProxy(),
+                        config.getHttpsProxy(), config.getSocksProxy());
+            }
         }
         
         //set Substance specific addons
