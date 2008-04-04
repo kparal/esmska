@@ -91,17 +91,23 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
             //convert known operators to our operators
             switch (type) {
                 case KUBIK_DREAMCOM_FILE:
-                    if (operator.startsWith("Oskar")) {
+                    if (operator.startsWith("Oskar") || operator.startsWith("Vodafone")) {
                         operator = "[CZ]Vodafone";
-                    } else if (operator.startsWith("Eurotel")) {
+                    } else if (operator.startsWith("Eurotel") || operator.startsWith("O2")) {
                         operator = "[CZ]O2";
+                    } else if (operator.startsWith("T-Mobile")) {
+                        operator = "[CZ]t-zones";
                     }
+                    break;
                 case DREAMCOM_SE_FILE:
                     if (operator.startsWith("O2")) {
                         operator = "[CZ]O2";
                     } else if (operator.startsWith("Vodafone")) {
                         operator = "[CZ]Vodafone";
+                    } else if (operator.startsWith("T-Zones")) {
+                        operator = "[CZ]t-zones";
                     }
+                    break;
                 case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
                     if ("Vodafone".equals(operator)) {
                         operator = "[CZ]Vodafone";
