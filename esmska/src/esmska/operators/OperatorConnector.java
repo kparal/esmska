@@ -6,6 +6,7 @@ package esmska.operators;
 
 import esmska.utils.Nullator;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -166,7 +167,12 @@ public class OperatorConnector {
         boolean text = (contentType != null && contentType.getValue().startsWith("text"));
 
         //read the response
-        byte[] response = IOUtils.toByteArray(method.getResponseBodyAsStream());
+        byte[] response = new byte[0];
+        InputStream responseStream = method.getResponseBodyAsStream();
+        if (responseStream != null) {
+            response = IOUtils.toByteArray(responseStream);
+            responseStream.close();
+        }
 
         //don't forget to release connection
         method.releaseConnection();
@@ -224,7 +230,12 @@ public class OperatorConnector {
         boolean text = (contentType != null && contentType.getValue().startsWith("text"));
 
         //read the response
-        byte[] response = IOUtils.toByteArray(method.getResponseBodyAsStream());
+        byte[] response = new byte[0];
+        InputStream responseStream = method.getResponseBodyAsStream();
+        if (responseStream != null) {
+            response = IOUtils.toByteArray(responseStream);
+            responseStream.close();
+        }
 
         //don't forget to release connection
         method.releaseConnection();
