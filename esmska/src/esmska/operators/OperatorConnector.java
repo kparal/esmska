@@ -6,26 +6,24 @@ package esmska.operators;
 
 import esmska.utils.Nullator;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.HttpCookie;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.URI;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.io.IOUtils;
 
 /** Class for connecting to HTTP resources and sending GET and POST requests.
- *
+ *  For each SMS there should be a separate instance.
  * @author ripper
  */
 public class OperatorConnector {
@@ -33,6 +31,7 @@ public class OperatorConnector {
     private static final Logger logger = Logger.getLogger(OperatorConnector.class.getName());
     private static final String USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686; cs-CZ; rv:1.8.1.13)" +
             " Gecko/20080325 Ubuntu/7.10 (gutsy) Firefox/2.0.0.13";
+    private final HttpClient client = new HttpClient();
     private String url;
     private String[] params;
     private String[] postData;
@@ -40,29 +39,19 @@ public class OperatorConnector {
     private String textContent;
     private byte[] binaryContent;
     private String referer;
-    private boolean useCookies;
+    private String fullURL;
+
+    /** Constructor for OperatorConnector. */
+    public OperatorConnector() {
+        //set cookie compatibility mode
+        client.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
+        client.getParams().setParameter("http.protocol.single-cookie-header", true);
+
+        //set user-agent - just to be sure that the server won't screw us
+        client.getParams().setParameter("http.useragent", USER_AGENT);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
-    /** URL where to connect */
-    public String getURL() {
-        return url;
-    }
-
-    /** Additional parameters to the URL. The array is in the form [key1,value1,key2,value2,...]. */
-    public String[] getParams() {
-        return params;
-    }
-    
-    /** Data to be sent in the POST request. The array is in the form [key1,value1,key2,value2,...]. */
-    public String[] getPostData() {
-        return postData;
-    }
-
-    /** True if set to do POST, false if GET. Default is false. */
-    public boolean isDoPost() {
-        return doPost;
-    }
-
     /** True if received response is textual, false if binary */
     public boolean isTextContent() {
         return textContent != null;
@@ -77,194 +66,286 @@ public class OperatorConnector {
     public byte[] getBinaryContent() {
         return binaryContent;
     }
-
-    /** Get referer. Default is empty string. */
-    public String getReferer() {
-        return referer;
-    }
-
-    /** Whether to use cookies. Default is false. */
-    public boolean isUseCookies() {
-        return useCookies;
-    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
-    /** URL where to connect */
-    public void setURL(String url) {
-        this.url = url;
-    }
-
-    /** Additional parameters to the URL. The arrays is in the form [key1,value1,key2,value2,...]. */
-    public void setParams(String[] params) {
-        this.params = params;
-    }
-    
-    /** Data to be sent in the POST request. 
-     * The array is in the form [key1,value1,key2,value2,...].
+    /** Prepare connector for a new connection.
+     * @param url URL where to connect. If you specify <tt>params</tt>, this must not 
+     *  contain '?'.
+     * @param params Additional parameters to the URL (aka query string).
+     *  The array is in the form [key1,value1,key2,value2,...]. Use null or
+     *  empty array for no parameters.
+     * @param doPost true if this should be POST request; false if this should
+     *  bet GET request
+     * @param postData Data to be sent in the POST request. The array is in the 
+     *  form [key1,value1,key2,value2,...]. Use null or empty array for no data.
+     * @throws IllegalArgumentException When <tt>url</tt> is null.
+     * @throws IOException When the <tt>url</tt> and <tt>params</tt> together does not
+     *  create a correct URL.
      */
-    public void setPostData(String[] postData) {
-        this.postData = postData;
-    }
-
-    /** True if set to do POST, false if GET. Default is false. */
-    public void setDoPost(boolean doPost) {
-        this.doPost = doPost;
-    }
-
-    /** Set referer. Default is empty string. */
-    public void setReferer(String referer) {
-        this.referer = referer;
-    }
-
-    /** Whether to use cookies. Default is false. */
-    public void setUseCookies(boolean useCookies) {
-        this.useCookies = useCookies;
-    }
-    // </editor-fold>
-    
-    /** Perform a connection (GET or POST, depending on configuration).
-     * @throws IOException when there is a problem with connection
-     */
-    public boolean connect() throws IOException {
+    public void setConnection(String url, String[] params, boolean doPost, String[] postData)
+            throws IOException {
         if (url == null) {
-            throw new MalformedURLException("URL empty");
+            throw new IllegalArgumentException("url");
         }
-
-        //delete previous response to allow repeated usage
-        textContent = null;
-        binaryContent = null;
+        this.url = url;
+        this.params = params;
+        this.doPost = doPost;
+        this.postData = postData;
 
         //create final url
-        String fullURL = url;
+        fullURL = url;
         String param = convertParamsToString(params);
         if (param.length() > 0) {
             fullURL += "?" + param;
         }
+
+        //set host - usefull for redirects
         URL address = new URL(fullURL);
-        
-        //set referer
-        HttpURLConnection con = (HttpURLConnection) address.openConnection();
-        if (referer != null) {
-            con.setRequestProperty("Referer", referer);
-        }
-        
-        //set user-agent - just to be sure that the server won't screw us
-        con.setRequestProperty("User-Agent", USER_AGENT);
+        client.getHostConfiguration().setHost(address.getHost(), address.getPort(),
+                address.getProtocol());
+    }
+
+    /** Set referer. Default is empty string. Use null to clear referer. */
+    public void setReferer(String referer) {
+        this.referer = referer;
+    }
+
+    /** Sets binary content, clears text content. */
+    private void setBinaryContent(byte[] binaryContent) {
+        this.binaryContent = binaryContent;
+        this.textContent = null;
+    }
+
+    /** Sets text content, clears binary content. */
+    private void setTextContent(String textContent) {
+        this.textContent = textContent;
+        this.binaryContent = null;
+    }
+    // </editor-fold>
+    /** Perform a connection (GET or POST, depending on configuration).
+     * @throws IOException when there is a problem with connection
+     */
+    public boolean connect() throws IOException {
+        //delete previous response to allow repeated usage
+        textContent = null;
+        binaryContent = null;
 
         //connect
-        if (isDoPost()) {
-            return doPost(con, getPostData());
+        if (doPost) {
+            return doPost(fullURL, postData);
         } else {
-            return doGet(con);
+            return doGet(fullURL);
         }
     }
 
-    /** Perform GET request */
-    private boolean doGet(HttpURLConnection con) throws IOException {
-        con.connect();
-        if (con.getResponseCode() >= 400) {
-            logger.warning("Problem connecting to \"" + con.getURL() +
-                    "\". Response: " + con.getResponseCode() + " " + con.getResponseMessage());
+    /** Perform GET request.
+     * @param url URL where to connect
+     * @return true if connection succeeded; false otherwise
+     * @throws java.io.IOException When there is some problem with connection
+     */
+    private boolean doGet(String url) throws IOException {
+        GetMethod method = new GetMethod(url);
+
+        //set referer
+        if (referer != null) {
+            method.setRequestHeader("Referer", referer);
+        }
+
+        int statusCode = client.executeMethod(method);
+
+        //only HTTP 200 OK status code is correct
+        if (statusCode != HttpStatus.SC_OK) {
+            logger.warning("Problem connecting to \"" + url +
+                    "\". Response: " + method.getStatusLine());
             return false;
         }
 
-        //handle cookies by hand, there is something very sick about the default Java behaviour
-        if (isUseCookies() && CookieHandler.getDefault() instanceof CookieManager) {
-            //workaround Sun's Java bug: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6610534
-            Locale locale = Locale.getDefault();
-            Locale.setDefault(Locale.US);
-            //temporarily disable default CookieManager
-            CookieManager manager = (CookieManager) CookieHandler.getDefault();
-            CookieHandler.setDefault(null);
-            //get cookies
-            List<String> cookies = new ArrayList<String>();
-            List<String> c1 = con.getHeaderFields().get("Set-Cookie");
-            List<String> c2 = con.getHeaderFields().get("Set-Cookie2");
-            if (c1 != null) {
-                cookies.addAll(c1);
-            }
-            if (c2 != null) {
-                cookies.addAll(c2);
-            }
-            //headers are in reversed order compared to the http response, dunno why
-            Collections.reverse(cookies);
-            try {
-                //save cookies
-                for (String c : cookies) {
-                    List<HttpCookie> cooks = HttpCookie.parse(c);
-                    for (HttpCookie cook : cooks) {
-                        manager.getCookieStore().add(con.getURL().toURI(), cook);
-                    }
-                }
-            } catch (URISyntaxException ex) {
-                logger.log(Level.WARNING, "Problem saving cookie", ex);
-            }
-            //return to initial state
-            CookieHandler.setDefault(manager);
-            Locale.setDefault(locale);
-        }
-
-        //parse content type
-        String encoding = con.getContentEncoding();
-        if (encoding == null && con.getContentType().contains("charset=")) {
-            encoding = con.getContentType().replaceFirst("^.*charset=", "").trim();
-        }
-        String contentType = con.getContentType();
         //decide whether text or binary response
-        boolean text = contentType != null && contentType.startsWith("text");
+        Header contentType = method.getResponseHeader("Content-Type");
+        boolean text = (contentType != null && contentType.getValue().startsWith("text"));
 
-        //read response
+        //read the response
+        byte[] response = IOUtils.toByteArray(method.getResponseBodyAsStream());
+
+        //don't forget to release connection
+        method.releaseConnection();
+
+        //save response
         if (text) { //text content
-            textContent = IOUtils.toString(con.getInputStream(),
-                    encoding != null ? encoding : "UTF-8");
-            con.getInputStream().close();
+            setTextContent(new String(response, method.getResponseCharSet()));
         } else { //binary content
-            binaryContent = IOUtils.toByteArray(con.getInputStream());
-            con.getInputStream().close();
+            setBinaryContent(response);
         }
 
-//        con.disconnect(); //TODO: should it be here or not?
+        //if text response, check for meta redirects
+        if (text) {
+            String redirect = checkMetaRedirect(textContent);
+            if (redirect != null) {
+                //redirect to new url
+                return followMetaRedirect(redirect, method.getURI());
+            }
+        }
+
         return true;
     }
 
-    /** Perform POST request */
-    private boolean doPost(HttpURLConnection con, String[] postData) throws IOException {
-        //setup parametres
-        con.setDoOutput(true);
-        con.setUseCaches(false);
-        OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
+    /** Perform POST request.
+     * @param url URL where to connect
+     * @param postData data which to send. In the form [key1, value1, key2, value2, ...].
+     * @return true if connection succeeded; false otherwise
+     * @throws java.io.IOException When there is some problem with connection
+     */
+    private boolean doPost(String url, String[] postData) throws IOException {
+        PostMethod method = new PostMethod(url);
 
-        //send POST request
-        wr.write(convertParamsToString(postData));
-        wr.flush();
-        wr.close();
+        //set referer
+        if (referer != null) {
+            method.setRequestHeader("Referer", referer);
+        }
 
-        //get reply
-        return doGet(con);
+        //set post data
+        method.setRequestEntity(new StringRequestEntity(
+                convertParamsToString(postData),
+                "application/x-www-form-urlencoded",
+                "UTF-8"));
+
+        int statuscode = client.executeMethod(method);
+
+        //check for error (4xx or 5xx) HTTP status codes
+        if (statuscode >= 400) {
+            logger.warning("Problem connecting to \"" + url +
+                    "\". Response: " + method.getStatusLine());
+            return false;
+        }
+
+        //decide whether text or binary response
+        Header contentType = method.getResponseHeader("Content-Type");
+        boolean text = (contentType != null && contentType.getValue().startsWith("text"));
+
+        //read the response
+        byte[] response = IOUtils.toByteArray(method.getResponseBodyAsStream());
+
+        //don't forget to release connection
+        method.releaseConnection();
+
+        //save response
+        if (text) { //text content
+            setTextContent(new String(response, method.getResponseCharSet()));
+        } else { //binary content
+            setBinaryContent(response);
+        }
+
+        //check for HTTP redirection
+        if (statuscode >= 300 && statuscode < 400) {
+            Header header = method.getResponseHeader("Location");
+            if (header == null) {
+                throw new IOException("Invalid HTTP redirect");
+            }
+            String newURL = header.getValue();
+            if (Nullator.isEmpty(newURL)) {
+                newURL = "/";
+            }
+            if (!newURL.startsWith("http://") && !newURL.startsWith("https://") && !newURL.startsWith("/")) {
+                newURL = "/" + newURL;
+            }
+            //redirect to new url
+            return doGet(newURL);
+        }
+
+        //if text response, check for meta redirects
+        if (text) {
+            String redirect = checkMetaRedirect(textContent);
+            if (redirect != null) {
+                //redirect to new url
+                return followMetaRedirect(redirect, method.getURI());
+            }
+        }
+
+        return true;
     }
-    
+
     /** Convert url parameters to string
      * @param params input array in form [key1,value1,key2,value2,...]
-     * @return string key1=value1&key2=value2&... in the x-www-form-urlencoded format
+     * @return string key1=value1&key2=value2&... in the x-www-form-urlencoded format;
+     *  or null when <tt>params</tt> are null
      */
-    private String convertParamsToString(String[] params) throws UnsupportedEncodingException {
+    private static String convertParamsToString(String[] params) throws UnsupportedEncodingException {
+        if (params == null) {
+            return null;
+        }
+
         String string = "";
         for (int i = 0; i < params.length; i++) {
             //skip the even ones
-            if (i % 2 == 0) 
+            if (i % 2 == 0) {
                 continue;
+            }
             String value = params[i];
-            String key = params[i-1];
+            String key = params[i - 1];
             //skip empty keys
-            if (Nullator.isEmpty(key))
+            if (Nullator.isEmpty(key)) {
                 continue;
+            }
             string += key + "=";
             string += URLEncoder.encode(value, "UTF-8") + "&";
         }
         if (string.endsWith("&")) {
-                string = string.substring(0, string.length()-1);
+            string = string.substring(0, string.length() - 1);
         }
         return string;
+    }
+
+    /** Check in the HTML page for meta redirects
+     * (<meta http-equiv="refresh"...> tags).
+     * 
+     * @param page A HTML page as string.
+     * @return URL of the new address if meta redirect found; null otherwise.
+     *  If the resulting URL is relative URL, it will always start with '/'.
+     */
+    private static String checkMetaRedirect(String page) {
+        Pattern pattern = Pattern.compile("<meta\\s+http-equiv=[^>]*refresh[^>]*" +
+                "url=(.*)(\"|')[^>]*>", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(page);
+        if (matcher.find()) {
+            String redirect = matcher.group(1);
+            if (!redirect.startsWith("http://") && !redirect.startsWith("https://") && !redirect.startsWith("/")) {
+                redirect = "/" + redirect;
+            }
+            return redirect;
+        }
+        return null;
+    }
+
+    /** Follow a meta redirect.
+     * 
+     * @param redirectURL new URL. May be absolute or relative.
+     * @param currentURI current URI
+     * @return result of doGet(url) method
+     * @throws java.io.IOException Problem when connecting
+     */
+    private boolean followMetaRedirect(String redirectURL, URI currentURI) throws IOException {
+        if (redirectURL == null) {
+            throw new IllegalArgumentException("redirectURL");
+        }
+        if (currentURI == null) {
+            throw new IllegalArgumentException("currentURI");
+        }
+
+        //convert relative to absolute URL
+        if (redirectURL.startsWith("/")) {
+            String uri = currentURI.getEscapedURI();
+            int slash = uri.indexOf('/', "https://".length());
+            if (slash > 0) {
+                uri = uri.substring(0, slash);
+            }
+            redirectURL = uri + redirectURL;
+        }
+        //check for redirection loops
+        if (url.equalsIgnoreCase(redirectURL)) {
+            throw new IOException("HTTP meta redirection endless loop detected");
+        }
+
+        return doGet(redirectURL);
     }
 }

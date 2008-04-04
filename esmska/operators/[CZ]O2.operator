@@ -55,7 +55,6 @@ function send() {
         SENDERNUMBER = SENDERNUMBER.substring(4);
 
     // start page
-    EXEC.setUseCookies(true);
     content = EXEC.getURL("http://www.1188.cz/?sms=gate", [])
 
     // get image id
@@ -77,14 +76,16 @@ function send() {
     // check if message was successfully sent
     re = /Zpráva byla úspěšně odeslána\./
     match = re.exec(content)
-    if (undefined != match) {
+    if (undefined != match) { //if found
+        // all ok
         return true
     }
     
     // look for possible error messages
     re = /<div class="error">([\s\S]*?)<\/div>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (undefined != match) { // if found
+        // operator told us what's wrong
         EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
         return false
     }

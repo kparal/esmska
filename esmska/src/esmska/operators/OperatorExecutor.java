@@ -7,9 +7,6 @@ package esmska.operators;
 import esmska.gui.MainFrame;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -22,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /** Class containing methods, which can be called from operator scripts.
- *
+ *  For each operator script a separate class should be created.
  * @author ripper
  */
 public class OperatorExecutor {
@@ -55,9 +52,9 @@ public class OperatorExecutor {
             "<br>" +
             "Pokud potíže přetrvají a webová brána operátora funguje,<br>" +
             "nahlaste problém na domovských stránkách programu.";
+    private OperatorConnector connector = new OperatorConnector();
     private String errorMessage;
     private String referer;
-    private boolean useCookies;
 
     /** Make a GET request to a provided URL
      * @param url base url where to connect, without any parameters or "?" at the end
@@ -71,11 +68,8 @@ public class OperatorExecutor {
      */
     public Object getURL(String url, String[] params) throws IOException {
         try {
-            OperatorConnector connector = new OperatorConnector();
-            connector.setURL(url);
-            connector.setParams(params);
+            connector.setConnection(url, params, false, null);
             connector.setReferer(referer);
-            connector.setUseCookies(useCookies);
 
             boolean ok = connector.connect();
             if (!ok) {
@@ -108,13 +102,8 @@ public class OperatorExecutor {
      */
     public Object postURL(String url, String[] params, String[] postData) throws IOException {
         try {
-            OperatorConnector connector = new OperatorConnector();
-            connector.setURL(url);
-            connector.setParams(params);
-            connector.setPostData(postData);
+            connector.setConnection(url, params, true, postData);
             connector.setReferer(referer);
-            connector.setUseCookies(useCookies);
-            connector.setDoPost(true);
 
             boolean ok = connector.connect();
             if (!ok) {
@@ -136,6 +125,8 @@ public class OperatorExecutor {
     }
 
     /** Ask user to recognize provided image code
+     * @param imageBytes image bytearray. Java must be able to display this image
+     *                   (PNG, GIF, JPEG, maybe something else).
      * @return Recognized image code. Never returns null, may return empty string.
      */
     public String recognizeImage(byte[] imageBytes) throws InterruptedException,
@@ -195,24 +186,11 @@ public class OperatorExecutor {
         return errorMessage;
     }
 
-    /** Referer used for the following requests. */
+    /** Referer used for the following requests.
+     * Use null for clearing the field.
+     */
     public void setReferer(String referer) {
         this.referer = referer;
     }
-
-    /** Whether to recieve and send cookies in the following requests.
-     * Default is false.
-     */
-    public void setUseCookies(boolean useCookies) {
-        this.useCookies = useCookies;
-        if (useCookies) {
-            if (CookieHandler.getDefault() == null) {
-                CookieManager manager = new CookieManager();
-                manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-                CookieHandler.setDefault(manager); //TODO: will concurrent SMS sending interfere?
-            }
-        } else {
-            CookieHandler.setDefault(null);
-        }
-    }
+    
 }
