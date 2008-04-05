@@ -212,7 +212,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         });
 
         rememberQueueCheckBox.setMnemonic('f');
-        rememberQueueCheckBox.setText("Ukládat frontu neodeslaných sms");
+        rememberQueueCheckBox.setText("Ukládat frontu neodeslaných zpráv");
         rememberQueueCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává frontu neodeslaných sms pro příští spuštění programu\n</html>");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberQueue}"), rememberQueueCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
@@ -233,7 +233,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         rememberHistoryCheckBox.setMnemonic('s');
-        rememberHistoryCheckBox.setText("Ukládat historii odeslaných sms");
+        rememberHistoryCheckBox.setText("Ukládat historii odeslaných zpráv");
         rememberHistoryCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává historii odeslaných sms pro příští spuštění programu\n</html>");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberHistory}"), rememberHistoryCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));

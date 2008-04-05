@@ -106,7 +106,7 @@
             <Component class="javax.swing.JCheckBox" name="rememberQueueCheckBox">
               <Properties>
                 <Property name="mnemonic" type="int" value="102"/>
-                <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat frontu neodeslan&#xfd;ch sms"/>
+                <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat frontu neodeslan&#xfd;ch zpr&#xe1;v"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; frontu neodeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
@@ -136,7 +136,7 @@
             <Component class="javax.swing.JCheckBox" name="rememberHistoryCheckBox">
               <Properties>
                 <Property name="mnemonic" type="int" value="115"/>
-                <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat historii odeslan&#xfd;ch sms"/>
+                <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat historii odeslan&#xfd;ch zpr&#xe1;v"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; historii odeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
