@@ -41,6 +41,12 @@ public class OperatorExecutor {
     public static final String ERROR_WRONG_AUTH =
             "Zadali jste nesprávné přihlašovací údaje.<br>" +
             "Možná jste je jen zapomněli vyplnit v nastavení programu.";
+    /** Message that user has not waited long enough to send another message
+     * or message quota has been reached. */
+    public static final String ERROR_LIMIT_REACHED =
+            "Odesíláte zprávu příliš brzy. Operátor buď vyžaduje určitý interval,<br>" +
+            "který je nutný vyčkat před odesláním další zprávy, nebo omezuje<br>" +
+            "maximální možný počet zpráv za jistý časový úsek. Zkuste to později.";
     /** Message preceding operator provided error message. */
     public static final String ERROR_OPERATOR_MESSAGE =
             "Zpráva od operátora:<br>";
