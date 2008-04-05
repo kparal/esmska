@@ -35,10 +35,6 @@ function getSignatureExtraLength() {
     return 5
 }
 
-function getMaxMessagesPerDay() {
-    return 0
-}
-
 function getDelayBetweenMessages() {
     return 15
 }

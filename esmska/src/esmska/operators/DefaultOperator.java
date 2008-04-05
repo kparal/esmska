@@ -26,7 +26,7 @@ public class DefaultOperator implements Operator {
     private String name, version, author, countryPrefix;
     private String[] operatorPrefixes;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
-            maxMessagesPerDay, delayBetweenMessages;
+            delayBetweenMessages;
     private Icon icon;
 
     /** Creates new DefaultOperator.
@@ -57,7 +57,6 @@ public class DefaultOperator implements Operator {
         maxParts = info.getMaxParts();
         maxChars = info.getMaxChars();
         signatureExtraLength = info.getSignatureExtraLength();
-        maxMessagesPerDay = info.getMaxMessagesPerDay();
         delayBetweenMessages = info.getDelayBetweenMessages();
 
         //find icon - for "[xx]abc.operator" look for "[xx]abc.png"
@@ -134,10 +133,6 @@ public class DefaultOperator implements Operator {
 
     public int getSignatureExtraLength() {
         return signatureExtraLength;
-    }
-
-    public int getMaxMessagesPerDay() {
-        return maxMessagesPerDay;
     }
 
     public int getDelayBetweenMessages() {
