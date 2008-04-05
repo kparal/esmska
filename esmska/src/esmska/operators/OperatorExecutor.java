@@ -54,7 +54,10 @@ public class OperatorExecutor {
     public static final String ERROR_UKNOWN =
             "Došlo k neznámé chybě. Operátor možná změnil<br>" +
             "své webové stránky, nebo s nimi má aktuálně potíže.<br>" +
-            "Zkuste to později, případně zkontrolujte aktualizaci programu.<br>" +
+            "Zkuste to později.<br>" +
+            "<br>" +
+            "Taktéž se ujistěte, máte funkční připojení k Internetu<br>" +
+            "a že používáte nejnovější verzi programu.<br>" +
             "<br>" +
             "Pokud potíže přetrvají a webová brána operátora funguje,<br>" +
             "nahlaste problém na domovských stránkách programu.";
