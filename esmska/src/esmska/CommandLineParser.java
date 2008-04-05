@@ -6,76 +6,85 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 package esmska;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.OptionGroup;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
 
 /** Parses program arguments from command line
  *
  * @author ripper
  */
+@SuppressWarnings("static-access")
 public class CommandLineParser {
-    private boolean portable;
-    private String configPath;
-    
-    /** Creates a new instance of CommandLineParser */
-    public CommandLineParser() {
+
+    private static final Options options = new Options();
+    private static final Option help = new Option("h", "help", false, "Zobrazí tuto nápovědu");
+    private static final Option portable = new Option("p", "portable", false, "Zapnutí přenosného módu - " +
+            "zeptá se na umístění uživatelského adresáře. Nelze použít s -c.");
+    private static final Option config = OptionBuilder.withArgName("cesta").hasArg().
+            withDescription("Nastavení cesty k uživatelskému adresáři. Nelze použít s -p.").
+            withLongOpt("config").create("c");
+    private static final OptionGroup configGroup = new OptionGroup();
+
+    static {
+        configGroup.addOption(portable);
+        configGroup.addOption(config);
+
+        options.addOption(help);
+        options.addOptionGroup(configGroup);
     }
-    
-    
+    private boolean isPortable;
+    private String configPath;
+
     /** Parse command line arguments
      * @return true, if arguments' syntax was ok, false otherwise
      */
     public boolean parseArgs(String[] args) {
-        List<String> arguments = Arrays.asList(args);
-        
-        for (Iterator it = arguments.iterator(); it.hasNext(); ) {
-            String arg = (String) it.next();
-            if (arg.equals("-h") || arg.equals("--help")) {
+        try {
+            PosixParser parser = new PosixParser();
+            CommandLine cmd = parser.parse(options, args);
+
+            if (cmd.hasOption(help.getOpt())) {
                 printUsage();
                 System.exit(0);
-            } else if (arg.equals("-p") || arg.equals("--portable")) {
-                portable = true;
-            } else if (arg.equals("-c") || arg.equals("--config")) {
-                if (!it.hasNext()) {
-                    System.err.println("Chybí cesta!");
-                    printUsage();
-                    System.exit(1);
-                }
-                configPath = (String) it.next();
-            } else {
-                System.err.println("Neznámá volba '" + arg + "'!");
-                printUsage();
-                return false;
             }
+            if (cmd.hasOption(portable.getOpt())) {
+                isPortable = true;
+            }
+            if (cmd.hasOption(config.getOpt())) {
+                configPath = config.getValue();
+            }
+
+        } catch (ParseException ex) {
+            System.err.println("Neplatná volba na příkazovém řádku! ('" + ex.getMessage() + "')");
+            printUsage();
+            return false;
         }
-        
+
         return true;
     }
-    
+
     /** Whether portable mode is enabled or disabled */
     public boolean isPortable() {
-        return portable;
+        return isPortable;
     }
-    
+
     /** User custom path to configuration files */
     public String getConfigPath() {
         return configPath;
     }
-    
+
     /** Print usage help */
     private static void printUsage() {
-        String usage =
-                "Použití: java -jar esmska.jar [VOLBY]\n" +
-                "\n" +
-                "Dostupné volby:\n" +
-                "   -h, --help                  Zobrazí tuto nápovědu\n" +
-                "   -p, --portable              Zapnutí přenosného módu - " +
-                "zeptá se na umístění uživatelského adresáře\n" +
-                "   -c, --config <cesta>        Nastavení cesty k uživatelskému adresáři";
-        System.out.println(usage);
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.setSyntaxPrefix("Použití: ");
+        formatter.printHelp("java -jar esmska.jar [VOLBY]", "\nDostupné volby:", options, null);
     }
 }
