@@ -337,7 +337,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class AddContactAction extends AbstractAction {
         private final String createOption = "Vytvořit";
         private final String cancelOption = "Zrušit";
-        private final String[] options = new String[]{createOption, cancelOption};
+        private final String[] options = new String[]{cancelOption, createOption};
         
         public AddContactAction() {
             super(null,new ImageIcon(ContactPanel.class.getResource(RES + "add.png")));
@@ -347,7 +347,7 @@ public class ContactPanel extends javax.swing.JPanel {
             contactList.requestFocusInWindow(); //always transfer focus
             ContactDialog contactDialog = new ContactDialog();
             contactDialog.setTitle("Nový kontakt");
-            contactDialog.setOptions(options, createOption);
+            contactDialog.setOptions(options, createOption, createOption);
             contactDialog.show(null);
             Contact c = contactDialog.getContact();
             if (c == null)
@@ -363,7 +363,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class EditContactAction extends AbstractAction {
         private final String saveOption = "Uložit";
         private final String cancelOption = "Zrušit";
-        private final String[] options = new String[]{saveOption, cancelOption};
+        private final String[] options = new String[]{cancelOption, saveOption};
         
         public EditContactAction() {
             super(null,new ImageIcon(ContactPanel.class.getResource(RES + "edit.png")));
@@ -375,7 +375,7 @@ public class ContactPanel extends javax.swing.JPanel {
             Contact contact = (Contact)contactList.getSelectedValue();
             ContactDialog contactDialog = new ContactDialog();
             contactDialog.setTitle("Upravit kontakt");
-            contactDialog.setOptions(options, saveOption);
+            contactDialog.setOptions(options, saveOption, saveOption);
             contactDialog.show(contact);
             Contact c = contactDialog.getContact();
             if (c == null)
@@ -392,7 +392,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class RemoveContactAction extends AbstractAction {
         private final String deleteOption = "Odstranit";
         private final String cancelOption = "Zrušit";
-        private final String[] options = new String[]{deleteOption, cancelOption};
+        private final String[] options = new String[]{cancelOption, deleteOption};
         
         public RemoveContactAction() {
             super(null,new ImageIcon(ContactPanel.class.getResource(RES + "remove.png")));
@@ -606,7 +606,7 @@ public class ContactPanel extends javax.swing.JPanel {
         private JOptionPane optionPane;
         private Contact contact;
         private Object[] options;
-        private Object initialValue;
+        private Object initialValue, confirmOption;
         public ContactDialog() {
             super((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, ContactPanel.this),
                     "Kontakt", true);
@@ -621,10 +621,16 @@ public class ContactPanel extends javax.swing.JPanel {
             setContentPane(optionPane);
             pack();
         }
-        /** Set options to display as buttons */
-        public void setOptions(Object[] options, Object initialValue) {
+        /** Set options to display as buttons
+         * @param options possible options
+         * @param initialValue default option
+         * @param confirmOption option which confirms the dialog; other options cancels it.
+         *  Can't be null.
+         */
+        public void setOptions(Object[] options, Object initialValue, Object confirmOption) {
             this.options = options;
             this.initialValue = initialValue;
+            this.confirmOption = confirmOption;
         }
         /** Show dialog with existing or new (null) contact */
         public void show(Contact contact) {
@@ -648,7 +654,7 @@ public class ContactPanel extends javax.swing.JPanel {
                     //ignore reset
                     return;
                 }
-                if (!value.equals(options[0])) { //not confirmed (confirm is first option)
+                if (!value.equals(confirmOption)) { //not confirmed
                     contact = null;
                     setVisible(false);
                     return;
