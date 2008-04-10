@@ -31,6 +31,8 @@ import java.util.logging.Logger;
 public class SMSSender {
     private static final Logger logger = Logger.getLogger(SMSSender.class.getName());
     private static final Keyring keyring = PersistenceManager.getKeyring();   
+    private static final String NO_REASON_ERROR = "Autor skriptu pro daného operátora neposkytl<br>" +
+            "žádné další informace o příčině selhání.";
     
     private List<SMS> smsQueue;
     private boolean running; // sending sms in this moment
@@ -95,8 +97,10 @@ public class SMSSender {
                 OperatorInterpreter interpreter = new OperatorInterpreter();
                 success = interpreter.sendMessage(OperatorUtil.getOperator(sms.getOperator()),
                         extractVariables(sms));
-                if (!success)
-                    sms.setErrMsg(interpreter.getErrorMessage());
+                if (!success) {
+                    sms.setErrMsg(interpreter.getErrorMessage() != null ?
+                        interpreter.getErrorMessage() : NO_REASON_ERROR);
+                }
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Error while sending sms", ex);
             } finally {

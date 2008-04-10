@@ -130,7 +130,7 @@ public class MainFrame extends javax.swing.JFrame {
                     "Zkuste místo poklikání na <i>esmska.jar</i> raději program spustit pomocí<br>" +
                     "souboru <i>esmska.sh</i> (v Linuxu, apod) nebo <i>esmska.bat</i> (ve Windows).</li>" +
                     "</ul></html>",
-                    "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
+                    null, JOptionPane.ERROR_MESSAGE);
         }
         
         //use bindings
@@ -371,7 +371,7 @@ public class MainFrame extends javax.swing.JFrame {
                 logger.warning("Some config files were not saved");
                 JOptionPane.showMessageDialog(this,
                         "Některé konfigurační soubory nemohly být uloženy!",
-                        "Chyba ukládání", JOptionPane.WARNING_MESSAGE);
+                        null, JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_formWindowClosing
@@ -410,8 +410,8 @@ public class MainFrame extends javax.swing.JFrame {
                     true, Icons.STATUS_WARNING);
             JOptionPane.showMessageDialog(this, new JLabel("<html>"
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>" + 
-                    (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "") //TODO: provide "unknown reason" message
-                    + "</html>"), "Chyba při odesílání", JOptionPane.WARNING_MESSAGE);
+                    (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "")
+                    + "</html>"), null, JOptionPane.WARNING_MESSAGE);
             
             if (smsPanel.getText().length() > 0)
                 smsPanel.requestFocusInWindow();

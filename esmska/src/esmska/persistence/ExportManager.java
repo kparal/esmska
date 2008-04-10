@@ -77,7 +77,7 @@ public class ExportManager {
         
         if (file.exists() && !file.canWrite()) {
             JOptionPane.showMessageDialog(parent,"Do souboru " + file.getAbsolutePath() +
-                    " nelze zapisovat!","Chyba výběru souboru", JOptionPane.ERROR_MESSAGE);
+                    " nelze zapisovat!", null, JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -86,12 +86,12 @@ public class ExportManager {
             exportContacts(contacts, file);
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not export contacts to file", ex);
-            JOptionPane.showMessageDialog(parent,"Export selhal!","Chyba při exportu",
+            JOptionPane.showMessageDialog(parent,"Export selhal!", null,
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        JOptionPane.showMessageDialog(parent,"Export úspěšně dokončen!","Export hotov",
+        JOptionPane.showMessageDialog(parent,"Export úspěšně dokončen!", null,
                     JOptionPane.INFORMATION_MESSAGE);
         
     }

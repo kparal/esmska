@@ -362,7 +362,10 @@ public class HistoryFrame extends javax.swing.JFrame {
 
     /** Delete sms from history */
     private class DeleteAction extends AbstractAction {
-
+        private final String deleteOption = "Odstranit";
+        private final String cancelOption = "Zrušit";
+        private final String[] options = new String[]{cancelOption, deleteOption};
+        
         public DeleteAction() {
             super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "delete.png")));
             this.putValue(SHORT_DESCRIPTION, "Odstranit označené zprávy z historie (Alt+D)");
@@ -376,11 +379,12 @@ public class HistoryFrame extends javax.swing.JFrame {
             if (rows.length <= 0) {
                 return;
             }
-            int result = JOptionPane.showConfirmDialog(HistoryFrame.this,
+            int result = JOptionPane.showOptionDialog(HistoryFrame.this,
                     "Opravdu z historie odstranit " +
-                    "všechny označené zprávy?", "Opravdu smazat?",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (result != JOptionPane.YES_OPTION) {
+                    "všechny označené zprávy?", null,
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+                    options, cancelOption);
+            if (result < 0 || !options[result].equals(deleteOption)) {
                 return;
             }
             //confirmed, let's delete it

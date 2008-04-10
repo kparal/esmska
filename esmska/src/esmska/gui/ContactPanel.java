@@ -403,7 +403,7 @@ public class ContactPanel extends javax.swing.JPanel {
             contactList.requestFocusInWindow(); //always transfer focus
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
-            JLabel label = new JLabel("<html><b>Opravdu odstranit následující kontakty?</b></html>");
+            JLabel label = new JLabel("<html><h3>Opravdu odstranit následující kontakty?</h3></html>");
             JTextArea area = new JTextArea();
             area.setEditable(false);
             area.setRows(5);
@@ -413,11 +413,12 @@ public class ContactPanel extends javax.swing.JPanel {
             panel.add(label, BorderLayout.PAGE_START);
             panel.add(new JScrollPane(area), BorderLayout.CENTER);
             //confirm
-            int result = JOptionPane.showOptionDialog(MainFrame.getInstance(),panel,"Opravdu odstranit?",
+            int result = JOptionPane.showOptionDialog(MainFrame.getInstance(),panel,null,
                     JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,
                     options, cancelOption);
-            if (result < 0 || !options[result].equals(deleteOption))
+            if (result < 0 || !options[result].equals(deleteOption)) {
                 return;
+            }
             //delete
             List<Object> list = Arrays.asList(contactList.getSelectedValues());
             contactListModel.removeAll(list);

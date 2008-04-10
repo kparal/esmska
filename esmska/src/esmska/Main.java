@@ -80,7 +80,7 @@ public class Main {
                     "<html>Vaše aktuální Java nepodporuje vykonávání JavaScriptových souborů,<br>" +
                     "což je ke správné funkci programu nezbytné. Je doporučené používat<br>" +
                     "Javu od firmy Sun. Program se nyní ukončí.",
-                    "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
+                    null, JOptionPane.ERROR_MESSAGE);
                 System.exit(1);
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Could not load operators", ex);
@@ -109,7 +109,7 @@ public class Main {
             logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
             JOptionPane.showMessageDialog(null, "Nepodařilo se vytvořit adresář " +
                     "nebo číst z adresáře s konfigurací!",
-                    "Chyba spouštění", JOptionPane.ERROR_MESSAGE);
+                    null, JOptionPane.ERROR_MESSAGE);
         }
         
         //warn if other program instance is already running
@@ -122,8 +122,7 @@ public class Main {
                     "<html><h2>Esmska již jednou běží!</h2>" +
                     "Esmska je již jednou spuštěna. Důrazně nedoporučujeme spouštět další<br>" +
                     "instance programu, neboť může dojít ke ztrátě uživatelských dat.<br>",
-                    "Vícenásobné spuštění", JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.WARNING_MESSAGE, null,
+                    null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
                     options, quitOption);
             if (result != 1)
                 System.exit(0);

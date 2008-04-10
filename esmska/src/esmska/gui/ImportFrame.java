@@ -529,7 +529,7 @@ public class ImportFrame extends javax.swing.JFrame {
             File file = new File(filename);
             if (!(file.isFile() && file.canRead())) {
                 JOptionPane.showMessageDialog(this, "Soubor " + file.getAbsolutePath() + " nelze přečíst!",
-                        "Chyba při čtení souboru", JOptionPane.ERROR_MESSAGE);
+                        null, JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
@@ -666,9 +666,10 @@ public class ImportFrame extends javax.swing.JFrame {
                 actualCard = "resultsPanel";
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Error while parsing file", ex);
-                JOptionPane.showMessageDialog(ImportFrame.this, "Nastala chyba při zpracování souboru!\n" +
-                        "Soubor zřejmě neobsahuje platné údaje.",
-                        "Chyba při zpracování souboru", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(ImportFrame.this, 
+                        "<html><h2>Nastala chyba při zpracování souboru!</h2>" +
+                        "Soubor zřejmě neobsahuje platné údaje.</html>",
+                        null, JOptionPane.ERROR_MESSAGE);
             } finally {
                 progressBar.setVisible(false);
                 nextButton.setEnabled(true);
