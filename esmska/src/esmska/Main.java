@@ -37,6 +37,15 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        //detect JVM and warn if not Sun Java
+        String vendor = System.getProperty("java.vendor");
+	String vm = System.getProperty("java.vm.name");
+        if (vendor == null || !vendor.toLowerCase().contains("sun microsystems") ||
+	    vm == null || vm.toLowerCase().contains("openjdk")) { //OpenJDK lacks JavaScript engine
+            logger.severe("Zřejmě program spouštíte na jiné verzi Javy než je " +
+                    "Sun Java 6! Program velice pravděpodobně nemusí pracovat správně!");
+        }
+        
         //parse commandline arguments
         CommandLineParser clp = new CommandLineParser();
         if (! clp.parseArgs(args))
