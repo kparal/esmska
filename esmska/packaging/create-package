@@ -1,23 +1,35 @@
 #!/bin/bash
 
+# trap and exit on error
+set -e
+trap "echo Packaging failed." ERR
+
+# usage
 if [ $# != 1 ]; then
     echo "Usage: $0 version_dir"
     echo "Example: $0 esmska-0.1.0"
     exit 1
 fi
 
+# create temp dirs
 FINALNAME="$1"
-TMPDIR="/tmp/esmska-packaging.$$"
-
-mkdir "$TMPDIR"
+TMPDIR=`mktemp -d -t esmska-packaging.XXXX`
 mkdir "$TMPDIR/$FINALNAME"
 
+# copy files
 cp -r ../dist/* "$TMPDIR/$FINALNAME/"
+
+# convert text files to CRLF for windows users
 unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/*.bat
 
+# create packages
 cd "$TMPDIR"
 zip -rq9 "$FINALNAME.zip" "$FINALNAME"
-cd "$OLDPWD"
-mv "$TMPDIR/$FINALNAME.zip" .
+tar czf "$FINALNAME.tar.gz" "$FINALNAME"
 
+# move packages to current directory
+cd "$OLDPWD"
+mv "$TMPDIR/$FINALNAME.zip" "$TMPDIR/$FINALNAME.tar.gz" .
+
+# delete temp dirs
 rm -rf "$TMPDIR"
