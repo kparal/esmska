@@ -37,7 +37,7 @@ public class OperatorComboBox extends JComboBox {
         filterOperators();
         setModel(model);
         setRenderer(cellRenderer);
-        setToolTipText("Seznam dostupných operátorů");
+        setToolTipText("Seznam dostupných webových bran operátorů");
         if (model.getSize() > 0)
             setSelectedIndex(0);
         

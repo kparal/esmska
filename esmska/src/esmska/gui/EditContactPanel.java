@@ -41,9 +41,6 @@ public class EditContactPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
         nameTextField.requestFocusInWindow();
         numberTextField = new javax.swing.JTextField() {
@@ -57,18 +54,9 @@ public class EditContactPanel extends javax.swing.JPanel {
         }
         ;
         operatorComboBox = new esmska.gui.OperatorComboBox();
-
-        jLabel1.setDisplayedMnemonic('j');
-        jLabel1.setLabelFor(nameTextField);
-        jLabel1.setText("Jméno");
-
-        jLabel2.setDisplayedMnemonic('s');
-        jLabel2.setLabelFor(numberTextField);
-        jLabel2.setText("Číslo");
-
-        jLabel3.setDisplayedMnemonic('o');
-        jLabel3.setLabelFor(operatorComboBox);
-        jLabel3.setText("Operátor");
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         nameTextField.setToolTipText("Jméno kontaktu");
         nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -90,6 +78,21 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setDisplayedMnemonic('j');
+        jLabel1.setLabelFor(nameTextField);
+        jLabel1.setText("Jméno");
+        jLabel1.setToolTipText(nameTextField.getToolTipText());
+
+        jLabel2.setDisplayedMnemonic('s');
+        jLabel2.setLabelFor(numberTextField);
+        jLabel2.setText("Číslo");
+        jLabel2.setToolTipText(numberTextField.getToolTipText());
+
+        jLabel3.setDisplayedMnemonic('b');
+        jLabel3.setLabelFor(operatorComboBox);
+        jLabel3.setText("Brána");
+        jLabel3.setToolTipText(operatorComboBox.getToolTipText());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,9 +105,9 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(numberTextField, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(operatorComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(numberTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
