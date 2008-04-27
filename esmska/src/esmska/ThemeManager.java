@@ -37,8 +37,10 @@ public class ThemeManager {
     private ThemeManager() {
     }
     
-    /* Set look and feel found in configuration */
-    public static void setLaF() throws Exception {
+    /* Set look and feel found in configuration
+     * @throws Throwable when chosen look and feel can't be set
+     */
+    public static void setLaF() throws Throwable {
         Config config = PersistenceManager.getConfig();
         String laf = config.getLookAndFeel();
         

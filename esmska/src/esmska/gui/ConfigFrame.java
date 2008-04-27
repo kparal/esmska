@@ -808,7 +808,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 ThemeManager.setLaF();
                 SwingUtilities.updateComponentTreeUI(MainFrame.getInstance());
                 SwingUtilities.updateComponentTreeUI(this);
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 logger.log(Level.SEVERE, "Problem while live-updating the look&feel skin", ex);
             }
         }

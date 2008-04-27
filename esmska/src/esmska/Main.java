@@ -150,7 +150,7 @@ public class Main {
         //set L&F
         try {
             ThemeManager.setLaF();
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             logger.log(Level.WARNING, "Could not set Look and Feel", ex);
         }
         
