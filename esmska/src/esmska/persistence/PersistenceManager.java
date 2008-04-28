@@ -61,6 +61,8 @@ public class PersistenceManager {
     private static File KEYRING_FILE = new File(USER_DIR, KEYRING_FILENAME);
     private static File LOCK_FILE = new File(USER_DIR, LOCK_FILENAME);
     
+    private static final String OPERATOR_RESOURCE = "esmska/operators/scripts";
+    
     private static Config config = new Config();
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
@@ -246,14 +248,18 @@ public class PersistenceManager {
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
     public void loadOperators() throws IOException, IntrospectionException {
+        TreeSet<Operator> newOperators = new TreeSet<Operator>();
         if (OPERATOR_DIR.exists()) {
-            TreeSet<Operator> newOperators = ImportManager.importOperators(OPERATOR_DIR);
-            operators.clear();
-            operators.addAll(newOperators);
+            newOperators = ImportManager.importOperators(OPERATOR_DIR);
+        } else if (ClassLoader.getSystemResource(OPERATOR_RESOURCE) != null) {
+            newOperators = ImportManager.importOperators(OPERATOR_RESOURCE);
         } else {
-            throw new IOException("Operators directory '" + OPERATOR_DIR.getAbsolutePath()
-                    + "' doesn't exist.");
+            throw new IOException("Could not find operator directory '" +
+                    OPERATOR_DIR.getAbsolutePath() + "' nor jar operator resource '" +
+                    OPERATOR_RESOURCE + "'");
         }
+        operators.clear();
+        operators.addAll(newOperators);
     }
     
     /** Checks if this is the first instance of the program.

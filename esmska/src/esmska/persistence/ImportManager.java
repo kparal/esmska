@@ -6,7 +6,6 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 package esmska.persistence;
 
 import com.csvreader.CsvReader;
@@ -25,11 +24,16 @@ import esmska.operators.DefaultOperator;
 import esmska.operators.Operator;
 import java.beans.IntrospectionException;
 import java.io.FileFilter;
+import java.net.JarURLConnection;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.TreeSet;
+import java.util.jar.JarEntry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,20 +42,21 @@ import java.util.logging.Logger;
  * @author ripper
  */
 public class ImportManager {
+
     private static final Logger logger = Logger.getLogger(ImportManager.class.getName());
-        
+
     /** Disabled constructor */
     private ImportManager() {
     }
-    
+
     /** Import contacts from file */
     public static ArrayList<Contact> importContacts(File file, ContactParser.ContactType type)
-    throws Exception {
+            throws Exception {
         ContactParser parser = new ContactParser(file, type);
         parser.execute();
         return parser.get();
     }
-    
+
     /** Import sms queue from file */
     public static ArrayList<SMS> importQueue(File file) throws IOException {
         CsvReader reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
@@ -76,7 +81,7 @@ public class ImportManager {
         }
         return queue;
     }
-    
+
     /** Import sms history from file */
     public static ArrayList<History.Record> importHistory(File file)
             throws IOException, ParseException {
@@ -92,10 +97,10 @@ public class ImportManager {
             String senderName = reader.get(5);
             String senderNumber = reader.get(6);
 
-            DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG, 
+            DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
                     DateFormat.LONG, Locale.ROOT);
             Date date = df.parse(dateString);
-            
+
             History.Record record = new History.Record();
             record.setDate(date);
             record.setName(name);
@@ -104,44 +109,91 @@ public class ImportManager {
             record.setText(text);
             record.setSenderName(senderName);
             record.setSenderNumber(senderNumber);
-            
+
             history.add(record);
         }
         return history;
     }
-    
-    /** Import all operators from directory
+
+    /** Import all operators from jar resource
+     * @param resource jar resource where to look for operators
      * @throws IOException When there is problem accessing operator directory or files
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
-    public static TreeSet<Operator> importOperators(File directory) throws 
+    public static TreeSet<Operator> importOperators(String resource) throws
             IOException, IntrospectionException {
-        TreeSet<Operator> operators = new TreeSet<Operator>();
-        if (!directory.canRead() || !directory.isDirectory())
-            throw new IOException("Invalid operator directory.");
+        URL operatorBase = ClassLoader.getSystemResource(resource);
+        if (operatorBase == null || //resource doesn't exist
+                !operatorBase.getProtocol().equals("jar")) { //resource not packed in jar
+            throw new IOException("Could not find jar operator resource: " + resource);
+        }
+        HashSet<URL> operatorURLs = new HashSet<URL>();
+        
+        JarURLConnection con = (JarURLConnection) operatorBase.openConnection();
+        for (Enumeration entries = con.getJarFile().entries(); entries.hasMoreElements();) {
+            JarEntry entry = (JarEntry) entries.nextElement();
+            String name = entry.getName();
+            if (name.startsWith(resource) && name.endsWith(".operator")) {
+                operatorURLs.add(new URL("jar:" + con.getJarFileURL() + "!/" + name));
+            }
+        }
+
+        return importOperators(operatorURLs);
+    }
+
+    /** Import all operators from directory
+     * @param directory directory where to look for operators
+     * @throws IOException When there is problem accessing operator directory or files
+     * @throws IntrospectionException When current JRE does not support JavaScript execution
+     */
+    public static TreeSet<Operator> importOperators(File directory) throws
+            IOException, IntrospectionException {
+        if (!directory.canRead() || !directory.isDirectory()) {
+            throw new IOException("Invalid operator directory: " + directory.getAbsolutePath());
+        }
+        HashSet<URL> operatorURLs = new HashSet<URL>();
         
         File[] files = directory.listFiles(new FileFilter() {
+
             public boolean accept(File pathname) {
                 return pathname.getAbsolutePath().endsWith(".operator") && pathname.canRead();
             }
-        });
-        
-        for (File file : files) {
+            });
+
+        for (File f : files) {
+            operatorURLs.add(f.toURI().toURL());
+        }
+
+        return importOperators(operatorURLs);
+    }
+
+    /** Get set of operators from set of operator URLs
+     * @param operatorURLs set of operator URLs (file or jar URLs)
+     * @return set of operators
+     * @throws java.beans.IntrospectionException When current JRE does not support JavaScript execution
+     */
+    private static TreeSet<Operator> importOperators(Set<URL> operatorURLs) throws
+            IntrospectionException {
+        TreeSet<Operator> operators = new TreeSet<Operator>();
+
+        for (URL operatorURL : operatorURLs) {
             try {
-                DefaultOperator operator = new DefaultOperator(file);
+                DefaultOperator operator = new DefaultOperator(operatorURL);
                 operators.add(operator);
             } catch (IOException ex) {
-                logger.log(Level.WARNING, "Problem accessing file " + file.getAbsolutePath(), ex);
+                logger.log(Level.WARNING, "Problem accessing operator resource: " +
+                        operatorURL.toExternalForm(), ex);
             } catch (IntrospectionException ex) {
                 throw ex;
             } catch (Exception ex) {
-                logger.log(Level.WARNING, "Ivalid operator file " + file.getAbsolutePath(), ex);
+                logger.log(Level.WARNING, "Ivalid operator resource: " +
+                        operatorURL.toExternalForm(), ex);
             }
         }
 
         return operators;
     }
-    
+
     /** Import keyring data from file.
      * @param file File to import from.
      * @return New keyring.
@@ -149,7 +201,7 @@ public class ImportManager {
      * @throws java.security.GeneralSecurityException When there is problem with
      *         key decryption.
      */
-    public static Keyring importKeyring(File file) 
+    public static Keyring importKeyring(File file)
             throws IOException, GeneralSecurityException {
         CsvReader reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
         reader.setUseComments(true);

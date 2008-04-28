@@ -6,8 +6,8 @@ package esmska.operators;
 
 import esmska.data.Icons;
 import java.beans.IntrospectionException;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.security.PrivilegedActionException;
 import java.text.Collator;
 import javax.script.ScriptException;
@@ -22,7 +22,7 @@ import javax.swing.ImageIcon;
 public class DefaultOperator implements Operator {
 
     private static final OperatorInterpreter interpreter = new OperatorInterpreter();
-    private File script;
+    private URL script;
     private String name, version, author, countryPrefix;
     private String[] operatorPrefixes;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
@@ -31,19 +31,19 @@ public class DefaultOperator implements Operator {
 
     /** Creates new DefaultOperator.
      * 
-     * @param script operator script
+     * @param script system resource containing operator script
      * @throws IOException When there are problem accessing the script file
      * @throws ScriptException When operator script is invalid
      * @throws PrivilegedActionException When operator script is invalid
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
-    public DefaultOperator(File script) throws IOException, ScriptException,
+    public DefaultOperator(URL script) throws IOException, ScriptException,
             PrivilegedActionException, IntrospectionException {
         this.script = script;
         
         OperatorInfo info = interpreter.parseInfo(script);
         if (info == null || info.getName() == null || info.getName().length() <= 0) {
-            throw new ScriptException("Not a valid script file.", script.getAbsolutePath(), 0);
+            throw new ScriptException("Not a valid operator script", script.toExternalForm(), 0);
         }
         
         //remember all the values from OperatorInfo interface internally in order
@@ -60,11 +60,10 @@ public class DefaultOperator implements Operator {
         delayBetweenMessages = info.getDelayBetweenMessages();
 
         //find icon - for "[xx]abc.operator" look for "[xx]abc.png"
-        String filename = script.getAbsolutePath();
-        filename = filename.replaceFirst("\\.operator$", ".png");
-        if (new File(filename).exists()) {
-            icon = new ImageIcon(filename);
-        } else {
+        String iconName = script.toExternalForm().replaceFirst("\\.operator$", ".png");
+        URL iconURL = new URL(iconName);
+        icon = new ImageIcon(iconURL);
+        if (icon.getIconWidth() <= 0) { //non-existing icon, zero-sized image
             icon = Icons.OPERATOR_DEFAULT;
         }
     }
@@ -91,7 +90,7 @@ public class DefaultOperator implements Operator {
         return this.compareTo(o) == 0;
     }
 
-    public File getScript() {
+    public URL getScript() {
         return script;
     }
 

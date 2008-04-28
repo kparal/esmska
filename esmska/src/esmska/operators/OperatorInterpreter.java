@@ -5,11 +5,10 @@
 package esmska.operators;
 
 import java.beans.IntrospectionException;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -42,19 +41,20 @@ public class OperatorInterpreter {
              variables = new HashMap<OperatorVariable, String>();
     }
     
-    /** Parse OperatorInfo implementation from the provided script file.
+    /** Parse OperatorInfo implementation from the provided URL.
+     * @param script URL (file or jar) of operator script
      * @return OperatorInfo implementation
      * @throws IOException when there is problem accessing the script file
      * @throws ScriptException when the script is not valid
      * @throws IntrospectionException when current JRE does not support JavaScript execution
      */
-    public OperatorInfo parseInfo(File file) throws IOException, ScriptException, IntrospectionException {
+    public OperatorInfo parseInfo(URL script) throws IOException, ScriptException, IntrospectionException {
         init();
         if (engine == null)
             throw new IntrospectionException("JavaScript execution not supported");
         Reader reader = null;
         try {
-            reader = new InputStreamReader(new FileInputStream(file), "UTF-8");
+            reader = new InputStreamReader(script.openStream(), "UTF-8");
             //the script must be evaluated before extracting the interface
             engine.eval(reader);
             OperatorInfo operatorInfo = invocable.getInterface(OperatorInfo.class);
@@ -62,8 +62,8 @@ public class OperatorInterpreter {
         } finally {
             try {
                 reader.close();
-            } catch (IOException ex) {
-                logger.log(Level.WARNING, "Error closing file " + file.getAbsolutePath(), ex);
+            } catch (Exception ex) {
+                logger.log(Level.WARNING, "Error closing script: " + script.toExternalForm(), ex);
             }
         }
     }
@@ -85,7 +85,7 @@ public class OperatorInterpreter {
         Reader reader = null;
         boolean sentOk = false;
         try {
-            reader = new InputStreamReader(new FileInputStream(operator.getScript()), "UTF-8");
+            reader = new InputStreamReader(operator.getScript().openStream(), "UTF-8");
             
             //forward variables to the script and evaluate it
             forwardVariables();
