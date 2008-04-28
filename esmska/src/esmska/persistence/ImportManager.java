@@ -116,13 +116,13 @@ public class ImportManager {
     }
 
     /** Import all operators from jar resource
-     * @param resource jar resource where to look for operators
+     * @param resource jar absolute resource path where to look for operators
      * @throws IOException When there is problem accessing operator directory or files
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
     public static TreeSet<Operator> importOperators(String resource) throws
             IOException, IntrospectionException {
-        URL operatorBase = ClassLoader.getSystemResource(resource);
+        URL operatorBase = ImportManager.class.getResource(resource);
         if (operatorBase == null || //resource doesn't exist
                 !operatorBase.getProtocol().equals("jar")) { //resource not packed in jar
             throw new IOException("Could not find jar operator resource: " + resource);
@@ -133,7 +133,8 @@ public class ImportManager {
         for (Enumeration entries = con.getJarFile().entries(); entries.hasMoreElements();) {
             JarEntry entry = (JarEntry) entries.nextElement();
             String name = entry.getName();
-            if (name.startsWith(resource) && name.endsWith(".operator")) {
+            String absoluteName = name.startsWith("/") ? name : ("/" + name);
+            if (absoluteName.startsWith(resource) && absoluteName.endsWith(".operator")) {
                 operatorURLs.add(new URL("jar:" + con.getJarFileURL() + "!/" + name));
             }
         }

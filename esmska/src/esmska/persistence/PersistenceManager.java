@@ -61,7 +61,7 @@ public class PersistenceManager {
     private static File KEYRING_FILE = new File(USER_DIR, KEYRING_FILENAME);
     private static File LOCK_FILE = new File(USER_DIR, LOCK_FILENAME);
     
-    private static final String OPERATOR_RESOURCE = "esmska/operators/scripts";
+    private static final String OPERATOR_RESOURCE = "/esmska/operators/scripts";
     
     private static Config config = new Config();
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
@@ -251,7 +251,7 @@ public class PersistenceManager {
         TreeSet<Operator> newOperators = new TreeSet<Operator>();
         if (OPERATOR_DIR.exists()) {
             newOperators = ImportManager.importOperators(OPERATOR_DIR);
-        } else if (ClassLoader.getSystemResource(OPERATOR_RESOURCE) != null) {
+        } else if (PersistenceManager.class.getResource(OPERATOR_RESOURCE) != null) {
             newOperators = ImportManager.importOperators(OPERATOR_RESOURCE);
         } else {
             throw new IOException("Could not find operator directory '" +
