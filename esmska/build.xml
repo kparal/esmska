@@ -67,6 +67,47 @@
 
     -->
     
+    <!-- overwrite 'jar' target not to create jnlp automatically (takes too long) -->
+    <target name="jar" depends="init,compile,-pre-jar,-do-jar-with-manifest,-do-jar-without-manifest,
+        -do-jar-with-mainclass,-do-jar-with-libraries,-post-jar" description="Build JAR."/>
+    
+    <!-- overwrite 'jws-run' to depend on 'javaws' target -->
+    <target name="jws-run" depends="jar,-verify-jnlp-enabled,-verify-codebase,javaws" description="Start javaws execution">
+        <exec executable="${java.home}/bin/javaws">
+            <arg file="${jnlp.dest.dir}/${launch.jnlp.file}"/>
+        </exec>
+    </target>
+    
+    <!-- build java webstart files -->
+    <target name="javaws" depends="jar" description="Build Java WebStart files.">
+        <!-- create operators.jar file -->
+        <copy todir="dist/tmp/esmska/operators/scripts">
+            <fileset dir="dist/operators"/>
+        </copy>
+        <jar destfile="dist/lib/operators.jar" basedir="dist/tmp"/>
+        <delete dir="dist/tmp"/>
+        <!-- add "operators.jar" to the Class-Path in jar manifest -->
+        <jar destfile="${dist.jar}" update="true">
+            <manifest>
+                <attribute name="Class-Path" value="${jar.classpath} lib/operators.jar"/>
+            </manifest>
+        </jar>
+        <!-- call 'jnlp' target -->
+        <antcall target="jnlp"/>
+        <!-- delete unneeded stuff -->
+        <delete dir="dist/ikony"/>
+        <delete dir="dist/operators"/>
+        <delete>
+            <fileset dir="dist">
+                <include name="ctime.txt"/>
+                <include name="esmska.bat"/>
+                <include name="esmska.sh"/>
+                <include name="licence.txt"/>
+            </fileset>
+        </delete>
+    </target>
+    
+    <!-- called after jar building -->
     <target name="-post-jar">
         <!-- delete defaultly created README.TXT -->
         <delete file="dist/README.TXT"/>
@@ -87,5 +128,4 @@
             </fileset>
         </chmod>
     </target>
-    
 </project>
