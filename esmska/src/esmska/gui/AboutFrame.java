@@ -6,7 +6,6 @@
 
 package esmska.gui;
 
-import esmska.*;
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
 import java.awt.Cursor;
@@ -22,6 +21,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /** About form
@@ -242,11 +243,27 @@ public class AboutFrame extends javax.swing.JFrame {
     private void creditsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsButtonActionPerformed
         //show credits
         try {
-            URL url = getClass().getResource(RES + "credits.txt");
+            URL url = getClass().getResource(RES + "credits.html");
             JTextPane tp = new JTextPane();
-            tp.setContentType("text/plain; charset=utf-8");
+            tp.setContentType("text/html; charset=utf-8");
             tp.setPage(url);
             tp.setEditable(false);
+            tp.setPreferredSize(new Dimension(450, 400));
+            //make links clickable
+            tp.addHyperlinkListener(new HyperlinkListener() {
+                @Override
+                public void hyperlinkUpdate(final HyperlinkEvent e) {
+                    if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED &&
+                            Desktop.isDesktopSupported()) {
+                        try {
+                            Desktop.getDesktop().browse(e.getURL().toURI());
+                        } catch (Exception ex) {
+                            logger.log(Level.SEVERE, "Can't browse hyperlink: " + e.getURL(), ex);
+                        }
+                    }
+                }
+            });
+            
             String option = "Děkuji";
             JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
                     JOptionPane.DEFAULT_OPTION, null, new Object[]{option}, option);
