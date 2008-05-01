@@ -28,15 +28,20 @@ import esmska.data.SMS;
 import esmska.UpdateChecker;
 import esmska.data.History;
 import esmska.data.Icons;
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Toolkit;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
@@ -408,11 +413,43 @@ public class MainFrame extends javax.swing.JFrame {
             pauseSMSQueue(true);
             statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
                     true, Icons.STATUS_WARNING);
-            JOptionPane.showMessageDialog(this, new JLabel("<html>"
+            
+            //prepare dialog
+            JLabel label = new JLabel("<html>"
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>" + 
                     (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "")
-                    + "</html>"), null, JOptionPane.WARNING_MESSAGE);
+                    + "</html>");
+            label.setVerticalAlignment(SwingConstants.TOP);
+            JPanel panel = new JPanel(new BorderLayout());
+            panel.add(label, BorderLayout.CENTER);
+            JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE);
+            JDialog dialog = pane.createDialog(MainFrame.this, null);
             
+            //check if the dialog is not larger than screen
+            //(very ugly, but it seems there is no clean solution in Swing for this)
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();            
+            double width = dialog.getSize().getWidth();
+            double height = dialog.getSize().getHeight();
+            boolean resized = false;
+            if (width > screenSize.getWidth()) { //wider than screen
+                width = screenSize.getWidth() * 3/4;
+                height = height * (dialog.getSize().getWidth() / width);
+                resized = true;
+            } else if (height > screenSize.getHeight()) { //higher than screen
+                height = screenSize.getHeight() * 3/4;
+                width = width * (dialog.getSize().getHeight() / height);
+                resized = true;
+            }
+            if (resized) {
+                panel.setPreferredSize(new Dimension((int) width, (int) height));
+                dialog = pane.createDialog(MainFrame.this, null); //create dialog again
+            }
+            
+            //show the dialog
+            dialog.setResizable(true);
+            dialog.setVisible(true);
+            
+            //transfer focus
             if (smsPanel.getText().length() > 0)
                 smsPanel.requestFocusInWindow();
             else
@@ -540,6 +577,7 @@ public class MainFrame extends javax.swing.JFrame {
             putValue(SHORT_DESCRIPTION,"Zobrazit informace o programu");
             putValue(MNEMONIC_KEY,KeyEvent.VK_O);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (aboutFrame != null && aboutFrame.isVisible()) {
                 aboutFrame.requestFocus();
@@ -563,6 +601,7 @@ public class MainFrame extends javax.swing.JFrame {
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, 
                     KeyEvent.CTRL_DOWN_MASK));
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             MainFrame.this.formWindowClosing(null);
             System.exit(0);
@@ -579,6 +618,7 @@ public class MainFrame extends javax.swing.JFrame {
             putValue(SHORT_DESCRIPTION,"Nastavit chování programu");
             putValue(MNEMONIC_KEY,KeyEvent.VK_N);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (configFrame != null && configFrame.isVisible()) {
                 configFrame.requestFocus();
@@ -599,6 +639,7 @@ public class MainFrame extends javax.swing.JFrame {
             this.putValue(SHORT_DESCRIPTION,"Importovat kontakty z jiných aplikací");
             putValue(MNEMONIC_KEY, KeyEvent.VK_I);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (importFrame != null && importFrame.isVisible()) {
                 importFrame.requestFocus();
@@ -622,6 +663,7 @@ public class MainFrame extends javax.swing.JFrame {
             this.putValue(SHORT_DESCRIPTION,"Exportovat kontakty do souboru");
             putValue(MNEMONIC_KEY, KeyEvent.VK_E);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             ExportManager.exportContacts(MainFrame.this, contacts);
         }
@@ -639,6 +681,7 @@ public class MainFrame extends javax.swing.JFrame {
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, 
                     KeyEvent.CTRL_DOWN_MASK));
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (historyFrame != null && historyFrame.isVisible()) {
                 historyFrame.requestFocus();
@@ -659,6 +702,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class SMSDelayActionListener implements ActionListener {
         private final int DELAY = 15;
         private int seconds = 0;
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (seconds <= DELAY) { //still waiting
                 statusPanel.setProgress(seconds, "Další sms za: " + (DELAY-seconds) + "s",
@@ -678,6 +722,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Listens for events from sms queue */
     private class QueueListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
                 //edit sms in queue
@@ -699,6 +744,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     /** Listens for events from sms history table */
     private class HistoryListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             //resend sms
             History.Record record = historyAction.getHistoryFrame().getSelectedHistory();
@@ -718,6 +764,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Listener for new imported contacts */
     private class ImportListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
                 case ImportFrame.ACTION_IMPORT_CONTACTS:
@@ -732,6 +779,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     /** Listens for changes in contact list */
     private class ContactListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
                 case ContactPanel.ACTION_CONTACT_SELECTION_CHANGED:
@@ -748,6 +796,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Listens for changes in sms panel */
     private class SMSListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
                 case SMSPanel.ACTION_REQUEST_CLEAR_CONTACT_SELECTION:
@@ -770,6 +819,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Listens for events from update checker */
     private class UpdateListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             statusPanel.setStatusMessage("Byla vydána nová verze programu!", 
                     false, Icons.STATUS_UPDATE);

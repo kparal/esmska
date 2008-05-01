@@ -126,14 +126,14 @@ public class Main {
             logger.warning("Some other instance of the program is already running");
             String runOption = "Přesto spustit";
             String quitOption = "Ukončit";
-            String[] options = new String[]{quitOption, runOption};
+            String[] options = new String[]{runOption, quitOption};
             int result = JOptionPane.showOptionDialog(null,
                     "<html><h2>Esmska již jednou běží!</h2>" +
                     "Esmska je již jednou spuštěna. Důrazně nedoporučujeme spouštět další<br>" +
                     "instance programu, neboť může dojít ke ztrátě uživatelských dat.<br>",
                     null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
                     options, quitOption);
-            if (result != 1)
+            if (result != 0)
                 System.exit(0);
         }
 
@@ -170,6 +170,7 @@ public class Main {
 
         //start main frame
         java.awt.EventQueue.invokeLater(new java.lang.Runnable() {
+            @Override
             public void run() {
                 MainFrame.getInstance().setVisible(true);
             }
