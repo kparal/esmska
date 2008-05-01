@@ -5,6 +5,7 @@
  */
 package esmska.gui;
 
+import esmska.ThemeManager;
 import esmska.data.History;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
@@ -68,6 +69,10 @@ public class HistoryFrame extends javax.swing.JFrame {
     /** Creates new form HistoryFrame */
     public HistoryFrame() {
         initComponents();
+        //if not Substance LaF, add clipboard popup menu to text components
+        if (!PersistenceManager.getConfig().getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE)) {
+            ClipboardPopupMenu.register(searchField);
+        }
         //select first row
         if (historyTableModel.getRowCount() > 0) {
             historyTable.getSelectionModel().setSelectionInterval(0, 0);

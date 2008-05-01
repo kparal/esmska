@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Envelope;
@@ -92,6 +93,11 @@ public class SMSPanel extends javax.swing.JPanel {
     /** Creates new form SMSPanel */
     public SMSPanel() {
         initComponents();
+        //if not Substance LaF, add clipboard popup menu to text components
+        if (!config.getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE)) {
+            ClipboardPopupMenu.register(smsTextPane);
+            ClipboardPopupMenu.register(numberTextField);
+        }
     }
     
     /** validates sms form and returns status */
@@ -437,6 +443,7 @@ public class SMSPanel extends javax.swing.JPanel {
                     KeyEvent.CTRL_DOWN_MASK));
             setEnabled(false);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (!validateForm(true))
                 return;
@@ -464,6 +471,7 @@ public class SMSPanel extends javax.swing.JPanel {
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z,
                     KeyEvent.CTRL_DOWN_MASK));
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (smsTextUndoManager.canUndo()) {
                 smsTextUndoManager.undo();
@@ -487,6 +495,7 @@ public class SMSPanel extends javax.swing.JPanel {
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Y,
                     KeyEvent.CTRL_DOWN_MASK));
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (smsTextUndoManager.canRedo()) {
                 smsTextUndoManager.redo();
@@ -510,6 +519,7 @@ public class SMSPanel extends javax.swing.JPanel {
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K,
                     KeyEvent.CTRL_DOWN_MASK));
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             String text = smsTextPane.getText();
             if (text == null || text.equals("")) {
@@ -538,21 +548,27 @@ public class SMSPanel extends javax.swing.JPanel {
 
     /** Another operator selected */
     private class OperatorComboBoxActionListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             //update text editor listeners
             DocumentEvent event = new DocumentEvent() {
+                @Override
                 public ElementChange getChange(Element elem) {
                     return null;
                 }
+                @Override
                 public Document getDocument() {
                     return smsTextPane.getDocument();
                 }
+                @Override
                 public int getLength() {
                     return 0;
                 }
+                @Override
                 public int getOffset() {
                     return 0;
                 }
+                @Override
                 public EventType getType() {
                     return EventType.INSERT;
                 }
@@ -575,6 +591,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** Listener for envelope */
     private class EnvelopePropertyListener implements PropertyChangeListener {
+        @Override
         public void propertyChange(PropertyChangeEvent evt) {
             if (evt.getPropertyName().equals("contacts")) {
                 progressBar.setMaximum(envelope.getMaxTextLength());
@@ -615,6 +632,7 @@ public class SMSPanel extends javax.swing.JPanel {
         private StyledDocument doc;
         private Style regular, highlight;
         private Timer timer = new Timer(100, new ActionListener() { //updating after each event is slow,
+            @Override
             public void actionPerformed(ActionEvent e) {            //therefore there is timer
                 colorDocument(0,doc.getLength());
                 updateUI();
@@ -633,6 +651,7 @@ public class SMSPanel extends javax.swing.JPanel {
             
             // listen for changes in Look and Feel and change color of regular text
             UIManager.addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     if ("lookAndFeel".equals(evt.getPropertyName())) {
                         StyleConstants.setForeground(regular, UIManager.getColor("TextArea.foreground"));

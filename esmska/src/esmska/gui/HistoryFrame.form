@@ -182,7 +182,7 @@
                       <Component id="senderNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="jScrollPane2" alignment="0" pref="114" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" alignment="0" pref="120" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

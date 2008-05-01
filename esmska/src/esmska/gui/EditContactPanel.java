@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.gui.FormChecker;
 import esmska.data.Contact;
@@ -31,6 +32,11 @@ public class EditContactPanel extends javax.swing.JPanel {
      */
     public EditContactPanel() {
         initComponents();
+        //if not Substance LaF, add clipboard popup menu to text components
+        if (!config.getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE)) {
+            ClipboardPopupMenu.register(nameTextField);
+            ClipboardPopupMenu.register(numberTextField);
+        }
     }
     
     /** This method is called from within the constructor to
