@@ -41,7 +41,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
@@ -419,29 +418,20 @@ public class MainFrame extends javax.swing.JFrame {
                     + "<h2>Zprávu se nepovedlo odeslat!</h2>" + 
                     (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "")
                     + "</html>");
-            label.setVerticalAlignment(SwingConstants.TOP);
             JPanel panel = new JPanel(new BorderLayout());
             panel.add(label, BorderLayout.CENTER);
             JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE);
             JDialog dialog = pane.createDialog(MainFrame.this, null);
             
-            //check if the dialog is not larger than screen
+            //check if the dialog is not wider than screen
             //(very ugly, but it seems there is no clean solution in Swing for this)
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();            
-            double width = dialog.getSize().getWidth();
-            double height = dialog.getSize().getHeight();
-            boolean resized = false;
-            if (width > screenSize.getWidth()) { //wider than screen
-                width = screenSize.getWidth() * 3/4;
-                height = height * (dialog.getSize().getWidth() / width);
-                resized = true;
-            } else if (height > screenSize.getHeight()) { //higher than screen
-                height = screenSize.getHeight() * 3/4;
-                width = width * (dialog.getSize().getHeight() / height);
-                resized = true;
-            }
-            if (resized) {
-                panel.setPreferredSize(new Dimension((int) width, (int) height));
+            int width = panel.getWidth();
+            int height = panel.getHeight();
+            if (dialog.getWidth() > screenSize.getWidth()) { //wider than screen
+                width = (int) screenSize.getWidth() * 2/3;
+                height = height * (panel.getWidth() / width);
+                panel.setPreferredSize(new Dimension(width, height));
                 dialog = pane.createDialog(MainFrame.this, null); //create dialog again
             }
             
