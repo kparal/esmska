@@ -61,8 +61,12 @@ public class OperatorExecutor {
             "<br>" +
             "Pokud potíže přetrvají a webová brána operátora funguje,<br>" +
             "nahlaste problém na domovských stránkách programu.";
+    /** Message saying how many free SMS are remaining. */
+    public static final String INFO_FREE_SMS_REMAINING = "Zbývá volných SMS: ";
+    
     private OperatorConnector connector = new OperatorConnector();
     private String errorMessage;
+    private String operatorMessage;
     private String referer;
 
     /** Make a GET request to a provided URL
@@ -155,7 +159,7 @@ public class OperatorExecutor {
             label.setVerticalTextPosition(JLabel.TOP);
             panel.add(label);
             FutureTask<String> task = new FutureTask<String>(new Callable<String>() {
-
+                @Override
                 public String call() {
                     String imageCode = JOptionPane.showInputDialog(MainFrame.getInstance(),
                             panel, "Kontrolní kód",
@@ -193,6 +197,16 @@ public class OperatorExecutor {
     /** Error message displayed when sending was unsuccessful. */
     public String getErrorMessage() {
         return errorMessage;
+    }
+    
+    /** Additional optional message from operator that is shown after message sending. */
+    public void setOperatorMessage(String operatorMessage) {
+        this.operatorMessage = operatorMessage;
+    }
+    
+    /** Additional optional message from operator. */
+    public String getOperatorMessage() {
+        return operatorMessage;
     }
 
     /** Referer used for the following requests.

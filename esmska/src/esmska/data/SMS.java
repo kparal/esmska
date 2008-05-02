@@ -26,6 +26,7 @@ public class SMS {
     private String operator;
     private Status status = Status.WAITING; //sms status
     private String errMsg; //potential error
+    private String operatorMsg; //additional message from operator
     
     /** Status of SMS */
     public static enum Status {
@@ -77,6 +78,10 @@ public class SMS {
     public String getName() {
         return name;
     }
+
+    public String getOperatorMsg() {
+        return operatorMsg;
+    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
@@ -118,6 +123,10 @@ public class SMS {
     
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setOperatorMsg(String operatorMsg) {
+        this.operatorMsg = operatorMsg;
     }
     // </editor-fold>
     

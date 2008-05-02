@@ -91,12 +91,14 @@ public class SMSSender {
             finishedSending(sms);
         }
         
+        @Override
         protected Void doInBackground() {
             boolean success = false;
             try {
                 OperatorInterpreter interpreter = new OperatorInterpreter();
                 success = interpreter.sendMessage(OperatorUtil.getOperator(sms.getOperator()),
                         extractVariables(sms));
+                sms.setOperatorMsg(interpreter.getOperatorMessage());
                 if (!success) {
                     sms.setErrMsg(interpreter.getErrorMessage() != null ?
                         interpreter.getErrorMessage() : NO_REASON_ERROR);

@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-04-04"
+    return "2008-05-02"
 }
 
 function getAuthor() {
@@ -108,6 +108,14 @@ function send() {
                 "send", "Odeslat", "mtype", "1",
                 "confirmation", "0"]
     content = EXEC.postURL("https://sms1.client.tmo.cz/sms.jsp", [], postData)
+
+    // get number of remaining free sms and display it
+    re = /Do sítě T-Mobile \(ČR\) je možné odeslat ještě ([0-9]+) z celkového limitu [0-9]+ SMS měsíčně zdarma./
+    match = re.exec(content);
+    if (undefined != match) { // if found
+        var freeSms = match[1]
+        EXEC.setOperatorMessage(EXEC.INFO_FREE_SMS_REMAINING + freeSms)
+    }
 
     // check if message was successfully sent
     re = /<table class="alert info".*SMS byla odeslána.*<\/table>/

@@ -28,6 +28,7 @@ import esmska.data.SMS;
 import esmska.UpdateChecker;
 import esmska.data.History;
 import esmska.data.Icons;
+import esmska.utils.Nullator;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Toolkit;
@@ -411,8 +412,7 @@ public class MainFrame extends javax.swing.JFrame {
                 smsPanel.requestFocusInWindow();
             else
                 contactPanel.requestFocusInWindow();
-        }
-        else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
+        } else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             logger.info("Message for " + sms + " could not be sent");
             pauseSMSQueue(true);
             statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
@@ -450,8 +450,13 @@ public class MainFrame extends javax.swing.JFrame {
             else
                 queuePanel.requestFocusInWindow();
         }
-        setTaskRunning(false);
+
+        if (!Nullator.isEmpty(sms.getOperatorMsg())) {
+            statusPanel.setStatusMessage(sms.getOperator() + ": " + sms.getOperatorMsg(),
+                    true, Icons.STATUS_MESSAGE, true);
+        }
         
+        setTaskRunning(false);
         queuePanel.smsProcessed(sms);
     }
     

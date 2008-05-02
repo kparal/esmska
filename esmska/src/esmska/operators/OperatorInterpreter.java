@@ -124,4 +124,9 @@ public class OperatorInterpreter {
     public String getErrorMessage() {
         return executor.getErrorMessage();
     }
+    
+    /** Get additional message from operator. May be null. */
+    public String getOperatorMessage() {
+        return executor.getOperatorMessage();
+    }
 }
