@@ -32,6 +32,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
@@ -41,6 +42,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import org.apache.commons.io.IOUtils;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
@@ -111,7 +113,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not create program dir with config files", ex);
             statusPanel.setStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!",
-                    false, Icons.STATUS_ERROR);
+                    false, Icons.STATUS_ERROR, true);
         }
         loadConfig();
         if (smsQueue.size() > 0)
@@ -142,6 +144,9 @@ public class MainFrame extends javax.swing.JFrame {
                 BeanProperty.create("toolbarVisible"), toolBar, BeanProperty.create("visible"));
         bindGroup.addBinding(bind);
         bindGroup.bind();
+        
+        //show tip of the day
+        showTipOfTheDay();
         
         //check for updates
         if (config.isCheckForUpdates()) {
@@ -386,7 +391,7 @@ public class MainFrame extends javax.swing.JFrame {
      * @param printTime show timestamp before text
      */
     public void printStatusMessage(String message, boolean printTime, ImageIcon icon) { //TODO remove
-        statusPanel.setStatusMessage(message, printTime, icon);
+        statusPanel.setStatusMessage(message, printTime, icon, true);
     }
 
     /** Tells main form whether it should display task busy icon */
@@ -398,7 +403,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void smsProcessed(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
             statusPanel.setStatusMessage("Zpráva pro " + sms + " odeslána.",
-                    true, Icons.STATUS_MESSAGE);
+                    true, Icons.STATUS_MESSAGE, true);
             setSMSDelay();
             createHistory(sms);
             
@@ -411,7 +416,7 @@ public class MainFrame extends javax.swing.JFrame {
             logger.info("Message for " + sms + " could not be sent");
             pauseSMSQueue(true);
             statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
-                    true, Icons.STATUS_WARNING);
+                    true, Icons.STATUS_WARNING, true);
             
             //prepare dialog
             JLabel label = new JLabel("<html>"
@@ -473,6 +478,18 @@ public class MainFrame extends javax.swing.JFrame {
     public void setSMSDelay() {
         smsSender.setDelayed(true);
         smsDelayTimer.start();
+    }
+    
+    /** Display random tip from the collection of tips */
+    public void showTipOfTheDay() {
+        try {
+            List tips = IOUtils.readLines(
+                    getClass().getResourceAsStream(RES + "tips.txt"), "UTF-8");
+            int random = new Random().nextInt(tips.size());
+            statusPanel.setStatusMessage("Tip: " + tips.get(random), false, null, false);
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Can't display tip of the day", ex);
+        }
     }
     
     /** save program configuration */
@@ -812,7 +829,7 @@ public class MainFrame extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             statusPanel.setStatusMessage("Byla vydána nová verze programu!", 
-                    false, Icons.STATUS_UPDATE);
+                    false, Icons.STATUS_UPDATE, true);
         }
     }
     

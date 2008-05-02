@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -44,19 +43,22 @@ public class StatusPanel extends javax.swing.JPanel {
      * @param message text
      * @param printTime show timestamp before text
      * @param icon show icon with text. Use null for no icon.
+     * @param addToLog whether the message should be logged
      */
-    public void setStatusMessage(String message, boolean printTime, ImageIcon icon) {
+    public void setStatusMessage(String message, boolean printTime, ImageIcon icon, boolean addToLog) {
         Date time = new Date();
         if (printTime) {
             String timestamp = shortTimeFormat.format(new Date());
-            statusMessageLabel.setText("[" + timestamp + "] " + message);
+            statusMessageLabel.setText("<html>[" + timestamp + "] " + message + "</html>");
         } else {
-            statusMessageLabel.setText(message);
+            statusMessageLabel.setText("<html>" + message + "</html>");
         }
         statusMessageLabel.setIcon(icon);
         
         //add to log
-        addToLog(message, time, icon);
+        if (addToLog) {
+            addToLog(message, time, icon);
+        }
     }
 
     /** Tells main form whether it should display task busy icon */
@@ -128,18 +130,17 @@ public class StatusPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(statusMessageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(statusAnimationLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(progressBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(statusMessageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
+            .addComponent(statusAnimationLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(progressBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(statusMessageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,6 +158,7 @@ public class StatusPanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,"Zobrazit aplikační protokol");
             putValue(MNEMONIC_KEY, KeyEvent.VK_P);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (logFrame != null && logFrame.isVisible()) {
                 logFrame.requestFocus();
