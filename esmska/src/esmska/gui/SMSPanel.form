@@ -77,7 +77,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="progressBar" min="-2" pref="10" max="-2" attributes="1"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="1" pref="144" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" pref="145" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">

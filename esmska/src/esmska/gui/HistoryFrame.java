@@ -378,6 +378,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             this.setEnabled(false);
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             historyTable.requestFocusInWindow(); //always transfer focus
             int[] rows = historyTable.getSelectedRows();
@@ -415,6 +416,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             this.setEnabled(false);
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (selectedHistory == null) {
                 return;
@@ -427,6 +429,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
     /** Listener for history changes */
     private class HistoryActionListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             historyTableModel.fireTableDataChanged();
             historyTable.getSelectionModel().clearSelection();
@@ -436,14 +439,17 @@ public class HistoryFrame extends javax.swing.JFrame {
     /** Table model for showing sms history */
     private class HistoryTableModel extends AbstractTableModel {
 
+        @Override
         public int getRowCount() {
             return history.getRecords().size();
         }
 
+        @Override
         public int getColumnCount() {
             return 3;
         }
 
+        @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             History.Record record = history.getRecord(rowIndex);
             switch (columnIndex) {
@@ -508,6 +514,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     /** Listener for changes in history table */
     private class HistoryTableListener implements ListSelectionListener {
 
+        @Override
         public void valueChanged(ListSelectionEvent e) {
             if (e.getValueIsAdjusting()) {
                 return;
@@ -553,6 +560,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     /** Filter for searching in history table */
     private class HistoryRowFilter extends RowFilter<HistoryTableModel, Integer> {
         private Timer timer = new Timer(500, new ActionListener() { //updating after each event is slow,
+            @Override
             public void actionPerformed(ActionEvent e) {            //therefore there is timer
                 historyTableSorter.setRowFilter(HistoryRowFilter.this);
             }
@@ -560,6 +568,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         public HistoryRowFilter() {
             timer.setRepeats(false);
         }
+        @Override
         public boolean include(Entry<? extends HistoryTableModel, ? extends Integer> entry) {
             History.Record record = history.getRecord(entry.getIdentifier());
             String pattern = searchField.getText().toLowerCase();

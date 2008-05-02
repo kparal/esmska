@@ -343,6 +343,7 @@ public class ContactPanel extends javax.swing.JPanel {
             super(null,new ImageIcon(ContactPanel.class.getResource(RES + "add.png")));
             this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
             ContactDialog contactDialog = new ContactDialog();
@@ -370,6 +371,7 @@ public class ContactPanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,"Upravit označený kontakt");
             this.setEnabled(false);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
             Contact contact = (Contact)contactList.getSelectedValue();
@@ -399,6 +401,7 @@ public class ContactPanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,"Odstranit označené kontakty");
             this.setEnabled(false);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
             JPanel panel = new JPanel();
@@ -427,6 +430,7 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Choose contact in contact list by keyboard or mouse */
     private class ChooseContactAction extends AbstractAction {
+        @Override
         public void actionPerformed(ActionEvent e) {
             actionSupport.fireActionPerformed(ACTION_CONTACT_CHOSEN, null);
         }
@@ -437,6 +441,7 @@ public class ContactPanel extends javax.swing.JPanel {
         private String searchString = "";
         /** "forgetting" timer, time to forget the searched string */
         private Timer timer = new Timer(2000, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 searchString = "";
                 SearchContactAction.this.actionPerformed(null);
@@ -454,6 +459,7 @@ public class ContactPanel extends javax.swing.JPanel {
         }
         
         /** do the search */
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (searchString.equals("")) {
                 updateRendering();
@@ -549,9 +555,11 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Model for contact list */
     private class ContactListModel extends AbstractListModel {
+        @Override
         public int getSize() {
             return contacts.size();
         }
+        @Override
         public Contact getElementAt(int index) {
             return contacts.toArray(new Contact[0])[index];
         }
@@ -643,6 +651,7 @@ public class ContactPanel extends javax.swing.JPanel {
             panel.prepareForShow();
             setVisible(true);
         }
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             String prop = e.getPropertyName();
             

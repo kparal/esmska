@@ -78,6 +78,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
     
     private Contact requestedContactSelection;
+    private boolean disableContactListeners;
     
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -127,27 +128,41 @@ public class SMSPanel extends javax.swing.JPanel {
         return true;
     }
     
-    /** updates name according to number and operator */
-    private boolean lookupContact() {
+    /** Find contact according to filled number and operator
+     * @param onlyFullMatch whether to look only for full match (number and operator)
+     *  or even partial match (number only)
+     * @return found Contact or null if none found
+     */
+    private Contact lookupContact(boolean onlyFullMatch) {
         String number = numberTextField.getText();
         String operatorName = operatorComboBox.getSelectedOperatorName();
         
-        Contact contact = null;
-            for (Contact c : contacts) {
-                if (c.getNumber() != null && c.getNumber().equals(number) &&
-                        Nullator.isEqual(c.getOperator(), operatorName)) {
-                    contact = c;
+        Contact contact = null; //match on number
+        Contact fullContact = null; //match on number and operator
+        for (Contact c : contacts) {
+            if (Nullator.isEqual(c.getNumber(), number)) {
+                if (Nullator.isEqual(c.getOperator(), operatorName)) {
+                    fullContact = c;
                     break;
                 }
+                if (!onlyFullMatch && contact == null) {
+                    contact = c; //remember only first partial match, but search further
+                }
             }
+        }
         
+        return (fullContact != null ? fullContact : contact);
+    }
+    
+    /** Request a contact to be selected in contact list. Use null for clearing
+     * the selection.
+     */
+    private void requestSelectContact(Contact contact) {
         if (contact != null) {
             requestedContactSelection = contact;
             actionSupport.fireActionPerformed(ACTION_REQUEST_SELECT_CONTACT, null);
-            return true;
         } else {
             actionSupport.fireActionPerformed(ACTION_REQUEST_CLEAR_CONTACT_SELECTION, null);
-            return false;
         }
     }
     
@@ -167,6 +182,7 @@ public class SMSPanel extends javax.swing.JPanel {
         if (contacts == null)
             throw new NullPointerException("contacts");
 
+        disableContactListeners = true;
         int count = contacts.size();
         
         if (count == 1) {
@@ -210,6 +226,7 @@ public class SMSPanel extends javax.swing.JPanel {
         // update components
         sendAction.updateStatus();
         smsTextPaneDocumentFilter.requestUpdate();
+        disableContactListeners = false;
     }
     
     /** set sms to display and edit */
@@ -219,6 +236,7 @@ public class SMSPanel extends javax.swing.JPanel {
         if (number.startsWith(config.getCountryPrefix()))
             number = number.substring(config.getCountryPrefix().length());
         numberTextField.setText(number);
+        numberTextFieldKeyReleased(null);
         smsTextPane.setText(sms.getText());
         operatorComboBox.setSelectedOperator(sms.getOperator());
         smsTextPane.requestFocusInWindow();
@@ -408,11 +426,14 @@ public class SMSPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
-        //update name label
-        boolean found = lookupContact();
+        if (disableContactListeners)
+            return;
         
-        if (!found) {
-            nameLabel.setText("");
+        //update name label
+        Contact contact = lookupContact(false);
+        requestSelectContact(contact);
+        
+        if (contact == null) { //if not found
             //guess operator
             operatorComboBox.suggestOperator(numberTextField.getText());
         }
@@ -550,6 +571,9 @@ public class SMSPanel extends javax.swing.JPanel {
     private class OperatorComboBoxActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (disableContactListeners)
+                return;
+            
             //update text editor listeners
             DocumentEvent event = new DocumentEvent() {
                 @Override
@@ -575,7 +599,11 @@ public class SMSPanel extends javax.swing.JPanel {
             };
             smsTextPaneListener.onUpdate(event);
             
-            lookupContact();
+            //select contact only if full match found
+            Contact contact = lookupContact(true);
+            if (contact != null) {
+                requestSelectContact(contact);
+            }
             
             //update envelope
             Set<Contact> set = new HashSet<Contact>();

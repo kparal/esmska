@@ -75,6 +75,7 @@ public class Contact extends Object implements Comparable<Contact> {
     }
     // </editor-fold>
     
+    @Override
     public int compareTo(Contact c) {
         int result = 0;
         Collator collator = Collator.getInstance();

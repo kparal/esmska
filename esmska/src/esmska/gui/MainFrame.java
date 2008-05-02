@@ -765,6 +765,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
             
             SMS sms = new SMS();
+            sms.setName(record.getName());
             sms.setNumber(record.getNumber());
             sms.setOperator(record.getOperator());
             sms.setText(record.getText());
