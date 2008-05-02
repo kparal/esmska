@@ -19,3 +19,4 @@ Program je otevřený a svobodný. Zapojte se i vy a pomozte nám ho zlepšit!
 Malý finanční příspěvek je jedna z možností, jak podpořit další vývoj programu.
 Za pomoci voleb přík. řádky můžete program použít třeba i v kavárně nebo škole.
 4 z 5 zoologů doporučují používat operační systém s logem tučňáka.
+Zprávu můžete poslat i přes jinou nez výchozí bránu - prostě ji zvolte v seznamu.
