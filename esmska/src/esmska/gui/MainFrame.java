@@ -859,7 +859,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem redoMenuItem;
     private javax.swing.JMenuItem sendMenuItem;
     private esmska.gui.SMSPanel smsPanel;
-    private esmska.gui.StatusPanel statusPanel;
+    esmska.gui.StatusPanel statusPanel;
     private javax.swing.JToolBar toolBar;
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JButton undoButton;

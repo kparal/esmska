@@ -8,12 +8,14 @@ package esmska.gui;
 import esmska.data.Log;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /** Status bar panel
  *
@@ -25,19 +27,15 @@ public class StatusPanel extends javax.swing.JPanel {
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
     private Log log = new Log();
     private LogAction logAction = new LogAction();
+    private Timer statusTimer = new Timer(5000, new StatusListener());
     
     /** Creates new form StatusPanel */
     public StatusPanel() {
         initComponents();
+        statusTimer.setRepeats(false);
         addToLog("Spuštění programu", new Date(), null);
     }
 
-    /** add record to log */
-    private void addToLog(String message, Date time, ImageIcon icon) {
-        Log.Record record = new Log.Record(message, time, icon);
-        log.addRecord(record);
-    }
-    
     /** Prints message to status bar
      * 
      * @param message text
@@ -45,7 +43,8 @@ public class StatusPanel extends javax.swing.JPanel {
      * @param icon show icon with text. Use null for no icon.
      * @param addToLog whether the message should be logged
      */
-    public void setStatusMessage(String message, boolean printTime, ImageIcon icon, boolean addToLog) {
+    public void setStatusMessage(String message, boolean printTime, ImageIcon icon,
+            boolean addToLog) {
         Date time = new Date();
         if (printTime) {
             String timestamp = shortTimeFormat.format(new Date());
@@ -59,6 +58,19 @@ public class StatusPanel extends javax.swing.JPanel {
         if (addToLog) {
             addToLog(message, time, icon);
         }
+    }
+    
+    /** Hide current status message after specified time. If new status message
+     *  is displayed in the meantime, this scheduled action is cancelled.
+     * @param millis time in milliseconds. Use 0 or negative number to cancel the timer.
+     */
+    public void hideStatusMessageAfter(int millis) {
+        if (millis <= 0) {
+            statusTimer.stop();
+            return;
+        }
+        statusTimer.setInitialDelay(millis);
+        statusTimer.restart();
     }
 
     /** Tells main form whether it should display task busy icon */
@@ -91,6 +103,12 @@ public class StatusPanel extends javax.swing.JPanel {
     /** get action to show log frame */
     public Action getLogAction() {
         return logAction;
+    }
+    
+    /** add record to log */
+    private void addToLog(String message, Date time, ImageIcon icon) {
+        Log.Record record = new Log.Record(message, time, icon);
+        log.addRecord(record);
     }
 
     /** This method is called from within the constructor to
@@ -169,6 +187,15 @@ public class StatusPanel extends javax.swing.JPanel {
                 logFrame.setLocationRelativeTo(MainFrame.getInstance());
                 logFrame.setVisible(true);
             }
+        }
+    }
+    
+    /** Hide all information in status message label */
+    private class StatusListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            statusMessageLabel.setIcon(null);
+            statusMessageLabel.setText(null);
         }
     }
     
