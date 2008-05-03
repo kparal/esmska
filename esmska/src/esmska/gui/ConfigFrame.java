@@ -27,7 +27,6 @@ import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.Nullator;
-import java.util.Arrays;
 import javax.swing.InputVerifier;
 import javax.swing.SwingUtilities;
 
@@ -170,6 +169,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         windowCenteredCheckBox = new javax.swing.JCheckBox();
         toolbarVisibleCheckBox = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
+        notificationAreaCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         senderNumberTextField = new javax.swing.JTextField();
@@ -325,6 +325,20 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         jLabel5.setText("*");
 
+        notificationAreaCheckBox.setMnemonic('o');
+        notificationAreaCheckBox.setText("Umístit ikonu do oznamovací oblasti");
+        notificationAreaCheckBox.setToolTipText("<html>\nZobrazit ikonu v oznamovací oblasti správce oken (tzv. <i>system tray</i>).<br>\n<br>\nPozor, u moderních kompozitních správců oken (Compiz, Beryl, ...) je<br>\ntato funkce dostupná až od Java 6 Update 10.\n</html>");
+        notificationAreaCheckBox.setEnabled(NotificationIcon.isSupported());
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${notificationIconVisible}"), notificationAreaCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+
+        notificationAreaCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notificationAreaCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -332,6 +346,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(notificationAreaCheckBox)
                     .addComponent(toolbarVisibleCheckBox)
                     .addComponent(windowCenteredCheckBox)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -373,7 +388,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(windowCenteredCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(toolbarVisibleCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(notificationAreaCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
         );
@@ -606,7 +623,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(clearKeyringButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addContainerGap())
         );
@@ -752,7 +769,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(socksProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                 .addComponent(jLabel17)
                 .addContainerGap())
         );
@@ -869,6 +886,14 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void sameProxyCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sameProxyCheckBoxItemStateChanged
         proxyUpdated();
     }//GEN-LAST:event_sameProxyCheckBoxItemStateChanged
+
+private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificationAreaCheckBoxActionPerformed
+        if (notificationAreaCheckBox.isSelected()) {
+            NotificationIcon.install();
+        } else {
+            NotificationIcon.uninstall();
+        }
+}//GEN-LAST:event_notificationAreaCheckBoxActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkUpdatesCheckBox;
@@ -902,6 +927,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JComboBox lafComboBox;
     private javax.swing.JTextField loginTextField;
+    private javax.swing.JCheckBox notificationAreaCheckBox;
     private esmska.gui.OperatorComboBox operatorComboBox;
     private javax.swing.JTextField operatorFilterTextField;
     private javax.swing.JPasswordField passwordField;

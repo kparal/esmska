@@ -233,9 +233,6 @@
       </SubComponents>
     </Container>
     <Component class="esmska.gui.StatusPanel" name="statusPanel">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>

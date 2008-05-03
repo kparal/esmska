@@ -42,6 +42,7 @@ public class Config extends Object implements Serializable {
     private String httpProxy = "";
     private String httpsProxy = "";
     private String socksProxy = "";
+    private boolean notificationIconVisible = false;
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -158,6 +159,10 @@ public class Config extends Object implements Serializable {
 
     public String getSocksProxy() {
         return socksProxy;
+    }
+    
+    public boolean isNotificationIconVisible() {
+        return notificationIconVisible;
     }
     
     // </editor-fold>
@@ -313,5 +318,10 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("socksProxy", old, socksProxy);
     }
     
+    public void setNotificationIconVisible(boolean notificationIconVisible) {
+        boolean old = notificationIconVisible;
+        this.notificationIconVisible = notificationIconVisible;
+        changeSupport.firePropertyChange("notificationIconVisible", old, notificationIconVisible);
+    }
     // </editor-fold>
 }

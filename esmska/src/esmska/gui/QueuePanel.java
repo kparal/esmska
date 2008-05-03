@@ -221,6 +221,7 @@ public class QueuePanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,"Odstranit označené zprávy");
             this.setEnabled(false);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             Object[] smsArray = smsQueueList.getSelectedValues();
             for (Object o : smsArray) {
@@ -242,6 +243,7 @@ public class QueuePanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,"Upravit označenou zprávu");
             this.setEnabled(false);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             SMS sms = (SMS) smsQueueList.getSelectedValue();
             if (sms == null)
@@ -262,6 +264,7 @@ public class QueuePanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě výše");
             this.setEnabled(false);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             int index = smsQueueList.getSelectedIndex();
             if (index <= 0) //cannot move up first item
@@ -283,6 +286,7 @@ public class QueuePanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě níže");
             this.setEnabled(false);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             int index = smsQueueList.getSelectedIndex();
             if (index < 0 || index >= smsQueueListModel.getSize() - 1) //cannot move down last item
@@ -310,6 +314,7 @@ public class QueuePanel extends javax.swing.JPanel {
             putValue(MNEMONIC_KEY, KeyEvent.VK_P);
             putValue(SELECTED_KEY, false);
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (paused) {
                 putValue(LARGE_ICON_KEY,pauseIcon);
@@ -335,11 +340,18 @@ public class QueuePanel extends javax.swing.JPanel {
         }
     }
     
+    /** get action used to pause/unpause the sms queue */
+    public Action getSMSQueuePauseAction() {
+        return smsQueuePauseAction;
+    }
+    
     /** Model for SMSQueueList */
     private class SMSQueueListModel extends AbstractListModel {
+        @Override
         public SMS getElementAt(int index) {
             return smsQueue.get(index);
         }
+        @Override
         public int getSize() {
             return smsQueue.size();
         }

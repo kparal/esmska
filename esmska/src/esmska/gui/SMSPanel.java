@@ -717,9 +717,9 @@ public class SMSPanel extends javax.swing.JPanel {
             //if reached size limit, crop the text and show a warning
             if ((fb.getDocument().getLength() + (text!=null?text.length():0) - length)
                     > envelope.getMaxTextLength()) {
-                MainFrame.getInstance().statusPanel.setStatusMessage(
+                MainFrame.getInstance().getStatusPanel().setStatusMessage(
                         "Text je příliš dlouhý!", false, null, false);
-                MainFrame.getInstance().statusPanel.hideStatusMessageAfter(5000);
+                MainFrame.getInstance().getStatusPanel().hideStatusMessageAfter(5000);
                 int maxlength = envelope.getMaxTextLength() - fb.getDocument().getLength() + length;
                 maxlength = Math.max(maxlength, 0);
                 text = text.substring(0, maxlength);

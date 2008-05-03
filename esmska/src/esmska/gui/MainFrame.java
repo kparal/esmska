@@ -514,7 +514,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** load program configuration */
     private void loadConfig() {
-        if (config.isRememberLayout()) { //set frame layout
+        //set frame layout
+        if (config.isRememberLayout()) {
             Dimension mainDimension = config.getMainDimension();
             Integer horizontalSplitPaneLocation = config.getHorizontalSplitPaneLocation();
             Integer verticalSplitPaneLocation = config.getVerticalSplitPaneLocation();
@@ -526,7 +527,8 @@ public class MainFrame extends javax.swing.JFrame {
                 verticalSplitPane.setDividerLocation(verticalSplitPaneLocation);
         }
         
-        if (config.isStartCentered()) { //set window centered
+        //set window centered
+        if (config.isStartCentered()) {
             setLocationRelativeTo(null);
         }
         
@@ -534,6 +536,11 @@ public class MainFrame extends javax.swing.JFrame {
         if (history.getRecords().size() > 0) {
             contactPanel.setSelectedContact(
                     history.getRecord(history.getRecords().size()-1).getName());    
+        }
+        
+        //show notification icon
+        if (config.isNotificationIconVisible()) {
+            NotificationIcon.install();
         }
     }
     
@@ -581,6 +588,14 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
+    public StatusPanel getStatusPanel() {
+        return statusPanel;
+    }
+    
+    public QueuePanel getQueuePanel() {
+        return queuePanel;
+    }
+    
     /** Show about frame */
     private class AboutAction extends AbstractAction {
         AboutFrame aboutFrame;
@@ -620,6 +635,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
+    /** get action used to exit the application */
+    public Action getQuitAction() {
+        return quitAction;
+    }
+    
     /** Show config frame */
     private class ConfigAction extends AbstractAction {
         private ConfigFrame configFrame;
@@ -641,6 +661,11 @@ public class MainFrame extends javax.swing.JFrame {
                 configFrame.setVisible(true);
             }
         }
+    }
+    
+    /** get action used to show settings frame */
+    public Action getConfigAction() {
+        return configAction;
     }
     
     /** import data from other programs */
@@ -708,6 +733,11 @@ public class MainFrame extends javax.swing.JFrame {
         public HistoryFrame getHistoryFrame() {
             return historyFrame;
         }
+    }
+    
+    /** get action used to show history frame */
+    public Action getHistoryAction() {
+        return historyAction;
     }
     
     /** Progress bar action listener after sending sms */
@@ -865,7 +895,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem redoMenuItem;
     private javax.swing.JMenuItem sendMenuItem;
     private esmska.gui.SMSPanel smsPanel;
-    esmska.gui.StatusPanel statusPanel;
+    private esmska.gui.StatusPanel statusPanel;
     private javax.swing.JToolBar toolBar;
     private javax.swing.JMenu toolsMenu;
     private javax.swing.JButton undoButton;
