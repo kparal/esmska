@@ -31,7 +31,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="progressBar" pref="298" max="32767" attributes="0"/>
+              <Component id="progressBar" pref="246" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="backButton" linkSize="4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -44,7 +44,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="cardPanel" pref="368" max="32767" attributes="0"/>
+              <Component id="cardPanel" pref="361" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -114,7 +114,7 @@
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="vcardRadioButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="146" max="32767" attributes="0"/>
+                      <EmptySpace pref="139" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -190,7 +190,7 @@
                           <Component id="infoLabel" alignment="0" pref="514" max="32767" attributes="0"/>
                           <Component id="fileLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="fileTextField" pref="405" max="32767" attributes="0"/>
+                              <Component id="fileTextField" pref="379" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="browseButton" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -219,18 +219,25 @@
                       <Component id="encodingLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="problemLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="144" max="32767" attributes="0"/>
+                      <EmptySpace pref="130" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="fileTextField">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Cesta k souboru s kontakty"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="browseButton">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/browse-22.png"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="114"/>
                 <Property name="text" type="java.lang.String" value="Proch&#xe1;zet..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Naj&#xed;t soubor s kontakty pomoc&#xed; dialogu"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseButtonActionPerformed"/>
@@ -300,7 +307,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="232" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="225" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="validOperatorCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -359,8 +366,12 @@
     </Container>
     <Component class="javax.swing.JButton" name="nextButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/esmska/resources/next-22.png"/>
+        </Property>
         <Property name="mnemonic" type="int" value="112"/>
         <Property name="text" type="java.lang.String" value="Pokra&#x10d;ovat"/>
+        <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextButtonActionPerformed"/>
@@ -375,6 +386,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="backButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/esmska/resources/previous-22.png"/>
+        </Property>
+        <Property name="mnemonic" type="int" value="122"/>
         <Property name="text" type="java.lang.String" value="Zp&#x11b;t"/>
       </Properties>
       <Events>

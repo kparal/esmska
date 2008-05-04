@@ -30,6 +30,7 @@ import esmska.utils.ActionEventSupport;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingConstants;
 
 /** Import contacts from external applications
  *
@@ -273,13 +274,17 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(vcardRadioButton)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         cardPanel.add(applicationPanel, "applicationPanel");
 
+        fileTextField.setToolTipText("Cesta k souboru s kontakty");
+
+        browseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/browse-22.png"))); // NOI18N
         browseButton.setMnemonic('r');
         browseButton.setText("Procházet...");
+        browseButton.setToolTipText("Najít soubor s kontakty pomocí dialogu");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 browseButtonActionPerformed(evt);
@@ -310,7 +315,7 @@ public class ImportFrame extends javax.swing.JFrame {
                     .addComponent(infoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                     .addComponent(fileLabel)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, browsePanelLayout.createSequentialGroup()
-                        .addComponent(fileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                        .addComponent(fileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browseButton))
                     .addComponent(encodingLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
@@ -334,7 +339,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(encodingLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(problemLabel)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         cardPanel.add(browsePanel, "browsePanel");
@@ -387,7 +392,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(validOperatorCheckBox)
                 .addGap(18, 18, 18)
@@ -397,8 +402,10 @@ public class ImportFrame extends javax.swing.JFrame {
 
         cardPanel.add(resultsPanel, "resultsPanel");
 
+        nextButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/next-22.png"))); // NOI18N
         nextButton.setMnemonic('p');
         nextButton.setText("Pokračovat");
+        nextButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextButtonActionPerformed(evt);
@@ -409,6 +416,8 @@ public class ImportFrame extends javax.swing.JFrame {
         progressBar.setString("Prosím čekejte...");
         progressBar.setStringPainted(true);
 
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/previous-22.png"))); // NOI18N
+        backButton.setMnemonic('z');
         backButton.setText("Zpět");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,7 +431,7 @@ public class ImportFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(backButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -436,7 +445,7 @@ public class ImportFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -463,7 +472,9 @@ public class ImportFrame extends javax.swing.JFrame {
         if (actualCard.equals("resultsPanel")) {
             String nextCard = "browsePanel";
             nextButton.setText("Pokračovat");
-            nextButton.setIcon(null);
+            nextButton.setIcon(new ImageIcon(
+                        ImportFrame.class.getResource(RES + "next-22.png")));
+            nextButton.setHorizontalTextPosition(SwingConstants.LEADING);
             updateBrowsePanel();
             cardLayout.show(cardPanel, nextCard);
             actualCard = nextCard;
@@ -565,7 +576,8 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 
                 nextButton.setText("Importovat");
                 nextButton.setIcon(new ImageIcon(
-                        ImportFrame.class.getResource(RES + "contact-16.png")));
+                        ImportFrame.class.getResource(RES + "contact-22.png")));
+                nextButton.setHorizontalTextPosition(SwingConstants.TRAILING);
                 cardLayout.show(cardPanel, "resultsPanel");
                 actualCard = "resultsPanel";
             } catch (Exception ex) {
