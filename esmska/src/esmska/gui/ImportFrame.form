@@ -160,7 +160,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nebo zvolte, ve kter&#xe9;m ze standardizovan&#xfd;ch form&#xe1;t&#x16f; soubork&#x16f; kontakty m&#xe1;te:"/>
+                <Property name="text" type="java.lang.String" value="Nebo zvolte, ve kter&#xe9;m ze standardizovan&#xfd;ch form&#xe1;t&#x16f; soubor&#x16f; kontakty m&#xe1;te:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="vcardRadioButton">

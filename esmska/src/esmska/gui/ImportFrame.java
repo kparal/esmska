@@ -229,7 +229,7 @@ public class ImportFrame extends javax.swing.JFrame {
         esmskaRadioButton.setSelected(true);
         esmskaRadioButton.setText("Esmska");
 
-        jLabel4.setText("Nebo zvolte, ve kterém ze standardizovaných formátů souborků kontakty máte:");
+        jLabel4.setText("Nebo zvolte, ve kterém ze standardizovaných formátů souborů kontakty máte:");
 
         importButtonGroup.add(vcardRadioButton);
         vcardRadioButton.setText("vCard (*.vcard, *.vcf)");
