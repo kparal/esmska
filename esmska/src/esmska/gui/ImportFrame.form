@@ -74,8 +74,12 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+                              <Component id="vcardRadioButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jLabel2" alignment="1" pref="514" max="32767" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -87,6 +91,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="323" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -105,7 +110,11 @@
                       <Component id="kubikRadioButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dreamcomSERadioButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="204" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="vcardRadioButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="146" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -147,6 +156,19 @@
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Esmska"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nebo zvolte, ve kter&#xe9;m ze standardizovan&#xfd;ch form&#xe1;t&#x16f; soubork&#x16f; kontakty m&#xe1;te:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="vcardRadioButton">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="importButtonGroup"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="vCard (*.vcard, *.vcf)"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -307,7 +329,7 @@
                       <Connection code="new DefaultListModel()" type="code"/>
                     </Property>
                     <Property name="cellRenderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new DefaultListCellRenderer() {&#xa;    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;        Component comp = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;        JLabel label = (JLabel) comp;&#xa;        Contact c = (Contact) value;&#xa;        label.setText(c.getName() + &quot; (&quot; + c.getNumber() + &quot;, &quot; + c.getOperator() + &quot;)&quot;);&#xa;        return label;&#xa;    }&#xa;    &#xa;}" type="code"/>
+                      <Connection code="new DefaultListCellRenderer() {&#xa;    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;        Component comp = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;        JLabel label = (JLabel) comp;&#xa;        Contact c = (Contact) value;&#xa;        String number = (c.getNumber() != null ? c.getNumber() : &quot;&quot;);&#xa;        String operator = (c.getOperator() != null ? c.getOperator() : &quot;&quot;);&#xa;        label.setText(c.getName() + &quot; (&quot; + number + &quot;, &quot; + operator + &quot;)&quot;);&#xa;        return label;&#xa;    }&#xa;    &#xa;}" type="code"/>
                     </Property>
                   </Properties>
                 </Component>

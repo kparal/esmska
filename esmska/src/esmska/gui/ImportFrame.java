@@ -50,6 +50,9 @@ public class ImportFrame extends javax.swing.JFrame {
             " z programu DreamCom SE. Spusťte uvedený program, přejděte do adresáře " +
             "kontaktů a pomocí pravého myšítka exportujte všechny své kontakty do CSV " +
             "souboru. Tento soubor zde následně vyberte.</html>";
+    private static final String infoVcard = "<html>Pro import kontaktů potřebujete mít " +
+            "nachystaný VCARD či VCF soubor, který vám vytvoří aplikace obsahující vaše " +
+            "kontakty. Tento soubor zde vyberte.</html>";
     private static final String encodingUTF8 = "<html>Program předpokládá, že soubor je " +
             "v kódování UTF-8.</html>";
     private static final String encodingWin1250 = "<html>Program předpokládá, že soubor " +
@@ -82,6 +85,26 @@ public class ImportFrame extends javax.swing.JFrame {
         chooser.setApproveButtonText("Zvolit");
         chooser.setDialogTitle("Vyberte soubor s exportovanými kontakty");
         chooser.setMultiSelectionEnabled(false);
+        chooser.addChoosableFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                if (vcardRadioButton.isSelected()) {
+                    return f.getName().toLowerCase().endsWith(".vcard") ||
+                            f.getName().toLowerCase().endsWith(".vcf") ||
+                            f.isDirectory();
+                } else {
+                    return f.getName().toLowerCase().endsWith(".csv") || f.isDirectory();
+                }
+            }
+            @Override
+            public String getDescription() {
+                if (vcardRadioButton.isSelected()) {
+                    return "vCard soubory (*.vcard, *.vcf)";
+                } else {
+                    return "CSV soubory (*.csv)";
+                }
+            }
+        });
     }
     
     /** get list of imported contacts */
@@ -91,16 +114,6 @@ public class ImportFrame extends javax.swing.JFrame {
     
     /** browse for file */
     private String doBrowseButton() {
-        chooser.setFileFilter(new FileFilter() {
-            @Override
-            public boolean accept(File f) {
-                return f.getName().toLowerCase().endsWith(".csv") || f.isDirectory();
-            }
-            @Override
-            public String getDescription() {
-                return "CSV soubory (*.csv)";
-            }
-        });
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             return chooser.getSelectedFile().getAbsolutePath();
         }
@@ -152,6 +165,10 @@ public class ImportFrame extends javax.swing.JFrame {
             infoLabel.setText(infoKubik);
             encodingLabel.setText(encodingWin1250);
             problemLabel.setVisible(true);
+        } else if (vcardRadioButton.isSelected()) {
+            infoLabel.setText(infoVcard);
+            encodingLabel.setText(encodingUTF8);
+            problemLabel.setVisible(true);
         }
     }
     
@@ -171,6 +188,8 @@ public class ImportFrame extends javax.swing.JFrame {
         kubikRadioButton = new javax.swing.JRadioButton();
         dreamcomSERadioButton = new javax.swing.JRadioButton();
         esmskaRadioButton = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        vcardRadioButton = new javax.swing.JRadioButton();
         browsePanel = new javax.swing.JPanel();
         fileTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
@@ -210,6 +229,11 @@ public class ImportFrame extends javax.swing.JFrame {
         esmskaRadioButton.setSelected(true);
         esmskaRadioButton.setText("Esmska");
 
+        jLabel4.setText("Nebo zvolte, ve kterém ze standardizovaných formátů souborků kontakty máte:");
+
+        importButtonGroup.add(vcardRadioButton);
+        vcardRadioButton.setText("vCard (*.vcard, *.vcf)");
+
         javax.swing.GroupLayout applicationPanelLayout = new javax.swing.GroupLayout(applicationPanel);
         applicationPanel.setLayout(applicationPanelLayout);
         applicationPanelLayout.setHorizontalGroup(
@@ -217,6 +241,9 @@ public class ImportFrame extends javax.swing.JFrame {
             .addGroup(applicationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(applicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(applicationPanelLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(vcardRadioButton))
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                     .addComponent(jLabel3)
                     .addGroup(applicationPanelLayout.createSequentialGroup()
@@ -225,7 +252,8 @@ public class ImportFrame extends javax.swing.JFrame {
                             .addComponent(esmskaRadioButton)
                             .addComponent(kubikRadioButton)
                             .addComponent(dreamcomSERadioButton))
-                        .addGap(323, 323, 323)))
+                        .addGap(323, 323, 323))
+                    .addComponent(jLabel4))
                 .addContainerGap())
         );
         applicationPanelLayout.setVerticalGroup(
@@ -241,7 +269,11 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(kubikRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dreamcomSERadioButton)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(vcardRadioButton)
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         cardPanel.add(applicationPanel, "applicationPanel");
@@ -315,7 +347,9 @@ public class ImportFrame extends javax.swing.JFrame {
                 Component comp = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 JLabel label = (JLabel) comp;
                 Contact c = (Contact) value;
-                label.setText(c.getName() + " (" + c.getNumber() + ", " + c.getOperator() + ")");
+                String number = (c.getNumber() != null ? c.getNumber() : "");
+                String operator = (c.getOperator() != null ? c.getOperator() : "");
+                label.setText(c.getName() + " (" + number + ", " + operator + ")");
                 return label;
             }
 
@@ -456,6 +490,8 @@ public class ImportFrame extends javax.swing.JFrame {
                 type = ContactParser.ContactType.KUBIK_DREAMCOM_FILE;
             } else if (dreamcomSERadioButton.isSelected()) {
                 type = ContactParser.ContactType.DREAMCOM_SE_FILE;
+            } else if (vcardRadioButton.isSelected()) {
+                type = ContactParser.ContactType.VCARD_FILE;
             }
             
             File file = new File(filename);
@@ -564,6 +600,7 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton kubikRadioButton;
@@ -572,6 +609,7 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JPanel resultsPanel;
     private javax.swing.JCheckBox validOperatorCheckBox;
+    private javax.swing.JRadioButton vcardRadioButton;
     // End of variables declaration//GEN-END:variables
     
 }

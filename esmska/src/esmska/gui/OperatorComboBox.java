@@ -43,6 +43,7 @@ public class OperatorComboBox extends JComboBox {
         
         //add listener to operator filter patterns
         config.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if (!"operatorFilter".equals(evt.getPropertyName()))
                     return;
@@ -91,14 +92,14 @@ public class OperatorComboBox extends JComboBox {
     }
     
     /** Select operator according to phone number or phone number prefix.
-     * Searches through operators and finds the first one supporting this phone number, either
-     * by operator prefix or country prefix. Doesn't change selection if no operator is found.
-     * Doesn't change selection if no operator prefix matched and operator witch matching country
-     * prefix is already selected.
+     * Searches through available (displayed) operators and selects the first one supporting 
+     * this phone number, either by operator prefix or country prefix. Doesn't change 
+     * selection if no operator is found. Doesn't change selection if no operator prefix 
+     * matched and operator witch matching country prefix is already selected.
      * @param number phone number or it's prefix. The minimum length is two characters,
      *               for shorter input (or null) the method does nothing.
      */
-    public void suggestOperator(String number) {
+    public void selectSuggestedOperator(String number) {
         if (number == null || number.length() < 2)
             return;
         

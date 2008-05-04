@@ -435,7 +435,7 @@ public class SMSPanel extends javax.swing.JPanel {
         
         if (contact == null) { //if not found
             //guess operator
-            operatorComboBox.suggestOperator(numberTextField.getText());
+            operatorComboBox.selectSuggestedOperator(numberTextField.getText());
         }
         
         //update envelope

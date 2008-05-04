@@ -53,4 +53,34 @@ public class OperatorUtil {
         }
         return null;
     }
+    
+    /** Guess operator according to phone number or phone number prefix.
+     * Searches through operators and finds the first one supporting this phone number, either
+     * by operator prefix or country prefix.
+     * @param number phone number or it's prefix. The minimum length is two characters,
+     *               for shorter input (or null) the method does nothing.
+     * @return name of the suggested operator or null if none found
+     */
+    public static String suggestOperator(String number) {
+        if (number == null || number.length() < 2)
+            return null;
+        
+        //search in operator prefixes
+        for (Operator op : operators) {
+            for (String prefix : op.getOperatorPrefixes()) {
+                if (number.startsWith(prefix)) {
+                    return op.getName();
+                }
+            }
+        }
+        
+        //search in country prefixes
+        for (Operator op : operators) {
+            if (number.startsWith(op.getCountryPrefix())) {
+                return op.getName();
+            }
+        }
+        
+        return null;
+    }
 }

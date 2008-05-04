@@ -117,7 +117,7 @@ public class ContactPanel extends javax.swing.JPanel {
             selectedContacts.add((Contact) o);
         return selectedContacts;
     }
-    
+       
     /** add new contacts to the contact list */
     public void addContacts(Collection<Contact> contacts) {
         contactListModel.addAll(contacts);
@@ -127,6 +127,17 @@ public class ContactPanel extends javax.swing.JPanel {
     public void ensureContactSelected() {
         if (contactList.getSelectedIndex() < 0 && contactListModel.getSize() > 0)
             contactList.setSelectedIndex(0);
+    }
+    
+    /** Add margins to selected contact to make selection nicer. Has effect only
+     * if single contact selected.
+     */
+    public void makeNiceSelection() {
+        int[] indices = contactList.getSelectedIndices();
+        if (indices.length != 1) {
+            return;
+        }
+        setSelectedContactIndexWithMargins(indices[0]);
     }
     
     /** sets selected index in contact list with making intelligent

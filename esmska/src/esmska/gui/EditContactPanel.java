@@ -177,7 +177,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     
     private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
         //guess operator
-        operatorComboBox.suggestOperator(numberTextField.getText());
+        operatorComboBox.selectSuggestedOperator(numberTextField.getText());
     }//GEN-LAST:event_numberTextFieldKeyReleased
 
     private void nameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
@@ -193,7 +193,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         if (contact == null) {
             nameTextField.setText(null);
             numberTextField.setText(config.getCountryPrefix());
-            operatorComboBox.suggestOperator(numberTextField.getText());
+            operatorComboBox.selectSuggestedOperator(numberTextField.getText());
         } else {
             nameTextField.setText(contact.getName());
             numberTextField.setText(contact.getNumber());
