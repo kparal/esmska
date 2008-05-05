@@ -23,11 +23,21 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
 import esmska.data.SMS;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import net.wimpi.pim.Pim;
+import net.wimpi.pim.contact.io.ContactMarshaller;
+import net.wimpi.pim.contact.model.Communications;
+import net.wimpi.pim.contact.model.PersonalIdentity;
+import net.wimpi.pim.contact.model.PhoneNumber;
+import net.wimpi.pim.factory.ContactIOFactory;
+import net.wimpi.pim.factory.ContactModelFactory;
 
 /** Export program data
  *
@@ -36,6 +46,27 @@ import javax.swing.ImageIcon;
 public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
     private static final String RES = "/esmska/resources/";
+    private static final FileFilter csvFileFilter = new FileFilter() {
+        @Override
+        public boolean accept(File f) {
+            return f.isDirectory() || f.getName().toLowerCase().endsWith(".csv");
+        }
+        @Override
+        public String getDescription() {
+            return "CSV soubory (*.csv)";
+        }
+    };
+    private static final FileFilter vCardFileFilter = new FileFilter() {
+        @Override
+        public boolean accept(File f) {
+            return f.isDirectory() || f.getName().toLowerCase().endsWith(".vcard") ||
+                    f.getName().toLowerCase().endsWith(".vcf");
+        }
+        @Override
+        public String getDescription() {
+            return "vCard soubory (*.vcard, *.vcf)";
+        }
+    };
 
     /** Disabled constructor */
     private ExportManager() {
@@ -45,35 +76,40 @@ public class ExportManager {
     public static void exportContacts(Component parent, Collection<Contact> contacts) {
         //show info
         String message =
-                "<html>Své kontakty můžete exportovat do CSV souboru. To je<br>" +
-                "textový soubor, kde všechna data vidíte v čitelné podobě.<br>" +
+                "<html>Své kontakty můžete exportovat do CSV či vCard souboru. To jsou<br>" +
+                "textové soubory, kde všechna data vidíte v čitelné podobě.<br>" +
                 "Pomocí importu můžete data později opět nahrát zpět do Esmsky,<br>" +
                 "nebo je využít jinak.<br><br>" +
-                "Soubor bude uložen v kódování UTF-8.<br><br>" +
-                "Při potřebě úpravy struktury souboru (např. za účelem importu<br>" +
-                "do jiného programu) využijte nějaký tabulkový procesor,<br>" +
-                "např. zdarma dostupný OpenOffice Calc (www.openoffice.cz).</html>";
+                "Soubor ve formátu vCard je standardizovaný a můžete ho použít<br>" +
+                "v mnoha dalších aplikacích. Soubor CSV má velice jednoduchý obsah<br>" +
+                "a každý program ho vytváří trochu jinak. Při potřebě úpravy jeho<br>" +
+                "struktury pro import v jiném programu využijte nějaký tabulkový<br>" +
+                "procesor, např. zdarma dostupný OpenOffice Calc (www.openoffice.cz).<br><br>" +
+                "Soubor bude uložen v kódování UTF-8.</html>";
         JOptionPane.showMessageDialog(parent,new JLabel(message),"Export kontaktů",
                 JOptionPane.INFORMATION_MESSAGE, 
                 new ImageIcon(ExportManager.class.getResource(RES + "contact-48.png")));
         
         //choose file
         JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Vyberte umístění exportovaného souboru");
-        chooser.setFileFilter(new FileFilter() {
-            public boolean accept(File f) {
-                return f.isDirectory() || f.getName().toLowerCase().endsWith(".csv");
-            }
-            public String getDescription() {
-                return "CSV soubory (*.csv)";
-            }
-        });
+        chooser.setDialogTitle("Vyberte umístění a typ exportovaného souboru");
+        chooser.addChoosableFileFilter(csvFileFilter);
+        chooser.addChoosableFileFilter(vCardFileFilter);
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(csvFileFilter);
         if (chooser.showSaveDialog(parent) != JFileChooser.APPROVE_OPTION)
             return;
         
         File file = chooser.getSelectedFile();
-        if (! file.getName().toLowerCase().endsWith(".csv"))
+        //append correct extension
+        if (chooser.getFileFilter() == csvFileFilter && 
+                !file.getName().toLowerCase().endsWith(".csv")) {
             file = new File(file.getPath() + ".csv");
+        } else if (chooser.getFileFilter() == vCardFileFilter &&
+                !file.getName().toLowerCase().endsWith(".vcard") &&
+                !file.getName().toLowerCase().endsWith(".vcf")) {
+            file = new File(file.getPath() + ".vcf");
+        }
         
         if (file.exists() && !file.canWrite()) {
             JOptionPane.showMessageDialog(parent,"Do souboru " + file.getAbsolutePath() +
@@ -83,7 +119,11 @@ public class ExportManager {
         
         //save
         try {
-            exportContacts(contacts, file);
+            if (chooser.getFileFilter() == vCardFileFilter) {
+                exportContactsToVCard(contacts, file);
+            } else {
+                exportContacts(contacts, file);
+            }
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not export contacts to file", ex);
             JOptionPane.showMessageDialog(parent,"Export selhal!", null,
@@ -96,7 +136,7 @@ public class ExportManager {
         
     }
     
-    /** Export contacts to file */
+    /** Export contacts to csv file */
     public static void exportContacts(Collection<Contact> contacts, File file)
     throws IOException {
         CsvWriter writer = null;
@@ -115,6 +155,51 @@ public class ExportManager {
         }
     }
     
+    /** Export contacts to vCard file */
+    public static void exportContactsToVCard(Collection<Contact> contacts, File file)
+            throws IOException {
+        OutputStream output = null;
+        
+        try {
+            output = new FileOutputStream(file);
+            
+            ContactIOFactory ciof = Pim.getContactIOFactory();
+            ContactModelFactory cmf = Pim.getContactModelFactory();
+            ContactMarshaller marshaller = ciof.createContactMarshaller();
+            marshaller.setEncoding("UTF-8");
+            ArrayList<net.wimpi.pim.contact.model.Contact> conts =
+                    new ArrayList<net.wimpi.pim.contact.model.Contact>();
+
+            //convert contacts to vcard library contacts
+            for (Contact contact : contacts) {
+                net.wimpi.pim.contact.model.Contact c = cmf.createContact();
+
+                PersonalIdentity pid = cmf.createPersonalIdentity();
+                pid.setFormattedName(contact.getName());
+                pid.setFirstname("");
+                pid.setLastname(contact.getName());
+                c.setPersonalIdentity(pid);
+
+                Communications comm = cmf.createCommunications();
+                PhoneNumber number = cmf.createPhoneNumber();
+                number.setNumber(contact.getNumber());
+                comm.addPhoneNumber(number);
+                c.setCommunications(comm);
+
+                conts.add(c);
+            }
+
+            //do the export
+            marshaller.marshallContacts(output,
+                    conts.toArray(new net.wimpi.pim.contact.model.Contact[0]));
+
+        } finally {
+            if (output != null) {
+                output.close();
+            }
+        }
+    }
+
     /** Export sms queue to file */
     public static void exportQueue(Collection<SMS> queue, File file) throws IOException {
         CsvWriter writer = null;
