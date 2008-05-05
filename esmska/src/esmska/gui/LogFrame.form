@@ -28,12 +28,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="1" pref="452" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" pref="485" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="clearButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="copyButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                      <EmptySpace pref="69" max="32767" attributes="0"/>
                       <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -81,6 +81,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="closeButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/esmska/resources/close-22.png"/>
+        </Property>
         <Property name="mnemonic" type="int" value="122"/>
         <Property name="text" type="java.lang.String" value="Zav&#x159;&#xed;t"/>
       </Properties>

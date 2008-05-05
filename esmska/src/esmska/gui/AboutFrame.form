@@ -29,30 +29,30 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel5" alignment="2" pref="269" max="32767" attributes="0"/>
-                  <Component id="jLabel3" alignment="2" pref="269" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="2" pref="269" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="2" pref="269" max="32767" attributes="0"/>
+                  <Component id="jLabel5" alignment="2" pref="339" max="32767" attributes="0"/>
+                  <Component id="jLabel3" alignment="2" pref="339" max="32767" attributes="0"/>
+                  <Component id="jLabel2" alignment="2" pref="339" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="2" pref="339" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="creditsButton" linkSize="10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="licenseButton" linkSize="10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="closeButton" linkSize="10" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jLabel4" pref="46" max="32767" attributes="0"/>
+                      <Component id="jLabel4" pref="81" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="linkButton" min="-2" max="-2" attributes="1"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel6" pref="47" max="32767" attributes="0"/>
+                      <Component id="jLabel6" pref="82" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel8" pref="53" max="32767" attributes="0"/>
+                      <Component id="jLabel8" pref="88" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="supportButton" min="-2" max="-2" attributes="1"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" pref="53" max="32767" attributes="0"/>
+                      <Component id="jLabel7" pref="88" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -124,6 +124,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="creditsButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/esmska/resources/about-22.png"/>
+        </Property>
         <Property name="mnemonic" type="int" value="115"/>
         <Property name="text" type="java.lang.String" value="Z&#xe1;sluhy"/>
       </Properties>
@@ -133,6 +136,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="closeButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/esmska/resources/close-22.png"/>
+        </Property>
         <Property name="mnemonic" type="int" value="122"/>
         <Property name="text" type="java.lang.String" value="Zav&#x159;&#xed;t"/>
       </Properties>
