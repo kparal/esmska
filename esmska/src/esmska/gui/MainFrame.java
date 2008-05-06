@@ -669,7 +669,7 @@ public class MainFrame extends javax.swing.JFrame {
         return configAction;
     }
     
-    /** import data from other programs */
+    /** import data from other programs/formats */
     private class ImportAction extends AbstractAction {
         private ImportFrame importFrame;
         public ImportAction() {
@@ -814,6 +814,8 @@ public class MainFrame extends javax.swing.JFrame {
                 case ImportFrame.ACTION_IMPORT_CONTACTS:
                     contactPanel.clearSelection();
                     contactPanel.addContacts(importAction.getImportFrame().getImportedContacts());
+                    statusPanel.setStatusMessage("Import kontaktů úspěšně dokončen",
+                            true, Icons.STATUS_INFO, true);
                     break;
                 default:
                     logger.severe("Unknown import event type: " + e.getID());

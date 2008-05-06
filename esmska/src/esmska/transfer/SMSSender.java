@@ -61,7 +61,7 @@ public class SMSSender {
             SMS sms = smsQueue.get(0);
             mainFrame.setTaskRunning(true);
             String operator = Nullator.isEmpty(sms.getOperator()) ? 
-                "Žádný operátor" : sms.getOperator();
+                "žádný operátor" : sms.getOperator();
             mainFrame.printStatusMessage("Posílám zprávu pro " + sms
             + " (" + operator + ") ...", true, Icons.STATUS_INFO);
             

@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
 import esmska.data.SMS;
+import esmska.gui.MainFrame;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
@@ -126,14 +127,17 @@ public class ExportManager {
             }
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not export contacts to file", ex);
-            JOptionPane.showMessageDialog(parent,"Export selhal!", null,
+            MainFrame.getInstance().getStatusPanel().setStatusMessage(
+                "Export kontaktů selhal!", true, Icons.STATUS_ERROR, true);
+            JOptionPane.showMessageDialog(parent,"Export kontaktů selhal!", null,
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        JOptionPane.showMessageDialog(parent,"Export úspěšně dokončen!", null,
+        MainFrame.getInstance().getStatusPanel().setStatusMessage(
+                "Export kontaktů úspěšně dokončen", true, Icons.STATUS_INFO, true);
+        JOptionPane.showMessageDialog(parent,"Export kontaktů úspěšně dokončen!", null,
                     JOptionPane.INFORMATION_MESSAGE);
-        
     }
     
     /** Export contacts to csv file */
