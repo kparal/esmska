@@ -420,7 +420,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             //prepare dialog
             JLabel label = new JLabel("<html>"
-                    + "<h2>Zprávu se nepovedlo odeslat!</h2>" + 
+                    + "<h2>Zprávu pro '" + sms + "' se nepovedlo odeslat!</h2>" + 
                     (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "")
                     + "</html>");
             JPanel panel = new JPanel(new BorderLayout());

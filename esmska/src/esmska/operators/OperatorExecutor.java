@@ -162,7 +162,7 @@ public class OperatorExecutor {
                 @Override
                 public String call() {
                     String imageCode = JOptionPane.showInputDialog(MainFrame.getInstance(),
-                            panel, "Kontrolní kód",
+                            panel, null,
                             JOptionPane.QUESTION_MESSAGE);
                     return imageCode;
                 }
