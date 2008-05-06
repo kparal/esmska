@@ -12,7 +12,7 @@ cd `dirname "$SCRIPT"`
 # run program
 if [ "$JAVA_HOME" ]; then
     $JAVA_HOME/bin/java -jar esmska.jar $*
-		     else
+                     else
     java -jar esmska.jar $*
 fi
 
