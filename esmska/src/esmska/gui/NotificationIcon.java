@@ -131,9 +131,12 @@ public class NotificationIcon {
 
     /** Update labels in popup menu according to current program state */
     private void updateItems() {
-        boolean queuePaused = MainFrame.getInstance().getQueuePanel().isPaused();
+        MainFrame frame = MainFrame.getInstance();
+        
+        boolean queuePaused = frame.getQueuePanel().isPaused();
         pauseQueueItem.setLabel(queuePaused ? unpauseQueue : pauseQueue);
-        boolean visible = MainFrame.getInstance().isVisible();
+        //visible if visible and not iconified
+        boolean visible = frame.isVisible() && (frame.getExtendedState() & JFrame.ICONIFIED) == 0;
         toggleItem.setLabel(visible ? hideWindow : showWindow);
     }
 
