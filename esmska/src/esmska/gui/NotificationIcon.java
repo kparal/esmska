@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /** Display icon in the notification area (aka system tray)
@@ -115,7 +116,17 @@ public class NotificationIcon {
 
     /** Show or hide main window */
     private void toggleMainFrameVisibility() {
-        MainFrame.getInstance().setVisible(!MainFrame.getInstance().isVisible());
+        MainFrame frame = MainFrame.getInstance();
+        
+        //if iconified, just deiconify and return
+        if ((frame.getExtendedState() & JFrame.ICONIFIED) != 0) {
+            int state = frame.getExtendedState() & ~JFrame.ICONIFIED; //erase iconify bit
+            frame.setExtendedState(state);
+            return;
+        }
+        
+        //toggle visibility
+        frame.setVisible(!frame.isVisible());
     }
 
     /** Update labels in popup menu according to current program state */
