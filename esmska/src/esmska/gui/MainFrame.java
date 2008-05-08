@@ -204,7 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
         importMenuItem = new javax.swing.JMenuItem();
         exportMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Esmska");
         setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
         setLocationByPlatform(true);
@@ -368,6 +368,14 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //if user clicked on close button (event non-null) and notification icon
+        //installed, just hide the main window
+        if (evt != null && NotificationIcon.isInstalled()) {
+            NotificationIcon.toggleMainFrameVisibility();
+            return;
+        }
+        
+        //save all settings
         try {
             saveConfig();
             saveContacts();
@@ -383,6 +391,7 @@ public class MainFrame extends javax.swing.JFrame {
                         "Některé konfigurační soubory nemohly být uloženy!",
                         null, JOptionPane.WARNING_MESSAGE);
             }
+            System.exit(saveOk ? 0 : 1);
         }
     }//GEN-LAST:event_formWindowClosing
     

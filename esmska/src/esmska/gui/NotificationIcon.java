@@ -27,6 +27,7 @@ import javax.swing.SwingUtilities;
 public class NotificationIcon {
 
     private static NotificationIcon instance;
+    private static boolean installed;
     private static final Logger logger = Logger.getLogger(MainFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final String pauseQueue = "Pozastavit frontu sms";
@@ -114,8 +115,11 @@ public class NotificationIcon {
         return instance;
     }
 
-    /** Show or hide main window */
-    private void toggleMainFrameVisibility() {
+    /** Show or hide main window. Icon must be installed first. */
+    public static void toggleMainFrameVisibility() {
+        if (!installed) {
+            return;
+        }
         MainFrame frame = MainFrame.getInstance();
         
         //if iconified, just deiconify and return
@@ -153,6 +157,7 @@ public class NotificationIcon {
         try {
             tray.remove(instance.trayIcon);
             tray.add(instance.trayIcon);
+            installed = true;
         } catch (AWTException ex) {
             logger.log(Level.WARNING, "Can't install program icon in the notification area", ex);
         }
@@ -169,10 +174,16 @@ public class NotificationIcon {
 
         SystemTray tray = SystemTray.getSystemTray();
         tray.remove(instance.trayIcon);
+        installed = false;
     }
 
     /** Returns whether notification area is supported on this system. */
     public static boolean isSupported() {
         return SystemTray.isSupported();
+    }
+    
+    /** Returns whether the notification icon is currently installed */
+    public static boolean isInstalled() {
+        return installed;
     }
 }
