@@ -72,6 +72,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         //if not Substance LaF, add clipboard popup menu to text components
         if (!PersistenceManager.getConfig().getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE)) {
             ClipboardPopupMenu.register(searchField);
+            ClipboardPopupMenu.register(textArea);
         }
         //select first row
         if (historyTableModel.getRowCount() > 0) {
