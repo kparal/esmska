@@ -43,6 +43,7 @@ public class Config extends Object implements Serializable {
     private String httpsProxy = "";
     private String socksProxy = "";
     private boolean notificationIconVisible = false;
+    private boolean showTips = true;
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -163,6 +164,10 @@ public class Config extends Object implements Serializable {
     
     public boolean isNotificationIconVisible() {
         return notificationIconVisible;
+    }
+
+    public boolean isShowTips() {
+        return showTips;
     }
     
     // </editor-fold>
@@ -319,9 +324,15 @@ public class Config extends Object implements Serializable {
     }
     
     public void setNotificationIconVisible(boolean notificationIconVisible) {
-        boolean old = notificationIconVisible;
+        boolean old = this.notificationIconVisible;
         this.notificationIconVisible = notificationIconVisible;
         changeSupport.firePropertyChange("notificationIconVisible", old, notificationIconVisible);
+    }
+
+    public void setShowTips(boolean showTips) {
+        boolean old = this.showTips;
+        this.showTips = showTips;
+        changeSupport.firePropertyChange("showTips", old, showTips);
     }
     // </editor-fold>
 }

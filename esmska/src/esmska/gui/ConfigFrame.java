@@ -170,6 +170,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         toolbarVisibleCheckBox = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         notificationAreaCheckBox = new javax.swing.JCheckBox();
+        tipsCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         useSenderIDCheckBox = new javax.swing.JCheckBox();
         senderNumberTextField = new javax.swing.JTextField();
@@ -339,6 +340,13 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        tipsCheckBox.setMnemonic('t');
+        tipsCheckBox.setText("Po spuštění zobrazit tip programu");
+        tipsCheckBox.setToolTipText("<html>\nPo spuštění programu zobrazit ve stavovém řádku<br>\nnáhodný tip ohledně práce s programem\n</html>");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${showTips}"), tipsCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -346,6 +354,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tipsCheckBox)
                     .addComponent(notificationAreaCheckBox)
                     .addComponent(toolbarVisibleCheckBox)
                     .addComponent(windowCenteredCheckBox)
@@ -390,7 +399,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(toolbarVisibleCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(notificationAreaCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tipsCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
         );
@@ -942,6 +953,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JTextField socksProxyTextField;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JComboBox themeComboBox;
+    private javax.swing.JCheckBox tipsCheckBox;
     private javax.swing.JCheckBox toolbarVisibleCheckBox;
     private javax.swing.JCheckBox useProxyCheckBox;
     private javax.swing.JCheckBox useSenderIDCheckBox;

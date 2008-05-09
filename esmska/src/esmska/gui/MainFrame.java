@@ -147,9 +147,6 @@ public class MainFrame extends javax.swing.JFrame {
         bindGroup.addBinding(bind);
         bindGroup.bind();
         
-        //show tip of the day
-        showTipOfTheDay();
-        
         //check for updates
         if (config.isCheckForUpdates()) {
             UpdateChecker updateChecker = new UpdateChecker();
@@ -533,6 +530,11 @@ public class MainFrame extends javax.swing.JFrame {
         //show notification icon
         if (config.isNotificationIconVisible()) {
             NotificationIcon.install();
+        }
+        
+        //show tip of the day
+        if (config.isShowTips()) {
+            showTipOfTheDay();
         }
     }
     

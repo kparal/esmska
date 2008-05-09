@@ -160,6 +160,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="tipsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="notificationAreaCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="toolbarVisibleCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="windowCenteredCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -210,7 +211,9 @@
                       <Component id="toolbarVisibleCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="notificationAreaCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="tipsCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="87" max="32767" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -326,6 +329,16 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="notificationAreaCheckBoxActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="tipsCheckBox">
+              <Properties>
+                <Property name="mnemonic" type="int" value="116"/>
+                <Property name="text" type="java.lang.String" value="Po spu&#x161;t&#x11b;n&#xed; zobrazit tip programu"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Po spu&#x161;t&#x11b;n&#xed; programu zobrazit ve stavov&#xe9;m &#x159;&#xe1;dku&lt;br&gt;&#xa;n&#xe1;hodn&#xfd; tip ohledn&#x11b; pr&#xe1;ce s programem&#xa;&lt;/html&gt;"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="selected" source="config" sourcePath="${showTips}" target="tipsCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
             </Component>
           </SubComponents>
         </Container>

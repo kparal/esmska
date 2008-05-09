@@ -21,3 +21,4 @@ Za pomoci voleb přík. řádky můžete program použít třeba i v kavárně n
 4 z 5 zoologů doporučují používat operační systém s logem tučňáka.
 Zprávu můžete poslat i přes jinou nez výchozí bránu - prostě ji zvolte v seznamu.
 Program můžete minimalizovat do ikony v oznamovací oblasti. Viz nastavení.
+Obtěžují vás tyto tipy? Můžete si je vypnout v nastavení.
