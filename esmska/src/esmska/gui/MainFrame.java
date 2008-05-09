@@ -117,8 +117,9 @@ public class MainFrame extends javax.swing.JFrame {
                     false, Icons.STATUS_ERROR, true);
         }
         loadConfig();
-        if (smsQueue.size() > 0)
-            pauseSMSQueue(true);
+        if (smsQueue.size() > 0) {
+            queuePanel.setPaused(true);
+        }
         
         //setup components
         smsDelayTimer.setInitialDelay(0);
@@ -409,7 +410,7 @@ public class MainFrame extends javax.swing.JFrame {
                 contactPanel.requestFocusInWindow();
         } else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             logger.info("Message for " + sms + " could not be sent");
-            pauseSMSQueue(true);
+            queuePanel.setPaused(true);
             statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
                     true, Icons.STATUS_WARNING, true);
             
@@ -467,11 +468,6 @@ public class MainFrame extends javax.swing.JFrame {
         record.setText(sms.getText());
         
         history.addRecord(record);
-    }
-    
-    /** Pauses sms queue */
-    public void pauseSMSQueue(boolean pause) {
-        queuePanel.setPaused(pause);
     }
     
     /** Forces delay before sending another sms */
