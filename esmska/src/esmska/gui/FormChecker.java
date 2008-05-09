@@ -9,6 +9,8 @@
 
 package esmska.gui;
 
+import esmska.utils.Nullator;
+
 /** Checks for validity of form components
  *
  * @author ripper
@@ -19,7 +21,7 @@ public class FormChecker {
      * @return true if name is not empty ("" or null), false otherwise
      */
     public static boolean checkContactName(String name) {
-        return !isEmpty(name);
+        return !Nullator.isEmpty(name);
     }
     
     /** Check valid number
@@ -56,12 +58,5 @@ public class FormChecker {
                 return false;
         }
         return true;
-    }
-    
-    /** Check for emptiness
-     * @return true if string is empty or null, false otherwise
-     */
-    public static boolean isEmpty(String s) {
-        return (s == null || s.equals(""));
     }
 }

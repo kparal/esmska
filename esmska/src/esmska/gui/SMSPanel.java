@@ -103,7 +103,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** validates sms form and returns status */
     private boolean validateForm(boolean transferFocus) {
-        if (FormChecker.isEmpty(envelope.getText())) {
+        if (Nullator.isEmpty(envelope.getText())) {
             if (transferFocus)
                 smsTextPane.requestFocusInWindow();
             return false;
