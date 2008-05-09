@@ -59,11 +59,11 @@ public class SMSSender {
         if (!isDelayed() && !isPaused() && !running && !smsQueue.isEmpty()) {
             running = true;
             SMS sms = smsQueue.get(0);
-            mainFrame.setTaskRunning(true);
+            mainFrame.getStatusPanel().setTaskRunning(true);
             String operator = Nullator.isEmpty(sms.getOperator()) ? 
                 "žádný operátor" : sms.getOperator();
-            mainFrame.printStatusMessage("Posílám zprávu pro " + sms
-            + " (" + operator + ") ...", true, Icons.STATUS_INFO);
+            mainFrame. getStatusPanel().setStatusMessage("Posílám zprávu pro " + sms
+            + " (" + operator + ") ...", true, Icons.STATUS_INFO, true);
             
             //send in worker thread
             smsWorker = new SMSWorker(sms);

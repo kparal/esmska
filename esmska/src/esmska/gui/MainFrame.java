@@ -395,20 +395,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
     
-    /** Prints message to status bar
-     * 
-     * @param message text
-     * @param printTime show timestamp before text
-     */
-    public void printStatusMessage(String message, boolean printTime, ImageIcon icon) { //TODO remove
-        statusPanel.setStatusMessage(message, printTime, icon, true);
-    }
-
-    /** Tells main form whether it should display task busy icon */
-    public void setTaskRunning(boolean b) { //TODO remove
-        statusPanel.setTaskRunning(b);
-    }
-    
     /** Notifies about change in sms queue */
     public void smsProcessed(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
@@ -465,7 +451,7 @@ public class MainFrame extends javax.swing.JFrame {
                     true, Icons.STATUS_MESSAGE, true);
         }
         
-        setTaskRunning(false);
+        statusPanel.setTaskRunning(false);
         queuePanel.smsProcessed(sms);
     }
     
