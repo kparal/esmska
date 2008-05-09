@@ -40,21 +40,6 @@ public class FormChecker {
         return true;
     }
     
-    /** Check valid number without country prefix
-     * @return true if number is in form [0-9]{1,14}, false otherwise
-     */
-    public static boolean checkSMSNumberWithoutPrefix(String number) {
-        if (number == null)
-            return false;
-        if (number.length() < 1 || number.length() > 14)
-            return false;
-        for (Character c : number.toCharArray()) {
-            if (!Character.isDigit(c))
-                return false;
-        }
-        return true;
-    }
-    
     /** Check valid country prefix
      * @return true if prefix is in form +[0-9]{1,3}, false otherwise
      */
