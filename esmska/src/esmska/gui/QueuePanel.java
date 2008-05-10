@@ -239,7 +239,7 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Edit sms from queue */
     private class EditSMSAction extends AbstractAction {
         public EditSMSAction() {
-            super(null, new ImageIcon(QueuePanel.class.getResource(RES + "edit.png")));
+            super(null, new ImageIcon(QueuePanel.class.getResource(RES + "edit-22.png")));
             this.putValue(SHORT_DESCRIPTION,"Upravit označenou zprávu");
             this.setEnabled(false);
         }

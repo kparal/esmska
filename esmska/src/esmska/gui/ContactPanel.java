@@ -38,8 +38,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -175,16 +177,19 @@ public class ContactPanel extends javax.swing.JPanel {
         });
 
         addContactButton.setAction(addContactAction);
+        addContactButton.setText("");
         addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         removeContactButton.setAction(removeContactAction);
+        removeContactButton.setText("");
         removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         contactList.setModel(contactListModel);
         contactList.setToolTipText("Seznam kontaktů (Alt+K)");
         contactList.setCellRenderer(new ContactListRenderer());
+        contactList.setComponentPopupMenu(new ContactPopupMenu());
         //key shortcuts
         String command = "choose contact";
         contactList.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), command);
@@ -219,6 +224,7 @@ public class ContactPanel extends javax.swing.JPanel {
         jScrollPane4.setViewportView(contactList);
 
         editContactButton.setAction(editContactAction);
+        editContactButton.setText("");
         editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -241,7 +247,7 @@ public class ContactPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -351,8 +357,11 @@ public class ContactPanel extends javax.swing.JPanel {
         private final String[] options = new String[]{cancelOption, createOption};
         
         public AddContactAction() {
-            super(null,new ImageIcon(ContactPanel.class.getResource(RES + "add.png")));
+            super("Přidat kontakt",
+                    new ImageIcon(ContactPanel.class.getResource(RES + "add-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
+            this.putValue(LARGE_ICON_KEY,
+                    new ImageIcon(ContactPanel.class.getResource(RES + "add-22.png")));
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -378,8 +387,11 @@ public class ContactPanel extends javax.swing.JPanel {
         private final String[] options = new String[]{cancelOption, saveOption};
         
         public EditContactAction() {
-            super(null,new ImageIcon(ContactPanel.class.getResource(RES + "edit.png")));
+            super("Upravit kontakt",
+                    new ImageIcon(ContactPanel.class.getResource(RES + "edit-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Upravit označený kontakt");
+            this.putValue(LARGE_ICON_KEY,
+                    new ImageIcon(ContactPanel.class.getResource(RES + "edit-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -408,8 +420,11 @@ public class ContactPanel extends javax.swing.JPanel {
         private final String[] options = new String[]{cancelOption, deleteOption};
         
         public RemoveContactAction() {
-            super(null,new ImageIcon(ContactPanel.class.getResource(RES + "remove.png")));
+            super("Odstranit kontakty",
+                    new ImageIcon(ContactPanel.class.getResource(RES + "remove-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Odstranit označené kontakty");
+            this.putValue(LARGE_ICON_KEY,
+                    new ImageIcon(ContactPanel.class.getResource(RES + "remove-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -719,6 +734,26 @@ public class ContactPanel extends javax.swing.JPanel {
                 label.setForeground(label.getForeground().darker());
             }
             return label;
+        }
+    }
+    
+    /** Popup menu in the contact list */
+    private class ContactPopupMenu extends JPopupMenu {
+
+        public ContactPopupMenu() {
+            JMenuItem menuItem = null;
+
+            //add contact action
+            menuItem = new JMenuItem(addContactAction);
+            this.add(menuItem);
+
+            //edit contact action
+            menuItem = new JMenuItem(editContactAction);
+            this.add(menuItem);
+
+            //remove contact action
+            menuItem = new JMenuItem(removeContactAction);
+            this.add(menuItem);
         }
     }
     
