@@ -40,11 +40,12 @@ public class Main {
         //detect JVM and warn if not Sun Java
         String vendor = System.getProperty("java.vendor");
 	String vm = System.getProperty("java.vm.name");
-        if (vendor == null || !vendor.toLowerCase().contains("sun microsystems") ||
-	    vm == null || vm.toLowerCase().contains("openjdk")) { //OpenJDK lacks JavaScript engine
+        if (vendor == null || vm == null ||
+                !vendor.toLowerCase().contains("sun microsystems")) {
             logger.severe("Zřejmě program spouštíte na jiné verzi Javy než je " +
-                    "Sun Java 6! Program velice pravděpodobně nemusí pracovat správně!");
-        }
+                    "Sun Java 6 nebo OpenJDK 6! Program velice pravděpodobně " +
+                    "nemusí pracovat správně!");
+        } //TODO: add check for Mac OS X
         
         //parse commandline arguments
         CommandLineParser clp = new CommandLineParser();
@@ -142,6 +143,10 @@ public class Main {
             //set country prefix from locale
             PersistenceManager.getConfig().setCountryPrefix(
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
+            //set system LaF on OpenJDK, because Substance throws exceptions
+            if (vm != null && vm.toLowerCase().contains("openjdk")) {
+                PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF_SYSTEM);
+            }
         }
         
         //update from older versions
