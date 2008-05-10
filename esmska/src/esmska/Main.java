@@ -37,15 +37,16 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        //detect JVM and warn if not Sun Java
+        //detect JVM and warn if not not supported
         String vendor = System.getProperty("java.vendor");
 	String vm = System.getProperty("java.vm.name");
         if (vendor == null || vm == null ||
-                !vendor.toLowerCase().contains("sun microsystems")) {
-            logger.severe("Zřejmě program spouštíte na jiné verzi Javy než je " +
-                    "Sun Java 6 nebo OpenJDK 6! Program velice pravděpodobně " +
-                    "nemusí pracovat správně!");
-        } //TODO: add check for Mac OS X
+                (!vendor.toLowerCase().contains("sun microsystems") &&
+                !vendor.toLowerCase().contains("apple"))) {
+            logger.severe("Zřejmě program spouštíte na nepodporované verzi Javy! " +
+                    "Program s ní nemusí pracovat správně! Ozkoušené verze Javy " +
+                    "jsou: Sun Java 6, OpenJDK 6, Apple Java 6.");
+        }
         
         //parse commandline arguments
         CommandLineParser clp = new CommandLineParser();
