@@ -43,6 +43,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import org.apache.commons.io.IOUtils;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
@@ -416,6 +417,7 @@ public class MainFrame extends javax.swing.JFrame {
                     + "<h2>Zprávu pro '" + sms + "' se nepovedlo odeslat!</h2>" + 
                     (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "")
                     + "</html>");
+            label.setVerticalAlignment(SwingConstants.TOP);
             JPanel panel = new JPanel(new BorderLayout());
             panel.add(label, BorderLayout.CENTER);
             JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE);
