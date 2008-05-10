@@ -9,6 +9,7 @@ package esmska.gui;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import esmska.*;
+import esmska.data.CountryPrefix;
 import esmska.data.Icons;
 import esmska.data.Keyring;
 import esmska.operators.Operator;
@@ -107,8 +108,19 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
     }
     
+    /** Update country code according to country  */
+    private void updateCountryCode() {
+        String countryPrefix = countryPrefixTextField.getText();
+        String countryCode = CountryPrefix.getCountryCode(countryPrefix);
+        if (Nullator.isEmpty(countryCode)) {
+            countryCodeLabel.setText("(neznámý stát)");
+        } else {
+            countryCodeLabel.setText("(stát: " + countryCode + ")");
+        }
+    }
+    
     /** Reaction for operator key (login, password) change */
-    private void keyUpdated() {
+    private void updateKeyring() {
         Operator operator = operatorComboBox.getSelectedOperator();
         if (operator == null)
             return;
@@ -126,7 +138,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     }
     
     /** Reaction to proxy configuration change */
-    private void proxyUpdated() {
+    private void updateProxy() {
         boolean useProxy = useProxyCheckBox.isSelected();
         boolean sameProxy = sameProxyCheckBox.isSelected();
         if (useProxy) {
@@ -181,6 +193,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         operatorFilterTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        countryCodeLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         operatorComboBox = new esmska.gui.OperatorComboBox();
         jLabel9 = new javax.swing.JLabel();
@@ -456,6 +469,12 @@ public class ConfigFrame extends javax.swing.JFrame {
                 return prefix.length() == 0 || FormChecker.checkCountryPrefix(prefix);
             }
         });
+        countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                updateCountryCode();
+            }
+        });
 
         jLabel2.setDisplayedMnemonic('d');
         jLabel2.setLabelFor(countryPrefixTextField);
@@ -472,6 +491,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel8.setLabelFor(operatorFilterTextField);
         jLabel8.setText("Zobrazovat pouze brány operátorů mající v názvu:");
         jLabel8.setToolTipText(operatorFilterTextField.getToolTipText());
+
+        countryCodeLabel.setText("(stát: XX)");
+        countryCodeLabel.setToolTipText("Kód státu, pro který jste vyplnili telefonní předčíslí");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -493,7 +515,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(countryCodeLabel))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -509,7 +533,8 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(countryPrefixTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(countryCodeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -548,7 +573,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
-                keyUpdated();
+                updateKeyring();
             }
         });
 
@@ -563,7 +588,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
-                keyUpdated();
+                updateKeyring();
             }
         });
 
@@ -665,7 +690,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
-                proxyUpdated();
+                updateProxy();
             }
         });
 
@@ -694,7 +719,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         httpsProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
-                proxyUpdated();
+                updateProxy();
             }
         });
 
@@ -708,7 +733,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
-                proxyUpdated();
+                updateProxy();
             }
         });
 
@@ -892,11 +917,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_clearKeyringButtonActionPerformed
 
     private void useProxyCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_useProxyCheckBoxItemStateChanged
-        proxyUpdated();
+        updateProxy();
     }//GEN-LAST:event_useProxyCheckBoxItemStateChanged
 
     private void sameProxyCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sameProxyCheckBoxItemStateChanged
-        proxyUpdated();
+        updateProxy();
     }//GEN-LAST:event_sameProxyCheckBoxItemStateChanged
 
 private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificationAreaCheckBoxActionPerformed
@@ -912,6 +937,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JButton clearKeyringButton;
     private javax.swing.JButton closeButton;
     private esmska.data.Config config;
+    private javax.swing.JLabel countryCodeLabel;
     private javax.swing.JTextField countryPrefixTextField;
     private javax.swing.JTextField httpProxyTextField;
     private javax.swing.JTextField httpsProxyTextField;

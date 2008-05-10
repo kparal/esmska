@@ -6,7 +6,9 @@ package esmska.data;
 
 import java.util.HashMap;
 
-/** Class containing list of all telephone country prefixes and some helper methods.
+/** Class containing list of all telephone country prefixes (as defined in
+ *  <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes">List of country calling codes</a>) 
+ *  and some helper methods.
  *
  * @author ripper
  */
@@ -281,11 +283,28 @@ public class CountryPrefix {
     
     /** Get telephone country prefix for country with country code.
      * 
-     * @param countryCode two letter country code as defined in <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>.
+     * @param countryCode two letter country code as defined in
+     *  <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>.
      * @return corresponding telephone country prefix or empty string if country wasn't found
      */
     public static String getCountryPrefix(String countryCode) {
         String prefix = map.get(countryCode.toUpperCase());
         return (prefix != null ? prefix : "");
+    }
+    
+    /** Get country code for country with specified telephone country prefix.
+     * 
+     * @param countryPrefix telephone country prefix as defined in
+     *  <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes">List of country calling codes</a>.
+     * @return corresponding two letter country code or null if country prefix wasn't found
+     */
+    public static String getCountryCode(String countryPrefix) {
+        for (String cc : map.keySet()) {
+            if (map.get(cc).equals(countryPrefix)) {
+                return cc;
+            }
+        }
+        
+        return null;
     }
 }

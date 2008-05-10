@@ -374,6 +374,8 @@
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="countryPrefixTextField" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="countryCodeLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
@@ -392,6 +394,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="countryPrefixTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="countryCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -485,7 +488,7 @@
                 </BindingProperty>
               </BindingProperties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryPrefixTextField.setInputVerifier(new InputVerifier() {&#xa;            @Override&#xa;            public boolean verify(JComponent input) {&#xa;                String prefix = countryPrefixTextField.getText();&#xa;                return prefix.length() == 0 || FormChecker.checkCountryPrefix(prefix);&#xa;            }&#xa;        });"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryPrefixTextField.setInputVerifier(new InputVerifier() {&#xa;            @Override&#xa;            public boolean verify(JComponent input) {&#xa;                String prefix = countryPrefixTextField.getText();&#xa;                return prefix.length() == 0 || FormChecker.checkCountryPrefix(prefix);&#xa;            }&#xa;        });&#xa;countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateCountryCode();&#xa;            }&#xa;});"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -521,6 +524,12 @@
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="operatorFilterTextField" name="toolTipText" type="property"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="countryCodeLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="(st&#xe1;t: XX)"/>
+                <Property name="toolTipText" type="java.lang.String" value="K&#xf3;d st&#xe1;tu, pro kter&#xfd; jste vyplnili telefonn&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed;"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -626,7 +635,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="U&#x17e;ivatelsk&#xe9; jm&#xe9;no pot&#x159;ebn&#xe9; k p&#x159;ihl&#xe1;&#x161;en&#xed; k webov&#xe9; br&#xe1;n&#x11b; oper&#xe1;tora"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                keyUpdated();&#xa;            }&#xa;        });"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateKeyring();&#xa;            }&#xa;        });"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
@@ -647,7 +656,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="Heslo p&#x159;&#xed;slu&#x161;ej&#xed;c&#xed; k dan&#xe9;mu u&#x17e;ivatelsk&#xe9;mu jm&#xe9;nu"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="passwordField.enableInputMethods(true);&#xa;passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                keyUpdated();&#xa;            }&#xa;        });"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="passwordField.enableInputMethods(true);&#xa;passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateKeyring();&#xa;            }&#xa;        });"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
@@ -786,7 +795,7 @@
                 <BindingProperty name="enabled" source="useProxyCheckBox" sourcePath="${selected}" target="httpProxyTextField" targetPath="enabled" updateStrategy="1" immediately="false"/>
               </BindingProperties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                proxyUpdated();&#xa;            }&#xa;        });"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateProxy();&#xa;            }&#xa;        });"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JCheckBox" name="sameProxyCheckBox">
@@ -814,7 +823,7 @@
                 <BindingProperty name="enabled" source="sameProxyCheckBox" sourcePath="${enabled &amp;&amp; !selected}" target="httpsProxyTextField" targetPath="enabled" updateStrategy="1" immediately="false"/>
               </BindingProperties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="httpsProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                proxyUpdated();&#xa;            }&#xa;        });"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="httpsProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateProxy();&#xa;            }&#xa;        });"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="socksProxyTextField">
@@ -828,7 +837,7 @@
                 <BindingProperty name="enabled" source="sameProxyCheckBox" sourcePath="${enabled &amp;&amp; !selected}" target="socksProxyTextField" targetPath="enabled" updateStrategy="1" immediately="false"/>
               </BindingProperties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                proxyUpdated();&#xa;            }&#xa;        });"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateProxy();&#xa;            }&#xa;        });"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
