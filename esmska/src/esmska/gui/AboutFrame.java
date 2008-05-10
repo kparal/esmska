@@ -72,7 +72,7 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/esmska.png"))); // NOI18N
         jLabel1.setFocusable(false);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36));
+        jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+22));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Esmska " + config.getLatestVersion());
         jLabel2.setFocusable(false);
@@ -195,7 +195,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     .addComponent(supportButton)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(creditsButton)
                     .addComponent(closeButton)
