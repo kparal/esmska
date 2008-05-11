@@ -67,7 +67,7 @@
 
     -->
     
-    <!-- overwrite 'jar' target not to create jnlp automatically (takes too long) -->
+    <!-- overwrite 'jar' target not to create jnlp automatically -->
     <target name="jar" depends="init,compile,-pre-jar,-do-jar-with-manifest,-do-jar-without-manifest,
         -do-jar-with-mainclass,-do-jar-with-libraries,-post-jar" description="Build JAR."/>
     
@@ -109,8 +109,9 @@
     
     <!-- called after jar building -->
     <target name="-post-jar">
-        <!-- delete defaultly created README.TXT -->
+        <!-- delete unneeded stuff -->
         <delete file="dist/README.TXT"/>
+        <delete file="dist/lib/mac-ui.jar"/>
         <!-- copy additional files to dist -->
         <copy todir="dist">
             <!-- operators -->

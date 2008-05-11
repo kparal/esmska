@@ -29,9 +29,11 @@ import esmska.UpdateChecker;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.utils.Nullator;
+import esmska.utils.mac.ActionBean;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
@@ -99,7 +101,30 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         instance = this;
         initComponents();
-
+        
+        //on Mac, move program menu items to system menu
+        if (System.getProperty("os.name").equals("Mac OS X")) {
+            try {
+                Object integration = Class.forName("esmska.utils.mac.MacIntegration")
+                        .newInstance();
+                
+                ActionBean bean = new ActionBean();
+                bean.setQuitAction(quitAction);
+                bean.setAboutAction(aboutAction);
+                bean.setConfigAction(configAction);
+                
+                Method method = integration.getClass().getMethod("setActionBean", 
+                        new Class[] { ActionBean.class });
+                method.invoke(integration, bean);
+                
+                programMenu.setVisible(false);
+            }
+            catch (Throwable ex) {
+                logger.log(Level.WARNING, "Can't integrate program menu items to " +
+                        "Mac system menu", ex);
+            }
+        }
+        
         //set tooltip delay
         ToolTipManager.sharedInstance().setInitialDelay(750);
         ToolTipManager.sharedInstance().setDismissDelay(60000);
@@ -622,7 +647,7 @@ public class MainFrame extends javax.swing.JFrame {
             putValue(SHORT_DESCRIPTION,"Ukončit program");
             putValue(MNEMONIC_KEY,KeyEvent.VK_U);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, 
-                    KeyEvent.CTRL_DOWN_MASK));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -712,7 +737,7 @@ public class MainFrame extends javax.swing.JFrame {
             this.putValue(SHORT_DESCRIPTION,"Zobrazit historii odeslaných zpráv");
             putValue(MNEMONIC_KEY, KeyEvent.VK_H);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, 
-                    KeyEvent.CTRL_DOWN_MASK));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
         @Override
         public void actionPerformed(ActionEvent e) {

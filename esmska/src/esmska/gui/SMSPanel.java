@@ -17,6 +17,7 @@ import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.Nullator;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -336,18 +337,19 @@ public class SMSPanel extends javax.swing.JPanel {
         });
 
         //this mapping is here bcz of some weird performance improvements when holding undo key stroke
+        int menuMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
         String command = "undo";
-        smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_DOWN_MASK), command);
+        smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, menuMask), command);
         smsTextPane.getActionMap().put("undo",undoAction);
         command = "redo";
-        smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,KeyEvent.CTRL_DOWN_MASK), command);
+        smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, menuMask), command);
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-            KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK), command);
+            menuMask|KeyEvent.SHIFT_DOWN_MASK), command);
     smsTextPane.getActionMap().put(command, redoAction);
 
     //ctrl+enter
     command = "send";
-    smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,KeyEvent.CTRL_DOWN_MASK), command);
+    smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, menuMask), command);
     smsTextPane.getActionMap().put(command, sendAction);
     jScrollPane1.setViewportView(smsTextPane);
 
@@ -413,7 +415,7 @@ public class SMSPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(sendButton)
@@ -461,7 +463,7 @@ public class SMSPanel extends javax.swing.JPanel {
             putValue(SHORT_DESCRIPTION,"Odeslat zprávu");
             putValue(MNEMONIC_KEY, KeyEvent.VK_S);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
-                    KeyEvent.CTRL_DOWN_MASK));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
             setEnabled(false);
         }
         @Override
@@ -490,7 +492,7 @@ public class SMSPanel extends javax.swing.JPanel {
             putValue(SHORT_DESCRIPTION, "Vrátit změnu v textu zprávy");
             putValue(MNEMONIC_KEY, KeyEvent.VK_Z);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                    KeyEvent.CTRL_DOWN_MASK));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -514,7 +516,7 @@ public class SMSPanel extends javax.swing.JPanel {
             putValue(SHORT_DESCRIPTION, "Zopakovat vrácenou změnu v textu zprávy");
             putValue(MNEMONIC_KEY, KeyEvent.VK_V);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                    KeyEvent.CTRL_DOWN_MASK));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -538,7 +540,7 @@ public class SMSPanel extends javax.swing.JPanel {
             putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\"");
             putValue(MNEMONIC_KEY, KeyEvent.VK_K);
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K,
-                    KeyEvent.CTRL_DOWN_MASK));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
         @Override
         public void actionPerformed(ActionEvent e) {

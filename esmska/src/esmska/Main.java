@@ -39,7 +39,7 @@ public class Main {
 
         //detect JVM and warn if not not supported
         String vendor = System.getProperty("java.vendor");
-	String vm = System.getProperty("java.vm.name");
+        String vm = System.getProperty("java.vm.name");
         if (vendor == null || vm == null ||
                 (!vendor.toLowerCase().contains("sun microsystems") &&
                 !vendor.toLowerCase().contains("apple"))) {
@@ -53,6 +53,10 @@ public class Main {
         if (! clp.parseArgs(args))
             System.exit(1);
         configPath = clp.getConfigPath();
+        
+        //take Mac UI for MenuBar from default l&f; set to use the MenuBar
+        String macBarUI = UIManager.getString("MenuBarUI");
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
         
         //portable mode
         if (clp.isPortable() && configPath == null) {
@@ -178,6 +182,11 @@ public class Main {
         //set Substance specific addons
         UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
 
+        //set MenuBar usage on Mac OS
+        if (macBarUI != null && System.getProperty("os.name").equals("Mac OS X")) {
+            UIManager.put("MenuBarUI", macBarUI);
+        }
+        
         //start main frame
         java.awt.EventQueue.invokeLater(new java.lang.Runnable() {
             @Override
