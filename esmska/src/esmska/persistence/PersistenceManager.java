@@ -15,6 +15,7 @@ import esmska.data.History;
 import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.operators.Operator;
+import esmska.utils.Nullator;
 import java.beans.IntrospectionException;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -77,12 +78,16 @@ public class PersistenceManager {
     private PersistenceManager() throws IOException {
         //adjust program dir according to operating system
         if (!customPathSet) {
+            String os = System.getProperty("os.name").toLowerCase();
             String path = System.getenv("XDG_CONFIG_HOME");
-            if ((path == null || path.equals("")) &&
-                    System.getProperty("os.name").toLowerCase().contains("windows")) {
-                path = System.getenv("APPDATA");
+            if (Nullator.isEmpty(path)) {
+                if (os.contains("windows")) {
+                    path = System.getenv("APPDATA");
+                } else if (os.contains("mac os")) {
+                    path = System.getProperty("user.home") + "/Library/Application Support";
+                }
             }
-            if (path != null && !path.equals("")) {
+            if (!Nullator.isEmpty(path)) {
                 setUserDir(path + File.separator + USER_DIRNAME);
             }
         }
