@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-05-02"
+    return "2008-05-11"
 }
 
 function getAuthor() {
@@ -118,7 +118,7 @@ function send() {
     }
 
     // check if message was successfully sent
-    re = /<table class="alert info".*SMS byla odeslána.*<\/table>/
+    re = /<table class="alert info".*SMS byl. odeslán..*<\/table>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // all ok
