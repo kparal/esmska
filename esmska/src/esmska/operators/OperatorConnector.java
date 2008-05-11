@@ -101,7 +101,7 @@ public class OperatorConnector {
             fullURL += "?" + param;
         }
 
-        //set host - usefull for redirects
+        //set host - useful for redirects
         URL address = new URL(fullURL);
         client.getHostConfiguration().setHost(address.getHost(), address.getPort(),
                 address.getProtocol());
@@ -251,13 +251,18 @@ public class OperatorConnector {
         if (statuscode >= 300 && statuscode < 400) {
             Header header = method.getResponseHeader("Location");
             if (header == null) {
-                throw new IOException("Invalid HTTP redirect");
+                throw new IOException("Invalid HTTP redirect, no Location header");
             }
             String newURL = header.getValue();
             if (Nullator.isEmpty(newURL)) {
-                newURL = "/";
+                throw new IOException("Invalid HTTP redirect, Location header is empty");
             }
-            if (!newURL.startsWith("http://") && !newURL.startsWith("https://") && !newURL.startsWith("/")) {
+            if (newURL.startsWith("./") || newURL.startsWith("../")) {
+                throw new IOException("Invalid HTTP redirect, Location header must " +
+                        "be an absolute path and is: '" + newURL + "'");
+            }
+            if (!newURL.startsWith("http://") && !newURL.startsWith("https://") 
+                    && !newURL.startsWith("/")) {
                 newURL = "/" + newURL;
             }
             //redirect to new url
