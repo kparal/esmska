@@ -20,7 +20,6 @@
 <!--${JNLP.RESOURCES.RUNTIME}-->
 <!--${JNLP.RESOURCES.MAIN.JAR}-->
 <!--${JNLP.RESOURCES.JARS}-->
-        <jar href="lib/operators.jar" download="eager"/>
     </resources>
     <application-desc main-class="${jnlp.main.class}">
 <!--${JNLP.APPLICATION.ARGS}-->
