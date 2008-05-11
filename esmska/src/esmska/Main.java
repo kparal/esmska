@@ -148,6 +148,10 @@ public class Main {
             if (vm != null && vm.toLowerCase().contains("openjdk")) {
                 PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF_SYSTEM);
             }
+            //set system LaF on Apple, because Apple users are used to consistent look
+            if (vendor != null && vendor.toLowerCase().contains("apple")) {
+                PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF_SYSTEM);
+            }
         }
         
         //update from older versions
