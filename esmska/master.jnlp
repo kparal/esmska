@@ -15,9 +15,15 @@
             <menu/>
         </shortcut>
     </information>
+    <information os="Mac OS X">
+        <shortcut online="true">
+            <desktop/>
+        </shortcut>
+    </information>
 <!--${JNLP.SECURITY}-->
     <resources>
 <!--${JNLP.RESOURCES.RUNTIME}-->
+        <property name="apple.laf.useScreenMenuBar" value="true"/>
 <!--${JNLP.RESOURCES.MAIN.JAR}-->
 <!--${JNLP.RESOURCES.JARS}-->
     </resources>
