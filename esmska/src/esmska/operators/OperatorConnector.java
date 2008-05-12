@@ -70,6 +70,24 @@ public class OperatorConnector {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
+    /** Set referer. Default is empty string. Use null to clear referer. */
+    public void setReferer(String referer) {
+        this.referer = referer;
+    }
+
+    /** Sets binary content, clears text content. */
+    private void setBinaryContent(byte[] binaryContent) {
+        this.binaryContent = binaryContent;
+        this.textContent = null;
+    }
+
+    /** Sets text content, clears binary content. */
+    private void setTextContent(String textContent) {
+        this.textContent = textContent;
+        this.binaryContent = null;
+    }
+    // </editor-fold>
+    
     /** Prepare connector for a new connection.
      * @param url URL where to connect. If you specify <tt>params</tt>, this must not 
      *  contain '?'.
@@ -106,24 +124,7 @@ public class OperatorConnector {
         client.getHostConfiguration().setHost(address.getHost(), address.getPort(),
                 address.getProtocol());
     }
-
-    /** Set referer. Default is empty string. Use null to clear referer. */
-    public void setReferer(String referer) {
-        this.referer = referer;
-    }
-
-    /** Sets binary content, clears text content. */
-    private void setBinaryContent(byte[] binaryContent) {
-        this.binaryContent = binaryContent;
-        this.textContent = null;
-    }
-
-    /** Sets text content, clears binary content. */
-    private void setTextContent(String textContent) {
-        this.textContent = textContent;
-        this.binaryContent = null;
-    }
-    // </editor-fold>
+    
     /** Perform a connection (GET or POST, depending on configuration).
      * @throws IOException when there is a problem with connection
      */
@@ -258,8 +259,12 @@ public class OperatorConnector {
                 throw new IOException("Invalid HTTP redirect, Location header is empty");
             }
             if (newURL.startsWith("./") || newURL.startsWith("../")) {
-                throw new IOException("Invalid HTTP redirect, Location header must " +
-                        "be an absolute path and is: '" + newURL + "'");
+                try {
+                    newURL = convertRelativeRedirectToAbsolute(url, newURL);
+                } catch (IOException ex) {
+                    throw new IOException("Invalid HTTP redirect, Location header must " +
+                            "be an absolute path and is: '" + newURL + "'", ex);
+                }
             }
             if (!newURL.startsWith("http://") && !newURL.startsWith("https://") 
                     && !newURL.startsWith("/")) {
@@ -363,5 +368,47 @@ public class OperatorConnector {
         }
 
         return doGet(redirectURL);
+    }
+    
+    /** Convert relative redirect to absolute url
+     * @param oldUrl full original URL
+     * @param redirect relative redirect starting with './' or '../'
+     * @throws IOException when redirect can't be applied to original URL
+     */
+    private String convertRelativeRedirectToAbsolute(String oldUrl, String redirect) 
+            throws IOException {
+        try {
+            String protocol = oldUrl.substring(0, oldUrl.indexOf("//") + 2);
+            String stub = oldUrl.substring(protocol.length());
+            String redir = redirect;
+
+            //strip ?a=b part
+            if (stub.contains("?")) {
+                stub = stub.substring(0, stub.indexOf("?"));
+            }
+
+            //strip the last path segment
+            if (stub.contains("/")) {
+                stub = stub.substring(0, stub.lastIndexOf("/"));
+            }
+
+            //traverse
+            while (redir.startsWith("./") || redir.startsWith("../")) {
+                if (redir.startsWith("./")) {
+                    redir = redir.substring(2);
+                    continue;
+                }
+                if (redir.startsWith("../")) {
+                    redir = redir.substring(3);
+                    stub = stub.substring(0, stub.lastIndexOf("/"));
+                }
+            }
+            
+            return protocol + stub + "/" + redir;
+            
+        } catch (Exception ex) {
+            throw new IOException("The redirect '" + redirect + "' is not valid " +
+                    "redirect to URL '" + oldUrl + "'");
+        }
     }
 }
