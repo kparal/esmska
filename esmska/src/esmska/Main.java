@@ -54,9 +54,8 @@ public class Main {
             System.exit(1);
         configPath = clp.getConfigPath();
         
-        //take Mac UI for MenuBar from default l&f; set to use the MenuBar
+        //remember Mac UI for MenuBar from default l&f
         String macBarUI = UIManager.getString("MenuBarUI");
-        System.setProperty("apple.laf.useScreenMenuBar", "true");
         
         //portable mode
         if (clp.isPortable() && configPath == null) {
