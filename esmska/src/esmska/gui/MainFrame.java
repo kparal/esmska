@@ -6,39 +6,25 @@
 
 package esmska.gui;
 
-import esmska.data.Envelope;
-import esmska.persistence.ExportManager;
-import esmska.transfer.SMSSender;
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.List;
-import java.util.TreeSet;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.Timer;
-import javax.swing.ToolTipManager;
-import esmska.data.Config;
-import esmska.data.Contact;
-import esmska.persistence.PersistenceManager;
-import esmska.data.SMS;
-import esmska.UpdateChecker;
-import esmska.data.History;
-import esmska.data.Icons;
-import esmska.utils.Nullator;
-import esmska.utils.mac.ActionBean;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Toolkit;
-import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -46,13 +32,31 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+import javax.swing.ToolTipManager;
+
 import org.apache.commons.io.IOUtils;
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jvnet.substance.SubstanceLookAndFeel;
+
+import esmska.UpdateChecker;
+import esmska.data.Config;
+import esmska.data.Contact;
+import esmska.data.Envelope;
+import esmska.data.History;
+import esmska.data.Icons;
+import esmska.data.SMS;
+import esmska.persistence.ExportManager;
+import esmska.persistence.PersistenceManager;
+import esmska.transfer.SMSSender;
+import esmska.utils.Nullator;
+import esmska.utils.OSType;
+import esmska.integration.ActionBean;
+import esmska.integration.IntegrationAdapter;
 
 /**
  * MainFrame form
@@ -103,20 +107,14 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
         //on Mac, move program menu items to system menu
-        if (System.getProperty("os.name").equals("Mac OS X")) {
+        if (OSType.isEqual(OSType.MAC_OS_X)) {
             try {
-                Object integration = Class.forName("esmska.utils.mac.MacIntegration")
-                        .newInstance();
-                
                 ActionBean bean = new ActionBean();
                 bean.setQuitAction(quitAction);
                 bean.setAboutAction(aboutAction);
                 bean.setConfigAction(configAction);
                 
-                Method method = integration.getClass().getMethod("setActionBean", 
-                        new Class[] { ActionBean.class });
-                method.invoke(integration, bean);
-                
+                IntegrationAdapter.getInstance().setActionBean(bean);
                 programMenu.setVisible(false);
             }
             catch (Throwable ex) {
@@ -183,8 +181,9 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Get current instance */
     public static MainFrame getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new MainFrame();
+        }
         return instance;
     }
     
@@ -233,6 +232,7 @@ public class MainFrame extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
         setLocationByPlatform(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -427,10 +427,11 @@ public class MainFrame extends javax.swing.JFrame {
             setSMSDelay();
             createHistory(sms);
             
-            if (smsPanel.getText().length() > 0)
+            if (smsPanel.getText().length() > 0) {
                 smsPanel.requestFocusInWindow();
-            else
+            } else {
                 contactPanel.requestFocusInWindow();
+            }
         } else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             logger.info("Message for " + sms + " could not be sent");
             queuePanel.setPaused(true);
@@ -465,12 +466,14 @@ public class MainFrame extends javax.swing.JFrame {
             dialog.setVisible(true);
             
             //transfer focus
-            if (smsPanel.getText().length() > 0)
+            if (smsPanel.getText().length() > 0) {
                 smsPanel.requestFocusInWindow();
-            else
+            } else {
                 queuePanel.requestFocusInWindow();
+            }
         }
 
+        //show operator message if present
         if (!Nullator.isEmpty(sms.getOperatorMsg())) {
             statusPanel.setStatusMessage(sms.getOperator() + ": " + sms.getOperatorMsg(),
                     true, Icons.STATUS_MESSAGE, true);
@@ -534,12 +537,15 @@ public class MainFrame extends javax.swing.JFrame {
             Dimension mainDimension = config.getMainDimension();
             Integer horizontalSplitPaneLocation = config.getHorizontalSplitPaneLocation();
             Integer verticalSplitPaneLocation = config.getVerticalSplitPaneLocation();
-            if (mainDimension != null)
+            if (mainDimension != null) {
                 this.setSize(mainDimension);
-            if (horizontalSplitPaneLocation != null)
+            }
+            if (horizontalSplitPaneLocation != null) {
                 horizontalSplitPane.setDividerLocation(horizontalSplitPaneLocation);
-            if (verticalSplitPaneLocation != null)
+            }
+            if (verticalSplitPaneLocation != null) {
                 verticalSplitPane.setDividerLocation(verticalSplitPaneLocation);
+            }
         }
         
         //set window centered
@@ -577,8 +583,9 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** save sms queue */
     private void saveQueue() {
-        if (!config.isRememberQueue())
+        if (!config.isRememberQueue()) {
             smsQueue.clear();
+        }
         try {
             persistenceManager.saveQueue();
         } catch (Exception ex) {
@@ -589,8 +596,9 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** save sms history */
     private void saveHistory() {
-        if (!config.isRememberHistory())
+        if (!config.isRememberHistory()) {
             history.clearRecords();
+        }
         try {
             persistenceManager.saveHistory();
         } catch (Exception ex) {
@@ -770,8 +778,9 @@ public class MainFrame extends javax.swing.JFrame {
             if (seconds <= DELAY) { //still waiting
                 statusPanel.setProgress(seconds, "Další sms za: " + (DELAY-seconds) + "s",
                         null, null);
-                if (seconds == 0)
+                if (seconds == 0) {
                     statusPanel.setProgress(null, null, null, true);
+                }
                 seconds++;
             } else { //delay finished
                 smsDelayTimer.stop();
@@ -791,8 +800,9 @@ public class MainFrame extends javax.swing.JFrame {
                 //edit sms in queue
                 case QueuePanel.ACTION_REQUEST_EDIT_SMS:
                     SMS sms = queuePanel.getEditRequestedSMS();
-                    if (sms == null)
+                    if (sms == null) {
                         return;
+                    }
                     contactPanel.clearSelection();
                     smsPanel.setSMS(sms);
                     break;

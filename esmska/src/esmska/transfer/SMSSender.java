@@ -9,20 +9,22 @@
 
 package esmska.transfer;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.SwingWorker;
+
 import esmska.data.Icons;
 import esmska.data.Keyring;
-import esmska.gui.MainFrame;
-import java.util.List;
-import javax.swing.SwingWorker;
 import esmska.data.SMS;
+import esmska.gui.MainFrame;
 import esmska.operators.OperatorInterpreter;
 import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.Nullator;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /** Sender of SMS
  *
@@ -43,8 +45,9 @@ public class SMSSender {
 
     /** Creates a new instance of SMSSender */
     public SMSSender(List<SMS> smsQueue) {
-        if (smsQueue == null)
+        if (smsQueue == null) {
             throw new NullPointerException("smsQueue");
+        }
         this.smsQueue = smsQueue;
         this.mainFrame = MainFrame.getInstance();
     }
@@ -139,8 +142,9 @@ public class SMSSender {
     /** Pause/unpause queue */
     public void setPaused(boolean paused) {
         this.paused = paused;
-        if (paused == false)
+        if (!paused) {
             prepareSending();
+        }
     }
     
     /** Whether queue is delayed */

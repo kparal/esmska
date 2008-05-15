@@ -6,13 +6,6 @@
 
 package esmska.gui;
 
-import esmska.data.Config;
-import esmska.data.Icons;
-import esmska.data.SMS;
-import esmska.operators.Operator;
-import esmska.operators.OperatorUtil;
-import esmska.persistence.PersistenceManager;
-import esmska.utils.ActionEventSupport;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -20,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Collections;
 import java.util.List;
+
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
@@ -27,7 +21,17 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
+
 import org.jvnet.substance.SubstanceLookAndFeel;
+
+import esmska.data.Config;
+import esmska.data.Icons;
+import esmska.data.SMS;
+import esmska.operators.Operator;
+import esmska.operators.OperatorUtil;
+import esmska.persistence.PersistenceManager;
+import esmska.utils.ActionEventSupport;
+import esmska.integration.IntegrationAdapter;
 
 /** SMS queue panel
  *
@@ -91,11 +95,15 @@ public class QueuePanel extends javax.swing.JPanel {
             smsQueueListModel.fireContentsChanged(
                     smsQueueListModel, index, index);
         }
+        
+        IntegrationAdapter.getInstance().setSMSCount(
+                smsQueue.isEmpty() ? null : smsQueue.size());
     }
     
     /** Adds new SMS to the queue */
     public void addSMS(SMS sms) {
         smsQueueListModel.add(sms);
+        IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
     }
     
     /** This method is called from within the constructor to
@@ -116,6 +124,7 @@ public class QueuePanel extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Fronta"));
         addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
             }
@@ -228,11 +237,16 @@ public class QueuePanel extends javax.swing.JPanel {
                 SMS sms = (SMS) o;
                 smsQueueListModel.remove(sms);
             }
+            
+            IntegrationAdapter.getInstance().setSMSCount(
+                    smsQueue.isEmpty() ? null : smsQueue.size());
+            
             //transfer focus
-            if (smsQueueListModel.getSize() > 0)
+            if (smsQueueListModel.getSize() > 0) {
                 smsQueueList.requestFocusInWindow();
-            else
+            } else {
                 pauseButton.requestFocusInWindow();
+            }
         }
     }
     
@@ -246,8 +260,9 @@ public class QueuePanel extends javax.swing.JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             SMS sms = (SMS) smsQueueList.getSelectedValue();
-            if (sms == null)
+            if (sms == null) {
                 return;
+            }
             
             editRequestedSMS = sms;
             smsQueueListModel.remove(sms);
@@ -267,8 +282,9 @@ public class QueuePanel extends javax.swing.JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = smsQueueList.getSelectedIndex();
-            if (index <= 0) //cannot move up first item
+            if (index <= 0) {
                 return;
+            }
             synchronized(smsQueue) {
                 Collections.swap(smsQueue,index,index-1);
             }
@@ -289,8 +305,9 @@ public class QueuePanel extends javax.swing.JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = smsQueueList.getSelectedIndex();
-            if (index < 0 || index >= smsQueueListModel.getSize() - 1) //cannot move down last item
+            if (index < 0 || index >= smsQueueListModel.getSize() - 1) {
                 return;
+            }
             synchronized(smsQueue) {
                 Collections.swap(smsQueue,index,index+1);
             }
@@ -398,8 +415,9 @@ public class QueuePanel extends javax.swing.JPanel {
             
             //set text
             String text = sms.toString();
-            if (text.startsWith(config.getCountryPrefix()))
+            if (text.startsWith(config.getCountryPrefix())) {
                 text = text.substring(config.getCountryPrefix().length());
+            }
             ((JLabel)c).setText(text);
             //problematic sms colored
             if ((sms.getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
@@ -421,8 +439,9 @@ public class QueuePanel extends javax.swing.JPanel {
             while (from < text.length()) {
                 int to = from + 50;
                 to = text.indexOf(' ',to);
-                if (to < 0)
+                if (to < 0) {
                     to = text.length();
+                }
                 output.append(text.substring(from, to));
                 output.append("<br>");
                 from = to + 1;

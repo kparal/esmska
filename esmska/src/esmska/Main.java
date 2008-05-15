@@ -9,20 +9,24 @@
 
 package esmska;
 
-import esmska.data.Config;
-import esmska.data.CountryPrefix;
-import esmska.gui.MainFrame;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import esmska.persistence.PersistenceManager;
-import esmska.transfer.ProxyManager;
-import esmska.utils.Nullator;
 import java.beans.IntrospectionException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
 import org.jvnet.lafwidget.LafWidget;
+
+import esmska.data.Config;
+import esmska.data.CountryPrefix;
+import esmska.gui.MainFrame;
+import esmska.persistence.PersistenceManager;
+import esmska.transfer.ProxyManager;
+import esmska.utils.Nullator;
+import esmska.utils.OSType;
 
 /** Starter class for the whole program
  *
@@ -50,8 +54,9 @@ public class Main {
         
         //parse commandline arguments
         CommandLineParser clp = new CommandLineParser();
-        if (! clp.parseArgs(args))
-            System.exit(1);
+        if (! clp.parseArgs(args)) {
+          System.exit(1);
+        }
         configPath = clp.getConfigPath();
         
         //remember Mac UI for MenuBar from default l&f
@@ -71,15 +76,17 @@ public class Main {
             chooser.setFileHidingEnabled(false);
             chooser.setMultiSelectionEnabled(false);
             int result = chooser.showOpenDialog(null);
-            if (result == JFileChooser.APPROVE_OPTION)
-                configPath = chooser.getSelectedFile().getPath();
+            if (result == JFileChooser.APPROVE_OPTION) {
+              configPath = chooser.getSelectedFile().getPath();
+            }
         }
         
         //load user files
         PersistenceManager pm = null;
         try {
-            if (configPath != null)
-                PersistenceManager.setUserDir(configPath);
+            if (configPath != null) {
+              PersistenceManager.setUserDir(configPath);
+            }
             pm = PersistenceManager.getInstance();
             try {
                 pm.loadConfig();
@@ -138,8 +145,9 @@ public class Main {
                     "instance programu, neboť může dojít ke ztrátě uživatelských dat.<br>",
                     null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
                     options, quitOption);
-            if (result != 0)
-                System.exit(0);
+            if (result != 0) {
+              System.exit(0);
+            }
         }
 
         //do some incialization if this is the first run
@@ -182,7 +190,7 @@ public class Main {
         UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
 
         //set MenuBar usage on Mac OS
-        if (macBarUI != null && System.getProperty("os.name").equals("Mac OS X")) {
+        if (macBarUI != null && OSType.isEqual(OSType.MAC_OS_X)) {
             UIManager.put("MenuBarUI", macBarUI);
         }
         

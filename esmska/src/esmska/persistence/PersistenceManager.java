@@ -9,13 +9,6 @@
 
 package esmska.persistence;
 
-import esmska.data.Config;
-import esmska.data.Contact;
-import esmska.data.History;
-import esmska.data.Keyring;
-import esmska.data.SMS;
-import esmska.operators.Operator;
-import esmska.utils.Nullator;
 import java.beans.IntrospectionException;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -33,7 +26,17 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.commons.io.FileUtils;
+
+import esmska.data.Config;
+import esmska.data.Contact;
+import esmska.data.History;
+import esmska.data.Keyring;
+import esmska.data.SMS;
+import esmska.operators.Operator;
+import esmska.utils.Nullator;
+import esmska.utils.OSType;
 
 /** Load and store settings and data
  *
@@ -78,34 +81,42 @@ public class PersistenceManager {
     private PersistenceManager() throws IOException {
         //adjust program dir according to operating system
         if (!customPathSet) {
-            String os = System.getProperty("os.name").toLowerCase();
-            String path = System.getenv("XDG_CONFIG_HOME");
-            if (Nullator.isEmpty(path)) {
-                if (os.contains("windows")) {
-                    path = System.getenv("APPDATA");
-                } else if (os.contains("mac os")) {
+            String path;
+            
+            switch (OSType.detect()) {
+                case LINUX:
+                    path = System.getenv("XDG_CONFIG_HOME");
+                    break;
+                case MAC_OS_X:
                     path = System.getProperty("user.home") + "/Library/Application Support";
-                }
+                    break;
+                case WINDOWS:
+                    path = System.getenv("APPDATA");
+                    break;
+                default:
+                    path = System.getenv("XDG_CONFIG_HOME");
+                    break;
             }
+            
             if (!Nullator.isEmpty(path)) {
                 setUserDir(path + File.separator + USER_DIRNAME);
             }
         }
         
         //create program dir if necessary
-        boolean ok = true;
-        if (!USER_DIR.exists())
-            ok = USER_DIR.mkdirs();
-        if (!ok)
+        if (!USER_DIR.exists() && !USER_DIR.mkdirs()) {
             throw new IOException("Can't create program dir");
-        if (!(USER_DIR.canWrite() && USER_DIR.canExecute()))
+        }
+        if (!(USER_DIR.canWrite() && USER_DIR.canExecute())) {
             throw new IOException("Can't write or execute the program dir");
+        }
     }
     
     /** Set user directory to custom path */
     public static void setUserDir(String path) {
-        if (persistenceManager != null)
+        if (persistenceManager != null) {
             throw new IllegalStateException("Persistence manager already exists");
+        }
         
         USER_DIR = new File(path);
         CONFIG_FILE = new File(USER_DIR, CONFIG_FILENAME);
@@ -124,8 +135,9 @@ public class PersistenceManager {
     
     /** Get PersistenceManager */
     public static PersistenceManager getInstance() throws IOException {
-        if (persistenceManager == null)
+        if (persistenceManager == null) {
             persistenceManager = new PersistenceManager();
+        }
         return persistenceManager;
     }
     
@@ -316,8 +328,9 @@ public class PersistenceManager {
      * @return newly created backup file, or null if original file doesn't exist
      */
     private File backupFile(File file) throws IOException {
-        if (!file.exists())
+        if (!file.exists()) {
             return null;
+        }
         String backupName = file.getAbsolutePath() + "~";
         File backup = new File(backupName);
         FileUtils.copyFile(file, backup);
