@@ -75,11 +75,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rememberHistoryCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="rememberQueueCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="removeAccentsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                           <Component id="checkUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="268" max="32767" attributes="0"/>
@@ -89,30 +87,16 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="rememberQueueCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="rememberHistoryCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="220" max="32767" attributes="0"/>
+                      <EmptySpace pref="266" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JCheckBox" name="rememberQueueCheckBox">
-              <Properties>
-                <Property name="mnemonic" type="int" value="102"/>
-                <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat frontu neodeslan&#xfd;ch zpr&#xe1;v"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; frontu neodeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
-              </Properties>
-              <BindingProperties>
-                <BindingProperty name="selected" source="config" sourcePath="${rememberQueue}" target="rememberQueueCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
-              </BindingProperties>
-            </Component>
             <Component class="javax.swing.JCheckBox" name="removeAccentsCheckBox">
               <Properties>
                 <Property name="mnemonic" type="int" value="100"/>
@@ -131,16 +115,6 @@
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${checkForUpdates}" target="checkUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
-              </BindingProperties>
-            </Component>
-            <Component class="javax.swing.JCheckBox" name="rememberHistoryCheckBox">
-              <Properties>
-                <Property name="mnemonic" type="int" value="115"/>
-                <Property name="text" type="java.lang.String" value="Ukl&#xe1;dat historii odeslan&#xfd;ch zpr&#xe1;v"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu uchov&#xe1;v&#xe1; historii odeslan&#xfd;ch sms pro p&#x159;&#xed;&#x161;t&#xed; spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
-              </Properties>
-              <BindingProperties>
-                <BindingProperty name="selected" source="config" sourcePath="${rememberHistory}" target="rememberHistoryCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
           </SubComponents>

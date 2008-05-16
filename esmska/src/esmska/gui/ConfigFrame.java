@@ -166,10 +166,8 @@ public class ConfigFrame extends javax.swing.JFrame {
         config = PersistenceManager.getConfig();
         tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        rememberQueueCheckBox = new javax.swing.JCheckBox();
         removeAccentsCheckBox = new javax.swing.JCheckBox();
         checkUpdatesCheckBox = new javax.swing.JCheckBox();
-        rememberHistoryCheckBox = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         lafComboBox = new javax.swing.JComboBox();
         rememberLayoutCheckBox = new javax.swing.JCheckBox();
@@ -225,18 +223,11 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        rememberQueueCheckBox.setMnemonic('f');
-        rememberQueueCheckBox.setText("Ukládat frontu neodeslaných zpráv");
-        rememberQueueCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává frontu neodeslaných sms pro příští spuštění programu\n</html>");
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberQueue}"), rememberQueueCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
         removeAccentsCheckBox.setMnemonic('d');
         removeAccentsCheckBox.setText("Ze zpráv odstraňovat diakritiku");
         removeAccentsCheckBox.setToolTipText("<html>\nPřed odesláním zprávy z ní odstraní všechna diakritická znaménka\n</html>");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${removeAccents}"), removeAccentsCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${removeAccents}"), removeAccentsCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
         checkUpdatesCheckBox.setMnemonic('n');
@@ -246,13 +237,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${checkForUpdates}"), checkUpdatesCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        rememberHistoryCheckBox.setMnemonic('s');
-        rememberHistoryCheckBox.setText("Ukládat historii odeslaných zpráv");
-        rememberHistoryCheckBox.setToolTipText("<html>\nPři ukončení programu uchovává historii odeslaných sms pro příští spuštění programu\n</html>");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberHistory}"), rememberHistoryCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -260,8 +244,6 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rememberHistoryCheckBox)
-                    .addComponent(rememberQueueCheckBox)
                     .addComponent(removeAccentsCheckBox)
                     .addComponent(checkUpdatesCheckBox))
                 .addContainerGap(268, Short.MAX_VALUE))
@@ -270,14 +252,10 @@ public class ConfigFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rememberQueueCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rememberHistoryCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(removeAccentsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkUpdatesCheckBox)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Obecné", jPanel1);
@@ -969,9 +947,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private esmska.gui.OperatorComboBox operatorComboBox;
     private javax.swing.JTextField operatorFilterTextField;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JCheckBox rememberHistoryCheckBox;
     private javax.swing.JCheckBox rememberLayoutCheckBox;
-    private javax.swing.JCheckBox rememberQueueCheckBox;
     private javax.swing.JCheckBox removeAccentsCheckBox;
     private javax.swing.JCheckBox sameProxyCheckBox;
     private javax.swing.JTextField senderNameTextField;

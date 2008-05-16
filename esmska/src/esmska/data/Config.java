@@ -18,7 +18,6 @@ public class Config extends Object implements Serializable {
     private static final String LATEST_VERSION = "0.10.0 beta";
 
     private String version = "";
-    private boolean rememberQueue = true;
     private String senderName = "";
     private String senderNumber = "";
     private boolean useSenderID = false;
@@ -32,7 +31,6 @@ public class Config extends Object implements Serializable {
     private String lafSubstanceSkin = "Sahara";
     private boolean removeAccents = true;
     private boolean checkForUpdates = true;
-    private boolean rememberHistory = true;
     private boolean startCentered = false;
     private boolean toolbarVisible = false;
     private String countryPrefix = "";
@@ -68,10 +66,6 @@ public class Config extends Object implements Serializable {
 
     public String getSenderNumber() {
         return senderNumber;
-    }
-
-    public boolean isRememberQueue() {
-        return rememberQueue;
     }
 
     public boolean isUseSenderID() {
@@ -120,10 +114,6 @@ public class Config extends Object implements Serializable {
 
     public boolean isCheckForUpdates() {
         return checkForUpdates;
-    }
-
-    public boolean isRememberHistory() {
-        return rememberHistory;
     }
 
     public boolean isStartCentered() {
@@ -183,12 +173,6 @@ public class Config extends Object implements Serializable {
         String old = this.senderNumber;
         this.senderNumber = senderNumber;
         changeSupport.firePropertyChange("senderNumber", old, senderNumber);
-    }
-
-    public void setRememberQueue(boolean rememberQueue) {
-        boolean old = this.rememberQueue;
-        this.rememberQueue = rememberQueue;
-        changeSupport.firePropertyChange("rememberQueue", old, rememberQueue);
     }
 
     public void setUseSenderID(boolean useSenderID) {
@@ -261,12 +245,6 @@ public class Config extends Object implements Serializable {
         boolean old = this.checkForUpdates;
         this.checkForUpdates = checkForUpdates;
         changeSupport.firePropertyChange("checkForUpdates", old, checkForUpdates);
-    }
-
-    public void setRememberHistory(boolean rememberHistory) {
-        boolean old = this.rememberHistory;
-        this.rememberHistory = rememberHistory;
-        changeSupport.firePropertyChange("rememberHistory", old, rememberHistory);
     }
 
     public void setStartCentered(boolean startCentered) {

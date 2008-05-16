@@ -583,9 +583,6 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** save sms queue */
     private void saveQueue() {
-        if (!config.isRememberQueue()) {
-            smsQueue.clear();
-        }
         try {
             persistenceManager.saveQueue();
         } catch (Exception ex) {
@@ -596,9 +593,6 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** save sms history */
     private void saveHistory() {
-        if (!config.isRememberHistory()) {
-            history.clearRecords();
-        }
         try {
             persistenceManager.saveHistory();
         } catch (Exception ex) {
