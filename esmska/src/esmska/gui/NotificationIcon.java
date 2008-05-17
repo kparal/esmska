@@ -16,9 +16,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import esmska.utils.OSType;
 
 /** Display icon in the notification area (aka system tray)
  *
@@ -34,13 +37,13 @@ public class NotificationIcon {
     private static final String unpauseQueue = "Znovu spustit frontu sms";
     private static final String showWindow = "Zobrazit program";
     private static final String hideWindow = "Skrýt program";
+    
+    private PopupMenu popup = null;
     private TrayIcon trayIcon = null;
-    private MenuItem toggleItem,  pauseQueueItem,  historyItem,  configItem,  quitItem;
+    private MenuItem toggleItem,  pauseQueueItem,  historyItem,  configItem,  
+            quitItem, separatorItem;
 
     private NotificationIcon() {
-        Image image = new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage();
-        PopupMenu popup = new PopupMenu();
-
         // show/hide main window
         toggleItem = new MenuItem("Skrýt/zobrazit program");
         toggleItem.addActionListener(new ActionListener() {
@@ -74,14 +77,32 @@ public class NotificationIcon {
         quitItem = new MenuItem("Ukončit");
         quitItem.addActionListener(MainFrame.getInstance().getQuitAction());
 
+        // separator
+        separatorItem = new MenuItem("-");
+        
+        // popup menu
+        popup = new PopupMenu();
+        MainFrame.getInstance().add(popup); //every popup must have parent
+        
         // populate menu
         popup.add(toggleItem);
         popup.add(pauseQueueItem);
         popup.add(historyItem);
         popup.add(configItem);
-        popup.addSeparator();
+        popup.add(separatorItem);
         popup.add(quitItem);
 
+        //unpopulate menu on some platforms
+        switch (OSType.detect()) {
+            //on MAC, it's not needed to have items to system provided actions
+            case MAC_OS_X:
+                popup.remove(toggleItem);
+                popup.remove(configItem);
+                popup.remove(separatorItem);
+                popup.remove(quitItem);
+                break;
+        }
+        
         // add default action on left click
         MouseAdapter mouseAdapter = new MouseAdapter() {
 
@@ -97,6 +118,7 @@ public class NotificationIcon {
         };
 
         // construct a TrayIcon
+        Image image = new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage();
         trayIcon = new TrayIcon(image, "Esmska", popup);
         trayIcon.setImageAutoSize(true);
         trayIcon.addMouseListener(mouseAdapter);
@@ -105,7 +127,7 @@ public class NotificationIcon {
     /** Get instance of NotificationIcon. This class is singleton.
      * @return instance if notification area is supported, null otherwise
      */
-    private static NotificationIcon getInstance() {
+    public static NotificationIcon getInstance() {
         if (!isSupported()) {
             return null;
         }
@@ -185,5 +207,10 @@ public class NotificationIcon {
     /** Returns whether the notification icon is currently installed */
     public static boolean isInstalled() {
         return installed;
+    }
+    
+    /** Returns the popup menu on notification icon. */
+    public PopupMenu getPopup() {
+        return popup;
     }
 }

@@ -68,6 +68,8 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Creates new form QueuePanel */
     public QueuePanel() {
         initComponents();
+        IntegrationAdapter.getInstance().setSMSCount(
+                smsQueue.isEmpty() ? null : smsQueue.size());
     }
     
     /** Get SMS which was requested to be edited */

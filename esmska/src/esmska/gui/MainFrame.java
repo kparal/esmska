@@ -50,13 +50,13 @@ import esmska.data.Envelope;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.data.SMS;
+import esmska.integration.ActionBean;
+import esmska.integration.IntegrationAdapter;
 import esmska.persistence.ExportManager;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
-import esmska.integration.ActionBean;
-import esmska.integration.IntegrationAdapter;
 
 /**
  * MainFrame form
