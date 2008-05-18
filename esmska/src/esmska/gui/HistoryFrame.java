@@ -5,11 +5,6 @@
  */
 package esmska.gui;
 
-import esmska.ThemeManager;
-import esmska.data.History;
-import esmska.persistence.PersistenceManager;
-import esmska.utils.AbstractDocumentListener;
-import esmska.utils.ActionEventSupport;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -35,7 +31,16 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
+
 import org.jvnet.substance.SubstanceLookAndFeel;
+
+import esmska.ThemeManager;
+import esmska.data.Config;
+import esmska.data.History;
+import esmska.persistence.PersistenceManager;
+import esmska.utils.AbstractDocumentListener;
+import esmska.utils.ActionEventSupport;
+import esmska.utils.OSType;
 
 /** Display all sent messages in a frame
  *
@@ -46,6 +51,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     public static final int ACTION_RESEND_SMS = 0;
     private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(HistoryFrame.class.getName());
+    private static final Config config = PersistenceManager.getConfig();
     private DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
     private History history = PersistenceManager.getHistory();
     private HistoryTableModel historyTableModel = new HistoryTableModel();
@@ -74,6 +80,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             ClipboardPopupMenu.register(searchField);
             ClipboardPopupMenu.register(textArea);
         }
+        
         //select first row
         if (historyTableModel.getRowCount() > 0) {
             historyTable.getSelectionModel().setSelectionInterval(0, 0);
@@ -263,6 +270,9 @@ public class HistoryFrame extends javax.swing.JFrame {
                 historyTableFilter.requestUpdate();
             }
         });
+
+        //on Mac OS X this will create a native search field with inline icons
+        searchField.putClientProperty("JTextField.variant", "search");
         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 searchFieldFocusGained(evt);
@@ -279,6 +289,12 @@ public class HistoryFrame extends javax.swing.JFrame {
         clearButton.setToolTipText("Vyčistit hledaný výraz (Alt+V)");
         clearButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+
+        // on Mac OS X the search field has native look and feel with inline icons, clear
+        // button is not needed
+        if (OSType.isEqual(OSType.MAC_OS_X) && config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM)) {
+            clearButton.setVisible(false);
+        }
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);

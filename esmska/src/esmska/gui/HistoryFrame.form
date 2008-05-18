@@ -313,7 +313,7 @@
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="searchFieldFocusGained"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;    @Override&#xa;    public void onUpdate(DocumentEvent e) {&#xa;        historyTableFilter.requestUpdate();&#xa;    }&#xa;});"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;    @Override&#xa;    public void onUpdate(DocumentEvent e) {&#xa;        historyTableFilter.requestUpdate();&#xa;    }&#xa;});&#xa;&#xa;//on Mac OS X this will create a native search field with inline icons&#xa;searchField.putClientProperty(&quot;JTextField.variant&quot;, &quot;search&quot;);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -343,7 +343,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);&#xa;&#xa;// on Mac OS X the search field has native look and feel with inline icons, clear&#xa;// button is not needed&#xa;if (OSType.isEqual(OSType.MAC_OS_X) &amp;&amp; config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM)) {&#xa;    clearButton.setVisible(false);&#xa;}&#xa;"/>
       </AuxValues>
     </Component>
   </SubComponents>
