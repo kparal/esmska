@@ -313,7 +313,7 @@
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="searchFieldFocusGained"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;    @Override&#xa;    public void onUpdate(DocumentEvent e) {&#xa;        historyTableFilter.requestUpdate();&#xa;    }&#xa;});&#xa;&#xa;//on Mac OS X this will create a native search field with inline icons&#xa;searchField.putClientProperty(&quot;JTextField.variant&quot;, &quot;search&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;    @Override&#xa;    public void onUpdate(DocumentEvent e) {&#xa;        historyTableFilter.requestUpdate();&#xa;    }&#xa;});&#xa;&#xa;//on Mac OS X this will create a native search field with inline icons&#xa;searchField.putClientProperty(&quot;JTextField.variant&quot;, &quot;search&quot;);&#xa;&#xa;//clear text on escape&#xa;String command = &quot;clear&quot;;&#xa;searchField.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), command);&#xa;searchField.getActionMap().put(command, new AbstractAction() {&#xa;    @Override&#xa;    public void actionPerformed(ActionEvent e) {&#xa;        searchField.setText(null);&#xa;    }&#xa;});"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -334,7 +334,7 @@
           <Image iconType="3" name="/esmska/resources/clear-22.png"/>
         </Property>
         <Property name="mnemonic" type="int" value="118"/>
-        <Property name="toolTipText" type="java.lang.String" value="Vy&#x10d;istit hledan&#xfd; v&#xfd;raz (Alt+V)"/>
+        <Property name="toolTipText" type="java.lang.String" value="Vy&#x10d;istit hledan&#xfd; v&#xfd;raz (Alt+V, Escape)"/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>

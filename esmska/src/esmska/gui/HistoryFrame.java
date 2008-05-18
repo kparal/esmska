@@ -41,6 +41,7 @@ import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.OSType;
+import javax.swing.KeyStroke;
 
 /** Display all sent messages in a frame
  *
@@ -273,6 +274,16 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         //on Mac OS X this will create a native search field with inline icons
         searchField.putClientProperty("JTextField.variant", "search");
+
+        //clear text on escape
+        String command = "clear";
+        searchField.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), command);
+        searchField.getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchField.setText(null);
+            }
+        });
         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 searchFieldFocusGained(evt);
@@ -286,7 +297,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
         clearButton.setMnemonic('v');
-        clearButton.setToolTipText("Vyčistit hledaný výraz (Alt+V)");
+        clearButton.setToolTipText("Vyčistit hledaný výraz (Alt+V, Escape)");
         clearButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
