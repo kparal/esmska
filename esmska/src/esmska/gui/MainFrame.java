@@ -232,7 +232,6 @@ public class MainFrame extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
         setLocationByPlatform(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -307,10 +306,13 @@ public class MainFrame extends javax.swing.JFrame {
         exitButton.setHideActionText(true);
         toolBar.add(exitButton);
 
-        //disable mnemonics for buttons
         for (Component comp : toolBar.getComponents()) {
             if (comp instanceof JButton) {
-                ((JButton)comp).setMnemonic(0);
+                JButton button = (JButton) comp;
+                //disable mnemonics for buttons
+                button.setMnemonic(0);
+                //make icons prettier on Mac OS X
+                button.putClientProperty("JButton.buttonType", "gradient");
             }
         }
 
