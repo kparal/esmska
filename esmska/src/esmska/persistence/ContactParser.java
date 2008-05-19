@@ -191,7 +191,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
             Communications co = pimContact.getCommunications();
             String number = "";
             //get first phone number listed
-            if (co.getPhoneNumberCount() > 0) {
+            if (co != null && co.getPhoneNumberCount() > 0) {
                 number = ((PhoneNumber) co.getPhoneNumbers().next()).getNumber();
             }
             //convert to international format
