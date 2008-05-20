@@ -28,6 +28,7 @@ import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingConstants;
@@ -569,7 +570,9 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             try {
                 DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
                 contactListModel.clear();
-                for (Contact c : worker.get())
+                ArrayList<Contact> contacts = worker.get();
+                Collections.sort(contacts);
+                for (Contact c : contacts)
                     contactListModel.addElement(c);
                 removeExistingContacts();
                 validOperatorCheckBoxStateChanged(null);
