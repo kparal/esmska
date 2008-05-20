@@ -192,9 +192,22 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
             }
             Communications co = pimContact.getCommunications();
             String number = "";
-            //get first phone number listed
+            //select best phone number if available
             if (co != null && co.getPhoneNumberCount() > 0) {
-                number = ((PhoneNumber) co.getPhoneNumbers().next()).getNumber();
+                PhoneNumber preffered = co.getPreferredPhoneNumber();
+                PhoneNumber[] cellulars = co.listPhoneNumbersByType(PhoneNumber.TYPE_CELLULAR);
+                PhoneNumber[] messengers = co.listPhoneNumbersByType(PhoneNumber.TYPE_MESSAGING);
+                PhoneNumber first = (PhoneNumber) co.getPhoneNumbers().next();
+                //priority: preffered > cellular > messaging > first listed
+                if (preffered != null) {
+                    number = preffered.getNumber();
+                } else if (cellulars.length > 0) {
+                    number = cellulars[0].getNumber();
+                } else if (messengers.length > 0) {
+                    number = messengers[0].getNumber();
+                } else {
+                    number = first.getNumber();
+                }
             }
             //convert to international format
             if (!Nullator.isEmpty(number)) {
