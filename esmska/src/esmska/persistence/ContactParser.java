@@ -10,6 +10,7 @@
 package esmska.persistence;
 
 import com.csvreader.CsvReader;
+import esmska.data.Config;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -44,6 +45,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
         VCARD_FILE
     }
     
+    private static final Config config = PersistenceManager.getConfig();
     private File file;
     private ContactType type;
     private ArrayList<Contact> contacts = new ArrayList<Contact>();
@@ -196,8 +198,13 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
             }
             //convert to international format
             if (!Nullator.isEmpty(number)) {
+                boolean international = number.startsWith("+");
                 number = number.replaceAll("[^0-9]", "");
-                number = "+" + number;
+                if (!international && !Nullator.isEmpty(config.getCountryPrefix())) {
+                    number = config.getCountryPrefix() + number;
+                } else {
+                    number = "+" + number;
+                }
             }
             
             //create contact
