@@ -43,7 +43,7 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
-import esmska.UpdateChecker;
+import esmska.update.UpdateChecker;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Envelope;
