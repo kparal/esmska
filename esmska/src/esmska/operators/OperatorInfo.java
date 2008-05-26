@@ -14,8 +14,10 @@ public interface OperatorInfo {
     /** Operator name.
      * This name will be visible in the list od available operators.
      * The name must be in the form "[CC]Operator", where CC is country code as defined
-     * in <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> and Operator is the name of the operator.
+     * in <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> 
+     * and Operator is the very name of the operator.
      * For international operators, allowing to send SMS to multiple countries, use [INT]Operator.
+     * This name must be unique amongst other operator names.
      */
     String getName();
     
