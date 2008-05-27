@@ -70,7 +70,7 @@ public class OperatorExecutor {
     private String referer;
 
     /** Make a GET request to a provided URL
-     * @param url base url where to connect, without any parameters or "?" at the end
+     * @param url base url where to connect, without any parameters or "?" at the end.
      *            In special cases when you don't use params, you can use url as a full url.
      *            But don't forget that parameters values must be url-encoded, which you can't
      *            do properly in JavaScript.
