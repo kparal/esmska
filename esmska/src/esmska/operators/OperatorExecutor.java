@@ -109,6 +109,8 @@ public class OperatorExecutor {
      *            But don't forget that parameters values must be url-encoded, which you can't
      *            do properly in JavaScript.
      * @param params array of url params in form [key1,value1,key2,value2,...]
+     * @param postData array of data to be sent in the request in form [key1,value1,key2,value2,...].
+     *                 This data will be properly url-encoded before sending.
      * @return content of the response. It may be String (when requesting HTML page) or
      *         just an array of bytes (when requesting eg. an image).
      * @throws IOException when there is some problem in connecting
