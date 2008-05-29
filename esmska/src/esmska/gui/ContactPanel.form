@@ -44,7 +44,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="jScrollPane4" pref="313" max="32767" attributes="0"/>
+              <Component id="jScrollPane4" pref="314" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="addContactButton" min="-2" max="-2" attributes="0"/>
@@ -62,7 +62,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="addContactAction" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=""/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>
@@ -76,7 +75,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="removeContactAction" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=""/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>
@@ -123,7 +121,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="editContactAction" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=""/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>

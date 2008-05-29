@@ -565,7 +565,7 @@ public class ContactPanel extends javax.swing.JPanel {
             
             Rectangle visibleRect = getVisibleRect();
             int height = (int) searchField.getPreferredSize().getHeight();
-            //+1 bcz first char was cutt off sometimes
+            //+1 bcz first char was cut off sometimes
             int width = (int) searchField.getPreferredSize().getWidth() + 1;
             searchField.setBounds(visibleRect.x + visibleRect.width - width,
                 visibleRect.y + visibleRect.height - height, width, height);
