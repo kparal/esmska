@@ -5,10 +5,12 @@
 package esmska.data;
 
 import esmska.utils.ActionEventSupport;
+import esmska.utils.Nullator;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.ListIterator;
 
 /** SMS history entity
  *
@@ -53,8 +55,9 @@ public class History {
     
     /** add new records */
     public void addRecords(Collection<Record> records) {
-        for (Record record : records)
+        for (Record record : records) {
             this.records.add(record);
+        }
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
     }
     
@@ -66,8 +69,9 @@ public class History {
     
     /** remove existing records */
     public void removeRecords(Collection<Record> records) {
-        for (Record record : records)
+        for (Record record : records) {
             this.records.remove(record);
+        }
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
     }
     
@@ -75,6 +79,22 @@ public class History {
     public void clearRecords() {
         records.clear();
         actionSupport.fireActionPerformed(ACTION_CLEAR_RECORDS, null);
+    }
+    
+    /** Find last (as in time) record sent to specified operator.
+     * @param operatorName name of the operator
+     * @return the last (the most recent) record sent to specified operator.
+     *  Null when none found.
+     */
+    public Record findLastRecord(String operatorName) {
+        ListIterator<Record> iter = records.listIterator(records.size());
+        while (iter.hasPrevious()) {
+            Record record = iter.previous();
+            if (Nullator.isEqual(record.getOperator(), operatorName)) {
+                return record;
+            }
+        }
+        return null;
     }
     
     /** Single history record */

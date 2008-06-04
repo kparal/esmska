@@ -32,7 +32,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
 import javax.swing.ToolTipManager;
 
 import org.apache.commons.io.IOUtils;
@@ -85,8 +84,6 @@ public class MainFrame extends javax.swing.JFrame {
     private SMSSender smsSender;
     /** box for messages */
     private Envelope envelope;
-    /** timer to send another sms after defined delay */
-    private Timer smsDelayTimer = new Timer(1000,new SMSDelayActionListener());
     /** manager of persistence data */
     private PersistenceManager persistenceManager;
     /** program configuration */
@@ -128,7 +125,7 @@ public class MainFrame extends javax.swing.JFrame {
         ToolTipManager.sharedInstance().setDismissDelay(60000);
         
         //init custom components
-        smsSender = new SMSSender(smsQueue);
+        smsSender = new SMSSender();
         envelope = new Envelope();
         smsPanel.setEnvelope(envelope);
         
@@ -146,7 +143,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         //setup components
-        smsDelayTimer.setInitialDelay(0);
         contactPanel.requestFocusInWindow();
         contactPanel.ensureContactSelected();
         
@@ -426,7 +422,6 @@ public class MainFrame extends javax.swing.JFrame {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
             statusPanel.setStatusMessage("Zpráva pro " + sms + " odeslána.",
                     true, Icons.STATUS_MESSAGE, true);
-            setSMSDelay();
             createHistory(sms);
             
             if (smsPanel.getText().length() > 0) {
@@ -497,12 +492,6 @@ public class MainFrame extends javax.swing.JFrame {
         record.setText(sms.getText());
         
         history.addRecord(record);
-    }
-    
-    /** Forces delay before sending another sms */
-    public void setSMSDelay() {
-        smsSender.setDelayed(true);
-        smsDelayTimer.start();
     }
     
     /** Display random tip from the collection of tips */
@@ -765,29 +754,6 @@ public class MainFrame extends javax.swing.JFrame {
         return historyAction;
     }
     
-    /** Progress bar action listener after sending sms */
-    private class SMSDelayActionListener implements ActionListener {
-        private final int DELAY = 15;
-        private int seconds = 0;
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (seconds <= DELAY) { //still waiting
-                statusPanel.setProgress(seconds, "Další sms za: " + (DELAY-seconds) + "s",
-                        null, null);
-                if (seconds == 0) {
-                    statusPanel.setProgress(null, null, null, true);
-                }
-                seconds++;
-            } else { //delay finished
-                smsDelayTimer.stop();
-                statusPanel.setProgress(null, null, null, false);
-                seconds = 0;
-                smsSender.setDelayed(false);
-                smsSender.announceNewSMS();
-            }
-        }
-    }
-    
     /** Listens for events from sms queue */
     private class QueueListener implements ActionListener {
         @Override
@@ -802,11 +768,6 @@ public class MainFrame extends javax.swing.JFrame {
                     contactPanel.clearSelection();
                     smsPanel.setSMS(sms);
                     break;
-                case QueuePanel.ACTION_QUEUE_PAUSE_CHANGED:
-                    smsSender.setPaused(queuePanel.isPaused());
-                    break;
-                default: 
-                    logger.severe("Uknown queue event type: " + e.getID());
             }
         }
     }
@@ -843,8 +804,6 @@ public class MainFrame extends javax.swing.JFrame {
                     statusPanel.setStatusMessage("Import kontaktů úspěšně dokončen",
                             true, Icons.STATUS_INFO, true);
                     break;
-                default:
-                    logger.severe("Unknown import event type: " + e.getID());
             }
         }
     }
@@ -860,8 +819,6 @@ public class MainFrame extends javax.swing.JFrame {
                 case ContactPanel.ACTION_CONTACT_CHOSEN:
                     smsPanel.requestFocusInWindow();
                     break;
-                default:
-                    logger.severe("Unknown contact event type: " + e.getID());
             }
         }
     }
@@ -880,11 +837,8 @@ public class MainFrame extends javax.swing.JFrame {
                 case SMSPanel.ACTION_SEND_SMS:
                     for (SMS sms : envelope.generate()) {
                         queuePanel.addSMS(sms);
-                        smsSender.announceNewSMS();
                     }
                     break;
-                default: 
-                    logger.severe("Uknown sms event type: " + e.getID());
             }
         }
     }

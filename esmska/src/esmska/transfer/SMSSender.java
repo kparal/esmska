@@ -9,8 +9,8 @@
 
 package esmska.transfer;
 
+import java.awt.event.ActionEvent;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,11 +20,14 @@ import esmska.data.Icons;
 import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.gui.MainFrame;
+import esmska.gui.QueuePanel;
 import esmska.operators.OperatorInterpreter;
 import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.Nullator;
+import java.awt.event.ActionListener;
+import java.util.Set;
 
 /** Sender of SMS
  *
@@ -36,37 +39,27 @@ public class SMSSender {
     private static final String NO_REASON_ERROR = "Autor skriptu pro daného operátora neposkytl<br>" +
             "žádné další informace o příčině selhání.";
     
-    private List<SMS> smsQueue;
     private boolean running; // sending sms in this moment
-    private boolean paused; // queue paused
-    private boolean delayed; //waiting for delay to send another sms
     private SMSWorker smsWorker; //worker for background thread
-    private MainFrame mainFrame; //reference to main form
+    private MainFrame mainFrame = MainFrame.getInstance(); //reference to main form
 
     /** Creates a new instance of SMSSender */
-    public SMSSender(List<SMS> smsQueue) {
-        if (smsQueue == null) {
-            throw new NullPointerException("smsQueue");
-        }
-        this.smsQueue = smsQueue;
-        this.mainFrame = MainFrame.getInstance();
-    }
-    
-    /** notify about new sms */
-    public void announceNewSMS() {
-        prepareSending();
+    public SMSSender() {
+        mainFrame.getQueuePanel().addActionListener(new QueueListener());
     }
     
     /** Make arrangements needed for sending SMS */
     private void prepareSending() {
-        if (!isDelayed() && !isPaused() && !running && !smsQueue.isEmpty()) {
-            running = true;
-            SMS sms = smsQueue.get(0);
-            mainFrame.getStatusPanel().setTaskRunning(true);
+        Set<SMS> readySMS = mainFrame.getQueuePanel().getReadySMS();
+        if (!running && !readySMS.isEmpty()) {
+            SMS sms = readySMS.iterator().next();
             String operator = Nullator.isEmpty(sms.getOperator()) ? 
                 "žádný operátor" : sms.getOperator();
+            
+            mainFrame.getStatusPanel().setTaskRunning(true);
             mainFrame. getStatusPanel().setStatusMessage("Posílám zprávu pro " + sms
             + " (" + operator + ") ...", true, Icons.STATUS_INFO, true);
+            running = true;
             
             //send in worker thread
             smsWorker = new SMSWorker(sms);
@@ -78,6 +71,8 @@ public class SMSSender {
     private void finishedSending(SMS sms) {
         mainFrame.smsProcessed(sms);
         running = false;
+        //look for another sms to send
+        prepareSending();
     }
     
     /** send sms over internet */
@@ -134,26 +129,16 @@ public class SMSSender {
         return map;
     }
     
-    /** Whether queue is paused */
-    public boolean isPaused() {
-        return paused;
-    }
-    
-    /** Pause/unpause queue */
-    public void setPaused(boolean paused) {
-        this.paused = paused;
-        if (!paused) {
-            prepareSending();
+    /** Listen for changes in the sms queue */
+    private class QueueListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switch (e.getID()) {
+                //on new sms ready try to send it
+                case QueuePanel.ACTION_NEW_SMS_READY:
+                    prepareSending();
+                    break;
+            }
         }
-    }
-    
-    /** Whether queue is delayed */
-    public boolean isDelayed() {
-        return delayed;
-    }
-    
-    /** Delay/undelay queue */
-    public void setDelayed(boolean delayed) {
-        this.delayed = delayed;
     }
 }
