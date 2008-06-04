@@ -461,6 +461,9 @@ public class QueuePanel extends javax.swing.JPanel {
                     queueListModel, index-1, index);
             queueList.setSelectedIndex(index-1);
             queueList.ensureIndexIsVisible(index-1);
+            
+            readySMS.clear();
+            findNewReadySMS();
         }
     }
     
@@ -484,6 +487,9 @@ public class QueuePanel extends javax.swing.JPanel {
                     queueListModel, index, index+1);
             queueList.setSelectedIndex(index+1);
             queueList.ensureIndexIsVisible(index+1);
+            
+            readySMS.clear();
+            findNewReadySMS();
         }
     }
     
