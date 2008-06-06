@@ -33,11 +33,12 @@ import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import esmska.integration.IntegrationAdapter;
+import esmska.utils.Nullator;
 import java.awt.BorderLayout;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.ListIterator;
 import java.util.Map.Entry;
 import java.util.Set;
 import javax.swing.JPanel;
@@ -71,7 +72,9 @@ public class QueuePanel extends javax.swing.JPanel {
     //every second check the queue
     private Timer timer = new Timer(1000, new DelayListener());
     //map of <operator name, current delay in seconds>
-    private HashMap<String, Integer> delays = new HashMap<String, Integer>();
+    private HashMap<String, Integer> operatorDelay = new HashMap<String, Integer>();
+    //map of <sms, current delay in seconds> - the delay can be different for sms of same operator
+    private HashMap<SMS, Integer> smsDelay = new HashMap<SMS, Integer>();
     //collection of sms ready and waiting to be sent
     private LinkedHashSet<SMS> readySMS = new LinkedHashSet<SMS>();
     //sms which have been requested to be edited
@@ -94,9 +97,6 @@ public class QueuePanel extends javax.swing.JPanel {
 
         //if there are some messages in queue, handle all needed routines
         if (!smsQueue.isEmpty()) {
-            for (SMS sms : smsQueue) {
-                findCurrentDelayForOperator(sms.getOperator());
-            }
             handleTimerStatus();
             findNewReadySMS();
         }
@@ -109,6 +109,11 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Get SMS which was requested to be edited */
     public SMS getEditRequestedSMS() {
         return editRequestedSMS;
+    }
+    
+    /** get action used to pause/unpause the sms queue */
+    public Action getSMSQueuePauseAction() {
+        return smsQueuePauseAction;
     }
     
     /** Whether queue is currently paused */
@@ -126,8 +131,6 @@ public class QueuePanel extends javax.swing.JPanel {
         int index = queueListModel.indexOf(sms);
         if (sms.getStatus() == SMS.Status.SENT_OK) {
             queueListModel.remove(sms);
-            readySMS.remove(sms);
-            delays.remove(sms.getOperator()); //TODO: remove only when it's the last message of that operator //edit: really?
         }
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             queueListModel.fireContentsChanged(
@@ -138,16 +141,13 @@ public class QueuePanel extends javax.swing.JPanel {
         IntegrationAdapter.getInstance().setSMSCount(
                 smsQueue.isEmpty() ? null : smsQueue.size());
         
-        handleTimerStatus();
         findNewReadySMS();
     }
     
     /** Adds new SMS to the queue */
     public void addSMS(SMS sms) {
         queueListModel.add(sms);
-        findCurrentDelayForOperator(sms.getOperator());
         IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
-        handleTimerStatus();
         findNewReadySMS();
     }
     
@@ -163,14 +163,14 @@ public class QueuePanel extends javax.swing.JPanel {
         }
     }
     
-    /** Return current delay for specified operator and set the value in delays map.
+    /** Return current delay for specified operator and set the value in operator delays map.
      * @param operatorName name of the operator
      * @return number of seconds a message from the operator must wait.
      *  If no operator found, return 0.
      */
-    private int findCurrentDelayForOperator(String operatorName) {
-        if (delays.containsKey(operatorName)) {
-            return delays.get(operatorName);
+    private int findCurrentDelay(String operatorName) {
+        if (operatorDelay.containsKey(operatorName)) {
+            return operatorDelay.get(operatorName);
         }
         
         Operator operator = OperatorUtil.getOperator(operatorName);
@@ -197,7 +197,48 @@ public class QueuePanel extends javax.swing.JPanel {
             }
         }
 
-        delays.put(operatorName, delay);
+        operatorDelay.put(operatorName, delay);
+        return delay;
+    }
+    
+    /** Return current delay for specified sms and set the value in sms delays map.
+     * The delay is taking into account all previous messages from the same operator
+     * which are waiting to be sent.
+     * @param sms sms in queue
+     * @return number of seconds a message must wait
+     * @throws IllegalArgumentException when sms is null or no such sms is found
+     *  in the queue
+     */
+    private int findCurrentDelay(SMS sms) {
+        if (sms == null) {
+            throw new IllegalArgumentException("sms can't be null");
+        }
+        if (smsDelay.containsKey(sms)) {
+            return smsDelay.get(sms);
+        }
+        Operator operator = OperatorUtil.getOperator(sms.getOperator());
+        if (operator == null || operator.getDelayBetweenMessages() <= 0) {
+            smsDelay.put(sms, 0);
+            return 0;
+        }
+        
+        int index = smsQueue.indexOf(sms);
+        if (index < 0) {
+            throw new IllegalArgumentException("sms not present in sms queue");
+        }
+        ListIterator<SMS> iter = smsQueue.listIterator(index);
+        while (iter.hasPrevious()) {
+            SMS message = iter.previous();
+            if (Nullator.isEqual(sms.getOperator(), message.getOperator())) {
+                int delay = findCurrentDelay(message);
+                delay += operator.getDelayBetweenMessages();
+                smsDelay.put(sms, delay);
+                return delay;
+            }
+        }
+        
+        int delay = findCurrentDelay(sms.getOperator());
+        smsDelay.put(sms, delay);
         return delay;
     }
     
@@ -231,7 +272,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private void handleTimerStatus() {
         if (smsQueue.isEmpty()) {
             timer.stop();
-            delays.clear();
+            operatorDelay.clear();
         } else {
             timer.start();
         }
@@ -242,26 +283,11 @@ public class QueuePanel extends javax.swing.JPanel {
     private void findNewReadySMS() {
         int waitingBefore = readySMS.size();
         
-        //remember ready operators, because we want to make available only the
-        //first message for each operator with delay
-        HashSet<String> readyOperators = new HashSet<String>();
-        for (SMS sms : readySMS) {
-            readyOperators.add(sms.getOperator());
-        }
-        
         //traverse sms queue and look for new ready sms
         for (SMS sms : smsQueue) {
-            String operator = sms.getOperator();
-            int delay = findCurrentDelayForOperator(operator);
-            int defaultDelay = 0;
-            Operator op = OperatorUtil.getOperator(operator);
-            if (op != null) {
-                defaultDelay = op.getDelayBetweenMessages();
-            }
-            //allow only first sms of delayed operator to be added
-            if (delay <= 0 && (defaultDelay <= 0 || !readyOperators.contains(operator))) {
+            int delay = findCurrentDelay(sms);
+            if (delay <= 0) {
                 readySMS.add(sms);
-                readyOperators.add(operator);
             }
         }
         
@@ -400,10 +426,7 @@ public class QueuePanel extends javax.swing.JPanel {
             for (Object o : smsArray) {
                 SMS sms = (SMS) o;
                 queueListModel.remove(sms);
-                delays.remove(sms.getOperator());
-                readySMS.remove(sms);
             }
-            handleTimerStatus();
             IntegrationAdapter.getInstance().setSMSCount(
                     smsQueue.isEmpty() ? null : smsQueue.size());
             
@@ -432,9 +455,6 @@ public class QueuePanel extends javax.swing.JPanel {
             
             editRequestedSMS = sms;
             queueListModel.remove(sms);
-            delays.remove(sms.getOperator());
-            readySMS.remove(sms);
-            handleTimerStatus();
             
             //fire event
             actionSupport.fireActionPerformed(ACTION_REQUEST_EDIT_SMS, null);
@@ -457,13 +477,15 @@ public class QueuePanel extends javax.swing.JPanel {
             synchronized(smsQueue) {
                 Collections.swap(smsQueue,index,index-1);
             }
+            //update collections
+            readySMS.clear();
+            smsDelay.clear();
+            findNewReadySMS();
+            //fire event
             queueListModel.fireContentsChanged(
                     queueListModel, index-1, index);
             queueList.setSelectedIndex(index-1);
             queueList.ensureIndexIsVisible(index-1);
-            
-            readySMS.clear();
-            findNewReadySMS();
         }
     }
     
@@ -483,13 +505,15 @@ public class QueuePanel extends javax.swing.JPanel {
             synchronized(smsQueue) {
                 Collections.swap(smsQueue,index,index+1);
             }
+            //update collections
+            readySMS.clear();
+            smsDelay.clear();
+            findNewReadySMS();
+            //fire event
             queueListModel.fireContentsChanged(
                     queueListModel, index, index+1);
             queueList.setSelectedIndex(index+1);
             queueList.ensureIndexIsVisible(index+1);
-            
-            readySMS.clear();
-            findNewReadySMS();
         }
     }
     
@@ -535,11 +559,6 @@ public class QueuePanel extends javax.swing.JPanel {
         }
     }
     
-    /** get action used to pause/unpause the sms queue */
-    public Action getSMSQueuePauseAction() {
-        return smsQueuePauseAction;
-    }
-    
     /** Model for SMSQueueList */
     private class QueueListModel extends AbstractListModel {
         @Override
@@ -555,6 +574,11 @@ public class QueuePanel extends javax.swing.JPanel {
         }
         public void add(SMS element) {
             if (smsQueue.add(element)) {
+                //update queue collections
+                smsDelay.clear();
+                //update the timer
+                handleTimerStatus();
+            
                 int index = smsQueue.indexOf(element);
                 fireIntervalAdded(this, index, index);
             }
@@ -566,6 +590,13 @@ public class QueuePanel extends javax.swing.JPanel {
             int index = smsQueue.indexOf(element);
             boolean removed = smsQueue.remove(element);
             if (removed) {
+                //update queue collections
+                readySMS.remove(element);
+                operatorDelay.remove(element.getOperator()); //TODO: remove only when it's the last message of that operator //edit: really?
+                smsDelay.clear();
+                //update the timer
+                handleTimerStatus();
+            
                 fireIntervalRemoved(this, index, index);
             }
             return removed;
@@ -622,7 +653,7 @@ public class QueuePanel extends javax.swing.JPanel {
             panel.setToolTipText(wrapToHTML(sms.getText()));
             //set delay
             delayLabel.setText(convertDelayToHumanString(
-                    findCurrentDelayForOperator(sms.getOperator())));
+                    findCurrentDelay(sms)));
             //add to panel
             panel.add(label, BorderLayout.CENTER);
             
@@ -656,7 +687,7 @@ public class QueuePanel extends javax.swing.JPanel {
             boolean newSMSReady = false;
             
             //for every delay substract one second
-            for (Entry<String, Integer> delay : delays.entrySet()) {
+            for (Entry<String, Integer> delay : operatorDelay.entrySet()) {
                 if (delay.getValue() > 0) {
                     delay.setValue(delay.getValue() - 1);
                     timerNeeded = true;
@@ -667,8 +698,11 @@ public class QueuePanel extends javax.swing.JPanel {
                 }
             }
             
-            //when everything is on 0, no need for timer to run, let's stop it
-            if (!timerNeeded) {
+            if (timerNeeded) {
+                //delays changed, clear current sms delays
+                smsDelay.clear();
+            } else {
+                //when everything is on 0, no need for timer to run, let's stop it
                 timer.stop();
             }
             //we have found new ready sms, update the collection
