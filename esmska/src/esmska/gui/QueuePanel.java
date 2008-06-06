@@ -144,7 +144,9 @@ public class QueuePanel extends javax.swing.JPanel {
         findNewReadySMS();
     }
     
-    /** Adds new SMS to the queue */
+    /** Add new SMS to the queue. The SMS is added after the last SMS of the
+     * same type of operator.
+     */
     public void addSMS(SMS sms) {
         queueListModel.add(sms);
         IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
@@ -573,7 +575,26 @@ public class QueuePanel extends javax.swing.JPanel {
             return smsQueue.indexOf(element);
         }
         public void add(SMS element) {
-            if (smsQueue.add(element)) {
+            Integer position = null; //where to put the new sms
+            //iterate from the end and find last sms of the same operator
+            ListIterator<SMS> iter = smsQueue.listIterator(smsQueue.size());
+            while (iter.hasPrevious()) {
+                SMS sms = iter.previous();
+                if (Nullator.isEqual(sms.getOperator(), element.getOperator())) {
+                    position = smsQueue.indexOf(sms) + 1; //set the position after this sms
+                    break;
+                }
+            }
+            
+            boolean added = false;
+            //not found any sms of same operator or it was the last sms in the queue
+            if (position == null || position >= smsQueue.size()) {
+                added = smsQueue.add(element);
+            } else { //found position where to put it
+                smsQueue.add(position, element);
+                added = true; //above method does not provide boolean return value
+            }
+            if (added) {
                 //update queue collections
                 smsDelay.clear();
                 //update the timer
