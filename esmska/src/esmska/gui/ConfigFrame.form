@@ -421,7 +421,7 @@
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="senderNumberTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo"/>
+                <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo:"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="senderNumberTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -445,7 +445,7 @@
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="senderNameTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Jm&#xe9;no"/>
+                <Property name="text" type="java.lang.String" value="Jm&#xe9;no:"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="senderNameTextField" name="toolTipText" type="property"/>
                 </Property>

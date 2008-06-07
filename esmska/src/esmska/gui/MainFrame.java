@@ -476,7 +476,9 @@ public class MainFrame extends javax.swing.JFrame {
                     true, Icons.STATUS_MESSAGE, true);
         }
         
-        statusPanel.setTaskRunning(false);
+        if (!smsSender.isRunning()) {
+            statusPanel.setTaskRunning(false);
+        }
         queuePanel.smsProcessed(sms);
     }
     

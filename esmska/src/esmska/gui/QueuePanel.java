@@ -615,8 +615,8 @@ public class QueuePanel extends javax.swing.JPanel {
                 readySMS.remove(element);
                 operatorDelay.remove(element.getOperator()); //TODO: remove only when it's the last message of that operator //edit: really?
                 smsDelay.clear();
-                //update the timer
                 handleTimerStatus();
+                findNewReadySMS();
             
                 fireIntervalRemoved(this, index, index);
             }

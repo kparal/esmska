@@ -418,7 +418,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         jLabel1.setDisplayedMnemonic('l');
         jLabel1.setLabelFor(senderNumberTextField);
-        jLabel1.setText("Číslo");
+        jLabel1.setText("Číslo:");
         jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
 
         senderNameTextField.setColumns(13);
@@ -431,7 +431,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         jLabel3.setDisplayedMnemonic('m');
         jLabel3.setLabelFor(senderNameTextField);
-        jLabel3.setText("Jméno");
+        jLabel3.setText("Jméno:");
         jLabel3.setToolTipText(senderNameTextField.getToolTipText());
 
         countryPrefixTextField.setColumns(5);

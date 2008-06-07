@@ -25,7 +25,6 @@ import esmska.operators.OperatorInterpreter;
 import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
 import esmska.persistence.PersistenceManager;
-import esmska.utils.Nullator;
 import java.awt.event.ActionListener;
 import java.util.Set;
 
@@ -39,40 +38,54 @@ public class SMSSender {
     private static final String NO_REASON_ERROR = "Autor skriptu pro daného operátora neposkytl<br>" +
             "žádné další informace o příčině selhání.";
     
-    private boolean running; // sending sms in this moment
-    private SMSWorker smsWorker; //worker for background thread
     private MainFrame mainFrame = MainFrame.getInstance(); //reference to main form
+    //map of <operator,worker>; it show's whether some operator has currently assigned
+    //a background worker (therefore is sending at the moment)
+    private HashMap<String,SMSWorker> workers = new HashMap<String, SMSWorker>();
 
     /** Creates a new instance of SMSSender */
     public SMSSender() {
         mainFrame.getQueuePanel().addActionListener(new QueueListener());
     }
     
-    /** Make arrangements needed for sending SMS */
-    private void prepareSending() {
+    /** Return whether there is currently some message being sent.
+     * @return true is some message is just being sent; false otherwise
+     */
+    public boolean isRunning() {
+        return !workers.isEmpty();
+    }
+    
+    /** Send new ready SMS */
+    private void sendNew() {
         Set<SMS> readySMS = mainFrame.getQueuePanel().getReadySMS();
-        if (!running && !readySMS.isEmpty()) {
-            SMS sms = readySMS.iterator().next();
-            String operator = Nullator.isEmpty(sms.getOperator()) ? 
-                "žádný operátor" : sms.getOperator();
+        
+        for (SMS sms : readySMS) {
+            String operator = sms.getOperator();
+            if (workers.containsKey(operator)) {
+                //there's already some message from this operator being sent,
+                //skip this message
+                continue;
+            }
             
             mainFrame.getStatusPanel().setTaskRunning(true);
-            mainFrame. getStatusPanel().setStatusMessage("Posílám zprávu pro " + sms
-            + " (" + operator + ") ...", true, Icons.STATUS_INFO, true);
-            running = true;
+            mainFrame.getStatusPanel().setStatusMessage("Posílám zprávu pro " + sms
+                + " (" + (operator == null ? "žádný operátor" : operator) + ") ...",
+                true, Icons.STATUS_INFO, true);
+            
+            SMSWorker worker = new SMSWorker(sms);
+            workers.put(operator, worker);
             
             //send in worker thread
-            smsWorker = new SMSWorker(sms);
-            smsWorker.execute();
+            worker.execute();
         }
     }
     
     /** Handle processed SMS */
     private void finishedSending(SMS sms) {
+        workers.remove(sms.getOperator());
         mainFrame.smsProcessed(sms);
-        running = false;
         //look for another sms to send
-        prepareSending();
+        sendNew();
     }
     
     /** send sms over internet */
@@ -109,7 +122,6 @@ public class SMSSender {
             
             return null;
         }
-        
     }
     
     /** Extract variables from SMS to a map */
@@ -136,7 +148,7 @@ public class SMSSender {
             switch (e.getID()) {
                 //on new sms ready try to send it
                 case QueuePanel.ACTION_NEW_SMS_READY:
-                    prepareSending();
+                    sendNew();
                     break;
             }
         }
