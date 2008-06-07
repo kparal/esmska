@@ -71,6 +71,7 @@ public class SMSSender {
             mainFrame.getStatusPanel().setStatusMessage("Posílám zprávu pro " + sms
                 + " (" + (operator == null ? "žádný operátor" : operator) + ") ...",
                 true, Icons.STATUS_INFO, true);
+            mainFrame.getQueuePanel().markSMSSending(sms);
             
             SMSWorker worker = new SMSWorker(sms);
             workers.put(operator, worker);

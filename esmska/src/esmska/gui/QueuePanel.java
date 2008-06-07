@@ -37,6 +37,7 @@ import esmska.utils.Nullator;
 import java.awt.BorderLayout;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.ListIterator;
 import java.util.Map.Entry;
@@ -77,6 +78,8 @@ public class QueuePanel extends javax.swing.JPanel {
     private HashMap<SMS, Integer> smsDelay = new HashMap<SMS, Integer>();
     //collection of sms ready and waiting to be sent
     private LinkedHashSet<SMS> readySMS = new LinkedHashSet<SMS>();
+    //collection of sms currently being sent
+    private HashSet<SMS> sendingSMS = new HashSet<SMS>();
     //sms which have been requested to be edited
     private SMS editRequestedSMS;
     
@@ -128,11 +131,13 @@ public class QueuePanel extends javax.swing.JPanel {
     
     /** Updates status of selected SMS */
     public void smsProcessed(SMS sms) {
-        int index = queueListModel.indexOf(sms);
+        sendingSMS.remove(sms);
+        
         if (sms.getStatus() == SMS.Status.SENT_OK) {
             queueListModel.remove(sms);
         }
         if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
+            int index = queueListModel.indexOf(sms);
             queueListModel.fireContentsChanged(
                     queueListModel, index, index);
         }
@@ -162,6 +167,18 @@ public class QueuePanel extends javax.swing.JPanel {
             return Collections.emptySet();
         } else {
             return Collections.unmodifiableSet(readySMS);
+        }
+    }
+    
+    /** Mark SMS as currently being sent. This SMS will be distinguished in the queue.
+     * @param sms SMS that is currently being sent
+     */
+    public void markSMSSending(SMS sms) {
+        sendingSMS.add(sms);
+        int index = queueListModel.indexOf(sms);
+        if (index >= 0) {
+            queueListModel.fireContentsChanged(
+                    queueListModel, index, index);
         }
     }
     
@@ -613,6 +630,7 @@ public class QueuePanel extends javax.swing.JPanel {
             if (removed) {
                 //update queue collections
                 readySMS.remove(element);
+                sendingSMS.remove(element);
                 operatorDelay.remove(element.getOperator()); //TODO: remove only when it's the last message of that operator //edit: really?
                 smsDelay.clear();
                 handleTimerStatus();
@@ -640,6 +658,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private class SMSQueueListRenderer extends DefaultListCellRenderer {
         private final JLabel delayLabel = new JLabel("", SwingConstants.TRAILING);
         private final JPanel panel = new JPanel(new BorderLayout());
+        private final ImageIcon sendIcon = new ImageIcon(getClass().getResource(RES + "send-16.png"));
 
         public SMSQueueListRenderer() {
             panel.add(delayLabel, BorderLayout.LINE_END);
@@ -672,9 +691,15 @@ public class QueuePanel extends javax.swing.JPanel {
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             panel.setToolTipText(wrapToHTML(sms.getText()));
-            //set delay
-            delayLabel.setText(convertDelayToHumanString(
-                    findCurrentDelay(sms)));
+            //set delay label
+            if (sendingSMS.contains(sms)) {
+                delayLabel.setIcon(sendIcon);
+                delayLabel.setText(null);
+            } else {
+                delayLabel.setIcon(null);
+                delayLabel.setText(convertDelayToHumanString(
+                        findCurrentDelay(sms)));
+            }
             //add to panel
             panel.add(label, BorderLayout.CENTER);
             
