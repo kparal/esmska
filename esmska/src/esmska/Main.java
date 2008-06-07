@@ -199,7 +199,7 @@ public class Main {
         java.awt.EventQueue.invokeLater(new java.lang.Runnable() {
             @Override
             public void run() {
-                MainFrame.getInstance().setVisible(true);
+                MainFrame.getInstance().startAndShow();
             }
         });
     }

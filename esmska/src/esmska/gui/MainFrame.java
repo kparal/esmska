@@ -187,6 +187,18 @@ public class MainFrame extends javax.swing.JFrame {
         return instance;
     }
     
+    /** Start the mainframe and let it be visible according to user preferences
+     * (visible on the screen or hidden to notification area) */
+    public void startAndShow() {
+        //if the window should be minimized into notification area
+        if (config.isStartMinimized() && NotificationIcon.isInstalled()) {
+            //do nothing, leave mainframe hidden
+        } else {
+            //show the form
+            this.setVisible(true);
+        }
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

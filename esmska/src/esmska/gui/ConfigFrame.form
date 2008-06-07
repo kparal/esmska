@@ -35,11 +35,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="tabbedPane" alignment="1" max="32767" attributes="0"/>
                   <Component id="closeButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="tabbedPane" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -49,10 +49,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabbedPane" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="tabbedPane" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="closeButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,7 +91,7 @@
                       <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="322" max="32767" attributes="0"/>
+                      <EmptySpace pref="256" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -131,9 +131,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="21" pref="21" max="21" attributes="0"/>
+                              <Component id="startMinimizedCheckBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="tipsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="notificationAreaCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="toolbarVisibleCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -153,9 +157,9 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel7" alignment="0" pref="638" max="32767" attributes="0"/>
                           <Component id="windowDecorationsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="rememberLayoutCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" pref="638" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -186,8 +190,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="notificationAreaCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="startMinimizedCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="tipsCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="143" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -314,6 +320,17 @@
                 <BindingProperty name="selected" source="config" sourcePath="${showTips}" target="tipsCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
+            <Component class="javax.swing.JCheckBox" name="startMinimizedCheckBox">
+              <Properties>
+                <Property name="mnemonic" type="int" value="121"/>
+                <Property name="text" type="java.lang.String" value="Po startu skr&#xfd;t program do ikony"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Program bude okam&#x17e;it&#x11b; po spu&#x161;t&#x11b;n&#xed; schov&#xe1;n&lt;br&gt;&#xa;do ikony v oznamovac&#xed; oblasti&#xa;&lt;/html&gt;"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="selected" source="config" sourcePath="${startMinimized}" target="startMinimizedCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="enabled" source="notificationAreaCheckBox" sourcePath="${selected}" target="startMinimizedCheckBox" targetPath="enabled" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -387,7 +404,7 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="senderNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="249" max="32767" attributes="0"/>
+                      <EmptySpace pref="183" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -541,8 +558,8 @@
                                   <Component id="loginTextField" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jLabel13" alignment="0" pref="638" max="32767" attributes="0"/>
                           <Component id="clearKeyringButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel13" alignment="0" pref="638" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -570,7 +587,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="156" max="32767" attributes="0"/>
+                      <EmptySpace pref="90" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -685,8 +702,8 @@
                       <Component id="reducedHistoryCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="reducedHistorySpinner" min="-2" pref="65" max="-2" attributes="0"/>
-                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="188" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -698,9 +715,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="reducedHistoryCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="reducedHistorySpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel19" alignment="3" max="32767" attributes="1"/>
+                          <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="343" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -710,19 +727,11 @@
               <Properties>
                 <Property name="mnemonic" type="int" value="109"/>
                 <Property name="text" type="java.lang.String" value="Omezit historii odeslan&#xfd;ch zpr&#xe1;v pouze na posledn&#xed;ch"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu se ulo&#x17e;&#xed; historie odeslan&#xfd;ch zpr&#xe1;v&lt;BR&gt;&#xa;pouze za zvolen&#xe9; posledn&#xed; obdob&#xed;.&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu se ulo&#x17e;&#xed; historie odeslan&#xfd;ch zpr&#xe1;v&lt;BR&gt;&#xa;pouze za zvolen&#xe9; posledn&#xed; obdob&#xed;&#xa;&lt;/html&gt;"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${reducedHistory}" target="reducedHistoryCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel19">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="dn&#xed;."/>
-                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection component="reducedHistoryCheckBox" name="toolTipText" type="property"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="reducedHistorySpinner">
               <Properties>
@@ -738,6 +747,11 @@
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((SpinnerNumberModel)reducedHistorySpinner.getModel()).setMinimum(new Integer(0));"/>
               </AuxValues>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel18">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="dn&#xed;."/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel5">
@@ -752,10 +766,9 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel17" alignment="0" pref="638" max="32767" attributes="0"/>
                           <Component id="useProxyCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="21" pref="21" max="21" attributes="0"/>
@@ -781,6 +794,7 @@
                                   </Group>
                               </Group>
                           </Group>
+                          <Component id="jLabel17" alignment="0" pref="638" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -808,7 +822,7 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="211" max="32767" attributes="0"/>
+                      <EmptySpace pref="145" max="32767" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
