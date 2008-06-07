@@ -42,6 +42,8 @@ public class Config extends Object implements Serializable {
     private String socksProxy = "";
     private boolean notificationIconVisible = false;
     private boolean showTips = true;
+    private boolean reducedHistory = false;
+    private int reducedHistoryCount = 30;
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -160,6 +162,13 @@ public class Config extends Object implements Serializable {
         return showTips;
     }
     
+    public boolean isReducedHistory() {
+        return reducedHistory;
+    }
+    
+    public int getReducedHistoryCount() {
+        return reducedHistoryCount;
+    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
@@ -311,6 +320,18 @@ public class Config extends Object implements Serializable {
         boolean old = this.showTips;
         this.showTips = showTips;
         changeSupport.firePropertyChange("showTips", old, showTips);
+    }
+    
+    public void setReducedHistory(boolean reducedHistory) {
+        boolean oldReducedHistory = this.reducedHistory;
+        this.reducedHistory = reducedHistory;
+        changeSupport.firePropertyChange("reducedHistory", oldReducedHistory, reducedHistory);
+    }
+    
+    public void setReducedHistoryCount(int reducedHistoryCount) {
+        int oldReducedHistoryCount = this.reducedHistoryCount;
+        this.reducedHistoryCount = reducedHistoryCount;
+        changeSupport.firePropertyChange("reducedHistoryCount", oldReducedHistoryCount, reducedHistoryCount);
     }
     // </editor-fold>
 }

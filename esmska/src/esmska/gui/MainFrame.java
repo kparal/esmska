@@ -47,6 +47,7 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Envelope;
 import esmska.data.History;
+import esmska.data.History.Record;
 import esmska.data.Icons;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
@@ -56,6 +57,9 @@ import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.ListIterator;
 
 /**
  * MainFrame form
@@ -586,6 +590,27 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** save sms history */
     private void saveHistory() {
+        //erase old messages from history if demanded
+        if (config.isReducedHistory()) {
+            ArrayList<Record> records = history.getRecords();
+            //computer last acceptable record time
+            Calendar limitCal = Calendar.getInstance();
+            limitCal.add(Calendar.DAY_OF_MONTH, -config.getReducedHistoryCount());
+            Date limit = limitCal.getTime();
+            //traverse through history and erase all older records than the limit time
+            ListIterator<Record> iter = records.listIterator();
+            while (iter.hasNext()) {
+                Record record = iter.next();
+                if (record.getDate().before(limit)) {
+                    iter.remove();
+                } else {
+                    //records are sorted in time, therefore on first newer message
+                    //stop iterating
+                    break;
+                }
+            }
+        }
+        
         try {
             persistenceManager.saveHistory();
         } catch (Exception ex) {
