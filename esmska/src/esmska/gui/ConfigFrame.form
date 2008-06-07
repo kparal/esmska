@@ -233,10 +233,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="jLabel7.getFont().deriveFont(Font.ITALIC)" type="code"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="* Pro projeven&#xed; zm&#x11b;n je nutn&#xfd; restart programu!"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;i&gt;&#xa;* Pro projeven&#xed; zm&#x11b;n je nutn&#xfd; restart programu!&#xa;&lt;/i&gt;&lt;/html&gt;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="themeComboBox">
@@ -328,7 +325,7 @@
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${startMinimized}" target="startMinimizedCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
-                <BindingProperty name="enabled" source="notificationAreaCheckBox" sourcePath="${selected}" target="startMinimizedCheckBox" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="enabled" source="notificationAreaCheckBox" sourcePath="${selected &amp;&amp; enabled}" target="startMinimizedCheckBox" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
           </SubComponents>
@@ -345,22 +342,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" max="-2" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="useSenderIDCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" max="-2" attributes="0">
-                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="senderNumberTextField" min="-2" max="-2" attributes="1"/>
-                                  <Component id="senderNameTextField" alignment="0" min="-2" max="-2" attributes="1"/>
-                              </Group>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -373,8 +358,19 @@
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="operatorFilterTextField" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="senderNumberTextField" min="-2" max="-2" attributes="1"/>
+                                  <Component id="senderNameTextField" alignment="0" min="-2" max="-2" attributes="1"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -447,7 +443,7 @@
             <Component class="javax.swing.JTextField" name="senderNameTextField">
               <Properties>
                 <Property name="columns" type="int" value="13"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;P&#x159;i vypln&#x11b;n&#xed; jm&#xe9;na je jm&#xe9;no veps&#xe1;no do zpr&#xe1;vy,&lt;br&gt;&#xa;tak&#x17e;e je sms ve skute&#x10d;nosti o n&#x11b;co del&#x161;&#xed;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Vypln&#x11b;n&#xe9; jm&#xe9;no zab&#xed;r&#xe1; ve zpr&#xe1;v&#x11b; m&#xed;sto, av&#x161;ak nen&#xed; vid&#x11b;t,&lt;br&gt;&#xa;tak&#x17e;e obarvov&#xe1;n&#xed; textu zpr&#xe1;vy a ukazatel po&#x10d;tu sms&lt;br&gt;&#xa;nebudou zd&#xe1;nliv&#x11b; spolu souhlasit&#xa;&lt;/html&gt;&#xa;&#xa;"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${senderName}" target="senderNameTextField" targetPath="text" updateStrategy="0" immediately="false">

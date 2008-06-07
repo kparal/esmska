@@ -99,13 +99,36 @@ public class Envelope {
             if (operator == null)
                 continue;
             worstOperator = Math.min(worstOperator,
-                    operator.getSMSLength() - getSignatureLength(c));
+                    operator.getSMSLength());
         }
         
+        chars += getSignatureLength();
         int count = chars / worstOperator;
         if (chars % worstOperator != 0)
             count++;
         return count;
+    }
+    
+    /** Get maximum signature length of the contact operators in the envelope */
+    public int getSignatureLength() {
+        int worstSignature = 0;
+        //find maximum signature length
+        for (Contact c : contacts) {
+            Operator operator = OperatorUtil.getOperator(c.getOperator());
+            if (operator == null)
+                continue;
+            worstSignature = Math.max(worstSignature, 
+                    operator.getSignatureExtraLength());
+        }
+        
+        String senderName = config.getSenderName();
+        //no operator supports signature or user has no signature
+        if (worstSignature == 0 || senderName == null || senderName.length() <= 0) {
+            return 0;
+        } else {
+            //add the signature length itself
+            return worstSignature + senderName.length();
+        }
     }
     
     /** generate list of sms's to send */
@@ -136,7 +159,7 @@ public class Envelope {
         Operator operator = OperatorUtil.getOperator(c.getOperator());
         if (operator != null && config.isUseSenderID() &&
                 config.getSenderName() != null &&
-                config.getSenderName().length() != 0) {
+                config.getSenderName().length() > 0) {
             return operator.getSignatureExtraLength() + config.getSenderName().length();
         } else {
             return 0;
