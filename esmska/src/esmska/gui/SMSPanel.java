@@ -415,7 +415,7 @@ public class SMSPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(sendButton)
@@ -428,8 +428,15 @@ public class SMSPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
-        if (disableContactListeners)
+        if (disableContactListeners) {
             return;
+        }
+        
+        //on Enter just focus the text area
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            smsTextPane.requestFocusInWindow();
+            return;
+        }
         
         //update name label
         Contact contact = lookupContact(false);
