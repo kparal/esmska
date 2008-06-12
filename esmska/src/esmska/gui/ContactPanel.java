@@ -778,10 +778,12 @@ public class ContactPanel extends javax.swing.JPanel {
             if (e.getWheelRotation() >= 0) { //mouse wheel down
                 if (index < contactListModel.getSize() - 1) {
                     contactList.setSelectedIndex(index + 1);
+                    contactList.ensureIndexIsVisible(index + 1);
                 }
             } else { //mouse wheel up
                 if (index > 0) {
                     contactList.setSelectedIndex(index - 1);
+                    contactList.ensureIndexIsVisible(index - 1);
                 }
             }
         }
