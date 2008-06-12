@@ -26,7 +26,7 @@ public class Envelope {
     private static final Config config = PersistenceManager.getConfig();;
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
-    
+
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
@@ -111,6 +111,12 @@ public class Envelope {
     
     /** Get maximum signature length of the contact operators in the envelope */
     public int getSignatureLength() {
+        String senderName = config.getSenderName();
+        //user has no signature
+        if (!config.isUseSenderID() || senderName == null || senderName.length() <= 0) {
+            return 0;
+        }
+        
         int worstSignature = 0;
         //find maximum signature length
         for (Contact c : contacts) {
@@ -121,9 +127,8 @@ public class Envelope {
                     operator.getSignatureExtraLength());
         }
         
-        String senderName = config.getSenderName();
-        //no operator supports signature or user has no signature
-        if (worstSignature == 0 || senderName == null || senderName.length() <= 0) {
+        //no operator supports signature
+        if (worstSignature == 0) {
             return 0;
         } else {
             //add the signature length itself

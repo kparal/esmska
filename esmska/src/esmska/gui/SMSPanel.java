@@ -271,6 +271,41 @@ public class SMSPanel extends javax.swing.JPanel {
         return sendAction;
     }
     
+    /** updates values on progress bars according to currently written message chars*/
+    private void updateProgressBars() {
+        int smsLength = smsTextPane.getText().length();
+        
+        //set maximums
+        singleProgressBar.setMaximum(envelope.getSMSLength());
+        fullProgressBar.setMaximum(envelope.getMaxTextLength());
+        
+        //if we are at the end of the whole message, the current message length
+        //can be lesser than usual
+        int remainder = envelope.getMaxTextLength() % envelope.getSMSLength();
+        if (envelope.getMaxTextLength() - smsLength < remainder) {
+            //we have crossed the remainder border, let's update maximum on progress bar
+            singleProgressBar.setMaximum(remainder);
+        }
+        
+        //set values
+        fullProgressBar.setValue(smsLength);
+        singleProgressBar.setValue(smsLength % envelope.getSMSLength());
+        //on the border counts we want progress bar full instead of empty
+        if (singleProgressBar.getValue() == 0 && smsLength > 0) {
+            singleProgressBar.setValue(singleProgressBar.getMaximum());
+        }
+        
+        //set tooltips
+        int current = singleProgressBar.getValue();
+        int max = singleProgressBar.getMaximum();
+        singleProgressBar.setToolTipText("<html>Znaků v aktuální zprávě: <b>" + 
+                current + "/" + max + "</b> (zbývá <b>" + (max - current) + "</b>)</html>");
+        current = fullProgressBar.getValue();
+        max = fullProgressBar.getMaximum();
+        fullProgressBar.setToolTipText("<html>Znaků v celé zprávě: <b>" + current +
+                "/" + max + "</b> (zbývá <b>" + (max - current) + "</b>)</html>");
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -280,7 +315,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        progressBar = new javax.swing.JProgressBar();
+        fullProgressBar = new javax.swing.JProgressBar();
         numberTextField = new javax.swing.JTextField() {
             @Override
             public String getText() {
@@ -299,6 +334,7 @@ public class SMSPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         operatorComboBox = new esmska.gui.OperatorComboBox();
+        singleProgressBar = new javax.swing.JProgressBar();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Zpráva"));
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -311,8 +347,7 @@ public class SMSPanel extends javax.swing.JPanel {
         jLabel4.setLabelFor(numberTextField);
         jLabel4.setText("Číslo");
 
-        progressBar.setMaximum(1000);
-        progressBar.setToolTipText("Graficky zobrazuje zbývající volné místo ve zprávě");
+        fullProgressBar.setMaximum(1000);
 
         numberTextField.setColumns(12);
         numberTextField.setToolTipText("<html>\nTelefonní číslo kontaktu včetně předčíslí země.<br>\nPřečíslí země nemusí být vyplněno, pokud je nastaveno<br>\nvýchozí předčíslí v nastavení programu.\n</html>");
@@ -370,6 +405,8 @@ public class SMSPanel extends javax.swing.JPanel {
 
     operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
 
+    singleProgressBar.setMaximum(1000);
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -381,7 +418,8 @@ public class SMSPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
@@ -398,6 +436,9 @@ public class SMSPanel extends javax.swing.JPanel {
                     .addGap(115, 115, 115)))
             .addContainerGap())
     );
+
+    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {fullProgressBar, singleProgressBar});
+
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
@@ -414,7 +455,9 @@ public class SMSPanel extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jLabel5)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -424,6 +467,8 @@ public class SMSPanel extends javax.swing.JPanel {
     );
 
     layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {numberTextField, operatorComboBox});
+
+    layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {fullProgressBar, singleProgressBar});
 
     }// </editor-fold>//GEN-END:initComponents
     
@@ -631,7 +676,7 @@ public class SMSPanel extends javax.swing.JPanel {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             if (evt.getPropertyName().equals("contacts")) {
-                progressBar.setMaximum(envelope.getMaxTextLength());
+                updateProgressBars();
             }
         }
     }
@@ -704,7 +749,7 @@ public class SMSPanel extends javax.swing.JPanel {
             undoAction.updateStatus();
             redoAction.updateStatus();
             sendAction.updateStatus();
-            progressBar.setValue(smsTextPane.getText().length());
+            updateProgressBars();
         }
         /** color parts of sms */
         private void colorDocument(int from, int length) {
@@ -754,6 +799,7 @@ public class SMSPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar fullProgressBar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -761,8 +807,8 @@ public class SMSPanel extends javax.swing.JPanel {
     private javax.swing.JLabel nameLabel;
     javax.swing.JTextField numberTextField;
     private esmska.gui.OperatorComboBox operatorComboBox;
-    private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton sendButton;
+    private javax.swing.JProgressBar singleProgressBar;
     private javax.swing.JLabel smsCounterLabel;
     private javax.swing.JTextPane smsTextPane;
     // End of variables declaration//GEN-END:variables

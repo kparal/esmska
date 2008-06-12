@@ -26,16 +26,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="progressBar" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
+                  <Component id="singleProgressBar" linkSize="2" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
+                  <Component id="fullProgressBar" linkSize="2" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jScrollPane1" pref="264" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
@@ -75,7 +76,9 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="progressBar" min="-2" pref="10" max="-2" attributes="1"/>
+                      <Component id="singleProgressBar" linkSize="3" min="-2" pref="10" max="-2" attributes="1"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="fullProgressBar" linkSize="3" min="-2" pref="10" max="-2" attributes="1"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="1" pref="148" max="32767" attributes="0"/>
               </Group>
@@ -99,10 +102,9 @@
         <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="progressBar">
+    <Component class="javax.swing.JProgressBar" name="fullProgressBar">
       <Properties>
         <Property name="maximum" type="int" value="1000"/>
-        <Property name="toolTipText" type="java.lang.String" value="Graficky zobrazuje zb&#xfd;vaj&#xed;c&#xed; voln&#xe9; m&#xed;sto ve zpr&#xe1;v&#x11b;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="numberTextField">
@@ -174,6 +176,11 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBox.addActionListener(new OperatorComboBoxActionListener());"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="singleProgressBar">
+      <Properties>
+        <Property name="maximum" type="int" value="1000"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
