@@ -40,7 +40,8 @@ public class OperatorExecutor {
     /** Message that login or password was wrong. */
     public static final String ERROR_WRONG_AUTH =
             "Zadali jste nesprávné přihlašovací údaje.<br>" +
-            "Možná jste je jen zapomněli vyplnit v nastavení programu.";
+            "Tato brána vyžaduje registraci, bez ní přes ni nelze zprávy posílat.<br>" +
+            "Přihlašovací údaje můžete vyplnit v nastavení programu.";
     /** Message that user has not waited long enough to send another message
      * or message quota has been reached. */
     public static final String ERROR_LIMIT_REACHED =
