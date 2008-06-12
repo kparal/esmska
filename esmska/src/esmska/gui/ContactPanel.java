@@ -19,6 +19,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -68,6 +69,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private Action chooseContactAction = new ChooseContactAction();
     private SearchContactAction searchContactAction = new SearchContactAction();
     private ContactListModel contactListModel = new ContactListModel();
+    private ContactPopupMenu popup = new ContactPopupMenu();
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -83,6 +85,7 @@ public class ContactPanel extends javax.swing.JPanel {
     /** Creates new form ContactPanel */
     public ContactPanel() {
         initComponents();
+        contactList.addMouseListener(new ContactMouseListener());
     }
     
     /** clear selection of contact list */
@@ -189,7 +192,6 @@ public class ContactPanel extends javax.swing.JPanel {
         contactList.setModel(contactListModel);
         contactList.setToolTipText("Seznam kontaktů (Alt+K)");
         contactList.setCellRenderer(new ContactListRenderer());
-        contactList.setComponentPopupMenu(new ContactPopupMenu());
         //key shortcuts
         String command = "choose contact";
         contactList.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), command);
@@ -201,11 +203,6 @@ public class ContactPanel extends javax.swing.JPanel {
         getActionMap().put(command, new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 contactList.requestFocusInWindow();
-            }
-        });
-        contactList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                contactListMouseClicked(evt);
             }
         });
         contactList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -247,7 +244,7 @@ public class ContactPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -273,12 +270,6 @@ public class ContactPanel extends javax.swing.JPanel {
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         contactList.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
-
-    private void contactListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactListMouseClicked
-        //transfer focus everytime but on single left click
-        if (evt.getButton() != MouseEvent.BUTTON1 || evt.getClickCount() > 1)
-            chooseContactAction.actionPerformed(null);
-    }//GEN-LAST:event_contactListMouseClicked
 
     private void contactListKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactListKeyTyped
         //do not catch keyboard shortcuts
@@ -754,6 +745,44 @@ public class ContactPanel extends javax.swing.JPanel {
             //remove contact action
             menuItem = new JMenuItem(removeContactAction);
             this.add(menuItem);
+        }
+    }
+    
+    /** Mouse listener on the contact list */
+    private class ContactMouseListener extends MouseAdapter {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            //transfer on left button doubleclick
+            if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() > 1) {
+                chooseContactAction.actionPerformed(null);
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            maybePopup(e);
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            maybePopup(e);
+        }
+
+        /** handle popup requests */
+        private void maybePopup(MouseEvent e) {
+            if (!e.isPopupTrigger()) {
+                return;
+            }
+
+            //if user clicked on unselected contact, select it
+            int index = contactList.locationToIndex(e.getPoint());
+            if (index >= 0 && !contactList.isSelectedIndex(index)) {
+                contactList.setSelectedIndex(index);
+            }
+            
+            //show popup
+            popup.show(contactList, e.getX(), e.getY());
         }
     }
     
