@@ -236,6 +236,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     JOptionPane.DEFAULT_OPTION, null, new Object[]{option}, option);
             JDialog dialog = op.createDialog(this,"Licence");
             dialog.setResizable(true);
+            dialog.pack();
             dialog.setVisible(true);
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not show license", ex);
@@ -271,6 +272,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     JOptionPane.DEFAULT_OPTION, null, new Object[]{option}, option);
             JDialog dialog = op.createDialog(this,"Zásluhy");
             dialog.setResizable(true);
+            dialog.pack();
             dialog.setVisible(true);
         } catch (IOException e) {
             logger.log(Level.WARNING, "Could not show credits", e);

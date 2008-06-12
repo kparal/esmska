@@ -476,6 +476,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             //show the dialog
             dialog.setResizable(true);
+            dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
             dialog.setVisible(true);
             
             //transfer focus
