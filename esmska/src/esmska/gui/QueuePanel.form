@@ -63,9 +63,9 @@
                       <Component id="editButton" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="deleteButton" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="49" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="50" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane2" alignment="0" pref="75" max="32767" attributes="2"/>
+                  <Component id="jScrollPane2" alignment="0" pref="76" max="32767" attributes="2"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -78,7 +78,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="smsUpAction" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=""/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>
@@ -92,7 +91,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="smsDownAction" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=""/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>
@@ -129,7 +127,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="editSMSAction" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=""/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>
@@ -143,7 +140,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="deleteSMSAction" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=""/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>
@@ -157,7 +153,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="smsQueuePauseAction" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=""/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 2, 2, 2]"/>
         </Property>

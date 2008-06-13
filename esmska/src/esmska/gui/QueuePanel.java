@@ -497,6 +497,9 @@ public class QueuePanel extends javax.swing.JPanel {
             editRequestedSMS = sms;
             queueListModel.remove(sms);
             
+            IntegrationAdapter.getInstance().setSMSCount(
+                    smsQueue.isEmpty() ? null : smsQueue.size());
+            
             //fire event
             actionSupport.fireActionPerformed(ACTION_REQUEST_EDIT_SMS, null);
         }
