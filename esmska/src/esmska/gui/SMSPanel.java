@@ -478,7 +478,7 @@ public class SMSPanel extends javax.swing.JPanel {
         }
         
         //on Enter just focus the text area
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt != null && evt.getKeyCode() == KeyEvent.VK_ENTER) {
             smsTextPane.requestFocusInWindow();
             return;
         }
