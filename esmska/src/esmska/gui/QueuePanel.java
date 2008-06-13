@@ -35,6 +35,7 @@ import esmska.utils.ActionEventSupport;
 import esmska.integration.IntegrationAdapter;
 import esmska.utils.Nullator;
 import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,8 +43,11 @@ import java.util.LinkedHashSet;
 import java.util.ListIterator;
 import java.util.Map.Entry;
 import java.util.Set;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /** SMS queue panel
@@ -82,6 +86,8 @@ public class QueuePanel extends javax.swing.JPanel {
     private HashSet<SMS> sendingSMS = new HashSet<SMS>();
     //sms which have been requested to be edited
     private SMS editRequestedSMS;
+    private QueuePopupMenu popup = new QueuePopupMenu();
+    private QueueMouseListener mouseListener;
     
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -97,6 +103,11 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Creates new form QueuePanel */
     public QueuePanel() {
         initComponents();
+        
+        //add mouse listeners to the queue list
+        mouseListener = new QueueMouseListener(queueList, popup);
+        queueList.addMouseListener(mouseListener);
+        queueList.addMouseWheelListener(mouseListener);
 
         //if there are some messages in queue, handle all needed routines
         if (!smsQueue.isEmpty()) {
@@ -340,10 +351,12 @@ public class QueuePanel extends javax.swing.JPanel {
         });
 
         smsUpButton.setAction(smsUpAction);
+        smsUpButton.setText("");
         smsUpButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         smsDownButton.setAction(smsDownAction);
+        smsDownButton.setText("");
         smsDownButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -358,14 +371,17 @@ public class QueuePanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(queueList);
 
         editButton.setAction(editSMSAction);
+        editButton.setText("");
         editButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         editButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         deleteButton.setAction(deleteSMSAction);
+        deleteButton.setText("");
         deleteButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         pauseButton.setAction(smsQueuePauseAction);
+        pauseButton.setText("");
         pauseButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -379,7 +395,7 @@ public class QueuePanel extends javax.swing.JPanel {
                     .addComponent(smsDownButton)
                     .addComponent(smsUpButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -407,8 +423,8 @@ public class QueuePanel extends javax.swing.JPanel {
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
-                        .addGap(0, 42, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                        .addGap(0, 49, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -435,8 +451,11 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
         public DeleteSMSAction() {
-            super(null, new ImageIcon(QueuePanel.class.getResource(RES + "delete.png")));
+            super("Odstranit zprávy", 
+                    new ImageIcon(QueuePanel.class.getResource(RES + "delete-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Odstranit označené zprávy");
+            this.putValue(LARGE_ICON_KEY,
+                    new ImageIcon(ContactPanel.class.getResource(RES + "delete-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -461,8 +480,11 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Edit sms from queue */
     private class EditSMSAction extends AbstractAction {
         public EditSMSAction() {
-            super(null, new ImageIcon(QueuePanel.class.getResource(RES + "edit-22.png")));
+            super("Upravit zprávu",
+                    new ImageIcon(QueuePanel.class.getResource(RES + "edit-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Upravit označenou zprávu");
+            this.putValue(LARGE_ICON_KEY,
+                    new ImageIcon(ContactPanel.class.getResource(RES + "edit-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -483,8 +505,11 @@ public class QueuePanel extends javax.swing.JPanel {
     /** move sms up in sms queue */
     private class SMSUpAction extends AbstractAction {
         public SMSUpAction() {
-            super(null,new ImageIcon(QueuePanel.class.getResource(RES + "up.png")));
+            super("Přesunout výš",
+                    new ImageIcon(QueuePanel.class.getResource(RES + "up-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě výše");
+            this.putValue(LARGE_ICON_KEY,
+                    new ImageIcon(ContactPanel.class.getResource(RES + "up-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -511,8 +536,11 @@ public class QueuePanel extends javax.swing.JPanel {
     /** move sms down in sms queue */
     private class SMSDownAction extends AbstractAction {
         public SMSDownAction() {
-            super(null,new ImageIcon(QueuePanel.class.getResource(RES + "down.png")));
+            super("Přesunout níž",
+                    new ImageIcon(QueuePanel.class.getResource(RES + "down-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě níže");
+            this.putValue(LARGE_ICON_KEY,
+                    new ImageIcon(ContactPanel.class.getResource(RES + "down-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -539,28 +567,42 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Pause/unpause the sms queue */
     private class SMSQueuePauseAction extends AbstractAction {
         private boolean paused = false;
+        private final String nameRunning = "Pozastavit frontu";
+        private final String nameStopped = "Spustit frontu";
         private final String descRunning = "Pozastavit odesílání sms ve frontě (Alt+P)";
         private final String descStopped = "Pokračovat v odesílání sms ve frontě (Alt+P)";
-        private final ImageIcon pauseIcon = new ImageIcon(QueuePanel.class.getResource(RES + "pause.png"));
-        private final ImageIcon startIcon = new ImageIcon(QueuePanel.class.getResource(RES + "start.png"));
+        private final ImageIcon pauseIcon = new ImageIcon(QueuePanel.class.getResource(RES + "pause-22.png"));
+        private final ImageIcon pauseIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "pause-16.png"));
+        private final ImageIcon startIcon = new ImageIcon(QueuePanel.class.getResource(RES + "start-22.png"));
+        private final ImageIcon startIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "start-16.png"));
         public SMSQueuePauseAction() {
-            super(null, new ImageIcon(QueuePanel.class.getResource(RES + "pause.png")));
-            putValue(SHORT_DESCRIPTION,descRunning);
+            super();
+            putValue(NAME, nameRunning);
+            putValue(SHORT_DESCRIPTION, descRunning);
+            putValue(SMALL_ICON, pauseIconSmall);
+            putValue(LARGE_ICON_KEY, pauseIcon);
             putValue(MNEMONIC_KEY, KeyEvent.VK_P);
             putValue(SELECTED_KEY, false);
         }
         @Override
         public void actionPerformed(ActionEvent e) {
             if (paused) {
-                putValue(LARGE_ICON_KEY,pauseIcon);
-                putValue(SHORT_DESCRIPTION,descRunning);
+                putValue(NAME, nameRunning);
+                putValue(SMALL_ICON, pauseIconSmall);
+                putValue(LARGE_ICON_KEY, pauseIcon);
+                putValue(SHORT_DESCRIPTION, descRunning);
                 putValue(SELECTED_KEY, false);
             } else {
+                putValue(NAME, nameStopped);
+                putValue(SMALL_ICON, startIconSmall);
                 putValue(LARGE_ICON_KEY, startIcon);
-                putValue(SHORT_DESCRIPTION,descStopped);
+                putValue(SHORT_DESCRIPTION, descStopped);
                 putValue(SELECTED_KEY, true);
             }
             paused = !paused;
+            
+            //clear text on pause button
+            pauseButton.setText(null);
             
             //fire event
             actionSupport.fireActionPerformed(ACTION_QUEUE_PAUSE_CHANGED, null);
@@ -758,6 +800,52 @@ public class QueuePanel extends javax.swing.JPanel {
             //update the gui
             if (queueListModel.getSize() > 0) {
                 queueListModel.fireContentsChanged(queueListModel, 0, queueListModel.getSize() - 1);
+            }
+        }
+    }
+    
+    /** Popup menu in the queue list */
+    private class QueuePopupMenu extends JPopupMenu {
+
+        public QueuePopupMenu() {
+            JMenuItem menuItem = null;
+
+            //edit sms action
+            menuItem = new JMenuItem(editSMSAction);
+            this.add(menuItem);
+
+            //delete sms action
+            menuItem = new JMenuItem(deleteSMSAction);
+            this.add(menuItem);
+
+            //move sms up action
+            menuItem = new JMenuItem(smsUpAction);
+            this.add(menuItem);
+            
+            //move sms down action
+            menuItem = new JMenuItem(smsDownAction);
+            this.add(menuItem);
+            
+            this.addSeparator();
+            
+            //queue pause action
+            menuItem = new JMenuItem(smsQueuePauseAction);
+            this.add(menuItem);
+        }
+    }
+    
+    /** Mouse listener on the queue list */
+    private class QueueMouseListener extends ListPopupMouseListener {
+
+        public QueueMouseListener(JList list, JPopupMenu popup) {
+            super(list, popup);
+        }
+        
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            //transfer on left button doubleclick
+            if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() > 1) {
+                editButton.doClick();
             }
         }
     }

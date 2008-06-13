@@ -401,7 +401,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         private final String[] options = new String[]{cancelOption, deleteOption};
         
         public DeleteAction() {
-            super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "delete.png")));
+            super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "delete-22.png")));
             this.putValue(SHORT_DESCRIPTION, "Odstranit označené zprávy z historie (Alt+D)");
             putValue(MNEMONIC_KEY, KeyEvent.VK_D);
             this.setEnabled(false);

@@ -19,9 +19,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -71,7 +69,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private SearchContactAction searchContactAction = new SearchContactAction();
     private ContactListModel contactListModel = new ContactListModel();
     private ContactPopupMenu popup = new ContactPopupMenu();
-    private ContactMouseListener mouseListener = new ContactMouseListener();
+    private ContactMouseListener mouseListener;
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -87,6 +85,9 @@ public class ContactPanel extends javax.swing.JPanel {
     /** Creates new form ContactPanel */
     public ContactPanel() {
         initComponents();
+        
+        //add mouse listeners to the contact list
+        mouseListener = new ContactMouseListener(contactList, popup);
         contactList.addMouseListener(mouseListener);
         contactList.addMouseWheelListener(mouseListener);
     }
@@ -452,7 +453,9 @@ public class ContactPanel extends javax.swing.JPanel {
     private class ChooseContactAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            actionSupport.fireActionPerformed(ACTION_CONTACT_CHOSEN, null);
+            if (contactList.getSelectedIndex() >= 0) {
+                actionSupport.fireActionPerformed(ACTION_CONTACT_CHOSEN, null);
+            }
         }
     }
     
@@ -752,56 +755,18 @@ public class ContactPanel extends javax.swing.JPanel {
     }
     
     /** Mouse listener on the contact list */
-    private class ContactMouseListener extends MouseAdapter {
+    private class ContactMouseListener extends ListPopupMouseListener {
 
+        public ContactMouseListener(JList list, JPopupMenu popup) {
+            super(list, popup);
+        }
+        
         @Override
         public void mouseClicked(MouseEvent e) {
             //transfer on left button doubleclick
             if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() > 1) {
                 chooseContactAction.actionPerformed(null);
             }
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            maybePopup(e);
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            maybePopup(e);
-        }
-
-        @Override
-        public void mouseWheelMoved(MouseWheelEvent e) {
-            int index = contactList.getSelectedIndex();
-            if (e.getWheelRotation() >= 0) { //mouse wheel down
-                if (index < contactListModel.getSize() - 1) {
-                    contactList.setSelectedIndex(index + 1);
-                    contactList.ensureIndexIsVisible(index + 1);
-                }
-            } else { //mouse wheel up
-                if (index > 0) {
-                    contactList.setSelectedIndex(index - 1);
-                    contactList.ensureIndexIsVisible(index - 1);
-                }
-            }
-        }
-        
-        /** handle popup requests */
-        private void maybePopup(MouseEvent e) {
-            if (!e.isPopupTrigger()) {
-                return;
-            }
-
-            //if user clicked on unselected contact, select it
-            int index = contactList.locationToIndex(e.getPoint());
-            if (index >= 0 && !contactList.isSelectedIndex(index)) {
-                contactList.setSelectedIndex(index);
-            }
-            
-            //show popup
-            popup.show(contactList, e.getX(), e.getY());
         }
     }
     
