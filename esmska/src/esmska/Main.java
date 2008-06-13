@@ -191,7 +191,7 @@ public class Main {
         UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
 
         //set MenuBar usage on Mac OS
-        if (macBarUI != null && OSType.isEqual(OSType.MAC_OS_X)) {
+        if (macBarUI != null && OSType.isMac()) {
             UIManager.put("MenuBarUI", macBarUI);
         }
         

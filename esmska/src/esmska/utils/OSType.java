@@ -41,4 +41,20 @@ public enum OSType {
     public static boolean isEqual(OSType osType) {
         return detect().equals(osType);
     }
+    
+    /** Check whether current OS is Linux */
+    public static boolean isLinux() {
+        return isEqual(LINUX);
+    }
+    
+    /** Check whether current OS is Mac */
+    public static boolean isMac() {
+        return isEqual(MAC_OS_X);
+    }
+    
+    /** Check whether current OS is Windows */
+    public static boolean isWindows() {
+        return isEqual(WINDOWS);
+    }
+    
 }

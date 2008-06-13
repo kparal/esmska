@@ -317,7 +317,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         // on Mac OS X the search field has native look and feel with inline icons, clear
         // button is not needed
-        if (OSType.isEqual(OSType.MAC_OS_X) && config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM)) {
+        if (OSType.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM)) {
             clearButton.setVisible(false);
         }
         clearButton.addActionListener(new java.awt.event.ActionListener() {

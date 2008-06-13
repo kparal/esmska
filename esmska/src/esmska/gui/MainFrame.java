@@ -116,14 +116,15 @@ public class MainFrame extends javax.swing.JFrame {
         getRootPane().getActionMap().put(command, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (NotificationIcon.isInstalled()) { //hide only when notification icon present
+                //hide only when notification icon present or on mac
+                if (NotificationIcon.isInstalled() || OSType.isMac()) {
                     formWindowClosing(new WindowEvent(MainFrame.this, 0));
                 }
             }
         });
         
         //on Mac, move program menu items to system menu
-        if (OSType.isEqual(OSType.MAC_OS_X)) {
+        if (OSType.isMac()) {
             try {
                 ActionBean bean = new ActionBean();
                 bean.setQuitAction(quitAction);

@@ -343,7 +343,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);&#xa;&#xa;// on Mac OS X the search field has native look and feel with inline icons, clear&#xa;// button is not needed&#xa;if (OSType.isEqual(OSType.MAC_OS_X) &amp;&amp; config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM)) {&#xa;    clearButton.setVisible(false);&#xa;}&#xa;"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);&#xa;&#xa;// on Mac OS X the search field has native look and feel with inline icons, clear&#xa;// button is not needed&#xa;if (OSType.isMac() &amp;&amp; config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM)) {&#xa;    clearButton.setVisible(false);&#xa;}&#xa;"/>
       </AuxValues>
     </Component>
   </SubComponents>

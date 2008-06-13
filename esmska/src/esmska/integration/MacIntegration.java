@@ -10,6 +10,7 @@ import com.apple.eawt.Application;
 import com.apple.eawt.ApplicationEvent;
 import com.apple.eawt.ApplicationListener;
 
+import esmska.gui.MainFrame;
 import esmska.gui.NotificationIcon;
 
 /**
@@ -122,6 +123,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
      */
     @Override
     public void handleReOpenApplication(ApplicationEvent e) {
-        e.setHandled(false);
+        e.setHandled(true);
+        MainFrame.getInstance().setVisible(true);
     }
 }
