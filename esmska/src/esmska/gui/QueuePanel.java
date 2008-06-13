@@ -116,8 +116,7 @@ public class QueuePanel extends javax.swing.JPanel {
         }
         
         //update integration sms count
-        IntegrationAdapter.getInstance().setSMSCount(
-                smsQueue.isEmpty() ? null : smsQueue.size());
+        IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
     }
     
     /** Get SMS which was requested to be edited */
@@ -154,8 +153,7 @@ public class QueuePanel extends javax.swing.JPanel {
         }
         
         //update integration sms count
-        IntegrationAdapter.getInstance().setSMSCount(
-                smsQueue.isEmpty() ? null : smsQueue.size());
+        IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
         
         findNewReadySMS();
     }
@@ -465,8 +463,7 @@ public class QueuePanel extends javax.swing.JPanel {
                 SMS sms = (SMS) o;
                 queueListModel.remove(sms);
             }
-            IntegrationAdapter.getInstance().setSMSCount(
-                    smsQueue.isEmpty() ? null : smsQueue.size());
+            IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
             
             //transfer focus
             if (queueListModel.getSize() > 0) {
@@ -497,8 +494,7 @@ public class QueuePanel extends javax.swing.JPanel {
             editRequestedSMS = sms;
             queueListModel.remove(sms);
             
-            IntegrationAdapter.getInstance().setSMSCount(
-                    smsQueue.isEmpty() ? null : smsQueue.size());
+            IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
             
             //fire event
             actionSupport.fireActionPerformed(ACTION_REQUEST_EDIT_SMS, null);

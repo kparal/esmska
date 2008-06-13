@@ -56,10 +56,10 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
      */
     @Override
     public void setSMSCount(Integer count) {
-        if (count != null) {
-            app.setDockIconBadge(count.toString());
-        } else {
+        if (count == null || count <= 0) {
             app.setDockIconBadge(null);
+        } else {
+            app.setDockIconBadge(count.toString());
         }
     }
     
