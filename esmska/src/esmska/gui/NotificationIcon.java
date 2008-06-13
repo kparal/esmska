@@ -22,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import esmska.utils.OSType;
+import java.awt.Dimension;
 
 /** Display icon in the notification area (aka system tray)
  *
@@ -117,8 +118,21 @@ public class NotificationIcon {
             }
         };
 
+        //choose best icon size
+        String logo = "esmska.png";
+        if (isSupported()) {
+            Dimension size = SystemTray.getSystemTray().getTrayIconSize();
+            if (size.getWidth() <= 16 && size.getHeight() <= 16) {
+                logo = "esmska-16.png";
+            } else if (size.getWidth() <= 32 && size.getHeight() <= 32) {
+                logo = "esmska-32.png";
+            } else if (size.getWidth() <= 64 && size.getHeight() <= 64) {
+                logo = "esmska-64.png";
+            }
+        }
+        
         // construct a TrayIcon
-        Image image = new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage();
+        Image image = new ImageIcon(getClass().getResource(RES + logo)).getImage();
         trayIcon = new TrayIcon(image, "Esmska", popup);
         trayIcon.setImageAutoSize(true);
         trayIcon.addMouseListener(mouseAdapter);
