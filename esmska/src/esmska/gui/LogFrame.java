@@ -15,14 +15,18 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 
 /** Display log records
@@ -42,6 +46,17 @@ public class LogFrame extends javax.swing.JFrame {
         initComponents();
         closeButton.requestFocusInWindow();
         this.getRootPane().setDefaultButton(closeButton);
+        
+        //close on Ctrl+W
+        String command = "close";
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
+                KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), command);
+        getRootPane().getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeButtonActionPerformed(e);
+            }
+        });
     }
     
     /** set log to display */

@@ -375,7 +375,7 @@ public class SMSPanel extends javax.swing.JPanel {
         int menuMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
         String command = "undo";
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, menuMask), command);
-        smsTextPane.getActionMap().put("undo",undoAction);
+        smsTextPane.getActionMap().put(command,undoAction);
         command = "redo";
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, menuMask), command);
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
@@ -458,7 +458,7 @@ public class SMSPanel extends javax.swing.JPanel {
                     .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(sendButton)

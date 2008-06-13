@@ -14,6 +14,7 @@ import esmska.data.CountryPrefix;
 import esmska.data.Icons;
 import esmska.data.Keyring;
 import esmska.operators.Operator;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -28,7 +29,11 @@ import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.Nullator;
+import java.awt.Toolkit;
+import javax.swing.AbstractAction;
+import javax.swing.InputMap;
 import javax.swing.InputVerifier;
+import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
@@ -53,6 +58,17 @@ public class ConfigFrame extends javax.swing.JFrame {
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
         initComponents();
+        
+        //close on Ctrl+W
+        String command = "close";
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
+                KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), command);
+        getRootPane().getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeButtonActionPerformed(e);
+            }
+        });
         
         //add development panel in development versions
         if (Config.getLatestVersion().contains("beta")) {
@@ -962,8 +978,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         //check validity of country prefix
         String prefix = countryPrefixTextField.getText();
-        if (prefix.length() > 0 && !FormChecker.checkCountryPrefix(prefix))
+        if (prefix.length() > 0 && !FormChecker.checkCountryPrefix(prefix)) {
             config.setCountryPrefix("");
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void operatorComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged

@@ -41,6 +41,8 @@ import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.OSType;
+import java.awt.Toolkit;
+import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 /** Display all sent messages in a frame
@@ -76,6 +78,18 @@ public class HistoryFrame extends javax.swing.JFrame {
     /** Creates new form HistoryFrame */
     public HistoryFrame() {
         initComponents();
+        
+        //close on Ctrl+W
+        String command = "close";
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
+                KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), command);
+        getRootPane().getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeButtonActionPerformed(e);
+            }
+        });
+        
         //if not Substance LaF, add clipboard popup menu to text components
         if (!PersistenceManager.getConfig().getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE)) {
             ClipboardPopupMenu.register(searchField);

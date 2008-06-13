@@ -9,6 +9,7 @@ package esmska.gui;
 import esmska.persistence.ContactParser;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -27,10 +28,15 @@ import esmska.data.Contact;
 import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 /** Import contacts from external applications
@@ -81,6 +87,19 @@ public class ImportFrame extends javax.swing.JFrame {
     /** Creates new form ImportFrame */
     public ImportFrame() {
         initComponents();
+        
+        //close on Ctrl+W
+        String command = "close";
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
+                KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), command);
+        getRootPane().getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ImportFrame.this.setVisible(false);
+                ImportFrame.this.dispose();
+            }
+        });
+        
         cardLayout = (CardLayout) cardPanel.getLayout();
         progressBar.setVisible(false);
         backButton.setVisible(false);

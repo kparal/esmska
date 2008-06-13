@@ -57,9 +57,11 @@ import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ListIterator;
+import javax.swing.JComponent;
 
 /**
  * MainFrame form
@@ -106,6 +108,19 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         instance = this;
         initComponents();
+        
+        //hide on Ctrl+W
+        String command = "hide";
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
+                KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), command);
+        getRootPane().getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (NotificationIcon.isInstalled()) { //hide only when notification icon present
+                    formWindowClosing(new WindowEvent(MainFrame.this, 0));
+                }
+            }
+        });
         
         //on Mac, move program menu items to system menu
         if (OSType.isEqual(OSType.MAC_OS_X)) {

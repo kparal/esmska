@@ -12,15 +12,20 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -39,6 +44,17 @@ public class AboutFrame extends javax.swing.JFrame {
         initComponents();
         closeButton.requestFocusInWindow();
         this.getRootPane().setDefaultButton(closeButton);
+        
+        //close on Ctrl+W
+        String command = "close";
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
+                KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), command);
+        getRootPane().getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeButtonActionPerformed(e);
+            }
+        });
     }
     
     /** This method is called from within the constructor to
