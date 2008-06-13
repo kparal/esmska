@@ -644,6 +644,9 @@ public class ContactPanel extends javax.swing.JPanel {
                     "Kontakt", true);
             init();
             setDefaultCloseOperation(HIDE_ON_CLOSE);
+            //integrate modal window better on Mac
+            setModalityType(ModalityType.DOCUMENT_MODAL);
+            getRootPane().putClientProperty("apple.awt.documentModalSheet", Boolean.TRUE);
         }
         private void init() {
             panel = new EditContactPanel();
