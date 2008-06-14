@@ -57,6 +57,7 @@ import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import java.awt.Image;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -108,6 +109,14 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         instance = this;
         initComponents();
+        
+        //set window images
+        ArrayList<Image> images = new ArrayList<Image>();
+        images.add(new ImageIcon(getClass().getResource(RES + "esmska-16.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "esmska-32.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "esmska-64.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
+        setIconImages(images);
         
         //hide on Ctrl+W
         String command = "hide";
@@ -257,7 +266,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Esmska");
-        setIconImage(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
         setLocationByPlatform(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
