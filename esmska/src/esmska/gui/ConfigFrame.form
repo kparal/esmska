@@ -768,6 +768,9 @@
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
                 <Property name="text" type="java.lang.String" value="dn&#xed;."/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="reducedHistoryCheckBox" name="toolTipText" type="property"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>

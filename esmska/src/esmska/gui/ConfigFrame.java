@@ -722,6 +722,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         ((SpinnerNumberModel)reducedHistorySpinner.getModel()).setMinimum(new Integer(0));
 
         jLabel18.setText("dní.");
+        jLabel18.setToolTipText(reducedHistoryCheckBox.getToolTipText());
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
