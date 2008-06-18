@@ -256,11 +256,13 @@ public class MainFrame extends javax.swing.JFrame {
         messageMenu = new javax.swing.JMenu();
         undoMenuItem = new javax.swing.JMenuItem();
         redoMenuItem = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JSeparator();
         compressMenuItem = new javax.swing.JMenuItem();
         sendMenuItem = new javax.swing.JMenuItem();
         toolsMenu = new javax.swing.JMenu();
         historyMenuItem = new javax.swing.JMenuItem();
         logMenuItem = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JSeparator();
         importMenuItem = new javax.swing.JMenuItem();
         exportMenuItem = new javax.swing.JMenuItem();
 
@@ -374,6 +376,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         redoMenuItem.setAction(smsPanel.getRedoAction());
         messageMenu.add(redoMenuItem);
+        messageMenu.add(jSeparator5);
 
         compressMenuItem.setAction(smsPanel.getCompressAction());
         messageMenu.add(compressMenuItem);
@@ -391,6 +394,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         logMenuItem.setAction(statusPanel.getLogAction());
         toolsMenu.add(logMenuItem);
+        toolsMenu.add(jSeparator4);
 
         importMenuItem.setAction(importAction);
         toolsMenu.add(importMenuItem);
@@ -933,6 +937,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JMenuItem logMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu messageMenu;
