@@ -15,6 +15,7 @@ import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dialog.ModalityType;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -425,27 +426,41 @@ public class ContactPanel extends javax.swing.JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
+            
+            HashSet<Contact> condemned = getSelectedContacts();
+            
+            //create warning
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
             JLabel label = new JLabel("<html><h3>Opravdu odstranit následující kontakty?</h3></html>");
             JTextArea area = new JTextArea();
             area.setEditable(false);
             area.setRows(5);
-            for (Object o : contactList.getSelectedValues())
-                area.append(((Contact)o).getName() + "\n");
+            for (Contact c : condemned) {
+                area.append(c.getName() + "\n");
+            }
             area.setCaretPosition(0);
             panel.add(label, BorderLayout.PAGE_START);
             panel.add(new JScrollPane(area), BorderLayout.CENTER);
+            
             //confirm
-            int result = JOptionPane.showOptionDialog(MainFrame.getInstance(),panel,null,
-                    JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,
-                    options, cancelOption);
-            if (result < 0 || !options[result].equals(deleteOption)) {
+            JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE, 
+                    JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
+            JDialog dialog = pane.createDialog(MainFrame.getInstance(), null);
+            dialog.setResizable(true);
+            dialog.setModalityType(ModalityType.DOCUMENT_MODAL);
+            dialog.getRootPane().putClientProperty("apple.awt.documentModalSheet", Boolean.TRUE);
+            dialog.pack();
+            dialog.setVisible(true);
+            dialog.dispose();
+
+            //return if should not delete
+            if (!deleteOption.equals(pane.getValue())) {
                 return;
             }
+            
             //delete
-            List<Object> list = Arrays.asList(contactList.getSelectedValues());
-            contactListModel.removeAll(list);
+            contactListModel.removeAll(condemned);
         }
     }
     
@@ -606,7 +621,7 @@ public class ContactPanel extends javax.swing.JPanel {
             }
             return removed;
         }
-        public void removeAll(Collection<Object> elements) {
+        public void removeAll(Collection<Contact> elements) {
 //            for (Object o : elements)
 //                remove((Contact)o); //TODO fix 'out of memory' when using remove()
             int size = getSize();
