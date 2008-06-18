@@ -33,6 +33,7 @@ import java.awt.Toolkit;
 import javax.swing.AbstractAction;
 import javax.swing.InputMap;
 import javax.swing.InputVerifier;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
@@ -997,6 +998,18 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_operatorComboBoxItemStateChanged
 
     private void clearKeyringButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
+        String deleteOption = "Odstranit";
+        String cancelOption = "Zrušit";
+        String[] options = new String[]{cancelOption, deleteOption};
+        String text = "Opravdu chcete odstranit všechny vyplněné přihlašovací údaje?";
+
+        int result = JOptionPane.showOptionDialog(this, text, null,
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+                options, cancelOption);
+        if (result < 0 || !options[result].equals(deleteOption)) {
+            return;
+        }
+        
         keyring.clearKeys();
         operatorComboBoxItemStateChanged(null);
     }//GEN-LAST:event_clearKeyringButtonActionPerformed
