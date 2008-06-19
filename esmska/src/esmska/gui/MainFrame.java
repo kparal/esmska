@@ -52,6 +52,7 @@ import esmska.data.Icons;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
 import esmska.integration.IntegrationAdapter;
+import esmska.integration.MacUtils;
 import esmska.persistence.ExportManager;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
@@ -503,6 +504,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
             
             //show the dialog
+            MacUtils.setDocumentModalDialog(dialog);
             dialog.setResizable(true);
             dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
             dialog.setVisible(true);
