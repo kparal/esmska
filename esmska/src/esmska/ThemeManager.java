@@ -21,6 +21,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
+import javax.swing.LookAndFeel;
 import org.jvnet.substance.skin.SaharaSkin;
 
 /** Manage and set look and feel
@@ -31,9 +32,6 @@ public class ThemeManager {
     public enum LAF {
         SYSTEM, CROSSPLATFORM, GTK, JGOODIES, SUBSTANCE
     }
-    
-    public static String MAC_LAF_CLASSNAME = "com.sun.java.swing.mac.MacLookAndFeel";
-    public static String GTK_LAF_CLASSNAME = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
     
     private ThemeManager() {
     }
@@ -89,4 +87,21 @@ public class ThemeManager {
         }
     }
     
+    /** Returns whether GTK is current look and feel */
+    public static boolean isGTKCurrentLaF() {
+        LookAndFeel laf = UIManager.getLookAndFeel();
+        if (laf == null) {
+            return false;
+        }
+        return laf.getName().equals("GTK look and feel");
+    }
+
+    /** Returns whether Aqua (Mac OS native) is current look and feel */
+    public static boolean isAquaCurrentLaF() {
+        LookAndFeel laf = UIManager.getLookAndFeel();
+        if (laf == null) {
+            return false;
+        }
+        return laf.getName().equals("Mac OS X");
+    }
 }

@@ -29,11 +29,9 @@ public class DialogButtonSorter {
      * @return original or reverted array, according to current L&F
      */
     public static Object[] sortOptions(Object... options) {
-        String laf = UIManager.getLookAndFeel().getClass().getName();
-        
         //GTK and Mac L&Fs are reverting buttons, so revert it back
-        if (ThemeManager.GTK_LAF_CLASSNAME.equals(laf) ||
-                ThemeManager.MAC_LAF_CLASSNAME.equals(laf)) {
+        if (ThemeManager.isGTKCurrentLaF() ||
+                ThemeManager.isAquaCurrentLaF()) {
             List<Object> list = Arrays.asList(options);
             Collections.reverse(list);
             return list.toArray();
