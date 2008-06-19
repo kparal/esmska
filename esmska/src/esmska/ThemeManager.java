@@ -34,6 +34,9 @@ public class ThemeManager {
     public static String LAF_JGOODIES = "JGoodies";
     public static String LAF_SUBSTANCE = "Substance";
     
+    public static String MAC_LAF_CLASSNAME = "com.sun.java.swing.mac.MacLookAndFeel";
+    public static String GTK_LAF_CLASSNAME = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
+    
     private ThemeManager() {
     }
     

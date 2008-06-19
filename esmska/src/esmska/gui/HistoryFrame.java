@@ -37,12 +37,15 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.History;
+import esmska.integration.MacUtils;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
+import esmska.utils.DialogButtonSorter;
 import esmska.utils.OSType;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 
 /** Display all sent messages in a frame
@@ -412,7 +415,10 @@ public class HistoryFrame extends javax.swing.JFrame {
     private class DeleteAction extends AbstractAction {
         private final String deleteOption = "Odstranit";
         private final String cancelOption = "Zrušit";
-        private final String[] options = new String[]{cancelOption, deleteOption};
+        private final Object[] options = DialogButtonSorter.sortOptions(
+                cancelOption, deleteOption);
+        private final String message = "Opravdu z historie odstranit všechny " +
+                "označené zprávy?";
         
         public DeleteAction() {
             super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "delete-22.png")));
@@ -428,14 +434,21 @@ public class HistoryFrame extends javax.swing.JFrame {
             if (rows.length <= 0) {
                 return;
             }
-            int result = JOptionPane.showOptionDialog(HistoryFrame.this,
-                    "Opravdu z historie odstranit " +
-                    "všechny označené zprávy?", null,
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
-                    options, cancelOption);
-            if (result < 0 || !options[result].equals(deleteOption)) {
+            
+            //show dialog
+            JOptionPane pane = new JOptionPane(message, JOptionPane.WARNING_MESSAGE, 
+                    JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
+            JDialog dialog = pane.createDialog(HistoryFrame.this, null);
+            dialog.setResizable(true);
+            MacUtils.setDocumentModalDialog(dialog);
+            dialog.pack();
+            dialog.setVisible(true);
+
+            //return if should not delete
+            if (!deleteOption.equals(pane.getValue())) {
                 return;
             }
+
             //confirmed, let's delete it
             ArrayList<History.Record> histToDelete = new ArrayList<History.Record>();
             for (int i : rows) {
@@ -443,6 +456,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                 histToDelete.add(history.getRecord(i));
             }
             history.removeRecords(histToDelete);
+            
             //refresh table
             historyTableModel.fireTableDataChanged();
             historyTable.getSelectionModel().clearSelection();

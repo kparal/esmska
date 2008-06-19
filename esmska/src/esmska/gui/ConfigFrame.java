@@ -13,6 +13,7 @@ import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Icons;
 import esmska.data.Keyring;
+import esmska.integration.MacUtils;
 import esmska.operators.Operator;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -28,11 +29,12 @@ import org.jvnet.substance.skin.SkinInfo;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.AbstractDocumentListener;
+import esmska.utils.DialogButtonSorter;
 import esmska.utils.Nullator;
 import java.awt.Toolkit;
 import javax.swing.AbstractAction;
-import javax.swing.InputMap;
 import javax.swing.InputVerifier;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
@@ -1000,13 +1002,20 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void clearKeyringButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
         String deleteOption = "Odstranit";
         String cancelOption = "Zrušit";
-        String[] options = new String[]{cancelOption, deleteOption};
-        String text = "Opravdu chcete odstranit všechny vyplněné přihlašovací údaje?";
+        Object[] options = DialogButtonSorter.sortOptions(cancelOption, deleteOption);
+        String message = "Opravdu chcete odstranit všechny vyplněné přihlašovací údaje?";
 
-        int result = JOptionPane.showOptionDialog(this, text, null,
-                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
-                options, cancelOption);
-        if (result < 0 || !options[result].equals(deleteOption)) {
+        //show dialog
+        JOptionPane pane = new JOptionPane(message, JOptionPane.WARNING_MESSAGE,
+                JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
+        JDialog dialog = pane.createDialog(ConfigFrame.this, null);
+        dialog.setResizable(true);
+        MacUtils.setDocumentModalDialog(dialog);
+        dialog.pack();
+        dialog.setVisible(true);
+
+        //return if should not delete
+        if (!deleteOption.equals(pane.getValue())) {
             return;
         }
         
