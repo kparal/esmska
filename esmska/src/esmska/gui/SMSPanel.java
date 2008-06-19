@@ -96,7 +96,7 @@ public class SMSPanel extends javax.swing.JPanel {
     public SMSPanel() {
         initComponents();
         //if not Substance LaF, add clipboard popup menu to text components
-        if (!config.getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE)) {
+        if (!config.getLookAndFeel().equals(ThemeManager.LAF.SUBSTANCE)) {
             ClipboardPopupMenu.register(smsTextPane);
             ClipboardPopupMenu.register(numberTextField);
         }

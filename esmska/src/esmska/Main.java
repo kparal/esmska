@@ -158,11 +158,11 @@ public class Main {
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
             //set system LaF on OpenJDK, because Substance throws exceptions
             if (vm != null && vm.toLowerCase().contains("openjdk")) {
-                PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF_SYSTEM);
+                PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF.SYSTEM);
             }
             //set system LaF on Apple, because Apple users are used to consistent look
             if (vendor != null && vendor.toLowerCase().contains("apple")) {
-                PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF_SYSTEM);
+                PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF.SYSTEM);
             }
         }
         

@@ -33,7 +33,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     public EditContactPanel() {
         initComponents();
         //if not Substance LaF, add clipboard popup menu to text components
-        if (!config.getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE)) {
+        if (!config.getLookAndFeel().equals(ThemeManager.LAF.SUBSTANCE)) {
             ClipboardPopupMenu.register(nameTextField);
             ClipboardPopupMenu.register(numberTextField);
         }

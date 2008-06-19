@@ -25,7 +25,7 @@ public class Config extends Object implements Serializable {
     private Dimension mainDimension;
     private Integer horizontalSplitPaneLocation;
     private Integer verticalSplitPaneLocation;
-    private String lookAndFeel = ThemeManager.LAF_SUBSTANCE;
+    private ThemeManager.LAF lookAndFeel = ThemeManager.LAF.SUBSTANCE;
     private boolean lafWindowDecorated = true;
     private String lafJGoodiesTheme = "Experience Blue";
     private String lafSubstanceSkin = "Sahara";
@@ -91,7 +91,7 @@ public class Config extends Object implements Serializable {
         return this.verticalSplitPaneLocation;
     }
 
-    public String getLookAndFeel() {
+    public ThemeManager.LAF getLookAndFeel() {
         return this.lookAndFeel;
     }
 
@@ -219,8 +219,15 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("verticalSplitPaneLocation", oldVerticalSplitPaneLocation, verticalSplitPaneLocation);
     }
 
-    public void setLookAndFeel(String lookAndFeel) {
-        String oldLookAndFeel = this.lookAndFeel;
+    /** Set current look and feel.
+     * 
+     * @param lookAndFeel current look and feel. May not be null.
+     */
+    public void setLookAndFeel(ThemeManager.LAF lookAndFeel) {
+        if (lookAndFeel == null) {
+            throw new IllegalArgumentException("lookAndFeel may not be null");
+        }
+        ThemeManager.LAF oldLookAndFeel = this.lookAndFeel;
         this.lookAndFeel = lookAndFeel;
         changeSupport.firePropertyChange("lookAndFeel", oldLookAndFeel, lookAndFeel);
     }

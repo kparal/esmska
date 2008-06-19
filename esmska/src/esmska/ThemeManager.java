@@ -28,11 +28,9 @@ import org.jvnet.substance.skin.SaharaSkin;
  * @author ripper
  */
 public class ThemeManager {
-    public static String LAF_SYSTEM = "System";
-    public static String LAF_CROSSPLATFORM = "Crossplatform";
-    public static String LAF_GTK = "GTK";
-    public static String LAF_JGOODIES = "JGoodies";
-    public static String LAF_SUBSTANCE = "Substance";
+    public enum LAF {
+        SYSTEM, CROSSPLATFORM, GTK, JGOODIES, SUBSTANCE
+    }
     
     public static String MAC_LAF_CLASSNAME = "com.sun.java.swing.mac.MacLookAndFeel";
     public static String GTK_LAF_CLASSNAME = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
@@ -45,50 +43,50 @@ public class ThemeManager {
      */
     public static void setLaF() throws Throwable {
         Config config = PersistenceManager.getConfig();
-        String laf = config.getLookAndFeel();
+        ThemeManager.LAF laf = config.getLookAndFeel();
         
         JFrame.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());
         JDialog.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());
         
-        if (laf.equals(LAF_SYSTEM)) {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
-        } else if (laf.equals(LAF_CROSSPLATFORM)) {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            
-        } else if (laf.equals(LAF_GTK)) {
-            UIManager.setLookAndFeel(GTKLookAndFeel.class.getName());
-            
-        } else if (laf.equals(LAF_JGOODIES)) {
-            String themeString = config.getLafJGoodiesTheme();
-            PlasticTheme theme = null;
-            for (Object o : PlasticLookAndFeel.getInstalledThemes()) {
-                PlasticTheme ptheme = (PlasticTheme) o;
-                if (ptheme.getName().equals(themeString)) {
-                    theme = ptheme;
-                    break;
+        switch (laf) {
+            case SYSTEM:
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                break;
+            case CROSSPLATFORM:
+                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+                break;
+            case GTK:
+                UIManager.setLookAndFeel(GTKLookAndFeel.class.getName());
+                break;
+            case JGOODIES:
+                String themeString = config.getLafJGoodiesTheme();
+                PlasticTheme theme = null;
+                for (Object o : PlasticLookAndFeel.getInstalledThemes()) {
+                    PlasticTheme ptheme = (PlasticTheme) o;
+                    if (ptheme.getName().equals(themeString)) {
+                        theme = ptheme;
+                        break;
+                    }
                 }
-            }
-            PlasticLookAndFeel.setPlasticTheme(theme != null? theme : new ExperienceBlue());
-            UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
-            
-        } else if (laf.equals(LAF_SUBSTANCE)) {
-            String skinString = config.getLafSubstanceSkin();
-            String skin = null;
-            new SubstanceLookAndFeel();
-            for (SkinInfo skinInfo : SubstanceLookAndFeel.getAllSkins().values()) {
-                if (skinInfo.getDisplayName().equals(skinString)) {
-                    skin = skinInfo.getClassName();
-                    break;
+                PlasticLookAndFeel.setPlasticTheme(theme != null ? theme : new ExperienceBlue());
+                UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
+                break;
+            case SUBSTANCE:
+                String skinString = config.getLafSubstanceSkin();
+                String skin = null;
+                new SubstanceLookAndFeel();
+                for (SkinInfo skinInfo : SubstanceLookAndFeel.getAllSkins().values()) {
+                    if (skinInfo.getDisplayName().equals(skinString)) {
+                        skin = skinInfo.getClassName();
+                        break;
+                    }
                 }
-            }
-            SubstanceLookAndFeel.setSkin(skin != null? skin : new SaharaSkin().getClass().getName());
-            UIManager.setLookAndFeel(new SubstanceLookAndFeel());
-            
-        } else {
-            throw new IllegalArgumentException("Unknown LaF name");
+                SubstanceLookAndFeel.setSkin(skin != null ? skin : new SaharaSkin().getClass().getName());
+                UIManager.setLookAndFeel(new SubstanceLookAndFeel());
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown LaF name");
         }
-        
     }
     
 }

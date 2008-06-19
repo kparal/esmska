@@ -94,7 +94,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         });
         
         //if not Substance LaF, add clipboard popup menu to text components
-        if (!PersistenceManager.getConfig().getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE)) {
+        if (!PersistenceManager.getConfig().getLookAndFeel().equals(ThemeManager.LAF.SUBSTANCE)) {
             ClipboardPopupMenu.register(searchField);
             ClipboardPopupMenu.register(textArea);
         }
@@ -320,7 +320,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         // on Mac OS X the search field has native look and feel with inline icons, clear
         // button is not needed
-        if (OSType.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM)) {
+        if (OSType.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
             clearButton.setVisible(false);
         }
         clearButton.addActionListener(new java.awt.event.ActionListener() {

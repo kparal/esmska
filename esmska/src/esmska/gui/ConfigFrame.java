@@ -94,16 +94,23 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
             LAF_SYSTEM, LAF_CROSSPLATFORM, LAF_GTK, LAF_JGOODIES, LAF_SUBSTANCE}));
-        if (config.getLookAndFeel().equals(ThemeManager.LAF_SYSTEM))
-            lafComboBox.setSelectedItem(LAF_SYSTEM);
-        else if (config.getLookAndFeel().equals(ThemeManager.LAF_CROSSPLATFORM))
-            lafComboBox.setSelectedItem(LAF_CROSSPLATFORM);
-        else if (config.getLookAndFeel().equals(ThemeManager.LAF_GTK))
-            lafComboBox.setSelectedItem(LAF_GTK);
-        else if (config.getLookAndFeel().equals(ThemeManager.LAF_JGOODIES))
-            lafComboBox.setSelectedItem(LAF_JGOODIES);
-        else if (config.getLookAndFeel().equals(ThemeManager.LAF_SUBSTANCE))
-            lafComboBox.setSelectedItem(LAF_SUBSTANCE);
+        switch (config.getLookAndFeel()) {
+            case SYSTEM:
+                lafComboBox.setSelectedItem(LAF_SYSTEM);
+                break;
+            case CROSSPLATFORM:
+                lafComboBox.setSelectedItem(LAF_CROSSPLATFORM);
+                break;
+            case GTK:
+                lafComboBox.setSelectedItem(LAF_GTK);
+                break;
+            case JGOODIES:
+                lafComboBox.setSelectedItem(LAF_JGOODIES);
+                break;
+            case SUBSTANCE:
+                lafComboBox.setSelectedItem(LAF_SUBSTANCE);
+                break;
+        }
         lafWhenLoaded = (String) lafComboBox.getSelectedItem();
         
         updateThemeComboBox();
@@ -961,15 +968,15 @@ public class ConfigFrame extends javax.swing.JFrame {
         String laf = (String) lafComboBox.getSelectedItem();
         
         if (laf.equals(LAF_SYSTEM))
-            config.setLookAndFeel(ThemeManager.LAF_SYSTEM);
+            config.setLookAndFeel(ThemeManager.LAF.SYSTEM);
         else if (laf.equals(LAF_CROSSPLATFORM))
-            config.setLookAndFeel(ThemeManager.LAF_CROSSPLATFORM);
+            config.setLookAndFeel(ThemeManager.LAF.CROSSPLATFORM);
         else if (laf.equals(LAF_GTK))
-            config.setLookAndFeel(ThemeManager.LAF_GTK);
+            config.setLookAndFeel(ThemeManager.LAF.GTK);
         else if (laf.equals(LAF_JGOODIES))
-            config.setLookAndFeel(ThemeManager.LAF_JGOODIES);
+            config.setLookAndFeel(ThemeManager.LAF.JGOODIES);
         else if (laf.equals(LAF_SUBSTANCE))
-            config.setLookAndFeel(ThemeManager.LAF_SUBSTANCE);
+            config.setLookAndFeel(ThemeManager.LAF.SUBSTANCE);
         
         updateThemeComboBox();
     }//GEN-LAST:event_lafComboBoxActionPerformed

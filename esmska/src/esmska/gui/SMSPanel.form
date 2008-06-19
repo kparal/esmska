@@ -80,7 +80,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fullProgressBar" linkSize="3" min="-2" pref="10" max="-2" attributes="1"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="1" pref="149" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" pref="150" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
