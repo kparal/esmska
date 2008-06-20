@@ -29,14 +29,16 @@ public class DialogButtonSorter {
      * @return original or reverted array, according to current L&F
      */
     public static Object[] sortOptions(Object... options) {
-        //GTK and Mac L&Fs are reverting buttons, so revert it back
+        //GTK and Mac L&Fs are reverting buttons (Java bug?), so revert it back
+        //Windows users are used to reversed button order, do it for them as well
         if (ThemeManager.isGTKCurrentLaF() ||
-                ThemeManager.isAquaCurrentLaF()) {
+                ThemeManager.isAquaCurrentLaF() ||
+                OSType.isWindows()) {
             List<Object> list = Arrays.asList(options);
             Collections.reverse(list);
             return list.toArray();
         }
-
+        
         //other L&Fs are ok, no change needed
         return options;
     }
