@@ -1,5 +1,5 @@
-Esmska 0.9.0
-~~~~~~~~~~~~
+Esmska 0.10.0
+~~~~~~~~~~~~~
 
 Program pro zasílání SMS přes Internet.
 
@@ -7,4 +7,4 @@ Domovská stránka: http://esmska.googlecode.com/
 
 Požadavky: Java 6 (http://www.java.com/)
 
-Spuštění: Většina grafických prostředí vám umožní program spustit jednoduše poklikáním na soubor 'esmska.jar'. Případně můžete spustit soubor 'esmska.sh' (v Linuxu apod.), 'esmska.bat' (ve Windows) nebo příkaz 'java -jar esmska.jar' (libovolný operační systém). Pokročilou nápovědu získáte parametrem '--help'.
+Spuštění: Většina grafických prostředí vám umožní program spustit jednoduše poklikáním na soubor 'esmska.jar'. Případně můžete spustit soubor 'esmska.sh' (v Linuxu, Mac OS apod.), 'esmska.bat' (ve Windows) nebo příkaz 'java -jar esmska.jar' (libovolný operační systém). Pokročilou nápovědu získáte parametrem '--help'.
