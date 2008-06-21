@@ -21,7 +21,7 @@ public class Config extends Object implements Serializable {
     private String senderName = "";
     private String senderNumber = "";
     private boolean useSenderID = false;
-    private boolean rememberLayout = true;
+    private boolean forgetLayout = false;
     private Dimension mainDimension;
     private Integer horizontalSplitPaneLocation;
     private Integer verticalSplitPaneLocation;
@@ -75,8 +75,8 @@ public class Config extends Object implements Serializable {
         return this.useSenderID;
     }
 
-    public boolean isRememberLayout() {
-        return this.rememberLayout;
+    public boolean isForgetLayout() {
+        return this.forgetLayout;
     }
 
     public Dimension getMainDimension() {
@@ -195,10 +195,10 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("useSenderID", oldUseSenderID, useSenderID);
     }
 
-    public void setRememberLayout(boolean rememberLayout) {
-        boolean oldRememberLayout = this.rememberLayout;
-        this.rememberLayout = rememberLayout;
-        changeSupport.firePropertyChange("rememberLayout", oldRememberLayout, rememberLayout);
+    public void setForgetLayout(boolean forgetLayout) {
+        boolean oldForgetLayout = this.forgetLayout;
+        this.forgetLayout = forgetLayout;
+        changeSupport.firePropertyChange("forgetLayout", oldForgetLayout, forgetLayout);
     }
 
     public void setMainDimension(Dimension mainDimension) {

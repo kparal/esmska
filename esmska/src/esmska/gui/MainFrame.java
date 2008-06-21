@@ -573,7 +573,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** load program configuration */
     private void loadConfig() {
         //set frame layout
-        if (config.isRememberLayout()) {
+        if (!config.isForgetLayout()) {
             Dimension mainDimension = config.getMainDimension();
             Integer horizontalSplitPaneLocation = config.getHorizontalSplitPaneLocation();
             Integer verticalSplitPaneLocation = config.getVerticalSplitPaneLocation();

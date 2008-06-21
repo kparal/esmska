@@ -14,7 +14,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="rememberLayoutCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="forgetLayoutCheckBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -23,21 +23,21 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="rememberLayoutCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="forgetLayoutCheckBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JCheckBox" name="rememberLayoutCheckBox">
+        <Component class="javax.swing.JCheckBox" name="forgetLayoutCheckBox">
           <Properties>
             <Property name="mnemonic" type="int" value="114"/>
-            <Property name="text" type="java.lang.String" value="Pamatovat rozvr&#x17e;en&#xed; formul&#xe1;&#x159;e"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Pou&#x17e;ije aktu&#xe1;ln&#xed; rozm&#x11b;ry programu a prvk&#x16f; formul&#xe1;&#x159;e p&#x159;i p&#x159;&#xed;&#x161;t&#xed;m spu&#x161;t&#x11b;n&#xed; programu&#xa;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;vat v&#xfd;choz&#xed; rozvr&#x17e;en&#xed; formul&#xe1;&#x159;e"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Nehled&#x11b; na aktu&#xe1;ln&#xed; rozm&#x11b;ry programu se p&#x159;i p&#x159;&#xed;&#x161;t&#xed;m&lt;br&gt;&#xa;spu&#x161;t&#x11b;n&#xed; programu op&#x11b;t obnov&#xed; v&#xfd;choz&#xed; rozvr&#x17e;en&#xed;&#xa;&lt;/html&gt;"/>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="selected" source="config" sourcePath="${rememberLayout}" target="rememberLayoutCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+            <BindingProperty name="selected" source="config" sourcePath="${forgetLayout}" target="forgetLayoutCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
           </BindingProperties>
         </Component>
       </SubComponents>

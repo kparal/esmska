@@ -204,7 +204,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         config = PersistenceManager.getConfig();
         develPanel = new javax.swing.JPanel();
-        rememberLayoutCheckBox = new javax.swing.JCheckBox();
+        forgetLayoutCheckBox = new javax.swing.JCheckBox();
         tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         removeAccentsCheckBox = new javax.swing.JCheckBox();
@@ -259,11 +259,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
 
-        rememberLayoutCheckBox.setMnemonic('r');
-        rememberLayoutCheckBox.setText("Pamatovat rozvržení formuláře");
-        rememberLayoutCheckBox.setToolTipText("<html>\nPoužije aktuální rozměry programu a prvků formuláře při příštím spuštění programu\n</html>");
+        forgetLayoutCheckBox.setMnemonic('r');
+        forgetLayoutCheckBox.setText("Používat výchozí rozvržení formuláře");
+        forgetLayoutCheckBox.setToolTipText("<html>\nNehledě na aktuální rozměry programu se při příštím<br>\nspuštění programu opět obnoví výchozí rozvržení\n</html>");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${rememberLayout}"), rememberLayoutCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${forgetLayout}"), forgetLayoutCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout develPanelLayout = new javax.swing.GroupLayout(develPanel);
@@ -272,14 +272,14 @@ public class ConfigFrame extends javax.swing.JFrame {
             develPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(develPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rememberLayoutCheckBox)
+                .addComponent(forgetLayoutCheckBox)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         develPanelLayout.setVerticalGroup(
             develPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(develPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rememberLayoutCheckBox)
+                .addComponent(forgetLayoutCheckBox)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -708,7 +708,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(clearKeyringButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addContainerGap())
         );
@@ -899,7 +899,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(socksProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
                 .addComponent(jLabel17)
                 .addContainerGap())
         );
@@ -1054,6 +1054,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JLabel countryCodeLabel;
     private javax.swing.JTextField countryPrefixTextField;
     private javax.swing.JPanel develPanel;
+    private javax.swing.JCheckBox forgetLayoutCheckBox;
     private javax.swing.JTextField httpProxyTextField;
     private javax.swing.JTextField httpsProxyTextField;
     private javax.swing.JLabel jLabel1;
@@ -1088,7 +1089,6 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JCheckBox reducedHistoryCheckBox;
     private javax.swing.JSpinner reducedHistorySpinner;
-    private javax.swing.JCheckBox rememberLayoutCheckBox;
     private javax.swing.JCheckBox removeAccentsCheckBox;
     private javax.swing.JCheckBox sameProxyCheckBox;
     private javax.swing.JTextField senderNameTextField;
