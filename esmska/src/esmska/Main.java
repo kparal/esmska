@@ -26,6 +26,7 @@ import esmska.data.CountryPrefix;
 import esmska.gui.MainFrame;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
+import esmska.utils.JavaType;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
 
@@ -43,11 +44,7 @@ public class Main {
     public static void main(String[] args) {
 
         //detect JVM and warn if not not supported
-        String vendor = System.getProperty("java.vendor");
-        String vm = System.getProperty("java.vm.name");
-        if (vendor == null || vm == null ||
-                (!vendor.toLowerCase().contains("sun microsystems") &&
-                !vendor.toLowerCase().contains("apple"))) {
+        if (!JavaType.isSupported()) {
             logger.severe("Zřejmě program spouštíte na nepodporované verzi Javy! " +
                     "Program s ní nemusí pracovat správně! Ozkoušené verze Javy " +
                     "jsou: Sun Java 6, OpenJDK 6, Apple Java 6.");
@@ -157,11 +154,11 @@ public class Main {
             PersistenceManager.getConfig().setCountryPrefix(
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
             //set system LaF on OpenJDK, because Substance throws exceptions
-            if (vm != null && vm.toLowerCase().contains("openjdk")) {
+            if (JavaType.isOpenJDK()) {
                 PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF.SYSTEM);
             }
             //set system LaF on Apple, because Apple users are used to consistent look
-            if (vendor != null && vendor.toLowerCase().contains("apple")) {
+            if (JavaType.isAppleJava()) {
                 PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF.SYSTEM);
             }
         }
