@@ -1,0 +1,13 @@
+[Desktop Entry]
+Categories=Network;Java;
+Name=Esmska
+GenericName=SMS Sender
+GenericName[cs]=Posílač SMS
+Comment=Send SMS over the Internet
+Comment[cs]=Posílejte SMS přes Internet
+Exec=esmska
+Icon=esmska
+StartupWMClass=esmska-Main
+Terminal=false
+Type=Application
+Version=1.0
