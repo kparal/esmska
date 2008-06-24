@@ -59,6 +59,7 @@ import esmska.transfer.SMSSender;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
 import java.awt.Image;
+import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -218,7 +219,11 @@ public class MainFrame extends javax.swing.JFrame {
     public void startAndShow() {
         //if the window should be minimized into notification area
         if (config.isStartMinimized() && NotificationIcon.isInstalled()) {
-            //do nothing, leave mainframe hidden
+            //hide splashscreen, otherwise on Windows it stays visible until mainframe is shown
+            SplashScreen splash = SplashScreen.getSplashScreen();
+            if (splash != null && splash.isVisible()) {
+                splash.close();
+            }
         } else {
             //show the form
             this.setVisible(true);
