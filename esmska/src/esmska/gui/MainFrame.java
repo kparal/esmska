@@ -441,9 +441,13 @@ public class MainFrame extends javax.swing.JFrame {
     
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //if user clicked on close button (event non-null) and notification icon
-        //installed, just hide the main window
-        if (evt != null && NotificationIcon.isInstalled()) {
-            NotificationIcon.toggleMainFrameVisibility();
+        //installed or on mac, just hide the main window
+        if (evt != null && (NotificationIcon.isInstalled() || OSType.isMac())) {
+            if (OSType.isMac()) {
+                this.setVisible(false);
+            } else {
+                NotificationIcon.toggleMainFrameVisibility();
+            }
             return;
         }
         
