@@ -155,7 +155,9 @@ public class ExportManager {
                 });
             }
         } finally {
-            writer.close();
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
     
@@ -221,7 +223,9 @@ public class ExportManager {
                 });
             }
         } finally {
-            writer.close();
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
     
@@ -245,7 +249,9 @@ public class ExportManager {
                 });
             }
         } finally {
-            writer.close();
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
     
@@ -273,7 +279,9 @@ public class ExportManager {
                 });
             }
         } finally {
-            writer.close();
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
 }

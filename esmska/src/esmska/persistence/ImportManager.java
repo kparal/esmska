@@ -9,7 +9,6 @@
 package esmska.persistence;
 
 import com.csvreader.CsvReader;
-import esmska.*;
 import esmska.data.*;
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +16,6 @@ import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import esmska.operators.Operator;
 import esmska.data.Contact;
 import esmska.data.SMS;
 import esmska.operators.DefaultOperator;
@@ -59,59 +57,78 @@ public class ImportManager {
 
     /** Import sms queue from file */
     public static ArrayList<SMS> importQueue(File file) throws IOException {
-        CsvReader reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
-        reader.setUseComments(true);
         ArrayList<SMS> queue = new ArrayList<SMS>();
-        while (reader.readRecord()) {
-            String name = reader.get(0);
-            String number = reader.get(1);
-            String operator = reader.get(2);
-            String text = reader.get(3);
-            String senderName = reader.get(4);
-            String senderNumber = reader.get(5);
+        CsvReader reader = null;
+        
+        try {
+            reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
+            reader.setUseComments(true);
+            while (reader.readRecord()) {
+                String name = reader.get(0);
+                String number = reader.get(1);
+                String operator = reader.get(2);
+                String text = reader.get(3);
+                String senderName = reader.get(4);
+                String senderNumber = reader.get(5);
 
-            SMS sms = new SMS();
-            sms.setName(name);
-            sms.setNumber(number);
-            sms.setText(text);
-            sms.setSenderName(senderName);
-            sms.setSenderNumber(senderNumber);
-            sms.setOperator(operator);
-            queue.add(sms);
+                SMS sms = new SMS();
+                sms.setName(name);
+                sms.setNumber(number);
+                sms.setText(text);
+                sms.setSenderName(senderName);
+                sms.setSenderNumber(senderNumber);
+                sms.setOperator(operator);
+                queue.add(sms);
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
         }
+        
         return queue;
     }
 
     /** Import sms history from file */
     public static ArrayList<History.Record> importHistory(File file)
             throws IOException, ParseException {
-        CsvReader reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
-        reader.setUseComments(true);
         ArrayList<History.Record> history = new ArrayList<History.Record>();
-        while (reader.readRecord()) {
-            String dateString = reader.get(0);
-            String name = reader.get(1);
-            String number = reader.get(2);
-            String operator = reader.get(3);
-            String text = reader.get(4);
-            String senderName = reader.get(5);
-            String senderNumber = reader.get(6);
+        CsvReader reader = null;
+        
+        try {
+            reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
+            reader.setUseComments(true);
 
-            DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
-                    DateFormat.LONG, Locale.ROOT);
-            Date date = df.parse(dateString);
+            while (reader.readRecord()) {
+                String dateString = reader.get(0);
+                String name = reader.get(1);
+                String number = reader.get(2);
+                String operator = reader.get(3);
+                String text = reader.get(4);
+                String senderName = reader.get(5);
+                String senderNumber = reader.get(6);
 
-            History.Record record = new History.Record();
-            record.setDate(date);
-            record.setName(name);
-            record.setNumber(number);
-            record.setOperator(operator);
-            record.setText(text);
-            record.setSenderName(senderName);
-            record.setSenderNumber(senderNumber);
+                DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
+                        DateFormat.LONG, Locale.ROOT);
+                Date date = df.parse(dateString);
 
-            history.add(record);
+                History.Record record = new History.Record();
+                record.setDate(date);
+                record.setName(name);
+                record.setNumber(number);
+                record.setOperator(operator);
+                record.setText(text);
+                record.setSenderName(senderName);
+                record.setSenderNumber(senderNumber);
+
+                history.add(record);
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
         }
+        
         return history;
     }
 
@@ -156,6 +173,7 @@ public class ImportManager {
         
         File[] files = directory.listFiles(new FileFilter() {
 
+            @Override
             public boolean accept(File pathname) {
                 return pathname.getAbsolutePath().endsWith(".operator") && pathname.canRead();
             }
@@ -204,17 +222,26 @@ public class ImportManager {
      */
     public static Keyring importKeyring(File file)
             throws IOException, GeneralSecurityException {
-        CsvReader reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
-        reader.setUseComments(true);
         Keyring keyring = new Keyring();
-        while (reader.readRecord()) {
-            String operatorName = reader.get(0);
-            String login = reader.get(1);
-            String password = Keyring.decrypt(reader.get(2));
+        CsvReader reader = null;
+        
+        try {
+            reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
+            reader.setUseComments(true);
+            while (reader.readRecord()) {
+                String operatorName = reader.get(0);
+                String login = reader.get(1);
+                String password = Keyring.decrypt(reader.get(2));
 
-            String[] key = new String[]{login, password};
-            keyring.putKey(operatorName, key);
+                String[] key = new String[]{login, password};
+                keyring.putKey(operatorName, key);
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
         }
+        
         return keyring;
     }
 }

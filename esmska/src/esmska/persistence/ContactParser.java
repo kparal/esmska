@@ -89,69 +89,79 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                 charset = Charset.forName("windows-1250");
                 separator = ';';
         }
-        CsvReader reader = new CsvReader(file.getPath(), separator, charset);
-        reader.setUseComments(true);
+        CsvReader reader = null;
         
-        //read all the records
-        while (reader.readRecord()) {
-            Contact c = new Contact();
-            String name = "";
-            String number = "";
-            String operator = "";
-            
-            //read record items
-            switch (type) {
-                case KUBIK_DREAMCOM_FILE:
-                    name = reader.get(5);
-                    number = reader.get(6);
-                    operator = reader.get(20).equals("") ?
-                        reader.get(21) : reader.get(20);
-                    break;
-                case DREAMCOM_SE_FILE:
-                case ESMSKA_FILE:
-                    name = reader.get(0);
-                    number = reader.get(1);
-                    operator = reader.get(2);
+        try {
+            reader = new CsvReader(file.getPath(), separator, charset);
+            reader.setUseComments(true);
+
+            //read all the records
+            while (reader.readRecord()) {
+                Contact c = new Contact();
+                String name = "";
+                String number = "";
+                String operator = "";
+
+                //read record items
+                switch (type) {
+                    case KUBIK_DREAMCOM_FILE:
+                        name = reader.get(5);
+                        number = reader.get(6);
+                        operator = reader.get(20).equals("") ? reader.get(21) : reader.get(20);
+                        break;
+                    case DREAMCOM_SE_FILE:
+                    case ESMSKA_FILE:
+                        name = reader.get(0);
+                        number = reader.get(1);
+                        operator = reader.get(2);
+                }
+
+                if (!FormChecker.checkContactName(name)) {
+                    continue;
+                }
+                c.setName(name);
+                if (!FormChecker.checkSMSNumber(number)) {
+                    continue;
+                }
+                c.setNumber(number);
+                //convert known operators to our operators
+                switch (type) {
+                    case KUBIK_DREAMCOM_FILE:
+                        if (operator.startsWith("Oskar") || operator.startsWith("Vodafone")) {
+                            operator = "[CZ]Vodafone";
+                        } else if (operator.startsWith("Eurotel") || operator.startsWith("O2")) {
+                            operator = "[CZ]O2";
+                        } else if (operator.startsWith("T-Mobile")) {
+                            operator = "[CZ]t-zones";
+                        }
+                        break;
+                    case DREAMCOM_SE_FILE:
+                        if (operator.startsWith("O2")) {
+                            operator = "[CZ]O2";
+                        } else if (operator.startsWith("Vodafone")) {
+                            operator = "[CZ]Vodafone";
+                        } else if (operator.startsWith("T-Zones")) {
+                            operator = "[CZ]t-zones";
+                        }
+                        break;
+                    case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
+                        if ("Vodafone".equals(operator)) {
+                            operator = "[CZ]Vodafone";
+                        } else if ("O2".equals(operator)) {
+                            operator = "[CZ]O2";
+                        }
+                        break;
+                }
+                c.setOperator(operator);
+
+                contacts.add(c);
             }
-            
-            if (!FormChecker.checkContactName(name))
-                continue;
-            c.setName(name);
-            if (!FormChecker.checkSMSNumber(number))
-                continue;
-            c.setNumber(number);
-            //convert known operators to our operators
-            switch (type) {
-                case KUBIK_DREAMCOM_FILE:
-                    if (operator.startsWith("Oskar") || operator.startsWith("Vodafone")) {
-                        operator = "[CZ]Vodafone";
-                    } else if (operator.startsWith("Eurotel") || operator.startsWith("O2")) {
-                        operator = "[CZ]O2";
-                    } else if (operator.startsWith("T-Mobile")) {
-                        operator = "[CZ]t-zones";
-                    }
-                    break;
-                case DREAMCOM_SE_FILE:
-                    if (operator.startsWith("O2")) {
-                        operator = "[CZ]O2";
-                    } else if (operator.startsWith("Vodafone")) {
-                        operator = "[CZ]Vodafone";
-                    } else if (operator.startsWith("T-Zones")) {
-                        operator = "[CZ]t-zones";
-                    }
-                    break;
-                case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
-                    if ("Vodafone".equals(operator)) {
-                        operator = "[CZ]Vodafone";
-                    } else if ("O2".equals(operator)) {
-                        operator = "[CZ]O2";
-                    }
-                    break;
+        } finally {
+            if (reader != null) {
+                reader.close();
             }
-            c.setOperator(operator);
-            
-            contacts.add(c);
         }
+        
         return contacts;
     }
     
@@ -164,69 +174,78 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
         unmarshaller.setStrict(false); //in order to parse older vCard 2.1 files
         unmarshaller.setEncoding("UTF-8");
         
-        net.wimpi.pim.contact.model.Contact[] pimContacts = 
-                unmarshaller.unmarshallContacts(new FileInputStream(file));
-        for (net.wimpi.pim.contact.model.Contact pimContact : pimContacts) {
-            PersonalIdentity pi = pimContact.getPersonalIdentity();
-            //FN (formatted name) should be there
-            String name = pi.getFormattedName();
-            //if not, read N (name)
-            if (Nullator.isEmpty(name)) {
-                String firstName = pi.getFirstname();
-                String middleName = "";
-                for (int i = 0; i < pi.getAdditionalNameCount(); i++) {
-                    middleName += pi.getAdditionalName(i);
-                    if (i < pi.getAdditionalNameCount() - 1) {
-                        middleName += " ";
+        FileInputStream input = null;
+        
+        try {
+            input = new FileInputStream(file);
+            net.wimpi.pim.contact.model.Contact[] pimContacts =
+                    unmarshaller.unmarshallContacts(input);
+            for (net.wimpi.pim.contact.model.Contact pimContact : pimContacts) {
+                PersonalIdentity pi = pimContact.getPersonalIdentity();
+                //FN (formatted name) should be there
+                String name = pi.getFormattedName();
+                //if not, read N (name)
+                if (Nullator.isEmpty(name)) {
+                    String firstName = pi.getFirstname();
+                    String middleName = "";
+                    for (int i = 0; i < pi.getAdditionalNameCount(); i++) {
+                        middleName += pi.getAdditionalName(i);
+                        if (i < pi.getAdditionalNameCount() - 1) {
+                            middleName += " ";
+                        }
+                    }
+                    String lastName = pi.getLastname();
+                    name = (Nullator.isEmpty(firstName) ? "" : firstName + " ") +
+                            (Nullator.isEmpty(middleName) ? "" : middleName + " ") +
+                            (Nullator.isEmpty(lastName) ? "" : lastName);
+                    name = name.trim();
+                }
+                //if no FN nor N, skip contact
+                if (Nullator.isEmpty(name)) {
+                    continue;
+                }
+                Communications co = pimContact.getCommunications();
+                String number = "";
+                //select best phone number if available
+                if (co != null && co.getPhoneNumberCount() > 0) {
+                    PhoneNumber preffered = co.getPreferredPhoneNumber();
+                    PhoneNumber[] cellulars = co.listPhoneNumbersByType(PhoneNumber.TYPE_CELLULAR);
+                    PhoneNumber[] messengers = co.listPhoneNumbersByType(PhoneNumber.TYPE_MESSAGING);
+                    PhoneNumber first = (PhoneNumber) co.getPhoneNumbers().next();
+                    //priority: preffered > cellular > messaging > first listed
+                    if (preffered != null) {
+                        number = preffered.getNumber();
+                    } else if (cellulars.length > 0) {
+                        number = cellulars[0].getNumber();
+                    } else if (messengers.length > 0) {
+                        number = messengers[0].getNumber();
+                    } else {
+                        number = first.getNumber();
                     }
                 }
-                String lastName = pi.getLastname();
-                name = (Nullator.isEmpty(firstName) ? "" : firstName + " ") +
-                        (Nullator.isEmpty(middleName) ? "" : middleName + " ") +
-                        (Nullator.isEmpty(lastName) ? "" : lastName);
-                name = name.trim();
-            }
-            //if no FN nor N, skip contact
-            if (Nullator.isEmpty(name)) {
-                continue;
-            }
-            Communications co = pimContact.getCommunications();
-            String number = "";
-            //select best phone number if available
-            if (co != null && co.getPhoneNumberCount() > 0) {
-                PhoneNumber preffered = co.getPreferredPhoneNumber();
-                PhoneNumber[] cellulars = co.listPhoneNumbersByType(PhoneNumber.TYPE_CELLULAR);
-                PhoneNumber[] messengers = co.listPhoneNumbersByType(PhoneNumber.TYPE_MESSAGING);
-                PhoneNumber first = (PhoneNumber) co.getPhoneNumbers().next();
-                //priority: preffered > cellular > messaging > first listed
-                if (preffered != null) {
-                    number = preffered.getNumber();
-                } else if (cellulars.length > 0) {
-                    number = cellulars[0].getNumber();
-                } else if (messengers.length > 0) {
-                    number = messengers[0].getNumber();
-                } else {
-                    number = first.getNumber();
+                //convert to international format
+                if (!Nullator.isEmpty(number)) {
+                    boolean international = number.startsWith("+");
+                    number = number.replaceAll("[^0-9]", "");
+                    if (!international && !Nullator.isEmpty(config.getCountryPrefix())) {
+                        number = config.getCountryPrefix() + number;
+                    } else {
+                        number = "+" + number;
+                    }
                 }
+
+                //create contact
+                Contact contact = new Contact();
+                contact.setName(name);
+                contact.setNumber(number);
+                contact.setOperator(OperatorUtil.suggestOperator(number)); //guess operator
+
+                contacts.add(contact);
             }
-            //convert to international format
-            if (!Nullator.isEmpty(number)) {
-                boolean international = number.startsWith("+");
-                number = number.replaceAll("[^0-9]", "");
-                if (!international && !Nullator.isEmpty(config.getCountryPrefix())) {
-                    number = config.getCountryPrefix() + number;
-                } else {
-                    number = "+" + number;
-                }
+        } finally {
+            if (input != null) {
+                input.close();
             }
-            
-            //create contact
-            Contact contact = new Contact();
-            contact.setName(name);
-            contact.setNumber(number);
-            contact.setOperator(OperatorUtil.suggestOperator(number)); //guess operator
-            
-            contacts.add(contact);
         }
         
         return contacts;
