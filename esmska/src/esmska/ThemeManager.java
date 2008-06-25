@@ -21,6 +21,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.OSType;
 import javax.swing.LookAndFeel;
 import org.jvnet.substance.skin.SaharaSkin;
 
@@ -104,4 +105,25 @@ public class ThemeManager {
         }
         return laf.getName().equals("Mac OS X");
     }
+    
+    /** Returns whether specified LaF is supported on current configuration
+     * (operating system, java version, etc).
+     */
+    public static boolean isLaFSupported(LAF laf) {
+        switch (laf) {
+            case SYSTEM:
+                return true;
+            case CROSSPLATFORM: 
+                return true;
+            case GTK: 
+                return !OSType.isWindows();
+            case JGOODIES: 
+                return true;
+            case SUBSTANCE: 
+                return true;
+            default: 
+                throw new IllegalArgumentException("Uknown LAF: " + laf);
+        }
+    }
+    
 }

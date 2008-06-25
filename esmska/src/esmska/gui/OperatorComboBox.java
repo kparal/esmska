@@ -38,18 +38,21 @@ public class OperatorComboBox extends JComboBox {
         setModel(model);
         setRenderer(cellRenderer);
         setToolTipText("Seznam dostupných webových bran operátorů");
-        if (model.getSize() > 0)
+        if (model.getSize() > 0) {
             setSelectedIndex(0);
+        }
         
         //add listener to operator filter patterns
         config.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                if (!"operatorFilter".equals(evt.getPropertyName()))
+                if (!"operatorFilter".equals(evt.getPropertyName())) {
                     return;
+                }
                 filterOperators();
-                if (model.getSize() > 0)
+                if (model.getSize() > 0) {
                     setSelectedIndex(0);
+                }
             }
         });
     }
@@ -85,10 +88,11 @@ public class OperatorComboBox extends JComboBox {
     public void setSelectedOperator(String operatorName) {
         this.operatorName = operatorName;
         Operator operator = OperatorUtil.getOperator(operatorName);
-        if (model.getIndexOf(operator) < 0)
+        if (model.getIndexOf(operator) < 0) {
             setSelectedItem(null);
-        else
+        } else {
             setSelectedItem(operator);
+        }
     }
     
     /** Select operator according to phone number or phone number prefix.
@@ -100,8 +104,9 @@ public class OperatorComboBox extends JComboBox {
      *               for shorter input (or null) the method does nothing.
      */
     public void selectSuggestedOperator(String number) {
-        if (number == null || number.length() < 2)
+        if (number == null || number.length() < 2) {
             return;
+        }
         
         //search in operator prefixes
         for (int i = 0; i < model.getSize(); i++) {
@@ -116,8 +121,9 @@ public class OperatorComboBox extends JComboBox {
         
         //return if already selected operator with matching country prefix
         Operator operator = getSelectedOperator();
-        if (operator != null && number.startsWith(operator.getCountryPrefix()))
+        if (operator != null && number.startsWith(operator.getCountryPrefix())) {
             return;
+        }
         
         //search in country prefixes
         for (int i = 0; i < model.getSize(); i++) {
@@ -135,8 +141,9 @@ public class OperatorComboBox extends JComboBox {
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
-            if (!(value instanceof Operator))
+            if (!(value instanceof Operator)) {
                 return c;
+            }
             JLabel label = (JLabel) c;
             Operator operator = (Operator)value;
             label.setText(operator != null ? operator.getName() : "Neznámý operátor");

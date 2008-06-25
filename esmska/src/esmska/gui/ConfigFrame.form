@@ -238,7 +238,13 @@
           <SubComponents>
             <Component class="javax.swing.JComboBox" name="lafComboBox">
               <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="lafModel" type="code"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Umo&#x17e;n&#xed; v&#xe1;m zm&#x11b;nit vzhled programu&#xa;&lt;/html&gt;"/>
+                <Property name="renderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new LaFComboRenderer()" type="code"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lafComboBoxActionPerformed"/>

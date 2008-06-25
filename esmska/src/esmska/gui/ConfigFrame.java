@@ -9,12 +9,14 @@ package esmska.gui;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import esmska.*;
+import esmska.ThemeManager.LAF;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Icons;
 import esmska.data.Keyring;
 import esmska.integration.MacUtils;
 import esmska.operators.Operator;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JList;
 import javax.swing.event.DocumentEvent;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
@@ -34,8 +37,10 @@ import esmska.utils.JavaType;
 import esmska.utils.Nullator;
 import java.awt.Toolkit;
 import javax.swing.AbstractAction;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.InputVerifier;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
@@ -51,13 +56,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     private static final Keyring keyring = PersistenceManager.getKeyring();
     /* when to take updates seriously */
     private boolean fullyInicialized;
-    private final String LAF_SYSTEM = "Systémový";
-    private final String LAF_CROSSPLATFORM = "Meziplatformní";
-    private final String LAF_GTK = "GTK";
-    private final String LAF_JGOODIES = "JGoodies";
-    private final String LAF_SUBSTANCE = "Substance";
     /* the active LaF when dialog is opened, needed for live-updating LaF skins */
-    private String lafWhenLoaded;
+    private LAF lafWhenLoaded;
+    private DefaultComboBoxModel lafModel = new DefaultComboBoxModel();
     
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
@@ -93,27 +94,23 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setIconAt(5, new ImageIcon(getClass().getResource(RES + "connection-16.png")));
         closeButton.requestFocusInWindow();
         
-        lafComboBox.setModel(new DefaultComboBoxModel(new String[] {
-            LAF_SYSTEM, LAF_CROSSPLATFORM, LAF_GTK, LAF_JGOODIES, LAF_SUBSTANCE}));
-        switch (config.getLookAndFeel()) {
-            case SYSTEM:
-                lafComboBox.setSelectedItem(LAF_SYSTEM);
-                break;
-            case CROSSPLATFORM:
-                lafComboBox.setSelectedItem(LAF_CROSSPLATFORM);
-                break;
-            case GTK:
-                lafComboBox.setSelectedItem(LAF_GTK);
-                break;
-            case JGOODIES:
-                lafComboBox.setSelectedItem(LAF_JGOODIES);
-                break;
-            case SUBSTANCE:
-                lafComboBox.setSelectedItem(LAF_SUBSTANCE);
-                break;
+        //add LaFs to combo box
+        for (LAF laf : LAF.values()) {
+            if (ThemeManager.isLaFSupported(laf)) {
+                lafModel.addElement(laf);
+            }
         }
-        lafWhenLoaded = (String) lafComboBox.getSelectedItem();
         
+        //select current laf and remember it
+        lafWhenLoaded = config.getLookAndFeel();
+        if (lafModel.getIndexOf(lafWhenLoaded) >= 0) {
+            lafModel.setSelectedItem(lafWhenLoaded);
+        } else {
+            logger.warning("Current LaF '" + lafWhenLoaded + "' not present in " +
+                    "the list of available LaFs!");
+        }
+        
+        //update themes according to current laf
         updateThemeComboBox();
 
         if (!NotificationIcon.isSupported()) {
@@ -126,9 +123,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     /** Update theme according to L&F */
     private void updateThemeComboBox() {
         themeComboBox.setEnabled(false);
-        String laf = (String) lafComboBox.getSelectedItem();
+        LAF laf = (LAF) lafComboBox.getSelectedItem();
         
-        if (laf.equals(LAF_JGOODIES)) {
+        if (laf.equals(LAF.JGOODIES)) {
             ArrayList<String> themes = new ArrayList<String>();
             for (Object o : PlasticLookAndFeel.getInstalledThemes())
                 themes.add(((PlasticTheme)o).getName());
@@ -137,7 +134,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             themeComboBox.setEnabled(true);
         }
         
-        else if (laf.equals(LAF_SUBSTANCE)) {
+        else if (laf.equals(LAF.SUBSTANCE)) {
             ArrayList<String> themes = new ArrayList<String>();
             new SubstanceLookAndFeel();
             for (SkinInfo skinInfo : SubstanceLookAndFeel.getAllSkins().values())
@@ -332,7 +329,9 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         tabbedPane.addTab("Obecné", jPanel1);
 
+        lafComboBox.setModel(lafModel);
         lafComboBox.setToolTipText("<html>\nUmožní vám změnit vzhled programu\n</html>");
+        lafComboBox.setRenderer(new LaFComboRenderer());
         lafComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lafComboBoxActionPerformed(evt);
@@ -959,11 +958,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
         
     private void themeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeComboBoxActionPerformed
-        String laf = (String) lafComboBox.getSelectedItem();
+        LAF laf = (LAF) lafComboBox.getSelectedItem();
 
-        if (laf.equals(LAF_JGOODIES)) {
+        if (laf.equals(LAF.JGOODIES)) {
             config.setLafJGoodiesTheme((String) themeComboBox.getSelectedItem());
-        } else if (laf.equals(LAF_SUBSTANCE)) {
+        } else if (laf.equals(LAF.SUBSTANCE)) {
             config.setLafSubstanceSkin((String) themeComboBox.getSelectedItem());
         }
 
@@ -980,21 +979,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_themeComboBoxActionPerformed
     
     private void lafComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lafComboBoxActionPerformed
-        if (!fullyInicialized)
+        if (!fullyInicialized) {
             return;
-        String laf = (String) lafComboBox.getSelectedItem();
-        
-        if (laf.equals(LAF_SYSTEM))
-            config.setLookAndFeel(ThemeManager.LAF.SYSTEM);
-        else if (laf.equals(LAF_CROSSPLATFORM))
-            config.setLookAndFeel(ThemeManager.LAF.CROSSPLATFORM);
-        else if (laf.equals(LAF_GTK))
-            config.setLookAndFeel(ThemeManager.LAF.GTK);
-        else if (laf.equals(LAF_JGOODIES))
-            config.setLookAndFeel(ThemeManager.LAF.JGOODIES);
-        else if (laf.equals(LAF_SUBSTANCE))
-            config.setLookAndFeel(ThemeManager.LAF.SUBSTANCE);
-        
+        }
+        LAF laf = (LAF) lafComboBox.getSelectedItem();
+        config.setLookAndFeel(laf);
         updateThemeComboBox();
     }//GEN-LAST:event_lafComboBoxActionPerformed
                             
@@ -1063,6 +1052,51 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
         }
 }//GEN-LAST:event_notificationAreaCheckBoxActionPerformed
     
+    private class LaFComboRenderer extends DefaultListCellRenderer {
+        private static final String LAF_SYSTEM = "Systémový";
+        private static final String LAF_CROSSPLATFORM = "Meziplatformní";
+        private static final String LAF_GTK = "GTK";
+        private static final String LAF_JGOODIES = "JGoodies";
+        private static final String LAF_SUBSTANCE = "Substance";
+        
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, 
+                int index, boolean isSelected, boolean cellHasFocus) {
+            JLabel label = (JLabel) super.getListCellRendererComponent(
+                    list, value, index, isSelected, cellHasFocus);
+            if (!(value instanceof LAF)) {
+                return label;
+            }
+            
+            LAF laf = (LAF) value;
+            String name = "Neznámý";
+            switch (laf) {
+                case SYSTEM: 
+                    name = LAF_SYSTEM;
+                    break;
+                case CROSSPLATFORM:
+                    name = LAF_CROSSPLATFORM; 
+                    break;
+                case GTK:
+                    name = LAF_GTK;
+                    break;
+                case JGOODIES: 
+                    name = LAF_JGOODIES;
+                    break;
+                case SUBSTANCE: 
+                    name = LAF_SUBSTANCE;
+                    break;
+                default: 
+                    logger.severe("Uknown LaF: " + laf);
+                    break;
+            }
+            label.setText(name);
+            
+            return label;
+        }
+        
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkUpdatesCheckBox;
     private javax.swing.JButton clearKeyringButton;
