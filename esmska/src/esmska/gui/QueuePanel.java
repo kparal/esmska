@@ -107,7 +107,6 @@ public class QueuePanel extends javax.swing.JPanel {
         //add mouse listeners to the queue list
         mouseListener = new QueueMouseListener(queueList, popup);
         queueList.addMouseListener(mouseListener);
-        queueList.addMouseWheelListener(mouseListener);
 
         //if there are some messages in queue, handle all needed routines
         if (!smsQueue.isEmpty()) {
