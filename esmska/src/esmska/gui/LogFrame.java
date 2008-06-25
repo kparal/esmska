@@ -20,7 +20,6 @@ import java.text.DateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -201,6 +200,7 @@ public class LogFrame extends javax.swing.JFrame {
     
     /** update log frame on log change*/
     private class LogListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
                 case Log.ACTION_ADD_RECORD:
@@ -215,8 +215,12 @@ public class LogFrame extends javax.swing.JFrame {
     
     /** Renderer for records in log list */
     private class LogRenderer implements ListCellRenderer {
+        private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
+        
+        @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = (new DefaultListCellRenderer()).getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            Component c = lafRenderer.getListCellRendererComponent(list, value, 
+                    index, isSelected, cellHasFocus);
             Log.Record record = (Log.Record)value;
             //display message and time
             String text = "[" + timeFormat.format(record.getTime()) + "] " +

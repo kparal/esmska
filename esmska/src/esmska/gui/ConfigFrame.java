@@ -43,6 +43,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
@@ -1053,6 +1054,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
 }//GEN-LAST:event_notificationAreaCheckBoxActionPerformed
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
+        private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
         private static final String LAF_SYSTEM = "Systémový";
         private static final String LAF_CROSSPLATFORM = "Meziplatformní";
         private static final String LAF_GTK = "GTK";
@@ -1062,8 +1064,9 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
         @Override
         public Component getListCellRendererComponent(JList list, Object value, 
                 int index, boolean isSelected, boolean cellHasFocus) {
-            JLabel label = (JLabel) super.getListCellRendererComponent(
+            JLabel label = (JLabel) lafRenderer.getListCellRendererComponent(
                     list, value, index, isSelected, cellHasFocus);
+            
             if (!(value instanceof LAF)) {
                 return label;
             }

@@ -46,6 +46,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -729,9 +730,12 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Renderer for items in contact list */
     private class ContactListRenderer extends DefaultListCellRenderer {
+        private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
+        
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            Component c = lafRenderer.getListCellRendererComponent(list, value,
+                    index, isSelected, cellHasFocus);
             Contact contact = (Contact)value;
             JLabel label = ((JLabel)c);
             //add operator logo

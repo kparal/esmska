@@ -219,7 +219,7 @@
                       <Component id="encodingLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="problemLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="145" max="32767" attributes="0"/>
+                      <EmptySpace pref="130" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -336,7 +336,7 @@
                       <Connection code="new DefaultListModel()" type="code"/>
                     </Property>
                     <Property name="cellRenderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new DefaultListCellRenderer() {&#xa;    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;        Component comp = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;        JLabel label = (JLabel) comp;&#xa;        Contact c = (Contact) value;&#xa;        String number = (c.getNumber() != null ? c.getNumber() : &quot;&quot;);&#xa;        String operator = (c.getOperator() != null ? c.getOperator() : &quot;&quot;);&#xa;        label.setText(c.getName() + &quot; (&quot; + number + &quot;, &quot; + operator + &quot;)&quot;);&#xa;        return label;&#xa;    }&#xa;    &#xa;}" type="code"/>
+                      <Connection code="new ContactsListRenderer()" type="code"/>
                     </Property>
                   </Properties>
                 </Component>

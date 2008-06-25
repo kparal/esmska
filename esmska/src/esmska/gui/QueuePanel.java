@@ -46,6 +46,7 @@ import java.util.Set;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -696,6 +697,7 @@ public class QueuePanel extends javax.swing.JPanel {
     
     /** Renderer for items in queue list */
     private class SMSQueueListRenderer extends DefaultListCellRenderer {
+        private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
         private final JLabel delayLabel = new JLabel("", SwingConstants.TRAILING);
         private final JPanel panel = new JPanel(new BorderLayout());
         private final ImageIcon sendIcon = new ImageIcon(getClass().getResource(RES + "send-16.png"));
@@ -706,8 +708,8 @@ public class QueuePanel extends javax.swing.JPanel {
         
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = super.getListCellRendererComponent(list,value,index,
-                    isSelected,false); //looks better without cell focus
+            Component c = lafRenderer.getListCellRendererComponent(list, value, index,
+                    isSelected, false); //looks better without cell focus
             JLabel label = (JLabel) c;
             SMS sms = (SMS)value;
             

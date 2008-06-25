@@ -47,6 +47,7 @@ import java.awt.Toolkit;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
+import javax.swing.table.TableCellRenderer;
 
 /** Display all sent messages in a frame
  *
@@ -601,12 +602,13 @@ public class HistoryFrame extends javax.swing.JFrame {
 
     /** Renderer for date columns in history table */
     private class TableDateRenderer extends DefaultTableCellRenderer {
-
+        private final JTable lafTable = new JTable();
         private final ImageIcon icon = new ImageIcon(HistoryFrame.class.getResource(RES + "message-16.png"));
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            TableCellRenderer renderer = lafTable.getDefaultRenderer(table.getColumnClass(column));
+            Component comp = renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             JLabel label = (JLabel) comp;
             label.setText(df.format(value));
             label.setIcon(icon);

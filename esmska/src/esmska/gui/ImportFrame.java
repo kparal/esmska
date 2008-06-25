@@ -37,6 +37,7 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 
 /** Import contacts from external applications
@@ -367,18 +368,7 @@ public class ImportFrame extends javax.swing.JFrame {
         jLabel1.setText("Byly nalezeny následující nové kontakty:");
 
         contactList.setModel(new DefaultListModel());
-        contactList.setCellRenderer(new DefaultListCellRenderer() {
-            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                Component comp = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                JLabel label = (JLabel) comp;
-                Contact c = (Contact) value;
-                String number = (c.getNumber() != null ? c.getNumber() : "");
-                String operator = (c.getOperator() != null ? c.getOperator() : "");
-                label.setText(c.getName() + " (" + number + ", " + operator + ")");
-                return label;
-            }
-
-        });
+        contactList.setCellRenderer(new ContactsListRenderer());
         jScrollPane1.setViewportView(contactList);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
@@ -614,6 +604,23 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 backButton.setEnabled(true);
             }
         }
+    }
+    
+    private class ContactsListRenderer extends DefaultListCellRenderer {
+        private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
+        
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component comp = lafRenderer.getListCellRendererComponent(list, value,
+                    index, isSelected, cellHasFocus);
+            JLabel label = (JLabel) comp;
+            Contact c = (Contact) value;
+            String number = (c.getNumber() != null ? c.getNumber() : "");
+            String operator = (c.getOperator() != null ? c.getOperator() : "");
+            label.setText(c.getName() + " (" + number + ", " + operator + ")");
+            return label;
+        }
+    
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

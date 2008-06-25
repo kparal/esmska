@@ -10,7 +10,6 @@ import esmska.data.Icons;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
-import esmska.utils.CurrentLaFRenderer;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -21,6 +20,7 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
 /** JComboBox showing available operators.
  *
@@ -139,10 +139,12 @@ public class OperatorComboBox extends JComboBox {
     
     /** Renderer for items in OperatorComboBox */
     private static class OperatorComboBoxRenderer extends DefaultListCellRenderer {
+        private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
+        
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = CurrentLaFRenderer.getListCellRenderer().
-                    getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
+            Component c = lafRenderer.getListCellRendererComponent(list, value, 
+                    index, isSelected, cellHasFocus);
             if (!(value instanceof Operator)) {
                 return c;
             }
