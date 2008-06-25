@@ -89,7 +89,6 @@ public class ContactPanel extends javax.swing.JPanel {
         //add mouse listeners to the contact list
         mouseListener = new ContactMouseListener(contactList, popup);
         contactList.addMouseListener(mouseListener);
-        contactList.addMouseWheelListener(mouseListener);
     }
     
     /** clear selection of contact list */
