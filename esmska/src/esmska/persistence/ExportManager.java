@@ -24,6 +24,7 @@ import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
 import esmska.data.SMS;
 import esmska.gui.MainFrame;
+import esmska.utils.ConfirmingFileChooser;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
@@ -92,14 +93,18 @@ public class ExportManager {
                 new ImageIcon(ExportManager.class.getResource(RES + "contact-48.png")));
         
         //choose file
-        JFileChooser chooser = new JFileChooser();
+        ConfirmingFileChooser chooser = new ConfirmingFileChooser();
         chooser.setDialogTitle("Vyberte umístění a typ exportovaného souboru");
+        //set dialog type not to erase approve button text later
+        chooser.setDialogType(JFileChooser.SAVE_DIALOG);
+        chooser.setApproveButtonText("Uložit");
         chooser.addChoosableFileFilter(csvFileFilter);
         chooser.addChoosableFileFilter(vCardFileFilter);
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setFileFilter(csvFileFilter);
-        if (chooser.showSaveDialog(parent) != JFileChooser.APPROVE_OPTION)
+        if (chooser.showSaveDialog(parent) != JFileChooser.APPROVE_OPTION) {
             return;
+        }
         
         File file = chooser.getSelectedFile();
         //append correct extension
@@ -112,6 +117,16 @@ public class ExportManager {
             file = new File(file.getPath() + ".vcf");
         }
         
+        //confirm overwrite if file with appended extension exists
+        if (!file.equals(chooser.getSelectedFile()) && file.exists()) {
+            chooser.setSelectedFile(file);
+            boolean overwrite = chooser.showConfirmOverwriteDialog();
+            if (!overwrite) {
+                return;
+            }
+        }
+        
+        //check if file can be written
         if (file.exists() && !file.canWrite()) {
             JOptionPane.showMessageDialog(parent,"Do souboru " + file.getAbsolutePath() +
                     " nelze zapisovat!", null, JOptionPane.ERROR_MESSAGE);
