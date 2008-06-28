@@ -24,7 +24,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     private Application app;
     
     /**
-     * @see esmska.utils.mac.IntegrationAdapter#initialize()
+     * @see esmska.integration.IntegrationAdapter#initialize()
      */
     @Override
     protected void initialize() {
