@@ -453,7 +453,7 @@ public class QueuePanel extends javax.swing.JPanel {
                     new ImageIcon(QueuePanel.class.getResource(RES + "delete-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Odstranit označené zprávy");
             this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(ContactPanel.class.getResource(RES + "delete-22.png")));
+                    new ImageIcon(QueuePanel.class.getResource(RES + "delete-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -481,7 +481,7 @@ public class QueuePanel extends javax.swing.JPanel {
                     new ImageIcon(QueuePanel.class.getResource(RES + "edit-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Upravit označenou zprávu");
             this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(ContactPanel.class.getResource(RES + "edit-22.png")));
+                    new ImageIcon(QueuePanel.class.getResource(RES + "edit-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -508,7 +508,7 @@ public class QueuePanel extends javax.swing.JPanel {
                     new ImageIcon(QueuePanel.class.getResource(RES + "up-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě výše");
             this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(ContactPanel.class.getResource(RES + "up-22.png")));
+                    new ImageIcon(QueuePanel.class.getResource(RES + "up-22.png")));
             this.setEnabled(false);
         }
         @Override
@@ -539,7 +539,7 @@ public class QueuePanel extends javax.swing.JPanel {
                     new ImageIcon(QueuePanel.class.getResource(RES + "down-16.png")));
             this.putValue(SHORT_DESCRIPTION,"Posunout sms ve frontě níže");
             this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(ContactPanel.class.getResource(RES + "down-22.png")));
+                    new ImageIcon(QueuePanel.class.getResource(RES + "down-22.png")));
             this.setEnabled(false);
         }
         @Override
