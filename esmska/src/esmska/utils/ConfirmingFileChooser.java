@@ -6,7 +6,6 @@ package esmska.utils;
 
 import esmska.integration.MacUtils;
 import java.awt.Component;
-import java.awt.Dialog.ModalityType;
 import java.awt.HeadlessException;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;

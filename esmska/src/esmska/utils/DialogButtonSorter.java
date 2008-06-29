@@ -8,7 +8,6 @@ import esmska.ThemeManager;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import javax.swing.UIManager;
 
 /** Sort dialog buttons according to current look and feel. Some L&Fs are
  * reversing order of the buttons, which is an unwanted behaviour. This

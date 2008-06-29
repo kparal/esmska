@@ -4,7 +4,6 @@
  */
 package esmska.update;
 
-import esmska.*;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.persistence.PersistenceManager;

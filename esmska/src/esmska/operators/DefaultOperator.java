@@ -68,6 +68,7 @@ public class DefaultOperator implements Operator {
         }
     }
 
+    @Override
     public int compareTo(Operator o) {
         Collator collator = Collator.getInstance();
         return collator.compare(this.getName(), o.getName());
@@ -90,50 +91,62 @@ public class DefaultOperator implements Operator {
         return this.compareTo(o) == 0;
     }
 
+    @Override
     public URL getScript() {
         return script;
     }
 
+    @Override
     public Icon getIcon() {
         return icon;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getVersion() {
         return version;
     }
 
+    @Override
     public String getAuthor() {
         return author;
     }
     
+    @Override
     public String getCountryPrefix() {
         return countryPrefix;
     }
 
+    @Override
     public String[] getOperatorPrefixes() {
         return operatorPrefixes;
     }
 
+    @Override
     public int getSMSLength() {
         return smsLength;
     }
 
+    @Override
     public int getMaxParts() {
         return maxParts;
     }
 
+    @Override
     public int getMaxChars() {
         return maxChars;
     }
 
+    @Override
     public int getSignatureExtraLength() {
         return signatureExtraLength;
     }
 
+    @Override
     public int getDelayBetweenMessages() {
         return delayBetweenMessages;
     }
