@@ -54,18 +54,18 @@ public class PersistenceManager {
     private static final String HISTORY_FILENAME = "history.csv";
     private static final String KEYRING_FILENAME = "keyring.csv";
     private static final String LOCK_FILENAME = "running.lock";
-    private static File USER_DIR =
+    private static final String OPERATOR_RESOURCE = "/esmska/operators/scripts";
+    
+    private static File userDir =
             new File(System.getProperty("user.home") + File.separator + ".config",
             USER_DIRNAME);
-    private static File OPERATOR_DIR = new File(OPERATOR_DIRNAME);
-    private static File CONFIG_FILE = new File(USER_DIR, CONFIG_FILENAME);
-    private static File CONTACTS_FILE = new File(USER_DIR, CONTACTS_FILENAME);
-    private static File QUEUE_FILE = new File(USER_DIR, QUEUE_FILENAME);
-    private static File HISTORY_FILE = new File(USER_DIR, HISTORY_FILENAME);
-    private static File KEYRING_FILE = new File(USER_DIR, KEYRING_FILENAME);
-    private static File LOCK_FILE = new File(USER_DIR, LOCK_FILENAME);
-    
-    private static final String OPERATOR_RESOURCE = "/esmska/operators/scripts";
+    private static File operatorDir = new File(OPERATOR_DIRNAME);
+    private static File configFile = new File(userDir, CONFIG_FILENAME);
+    private static File contactsFile = new File(userDir, CONTACTS_FILENAME);
+    private static File queueFile = new File(userDir, QUEUE_FILENAME);
+    private static File historyFile = new File(userDir, HISTORY_FILENAME);
+    private static File keyringFile = new File(userDir, KEYRING_FILENAME);
+    private static File lockFile = new File(userDir, LOCK_FILENAME);
     
     private static Config config = new Config();
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
@@ -104,10 +104,10 @@ public class PersistenceManager {
         }
         
         //create program dir if necessary
-        if (!USER_DIR.exists() && !USER_DIR.mkdirs()) {
+        if (!userDir.exists() && !userDir.mkdirs()) {
             throw new IOException("Can't create program dir");
         }
-        if (!(USER_DIR.canWrite() && USER_DIR.canExecute())) {
+        if (!(userDir.canWrite() && userDir.canExecute())) {
             throw new IOException("Can't write or execute the program dir");
         }
     }
@@ -118,19 +118,19 @@ public class PersistenceManager {
             throw new IllegalStateException("Persistence manager already exists");
         }
         
-        USER_DIR = new File(path);
-        CONFIG_FILE = new File(USER_DIR, CONFIG_FILENAME);
-        CONTACTS_FILE = new File(USER_DIR, CONTACTS_FILENAME);
-        QUEUE_FILE = new File(USER_DIR, QUEUE_FILENAME);
-        HISTORY_FILE = new File(USER_DIR, HISTORY_FILENAME);
-        KEYRING_FILE = new File(USER_DIR, KEYRING_FILENAME);
-        LOCK_FILE = new File(USER_DIR, LOCK_FILENAME);
+        userDir = new File(path);
+        configFile = new File(userDir, CONFIG_FILENAME);
+        contactsFile = new File(userDir, CONTACTS_FILENAME);
+        queueFile = new File(userDir, QUEUE_FILENAME);
+        historyFile = new File(userDir, HISTORY_FILENAME);
+        keyringFile = new File(userDir, KEYRING_FILENAME);
+        lockFile = new File(userDir, LOCK_FILENAME);
         customPathSet = true;
     }
     
     /** Get user configuration dir */
     public static File getUserDir() {
-        return USER_DIR;
+        return userDir;
     }
     
     /** Get PersistenceManager */
@@ -181,14 +181,14 @@ public class PersistenceManager {
                 new BufferedOutputStream(new FileOutputStream(temp)));
         xmlEncoder.writeObject(config);
         xmlEncoder.close();
-        moveFileSafely(temp, CONFIG_FILE);
+        moveFileSafely(temp, configFile);
     }
     
     /** Load program configuration */
     public void loadConfig() throws IOException {
-        if (CONFIG_FILE.exists()) {
+        if (configFile.exists()) {
             XMLDecoder xmlDecoder = new XMLDecoder(
-                    new BufferedInputStream(new FileInputStream(CONFIG_FILE)));
+                    new BufferedInputStream(new FileInputStream(configFile)));
             Config newConfig = (Config) xmlDecoder.readObject();
             xmlDecoder.close();
             if (newConfig != null) {
@@ -201,13 +201,13 @@ public class PersistenceManager {
     public void saveContacts() throws IOException {
         File temp = createTempFile();
         ExportManager.exportContacts(contacts, temp);
-        moveFileSafely(temp, CONTACTS_FILE);
+        moveFileSafely(temp, contactsFile);
     }
        
     /** Load contacts */
     public void loadContacts() throws Exception {
-        if (CONTACTS_FILE.exists()) {
-            ArrayList<Contact> newContacts = ImportManager.importContacts(CONTACTS_FILE,
+        if (contactsFile.exists()) {
+            ArrayList<Contact> newContacts = ImportManager.importContacts(contactsFile,
                     ContactParser.ContactType.ESMSKA_FILE);
             contacts.clear();
             contacts.addAll(newContacts);
@@ -218,13 +218,13 @@ public class PersistenceManager {
     public void saveQueue() throws IOException {
         File temp = createTempFile();
         ExportManager.exportQueue(queue, temp);
-        moveFileSafely(temp, QUEUE_FILE);
+        moveFileSafely(temp, queueFile);
     }
     
     /** Load sms queue */
     public void loadQueue() throws IOException {
-        if (QUEUE_FILE.exists()) {
-            ArrayList<SMS> newQueue = ImportManager.importQueue(QUEUE_FILE);
+        if (queueFile.exists()) {
+            ArrayList<SMS> newQueue = ImportManager.importQueue(queueFile);
             queue.clear();
             queue.addAll(newQueue);
         }
@@ -234,13 +234,13 @@ public class PersistenceManager {
     public void saveHistory() throws IOException {
         File temp = createTempFile();
         ExportManager.exportHistory(history.getRecords(), temp);
-        moveFileSafely(temp, HISTORY_FILE);
+        moveFileSafely(temp, historyFile);
     }
     
     /** Load sms history */
     public void loadHistory() throws Exception {
-        if (HISTORY_FILE.exists()) {
-            ArrayList<History.Record> records = ImportManager.importHistory(HISTORY_FILE);
+        if (historyFile.exists()) {
+            ArrayList<History.Record> records = ImportManager.importHistory(historyFile);
             history.clearRecords();
             history.addRecords(records);
         }
@@ -250,13 +250,13 @@ public class PersistenceManager {
     public void saveKeyring() throws Exception {
         File temp = createTempFile();
         ExportManager.exportKeyring(keyring, temp);
-        moveFileSafely(temp, KEYRING_FILE);
+        moveFileSafely(temp, keyringFile);
     }
     
     /** Load keyring. */
     public void loadKeyring() throws Exception {
-        if (KEYRING_FILE.exists()) {
-            keyring = ImportManager.importKeyring(KEYRING_FILE);
+        if (keyringFile.exists()) {
+            keyring = ImportManager.importKeyring(keyringFile);
         }
     }
     
@@ -266,13 +266,13 @@ public class PersistenceManager {
      */
     public void loadOperators() throws IOException, IntrospectionException {
         TreeSet<Operator> newOperators = new TreeSet<Operator>();
-        if (OPERATOR_DIR.exists()) {
-            newOperators = ImportManager.importOperators(OPERATOR_DIR);
+        if (operatorDir.exists()) {
+            newOperators = ImportManager.importOperators(operatorDir);
         } else if (PersistenceManager.class.getResource(OPERATOR_RESOURCE) != null) {
             newOperators = ImportManager.importOperators(OPERATOR_RESOURCE);
         } else {
             throw new IOException("Could not find operator directory '" +
-                    OPERATOR_DIR.getAbsolutePath() + "' nor jar operator resource '" +
+                    operatorDir.getAbsolutePath() + "' nor jar operator resource '" +
                     OPERATOR_RESOURCE + "'");
         }
         operators.clear();
@@ -285,13 +285,13 @@ public class PersistenceManager {
      */
     public boolean isFirstInstance() {
         try {
-            FileOutputStream out = new FileOutputStream(LOCK_FILE);
+            FileOutputStream out = new FileOutputStream(lockFile);
             FileChannel channel = out.getChannel();
             lock = channel.tryLock();
             if (lock == null) {
                 return false;
             }
-            LOCK_FILE.deleteOnExit();
+            lockFile.deleteOnExit();
         } catch (Throwable t) {
             logger.log(Level.INFO, "Program lock could not be obtained", t);
             return false;
