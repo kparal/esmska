@@ -10,8 +10,13 @@ import com.apple.eawt.Application;
 import com.apple.eawt.ApplicationEvent;
 import com.apple.eawt.ApplicationListener;
 
+import esmska.ThemeManager;
 import esmska.gui.MainFrame;
 import esmska.gui.NotificationIcon;
+import java.awt.Component;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  * Integration for Mac OS X.
@@ -79,7 +84,32 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
      */
     @Override
     public void handleOpenApplication(ApplicationEvent e) {
-        e.setHandled(false);
+        e.setHandled(true);
+
+        // we are using different l&f, so there is no need to strict use of HIG
+        if (!ThemeManager.isAquaCurrentLaF()) {
+            return;
+        }
+
+        // turn off mnemonics and tool tips
+        JMenuBar bar = MainFrame.getInstance().getJMenuBar();
+        for (Component menu : bar.getComponents()) {
+            JMenu m = (JMenu) menu;
+            m.setMnemonic(-1);
+            m.setToolTipText(null);
+
+            for (Component c : m.getPopupMenu().getComponents()) {
+                if (c instanceof JMenuItem) {
+                    JMenuItem i = (JMenuItem) c;
+                    i.setMnemonic(-1);
+                    i.setToolTipText(null);
+                } else if (c instanceof JMenu) {
+                    JMenu jm = (JMenu) c;
+                    jm.setMnemonic(-1);
+                    jm.setToolTipText(null);
+                }
+            }
+        }
     }
     
     /**
