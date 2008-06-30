@@ -9,30 +9,27 @@
 
 package esmska.persistence;
 
-import com.csvreader.CsvWriter;
-import esmska.data.*;
 import java.awt.Component;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
+import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
-import esmska.data.Contact;
-import esmska.data.SMS;
-import esmska.gui.MainFrame;
-import esmska.utils.ConfirmingFileChooser;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import net.wimpi.pim.Pim;
 import net.wimpi.pim.contact.io.ContactMarshaller;
 import net.wimpi.pim.contact.model.Communications;
@@ -41,6 +38,16 @@ import net.wimpi.pim.contact.model.PhoneNumber;
 import net.wimpi.pim.factory.ContactIOFactory;
 import net.wimpi.pim.factory.ContactModelFactory;
 
+import com.csvreader.CsvWriter;
+
+import esmska.data.Contact;
+import esmska.data.History;
+import esmska.data.Icons;
+import esmska.data.Keyring;
+import esmska.data.SMS;
+import esmska.gui.MainFrame;
+import esmska.utils.ConfirmingFileChooser;
+
 /** Export program data
  *
  * @author ripper
@@ -48,28 +55,12 @@ import net.wimpi.pim.factory.ContactModelFactory;
 public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
     private static final String RES = "/esmska/resources/";
-    private static final FileFilter csvFileFilter = new FileFilter() {
-        @Override
-        public boolean accept(File f) {
-            return f.isDirectory() || f.getName().toLowerCase().endsWith(".csv");
-        }
-        @Override
-        public String getDescription() {
-            return "CSV soubory (*.csv)";
-        }
-    };
-    private static final FileFilter vCardFileFilter = new FileFilter() {
-        @Override
-        public boolean accept(File f) {
-            return f.isDirectory() || f.getName().toLowerCase().endsWith(".vcard") ||
-                    f.getName().toLowerCase().endsWith(".vcf");
-        }
-        @Override
-        public String getDescription() {
-            return "vCard soubory (*.vcard, *.vcf)";
-        }
-    };
-
+    
+    private static final FileFilter csvFileFilter = 
+            new FileNameExtensionFilter("CSV soubory (*.csv)", "csv");
+    private static final FileFilter vCardFileFilter = 
+            new FileNameExtensionFilter("vCard soubory (*.vcard, *.vcf)", "vcf", "vcard");
+    
     /** Disabled constructor */
     private ExportManager() {
     }
@@ -89,7 +80,7 @@ public class ExportManager {
                 "procesor, např. zdarma dostupný OpenOffice Calc (www.openoffice.cz).<br><br>" +
                 "Soubor bude uložen v kódování UTF-8.</html>";
         JOptionPane.showMessageDialog(parent,new JLabel(message),"Export kontaktů",
-                JOptionPane.INFORMATION_MESSAGE, 
+                JOptionPane.INFORMATION_MESSAGE,
                 new ImageIcon(ExportManager.class.getResource(RES + "contact-48.png")));
         
         //choose file
@@ -107,24 +98,6 @@ public class ExportManager {
         }
         
         File file = chooser.getSelectedFile();
-        //append correct extension
-        if (chooser.getFileFilter() == csvFileFilter && 
-                !file.getName().toLowerCase().endsWith(".csv")) {
-            file = new File(file.getPath() + ".csv");
-        } else if (chooser.getFileFilter() == vCardFileFilter &&
-                !file.getName().toLowerCase().endsWith(".vcard") &&
-                !file.getName().toLowerCase().endsWith(".vcf")) {
-            file = new File(file.getPath() + ".vcf");
-        }
-        
-        //confirm overwrite if file with appended extension exists
-        if (!file.equals(chooser.getSelectedFile()) && file.exists()) {
-            chooser.setSelectedFile(file);
-            boolean overwrite = chooser.showConfirmOverwriteDialog();
-            if (!overwrite) {
-                return;
-            }
-        }
         
         //check if file can be written
         if (file.exists() && !file.canWrite()) {
@@ -247,7 +220,7 @@ public class ExportManager {
     /** Export sms history to file */
     public static void exportHistory(Collection<History.Record> history, File file) throws IOException {
         CsvWriter writer = null;
-        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG, 
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
                 DateFormat.LONG, Locale.ROOT);
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
