@@ -4,14 +4,14 @@
 # traverse symlinks
 SCRIPT="$0"
 if [ -L "${SCRIPT}" ]; then
-    SCRIPT=`readlink -f "${SCRIPT}"`
+    SCRIPT="`readlink -f "${SCRIPT}"`"
 fi
 # go to the program directory
-cd `dirname "$SCRIPT"`
+cd "`dirname "$SCRIPT"`"
 
 # run program
 if [ "$JAVA_HOME" ]; then
-    $JAVA_HOME/bin/java -jar esmska.jar $*
+    "$JAVA_HOME"/bin/java -jar esmska.jar $*
                      else
     java -jar esmska.jar $*
 fi
