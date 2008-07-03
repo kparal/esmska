@@ -16,19 +16,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="operatorComboBox" pref="131" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="suggestOperatorButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="nameTextField" alignment="0" pref="147" max="32767" attributes="0"/>
-                  <Component id="operatorComboBox" alignment="1" pref="147" max="32767" attributes="0"/>
                   <Component id="numberTextField" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,10 +49,13 @@
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="numberTextField" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="operatorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="operatorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="suggestOperatorButton" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -117,6 +124,16 @@
           <Connection component="operatorComboBox" name="toolTipText" type="property"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="suggestOperatorButton">
+      <Properties>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[2, 2, 2, 2]"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="suggestOperatorButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

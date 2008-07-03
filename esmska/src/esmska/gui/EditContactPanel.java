@@ -12,10 +12,12 @@ import esmska.gui.FormChecker;
 import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import java.awt.Color;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 /** Add new or edit current contact
  *
@@ -26,7 +28,8 @@ public class EditContactPanel extends javax.swing.JPanel {
     private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);
     
     private Config config = PersistenceManager.getConfig();
-    
+
+    private Action suggestOperatorAction;
     /**
      * Creates new form EditContactPanel
      */
@@ -37,6 +40,11 @@ public class EditContactPanel extends javax.swing.JPanel {
             ClipboardPopupMenu.register(nameTextField);
             ClipboardPopupMenu.register(numberTextField);
         }
+        
+        //set up button for suggesting operator
+        suggestOperatorAction = operatorComboBox.getSuggestOperatorAction(numberTextField);
+        suggestOperatorButton.setAction(suggestOperatorAction);
+        suggestOperatorButton.setText(null);
     }
     
     /** This method is called from within the constructor to
@@ -63,6 +71,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        suggestOperatorButton = new javax.swing.JButton();
 
         nameTextField.setToolTipText("Jméno kontaktu");
         nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -99,6 +108,9 @@ public class EditContactPanel extends javax.swing.JPanel {
         jLabel3.setText("Brána:");
         jLabel3.setToolTipText(operatorComboBox.getToolTipText());
 
+        suggestOperatorButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        suggestOperatorButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,13 +118,16 @@ public class EditContactPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(suggestOperatorButton))
                     .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addComponent(numberTextField, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -131,9 +146,11 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(numberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(suggestOperatorButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -226,6 +243,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     private javax.swing.JTextField nameTextField;
     private javax.swing.JTextField numberTextField;
     private esmska.gui.OperatorComboBox operatorComboBox;
+    private javax.swing.JButton suggestOperatorButton;
     // End of variables declaration//GEN-END:variables
     
 }
