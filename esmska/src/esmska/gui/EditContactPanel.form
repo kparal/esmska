@@ -18,15 +18,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="nameTextField" alignment="0" pref="150" max="32767" attributes="0"/>
-                  <Component id="operatorComboBox" alignment="1" pref="150" max="32767" attributes="0"/>
-                  <Component id="numberTextField" alignment="1" pref="150" max="32767" attributes="0"/>
+                  <Component id="nameTextField" alignment="0" pref="147" max="32767" attributes="0"/>
+                  <Component id="operatorComboBox" alignment="1" pref="147" max="32767" attributes="0"/>
+                  <Component id="numberTextField" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -84,11 +84,11 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="displayedMnemonic" type="int" value="106"/>
+        <Property name="displayedMnemonic" type="int" value="109"/>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="nameTextField"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Jm&#xe9;no"/>
+        <Property name="text" type="java.lang.String" value="Jm&#xe9;no:"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection component="nameTextField" name="toolTipText" type="property"/>
         </Property>
@@ -96,11 +96,11 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="displayedMnemonic" type="int" value="115"/>
+        <Property name="displayedMnemonic" type="int" value="111"/>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="numberTextField"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo"/>
+        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo:"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection component="numberTextField" name="toolTipText" type="property"/>
         </Property>
@@ -112,7 +112,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="operatorComboBox"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Br&#xe1;na"/>
+        <Property name="text" type="java.lang.String" value="Br&#xe1;na:"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection component="operatorComboBox" name="toolTipText" type="property"/>
         </Property>

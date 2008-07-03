@@ -84,19 +84,19 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setDisplayedMnemonic('j');
+        jLabel1.setDisplayedMnemonic('m');
         jLabel1.setLabelFor(nameTextField);
-        jLabel1.setText("Jméno");
+        jLabel1.setText("Jméno:");
         jLabel1.setToolTipText(nameTextField.getToolTipText());
 
-        jLabel2.setDisplayedMnemonic('s');
+        jLabel2.setDisplayedMnemonic('o');
         jLabel2.setLabelFor(numberTextField);
-        jLabel2.setText("Číslo");
+        jLabel2.setText("Číslo:");
         jLabel2.setToolTipText(numberTextField.getToolTipText());
 
         jLabel3.setDisplayedMnemonic('b');
         jLabel3.setLabelFor(operatorComboBox);
-        jLabel3.setText("Brána");
+        jLabel3.setText("Brána:");
         jLabel3.setToolTipText(operatorComboBox.getToolTipText());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -111,11 +111,14 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(numberTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                    .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(operatorComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(numberTextField, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
