@@ -25,33 +25,39 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="singleProgressBar" linkSize="2" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
-                  <Component id="fullProgressBar" linkSize="2" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane1" pref="264" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="smsCounterLabel" pref="218" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="sendButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="numberTextField" pref="125" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel5" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="singleProgressBar" linkSize="2" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
+                          <Component id="fullProgressBar" linkSize="2" alignment="0" min="-2" pref="33" max="-2" attributes="1"/>
+                      </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="operatorComboBox" pref="133" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jScrollPane1" pref="187" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="smsCounterLabel" pref="141" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="sendButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel2" linkSize="5" alignment="0" max="32767" attributes="1"/>
+                              <Component id="jLabel4" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel1" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="numberTextField" alignment="0" pref="187" max="32767" attributes="0"/>
+                          <Component id="operatorComboBox" alignment="0" pref="187" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -65,29 +71,33 @@
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="operatorComboBox" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="numberTextField" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="numberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="operatorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="singleProgressBar" linkSize="3" min="-2" pref="10" max="-2" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fullProgressBar" linkSize="3" min="-2" pref="10" max="-2" attributes="1"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="1" pref="150" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" pref="100" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="sendButton" min="-2" max="-2" attributes="0"/>
-                  <Component id="smsCounterLabel" alignment="0" max="32767" attributes="1"/>
+                  <Component id="smsCounterLabel" alignment="0" min="-2" max="-2" attributes="1"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,8 +109,13 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="numberTextField"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo"/>
+        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo:"/>
       </Properties>
+    </Component>
+    <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBox.addActionListener(new OperatorComboBoxActionListener());"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JProgressBar" name="fullProgressBar">
       <Properties>
@@ -140,7 +155,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="smsTextPane"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Text"/>
+        <Property name="text" type="java.lang.String" value="Text:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="sendButton">
@@ -158,7 +173,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Jm&#xe9;no"/>
+        <Property name="text" type="java.lang.String" value="Jm&#xe9;no:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="nameLabel">
@@ -172,14 +187,18 @@
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="nameLabel.setText(null);"/>
       </AuxValues>
     </Component>
-    <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBox.addActionListener(new OperatorComboBoxActionListener());"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JProgressBar" name="singleProgressBar">
       <Properties>
         <Property name="maximum" type="int" value="1000"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="displayedMnemonic" type="int" value="98"/>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="operatorComboBox"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Br&#xe1;na:"/>
       </Properties>
     </Component>
   </SubComponents>
