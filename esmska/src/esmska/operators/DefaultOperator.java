@@ -28,6 +28,7 @@ public class DefaultOperator implements Operator {
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
             delayBetweenMessages;
     private Icon icon;
+    private boolean loginRequired;
 
     /** Creates new DefaultOperator.
      * 
@@ -58,6 +59,7 @@ public class DefaultOperator implements Operator {
         maxChars = info.getMaxChars();
         signatureExtraLength = info.getSignatureExtraLength();
         delayBetweenMessages = info.getDelayBetweenMessages();
+        loginRequired = info.isLoginRequired();
 
         //find icon - for "[xx]abc.operator" look for "[xx]abc.png"
         String iconName = script.toExternalForm().replaceFirst("\\.operator$", ".png");
@@ -149,5 +151,10 @@ public class DefaultOperator implements Operator {
     @Override
     public int getDelayBetweenMessages() {
         return delayBetweenMessages;
+    }
+
+    @Override
+    public boolean isLoginRequired() {
+        return loginRequired;
     }
 }

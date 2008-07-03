@@ -97,43 +97,42 @@ public class OperatorComboBox extends JComboBox {
     }
     
     /** Select operator according to phone number or phone number prefix.
-     * Searches through available (displayed) operators and selects the first one supporting 
-     * this phone number, either by operator prefix or country prefix. Doesn't change 
-     * selection if no operator is found. Doesn't change selection if no operator prefix 
-     * matched and operator witch matching country prefix is already selected.
+     * Searches through available (displayed) operators and selects the best
+     * suited on supporting this phone number. Doesn't change selection if no 
+     * such operator is found. Doesn't change selection if no operator prefix 
+     * matched and operator with matching country prefix is already selected.
      * @param number phone number or it's prefix. The minimum length is two characters,
      *               for shorter input (or null) the method does nothing.
      */
     public void selectSuggestedOperator(String number) {
-        if (number == null || number.length() < 2) {
+        TreeSet<Operator> visibleOperators = new TreeSet<Operator>();
+        for (int i = 0; i < model.getSize(); i++) {
+            Operator op = (Operator) model.getElementAt(i);
+            visibleOperators.add(op);
+        }
+        
+        Operator operator = OperatorUtil.suggestOperator(number, visibleOperators);
+        
+        //none suitable operator found, do nothing
+        if (operator == null) {
             return;
         }
         
-        //search in operator prefixes
-        for (int i = 0; i < model.getSize(); i++) {
-            Operator op = (Operator) model.getElementAt(i);
-            for (String prefix : op.getOperatorPrefixes()) {
-                if (number.startsWith(prefix)) {
-                    setSelectedOperator(op.getName());
-                    return;
-                }
-            }
+        //if perfect match found, select it
+        if (OperatorUtil.matchesWithOperatorPrefix(operator, number)) {
+            setSelectedOperator(operator.getName());
+            return;
         }
         
         //return if already selected operator with matching country prefix
-        Operator operator = getSelectedOperator();
-        if (operator != null && number.startsWith(operator.getCountryPrefix())) {
+        Operator selectedOperator = getSelectedOperator();
+        if (OperatorUtil.matchesWithCountryPrefix(selectedOperator, number)) {
             return;
         }
         
-        //search in country prefixes
-        for (int i = 0; i < model.getSize(); i++) {
-            Operator op = (Operator) model.getElementAt(i);
-            if (number.startsWith(op.getCountryPrefix())) {
-                setSelectedOperator(op.getName());
-                return;
-            }
-        }
+        //select suggested
+        setSelectedOperator(operator.getName());
+        
     }
             
     

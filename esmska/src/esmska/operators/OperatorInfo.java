@@ -83,4 +83,13 @@ public interface OperatorInfo {
      * another message. If there are no operator restrictions, use '0'.
      */
     int getDelayBetweenMessages();
+    
+    
+    /** Indicates whether this operator gateway requires login with username and
+     * password. If this is true, it means that user must have some credentials
+     * assigned from the operator or must register at gateway website prior to
+     * using this gateway in program.
+     */
+    boolean isLoginRequired();
+    
 }

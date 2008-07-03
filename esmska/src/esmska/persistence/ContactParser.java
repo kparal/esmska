@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import javax.swing.SwingWorker;
 import esmska.data.Contact;
 import esmska.gui.FormChecker;
+import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.utils.Nullator;
 import java.io.FileInputStream;
@@ -238,7 +239,8 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                 Contact contact = new Contact();
                 contact.setName(name);
                 contact.setNumber(number);
-                contact.setOperator(OperatorUtil.suggestOperator(number)); //guess operator
+                Operator operator = OperatorUtil.suggestOperator(number, null);
+                contact.setOperator(operator != null ? operator.getName() : null); //guess operator
 
                 contacts.add(contact);
             }

@@ -5,7 +5,9 @@
 
 package esmska.operators;
 
+import esmska.data.Keyring;
 import esmska.persistence.PersistenceManager;
+import java.util.Collection;
 import java.util.TreeSet;
 
 /** Helper class for the Operator interface. 
@@ -14,6 +16,7 @@ import java.util.TreeSet;
  */
 public class OperatorUtil {
     private static final TreeSet<Operator> operators = PersistenceManager.getOperators();
+    private static final Keyring keyring = PersistenceManager.getKeyring();
     
     /** Find operator by name.
      * @param name Name of the operator. Search is case sensitive.
@@ -55,32 +58,111 @@ public class OperatorUtil {
     }
     
     /** Guess operator according to phone number or phone number prefix.
-     * Searches through operators and finds the first one supporting this phone number, either
-     * by operator prefix or country prefix.
+     * Searches through operators and finds the best suited one one
+     * supporting this phone number.
+     * 
      * @param number phone number or it's prefix. The minimum length is two characters,
-     *               for shorter input (or null) the method does nothing.
-     * @return name of the suggested operator or null if none found
+     *  for shorter input (or null) the method does nothing.
+     * @param customOperators collection of operators in which to search.
+     *  Use null for searching in all currently available operators.
+     * @return the suggested operator or null if none found
      */
-    public static String suggestOperator(String number) {
-        if (number == null || number.length() < 2)
+    public static Operator suggestOperator(String number, Collection<Operator> customOperators) {
+        if (number == null || number.length() < 2) {
             return null;
+        }
+        
+        Collection<Operator> selectedOperators = 
+                (customOperators != null ? customOperators : operators);
+        Operator operator = null;
         
         //search in operator prefixes
-        for (Operator op : operators) {
-            for (String prefix : op.getOperatorPrefixes()) {
-                if (number.startsWith(prefix)) {
-                    return op.getName();
+        for (Operator op : selectedOperators) {
+            if (matchesWithOperatorPrefix(op, number)) {
+                //prefer operators without login requirements
+                if (op.isLoginRequired()) {
+                    if (operator == null) {
+                        operator = op;
+                    } else if (keyring.getKey(operator.getName()) == null &&
+                            keyring.getKey(op.getName()) != null) {
+                        //prefer operators with filled in credentials
+                        operator = op;
+                    }
+                } else {
+                    return op;
                 }
             }
         }
         
+        //if no operator without login found, but some operator with login found
+        if (operator != null) {
+            return operator;
+        }
+        
         //search in country prefixes
-        for (Operator op : operators) {
-            if (number.startsWith(op.getCountryPrefix())) {
-                return op.getName();
+        for (Operator op : selectedOperators) {
+            if (matchesWithCountryPrefix(op, number)) {
+                //prefer operators without login requirements
+                if (op.isLoginRequired()) {
+                    if (operator == null) {
+                        operator = op;
+                    } else if (keyring.getKey(operator.getName()) == null &&
+                            keyring.getKey(op.getName()) != null) {
+                        //prefer operators with filled in credentials
+                        operator = op;
+                    }
+                } else {
+                    return op;
+                }
             }
+        }
+        
+        //if no operator without login found, but some operator with login found
+        if (operator != null) {
+            return operator;
         }
         
         return null;
     }
+    
+    /** Returns whether current operator matches the number with some of
+     * it's operator prefix.
+     * 
+     * @param operator operator
+     * @param number phone number
+     * @return true if current operator matches the number with some of
+     * it's operator prefix; false if operator of phone number is null or if
+     * phone number is shorter than 2 characters
+     */
+    public static boolean matchesWithOperatorPrefix(Operator operator, String number) {
+        if (operator == null || number == null || number.length() < 2) {
+            return false;
+        }
+        
+        //search in operator prefixes
+        for (String prefix : operator.getOperatorPrefixes()) {
+            if (number.startsWith(prefix)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /** Returns whether current operator matches the number with it's country prefix.
+     * 
+     * @param operator operator
+     * @param number phone number
+     * @return true if current operator matches the number with it's country prefix;
+     * false if operator of phone number is null or if phone number is shorter 
+     * than 2 characters
+     */
+    public static boolean matchesWithCountryPrefix(Operator operator, String number) {
+        if (operator == null || number == null || number.length() < 2) {
+            return false;
+        }
+        
+        return number.startsWith(operator.getCountryPrefix());
+    }
+    
 }

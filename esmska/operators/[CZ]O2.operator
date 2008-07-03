@@ -41,6 +41,10 @@ function getDelayBetweenMessages() {
     return 0
 }
 
+function isLoginRequired() {
+    return false
+}
+
 function send() {
     var re, match, content, params, postData
 
