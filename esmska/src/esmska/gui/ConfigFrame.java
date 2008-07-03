@@ -88,7 +88,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane.setMnemonicAt(4, KeyEvent.VK_S); 
         tabbedPane.setMnemonicAt(5, KeyEvent.VK_N);
         tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-16.png")));
-        tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-small.png")));
+        tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-16.png")));
         tabbedPane.setIconAt(2, Icons.OPERATOR_DEFAULT);
         tabbedPane.setIconAt(3, new ImageIcon(getClass().getResource(RES + "keyring-16.png")));
         tabbedPane.setIconAt(4, new ImageIcon(getClass().getResource(RES + "lock-16.png")));
