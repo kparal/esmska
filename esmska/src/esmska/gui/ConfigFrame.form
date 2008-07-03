@@ -589,17 +589,17 @@
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="jLabel12" linkSize="4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="passwordField" max="32767" attributes="0"/>
+                                  <Component id="passwordField" linkSize="7" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="jLabel10" linkSize="4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="operatorComboBox" max="32767" attributes="0"/>
+                                  <Component id="operatorComboBox" linkSize="7" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel11" linkSize="4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="loginTextField" min="-2" max="-2" attributes="0"/>
+                                  <Component id="loginTextField" linkSize="7" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="clearKeyringButton" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -631,7 +631,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="203" max="32767" attributes="0"/>
+                      <EmptySpace pref="173" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -869,7 +869,7 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="243" max="32767" attributes="0"/>
+                      <EmptySpace pref="228" max="32767" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
