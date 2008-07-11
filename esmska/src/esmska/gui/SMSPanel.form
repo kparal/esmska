@@ -36,9 +36,9 @@
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane1" pref="187" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="175" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="smsCounterLabel" pref="141" max="32767" attributes="0"/>
+                              <Component id="smsCounterLabel" pref="129" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -52,11 +52,11 @@
                           </Group>
                           <Component id="jLabel1" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="numberTextField" alignment="0" pref="187" max="32767" attributes="0"/>
-                          <Component id="operatorComboBox" alignment="0" pref="187" max="32767" attributes="0"/>
+                          <Component id="operatorComboBox" alignment="0" pref="175" max="32767" attributes="0"/>
+                          <Component id="recipientTextField" alignment="1" pref="175" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -74,7 +74,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="numberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="recipientTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -90,7 +90,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fullProgressBar" linkSize="3" min="-2" pref="10" max="-2" attributes="1"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="1" pref="100" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" pref="104" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -103,15 +103,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="displayedMnemonic" type="int" value="111"/>
-        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="numberTextField"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo:"/>
-      </Properties>
-    </Component>
     <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBox.addActionListener(new OperatorComboBoxActionListener());"/>
@@ -121,19 +112,6 @@
       <Properties>
         <Property name="maximum" type="int" value="1000"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="numberTextField">
-      <Properties>
-        <Property name="columns" type="int" value="12"/>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Telefonn&#xed; &#x10d;&#xed;slo kontaktu v&#x10d;etn&#x11b; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;.&lt;br&gt;&#xa;P&#x159;e&#x10d;&#xed;sl&#xed; zem&#x11b; nemus&#xed; b&#xfd;t vypln&#x11b;no, pokud je nastaveno&lt;br&gt;&#xa;v&#xfd;choz&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; v nastaven&#xed; programu.&#xa;&lt;/html&gt;"/>
-      </Properties>
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="numberTextFieldKeyReleased"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField() {&#xa;    @Override&#xa;    public String getText() {&#xa;        String text = super.getText();&#xa;        if (!text.startsWith(&quot;+&quot;))&#xa;        text = config.getCountryPrefix() + text;&#xa;        return text;&#xa;    }&#xa;}&#xa;"/>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-      </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -156,6 +134,7 @@
           <ComponentRef name="smsTextPane"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Text:"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Vlastn&#xed; text zpr&#xe1;vy&#xa;&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="sendButton">
@@ -199,6 +178,23 @@
           <ComponentRef name="operatorComboBox"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Br&#xe1;na:"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection component="operatorComboBox" name="toolTipText" type="property"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="recipientTextField">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new SMSPanel.RecipientTextField()"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="displayedMnemonic" type="int" value="111"/>
+        <Property name="text" type="java.lang.String" value="P&#x159;&#xed;jemce:"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection component="recipientTextField" name="toolTipText" type="property"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

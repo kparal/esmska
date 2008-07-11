@@ -20,6 +20,9 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -34,7 +37,9 @@ import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
@@ -77,6 +82,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private SendAction sendAction = new SendAction();
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
+    private RecipientTextField recipientField;
     
     private Contact requestedContactSelection;
     private boolean disableContactListeners;
@@ -95,59 +101,87 @@ public class SMSPanel extends javax.swing.JPanel {
     /** Creates new form SMSPanel */
     public SMSPanel() {
         initComponents();
+        recipientField = (RecipientTextField) recipientTextField;
+        
         //if not Substance LaF, add clipboard popup menu to text components
         if (!config.getLookAndFeel().equals(ThemeManager.LAF.SUBSTANCE)) {
             ClipboardPopupMenu.register(smsTextPane);
-            ClipboardPopupMenu.register(numberTextField);
+            ClipboardPopupMenu.register(recipientTextField);
         }
     }
     
     /** validates sms form and returns status */
     private boolean validateForm(boolean transferFocus) {
         if (Nullator.isEmpty(envelope.getText())) {
-            if (transferFocus)
+            if (transferFocus) {
                 smsTextPane.requestFocusInWindow();
+            }
             return false;
         }
         if (envelope.getText().length() > envelope.getMaxTextLength()) {
-            if (transferFocus)
+            if (transferFocus) {
                 smsTextPane.requestFocusInWindow();
+            }
             return false;
         }
         if (envelope.getContacts().size() <= 0) {
-            if (transferFocus)
-                numberTextField.requestFocusInWindow();
+            if (transferFocus) {
+                recipientTextField.requestFocusInWindow();
+            }
             return false;
         }
         for (Contact c : envelope.getContacts()) {
             if (!FormChecker.checkSMSNumber(c.getNumber())) {
-                if (transferFocus)
-                    numberTextField.requestFocusInWindow();
+                if (transferFocus) {
+                    recipientTextField.requestFocusInWindow();
+                }
                 return false;
             }
         }
         return true;
     }
     
-    /** Find contact according to filled number and operator
-     * @param onlyFullMatch whether to look only for full match (number and operator)
-     *  or even partial match (number only)
-     * @return found Contact or null if none found
+    /** Find contact according to filled name/number and operator
+     * @param onlyFullMatch whether to look only for full match (name/number and operator)
+     *  or even partial match (name/number only)
+     * @return found contact or null if none found
      */
     private Contact lookupContact(boolean onlyFullMatch) {
-        String number = numberTextField.getText();
+        String number = recipientField.getNumber();
+        String id = recipientTextField.getText(); //name or number
         String operatorName = operatorComboBox.getSelectedOperatorName();
         
-        Contact contact = null; //match on number
-        Contact fullContact = null; //match on number and operator
-        for (Contact c : contacts) {
-            if (Nullator.isEqual(c.getNumber(), number)) {
-                if (Nullator.isEqual(c.getOperator(), operatorName)) {
-                    fullContact = c;
-                    break;
+        if (Nullator.isEmpty(id)) {
+            return null;
+        }
+        
+        Contact contact = null; //match on id
+        Contact fullContact = null; //match on id and operator
+        
+        //search in contact numbers
+        if (number != null) {
+            for (Contact c : contacts) {
+                if (Nullator.isEqual(c.getNumber(), number)) {
+                    if (Nullator.isEqual(c.getOperator(), operatorName)) {
+                        fullContact = c;
+                        break;
+                    }
+                    if (!onlyFullMatch && contact == null) {
+                        contact = c; //remember only first partial match, but search further
+                    }
                 }
-                if (!onlyFullMatch && contact == null) {
-                    contact = c; //remember only first partial match, but search further
+            }
+        } else {
+            //search in contact names if not number
+            for (Contact c : contacts) {
+                if (id.equalsIgnoreCase(c.getName())) {
+                    if (Nullator.isEqual(c.getOperator(), operatorName)) {
+                        fullContact = c;
+                        break;
+                    }
+                    if (!onlyFullMatch && contact == null) {
+                        contact = c; //remember only first partial match, but search further
+                    }
                 }
             }
         }
@@ -188,10 +222,7 @@ public class SMSPanel extends javax.swing.JPanel {
         
         if (count == 1) {
             Contact c = contacts.iterator().next();
-            String number = c.getNumber();
-            if (number.startsWith(config.getCountryPrefix()))
-                number = number.substring(config.getCountryPrefix().length());
-            numberTextField.setText(number);
+            recipientField.setContact(c);
             operatorComboBox.setSelectedOperator(c.getOperator());
             nameLabel.setText(c.getName());
         } else if (count < 1) {
@@ -205,21 +236,23 @@ public class SMSPanel extends javax.swing.JPanel {
                     + "označte v seznamu kontaktů jediný kontakt</html>";
             nameLabel.setText(sendLabel);
             nameLabel.setToolTipText(tooltip);
-            numberTextField.setText("");
+            recipientTextField.setText(sendLabel);
         } else {
             if (sendLabel.equals(nameLabel.getText())) {
                 nameLabel.setText("");
             }
             nameLabel.setToolTipText(null);
         }
-        numberTextField.setEnabled(! multiSendMode);
+        recipientTextField.setEnabled(! multiSendMode);
         operatorComboBox.setEnabled(! multiSendMode);
         
         //update envelope
         Set<Contact> set = new HashSet<Contact>();
         set.addAll(contacts);
         if (count < 1) {
-            set.add(new Contact(nameLabel.getText(), numberTextField.getText(),
+            Contact contact = recipientField.getContact();
+            set.add(new Contact(contact != null ? contact.getName() : null,
+                    recipientField.getNumber(),
                     operatorComboBox.getSelectedOperatorName()));
         }
         envelope.setContacts(set);
@@ -233,11 +266,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** set sms to display and edit */
     public void setSMS(SMS sms) {
         nameLabel.setText(sms.getName());
-        String number = sms.getNumber();
-        if (number.startsWith(config.getCountryPrefix()))
-            number = number.substring(config.getCountryPrefix().length());
-        numberTextField.setText(number);
-        numberTextFieldKeyReleased(null);
+        recipientTextField.setText(sms.getNumber());
         smsTextPane.setText(sms.getText());
         operatorComboBox.setSelectedOperator(sms.getOperator());
         smsTextPane.requestFocusInWindow();
@@ -314,19 +343,8 @@ public class SMSPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
         operatorComboBox = new esmska.gui.OperatorComboBox();
         fullProgressBar = new javax.swing.JProgressBar();
-        numberTextField = new javax.swing.JTextField() {
-            @Override
-            public String getText() {
-                String text = super.getText();
-                if (!text.startsWith("+"))
-                text = config.getCountryPrefix() + text;
-                return text;
-            }
-        }
-        ;
         jScrollPane1 = new javax.swing.JScrollPane();
         smsTextPane = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
@@ -336,6 +354,8 @@ public class SMSPanel extends javax.swing.JPanel {
         nameLabel = new javax.swing.JLabel();
         singleProgressBar = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
+        recipientTextField = new SMSPanel.RecipientTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Zpráva"));
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -344,21 +364,9 @@ public class SMSPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setDisplayedMnemonic('o');
-        jLabel4.setLabelFor(numberTextField);
-        jLabel4.setText("Číslo:");
-
         operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
 
         fullProgressBar.setMaximum(1000);
-
-        numberTextField.setColumns(12);
-        numberTextField.setToolTipText("<html>\nTelefonní číslo kontaktu včetně předčíslí země.<br>\nPřečíslí země nemusí být vyplněno, pokud je nastaveno<br>\nvýchozí předčíslí v nastavení programu.\n</html>");
-        numberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                numberTextFieldKeyReleased(evt);
-            }
-        });
 
         smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);
         smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();
@@ -394,6 +402,7 @@ public class SMSPanel extends javax.swing.JPanel {
     jLabel5.setDisplayedMnemonic('t');
     jLabel5.setLabelFor(smsTextPane);
     jLabel5.setText("Text:");
+    jLabel5.setToolTipText("<html>\nVlastní text zprávy\n</html>");
 
     sendButton.setAction(sendAction);
     sendButton.setToolTipText("Odeslat zprávu (Alt+S, Ctrl+Enter)");
@@ -411,6 +420,11 @@ public class SMSPanel extends javax.swing.JPanel {
     jLabel1.setDisplayedMnemonic('b');
     jLabel1.setLabelFor(operatorComboBox);
     jLabel1.setText("Brána:");
+    jLabel1.setToolTipText(operatorComboBox.getToolTipText());
+
+    jLabel4.setDisplayedMnemonic('o');
+    jLabel4.setText("Příjemce:");
+    jLabel4.setToolTipText(recipientTextField.getToolTipText());
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -426,9 +440,9 @@ public class SMSPanel extends javax.swing.JPanel {
                         .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(sendButton))))
                 .addGroup(layout.createSequentialGroup()
@@ -440,8 +454,8 @@ public class SMSPanel extends javax.swing.JPanel {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(nameLabel)
-                        .addComponent(numberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                        .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))))
+                        .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                        .addComponent(recipientTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))))
             .addContainerGap())
     );
 
@@ -458,7 +472,7 @@ public class SMSPanel extends javax.swing.JPanel {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel4)
-                .addComponent(numberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(recipientTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel1)
@@ -471,7 +485,7 @@ public class SMSPanel extends javax.swing.JPanel {
                     .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(sendButton)
@@ -483,36 +497,6 @@ public class SMSPanel extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
     
-    private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
-        if (disableContactListeners) {
-            return;
-        }
-        
-        //on Enter just focus the text area
-        if (evt != null && evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            smsTextPane.requestFocusInWindow();
-            return;
-        }
-        
-        //update name label
-        Contact contact = lookupContact(false);
-        requestSelectContact(contact);
-        
-        if (contact == null) { //if not found
-            //guess operator
-            operatorComboBox.selectSuggestedOperator(numberTextField.getText());
-        }
-        
-        //update envelope
-        Set<Contact> set = new HashSet<Contact>();
-        set.add(new Contact(nameLabel.getText(), numberTextField.getText(),
-                operatorComboBox.getSelectedOperatorName()));
-        envelope.setContacts(set);
-        
-        //update send action
-        sendAction.updateStatus();
-}//GEN-LAST:event_numberTextFieldKeyReleased
-
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         smsTextPane.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
@@ -636,8 +620,9 @@ public class SMSPanel extends javax.swing.JPanel {
     private class OperatorComboBoxActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (disableContactListeners)
+            if (disableContactListeners) {
                 return;
+            }
             
             //update text editor listeners
             DocumentEvent event = new DocumentEvent() {
@@ -673,8 +658,10 @@ public class SMSPanel extends javax.swing.JPanel {
             //update envelope
             Set<Contact> set = new HashSet<Contact>();
             
-            set.add(new Contact(nameLabel.getText(), numberTextField.getText(),
-                operatorComboBox.getSelectedOperatorName()));
+            Contact c = recipientField.getContact();
+            set.add(new Contact(c != null ? c.getName() : null,
+                    recipientField.getNumber(),
+                    operatorComboBox.getSelectedOperatorName()));
             envelope.setContacts(set);
             
             //update components
@@ -809,6 +796,175 @@ public class SMSPanel extends javax.swing.JPanel {
         }
     }
     
+    /** Textfield for entering contact name or number */
+    public class RecipientTextField extends JTextField {
+        /** currently selected contact */
+        private Contact contact;
+        private RecipientDocumentChange recipientDocumentChange = new RecipientDocumentChange();
+        private String tooltip = "<html>" +
+                    "Jméno nebo telefonní číslo kontaktu.<br><br>" +
+                    "Pro odeslání zprávy více kontaktům stiskněte Shift nebo Ctrl<br>" +
+                    "při označování kontaktů v seznamu.";
+        private String tooltipTip = "<br><br>TIP: Vyplňte výchozí předčíslí země v nastavení programu a<br>" +
+                        "nebudete jej muset vždy vypisovat do telefonního čísla.";
+        
+        public RecipientTextField() {
+
+            //set tooltip
+            if (Nullator.isEmpty(config.getCountryPrefix())) {
+                setToolTipText(tooltip + tooltipTip + "</html>");
+            } else {
+                setToolTipText(tooltip + "</html>");
+            }
+            
+            //focus listener
+            addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    selectAll();
+                }
+                @Override
+                public void focusLost(FocusEvent e) {
+                    select(0, 0);
+                    //try to rewrite phone number to contact name if possible
+                    redrawContactName();
+                }
+            });
+            
+            //key listener
+            addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent evt) {
+                    //on Enter just focus the text area
+                    if (evt != null && evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                        smsTextPane.requestFocusInWindow();
+                        return;
+                    }
+                }
+            });
+            
+            //document listener
+            getDocument().addDocumentListener(new AbstractDocumentListener() {
+                @Override
+                public void onUpdate(DocumentEvent evt) {
+                    if (disableContactListeners) {
+                        return;
+                    }
+                    
+                    SwingUtilities.invokeLater(recipientDocumentChange);
+                }
+            });
+            
+        }
+        
+        /** Set contact to display. Will display contact name. Will not change
+         displayed text if user is currently editing it. */
+        public void setContact(Contact contact) {
+            this.contact = contact;
+            if (!hasFocus()) {
+                super.setText(contact != null ? contact.getName() : null);
+            }
+        }
+        
+        /** Get currently chosen contact. May be null. */
+        public Contact getContact() {
+            return contact;
+        }
+        
+        /** Return visible text. May be contact name or phone number (will include prefix).
+         May be null. */
+        @Override
+        public String getText() {
+            if (contact != null) {
+                return contact.getNumber();
+            }
+            
+            String text = super.getText();
+            if (!text.startsWith("+")) {
+                text = config.getCountryPrefix() + text;
+            }
+            //prepend country prefix if not present and text is a number
+            if (FormChecker.checkSMSNumber(text)) {
+                return text;
+            } else { //text is a name
+                return super.getText();
+            }
+        }
+        
+        /** Set text to display. Will erase any internally remembered contact. */
+        @Override
+        public void setText(String text) {
+            contact = null;
+            super.setText(text);
+        }
+        
+        /** Rewrite phone number to contact name. Used after user finished editing
+         the field. */
+        public void redrawContactName() {
+            if (contact == null) {
+                return;
+            }
+            
+            boolean old = disableContactListeners;
+            disableContactListeners = true;
+           
+            super.setText(contact.getName());
+           
+            disableContactListeners = old;
+        }
+        
+        /** Get phone number of chosen contact or typed phone number. May be null. */
+        public String getNumber() {
+            if (contact != null) {
+                return contact.getNumber();
+            }
+            
+            String text = getText();
+            if (FormChecker.checkSMSNumber(text)) {
+                return text;
+            } else {
+                return null;
+            }
+        }
+        
+        /** Set phone number to display. Handles country prefix correctly. */
+        public void setNumber(String number) {
+            if (Nullator.isEmpty(number)) {
+                setText("");
+            }
+            
+            if (number.startsWith(config.getCountryPrefix())) {
+                number = number.substring(config.getCountryPrefix().length());
+            }
+            setText(number);
+        }
+        
+        /** Listener for changes in the field document */
+        private class RecipientDocumentChange implements Runnable {
+            @Override
+            public void run() {
+                //search for contact
+                contact = null;
+                contact = lookupContact(false);
+                requestSelectContact(contact);
+
+                //if not found and is number, guess operator
+                if (contact == null && getNumber() != null) {
+                    operatorComboBox.selectSuggestedOperator(getNumber());
+                }
+
+                //update envelope
+                Set<Contact> set = new HashSet<Contact>();
+                set.add(new Contact(nameLabel.getText(), getNumber(),
+                        operatorComboBox.getSelectedOperatorName()));
+                envelope.setContacts(set);
+
+                //update send action
+                sendAction.updateStatus();
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar fullProgressBar;
     private javax.swing.JLabel jLabel1;
@@ -817,8 +973,8 @@ public class SMSPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
-    javax.swing.JTextField numberTextField;
     private esmska.gui.OperatorComboBox operatorComboBox;
+    private javax.swing.JTextField recipientTextField;
     private javax.swing.JButton sendButton;
     private javax.swing.JProgressBar singleProgressBar;
     private javax.swing.JLabel smsCounterLabel;
