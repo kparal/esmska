@@ -28,16 +28,20 @@ public class FormChecker {
      * @return true if number is in form +[0-9]{1,15}, false otherwise
      */
     public static boolean checkSMSNumber(String number) {
-        if (number == null)
+        if (number == null) {
             return false;
-        if (!number.startsWith("+"))
+        }
+        if (!number.startsWith("+")) {
             return false;
+        }
         number = number.substring(1); //strip the "+"
-        if (number.length() < 1 || number.length() > 15)
+        if (number.length() < 1 || number.length() > 15) {
             return false;
+        }
         for (Character c : number.toCharArray()) {
-            if (!Character.isDigit(c))
+            if (!Character.isDigit(c)) {
                 return false;
+            }
         }
         return true;
     }
@@ -46,16 +50,20 @@ public class FormChecker {
      * @return true if prefix is in form +[0-9]{1,3}, false otherwise
      */
     public static boolean checkCountryPrefix(String prefix) {
-        if (prefix == null)
+        if (prefix == null) {
             return false;
-        if (!prefix.startsWith("+"))
+        }
+        if (!prefix.startsWith("+")) {
             return false;
+        }
         prefix = prefix.substring(1); //strip the "+"
-        if (prefix.length() < 1 || prefix.length() > 3)
+        if (prefix.length() < 1 || prefix.length() > 3) {
             return false;
+        }
         for (Character c : prefix.toCharArray()) {
-            if (!Character.isDigit(c))
+            if (!Character.isDigit(c)) {
                 return false;
+            }
         }
         return true;
     }
