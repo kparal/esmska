@@ -349,14 +349,14 @@ public class QueuePanel extends javax.swing.JPanel {
         });
 
         smsUpButton.setAction(smsUpAction);
-        smsUpButton.setText("");
         smsUpButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        smsUpButton.setText("");
 
         smsDownButton.setAction(smsDownAction);
-        smsDownButton.setText("");
         smsDownButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        smsDownButton.setText("");
 
         queueList.setModel(queueListModel);
         queueList.setCellRenderer(new SMSQueueListRenderer());
@@ -369,17 +369,16 @@ public class QueuePanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(queueList);
 
         editButton.setAction(editSMSAction);
-        editButton.setText("");
         editButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         editButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        editButton.setText("");
 
         deleteButton.setAction(deleteSMSAction);
-        deleteButton.setText("");
         deleteButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        deleteButton.setText("");
 
         pauseButton.setAction(smsQueuePauseAction);
-        pauseButton.setText("");
         pauseButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -393,7 +392,7 @@ public class QueuePanel extends javax.swing.JPanel {
                     .addComponent(smsDownButton)
                     .addComponent(smsUpButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -421,8 +420,8 @@ public class QueuePanel extends javax.swing.JPanel {
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
-                        .addGap(0, 49, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

@@ -224,24 +224,11 @@ public class SMSPanel extends javax.swing.JPanel {
             Contact c = contacts.iterator().next();
             recipientField.setContact(c);
             operatorComboBox.setSelectedOperator(c.getOperator());
-            nameLabel.setText(c.getName());
-        } else if (count < 1) {
-            nameLabel.setText(null);
         }
         
         boolean multiSendMode = (count > 1);
-        String sendLabel = "Hromadné odesílání";
         if (multiSendMode) {
-            String tooltip = "<html>Pro zrušení módu hromadného odesílání<br>"
-                    + "označte v seznamu kontaktů jediný kontakt</html>";
-            nameLabel.setText(sendLabel);
-            nameLabel.setToolTipText(tooltip);
-            recipientTextField.setText(sendLabel);
-        } else {
-            if (sendLabel.equals(nameLabel.getText())) {
-                nameLabel.setText("");
-            }
-            nameLabel.setToolTipText(null);
+            recipientTextField.setText("Hromadné odesílání");
         }
         recipientTextField.setEnabled(! multiSendMode);
         operatorComboBox.setEnabled(! multiSendMode);
@@ -265,7 +252,6 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** set sms to display and edit */
     public void setSMS(SMS sms) {
-        nameLabel.setText(sms.getName());
         recipientTextField.setText(sms.getNumber());
         smsTextPane.setText(sms.getText());
         operatorComboBox.setSelectedOperator(sms.getOperator());
@@ -350,8 +336,6 @@ public class SMSPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         sendButton = new javax.swing.JButton();
         smsCounterLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
         singleProgressBar = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         recipientTextField = new SMSPanel.RecipientTextField();
@@ -409,12 +393,6 @@ public class SMSPanel extends javax.swing.JPanel {
 
     smsCounterLabel.setText("0 znaků (0 sms)");
 
-    jLabel2.setText("Jméno:");
-
-    nameLabel.setForeground(new java.awt.Color(0, 51, 255));
-    nameLabel.setText("jméno");
-    nameLabel.setText(null);
-
     singleProgressBar.setMaximum(1000);
 
     jLabel1.setDisplayedMnemonic('b');
@@ -440,36 +418,29 @@ public class SMSPanel extends javax.swing.JPanel {
                         .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(sendButton))))
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4))
-                        .addComponent(jLabel1))
+                            .addComponent(sendButton))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jLabel4)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(nameLabel)
-                        .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                        .addComponent(recipientTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))))
+                    .addComponent(recipientTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jLabel1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
             .addContainerGap())
     );
 
     layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {fullProgressBar, singleProgressBar});
 
-    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel4, jLabel5});
+    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel4, jLabel5});
 
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel2)
-                .addComponent(nameLabel))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel4)
                 .addComponent(recipientTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -480,16 +451,17 @@ public class SMSPanel extends javax.swing.JPanel {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(sendButton)
+                        .addComponent(smsCounterLabel)))
+                .addGroup(layout.createSequentialGroup()
                     .addComponent(jLabel5)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(sendButton)
-                .addComponent(smsCounterLabel))
+                    .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addContainerGap())
     );
 
@@ -955,7 +927,8 @@ public class SMSPanel extends javax.swing.JPanel {
 
                 //update envelope
                 Set<Contact> set = new HashSet<Contact>();
-                set.add(new Contact(nameLabel.getText(), getNumber(),
+                set.add(new Contact(contact != null ? contact.getName() : null,
+                        getNumber(),
                         operatorComboBox.getSelectedOperatorName()));
                 envelope.setContacts(set);
 
@@ -968,11 +941,9 @@ public class SMSPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar fullProgressBar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel nameLabel;
     private esmska.gui.OperatorComboBox operatorComboBox;
     private javax.swing.JTextField recipientTextField;
     private javax.swing.JButton sendButton;
