@@ -251,11 +251,18 @@ public class SMSPanel extends javax.swing.JPanel {
     }
     
     /** set sms to display and edit */
-    public void setSMS(SMS sms) {
-        recipientTextField.setText(sms.getNumber());
+    public void setSMS(final SMS sms) {
+        recipientField.setNumber(sms.getNumber());
         smsTextPane.setText(sms.getText());
-        operatorComboBox.setSelectedOperator(sms.getOperator());
-        smsTextPane.requestFocusInWindow();
+        
+        //recipient textfield will change operator, must wait and change operator back
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                operatorComboBox.setSelectedOperator(sms.getOperator());
+                smsTextPane.requestFocusInWindow();
+            }
+        });
     }
     
     /** get currently written sms text
