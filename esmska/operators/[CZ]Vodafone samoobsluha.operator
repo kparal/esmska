@@ -1,0 +1,183 @@
+
+function getName() {
+    return "[CZ]Vodafone samoobsluha"
+}
+
+function getVersion() {
+    return "2008-07-14"
+}
+
+function getAuthor() {
+    return "Martin Jansa <Martin.Jansa@gmail.com>"
+}
+
+function getCountryPrefix() {
+    return "+420"
+}
+
+function getOperatorPrefixes() {
+    return ["+420608","+420773","+420774","+420775","+420776","+420777",
+            "+420601","+420602","+420606","+420607","+420720","+420721",
+            "+420722","+420723","+420724","+420725","+420726","+420727",
+            "+420728","+420729","+420603","+420604","+420605","+420730",
+            "+420731","+420732","+420733","+420734","+420735","+420736",
+            "+420737","+420738","+420739"]
+}
+
+function getSMSLength() {
+    return 152
+}
+
+function getMaxChars() {
+    return 775
+}
+
+function getMaxParts() {
+    return 1
+}
+
+function getSignatureExtraLength() {
+    return 1
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function send() {
+    var re, match, content, params, postData
+    
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+
+    // not logged in yet
+    var logged = false
+
+    // start page
+    content = EXEC.getURL("https://samoobsluha.vodafone.cz/", [])
+
+    // search if we are not already logged in (previous logout failed or something)
+    re = /<a href="logout.php"/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // we are already logged in
+        logged = true
+    }
+
+    // if not logged in, do it
+    if (!logged) {
+        // post credentials
+        postData = ["lang", "cs", "redirect", "", 
+                    "msisdn", LOGIN, "passwd", PASSWORD,
+                    "submit", "Přihlásit"]
+        content = EXEC.postURL("https://samoobsluha.vodafone.cz/login.php", [], postData)
+        
+        // search for errors
+        re = /<div class="warningbox">/
+        match = re.exec(content)
+        if (undefined != match) { // if found
+            // login was not successfull
+            EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+            logout()
+            return false
+        }
+        // no error message, we are logged in now
+        logged = true
+    }
+
+    // sms sending page
+    content = EXEC.getURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [])
+ 
+    //search if the sms service is activated
+    re = /Službu Skupinové web SMS nemáte aktivní/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        EXEC.setErrorMessage("Pro možnost posílání SMS je ve Vodafone samoobsluze nejprve<br>" +
+        'nutné aktivovat službu "Skupinové web SMS"')
+        logout()
+        return false
+    }
+ 
+    // add receiver
+    postData = ["action", "", "receiver", NUMBER, "pushed_button[add_msisdn]", "Přidat"]
+    content = EXEC.postURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [], postData)
+
+    // check if receiver added successfully
+    re = /<div class="warningbox">(.+?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // operator told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
+        logout()
+        return false
+    }
+
+    // preview sms
+    postData = ["action", "", "split", "1", "sms_count", "5",
+                "sender_name", SENDERNAME, "message", MESSAGE, 
+                "pushed_button[preview]", "Odeslat"]
+    content = EXEC.postURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [], postData)
+
+    // apparently operator does not report any error here but unfortunately silently ignores it
+    // anyway, let's try to detect possible error
+    re = /<div class="warningbox">(.+?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // operator told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
+        logout()
+        return false
+    }
+
+    // send sms
+    postData = ["message_id", "", "pushed_button[send]", "Ano"]
+    content = EXEC.postURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [], postData)
+
+    // check if message was successfully sent
+    re = /zpráva byla úspěšně odeslána/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // all ok, lets find remaining free sms
+        content = EXEC.getURL("https://samoobsluha.vodafone.cz/smsgw_main.php", []);
+        re = /<td>Do Vodafonu: - \d+<\/td><td>(\d+)<\/td><\/tr><\/table>/
+        match = re.exec(content)
+        if (undefined != match) { // if found
+            var freeSms = match[1]
+            EXEC.setOperatorMessage(EXEC.INFO_FREE_SMS_REMAINING + freeSms)
+        }
+        logout()
+        return true
+    }
+    
+    // error was never achieved here, but try to find it
+    re = /<div class="warningbox">(.+?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // operator told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
+        logout()
+        return false
+    }
+    
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    logout()
+    return false
+}
+
+// custom function for logging out
+function logout() {
+    // visit logout page
+    EXEC.getURL("https://samoobsluha.vodafone.cz/logout.php", []);
+}
