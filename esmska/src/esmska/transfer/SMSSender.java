@@ -35,7 +35,7 @@ import java.util.Set;
 public class SMSSender {
     private static final Logger logger = Logger.getLogger(SMSSender.class.getName());
     private static final Keyring keyring = PersistenceManager.getKeyring();   
-    private static final String NO_REASON_ERROR = "Autor skriptu pro daného operátora neposkytl<br>" +
+    private static final String NO_REASON_ERROR = "Autor skriptu pro použitou webovou bránu neposkytl<br>" +
             "žádné další informace o příčině selhání.";
     
     private MainFrame mainFrame = MainFrame.getInstance(); //reference to main form
