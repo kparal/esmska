@@ -859,7 +859,7 @@ public class SMSPanel extends javax.swing.JPanel {
             }
             
             String text = super.getText();
-            if (!text.startsWith("+")) {
+            if (!Nullator.isEmpty(text) && !text.startsWith("+")) {
                 text = config.getCountryPrefix() + text;
             }
             //prepend country prefix if not present and text is a number

@@ -25,7 +25,7 @@ public class FormChecker {
     }
     
     /** Check valid number
-     * @return true if number is in form +[0-9]{1,15}, false otherwise
+     * @return true if number is in form +[0-9]{2,15}, false otherwise
      */
     public static boolean checkSMSNumber(String number) {
         if (number == null) {
@@ -35,7 +35,7 @@ public class FormChecker {
             return false;
         }
         number = number.substring(1); //strip the "+"
-        if (number.length() < 1 || number.length() > 15) {
+        if (number.length() < 2 || number.length() > 15) {
             return false;
         }
         for (Character c : number.toCharArray()) {
