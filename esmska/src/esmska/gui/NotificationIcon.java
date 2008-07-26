@@ -32,7 +32,7 @@ public class NotificationIcon {
 
     private static NotificationIcon instance;
     private static boolean installed;
-    private static final Logger logger = Logger.getLogger(MainFrame.class.getName());
+    private static final Logger logger = Logger.getLogger(NotificationIcon.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final String pauseQueue = "Pozastavit frontu sms";
     private static final String unpauseQueue = "Znovu spustit frontu sms";
