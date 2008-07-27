@@ -260,6 +260,7 @@
             <Component class="javax.swing.JTextArea" name="textArea">
               <Properties>
                 <Property name="lineWrap" type="boolean" value="true"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
             </Component>
           </SubComponents>

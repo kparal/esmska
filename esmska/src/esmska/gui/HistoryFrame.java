@@ -195,6 +195,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         senderNameLabel.setText("    ");
 
         textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
         jScrollPane2.setViewportView(textArea);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
