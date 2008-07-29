@@ -23,7 +23,7 @@ public class DefaultOperator implements Operator {
 
     private static final OperatorInterpreter interpreter = new OperatorInterpreter();
     private URL script;
-    private String name, version, author, countryPrefix;
+    private String name, version, maintainer, countryPrefix;
     private String[] operatorPrefixes;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
             delayBetweenMessages;
@@ -51,7 +51,7 @@ public class DefaultOperator implements Operator {
         //to increase speed (Java code vs JavaScript execution for every method access).
         name = info.getName();
         version = info.getVersion();
-        author = info.getAuthor();
+        maintainer = info.getMaintainer();
         countryPrefix = info.getCountryPrefix();
         operatorPrefixes = info.getOperatorPrefixes();
         smsLength = info.getSMSLength();
@@ -114,8 +114,8 @@ public class DefaultOperator implements Operator {
     }
 
     @Override
-    public String getAuthor() {
-        return author;
+    public String getMaintainer() {
+        return maintainer;
     }
     
     @Override

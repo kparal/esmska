@@ -26,11 +26,11 @@ public interface OperatorInfo {
      */
     String getVersion();
     
-    /** Author of the script.
-     * This is the name and email of the author or latest contributor of the script.
-     * The author must be in format "NAME &lt;EMAIL&gt;". Name and email are mandatory.
+    /** Maintainer of the script.
+     * This is the name and email of the maintainer (often the author) of the script.
+     * The maintainer must be in format "NAME &lt;EMAIL&gt;". Name and email are mandatory.
      */
-    String getAuthor();
+    String getMaintainer();
     
     /** Telephone country prefix.
      * The prefix starts with "+" sign and is 1-3 digits long.

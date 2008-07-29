@@ -7,7 +7,7 @@ function getVersion() {
     return "2008-03-27"
 }
 
-function getAuthor() {
+function getMaintainer() {
     return "Kamil Páral <ripper42@gmail.com>"
 }
 

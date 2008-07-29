@@ -7,7 +7,7 @@ function getVersion() {
     return "2008-07-14"
 }
 
-function getAuthor() {
+function getMaintainer() {
     return "Martin Jansa <Martin.Jansa@gmail.com>"
 }
 
