@@ -88,7 +88,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<div id="errmsg">\n<p>(.+?)<\/p>/
+    re = /<div id="errmsg">\r?\n<p>(.+?)<\/p>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // operator told us what's wrong
