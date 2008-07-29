@@ -206,10 +206,9 @@ public class SMSPanel extends javax.swing.JPanel {
         return requestedContactSelection;
     }
     
-    /** set envelope */
-    public void setEnvelope(Envelope envelope) {
-        this.envelope = envelope;
-        envelope.addPropertyChangeListener(new EnvelopePropertyListener());
+    /** get currently used envelope */
+    public Envelope getEnvelope() {
+        return envelope;
     }
     
     /** set selected contacts in contact list or contact to display */

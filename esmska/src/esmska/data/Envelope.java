@@ -23,7 +23,7 @@ import java.text.Normalizer;
  * @author ripper
  */
 public class Envelope {
-    private static final Config config = PersistenceManager.getConfig();;
+    private static final Config config = PersistenceManager.getConfig();
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
 

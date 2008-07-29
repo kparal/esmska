@@ -45,7 +45,6 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
 import esmska.data.Contact;
-import esmska.data.Envelope;
 import esmska.data.History;
 import esmska.data.History.Record;
 import esmska.data.Icons;
@@ -91,8 +90,6 @@ public class MainFrame extends javax.swing.JFrame {
     private List<SMS> smsQueue = PersistenceManager.getQueue();
     /** sender of sms */
     private SMSSender smsSender;
-    /** box for messages */
-    private Envelope envelope;
     /** manager of persistence data */
     private PersistenceManager persistenceManager;
     /** program configuration */
@@ -157,8 +154,6 @@ public class MainFrame extends javax.swing.JFrame {
         
         //init custom components
         smsSender = new SMSSender();
-        envelope = new Envelope();
-        smsPanel.setEnvelope(envelope);
         
         //load config
         try {
@@ -914,7 +909,7 @@ public class MainFrame extends javax.swing.JFrame {
                     contactPanel.setSelectedContact(smsPanel.getRequestedContactSelection());
                     break;
                 case SMSPanel.ACTION_SEND_SMS:
-                    for (SMS sms : envelope.generate()) {
+                    for (SMS sms : smsPanel.getEnvelope().generate()) {
                         queuePanel.addSMS(sms);
                     }
                     break;
