@@ -64,6 +64,11 @@ public class OperatorExecutor {
             "nahlaste problém na domovských stránkách programu.";
     /** Message saying how many free SMS are remaining. */
     public static final String INFO_FREE_SMS_REMAINING = "Zbývá volných SMS: ";
+    /** Message used when operator provides no info whether message was successfuly
+     sent or not */
+    public static final String INFO_NOT_PROVIDED = "Brána neposkytuje žádné " +
+            "informace o úspěšném odeslání. Zpráva mohla a <b>nemusela</b> být " +
+            "doručena.";
     
     private OperatorConnector connector = new OperatorConnector();
     private String errorMessage;
