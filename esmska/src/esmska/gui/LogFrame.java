@@ -188,7 +188,7 @@ public class LogFrame extends javax.swing.JFrame {
                 builder.append("[");
                 builder.append(timeFormat.format(record.getTime()));
                 builder.append("] ");
-                builder.append(record.getMessage());
+                builder.append(record.getMessage().replaceAll("<.*?>",""));
                 builder.append("\n");
             }
             Transferable text = new StringSelection(builder.toString());
@@ -223,8 +223,8 @@ public class LogFrame extends javax.swing.JFrame {
                     index, isSelected, cellHasFocus);
             Log.Record record = (Log.Record)value;
             //display message and time
-            String text = "[" + timeFormat.format(record.getTime()) + "] " +
-                    record.getMessage();
+            String text = "<html>[" + timeFormat.format(record.getTime()) + "] " +
+                    record.getMessage() + "</html>";
             ((JLabel)c).setText(text);
             //add record icon
             ((JLabel)c).setIcon(record.getIcon() != null ? record.getIcon() :
