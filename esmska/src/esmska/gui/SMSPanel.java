@@ -406,7 +406,8 @@ public class SMSPanel extends javax.swing.JPanel {
     jLabel1.setText("Brána:");
     jLabel1.setToolTipText(operatorComboBox.getToolTipText());
 
-    jLabel4.setDisplayedMnemonic('o');
+    jLabel4.setDisplayedMnemonic('e');
+    jLabel4.setLabelFor(recipientTextField);
     jLabel4.setText("Příjemce:");
     jLabel4.setToolTipText(recipientTextField.getToolTipText());
 
@@ -457,7 +458,7 @@ public class SMSPanel extends javax.swing.JPanel {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(sendButton)

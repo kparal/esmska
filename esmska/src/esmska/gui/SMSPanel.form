@@ -166,7 +166,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="displayedMnemonic" type="int" value="111"/>
+        <Property name="displayedMnemonic" type="int" value="101"/>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="recipientTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="P&#x159;&#xed;jemce:"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection component="recipientTextField" name="getToolTipText" type="method"/>
