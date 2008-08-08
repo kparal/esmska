@@ -9,6 +9,7 @@
 
 package esmska.transfer;
 
+import esmska.data.Config;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -34,7 +35,8 @@ import java.util.Set;
  */
 public class SMSSender {
     private static final Logger logger = Logger.getLogger(SMSSender.class.getName());
-    private static final Keyring keyring = PersistenceManager.getKeyring();   
+    private static final Keyring keyring = PersistenceManager.getKeyring();
+    private static final Config config = PersistenceManager.getConfig();
     private static final String NO_REASON_ERROR = "Autor skriptu pro použitou webovou bránu neposkytl<br>" +
             "žádné další informace o příčině selhání.";
     
@@ -137,6 +139,10 @@ public class SMSSender {
         if (key != null) {
             map.put(OperatorVariable.LOGIN, key[0]);
             map.put(OperatorVariable.PASSWORD, key[1]);
+        }
+        
+        if (config.isDemandDeliveryReport()) {
+            map.put(OperatorVariable.DELIVERY_REPORT, "true");
         }
         
         return map;

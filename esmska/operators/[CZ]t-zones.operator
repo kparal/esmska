@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-05-11"
+    return "2008-08-08"
 }
 
 function getMaintainer() {
@@ -81,7 +81,7 @@ function send() {
         content = EXEC.postURL("https://sms1.client.tmo.cz/.gang/login", [], postData)
         
         // seach for errors
-        re = /<div class="relogin">/
+        re = /<div class="error_box">/
         match = re.exec(content)
         if (undefined != match) { // if found
             re = /Uživatel je již přihlášen/
@@ -100,7 +100,7 @@ function send() {
 
     // sms sending page
     content = EXEC.getURL("https://sms1.client.tmo.cz/sms.jsp", [])
- 
+
     // find validation key
     re = /<input type="hidden" name="validationKey" id="validationKey" value="(.*)"\/>/
     match = re.exec(content);
@@ -110,7 +110,7 @@ function send() {
     postData = ["advancedMode", "0", "validationKey", validationKey,
                 "number", NUMBER, "text", MESSAGE,
                 "send", "Odeslat", "mtype", "1",
-                "confirmation", "0"]
+                "confirmation", DELIVERY_REPORT?"2":"0"]
     content = EXEC.postURL("https://sms1.client.tmo.cz/sms.jsp", [], postData)
 
     // get number of remaining free sms and display it

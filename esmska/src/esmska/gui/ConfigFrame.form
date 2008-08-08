@@ -418,7 +418,9 @@
                                   <Component id="senderNameTextField" alignment="0" min="-2" max="-2" attributes="1"/>
                               </Group>
                           </Group>
+                          <Component id="demandDeliveryReportCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -448,7 +450,9 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="senderNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="266" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="demandDeliveryReportCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="241" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -566,6 +570,16 @@
                 <Property name="text" type="java.lang.String" value="(st&#xe1;t: XX)"/>
                 <Property name="toolTipText" type="java.lang.String" value="K&#xf3;d st&#xe1;tu, pro kter&#xfd; jste vyplnili telefonn&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed;"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="demandDeliveryReportCheckBox">
+              <Properties>
+                <Property name="mnemonic" type="int" value="107"/>
+                <Property name="text" type="java.lang.String" value="Po&#x17e;adovat posl&#xe1;n&#xed; doru&#x10d;enky"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Vy&#x17e;&#xe1;d&#xe1; si zasl&#xe1;n&#xed; potvrzen&#xed; o doru&#x10d;en&#xed; zpr&#xe1;vy. Potvrzen&#xed; p&#x159;ijde&lt;br&gt;&#xa;na telefonn&#xed; &#x10d;&#xed;slo odesilatele. Tuto funkci podporuj&#xed; pouze n&#x11b;kte&#x159;&#xed; oper&#xe1;to&#x159;i.&#xa;&lt;/html&gt;"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="selected" source="config" sourcePath="${demandDeliveryReport}" target="demandDeliveryReportCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
             </Component>
           </SubComponents>
         </Container>

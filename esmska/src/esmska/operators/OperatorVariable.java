@@ -23,5 +23,7 @@ public enum OperatorVariable {
     /** Login name to the operator website */
     LOGIN,
     /** Password to the operator website */
-    PASSWORD
+    PASSWORD,
+    /** This string is non-empty if a delivery report should be sent */
+    DELIVERY_REPORT
 }

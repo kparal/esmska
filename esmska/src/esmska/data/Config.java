@@ -45,6 +45,7 @@ public class Config extends Object implements Serializable {
     private boolean reducedHistory = false;
     private int reducedHistoryCount = 30;
     private boolean startMinimized = false;
+    private boolean demandDeliveryReport = false;
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -173,6 +174,10 @@ public class Config extends Object implements Serializable {
     
     public boolean isStartMinimized() {
         return startMinimized;
+    }
+    
+    public boolean isDemandDeliveryReport() {
+        return demandDeliveryReport;
     }
     // </editor-fold>
     
@@ -350,6 +355,12 @@ public class Config extends Object implements Serializable {
         boolean old = this.startMinimized;
         this.startMinimized = startMinimized;
         changeSupport.firePropertyChange("startMinimized", old, startMinimized);
+    }
+    
+    public void setDemandDeliveryReport(boolean demandDeliveryReport) {
+        boolean oldDemandDeliveryReport = this.demandDeliveryReport;
+        this.demandDeliveryReport = demandDeliveryReport;
+        changeSupport.firePropertyChange("demandDeliveryReport", oldDemandDeliveryReport, demandDeliveryReport);
     }
     // </editor-fold>
 }

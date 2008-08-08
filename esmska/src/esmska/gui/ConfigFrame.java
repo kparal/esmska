@@ -81,6 +81,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             tabbedPane.addTab("Devel", develPanel);
         }
         
+        //set visuals
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_P);
@@ -234,6 +235,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         operatorFilterTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         countryCodeLabel = new javax.swing.JLabel();
+        demandDeliveryReportCheckBox = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         operatorComboBox = new esmska.gui.OperatorComboBox();
         jLabel9 = new javax.swing.JLabel();
@@ -562,6 +564,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         countryCodeLabel.setText("(stát: XX)");
         countryCodeLabel.setToolTipText("Kód státu, pro který jste vyplnili telefonní předčíslí");
 
+        demandDeliveryReportCheckBox.setMnemonic('k');
+        demandDeliveryReportCheckBox.setText("Požadovat poslání doručenky");
+        demandDeliveryReportCheckBox.setToolTipText("<html>\nVyžádá si zaslání potvrzení o doručení zprávy. Potvrzení přijde<br>\nna telefonní číslo odesilatele. Tuto funkci podporují pouze někteří operátoři.\n</html>");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${demandDeliveryReport}"), demandDeliveryReportCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -588,7 +597,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(demandDeliveryReportCheckBox))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3});
@@ -615,7 +626,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(demandDeliveryReportCheckBox)
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Operátoři", jPanel2);
@@ -1109,6 +1122,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private esmska.data.Config config;
     private javax.swing.JLabel countryCodeLabel;
     private javax.swing.JTextField countryPrefixTextField;
+    private javax.swing.JCheckBox demandDeliveryReportCheckBox;
     private javax.swing.JPanel develPanel;
     private javax.swing.JCheckBox forgetLayoutCheckBox;
     private javax.swing.JTextField httpProxyTextField;
