@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-08-05"
+    return "2008-03-27"
 }
 
 function getMaintainer() {
@@ -89,10 +89,6 @@ function send() {
         EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
         return false
     }
-
-    //O2 stopped showing any success or error messages, incomprehensible
-    EXEC.setOperatorMessage(EXEC.INFO_NOT_PROVIDED)
-    return true
 
     // if neither success nor error message was found
     EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
