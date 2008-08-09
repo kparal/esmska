@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-08-08"
+    return "2008-08-09"
 }
 
 function getMaintainer() {
@@ -110,7 +110,7 @@ function send() {
     postData = ["advancedMode", "0", "validationKey", validationKey,
                 "number", NUMBER, "text", MESSAGE,
                 "send", "Odeslat", "mtype", "1",
-                "confirmation", DELIVERY_REPORT?"2":"0"]
+                "confirmation", DELIVERY_REPORT?"1":"0"]
     content = EXEC.postURL("https://sms1.client.tmo.cz/sms.jsp", [], postData)
 
     // get number of remaining free sms and display it
