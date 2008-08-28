@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-08-09"
+    return "2008-08-28"
 }
 
 function getMaintainer() {
@@ -99,30 +99,23 @@ function send() {
     }
 
     // sms sending page
-    content = EXEC.getURL("https://sms1.client.tmo.cz/sms.jsp", [])
+    content = EXEC.getURL("https://sms1.client.tmo.cz/closed.jsp", [])
 
-    // find validation key
-    re = /<input type="hidden" name="validationKey" id="validationKey" value="(.*)"\/>/
+    // find counter
+    re = /<input type="hidden" name="counter" value="(.*)" \/>/
     match = re.exec(content);
-    var validationKey = match[1]
+    var counter = match[1]
 
     // send sms
-    postData = ["advancedMode", "0", "validationKey", validationKey,
-                "number", NUMBER, "text", MESSAGE,
-                "send", "Odeslat", "mtype", "1",
-                "confirmation", DELIVERY_REPORT?"1":"0"]
-    content = EXEC.postURL("https://sms1.client.tmo.cz/sms.jsp", [], postData)
-
-    // get number of remaining free sms and display it
-    re = /Do sítě T-Mobile \(ČR\) je možné odeslat ještě ([0-9]+) z celkového limitu [0-9]+ SMS měsíčně zdarma./
-    match = re.exec(content);
-    if (undefined != match) { // if found
-        var freeSms = match[1]
-        EXEC.setOperatorMessage(EXEC.INFO_FREE_SMS_REMAINING + freeSms)
-    }
+    postData = ["counter", counter,
+                "recipients", NUMBER, "text", MESSAGE,
+                "send", "Odeslat", "mtype", "0",
+                "confirmation", DELIVERY_REPORT?"1":"0",
+                "history", "on"]
+    content = EXEC.postURL("https://sms1.client.tmo.cz/closed.jsp", [], postData)
 
     // check if message was successfully sent
-    re = /<table class="alert info".*SMS byl. odeslán..*<\/table>/
+    re = /SMS zpr.va byl. odeslán./
     match = re.exec(content)
     if (undefined != match) { // if found
         // all ok
@@ -131,7 +124,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<table class="alert error".*<span>(.*)<\/span>.*<\/table>/
+    re = /<div id="gt-errorWindow">([^]*?)<\/div>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // operator told us what's wrong
