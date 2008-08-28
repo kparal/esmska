@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-03-27"
+    return "2008-08-28"
 }
 
 function getMaintainer() {
@@ -55,7 +55,7 @@ function send() {
         SENDERNUMBER = SENDERNUMBER.substring(4);
 
     // start page
-    content = EXEC.getURL("http://www.1188.cz/?sms=gate", [])
+    content = EXEC.getURL("http://sms.1188.cz/?sms=gate", [])
 
     // get image id
     re = /<img src="(.*)" title="potvrzovací kód"/
@@ -63,7 +63,7 @@ function send() {
     var image = match[1]
     
     // download image
-    content = EXEC.getURL("http://www.1188.cz" + image, [])
+    content = EXEC.getURL("http://sms.1188.cz" + image, [])
     
     // show image
     var code = EXEC.recognizeImage(content)
@@ -71,7 +71,7 @@ function send() {
     // send message
     postData = ["adress", NUMBER, "code", code, 
                 "text", MESSAGE, "send", "ODESLAT"]
-    content = EXEC.postURL("http://www.1188.cz/?sms", [], postData)
+    content = EXEC.postURL("http://sms.1188.cz/?sms", [], postData)
 
     // check if message was successfully sent
     re = /Zpráva byla úspěšně odeslána\./
