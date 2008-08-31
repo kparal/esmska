@@ -1,0 +1,104 @@
+
+function getName() {
+    return "[CZ]T-mobile"
+}
+
+function getVersion() {
+    return "2008-08-31"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <ripper42@gmail.com>"
+}
+
+function getCountryPrefix() {
+    return "+420"
+}
+
+function getOperatorPrefixes() {
+    return ["+420603","+420604","+420605","+420730","+420731","+420732",
+            "+420733","+420734","+420735","+420736","+420737","+420738",
+            "+420739"]
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 160
+}
+
+function getMaxParts() {
+    return 5
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 30
+}
+
+function isLoginRequired() {
+    return false
+}
+
+function send() {
+    var re, match, content, params, postData
+
+    // logout just to be sure
+    EXEC.getURL("https://login.client.tmo.cz/um/cs/logout.jsp", []);
+
+    // sms sending page
+    content = EXEC.getURL("http://sms.t-zones.cz/", [])
+    var time = new Date().getTime()
+   
+    // find counter
+    re = /<input type="hidden" name="counter" value="(.*)" \/>/
+    match = re.exec(content);
+    var counter = match[1]
+
+    // download image
+    content = EXEC.getURL("http://sms.t-zones.cz/open/captcha.jpg", [])
+    
+    // show image
+    var captcha = EXEC.recognizeImage(content)
+
+    // operator forces us to sleep 15s before sending
+    var now = new Date().getTime()
+    if (time + 15000 > now) {
+        EXEC.sleep(time + 15000 - now)
+    }
+
+    // send sms
+    postData = ["counter", counter,
+                "recipient", NUMBER, "text", MESSAGE,
+                "send", "Odeslat", "mtype", "0",
+                "captcha", captcha]
+    content = EXEC.postURL("http://sms.t-zones.cz/", [], postData)
+
+    // check if message was successfully sent
+    re = /SMS zpr.va byl. odeslán./
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // all ok
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<div id="gt-errorWindow">([^]*?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // operator told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
+        return false
+    }
+    
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    return false
+}
+
+
