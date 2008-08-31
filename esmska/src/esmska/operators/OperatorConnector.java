@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +23,7 @@ import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
 
 /** Class for connecting to HTTP resources and sending GET and POST requests.
@@ -46,10 +49,21 @@ public class OperatorConnector {
     public OperatorConnector() {
         //set cookie compatibility mode
         client.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
-        client.getParams().setParameter("http.protocol.single-cookie-header", true);
+        client.getParams().setParameter(HttpMethodParams.SINGLE_COOKIE_HEADER, true);
 
         //set user-agent - just to be sure that the server won't screw us
-        client.getParams().setParameter("http.useragent", USER_AGENT);
+        client.getParams().setParameter(HttpMethodParams.USER_AGENT, USER_AGENT);
+        
+        //set Accept-Language headers
+        @SuppressWarnings("unchecked")
+        HashSet<Header> headerSet = (HashSet<Header>) client.getHostConfiguration().
+                getParams().getParameter("http.default-headers");
+        if (headerSet == null) {
+            headerSet = new HashSet<Header>();
+        }
+        Header languageHeader = new Header("Accept-Language", Locale.getDefault().getLanguage());
+        headerSet.add(languageHeader);
+        client.getHostConfiguration().getParams().setParameter("http.default-headers", headerSet);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
