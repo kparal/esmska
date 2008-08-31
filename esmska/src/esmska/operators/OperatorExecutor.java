@@ -224,4 +224,9 @@ public class OperatorExecutor {
         this.referer = referer;
     }
     
+    /** Pauses the execution for specified amount of time. */
+    public void sleep(long milliseconds) throws InterruptedException {
+        Thread.sleep(milliseconds);
+    }
+    
 }
