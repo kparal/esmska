@@ -1,4 +1,4 @@
-Esmska 0.11.0
+Esmska 0.11.1
 ~~~~~~~~~~~~~
 
 Program pro zasílání SMS přes Internet.
