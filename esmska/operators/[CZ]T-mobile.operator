@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-08-31"
+    return "2008-09-04"
 }
 
 function getMaintainer() {
@@ -66,10 +66,11 @@ function send() {
     // show image
     var captcha = EXEC.recognizeImage(content)
 
-    // operator forces us to sleep 15s before sending
+    // operator forces us to sleep 15s before sending (add +1s to be sure)
+    //exact 15s delay maybe causes exception by server refusing connection
     var now = new Date().getTime()
-    if (time + 15000 > now) {
-        EXEC.sleep(time + 15000 - now)
+    if (time + 16000 > now) {
+        EXEC.sleep(time + 16000 - now)
     }
 
     // send sms
