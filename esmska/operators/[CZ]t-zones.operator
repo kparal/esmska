@@ -115,7 +115,7 @@ function send() {
     content = EXEC.postURL("https://sms1.client.tmo.cz/closed.jsp", [], postData)
 
     // check if message was successfully sent
-    re = /SMS zpr.va byl. odeslán./
+    re = /SMS zpr.v. byl. odeslán./
     match = re.exec(content)
     if (undefined != match) { // if found
         // all ok
