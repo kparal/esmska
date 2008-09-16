@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +32,7 @@ import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
+import org.apache.commons.io.IOUtils;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /** About form
@@ -255,12 +258,18 @@ public class AboutFrame extends javax.swing.JFrame {
     private void creditsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsButtonActionPerformed
         //show credits
         try {
-            URL url = getClass().getResource(RES + "credits.html");
+            String credits = IOUtils.toString(
+                    getClass().getResourceAsStream(RES + "credits.html"), "UTF-8");
+            String document = MessageFormat.format(credits, l10n.getString("Credits.authors"),
+                    l10n.getString("Credits.contributors"), l10n.getString("Credits.graphics"),
+                    l10n.getString("Credits.sponsors"));
+            
             JTextPane tp = new JTextPane();
-            tp.setContentType("text/html; charset=utf-8");
-            tp.setPage(url);
+            tp.setContentType("text/html; charset=UTF-8");
+            tp.setText(document);
             tp.setEditable(false);
             tp.setPreferredSize(new Dimension(450, 400));
+            tp.setCaretPosition(0);
             //make links clickable
             tp.addHyperlinkListener(new HyperlinkListener() {
                 @Override

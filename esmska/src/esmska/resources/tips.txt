@@ -1,24 +1,24 @@
-Pro hromadné odesílání zpráv označte více kontaktů v seznamu pomocí klávesy Ctrl.
-Program je snadno ovladatelný z klávesnice. Všímejte si klávesových zkratek.
-Své kontakty můžete importovat z mnoha jiných programů či formátů.
-Kliknutím na tento stavový řádek zobrazíte protokol aplikace.
-V historii zpráv najdete všechny své odeslané zprávy.
-Historii zpráv lze snadno prohledávat.
-V seznamu kontaktů lze vyhledávat. Prostě do něj klikněte a napište pár písmen.
-Při vyhledávání v seznamu kontaků se šipkami přesunete na další výsledky.
-Nezapomeňte si v nastavení vyplnit předčíslí své země.
-Vzhled programu lze změnit, přesně podle vašeho vkusu.
-Dostupný seznam webových bran lze v nastavení omezit jen na vybrané.
-Mnoho bran operátorů podporuje přidání vlastního podpisu. Viz nastavení.
-Vaše kontakty lze exportovat do textového formátu a využít je tak i jinde.
-Pokud je napsaná zpráva příliš dlouhá, využijte funkce komprimace.
-Doporučujeme instalovat z linuxových balíčků, získáte tak autom. aktualizaci.
-Jste programátor? Napište podporu pro novou bránu, stačí trocha JavaScriptu.
-Něco nefunguje? Máte návrh na zlepšení? Dejte nám vědět na naší domovské stránce!
-Program je otevřený a svobodný. Zapojte se i vy a pomozte nám ho zlepšit!
-Malý finanční příspěvek je jedna z možností, jak podpořit další vývoj programu.
-Za pomoci voleb přík. řádky můžete program použít třeba i v kavárně nebo škole.
-4 z 5 zoologů doporučují používat operační systém s logem tučňáka.
-Zprávu můžete poslat i přes jinou nez výchozí bránu - prostě ji zvolte v seznamu.
-Program můžete minimalizovat do ikony v oznamovací oblasti. Viz nastavení.
-Obtěžují vás tyto tipy? Můžete si je vypnout v nastavení.
+Tip.1
+Tip.2
+Tip.3
+Tip.4
+Tip.5
+Tip.6
+Tip.7
+Tip.8
+Tip.9
+Tip.10
+Tip.11
+Tip.12
+Tip.13
+Tip.14
+Tip.15
+Tip.16
+Tip.17
+Tip.18
+Tip.19
+Tip.20
+Tip.21
+Tip.22
+Tip.23
+Tip.24
