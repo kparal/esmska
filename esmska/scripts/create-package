@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Create distribution packages from dist directory
+# in order to be released
+
 # trap and exit on error
 set -e
 trap "echo Packaging failed." ERR
 
 # usage
-if [ $# != 1 ]; then
+if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
     echo "Usage: $0 version_dir"
     echo "Example: $0 esmska-0.1.0"
     exit 1
@@ -33,3 +36,4 @@ mv "$TMPDIR/$FINALNAME.zip" "$TMPDIR/$FINALNAME.tar.gz" .
 
 # delete temp dirs
 rm -rf "$TMPDIR"
+
