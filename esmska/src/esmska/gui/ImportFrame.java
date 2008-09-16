@@ -28,10 +28,13 @@ import esmska.data.Contact;
 import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
+import esmska.utils.L10N;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.text.MessageFormat;
 import java.util.Collections;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -48,24 +51,13 @@ public class ImportFrame extends javax.swing.JFrame {
     public static final int ACTION_IMPORT_CONTACTS = 0;
     private static final Logger logger = Logger.getLogger(ImportFrame.class.getName());
     private static final String RES = "/esmska/resources/";
-    private static final String infoEsmska = "<html>Pro import kontaktů potřebujete mít" +
-            " nachystaný CSV soubor vytvořený pomocí funkce \"Exportovat kontakty\". Tento" +
-            " soubor zde vyberte.</html>";
-    private static final String infoKubik = "<html>Neprve musíte exportovat kontakty " +
-            "z programu Kubík SMS DreamCom. Spusťte uvedený program, přejděte do adresáře" +
-            " kontaktů a pomocí pravého myšítka exportujte všechny své kontakty do CSV " +
-            "souboru. Tento soubor zde následně vyberte.</html>";
-    private static final String infoDreamComSE = "<html>Nejprve musíte exportovat kontakty" +
-            " z programu DreamCom SE. Spusťte uvedený program, přejděte do adresáře " +
-            "kontaktů a pomocí pravého myšítka exportujte všechny své kontakty do CSV " +
-            "souboru. Tento soubor zde následně vyberte.</html>";
-    private static final String infoVcard = "<html>Pro import kontaktů potřebujete mít " +
-            "nachystaný VCARD či VCF soubor, který vám vytvoří aplikace obsahující vaše " +
-            "kontakty. Tento soubor zde vyberte.</html>";
-    private static final String encodingUTF8 = "<html>Program předpokládá, že soubor je " +
-            "v kódování UTF-8.</html>";
-    private static final String encodingWin1250 = "<html>Program předpokládá, že soubor " +
-            "je v kódování windows-1250 (výchozí kódování souborů pro české MS Windows).</html>";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
+    private static final String infoEsmska = l10n.getString("ImportFrame.infoEsmska");
+    private static final String infoKubik = l10n.getString("ImportFrame.infoKubik");
+    private static final String infoDreamComSE = l10n.getString("ImportFrame.infoDreamComSE");
+    private static final String infoVcard = l10n.getString("ImportFrame.infoVcard");
+    private static final String encodingUTF8 = l10n.getString("ImportFrame.encodingUTF8");
+    private static final String encodingWin1250 = l10n.getString("ImportFrame.encodingWin1250");
 
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
@@ -104,8 +96,8 @@ public class ImportFrame extends javax.swing.JFrame {
         cardLayout = (CardLayout) cardPanel.getLayout();
         progressBar.setVisible(false);
         backButton.setVisible(false);
-        chooser.setApproveButtonText("Zvolit");
-        chooser.setDialogTitle("Vyberte soubor s exportovanými kontakty");
+        chooser.setApproveButtonText(l10n.getString("ImportFrame.Select"));
+        chooser.setDialogTitle(l10n.getString("ImportFrame.choose_export_file"));
         chooser.setMultiSelectionEnabled(false);
         chooser.addChoosableFileFilter(new FileFilter() {
             @Override
@@ -121,9 +113,9 @@ public class ImportFrame extends javax.swing.JFrame {
             @Override
             public String getDescription() {
                 if (vcardRadioButton.isSelected()) {
-                    return "vCard soubory (*.vcard, *.vcf)";
+                    return l10n.getString("ImportFrame.vCard_filter");
                 } else {
-                    return "CSV soubory (*.csv)";
+                    return l10n.getString("ImportFrame.CSV_filter");
                 }
             }
         });
@@ -226,35 +218,35 @@ public class ImportFrame extends javax.swing.JFrame {
         contactList = new javax.swing.JList();
         jLabel8 = new javax.swing.JLabel();
         validOperatorCheckBox = new javax.swing.JCheckBox();
-        nextButton = new javax.swing.JButton();
+        forwardButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Import kontaktů - Esmska");
+        setTitle(l10n.getString("ImportFrame.title")); // NOI18N
         setIconImage(new ImageIcon(getClass().getResource(RES + "contact-48.png")).getImage());
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
-        jLabel2.setText("<html>\nImport kontaktů vám dovolí načíst vaše kontakty z jiné aplikace a zkopírovat je do Esmsky. V původní aplikaci zůstanou vaše kontakty nedotčeny.\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, l10n.getString("ImportFrame.jLabel2.text")); // NOI18N
 
-        jLabel3.setText("Vyberte, ze které aplikace chcete importovat kontakty:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, l10n.getString("ImportFrame.jLabel3.text")); // NOI18N
 
         importButtonGroup.add(kubikRadioButton);
-        kubikRadioButton.setText("Kubík SMS DreamCom");
+        org.openide.awt.Mnemonics.setLocalizedText(kubikRadioButton, "&Kubík SMS DreamCom"); // NOI18N
 
         importButtonGroup.add(dreamcomSERadioButton);
-        dreamcomSERadioButton.setText("DreamCom SE");
+        org.openide.awt.Mnemonics.setLocalizedText(dreamcomSERadioButton, "&DreamCom SE"); // NOI18N
 
         importButtonGroup.add(esmskaRadioButton);
         esmskaRadioButton.setSelected(true);
-        esmskaRadioButton.setText("Esmska");
+        org.openide.awt.Mnemonics.setLocalizedText(esmskaRadioButton, "&Esmska"); // NOI18N
 
-        jLabel4.setText("Nebo zvolte, ve kterém ze standardizovaných formátů souborů kontakty máte:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, l10n.getString("ImportFrame.jLabel4.text")); // NOI18N
 
         importButtonGroup.add(vcardRadioButton);
-        vcardRadioButton.setText("vCard (*.vcard, *.vcf)");
+        org.openide.awt.Mnemonics.setLocalizedText(vcardRadioButton, "&vCard (*.vcard, *.vcf)"); // NOI18N
 
         javax.swing.GroupLayout applicationPanelLayout = new javax.swing.GroupLayout(applicationPanel);
         applicationPanel.setLayout(applicationPanelLayout);
@@ -300,12 +292,11 @@ public class ImportFrame extends javax.swing.JFrame {
 
         cardPanel.add(applicationPanel, "applicationPanel");
 
-        fileTextField.setToolTipText("Cesta k souboru s kontakty");
+        fileTextField.setToolTipText(l10n.getString("ImportFrame.fileTextField.toolTipText")); // NOI18N
 
         browseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/browse-22.png"))); // NOI18N
-        browseButton.setMnemonic('r');
-        browseButton.setText("Procházet...");
-        browseButton.setToolTipText("Najít soubor s kontakty pomocí dialogu");
+        org.openide.awt.Mnemonics.setLocalizedText(browseButton, l10n.getString("ImportFrame.browseButton.text")); // NOI18N
+        browseButton.setToolTipText(l10n.getString("ImportFrame.browseButton.toolTipText")); // NOI18N
         browseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 browseButtonActionPerformed(evt);
@@ -313,17 +304,17 @@ public class ImportFrame extends javax.swing.JFrame {
         });
 
         infoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
-        infoLabel.setText("<<info text>>");
+        org.openide.awt.Mnemonics.setLocalizedText(infoLabel, "<<info text>>"); // NOI18N
 
-        fileLabel.setText("Zvolte vstupní soubor:");
+        org.openide.awt.Mnemonics.setLocalizedText(fileLabel, l10n.getString("ImportFrame.fileLabel.text")); // NOI18N
 
-        jLabel22.setText("<html>\nSoubor bude prozkoumán a následně vám bude vypsán seznam kontaktů dostupných pro import. Žádné změny zatím nebudou provedeny.\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel22, l10n.getString("ImportFrame.jLabel22.text")); // NOI18N
 
         encodingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
-        encodingLabel.setText("<<encoding hint>>");
+        org.openide.awt.Mnemonics.setLocalizedText(encodingLabel, "<<encoding hint>>"); // NOI18N
 
         problemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
-        problemLabel.setText("<html>\nPokud budete mít problémy s importem, ověřte, zda nevyšla novější verze Esmsky, a zkuste to v ní.\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(problemLabel, l10n.getString("ImportFrame.problemLabel.text")); // NOI18N
 
         javax.swing.GroupLayout browsePanelLayout = new javax.swing.GroupLayout(browsePanel);
         browsePanel.setLayout(browsePanelLayout);
@@ -365,18 +356,18 @@ public class ImportFrame extends javax.swing.JFrame {
 
         cardPanel.add(browsePanel, "browsePanel");
 
-        jLabel1.setText("Byly nalezeny následující nové kontakty:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, l10n.getString("ImportFrame.jLabel1.text")); // NOI18N
 
         contactList.setModel(new DefaultListModel());
         contactList.setCellRenderer(new ContactsListRenderer());
         jScrollPane1.setViewportView(contactList);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
-        jLabel8.setText("Pokud chcete tyto kontakty importovat, stiskněte Importovat.");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel8, l10n.getString("ImportFrame.jLabel8.text")); // NOI18N
 
         validOperatorCheckBox.setSelected(true);
-        validOperatorCheckBox.setText("Importovat pouze kontakty se známým operátorem");
-        validOperatorCheckBox.setToolTipText("<html>\nPokud je pole zatrhnuto, zobrazí se v seznamu a budou importovány<br>\npouze ty kontakty, s jejichž operátory umí tento program pracovat\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(validOperatorCheckBox, l10n.getString("ImportFrame.validOperatorCheckBox.text")); // NOI18N
+        validOperatorCheckBox.setToolTipText(l10n.getString("ImportFrame.validOperatorCheckBox.toolTipText")); // NOI18N
         validOperatorCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 validOperatorCheckBoxStateChanged(evt);
@@ -412,23 +403,21 @@ public class ImportFrame extends javax.swing.JFrame {
 
         cardPanel.add(resultsPanel, "resultsPanel");
 
-        nextButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/next-22.png"))); // NOI18N
-        nextButton.setMnemonic('p');
-        nextButton.setText("Pokračovat");
-        nextButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        nextButton.addActionListener(new java.awt.event.ActionListener() {
+        forwardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/next-22.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(forwardButton, l10n.getString("ImportFrame.forwardButton.text")); // NOI18N
+        forwardButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        forwardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextButtonActionPerformed(evt);
+                forwardButtonActionPerformed(evt);
             }
         });
 
         progressBar.setIndeterminate(true);
-        progressBar.setString("Prosím čekejte...");
+        progressBar.setString(l10n.getString("ImportFrame.progressBar.string")); // NOI18N
         progressBar.setStringPainted(true);
 
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/previous-22.png"))); // NOI18N
-        backButton.setMnemonic('z');
-        backButton.setText("Zpět");
+        org.openide.awt.Mnemonics.setLocalizedText(backButton, l10n.getString("ImportFrame.backButton.text")); // NOI18N
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -445,12 +434,12 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(backButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nextButton)
+                .addComponent(forwardButton)
                 .addContainerGap())
             .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {backButton, nextButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {backButton, forwardButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,13 +448,13 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nextButton)
+                        .addComponent(forwardButton)
                         .addComponent(backButton))
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {backButton, nextButton, progressBar});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {backButton, forwardButton, progressBar});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -481,17 +470,17 @@ public class ImportFrame extends javax.swing.JFrame {
         //result
         if (actualCard.equals("resultsPanel")) {
             String nextCard = "browsePanel";
-            nextButton.setText("Pokračovat");
-            nextButton.setIcon(new ImageIcon(
+            forwardButton.setText(l10n.getString("ImportFrame.forwardButton.text"));
+            forwardButton.setIcon(new ImageIcon(
                         ImportFrame.class.getResource(RES + "next-22.png")));
-            nextButton.setHorizontalTextPosition(SwingConstants.LEADING);
+            forwardButton.setHorizontalTextPosition(SwingConstants.LEADING);
             updateBrowsePanel();
             cardLayout.show(cardPanel, nextCard);
             actualCard = nextCard;
         }
     }//GEN-LAST:event_backButtonActionPerformed
     
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+    private void forwardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardButtonActionPerformed
         //introduction panel
         if (actualCard.equals("applicationPanel")) {
             String nextCard = "browsePanel";
@@ -517,13 +506,14 @@ public class ImportFrame extends javax.swing.JFrame {
             
             File file = new File(filename);
             if (!(file.isFile() && file.canRead())) {
-                JOptionPane.showMessageDialog(this, "Soubor " + file.getAbsolutePath() + " nelze přečíst!",
+                JOptionPane.showMessageDialog(this, 
+                        MessageFormat.format(l10n.getString("ImportFrame.file_cant_be_read"), file.getAbsolutePath()),
                         null, JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
             progressBar.setVisible(true);
-            nextButton.setEnabled(false);
+            forwardButton.setEnabled(false);
             backButton.setEnabled(false);
             worker = new ContactParser(file, type);
             worker.addPropertyChangeListener(new ParseContactsFinishedListener());
@@ -543,7 +533,7 @@ public class ImportFrame extends javax.swing.JFrame {
             this.dispose();
             return;
         }
-    }//GEN-LAST:event_nextButtonActionPerformed
+}//GEN-LAST:event_forwardButtonActionPerformed
                 
     private void validOperatorCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_validOperatorCheckBoxStateChanged
         if (validOperatorCheckBox.isSelected()) {
@@ -586,21 +576,20 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 removeExistingContacts();
                 validOperatorCheckBoxStateChanged(null);
                 
-                nextButton.setText("Importovat");
-                nextButton.setIcon(new ImageIcon(
+                forwardButton.setText(l10n.getString("Import"));
+                forwardButton.setIcon(new ImageIcon(
                         ImportFrame.class.getResource(RES + "contact-22.png")));
-                nextButton.setHorizontalTextPosition(SwingConstants.TRAILING);
+                forwardButton.setHorizontalTextPosition(SwingConstants.TRAILING);
                 cardLayout.show(cardPanel, "resultsPanel");
                 actualCard = "resultsPanel";
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Error while parsing file", ex);
                 JOptionPane.showMessageDialog(ImportFrame.this, 
-                        "<html><h2>Nastala chyba při zpracování souboru!</h2>" +
-                        "Soubor zřejmě neobsahuje platné údaje.</html>",
+                        l10n.getString("ImportFrame.invalid_file"),
                         null, JOptionPane.ERROR_MESSAGE);
             } finally {
                 progressBar.setVisible(false);
-                nextButton.setEnabled(true);
+                forwardButton.setEnabled(true);
                 backButton.setEnabled(true);
             }
         }
@@ -635,6 +624,7 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JRadioButton esmskaRadioButton;
     private javax.swing.JLabel fileLabel;
     private javax.swing.JTextField fileTextField;
+    private javax.swing.JButton forwardButton;
     private javax.swing.ButtonGroup importButtonGroup;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel jLabel1;
@@ -645,7 +635,6 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton kubikRadioButton;
-    private javax.swing.JButton nextButton;
     private javax.swing.JLabel problemLabel;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JPanel resultsPanel;

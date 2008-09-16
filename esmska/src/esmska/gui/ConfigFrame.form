@@ -32,9 +32,12 @@
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="forgetLayoutCheckBox">
           <Properties>
-            <Property name="mnemonic" type="int" value="114"/>
-            <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;vat v&#xfd;choz&#xed; rozvr&#x17e;en&#xed; formul&#xe1;&#x159;e"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Nehled&#x11b; na aktu&#xe1;ln&#xed; rozm&#x11b;ry programu se p&#x159;i p&#x159;&#xed;&#x161;t&#xed;m&lt;br&gt;&#xa;spu&#x161;t&#x11b;n&#xed; programu op&#x11b;t obnov&#xed; v&#xfd;choz&#xed; rozvr&#x17e;en&#xed;&#xa;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.forgetLayoutCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.forgetLayoutCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <BindingProperties>
             <BindingProperty name="selected" source="config" sourcePath="${forgetLayout}" target="forgetLayoutCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -45,7 +48,9 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Nastaven&#xed; - Esmska"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+      <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.title" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+    </Property>
     <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection code="new ImageIcon(getClass().getResource(RES + &quot;config-48.png&quot;)).getImage()" type="code"/>
     </Property>
@@ -57,10 +62,11 @@
     <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
   </Events>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="esmska/resources/l10n"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -73,7 +79,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="tabbedPane" alignment="1" pref="679" max="32767" attributes="0"/>
+                  <Component id="tabbedPane" alignment="1" pref="710" max="32767" attributes="0"/>
                   <Component id="closeButton" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -100,8 +106,13 @@
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Obecn&#xe9;">
-                <Property name="tabTitle" type="java.lang.String" value="Obecn&#xe9;"/>
+              <JTabbedPaneConstraints tabName="&amp;Obecn&#xe9;">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel1.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/config-16.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -115,7 +126,7 @@
                           <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                           <Component id="checkUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="364" max="32767" attributes="0"/>
+                      <EmptySpace pref="395" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -134,9 +145,12 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="removeAccentsCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="100"/>
-                <Property name="text" type="java.lang.String" value="Ze zpr&#xe1;v odstra&#x148;ovat diakritiku"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;ed odesl&#xe1;n&#xed;m zpr&#xe1;vy z n&#xed; odstran&#xed; v&#x161;echna diakritick&#xe1; znam&#xe9;nka&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.removeAccentsCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.removeAccentsCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${removeAccents}" target="removeAccentsCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -144,9 +158,12 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkUpdatesCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="110"/>
-                <Property name="text" type="java.lang.String" value="Kontrolovat po startu novou verzi programu"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Po spu&#x161;t&#x11b;n&#xed; programu zkontrolovat, zda nevy&#x161;la nov&#x11b;j&#x161;&#xed;&lt;br&gt;&#xa;verze programu, a p&#x159;&#xed;padn&#x11b; upozornit ve stavov&#xe9;m &#x159;&#xe1;dku&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.checkUpdatesCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.checkUpdatesCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${checkForUpdates}" target="checkUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -157,8 +174,13 @@
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Vzhled">
-                <Property name="tabTitle" type="java.lang.String" value="Vzhled"/>
+              <JTabbedPaneConstraints tabName="&amp;Vzhled">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel3.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/appearance-16.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -170,7 +192,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel4" linkSize="6" min="-2" max="-2" attributes="0"/>
+                              <Component id="lookLabel" linkSize="6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lafComboBox" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -178,7 +200,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="substanceWarningMark" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel7" alignment="0" pref="650" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" pref="681" max="32767" attributes="0"/>
                           <Component id="windowCenteredCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="21" pref="21" max="21" attributes="0"/>
@@ -188,7 +210,7 @@
                           <Component id="notificationAreaCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="toolbarVisibleCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel6" linkSize="6" min="-2" max="-2" attributes="0"/>
+                              <Component id="themeLabel" linkSize="6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="themeComboBox" linkSize="1" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -204,14 +226,14 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lookLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lafComboBox" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="substanceWarningMark" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="themeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="themeComboBox" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -241,7 +263,9 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="lafModel" type="code"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Umo&#x17e;n&#xed; v&#xe1;m zm&#x11b;nit vzhled programu&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.lafComboBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="renderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new LaFComboRenderer()" type="code"/>
                 </Property>
@@ -252,20 +276,25 @@
             </Component>
             <Component class="javax.swing.JLabel" name="substanceWarning">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;i&gt;&#xa;** Vzhled Substance nen&#xed; pro va&#x161;i verzi Javy (OpenJDK) doporu&#x10d;en!&#xa;&lt;/i&gt;&lt;/html&gt;"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Jsou zn&#xe1;my probl&#xe9;my p&#x159;i provozov&#xe1;n&#xed; vzhled&#x16f; Substance na OpenJDK.&lt;br&gt;&#xa;Pro tento vzhled pou&#x17e;ijte rad&#x11b;ji Sun Javu.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.substanceWarning.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.substanceWarning.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="substanceWarning.setVisible(JavaType.isOpenJDK());"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="lookLabel">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="100"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="lafComboBox"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Vzhled:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.lookLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="lafComboBox" name="toolTipText" type="property"/>
                 </Property>
@@ -273,24 +302,29 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;i&gt;&#xa;* Pro projeven&#xed; zm&#x11b;n je nutn&#xfd; restart programu!&#xa;&lt;/i&gt;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel7.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="themeComboBox">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Barevn&#xe1; sch&#xe9;mata pro zvolen&#xfd; vzhled&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.themeComboBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="themeComboBoxActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel6">
+            <Component class="javax.swing.JLabel" name="themeLabel">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="109"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="themeComboBox"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Motiv:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.themeLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="themeComboBox" name="toolTipText" type="property"/>
                 </Property>
@@ -298,9 +332,12 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="windowDecorationsCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="107"/>
-                <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;t vzhled i na okraje oken *"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Zda m&#xe1; m&#xed;sto opera&#x10d;n&#xed;ho syst&#xe9;mu vykreslovat&lt;br&gt;&#xa;r&#xe1;me&#x10d;ky oken zvolen&#xfd; vzhled&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.windowDecorationsCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.windowDecorationsCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${lafWindowDecorated}" target="windowDecorationsCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -308,9 +345,12 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="windowCenteredCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="117"/>
-                <Property name="text" type="java.lang.String" value="Spustit program uprost&#x159;ed obrazovky"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Zda-li nechat um&#xed;st&#x11b;n&#xed; okna programu na opera&#x10d;n&#xed;m syst&#xe9;mu,&lt;br&gt;&#xa;nebo ho um&#xed;stit v&#x17e;dy doprost&#x159;ed obrazovky&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.windowCenteredCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.windowCenteredCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${startCentered}" target="windowCenteredCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -318,9 +358,12 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="toolbarVisibleCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="110"/>
-                <Property name="text" type="java.lang.String" value="Zobrazit panel n&#xe1;stroj&#x16f;"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Zobrazit panel n&#xe1;stroj&#x16f;, kter&#xfd; umo&#x17e;&#x148;uje rychlej&#x161;&#xed; ovl&#xe1;d&#xe1;n&#xed; my&#x161;&#xed; n&#x11b;kter&#xfd;ch akc&#xed;&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.toolbarVisibleCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.toolbarVisibleCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${toolbarVisible}" target="toolbarVisibleCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -328,14 +371,17 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="*"/>
+                <Property name="text" type="java.lang.String" value="*" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="notificationAreaCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="111"/>
-                <Property name="text" type="java.lang.String" value="Um&#xed;stit ikonu do oznamovac&#xed; oblasti"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Zobrazit ikonu v oznamovac&#xed; oblasti spr&#xe1;vce oken (tzv. &lt;i&gt;system tray&lt;/i&gt;).&lt;br&gt;&#xa;&lt;br&gt;&#xa;Pozor, u modern&#xed;ch kompozitn&#xed;ch spr&#xe1;vc&#x16f; oken (Compiz, Beryl, ...) je&lt;br&gt;&#xa;tato funkce dostupn&#xe1; a&#x17e; od Java 6 Update 10.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.notificationAreaCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.notificationAreaCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="NotificationIcon.isSupported()" type="code"/>
                 </Property>
@@ -349,9 +395,12 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="tipsCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="116"/>
-                <Property name="text" type="java.lang.String" value="Po spu&#x161;t&#x11b;n&#xed; zobrazit tip programu"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Po spu&#x161;t&#x11b;n&#xed; programu zobrazit ve stavov&#xe9;m &#x159;&#xe1;dku&lt;br&gt;&#xa;n&#xe1;hodn&#xfd; tip ohledn&#x11b; pr&#xe1;ce s programem&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.tipsCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.tipsCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${showTips}" target="tipsCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -359,9 +408,12 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="startMinimizedCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="121"/>
-                <Property name="text" type="java.lang.String" value="Po startu skr&#xfd;t program do ikony"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Program bude okam&#x17e;it&#x11b; po spu&#x161;t&#x11b;n&#xed; schov&#xe1;n&lt;br&gt;&#xa;do ikony v oznamovac&#xed; oblasti&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.startMinimizedCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.startMinimizedCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${startMinimized}" target="startMinimizedCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -370,7 +422,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="substanceWarningMark">
               <Properties>
-                <Property name="text" type="java.lang.String" value="**"/>
+                <Property name="text" type="java.lang.String" value="**" noResource="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="substanceWarningMark.setVisible(JavaType.isOpenJDK());"/>
@@ -381,8 +433,13 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Oper&#xe1;to&#x159;i">
-                <Property name="tabTitle" type="java.lang.String" value="Oper&#xe1;to&#x159;i"/>
+              <JTabbedPaneConstraints tabName="O&amp;per&#xe1;to&#x159;i">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel2.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/operator-16.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -420,7 +477,7 @@
                           </Group>
                           <Component id="demandDeliveryReportCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="191" max="32767" attributes="0"/>
+                      <EmptySpace pref="222" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -460,9 +517,12 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="useSenderIDCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="100"/>
-                <Property name="text" type="java.lang.String" value="P&#x159;ipojovat ke zpr&#xe1;v&#x11b; podpis odesilatele"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i p&#x159;ipojen&#xed; podpisu p&#x159;ijde SMS adres&#xe1;tovi ze zadan&#xe9;ho &#x10d;&#xed;sla&lt;br&gt;&#xa;a podepsan&#xe1; dan&#xfd;m jm&#xe9;nem. Tuto funkci podporuj&#xed; pouze n&#x11b;kte&#x159;&#xed; oper&#xe1;to&#x159;i.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.useSenderIDCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.useSenderIDCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${useSenderID}" target="useSenderIDCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -471,7 +531,9 @@
             <Component class="javax.swing.JTextField" name="senderNumberTextField">
               <Properties>
                 <Property name="columns" type="int" value="13"/>
-                <Property name="toolTipText" type="java.lang.String" value="&#x10c;&#xed;slo odesilatele v mezin&#xe1;rodn&#xed;m form&#xe1;tu (za&#x10d;&#xed;naj&#xed;c&#xed; na znak &quot;+&quot;)"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.senderNumberTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${senderNumber}" target="senderNumberTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -482,11 +544,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="108"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="senderNumberTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel1.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="senderNumberTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -495,7 +558,9 @@
             <Component class="javax.swing.JTextField" name="senderNameTextField">
               <Properties>
                 <Property name="columns" type="int" value="13"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Vypln&#x11b;n&#xe9; jm&#xe9;no zab&#xed;r&#xe1; ve zpr&#xe1;v&#x11b; m&#xed;sto, av&#x161;ak nen&#xed; vid&#x11b;t,&lt;br&gt;&#xa;tak&#x17e;e obarvov&#xe1;n&#xed; textu zpr&#xe1;vy a ukazatel po&#x10d;tu sms&lt;br&gt;&#xa;nebudou zd&#xe1;nliv&#x11b; spolu souhlasit&#xa;&lt;/html&gt;&#xa;&#xa;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.senderNameTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${senderName}" target="senderNameTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -506,11 +571,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="109"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="senderNameTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Jm&#xe9;no:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel3.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="senderNameTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -519,7 +585,9 @@
             <Component class="javax.swing.JTextField" name="countryPrefixTextField">
               <Properties>
                 <Property name="columns" type="int" value="5"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Mezin&#xe1;rodn&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;, za&#x10d;&#xed;naj&#xed;c&#xed; na znak &quot;+&quot;.&lt;br&gt;&#xa;P&#x159;i vypln&#x11b;n&#xed; se dan&#xe9; p&#x159;ed&#x10d;&#xed;sl&#xed; bude p&#x159;edpokl&#xe1;dat u v&#x161;ech &#x10d;&#xed;sel, kter&#xe9; nebudou&lt;br&gt;&#xa;zad&#xe1;ny v mezin&#xe1;rodn&#xed;m form&#xe1;tu. Takt&#xe9;&#x17e; se zkr&#xe1;t&#xed; zobrazen&#xed; t&#x11b;chto &#x10d;&#xed;sel v mnoha popisc&#xed;ch.&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.countryPrefixTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${countryPrefix}" target="countryPrefixTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -532,11 +600,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="100"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="countryPrefixTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="V&#xfd;choz&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel2.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="countryPrefixTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -545,7 +614,9 @@
             <Component class="javax.swing.JTextField" name="operatorFilterTextField">
               <Properties>
                 <Property name="columns" type="int" value="13"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;V seznamu oper&#xe1;tor&#x16f; budou zobrazeni pouze ti, kte&#x159;&#xed; budou&lt;br&gt;&#xa;obsahovat ve sv&#xe9;m n&#xe1;zvu vzor zadan&#xfd; v tomto poli. Jednodu&#x161;e tak&lt;br&gt;&#xa;lze nap&#x159;&#xed;klad zobrazit pouze oper&#xe1;tory pro zemi XX zad&#xe1;n&#xed;m vzoru [XX].&lt;br&gt;&#xa;Lze zadat v&#xed;ce vzor&#x16f; odd&#x11b;len&#xfd;ch &#x10d;&#xe1;rkou. Bere se ohled na velikost p&#xed;smen.&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.operatorFilterTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${operatorFilter}" target="operatorFilterTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -555,11 +626,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="116"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="operatorFilterTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Zobrazovat pouze br&#xe1;ny oper&#xe1;tor&#x16f; maj&#xed;c&#xed; v n&#xe1;zvu:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel8.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="operatorFilterTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -567,15 +639,20 @@
             </Component>
             <Component class="javax.swing.JLabel" name="countryCodeLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="(st&#xe1;t: XX)"/>
-                <Property name="toolTipText" type="java.lang.String" value="K&#xf3;d st&#xe1;tu, pro kter&#xfd; jste vyplnili telefonn&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed;"/>
+                <Property name="text" type="java.lang.String" value="&lt;&lt;(country: XX)&gt;&gt;" noResource="true"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.countryCodeLabel.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="demandDeliveryReportCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="107"/>
-                <Property name="text" type="java.lang.String" value="Po&#x17e;adovat posl&#xe1;n&#xed; doru&#x10d;enky"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Vy&#x17e;&#xe1;d&#xe1; si zasl&#xe1;n&#xed; potvrzen&#xed; o doru&#x10d;en&#xed; zpr&#xe1;vy. Potvrzen&#xed; p&#x159;ijde&lt;br&gt;&#xa;na telefonn&#xed; &#x10d;&#xed;slo odesilatele. Tuto funkci podporuj&#xed; pouze n&#x11b;kte&#x159;&#xed; oper&#xe1;to&#x159;i.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.demandDeliveryReportCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.demandDeliveryReportCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${demandDeliveryReport}" target="demandDeliveryReportCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -586,8 +663,13 @@
         <Container class="javax.swing.JPanel" name="jPanel4">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="P&#x159;ihla&#x161;ovac&#xed; &#xfa;daje">
-                <Property name="tabTitle" type="java.lang.String" value="P&#x159;ihla&#x161;ovac&#xed; &#xfa;daje"/>
+              <JTabbedPaneConstraints tabName="P&#x159;i&amp;hla&#x161;ovac&#xed; &#xfa;daje">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel4.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/keyring-16.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -598,7 +680,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel9" alignment="0" pref="650" max="32767" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" pref="681" max="32767" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="jLabel12" linkSize="4" min="-2" max="-2" attributes="0"/>
@@ -617,7 +699,7 @@
                               </Group>
                           </Group>
                           <Component id="clearKeyringButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel13" alignment="0" pref="650" max="32767" attributes="0"/>
+                          <Component id="jLabel13" alignment="0" pref="681" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -645,7 +727,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="173" max="32767" attributes="0"/>
+                      <EmptySpace pref="188" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -663,16 +745,19 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Zde si m&#x16f;&#x17e;ete nastavit sv&#xe9; p&#x159;ihla&#x161;ovac&#xed; &#xfa;daje pro oper&#xe1;tory, kte&#x159;&#xed; to vy&#x17e;aduj&#xed;.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel9.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="114"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="operatorComboBox"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Oper&#xe1;tor:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel10.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="operatorComboBox" name="toolTipText" type="property"/>
                 </Property>
@@ -681,7 +766,9 @@
             <Component class="javax.swing.JTextField" name="loginTextField">
               <Properties>
                 <Property name="columns" type="int" value="15"/>
-                <Property name="toolTipText" type="java.lang.String" value="U&#x17e;ivatelsk&#xe9; jm&#xe9;no pot&#x159;ebn&#xe9; k p&#x159;ihl&#xe1;&#x161;en&#xed; k webov&#xe9; br&#xe1;n&#x11b; oper&#xe1;tora"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.loginTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateKeyring();&#xa;            }&#xa;        });"/>
@@ -689,11 +776,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="117"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="loginTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="U&#x17e;ivatelsk&#xe9; jm&#xe9;no:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel11.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="loginTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -702,7 +790,9 @@
             <Component class="javax.swing.JPasswordField" name="passwordField">
               <Properties>
                 <Property name="columns" type="int" value="15"/>
-                <Property name="toolTipText" type="java.lang.String" value="Heslo p&#x159;&#xed;slu&#x161;ej&#xed;c&#xed; k dan&#xe9;mu u&#x17e;ivatelsk&#xe9;mu jm&#xe9;nu"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.passwordField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="passwordField.enableInputMethods(true);&#xa;passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateKeyring();&#xa;            }&#xa;        });"/>
@@ -710,11 +800,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="115"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="passwordField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Heslo:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel12.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="passwordField" name="toolTipText" type="property"/>
                 </Property>
@@ -725,9 +816,12 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/esmska/resources/clear-22.png"/>
                 </Property>
-                <Property name="mnemonic" type="int" value="100"/>
-                <Property name="text" type="java.lang.String" value="Odstranit v&#x161;echny p&#x159;ihla&#x161;ovac&#xed; &#xfa;daje"/>
-                <Property name="toolTipText" type="java.lang.String" value="Vyma&#x17e;e u&#x17e;ivatelsk&#xe9; jm&#xe9;na a hesla u v&#x161;ech oper&#xe1;tor&#x16f;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.clearKeyringButton.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.clearKeyringButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearKeyringButtonActionPerformed"/>
@@ -735,9 +829,11 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;i&gt;&#xa;A&#x10d;koliv se hesla ukl&#xe1;daj&#xed; &#x161;ifrovan&#x11b;, lze se k p&#x16f;vodn&#xed;mu obsahu dostat. D&#x16f;razn&#x11b; doporu&#x10d;ujeme nastavit si p&#x159;&#xed;stupov&#xe1; pr&#xe1;va tak, aby k &lt;u&gt;adres&#xe1;&#x159;i s konfigura&#x10d;n&#xed;mi soubory programu&lt;/u&gt; nem&#x11b;l p&#x159;&#xed;stup &#x17e;&#xe1;dn&#xfd; jin&#xfd; u&#x17e;ivatel.&#xa;&lt;/i&gt;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel13.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;&lt;html&gt;U&#x17e;ivatelsk&#xfd; adres&#xe1;&#x159; programu:&lt;br&gt;&quot;&#xa;        + PersistenceManager.getUserDir().getAbsolutePath()&#xa;        + &quot;&lt;/html&gt;&quot;" type="code"/>
+                  <Connection code="MessageFormat.format(l10n.getString(&quot;ConfigFrame.user_directory&quot;), &#xa;        PersistenceManager.getUserDir().getAbsolutePath())" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -746,8 +842,13 @@
         <Container class="javax.swing.JPanel" name="jPanel6">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Soukrom&#xed;">
-                <Property name="tabTitle" type="java.lang.String" value="Soukrom&#xed;"/>
+              <JTabbedPaneConstraints tabName="&amp;Soukrom&#xed;">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel6.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/lock-16.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -762,7 +863,7 @@
                       <Component id="reducedHistorySpinner" min="-2" pref="65" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="200" max="32767" attributes="0"/>
+                      <EmptySpace pref="135" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -783,13 +884,19 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="reducedHistoryCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="109"/>
-                <Property name="text" type="java.lang.String" value="Omezit historii odeslan&#xfd;ch zpr&#xe1;v pouze na posledn&#xed;ch"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;P&#x159;i ukon&#x10d;en&#xed; programu se ulo&#x17e;&#xed; historie odeslan&#xfd;ch zpr&#xe1;v&lt;BR&gt;&#xa;pouze za zvolen&#xe9; posledn&#xed; obdob&#xed;&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.reducedHistoryCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.reducedHistoryCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${reducedHistory}" target="reducedHistoryCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="reducedHistoryCheckBox.setText(reducedHistoryCheckBox.getText().replaceFirst(&quot;\\{0\\}.*$&quot;, &quot;&quot;).trim());"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JSpinner" name="reducedHistorySpinner">
               <Properties>
@@ -807,19 +914,27 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
-                <Property name="text" type="java.lang.String" value="dn&#xed;."/>
+                <Property name="text" type="java.lang.String" value="&lt;&lt;days.&gt;&gt;" noResource="true"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="reducedHistoryCheckBox" name="toolTipText" type="property"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel18.setText(l10n.getString(&quot;ConfigFrame.reducedHistoryCheckBox.text&quot;).replaceFirst(&quot;^.*\\{0\\}&quot;, &quot;&quot;).trim());"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel5">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="P&#x159;ipojen&#xed;">
-                <Property name="tabTitle" type="java.lang.String" value="P&#x159;ipojen&#xed;"/>
+              <JTabbedPaneConstraints tabName="P&#x159;ipoje&amp;n&#xed;">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel5.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/esmska/resources/connection-16.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -855,7 +970,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel17" alignment="0" pref="650" max="32767" attributes="0"/>
+                          <Component id="jLabel17" alignment="0" pref="681" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -883,7 +998,7 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="228" max="32767" attributes="0"/>
+                      <EmptySpace pref="243" max="32767" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -893,9 +1008,12 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="useProxyCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="120"/>
-                <Property name="text" type="java.lang.String" value="Pou&#x17e;&#xed;vat proxy server *"/>
-                <Property name="toolTipText" type="java.lang.String" value="Zda pro p&#x159;ipojen&#xed; pou&#x17e;&#xed;vat proxy server"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.useProxyCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.useProxyCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${useProxy}" target="useProxyCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -907,7 +1025,9 @@
             <Component class="javax.swing.JTextField" name="httpProxyTextField">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Adresa HTTP proxy serveru ve form&#xe1;tu &quot;host&quot; nebo &quot;host:port&quot;.&#xa;Nap&#x159;&#xed;klad: proxy.firma.com:80&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.httpProxyTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${httpProxy}" target="httpProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -921,9 +1041,12 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="sameProxyCheckBox">
               <Properties>
-                <Property name="mnemonic" type="int" value="116"/>
-                <Property name="text" type="java.lang.String" value="Pro v&#x161;echny protokoly pou&#x17e;&#xed;t tuto proxy"/>
-                <Property name="toolTipText" type="java.lang.String" value="Pro v&#x161;echny protokoly se pou&#x17e;ije adresa zadan&#xe1; v pol&#xed;&#x10d;ku &quot;HTTP proxy&quot;."/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.sameProxyCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.sameProxyCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${sameProxy}" target="sameProxyCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
@@ -935,7 +1058,9 @@
             </Component>
             <Component class="javax.swing.JTextField" name="httpsProxyTextField">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Adresa HTTPS proxy serveru ve form&#xe1;tu &quot;host&quot; nebo &quot;host:port&quot;.&#xa;Nap&#x159;&#xed;klad: proxy.firma.com:443&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.httpsProxyTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${httpsProxy}" target="httpsProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -949,7 +1074,9 @@
             </Component>
             <Component class="javax.swing.JTextField" name="socksProxyTextField">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Adresa SOCKS proxy serveru ve form&#xe1;tu &quot;host&quot; nebo &quot;host:port&quot;.&#xa;Nap&#x159;&#xed;klad: proxy.firma.com:1080&#xa;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.socksProxyTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="text" source="config" sourcePath="${socksProxy}" target="socksProxyTextField" targetPath="text" updateStrategy="0" immediately="false">
@@ -963,11 +1090,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="116"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="httpProxyTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="HTTP proxy:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel14.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="httpProxyTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -975,11 +1103,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="115"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="httpsProxyTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="HTTPS proxy:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel15.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="httpsProxyTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -987,11 +1116,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
-                <Property name="displayedMnemonic" type="int" value="99"/>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="socksProxyTextField"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="SOCKS proxy:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel16.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="socksProxyTextField" name="toolTipText" type="property"/>
                 </Property>
@@ -999,7 +1129,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;i&gt;&#xa;* Pokud nejste k Internetu p&#x159;ipojeni p&#x159;&#xed;mo, je nutn&#xe9;, aby va&#x161;e proxy fungovala jako SOCKS proxy server.&#xa;&lt;/i&gt;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel17.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -1011,8 +1143,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/esmska/resources/close-22.png"/>
         </Property>
-        <Property name="mnemonic" type="int" value="122"/>
-        <Property name="text" type="java.lang.String" value="Zav&#x159;&#xed;t"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="Close_" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closeButtonActionPerformed"/>

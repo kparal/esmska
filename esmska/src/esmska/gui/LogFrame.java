@@ -8,6 +8,7 @@ package esmska.gui;
 
 import esmska.data.Icons;
 import esmska.data.Log;
+import esmska.utils.L10N;
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -17,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -35,6 +37,7 @@ import javax.swing.ListCellRenderer;
 public class LogFrame extends javax.swing.JFrame {
     private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(LogFrame.class.getName());
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.MEDIUM);
     private Log log = new Log();
     private DefaultListModel logModel = new DefaultListModel();
@@ -100,7 +103,7 @@ public class LogFrame extends javax.swing.JFrame {
         copyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Protokol - Esmska");
+        setTitle(l10n.getString("LogFrame.title")); // NOI18N
         setIconImage(new ImageIcon(getClass().getResource(RES + "log-48.png")).getImage());
 
         logList.setModel(logModel);
@@ -108,8 +111,7 @@ public class LogFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(logList);
 
         closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        closeButton.setMnemonic('z');
-        closeButton.setText("Zavřít");
+        org.openide.awt.Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
@@ -117,9 +119,8 @@ public class LogFrame extends javax.swing.JFrame {
         });
 
         clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
-        clearButton.setMnemonic('v');
-        clearButton.setText("Vyčistit");
-        clearButton.setToolTipText("Vymaže aktuální protokol");
+        org.openide.awt.Mnemonics.setLocalizedText(clearButton, l10n.getString("LogFrame.clearButton.text")); // NOI18N
+        clearButton.setToolTipText(l10n.getString("LogFrame.clearButton.toolTipText")); // NOI18N
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);
@@ -127,9 +128,8 @@ public class LogFrame extends javax.swing.JFrame {
         });
 
         copyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/copy-22.png"))); // NOI18N
-        copyButton.setMnemonic('s');
-        copyButton.setText("Zkopírovat do schránky");
-        copyButton.setToolTipText("Zkopíruje celý obsah protokolu do systémové schránky");
+        org.openide.awt.Mnemonics.setLocalizedText(copyButton, l10n.getString("LogFrame.copyButton.text")); // NOI18N
+        copyButton.setToolTipText(l10n.getString("LogFrame.copyButton.toolTipText")); // NOI18N
         copyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 copyButtonActionPerformed(evt);
@@ -143,12 +143,12 @@ public class LogFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(clearButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(copyButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                         .addComponent(closeButton)))
                 .addContainerGap())
         );

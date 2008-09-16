@@ -47,6 +47,9 @@ import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.gui.MainFrame;
 import esmska.utils.ConfirmingFileChooser;
+import esmska.utils.L10N;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 
 /** Export program data
  *
@@ -55,11 +58,12 @@ import esmska.utils.ConfirmingFileChooser;
 public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     
     private static final FileFilter csvFileFilter = 
-            new FileNameExtensionFilter("CSV soubory (*.csv)", "csv");
+            new FileNameExtensionFilter(l10n.getString("ExportManager.csv_filter"), "csv");
     private static final FileFilter vCardFileFilter = 
-            new FileNameExtensionFilter("vCard soubory (*.vcard, *.vcf)", "vcf", "vcard");
+            new FileNameExtensionFilter(l10n.getString("ExportManager.vcard_filter"), "vcf", "vcard");
     
     /** Disabled constructor */
     private ExportManager() {
@@ -68,27 +72,17 @@ public class ExportManager {
     /** Export contacts with info and file chooser dialog */
     public static void exportContacts(Component parent, Collection<Contact> contacts) {
         //show info
-        String message =
-                "<html>Své kontakty můžete exportovat do CSV či vCard souboru. To jsou<br>" +
-                "textové soubory, kde všechna data vidíte v čitelné podobě.<br>" +
-                "Pomocí importu můžete data později opět nahrát zpět do Esmsky,<br>" +
-                "nebo je využít jinak.<br><br>" +
-                "Soubor ve formátu vCard je standardizovaný a můžete ho použít<br>" +
-                "v mnoha dalších aplikacích. Soubor CSV má velice jednoduchý obsah<br>" +
-                "a každý program ho vytváří trochu jinak. Při potřebě úpravy jeho<br>" +
-                "struktury pro import v jiném programu využijte nějaký tabulkový<br>" +
-                "procesor, např. zdarma dostupný OpenOffice Calc (www.openoffice.cz).<br><br>" +
-                "Soubor bude uložen v kódování UTF-8.</html>";
-        JOptionPane.showMessageDialog(parent,new JLabel(message),"Export kontaktů",
+        String message = l10n.getString("ExportManager.export_info");
+        JOptionPane.showMessageDialog(parent,new JLabel(message),l10n.getString("ExportManager.contact_export"),
                 JOptionPane.INFORMATION_MESSAGE,
                 new ImageIcon(ExportManager.class.getResource(RES + "contact-48.png")));
         
         //choose file
         ConfirmingFileChooser chooser = new ConfirmingFileChooser();
-        chooser.setDialogTitle("Vyberte umístění a typ exportovaného souboru");
+        chooser.setDialogTitle(l10n.getString("ExportManager.choose_export_file"));
         //set dialog type not to erase approve button text later
         chooser.setDialogType(JFileChooser.SAVE_DIALOG);
-        chooser.setApproveButtonText("Uložit");
+        chooser.setApproveButtonText(l10n.getString("Save"));
         chooser.addChoosableFileFilter(csvFileFilter);
         chooser.addChoosableFileFilter(vCardFileFilter);
         chooser.setAcceptAllFileFilterUsed(false);
@@ -101,8 +95,9 @@ public class ExportManager {
         
         //check if file can be written
         if (file.exists() && !file.canWrite()) {
-            JOptionPane.showMessageDialog(parent,"Do souboru " + file.getAbsolutePath() +
-                    " nelze zapisovat!", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parent,
+                    MessageFormat.format(l10n.getString("ExportManager.cant_write"), file.getAbsolutePath()),
+                    null, JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -116,15 +111,15 @@ public class ExportManager {
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not export contacts to file", ex);
             MainFrame.getInstance().getStatusPanel().setStatusMessage(
-                "Export kontaktů selhal!", true, Icons.STATUS_ERROR, true);
-            JOptionPane.showMessageDialog(parent,"Export kontaktů selhal!", null,
+                l10n.getString("ExportManager.export_failed"), true, Icons.STATUS_ERROR, true);
+            JOptionPane.showMessageDialog(parent,l10n.getString("ExportManager.export_failed"), null,
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         MainFrame.getInstance().getStatusPanel().setStatusMessage(
-                "Export kontaktů úspěšně dokončen", true, Icons.STATUS_INFO, true);
-        JOptionPane.showMessageDialog(parent,"Export kontaktů úspěšně dokončen!", null,
+                l10n.getString("ExportManager.export_ok"), true, Icons.STATUS_INFO, true);
+        JOptionPane.showMessageDialog(parent,l10n.getString("ExportManager.export_ok!"), null,
                     JOptionPane.INFORMATION_MESSAGE);
     }
     
@@ -134,7 +129,7 @@ public class ExportManager {
         CsvWriter writer = null;
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            writer.writeComment("Seznam kontaktů");
+            writer.writeComment(l10n.getString("ExportManager.contact_list"));
             for (Contact contact : contacts) {
                 writer.writeRecord(new String[] {
                     contact.getName(),
@@ -199,7 +194,7 @@ public class ExportManager {
         CsvWriter writer = null;
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            writer.writeComment("Fronta sms k odeslání");
+            writer.writeComment(l10n.getString("ExportManager.sms_queue"));
             for (SMS sms : queue) {
                 writer.writeRecord(new String[] {
                     sms.getName(),
@@ -224,7 +219,7 @@ public class ExportManager {
                 DateFormat.LONG, Locale.ROOT);
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            writer.writeComment("Historie odeslaných sms");
+            writer.writeComment(l10n.getString("ExportManager.history"));
             for (History.Record record : history) {
                 writer.writeRecord(new String[] {
                     df.format(record.getDate()),
@@ -255,7 +250,7 @@ public class ExportManager {
         CsvWriter writer = null;
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            writer.writeComment("Uživatelská jména a hesla k jednotlivým operátorům");
+            writer.writeComment(l10n.getString("ExportManager.login"));
             for (String operatorName : keyring.getOperatorNames()) {
                 String[] key = keyring.getKey(operatorName);
                 String login = key[0];

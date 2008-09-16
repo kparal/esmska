@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import esmska.integration.MacUtils;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 
 /**
  * Extended dialog for choosing files. When saving file to an already existing file,
@@ -21,8 +23,10 @@ import esmska.integration.MacUtils;
  * @author  Marian Bouček
  */
 public class ConfirmingFileChooser extends JFileChooser {
-    private static String overwriteOption = "Nahradit";
-    private static String cancelOption = "Zrušit";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
+    
+    private static String overwriteOption = l10n.getString("Replace");
+    private static String cancelOption = l10n.getString("Cancel");
     private static Object[] options = DialogButtonSorter.sortOptions(
                 cancelOption, overwriteOption);
     
@@ -54,10 +58,8 @@ public class ConfirmingFileChooser extends JFileChooser {
      * @return true if the file should be overwritten; else otherwise
      */
     private boolean showConfirmOverwriteDialog() {
-        String message = "<html><h2>Soubor nazvaný \"" + getSelectedFile().getName()
-                + "\" již existuje.<br>Chcete jej nahradit?</h2>" +
-                "V \"" + getSelectedFile().getParent() + "\" již tento soubor existuje.<br>" +
-                "Jeho nahrazení přepíše celý obsah.</html>";
+        String message = MessageFormat.format(l10n.getString("ConfirmingFileChooser.sure_to_replace"),
+                getSelectedFile().getName(), getSelectedFile().getParent());
         JOptionPane pane = new JOptionPane(message, JOptionPane.QUESTION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, options, overwriteOption);
         

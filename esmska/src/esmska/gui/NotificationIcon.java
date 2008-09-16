@@ -4,6 +4,7 @@
  */
 package esmska.gui;
 
+import esmska.utils.L10N;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -23,6 +24,7 @@ import javax.swing.SwingUtilities;
 
 import esmska.utils.OSType;
 import java.awt.Dimension;
+import java.util.ResourceBundle;
 
 /** Display icon in the notification area (aka system tray)
  *
@@ -34,10 +36,11 @@ public class NotificationIcon {
     private static boolean installed;
     private static final Logger logger = Logger.getLogger(NotificationIcon.class.getName());
     private static final String RES = "/esmska/resources/";
-    private static final String pauseQueue = "Pozastavit frontu sms";
-    private static final String unpauseQueue = "Znovu spustit frontu sms";
-    private static final String showWindow = "Zobrazit program";
-    private static final String hideWindow = "Skrýt program";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
+    private static final String pauseQueue = l10n.getString("Pause_sms_queue");
+    private static final String unpauseQueue = l10n.getString("Unpause_sms_queue");
+    private static final String showWindow = l10n.getString("Show_program");
+    private static final String hideWindow = l10n.getString("Hide_program");
     
     private PopupMenu popup = null;
     private TrayIcon trayIcon = null;
@@ -46,7 +49,7 @@ public class NotificationIcon {
 
     private NotificationIcon() {
         // show/hide main window
-        toggleItem = new MenuItem("Skrýt/zobrazit program");
+        toggleItem = new MenuItem(l10n.getString("Show/hide_program"));
         toggleItem.addActionListener(new ActionListener() {
 
             @Override
@@ -56,7 +59,7 @@ public class NotificationIcon {
         });
 
         // pause/unpause sms queue
-        pauseQueueItem = new MenuItem("Pozastavit/spustit odesílání");
+        pauseQueueItem = new MenuItem(l10n.getString("NotificationIcon.Pause/unpause_sending"));
         pauseQueueItem.addActionListener(new ActionListener() {
 
             @Override
@@ -67,15 +70,15 @@ public class NotificationIcon {
         });
 
         // show history
-        historyItem = new MenuItem("Historie");
+        historyItem = new MenuItem(l10n.getString("History"));
         historyItem.addActionListener(MainFrame.getInstance().getHistoryAction());
 
         // show settings
-        configItem = new MenuItem("Nastavení");
+        configItem = new MenuItem(l10n.getString("Preferences_"));
         configItem.addActionListener(MainFrame.getInstance().getConfigAction());
 
         // exit program
-        quitItem = new MenuItem("Ukončit");
+        quitItem = new MenuItem(l10n.getString("Quit_"));
         quitItem.addActionListener(MainFrame.getInstance().getQuitAction());
 
         // separator

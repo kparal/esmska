@@ -5,8 +5,10 @@
 package esmska.operators;
 
 import esmska.gui.MainFrame;
+import esmska.utils.L10N;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -23,52 +25,40 @@ import javax.swing.SwingUtilities;
  * @author ripper
  */
 public class OperatorExecutor {
-
+    private static final ResourceBundle l10n = L10N.l10nBundle;
+    
     private static final Logger logger = Logger.getLogger(OperatorExecutor.class.getName());
     /** Message that recepient number was wrong. */
     public static final String ERROR_WRONG_NUMBER =
-            "Zadali jste nesprávné číslo příjemce.";
+            l10n.getString("OperatorExecutor.ERROR_WRONG_NUMBER");
     /** Message that security code was wrong. */
     public static final String ERROR_WRONG_CODE =
-            "Špatně jste opsali bezpečnostní kód.";
+            l10n.getString("OperatorExecutor.ERROR_WRONG_CODE");
     /** Message that message text was wrong. */
     public static final String ERROR_WRONG_TEXT =
-            "Zadali jste nesprávný text zprávy. Prázdný, nebo příliš dlouhý?";
+            l10n.getString("OperatorExecutor.ERROR_WRONG_TEXT");
     /** Message that sender signature was wrong. */
     public static final String ERROR_WRONG_SIGNATURE =
-            "Zadali jste nesprávný podpis odesilatele (číslo či jméno).";
+            l10n.getString("OperatorExecutor.ERROR_WRONG_SIGNATURE");
     /** Message that login or password was wrong. */
     public static final String ERROR_WRONG_AUTH =
-            "Zadali jste nesprávné přihlašovací údaje.<br>" +
-            "Tato brána vyžaduje registraci, bez ní přes ni nelze zprávy posílat.<br>" +
-            "Přihlašovací údaje můžete vyplnit v nastavení programu.";
+            l10n.getString("OperatorExecutor.ERROR_WRONG_AUTH");
     /** Message that user has not waited long enough to send another message
      * or message quota has been reached. */
     public static final String ERROR_LIMIT_REACHED =
-            "Odesíláte zprávu příliš brzy. Operátor buď vyžaduje určitý interval,<br>" +
-            "který je nutný vyčkat před odesláním další zprávy, nebo omezuje<br>" +
-            "maximální možný počet zpráv za jistý časový úsek. Zkuste to později.";
+            l10n.getString("OperatorExecutor.ERROR_LIMIT_REACHED");
     /** Message preceding operator provided error message. */
     public static final String ERROR_OPERATOR_MESSAGE =
-            "Zpráva od operátora:<br>";
+            l10n.getString("OperatorExecutor.ERROR_OPERATOR_MESSAGE");
     /** Message that uknown error happened. */
     public static final String ERROR_UKNOWN =
-            "Došlo k neznámé chybě. Operátor možná změnil<br>" +
-            "své webové stránky, nebo s nimi má aktuálně potíže.<br>" +
-            "Zkuste to později.<br>" +
-            "<br>" +
-            "Taktéž se ujistěte, máte funkční připojení k Internetu<br>" +
-            "a že používáte nejnovější verzi programu.<br>" +
-            "<br>" +
-            "Pokud potíže přetrvají a webová brána operátora funguje,<br>" +
-            "nahlaste problém na domovských stránkách programu.";
+            l10n.getString("OperatorExecutor.ERROR_UKNOWN");
     /** Message saying how many free SMS are remaining. */
-    public static final String INFO_FREE_SMS_REMAINING = "Zbývá volných SMS: ";
-    /** Message used when operator provides no info whether message was successfuly
-     sent or not */
-    public static final String INFO_NOT_PROVIDED = "Brána neposkytuje žádné " +
-            "informace o úspěšném odeslání. Zpráva mohla a <b>nemusela</b> být " +
-            "doručena.";
+    public static final String INFO_FREE_SMS_REMAINING = 
+            l10n.getString("OperatorExecutor.INFO_FREE_SMS_REMAINING");
+    /** Message used when operator provides no info whether message was successfuly sent or not */
+    public static final String INFO_NOT_PROVIDED = 
+            l10n.getString("OperatorExecutor.INFO_NOT_PROVIDED");
     
     private OperatorConnector connector = new OperatorConnector();
     private String errorMessage;
@@ -161,7 +151,7 @@ public class OperatorExecutor {
 
             //display dialog
             final JPanel panel = new JPanel();
-            JLabel label = new JLabel("Opište kód z obrázku:",
+            JLabel label = new JLabel(l10n.getString("OperatorExecutor.recognize_number"),
                     image, JLabel.CENTER);
             label.setHorizontalTextPosition(JLabel.CENTER);
             label.setVerticalTextPosition(JLabel.TOP);

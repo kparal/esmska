@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.6" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="importButtonGroup">
     </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Import kontakt&#x16f; - Esmska"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+      <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.title" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+    </Property>
     <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection code="new ImageIcon(getClass().getResource(RES + &quot;contact-48.png&quot;)).getImage()" type="code"/>
     </Property>
@@ -16,10 +18,11 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="esmska/resources/l10n"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -35,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="backButton" linkSize="4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="nextButton" linkSize="4" min="-2" max="-2" attributes="0"/>
+              <Component id="forwardButton" linkSize="4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Component id="cardPanel" alignment="0" pref="538" max="32767" attributes="0"/>
@@ -48,7 +51,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nextButton" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="forwardButton" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="backButton" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="progressBar" linkSize="3" min="-2" max="-2" attributes="0"/>
@@ -125,12 +128,16 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/esmska/resources/contact-48.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Import kontakt&#x16f; v&#xe1;m dovol&#xed; na&#x10d;&#xed;st va&#x161;e kontakty z jin&#xe9; aplikace a zkop&#xed;rovat je do Esmsky. V p&#x16f;vodn&#xed; aplikaci z&#x16f;stanou va&#x161;e kontakty nedot&#x10d;eny.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.jLabel2.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Vyberte, ze kter&#xe9; aplikace chcete importovat kontakty:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.jLabel3.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="kubikRadioButton">
@@ -138,7 +145,7 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="importButtonGroup"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Kub&#xed;k SMS DreamCom"/>
+                <Property name="text" type="java.lang.String" value="&amp;Kub&#xed;k SMS DreamCom" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="dreamcomSERadioButton">
@@ -146,7 +153,7 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="importButtonGroup"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="DreamCom SE"/>
+                <Property name="text" type="java.lang.String" value="&amp;DreamCom SE" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="esmskaRadioButton">
@@ -155,12 +162,14 @@
                   <ComponentRef name="importButtonGroup"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Esmska"/>
+                <Property name="text" type="java.lang.String" value="&amp;Esmska" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nebo zvolte, ve kter&#xe9;m ze standardizovan&#xfd;ch form&#xe1;t&#x16f; soubor&#x16f; kontakty m&#xe1;te:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.jLabel4.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="vcardRadioButton">
@@ -168,7 +177,7 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="importButtonGroup"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="vCard (*.vcard, *.vcf)"/>
+                <Property name="text" type="java.lang.String" value="&amp;vCard (*.vcard, *.vcf)" noResource="true"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -227,7 +236,9 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="fileTextField">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="Cesta k souboru s kontakty"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.fileTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="browseButton">
@@ -235,9 +246,12 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/esmska/resources/browse-22.png"/>
                 </Property>
-                <Property name="mnemonic" type="int" value="114"/>
-                <Property name="text" type="java.lang.String" value="Proch&#xe1;zet..."/>
-                <Property name="toolTipText" type="java.lang.String" value="Naj&#xed;t soubor s kontakty pomoc&#xed; dialogu"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.browseButton.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.browseButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseButtonActionPerformed"/>
@@ -248,17 +262,21 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/esmska/resources/contact-48.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;&lt;info text&gt;&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;&lt;info text&gt;&gt;" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="fileLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Zvolte vstupn&#xed; soubor:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.fileLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Soubor bude prozkoum&#xe1;n a n&#xe1;sledn&#x11b; v&#xe1;m bude vyps&#xe1;n seznam kontakt&#x16f; dostupn&#xfd;ch pro import. &#x17d;&#xe1;dn&#xe9; zm&#x11b;ny zat&#xed;m nebudou provedeny.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.jLabel22.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="encodingLabel">
@@ -266,7 +284,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/esmska/resources/info-32.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;&lt;encoding hint&gt;&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;&lt;encoding hint&gt;&gt;" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="problemLabel">
@@ -274,7 +292,9 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/esmska/resources/info-32.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Pokud budete m&#xed;t probl&#xe9;my s importem, ov&#x11b;&#x159;te, zda nevy&#x161;la nov&#x11b;j&#x161;&#xed; verze Esmsky, a zkuste to v n&#xed;.&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.problemLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -320,7 +340,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Byly nalezeny n&#xe1;sleduj&#xed;c&#xed; nov&#xe9; kontakty:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.jLabel1.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -347,14 +369,20 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/esmska/resources/contact-48.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pokud chcete tyto kontakty importovat, stiskn&#x11b;te Importovat."/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.jLabel8.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="validOperatorCheckBox">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Importovat pouze kontakty se zn&#xe1;m&#xfd;m oper&#xe1;torem"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Pokud je pole zatrhnuto, zobraz&#xed; se v seznamu a budou importov&#xe1;ny&lt;br&gt;&#xa;pouze ty kontakty, s jejich&#x17e; oper&#xe1;tory um&#xed; tento program pracovat&#xa;&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.validOperatorCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.validOperatorCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="validOperatorCheckBoxStateChanged"/>
@@ -364,23 +392,26 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="nextButton">
+    <Component class="javax.swing.JButton" name="forwardButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/esmska/resources/next-22.png"/>
         </Property>
-        <Property name="mnemonic" type="int" value="112"/>
-        <Property name="text" type="java.lang.String" value="Pokra&#x10d;ovat"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.forwardButton.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="forwardButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JProgressBar" name="progressBar">
       <Properties>
         <Property name="indeterminate" type="boolean" value="true"/>
-        <Property name="string" type="java.lang.String" value="Pros&#xed;m &#x10d;ekejte..."/>
+        <Property name="string" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.progressBar.string" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
     </Component>
@@ -389,8 +420,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/esmska/resources/previous-22.png"/>
         </Property>
-        <Property name="mnemonic" type="int" value="122"/>
-        <Property name="text" type="java.lang.String" value="Zp&#x11b;t"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.backButton.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>

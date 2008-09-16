@@ -55,14 +55,17 @@ import esmska.integration.MacUtils;
 import esmska.persistence.ExportManager;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
+import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ListIterator;
+import java.util.ResourceBundle;
 import javax.swing.JComponent;
 
 /**
@@ -74,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
     private static MainFrame instance;
     private static final Logger logger = Logger.getLogger(MainFrame.class.getName());
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
 
     /** custom beans binding group */
     private BindingGroup bindGroup = new BindingGroup();
@@ -160,7 +164,7 @@ public class MainFrame extends javax.swing.JFrame {
             persistenceManager = PersistenceManager.getInstance();
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not create program dir with config files", ex);
-            statusPanel.setStatusMessage("Nepovedlo se vytvořit adresář s nastavením programu!",
+            statusPanel.setStatusMessage(l10n.getString("MainFrame.cant_create_program_dir"),
                     false, Icons.STATUS_ERROR, true);
         }
         loadConfig();
@@ -175,15 +179,7 @@ public class MainFrame extends javax.swing.JFrame {
         //check for valid operators
         if (PersistenceManager.getOperators().size() <= 0) {
             JOptionPane.showMessageDialog(null,
-                    "<html><h2>Nepodařilo se nalézt žádné operátory!</h2>" +
-                    "Bez operátorů je program nepoužitelný. Problém může pramenit " +
-                    "z těchto příčin:<br>" +
-                    "<ul><li>Váš program je nekorektně nainstalován a chybí mu některé<br>" +
-                    "soubory nebo jsou poškozeny. Zkuste jej stáhnout znovu.</li>" +
-                    "<li>Operační systém špatně nastavil cestu k programu.<br>" +
-                    "Zkuste místo poklikání na <i>esmska.jar</i> raději program spustit pomocí<br>" +
-                    "souboru <i>esmska.sh</i> (v Linuxu, apod) nebo <i>esmska.bat</i> (ve Windows).</li>" +
-                    "</ul></html>",
+                    l10n.getString("MainFrame.no_operators"),
                     null, JOptionPane.ERROR_MESSAGE);
         }
         
@@ -268,7 +264,7 @@ public class MainFrame extends javax.swing.JFrame {
         exportMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Esmska");
+        setTitle("Esmska"); // NOI18N
         setLocationByPlatform(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -308,19 +304,19 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(Box.createRigidArea(new Dimension(5, 1)));
 
         compressButton.setAction(smsPanel.getCompressAction());
-        compressButton.setToolTipText("Zkomprimovat zprávu (Ctrl+K)");
+        compressButton.setToolTipText(l10n.getString("MainFrame.compressButton.toolTipText")); // NOI18N
         compressButton.setFocusable(false);
         compressButton.setHideActionText(true);
         toolBar.add(compressButton);
 
         undoButton.setAction(smsPanel.getUndoAction());
-        undoButton.setToolTipText("Zpět (Ctrl+Z)");
+        undoButton.setToolTipText(l10n.getString("MainFrame.undoButton.toolTipText")); // NOI18N
         undoButton.setFocusable(false);
         undoButton.setHideActionText(true);
         toolBar.add(undoButton);
 
         redoButton.setAction(smsPanel.getRedoAction());
-        redoButton.setToolTipText("Vpřed (Ctrl+Y)");
+        redoButton.setToolTipText(l10n.getString("MainFrame.redoButton.toolTipText")); // NOI18N
         redoButton.setFocusable(false);
         redoButton.setHideActionText(true);
         toolBar.add(redoButton);
@@ -355,8 +351,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
 
-        programMenu.setMnemonic('r');
-        programMenu.setText("Program");
+        org.openide.awt.Mnemonics.setLocalizedText(programMenu, l10n.getString("MainFrame.programMenu.text")); // NOI18N
 
         configMenuItem.setAction(configAction);
         programMenu.add(configMenuItem);
@@ -369,8 +364,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(programMenu);
 
-        messageMenu.setMnemonic('z');
-        messageMenu.setText("Zpráva");
+        org.openide.awt.Mnemonics.setLocalizedText(messageMenu, l10n.getString("MainFrame.messageMenu.text")); // NOI18N
 
         undoMenuItem.setAction(smsPanel.getUndoAction());
         messageMenu.add(undoMenuItem);
@@ -387,8 +381,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(messageMenu);
 
-        toolsMenu.setMnemonic('n');
-        toolsMenu.setText("Nástroje");
+        org.openide.awt.Mnemonics.setLocalizedText(toolsMenu, l10n.getString("MainFrame.toolsMenu.text")); // NOI18N
 
         historyMenuItem.setAction(historyAction);
         toolsMenu.add(historyMenuItem);
@@ -459,7 +452,7 @@ public class MainFrame extends javax.swing.JFrame {
             if (!saveOk) { //some data were not saved
                 logger.warning("Some config files were not saved");
                 JOptionPane.showMessageDialog(this,
-                        "Některé konfigurační soubory nemohly být uloženy!",
+                        l10n.getString("MainFrame.cant_save_config"),
                         null, JOptionPane.WARNING_MESSAGE);
             }
             System.exit(saveOk ? 0 : 1);
@@ -469,7 +462,8 @@ public class MainFrame extends javax.swing.JFrame {
     /** Notifies about change in sms queue */
     public void smsProcessed(SMS sms) {
         if (sms.getStatus() == SMS.Status.SENT_OK) {
-            statusPanel.setStatusMessage("Zpráva pro " + sms + " odeslána.",
+            statusPanel.setStatusMessage(
+                    MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
                     true, Icons.STATUS_MESSAGE, true);
             createHistory(sms);
             
@@ -481,14 +475,15 @@ public class MainFrame extends javax.swing.JFrame {
         } else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             logger.info("Message for " + sms + " could not be sent");
             queuePanel.setPaused(true);
-            statusPanel.setStatusMessage("Zprávu pro " + sms + " se nepodařilo odeslat!",
+            statusPanel.setStatusMessage(
+                    MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms),
                     true, Icons.STATUS_WARNING, true);
             
             //prepare dialog
-            JLabel label = new JLabel("<html>"
-                    + "<h2>Zprávu pro '" + sms + "' se nepovedlo odeslat!</h2>" + 
-                    (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "")
-                    + "</html>");
+            String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
+            JLabel label = new JLabel(
+                    MessageFormat.format(l10n.getString("MainFrame.sms_failed2"),
+                    sms, cause));
             label.setVerticalAlignment(SwingConstants.TOP);
             JPanel panel = new JPanel(new BorderLayout());
             panel.add(label, BorderLayout.CENTER);
@@ -553,7 +548,7 @@ public class MainFrame extends javax.swing.JFrame {
             List tips = IOUtils.readLines(
                     getClass().getResourceAsStream(RES + "tips.txt"), "UTF-8");
             int random = new Random().nextInt(tips.size());
-            statusPanel.setStatusMessage("Tip: " + tips.get(random), false, null, false);
+            statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + tips.get(random), false, null, false);
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Can't display tip of the day", ex);
         }
@@ -688,9 +683,9 @@ public class MainFrame extends javax.swing.JFrame {
     private class AboutAction extends AbstractAction {
         AboutFrame aboutFrame;
         public AboutAction() {
-            super("O programu", new ImageIcon(MainFrame.class.getResource(RES + "about-16.png")));
-            putValue(SHORT_DESCRIPTION,"Zobrazit informace o programu");
-            putValue(MNEMONIC_KEY,KeyEvent.VK_O);
+            L10N.setLocalizedText(this, l10n.getString("About_"));
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "about-16.png")));
+            putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.show_information_about_program"));
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -708,11 +703,10 @@ public class MainFrame extends javax.swing.JFrame {
     /** Quit the program */
     private class QuitAction extends AbstractAction {
         public QuitAction() {
-            super("Ukončit");
+            L10N.setLocalizedText(this, l10n.getString("Quit_"));
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "exit-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "exit-32.png")));
-            putValue(SHORT_DESCRIPTION,"Ukončit program");
-            putValue(MNEMONIC_KEY,KeyEvent.VK_U);
+            putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.Quit_program"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, 
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
@@ -732,11 +726,10 @@ public class MainFrame extends javax.swing.JFrame {
     private class ConfigAction extends AbstractAction {
         private ConfigFrame configFrame;
         public ConfigAction() {
-            super("Nastavení");
+            L10N.setLocalizedText(this, l10n.getString("Preferences_"));
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "config-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "config-32.png")));
-            putValue(SHORT_DESCRIPTION,"Nastavit chování programu");
-            putValue(MNEMONIC_KEY,KeyEvent.VK_N);
+            putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.configure_program_behaviour"));
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -760,9 +753,9 @@ public class MainFrame extends javax.swing.JFrame {
     private class ImportAction extends AbstractAction {
         private ImportFrame importFrame;
         public ImportAction() {
-            super("Import kontaktů", new ImageIcon(MainFrame.class.getResource(RES + "contact-16.png")));
-            this.putValue(SHORT_DESCRIPTION,"Importovat kontakty z jiných aplikací");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_I);
+            L10N.setLocalizedText(this, l10n.getString("Contact_import_"));
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "contact-16.png")));
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.import_contacts_from_other_applications"));
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -784,9 +777,9 @@ public class MainFrame extends javax.swing.JFrame {
     /** export data for other programs */
     private class ExportAction extends AbstractAction {
         public ExportAction() {
-            super("Export kontaktů", new ImageIcon(MainFrame.class.getResource(RES + "contact-16.png")));
-            this.putValue(SHORT_DESCRIPTION,"Exportovat kontakty do souboru");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_E);
+            L10N.setLocalizedText(this, l10n.getString("Contact_export_"));
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "contact-16.png")));
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.export_contacts_to_file"));
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -798,11 +791,10 @@ public class MainFrame extends javax.swing.JFrame {
     private class HistoryAction extends AbstractAction {
         private HistoryFrame historyFrame;
         public HistoryAction() {
-            super("Historie zpráv");
+            L10N.setLocalizedText(this, l10n.getString("Message_history_"));
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "history-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "history-32.png")));
-            this.putValue(SHORT_DESCRIPTION,"Zobrazit historii odeslaných zpráv");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_H);
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.show_history_of_sent_messages"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, 
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
@@ -875,7 +867,7 @@ public class MainFrame extends javax.swing.JFrame {
                 case ImportFrame.ACTION_IMPORT_CONTACTS:
                     contactPanel.clearSelection();
                     contactPanel.addContacts(importAction.getImportFrame().getImportedContacts());
-                    statusPanel.setStatusMessage("Import kontaktů úspěšně dokončen",
+                    statusPanel.setStatusMessage(l10n.getString("MainFrame.import_complete"),
                             true, Icons.STATUS_INFO, true);
                     break;
             }
@@ -921,7 +913,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class UpdateListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            statusPanel.setStatusMessage("Byla vydána nová verze programu!", 
+            statusPanel.setStatusMessage(l10n.getString("MainFrame.new_program_version"), 
                     false, Icons.STATUS_UPDATE, true);
         }
     }

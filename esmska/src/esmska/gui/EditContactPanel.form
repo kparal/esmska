@@ -2,10 +2,11 @@
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="esmska/resources/l10n"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -18,9 +19,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="numberLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="nameLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="gatewayLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -41,18 +42,18 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nameTextField" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="numberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="numberTextField" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="gatewayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="operatorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="suggestOperatorButton" min="-2" max="-2" attributes="0"/>
@@ -65,7 +66,9 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="nameTextField">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Jm&#xe9;no kontaktu"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.nameTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nameTextFieldFocusLost"/>
@@ -77,7 +80,9 @@
     <Component class="javax.swing.JTextField" name="numberTextField">
       <Properties>
         <Property name="columns" type="int" value="13"/>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Telefonn&#xed; &#x10d;&#xed;slo kontaktu v&#x10d;etn&#x11b; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b;.&lt;br&gt;&#xa;P&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b; nemus&#xed; b&#xfd;t vypln&#x11b;no, pokud je nastaveno&lt;br&gt;&#xa;v&#xfd;choz&#xed; p&#x159;ed&#x10d;&#xed;sl&#xed; zem&#x11b; v nastaven&#xed; programu.&#xa;&lt;/html&gt;"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.numberTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="numberTextFieldFocusLost"/>
@@ -89,37 +94,40 @@
     </Component>
     <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="nameLabel">
       <Properties>
-        <Property name="displayedMnemonic" type="int" value="109"/>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="nameTextField"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Jm&#xe9;no:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.nameLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection component="nameTextField" name="toolTipText" type="property"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="numberLabel">
       <Properties>
-        <Property name="displayedMnemonic" type="int" value="111"/>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="numberTextField"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.numberLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection component="numberTextField" name="toolTipText" type="property"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="gatewayLabel">
       <Properties>
-        <Property name="displayedMnemonic" type="int" value="98"/>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="operatorComboBox"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Br&#xe1;na:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.gatewayLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection component="operatorComboBox" name="toolTipText" type="property"/>
         </Property>

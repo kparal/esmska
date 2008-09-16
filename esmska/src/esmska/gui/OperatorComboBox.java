@@ -10,11 +10,13 @@ import esmska.data.Icons;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.L10N;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import java.util.TreeSet;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -33,6 +35,7 @@ import javax.swing.text.JTextComponent;
  */
 public class OperatorComboBox extends JComboBox {
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final TreeSet<Operator> operators = PersistenceManager.getOperators();
     private static final Config config = PersistenceManager.getConfig();
     private static final OperatorComboBoxRenderer cellRenderer = new OperatorComboBoxRenderer();
@@ -44,7 +47,7 @@ public class OperatorComboBox extends JComboBox {
         filterOperators();
         setModel(model);
         setRenderer(cellRenderer);
-        setToolTipText("Seznam dostupných webových bran operátorů");
+        setToolTipText(l10n.getString("OperatorComboBox.List_of_available_operators_web_gateways"));
         if (model.getSize() > 0) {
             setSelectedIndex(0);
         }
@@ -166,7 +169,7 @@ public class OperatorComboBox extends JComboBox {
             }
             JLabel label = (JLabel) c;
             Operator operator = (Operator)value;
-            label.setText(operator != null ? operator.getName() : "Neznámý operátor");
+            label.setText(operator != null ? operator.getName() : l10n.getString("Unknown_operator"));
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             return label;
         }
@@ -198,8 +201,9 @@ public class OperatorComboBox extends JComboBox {
         private JTextComponent numberComponent;
         
         public SuggestOperatorAction(OperatorComboBox operatorComboBox, JTextComponent numberComponent) {
-            super("Zvolit vhodnou bránu", new ImageIcon(OperatorComboBox.class.getResource(RES + "search-22.png")));
-            this.putValue(SHORT_DESCRIPTION, "Vybrat vhodnou bránu pro zadané číslo");
+            super(l10n.getString("OperatorComboBox.Choose_suitable_gateway"), 
+                    new ImageIcon(OperatorComboBox.class.getResource(RES + "search-22.png")));
+            this.putValue(SHORT_DESCRIPTION, l10n.getString("OperatorComboBox.Choose_suitable_gateway_for_provided_number"));
             
             if (operatorComboBox == null || numberComponent == null) {
                 throw new IllegalArgumentException("Arguments cant be null");

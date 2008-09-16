@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="esmska/resources/l10n"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -37,8 +38,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="statusMessageLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="V&#xed;tejte"/>
-        <Property name="toolTipText" type="java.lang.String" value="Klikn&#x11b;te pro zobrazen&#xed; aplika&#x10d;n&#xed;ho protokolu"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="StatusPanel.statusMessageLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="StatusPanel.statusMessageLabel.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -60,7 +65,9 @@
       <Properties>
         <Property name="maximum" type="int" value="15"/>
         <Property name="focusable" type="boolean" value="false"/>
-        <Property name="string" type="java.lang.String" value="Pros&#xed;m &#x10d;ekejte..."/>
+        <Property name="string" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="StatusPanel.progressBar.string" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
       <AuxValues>

@@ -8,6 +8,9 @@
  */
 package esmska;
 
+import esmska.utils.L10N;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
@@ -23,13 +26,13 @@ import org.apache.commons.cli.PosixParser;
  */
 @SuppressWarnings("static-access")
 public class CommandLineParser {
-
+    private static final ResourceBundle l10n = L10N.l10nBundle;
+    
     private static final Options options = new Options();
-    private static final Option help = new Option("h", "help", false, "Zobrazí tuto nápovědu");
-    private static final Option portable = new Option("p", "portable", false, "Zapnutí přenosného módu - " +
-            "zeptá se na umístění uživatelského adresáře. Nelze použít s -c.");
-    private static final Option config = OptionBuilder.withArgName("cesta").hasArg().
-            withDescription("Nastavení cesty k uživatelskému adresáři. Nelze použít s -p.").
+    private static final Option help = new Option("h", "help", false, l10n.getString("CommandLineParser.show_this_help"));
+    private static final Option portable = new Option("p", "portable", false, l10n.getString("CommandLineParser.enable_portable_mode"));
+    private static final Option config = OptionBuilder.withArgName(l10n.getString("CommandLineParser.path")).hasArg().
+            withDescription(l10n.getString("CommandLineParser.set_user_path")).
             withLongOpt("config").create("c");
     private static final OptionGroup configGroup = new OptionGroup();
 
@@ -63,7 +66,8 @@ public class CommandLineParser {
             }
 
         } catch (ParseException ex) {
-            System.err.println("Neplatná volba na příkazovém řádku! ('" + ex.getMessage() + "')");
+            System.err.println(
+                    MessageFormat.format(l10n.getString("CommandLineParser.invalid_option"), ex.getMessage()));
             printUsage();
             return false;
         }
@@ -84,7 +88,8 @@ public class CommandLineParser {
     /** Print usage help */
     private static void printUsage() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.setSyntaxPrefix("Použití: ");
-        formatter.printHelp("java -jar esmska.jar [VOLBY]", "\nDostupné volby:", options, null);
+        formatter.setSyntaxPrefix(l10n.getString("CommandLineParser.usage"));
+        formatter.printHelp(l10n.getString("CommandLineParser.basic_usage"), 
+                "\n" + l10n.getString("CommandLineParser.available_options"), options, null);
     }
 }

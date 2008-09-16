@@ -6,8 +6,9 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="programMenu">
           <Properties>
-            <Property name="mnemonic" type="int" value="114"/>
-            <Property name="text" type="java.lang.String" value="Program"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.programMenu.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="configMenuItem">
@@ -35,8 +36,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="messageMenu">
           <Properties>
-            <Property name="mnemonic" type="int" value="122"/>
-            <Property name="text" type="java.lang.String" value="Zpr&#xe1;va"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.messageMenu.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="undoMenuItem">
@@ -73,8 +75,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="toolsMenu">
           <Properties>
-            <Property name="mnemonic" type="int" value="110"/>
-            <Property name="text" type="java.lang.String" value="N&#xe1;stroje"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.toolsMenu.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="historyMenuItem">
@@ -114,7 +117,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
-    <Property name="title" type="java.lang.String" value="Esmska"/>
+    <Property name="title" type="java.lang.String" value="Esmska" noResource="true"/>
     <Property name="locationByPlatform" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
@@ -125,10 +128,11 @@
     <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
   </Events>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="esmska/resources/l10n"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -254,7 +258,9 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="smsPanel.getCompressAction()" type="code"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Zkomprimovat zpr&#xe1;vu (Ctrl+K)"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.compressButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>
@@ -264,7 +270,9 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="smsPanel.getUndoAction()" type="code"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Zp&#x11b;t (Ctrl+Z)"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.undoButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>
@@ -274,7 +282,9 @@
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="smsPanel.getRedoAction()" type="code"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Vp&#x159;ed (Ctrl+Y)"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.redoButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="hideActionText" type="boolean" value="true"/>
           </Properties>

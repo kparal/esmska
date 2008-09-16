@@ -27,8 +27,10 @@ import esmska.gui.MainFrame;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.JavaType;
+import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import java.util.ResourceBundle;
 
 /** Starter class for the whole program
  *
@@ -36,18 +38,16 @@ import esmska.utils.OSType;
  */
 public class Main {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static String configPath; //path to config files
     
     /** Program starter method
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
         //detect JVM and warn if not not supported
         if (!JavaType.isSupported()) {
-            logger.severe("Zřejmě program spouštíte na nepodporované verzi Javy! " +
-                    "Program s ní nemusí pracovat správně! Ozkoušené verze Javy " +
-                    "jsou: Sun Java 6, OpenJDK 6, Apple Java 6.");
+            logger.severe(l10n.getString("Main.unsupported_java"));
         }
         
         //parse commandline arguments
@@ -69,8 +69,8 @@ public class Main {
             }
             JFileChooser chooser = new JFileChooser();
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            chooser.setApproveButtonText("Vybrat");
-            chooser.setDialogTitle("Zvolte umístění konfiguračních souborů");
+            chooser.setApproveButtonText(l10n.getString("Select"));
+            chooser.setDialogTitle(l10n.getString("Main.choose_config_files"));
             chooser.setFileHidingEnabled(false);
             chooser.setMultiSelectionEnabled(false);
             int result = chooser.showOpenDialog(null);
@@ -95,10 +95,7 @@ public class Main {
                 pm.loadOperators();
             } catch (IntrospectionException ex) { //OpenJDK 6 seems not to support JavaScript
                 logger.log(Level.SEVERE, "Current JRE doesn't support JavaScript execution", ex);
-                JOptionPane.showMessageDialog(null, 
-                    "<html>Vaše aktuální Java nepodporuje vykonávání JavaScriptových souborů,<br>" +
-                    "což je ke správné funkci programu nezbytné. Je doporučené používat<br>" +
-                    "Javu od firmy Sun. Program se nyní ukončí.",
+                JOptionPane.showMessageDialog(null, l10n.getString("Main.no_javascript"),
                     null, JOptionPane.ERROR_MESSAGE);
                 System.exit(1);
             } catch (Exception ex) {
@@ -126,21 +123,17 @@ public class Main {
             }
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
-            JOptionPane.showMessageDialog(null, "Nepodařilo se vytvořit adresář " +
-                    "nebo číst z adresáře s konfigurací!",
+            JOptionPane.showMessageDialog(null, l10n.getString("Main.cant_read_config"),
                     null, JOptionPane.ERROR_MESSAGE);
         }
         
         //warn if other program instance is already running
         if (pm != null && !pm.isFirstInstance()) {
             logger.warning("Some other instance of the program is already running");
-            String runOption = "Přesto spustit";
-            String quitOption = "Ukončit";
+            String runOption = l10n.getString("Main.run_anyway");
+            String quitOption = l10n.getString("Quit");
             String[] options = new String[]{runOption, quitOption};
-            int result = JOptionPane.showOptionDialog(null,
-                    "<html><h2>Esmska již jednou běží!</h2>" +
-                    "Esmska je již jednou spuštěna. Důrazně nedoporučujeme spouštět další<br>" +
-                    "instance programu, neboť může dojít ke ztrátě uživatelských dat.<br>",
+            int result = JOptionPane.showOptionDialog(null, l10n.getString("Main.already_running"),
                     null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
                     options, quitOption);
             if (result != 0) {

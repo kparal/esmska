@@ -41,9 +41,11 @@ import esmska.integration.MacUtils;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
+import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
 import esmska.utils.OSType;
 import java.awt.Toolkit;
+import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
@@ -54,9 +56,9 @@ import javax.swing.table.TableCellRenderer;
  * @author  ripper
  */
 public class HistoryFrame extends javax.swing.JFrame {
-
     public static final int ACTION_RESEND_SMS = 0;
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Logger logger = Logger.getLogger(HistoryFrame.class.getName());
     private static final Config config = PersistenceManager.getConfig();
     private DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
@@ -142,11 +144,11 @@ public class HistoryFrame extends javax.swing.JFrame {
         resendButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         searchField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        searchLabel = new javax.swing.JLabel();
         clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Historie odeslaných zpráv - Esmska");
+        setTitle(l10n.getString("HistoryFrame.title")); // NOI18N
         setIconImage(new ImageIcon(getClass().getResource(RES + "history-48.png")).getImage());
 
         historyTable.setModel(historyTableModel);
@@ -169,30 +171,30 @@ public class HistoryFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(historyTable);
 
-        jLabel2.setText("Jméno:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, l10n.getString("HistoryFrame.jLabel2.text")); // NOI18N
 
-        jLabel1.setText("Číslo:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, l10n.getString("HistoryFrame.jLabel1.text")); // NOI18N
 
-        jLabel3.setText("Datum:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, l10n.getString("HistoryFrame.jLabel3.text")); // NOI18N
 
-        jLabel4.setText("Operátor:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, l10n.getString("HistoryFrame.jLabel4.text")); // NOI18N
 
-        jLabel5.setText("Číslo odes.:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, l10n.getString("HistoryFrame.jLabel5.text")); // NOI18N
 
-        jLabel6.setText("Jméno odes.:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, l10n.getString("HistoryFrame.jLabel6.text")); // NOI18N
 
-        dateLabel.setText("    ");
+        org.openide.awt.Mnemonics.setLocalizedText(dateLabel, "    "); // NOI18N
 
         nameLabel.setForeground(new java.awt.Color(0, 51, 255));
-        nameLabel.setText("    ");
+        org.openide.awt.Mnemonics.setLocalizedText(nameLabel, "    "); // NOI18N
 
-        numberLabel.setText("    ");
+        org.openide.awt.Mnemonics.setLocalizedText(numberLabel, "    "); // NOI18N
 
-        operatorLabel.setText("    ");
+        org.openide.awt.Mnemonics.setLocalizedText(operatorLabel, "    "); // NOI18N
 
-        senderNumberLabel.setText("    ");
+        org.openide.awt.Mnemonics.setLocalizedText(senderNumberLabel, "    "); // NOI18N
 
-        senderNameLabel.setText("    ");
+        org.openide.awt.Mnemonics.setLocalizedText(senderNameLabel, "    "); // NOI18N
 
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
@@ -274,8 +276,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         resendButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        closeButton.setMnemonic('z');
-        closeButton.setText("Zavřít");
+        org.openide.awt.Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
@@ -283,7 +284,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         });
 
         searchField.setColumns(15);
-        searchField.setToolTipText("Zadejte výraz pro vyhledání v historii zpráv");
+        searchField.setToolTipText(l10n.getString("HistoryFrame.searchField.toolTipText")); // NOI18N
         searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
@@ -309,14 +310,12 @@ public class HistoryFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setDisplayedMnemonic('h');
-        jLabel7.setLabelFor(searchField);
-        jLabel7.setText("Hledat:");
-        jLabel7.setToolTipText(searchField.getToolTipText());
+        searchLabel.setLabelFor(searchField);
+        org.openide.awt.Mnemonics.setLocalizedText(searchLabel, l10n.getString("HistoryFrame.searchLabel.text")); // NOI18N
+        searchLabel.setToolTipText(searchField.getToolTipText());
 
         clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
-        clearButton.setMnemonic('v');
-        clearButton.setToolTipText("Vyčistit hledaný výraz (Alt+V, Escape)");
+        clearButton.setToolTipText(l10n.getString("HistoryFrame.clearButton.toolTipText")); // NOI18N
         clearButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -348,7 +347,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                             .addComponent(resendButton)
                             .addComponent(closeButton)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(searchLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -365,7 +364,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7))
+                        .addComponent(searchLabel))
                     .addComponent(clearButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,16 +414,15 @@ public class HistoryFrame extends javax.swing.JFrame {
 
     /** Delete sms from history */
     private class DeleteAction extends AbstractAction {
-        private final String deleteOption = "Odstranit";
-        private final String cancelOption = "Zrušit";
+        private final String deleteOption = l10n.getString("Delete");
+        private final String cancelOption = l10n.getString("Cancel");
         private final Object[] options = DialogButtonSorter.sortOptions(
                 cancelOption, deleteOption);
-        private final String message = "Opravdu z historie odstranit všechny " +
-                "označené zprávy?";
+        private final String message = l10n.getString("HistoryFrame.remove_selected");
         
         public DeleteAction() {
             super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "delete-22.png")));
-            this.putValue(SHORT_DESCRIPTION, "Odstranit označené zprávy z historie (Alt+D)");
+            this.putValue(SHORT_DESCRIPTION, l10n.getString("Delete_selected_messages_from_history"));
             putValue(MNEMONIC_KEY, KeyEvent.VK_D);
             this.setEnabled(false);
         }
@@ -470,7 +468,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         public ResendAction() {
             super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "send-22.png")));
-            this.putValue(SHORT_DESCRIPTION, "Přeposlat zprávu někomu jinému (Alt+S)");
+            this.putValue(SHORT_DESCRIPTION, l10n.getString("HistoryFrame.resend_message"));
             putValue(MNEMONIC_KEY, KeyEvent.VK_S);
             this.setEnabled(false);
         }
@@ -529,11 +527,11 @@ public class HistoryFrame extends javax.swing.JFrame {
         public String getColumnName(int column) {
             switch (column) {
                 case 0:
-                    return "Datum";
+                    return l10n.getString("Date");
                 case 1:
-                    return "Příjemce";
+                    return l10n.getString("Recipient");
                 case 2:
-                    return "Text";
+                    return l10n.getString("Text");
                 default:
                     logger.warning("Index out of bounds!");
                     return null;
@@ -665,7 +663,6 @@ public class HistoryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -674,6 +671,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel operatorLabel;
     private javax.swing.JButton resendButton;
     private javax.swing.JTextField searchField;
+    private javax.swing.JLabel searchLabel;
     private javax.swing.JLabel senderNameLabel;
     private javax.swing.JLabel senderNumberLabel;
     private javax.swing.JTextArea textArea;

@@ -8,6 +8,7 @@ package esmska.gui;
 
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.L10N;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -16,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -37,6 +39,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 public class AboutFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(AboutFrame.class.getName());
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Config config = PersistenceManager.getConfig();
     
     /** Creates new form AboutFrame */
@@ -80,7 +83,8 @@ public class AboutFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("O Esmsce");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("esmska/resources/l10n"); // NOI18N
+        setTitle(bundle.getString("AboutFrame.title")); // NOI18N
         setIconImage(new ImageIcon(getClass().getResource(RES + "about-24.png")).getImage());
         setLocationByPlatform(true);
 
@@ -90,16 +94,15 @@ public class AboutFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+22));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Esmska " + config.getLatestVersion());
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, "Esmska " + config.getLatestVersion());
         jLabel2.setFocusable(false);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Posílání SMS přes Internet.");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, bundle.getString("AboutFrame.jLabel3.text")); // NOI18N
         jLabel3.setFocusable(false);
 
         creditsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/about-22.png"))); // NOI18N
-        creditsButton.setMnemonic('s');
-        creditsButton.setText("Zásluhy");
+        org.openide.awt.Mnemonics.setLocalizedText(creditsButton, bundle.getString("AboutFrame.creditsButton.text")); // NOI18N
         creditsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditsButtonActionPerformed(evt);
@@ -107,16 +110,14 @@ public class AboutFrame extends javax.swing.JFrame {
         });
 
         closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        closeButton.setMnemonic('z');
-        closeButton.setText("Zavřít");
+        org.openide.awt.Mnemonics.setLocalizedText(closeButton, bundle.getString("Close_")); // NOI18N
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
             }
         });
 
-        licenseButton.setMnemonic('l');
-        licenseButton.setText("Licence");
+        org.openide.awt.Mnemonics.setLocalizedText(licenseButton, bundle.getString("AboutFrame.licenseButton.text")); // NOI18N
         licenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 licenseButtonActionPerformed(evt);
@@ -125,11 +126,11 @@ public class AboutFrame extends javax.swing.JFrame {
 
         jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getSize()-2f));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("© 2007-2008 Kamil Páral");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, bundle.getString("AboutFrame.jLabel5.text")); // NOI18N
         jLabel5.setFocusable(false);
 
-        linkButton.setText("<html><a href=\"http://esmska.googlecode.com/\">Domovská stránka</a></html>");
-        linkButton.setToolTipText("<html>\nZobrazit domovskou stránku programu\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(linkButton, bundle.getString("AboutFrame.linkButton.text")); // NOI18N
+        linkButton.setToolTipText(bundle.getString("AboutFrame.linkButton.toolTipText")); // NOI18N
         linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         linkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -138,12 +139,8 @@ public class AboutFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("  ");
-
-        jLabel6.setText("  ");
-
-        supportButton.setText("<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Podpořte projekt</a></html>");
-        supportButton.setToolTipText("<html>\nLíbí se vám tento projekt? Pomozte jej udržet v chodu...\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(supportButton, bundle.getString("AboutFrame.supportButton.text")); // NOI18N
+        supportButton.setToolTipText(bundle.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         supportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         supportButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         supportButton.addActionListener(new java.awt.event.ActionListener() {
@@ -152,10 +149,6 @@ public class AboutFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("  ");
-
-        jLabel8.setText("  ");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,28 +156,28 @@ public class AboutFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(creditsButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(licenseButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(closeButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(linkButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(supportButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -247,10 +240,10 @@ public class AboutFrame extends javax.swing.JFrame {
             tp.setPage(url);
             tp.setEditable(false);
             tp.setPreferredSize(new Dimension((int)d.getWidth()/2,(int)d.getHeight()/2)); //reasonable size
-            String option = "Beru na vědomí";
+            String option = l10n.getString("AboutFrame.Acknowledge");
             JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
                     JOptionPane.DEFAULT_OPTION, null, new Object[]{option}, option);
-            JDialog dialog = op.createDialog(this,"Licence");
+            JDialog dialog = op.createDialog(this,l10n.getString("AboutFrame.License"));
             dialog.setResizable(true);
             dialog.pack();
             dialog.setVisible(true);
@@ -283,10 +276,10 @@ public class AboutFrame extends javax.swing.JFrame {
                 }
             });
             
-            String option = "Děkuji";
+            String option = l10n.getString("AboutFrame.Thank_you");
             JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
                     JOptionPane.DEFAULT_OPTION, null, new Object[]{option}, option);
-            JDialog dialog = op.createDialog(this,"Zásluhy");
+            JDialog dialog = op.createDialog(this,l10n.getString("AboutFrame.Credits"));
             dialog.setResizable(true);
             dialog.pack();
             dialog.setVisible(true);

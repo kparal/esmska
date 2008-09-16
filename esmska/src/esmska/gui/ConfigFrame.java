@@ -12,7 +12,6 @@ import esmska.*;
 import esmska.ThemeManager.LAF;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
-import esmska.data.Icons;
 import esmska.data.Keyring;
 import esmska.integration.MacUtils;
 import esmska.operators.Operator;
@@ -32,10 +31,13 @@ import org.jvnet.substance.skin.SkinInfo;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.AbstractDocumentListener;
+import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
 import esmska.utils.JavaType;
 import esmska.utils.Nullator;
 import java.awt.Toolkit;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.InputVerifier;
@@ -54,6 +56,7 @@ import javax.swing.SwingUtilities;
 public class ConfigFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(ConfigFrame.class.getName());
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Keyring keyring = PersistenceManager.getKeyring();
     /* when to take updates seriously */
     private boolean fullyInicialized;
@@ -81,20 +84,10 @@ public class ConfigFrame extends javax.swing.JFrame {
             tabbedPane.addTab("Devel", develPanel);
         }
         
-        //set visuals
-        tabbedPane.setMnemonicAt(0, KeyEvent.VK_O);
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
-        tabbedPane.setMnemonicAt(2, KeyEvent.VK_P);
-        tabbedPane.setMnemonicAt(3, KeyEvent.VK_H);
-        tabbedPane.setMnemonicAt(4, KeyEvent.VK_S); 
-        tabbedPane.setMnemonicAt(5, KeyEvent.VK_N);
-        tabbedPane.setIconAt(0, new ImageIcon(getClass().getResource(RES + "config-16.png")));
-        tabbedPane.setIconAt(1, new ImageIcon(getClass().getResource(RES + "appearance-16.png")));
-        tabbedPane.setIconAt(2, Icons.OPERATOR_DEFAULT);
-        tabbedPane.setIconAt(3, new ImageIcon(getClass().getResource(RES + "keyring-16.png")));
-        tabbedPane.setIconAt(4, new ImageIcon(getClass().getResource(RES + "lock-16.png")));
-        tabbedPane.setIconAt(5, new ImageIcon(getClass().getResource(RES + "connection-16.png")));
-        closeButton.requestFocusInWindow();
+        //set tab mnemonics
+        for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+            L10N.setLocalizedText(tabbedPane, i, tabbedPane.getTitleAt(i));
+        }
         
         //add LaFs to combo box
         for (LAF laf : LAF.values()) {
@@ -119,6 +112,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             notificationAreaCheckBox.setSelected(false);
         }
         
+        closeButton.requestFocusInWindow();
         fullyInicialized = true;
     }
     
@@ -152,9 +146,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         String countryPrefix = countryPrefixTextField.getText();
         String countryCode = CountryPrefix.getCountryCode(countryPrefix);
         if (Nullator.isEmpty(countryCode)) {
-            countryCodeLabel.setText("(neznámý stát)");
+            countryCodeLabel.setText(l10n.getString("ConfigFrame.unknown_state"));
         } else {
-            countryCodeLabel.setText("(stát: " + countryCode + ")");
+            countryCodeLabel.setText(
+                    MessageFormat.format(l10n.getString("ConfigFrame.state"), countryCode));
         }
     }
     
@@ -212,10 +207,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         lafComboBox = new javax.swing.JComboBox();
         substanceWarning = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lookLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         themeComboBox = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
+        themeLabel = new javax.swing.JLabel();
         windowDecorationsCheckBox = new javax.swing.JCheckBox();
         windowCenteredCheckBox = new javax.swing.JCheckBox();
         toolbarVisibleCheckBox = new javax.swing.JCheckBox();
@@ -262,9 +257,8 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
 
-        forgetLayoutCheckBox.setMnemonic('r');
-        forgetLayoutCheckBox.setText("Používat výchozí rozvržení formuláře");
-        forgetLayoutCheckBox.setToolTipText("<html>\nNehledě na aktuální rozměry programu se při příštím<br>\nspuštění programu opět obnoví výchozí rozvržení\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(forgetLayoutCheckBox, l10n.getString("ConfigFrame.forgetLayoutCheckBox.text")); // NOI18N
+        forgetLayoutCheckBox.setToolTipText(l10n.getString("ConfigFrame.forgetLayoutCheckBox.toolTipText")); // NOI18N
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${forgetLayout}"), forgetLayoutCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
@@ -287,7 +281,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nastavení - Esmska");
+        setTitle(l10n.getString("ConfigFrame.title")); // NOI18N
         setIconImage(new ImageIcon(getClass().getResource(RES + "config-48.png")).getImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -295,16 +289,14 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        removeAccentsCheckBox.setMnemonic('d');
-        removeAccentsCheckBox.setText("Ze zpráv odstraňovat diakritiku");
-        removeAccentsCheckBox.setToolTipText("<html>\nPřed odesláním zprávy z ní odstraní všechna diakritická znaménka\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(removeAccentsCheckBox, l10n.getString("ConfigFrame.removeAccentsCheckBox.text")); // NOI18N
+        removeAccentsCheckBox.setToolTipText(l10n.getString("ConfigFrame.removeAccentsCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${removeAccents}"), removeAccentsCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        checkUpdatesCheckBox.setMnemonic('n');
-        checkUpdatesCheckBox.setText("Kontrolovat po startu novou verzi programu");
-        checkUpdatesCheckBox.setToolTipText("<html>\nPo spuštění programu zkontrolovat, zda nevyšla novější<br>\nverze programu, a případně upozornit ve stavovém řádku\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(checkUpdatesCheckBox, l10n.getString("ConfigFrame.checkUpdatesCheckBox.text")); // NOI18N
+        checkUpdatesCheckBox.setToolTipText(l10n.getString("ConfigFrame.checkUpdatesCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${checkForUpdates}"), checkUpdatesCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
@@ -318,7 +310,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(removeAccentsCheckBox)
                     .addComponent(checkUpdatesCheckBox))
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addContainerGap(395, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,10 +322,10 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap(339, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("Obecné", jPanel1);
+        tabbedPane.addTab(l10n.getString("ConfigFrame.jPanel1.TabConstraints.tabTitle"), new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), jPanel1); // NOI18N
 
         lafComboBox.setModel(lafModel);
-        lafComboBox.setToolTipText("<html>\nUmožní vám změnit vzhled programu\n</html>");
+        lafComboBox.setToolTipText(l10n.getString("ConfigFrame.lafComboBox.toolTipText")); // NOI18N
         lafComboBox.setRenderer(new LaFComboRenderer());
         lafComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,55 +333,49 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        substanceWarning.setText("<html><i>\n** Vzhled Substance není pro vaši verzi Javy (OpenJDK) doporučen!\n</i></html>");
-        substanceWarning.setToolTipText("<html>\nJsou známy problémy při provozování vzhledů Substance na OpenJDK.<br>\nPro tento vzhled použijte raději Sun Javu.\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(substanceWarning, l10n.getString("ConfigFrame.substanceWarning.text")); // NOI18N
+        substanceWarning.setToolTipText(l10n.getString("ConfigFrame.substanceWarning.toolTipText")); // NOI18N
         substanceWarning.setVisible(JavaType.isOpenJDK());
 
-        jLabel4.setDisplayedMnemonic('d');
-        jLabel4.setLabelFor(lafComboBox);
-        jLabel4.setText("Vzhled:");
-        jLabel4.setToolTipText(lafComboBox.getToolTipText());
+        lookLabel.setLabelFor(lafComboBox);
+        org.openide.awt.Mnemonics.setLocalizedText(lookLabel, l10n.getString("ConfigFrame.lookLabel.text")); // NOI18N
+        lookLabel.setToolTipText(lafComboBox.getToolTipText());
 
-        jLabel7.setText("<html><i>\n* Pro projevení změn je nutný restart programu!\n</i></html>");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, l10n.getString("ConfigFrame.jLabel7.text")); // NOI18N
 
-        themeComboBox.setToolTipText("<html>\nBarevná schémata pro zvolený vzhled\n</html>");
+        themeComboBox.setToolTipText(l10n.getString("ConfigFrame.themeComboBox.toolTipText")); // NOI18N
         themeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 themeComboBoxActionPerformed(evt);
             }
         });
 
-        jLabel6.setDisplayedMnemonic('m');
-        jLabel6.setLabelFor(themeComboBox);
-        jLabel6.setText("Motiv:");
-        jLabel6.setToolTipText(themeComboBox.getToolTipText());
+        themeLabel.setLabelFor(themeComboBox);
+        org.openide.awt.Mnemonics.setLocalizedText(themeLabel, l10n.getString("ConfigFrame.themeLabel.text")); // NOI18N
+        themeLabel.setToolTipText(themeComboBox.getToolTipText());
 
-        windowDecorationsCheckBox.setMnemonic('k');
-        windowDecorationsCheckBox.setText("Použít vzhled i na okraje oken *");
-        windowDecorationsCheckBox.setToolTipText("<html>\nZda má místo operačního systému vykreslovat<br>\nrámečky oken zvolený vzhled\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(windowDecorationsCheckBox, l10n.getString("ConfigFrame.windowDecorationsCheckBox.text")); // NOI18N
+        windowDecorationsCheckBox.setToolTipText(l10n.getString("ConfigFrame.windowDecorationsCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${lafWindowDecorated}"), windowDecorationsCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        windowCenteredCheckBox.setMnemonic('u');
-        windowCenteredCheckBox.setText("Spustit program uprostřed obrazovky");
-        windowCenteredCheckBox.setToolTipText("<html>Zda-li nechat umístění okna programu na operačním systému,<br>\nnebo ho umístit vždy doprostřed obrazovky</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(windowCenteredCheckBox, l10n.getString("ConfigFrame.windowCenteredCheckBox.text")); // NOI18N
+        windowCenteredCheckBox.setToolTipText(l10n.getString("ConfigFrame.windowCenteredCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${startCentered}"), windowCenteredCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        toolbarVisibleCheckBox.setMnemonic('n');
-        toolbarVisibleCheckBox.setText("Zobrazit panel nástrojů");
-        toolbarVisibleCheckBox.setToolTipText("<html>\nZobrazit panel nástrojů, který umožňuje rychlejší ovládání myší některých akcí\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(toolbarVisibleCheckBox, l10n.getString("ConfigFrame.toolbarVisibleCheckBox.text")); // NOI18N
+        toolbarVisibleCheckBox.setToolTipText(l10n.getString("ConfigFrame.toolbarVisibleCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${toolbarVisible}"), toolbarVisibleCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        jLabel5.setText("*");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, "*"); // NOI18N
 
-        notificationAreaCheckBox.setMnemonic('o');
-        notificationAreaCheckBox.setText("Umístit ikonu do oznamovací oblasti");
-        notificationAreaCheckBox.setToolTipText("<html>\nZobrazit ikonu v oznamovací oblasti správce oken (tzv. <i>system tray</i>).<br>\n<br>\nPozor, u moderních kompozitních správců oken (Compiz, Beryl, ...) je<br>\ntato funkce dostupná až od Java 6 Update 10.\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(notificationAreaCheckBox, l10n.getString("ConfigFrame.notificationAreaCheckBox.text")); // NOI18N
+        notificationAreaCheckBox.setToolTipText(l10n.getString("ConfigFrame.notificationAreaCheckBox.toolTipText")); // NOI18N
         notificationAreaCheckBox.setEnabled(NotificationIcon.isSupported());
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${notificationIconVisible}"), notificationAreaCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
@@ -401,23 +387,21 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        tipsCheckBox.setMnemonic('t');
-        tipsCheckBox.setText("Po spuštění zobrazit tip programu");
-        tipsCheckBox.setToolTipText("<html>\nPo spuštění programu zobrazit ve stavovém řádku<br>\nnáhodný tip ohledně práce s programem\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(tipsCheckBox, l10n.getString("ConfigFrame.tipsCheckBox.text")); // NOI18N
+        tipsCheckBox.setToolTipText(l10n.getString("ConfigFrame.tipsCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${showTips}"), tipsCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        startMinimizedCheckBox.setMnemonic('y');
-        startMinimizedCheckBox.setText("Po startu skrýt program do ikony");
-        startMinimizedCheckBox.setToolTipText("<html>\nProgram bude okamžitě po spuštění schován<br>\ndo ikony v oznamovací oblasti\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(startMinimizedCheckBox, l10n.getString("ConfigFrame.startMinimizedCheckBox.text")); // NOI18N
+        startMinimizedCheckBox.setToolTipText(l10n.getString("ConfigFrame.startMinimizedCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${startMinimized}"), startMinimizedCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, notificationAreaCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected && enabled}"), startMinimizedCheckBox, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        substanceWarningMark.setText("**");
+        org.openide.awt.Mnemonics.setLocalizedText(substanceWarningMark, "**"); // NOI18N
         substanceWarningMark.setVisible(JavaType.isOpenJDK());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -428,14 +412,14 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(lookLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(substanceWarningMark))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
                     .addComponent(windowCenteredCheckBox)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -444,7 +428,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(notificationAreaCheckBox)
                     .addComponent(toolbarVisibleCheckBox)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(themeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(windowDecorationsCheckBox)
@@ -454,20 +438,20 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lafComboBox, themeComboBox});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel4, jLabel6});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lookLabel, themeLabel});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(lookLabel)
                     .addComponent(lafComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(substanceWarningMark))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(themeLabel)
                     .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(windowDecorationsCheckBox)
@@ -490,43 +474,40 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lafComboBox, themeComboBox});
 
-        tabbedPane.addTab("Vzhled", jPanel3);
+        tabbedPane.addTab(l10n.getString("ConfigFrame.jPanel3.TabConstraints.tabTitle"), new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/appearance-16.png")), jPanel3); // NOI18N
 
-        useSenderIDCheckBox.setMnemonic('d');
-        useSenderIDCheckBox.setText("Připojovat ke zprávě podpis odesilatele");
-        useSenderIDCheckBox.setToolTipText("<html>\nPři připojení podpisu přijde SMS adresátovi ze zadaného čísla<br>\na podepsaná daným jménem. Tuto funkci podporují pouze někteří operátoři.\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(useSenderIDCheckBox, l10n.getString("ConfigFrame.useSenderIDCheckBox.text")); // NOI18N
+        useSenderIDCheckBox.setToolTipText(l10n.getString("ConfigFrame.useSenderIDCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${useSenderID}"), useSenderIDCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
         senderNumberTextField.setColumns(13);
-        senderNumberTextField.setToolTipText("Číslo odesilatele v mezinárodním formátu (začínající na znak \"+\")");
+        senderNumberTextField.setToolTipText(l10n.getString("ConfigFrame.senderNumberTextField.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${senderNumber}"), senderNumberTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useSenderIDCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), senderNumberTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        jLabel1.setDisplayedMnemonic('l');
         jLabel1.setLabelFor(senderNumberTextField);
-        jLabel1.setText("Číslo:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, l10n.getString("ConfigFrame.jLabel1.text")); // NOI18N
         jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
 
         senderNameTextField.setColumns(13);
-        senderNameTextField.setToolTipText("<html>\nVyplněné jméno zabírá ve zprávě místo, avšak není vidět,<br>\ntakže obarvování textu zprávy a ukazatel počtu sms<br>\nnebudou zdánlivě spolu souhlasit\n</html>\n\n");
+        senderNameTextField.setToolTipText(l10n.getString("ConfigFrame.senderNameTextField.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${senderName}"), senderNameTextField, org.jdesktop.beansbinding.BeanProperty.create("text_ON_ACTION_OR_FOCUS_LOST"));
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useSenderIDCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), senderNameTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        jLabel3.setDisplayedMnemonic('m');
         jLabel3.setLabelFor(senderNameTextField);
-        jLabel3.setText("Jméno:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, l10n.getString("ConfigFrame.jLabel3.text")); // NOI18N
         jLabel3.setToolTipText(senderNameTextField.getToolTipText());
 
         countryPrefixTextField.setColumns(5);
-        countryPrefixTextField.setToolTipText("<html>\nMezinárodní předčíslí země, začínající na znak \"+\".<br>\nPři vyplnění se dané předčíslí bude předpokládat u všech čísel, které nebudou<br>\nzadány v mezinárodním formátu. Taktéž se zkrátí zobrazení těchto čísel v mnoha popiscích.\n</html>");
+        countryPrefixTextField.setToolTipText(l10n.getString("ConfigFrame.countryPrefixTextField.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${countryPrefix}"), countryPrefixTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
@@ -545,28 +526,25 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setDisplayedMnemonic('d');
         jLabel2.setLabelFor(countryPrefixTextField);
-        jLabel2.setText("Výchozí předčíslí země:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, l10n.getString("ConfigFrame.jLabel2.text")); // NOI18N
         jLabel2.setToolTipText(countryPrefixTextField.getToolTipText());
 
         operatorFilterTextField.setColumns(13);
-        operatorFilterTextField.setToolTipText("<html>\nV seznamu operátorů budou zobrazeni pouze ti, kteří budou<br>\nobsahovat ve svém názvu vzor zadaný v tomto poli. Jednoduše tak<br>\nlze například zobrazit pouze operátory pro zemi XX zadáním vzoru [XX].<br>\nLze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n</html>");
+        operatorFilterTextField.setToolTipText(l10n.getString("ConfigFrame.operatorFilterTextField.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${operatorFilter}"), operatorFilterTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        jLabel8.setDisplayedMnemonic('t');
         jLabel8.setLabelFor(operatorFilterTextField);
-        jLabel8.setText("Zobrazovat pouze brány operátorů mající v názvu:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel8, l10n.getString("ConfigFrame.jLabel8.text")); // NOI18N
         jLabel8.setToolTipText(operatorFilterTextField.getToolTipText());
 
-        countryCodeLabel.setText("(stát: XX)");
-        countryCodeLabel.setToolTipText("Kód státu, pro který jste vyplnili telefonní předčíslí");
+        org.openide.awt.Mnemonics.setLocalizedText(countryCodeLabel, "<<(country: XX)>>"); // NOI18N
+        countryCodeLabel.setToolTipText(l10n.getString("ConfigFrame.countryCodeLabel.toolTipText")); // NOI18N
 
-        demandDeliveryReportCheckBox.setMnemonic('k');
-        demandDeliveryReportCheckBox.setText("Požadovat poslání doručenky");
-        demandDeliveryReportCheckBox.setToolTipText("<html>\nVyžádá si zaslání potvrzení o doručení zprávy. Potvrzení přijde<br>\nna telefonní číslo odesilatele. Tuto funkci podporují pouze někteří operátoři.\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(demandDeliveryReportCheckBox, l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.text")); // NOI18N
+        demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${demandDeliveryReport}"), demandDeliveryReportCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
@@ -599,7 +577,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(demandDeliveryReportCheckBox))
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3});
@@ -631,7 +609,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap(241, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("Operátoři", jPanel2);
+        tabbedPane.addTab(l10n.getString("ConfigFrame.jPanel2.TabConstraints.tabTitle"), new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), jPanel2); // NOI18N
 
         operatorComboBoxItemStateChanged(null);
         operatorComboBox.addItemListener(new java.awt.event.ItemListener() {
@@ -640,15 +618,14 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("<html>\nZde si můžete nastavit své přihlašovací údaje pro operátory, kteří to vyžadují.\n</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel9, l10n.getString("ConfigFrame.jLabel9.text")); // NOI18N
 
-        jLabel10.setDisplayedMnemonic('r');
         jLabel10.setLabelFor(operatorComboBox);
-        jLabel10.setText("Operátor:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel10, l10n.getString("ConfigFrame.jLabel10.text")); // NOI18N
         jLabel10.setToolTipText(operatorComboBox.getToolTipText());
 
         loginTextField.setColumns(15);
-        loginTextField.setToolTipText("Uživatelské jméno potřebné k přihlášení k webové bráně operátora");
+        loginTextField.setToolTipText(l10n.getString("ConfigFrame.loginTextField.toolTipText")); // NOI18N
         loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
@@ -656,13 +633,12 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setDisplayedMnemonic('u');
         jLabel11.setLabelFor(loginTextField);
-        jLabel11.setText("Uživatelské jméno:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel11, l10n.getString("ConfigFrame.jLabel11.text")); // NOI18N
         jLabel11.setToolTipText(loginTextField.getToolTipText());
 
         passwordField.setColumns(15);
-        passwordField.setToolTipText("Heslo příslušející k danému uživatelskému jménu");
+        passwordField.setToolTipText(l10n.getString("ConfigFrame.passwordField.toolTipText")); // NOI18N
         passwordField.enableInputMethods(true);
         passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
@@ -671,306 +647,299 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setDisplayedMnemonic('s');
         jLabel12.setLabelFor(passwordField);
-        jLabel12.setText("Heslo:");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel12, l10n.getString("ConfigFrame.jLabel12.text")); // NOI18N
         jLabel12.setToolTipText(passwordField.getToolTipText());
 
         clearKeyringButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
-        clearKeyringButton.setMnemonic('d');
-        clearKeyringButton.setText("Odstranit všechny přihlašovací údaje");
-        clearKeyringButton.setToolTipText("Vymaže uživatelské jména a hesla u všech operátorů");
+        org.openide.awt.Mnemonics.setLocalizedText(clearKeyringButton, l10n.getString("ConfigFrame.clearKeyringButton.text")); // NOI18N
+        clearKeyringButton.setToolTipText(l10n.getString("ConfigFrame.clearKeyringButton.toolTipText")); // NOI18N
         clearKeyringButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearKeyringButtonActionPerformed(evt);
             }
         });
 
-        jLabel13.setText("<html><i>\nAčkoliv se hesla ukládají šifrovaně, lze se k původnímu obsahu dostat. Důrazně doporučujeme nastavit si přístupová práva tak, aby k <u>adresáři s konfiguračními soubory programu</u> neměl přístup žádný jiný uživatel.\n</i></html>");
-        jLabel13.setToolTipText("<html>Uživatelský adresář programu:<br>"
-            + PersistenceManager.getUserDir().getAbsolutePath()
-            + "</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel13, l10n.getString("ConfigFrame.jLabel13.text")); // NOI18N
+        jLabel13.setToolTipText(MessageFormat.format(l10n.getString("ConfigFrame.user_directory"),
+            PersistenceManager.getUserDir().getAbsolutePath()));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(passwordField))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel10)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel11)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(clearKeyringButton)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {loginTextField, operatorComboBox, passwordField});
-
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+    javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+    jPanel4.setLayout(jPanel4Layout);
+    jPanel4Layout.setHorizontalGroup(
+        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel4Layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passwordField))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(clearKeyringButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addContainerGap())
-        );
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+            .addContainerGap())
+    );
 
-        tabbedPane.addTab("Přihlašovací údaje", jPanel4);
+    jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
 
-        reducedHistoryCheckBox.setMnemonic('m');
-        reducedHistoryCheckBox.setText("Omezit historii odeslaných zpráv pouze na posledních");
-        reducedHistoryCheckBox.setToolTipText("<html>\nPři ukončení programu se uloží historie odeslaných zpráv<BR>\npouze za zvolené poslední období\n</html>");
+    jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {loginTextField, operatorComboBox, passwordField});
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${reducedHistory}"), reducedHistoryCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
+    jPanel4Layout.setVerticalGroup(
+        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel4Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jLabel9)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel10)
+                .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel11)
+                .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel12)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(18, 18, 18)
+            .addComponent(clearKeyringButton)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+            .addComponent(jLabel13)
+            .addContainerGap())
+    );
 
-        reducedHistorySpinner.setToolTipText(reducedHistoryCheckBox.getToolTipText());
+    tabbedPane.addTab(l10n.getString("ConfigFrame.jPanel4.TabConstraints.tabTitle"), new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/keyring-16.png")), jPanel4); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${reducedHistoryCount}"), reducedHistorySpinner, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, reducedHistoryCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), reducedHistorySpinner, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    org.openide.awt.Mnemonics.setLocalizedText(reducedHistoryCheckBox, l10n.getString("ConfigFrame.reducedHistoryCheckBox.text")); // NOI18N
+    reducedHistoryCheckBox.setToolTipText(l10n.getString("ConfigFrame.reducedHistoryCheckBox.toolTipText")); // NOI18N
 
-        ((SpinnerNumberModel)reducedHistorySpinner.getModel()).setMinimum(new Integer(0));
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${reducedHistory}"), reducedHistoryCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
 
-        jLabel18.setText("dní.");
-        jLabel18.setToolTipText(reducedHistoryCheckBox.getToolTipText());
+    reducedHistoryCheckBox.setText(reducedHistoryCheckBox.getText().replaceFirst("\\{0\\}.*$", "").trim());
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
+    reducedHistorySpinner.setToolTipText(reducedHistoryCheckBox.getToolTipText());
+
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${reducedHistoryCount}"), reducedHistorySpinner, org.jdesktop.beansbinding.BeanProperty.create("value"));
+    bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, reducedHistoryCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), reducedHistorySpinner, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
+
+    ((SpinnerNumberModel)reducedHistorySpinner.getModel()).setMinimum(new Integer(0));
+
+    org.openide.awt.Mnemonics.setLocalizedText(jLabel18, "<<days.>>"); // NOI18N
+    jLabel18.setToolTipText(reducedHistoryCheckBox.getToolTipText());
+    jLabel18.setText(l10n.getString("ConfigFrame.reducedHistoryCheckBox.text").replaceFirst("^.*\\{0\\}", "").trim());
+
+    javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+    jPanel6.setLayout(jPanel6Layout);
+    jPanel6Layout.setHorizontalGroup(
+        jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel6Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(reducedHistoryCheckBox)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(reducedHistorySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jLabel18)
+            .addContainerGap(135, Short.MAX_VALUE))
+    );
+    jPanel6Layout.setVerticalGroup(
+        jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel6Layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(reducedHistoryCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reducedHistorySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18)
-                .addContainerGap(200, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(reducedHistoryCheckBox)
-                    .addComponent(reducedHistorySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addContainerGap())
-        );
+                .addComponent(reducedHistorySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel18))
+            .addContainerGap())
+    );
 
-        tabbedPane.addTab("Soukromí", jPanel6);
+    tabbedPane.addTab(l10n.getString("ConfigFrame.jPanel6.TabConstraints.tabTitle"), new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/lock-16.png")), jPanel6); // NOI18N
 
-        useProxyCheckBox.setMnemonic('x');
-        useProxyCheckBox.setText("Používat proxy server *");
-        useProxyCheckBox.setToolTipText("Zda pro připojení používat proxy server");
+    org.openide.awt.Mnemonics.setLocalizedText(useProxyCheckBox, l10n.getString("ConfigFrame.useProxyCheckBox.text")); // NOI18N
+    useProxyCheckBox.setToolTipText(l10n.getString("ConfigFrame.useProxyCheckBox.toolTipText")); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${useProxy}"), useProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${useProxy}"), useProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
 
-        useProxyCheckBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                useProxyCheckBoxItemStateChanged(evt);
-            }
-        });
+    useProxyCheckBox.addItemListener(new java.awt.event.ItemListener() {
+        public void itemStateChanged(java.awt.event.ItemEvent evt) {
+            useProxyCheckBoxItemStateChanged(evt);
+        }
+    });
 
-        httpProxyTextField.setColumns(20);
-        httpProxyTextField.setToolTipText("<html>\nAdresa HTTP proxy serveru ve formátu \"host\" nebo \"host:port\".\nNapříklad: proxy.firma.com:80\n</html>");
+    httpProxyTextField.setColumns(20);
+    httpProxyTextField.setToolTipText(l10n.getString("ConfigFrame.httpProxyTextField.toolTipText")); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${httpProxy}"), httpProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), httpProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${httpProxy}"), httpProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+    bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), httpProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
-        httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
-            @Override
-            public void onUpdate(DocumentEvent e) {
-                updateProxy();
-            }
-        });
+    httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+        @Override
+        public void onUpdate(DocumentEvent e) {
+            updateProxy();
+        }
+    });
 
-        sameProxyCheckBox.setMnemonic('t');
-        sameProxyCheckBox.setText("Pro všechny protokoly použít tuto proxy");
-        sameProxyCheckBox.setToolTipText("Pro všechny protokoly se použije adresa zadaná v políčku \"HTTP proxy\".");
+    org.openide.awt.Mnemonics.setLocalizedText(sameProxyCheckBox, l10n.getString("ConfigFrame.sameProxyCheckBox.text")); // NOI18N
+    sameProxyCheckBox.setToolTipText(l10n.getString("ConfigFrame.sameProxyCheckBox.toolTipText")); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${sameProxy}"), sameProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), sameProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${sameProxy}"), sameProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, useProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${selected}"), sameProxyCheckBox, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
-        sameProxyCheckBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                sameProxyCheckBoxItemStateChanged(evt);
-            }
-        });
+    sameProxyCheckBox.addItemListener(new java.awt.event.ItemListener() {
+        public void itemStateChanged(java.awt.event.ItemEvent evt) {
+            sameProxyCheckBoxItemStateChanged(evt);
+        }
+    });
 
-        httpsProxyTextField.setToolTipText("<html>\nAdresa HTTPS proxy serveru ve formátu \"host\" nebo \"host:port\".\nNapříklad: proxy.firma.com:443\n</html>");
+    httpsProxyTextField.setToolTipText(l10n.getString("ConfigFrame.httpsProxyTextField.toolTipText")); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${httpsProxy}"), httpsProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, sameProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${enabled && !selected}"), httpsProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${httpsProxy}"), httpsProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+    bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, sameProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${enabled && !selected}"), httpsProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
-        httpsProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
-            @Override
-            public void onUpdate(DocumentEvent e) {
-                updateProxy();
-            }
-        });
+    httpsProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+        @Override
+        public void onUpdate(DocumentEvent e) {
+            updateProxy();
+        }
+    });
 
-        socksProxyTextField.setToolTipText("<html>\nAdresa SOCKS proxy serveru ve formátu \"host\" nebo \"host:port\".\nNapříklad: proxy.firma.com:1080\n</html>");
+    socksProxyTextField.setToolTipText(l10n.getString("ConfigFrame.socksProxyTextField.toolTipText")); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${socksProxy}"), socksProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, sameProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${enabled && !selected}"), socksProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${socksProxy}"), socksProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+    bindingGroup.addBinding(binding);
+    binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, sameProxyCheckBox, org.jdesktop.beansbinding.ELProperty.create("${enabled && !selected}"), socksProxyTextField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
-        socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
-            @Override
-            public void onUpdate(DocumentEvent e) {
-                updateProxy();
-            }
-        });
+    socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+        @Override
+        public void onUpdate(DocumentEvent e) {
+            updateProxy();
+        }
+    });
 
-        jLabel14.setDisplayedMnemonic('t');
-        jLabel14.setLabelFor(httpProxyTextField);
-        jLabel14.setText("HTTP proxy:");
-        jLabel14.setToolTipText(httpProxyTextField.getToolTipText());
+    jLabel14.setLabelFor(httpProxyTextField);
+    org.openide.awt.Mnemonics.setLocalizedText(jLabel14, l10n.getString("ConfigFrame.jLabel14.text")); // NOI18N
+    jLabel14.setToolTipText(httpProxyTextField.getToolTipText());
 
-        jLabel15.setDisplayedMnemonic('s');
-        jLabel15.setLabelFor(httpsProxyTextField);
-        jLabel15.setText("HTTPS proxy:");
-        jLabel15.setToolTipText(httpsProxyTextField.getToolTipText());
+    jLabel15.setLabelFor(httpsProxyTextField);
+    org.openide.awt.Mnemonics.setLocalizedText(jLabel15, l10n.getString("ConfigFrame.jLabel15.text")); // NOI18N
+    jLabel15.setToolTipText(httpsProxyTextField.getToolTipText());
 
-        jLabel16.setDisplayedMnemonic('c');
-        jLabel16.setLabelFor(socksProxyTextField);
-        jLabel16.setText("SOCKS proxy:");
-        jLabel16.setToolTipText(socksProxyTextField.getToolTipText());
+    jLabel16.setLabelFor(socksProxyTextField);
+    org.openide.awt.Mnemonics.setLocalizedText(jLabel16, l10n.getString("ConfigFrame.jLabel16.text")); // NOI18N
+    jLabel16.setToolTipText(socksProxyTextField.getToolTipText());
 
-        jLabel17.setText("<html><i>\n* Pokud nejste k Internetu připojeni přímo, je nutné, aby vaše proxy fungovala jako SOCKS proxy server.\n</i></html>");
+    org.openide.awt.Mnemonics.setLocalizedText(jLabel17, l10n.getString("ConfigFrame.jLabel17.text")); // NOI18N
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(useProxyCheckBox)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(sameProxyCheckBox))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(httpProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(httpsProxyTextField))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(socksProxyTextField))))
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel14, jLabel15, jLabel16});
-
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+    javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+    jPanel5.setLayout(jPanel5Layout);
+    jPanel5Layout.setHorizontalGroup(
+        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel5Layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(useProxyCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(httpProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sameProxyCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(httpsProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(socksProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                .addComponent(jLabel17)
-                .addContainerGap())
-        );
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(sameProxyCheckBox))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(httpProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel15)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(httpsProxyTextField))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel16)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(socksProxyTextField))))
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+            .addContainerGap())
+    );
 
-        tabbedPane.addTab("Připojení", jPanel5);
+    jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel14, jLabel15, jLabel16});
 
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        closeButton.setMnemonic('z');
-        closeButton.setText("Zavřít");
-        closeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeButtonActionPerformed(evt);
-            }
-        });
+    jPanel5Layout.setVerticalGroup(
+        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel5Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(useProxyCheckBox)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel14)
+                .addComponent(httpProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(sameProxyCheckBox)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel15)
+                .addComponent(httpsProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel16)
+                .addComponent(socksProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
+            .addComponent(jLabel17)
+            .addContainerGap())
+    );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-                    .addComponent(closeButton))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(closeButton)
-                .addContainerGap())
-        );
+    tabbedPane.addTab(l10n.getString("ConfigFrame.jPanel5.TabConstraints.tabTitle"), new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/connection-16.png")), jPanel5); // NOI18N
 
-        bindingGroup.bind();
+    closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
+    org.openide.awt.Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
+    closeButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            closeButtonActionPerformed(evt);
+        }
+    });
 
-        pack();
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                .addComponent(closeButton))
+            .addContainerGap())
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(closeButton)
+            .addContainerGap())
+    );
+
+    bindingGroup.bind();
+
+    pack();
     }// </editor-fold>//GEN-END:initComponents
         
     private void themeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeComboBoxActionPerformed
@@ -1029,10 +998,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_operatorComboBoxItemStateChanged
 
     private void clearKeyringButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
-        String deleteOption = "Odstranit";
-        String cancelOption = "Zrušit";
+        String deleteOption = l10n.getString("Delete");
+        String cancelOption = l10n.getString("Cancel");
         Object[] options = DialogButtonSorter.sortOptions(cancelOption, deleteOption);
-        String message = "Opravdu chcete odstranit všechny vyplněné přihlašovací údaje?";
+        String message = l10n.getString("ConfigFrame.remove_credentials");
 
         //show dialog
         JOptionPane pane = new JOptionPane(message, JOptionPane.WARNING_MESSAGE,
@@ -1070,11 +1039,11 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
-        private static final String LAF_SYSTEM = "Systémový";
-        private static final String LAF_CROSSPLATFORM = "Meziplatformní";
-        private static final String LAF_GTK = "GTK";
-        private static final String LAF_JGOODIES = "JGoodies";
-        private static final String LAF_SUBSTANCE = "Substance";
+        private final String LAF_SYSTEM = l10n.getString("ConfigFrame.system_look");
+        private final String LAF_CROSSPLATFORM = l10n.getString("ConfigFrame.multiplatform_look");
+        private final String LAF_GTK = "GTK";
+        private final String LAF_JGOODIES = "JGoodies";
+        private final String LAF_SUBSTANCE = "Substance";
         
         @Override
         public Component getListCellRendererComponent(JList list, Object value, 
@@ -1087,7 +1056,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
             }
             
             LAF laf = (LAF) value;
-            String name = "Neznámý";
+            String name = l10n.getString("ConfigFrame.unknown_look");
             switch (laf) {
                 case SYSTEM: 
                     name = LAF_SYSTEM;
@@ -1139,9 +1108,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1153,6 +1120,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JPanel jPanel6;
     private javax.swing.JComboBox lafComboBox;
     private javax.swing.JTextField loginTextField;
+    private javax.swing.JLabel lookLabel;
     private javax.swing.JCheckBox notificationAreaCheckBox;
     private esmska.gui.OperatorComboBox operatorComboBox;
     private javax.swing.JTextField operatorFilterTextField;
@@ -1169,6 +1137,7 @@ private void notificationAreaCheckBoxActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JLabel substanceWarningMark;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JComboBox themeComboBox;
+    private javax.swing.JLabel themeLabel;
     private javax.swing.JCheckBox tipsCheckBox;
     private javax.swing.JCheckBox toolbarVisibleCheckBox;
     private javax.swing.JCheckBox useProxyCheckBox;

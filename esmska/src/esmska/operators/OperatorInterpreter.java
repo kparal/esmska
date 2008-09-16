@@ -4,6 +4,7 @@
  */
 package esmska.operators;
 
+import esmska.utils.L10N;
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +12,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.script.Invocable;
@@ -26,6 +28,7 @@ import javax.script.ScriptException;
 public class OperatorInterpreter {
 
     private static final Logger logger = Logger.getLogger(OperatorInterpreter.class.getName());
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final ScriptEngineManager manager = new ScriptEngineManager();
     private Map<OperatorVariable, String> variables;
     private OperatorExecutor executor = new OperatorExecutor();
@@ -78,7 +81,7 @@ public class OperatorInterpreter {
         this.variables = variables;
         init();
         if (operator == null) {
-            executor.setErrorMessage("Neznámý operátor!");
+            executor.setErrorMessage(l10n.getString("OperatorInterpreter.unknown_operator"));
             return false;
         }
         

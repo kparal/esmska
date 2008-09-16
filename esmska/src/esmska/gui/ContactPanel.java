@@ -14,6 +14,7 @@ import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
+import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -27,6 +28,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 import java.util.TreeSet;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
@@ -60,6 +62,7 @@ public class ContactPanel extends javax.swing.JPanel {
     public static final int ACTION_CONTACT_CHOSEN = 1;
     
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     private Config config = PersistenceManager.getConfig();
     
@@ -176,7 +179,7 @@ public class ContactPanel extends javax.swing.JPanel {
         contactList = new ContactList();
         editContactButton = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Kontakty"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(l10n.getString("ContactPanel.border.title"))); // NOI18N
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
@@ -184,17 +187,17 @@ public class ContactPanel extends javax.swing.JPanel {
         });
 
         addContactButton.setAction(addContactAction);
-        addContactButton.setText("");
         addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        addContactButton.setText("");
 
         removeContactButton.setAction(removeContactAction);
-        removeContactButton.setText("");
         removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        removeContactButton.setText("");
 
         contactList.setModel(contactListModel);
-        contactList.setToolTipText("Seznam kontaktů (Alt+K)");
+        contactList.setToolTipText(l10n.getString("ContactPanel.contactList.toolTipText")); // NOI18N
         contactList.setCellRenderer(new ContactListRenderer());
         //key shortcuts
         String command = "choose contact";
@@ -225,9 +228,9 @@ public class ContactPanel extends javax.swing.JPanel {
         jScrollPane4.setViewportView(contactList);
 
         editContactButton.setAction(editContactAction);
-        editContactButton.setText("");
         editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        editContactButton.setText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -248,7 +251,7 @@ public class ContactPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -347,15 +350,15 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Add contact to contact list */
     private class AddContactAction extends AbstractAction {
-        private final String createOption = "Vytvořit";
-        private final String cancelOption = "Zrušit";
+        private final String createOption = l10n.getString("Create");
+        private final String cancelOption = l10n.getString("Cancel");
         private final Object[] options = DialogButtonSorter.sortOptions(
                 cancelOption, createOption);
         
         public AddContactAction() {
-            super("Přidat kontakt",
+            super(l10n.getString("Add_contact"),
                     new ImageIcon(ContactPanel.class.getResource(RES + "add-16.png")));
-            this.putValue(SHORT_DESCRIPTION,"Přidat nový kontakt");
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("Add_new_contact"));
             this.putValue(LARGE_ICON_KEY,
                     new ImageIcon(ContactPanel.class.getResource(RES + "add-22.png")));
         }
@@ -363,7 +366,7 @@ public class ContactPanel extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
             ContactDialog contactDialog = new ContactDialog();
-            contactDialog.setTitle("Nový kontakt");
+            contactDialog.setTitle(l10n.getString("New_contact"));
             contactDialog.setOptions(options, createOption, createOption);
             contactDialog.show(null);
             Contact c = contactDialog.getContact();
@@ -379,15 +382,15 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Edit contact from contact list */
     private class EditContactAction extends AbstractAction {
-        private final String saveOption = "Uložit";
-        private final String cancelOption = "Zrušit";
+        private final String saveOption = l10n.getString("Save");
+        private final String cancelOption = l10n.getString("Cancel");
         private final Object[] options = DialogButtonSorter.sortOptions(
                 cancelOption, saveOption);
         
         public EditContactAction() {
-            super("Upravit kontakt",
+            super(l10n.getString("Edit_contact"),
                     new ImageIcon(ContactPanel.class.getResource(RES + "edit-16.png")));
-            this.putValue(SHORT_DESCRIPTION,"Upravit označený kontakt");
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("Edit_selected_contact"));
             this.putValue(LARGE_ICON_KEY,
                     new ImageIcon(ContactPanel.class.getResource(RES + "edit-22.png")));
             this.setEnabled(false);
@@ -397,7 +400,7 @@ public class ContactPanel extends javax.swing.JPanel {
             contactList.requestFocusInWindow(); //always transfer focus
             Contact contact = (Contact)contactList.getSelectedValue();
             ContactDialog contactDialog = new ContactDialog();
-            contactDialog.setTitle("Upravit kontakt");
+            contactDialog.setTitle(l10n.getString("Edit_contact"));
             contactDialog.setOptions(options, saveOption, saveOption);
             contactDialog.show(contact);
             Contact c = contactDialog.getContact();
@@ -414,15 +417,15 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Remove contact from contact list */
     private class RemoveContactAction extends AbstractAction {
-        private final String deleteOption = "Odstranit";
-        private final String cancelOption = "Zrušit";
+        private final String deleteOption = l10n.getString("Delete");
+        private final String cancelOption = l10n.getString("Cancel");
         private final Object[] options = DialogButtonSorter.sortOptions(
                 cancelOption, deleteOption);
         
         public RemoveContactAction() {
-            super("Odstranit kontakty",
+            super(l10n.getString("Delete_contacts"),
                     new ImageIcon(ContactPanel.class.getResource(RES + "remove-16.png")));
-            this.putValue(SHORT_DESCRIPTION,"Odstranit označené kontakty");
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("Delete_selected_contacts"));
             this.putValue(LARGE_ICON_KEY,
                     new ImageIcon(ContactPanel.class.getResource(RES + "remove-22.png")));
             this.setEnabled(false);
@@ -436,7 +439,7 @@ public class ContactPanel extends javax.swing.JPanel {
             //create warning
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
-            JLabel label = new JLabel("<html><h3>Opravdu odstranit následující kontakty?</h3></html>");
+            JLabel label = new JLabel(l10n.getString("ContactPanel.remove_following_contacts"));
             JTextArea area = new JTextArea();
             area.setEditable(false);
             area.setRows(5);
@@ -658,7 +661,7 @@ public class ContactPanel extends javax.swing.JPanel {
         private Object initialValue, confirmOption;
         public ContactDialog() {
             super((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, ContactPanel.this),
-                    "Kontakt", true);
+                    l10n.getString("Contact"), true);
             init();
             setDefaultCloseOperation(HIDE_ON_CLOSE);
             //integrate modal window better on Mac

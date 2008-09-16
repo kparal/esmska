@@ -26,7 +26,10 @@ import esmska.operators.OperatorInterpreter;
 import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.L10N;
 import java.awt.event.ActionListener;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 /** Sender of SMS
@@ -35,10 +38,10 @@ import java.util.Set;
  */
 public class SMSSender {
     private static final Logger logger = Logger.getLogger(SMSSender.class.getName());
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Keyring keyring = PersistenceManager.getKeyring();
     private static final Config config = PersistenceManager.getConfig();
-    private static final String NO_REASON_ERROR = "Autor skriptu pro použitou webovou bránu neposkytl<br>" +
-            "žádné další informace o příčině selhání.";
+    private static final String NO_REASON_ERROR = l10n.getString("SMSSender.NO_REASON_ERROR");
     
     private MainFrame mainFrame = MainFrame.getInstance(); //reference to main form
     //map of <operator,worker>; it show's whether some operator has currently assigned
@@ -70,9 +73,10 @@ public class SMSSender {
             }
             
             mainFrame.getStatusPanel().setTaskRunning(true);
-            mainFrame.getStatusPanel().setStatusMessage("Posílám zprávu pro " + sms
-                + " (" + (operator == null ? "žádný operátor" : operator) + ") ...",
-                true, Icons.STATUS_INFO, true);
+            mainFrame.getStatusPanel().setStatusMessage(
+                    MessageFormat.format(l10n.getString("SMSSender.sending_message"),
+                    sms, (operator == null ? l10n.getString("SMSSender.no_operator") : operator)),
+                    true, Icons.STATUS_INFO, true);
             mainFrame.getQueuePanel().markSMSSending(sms);
             
             SMSWorker worker = new SMSWorker(sms);

@@ -6,12 +6,14 @@
 package esmska.gui;
 
 import esmska.data.Log;
+import esmska.utils.L10N;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -24,6 +26,7 @@ import javax.swing.Timer;
 public class StatusPanel extends javax.swing.JPanel {
 
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
     private Log log = new Log();
     private LogAction logAction = new LogAction();
@@ -33,7 +36,7 @@ public class StatusPanel extends javax.swing.JPanel {
     public StatusPanel() {
         initComponents();
         statusTimer.setRepeats(false);
-        addToLog("Spuštění programu", new Date(), null);
+        addToLog(l10n.getString("Program_start"), new Date(), null);
     }
 
     /** Prints message to status bar
@@ -123,8 +126,8 @@ public class StatusPanel extends javax.swing.JPanel {
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
 
-        statusMessageLabel.setText("Vítejte");
-        statusMessageLabel.setToolTipText("Klikněte pro zobrazení aplikačního protokolu");
+        org.openide.awt.Mnemonics.setLocalizedText(statusMessageLabel, l10n.getString("StatusPanel.statusMessageLabel.text")); // NOI18N
+        statusMessageLabel.setToolTipText(l10n.getString("StatusPanel.statusMessageLabel.toolTipText")); // NOI18N
         statusMessageLabel.setFocusable(false);
         statusMessageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         statusMessageLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,7 +141,7 @@ public class StatusPanel extends javax.swing.JPanel {
 
         progressBar.setMaximum(15);
         progressBar.setFocusable(false);
-        progressBar.setString("Prosím čekejte...");
+        progressBar.setString(l10n.getString("StatusPanel.progressBar.string")); // NOI18N
         progressBar.setStringPainted(true);
         progressBar.setVisible(false);
 
@@ -171,11 +174,10 @@ public class StatusPanel extends javax.swing.JPanel {
     private class LogAction extends AbstractAction {
         private LogFrame logFrame;
         public LogAction() {
-            super("Protokol");
+            L10N.setLocalizedText(this, l10n.getString("Log_"));
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "log-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "log-48.png")));
-            this.putValue(SHORT_DESCRIPTION,"Zobrazit aplikační protokol");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_P);
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("Show_application_log"));
         }
         @Override
         public void actionPerformed(ActionEvent e) {

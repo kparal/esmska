@@ -15,6 +15,7 @@ import esmska.data.SMS;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
+import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -26,8 +27,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
@@ -68,6 +71,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     private static final Logger logger = Logger.getLogger(SMSPanel.class.getName());
     private static final String RES = "/esmska/resources/";
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     
     /** box for messages */
     private Envelope envelope = new Envelope();
@@ -227,7 +231,7 @@ public class SMSPanel extends javax.swing.JPanel {
         
         boolean multiSendMode = (count > 1);
         if (multiSendMode) {
-            recipientTextField.setText("Hromadné odesílání");
+            recipientTextField.setText(l10n.getString("Multiple_sending"));
         }
         recipientTextField.setEnabled(! multiSendMode);
         operatorComboBox.setEnabled(! multiSendMode);
@@ -319,12 +323,14 @@ public class SMSPanel extends javax.swing.JPanel {
         //set tooltips
         int current = singleProgressBar.getValue();
         int max = singleProgressBar.getMaximum();
-        singleProgressBar.setToolTipText("<html>Znaků v aktuální zprávě: <b>" + 
-                current + "/" + max + "</b> (zbývá <b>" + (max - current) + "</b>)</html>");
+        singleProgressBar.setToolTipText(MessageFormat.format(
+                l10n.getString("SMSPanel.singleProgressBar"),
+                current, max, (max - current)));
         current = fullProgressBar.getValue();
         max = fullProgressBar.getMaximum();
-        fullProgressBar.setToolTipText("<html>Znaků v celé zprávě: <b>" + current +
-                "/" + max + "</b> (zbývá <b>" + (max - current) + "</b>)</html>");
+        fullProgressBar.setToolTipText(MessageFormat.format(
+                l10n.getString("SMSPanel.fullProgressBar"),
+                current, max, (max - current)));
     }
     
     /** This method is called from within the constructor to
@@ -339,15 +345,15 @@ public class SMSPanel extends javax.swing.JPanel {
         fullProgressBar = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         smsTextPane = new javax.swing.JTextPane();
-        jLabel5 = new javax.swing.JLabel();
+        textLabel = new javax.swing.JLabel();
         sendButton = new javax.swing.JButton();
         smsCounterLabel = new javax.swing.JLabel();
         singleProgressBar = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
+        gatewayLabel = new javax.swing.JLabel();
         recipientTextField = new SMSPanel.RecipientTextField();
-        jLabel4 = new javax.swing.JLabel();
+        recipientLabel = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Zpráva"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
@@ -389,27 +395,24 @@ public class SMSPanel extends javax.swing.JPanel {
     smsTextPane.getActionMap().put(command, sendAction);
     jScrollPane1.setViewportView(smsTextPane);
 
-    jLabel5.setDisplayedMnemonic('t');
-    jLabel5.setLabelFor(smsTextPane);
-    jLabel5.setText("Text:");
-    jLabel5.setToolTipText("<html>\nVlastní text zprávy\n</html>");
+    textLabel.setLabelFor(smsTextPane);
+    org.openide.awt.Mnemonics.setLocalizedText(textLabel, l10n.getString("SMSPanel.textLabel.text")); // NOI18N
+    textLabel.setToolTipText(l10n.getString("SMSPanel.textLabel.toolTipText")); // NOI18N
 
     sendButton.setAction(sendAction);
-    sendButton.setToolTipText("Odeslat zprávu (Alt+S, Ctrl+Enter)");
+    sendButton.setToolTipText(l10n.getString("SMSPanel.sendButton.toolTipText")); // NOI18N
 
-    smsCounterLabel.setText("0 znaků (0 sms)");
+    org.openide.awt.Mnemonics.setLocalizedText(smsCounterLabel, l10n.getString("SMSPanel.smsCounterLabel.text")); // NOI18N
 
     singleProgressBar.setMaximum(1000);
 
-    jLabel1.setDisplayedMnemonic('b');
-    jLabel1.setLabelFor(operatorComboBox);
-    jLabel1.setText("Brána:");
-    jLabel1.setToolTipText(operatorComboBox.getToolTipText());
+    gatewayLabel.setLabelFor(operatorComboBox);
+    org.openide.awt.Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("SMSPanel.gatewayLabel.text")); // NOI18N
+    gatewayLabel.setToolTipText(operatorComboBox.getToolTipText());
 
-    jLabel4.setDisplayedMnemonic('e');
-    jLabel4.setLabelFor(recipientTextField);
-    jLabel4.setText("Příjemce:");
-    jLabel4.setToolTipText(recipientTextField.getToolTipText());
+    recipientLabel.setLabelFor(recipientTextField);
+    org.openide.awt.Mnemonics.setLocalizedText(recipientLabel, l10n.getString("SMSPanel.recipientLabel.text")); // NOI18N
+    recipientLabel.setToolTipText(recipientTextField.getToolTipText());
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -420,7 +423,7 @@ public class SMSPanel extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5)
+                        .addComponent(textLabel)
                         .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -431,11 +434,11 @@ public class SMSPanel extends javax.swing.JPanel {
                             .addComponent(sendButton))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jLabel4)
+                    .addComponent(recipientLabel)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(recipientTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jLabel1)
+                    .addComponent(gatewayLabel)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
             .addContainerGap())
@@ -443,17 +446,17 @@ public class SMSPanel extends javax.swing.JPanel {
 
     layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {fullProgressBar, singleProgressBar});
 
-    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel4, jLabel5});
+    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {gatewayLabel, recipientLabel, textLabel});
 
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel4)
+                .addComponent(recipientLabel)
                 .addComponent(recipientTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel1)
+                .addComponent(gatewayLabel)
                 .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +467,7 @@ public class SMSPanel extends javax.swing.JPanel {
                         .addComponent(sendButton)
                         .addComponent(smsCounterLabel)))
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jLabel5)
+                    .addComponent(textLabel)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -483,11 +486,10 @@ public class SMSPanel extends javax.swing.JPanel {
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
         public SendAction() {
-            super("Poslat");
+            L10N.setLocalizedText(this, l10n.getString("Send_"));
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "send-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "send-22.png")));
-            putValue(SHORT_DESCRIPTION,"Odeslat zprávu");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_S);
+            putValue(SHORT_DESCRIPTION,l10n.getString("Send_message"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
             setEnabled(false);
@@ -512,11 +514,10 @@ public class SMSPanel extends javax.swing.JPanel {
     /** undo in sms text pane */
     private class UndoAction extends AbstractAction {
         public UndoAction() {
-            super("Zpět");
+            L10N.setLocalizedText(this, l10n.getString("Undo_"));
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "undo-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "undo-32.png")));
-            putValue(SHORT_DESCRIPTION, "Vrátit změnu v textu zprávy");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_Z);
+            putValue(SHORT_DESCRIPTION, l10n.getString("SMSPanel.Undo_change_in_message_text"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
@@ -536,11 +537,10 @@ public class SMSPanel extends javax.swing.JPanel {
     /** redo in sms text pane */
     private class RedoAction extends AbstractAction {
         public RedoAction() {
-            super("Vpřed");
+            L10N.setLocalizedText(this, l10n.getString("Redo_"));
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "redo-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "redo-32.png")));
-            putValue(SHORT_DESCRIPTION, "Zopakovat vrácenou změnu v textu zprávy");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_V);
+            putValue(SHORT_DESCRIPTION, l10n.getString("SMSPanel.Redo_change_in_message_text"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Y,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
@@ -560,11 +560,10 @@ public class SMSPanel extends javax.swing.JPanel {
     /** compress current sms text by rewriting it to CamelCase */
     private class CompressAction extends AbstractAction {
         public CompressAction() {
-            super("Zkomprimovat");
+            L10N.setLocalizedText(this, l10n.getString("Compress_"));
             putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "compress-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
-            putValue(SHORT_DESCRIPTION,"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \"CamelCase\"");
-            putValue(MNEMONIC_KEY, KeyEvent.VK_K);
+            putValue(SHORT_DESCRIPTION,l10n.getString("SMSPanel.compress"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
@@ -664,10 +663,12 @@ public class SMSPanel extends javax.swing.JPanel {
         private void countChars(DocumentEvent e) {
             int chars = e.getDocument().getLength();
             int smsCount = envelope.getSMSCount(chars);
-            smsCounterLabel.setText(chars + " znaků (" +  smsCount + " sms)");
+            smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.1"),
+                    chars, smsCount));
             if (chars > envelope.getMaxTextLength()) { //chars more than max
                 smsCounterLabel.setForeground(Color.RED);
-                smsCounterLabel.setText(chars + " znaků (nelze odeslat!)");
+                smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.2"),
+                        chars));
             } else //chars ok
                 smsCounterLabel.setForeground(UIManager.getColor("Label.foreground"));
         }
@@ -750,7 +751,7 @@ public class SMSPanel extends javax.swing.JPanel {
             if ((fb.getDocument().getLength() + (text!=null?text.length():0) - length)
                     > envelope.getMaxTextLength()) {
                 MainFrame.getInstance().getStatusPanel().setStatusMessage(
-                        "Text je příliš dlouhý!", false, null, false);
+                        l10n.getString("SMSPanel.Text_is_too_long!"), false, null, false);
                 MainFrame.getInstance().getStatusPanel().hideStatusMessageAfter(5000);
                 int maxlength = envelope.getMaxTextLength() - fb.getDocument().getLength() + length;
                 maxlength = Math.max(maxlength, 0);
@@ -780,12 +781,8 @@ public class SMSPanel extends javax.swing.JPanel {
         /** currently selected contact */
         private Contact contact;
         private RecipientDocumentChange recipientDocumentChange = new RecipientDocumentChange();
-        private String tooltip = "<html>" +
-                    "Jméno nebo telefonní číslo kontaktu.<br><br>" +
-                    "Pro odeslání zprávy více kontaktům stiskněte Shift nebo Ctrl<br>" +
-                    "při označování kontaktů v seznamu.";
-        private String tooltipTip = "<br><br>TIP: Vyplňte výchozí předčíslí země v nastavení programu a<br>" +
-                        "nebudete jej muset vždy vypisovat do telefonního čísla.";
+        private String tooltip = l10n.getString("SMSPanel.recipientTextField.tooltip");
+        private String tooltipTip = l10n.getString("SMSPanel.recipientTextField.tooltip.tip");
         
         public RecipientTextField() {
 
@@ -947,16 +944,16 @@ public class SMSPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar fullProgressBar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel gatewayLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private esmska.gui.OperatorComboBox operatorComboBox;
+    private javax.swing.JLabel recipientLabel;
     private javax.swing.JTextField recipientTextField;
     private javax.swing.JButton sendButton;
     private javax.swing.JProgressBar singleProgressBar;
     private javax.swing.JLabel smsCounterLabel;
     private javax.swing.JTextPane smsTextPane;
+    private javax.swing.JLabel textLabel;
     // End of variables declaration//GEN-END:variables
     
 }
