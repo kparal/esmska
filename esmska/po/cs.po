@@ -1,0 +1,1822 @@
+#. extracted from ../src/esmska/resources/l10n.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-16 16:21+0200\n"
+"PO-Revision-Date: 2008-09-16 16:20+0100\n"
+"Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
+"Language-Team: cs <cs@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.1.1\n"
+
+#: AboutFrame.Acknowledge
+msgid "I acknowledge that"
+msgstr "Beru na vědomí"
+
+#: AboutFrame.Credits
+msgid "Credits"
+msgstr "Zásluhy"
+
+#: AboutFrame.License
+msgid "License"
+msgstr "Licence"
+
+#: AboutFrame.Thank_you
+msgid "Thank you"
+msgstr "Děkuji"
+
+#: AboutFrame.creditsButton.text
+msgid "C&redits"
+msgstr "Zá&sluhy"
+
+#: AboutFrame.jLabel3.text
+msgid "Sending SMS over Internet."
+msgstr "Posílání SMS přes Internet."
+
+#: AboutFrame.jLabel5.text
+msgid "© 2007-2008 Kamil Páral"
+msgstr "© 2007-2008 Kamil Páral"
+
+#: AboutFrame.licenseButton.text
+msgid "&License"
+msgstr "&Licence"
+
+#: AboutFrame.linkButton.text
+msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
+msgstr ""
+"<html><a href=\"http://esmska.googlecode.com/\">Domovská stránka</a></html>"
+
+#: AboutFrame.linkButton.toolTipText
+msgid ""
+"<html>\n"
+"Show program home page\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Zobrazit domovskou stránku programu\n"
+"</html>"
+
+#: AboutFrame.supportButton.text
+msgid ""
+"<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
+"project</a></html>"
+msgstr ""
+"<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Podpořte "
+"projekt</a></html>"
+
+#: AboutFrame.supportButton.toolTipText
+msgid ""
+"<html>\n"
+"Do you like this project? Help to keep it running...\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Líbí se vám tento projekt? Pomozte jej udržet v chodu...\n"
+"</html>"
+
+#: AboutFrame.title
+msgid "About Esmska"
+msgstr "O Esmsce"
+
+#: About_
+msgid "&About"
+msgstr "&O programu"
+
+#: Add_contact
+msgid "Add contact"
+msgstr "Přidat kontakt"
+
+#: Add_new_contact
+msgid "Add new contact"
+msgstr "Přidat nový kontakt"
+
+#: Cancel
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: ClipboardPopupMenu.Copy
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: ClipboardPopupMenu.Cut
+msgid "Cut"
+msgstr "Vyjmout"
+
+#: ClipboardPopupMenu.Paste
+msgid "Paste"
+msgstr "Vložit"
+
+#: Close_
+msgid "&Close"
+msgstr "&Zavřít"
+
+#: CommandLineParser.available_options
+msgid "Available options:"
+msgstr "Dostupné volby:"
+
+#: CommandLineParser.basic_usage
+msgid "java -jar esmska.jar [OPTIONS]"
+msgstr "java -jar esmska.jar [VOLBY]"
+
+#: CommandLineParser.enable_portable_mode
+msgid ""
+"Enable the portable mode - ask for location of the user configuration "
+"directory. Can't be used with -c."
+msgstr ""
+"Zapnutí přenosného módu - zeptá se na umístění uživatelského adresáře. Nelze "
+"použít s -c."
+
+#. #Single quotes need to be doubled
+#: CommandLineParser.invalid_option
+msgid "Invalid option on the command line! (''{0}'')"
+msgstr "Neplatná volba na příkazovém řádku! (\"{0}\")"
+
+#: CommandLineParser.path
+msgid "path"
+msgstr "cesta"
+
+#: CommandLineParser.set_user_path
+msgid ""
+"Set the path to the user configuration directory. Can't be used with -p."
+msgstr "Nastavení cesty k uživatelskému adresáři. Nelze použít s -p."
+
+#: CommandLineParser.show_this_help
+msgid "Show this help"
+msgstr "Zobrazí tuto nápovědu"
+
+#: CommandLineParser.usage
+msgid "Usage:"
+msgstr "Použití:"
+
+#: Compress_
+msgid "&Compress"
+msgstr "Z&komprimovat"
+
+#: ConfigFrame.checkUpdatesCheckBox.text
+msgid "Check for a &new program version on startup"
+msgstr "Kontrolovat po startu &novou verzi programu"
+
+#: ConfigFrame.checkUpdatesCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"After program startup perform a check whether a new program<br>\n"
+"version was released and eventually notify in status bar\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Po spuštění programu zkontrolovat, zda nevyšla novější<br>\n"
+"verze programu, a případně upozornit ve stavovém řádku\n"
+"</html>"
+
+#: ConfigFrame.clearKeyringButton.text
+msgid "&Delete all login credentials"
+msgstr "O&dstranit všechny přihlašovací údaje"
+
+#: ConfigFrame.clearKeyringButton.toolTipText
+msgid "Deletes all usernames and passwords for all operators"
+msgstr "Vymaže uživatelské jména a hesla u všech operátorů"
+
+#: ConfigFrame.countryCodeLabel.toolTipText
+msgid "The country code for which you have filled out the prefix number"
+msgstr "Kód státu, pro který jste vyplnili telefonní předčíslí"
+
+#: ConfigFrame.countryPrefixTextField.toolTipText
+msgid ""
+"<html>\n"
+"The international country prefix number starting with '+' sign.<br>\n"
+"When filled out this prefix will be supposed to be present with all the "
+"numbers written not in the<br>\n"
+"international format. Also the appeareance of these numbers will be much "
+"shorter in many labels.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Mezinárodní předčíslí země, začínající na znak \"+\".<br>\n"
+"Při vyplnění se dané předčíslí bude předpokládat u všech čísel, které "
+"nebudou<br>\n"
+"zadány v mezinárodním formátu. Taktéž se zkrátí zobrazení těchto čísel v "
+"mnoha popiscích.\n"
+"</html>"
+
+#: ConfigFrame.demandDeliveryReportCheckBox.text
+msgid "Request the &delivery report"
+msgstr "Požadovat poslání doručen&ky"
+
+#: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Will request sending of a delivery report of the message. The report will "
+"come<br>\n"
+"to the phone number of the sender. This function is supported only by some "
+"operators.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Vyžádá si zaslání potvrzení o doručení zprávy. Potvrzení přijde<br>\n"
+"na telefonní číslo odesilatele. Tuto funkci podporují pouze někteří "
+"operátoři.\n"
+"</html>"
+
+#: ConfigFrame.forgetLayoutCheckBox.text
+msgid "Use default form &layout"
+msgstr "Používat výchozí &rozvržení formuláře"
+
+#: ConfigFrame.forgetLayoutCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Current program dimension will be ignored and the default<br>\n"
+"layout will be restored on the next program startup\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Nehledě na aktuální rozměry programu se při příštím<br>\n"
+"spuštění programu opět obnoví výchozí rozvržení\n"
+"</html>"
+
+#: ConfigFrame.httpProxyTextField.toolTipText
+msgid ""
+"<html>\n"
+"HTTP proxy server address in the 'host' or 'host:port' format.\n"
+"Example: proxy.company.com:80\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Adresa HTTP proxy serveru ve formátu \"stroj\" nebo \"stroj:port\".\n"
+"Například: proxy.firma.com:80\n"
+"</html>"
+
+#: ConfigFrame.httpsProxyTextField.toolTipText
+msgid ""
+"<html>\n"
+"HTTPS proxy server address in the 'host' or 'host:port' format.\n"
+"Example: proxy.company.com:443\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Adresa HTTPS proxy serveru ve formátu \"stroj\" nebo \"stroj:port\".\n"
+"Například: proxy.firma.com:443\n"
+"</html>"
+
+#: ConfigFrame.jLabel1.text
+msgid "&Number:"
+msgstr "Čís&lo:"
+
+#: ConfigFrame.jLabel10.text
+msgid "Ope&rator:"
+msgstr "Ope&rátor:"
+
+#: ConfigFrame.jLabel11.text
+msgid "&Username:"
+msgstr "&Uživatelské jméno:"
+
+#: ConfigFrame.jLabel12.text
+msgid "Pa&ssword:"
+msgstr "He&slo:"
+
+#: ConfigFrame.jLabel13.text
+msgid ""
+"<html><i>\n"
+"Although the passwords are stored encrypted the original content may be "
+"retrieved. We strongly suggest to set the access rights in such manner that "
+"no other user has the access to the <u>program configuration directory</u>.\n"
+"</i></html>"
+msgstr ""
+"<html><i>\n"
+"Ačkoliv se hesla ukládají šifrovaně, lze se k původnímu obsahu dostat. "
+"Důrazně doporučujeme nastavit si přístupová práva tak, aby k <u>adresáři s "
+"konfiguračními soubory programu</u> neměl přístup žádný jiný uživatel.\n"
+"</i></html>"
+
+#: ConfigFrame.jLabel14.text
+msgid "H&TTP proxy:"
+msgstr "H&TTP proxy:"
+
+#: ConfigFrame.jLabel15.text
+msgid "HTTP&S proxy:"
+msgstr "HTTP&S proxy:"
+
+#: ConfigFrame.jLabel16.text
+msgid "SO&CKS proxy:"
+msgstr "SO&CKS proxy:"
+
+#: ConfigFrame.jLabel17.text
+msgid ""
+"<html><i>\n"
+"* If you are not directly connected to the Internet it is neccessary that "
+"your proxy works as a SOCKS proxy server.\n"
+"</i></html>"
+msgstr ""
+"<html><i>\n"
+"* Pokud nejste k Internetu připojeni přímo, je nutné, aby vaše proxy "
+"fungovala jako SOCKS proxy server.\n"
+"</i></html>"
+
+#: ConfigFrame.jLabel2.text
+msgid "The &default country prefix number:"
+msgstr "Výchozí pře&dčíslí země:"
+
+#: ConfigFrame.jLabel3.text
+msgctxt "ConfigFrame.jLabel3.text"
+msgid "&Name:"
+msgstr "J&méno:"
+
+#: ConfigFrame.jLabel7.text
+msgid ""
+"<html><i>\n"
+"* A program restart is neccessary to apply the changes!\n"
+"</i></html>"
+msgstr ""
+"<html><i>\n"
+"* Pro projevení změn je nutný restart programu!\n"
+"</i></html>"
+
+#: ConfigFrame.jLabel8.text
+msgid "Show &only operator gateways with names containing:"
+msgstr "Zobrazova&t pouze brány operátorů mající v názvu:"
+
+#: ConfigFrame.jLabel9.text
+msgid ""
+"<html>\n"
+"Here you can set your login credentials for operators which require it.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Zde si můžete nastavit své přihlašovací údaje pro operátory, kteří to "
+"vyžadují.\n"
+"</html>"
+
+#: ConfigFrame.jPanel1.TabConstraints.tabTitle
+msgid "&General"
+msgstr "&Obecné"
+
+#: ConfigFrame.jPanel2.TabConstraints.tabTitle
+msgid "O&perators"
+msgstr "O&perátoři"
+
+#: ConfigFrame.jPanel3.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr "&Vzhled"
+
+#: ConfigFrame.jPanel4.TabConstraints.tabTitle
+msgid "&Login credentials"
+msgstr "Při&hlašovací údaje"
+
+#: ConfigFrame.jPanel5.TabConstraints.tabTitle
+msgid "&Connection"
+msgstr "Připoje&ní"
+
+#: ConfigFrame.jPanel6.TabConstraints.tabTitle
+msgid "P&rivacy"
+msgstr "&Soukromí"
+
+#: ConfigFrame.lafComboBox.toolTipText
+msgid ""
+"<html>\n"
+"Allows you to change the appearance of the program\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Umožní vám změnit vzhled programu\n"
+"</html>"
+
+#: ConfigFrame.loginTextField.toolTipText
+msgid "Username needed for logging in to the operator web gateway"
+msgstr "Uživatelské jméno potřebné k přihlášení k webové bráně operátora"
+
+#: ConfigFrame.lookLabel.text
+msgid "Loo&k:"
+msgstr "Vzhle&d:"
+
+#: ConfigFrame.multiplatform_look
+msgid "Multiplatform"
+msgstr "Meziplatformní"
+
+#: ConfigFrame.notificationAreaCheckBox.text
+msgid "Show icon in the &notification area"
+msgstr "Umístit ikonu do &oznamovací oblasti"
+
+#: ConfigFrame.notificationAreaCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show icon in the notification area of the window manager (so-called "
+"<i>system tray</i>).<br>\n"
+"<br>\n"
+"Beware, when using modern composite window managers (Compiz, Beryl, ...) "
+"this<br>\n"
+"feature is available only from Java 6 Update 10.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Zobrazit ikonu v oznamovací oblasti správce oken (tzv. <i>system tray</i>)."
+"<br>\n"
+"<br>\n"
+"Pozor, u moderních kompozitních správců oken (Compiz, Beryl, ...) je<br>\n"
+"tato funkce dostupná až od Java 6 Update 10.\n"
+"</html>"
+
+#: ConfigFrame.operatorFilterTextField.toolTipText
+msgid ""
+"<html>\n"
+"In the operator list only those will be displayed, which contains<br>\n"
+"a pattern in their name provided in this field. This way you can easily<br>\n"
+"show eg. only operators for country XX by entering pattern [XX].<br>\n"
+"You can enter more patterns separated by comma. Patterns are case "
+"sensitive.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"V seznamu operátorů budou zobrazeni pouze ti, kteří budou<br>\n"
+"obsahovat ve svém názvu vzor zadaný v tomto poli. Jednoduše tak<br>\n"
+"lze například zobrazit pouze operátory pro zemi XX zadáním vzoru [XX].<br>\n"
+"Lze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n"
+"</html>"
+
+#: ConfigFrame.passwordField.toolTipText
+msgid "The password belonging to the username"
+msgstr "Heslo příslušející k danému uživatelskému jménu"
+
+#: ConfigFrame.reducedHistoryCheckBox.text
+msgid "&Restrict the sent message history only to last {0} days."
+msgstr "O&mezit historii odeslaných zpráv pouze na posledních {0} dní."
+
+#: ConfigFrame.reducedHistoryCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"When closing program the sent message history only for the chosen<BR>\n"
+"last period will be saved\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Při ukončení programu se uloží historie odeslaných zpráv<BR>\n"
+"pouze za zvolené poslední období\n"
+"</html>"
+
+#: ConfigFrame.removeAccentsCheckBox.text
+msgid "Remove &diacritics from messages"
+msgstr "Ze zpráv odstraňovat &diakritiku"
+
+#: ConfigFrame.removeAccentsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"All diacritics marks will be removed from the message before sending it\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Před odesláním zprávy z ní odstraní všechna diakritická znaménka\n"
+"</html>"
+
+#: ConfigFrame.remove_credentials
+msgid "Do you really like to remove all entered login credentials?"
+msgstr "Opravdu chcete odstranit všechny vyplněné přihlašovací údaje?"
+
+#: ConfigFrame.sameProxyCheckBox.text
+msgid "Use &this proxy for all protocols"
+msgstr "Pro všechny protokoly použít &tuto proxy"
+
+#: ConfigFrame.sameProxyCheckBox.toolTipText
+msgid "An address in the 'HTTP proxy' field will be used for all protocols"
+msgstr ""
+"Pro všechny protokoly se použije adresa zadaná v políčku \"HTTP proxy\""
+
+#: ConfigFrame.senderNameTextField.toolTipText
+msgid ""
+"<html>\n"
+"Filled in name occupies space in the message but is not visible,<br>\n"
+"therefore the message text coloring and message counter indicator<br>\n"
+"may seem not to match\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Vyplněné jméno zabírá ve zprávě místo, avšak není vidět,<br>\n"
+"takže obarvování textu zprávy a ukazatel počtu sms<br>\n"
+"nebudou zdánlivě spolu souhlasit\n"
+"</html>"
+
+#: ConfigFrame.senderNumberTextField.toolTipText
+msgid "Sender number in international format (starting with '+' sign)"
+msgstr "Číslo odesilatele v mezinárodním formátu (začínající na znak \"+\")"
+
+#: ConfigFrame.socksProxyTextField.toolTipText
+msgid ""
+"<html>\n"
+"SOCKS proxy server address in the 'host' or 'host:port' format.\n"
+"Example: proxy.company.com:1080\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Adresa SOCKS proxy serveru ve formátu \"host\" nebo \"host:port\".\n"
+"Například: proxy.firma.com:1080\n"
+"</html>"
+
+#: ConfigFrame.startMinimizedCheckBox.text
+msgid "Hide program to &icon on startup"
+msgstr "Po startu skrýt program do ikon&y"
+
+#: ConfigFrame.startMinimizedCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Immediatelly after startup the program will be hidden<br>\n"
+"to the icon in the notification area\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Program bude okamžitě po spuštění schován<br>\n"
+"do ikony v oznamovací oblasti\n"
+"</html>"
+
+#. #Single quotes need to be doubled
+#: ConfigFrame.state
+msgid "(country: {0})"
+msgstr "(stát: {0})"
+
+#: ConfigFrame.substanceWarning.text
+msgid ""
+"<html><i>\n"
+"** The Substance look is not recommended for your Java version (OpenJDK)!\n"
+"</i></html>"
+msgstr ""
+"<html><i>\n"
+"** Vzhled Substance není pro vaši verzi Javy (OpenJDK) doporučen!\n"
+"</i></html>"
+
+#: ConfigFrame.substanceWarning.toolTipText
+msgid ""
+"<html>\n"
+"Some problems are known when using Substance look with OpenJDK.<br>\n"
+"Use rather Sun Java to use this look.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Jsou známy problémy při provozování vzhledů Substance na OpenJDK.<br>\n"
+"Pro tento vzhled použijte raději Sun Javu.\n"
+"</html>"
+
+#: ConfigFrame.system_look
+msgid "System"
+msgstr "Systémový"
+
+#: ConfigFrame.themeComboBox.toolTipText
+msgid ""
+"<html>\n"
+"Color motives for the chosen look\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Barevná schémata pro zvolený vzhled\n"
+"</html>"
+
+#: ConfigFrame.themeLabel.text
+msgid "The&me:"
+msgstr "&Motiv:"
+
+#: ConfigFrame.tipsCheckBox.text
+msgid "Show program &tip on startup"
+msgstr "Po spuštění zobrazit &tip programu"
+
+#: ConfigFrame.tipsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show a random tip about working with the program<br>\n"
+"in the status bar on program startup\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Po spuštění programu zobrazit ve stavovém řádku<br>\n"
+"náhodný tip ohledně práce s programem\n"
+"</html>"
+
+#: ConfigFrame.title
+msgid "Preferences - Esmska"
+msgstr "Nastavení - Esmska"
+
+#: ConfigFrame.toolbarVisibleCheckBox.text
+msgid "Show the &toolbar"
+msgstr "Zobrazit panel &nástrojů"
+
+#: ConfigFrame.toolbarVisibleCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show the toolbar which helps to access some actions with mouse more easily\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Zobrazit panel nástrojů, který umožňuje rychlejší ovládání myší některých "
+"akcí\n"
+"</html>"
+
+#: ConfigFrame.unknown_look
+msgid "Unknown"
+msgstr "Neznámý"
+
+#: ConfigFrame.unknown_state
+msgid "(unknown state)"
+msgstr "(neznámý stát)"
+
+#: ConfigFrame.useProxyCheckBox.text
+msgid "Use pro&xy server *"
+msgstr "Používat pro&xy server *"
+
+#: ConfigFrame.useProxyCheckBox.toolTipText
+msgid "Whether a proxy server should be used for connections"
+msgstr "Zda pro připojení používat proxy server"
+
+#: ConfigFrame.useSenderIDCheckBox.text
+msgid "Add a sender &signature to the message"
+msgstr "Připojovat ke zprávě po&dpis odesilatele"
+
+#: ConfigFrame.useSenderIDCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"With signature added the SMS will come to the recipient from the entered "
+"number<br>\n"
+"and signed with entered name. Only some operators support this feature.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Při připojení podpisu přijde SMS adresátovi ze zadaného čísla<br>\n"
+"a podepsaná daným jménem. Tuto funkci podporují pouze někteří operátoři.\n"
+"</html>"
+
+#. #Single quotes need to be doubled
+#: ConfigFrame.user_directory
+msgid "<html>User configuration directory:<br>{0}</html>"
+msgstr "<html>Uživatelský adresář programu:<br>{0}</html>"
+
+#: ConfigFrame.windowCenteredCheckBox.text
+msgid "Start program &centered on the screen"
+msgstr "Spustit program &uprostřed obrazovky"
+
+#: ConfigFrame.windowCenteredCheckBox.toolTipText
+msgid ""
+"<html>Whether the program window should be placed according to operating "
+"system<br>\n"
+"or centered on the screen</html>"
+msgstr ""
+"<html>Zda-li nechat umístění okna programu na operačním systému,<br>\n"
+"nebo ho umístit vždy doprostřed obrazovky</html>"
+
+#: ConfigFrame.windowDecorationsCheckBox.text
+msgid "Use the look also on program &borders *"
+msgstr "Použít vzhled i na o&kraje oken *"
+
+#: ConfigFrame.windowDecorationsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Whether the programs borders should be painter by the chosen look<br>\n"
+"instead of the operating system\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Zda má místo operačního systému vykreslovat<br>\n"
+"rámečky oken zvolený vzhled\n"
+"</html>"
+
+#. #Single quotes need to be doubled
+#: ConfirmingFileChooser.sure_to_replace
+msgid ""
+"<html><h2>A file named ''{0}'' already exists.<br>Do you really want to "
+"replace it?</h2>This file already exists in ''{1}''.<br>By replacing it you "
+"will overwrite the whole it''s contents.</html>"
+msgstr ""
+"<html><h2>Soubor nazvaný \"{0}\" již existuje.<br>Chcete jej nahradit?</h2>V "
+"\"{1}\" již tento soubor existuje.<br>Jeho nahrazení přepíše celý obsah.</"
+"html>"
+
+#: Contact
+msgid "Contact"
+msgstr "Kontakt"
+
+#: ContactPanel.border.title
+msgid "Contacts"
+msgstr "Kontakty"
+
+#: ContactPanel.contactList.toolTipText
+msgid "Contact list (Alt+K)"
+msgstr "Seznam kontaktů (Alt+K)"
+
+#: ContactPanel.remove_following_contacts
+msgid "<html><h3>Really remove following contacts?</h3></html>"
+msgstr "<html><h3>Opravdu odstranit následující kontakty?</h3></html>"
+
+#: Contact_export_
+msgid "Contact &export"
+msgstr "&Export kontaktů"
+
+#: Contact_import_
+msgid "Contact &import"
+msgstr "&Import kontaktů"
+
+#: Create
+msgid "Create"
+msgstr "Vytvořit"
+
+#: Credits.authors
+msgid "Written by:"
+msgstr "Napsali:"
+
+#: Credits.contributors
+msgid "Contributions from:"
+msgstr "Podíleli se:"
+
+#: Credits.graphics
+msgid "Graphics:"
+msgstr "Grafika:"
+
+#: Credits.sponsors
+msgid "Sponsors:"
+msgstr "Sponzoři:"
+
+#: Date
+msgid "Date"
+msgstr "Datum"
+
+#: Delete
+msgid "Delete"
+msgstr "Odstranit"
+
+#: Delete_contacts
+msgid "Delete contacts"
+msgstr "Odstranit kontakty"
+
+#: Delete_messages
+msgid "Delete messages"
+msgstr "Odstranit zprávy"
+
+#: Delete_selected_contacts
+msgid "Delete selected contacts"
+msgstr "Odstranit označené kontakty"
+
+#: Delete_selected_messages
+msgid "Delete selected messages"
+msgstr "Odstranit označené zprávy"
+
+#: Delete_selected_messages_from_history
+msgid "Delete selected messages from history (Alt+D)"
+msgstr "Odstranit označené zprávy z historie (Alt+D)"
+
+#: EditContactPanel.gatewayLabel.text
+msgctxt "EditContactPanel.gatewayLabel.text"
+msgid "&Gateway:"
+msgstr "&Brána:"
+
+#: EditContactPanel.nameLabel.text
+msgctxt "EditContactPanel.nameLabel.text"
+msgid "&Name:"
+msgstr "J&méno:"
+
+#: EditContactPanel.nameTextField.toolTipText
+msgid "Contact name"
+msgstr "Jméno kontaktu"
+
+#: EditContactPanel.numberLabel.text
+msgid "Nu&mber:"
+msgstr "Čísl&o:"
+
+#: EditContactPanel.numberTextField.toolTipText
+msgid ""
+"<html>\n"
+"Telephone number of the contact including the country prefix.<br>\n"
+"Country prefix doesn't have to be filled in if the default<br>\n"
+"country prefix is set in the program preferences.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Telefonní číslo kontaktu včetně předčíslí země.<br>\n"
+"Předčíslí země nemusí být vyplněno, pokud je nastaveno<br>\n"
+"výchozí předčíslí země v nastavení programu.\n"
+"</html>"
+
+#: Edit_contact
+msgid "Edit contact"
+msgstr "Upravit kontakt"
+
+#: Edit_message
+msgid "Edit message"
+msgstr "Upravit zprávu"
+
+#: Edit_selected_contact
+msgid "Edit selected contact"
+msgstr "Upravit označený kontakt"
+
+#: Edit_selected_message
+msgid "Edit selected message"
+msgstr "Upravit označenou zprávu"
+
+#. #Single quotes need to be doubled
+#: ExportManager.cant_write
+msgid "The file ''{0}'' can''t be written!"
+msgstr "Do souboru \"{0}\" nelze zapisovat!"
+
+#: ExportManager.choose_export_file
+msgid "Choose location and type of exported file"
+msgstr "Vyberte umístění a typ exportovaného souboru"
+
+#: ExportManager.contact_export
+msgid "Contact export"
+msgstr "Export kontaktů"
+
+#: ExportManager.contact_list
+msgid "Contact list"
+msgstr "Seznam kontaktů"
+
+#: ExportManager.csv_filter
+msgctxt "ExportManager.csv_filter"
+msgid "CSV files (*.csv)"
+msgstr "CSV soubory (*.csv)"
+
+#: ExportManager.export_failed
+msgid "Contact export failed!"
+msgstr "Export kontaktů selhal!"
+
+#: ExportManager.export_info
+msgid ""
+"<html>You can export your contacts to the CSV or vCard file. These are<br>\n"
+"text files with all the data clearly visible and readable.<br>\n"
+"By using import function you can later on load this data back to Esmska<br>\n"
+"or use it other way.<br><br>\n"
+"The file in vCard format is standardized and you can use it<br>\n"
+"in many other applications. The CSV file has very simple contents<br>\n"
+"and every program creates it a little differently. If you need to change "
+"it's<br>\n"
+"structure to import it in other program you can use some spreadsheet,<br>\n"
+"eg. freely available OpenOffice Calc (www.openoffice.org).<br><br>\n"
+"The file will be saved in the UTF-8 encoding.</html>"
+msgstr ""
+"<html>Své kontakty můžete exportovat do CSV či vCard souboru. To jsou<br>\n"
+"textové soubory, kde všechna data vidíte v čitelné podobě.<br>\n"
+"Pomocí importu můžete data později opět nahrát zpět do Esmsky,<br>\n"
+"nebo je využít jinak.<br><br>\n"
+"Soubor ve formátu vCard je standardizovaný a můžete ho použít<br>\n"
+"v mnoha dalších aplikacích. Soubor CSV má velice jednoduchý obsah<br>\n"
+"a každý program ho vytváří trochu jinak. Při potřebě úpravy jeho<br>\n"
+"struktury pro import v jiném programu využijte nějaký tabulkový<br>\n"
+"procesor, např. zdarma dostupný OpenOffice Calc (www.openoffice.cz)."
+"<br><br>\n"
+"Soubor bude uložen v kódování UTF-8.</html>"
+
+#: ExportManager.export_ok
+msgid "Contact export finished successfully"
+msgstr "Export kontaktů úspěšně dokončen"
+
+#: ExportManager.export_ok!
+msgid "Contact export finished successfully!"
+msgstr "Export kontaktů úspěšně dokončen!"
+
+#: ExportManager.history
+msgid "Sent messages history"
+msgstr "Historie odeslaných sms"
+
+#: ExportManager.login
+msgid "Usernames and password to individual operators"
+msgstr "Uživatelská jména a hesla k jednotlivým operátorům"
+
+#: ExportManager.sms_queue
+msgid "SMS queue to be sent"
+msgstr "Fronta sms k odeslání"
+
+#: ExportManager.vcard_filter
+msgctxt "ExportManager.vcard_filter"
+msgid "vCard files (*.vcard, *.vcf)"
+msgstr "vCard soubory (*.vcard, *.vcf)"
+
+#: Hide_program
+msgid "Hide program"
+msgstr "Skrýt program"
+
+#: History
+msgid "History"
+msgstr "Historie"
+
+#: HistoryFrame.clearButton.toolTipText
+msgid "Clea&r search term (Alt+R, Escape)"
+msgstr "&Vyčistit hledaný výraz (Alt+V, Escape)"
+
+#: HistoryFrame.jLabel1.text
+msgid "Number:"
+msgstr "Číslo:"
+
+#: HistoryFrame.jLabel2.text
+msgid "Name:"
+msgstr "Jméno:"
+
+#: HistoryFrame.jLabel3.text
+msgid "Date:"
+msgstr "Datum:"
+
+#: HistoryFrame.jLabel4.text
+msgid "Gateway:"
+msgstr "Brána:"
+
+#: HistoryFrame.jLabel5.text
+msgid "Sender number:"
+msgstr "Číslo odes.:"
+
+#: HistoryFrame.jLabel6.text
+msgid "Sender name:"
+msgstr "Jméno odes.:"
+
+#: HistoryFrame.remove_selected
+msgid "Really remove all selected messages from history?"
+msgstr "Opravdu z historie odstranit všechny označené zprávy?"
+
+#: HistoryFrame.resend_message
+msgid "Resend message to someone else (Alt+S)"
+msgstr "Přeposlat zprávu někomu jinému (Alt+S)"
+
+#: HistoryFrame.searchField.toolTipText
+msgid "Enter term to search in messages history"
+msgstr "Zadejte výraz pro vyhledání v historii zpráv"
+
+#: HistoryFrame.searchLabel.text
+msgid "&Search:"
+msgstr "&Hledat:"
+
+#: HistoryFrame.title
+msgid "Sent messages history - Esmska"
+msgstr "Historie odeslaných zpráv - Esmska"
+
+#: Import
+msgid "Import"
+msgstr "Importovat"
+
+#: ImportFrame.CSV_filter
+msgctxt "ImportFrame.CSV_filter"
+msgid "CSV files (*.csv)"
+msgstr "CSV soubory (*.csv)"
+
+#: ImportFrame.Select
+msgctxt "ImportFrame.Select"
+msgid "Select"
+msgstr "Zvolit"
+
+#: ImportFrame.backButton.text
+msgid "&Back"
+msgstr "&Zpět"
+
+#: ImportFrame.browseButton.text
+msgid "B&rowse..."
+msgstr "P&rocházet..."
+
+#: ImportFrame.browseButton.toolTipText
+msgid "Find contacts file using dialog"
+msgstr "Najít soubor s kontakty pomocí dialogu"
+
+#: ImportFrame.choose_export_file
+msgid "Choose the file with exported contacts"
+msgstr "Vyberte soubor s exportovanými kontakty"
+
+#: ImportFrame.encodingUTF8
+msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
+msgstr "<html>Program předpokládá, že soubor je v kódování UTF-8.</html>"
+
+#: ImportFrame.encodingWin1250
+msgid ""
+"<html>The program expects the file to be in the windows-1250 encoding (the "
+"default file encoding for czech MS Windows).</html>"
+msgstr ""
+"<html>Program předpokládá, že soubor je v kódování windows-1250 (výchozí "
+"kódování souborů pro české MS Windows).</html>"
+
+#: ImportFrame.fileLabel.text
+msgid "Choose input file:"
+msgstr "Zvolte vstupní soubor:"
+
+#: ImportFrame.fileTextField.toolTipText
+msgid "The path to contacts file"
+msgstr "Cesta k souboru s kontakty"
+
+#. #Single quotes need to be doubled
+#: ImportFrame.file_cant_be_read
+msgid "The file {0} can''t be read!"
+msgstr "Soubor {0} nelze přečíst!"
+
+#: ImportFrame.forwardButton.text
+msgid "&Forward"
+msgstr "&Pokračovat"
+
+#: ImportFrame.infoDreamComSE
+msgid ""
+"<html>First you need to export contacts from DreamCom SE. Run the program, "
+"go to the contact list and by using right mouse button export all your "
+"contacts to CSV file. Select that file here.</html>"
+msgstr ""
+"<html>Nejprve musíte exportovat kontakty z programu DreamCom SE. Spusťte "
+"uvedený program, přejděte do adresáře kontaktů a pomocí pravého myšítka "
+"exportujte všechny své kontakty do CSV souboru. Tento soubor zde následně "
+"vyberte.</html>"
+
+#: ImportFrame.infoEsmska
+msgid ""
+"<html>To import contacts you need to have a CSV file prepared. You can "
+"create it by using \"Export contacts\" function. Select that file here.</"
+"html>"
+msgstr ""
+"<html>Pro import kontaktů potřebujete mít nachystaný CSV soubor vytvořený "
+"pomocí funkce \"Exportovat kontakty\". Tento soubor zde vyberte.</html>"
+
+#: ImportFrame.infoKubik
+msgid ""
+"<html>First you need to export contacts from Kubík SMS DreamCom. Run the "
+"program, go to the contact list and by using right mouse button export all "
+"your contacts to CSV file. Select that file here.</html>"
+msgstr ""
+"<html>Nejprve musíte exportovat kontakty z programu Kubík SMS DreamCom. "
+"Spusťte uvedený program, přejděte do adresáře kontaktů a pomocí pravého "
+"myšítka exportujte všechny své kontakty do CSV souboru. Tento soubor zde "
+"následně vyberte.</html>"
+
+#: ImportFrame.infoVcard
+msgid ""
+"<html>To import contacts you need to have a VCARD or VCF file prepared, "
+"which can be created by an application containing your contacts. Select that "
+"file here.</html>"
+msgstr ""
+"<html>Pro import kontaktů potřebujete mít nachystaný VCARD či VCF soubor, "
+"který vám vytvoří aplikace obsahující vaše kontakty. Tento soubor zde "
+"vyberte.</html>"
+
+#: ImportFrame.invalid_file
+msgid ""
+"<html><h2>There was an error while parsing file!</h2>The file probably "
+"contains invalid data.</html>"
+msgstr ""
+"<html><h2>Nastala chyba při zpracování souboru!</h2>Soubor zřejmě neobsahuje "
+"platné údaje.</html>"
+
+#: ImportFrame.jLabel1.text
+msgid "Following new contacts were found:"
+msgstr "Byly nalezeny následující nové kontakty:"
+
+#: ImportFrame.jLabel2.text
+msgid ""
+"<html>\n"
+"Contact import will allow you to read your contacts from another application "
+"a copy them to Esmska. Contacts in your old application will remain intact.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Import kontaktů vám dovolí načíst vaše kontakty z jiné aplikace a zkopírovat "
+"je do Esmsky. V původní aplikaci zůstanou vaše kontakty nedotčeny.\n"
+"</html>"
+
+#: ImportFrame.jLabel22.text
+msgid ""
+"<html>\n"
+"The file will be analyzed and then a list of contacts available for import "
+"will be shown to you. No changes will be made yet.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Soubor bude prozkoumán a následně vám bude vypsán seznam kontaktů dostupných "
+"pro import. Žádné změny zatím nebudou provedeny.\n"
+"</html>"
+
+#: ImportFrame.jLabel3.text
+msgid "Choose from which application you want to import contacts:"
+msgstr "Vyberte, ze které aplikace chcete importovat kontakty:"
+
+#: ImportFrame.jLabel4.text
+msgid ""
+"Or choose the type of the standardized file format you have the contacts in:"
+msgstr ""
+"Nebo zvolte, ve kterém ze standardizovaných formátů souborů kontakty máte:"
+
+#: ImportFrame.jLabel8.text
+msgid "If you want to import these contacts press Import."
+msgstr "Pokud chcete tyto kontakty importovat, stiskněte Importovat."
+
+#: ImportFrame.problemLabel.text
+msgid ""
+"<html>\n"
+"If you have a problem with import, please check whether there is a newer "
+"Esmska release and try to use it.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Pokud budete mít problémy s importem, ověřte, zda nevyšla novější verze "
+"Esmsky, a zkuste to v ní.\n"
+"</html>"
+
+#: ImportFrame.progressBar.string
+msgctxt "ImportFrame.progressBar.string"
+msgid "Please wait..."
+msgstr "Prosím čekejte..."
+
+#: ImportFrame.title
+msgid "Contact import - Esmska"
+msgstr "Import kontaktů - Esmska"
+
+#: ImportFrame.vCard_filter
+msgctxt "ImportFrame.vCard_filter"
+msgid "vCard files (*.vcard, *.vcf)"
+msgstr "vCard soubory (*.vcard, *.vcf)"
+
+#: ImportFrame.validOperatorCheckBox.text
+msgid "Import only contacts with known operator"
+msgstr "Importovat pouze kontakty se známým operátorem"
+
+#: ImportFrame.validOperatorCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"If checked then contacts will be shown in the list and will be imported only "
+"when<br>\n"
+"they have operator this program can work with\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Pokud je pole zatrhnuto, zobrazí se v seznamu a budou importovány<br>\n"
+"pouze ty kontakty, s jejichž operátory umí tento program pracovat\n"
+"</html>"
+
+#: LogFrame.clearButton.text
+msgid "Clea&r"
+msgstr "&Vyčistit"
+
+#: LogFrame.clearButton.toolTipText
+msgid "Clears current log"
+msgstr "Vymaže aktuální protokol"
+
+#: LogFrame.copyButton.text
+msgid "Co&py to clipboard"
+msgstr "Zkopírovat do &schránky"
+
+#: LogFrame.copyButton.toolTipText
+msgid "Copy the whole log contents to the system clipboard"
+msgstr "Zkopíruje celý obsah protokolu do systémové schránky"
+
+#: LogFrame.title
+msgid "Log - Esmska"
+msgstr "Protokol - Esmska"
+
+#: Log_
+msgid "&Log"
+msgstr "&Protokol"
+
+#: Main.already_running
+msgid ""
+"<html><h2>Esmska is already running!</h2>Esmska is already once started. We "
+"strongly discourage you from starting another<br>instances of the program "
+"because it may cause a user data loss.</html>"
+msgstr ""
+"<html><h2>Esmska již jednou běží!</h2>Esmska je již jednou spuštěna. Důrazně "
+"nedoporučujeme spouštět další<br>instance programu, neboť může dojít ke "
+"ztrátě uživatelských dat.</html>"
+
+#: Main.cant_read_config
+msgid "The user configuration directory can't be read or written!"
+msgstr "Nepodařilo se vytvořit adresář nebo číst z adresáře s konfigurací!"
+
+#: Main.choose_config_files
+msgid "Choose the location of the configuration files"
+msgstr "Zvolte umístění konfiguračních souborů"
+
+#: Main.no_javascript
+msgid ""
+"<html>You current Java doesn't support execution of the JavaScript "
+"files<br>which is necessary for the program to work properly. It is "
+"recommended to use <br>Java from Sun. The program will now exit.</html>"
+msgstr ""
+"<html>Vaše aktuální Java nepodporuje vykonávání JavaScriptových souborů,"
+"<br>což je ke správné funkci programu nezbytné. Je doporučené "
+"používat<br>Javu od firmy Sun. Program se nyní ukončí.</html>"
+
+#: Main.run_anyway
+msgid "Run anyway"
+msgstr "Přesto spustit"
+
+#: Main.unsupported_java
+msgid ""
+"You are probably running the program on an unsupported Java version! Program "
+"might not work correctly with it! The tested Java versions are: Sun Java 6, "
+"OpenJDK 6, Apple Java 6."
+msgstr ""
+"Zřejmě program spouštíte na nepodporované verzi Javy! Program s ní nemusí "
+"pracovat správně! Ozkoušené verze Javy jsou: Sun Java 6, OpenJDK 6, Apple "
+"Java 6."
+
+#: MainFrame.Quit_program
+msgid "Quit program"
+msgstr "Ukončit program"
+
+#: MainFrame.cant_create_program_dir
+msgid "Directory with program settings can't be created!"
+msgstr "Nepovedlo se vytvořit adresář s nastavením programu!"
+
+#: MainFrame.cant_save_config
+msgid "Some of the configuration files couldn't be saved!"
+msgstr "Některé konfigurační soubory nemohly být uloženy!"
+
+#: MainFrame.compressButton.toolTipText
+msgid "Compress message (Ctrl+K)"
+msgstr "Zkomprimovat zprávu (Ctrl+K)"
+
+#: MainFrame.configure_program_behaviour
+msgid "Configure program behaviour"
+msgstr "Nastavit chování programu"
+
+#: MainFrame.export_contacts_to_file
+msgid "Export contacts to file"
+msgstr "Exportovat kontakty do souboru"
+
+#: MainFrame.import_complete
+msgid "Contact import successfully finished"
+msgstr "Import kontaktů úspěšně dokončen"
+
+#: MainFrame.import_contacts_from_other_applications
+msgid "Import contacts from other applications"
+msgstr "Importovat kontakty z jiných aplikací"
+
+#: MainFrame.messageMenu.text
+msgid "&Message"
+msgstr "&Zpráva"
+
+#: MainFrame.new_program_version
+msgid "A new program version has been released!"
+msgstr "Byla vydána nová verze programu!"
+
+#: MainFrame.no_operators
+msgid ""
+"<html>\n"
+"<h2>No operators can be found!</h2>\n"
+"The program is useless without the operators. The cause of the problem may "
+"be:<br>\n"
+"<ul>\n"
+"<li>Your program is incorrectly installed and some of the files<br>\n"
+"are missing or are corrupted. Try to download it again.</li>\n"
+"<li>The operating system has wrongly set the program path.<br>\n"
+"Instead of clicking on <i>esmska.jar</i> try to run the program rather "
+"using<br>\n"
+"the <i>esmska.sh</i> file (in Linux, etc) or the <i>esmska.bat</i> (in "
+"Windows).</li>\n"
+"</ul></html>"
+msgstr ""
+"<html>\n"
+"<h2>Nepodařilo se nalézt žádné operátory!</h2>\n"
+"Bez operátorů je program nepoužitelný. Problém může pramenit z těchto příčin:"
+"<br>\n"
+"<ul>\n"
+"<li>Váš program je nekorektně nainstalován a chybí mu některé<br>\n"
+"soubory nebo jsou poškozeny. Zkuste jej stáhnout znovu.</li>\n"
+"<li>Operační systém špatně nastavil cestu k programu.<br>\n"
+"Zkuste místo poklikání na <i>esmska.jar</i> raději program spustit "
+"pomocí<br>\n"
+"souboru <i>esmska.sh</i> (v Linuxu, apod) nebo <i>esmska.bat</i> (ve "
+"Windows).</li>\n"
+"</ul></html>"
+
+#: MainFrame.programMenu.text
+msgid "P&rogram"
+msgstr "P&rogram"
+
+#: MainFrame.redoButton.toolTipText
+msgid "Redo (Ctrl+Y)"
+msgstr "Vpřed (Ctrl+Y)"
+
+#: MainFrame.show_history_of_sent_messages
+msgid "Show history of sent messages"
+msgstr "Zobrazit historii odeslaných zpráv"
+
+#: MainFrame.show_information_about_program
+msgid "Show program information"
+msgstr "Zobrazit informace o programu"
+
+#. #Single quotes need to be doubled
+#: MainFrame.sms_failed
+msgid "Message for {0} couldn''t be sent!"
+msgstr "Zprávu pro {0} se nepodařilo odeslat!"
+
+#. #Single quotes need to be doubled
+#: MainFrame.sms_failed2
+msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
+msgstr "<html><h2>Zprávu pro \"{0}\" se nepovedlo odeslat!</h2>{1}</html>"
+
+#. #Single quotes need to be doubled
+#: MainFrame.sms_sent
+msgid "Message for {0} sent."
+msgstr "Zpráva pro {0} odeslána."
+
+#: MainFrame.tip
+msgid "Tip:"
+msgstr "Tip:"
+
+#: MainFrame.toolsMenu.text
+msgid "&Tools"
+msgstr "&Nástroje"
+
+#: MainFrame.undoButton.toolTipText
+msgid "Undo (Ctrl+Z)"
+msgstr "Zpět (Ctrl+Z)"
+
+#: Message_history_
+msgid "Message &history"
+msgstr "&Historie zpráv"
+
+#: Move_down
+msgid "Move down"
+msgstr "Přesunout níž"
+
+#: Move_up
+msgid "Move up"
+msgstr "Přesunout výš"
+
+#: Multiple_sending
+msgid "Multiple sending"
+msgstr "Hromadné odesílání"
+
+#: New_contact
+msgid "New contact"
+msgstr "Nový kontakt"
+
+#: NotificationIcon.Pause/unpause_sending
+msgid "Pause/unpause sending"
+msgstr "Pozastavit/spustit odesílání"
+
+#: OperatorComboBox.Choose_suitable_gateway
+msgid "Choose suitable gateway"
+msgstr "Zvolit vhodnou bránu"
+
+#: OperatorComboBox.Choose_suitable_gateway_for_provided_number
+msgid "Choose suitable gateway for provided number"
+msgstr "Vybrat vhodnou bránu pro zadané číslo"
+
+#: OperatorComboBox.List_of_available_operators_web_gateways
+msgid "List of available operators web gateways"
+msgstr "Seznam dostupných webových bran operátorů"
+
+#: OperatorExecutor.ERROR_LIMIT_REACHED
+msgid ""
+"You are sending the message to early. The operator either requires a certain "
+"interval<br>you have to wait before sending another message or it "
+"limits<br>the maximum number of possible messages in some time period. Try "
+"it later."
+msgstr ""
+"Odesíláte zprávu příliš brzy. Operátor buď vyžaduje určitý interval,"
+"<br>který je nutný vyčkat před odesláním další zprávy, nebo "
+"omezuje<br>maximální možný počet zpráv za jistý časový úsek. Zkuste to "
+"později."
+
+#: OperatorExecutor.ERROR_OPERATOR_MESSAGE
+msgid "A message from operator:<br>"
+msgstr "Zpráva od operátora:<br>"
+
+#: OperatorExecutor.ERROR_UKNOWN
+msgid ""
+"An unknown error has occured. The operator may have changed<br>it's webpages "
+"or has a problem with them currently.<br>Try again later.<br><br>Also make "
+"sure that you have working connection to the Internet<br>and that you are "
+"using the latest program version.<br><br>If the problems persist and "
+"operator web gateway works,<br>report the problem on program homepage."
+msgstr ""
+"Došlo k neznámé chybě. Operátor možná změnil<br>své webové stránky, nebo s "
+"nimi má aktuálně potíže.<br>Zkuste to později.<br><br>Taktéž se ujistěte, "
+"máte funkční připojení k Internetu<br>a že používáte nejnovější verzi "
+"programu.<br><br>Pokud potíže přetrvají a webová brána operátora funguje,"
+"<br>nahlaste problém na domovských stránkách programu."
+
+#: OperatorExecutor.ERROR_WRONG_AUTH
+msgid ""
+"You have entered incorrect login credentials.<br>This gateway requires "
+"registration and you can't send messages throught it without one.<br>The "
+"login credentials can be entered in program preferences."
+msgstr ""
+"Zadali jste nesprávné přihlašovací údaje.<br>Tato brána vyžaduje registraci, "
+"bez ní přes ni nelze zprávy posílat.<br>Přihlašovací údaje můžete vyplnit v "
+"nastavení programu."
+
+#: OperatorExecutor.ERROR_WRONG_CODE
+msgid "You have entered the wrong security code."
+msgstr "Špatně jste opsali bezpečnostní kód."
+
+#: OperatorExecutor.ERROR_WRONG_NUMBER
+msgid "You have entered incorrect recipient number."
+msgstr "Zadali jste nesprávné číslo příjemce."
+
+#: OperatorExecutor.ERROR_WRONG_SIGNATURE
+msgid "You have entered incorrent sender signature (number or name)."
+msgstr "Zadali jste nesprávný podpis odesilatele (číslo či jméno)."
+
+#: OperatorExecutor.ERROR_WRONG_TEXT
+msgid "You have entered incorrect message text. Empty or too long?"
+msgstr "Zadali jste nesprávný text zprávy. Prázdný, nebo příliš dlouhý?"
+
+#: OperatorExecutor.INFO_FREE_SMS_REMAINING
+msgid "Free SMS remaining:"
+msgstr "Zbývá volných SMS:"
+
+#: OperatorExecutor.INFO_NOT_PROVIDED
+msgid ""
+"The gateway doesn't provide any information about successful sending. The "
+"message might be and <b>might not be</b> delivered."
+msgstr ""
+"Brána neposkytuje žádné informace o úspěšném odeslání. Zpráva mohla a "
+"<b>nemusela</b> být doručena."
+
+#: OperatorExecutor.recognize_number
+msgid "Please enter the code from the picture:"
+msgstr "Opište kód z obrázku:"
+
+#: OperatorInterpreter.unknown_operator
+msgid "Unknown operator!"
+msgstr "Neznámý operátor!"
+
+#: Pause_queue
+msgid "Pause queue"
+msgstr "Pozastavit frontu"
+
+#: Pause_sms_queue
+msgid "Pause sms queue"
+msgstr "Pozastavit frontu sms"
+
+#: Preferences_
+msgid "&Preferences"
+msgstr "&Nastavení"
+
+#: Program_start
+msgid "Program start"
+msgstr "Spuštění programu"
+
+#: QueuePanel.Move_sms_down_in_the_queue
+msgid "Move sms down in the queue"
+msgstr "Posunout sms ve frontě níže"
+
+#: QueuePanel.Move_sms_up_in_the_queue
+msgid "Move sms up in the queue"
+msgstr "Posunout sms ve frontě výše"
+
+#: QueuePanel.Pause_sending_of_sms_in_the_queue
+msgid "Pause sending of sms in the queue"
+msgstr "Pozastavit odesílání sms ve frontě (Alt+P)"
+
+#: QueuePanel.Unpause_sending_of_sms_in_the_queue
+msgid "Unpause sending of sms in the queue"
+msgstr "Pokračovat v odesílání sms ve frontě (Alt+P)"
+
+#: QueuePanel.border.title
+msgid "Queue"
+msgstr "Fronta"
+
+#: QueuePanel.hour_shortcut
+msgid "h"
+msgstr "h"
+
+#: QueuePanel.minute_shortcut
+msgid "m"
+msgstr "m"
+
+#: QueuePanel.second_shortcut
+msgid "s"
+msgstr "s"
+
+#: Quit
+msgid "Quit"
+msgstr "Ukončit"
+
+#: Quit_
+msgid "&Quit"
+msgstr "U&končit"
+
+#: Recipient
+msgid "Recipient"
+msgstr "Příjemce"
+
+#: Redo_
+msgid "&Redo"
+msgstr "&Vpřed"
+
+#: Replace
+msgid "Replace"
+msgstr "Nahradit"
+
+#: SMSPanel.Redo_change_in_message_text
+msgid "Redo undone change in message text"
+msgstr "Zopakovat vrácenou změnu v textu zprávy"
+
+#: SMSPanel.Text_is_too_long!
+msgid "Text is too long!"
+msgstr "Text je příliš dlouhý!"
+
+#: SMSPanel.Undo_change_in_message_text
+msgid "Undo change in message text"
+msgstr "Vrátit změnu v textu zprávy"
+
+#: SMSPanel.border.title
+msgid "Message"
+msgstr "Zpráva"
+
+#: SMSPanel.compress
+msgid ""
+"Omit whitespace from current message and rewrite it to \"CamelCase\" format"
+msgstr ""
+"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \\\"CamelCase\\\""
+
+#. #Single quotes need to be doubled
+#: SMSPanel.fullProgressBar
+msgid ""
+"<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
+msgstr "<html>Znaků v celé zprávě: <b>{0}/{1}</b> (zbývá <b>{2}</b>)</html>"
+
+#: SMSPanel.gatewayLabel.text
+msgctxt "SMSPanel.gatewayLabel.text"
+msgid "&Gateway:"
+msgstr "&Brána:"
+
+#: SMSPanel.recipientLabel.text
+msgid "R&ecipient:"
+msgstr "Příj&emce:"
+
+#: SMSPanel.recipientTextField.tooltip
+msgid ""
+"<html>\n"
+"Contact's name or phone number.<br><br>\n"
+"To send message to multiple contacts hold Shift or Ctrl<br>\n"
+"when selecting contacts in the list."
+msgstr ""
+"<html>\n"
+"Jméno nebo telefonní číslo kontaktu.<br><br>\n"
+"Pro odeslání zprávy více kontaktům stiskněte Shift nebo Ctrl<br>\n"
+"při označování kontaktů v seznamu."
+
+#: SMSPanel.recipientTextField.tooltip.tip
+msgid ""
+"<br><br>TIP: Fill in the default country prefix in program preferences "
+"and<br>\n"
+"you won't have to always fill it in with the phone number."
+msgstr ""
+"<br><br>TIP: Vyplňte výchozí předčíslí země v nastavení programu a<br>\n"
+"nebudete jej muset vždy vypisovat do telefonního čísla."
+
+#: SMSPanel.sendButton.toolTipText
+msgid "Send message (Alt+S, Ctrl+Enter)"
+msgstr "Odeslat zprávu (Alt+S, Ctrl+Enter)"
+
+#. #Single quotes need to be doubled
+#: SMSPanel.singleProgressBar
+msgid ""
+"<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
+msgstr ""
+"<html>Znaků v aktuální zprávě: <b>{0}/{1}</b> (zbývá <b>{2}</b>)</html>"
+
+#. #Single quotes need to be doubled
+#: SMSPanel.smsCounterLabel.1
+msgid "{0} chars ({1} sms)"
+msgstr "{0} znaků ({1} sms)"
+
+#. #Single quotes need to be doubled
+#: SMSPanel.smsCounterLabel.2
+msgid "{0} chars (can''t be sent!)"
+msgstr "{0} znaků (nelze odeslat!)"
+
+#: SMSPanel.smsCounterLabel.text
+msgid "0 chars (0 sms)"
+msgstr "0 znaků (0 sms)"
+
+#: SMSPanel.textLabel.text
+msgid "Te&xt:"
+msgstr "&Text:"
+
+#: SMSPanel.textLabel.toolTipText
+msgid ""
+"<html>\n"
+"The very message text\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Vlastní text zprávy\n"
+"</html>"
+
+#: SMSSender.NO_REASON_ERROR
+msgid ""
+"Author of the script has not provided any additional information<br>about "
+"cause of the failure for the web gateway used."
+msgstr ""
+"Autor skriptu pro použitou webovou bránu neposkytl<br>žádné další informace "
+"o příčině selhání."
+
+#: SMSSender.no_operator
+msgid "no operator"
+msgstr "žádný operátor"
+
+#. #Single quotes need to be doubled
+#: SMSSender.sending_message
+msgid "Sending message to {0} ({1}) ..."
+msgstr "Posílám zprávu pro {0} ({1}) ..."
+
+#: Save
+msgid "Save"
+msgstr "Uložit"
+
+#: Select
+msgctxt "Select"
+msgid "Select"
+msgstr "Vybrat"
+
+#: Send_
+msgid "&Send"
+msgstr "Po&slat"
+
+#: Send_message
+msgid "Send message"
+msgstr "Odeslat zprávu"
+
+#: Show/hide_program
+msgid "Show/hide program"
+msgstr "Skrýt/zobrazit program"
+
+#: Show_application_log
+msgid "Show application log"
+msgstr "Zobrazit aplikační protokol"
+
+#: Show_program
+msgid "Show program"
+msgstr "Zobrazit program"
+
+#: StatusPanel.progressBar.string
+msgctxt "StatusPanel.progressBar.string"
+msgid "Please wait..."
+msgstr "Prosím čekejte..."
+
+#: StatusPanel.statusMessageLabel.text
+msgid "Welcome"
+msgstr "Vítejte"
+
+#: StatusPanel.statusMessageLabel.toolTipText
+msgid "Click to show application log"
+msgstr "Klikněte pro zobrazení aplikačního protokolu"
+
+#: Text
+msgid "Text"
+msgstr "Text"
+
+#. #Write the tip as short as possible
+#: Tip.1
+msgid ""
+"To send multiple messages select more contacts in the list using Ctrl key."
+msgstr ""
+"Pro hromadné odesílání zpráv označte více kontaktů v seznamu pomocí klávesy "
+"Ctrl."
+
+#. #Write the tip as short as possible
+#: Tip.10
+msgid "Program appearance can be modified according to your taste."
+msgstr "Vzhled programu lze změnit, přesně podle vašeho vkusu."
+
+#. #Write the tip as short as possible
+#: Tip.11
+msgid "In preferences you can restrict the list of available web gateways."
+msgstr "Dostupný seznam webových bran lze v nastavení omezit jen na vybrané."
+
+#. #Write the tip as short as possible
+#: Tip.12
+msgid ""
+"Many operator gateways support adding of custom signature. See preferences."
+msgstr ""
+"Mnoho bran operátorů podporuje přidání vlastního podpisu. Viz nastavení."
+
+#. #Write the tip as short as possible
+#: Tip.13
+msgid ""
+"Your contacts can be exported as text and therefore can be used elsewhere."
+msgstr ""
+"Vaše kontakty lze exportovat do textového formátu a využít je tak i jinde."
+
+#. #Write the tip as short as possible
+#: Tip.14
+msgid "If the written message is too long use the compress function."
+msgstr "Pokud je napsaná zpráva příliš dlouhá, využijte funkce komprimace."
+
+#. #Write the tip as short as possible
+#: Tip.15
+msgid ""
+"We recommend you to use Linux packages, you'll obtain an auto-update feature."
+msgstr ""
+"Doporučujeme instalovat z linuxových balíčků, získáte tak autom. aktualizaci."
+
+#. #Write the tip as short as possible
+#: Tip.16
+msgid ""
+"Are you a programmer? Write support for a new gateway, little JavaScript is "
+"enough."
+msgstr ""
+"Jste programátor? Napište podporu pro novou bránu, stačí trocha JavaScriptu."
+
+#. #Write the tip as short as possible
+#: Tip.17
+msgid "Something broken? Enhancement suggestion? Let us know on our homepage!"
+msgstr ""
+"Něco nefunguje? Máte návrh na zlepšení? Dejte nám vědět na naší domovské "
+"stránce!"
+
+#. #Write the tip as short as possible
+#: Tip.18
+msgid "Program is open and free. Join in and help us improve it!"
+msgstr ""
+"Program je otevřený a svobodný. Zapojte se i vy a pomozte nám ho zlepšit!"
+
+#. #Write the tip as short as possible
+#: Tip.19
+msgid ""
+"A small donation is one of the options how to support future program "
+"development."
+msgstr ""
+"Malý finanční příspěvek je jedna z možností, jak podpořit další vývoj "
+"programu."
+
+#. #Write the tip as short as possible
+#: Tip.2
+msgid ""
+"Program can be controlled from keyboard easily. Notice the keyboard "
+"shortcuts."
+msgstr ""
+"Program je snadno ovladatelný z klávesnice. Všímejte si klávesových zkratek."
+
+#. #Write the tip as short as possible
+#: Tip.20
+msgid ""
+"By using commandline options you can use program even in café or school."
+msgstr ""
+"Za pomoci voleb přík. řádky můžete program použít třeba i v kavárně nebo "
+"škole."
+
+#. #Write the tip as short as possible
+#: Tip.21
+msgid ""
+"4 of 5 zoologist recommend using the operating system with a penguin logo."
+msgstr "4 z 5 zoologů doporučují používat operační systém s logem tučňáka."
+
+#. #Write the tip as short as possible
+#: Tip.22
+msgid ""
+"Message can be sent using other than default gateway - just pick it from the "
+"list."
+msgstr ""
+"Zprávu můžete poslat i přes jinou nez výchozí bránu - prostě ji zvolte v "
+"seznamu."
+
+#. #Write the tip as short as possible
+#: Tip.23
+msgid "Program can be minimized to a notification area icon. See preferences."
+msgstr ""
+"Program můžete minimalizovat do ikony v oznamovací oblasti. Viz nastavení."
+
+#. #Write the tip as short as possible
+#: Tip.24
+msgid "Bothered by these tips? You can turn them off in preferences."
+msgstr "Obtěžují vás tyto tipy? Můžete si je vypnout v nastavení."
+
+#. #Write the tip as short as possible
+#: Tip.3
+msgid "Your contacts can be imported from many other programs or formats."
+msgstr "Své kontakty můžete importovat z mnoha jiných programů či formátů."
+
+#. #Write the tip as short as possible
+#: Tip.4
+msgid "You can see the application protocol by clicking on the status bar."
+msgstr "Kliknutím na tento stavový řádek zobrazíte protokol aplikace."
+
+#. #Write the tip as short as possible
+#: Tip.5
+msgid "All your sent messages are available in the message history."
+msgstr "V historii zpráv najdete všechny své odeslané zprávy."
+
+#. #Write the tip as short as possible
+#: Tip.6
+msgid "The message history can be search through."
+msgstr "Historii zpráv lze snadno prohledávat."
+
+#. #Write the tip as short as possible
+#: Tip.7
+msgid ""
+"You can search in contact list. Just click into it and write a few letters."
+msgstr ""
+"V seznamu kontaktů lze vyhledávat. Prostě do něj klikněte a napište pár "
+"písmen."
+
+#. #Write the tip as short as possible
+#: Tip.8
+msgid "When searching in contact list use arrows to move to other matches."
+msgstr ""
+"Při vyhledávání v seznamu kontaků se šipkami přesunete na další výsledky."
+
+#. #Write the tip as short as possible
+#: Tip.9
+msgid "Don't forget to provide your country prefix number in the preferences."
+msgstr "Nezapomeňte si v nastavení vyplnit předčíslí své země."
+
+#: Undo_
+msgid "&Undo"
+msgstr "&Zpět"
+
+#: Unknown_operator
+msgid "Unknown operator"
+msgstr "Neznámý operátor"
+
+#: Unpause_queue
+msgid "Unpause queue"
+msgstr "Spustit frontu"
+
+#: Unpause_sms_queue
+msgid "Unpause sms queue"
+msgstr "Znovu spustit frontu sms"

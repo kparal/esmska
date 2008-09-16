@@ -1,0 +1,1582 @@
+#. extracted from ../src/esmska/resources/l10n.properties
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-16 16:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.1.1\n"
+"X-Accelerator-Marker: &\n"
+
+#: AboutFrame.Acknowledge
+msgid "I acknowledge that"
+msgstr ""
+
+#: AboutFrame.Credits
+msgid "Credits"
+msgstr ""
+
+#: AboutFrame.License
+msgid "License"
+msgstr ""
+
+#: AboutFrame.Thank_you
+msgid "Thank you"
+msgstr ""
+
+#: AboutFrame.creditsButton.text
+msgid "C&redits"
+msgstr ""
+
+#: AboutFrame.jLabel3.text
+msgid "Sending SMS over Internet."
+msgstr ""
+
+#: AboutFrame.jLabel5.text
+msgid "© 2007-2008 Kamil Páral"
+msgstr ""
+
+#: AboutFrame.licenseButton.text
+msgid "&License"
+msgstr ""
+
+#: AboutFrame.linkButton.text
+msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
+msgstr ""
+
+#: AboutFrame.linkButton.toolTipText
+msgid ""
+"<html>\n"
+"Show program home page\n"
+"</html>"
+msgstr ""
+
+#: AboutFrame.supportButton.text
+msgid ""
+"<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
+"project</a></html>"
+msgstr ""
+
+#: AboutFrame.supportButton.toolTipText
+msgid ""
+"<html>\n"
+"Do you like this project? Help to keep it running...\n"
+"</html>"
+msgstr ""
+
+#: AboutFrame.title
+msgid "About Esmska"
+msgstr ""
+
+#: About_
+msgid "&About"
+msgstr ""
+
+#: Add_contact
+msgid "Add contact"
+msgstr ""
+
+#: Add_new_contact
+msgid "Add new contact"
+msgstr ""
+
+#: Cancel
+msgid "Cancel"
+msgstr ""
+
+#: ClipboardPopupMenu.Copy
+msgid "Copy"
+msgstr ""
+
+#: ClipboardPopupMenu.Cut
+msgid "Cut"
+msgstr ""
+
+#: ClipboardPopupMenu.Paste
+msgid "Paste"
+msgstr ""
+
+#: Close_
+msgid "&Close"
+msgstr ""
+
+#: CommandLineParser.available_options
+msgid "Available options:"
+msgstr ""
+
+#: CommandLineParser.basic_usage
+msgid "java -jar esmska.jar [OPTIONS]"
+msgstr ""
+
+#: CommandLineParser.enable_portable_mode
+msgid ""
+"Enable the portable mode - ask for location of the user configuration "
+"directory. Can't be used with -c."
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: CommandLineParser.invalid_option
+msgid "Invalid option on the command line! (''{0}'')"
+msgstr ""
+
+#: CommandLineParser.path
+msgid "path"
+msgstr ""
+
+#: CommandLineParser.set_user_path
+msgid ""
+"Set the path to the user configuration directory. Can't be used with -p."
+msgstr ""
+
+#: CommandLineParser.show_this_help
+msgid "Show this help"
+msgstr ""
+
+#: CommandLineParser.usage
+msgid "Usage:"
+msgstr ""
+
+#: Compress_
+msgid "&Compress"
+msgstr ""
+
+#: ConfigFrame.checkUpdatesCheckBox.text
+msgid "Check for a &new program version on startup"
+msgstr ""
+
+#: ConfigFrame.checkUpdatesCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"After program startup perform a check whether a new program<br>\n"
+"version was released and eventually notify in status bar\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.clearKeyringButton.text
+msgid "&Delete all login credentials"
+msgstr ""
+
+#: ConfigFrame.clearKeyringButton.toolTipText
+msgid "Deletes all usernames and passwords for all operators"
+msgstr ""
+
+#: ConfigFrame.countryCodeLabel.toolTipText
+msgid "The country code for which you have filled out the prefix number"
+msgstr ""
+
+#: ConfigFrame.countryPrefixTextField.toolTipText
+msgid ""
+"<html>\n"
+"The international country prefix number starting with '+' sign.<br>\n"
+"When filled out this prefix will be supposed to be present with all the "
+"numbers written not in the<br>\n"
+"international format. Also the appeareance of these numbers will be much "
+"shorter in many labels.\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.demandDeliveryReportCheckBox.text
+msgid "Request the &delivery report"
+msgstr ""
+
+#: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Will request sending of a delivery report of the message. The report will "
+"come<br>\n"
+"to the phone number of the sender. This function is supported only by some "
+"operators.\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.forgetLayoutCheckBox.text
+msgid "Use default form &layout"
+msgstr ""
+
+#: ConfigFrame.forgetLayoutCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Current program dimension will be ignored and the default<br>\n"
+"layout will be restored on the next program startup\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.httpProxyTextField.toolTipText
+msgid ""
+"<html>\n"
+"HTTP proxy server address in the 'host' or 'host:port' format.\n"
+"Example: proxy.company.com:80\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.httpsProxyTextField.toolTipText
+msgid ""
+"<html>\n"
+"HTTPS proxy server address in the 'host' or 'host:port' format.\n"
+"Example: proxy.company.com:443\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.jLabel1.text
+msgid "&Number:"
+msgstr ""
+
+#: ConfigFrame.jLabel10.text
+msgid "Ope&rator:"
+msgstr ""
+
+#: ConfigFrame.jLabel11.text
+msgid "&Username:"
+msgstr ""
+
+#: ConfigFrame.jLabel12.text
+msgid "Pa&ssword:"
+msgstr ""
+
+#: ConfigFrame.jLabel13.text
+msgid ""
+"<html><i>\n"
+"Although the passwords are stored encrypted the original content may be "
+"retrieved. We strongly suggest to set the access rights in such manner that "
+"no other user has the access to the <u>program configuration directory</u>.\n"
+"</i></html>"
+msgstr ""
+
+#: ConfigFrame.jLabel14.text
+msgid "H&TTP proxy:"
+msgstr ""
+
+#: ConfigFrame.jLabel15.text
+msgid "HTTP&S proxy:"
+msgstr ""
+
+#: ConfigFrame.jLabel16.text
+msgid "SO&CKS proxy:"
+msgstr ""
+
+#: ConfigFrame.jLabel17.text
+msgid ""
+"<html><i>\n"
+"* If you are not directly connected to the Internet it is neccessary that "
+"your proxy works as a SOCKS proxy server.\n"
+"</i></html>"
+msgstr ""
+
+#: ConfigFrame.jLabel2.text
+msgid "The &default country prefix number:"
+msgstr ""
+
+#: ConfigFrame.jLabel3.text
+msgctxt "ConfigFrame.jLabel3.text"
+msgid "&Name:"
+msgstr ""
+
+#: ConfigFrame.jLabel7.text
+msgid ""
+"<html><i>\n"
+"* A program restart is neccessary to apply the changes!\n"
+"</i></html>"
+msgstr ""
+
+#: ConfigFrame.jLabel8.text
+msgid "Show &only operator gateways with names containing:"
+msgstr ""
+
+#: ConfigFrame.jLabel9.text
+msgid ""
+"<html>\n"
+"Here you can set your login credentials for operators which require it.\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.jPanel1.TabConstraints.tabTitle
+msgid "&General"
+msgstr ""
+
+#: ConfigFrame.jPanel2.TabConstraints.tabTitle
+msgid "O&perators"
+msgstr ""
+
+#: ConfigFrame.jPanel3.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr ""
+
+#: ConfigFrame.jPanel4.TabConstraints.tabTitle
+msgid "&Login credentials"
+msgstr ""
+
+#: ConfigFrame.jPanel5.TabConstraints.tabTitle
+msgid "&Connection"
+msgstr ""
+
+#: ConfigFrame.jPanel6.TabConstraints.tabTitle
+msgid "P&rivacy"
+msgstr ""
+
+#: ConfigFrame.lafComboBox.toolTipText
+msgid ""
+"<html>\n"
+"Allows you to change the appearance of the program\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.loginTextField.toolTipText
+msgid "Username needed for logging in to the operator web gateway"
+msgstr ""
+
+#: ConfigFrame.lookLabel.text
+msgid "Loo&k:"
+msgstr ""
+
+#: ConfigFrame.multiplatform_look
+msgid "Multiplatform"
+msgstr ""
+
+#: ConfigFrame.notificationAreaCheckBox.text
+msgid "Show icon in the &notification area"
+msgstr ""
+
+#: ConfigFrame.notificationAreaCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show icon in the notification area of the window manager (so-called "
+"<i>system tray</i>).<br>\n"
+"<br>\n"
+"Beware, when using modern composite window managers (Compiz, Beryl, ...) "
+"this<br>\n"
+"feature is available only from Java 6 Update 10.\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.operatorFilterTextField.toolTipText
+msgid ""
+"<html>\n"
+"In the operator list only those will be displayed, which contains<br>\n"
+"a pattern in their name provided in this field. This way you can easily<br>\n"
+"show eg. only operators for country XX by entering pattern [XX].<br>\n"
+"You can enter more patterns separated by comma. Patterns are case "
+"sensitive.\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.passwordField.toolTipText
+msgid "The password belonging to the username"
+msgstr ""
+
+#: ConfigFrame.reducedHistoryCheckBox.text
+msgid "&Restrict the sent message history only to last {0} days."
+msgstr ""
+
+#: ConfigFrame.reducedHistoryCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"When closing program the sent message history only for the chosen<BR>\n"
+"last period will be saved\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.removeAccentsCheckBox.text
+msgid "Remove &diacritics from messages"
+msgstr ""
+
+#: ConfigFrame.removeAccentsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"All diacritics marks will be removed from the message before sending it\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.remove_credentials
+msgid "Do you really like to remove all entered login credentials?"
+msgstr ""
+
+#: ConfigFrame.sameProxyCheckBox.text
+msgid "Use &this proxy for all protocols"
+msgstr ""
+
+#: ConfigFrame.sameProxyCheckBox.toolTipText
+msgid "An address in the 'HTTP proxy' field will be used for all protocols"
+msgstr ""
+
+#: ConfigFrame.senderNameTextField.toolTipText
+msgid ""
+"<html>\n"
+"Filled in name occupies space in the message but is not visible,<br>\n"
+"therefore the message text coloring and message counter indicator<br>\n"
+"may seem not to match\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.senderNumberTextField.toolTipText
+msgid "Sender number in international format (starting with '+' sign)"
+msgstr ""
+
+#: ConfigFrame.socksProxyTextField.toolTipText
+msgid ""
+"<html>\n"
+"SOCKS proxy server address in the 'host' or 'host:port' format.\n"
+"Example: proxy.company.com:1080\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.startMinimizedCheckBox.text
+msgid "Hide program to &icon on startup"
+msgstr ""
+
+#: ConfigFrame.startMinimizedCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Immediatelly after startup the program will be hidden<br>\n"
+"to the icon in the notification area\n"
+"</html>"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: ConfigFrame.state
+msgid "(country: {0})"
+msgstr ""
+
+#: ConfigFrame.substanceWarning.text
+msgid ""
+"<html><i>\n"
+"** The Substance look is not recommended for your Java version (OpenJDK)!\n"
+"</i></html>"
+msgstr ""
+
+#: ConfigFrame.substanceWarning.toolTipText
+msgid ""
+"<html>\n"
+"Some problems are known when using Substance look with OpenJDK.<br>\n"
+"Use rather Sun Java to use this look.\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.system_look
+msgid "System"
+msgstr ""
+
+#: ConfigFrame.themeComboBox.toolTipText
+msgid ""
+"<html>\n"
+"Color motives for the chosen look\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.themeLabel.text
+msgid "The&me:"
+msgstr ""
+
+#: ConfigFrame.tipsCheckBox.text
+msgid "Show program &tip on startup"
+msgstr ""
+
+#: ConfigFrame.tipsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show a random tip about working with the program<br>\n"
+"in the status bar on program startup\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.title
+msgid "Preferences - Esmska"
+msgstr ""
+
+#: ConfigFrame.toolbarVisibleCheckBox.text
+msgid "Show the &toolbar"
+msgstr ""
+
+#: ConfigFrame.toolbarVisibleCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show the toolbar which helps to access some actions with mouse more easily\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.unknown_look
+msgid "Unknown"
+msgstr ""
+
+#: ConfigFrame.unknown_state
+msgid "(unknown state)"
+msgstr ""
+
+#: ConfigFrame.useProxyCheckBox.text
+msgid "Use pro&xy server *"
+msgstr ""
+
+#: ConfigFrame.useProxyCheckBox.toolTipText
+msgid "Whether a proxy server should be used for connections"
+msgstr ""
+
+#: ConfigFrame.useSenderIDCheckBox.text
+msgid "Add a sender &signature to the message"
+msgstr ""
+
+#: ConfigFrame.useSenderIDCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"With signature added the SMS will come to the recipient from the entered "
+"number<br>\n"
+"and signed with entered name. Only some operators support this feature.\n"
+"</html>"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: ConfigFrame.user_directory
+msgid "<html>User configuration directory:<br>{0}</html>"
+msgstr ""
+
+#: ConfigFrame.windowCenteredCheckBox.text
+msgid "Start program &centered on the screen"
+msgstr ""
+
+#: ConfigFrame.windowCenteredCheckBox.toolTipText
+msgid ""
+"<html>Whether the program window should be placed according to operating "
+"system<br>\n"
+"or centered on the screen</html>"
+msgstr ""
+
+#: ConfigFrame.windowDecorationsCheckBox.text
+msgid "Use the look also on program &borders *"
+msgstr ""
+
+#: ConfigFrame.windowDecorationsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Whether the programs borders should be painter by the chosen look<br>\n"
+"instead of the operating system\n"
+"</html>"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: ConfirmingFileChooser.sure_to_replace
+msgid ""
+"<html><h2>A file named ''{0}'' already exists.<br>Do you really want to "
+"replace it?</h2>This file already exists in ''{1}''.<br>By replacing it you "
+"will overwrite the whole it''s contents.</html>"
+msgstr ""
+
+#: Contact
+msgid "Contact"
+msgstr ""
+
+#: ContactPanel.border.title
+msgid "Contacts"
+msgstr ""
+
+#: ContactPanel.contactList.toolTipText
+msgid "Contact list (Alt+K)"
+msgstr ""
+
+#: ContactPanel.remove_following_contacts
+msgid "<html><h3>Really remove following contacts?</h3></html>"
+msgstr ""
+
+#: Contact_export_
+msgid "Contact &export"
+msgstr ""
+
+#: Contact_import_
+msgid "Contact &import"
+msgstr ""
+
+#: Create
+msgid "Create"
+msgstr ""
+
+#: Credits.authors
+msgid "Written by:"
+msgstr ""
+
+#: Credits.contributors
+msgid "Contributions from:"
+msgstr ""
+
+#: Credits.graphics
+msgid "Graphics:"
+msgstr ""
+
+#: Credits.sponsors
+msgid "Sponsors:"
+msgstr ""
+
+#: Date
+msgid "Date"
+msgstr ""
+
+#: Delete
+msgid "Delete"
+msgstr ""
+
+#: Delete_contacts
+msgid "Delete contacts"
+msgstr ""
+
+#: Delete_messages
+msgid "Delete messages"
+msgstr ""
+
+#: Delete_selected_contacts
+msgid "Delete selected contacts"
+msgstr ""
+
+#: Delete_selected_messages
+msgid "Delete selected messages"
+msgstr ""
+
+#: Delete_selected_messages_from_history
+msgid "Delete selected messages from history (Alt+D)"
+msgstr ""
+
+#: EditContactPanel.gatewayLabel.text
+msgctxt "EditContactPanel.gatewayLabel.text"
+msgid "&Gateway:"
+msgstr ""
+
+#: EditContactPanel.nameLabel.text
+msgctxt "EditContactPanel.nameLabel.text"
+msgid "&Name:"
+msgstr ""
+
+#: EditContactPanel.nameTextField.toolTipText
+msgid "Contact name"
+msgstr ""
+
+#: EditContactPanel.numberLabel.text
+msgid "Nu&mber:"
+msgstr ""
+
+#: EditContactPanel.numberTextField.toolTipText
+msgid ""
+"<html>\n"
+"Telephone number of the contact including the country prefix.<br>\n"
+"Country prefix doesn't have to be filled in if the default<br>\n"
+"country prefix is set in the program preferences.\n"
+"</html>"
+msgstr ""
+
+#: Edit_contact
+msgid "Edit contact"
+msgstr ""
+
+#: Edit_message
+msgid "Edit message"
+msgstr ""
+
+#: Edit_selected_contact
+msgid "Edit selected contact"
+msgstr ""
+
+#: Edit_selected_message
+msgid "Edit selected message"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: ExportManager.cant_write
+msgid "The file ''{0}'' can''t be written!"
+msgstr ""
+
+#: ExportManager.choose_export_file
+msgid "Choose location and type of exported file"
+msgstr ""
+
+#: ExportManager.contact_export
+msgid "Contact export"
+msgstr ""
+
+#: ExportManager.contact_list
+msgid "Contact list"
+msgstr ""
+
+#: ExportManager.csv_filter
+msgctxt "ExportManager.csv_filter"
+msgid "CSV files (*.csv)"
+msgstr ""
+
+#: ExportManager.export_failed
+msgid "Contact export failed!"
+msgstr ""
+
+#: ExportManager.export_info
+msgid ""
+"<html>You can export your contacts to the CSV or vCard file. These are<br>\n"
+"text files with all the data clearly visible and readable.<br>\n"
+"By using import function you can later on load this data back to Esmska<br>\n"
+"or use it other way.<br><br>\n"
+"The file in vCard format is standardized and you can use it<br>\n"
+"in many other applications. The CSV file has very simple contents<br>\n"
+"and every program creates it a little differently. If you need to change "
+"it's<br>\n"
+"structure to import it in other program you can use some spreadsheet,<br>\n"
+"eg. freely available OpenOffice Calc (www.openoffice.org).<br><br>\n"
+"The file will be saved in the UTF-8 encoding.</html>"
+msgstr ""
+
+#: ExportManager.export_ok
+msgid "Contact export finished successfully"
+msgstr ""
+
+#: ExportManager.export_ok!
+msgid "Contact export finished successfully!"
+msgstr ""
+
+#: ExportManager.history
+msgid "Sent messages history"
+msgstr ""
+
+#: ExportManager.login
+msgid "Usernames and password to individual operators"
+msgstr ""
+
+#: ExportManager.sms_queue
+msgid "SMS queue to be sent"
+msgstr ""
+
+#: ExportManager.vcard_filter
+msgctxt "ExportManager.vcard_filter"
+msgid "vCard files (*.vcard, *.vcf)"
+msgstr ""
+
+#: Hide_program
+msgid "Hide program"
+msgstr ""
+
+#: History
+msgid "History"
+msgstr ""
+
+#: HistoryFrame.clearButton.toolTipText
+msgid "Clea&r search term (Alt+R, Escape)"
+msgstr ""
+
+#: HistoryFrame.jLabel1.text
+msgid "Number:"
+msgstr ""
+
+#: HistoryFrame.jLabel2.text
+msgid "Name:"
+msgstr ""
+
+#: HistoryFrame.jLabel3.text
+msgid "Date:"
+msgstr ""
+
+#: HistoryFrame.jLabel4.text
+msgid "Gateway:"
+msgstr ""
+
+#: HistoryFrame.jLabel5.text
+msgid "Sender number:"
+msgstr ""
+
+#: HistoryFrame.jLabel6.text
+msgid "Sender name:"
+msgstr ""
+
+#: HistoryFrame.remove_selected
+msgid "Really remove all selected messages from history?"
+msgstr ""
+
+#: HistoryFrame.resend_message
+msgid "Resend message to someone else (Alt+S)"
+msgstr ""
+
+#: HistoryFrame.searchField.toolTipText
+msgid "Enter term to search in messages history"
+msgstr ""
+
+#: HistoryFrame.searchLabel.text
+msgid "&Search:"
+msgstr ""
+
+#: HistoryFrame.title
+msgid "Sent messages history - Esmska"
+msgstr ""
+
+#: Import
+msgid "Import"
+msgstr ""
+
+#: ImportFrame.CSV_filter
+msgctxt "ImportFrame.CSV_filter"
+msgid "CSV files (*.csv)"
+msgstr ""
+
+#: ImportFrame.Select
+msgctxt "ImportFrame.Select"
+msgid "Select"
+msgstr ""
+
+#: ImportFrame.backButton.text
+msgid "&Back"
+msgstr ""
+
+#: ImportFrame.browseButton.text
+msgid "B&rowse..."
+msgstr ""
+
+#: ImportFrame.browseButton.toolTipText
+msgid "Find contacts file using dialog"
+msgstr ""
+
+#: ImportFrame.choose_export_file
+msgid "Choose the file with exported contacts"
+msgstr ""
+
+#: ImportFrame.encodingUTF8
+msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
+msgstr ""
+
+#: ImportFrame.encodingWin1250
+msgid ""
+"<html>The program expects the file to be in the windows-1250 encoding (the "
+"default file encoding for czech MS Windows).</html>"
+msgstr ""
+
+#: ImportFrame.fileLabel.text
+msgid "Choose input file:"
+msgstr ""
+
+#: ImportFrame.fileTextField.toolTipText
+msgid "The path to contacts file"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: ImportFrame.file_cant_be_read
+msgid "The file {0} can''t be read!"
+msgstr ""
+
+#: ImportFrame.forwardButton.text
+msgid "&Forward"
+msgstr ""
+
+#: ImportFrame.infoDreamComSE
+msgid ""
+"<html>First you need to export contacts from DreamCom SE. Run the program, "
+"go to the contact list and by using right mouse button export all your "
+"contacts to CSV file. Select that file here.</html>"
+msgstr ""
+
+#: ImportFrame.infoEsmska
+msgid ""
+"<html>To import contacts you need to have a CSV file prepared. You can "
+"create it by using \"Export contacts\" function. Select that file here.</"
+"html>"
+msgstr ""
+
+#: ImportFrame.infoKubik
+msgid ""
+"<html>First you need to export contacts from Kubík SMS DreamCom. Run the "
+"program, go to the contact list and by using right mouse button export all "
+"your contacts to CSV file. Select that file here.</html>"
+msgstr ""
+
+#: ImportFrame.infoVcard
+msgid ""
+"<html>To import contacts you need to have a VCARD or VCF file prepared, "
+"which can be created by an application containing your contacts. Select that "
+"file here.</html>"
+msgstr ""
+
+#: ImportFrame.invalid_file
+msgid ""
+"<html><h2>There was an error while parsing file!</h2>The file probably "
+"contains invalid data.</html>"
+msgstr ""
+
+#: ImportFrame.jLabel1.text
+msgid "Following new contacts were found:"
+msgstr ""
+
+#: ImportFrame.jLabel2.text
+msgid ""
+"<html>\n"
+"Contact import will allow you to read your contacts from another application "
+"a copy them to Esmska. Contacts in your old application will remain intact.\n"
+"</html>"
+msgstr ""
+
+#: ImportFrame.jLabel22.text
+msgid ""
+"<html>\n"
+"The file will be analyzed and then a list of contacts available for import "
+"will be shown to you. No changes will be made yet.\n"
+"</html>"
+msgstr ""
+
+#: ImportFrame.jLabel3.text
+msgid "Choose from which application you want to import contacts:"
+msgstr ""
+
+#: ImportFrame.jLabel4.text
+msgid ""
+"Or choose the type of the standardized file format you have the contacts in:"
+msgstr ""
+
+#: ImportFrame.jLabel8.text
+msgid "If you want to import these contacts press Import."
+msgstr ""
+
+#: ImportFrame.problemLabel.text
+msgid ""
+"<html>\n"
+"If you have a problem with import, please check whether there is a newer "
+"Esmska release and try to use it.\n"
+"</html>"
+msgstr ""
+
+#: ImportFrame.progressBar.string
+msgctxt "ImportFrame.progressBar.string"
+msgid "Please wait..."
+msgstr ""
+
+#: ImportFrame.title
+msgid "Contact import - Esmska"
+msgstr ""
+
+#: ImportFrame.vCard_filter
+msgctxt "ImportFrame.vCard_filter"
+msgid "vCard files (*.vcard, *.vcf)"
+msgstr ""
+
+#: ImportFrame.validOperatorCheckBox.text
+msgid "Import only contacts with known operator"
+msgstr ""
+
+#: ImportFrame.validOperatorCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"If checked then contacts will be shown in the list and will be imported only "
+"when<br>\n"
+"they have operator this program can work with\n"
+"</html>"
+msgstr ""
+
+#: LogFrame.clearButton.text
+msgid "Clea&r"
+msgstr ""
+
+#: LogFrame.clearButton.toolTipText
+msgid "Clears current log"
+msgstr ""
+
+#: LogFrame.copyButton.text
+msgid "Co&py to clipboard"
+msgstr ""
+
+#: LogFrame.copyButton.toolTipText
+msgid "Copy the whole log contents to the system clipboard"
+msgstr ""
+
+#: LogFrame.title
+msgid "Log - Esmska"
+msgstr ""
+
+#: Log_
+msgid "&Log"
+msgstr ""
+
+#: Main.already_running
+msgid ""
+"<html><h2>Esmska is already running!</h2>Esmska is already once started. We "
+"strongly discourage you from starting another<br>instances of the program "
+"because it may cause a user data loss.</html>"
+msgstr ""
+
+#: Main.cant_read_config
+msgid "The user configuration directory can't be read or written!"
+msgstr ""
+
+#: Main.choose_config_files
+msgid "Choose the location of the configuration files"
+msgstr ""
+
+#: Main.no_javascript
+msgid ""
+"<html>You current Java doesn't support execution of the JavaScript "
+"files<br>which is necessary for the program to work properly. It is "
+"recommended to use <br>Java from Sun. The program will now exit.</html>"
+msgstr ""
+
+#: Main.run_anyway
+msgid "Run anyway"
+msgstr ""
+
+#: Main.unsupported_java
+msgid ""
+"You are probably running the program on an unsupported Java version! Program "
+"might not work correctly with it! The tested Java versions are: Sun Java 6, "
+"OpenJDK 6, Apple Java 6."
+msgstr ""
+
+#: MainFrame.Quit_program
+msgid "Quit program"
+msgstr ""
+
+#: MainFrame.cant_create_program_dir
+msgid "Directory with program settings can't be created!"
+msgstr ""
+
+#: MainFrame.cant_save_config
+msgid "Some of the configuration files couldn't be saved!"
+msgstr ""
+
+#: MainFrame.compressButton.toolTipText
+msgid "Compress message (Ctrl+K)"
+msgstr ""
+
+#: MainFrame.configure_program_behaviour
+msgid "Configure program behaviour"
+msgstr ""
+
+#: MainFrame.export_contacts_to_file
+msgid "Export contacts to file"
+msgstr ""
+
+#: MainFrame.import_complete
+msgid "Contact import successfully finished"
+msgstr ""
+
+#: MainFrame.import_contacts_from_other_applications
+msgid "Import contacts from other applications"
+msgstr ""
+
+#: MainFrame.messageMenu.text
+msgid "&Message"
+msgstr ""
+
+#: MainFrame.new_program_version
+msgid "A new program version has been released!"
+msgstr ""
+
+#: MainFrame.no_operators
+msgid ""
+"<html>\n"
+"<h2>No operators can be found!</h2>\n"
+"The program is useless without the operators. The cause of the problem may "
+"be:<br>\n"
+"<ul>\n"
+"<li>Your program is incorrectly installed and some of the files<br>\n"
+"are missing or are corrupted. Try to download it again.</li>\n"
+"<li>The operating system has wrongly set the program path.<br>\n"
+"Instead of clicking on <i>esmska.jar</i> try to run the program rather "
+"using<br>\n"
+"the <i>esmska.sh</i> file (in Linux, etc) or the <i>esmska.bat</i> (in "
+"Windows).</li>\n"
+"</ul></html>"
+msgstr ""
+
+#: MainFrame.programMenu.text
+msgid "P&rogram"
+msgstr ""
+
+#: MainFrame.redoButton.toolTipText
+msgid "Redo (Ctrl+Y)"
+msgstr ""
+
+#: MainFrame.show_history_of_sent_messages
+msgid "Show history of sent messages"
+msgstr ""
+
+#: MainFrame.show_information_about_program
+msgid "Show program information"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: MainFrame.sms_failed
+msgid "Message for {0} couldn''t be sent!"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: MainFrame.sms_failed2
+msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: MainFrame.sms_sent
+msgid "Message for {0} sent."
+msgstr ""
+
+#: MainFrame.tip
+msgid "Tip:"
+msgstr ""
+
+#: MainFrame.toolsMenu.text
+msgid "&Tools"
+msgstr ""
+
+#: MainFrame.undoButton.toolTipText
+msgid "Undo (Ctrl+Z)"
+msgstr ""
+
+#: Message_history_
+msgid "Message &history"
+msgstr ""
+
+#: Move_down
+msgid "Move down"
+msgstr ""
+
+#: Move_up
+msgid "Move up"
+msgstr ""
+
+#: Multiple_sending
+msgid "Multiple sending"
+msgstr ""
+
+#: New_contact
+msgid "New contact"
+msgstr ""
+
+#: NotificationIcon.Pause/unpause_sending
+msgid "Pause/unpause sending"
+msgstr ""
+
+#: OperatorComboBox.Choose_suitable_gateway
+msgid "Choose suitable gateway"
+msgstr ""
+
+#: OperatorComboBox.Choose_suitable_gateway_for_provided_number
+msgid "Choose suitable gateway for provided number"
+msgstr ""
+
+#: OperatorComboBox.List_of_available_operators_web_gateways
+msgid "List of available operators web gateways"
+msgstr ""
+
+#: OperatorExecutor.ERROR_LIMIT_REACHED
+msgid ""
+"You are sending the message to early. The operator either requires a certain "
+"interval<br>you have to wait before sending another message or it "
+"limits<br>the maximum number of possible messages in some time period. Try "
+"it later."
+msgstr ""
+
+#: OperatorExecutor.ERROR_OPERATOR_MESSAGE
+msgid "A message from operator:<br>"
+msgstr ""
+
+#: OperatorExecutor.ERROR_UKNOWN
+msgid ""
+"An unknown error has occured. The operator may have changed<br>it's webpages "
+"or has a problem with them currently.<br>Try again later.<br><br>Also make "
+"sure that you have working connection to the Internet<br>and that you are "
+"using the latest program version.<br><br>If the problems persist and "
+"operator web gateway works,<br>report the problem on program homepage."
+msgstr ""
+
+#: OperatorExecutor.ERROR_WRONG_AUTH
+msgid ""
+"You have entered incorrect login credentials.<br>This gateway requires "
+"registration and you can't send messages throught it without one.<br>The "
+"login credentials can be entered in program preferences."
+msgstr ""
+
+#: OperatorExecutor.ERROR_WRONG_CODE
+msgid "You have entered the wrong security code."
+msgstr ""
+
+#: OperatorExecutor.ERROR_WRONG_NUMBER
+msgid "You have entered incorrect recipient number."
+msgstr ""
+
+#: OperatorExecutor.ERROR_WRONG_SIGNATURE
+msgid "You have entered incorrent sender signature (number or name)."
+msgstr ""
+
+#: OperatorExecutor.ERROR_WRONG_TEXT
+msgid "You have entered incorrect message text. Empty or too long?"
+msgstr ""
+
+#: OperatorExecutor.INFO_FREE_SMS_REMAINING
+msgid "Free SMS remaining:"
+msgstr ""
+
+#: OperatorExecutor.INFO_NOT_PROVIDED
+msgid ""
+"The gateway doesn't provide any information about successful sending. The "
+"message might be and <b>might not be</b> delivered."
+msgstr ""
+
+#: OperatorExecutor.recognize_number
+msgid "Please enter the code from the picture:"
+msgstr ""
+
+#: OperatorInterpreter.unknown_operator
+msgid "Unknown operator!"
+msgstr ""
+
+#: Pause_queue
+msgid "Pause queue"
+msgstr ""
+
+#: Pause_sms_queue
+msgid "Pause sms queue"
+msgstr ""
+
+#: Preferences_
+msgid "&Preferences"
+msgstr ""
+
+#: Program_start
+msgid "Program start"
+msgstr ""
+
+#: QueuePanel.Move_sms_down_in_the_queue
+msgid "Move sms down in the queue"
+msgstr ""
+
+#: QueuePanel.Move_sms_up_in_the_queue
+msgid "Move sms up in the queue"
+msgstr ""
+
+#: QueuePanel.Pause_sending_of_sms_in_the_queue
+msgid "Pause sending of sms in the queue"
+msgstr ""
+
+#: QueuePanel.Unpause_sending_of_sms_in_the_queue
+msgid "Unpause sending of sms in the queue"
+msgstr ""
+
+#: QueuePanel.border.title
+msgid "Queue"
+msgstr ""
+
+#: QueuePanel.hour_shortcut
+msgid "h"
+msgstr ""
+
+#: QueuePanel.minute_shortcut
+msgid "m"
+msgstr ""
+
+#: QueuePanel.second_shortcut
+msgid "s"
+msgstr ""
+
+#: Quit
+msgid "Quit"
+msgstr ""
+
+#: Quit_
+msgid "&Quit"
+msgstr ""
+
+#: Recipient
+msgid "Recipient"
+msgstr ""
+
+#: Redo_
+msgid "&Redo"
+msgstr ""
+
+#: Replace
+msgid "Replace"
+msgstr ""
+
+#: SMSPanel.Redo_change_in_message_text
+msgid "Redo undone change in message text"
+msgstr ""
+
+#: SMSPanel.Text_is_too_long!
+msgid "Text is too long!"
+msgstr ""
+
+#: SMSPanel.Undo_change_in_message_text
+msgid "Undo change in message text"
+msgstr ""
+
+#: SMSPanel.border.title
+msgid "Message"
+msgstr ""
+
+#: SMSPanel.compress
+msgid ""
+"Omit whitespace from current message and rewrite it to \"CamelCase\" format"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: SMSPanel.fullProgressBar
+msgid ""
+"<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
+msgstr ""
+
+#: SMSPanel.gatewayLabel.text
+msgctxt "SMSPanel.gatewayLabel.text"
+msgid "&Gateway:"
+msgstr ""
+
+#: SMSPanel.recipientLabel.text
+msgid "R&ecipient:"
+msgstr ""
+
+#: SMSPanel.recipientTextField.tooltip
+msgid ""
+"<html>\n"
+"Contact's name or phone number.<br><br>\n"
+"To send message to multiple contacts hold Shift or Ctrl<br>\n"
+"when selecting contacts in the list."
+msgstr ""
+
+#: SMSPanel.recipientTextField.tooltip.tip
+msgid ""
+"<br><br>TIP: Fill in the default country prefix in program preferences "
+"and<br>\n"
+"you won't have to always fill it in with the phone number."
+msgstr ""
+
+#: SMSPanel.sendButton.toolTipText
+msgid "Send message (Alt+S, Ctrl+Enter)"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: SMSPanel.singleProgressBar
+msgid ""
+"<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: SMSPanel.smsCounterLabel.1
+msgid "{0} chars ({1} sms)"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: SMSPanel.smsCounterLabel.2
+msgid "{0} chars (can''t be sent!)"
+msgstr ""
+
+#: SMSPanel.smsCounterLabel.text
+msgid "0 chars (0 sms)"
+msgstr ""
+
+#: SMSPanel.textLabel.text
+msgid "Te&xt:"
+msgstr ""
+
+#: SMSPanel.textLabel.toolTipText
+msgid ""
+"<html>\n"
+"The very message text\n"
+"</html>"
+msgstr ""
+
+#: SMSSender.NO_REASON_ERROR
+msgid ""
+"Author of the script has not provided any additional information<br>about "
+"cause of the failure for the web gateway used."
+msgstr ""
+
+#: SMSSender.no_operator
+msgid "no operator"
+msgstr ""
+
+#. #Single quotes need to be doubled
+#: SMSSender.sending_message
+msgid "Sending message to {0} ({1}) ..."
+msgstr ""
+
+#: Save
+msgid "Save"
+msgstr ""
+
+#: Select
+msgctxt "Select"
+msgid "Select"
+msgstr ""
+
+#: Send_
+msgid "&Send"
+msgstr ""
+
+#: Send_message
+msgid "Send message"
+msgstr ""
+
+#: Show/hide_program
+msgid "Show/hide program"
+msgstr ""
+
+#: Show_application_log
+msgid "Show application log"
+msgstr ""
+
+#: Show_program
+msgid "Show program"
+msgstr ""
+
+#: StatusPanel.progressBar.string
+msgctxt "StatusPanel.progressBar.string"
+msgid "Please wait..."
+msgstr ""
+
+#: StatusPanel.statusMessageLabel.text
+msgid "Welcome"
+msgstr ""
+
+#: StatusPanel.statusMessageLabel.toolTipText
+msgid "Click to show application log"
+msgstr ""
+
+#: Text
+msgid "Text"
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.1
+msgid ""
+"To send multiple messages select more contacts in the list using Ctrl key."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.10
+msgid "Program appearance can be modified according to your taste."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.11
+msgid "In preferences you can restrict the list of available web gateways."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.12
+msgid ""
+"Many operator gateways support adding of custom signature. See preferences."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.13
+msgid ""
+"Your contacts can be exported as text and therefore can be used elsewhere."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.14
+msgid "If the written message is too long use the compress function."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.15
+msgid ""
+"We recommend you to use Linux packages, you'll obtain an auto-update feature."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.16
+msgid ""
+"Are you a programmer? Write support for a new gateway, little JavaScript is "
+"enough."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.17
+msgid "Something broken? Enhancement suggestion? Let us know on our homepage!"
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.18
+msgid "Program is open and free. Join in and help us improve it!"
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.19
+msgid ""
+"A small donation is one of the options how to support future program "
+"development."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.2
+msgid ""
+"Program can be controlled from keyboard easily. Notice the keyboard "
+"shortcuts."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.20
+msgid ""
+"By using commandline options you can use program even in café or school."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.21
+msgid ""
+"4 of 5 zoologist recommend using the operating system with a penguin logo."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.22
+msgid ""
+"Message can be sent using other than default gateway - just pick it from the "
+"list."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.23
+msgid "Program can be minimized to a notification area icon. See preferences."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.24
+msgid "Bothered by these tips? You can turn them off in preferences."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.3
+msgid "Your contacts can be imported from many other programs or formats."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.4
+msgid "You can see the application protocol by clicking on the status bar."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.5
+msgid "All your sent messages are available in the message history."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.6
+msgid "The message history can be search through."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.7
+msgid ""
+"You can search in contact list. Just click into it and write a few letters."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.8
+msgid "When searching in contact list use arrows to move to other matches."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.9
+msgid "Don't forget to provide your country prefix number in the preferences."
+msgstr ""
+
+#: Undo_
+msgid "&Undo"
+msgstr ""
+
+#: Unknown_operator
+msgid "Unknown operator"
+msgstr ""
+
+#: Unpause_queue
+msgid "Unpause queue"
+msgstr ""
+
+#: Unpause_sms_queue
+msgid "Unpause sms queue"
+msgstr ""

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Updates properties files from PO files.
+
+# trap and exit on error 
+set -e
+trap "echo Updating properties files failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+cd ../po
+for PO in *.po; do 
+    if [ "$PO" = "*.po" ]; then	# there was no PO file
+        break
+    fi	
+    LOCALE=${PO%.po}
+    po2prop -t ../src/esmska/resources/l10n.properties \
+        "$PO" ../src/esmska/resources/l10n_${LOCALE}.properties
+done
