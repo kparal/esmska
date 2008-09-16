@@ -548,7 +548,7 @@ public class MainFrame extends javax.swing.JFrame {
             List tips = IOUtils.readLines(
                     getClass().getResourceAsStream(RES + "tips.txt"), "UTF-8");
             int random = new Random().nextInt(tips.size());
-            statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + 
+            statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
                     l10n.getString((String)tips.get(random)), false, null, false);
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Can't display tip of the day", ex);

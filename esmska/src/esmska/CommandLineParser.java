@@ -88,7 +88,7 @@ public class CommandLineParser {
     /** Print usage help */
     private static void printUsage() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.setSyntaxPrefix(l10n.getString("CommandLineParser.usage"));
+        formatter.setSyntaxPrefix(l10n.getString("CommandLineParser.usage") + " ");
         formatter.printHelp(l10n.getString("CommandLineParser.basic_usage"), 
                 "\n" + l10n.getString("CommandLineParser.available_options"), options, null);
     }
