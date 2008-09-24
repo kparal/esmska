@@ -33,8 +33,8 @@ import org.apache.commons.io.IOUtils;
 public class OperatorConnector {
 
     private static final Logger logger = Logger.getLogger(OperatorConnector.class.getName());
-    private static final String USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686; cs-CZ; rv:1.8.1.13)" +
-            " Gecko/20080325 Ubuntu/7.10 (gutsy) Firefox/2.0.0.13";
+    private static final String USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686; cs-CZ; rv:1.9.0.2)" +
+            " Gecko/2008092313 Ubuntu/8.04 (hardy) Firefox/3.0.2";
     private final HttpClient client = new HttpClient();
     private String url;
     private String[] params;
