@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-16 16:23+0200\n"
+"POT-Creation-Date: 2008-10-08 16:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,7 +120,7 @@ msgid ""
 "directory. Can't be used with -c."
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
 msgstr ""
@@ -437,7 +437,7 @@ msgid ""
 "</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ConfigFrame.state
 msgid "(country: {0})"
 msgstr ""
@@ -528,7 +528,7 @@ msgid ""
 "</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
 msgstr ""
@@ -556,7 +556,7 @@ msgid ""
 "</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ConfirmingFileChooser.sure_to_replace
 msgid ""
 "<html><h2>A file named ''{0}'' already exists.<br>Do you really want to "
@@ -679,7 +679,7 @@ msgstr ""
 msgid "Edit selected message"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
 msgstr ""
@@ -849,7 +849,7 @@ msgstr ""
 msgid "The path to contacts file"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
 msgstr ""
@@ -1090,17 +1090,17 @@ msgstr ""
 msgid "Show program information"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
 msgstr ""
@@ -1251,14 +1251,17 @@ msgstr ""
 msgid "Queue"
 msgstr ""
 
+#. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
 msgid "h"
 msgstr ""
 
+#. #Shortcut for "minute"
 #: QueuePanel.minute_shortcut
 msgid "m"
 msgstr ""
 
+#. #Shortcut for "second"
 #: QueuePanel.second_shortcut
 msgid "s"
 msgstr ""
@@ -1304,7 +1307,7 @@ msgid ""
 "Omit whitespace from current message and rewrite it to \"CamelCase\" format"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1338,18 +1341,18 @@ msgstr ""
 msgid "Send message (Alt+S, Ctrl+Enter)"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
 msgstr ""
@@ -1379,7 +1382,7 @@ msgstr ""
 msgid "no operator"
 msgstr ""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
 msgstr ""

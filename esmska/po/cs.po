@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-16 16:21+0200\n"
+"POT-Creation-Date: 2008-10-08 16:51+0200\n"
 "PO-Revision-Date: 2008-09-16 16:20+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -129,7 +129,7 @@ msgstr ""
 "Zapnutí přenosného módu - zeptá se na umístění uživatelského adresáře. Nelze "
 "použít s -c."
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
 msgstr "Neplatná volba na příkazovém řádku! (\"{0}\")"
@@ -527,7 +527,7 @@ msgstr ""
 "do ikony v oznamovací oblasti\n"
 "</html>"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ConfigFrame.state
 msgid "(country: {0})"
 msgstr "(stát: {0})"
@@ -640,7 +640,7 @@ msgstr ""
 "a podepsaná daným jménem. Tuto funkci podporují pouze někteří operátoři.\n"
 "</html>"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
 msgstr "<html>Uživatelský adresář programu:<br>{0}</html>"
@@ -674,7 +674,7 @@ msgstr ""
 "rámečky oken zvolený vzhled\n"
 "</html>"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ConfirmingFileChooser.sure_to_replace
 msgid ""
 "<html><h2>A file named ''{0}'' already exists.<br>Do you really want to "
@@ -805,7 +805,7 @@ msgstr "Upravit označený kontakt"
 msgid "Edit selected message"
 msgstr "Upravit označenou zprávu"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
 msgstr "Do souboru \"{0}\" nelze zapisovat!"
@@ -988,7 +988,7 @@ msgstr "Zvolte vstupní soubor:"
 msgid "The path to contacts file"
 msgstr "Cesta k souboru s kontakty"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
 msgstr "Soubor {0} nelze přečíst!"
@@ -1283,17 +1283,17 @@ msgstr "Zobrazit historii odeslaných zpráv"
 msgid "Show program information"
 msgstr "Zobrazit informace o programu"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
 msgstr "Zprávu pro {0} se nepodařilo odeslat!"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 msgstr "<html><h2>Zprávu pro \"{0}\" se nepovedlo odeslat!</h2>{1}</html>"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
 msgstr "Zpráva pro {0} odeslána."
@@ -1458,14 +1458,17 @@ msgstr "Pokračovat v odesílání sms ve frontě (Alt+P)"
 msgid "Queue"
 msgstr "Fronta"
 
+#. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
 msgid "h"
 msgstr "h"
 
+#. #Shortcut for "minute"
 #: QueuePanel.minute_shortcut
 msgid "m"
 msgstr "m"
 
+#. #Shortcut for "second"
 #: QueuePanel.second_shortcut
 msgid "s"
 msgstr "s"
@@ -1512,7 +1515,7 @@ msgid ""
 msgstr ""
 "Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \\\"CamelCase\\\""
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1552,19 +1555,19 @@ msgstr ""
 msgid "Send message (Alt+S, Ctrl+Enter)"
 msgstr "Odeslat zprávu (Alt+S, Ctrl+Enter)"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
 msgstr ""
 "<html>Znaků v aktuální zprávě: <b>{0}/{1}</b> (zbývá <b>{2}</b>)</html>"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
 msgstr "{0} znaků ({1} sms)"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
 msgstr "{0} znaků (nelze odeslat!)"
@@ -1599,7 +1602,7 @@ msgstr ""
 msgid "no operator"
 msgstr "žádný operátor"
 
-#. #Single quotes need to be doubled
+#. #Single quotes need to be doubled!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
 msgstr "Posílám zprávu pro {0} ({1}) ..."
