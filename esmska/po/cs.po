@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 16:51+0200\n"
+"POT-Creation-Date: 2008-10-09 21:45+0200\n"
 "PO-Revision-Date: 2008-09-16 16:20+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -60,8 +60,9 @@ msgstr ""
 "</html>"
 
 #: AboutFrame.supportButton.text
+#, fuzzy
 msgid ""
-"<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
+"<html><a href=\"http://code.google.com/p/esmska/wiki/Support\">Support "
 "project</a></html>"
 msgstr ""
 "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Podpořte "
@@ -1221,6 +1222,26 @@ msgstr "Nastavit chování programu"
 msgid "Export contacts to file"
 msgstr "Exportovat kontakty do souboru"
 
+#: MainFrame.faqMenuItem.text
+msgid "Frequently Asked &Questions"
+msgstr ""
+
+#: MainFrame.faqMenuItem.toolTipText
+msgid "See the most frequently asked questions (online)"
+msgstr ""
+
+#: MainFrame.getHelpMenuItem.text
+msgid "Get &Help Online..."
+msgstr ""
+
+#: MainFrame.getHelpMenuItem.toolTipText
+msgid "Ask a question in a support forum"
+msgstr ""
+
+#: MainFrame.helpMenu.text
+msgid "&Help"
+msgstr ""
+
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
 msgstr "Import kontaktů úspěšně dokončen"
@@ -1267,6 +1288,14 @@ msgstr ""
 "Windows).</li>\n"
 "</ul></html>"
 
+#: MainFrame.problemMenuItem.text
+msgid "Report a &Problem..."
+msgstr ""
+
+#: MainFrame.problemMenuItem.toolTipText
+msgid "Report a problem or a feature request"
+msgstr ""
+
 #: MainFrame.programMenu.text
 msgid "P&rogram"
 msgstr "P&rogram"
@@ -1305,6 +1334,14 @@ msgstr "Tip:"
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
 msgstr "&Nástroje"
+
+#: MainFrame.translateMenuItem.text
+msgid "&Translate This Application..."
+msgstr ""
+
+#: MainFrame.translateMenuItem.toolTipText
+msgid "Help to translate this application into your native language"
+msgstr ""
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"

@@ -58,9 +58,11 @@ import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -248,7 +250,6 @@ public class MainFrame extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         configMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         messageMenu = new javax.swing.JMenu();
         undoMenuItem = new javax.swing.JMenuItem();
@@ -262,6 +263,13 @@ public class MainFrame extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         importMenuItem = new javax.swing.JMenuItem();
         exportMenuItem = new javax.swing.JMenuItem();
+        helpMenu = new javax.swing.JMenu();
+        faqMenuItem = new javax.swing.JMenuItem();
+        getHelpMenuItem = new javax.swing.JMenuItem();
+        translateMenuItem = new javax.swing.JMenuItem();
+        problemMenuItem = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JSeparator();
+        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Esmska"); // NOI18N
@@ -356,9 +364,6 @@ public class MainFrame extends javax.swing.JFrame {
         configMenuItem.setAction(configAction);
         programMenu.add(configMenuItem);
 
-        aboutMenuItem.setAction(aboutAction);
-        programMenu.add(aboutMenuItem);
-
         exitMenuItem.setAction(quitAction);
         programMenu.add(exitMenuItem);
 
@@ -397,6 +402,55 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu.add(exportMenuItem);
 
         menuBar.add(toolsMenu);
+
+        org.openide.awt.Mnemonics.setLocalizedText(helpMenu, l10n.getString("MainFrame.helpMenu.text")); // NOI18N
+
+        faqMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        faqMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/faq-16.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text")); // NOI18N
+        faqMenuItem.setToolTipText(l10n.getString("MainFrame.faqMenuItem.toolTipText")); // NOI18N
+        faqMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                faqMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(faqMenuItem);
+
+        getHelpMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/getHelp-16.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(getHelpMenuItem, l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
+        getHelpMenuItem.setToolTipText(l10n.getString("MainFrame.getHelpMenuItem.toolTipText")); // NOI18N
+        getHelpMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getHelpMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(getHelpMenuItem);
+
+        translateMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/translate-16.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateMenuItem, l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
+        translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
+        translateMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(translateMenuItem);
+
+        problemMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/bug-16.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(problemMenuItem, l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
+        problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
+        problemMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                problemMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(problemMenuItem);
+        helpMenu.add(jSeparator6);
+
+        aboutMenuItem.setAction(aboutAction);
+        helpMenu.add(aboutMenuItem);
+
+        menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
 
@@ -458,6 +512,58 @@ public class MainFrame extends javax.swing.JFrame {
             System.exit(saveOk ? 0 : 1);
         }
     }//GEN-LAST:event_formWindowClosing
+
+private void faqMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_faqMenuItemActionPerformed
+    if (!Desktop.isDesktopSupported()) {
+        return;
+    }
+    //start browser
+    Desktop desktop = Desktop.getDesktop();
+    try {
+        desktop.browse(new URL("http://code.google.com/p/esmska/wiki/FAQ").toURI());
+    } catch (Exception e) {
+        logger.log(Level.WARNING, "Could not launch browser", e);
+    }
+}//GEN-LAST:event_faqMenuItemActionPerformed
+
+private void getHelpMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getHelpMenuItemActionPerformed
+    if (!Desktop.isDesktopSupported()) {
+        return;
+    }
+    //start browser
+    Desktop desktop = Desktop.getDesktop();
+    try {
+        desktop.browse(new URL("https://answers.launchpad.net/esmska").toURI());
+    } catch (Exception e) {
+        logger.log(Level.WARNING, "Could not launch browser", e);
+    }
+}//GEN-LAST:event_getHelpMenuItemActionPerformed
+
+private void translateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateMenuItemActionPerformed
+    if (!Desktop.isDesktopSupported()) {
+        return;
+    }
+    //start browser
+    Desktop desktop = Desktop.getDesktop();
+    try {
+        desktop.browse(new URL("https://translations.launchpad.net/esmska").toURI());
+    } catch (Exception e) {
+        logger.log(Level.WARNING, "Could not launch browser", e);
+    }
+}//GEN-LAST:event_translateMenuItemActionPerformed
+
+private void problemMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_problemMenuItemActionPerformed
+    if (!Desktop.isDesktopSupported()) {
+        return;
+    }
+    //start browser
+    Desktop desktop = Desktop.getDesktop();
+    try {
+        desktop.browse(new URL("http://code.google.com/p/esmska/issues/list").toURI());
+    } catch (Exception e) {
+        logger.log(Level.WARNING, "Could not launch browser", e);
+    }
+}//GEN-LAST:event_problemMenuItemActionPerformed
     
     /** Notifies about change in sms queue */
     public void smsProcessed(SMS sms) {
@@ -929,6 +1035,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenuItem exportMenuItem;
+    private javax.swing.JMenuItem faqMenuItem;
+    private javax.swing.JMenuItem getHelpMenuItem;
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JButton historyButton;
     private javax.swing.JMenuItem historyMenuItem;
     private javax.swing.JSplitPane horizontalSplitPane;
@@ -938,9 +1047,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JMenuItem logMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu messageMenu;
+    private javax.swing.JMenuItem problemMenuItem;
     private javax.swing.JMenu programMenu;
     private esmska.gui.QueuePanel queuePanel;
     private javax.swing.JButton redoButton;
@@ -950,6 +1061,7 @@ public class MainFrame extends javax.swing.JFrame {
     private esmska.gui.StatusPanel statusPanel;
     private javax.swing.JToolBar toolBar;
     private javax.swing.JMenu toolsMenu;
+    private javax.swing.JMenuItem translateMenuItem;
     private javax.swing.JButton undoButton;
     private javax.swing.JMenuItem undoMenuItem;
     private javax.swing.JSplitPane verticalSplitPane;

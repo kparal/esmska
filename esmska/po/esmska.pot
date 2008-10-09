@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 16:51+0200\n"
+"POT-Creation-Date: 2008-10-09 21:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid ""
-"<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
+"<html><a href=\"http://code.google.com/p/esmska/wiki/Support\">Support "
 "project</a></html>"
 msgstr ""
 
@@ -1041,6 +1041,26 @@ msgstr ""
 msgid "Export contacts to file"
 msgstr ""
 
+#: MainFrame.faqMenuItem.text
+msgid "Frequently Asked &Questions"
+msgstr ""
+
+#: MainFrame.faqMenuItem.toolTipText
+msgid "See the most frequently asked questions (online)"
+msgstr ""
+
+#: MainFrame.getHelpMenuItem.text
+msgid "Get &Help Online..."
+msgstr ""
+
+#: MainFrame.getHelpMenuItem.toolTipText
+msgid "Ask a question in a support forum"
+msgstr ""
+
+#: MainFrame.helpMenu.text
+msgid "&Help"
+msgstr ""
+
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
 msgstr ""
@@ -1072,6 +1092,14 @@ msgid ""
 "the <i>esmska.sh</i> file (in Linux, etc) or the <i>esmska.bat</i> (in "
 "Windows).</li>\n"
 "</ul></html>"
+msgstr ""
+
+#: MainFrame.problemMenuItem.text
+msgid "Report a &Problem..."
+msgstr ""
+
+#: MainFrame.problemMenuItem.toolTipText
+msgid "Report a problem or a feature request"
 msgstr ""
 
 #: MainFrame.programMenu.text
@@ -1111,6 +1139,14 @@ msgstr ""
 
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
+msgstr ""
+
+#: MainFrame.translateMenuItem.text
+msgid "&Translate This Application..."
+msgstr ""
+
+#: MainFrame.translateMenuItem.toolTipText
+msgid "Help to translate this application into your native language"
 msgstr ""
 
 #: MainFrame.undoButton.toolTipText
