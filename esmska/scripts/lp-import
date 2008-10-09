@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Imports PO files exported from Launchpad to PO directory
+
+# trap and exit on error
+set -e
+trap "echo Import failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+# usage
+if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0 lp_tarball_with_translations"
+    echo "Example: $0 launchpad-export.tar.gz"
+    exit 1
+fi
+
+PODIR="$PWD/../po"
+
+# create temp dir
+TMPDIR=`mktemp -d -t esmska-lp-import.XXXX`
+
+# extract
+tar xzf "$1" --strip 1 -C "$TMPDIR"
+
+# copy
+cd "$TMPDIR"
+if ls esmska-*.po >/dev/null; then
+    for PO in esmska-*.po; do
+	LOCALE=${PO%.po}
+	LOCALE=${LOCALE#esmska-}
+	cp "$PO" "$PODIR/$LOCALE.po"
+    done
+fi
+
+# delete temp dir
+rm -r "$TMPDIR"
+
+# update translations
+cd "$OLDPWD"
+./update-translations

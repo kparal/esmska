@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Updates POT file from properties file,
+# updates PO files to be up to date,
+# updates properties files from PO files.
+
+# trap and exit on error 
+set -e
+trap "echo Updating PO files failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+# update POT template
+prop2po -P ../src/esmska/resources/l10n.properties ../po/esmska.pot
+# sort entries by location
+msgattrib -F ../po/esmska.pot -o ../po/esmska.pot 
+
+# update PO files
+cd ../po
+if ls *.po >/dev/null; then
+    for PO in *.po; do
+	msgmerge -U --backup=none $PO esmska.pot
+    done
+fi
+
+# generate properties files
+if ls *.po >/dev/null; then
+    for PO in *.po; do
+        LOCALE=${PO%.po}
+        po2prop -t ../src/esmska/resources/l10n.properties \
+        "$PO" ../src/esmska/resources/l10n_${LOCALE}.properties
+    done
+fi

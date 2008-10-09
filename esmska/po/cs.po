@@ -3,14 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-09 21:45+0200\n"
-"PO-Revision-Date: 2008-09-16 16:20+0100\n"
+"POT-Creation-Date: 2008-10-10 01:18+0200\n"
+"PO-Revision-Date: 2008-10-09 21:00+0000\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.1.1\n"
+"X-Launchpad-Export-Date: 2008-10-09 21:04+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -60,7 +61,6 @@ msgstr ""
 "</html>"
 
 #: AboutFrame.supportButton.text
-#, fuzzy
 msgid ""
 "<html><a href=\"http://code.google.com/p/esmska/wiki/Support\">Support "
 "project</a></html>"
@@ -1224,23 +1224,23 @@ msgstr "Exportovat kontakty do souboru"
 
 #: MainFrame.faqMenuItem.text
 msgid "Frequently Asked &Questions"
-msgstr ""
+msgstr "Často kladené &dotazy"
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
-msgstr ""
+msgstr "Zobrazit nejčastěji pokládané otázky (online)"
 
 #: MainFrame.getHelpMenuItem.text
 msgid "Get &Help Online..."
-msgstr ""
+msgstr "Získat &pomoc online..."
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
-msgstr ""
+msgstr "Položit dotaz v podpůrném fóru"
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr ""
+msgstr "Nápo&věda"
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
@@ -1290,11 +1290,12 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &Problem..."
-msgstr ""
+msgstr "Nahlásit p&roblém..."
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or a feature request"
-msgstr ""
+#, fuzzy
+msgid "Report a problem or request a feature"
+msgstr "Nahlaste problém nebo navrhněte vylepšení"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -1337,11 +1338,11 @@ msgstr "&Nástroje"
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate This Application..."
-msgstr ""
+msgstr "Pře&ložit tuto aplikaci..."
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
-msgstr ""
+msgstr "Pomozte přeložit tuto aplikaci do svého rodného jazyka"
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"
@@ -1860,3 +1861,10 @@ msgstr "Spustit frontu"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "Znovu spustit frontu sms"
+
+#~ msgid ""
+#~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
+#~ "project</a></html>"
+#~ msgstr ""
+#~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Podpořte "
+#~ "projekt</a></html>"

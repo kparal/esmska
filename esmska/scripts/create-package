@@ -7,6 +7,9 @@
 set -e
 trap "echo Packaging failed." ERR
 
+# go to the program directory
+cd "`dirname "$0"`"
+
 # usage
 if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
     echo "Usage: $0 version_dir"
