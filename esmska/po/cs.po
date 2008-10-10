@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-10 11:16+0200\n"
+"POT-Creation-Date: 2008-10-10 16:46+0200\n"
 "PO-Revision-Date: 2008-10-10 11:16+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -1844,6 +1844,11 @@ msgstr ""
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
 msgstr "Nezapomeňte si v nastavení vyplnit předčíslí své země."
+
+#. #Provide names and contacts to translators
+#: Translators
+msgid "translator-credits"
+msgstr ""
 
 #: Undo_
 msgid "&Undo"

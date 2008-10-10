@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-10 11:43+0200\n"
+"POT-Creation-Date: 2008-10-10 16:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1602,6 +1602,11 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
+msgstr ""
+
+#. #Provide names and contacts to translators
+#: Translators
+msgid "translator-credits"
 msgstr ""
 
 #: Undo_
