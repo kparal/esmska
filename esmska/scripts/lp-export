@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Creates a tarball containing POT file and czech PO file
+# intended for import in Launchpad Translations
+
+# trap and exit on error
+set -e
+trap "echo Export failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+# usage
+if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0 output_tarball"
+    echo "Example: $0 lp-esmska.tar.gz"
+    exit 1
+fi
+
+PODIR="$PWD/../po"
+
+# update translations
+./update-translations
+
+# create tarball
+cd "$PODIR"
+tar czf "$1" esmska.pot cs.po
+

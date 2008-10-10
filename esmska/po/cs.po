@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-10 01:18+0200\n"
-"PO-Revision-Date: 2008-10-09 21:00+0000\n"
+"POT-Creation-Date: 2008-10-10 11:16+0200\n"
+"PO-Revision-Date: 2008-10-10 11:16+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1293,9 +1293,8 @@ msgid "Report a &Problem..."
 msgstr "Nahlásit p&roblém..."
 
 #: MainFrame.problemMenuItem.toolTipText
-#, fuzzy
 msgid "Report a problem or request a feature"
-msgstr "Nahlaste problém nebo navrhněte vylepšení"
+msgstr "Nahlásit problém nebo navrhnout vylepšení"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
