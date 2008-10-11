@@ -18,7 +18,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -260,9 +259,19 @@ public class AboutFrame extends javax.swing.JFrame {
         try {
             String credits = IOUtils.toString(
                     getClass().getResourceAsStream(RES + "credits.html"), "UTF-8");
+            String translators = l10n.getString("Translators");
+            if ("translator-credits".equals(translators)) {
+                //there are no translators mentioned
+                translators = "";
+            } else {
+                translators = "&nbsp;&nbsp;" + translators.replaceAll("\n", "<br>\n").
+                    replaceAll("\n  ", "\n&nbsp;&nbsp;");
+            }
+            
             String document = MessageFormat.format(credits, l10n.getString("Credits.authors"),
                     l10n.getString("Credits.contributors"), l10n.getString("Credits.graphics"),
-                    l10n.getString("Credits.sponsors"));
+                    l10n.getString("Credits.sponsors"), l10n.getString("Credits.translators"),
+                    translators);
             
             JTextPane tp = new JTextPane();
             tp.setContentType("text/html; charset=UTF-8");

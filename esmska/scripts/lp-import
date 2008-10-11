@@ -22,17 +22,16 @@ PODIR="$PWD/../po"
 TMPDIR=`mktemp -d -t esmska-lp-import.XXXX`
 
 # extract
-tar xzf "$1" --strip 1 -C "$TMPDIR"
+tar xzf "$1" -C "$TMPDIR"
 
 # copy
 cd "$TMPDIR"
-if ls esmska-*.po >/dev/null; then
-    for PO in esmska-*.po; do
-	LOCALE=${PO%.po}
-	LOCALE=${LOCALE#esmska-}
-	cp "$PO" "$PODIR/$LOCALE.po"
-    done
-fi
+for PO in `find . -name 'esmska-*.po'`; do
+    FILE=`basename "$PO"`
+    LOCALE=${FILE%.po}
+    LOCALE=${LOCALE#esmska-}
+    cp "$PO" "$PODIR/$LOCALE.po"
+done
 
 # delete temp dir
 rm -r "$TMPDIR"
