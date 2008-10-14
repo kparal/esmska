@@ -266,6 +266,9 @@ public class AboutFrame extends javax.swing.JFrame {
             } else {
                 translators = "&nbsp;&nbsp;" + translators.replaceAll("\n", "<br>\n").
                     replaceAll("\n  ", "\n&nbsp;&nbsp;");
+                //add hyperlinks to the Launchpad URLs
+                translators = translators.replaceAll("(https://[^<]*)", 
+                        "<a href=\"$1\">$1</a>");
             }
             
             String document = MessageFormat.format(credits, l10n.getString("Credits.authors"),
