@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-14 14:41+0200\n"
+"POT-Creation-Date: 2008-10-15 19:03+0200\n"
 "PO-Revision-Date: 2008-10-10 19:45+0000\n"
 "Last-Translator: Luca Livraghi <luca.91@hotmail.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -61,10 +61,13 @@ msgid ""
 "</html>"
 msgstr ""
 
+#. #Do not change this value
+#: AboutFrame.supportButton.link
+msgid "http://code.google.com/p/esmska/wiki/Support"
+msgstr ""
+
 #: AboutFrame.supportButton.text
-msgid ""
-"<html><a href=\"http://code.google.com/p/esmska/wiki/Support\">Support "
-"project</a></html>"
+msgid "Support project"
 msgstr ""
 
 #: AboutFrame.supportButton.toolTipText

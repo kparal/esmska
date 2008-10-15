@@ -51,11 +51,11 @@
                       <Component id="jLabel6" pref="121" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel8" pref="106" max="32767" attributes="0"/>
+                      <Component id="jLabel8" pref="112" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="supportButton" min="-2" max="-2" attributes="1"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" pref="106" max="32767" attributes="0"/>
+                      <Component id="jLabel7" pref="112" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -201,8 +201,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="supportButton">
       <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportButton.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;&lt;html&gt;&lt;a href=\&quot;&quot; + &#xa;        l10n.getString(&quot;AboutFrame.supportButton.link&quot;) +&#xa;        &quot;\&quot;&gt;&quot; + &#xa;        l10n.getString(&quot;AboutFrame.supportButton.text&quot;) + &#xa;        &quot;&lt;/a&gt;&lt;/html&gt;&quot;" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportButton.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>

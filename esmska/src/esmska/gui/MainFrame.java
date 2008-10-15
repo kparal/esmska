@@ -559,7 +559,7 @@ private void problemMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     //start browser
     Desktop desktop = Desktop.getDesktop();
     try {
-        desktop.browse(new URL("http://code.google.com/p/esmska/issues/list").toURI());
+        desktop.browse(new URL("http://code.google.com/p/esmska/wiki/Issues").toURI());
     } catch (Exception e) {
         logger.log(Level.WARNING, "Could not launch browser", e);
     }
