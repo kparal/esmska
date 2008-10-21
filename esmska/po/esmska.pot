@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-21 02:05+0200\n"
+"POT-Creation-Date: 2008-10-22 00:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -641,6 +641,21 @@ msgstr ""
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history (Alt+D)"
+msgstr ""
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.comment
+msgid "Send SMS over the Internet"
+msgstr ""
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.genericName
+msgid "SMS Sender"
+msgstr ""
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.name
+msgid "Esmska"
 msgstr ""
 
 #: EditContactPanel.gatewayLabel.text

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-16 13:44+0200\n"
-"PO-Revision-Date: 2008-10-16 13:44+0100\n"
+"POT-Creation-Date: 2008-10-21 23:35+0200\n"
+"PO-Revision-Date: 2008-10-21 23:33+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -762,6 +762,21 @@ msgstr "Odstranit označené zprávy"
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history (Alt+D)"
 msgstr "Odstranit označené zprávy z historie (Alt+D)"
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.comment
+msgid "Send SMS over the Internet"
+msgstr "Posílejte SMS přes Internet"
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.genericName
+msgid "SMS Sender"
+msgstr "Posílač SMS"
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.name
+msgid "Esmska"
+msgstr "Esmska"
 
 #: EditContactPanel.gatewayLabel.text
 msgctxt "EditContactPanel.gatewayLabel.text"

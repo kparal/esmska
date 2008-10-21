@@ -32,3 +32,8 @@ if ls *.po >/dev/null; then
         "$PO" ../src/esmska/resources/l10n_${LOCALE}.properties
     done
 fi
+
+cd "$OLDPWD"
+
+# update desktop file
+./update-desktop-file

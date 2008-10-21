@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-15 19:03+0200\n"
+"POT-Creation-Date: 2008-10-21 23:35+0200\n"
 "PO-Revision-Date: 2008-10-10 19:45+0000\n"
 "Last-Translator: Luca Livraghi <luca.91@hotmail.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -646,6 +646,22 @@ msgstr "Elimina messaggi selezionati"
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history (Alt+D)"
 msgstr "Elimina i messaggi selezionati dalla cronologia (Alt+D)"
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.comment
+msgid "Send SMS over the Internet"
+msgstr ""
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.genericName
+msgid "SMS Sender"
+msgstr ""
+
+#. #This string is located in the operating-system menu item
+#: DesktopFile.name
+#, fuzzy
+msgid "Esmska"
+msgstr "Informazioni su Esmska"
 
 #: EditContactPanel.gatewayLabel.text
 msgctxt "EditContactPanel.gatewayLabel.text"
