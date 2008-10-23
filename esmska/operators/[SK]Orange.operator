@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-10-22"
+    return "2008-10-23"
 }
 
 function getMaintainer() {
@@ -118,6 +118,6 @@ function send() {
 }
 
 function logout() {
-	EXEC.getURL("https://www.orangeportal.sk/portal/do_logout.dwp?target=http%3A%2F%2Fwww.orangeportal.sk%2F", []);
+	EXEC.getURL("https://www.orangeportal.sk/portal/do_logout.dwp", [])
 }
 
