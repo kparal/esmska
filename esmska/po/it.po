@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-21 23:35+0200\n"
+"POT-Creation-Date: 2008-10-23 23:52+0200\n"
 "PO-Revision-Date: 2008-10-10 19:45+0000\n"
 "Last-Translator: Luca Livraghi <luca.91@hotmail.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -153,6 +153,18 @@ msgstr "Utilizzo:"
 msgid "&Compress"
 msgstr "&Comprimi"
 
+#: ConfigFrame.advancedCheckBox.text
+msgid "A&dvanced settings"
+msgstr ""
+
+#: ConfigFrame.advancedCheckBox.toolTipText
+msgid "Show items with more advanced settings"
+msgstr ""
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr "&Aspetto"
+
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Check for a &new program version on startup"
 msgstr "Controlla se è presente una &nuova versione del programma all'avvio"
@@ -172,6 +184,10 @@ msgstr "&Cancella tutte le credenziali del login"
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Deletes all usernames and passwords for all operators"
 msgstr ""
+
+#: ConfigFrame.connectionPanel.TabConstraints.tabTitle
+msgid "&Connection"
+msgstr "&Connessione"
 
 #: ConfigFrame.countryCodeLabel.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -213,6 +229,10 @@ msgid ""
 "layout will be restored on the next program startup\n"
 "</html>"
 msgstr ""
+
+#: ConfigFrame.generalPanel.TabConstraints.tabTitle
+msgid "&General"
+msgstr "&Generale"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -291,10 +311,6 @@ msgid ""
 "</i></html>"
 msgstr ""
 
-#: ConfigFrame.jLabel8.text
-msgid "Show &only operator gateways with names containing:"
-msgstr ""
-
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
@@ -302,36 +318,16 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.jPanel1.TabConstraints.tabTitle
-msgid "&General"
-msgstr "&Generale"
-
-#: ConfigFrame.jPanel2.TabConstraints.tabTitle
-msgid "O&perators"
-msgstr "O&peratori"
-
-#: ConfigFrame.jPanel3.TabConstraints.tabTitle
-msgid "&Appearance"
-msgstr "&Aspetto"
-
-#: ConfigFrame.jPanel4.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr "&Credenziali login"
-
-#: ConfigFrame.jPanel5.TabConstraints.tabTitle
-msgid "&Connection"
-msgstr "&Connessione"
-
-#: ConfigFrame.jPanel6.TabConstraints.tabTitle
-msgid "P&rivacy"
-msgstr "P&rivacy"
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
 "Allows you to change the appearance of the program\n"
 "</html>"
 msgstr ""
+
+#: ConfigFrame.loginPanel.TabConstraints.tabTitle
+msgid "&Login credentials"
+msgstr "&Credenziali login"
 
 #: ConfigFrame.loginTextField.toolTipText
 msgid "Username needed for logging in to the operator web gateway"
@@ -361,6 +357,10 @@ msgid ""
 "</html>"
 msgstr ""
 
+#: ConfigFrame.operatorFilterLabel.text
+msgid "Show &only operator gateways with names containing:"
+msgstr ""
+
 #: ConfigFrame.operatorFilterTextField.toolTipText
 msgid ""
 "<html>\n"
@@ -372,9 +372,17 @@ msgid ""
 "</html>"
 msgstr ""
 
+#: ConfigFrame.operatorPanel.TabConstraints.tabTitle
+msgid "O&perators"
+msgstr "O&peratori"
+
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
 msgstr ""
+
+#: ConfigFrame.privacyPanel.TabConstraints.tabTitle
+msgid "P&rivacy"
+msgstr "P&rivacy"
 
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-22 00:14+0200\n"
+"POT-Creation-Date: 2008-10-23 23:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,6 +149,18 @@ msgstr ""
 msgid "&Compress"
 msgstr ""
 
+#: ConfigFrame.advancedCheckBox.text
+msgid "A&dvanced settings"
+msgstr ""
+
+#: ConfigFrame.advancedCheckBox.toolTipText
+msgid "Show items with more advanced settings"
+msgstr ""
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr ""
+
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Check for a &new program version on startup"
 msgstr ""
@@ -167,6 +179,10 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Deletes all usernames and passwords for all operators"
+msgstr ""
+
+#: ConfigFrame.connectionPanel.TabConstraints.tabTitle
+msgid "&Connection"
 msgstr ""
 
 #: ConfigFrame.countryCodeLabel.toolTipText
@@ -208,6 +224,10 @@ msgid ""
 "Current program dimension will be ignored and the default<br>\n"
 "layout will be restored on the next program startup\n"
 "</html>"
+msgstr ""
+
+#: ConfigFrame.generalPanel.TabConstraints.tabTitle
+msgid "&General"
 msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
@@ -287,10 +307,6 @@ msgid ""
 "</i></html>"
 msgstr ""
 
-#: ConfigFrame.jLabel8.text
-msgid "Show &only operator gateways with names containing:"
-msgstr ""
-
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
@@ -298,35 +314,15 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.jPanel1.TabConstraints.tabTitle
-msgid "&General"
-msgstr ""
-
-#: ConfigFrame.jPanel2.TabConstraints.tabTitle
-msgid "O&perators"
-msgstr ""
-
-#: ConfigFrame.jPanel3.TabConstraints.tabTitle
-msgid "&Appearance"
-msgstr ""
-
-#: ConfigFrame.jPanel4.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr ""
-
-#: ConfigFrame.jPanel5.TabConstraints.tabTitle
-msgid "&Connection"
-msgstr ""
-
-#: ConfigFrame.jPanel6.TabConstraints.tabTitle
-msgid "P&rivacy"
-msgstr ""
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
 "Allows you to change the appearance of the program\n"
 "</html>"
+msgstr ""
+
+#: ConfigFrame.loginPanel.TabConstraints.tabTitle
+msgid "&Login credentials"
 msgstr ""
 
 #: ConfigFrame.loginTextField.toolTipText
@@ -357,6 +353,10 @@ msgid ""
 "</html>"
 msgstr ""
 
+#: ConfigFrame.operatorFilterLabel.text
+msgid "Show &only operator gateways with names containing:"
+msgstr ""
+
 #: ConfigFrame.operatorFilterTextField.toolTipText
 msgid ""
 "<html>\n"
@@ -368,8 +368,16 @@ msgid ""
 "</html>"
 msgstr ""
 
+#: ConfigFrame.operatorPanel.TabConstraints.tabTitle
+msgid "O&perators"
+msgstr ""
+
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
+msgstr ""
+
+#: ConfigFrame.privacyPanel.TabConstraints.tabTitle
+msgid "P&rivacy"
 msgstr ""
 
 #: ConfigFrame.reducedHistoryCheckBox.text

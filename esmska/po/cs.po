@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-21 23:35+0200\n"
-"PO-Revision-Date: 2008-10-21 23:33+0100\n"
+"POT-Creation-Date: 2008-10-23 23:52+0200\n"
+"PO-Revision-Date: 2008-10-23 23:52+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -157,6 +157,18 @@ msgstr "Použití:"
 msgid "&Compress"
 msgstr "Z&komprimovat"
 
+#: ConfigFrame.advancedCheckBox.text
+msgid "A&dvanced settings"
+msgstr "Po&kročilá nastavení"
+
+#: ConfigFrame.advancedCheckBox.toolTipText
+msgid "Show items with more advanced settings"
+msgstr "Zobrazit položky s pokročilejším nastavením"
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr "&Vzhled"
+
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Check for a &new program version on startup"
 msgstr "Kontrolovat po startu &novou verzi programu"
@@ -180,6 +192,10 @@ msgstr "O&dstranit všechny přihlašovací údaje"
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Deletes all usernames and passwords for all operators"
 msgstr "Vymaže uživatelské jména a hesla u všech operátorů"
+
+#: ConfigFrame.connectionPanel.TabConstraints.tabTitle
+msgid "&Connection"
+msgstr "Připoje&ní"
 
 #: ConfigFrame.countryCodeLabel.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -237,6 +253,10 @@ msgstr ""
 "Nehledě na aktuální rozměry programu se při příštím<br>\n"
 "spuštění programu opět obnoví výchozí rozvržení\n"
 "</html>"
+
+#: ConfigFrame.generalPanel.TabConstraints.tabTitle
+msgid "&General"
+msgstr "&Obecné"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -335,10 +355,6 @@ msgstr ""
 "* Pro projevení změn je nutný restart programu!\n"
 "</i></html>"
 
-#: ConfigFrame.jLabel8.text
-msgid "Show &only operator gateways with names containing:"
-msgstr "Zobrazova&t pouze brány operátorů mající v názvu:"
-
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
@@ -350,30 +366,6 @@ msgstr ""
 "vyžadují.\n"
 "</html>"
 
-#: ConfigFrame.jPanel1.TabConstraints.tabTitle
-msgid "&General"
-msgstr "&Obecné"
-
-#: ConfigFrame.jPanel2.TabConstraints.tabTitle
-msgid "O&perators"
-msgstr "O&perátoři"
-
-#: ConfigFrame.jPanel3.TabConstraints.tabTitle
-msgid "&Appearance"
-msgstr "&Vzhled"
-
-#: ConfigFrame.jPanel4.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr "Při&hlašovací údaje"
-
-#: ConfigFrame.jPanel5.TabConstraints.tabTitle
-msgid "&Connection"
-msgstr "Připoje&ní"
-
-#: ConfigFrame.jPanel6.TabConstraints.tabTitle
-msgid "P&rivacy"
-msgstr "&Soukromí"
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
@@ -383,6 +375,10 @@ msgstr ""
 "<html>\n"
 "Umožní vám změnit vzhled programu\n"
 "</html>"
+
+#: ConfigFrame.loginPanel.TabConstraints.tabTitle
+msgid "&Login credentials"
+msgstr "Při&hlašovací údaje"
 
 #: ConfigFrame.loginTextField.toolTipText
 msgid "Username needed for logging in to the operator web gateway"
@@ -419,6 +415,10 @@ msgstr ""
 "tato funkce dostupná až od Java 6 Update 10.\n"
 "</html>"
 
+#: ConfigFrame.operatorFilterLabel.text
+msgid "Show &only operator gateways with names containing:"
+msgstr "Zobrazova&t pouze brány operátorů mající v názvu:"
+
 #: ConfigFrame.operatorFilterTextField.toolTipText
 msgid ""
 "<html>\n"
@@ -436,9 +436,17 @@ msgstr ""
 "Lze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n"
 "</html>"
 
+#: ConfigFrame.operatorPanel.TabConstraints.tabTitle
+msgid "O&perators"
+msgstr "O&perátoři"
+
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
 msgstr "Heslo příslušející k danému uživatelskému jménu"
+
+#: ConfigFrame.privacyPanel.TabConstraints.tabTitle
+msgid "P&rivacy"
+msgstr "&Soukromí"
 
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."
