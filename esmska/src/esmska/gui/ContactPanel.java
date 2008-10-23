@@ -286,10 +286,9 @@ public class ContactPanel extends javax.swing.JPanel {
         }
         
         char chr = evt.getKeyChar();
-
-        //skip when not letter nor digit nor whitespace, or is enter
-        if ((!Character.isLetterOrDigit(chr) && !Character.isWhitespace(chr)) ||
-                Character.getNumericValue(chr) == Character.getNumericValue(KeyEvent.VK_ENTER)) {
+        
+        //skip control characters (enter, etc)
+        if (Character.isISOControl(chr)) {
             return;
         }
 
