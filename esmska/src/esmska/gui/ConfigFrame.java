@@ -107,11 +107,14 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         //update themes according to current laf
         updateThemeComboBox();
-
+        
+        //update other components
+        updateCountryCode();
         if (!NotificationIcon.isSupported()) {
             notificationAreaCheckBox.setSelected(false);
         }
-        
+
+        //end of init
         closeButton.requestFocusInWindow();
         fullyInicialized = true;
     }

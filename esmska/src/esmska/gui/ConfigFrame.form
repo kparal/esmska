@@ -106,7 +106,7 @@
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="&amp;Obecn&#xe9;">
+              <JTabbedPaneConstraints tabName="&amp;General">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel1.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -174,7 +174,7 @@
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="&amp;Vzhled">
+              <JTabbedPaneConstraints tabName="&amp;Appearance">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel3.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -433,7 +433,7 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="O&amp;per&#xe1;to&#x159;i">
+              <JTabbedPaneConstraints tabName="O&amp;perators">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel2.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -477,7 +477,7 @@
                           </Group>
                           <Component id="demandDeliveryReportCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="222" max="32767" attributes="0"/>
+                      <EmptySpace pref="199" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -663,7 +663,7 @@
         <Container class="javax.swing.JPanel" name="jPanel4">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="P&#x159;i&amp;hla&#x161;ovac&#xed; &#xfa;daje">
+              <JTabbedPaneConstraints tabName="&amp;Login credentials">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel4.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -727,7 +727,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="188" max="32767" attributes="0"/>
+                      <EmptySpace pref="203" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -842,7 +842,7 @@
         <Container class="javax.swing.JPanel" name="jPanel6">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="&amp;Soukrom&#xed;">
+              <JTabbedPaneConstraints tabName="P&amp;rivacy">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel6.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -863,7 +863,7 @@
                       <Component id="reducedHistorySpinner" min="-2" pref="65" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="135" max="32767" attributes="0"/>
+                      <EmptySpace pref="181" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -928,7 +928,7 @@
         <Container class="javax.swing.JPanel" name="jPanel5">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="P&#x159;ipoje&amp;n&#xed;">
+              <JTabbedPaneConstraints tabName="&amp;Connection">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jPanel5.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
