@@ -315,6 +315,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         searchLabel.setToolTipText(searchField.getToolTipText());
 
         clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
+        clearButton.setMnemonic('r');
         clearButton.setToolTipText(l10n.getString("HistoryFrame.clearButton.toolTipText")); // NOI18N
         clearButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
         clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
