@@ -340,7 +340,7 @@ public class OperatorConnector {
      */
     private static String checkMetaRedirect(String page) {
         Pattern pattern = Pattern.compile("<meta\\s+http-equiv=[^>]*refresh[^>]*" +
-                "url=(.*)(\"|')[^>]*>", Pattern.CASE_INSENSITIVE);
+                "url=([^>]*)(\"|')[^>]*>", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(page);
         if (matcher.find()) {
             String redirect = matcher.group(1);
