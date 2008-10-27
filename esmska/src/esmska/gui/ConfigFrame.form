@@ -473,16 +473,20 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="senderNumberTextField" min="-2" max="-2" attributes="1"/>
-                                  <Component id="senderNameTextField" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel3" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="senderNumberTextField" min="-2" max="-2" attributes="1"/>
+                                          <Component id="senderNameTextField" alignment="0" min="-2" max="-2" attributes="1"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="demandDeliveryReportCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="demandDeliveryReportCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="205" max="32767" attributes="0"/>
                   </Group>
@@ -663,6 +667,7 @@
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${demandDeliveryReport}" target="demandDeliveryReportCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="enabled" source="useSenderIDCheckBox" sourcePath="${selected}" target="demandDeliveryReportCheckBox" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
           </SubComponents>
@@ -734,7 +739,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="203" max="32767" attributes="0"/>
+                      <EmptySpace pref="173" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1005,7 +1010,7 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="243" max="32767" attributes="0"/>
+                      <EmptySpace pref="228" max="32767" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
