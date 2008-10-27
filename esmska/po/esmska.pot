@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-27 10:46+0200\n"
+"POT-Creation-Date: 2008-10-27 23:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1600,6 +1600,11 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.24
 msgid "Bothered by these tips? You can turn them off in preferences."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.25
+msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
 
 #. #Write the tip as short as possible
