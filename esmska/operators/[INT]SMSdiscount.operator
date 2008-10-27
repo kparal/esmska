@@ -102,8 +102,7 @@ function send() {
     	re = /<span id="balanceid"><b>&euro;&nbsp;([0-9]+.[0-9]+)<\/b>/
     	match = re.exec(content);
     	if (undefined != match) { // if found
-    		var freeSMS = match[1]
-    		EXEC.setOperatorMessage("Remaining credit: €" + match[1])
+    		EXEC.setOperatorMessage(EXEC.INFO_CREDIT_REMAINING + match[1])
     	}
         return true
     }
