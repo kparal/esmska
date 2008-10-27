@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-25 21:38+0200\n"
-"PO-Revision-Date: 2008-10-25 21:38+0100\n"
+"POT-Creation-Date: 2008-10-27 02:04+0200\n"
+"PO-Revision-Date: 2008-10-27 02:04+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1466,6 +1466,10 @@ msgstr "Zadali jste nesprávný podpis odesilatele (číslo či jméno)."
 #: OperatorExecutor.ERROR_WRONG_TEXT
 msgid "You have entered incorrect message text. Empty or too long?"
 msgstr "Zadali jste nesprávný text zprávy. Prázdný, nebo příliš dlouhý?"
+
+#: OperatorExecutor.INFO_CREDIT_REMAINING
+msgid "Remaining credit:"
+msgstr "Zbývající kredit:"
 
 #: OperatorExecutor.INFO_FREE_SMS_REMAINING
 msgid "Free SMS remaining:"

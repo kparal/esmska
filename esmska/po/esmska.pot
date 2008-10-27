@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-25 22:10+0200\n"
+"POT-Creation-Date: 2008-10-27 02:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1261,6 +1261,10 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_TEXT
 msgid "You have entered incorrect message text. Empty or too long?"
+msgstr ""
+
+#: OperatorExecutor.INFO_CREDIT_REMAINING
+msgid "Remaining credit:"
 msgstr ""
 
 #: OperatorExecutor.INFO_FREE_SMS_REMAINING

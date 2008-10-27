@@ -56,6 +56,9 @@ public class OperatorExecutor {
     /** Message saying how many free SMS are remaining. */
     public static final String INFO_FREE_SMS_REMAINING = 
             l10n.getString("OperatorExecutor.INFO_FREE_SMS_REMAINING") + " ";
+    /** Message saying how much credit is remaining. */
+    public static final String INFO_CREDIT_REMAINING = 
+            l10n.getString("OperatorExecutor.INFO_CREDIT_REMAINING") + " ";
     /** Message used when operator provides no info whether message was successfuly sent or not */
     public static final String INFO_NOT_PROVIDED = 
             l10n.getString("OperatorExecutor.INFO_NOT_PROVIDED");

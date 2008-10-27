@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-25 21:38+0200\n"
+"POT-Creation-Date: 2008-10-27 02:03+0200\n"
 "PO-Revision-Date: 2008-10-10 19:45+0000\n"
 "Last-Translator: Luca Livraghi <luca.91@hotmail.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1267,6 +1267,10 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_TEXT
 msgid "You have entered incorrect message text. Empty or too long?"
+msgstr ""
+
+#: OperatorExecutor.INFO_CREDIT_REMAINING
+msgid "Remaining credit:"
 msgstr ""
 
 #: OperatorExecutor.INFO_FREE_SMS_REMAINING
