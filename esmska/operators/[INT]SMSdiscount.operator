@@ -1,0 +1,158 @@
+
+function getName() {
+    return "[INT]SMSdiscount"
+}
+
+function getVersion() {
+    return "2008-10-27"
+}
+
+function getMaintainer() {
+    return "Tomáš Kováčik <tomas.kovacik@gmail.com>"
+}
+
+function getCountryPrefix() {
+    return ""
+}
+
+function getOperatorPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 160
+}
+
+function getMaxParts() {
+    return 5
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function send() {
+    var re, match, content, params, postData, freeSMS
+
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+
+    // send message
+    getData = ["username", LOGIN, "password", PASSWORD, "from", SENDERNUMBER, "to", NUMBER, "text", MESSAGE]
+    content = EXEC.getURL("https://myaccount.smsdiscount.com/clx/sendsms.php", getData)
+
+    // wrong username/password/nousername/nopassword 
+    re = /<description>error<\/description>/
+    match = re.exec(content)
+    if (undefined != match) {
+	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+    re = /<description>The parameter password is missing<\/description>/
+    match = re.exec(content)
+    if (undefined != match) {
+	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+    re = /<description>The parameter username is missing<\/description>/
+    match = re.exec(content)
+    if (undefined != match) {
+	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+    re = /<description>Wrong Username\/password combination<\/description>/
+    match = re.exec(content)
+    if (undefined != match) {
+	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+
+    // invalid number   
+    re=/<description>(Invalid Number)<\/description>/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
+        return false
+    }
+
+    // check if message was successfully sent
+    re = /<resultstring>success<\/resultstring>/
+    match = re.exec(content)
+    if (undefined != match) {
+    	//get remanining credit and display it like remaining free SMS
+    	var simpleLOGIN = escape(simpleMask(LOGIN))
+    	var simplePASSWORD = escape(simpleMask(PASSWORD))
+	    getData = ["part", "plogin", "username", simpleLOGIN, "password", simplePASSWORD]
+    	content = EXEC.getURL("https://myaccount.smsdiscount.com/clx/index.php", getData)
+    	re = /<span id="balanceid"><b>&euro;&nbsp;([0-9]+.[0-9]+)<\/b>/
+    	match = re.exec(content);
+    	if (undefined != match) { // if found
+    		var freeSMS = match[1]
+    		EXEC.setOperatorMessage("Remaining credit: €" + match[1])
+    	}
+        return true
+    }
+
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    return false
+}
+
+// copied from https://myaccount.smsdiscount.com/clx/loginpanel.php to make login posible
+function simpleMask(theVar)
+		{			
+	
+			var modulo = 13;
+			var maskedValue = "";
+			for (i=0;i<theVar.length;i++)
+			{
+				if (theVar.charCodeAt(i)>=65 && theVar.charCodeAt(i)<=90) 
+				{
+					var v = theVar.charCodeAt(i);
+					v = v + modulo;
+					var rest = 0;
+					if (v > 90) rest = v % 90;
+					if (rest > 0) v = 64 + rest;					
+					maskedValue = maskedValue.concat(String.fromCharCode(v));
+				}
+				else if (theVar.charCodeAt(i) >= 97 && theVar.charCodeAt(i) <= 122)
+				{
+					var v = theVar.charCodeAt(i);
+					v = v + modulo;
+					var rest = 0;
+					if (v > 122) rest = v % 122;
+					if (rest > 0) v = 96 + rest;
+					maskedValue = maskedValue+ String.fromCharCode(v);
+				}
+				else if (theVar.charCodeAt(i) >= 48 && theVar.charCodeAt(i) <= 57)
+				{
+					var v = theVar.charCodeAt(i);
+					v =  v + 5;
+					var rest = 0;
+					if (v > 57) rest = v % 57;
+					if (rest > 0) v = 47 + rest;	
+					maskedValue = maskedValue.concat(String.fromCharCode(v));				
+				}
+				else
+				{
+					maskedValue = maskedValue.concat(theVar.charAt(i));					
+				}
+			}
+			return maskedValue;
+		}
+
