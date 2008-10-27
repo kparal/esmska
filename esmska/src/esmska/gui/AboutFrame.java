@@ -128,6 +128,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
         jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getSize()-2f));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/copyleft-12.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, bundle.getString("AboutFrame.jLabel5.text")); // NOI18N
         jLabel5.setFocusable(false);
 
@@ -210,7 +211,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     .addComponent(supportButton)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addGap(18, 20, Short.MAX_VALUE)
+                .addGap(18, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(creditsButton)
                     .addComponent(closeButton)
