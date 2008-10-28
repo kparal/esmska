@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -40,8 +43,9 @@ public class OperatorInterpreter {
         engine = manager.getEngineByName("js");
         invocable = (Invocable) engine;
         executor = new OperatorExecutor();
-        if (variables == null)
+        if (variables == null) {
              variables = new HashMap<OperatorVariable, String>();
+        }
     }
     
     /** Parse OperatorInfo implementation from the provided URL.
@@ -94,6 +98,10 @@ public class OperatorInterpreter {
             forwardVariables();
             engine.eval(reader);
 
+            //set preffered language
+            String language = getPrefferedLanguage(operator);
+            executor.setPrefferedLanguage(language);
+            
             //send the message
             sentOk = (Boolean) invocable.invokeFunction("send", new Object[0]);
         } catch (Exception ex) {
@@ -121,6 +129,20 @@ public class OperatorInterpreter {
         }
 
         engine.put("EXEC", executor);
+    }
+    
+    /** Compute preffered language to retrieve web content based on user default
+     * language and set of supported languages by operator script.
+     * @return two-letter language code as defined in ISO 639-1
+     */
+    private String getPrefferedLanguage(Operator operator) {
+        List<String> languages = Arrays.asList(operator.getSupportedLanguages());
+        String defLang = Locale.getDefault().getLanguage();
+        if (languages.isEmpty() || languages.contains(defLang)) {
+            return defLang;
+        } else {
+            return languages.get(0);
+        }
     }
 
     /** Get the error message created when sending of the message failed. May be null. */

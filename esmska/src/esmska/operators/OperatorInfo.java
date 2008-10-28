@@ -84,12 +84,27 @@ public interface OperatorInfo {
      */
     int getDelayBetweenMessages();
     
-    
     /** Indicates whether this operator gateway requires login with username and
      * password. If this is true, it means that user must have some credentials
      * assigned from the operator or must register at gateway website prior to
      * using this gateway in program.
      */
     boolean isLoginRequired();
+    
+    /** Indicates for which website languages the script is working.
+     * This method is included because operators may have their website translated
+     * into many languages and therefore the response may come somehow localized.<br>
+     * If the script works independently of website language (no matching on sentences is done),
+     * specify just an empty array.
+     * In this case default user language will be used for retrieving the website.<br>
+     * If the script works only with one or more specific languages, provide their
+     * two-letter codes (as specified by the <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-1 Code</a>) in an array.
+     * In this case default user language will be used if it exists in the array,
+     * otherwise first language in the array will be used (therefore it is reasonable
+     * to specify the most widely used - like english - as first).
+     * @return list of two-letter language codes for which this script works,
+     *  or empty array if the script works independently of language
+     */
+    String[] getSupportedLanguages();
     
 }

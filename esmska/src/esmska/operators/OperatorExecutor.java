@@ -195,21 +195,11 @@ public class OperatorExecutor {
         this.errorMessage = errorMessage;
     }
 
-    /** Error message displayed when sending was unsuccessful. */
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-    
     /** Additional optional message from operator that is shown after message sending. */
     public void setOperatorMessage(String operatorMessage) {
         this.operatorMessage = operatorMessage;
     }
     
-    /** Additional optional message from operator. */
-    public String getOperatorMessage() {
-        return operatorMessage;
-    }
-
     /** Referer used for the following requests.
      * Use null for clearing the field.
      */
@@ -225,5 +215,21 @@ public class OperatorExecutor {
         }
         Thread.sleep(milliseconds);
     }
+
+    /** Error message displayed when sending was unsuccessful. */
+    String getErrorMessage() {
+        return errorMessage;
+    }
     
+    /** Additional optional message from operator. */
+    String getOperatorMessage() {
+        return operatorMessage;
+    }
+    
+    /** Set preferred language to retrieve web content.
+     * @param language two-letter language code as defined in ISO 639-1
+     */
+    void setPrefferedLanguage(String language) {
+        connector.setLanguage(language);
+    }
 }

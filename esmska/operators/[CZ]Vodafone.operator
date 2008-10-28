@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-07-29"
+    return "2008-10-28"
 }
 
 function getMaintainer() {
@@ -43,9 +43,13 @@ function isLoginRequired() {
     return false
 }
 
+function getSupportedLanguages() {
+    return []
+}
+
 function send() {
     var re, match, content, params, postData
-    
+
     // change variables to correct form
     if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)

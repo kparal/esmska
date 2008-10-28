@@ -24,7 +24,7 @@ public class DefaultOperator implements Operator {
     private static final OperatorInterpreter interpreter = new OperatorInterpreter();
     private URL script;
     private String name, version, maintainer, countryPrefix;
-    private String[] operatorPrefixes;
+    private String[] operatorPrefixes, supportedLanguages;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
             delayBetweenMessages;
     private Icon icon;
@@ -60,6 +60,7 @@ public class DefaultOperator implements Operator {
         signatureExtraLength = info.getSignatureExtraLength();
         delayBetweenMessages = info.getDelayBetweenMessages();
         loginRequired = info.isLoginRequired();
+        supportedLanguages = info.getSupportedLanguages();
 
         //find icon - for "[xx]abc.operator" look for "[xx]abc.png"
         String iconName = script.toExternalForm().replaceFirst("\\.operator$", ".png");
@@ -156,5 +157,10 @@ public class DefaultOperator implements Operator {
     @Override
     public boolean isLoginRequired() {
         return loginRequired;
+    }
+
+    @Override
+    public String[] getSupportedLanguages() {
+        return supportedLanguages;
     }
 }

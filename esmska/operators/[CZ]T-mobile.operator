@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-09-04"
+    return "2008-10-28"
 }
 
 function getMaintainer() {
@@ -45,6 +45,10 @@ function isLoginRequired() {
     return false
 }
 
+function getSupportedLanguages() {
+    return ["en", "cs"]
+}
+
 function send() {
     var re, match, content, params, postData
 
@@ -81,7 +85,7 @@ function send() {
     content = EXEC.postURL("http://sms.t-zones.cz/", [], postData)
 
     // check if message was successfully sent
-    re = /SMS zpr.va byl. odeslán./
+    re = /(SMS zpr.va byl. odeslán.|SMS was sent)/
     match = re.exec(content)
     if (undefined != match) { // if found
         // all ok

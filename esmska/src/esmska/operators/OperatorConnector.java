@@ -11,7 +11,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,17 +52,6 @@ public class OperatorConnector {
 
         //set user-agent - just to be sure that the server won't screw us
         client.getParams().setParameter(HttpMethodParams.USER_AGENT, USER_AGENT);
-        
-        //set Accept-Language headers
-        @SuppressWarnings("unchecked")
-        HashSet<Header> headerSet = (HashSet<Header>) client.getHostConfiguration().
-                getParams().getParameter("http.default-headers");
-        if (headerSet == null) {
-            headerSet = new HashSet<Header>();
-        }
-        Header languageHeader = new Header("Accept-Language", Locale.getDefault().getLanguage());
-        headerSet.add(languageHeader);
-        client.getHostConfiguration().getParams().setParameter("http.default-headers", headerSet);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
@@ -89,6 +77,22 @@ public class OperatorConnector {
         this.referer = referer;
     }
 
+    /** Sets preferred language to retrieve web content.
+     * @param languageCode two-letter language code as defined in ISO 639-1
+     */
+    public void setLanguage(String languageCode) {
+        //set Accept-Language headers
+        @SuppressWarnings("unchecked")
+        HashSet<Header> headerSet = (HashSet<Header>) client.getHostConfiguration().
+                getParams().getParameter("http.default-headers");
+        if (headerSet == null) {
+            headerSet = new HashSet<Header>();
+        }
+        Header languageHeader = new Header("Accept-Language", languageCode);
+        headerSet.add(languageHeader);
+        client.getHostConfiguration().getParams().setParameter("http.default-headers", headerSet);
+    }
+    
     /** Sets binary content, clears text content. */
     private void setBinaryContent(byte[] binaryContent) {
         this.binaryContent = binaryContent;

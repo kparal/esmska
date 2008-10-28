@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-08-28"
+    return "2008-10-28"
 }
 
 function getMaintainer() {
@@ -43,6 +43,10 @@ function getDelayBetweenMessages() {
 
 function isLoginRequired() {
     return false
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
 }
 
 function send() {
