@@ -47,10 +47,16 @@ public class OperatorExecutor {
      * or message quota has been reached. */
     public static final String ERROR_LIMIT_REACHED =
             l10n.getString("OperatorExecutor.ERROR_LIMIT_REACHED");
+    /** Message that user does not have sufficient credit. */
+    public static final String ERROR_NO_CREDIT =
+            l10n.getString("OperatorExecutor.ERROR_NO_CREDIT");
+    /** Message that sending failed but operator hasn't provided any reason for it. */
+    public static final String ERROR_NO_REASON =
+            l10n.getString("OperatorExecutor.ERROR_NO_REASON");
     /** Message preceding operator provided error message. */
     public static final String ERROR_OPERATOR_MESSAGE =
             l10n.getString("OperatorExecutor.ERROR_OPERATOR_MESSAGE");
-    /** Message that uknown error happened. */
+    /** Message that uknown error happened, maybe error in the script. */
     public static final String ERROR_UKNOWN =
             l10n.getString("OperatorExecutor.ERROR_UKNOWN");
     /** Message saying how many free SMS are remaining. */
@@ -59,9 +65,9 @@ public class OperatorExecutor {
     /** Message saying how much credit is remaining. */
     public static final String INFO_CREDIT_REMAINING = 
             l10n.getString("OperatorExecutor.INFO_CREDIT_REMAINING") + " ";
-    /** Message used when operator provides no info whether message was successfuly sent or not */
-    public static final String INFO_NOT_PROVIDED = 
-            l10n.getString("OperatorExecutor.INFO_NOT_PROVIDED");
+    /** Message used when operator provides no info whether message was successfuly sent or not. */
+    public static final String INFO_STATUS_NOT_PROVIDED = 
+            l10n.getString("OperatorExecutor.INFO_STATUS_NOT_PROVIDED");
     
     private OperatorConnector connector = new OperatorConnector();
     private String errorMessage;
