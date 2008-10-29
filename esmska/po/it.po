@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-27 23:20+0200\n"
+"POT-Creation-Date: 2008-10-29 18:34+0200\n"
 "PO-Revision-Date: 2008-10-10 19:45+0000\n"
 "Last-Translator: Luca Livraghi <luca.91@hotmail.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -120,6 +120,10 @@ msgstr "Opzioni disponibili:"
 
 #: CommandLineParser.basic_usage
 msgid "java -jar esmska.jar [OPTIONS]"
+msgstr ""
+
+#: CommandLineParser.debugNetwork
+msgid "Print debugging output of the network communication."
 msgstr ""
 
 #: CommandLineParser.enable_portable_mode
@@ -1223,7 +1227,13 @@ msgid "Choose suitable gateway for provided number"
 msgstr ""
 
 #: OperatorComboBox.List_of_available_operators_web_gateways
-msgid "List of available operators web gateways"
+msgid ""
+"<html>\n"
+"List of available operators web gateways.<br>\n"
+"<br>\n"
+"Prefix [XX] indicates country for which the gateway works.<br>\n"
+"Prefix [INT] indicates international gateways.\n"
+"</html>"
 msgstr ""
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED

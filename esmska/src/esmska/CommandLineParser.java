@@ -10,6 +10,8 @@ package esmska;
 
 import esmska.utils.L10N;
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
@@ -29,11 +31,16 @@ public class CommandLineParser {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     
     private static final Options options = new Options();
-    private static final Option help = new Option("h", "help", false, l10n.getString("CommandLineParser.show_this_help"));
-    private static final Option portable = new Option("p", "portable", false, l10n.getString("CommandLineParser.enable_portable_mode"));
-    private static final Option config = OptionBuilder.withArgName(l10n.getString("CommandLineParser.path")).hasArg().
+    private static final Option help = new Option("h", "help", false, 
+            l10n.getString("CommandLineParser.show_this_help"));
+    private static final Option portable = new Option("p", "portable", false,
+            l10n.getString("CommandLineParser.enable_portable_mode"));
+    private static final Option config = OptionBuilder.withArgName(
+            l10n.getString("CommandLineParser.path")).hasArg().
             withDescription(l10n.getString("CommandLineParser.set_user_path")).
             withLongOpt("config").create("c");
+    private static final Option debugConnection = new Option(null, "debug-network", false,
+            l10n.getString("CommandLineParser.debugNetwork"));
     private static final OptionGroup configGroup = new OptionGroup();
 
     static {
@@ -42,6 +49,7 @@ public class CommandLineParser {
 
         options.addOption(help);
         options.addOptionGroup(configGroup);
+        options.addOption(debugConnection);
     }
     private boolean isPortable;
     private String configPath;
@@ -53,16 +61,27 @@ public class CommandLineParser {
         try {
             PosixParser parser = new PosixParser();
             CommandLine cmd = parser.parse(options, args);
-
-            if (cmd.hasOption(help.getOpt())) {
+            List<Option> opts = Arrays.asList(cmd.getOptions());
+            
+            if (opts.contains(help)) {
                 printUsage();
                 System.exit(0);
             }
-            if (cmd.hasOption(portable.getOpt())) {
+            if (opts.contains(portable)) {
                 isPortable = true;
             }
-            if (cmd.hasOption(config.getOpt())) {
+            if (opts.contains(config)) {
                 configPath = config.getValue();
+            }
+            if (opts.contains(debugConnection)) {
+                System.setProperty("org.apache.commons.logging.Log",
+                        "org.apache.commons.logging.impl.SimpleLog");
+                System.setProperty("org.apache.commons.logging.simplelog.showdatetime", 
+                        "true");
+                System.setProperty("org.apache.commons.logging.simplelog.log.httpclient.wire.header",
+                        "debug");
+                System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient",
+                        "debug");
             }
 
         } catch (ParseException ex) {

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-27 23:20+0200\n"
-"PO-Revision-Date: 2008-10-27 10:46+0100\n"
+"POT-Creation-Date: 2008-10-29 18:41+0200\n"
+"PO-Revision-Date: 2008-10-29 18:41+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -122,6 +122,10 @@ msgstr "Dostupné volby:"
 #: CommandLineParser.basic_usage
 msgid "java -jar esmska.jar [OPTIONS]"
 msgstr "java -jar esmska.jar [VOLBY]"
+
+#: CommandLineParser.debugNetwork
+msgid "Print debugging output of the network communication."
+msgstr "Vypisovat ladící výstup síťové komunikace."
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
@@ -1408,8 +1412,20 @@ msgid "Choose suitable gateway for provided number"
 msgstr "Vybrat vhodnou bránu pro zadané číslo"
 
 #: OperatorComboBox.List_of_available_operators_web_gateways
-msgid "List of available operators web gateways"
-msgstr "Seznam dostupných webových bran operátorů"
+msgid ""
+"<html>\n"
+"List of available operators web gateways.<br>\n"
+"<br>\n"
+"Prefix [XX] indicates country for which the gateway works.<br>\n"
+"Prefix [INT] indicates international gateways.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Seznam dostupných webových bran operátorů.<br>\n"
+"<br>\n"
+"Předpona [XX] označuje zemi, pro kterou daná brána funguje.<br>\n"
+"Předpona [INT] označuje mezinárodní brány.\n"
+"</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
@@ -1841,7 +1857,7 @@ msgstr "Obtěžují vás tyto tipy? Můžete si je vypnout v nastavení."
 #. #Write the tip as short as possible
 #: Tip.25
 msgid "Use Help menu to ask a question or report a problem."
-msgstr ""
+msgstr "Použijte nabídku Nápověda pro položení dotazu nebo nahlášení problému."
 
 #. #Write the tip as short as possible
 #: Tip.3
@@ -1904,6 +1920,9 @@ msgstr "Spustit frontu"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "Znovu spustit frontu sms"
+
+#~ msgid "List of available operators web gateways"
+#~ msgstr "Seznam dostupných webových bran operátorů"
 
 #~ msgid ""
 #~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
