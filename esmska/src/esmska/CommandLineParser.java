@@ -39,17 +39,20 @@ public class CommandLineParser {
             l10n.getString("CommandLineParser.path")).hasArg().
             withDescription(l10n.getString("CommandLineParser.set_user_path")).
             withLongOpt("config").create("c");
-    private static final Option debugConnection = new Option(null, "debug-network", false,
+    private static final Option debugNetwork = new Option(null, "debug-network", false,
             l10n.getString("CommandLineParser.debugNetwork"));
-    private static final OptionGroup configGroup = new OptionGroup();
+    private static final Option debugNetworkFull = new Option(null, "debug-network-full", false,
+            l10n.getString("CommandLineParser.debugNetworkFull"));
 
     static {
+        OptionGroup configGroup = new OptionGroup();
         configGroup.addOption(portable);
         configGroup.addOption(config);
 
         options.addOption(help);
         options.addOptionGroup(configGroup);
-        options.addOption(debugConnection);
+        options.addOption(debugNetwork);
+        options.addOption(debugNetworkFull);
     }
     private boolean isPortable;
     private String configPath;
@@ -73,7 +76,7 @@ public class CommandLineParser {
             if (opts.contains(config)) {
                 configPath = config.getValue();
             }
-            if (opts.contains(debugConnection)) {
+            if (opts.contains(debugNetwork)) {
                 System.setProperty("org.apache.commons.logging.Log",
                         "org.apache.commons.logging.impl.SimpleLog");
                 System.setProperty("org.apache.commons.logging.simplelog.showdatetime", 
@@ -81,6 +84,16 @@ public class CommandLineParser {
                 System.setProperty("org.apache.commons.logging.simplelog.log.httpclient.wire.header",
                         "debug");
                 System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient",
+                        "debug");
+            }
+            if (opts.contains(debugNetworkFull)) {
+                System.setProperty("org.apache.commons.logging.Log",
+                        "org.apache.commons.logging.impl.SimpleLog");
+                System.setProperty("org.apache.commons.logging.simplelog.showdatetime",
+                        "true");
+                System.setProperty("org.apache.commons.logging.simplelog.log.httpclient.wire", 
+                        "debug");
+                System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient", 
                         "debug");
             }
 
