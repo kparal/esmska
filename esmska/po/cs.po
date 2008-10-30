@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-29 18:41+0200\n"
-"PO-Revision-Date: 2008-10-29 18:41+0100\n"
+"POT-Creation-Date: 2008-10-30 23:45+0200\n"
+"PO-Revision-Date: 2008-10-30 22:02+0000\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-10-16 03:24+0000\n"
+"X-Launchpad-Export-Date: 2008-10-30 22:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -127,6 +127,14 @@ msgstr "java -jar esmska.jar [VOLBY]"
 msgid "Print debugging output of the network communication."
 msgstr "Vypisovat ladící výstup síťové komunikace."
 
+#: CommandLineParser.debugNetworkFull
+msgid ""
+"Print debugging output of the network communication including the content of "
+"the messages. This option implies --debug-network option."
+msgstr ""
+"Vypisovat ladící výstup síťové komunikace včetně obsahu zpráv. Tato volba "
+"zahrnuje volbu --debug-network."
+
 #: CommandLineParser.enable_portable_mode
 msgid ""
 "Enable the portable mode - ask for location of the user configuration "
@@ -150,8 +158,8 @@ msgid ""
 msgstr "Nastavení cesty k uživatelskému adresáři. Nelze použít s -p."
 
 #: CommandLineParser.show_this_help
-msgid "Show this help"
-msgstr "Zobrazí tuto nápovědu"
+msgid "Show this help."
+msgstr "Zobrazit tuto nápovědu."
 
 #: CommandLineParser.usage
 msgid "Usage:"
@@ -1439,6 +1447,16 @@ msgstr ""
 "omezuje<br>maximální možný počet zpráv za jistý časový úsek. Zkuste to "
 "později."
 
+#: OperatorExecutor.ERROR_NO_CREDIT
+msgid "You don't have sufficient credit to send this message."
+msgstr "Pro odeslání této zprávy nemáte dostatečný kredit."
+
+#: OperatorExecutor.ERROR_NO_REASON
+msgid ""
+"The operator hasn't specified any reason why the message sending failed."
+msgstr ""
+"Operátor blíže neupřesnil žádný důvod, proč odeslání této zprávy selhalo."
+
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
 msgid "A message from operator:<br>"
 msgstr "Zpráva od operátora:<br>"
@@ -1491,7 +1509,7 @@ msgstr "Zbývající kredit:"
 msgid "Free SMS remaining:"
 msgstr "Zbývá volných SMS:"
 
-#: OperatorExecutor.INFO_NOT_PROVIDED
+#: OperatorExecutor.INFO_STATUS_NOT_PROVIDED
 msgid ""
 "The gateway doesn't provide any information about successful sending. The "
 "message might be and <b>might not be</b> delivered."
@@ -1903,7 +1921,7 @@ msgstr "Nezapomeňte si v nastavení vyplnit předčíslí své země."
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Kamil Páral https://translations.launchpad.net/~kamil.paral"
+"  Kamil Páral https://launchpad.net/~kamil.paral"
 
 #: Undo_
 msgid "&Undo"
@@ -1921,12 +1939,12 @@ msgstr "Spustit frontu"
 msgid "Unpause sms queue"
 msgstr "Znovu spustit frontu sms"
 
-#~ msgid "List of available operators web gateways"
-#~ msgstr "Seznam dostupných webových bran operátorů"
-
 #~ msgid ""
 #~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
 #~ "project</a></html>"
 #~ msgstr ""
 #~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Podpořte "
 #~ "projekt</a></html>"
+
+#~ msgid "List of available operators web gateways"
+#~ msgstr "Seznam dostupných webových bran operátorů"
