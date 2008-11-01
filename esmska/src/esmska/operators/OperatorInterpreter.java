@@ -94,14 +94,14 @@ public class OperatorInterpreter {
         try {
             reader = new InputStreamReader(operator.getScript().openStream(), "UTF-8");
             
+            //set preferred language
+            String language = getPreferredLanguage(operator);
+            executor.setPreferredLanguage(language);
+            
             //forward variables to the script and evaluate it
             forwardVariables();
             engine.eval(reader);
 
-            //set preffered language
-            String language = getPrefferedLanguage(operator);
-            executor.setPrefferedLanguage(language);
-            
             //send the message
             sentOk = (Boolean) invocable.invokeFunction("send", new Object[0]);
         } catch (Exception ex) {
@@ -135,7 +135,7 @@ public class OperatorInterpreter {
      * language and set of supported languages by operator script.
      * @return two-letter language code as defined in ISO 639-1
      */
-    private String getPrefferedLanguage(Operator operator) {
+    private String getPreferredLanguage(Operator operator) {
         List<String> languages = Arrays.asList(operator.getSupportedLanguages());
         String defLang = Locale.getDefault().getLanguage();
         if (languages.isEmpty() || languages.contains(defLang)) {

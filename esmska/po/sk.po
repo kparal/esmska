@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-30 23:45+0200\n"
-"PO-Revision-Date: 2008-10-28 14:24+0000\n"
+"POT-Creation-Date: 2008-11-01 22:03+0200\n"
+"PO-Revision-Date: 2008-11-01 11:47+0000\n"
 "Last-Translator: TomasKovacik <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-10-30 22:24+0000\n"
+"X-Launchpad-Export-Date: 2008-11-01 16:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -44,7 +44,7 @@ msgstr "Posielanie SMS cez internet."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2008 Kamil Páral"
-msgstr ""
+msgstr "2007-2008 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -131,13 +131,15 @@ msgstr "java -jar esmska.jar [VOĽBY]"
 
 #: CommandLineParser.debugNetwork
 msgid "Print debugging output of the network communication."
-msgstr ""
+msgstr "Vypisovať odlaďovací výstup sieťovej komunikácie."
 
 #: CommandLineParser.debugNetworkFull
 msgid ""
 "Print debugging output of the network communication including the content of "
 "the messages. This option implies --debug-network option."
 msgstr ""
+"Vypisovať odlaďovací výstup sieťovej komunikácie vrátane obsahu správ.\n"
+"Táto voľba zahŕňa voľbu --debug-network."
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
@@ -164,7 +166,7 @@ msgstr ""
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr ""
+msgstr "Zobraziť túto nápovedu."
 
 #: CommandLineParser.usage
 msgid "Usage:"
@@ -176,11 +178,11 @@ msgstr "S&komprimovat"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr ""
+msgstr "Po&kročilé nastavenia"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr ""
+msgstr "Zobraziť položky s pokročilejšími nastaveniami"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -712,13 +714,13 @@ msgid ""
 "replace it?</h2>This file already exists in ''{1}''.<br>By replacing it you "
 "will overwrite the whole it''s contents.</html>"
 msgstr ""
-"<html>\r\n"
-"<h2>\r\n"
-"Súbor s menom \"{0}\" už existuje.<br>\r\n"
-"Chcete ho nahradiť?\r\n"
-"</h2>\r\n"
-"V \"{1}\" existuje takýto súbor.<br>\r\n"
-"Jeho nahradením prepíšete celý obsah.\r\n"
+"<html>\n"
+"<h2>\n"
+"Súbor s menom \"{0}\" už existuje.<br>\n"
+"Chcete ho nahradiť?\n"
+"</h2>\n"
+"V \"{1}\" existuje takýto súbor.<br>\n"
+"Jeho nahradením prepíšete celý obsah.\n"
 "</html>"
 
 #: Contact
@@ -949,7 +951,7 @@ msgstr "História"
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
-msgstr ""
+msgstr "Vyčistiť hľadaný výraz (Alt+R, Escape)\""
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
@@ -1028,8 +1030,8 @@ msgstr "Vyberte súbor s vyexportovanými kontaktami"
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
 msgstr ""
-"<html>\r\n"
-"Program predpokladá, že súbor je v UTF-8 kódovaní.\r\n"
+"<html>\n"
+"Program predpokladá, že súbor je v UTF-8 kódovaní.\n"
 "</html>"
 
 #: ImportFrame.encodingWin1250
@@ -1037,9 +1039,9 @@ msgid ""
 "<html>The program expects the file to be in the windows-1250 encoding (the "
 "default file encoding for czech MS Windows).</html>"
 msgstr ""
-"<html>\r\n"
+"<html>\n"
 "Program predpokladá, že súbor je v kódovaní windows-1250 (východiskové "
-"kódofanie pre slovenské MS windows).\r\n"
+"kódofanie pre slovenské MS windows).\n"
 "</html>"
 
 #: ImportFrame.fileLabel.text
@@ -1065,11 +1067,11 @@ msgid ""
 "go to the contact list and by using right mouse button export all your "
 "contacts to CSV file. Select that file here.</html>"
 msgstr ""
-"<html>\r\n"
-"Najprv je potrebné vyexportovať kontakty z programu DreamCom SE. Spustite\r\n"
-"uvedený program, prejdite do adresára s kontaktami a pomocov pravého\r\n"
-"tlačítka vyexportujte všetky svoje kontakty do CSV súboru. Tento súbor tu\r\n"
-"vyberte.\r\n"
+"<html>\n"
+"Najprv je potrebné vyexportovať kontakty z programu DreamCom SE. Spustite\n"
+"uvedený program, prejdite do adresára s kontaktami a pomocov pravého\n"
+"tlačítka vyexportujte všetky svoje kontakty do CSV súboru. Tento súbor tu\n"
+"vyberte.\n"
 "</html>"
 
 #: ImportFrame.infoEsmska
@@ -1078,10 +1080,10 @@ msgid ""
 "create it by using \"Export contacts\" function. Select that file here.</"
 "html>"
 msgstr ""
-"<html>\r\n"
-"Pre import kontaktov potrebujete mať nachystaný CSV súbor,\r\n"
-"ktorý Vám vytvorí aplikácia obsahujúci Vaše kontakty. Tento súbor tu vyberte."
-"\r\n"
+"<html>\n"
+"Pre import kontaktov potrebujete mať nachystaný CSV súbor,\n"
+"ktorý Vám vytvorí aplikácia obsahujúci Vaše kontakty. Tento súbor tu "
+"vyberte.\n"
 "</html>"
 
 #: ImportFrame.infoKubik
@@ -1090,11 +1092,11 @@ msgid ""
 "program, go to the contact list and by using right mouse button export all "
 "your contacts to CSV file. Select that file here.</html>"
 msgstr ""
-"<html>\r\n"
-"Najprv musíte vyexportovať kontakty z programu Kubík SMS DreamCom.\r\n"
-"Spustite uvedený program, prejdite do adresára s kontaktami a pomocov\r\n"
-"pravého tlačítka vyexportujte všetky svoje kontakty do CSV súboru. Tento\r\n"
-"súbor tu vyberte.\r\n"
+"<html>\n"
+"Najprv musíte vyexportovať kontakty z programu Kubík SMS DreamCom.\n"
+"Spustite uvedený program, prejdite do adresára s kontaktami a pomocov\n"
+"pravého tlačítka vyexportujte všetky svoje kontakty do CSV súboru. Tento\n"
+"súbor tu vyberte.\n"
 "</html>"
 
 #: ImportFrame.infoVcard
@@ -1103,10 +1105,10 @@ msgid ""
 "which can be created by an application containing your contacts. Select that "
 "file here.</html>"
 msgstr ""
-"<html>\r\n"
-"Pre import kontaktov potrebujete mať nachystaný vCard alebo VCF súbor,\r\n"
-"ktorý Vám vytvorí aplikácia obsahujúci Vaše kontakty. Tento súbor tu vyberte."
-"\r\n"
+"<html>\n"
+"Pre import kontaktov potrebujete mať nachystaný vCard alebo VCF súbor,\n"
+"ktorý Vám vytvorí aplikácia obsahujúci Vaše kontakty. Tento súbor tu "
+"vyberte.\n"
 "</html>"
 
 #: ImportFrame.invalid_file
@@ -1114,11 +1116,11 @@ msgid ""
 "<html><h2>There was an error while parsing file!</h2>The file probably "
 "contains invalid data.</html>"
 msgstr ""
-"<html>\r\n"
-"<h2>\r\n"
-"Pri spracovávaní súboru sa vyskytla chyba!\r\n"
-"</h2>\r\n"
-"Súbor pravdepodobne obsahuje nesprávne/nesprávne fomátované údaje.\r\n"
+"<html>\n"
+"<h2>\n"
+"Pri spracovávaní súboru sa vyskytla chyba!\n"
+"</h2>\n"
+"Súbor pravdepodobne obsahuje nesprávne/nesprávne fomátované údaje.\n"
 "</html>\""
 
 #: ImportFrame.jLabel1.text
@@ -1240,12 +1242,12 @@ msgid ""
 "strongly discourage you from starting another<br>instances of the program "
 "because it may cause a user data loss.</html>"
 msgstr ""
-"<html>\r\n"
-"<h2>\r\n"
-"Aktuálne je už jedna Esmska spustená!\r\n"
-"</h2>\r\n"
-"Dôrazne nedoporučujeme spôšťať dalšiu inštanciu<br>\r\n"
-"programu, môže dôjsť k strate požívateľských dát.\r\n"
+"<html>\n"
+"<h2>\n"
+"Aktuálne je už jedna Esmska spustená!\n"
+"</h2>\n"
+"Dôrazne nedoporučujeme spôšťať dalšiu inštanciu<br>\n"
+"programu, môže dôjsť k strate požívateľských dát.\n"
 "</html>"
 
 #: Main.cant_read_config
@@ -1262,10 +1264,10 @@ msgid ""
 "files<br>which is necessary for the program to work properly. It is "
 "recommended to use <br>Java from Sun. The program will now exit.</html>"
 msgstr ""
-"<html>\r\n"
-"Vami aktuálne používaná Java nepodporuje vykonávanie JavaScriptových<br>\r\n"
-"súborov, čo je pre správne fungovanie programu nevyhnutné.<br>\r\n"
-"Odporúčame používať Javu od firmy Sun. Program bude ukončený.\r\n"
+"<html>\n"
+"Vami aktuálne používaná Java nepodporuje vykonávanie JavaScriptových<br>\n"
+"súborov, čo je pre správne fungovanie programu nevyhnutné.<br>\n"
+"Odporúčame používať Javu od firmy Sun. Program bude ukončený.\n"
 "</html>"
 
 #: Main.run_anyway
@@ -1405,10 +1407,10 @@ msgstr "Správu pre {0} se nepodarilo odeslať!"
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 msgstr ""
-"<html>\r\n"
-"<h2>\r\n"
-"Správu pre \"{0}\" se nepodarilo odeslať!\r\n"
-"</h2>{1}\r\n"
+"<html>\n"
+"<h2>\n"
+"Správu pre \"{0}\" se nepodarilo odeslať!\n"
+"</h2>{1}\n"
 "</html>"
 
 #. #Single quotes need to be doubled!
@@ -1477,6 +1479,12 @@ msgid ""
 "Prefix [INT] indicates international gateways.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Zoznam dostupných webových brán operáorov.<br>\n"
+"<br>\n"
+"Predpona [XX] označuje zem, pre ktorú daná brána funguje.<br>\n"
+"Predpona [INT] označuje mezinárodné brány.\n"
+"</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
@@ -1485,19 +1493,18 @@ msgid ""
 "limits<br>the maximum number of possible messages in some time period. Try "
 "it later."
 msgstr ""
-"Odosielate správu príliš skoro. Operátor asi vyžaduje určitý interval,<br>"
-"\r\n"
-"ktorý je nutné počkať pred odoslaním dalšej správy, alebo obmedzuje<br>\r\n"
+"Odosielate správu príliš skoro. Operátor asi vyžaduje určitý interval,<br>\n"
+"ktorý je nutné počkať pred odoslaním dalšej správy, alebo obmedzuje<br>\n"
 "maximálny počet správ za určitý časový úsek. Skúste to neskôr"
 
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
-msgstr ""
+msgstr "Pre odeslanie tejto správy nemáte dostatočný kredit."
 
 #: OperatorExecutor.ERROR_NO_REASON
 msgid ""
 "The operator hasn't specified any reason why the message sending failed."
-msgstr ""
+msgstr "Operátor bližšie neupresnil dôvod prečo odoslanie správy zlyhalo"
 
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
 msgid "A message from operator:<br>"
@@ -1545,7 +1552,7 @@ msgstr "Zadali ste nesprávny text zprávy. Prázdny, alebo príliš dlhý?"
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
-msgstr ""
+msgstr "Zostávajúci kredit:"
 
 #: OperatorExecutor.INFO_FREE_SMS_REMAINING
 msgid "Free SMS remaining:"
@@ -1659,7 +1666,7 @@ msgid ""
 "Omit whitespace from current message and rewrite it to \"CamelCase\" format"
 msgstr ""
 "Vynechať z aktuálnej správy biele znaky a prepísať správu do tvaru "
-"\"CamelCase\"\r\n"
+"\"CamelCase\"\n"
 "Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \\\\\\\"CamelCase"
 "\\\\\\\"\""
 
@@ -1925,7 +1932,7 @@ msgstr "Obťažujú Vás tieto tipy? Môžete ich vypnúť v nastaveniach."
 #. #Write the tip as short as possible
 #: Tip.25
 msgid "Use Help menu to ask a question or report a problem."
-msgstr ""
+msgstr "Otázky a hlásenia problémov môžete realizovať v ponuke Nápoveda."
 
 #. #Write the tip as short as possible
 #: Tip.3

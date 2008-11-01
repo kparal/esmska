@@ -20,7 +20,13 @@ msgattrib -F ../po/esmska.pot -o ../po/esmska.pot
 cd ../po
 if ls *.po >/dev/null; then
     for PO in *.po; do
-	msgmerge -U --backup=none $PO esmska.pot
+        # remove CR linefeeds which may be present even though they should not be
+        if od -c "$PO" | grep -q '\\r'; then
+            echo "$PO contains forbidden CR linefeeds, removing..."
+            dos2unix -a "$PO"
+        fi
+        # merge
+        msgmerge -U --backup=none "$PO" esmska.pot
     done
 fi
 

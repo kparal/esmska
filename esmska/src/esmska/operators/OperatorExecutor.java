@@ -235,7 +235,7 @@ public class OperatorExecutor {
     /** Set preferred language to retrieve web content.
      * @param language two-letter language code as defined in ISO 639-1
      */
-    void setPrefferedLanguage(String language) {
+    void setPreferredLanguage(String language) {
         connector.setLanguage(language);
     }
 }
