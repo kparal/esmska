@@ -19,7 +19,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import org.jvnet.lafwidget.LafWidget;
 
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
@@ -177,9 +176,6 @@ public class Main {
             }
         }
         
-        //set Substance specific addons
-        UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
-
         //set MenuBar usage on Mac OS
         if (macBarUI != null && OSType.isMac()) {
             UIManager.put("MenuBarUI", macBarUI);
