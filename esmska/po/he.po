@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-30 23:45+0200\n"
-"PO-Revision-Date: 2008-10-26 07:47+0000\n"
+"POT-Creation-Date: 2008-11-03 21:59+0200\n"
+"PO-Revision-Date: 2008-11-03 15:48+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-10-30 22:24+0000\n"
+"X-Launchpad-Export-Date: 2008-11-03 20:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -44,7 +44,7 @@ msgstr "שליחת SMS דרך האינטרנט."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2008 Kamil Páral"
-msgstr ""
+msgstr "2007-2008 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -129,13 +129,15 @@ msgstr "java -jar esmska.jar [OPTIONS]"
 
 #: CommandLineParser.debugNetwork
 msgid "Print debugging output of the network communication."
-msgstr ""
+msgstr "הצגת פלט תקשורת הרשת לניפוי שגיאות"
 
 #: CommandLineParser.debugNetworkFull
 msgid ""
 "Print debugging output of the network communication including the content of "
 "the messages. This option implies --debug-network option."
 msgstr ""
+"הצגת פלט תקשורת הרשת לניפוי שגיאות כולל תוכן ההודעות. אפשרות זו מרמזת על "
+"האפשרות  --debug-network option."
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
@@ -161,7 +163,7 @@ msgstr "הגדר את הנתיב אל תיקיית תצורת המשתמש. לא
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr ""
+msgstr "הצגת עזרה זו."
 
 #: CommandLineParser.usage
 msgid "Usage:"
@@ -173,11 +175,11 @@ msgstr "&דחס"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr ""
+msgstr "הגדרות מ&תקדמות"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr ""
+msgstr "הצגת פריטים עם הגדרות מתקדמות יותר"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -418,6 +420,12 @@ msgid ""
 "feature is available only from Java 6 Update 10.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"הצג סמל באזור ההתרעה של מנהל החלונות (ידוע בשם <i>מגשית המערכת</i>).<br>\n"
+"<br>\n"
+"הזהר, בעת שימוש במנהלי חלונות חדישים (Compiz, Beryl, ...) תכונה<br>\n"
+"זו זמינה רק לאחר העדכון העשירי של Java 6.\n"
+"</html>"
 
 #: ConfigFrame.operatorFilterLabel.text
 msgid "Show &only operator gateways with names containing:"
@@ -433,6 +441,12 @@ msgid ""
 "sensitive.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"ברשימת המפעילים יופיעו אך ורק מפעילים, המכילים תבנית בשם המסופק<br>\n"
+"בשדה זה. בדרך זו תוכל להציג מפעילים רק עבור המדינה XX על ידי הזנת התבנית "
+"[XX].<br>\n"
+"תוכל להזין תבניות נוספות המופרדות בפסיקים. התבניות תלויות רישיות.\n"
+"</html>"
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
 msgid "O&perators"
@@ -444,7 +458,7 @@ msgstr "הסיסמה השייכת לשם המשתמש"
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
-msgstr ""
+msgstr "פ&רטיות"
 
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."
@@ -496,6 +510,10 @@ msgid ""
 "may seem not to match\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"השם שהוזן תופס חלק מההודעה אך אינו גלוי,<br>\n"
+"לכן צביעת הודעת הטקסט אינה נראית זהה למחוון הספירה<br>\n"
+"</html>"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
@@ -508,10 +526,14 @@ msgid ""
 "Example: proxy.company.com:1080\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"כתובת שרת המתווך מסוג SOCKS הינה מהתבנית 'מארח' או 'מארח:פתחה'.\n"
+"דוגמה: proxy.company.com:1080\n"
+"</html>"
 
 #: ConfigFrame.startMinimizedCheckBox.text
 msgid "Hide program to &icon on startup"
-msgstr ""
+msgstr "הסתר את התוכנה ל&סמל עם ההפעלה"
 
 #: ConfigFrame.startMinimizedCheckBox.toolTipText
 msgid ""
@@ -520,11 +542,15 @@ msgid ""
 "to the icon in the notification area\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"מיד לאחר ההפעלה התוכנית תוסתר<br>\n"
+"לסמל שבאזור ההתרעות\n"
+"</html>"
 
 #. #Single quotes need to be doubled!
 #: ConfigFrame.state
 msgid "(country: {0})"
-msgstr ""
+msgstr "(מדינה: {0})"
 
 #: ConfigFrame.substanceWarning.text
 msgid ""
@@ -532,6 +558,9 @@ msgid ""
 "** The Substance look is not recommended for your Java version (OpenJDK)!\n"
 "</i></html>"
 msgstr ""
+"<html><i>\n"
+"** ערכת החזות Substance אינה מומלצת עבור גירסת הג'אווה שלך (OpenJDK)!\n"
+"</i></html>"
 
 #: ConfigFrame.substanceWarning.toolTipText
 msgid ""
@@ -540,6 +569,10 @@ msgid ""
 "Use rather Sun Java to use this look.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"ישנן כמה בעיות ידועות בעת השימוש בערכת החזות Substance עם OpenJDK.<br>\n"
+"מומלץ להשתמש ב־Java מבית Sun לשימוש בערכה זו. \n"
+"</html>"
 
 #: ConfigFrame.system_look
 msgid "System"
@@ -570,6 +603,10 @@ msgid ""
 "in the status bar on program startup\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"הצג עצה אקראית אודות אופן השימוש בתוכנה<br>\n"
+"בסרגל המצב עם הפעלת התוכנה\n"
+"</html>"
 
 #: ConfigFrame.title
 msgid "Preferences - Esmska"
@@ -585,6 +622,9 @@ msgid ""
 "Show the toolbar which helps to access some actions with mouse more easily\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"הצג את סרגל הכלים המסייע לגשת לכמה פעולות עם העכבר ביתר קלות\n"
+"</html>"
 
 #: ConfigFrame.unknown_look
 msgid "Unknown"
@@ -614,15 +654,20 @@ msgid ""
 "and signed with entered name. Only some operators support this feature.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"עם תוספת חתימה, הודעת ה־ SMS תגיע אל הנמען מהמספר שהוזן וחתומה בשם שהוזן."
+"<br>\n"
+"רק כמה מהמפעילים תומכים בתכונה זו.\n"
+"</html>"
 
 #. #Single quotes need to be doubled!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
-msgstr ""
+msgstr "<html>תיקיית תצורת המשתמש:<br>{0}</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
-msgstr ""
+msgstr "התוכנה תופעל &ממורכזת במסך"
 
 #: ConfigFrame.windowCenteredCheckBox.toolTipText
 msgid ""
@@ -630,10 +675,12 @@ msgid ""
 "system<br>\n"
 "or centered on the screen</html>"
 msgstr ""
+"<html>האם חלון התוכנה אמור להיות ממוקם בהתאם למערכת ההפעלה<br>\n"
+"או ממורכז למרכז המסך</html>"
 
 #: ConfigFrame.windowDecorationsCheckBox.text
 msgid "Use the look also on program &borders *"
-msgstr ""
+msgstr "השתמש בערכת החזות גם על &גבולות התוכנה *"
 
 #: ConfigFrame.windowDecorationsCheckBox.toolTipText
 msgid ""
@@ -642,6 +689,10 @@ msgid ""
 "instead of the operating system\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"האם יש לצבוע את גבולות התוכנה עם ערכת החזות הנבחרת<br>\n"
+"במקום לפי ערכת מערכת ההפעלה\n"
+"</html>"
 
 #. #Single quotes need to be doubled!
 #: ConfirmingFileChooser.sure_to_replace
@@ -650,6 +701,9 @@ msgid ""
 "replace it?</h2>This file already exists in ''{1}''.<br>By replacing it you "
 "will overwrite the whole it''s contents.</html>"
 msgstr ""
+"<html><h2>קובץ הנושא את השם  ''{0}'' כבר קיים.<br>האם אתה בטוח שברצונך "
+"להחליף אותו?</h2>קובץ זה כבר קיים תחת ''{1}''.<br>על ידי החלפת הקובץ ישוכתב "
+"כל תוכנו של הקובץ.</html>"
 
 #: Contact
 msgid "Contact"
@@ -768,6 +822,11 @@ msgid ""
 "country prefix is set in the program preferences.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"מספר הטלפון של איש הקשר כולל קידומת המדינה.<br>\n"
+"אין למלא את קידומת המדינה אם קידומת ברירת המחדל<br>\n"
+"מוגדרת בהעדפות התוכנה.\n"
+"</html>"
 
 #: Edit_contact
 msgid "Edit contact"
@@ -825,6 +884,17 @@ msgid ""
 "eg. freely available OpenOffice Calc (www.openoffice.org).<br><br>\n"
 "The file will be saved in the UTF-8 encoding.</html>"
 msgstr ""
+"<html>תוכל לייצא את אנשי הקשר שלך לקבצים מסוג CSV או vCard. אלו הם<br>\n"
+"קבצי טקסט המכילים נתונים ברורים וקריאים.<br>\n"
+"על ידי שימוש בפונקציית הייבוא תוכל לטעון נתונים אלה מאוחר יותר אל "
+"Esmska<br>\n"
+"או לעשות בו שימוש בכל דרך אחרת.<br><br>\n"
+"קובץ הנמצא במבנה vCard הינו קובץ מתוקנן וניתן להשתמש בו במגוון רחב של<br>\n"
+"תוכנות. לקובץ ה־CSV ישנם תכנים בסיסיים ביותר<br>\n"
+"וכל תוכנה יוצרת אותו מעט אחרת. אם תאלץ לשנות את מבנה הקובץ על מנת<br>\n"
+"לייבא אותו לתוכנה אחרת תוכל להשתמש בתוכנת גיליון נתונים,<br>\n"
+"לדוגמה \"גליונות עבודה\" מחבילת OpenOffice (www.openoffice.org).<br><br>\n"
+"הקובץ ישמר בקידוד UTF-8.</html>"
 
 #: ExportManager.export_ok
 msgid "Contact export finished successfully"
@@ -861,7 +931,7 @@ msgstr "היסטוריה"
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
-msgstr ""
+msgstr "נקה את תנאי החיפוש (Alt+R, Escape)"
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
@@ -939,13 +1009,15 @@ msgstr "בחר את הקובץ עם אנשי הקשר המיוצאים"
 
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
-msgstr ""
+msgstr "<html>התוכנה מצפה שהקובץ יהיה בקידוד UTF-8.</html>"
 
 #: ImportFrame.encodingWin1250
 msgid ""
 "<html>The program expects the file to be in the windows-1250 encoding (the "
 "default file encoding for czech MS Windows).</html>"
 msgstr ""
+"<html>התוכנה מצפה שהקובץ יהיה בקידוד windows-1250 (קידוד הקבצים כברירת המחדל "
+"ב־MS Windows).</html>"
 
 #: ImportFrame.fileLabel.text
 msgid "Choose input file:"
@@ -970,6 +1042,9 @@ msgid ""
 "go to the contact list and by using right mouse button export all your "
 "contacts to CSV file. Select that file here.</html>"
 msgstr ""
+"<html>ראשית יהיה עליך לייצא את אנשי הקשר מ־DreamCom SE. הפעל את התוכנה, גש "
+"לרשימת אנשי הקשר ובאמצעות מקש העכבר הימני ייצא את כל אנשי הקשר שלך לקובץ "
+"CSV. בחר קובץ זה כאן.</html>"
 
 #: ImportFrame.infoEsmska
 msgid ""
@@ -977,6 +1052,8 @@ msgid ""
 "create it by using \"Export contacts\" function. Select that file here.</"
 "html>"
 msgstr ""
+"<html>על מנת לייבא אנשי קשר צריך להיות לך קובץ CSV. תוכל ליצור אותו על ידי "
+"שימוש בפונקציית \"ייצוא אנשי הקשר\". בחר קובץ זה כאן.</html>"
 
 #: ImportFrame.infoKubik
 msgid ""
@@ -984,6 +1061,9 @@ msgid ""
 "program, go to the contact list and by using right mouse button export all "
 "your contacts to CSV file. Select that file here.</html>"
 msgstr ""
+"<html>ראשית יהיה עליך לייצא את אנשי הקשר מ־Kubík SMS DreamCom. הפעל את "
+"התוכנה, גש לרשימת אנשי הקשר ובאמצעות מקש העכבר הימני ייצא את כל אנשי הקשר "
+"שלך לקובץ CSV. בחר קובץ זה כאן.</html>"
 
 #: ImportFrame.infoVcard
 msgid ""
@@ -991,16 +1071,20 @@ msgid ""
 "which can be created by an application containing your contacts. Select that "
 "file here.</html>"
 msgstr ""
+"<html>על מנת לייבא אנשי קשר צריך להיות ברשותך קובץ VCARD או VCF f מוכן מראש, "
+"אותו ניתן ליצור מתוך יישום המכיל את אנשי הקשר שלך. בחר קובץ זה כאן.</html>"
 
 #: ImportFrame.invalid_file
 msgid ""
 "<html><h2>There was an error while parsing file!</h2>The file probably "
 "contains invalid data.</html>"
 msgstr ""
+"<html><h2>ארעה שגיאה בעת עיבוד הקובץ!</h2>ייתכן והקובץ מכיל נתונים לא תקינים."
+"</html>"
 
 #: ImportFrame.jLabel1.text
 msgid "Following new contacts were found:"
-msgstr ""
+msgstr "אנשי הקשר החדשים הבאים נמצאו:"
 
 #: ImportFrame.jLabel2.text
 msgid ""
@@ -1009,6 +1093,10 @@ msgid ""
 "a copy them to Esmska. Contacts in your old application will remain intact.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"ייבוא אנשי הקשר יאפשר לך לקרוא את אנשי הקשר מיישום אחר ולהעתיק אותם "
+"ל־Esmska. אנשי הקשר יוותרו ביישום הקודם ללא שינוי.\n"
+"</html>"
 
 #: ImportFrame.jLabel22.text
 msgid ""
@@ -1017,19 +1105,23 @@ msgid ""
 "will be shown to you. No changes will be made yet.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"הקובץ יעובד ואז תוצג בפניך רשימת אנשי קשר הזמינים לייבוא. לא בוצעו כל "
+"שינויים עדיין.\n"
+"</html>"
 
 #: ImportFrame.jLabel3.text
 msgid "Choose from which application you want to import contacts:"
-msgstr ""
+msgstr "בחר מאיזה יישום ברצונך לייבא אנשי קשר:"
 
 #: ImportFrame.jLabel4.text
 msgid ""
 "Or choose the type of the standardized file format you have the contacts in:"
-msgstr ""
+msgstr "או בחר את סוג הקובץ המתוקנן בו יש לך אנשי קשר:"
 
 #: ImportFrame.jLabel8.text
 msgid "If you want to import these contacts press Import."
-msgstr ""
+msgstr "אם ברצונך לייבא אנשי קשר אלה לחץ על ייבוא."
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1038,24 +1130,28 @@ msgid ""
 "Esmska release and try to use it.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"במידה ומתגלות תקלות בעת הייבוא, אנא בדוק האם ישנה גירסה חדשה של Esmska ונסה "
+"להשתמש בה.\n"
+"</html>"
 
 #: ImportFrame.progressBar.string
 msgctxt "ImportFrame.progressBar.string"
 msgid "Please wait..."
-msgstr ""
+msgstr "נא להמתין..."
 
 #: ImportFrame.title
 msgid "Contact import - Esmska"
-msgstr ""
+msgstr "ייבוא אנשי קשר - Esmska"
 
 #: ImportFrame.vCard_filter
 msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "קבצי vCard (*.vcard, *.vcf)"
 
 #: ImportFrame.validOperatorCheckBox.text
 msgid "Import only contacts with known operator"
-msgstr ""
+msgstr "ייבא אנשי קשר ממפעילים מוכרים בלבד"
 
 #: ImportFrame.validOperatorCheckBox.toolTipText
 msgid ""
@@ -1065,26 +1161,30 @@ msgid ""
 "they have operator this program can work with\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"במידה וסומן אנשי הקשר יוצגו ברשימה וייובאו רק כאשר<br>\n"
+"המפעיל שלהם נתמך על ידי התוכנה\n"
+"</html>"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
-msgstr ""
+msgstr "&נקה"
 
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
-msgstr ""
+msgstr "מנקה את הרישום הנוכחי"
 
 #: LogFrame.copyButton.text
 msgid "Co&py to clipboard"
-msgstr ""
+msgstr "ה&עתק ללוח הגזירים"
 
 #: LogFrame.copyButton.toolTipText
 msgid "Copy the whole log contents to the system clipboard"
-msgstr ""
+msgstr "העתק את תוכן הרישום כולו ללוח הגזירים של המערכת"
 
 #: LogFrame.title
 msgid "Log - Esmska"
-msgstr ""
+msgstr "רישום - Esmska"
 
 #: Log_
 msgid "&Log"

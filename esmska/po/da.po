@@ -1,18 +1,22 @@
+# Danish translation for esmska
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the esmska package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 #. extracted from ../src/esmska/resources/l10n.properties
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-03 21:59+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2008-11-01 14:48+0000\n"
+"Last-Translator: nanker <Unknown>\n"
+"Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.1.1\n"
-"X-Accelerator-Marker: &\n"
+"X-Launchpad-Export-Date: 2008-11-03 20:36+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -48,7 +52,7 @@ msgstr ""
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
-msgstr ""
+msgstr "<html><a href=\"http://esmska.googlecode.com/\">Hjemmeside</a></html>"
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -56,6 +60,9 @@ msgid ""
 "Show program home page\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Vis programmets hjemmeside\n"
+"</html>"
 
 #. #Do not change this value
 #: AboutFrame.supportButton.link
@@ -75,43 +82,43 @@ msgstr ""
 
 #: AboutFrame.title
 msgid "About Esmska"
-msgstr ""
+msgstr "Om Esmska"
 
 #: About_
 msgid "&About"
-msgstr ""
+msgstr "&Om"
 
 #: Add_contact
 msgid "Add contact"
-msgstr ""
+msgstr "Tilføj kontakt"
 
 #: Add_new_contact
 msgid "Add new contact"
-msgstr ""
+msgstr "Tilføj ny kontakt"
 
 #: Cancel
 msgid "Cancel"
-msgstr ""
+msgstr "Annullér"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
-msgstr ""
+msgstr "Kopi"
 
 #: ClipboardPopupMenu.Cut
 msgid "Cut"
-msgstr ""
+msgstr "Klip"
 
 #: ClipboardPopupMenu.Paste
 msgid "Paste"
-msgstr ""
+msgstr "Indsæt"
 
 #: Close_
 msgid "&Close"
-msgstr ""
+msgstr "&Luk"
 
 #: CommandLineParser.available_options
 msgid "Available options:"
-msgstr ""
+msgstr "Tilgængelige valgmuligheder:"
 
 #: CommandLineParser.basic_usage
 msgid "java -jar esmska.jar [OPTIONS]"
@@ -140,7 +147,7 @@ msgstr ""
 
 #: CommandLineParser.path
 msgid "path"
-msgstr ""
+msgstr "sti"
 
 #: CommandLineParser.set_user_path
 msgid ""
@@ -149,11 +156,11 @@ msgstr ""
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr ""
+msgstr "Vis denne hjælp."
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr ""
+msgstr "Brug:"
 
 #: Compress_
 msgid "&Compress"
@@ -266,11 +273,11 @@ msgstr ""
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr ""
+msgstr "&Brugernavn:"
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr ""
+msgstr "Adgang&skode:"
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -283,15 +290,15 @@ msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
-msgstr ""
+msgstr "H&TTP proxy:"
 
 #: ConfigFrame.jLabel15.text
 msgid "HTTP&S proxy:"
-msgstr ""
+msgstr "HTTP&S proxy:"
 
 #: ConfigFrame.jLabel16.text
 msgid "SO&CKS proxy:"
-msgstr ""
+msgstr "SO&CKS proxy:"
 
 #: ConfigFrame.jLabel17.text
 msgid ""
@@ -308,7 +315,7 @@ msgstr ""
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Navn:"
 
 #: ConfigFrame.jLabel7.text
 msgid ""
@@ -480,7 +487,7 @@ msgstr ""
 
 #: ConfigFrame.system_look
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: ConfigFrame.themeComboBox.toolTipText
 msgid ""
@@ -522,7 +529,7 @@ msgstr ""
 
 #: ConfigFrame.unknown_look
 msgid "Unknown"
-msgstr ""
+msgstr "Ukendt"
 
 #: ConfigFrame.unknown_state
 msgid "(unknown state)"
@@ -587,11 +594,11 @@ msgstr ""
 
 #: Contact
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: ContactPanel.border.title
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakter"
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
@@ -611,15 +618,15 @@ msgstr ""
 
 #: Create
 msgid "Create"
-msgstr ""
+msgstr "Opret"
 
 #: Credits.authors
 msgid "Written by:"
-msgstr ""
+msgstr "Skrevet af:"
 
 #: Credits.contributors
 msgid "Contributions from:"
-msgstr ""
+msgstr "Bidrag fra:"
 
 #: Credits.graphics
 msgid "Graphics:"
@@ -631,31 +638,31 @@ msgstr ""
 
 #: Credits.translators
 msgid "Translated by:"
-msgstr ""
+msgstr "Oversat af:"
 
 #: Date
 msgid "Date"
-msgstr ""
+msgstr "Dato"
 
 #: Delete
 msgid "Delete"
-msgstr ""
+msgstr "Slet"
 
 #: Delete_contacts
 msgid "Delete contacts"
-msgstr ""
+msgstr "Slet kontakter"
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr ""
+msgstr "Slet besked"
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
-msgstr ""
+msgstr "Slet valgte kontakter"
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr ""
+msgstr "Slet valgte beskedder"
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history (Alt+D)"
@@ -664,17 +671,17 @@ msgstr ""
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
 msgid "Send SMS over the Internet"
-msgstr ""
+msgstr "Send SMS via internettet"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.genericName
 msgid "SMS Sender"
-msgstr ""
+msgstr "SMS afsender"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.name
 msgid "Esmska"
-msgstr ""
+msgstr "Esmska"
 
 #: EditContactPanel.gatewayLabel.text
 msgctxt "EditContactPanel.gatewayLabel.text"
@@ -684,15 +691,15 @@ msgstr ""
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Navn:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
-msgstr ""
+msgstr "Navn på kontakt"
 
 #: EditContactPanel.numberLabel.text
 msgid "Nu&mber:"
-msgstr ""
+msgstr "Nu&mmer:"
 
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
@@ -705,19 +712,19 @@ msgstr ""
 
 #: Edit_contact
 msgid "Edit contact"
-msgstr ""
+msgstr "Redigér kontakt"
 
 #: Edit_message
 msgid "Edit message"
-msgstr ""
+msgstr "Redigér besked"
 
 #: Edit_selected_contact
 msgid "Edit selected contact"
-msgstr ""
+msgstr "Redigér valgte kontakter"
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr ""
+msgstr "Redigér valgte beskedder"
 
 #. #Single quotes need to be doubled!
 #: ExportManager.cant_write
@@ -783,15 +790,15 @@ msgstr ""
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "vCard filer (*.vcard, *.vcf)"
 
 #: Hide_program
 msgid "Hide program"
-msgstr ""
+msgstr "Skjul program"
 
 #: History
 msgid "History"
-msgstr ""
+msgstr "Historik"
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
@@ -799,19 +806,19 @@ msgstr ""
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
-msgstr ""
+msgstr "Nummer:"
 
 #: HistoryFrame.jLabel2.text
 msgid "Name:"
-msgstr ""
+msgstr "Navn:"
 
 #: HistoryFrame.jLabel3.text
 msgid "Date:"
-msgstr ""
+msgstr "Dato:"
 
 #: HistoryFrame.jLabel4.text
 msgid "Gateway:"
-msgstr ""
+msgstr "Gateway:"
 
 #: HistoryFrame.jLabel5.text
 msgid "Sender number:"
@@ -835,7 +842,7 @@ msgstr ""
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
-msgstr ""
+msgstr "&Søg"
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
@@ -843,7 +850,7 @@ msgstr ""
 
 #: Import
 msgid "Import"
-msgstr ""
+msgstr "Importér"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
@@ -853,15 +860,15 @@ msgstr ""
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
 msgid "Select"
-msgstr ""
+msgstr "Vælg"
 
 #: ImportFrame.backButton.text
 msgid "&Back"
-msgstr ""
+msgstr "&Tilbage"
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
-msgstr ""
+msgstr "&Gennemse"
 
 #: ImportFrame.browseButton.toolTipText
 msgid "Find contacts file using dialog"
@@ -883,7 +890,7 @@ msgstr ""
 
 #: ImportFrame.fileLabel.text
 msgid "Choose input file:"
-msgstr ""
+msgstr "Vælg input fil:"
 
 #: ImportFrame.fileTextField.toolTipText
 msgid "The path to contacts file"
@@ -892,11 +899,11 @@ msgstr ""
 #. #Single quotes need to be doubled!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
-msgstr ""
+msgstr "Denne fil {0} kan ikke læses!"
 
 #: ImportFrame.forwardButton.text
 msgid "&Forward"
-msgstr ""
+msgstr "&Fremad"
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -934,7 +941,7 @@ msgstr ""
 
 #: ImportFrame.jLabel1.text
 msgid "Following new contacts were found:"
-msgstr ""
+msgstr "Følgende nye kontakter blev fundet:"
 
 #: ImportFrame.jLabel2.text
 msgid ""
@@ -976,7 +983,7 @@ msgstr ""
 #: ImportFrame.progressBar.string
 msgctxt "ImportFrame.progressBar.string"
 msgid "Please wait..."
-msgstr ""
+msgstr "Vent venligst..."
 
 #: ImportFrame.title
 msgid "Contact import - Esmska"
@@ -985,7 +992,7 @@ msgstr ""
 #: ImportFrame.vCard_filter
 msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "vCard filer (*.vcard, *.vcf)"
 
 #: ImportFrame.validOperatorCheckBox.text
 msgid "Import only contacts with known operator"
@@ -1018,7 +1025,7 @@ msgstr ""
 
 #: LogFrame.title
 msgid "Log - Esmska"
-msgstr ""
+msgstr "Log - Esmska"
 
 #: Log_
 msgid "&Log"
@@ -1059,7 +1066,7 @@ msgstr ""
 
 #: MainFrame.Quit_program
 msgid "Quit program"
-msgstr ""
+msgstr "Forlad program"
 
 #: MainFrame.cant_create_program_dir
 msgid "Directory with program settings can't be created!"
@@ -1099,7 +1106,7 @@ msgstr ""
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr ""
+msgstr "&Hjælp"
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
@@ -1111,11 +1118,11 @@ msgstr ""
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr ""
+msgstr "&Besked:"
 
 #: MainFrame.new_program_version
 msgid "A new program version has been released!"
-msgstr ""
+msgstr "En ny programversion er tilgængelig!"
 
 #: MainFrame.no_operators
 msgid ""
@@ -1144,7 +1151,7 @@ msgstr ""
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
-msgstr ""
+msgstr "P&rogram"
 
 #: MainFrame.redoButton.toolTipText
 msgid "Redo (Ctrl+Y)"
@@ -1156,7 +1163,7 @@ msgstr ""
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr ""
+msgstr "Vis programinformation"
 
 #. #Single quotes need to be doubled!
 #: MainFrame.sms_failed
@@ -1175,11 +1182,11 @@ msgstr ""
 
 #: MainFrame.tip
 msgid "Tip:"
-msgstr ""
+msgstr "Tips:"
 
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
-msgstr ""
+msgstr "&Værktøjer"
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate This Application..."
@@ -1199,11 +1206,11 @@ msgstr ""
 
 #: Move_down
 msgid "Move down"
-msgstr ""
+msgstr "Flyt ned"
 
 #: Move_up
 msgid "Move up"
-msgstr ""
+msgstr "Flyt op"
 
 #: Multiple_sending
 msgid "Multiple sending"
@@ -1211,7 +1218,7 @@ msgstr ""
 
 #: New_contact
 msgid "New contact"
-msgstr ""
+msgstr "Ny kontakt"
 
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
@@ -1636,6 +1643,7 @@ msgstr ""
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
+"Dine kontakter kan hentes ind fra mange andre programmer eller formater."
 
 #. #Write the tip as short as possible
 #: Tip.4
@@ -1672,14 +1680,16 @@ msgstr ""
 #: Translators
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  nanker https://launchpad.net/~nanker"
 
 #: Undo_
 msgid "&Undo"
-msgstr ""
+msgstr "&Fortryd"
 
 #: Unknown_operator
 msgid "Unknown operator"
-msgstr ""
+msgstr "Ukendt operator"
 
 #: Unpause_queue
 msgid "Unpause queue"
