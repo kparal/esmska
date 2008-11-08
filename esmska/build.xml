@@ -95,14 +95,14 @@
         <!-- call 'jnlp' target -->
         <antcall target="jnlp"/>
         <!-- delete unneeded stuff -->
-        <delete dir="dist/ikony"/>
+        <delete dir="dist/icons"/>
         <delete dir="dist/operators"/>
         <delete>
             <fileset dir="dist">
-                <include name="ctime.txt"/>
+                <include name="readme.txt"/>
                 <include name="esmska.bat"/>
                 <include name="esmska.sh"/>
-                <include name="licence.txt"/>
+                <include name="license.txt"/>
             </fileset>
         </delete>
     </target>
