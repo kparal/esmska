@@ -181,7 +181,7 @@ public class MainFrame extends javax.swing.JFrame {
         //check for valid operators
         if (PersistenceManager.getOperators().size() <= 0) {
             JOptionPane.showMessageDialog(null,
-                    l10n.getString("MainFrame.no_operators"),
+                    new JLabel(l10n.getString("MainFrame.no_operators")),
                     null, JOptionPane.ERROR_MESSAGE);
         }
         
