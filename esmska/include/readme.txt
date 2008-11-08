@@ -1,4 +1,4 @@
-Esmska 0.11.1
+Esmska 0.12.0
 ~~~~~~~~~~~~~
 
 A program for sending SMS over the Internet.
