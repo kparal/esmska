@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-03 21:59+0200\n"
-"PO-Revision-Date: 2008-11-03 15:48+0000\n"
+"POT-Creation-Date: 2008-11-08 14:39+0200\n"
+"PO-Revision-Date: 2008-11-05 13:49+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-03 20:36+0000\n"
+"X-Launchpad-Export-Date: 2008-11-08 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -1188,7 +1188,7 @@ msgstr "רישום - Esmska"
 
 #: Log_
 msgid "&Log"
-msgstr ""
+msgstr "רישו&ם"
 
 #: Main.already_running
 msgid ""
@@ -1196,14 +1196,17 @@ msgid ""
 "strongly discourage you from starting another<br>instances of the program "
 "because it may cause a user data loss.</html>"
 msgstr ""
+"<html><h2>Esmska כבר פעילה!</h2>Esmska כבר הופעלה פעם אחת. אנו לא ממליצים "
+"להפעיל מופעים נוספים של התוכנה<br>כיוון שהם עלולים לגרום לאובדן המידע של "
+"המשתמש.</html>"
 
 #: Main.cant_read_config
 msgid "The user configuration directory can't be read or written!"
-msgstr ""
+msgstr "תיקיית תצורת המשתמש לא ניתנת לקריאה או לכתיבה!"
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
-msgstr ""
+msgstr "בחר את מיקום קבצי התצורה"
 
 #: Main.no_javascript
 msgid ""
@@ -1211,10 +1214,13 @@ msgid ""
 "files<br>which is necessary for the program to work properly. It is "
 "recommended to use <br>Java from Sun. The program will now exit.</html>"
 msgstr ""
+"<html>גירסת הג'אווה הנוכחית שלך אינה תומכת בהפעלת קבצי "
+"ג'אווהסקריפט<br>הנחוצים על מנת שהתוכנה תעבוד. מומלץ להשתמש<br>בג'אווה מבית "
+"סאן. התוכנית תצא כעת.</html>"
 
 #: Main.run_anyway
 msgid "Run anyway"
-msgstr ""
+msgstr "ברח"
 
 #: Main.unsupported_java
 msgid ""
@@ -1222,66 +1228,69 @@ msgid ""
 "might not work correctly with it! The tested Java versions are: Sun Java 6, "
 "OpenJDK 6, Apple Java 6."
 msgstr ""
+"יתכן והנך מריץ את התוכנה על גירסת ג'אווה שאינה נתמכת! התוכנה עלולה לעבוד שלא "
+"כראוי עם גירסת גא'ווה זו! גירסאות הג'אווה שנבדקו הן: ג'אווה 6 של סאן, "
+"OpenJDK 6, Apple ג'אווה 6."
 
 #: MainFrame.Quit_program
 msgid "Quit program"
-msgstr ""
+msgstr "יציאה מהתוכנית"
 
 #: MainFrame.cant_create_program_dir
 msgid "Directory with program settings can't be created!"
-msgstr ""
+msgstr "לא ניתן ליצור תיקייה עם הגדרות התוכנה!"
 
 #: MainFrame.cant_save_config
 msgid "Some of the configuration files couldn't be saved!"
-msgstr ""
+msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
 #: MainFrame.compressButton.toolTipText
 msgid "Compress message (Ctrl+K)"
-msgstr ""
+msgstr "דחוס את ההודעה (Ctrl+K)"
 
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
-msgstr ""
+msgstr "הגדרת התנהגות התוכנה"
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
-msgstr ""
+msgstr "ייצוא אנשי הקשר לקובץ"
 
 #: MainFrame.faqMenuItem.text
 msgid "Frequently Asked &Questions"
-msgstr ""
+msgstr "שאלות &נפוצות"
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
-msgstr ""
+msgstr "הצג את השאלות הנפוצות ביותר (באינטרנט - באנגלית)"
 
 #: MainFrame.getHelpMenuItem.text
 msgid "Get &Help Online..."
-msgstr ""
+msgstr "קבלת ע&זרה מקוונת..."
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
-msgstr ""
+msgstr "שאל שאלה בפורום התמיכה"
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr ""
+msgstr "ע&זרה"
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
-msgstr ""
+msgstr "ייבוא אנשי הקשר הושלם בהצלחה"
 
 #: MainFrame.import_contacts_from_other_applications
 msgid "Import contacts from other applications"
-msgstr ""
+msgstr "ייבא אנשי קשר מיישומים אחרים"
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr ""
+msgstr "הו&דעה"
 
 #: MainFrame.new_program_version
 msgid "A new program version has been released!"
-msgstr ""
+msgstr "שוחררה גירסה חדשה של התוכנה!"
 
 #: MainFrame.no_operators
 msgid ""
@@ -1299,97 +1308,108 @@ msgid ""
 "Windows).</li>\n"
 "</ul></html>"
 msgstr ""
+"<html>\n"
+"<h2>לא נמצאו מפעילים!</h2>\n"
+"התוכנה חסרת כל ערך ללא המפעילים. הסיבה לבעיה עלולה להיות:<br>\n"
+"<ul>\n"
+"<li>התוכנה שלך אינה מותקנת כראוי וכמה מהקבצים פגומים או חסרים<br>\n"
+"נסה להוריד את התוכנה שוב.</li>\n"
+"<li>מערכת ההפעלה הגדירה את נתיב התוכנה באופן שגוי.<br>\n"
+"במקום ללחוץ על<i>esmska.jar</i> נסה להריץ את התוכנה דרך הקובץ<br>\n"
+"<i>esmska.sh</i> (בלינוקס וכו') או את הקובץ <i>esmska.bat</i> (ב־Windows).</"
+"li>\n"
+"</ul></html>"
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &Problem..."
-msgstr ""
+msgstr "דווח על &בעיה..."
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
-msgstr ""
+msgstr "דווח על בעיה או בקש תכונה"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
-msgstr ""
+msgstr "&תוכנה"
 
 #: MainFrame.redoButton.toolTipText
 msgid "Redo (Ctrl+Y)"
-msgstr ""
+msgstr "בצע שוב (Ctrl+Y)"
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
-msgstr ""
+msgstr "הצג את היסטוריית ההודעות שנשלחו"
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr ""
+msgstr "הצג את נתוני התוכנה"
 
 #. #Single quotes need to be doubled!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
-msgstr ""
+msgstr "לא ניתן לשלוח את ההודעה עבור {0}!"
 
 #. #Single quotes need to be doubled!
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-msgstr ""
+msgstr "<html><h2>לא ניתן לשלוח את ההודעה עבור ''{0}''!</h2>{1}</html>"
 
 #. #Single quotes need to be doubled!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
-msgstr ""
+msgstr "ההודעה עבור {0} נשלחה."
 
 #: MainFrame.tip
 msgid "Tip:"
-msgstr ""
+msgstr "עצה:"
 
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
-msgstr ""
+msgstr "&כלים"
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate This Application..."
-msgstr ""
+msgstr "ת&רגם יישום זה..."
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
-msgstr ""
+msgstr "עזור לתרגם תוכנה זו לשפת האם שלך"
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"
-msgstr ""
+msgstr "ביטול (Ctrl+Z)"
 
 #: Message_history_
 msgid "Message &history"
-msgstr ""
+msgstr "הי&סטוריית ההודעות"
 
 #: Move_down
 msgid "Move down"
-msgstr ""
+msgstr "הזז מטה"
 
 #: Move_up
 msgid "Move up"
-msgstr ""
+msgstr "הזז מעלה"
 
 #: Multiple_sending
 msgid "Multiple sending"
-msgstr ""
+msgstr "שליחה לריבוי נמענים"
 
 #: New_contact
 msgid "New contact"
-msgstr ""
+msgstr "איש קשר חדש"
 
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
-msgstr ""
+msgstr "השהה/המשך את השליחה"
 
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Choose suitable gateway"
-msgstr ""
+msgstr "בחר שער גישה הולם"
 
 #: OperatorComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Choose suitable gateway for provided number"
-msgstr ""
+msgstr "בחר שער גישה הולם עבור המספר שהוזן"
 
 #: OperatorComboBox.List_of_available_operators_web_gateways
 msgid ""
@@ -1400,6 +1420,12 @@ msgid ""
 "Prefix [INT] indicates international gateways.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"רשימת שערי גישת הרשת של המפעילות הסלולריות.<br>\n"
+"<br>\n"
+"הקידומת [XX] מציינת את המדינה עבורה שער הגישה עובד.<br>\n"
+"הקידומת [INT] מציינת שערי גישה בינלאומיים.\n"
+"</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
@@ -1408,19 +1434,22 @@ msgid ""
 "limits<br>the maximum number of possible messages in some time period. Try "
 "it later."
 msgstr ""
+"הינך שולח את ההודעה מוקדם מדי. המפעיל הסלולרי דורש משך זמן מסויים<br>\n"
+"בו יהיה עליך להמתין עד לשליחת ההודעה הבאה או לחילופין מספר מסויים של<br>\n"
+"הודעות בפרק זמן מסויים. נסה שוב מאוחר יותר."
 
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
-msgstr ""
+msgstr "אין לך די אשראי לשליחת הודעה זו."
 
 #: OperatorExecutor.ERROR_NO_REASON
 msgid ""
 "The operator hasn't specified any reason why the message sending failed."
-msgstr ""
+msgstr "המפעיל לא ציין סיבה כלשהי לכשל בשליחת ההודעה."
 
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
 msgid "A message from operator:<br>"
-msgstr ""
+msgstr "הודעה מהמפעיל:<br>"
 
 #: OperatorExecutor.ERROR_UKNOWN
 msgid ""
@@ -1430,6 +1459,10 @@ msgid ""
 "using the latest program version.<br><br>If the problems persist and "
 "operator web gateway works,<br>report the problem on program homepage."
 msgstr ""
+"ארעה שגיאה בלתי ידועה. ייתכן והמפעיל שינה את<br>דפי אתר האינטרנט שלו או שהוא "
+"סובל מבעיות איתם כרגע.<br>נסה שוב מאוחר יותר.<br><br>כמו כן וודא כי החיבור "
+"שלך לאינטרנט פעיל<br>וכי הינך משתמש בגירסה האחרונה של התוכנה.<br><br>אם "
+"התקלות נמשכות ושער הגישה של המפעיל פעיל,<br>דווח על התקלה בדף הבית של התוכנה."
 
 #: OperatorExecutor.ERROR_WRONG_AUTH
 msgid ""
@@ -1437,151 +1470,155 @@ msgid ""
 "registration and you can't send messages throught it without one.<br>The "
 "login credentials can be entered in program preferences."
 msgstr ""
+"הזנת פרטי התחברות שגויים.<br>שער גישה זה דורש הרשמה ולא ניתן לשלוח הודעות "
+"דרכו מבלי להרשם.<br>ניתן להזין את פרטי הגישה בהעדפות התוכנה."
 
 #: OperatorExecutor.ERROR_WRONG_CODE
 msgid "You have entered the wrong security code."
-msgstr ""
+msgstr "הזנת קוד אבטחה שגוי."
 
 #: OperatorExecutor.ERROR_WRONG_NUMBER
 msgid "You have entered incorrect recipient number."
-msgstr ""
+msgstr "הזנת מספר נמען שגוי."
 
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
-msgstr ""
+msgstr "הזנת חתימת שולח שגויה (מספר או שם)."
 
 #: OperatorExecutor.ERROR_WRONG_TEXT
 msgid "You have entered incorrect message text. Empty or too long?"
-msgstr ""
+msgstr "הזנת טקסט שגוי בהודעה. ריק או ארוך מדי?"
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
-msgstr ""
+msgstr "אשראי שנותר:"
 
 #: OperatorExecutor.INFO_FREE_SMS_REMAINING
 msgid "Free SMS remaining:"
-msgstr ""
+msgstr "הודעות SMS בחינם שנותרו:"
 
 #: OperatorExecutor.INFO_STATUS_NOT_PROVIDED
 msgid ""
 "The gateway doesn't provide any information about successful sending. The "
 "message might be and <b>might not be</b> delivered."
 msgstr ""
+"שער הגישה אינו מציין נתונים אודות שליחה מוצלחת. ייתכן כי ההודעה נשלחה או "
+"ייתכן שהיא <b>איננה</b> נשלחה."
 
 #: OperatorExecutor.recognize_number
 msgid "Please enter the code from the picture:"
-msgstr ""
+msgstr "אנא הזן את הקוד שבתמונה:"
 
 #: OperatorInterpreter.unknown_operator
 msgid "Unknown operator!"
-msgstr ""
+msgstr "מפעיל לא ידוע!"
 
 #: Pause_queue
 msgid "Pause queue"
-msgstr ""
+msgstr "השהיית התור"
 
 #: Pause_sms_queue
 msgid "Pause sms queue"
-msgstr ""
+msgstr "השהיית תור ה־SMS"
 
 #: Preferences_
 msgid "&Preferences"
-msgstr ""
+msgstr "ה&עדפות"
 
 #: Program_start
 msgid "Program start"
-msgstr ""
+msgstr "התחלת התוכנה"
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
-msgstr ""
+msgstr "הורד את ה־SMS במורד התור"
 
 #: QueuePanel.Move_sms_up_in_the_queue
 msgid "Move sms up in the queue"
-msgstr ""
+msgstr "העלה את ה־SMS במעלה התור"
 
 #: QueuePanel.Pause_sending_of_sms_in_the_queue
 msgid "Pause sending of sms in the queue"
-msgstr ""
+msgstr "השהיית שליחת ה־SMS שבתור"
 
 #: QueuePanel.Unpause_sending_of_sms_in_the_queue
 msgid "Unpause sending of sms in the queue"
-msgstr ""
+msgstr "המשך שליחת ה־SMS שבתור"
 
 #: QueuePanel.border.title
 msgid "Queue"
-msgstr ""
+msgstr "תור"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
 msgid "h"
-msgstr ""
+msgstr "שע'"
 
 #. #Shortcut for "minute"
 #: QueuePanel.minute_shortcut
 msgid "m"
-msgstr ""
+msgstr "ד'"
 
 #. #Shortcut for "second"
 #: QueuePanel.second_shortcut
 msgid "s"
-msgstr ""
+msgstr "שנ'"
 
 #: Quit
 msgid "Quit"
-msgstr ""
+msgstr "יציאה"
 
 #: Quit_
 msgid "&Quit"
-msgstr ""
+msgstr "י&ציאה"
 
 #: Recipient
 msgid "Recipient"
-msgstr ""
+msgstr "נמען"
 
 #: Redo_
 msgid "&Redo"
-msgstr ""
+msgstr "בצע &שוב"
 
 #: Replace
 msgid "Replace"
-msgstr ""
+msgstr "החלף"
 
 #: SMSPanel.Redo_change_in_message_text
 msgid "Redo undone change in message text"
-msgstr ""
+msgstr "בצע שוב את השינויים בהודעת הטקסט"
 
 #: SMSPanel.Text_is_too_long!
 msgid "Text is too long!"
-msgstr ""
+msgstr "הטקסט ארוך מדי!"
 
 #: SMSPanel.Undo_change_in_message_text
 msgid "Undo change in message text"
-msgstr ""
+msgstr "בטל את השינויים בהודעת הטקסט"
 
 #: SMSPanel.border.title
 msgid "Message"
-msgstr ""
+msgstr "הודעה"
 
 #: SMSPanel.compress
 msgid ""
 "Omit whitespace from current message and rewrite it to \"CamelCase\" format"
-msgstr ""
+msgstr "השמט רווחים מההודעה ושנה אותה למבנה \"רישיות־מוקפצות\" (לא תקף בעברית)"
 
 #. #Single quotes need to be doubled!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
-msgstr ""
+msgstr "<html>תווים בהודעה כולה: <b>{0}/{1}</b> (נותרו <b>{2}</b>)</html>"
 
 #: SMSPanel.gatewayLabel.text
 msgctxt "SMSPanel.gatewayLabel.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "שער &גישה:"
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"
-msgstr ""
+msgstr "נ&מען:"
 
 #: SMSPanel.recipientTextField.tooltip
 msgid ""
@@ -1590,6 +1627,10 @@ msgid ""
 "To send message to multiple contacts hold Shift or Ctrl<br>\n"
 "when selecting contacts in the list."
 msgstr ""
+"<html>\n"
+"שם או מספר הטלפון של איש הקשר.<br><br>\n"
+"על מנת לשלוח הודעה למספר אנשי קשר החזק את המקשים Shift או Ctrl<br>\n"
+"בעת בחירת אנשי הקשר ברשימה."
 
 #: SMSPanel.recipientTextField.tooltip.tip
 msgid ""
@@ -1597,34 +1638,36 @@ msgid ""
 "and<br>\n"
 "you won't have to always fill it in with the phone number."
 msgstr ""
+"<br><br>עצה: מלא את קידומת המדינה כברירת המחדל בהעדפות התוכנה<br>\n"
+"ולא יהיה עליך להזין אותה יחד עם מספר הטלפון בכל פעם מחדש."
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Alt+S, Ctrl+Enter)"
-msgstr ""
+msgstr "שלח הודעה (Alt+S, Ctrl+Enter)"
 
 #. #Single quotes need to be doubled!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
-msgstr ""
+msgstr "<html>תווים בהודעה הנוכחית: <b>{0}/{1}</b> (נותרו <b>{2}</b>)</html>"
 
 #. #Single quotes need to be doubled!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
-msgstr ""
+msgstr "{0} תווים ({1} sms)"
 
 #. #Single quotes need to be doubled!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
-msgstr ""
+msgstr "{0} תווים (לא ניתן לשלוח!)"
 
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
-msgstr ""
+msgstr "0 תווים (0 sms)"
 
 #: SMSPanel.textLabel.text
 msgid "Te&xt:"
-msgstr ""
+msgstr "&טקסט:"
 
 #: SMSPanel.textLabel.toolTipText
 msgid ""
@@ -1632,106 +1675,112 @@ msgid ""
 "The very message text\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"טקסט ההודעה עצמה\n"
+"</html>"
 
 #: SMSSender.NO_REASON_ERROR
 msgid ""
 "Author of the script has not provided any additional information<br>about "
 "cause of the failure for the web gateway used."
 msgstr ""
+"יוצר הסקריפט לא סיפק נתונים נוספים<br>אודות גורם השגיאה עבור שער הגישה ברשת "
+"בו השתמשת."
 
 #: SMSSender.no_operator
 msgid "no operator"
-msgstr ""
+msgstr "אין מפעיל"
 
 #. #Single quotes need to be doubled!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
-msgstr ""
+msgstr "שליחת הודעה אל {0} ({1}) ..."
 
 #: Save
 msgid "Save"
-msgstr ""
+msgstr "שמור"
 
 #: Select
 msgctxt "Select"
 msgid "Select"
-msgstr ""
+msgstr "בחר"
 
 #: Send_
 msgid "&Send"
-msgstr ""
+msgstr "&שלח"
 
 #: Send_message
 msgid "Send message"
-msgstr ""
+msgstr "שלח הודעה"
 
 #: Show/hide_program
 msgid "Show/hide program"
-msgstr ""
+msgstr "הצג/הסתר את התוכנה"
 
 #: Show_application_log
 msgid "Show application log"
-msgstr ""
+msgstr "הצג את רישום התוכנה"
 
 #: Show_program
 msgid "Show program"
-msgstr ""
+msgstr "הצג את התוכנה"
 
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
-msgstr ""
+msgstr "נא להמתין..."
 
 #: StatusPanel.statusMessageLabel.text
 msgid "Welcome"
-msgstr ""
+msgstr "ברוכים הבאים"
 
 #: StatusPanel.statusMessageLabel.toolTipText
 msgid "Click to show application log"
-msgstr ""
+msgstr "לחץ להצגת רישום התוכנה"
 
 #: Text
 msgid "Text"
-msgstr ""
+msgstr "טקסט"
 
 #. #Write the tip as short as possible
 #: Tip.1
 msgid ""
 "To send multiple messages select more contacts in the list using Ctrl key."
-msgstr ""
+msgstr "על מנת לשלוח מספר הודעות בחר יותר אנשי קשר מהרשימה באמצעות מקש ה־Ctrl."
 
 #. #Write the tip as short as possible
 #: Tip.10
 msgid "Program appearance can be modified according to your taste."
-msgstr ""
+msgstr "ניתן לשנות את חזות התוכנה בהתאם להחלטתך."
 
 #. #Write the tip as short as possible
 #: Tip.11
 msgid "In preferences you can restrict the list of available web gateways."
-msgstr ""
+msgstr "בהעדפות תוכל להגביל את רשימת שערי הגישה הזמינים."
 
 #. #Write the tip as short as possible
 #: Tip.12
 msgid ""
 "Many operator gateways support adding of custom signature. See preferences."
-msgstr ""
+msgstr "שערי גישה של מפעילים רבים מוסיף חתימה אישית. עיין בהעדפות."
 
 #. #Write the tip as short as possible
 #: Tip.13
 msgid ""
 "Your contacts can be exported as text and therefore can be used elsewhere."
-msgstr ""
+msgstr "ניתן לייצא את אנשי הקשר שלך כטקסט ובכך להשמיש אותם במקום אחר."
 
 #. #Write the tip as short as possible
 #: Tip.14
 msgid "If the written message is too long use the compress function."
-msgstr ""
+msgstr "אם ההודעה הנכתבת ארוכה מדי השתמשו בפונקציית הדחיסה."
 
 #. #Write the tip as short as possible
 #: Tip.15
 msgid ""
 "We recommend you to use Linux packages, you'll obtain an auto-update feature."
 msgstr ""
+"אנו ממליצים לך להשתמש בחבילות לינוקס, כך תתאפשר לך תכונת העדכון האוטומטי."
 
 #. #Write the tip as short as possible
 #: Tip.16
@@ -1739,100 +1788,104 @@ msgid ""
 "Are you a programmer? Write support for a new gateway, little JavaScript is "
 "enough."
 msgstr ""
+"האם אתה מתכנת? כתוב תמיכה לשערי גישה חדשים, מעט ג'אווהסקריפט זה די והותר."
 
 #. #Write the tip as short as possible
 #: Tip.17
 msgid "Something broken? Enhancement suggestion? Let us know on our homepage!"
-msgstr ""
+msgstr "משהו אינו כשורה? הצעת שיפור? הודע לנו על כך בדף הבית!"
 
 #. #Write the tip as short as possible
 #: Tip.18
 msgid "Program is open and free. Join in and help us improve it!"
-msgstr ""
+msgstr "התוכנה פתוחה וחופשית. הצטרף אלינו ועזור לשפר אותה!"
 
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
 "A small donation is one of the options how to support future program "
 "development."
-msgstr ""
+msgstr "תרומה קטנה היא אחת מאפשרויות התמיכה בפיתוח העתידי של התוכנה."
 
 #. #Write the tip as short as possible
 #: Tip.2
 msgid ""
 "Program can be controlled from keyboard easily. Notice the keyboard "
 "shortcuts."
-msgstr ""
+msgstr "ניתן לשלוט בתוכנה באמצעות המקלדת בקלות. שימו לב לכל קיצורי המקלדת."
 
 #. #Write the tip as short as possible
 #: Tip.20
 msgid ""
 "By using commandline options you can use program even in café or school."
 msgstr ""
+"על ידי שימוש באפשרויות שורת הפקודה תוכלו להשתמש בתוכנה אפילו בבתי קפה או "
+"בבית הספר."
 
 #. #Write the tip as short as possible
 #: Tip.21
 msgid ""
 "4 of 5 zoologist recommend using the operating system with a penguin logo."
 msgstr ""
+"4 מתוך כל 5 זאולוגים ממליצים להשתמש במערכת הפעלה בעלת לוגו בצורת פינגווין."
 
 #. #Write the tip as short as possible
 #: Tip.22
 msgid ""
 "Message can be sent using other than default gateway - just pick it from the "
 "list."
-msgstr ""
+msgstr "ניתן לשלוח את ההודעה באמצעות שער ברירת המחדל - פשוט בחר אותו מהרשימה."
 
 #. #Write the tip as short as possible
 #: Tip.23
 msgid "Program can be minimized to a notification area icon. See preferences."
-msgstr ""
+msgstr "ניתן למזער את התוכנה לסמל שבאזור ההתראות. עיין בהעדפות."
 
 #. #Write the tip as short as possible
 #: Tip.24
 msgid "Bothered by these tips? You can turn them off in preferences."
-msgstr ""
+msgstr "מוטרד מעצות אלו? תוכל לכבותן בהעדפות."
 
 #. #Write the tip as short as possible
 #: Tip.25
 msgid "Use Help menu to ask a question or report a problem."
-msgstr ""
+msgstr "השתמש בתפריט העזרה כדי לשאול שאלה או לדווח על תקלה."
 
 #. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
-msgstr ""
+msgstr "ניתן לייבא את אנשי הקשר שלך מתוכנות וממבני קבצים רבים ושונים."
 
 #. #Write the tip as short as possible
 #: Tip.4
 msgid "You can see the application protocol by clicking on the status bar."
-msgstr ""
+msgstr "ניתן לעיין בפרוטוקול היישום על ידי לחיצה על שורת המצב."
 
 #. #Write the tip as short as possible
 #: Tip.5
 msgid "All your sent messages are available in the message history."
-msgstr ""
+msgstr "כל ההודעות שלך שנשלחו מופיעות בהיסטוריית ההודעות."
 
 #. #Write the tip as short as possible
 #: Tip.6
 msgid "The message history can be search through."
-msgstr ""
+msgstr "ניתן לחפש בין פריטי ההיסטוריה."
 
 #. #Write the tip as short as possible
 #: Tip.7
 msgid ""
 "You can search in contact list. Just click into it and write a few letters."
-msgstr ""
+msgstr "תוכל לחפש ברשימת אנשי הקשר. פשוט לחץ עליה וכתוב כמה אותיות."
 
 #. #Write the tip as short as possible
 #: Tip.8
 msgid "When searching in contact list use arrows to move to other matches."
-msgstr ""
+msgstr "בעת החיפוש ברשימת אנשי הקשר השתמש בחצים כדי לעבור לתוצאות אחרות."
 
 #. #Write the tip as short as possible
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
-msgstr ""
+msgstr "אל תשכח לספר את מספר הקידות של המדינה שלך בהעדפות."
 
 #. #Provide names and contacts to translators
 #: Translators
@@ -1843,16 +1896,16 @@ msgstr ""
 
 #: Undo_
 msgid "&Undo"
-msgstr ""
+msgstr "&בטל"
 
 #: Unknown_operator
 msgid "Unknown operator"
-msgstr ""
+msgstr "מפעיל לא ידוע"
 
 #: Unpause_queue
 msgid "Unpause queue"
-msgstr ""
+msgstr "המשך בתור"
 
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
-msgstr ""
+msgstr "המשך את תור ה־SMS"
