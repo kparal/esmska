@@ -138,6 +138,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         else if (laf.equals(LAF.SUBSTANCE)) {
             ArrayList<String> themes = new ArrayList<String>();
+            new SubstanceLookAndFeel();
             for (SkinInfo skinInfo : SubstanceLookAndFeel.getAllSkins().values()) {
                 themes.add(skinInfo.getDisplayName());
             }

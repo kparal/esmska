@@ -74,6 +74,7 @@ public class ThemeManager {
             case SUBSTANCE:
                 String skinString = config.getLafSubstanceSkin();
                 String skin = null;
+                new SubstanceLookAndFeel();
                 for (SkinInfo skinInfo : SubstanceLookAndFeel.getAllSkins().values()) {
                     if (skinInfo.getDisplayName().equals(skinString)) {
                         skin = skinInfo.getClassName();
@@ -81,10 +82,11 @@ public class ThemeManager {
                     }
                 }
                 SubstanceLookAndFeel.setSkin(skin != null ? skin : new SaharaSkin().getClass().getName());
+                UIManager.setLookAndFeel(new SubstanceLookAndFeel());
                 
                 //set Substance specific addons
                 UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
-                UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
+//                UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
                 
                 break;
             default:
