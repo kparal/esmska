@@ -179,7 +179,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="problemMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JSeparator" name="jSeparator6">
+            <MenuItem class="javax.swing.JSeparator" name="helpSeparator">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>

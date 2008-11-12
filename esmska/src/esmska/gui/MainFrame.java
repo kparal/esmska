@@ -147,6 +147,9 @@ public class MainFrame extends javax.swing.JFrame {
                 
                 IntegrationAdapter.getInstance().setActionBean(bean);
                 programMenu.setVisible(false);
+                aboutMenuItem.setVisible(false);
+                //should be helpSeparator.setVisible(false); but bug #6365547 in Apple Java precludes it
+                helpMenu.remove(helpSeparator);
             }
             catch (Throwable ex) {
                 logger.log(Level.WARNING, "Can't integrate program menu items to " +
@@ -268,7 +271,7 @@ public class MainFrame extends javax.swing.JFrame {
         getHelpMenuItem = new javax.swing.JMenuItem();
         translateMenuItem = new javax.swing.JMenuItem();
         problemMenuItem = new javax.swing.JMenuItem();
-        jSeparator6 = new javax.swing.JSeparator();
+        helpSeparator = new javax.swing.JSeparator();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -445,7 +448,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         helpMenu.add(problemMenuItem);
-        helpMenu.add(jSeparator6);
+        helpMenu.add(helpSeparator);
 
         aboutMenuItem.setAction(aboutAction);
         helpMenu.add(aboutMenuItem);
@@ -1038,6 +1041,7 @@ private void problemMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JMenuItem faqMenuItem;
     private javax.swing.JMenuItem getHelpMenuItem;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JSeparator helpSeparator;
     private javax.swing.JButton historyButton;
     private javax.swing.JMenuItem historyMenuItem;
     private javax.swing.JSplitPane horizontalSplitPane;
@@ -1047,7 +1051,6 @@ private void problemMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JMenuItem logMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu messageMenu;
