@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-08 14:39+0200\n"
+"POT-Creation-Date: 2008-11-16 00:46+0200\n"
 "PO-Revision-Date: 2008-11-05 13:49+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -252,6 +252,12 @@ msgstr ""
 "פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
 "</html>"
 
+#: ConfigFrame.develLabel.text
+msgid ""
+"This tab is for developing purposes only. It will not be visible in the "
+"final release."
+msgstr ""
+
 #: ConfigFrame.forgetLayoutCheckBox.text
 msgid "Use default form &layout"
 msgstr "השתמש במבנה &ברירת המחדל של הטופס"
@@ -481,9 +487,12 @@ msgid "Remove &diacritics from messages"
 msgstr "הסר &סימנים דיאקריטיים מההודעות"
 
 #: ConfigFrame.removeAccentsCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"All diacritics marks will be removed from the message before sending it\n"
+"All diacritics marks will be removed from the message before sending it."
+"<br>\n"
+"Note: This may not work for all languages.\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -1520,6 +1529,11 @@ msgstr "השהיית התור"
 #: Pause_sms_queue
 msgid "Pause sms queue"
 msgstr "השהיית תור ה־SMS"
+
+#: Preferences
+#, fuzzy
+msgid "Preferences"
+msgstr "ה&עדפות"
 
 #: Preferences_
 msgid "&Preferences"
