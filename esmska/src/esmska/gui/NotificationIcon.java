@@ -211,6 +211,11 @@ public class NotificationIcon {
         }
         getInstance();
 
+        //if mainframe currently hidden, show it before removing icon from system tray
+        if (!MainFrame.getInstance().isVisible()) {
+            toggleMainFrameVisibility();
+        }
+        
         SystemTray tray = SystemTray.getSystemTray();
         tray.remove(instance.trayIcon);
         installed = false;
