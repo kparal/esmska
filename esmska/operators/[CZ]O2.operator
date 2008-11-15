@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-10-28"
+    return "2008-11-16"
 }
 
 function getMaintainer() {
@@ -59,10 +59,10 @@ function send() {
         SENDERNUMBER = SENDERNUMBER.substring(4);
 
     // start page
-    content = EXEC.getURL("http://sms.1188.cz/?sms=gate", [])
+    content = EXEC.getURL("http://sms.1188.cz", [])
 
     // get image id
-    re = /<img src="(.*)" title="potvrzovací kód"/
+    re = /<img class="codeImage" src="(.+?)"/
     match = re.exec(content);
     var image = match[1]
     
@@ -75,7 +75,7 @@ function send() {
     // send message
     postData = ["adress", NUMBER, "code", code, 
                 "text", MESSAGE, "send", "ODESLAT"]
-    content = EXEC.postURL("http://sms.1188.cz/?sms", [], postData)
+    content = EXEC.postURL("http://sms.1188.cz/", [], postData)
 
     // check if message was successfully sent
     re = /Zpráva byla úspěšně odeslána\./
@@ -86,7 +86,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<div class="error">([\s\S]*?)<\/div>/
+    re = /<div class="messages">([\s\S]*?)<\/div>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // operator told us what's wrong
