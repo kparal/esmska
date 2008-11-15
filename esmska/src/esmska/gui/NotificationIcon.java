@@ -74,11 +74,11 @@ public class NotificationIcon {
         historyItem.addActionListener(MainFrame.getInstance().getHistoryAction());
 
         // show settings
-        configItem = new MenuItem(l10n.getString("Preferences_"));
+        configItem = new MenuItem(l10n.getString("Preferences"));
         configItem.addActionListener(MainFrame.getInstance().getConfigAction());
 
         // exit program
-        quitItem = new MenuItem(l10n.getString("Quit_"));
+        quitItem = new MenuItem(l10n.getString("Quit"));
         quitItem.addActionListener(MainFrame.getInstance().getQuitAction());
 
         // separator
