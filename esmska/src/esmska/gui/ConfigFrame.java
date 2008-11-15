@@ -207,6 +207,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         config = PersistenceManager.getConfig();
         develPanel = new javax.swing.JPanel();
         forgetLayoutCheckBox = new javax.swing.JCheckBox();
+        develLabel = new javax.swing.JLabel();
         tabbedPane = new javax.swing.JTabbedPane();
         generalPanel = new javax.swing.JPanel();
         removeAccentsCheckBox = new javax.swing.JCheckBox();
@@ -271,19 +272,26 @@ public class ConfigFrame extends javax.swing.JFrame {
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, config, org.jdesktop.beansbinding.ELProperty.create("${forgetLayout}"), forgetLayoutCheckBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
+        develLabel.setFont(develLabel.getFont().deriveFont((develLabel.getFont().getStyle() | java.awt.Font.ITALIC)));
+        org.openide.awt.Mnemonics.setLocalizedText(develLabel, l10n.getString("ConfigFrame.develLabel.text")); // NOI18N
+
         javax.swing.GroupLayout develPanelLayout = new javax.swing.GroupLayout(develPanel);
         develPanel.setLayout(develPanelLayout);
         develPanelLayout.setHorizontalGroup(
             develPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(develPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(forgetLayoutCheckBox)
+                .addGroup(develPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(forgetLayoutCheckBox)
+                    .addComponent(develLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         develPanelLayout.setVerticalGroup(
             develPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(develPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(develLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(forgetLayoutCheckBox)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -318,7 +326,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(generalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(removeAccentsCheckBox)
                     .addComponent(checkUpdatesCheckBox))
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addContainerGap(441, Short.MAX_VALUE))
         );
         generalPanelLayout.setVerticalGroup(
             generalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,7 +335,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(removeAccentsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkUpdatesCheckBox)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
@@ -473,7 +481,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(startMinimizedCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tipsCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
                 .addComponent(substanceWarning)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
@@ -589,7 +597,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                                     .addComponent(senderNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(demandDeliveryReportCheckBox))))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         operatorPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3});
@@ -618,7 +626,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(senderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(demandDeliveryReportCheckBox)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(l10n.getString("ConfigFrame.operatorPanel.TabConstraints.tabTitle"), new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), operatorPanel); // NOI18N
@@ -725,7 +733,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
             .addComponent(jLabel13)
             .addContainerGap())
     );
@@ -764,7 +772,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(reducedHistorySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jLabel18)
-            .addContainerGap(187, Short.MAX_VALUE))
+            .addContainerGap(246, Short.MAX_VALUE))
     );
     privacyPanelLayout.setVerticalGroup(
         privacyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -913,7 +921,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(connectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
             .addComponent(jLabel17)
             .addContainerGap())
     );
@@ -950,7 +958,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(advancedCheckBox)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
                     .addComponent(closeButton)))
             .addContainerGap())
     );
@@ -1138,6 +1146,7 @@ private void advancedCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JLabel countryCodeLabel;
     private javax.swing.JTextField countryPrefixTextField;
     private javax.swing.JCheckBox demandDeliveryReportCheckBox;
+    private javax.swing.JLabel develLabel;
     private javax.swing.JPanel develPanel;
     private javax.swing.JCheckBox forgetLayoutCheckBox;
     private javax.swing.JPanel generalPanel;
