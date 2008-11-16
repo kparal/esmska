@@ -7,15 +7,18 @@
 set -e
 trap "echo Export failed." ERR
 
-# go to the program directory
-cd "`dirname "$0"`"
-
 # usage
 if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
     echo "Usage: $0 output_tarball"
     echo "Example: $0 lp-esmska.tar.gz"
     exit 1
 fi
+
+# get absolute path of output file
+FILE=`readlink -f "$1"`
+
+# go to the program directory
+cd "`dirname "$0"`"
 
 PODIR="$PWD/../po"
 
@@ -27,9 +30,9 @@ cd "$PODIR"
 # remove value from translator-credits because of Launchpad bug
 mv cs.po cs.po_orig
 sed 's/^".*Launchpad Contributions.*"$/""/' cs.po_orig | 
-  sed 's/^".*translations.launchpad.net.*"$/""/' > cs.po
+  sed 's/^".*launchpad.net.*"$/""/' > cs.po
 
 # create tarball
-tar czf "$1" esmska.pot cs.po
+tar czf "$FILE" esmska.pot cs.po
 
 mv cs.po_orig cs.po
