@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-16 00:46+0200\n"
-"PO-Revision-Date: 2008-11-05 18:34+0000\n"
-"Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
+"POT-Creation-Date: 2008-11-18 11:22+0200\n"
+"PO-Revision-Date: 2008-11-16 20:49+0000\n"
+"Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-08 13:16+0000\n"
+"X-Launchpad-Export-Date: 2008-11-18 10:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -262,6 +262,8 @@ msgid ""
 "This tab is for developing purposes only. It will not be visible in the "
 "final release."
 msgstr ""
+"Táto záložka je len pre potreby vývoja. V konečnej verzii programu sa nebude "
+"prítomna."
 
 #: ConfigFrame.forgetLayoutCheckBox.text
 msgid "Use default form &layout"
@@ -496,7 +498,6 @@ msgid "Remove &diacritics from messages"
 msgstr "Odstraňovať &diakritiku zo správ"
 
 #: ConfigFrame.removeAccentsCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "All diacritics marks will be removed from the message before sending it."
@@ -505,7 +506,8 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Pred odoslaním bude zo správy odstranená diakritika.\n"
+"Pred odoslaním správy budú vymazané všetky diaktritické značky.<br>\n"
+"Pozn: Táto funkcia nemusí byť funkčná pre všetky jazyky.\n"
 "</html>"
 
 #: ConfigFrame.remove_credentials
@@ -1549,9 +1551,8 @@ msgid "Pause sms queue"
 msgstr "Pozastaviť sms frontu"
 
 #: Preferences
-#, fuzzy
 msgid "Preferences"
-msgstr "&Nastavenia"
+msgstr "Nastavenia"
 
 #: Preferences_
 msgid "&Preferences"
