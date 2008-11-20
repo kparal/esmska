@@ -92,19 +92,15 @@
                 <attribute name="Class-Path" value="${jar.classpath} lib/operators.jar"/>
             </manifest>
         </jar>
-        <!-- call 'jnlp' target -->
-        <antcall target="jnlp"/>
         <!-- delete unneeded stuff -->
-        <delete dir="dist/icons"/>
-        <delete dir="dist/operators"/>
-        <delete>
-            <fileset dir="dist">
-                <include name="readme.txt"/>
-                <include name="esmska.bat"/>
-                <include name="esmska.sh"/>
-                <include name="license.txt"/>
+        <delete includeemptydirs="true">
+            <fileset dir="dist" includes="**/*">
+                <exclude name="lib/**"/>
+                <exclude name="*.jar"/>
             </fileset>
         </delete>
+        <!-- call 'jnlp' target -->
+        <antcall target="jnlp"/>
     </target>
     
     <!-- called after jar building -->

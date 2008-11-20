@@ -40,22 +40,22 @@
                       <Component id="creditsButton" linkSize="10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="licenseButton" linkSize="10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="45" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                       <Component id="closeButton" linkSize="10" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jLabel4" pref="121" max="32767" attributes="0"/>
+                      <Component id="jLabel4" pref="125" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="linkButton" min="-2" max="-2" attributes="1"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel6" pref="121" max="32767" attributes="0"/>
+                      <Component id="jLabel6" pref="126" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel8" pref="112" max="32767" attributes="0"/>
+                      <Component id="jLabel8" pref="117" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="supportButton" min="-2" max="-2" attributes="1"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" pref="112" max="32767" attributes="0"/>
+                      <Component id="jLabel7" pref="117" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>

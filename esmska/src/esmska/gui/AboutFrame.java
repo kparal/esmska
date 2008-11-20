@@ -241,12 +241,34 @@ public class AboutFrame extends javax.swing.JFrame {
     private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         //show licence
         try {
-            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-            URL url = getClass().getResource(RES + "license.txt");
-            JTextPane tp = new JTextPane();
-            tp.setPage(url);
+            String license = IOUtils.toString(
+                    getClass().getResourceAsStream(RES + "license.txt"), "UTF-8");
+            final String agpl = IOUtils.toString(
+                            getClass().getResourceAsStream(RES + "gnu-agpl.txt"), "UTF-8");
+            license = license.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+            license = license.replaceAll("GNU Affero General Public License", 
+                    "<a href=\"agpl\">GNU Affero General Public License</a>");
+            
+            final JTextPane tp = new JTextPane();
+            tp.setContentType("text/html; charset=UTF-8");
+            tp.setText("<html><pre>" + license + "</pre></html>");
             tp.setEditable(false);
+            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
             tp.setPreferredSize(new Dimension((int)d.getWidth()/2,(int)d.getHeight()/2)); //reasonable size
+            tp.setCaretPosition(0);
+            //make links clickable
+            tp.addHyperlinkListener(new HyperlinkListener() {
+                @Override
+                public void hyperlinkUpdate(final HyperlinkEvent e) {
+                    if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                        tp.setText(null);
+                        tp.setContentType("text/plain");
+                        tp.setText(agpl);
+                        tp.setCaretPosition(0);
+                    }
+                }
+            });
+            
             String option = l10n.getString("AboutFrame.Acknowledge");
             JOptionPane op = new JOptionPane(new JScrollPane(tp),JOptionPane.INFORMATION_MESSAGE,
                     JOptionPane.DEFAULT_OPTION, null, new Object[]{option}, option);
