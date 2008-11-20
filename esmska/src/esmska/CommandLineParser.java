@@ -8,6 +8,7 @@
  */
 package esmska;
 
+import esmska.data.Config;
 import esmska.utils.L10N;
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -43,6 +44,8 @@ public class CommandLineParser {
             l10n.getString("CommandLineParser.debugNetwork"));
     private static final Option debugNetworkFull = new Option(null, "debug-network-full", false,
             l10n.getString("CommandLineParser.debugNetworkFull"));
+    private static final Option version = new Option(null, "version", false,
+            l10n.getString("CommandLineParser.version"));
 
     static {
         OptionGroup configGroup = new OptionGroup();
@@ -53,6 +56,7 @@ public class CommandLineParser {
         options.addOptionGroup(configGroup);
         options.addOption(debugNetwork);
         options.addOption(debugNetworkFull);
+        options.addOption(version);
     }
     private boolean isPortable;
     private String configPath;
@@ -95,6 +99,10 @@ public class CommandLineParser {
                         "debug");
                 System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient", 
                         "debug");
+            }
+            if (opts.contains(version)) {
+                System.out.println("Esmska " + Config.getLatestVersion());
+                System.exit(0);
             }
 
         } catch (ParseException ex) {

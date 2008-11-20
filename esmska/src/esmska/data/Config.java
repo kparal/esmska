@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public class Config extends Object implements Serializable {
 
-    private static final String LATEST_VERSION = "0.12.2";
+    private static final String LATEST_VERSION = "0.13.0 beta";
 
     private String version = "";
     private String senderName = "";
