@@ -121,7 +121,6 @@
         <chmod perm="755" type="file">
             <fileset dir="dist">
                 <include name="esmska.sh"/>
-                <include name="esmska.jar"/>
             </fileset>
         </chmod>
     </target>
