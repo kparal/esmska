@@ -14,6 +14,9 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
@@ -46,6 +49,8 @@ public class CommandLineParser {
             l10n.getString("CommandLineParser.debugNetworkFull"));
     private static final Option version = new Option(null, "version", false,
             l10n.getString("CommandLineParser.version"));
+    private static final Option debug = new Option(null, "debug", false,
+            l10n.getString("CommandLineParser.debug"));
 
     static {
         OptionGroup configGroup = new OptionGroup();
@@ -57,6 +62,7 @@ public class CommandLineParser {
         options.addOption(debugNetwork);
         options.addOption(debugNetworkFull);
         options.addOption(version);
+        options.addOption(debug);
     }
     private boolean isPortable;
     private String configPath;
@@ -103,6 +109,15 @@ public class CommandLineParser {
             if (opts.contains(version)) {
                 System.out.println("Esmska " + Config.getLatestVersion());
                 System.exit(0);
+            }
+            if (opts.contains(debug)) {
+                Logger mainLogger = Logger.getLogger("esmska");
+                mainLogger.setLevel(Level.ALL);
+                
+                ConsoleHandler console = new ConsoleHandler();
+                console.setLevel(Level.ALL);
+                mainLogger.addHandler(console);
+                mainLogger.setUseParentHandlers(false);
             }
 
         } catch (ParseException ex) {
