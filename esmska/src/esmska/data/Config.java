@@ -32,7 +32,7 @@ public class Config extends Object implements Serializable {
     private boolean removeAccents = true;
     private boolean checkForUpdates = true;
     private boolean startCentered = false;
-    private boolean toolbarVisible = false;
+    private boolean toolbarVisible = true;
     private String countryPrefix = "";
     private String operatorFilter = "";
     private boolean useProxy = false;
