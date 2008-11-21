@@ -185,7 +185,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         org.openide.awt.Mnemonics.setLocalizedText(dateLabel, "    "); // NOI18N
 
-        nameLabel.setForeground(new java.awt.Color(0, 51, 255));
+        nameLabel.setFont(nameLabel.getFont().deriveFont(nameLabel.getFont().getStyle() | java.awt.Font.BOLD));
         org.openide.awt.Mnemonics.setLocalizedText(nameLabel, "    "); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(numberLabel, "    "); // NOI18N
