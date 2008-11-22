@@ -57,4 +57,30 @@ public enum OSType {
         return isEqual(WINDOWS);
     }
     
+    /** Check whether current desktop environment is Gnome */
+    public static boolean isGnomeDesktop() {
+        return System.getenv("GNOME_DESKTOP_SESSION_ID") != null;
+    }
+    
+    /** Check whether current desktop environment is KDE */
+    public static boolean isKDEDesktop() {
+        return System.getenv("KDE_FULL_SESSION") != null;
+    }
+    
+    /** Get version of current KDE desktop environment
+     * @return KDE version if running under KDE; null otherwise
+     */
+    public static String getKDEDesktopVersion() {
+        if (!isKDEDesktop()) {
+            return null;
+        }
+        String version = System.getenv("KDE_SESSION_VERSION");
+        if (version != null) {
+            return version;
+        } else {
+            //KDE_SESSION_VERSION is introduced only in KDE4. If it is not
+            //present it is most probably KDE3.
+            return "3";
+        }
+    }
 }

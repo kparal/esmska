@@ -21,6 +21,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.JavaType;
 import esmska.utils.OSType;
 import javax.swing.LookAndFeel;
 import org.jvnet.lafwidget.LafWidget;
@@ -129,6 +130,30 @@ public class ThemeManager {
             default: 
                 throw new IllegalArgumentException("Uknown LAF: " + laf);
         }
+    }
+    
+    /** Propose the best LaF for current system, based on java type and
+     * operating system. Useful for program first run.
+     * @return the best LaF for this platform
+     */
+    public static LAF suggestBestLAF() {
+        LAF laf = LAF.SUBSTANCE;
+        
+        //set system LaF on OpenJDK, because Substance throws exceptions
+        if (JavaType.isOpenJDK()) {
+            laf = LAF.SYSTEM;
+        }
+        //set system LaF on Apple, because Apple users are used to consistent look
+        if (JavaType.isAppleJava()) {
+            laf = LAF.SYSTEM;
+        }
+        //set system LaF on KDE3, because there is a problem with small fonts in Substance
+        String KDEVersion = OSType.getKDEDesktopVersion();
+        if (KDEVersion != null && KDEVersion.startsWith("3")) {
+            laf = LAF.SYSTEM;
+        }
+        
+        return laf;
     }
     
 }

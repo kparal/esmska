@@ -145,14 +145,8 @@ public class Main {
             //set country prefix from locale
             PersistenceManager.getConfig().setCountryPrefix(
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
-            //set system LaF on OpenJDK, because Substance throws exceptions
-            if (JavaType.isOpenJDK()) {
-                PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF.SYSTEM);
-            }
-            //set system LaF on Apple, because Apple users are used to consistent look
-            if (JavaType.isAppleJava()) {
-                PersistenceManager.getConfig().setLookAndFeel(ThemeManager.LAF.SYSTEM);
-            }
+            //set suggested LaF for this platform
+            PersistenceManager.getConfig().setLookAndFeel(ThemeManager.suggestBestLAF());
         }
         
         //update from older versions
