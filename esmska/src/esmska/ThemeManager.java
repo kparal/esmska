@@ -86,7 +86,6 @@ public class ThemeManager {
                 
                 //set Substance specific addons
                 UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
-//                UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
                 
                 break;
             default:
