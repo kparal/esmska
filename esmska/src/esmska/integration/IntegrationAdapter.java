@@ -24,8 +24,6 @@ public class IntegrationAdapter {
     // singleton API ------------------------------------------------------------
     /**
      * Constructor.
-     * 
-     * @throws Exception e
      */
     protected IntegrationAdapter() {
         super();
