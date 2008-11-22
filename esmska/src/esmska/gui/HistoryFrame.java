@@ -6,9 +6,16 @@
 package esmska.gui;
 
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,14 +24,24 @@ import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -50,6 +67,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.table.TableCellRenderer;
+import org.openide.awt.Mnemonics;
 
 /** Display all sent messages in a frame
  *
@@ -123,160 +141,158 @@ public class HistoryFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        historyTable = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        dateLabel = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        numberLabel = new javax.swing.JLabel();
-        operatorLabel = new javax.swing.JLabel();
-        senderNumberLabel = new javax.swing.JLabel();
-        senderNameLabel = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textArea = new javax.swing.JTextArea();
-        deleteButton = new javax.swing.JButton();
-        resendButton = new javax.swing.JButton();
-        closeButton = new javax.swing.JButton();
-        searchField = new javax.swing.JTextField();
-        searchLabel = new javax.swing.JLabel();
-        clearButton = new javax.swing.JButton();
+        jScrollPane1 = new JScrollPane();
+        historyTable = new JTable();
+        jPanel1 = new JPanel();
+        jLabel2 = new JLabel();
+        jLabel1 = new JLabel();
+        jLabel3 = new JLabel();
+        jLabel4 = new JLabel();
+        jLabel5 = new JLabel();
+        jLabel6 = new JLabel();
+        dateLabel = new JLabel();
+        nameLabel = new JLabel();
+        numberLabel = new JLabel();
+        operatorLabel = new JLabel();
+        senderNumberLabel = new JLabel();
+        senderNameLabel = new JLabel();
+        jScrollPane2 = new JScrollPane();
+        textArea = new JTextArea();
+        deleteButton = new JButton();
+        resendButton = new JButton();
+        closeButton = new JButton();
+        searchField = new JTextField();
+        searchLabel = new JLabel();
+        clearButton = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("HistoryFrame.title")); // NOI18N
         setIconImage(new ImageIcon(getClass().getResource(RES + "history-48.png")).getImage());
 
         historyTable.setModel(historyTableModel);
         historyTable.setDefaultRenderer(Date.class, new TableDateRenderer());
         historyTable.getSelectionModel().addListSelectionListener(new HistoryTableListener());
-
         List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
         sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
         historyTableSorter.setSortKeys(sortKeys);
         historyTable.setRowSorter(historyTableSorter);
-        historyTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        historyTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 historyTableMouseClicked(evt);
             }
         });
-        historyTable.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        historyTable.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent evt) {
                 historyTableKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(historyTable);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, l10n.getString("HistoryFrame.jLabel2.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, l10n.getString("HistoryFrame.jLabel1.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, l10n.getString("HistoryFrame.jLabel3.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, l10n.getString("HistoryFrame.jLabel4.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, l10n.getString("HistoryFrame.jLabel5.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, l10n.getString("HistoryFrame.jLabel6.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(dateLabel, "    "); // NOI18N
 
-        nameLabel.setFont(nameLabel.getFont().deriveFont(nameLabel.getFont().getStyle() | java.awt.Font.BOLD));
-        org.openide.awt.Mnemonics.setLocalizedText(nameLabel, "    "); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(numberLabel, "    "); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(operatorLabel, "    "); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(senderNumberLabel, "    "); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(senderNameLabel, "    "); // NOI18N
-
+        Mnemonics.setLocalizedText(jLabel2,l10n.getString("HistoryFrame.jLabel2.text")); // NOI18N
+        Mnemonics.setLocalizedText(jLabel1, l10n.getString("HistoryFrame.jLabel1.text"));
+        Mnemonics.setLocalizedText(jLabel3, l10n.getString("HistoryFrame.jLabel3.text"));
+        Mnemonics.setLocalizedText(jLabel4, l10n.getString("HistoryFrame.jLabel4.text"));
+        Mnemonics.setLocalizedText(jLabel5, l10n.getString("HistoryFrame.jLabel5.text"));
+        Mnemonics.setLocalizedText(jLabel6, l10n.getString("HistoryFrame.jLabel6.text"));
+        Mnemonics.setLocalizedText(dateLabel, "    ");
+        nameLabel.setFont(nameLabel.getFont().deriveFont(nameLabel.getFont().getStyle() | Font.BOLD));
+        Mnemonics.setLocalizedText(nameLabel, "    ");
+        Mnemonics.setLocalizedText(numberLabel, "    ");
+        Mnemonics.setLocalizedText(operatorLabel, "    ");
+        Mnemonics.setLocalizedText(senderNumberLabel, "    ");
+        Mnemonics.setLocalizedText(senderNameLabel, "    ");
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         jScrollPane2.setViewportView(textArea);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(operatorLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(dateLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(nameLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(numberLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(senderNumberLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(senderNameLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6});
+        jPanel1Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dateLabel, nameLabel, numberLabel, operatorLabel, senderNameLabel, senderNumberLabel});
+        jPanel1Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {dateLabel, nameLabel, numberLabel, operatorLabel, senderNameLabel, senderNumberLabel});
 
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(dateLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(numberLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(operatorLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(senderNumberLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(senderNameLabel)))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
 
         deleteButton.setAction(deleteAction);
-        deleteButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        deleteButton.setMargin(new Insets(2, 2, 2, 2));
 
         resendButton.setAction(resendAction);
-        resendButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        resendButton.setMargin(new Insets(2, 2, 2, 2));
 
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
-        closeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_"));
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 closeButtonActionPerformed(evt);
             }
         });
@@ -292,8 +308,6 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         //on Mac OS X this will create a native search field with inline icons
         searchField.putClientProperty("JTextField.variant", "search");
-
-        //clear text on escape
         String command = "clear";
         searchField.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), command);
         searchField.getActionMap().put(command, new AbstractAction() {
@@ -302,112 +316,113 @@ public class HistoryFrame extends javax.swing.JFrame {
                 searchField.setText(null);
             }
         });
-        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        searchField.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
                 searchFieldFocusGained(evt);
             }
         });
 
         searchLabel.setLabelFor(searchField);
-        org.openide.awt.Mnemonics.setLocalizedText(searchLabel, l10n.getString("HistoryFrame.searchLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(searchLabel, l10n.getString("HistoryFrame.searchLabel.text")); // NOI18N
         searchLabel.setToolTipText(searchField.getToolTipText());
 
-        clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
+        clearButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
         clearButton.setMnemonic('r');
         clearButton.setToolTipText(l10n.getString("HistoryFrame.clearButton.toolTipText")); // NOI18N
-        clearButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        clearButton.setMargin(new Insets(2, 2, 2, 2));
         clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-
-        // on Mac OS X the search field has native look and feel with inline icons, clear
-        // button is not needed
-        if (OSType.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
+        /*
+         * HistoryFrame.java
+         *
+         * Created on 27. prosinec 2007, 12:22
+         */ if (OSType.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
             clearButton.setVisible(false);
         }
-        clearButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        clearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 clearButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                            .addComponent(jPanel1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
                             .addComponent(deleteButton)
                             .addComponent(resendButton)
                             .addComponent(closeButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(clearButton)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {closeButton, deleteButton, resendButton});
+        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {closeButton, deleteButton, resendButton});
 
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(searchLabel))
                     .addComponent(clearButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                     .addComponent(deleteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+                    .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(resendButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(closeButton))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {closeButton, deleteButton, resendButton});
+        layout.linkSize(SwingConstants.VERTICAL, new Component[] {closeButton, deleteButton, resendButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+    private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
         this.dispose();
 }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void historyTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historyTableMouseClicked
+    private void historyTableMouseClicked(MouseEvent evt) {//GEN-FIRST:event_historyTableMouseClicked
         if (evt.getClickCount() != 2) { //only on double click
             return;
         }
         resendButton.doClick(0);
     }//GEN-LAST:event_historyTableMouseClicked
 
-    private void historyTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_historyTableKeyPressed
+    private void historyTableKeyPressed(KeyEvent evt) {//GEN-FIRST:event_historyTableKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             evt.consume();
             resendButton.doClick(0);
         }
     }//GEN-LAST:event_historyTableKeyPressed
 
-    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+    private void clearButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         searchField.setText(null);
         searchField.requestFocusInWindow();
     }//GEN-LAST:event_clearButtonActionPerformed
 
-    private void searchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusGained
+    private void searchFieldFocusGained(FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusGained
         searchField.selectAll();
     }//GEN-LAST:event_searchFieldFocusGained
 
@@ -655,28 +670,28 @@ public class HistoryFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton clearButton;
-    private javax.swing.JButton closeButton;
-    private javax.swing.JLabel dateLabel;
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JTable historyTable;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel nameLabel;
-    private javax.swing.JLabel numberLabel;
-    private javax.swing.JLabel operatorLabel;
-    private javax.swing.JButton resendButton;
-    private javax.swing.JTextField searchField;
-    private javax.swing.JLabel searchLabel;
-    private javax.swing.JLabel senderNameLabel;
-    private javax.swing.JLabel senderNumberLabel;
-    private javax.swing.JTextArea textArea;
+    private JButton clearButton;
+    private JButton closeButton;
+    private JLabel dateLabel;
+    private JButton deleteButton;
+    private JTable historyTable;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    private JLabel jLabel6;
+    private JPanel jPanel1;
+    private JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane2;
+    private JLabel nameLabel;
+    private JLabel numberLabel;
+    private JLabel operatorLabel;
+    private JButton resendButton;
+    private JTextField searchField;
+    private JLabel searchLabel;
+    private JLabel senderNameLabel;
+    private JLabel senderNumberLabel;
+    private JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }

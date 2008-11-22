@@ -18,9 +18,11 @@ import esmska.utils.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
@@ -39,9 +41,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
@@ -59,6 +71,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 import javax.swing.undo.UndoManager;
+import org.openide.awt.Mnemonics;
 
 /** Panel for writing and sending sms, and for setting immediate contact
  *
@@ -341,21 +354,21 @@ public class SMSPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        operatorComboBox = new esmska.gui.OperatorComboBox();
-        fullProgressBar = new javax.swing.JProgressBar();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        smsTextPane = new javax.swing.JTextPane();
-        textLabel = new javax.swing.JLabel();
-        sendButton = new javax.swing.JButton();
-        smsCounterLabel = new javax.swing.JLabel();
-        singleProgressBar = new javax.swing.JProgressBar();
-        gatewayLabel = new javax.swing.JLabel();
+        operatorComboBox = new OperatorComboBox();
+        fullProgressBar = new JProgressBar();
+        jScrollPane1 = new JScrollPane();
+        smsTextPane = new JTextPane();
+        textLabel = new JLabel();
+        sendButton = new JButton();
+        smsCounterLabel = new JLabel();
+        singleProgressBar = new JProgressBar();
+        gatewayLabel = new JLabel();
         recipientTextField = new SMSPanel.RecipientTextField();
-        recipientLabel = new javax.swing.JLabel();
+        recipientLabel = new JLabel();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
-        addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        setBorder(BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
+        addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
                 formFocusGained(evt);
             }
         });
@@ -377,7 +390,6 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextUndoManager.addEdit(e.getEdit());
             }
         });
-
         //this mapping is here bcz of some weird performance improvements when holding undo key stroke
         int menuMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
         String command = "undo";
@@ -396,90 +408,90 @@ public class SMSPanel extends javax.swing.JPanel {
     jScrollPane1.setViewportView(smsTextPane);
 
     textLabel.setLabelFor(smsTextPane);
-    org.openide.awt.Mnemonics.setLocalizedText(textLabel, l10n.getString("SMSPanel.textLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(textLabel, l10n.getString("SMSPanel.textLabel.text")); // NOI18N
     textLabel.setToolTipText(l10n.getString("SMSPanel.textLabel.toolTipText")); // NOI18N
 
     sendButton.setAction(sendAction);
     sendButton.setToolTipText(l10n.getString("SMSPanel.sendButton.toolTipText")); // NOI18N
 
-    org.openide.awt.Mnemonics.setLocalizedText(smsCounterLabel, l10n.getString("SMSPanel.smsCounterLabel.text")); // NOI18N
 
+        Mnemonics.setLocalizedText(smsCounterLabel, l10n.getString("SMSPanel.smsCounterLabel.text")); // NOI18N
     singleProgressBar.setMaximum(1000);
 
     gatewayLabel.setLabelFor(operatorComboBox);
-    org.openide.awt.Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("SMSPanel.gatewayLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("SMSPanel.gatewayLabel.text")); // NOI18N
     gatewayLabel.setToolTipText(operatorComboBox.getToolTipText());
 
     recipientLabel.setLabelFor(recipientTextField);
-    org.openide.awt.Mnemonics.setLocalizedText(recipientLabel, l10n.getString("SMSPanel.recipientLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(recipientLabel, l10n.getString("SMSPanel.recipientLabel.text")); // NOI18N
     recipientLabel.setToolTipText(recipientTextField.getToolTipText());
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.createParallelGroup(Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addComponent(textLabel)
-                        .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(singleProgressBar, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fullProgressBar, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(smsCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(sendButton))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                     .addComponent(recipientLabel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(recipientTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                     .addComponent(gatewayLabel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
             .addContainerGap())
     );
 
-    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {fullProgressBar, singleProgressBar});
+    layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {fullProgressBar, singleProgressBar});
 
-    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {gatewayLabel, recipientLabel, textLabel});
+    layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {gatewayLabel, recipientLabel, textLabel});
 
     layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.createParallelGroup(Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(recipientLabel)
-                .addComponent(recipientTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(recipientTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(gatewayLabel)
-                .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(Alignment.LEADING, false)
                         .addComponent(sendButton)
                         .addComponent(smsCounterLabel)))
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(textLabel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(singleProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(fullProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(singleProgressBar, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(fullProgressBar, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)))
             .addContainerGap())
     );
 
-    layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {fullProgressBar, singleProgressBar});
+    layout.linkSize(SwingConstants.VERTICAL, new Component[] {fullProgressBar, singleProgressBar});
 
     }// </editor-fold>//GEN-END:initComponents
     
-    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+    private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         smsTextPane.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
     
@@ -943,17 +955,17 @@ public class SMSPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar fullProgressBar;
-    private javax.swing.JLabel gatewayLabel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private esmska.gui.OperatorComboBox operatorComboBox;
-    private javax.swing.JLabel recipientLabel;
-    private javax.swing.JTextField recipientTextField;
-    private javax.swing.JButton sendButton;
-    private javax.swing.JProgressBar singleProgressBar;
-    private javax.swing.JLabel smsCounterLabel;
-    private javax.swing.JTextPane smsTextPane;
-    private javax.swing.JLabel textLabel;
+    private JProgressBar fullProgressBar;
+    private JLabel gatewayLabel;
+    private JScrollPane jScrollPane1;
+    private OperatorComboBox operatorComboBox;
+    private JLabel recipientLabel;
+    private JTextField recipientTextField;
+    private JButton sendButton;
+    private JProgressBar singleProgressBar;
+    private JLabel smsCounterLabel;
+    private JTextPane smsTextPane;
+    private JLabel textLabel;
     // End of variables declaration//GEN-END:variables
     
 }

@@ -9,11 +9,14 @@ package esmska.gui;
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
@@ -22,17 +25,25 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import org.apache.commons.io.IOUtils;
 import org.jvnet.substance.SubstanceLookAndFeel;
+import org.openide.awt.Mnemonics;
 
 /** About form
  *
@@ -70,79 +81,78 @@ public class AboutFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        creditsButton = new javax.swing.JButton();
-        closeButton = new javax.swing.JButton();
-        licenseButton = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        linkButton = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        supportButton = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
+        creditsButton = new JButton();
+        closeButton = new JButton();
+        licenseButton = new JButton();
+        jLabel5 = new JLabel();
+        linkButton = new JButton();
+        jLabel4 = new JLabel();
+        jLabel6 = new JLabel();
+        supportButton = new JButton();
+        jLabel7 = new JLabel();
+        jLabel8 = new JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("esmska/resources/l10n"); // NOI18N
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        ResourceBundle bundle = ResourceBundle.getBundle("esmska/resources/l10n"); // NOI18N
         setTitle(bundle.getString("AboutFrame.title")); // NOI18N
         setIconImage(new ImageIcon(getClass().getResource(RES + "about-24.png")).getImage());
         setLocationByPlatform(true);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/esmska.png"))); // NOI18N
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/esmska.png"))); // NOI18N
         jLabel1.setFocusable(false);
 
-        jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+22));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, "Esmska " + config.getLatestVersion());
+        jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | Font.BOLD, jLabel2.getFont().getSize()+22));
+        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+        Mnemonics.setLocalizedText(jLabel2, "Esmska " + config.getLatestVersion());
         jLabel2.setFocusable(false);
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, bundle.getString("AboutFrame.jLabel3.text")); // NOI18N
+        jLabel3.setHorizontalAlignment(SwingConstants.CENTER);
+        Mnemonics.setLocalizedText(jLabel3, bundle.getString("AboutFrame.jLabel3.text")); // NOI18N
         jLabel3.setFocusable(false);
 
-        creditsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/about-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(creditsButton, bundle.getString("AboutFrame.creditsButton.text")); // NOI18N
-        creditsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        creditsButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/about-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(creditsButton, bundle.getString("AboutFrame.creditsButton.text"));
+        creditsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 creditsButtonActionPerformed(evt);
             }
         });
 
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(closeButton, bundle.getString("Close_")); // NOI18N
-        closeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(closeButton, bundle.getString("Close_"));
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 closeButtonActionPerformed(evt);
             }
         });
-
-        org.openide.awt.Mnemonics.setLocalizedText(licenseButton, bundle.getString("AboutFrame.licenseButton.text")); // NOI18N
-        licenseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        Mnemonics.setLocalizedText(licenseButton, bundle.getString("AboutFrame.licenseButton.text"));
+        licenseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 licenseButtonActionPerformed(evt);
             }
         });
 
         jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getSize()-2f));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/copyleft-12.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, bundle.getString("AboutFrame.jLabel5.text")); // NOI18N
+        jLabel5.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel5.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/copyleft-12.png"))); // NOI18N
+        Mnemonics.setLocalizedText(jLabel5, bundle.getString("AboutFrame.jLabel5.text")); // NOI18N
         jLabel5.setFocusable(false);
 
-        org.openide.awt.Mnemonics.setLocalizedText(linkButton, bundle.getString("AboutFrame.linkButton.text")); // NOI18N
+        Mnemonics.setLocalizedText(linkButton, bundle.getString("AboutFrame.linkButton.text")); // NOI18N
         linkButton.setToolTipText(bundle.getString("AboutFrame.linkButton.toolTipText")); // NOI18N
         linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        linkButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        linkButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 linkButtonActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(supportButton, "<html><a href=\"" +
+        Mnemonics.setLocalizedText(supportButton, "<html><a href=\"" +
             l10n.getString("AboutFrame.supportButton.link") +
             "\">" +
             l10n.getString("AboutFrame.supportButton.text") +
@@ -150,83 +160,83 @@ public class AboutFrame extends javax.swing.JFrame {
         supportButton.setToolTipText(bundle.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         supportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         supportButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        supportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        supportButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 supportButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(jLabel5, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                    .addComponent(jLabel3, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                    .addComponent(jLabel2, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                    .addComponent(jLabel1, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(creditsButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(licenseButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addComponent(closeButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(linkButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(supportButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)))
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {closeButton, creditsButton, licenseButton});
+        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {closeButton, creditsButton, licenseButton});
 
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(linkButton)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(supportButton)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addGap(18, 21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(creditsButton)
                     .addComponent(closeButton)
                     .addComponent(licenseButton))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel4, jLabel6});
+        layout.linkSize(SwingConstants.VERTICAL, new Component[] {jLabel4, jLabel6});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {closeButton, creditsButton, licenseButton});
+        layout.linkSize(SwingConstants.VERTICAL, new Component[] {closeButton, creditsButton, licenseButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void linkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkButtonActionPerformed
+    private void linkButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_linkButtonActionPerformed
         if (!Desktop.isDesktopSupported())
             return;
         //start browser
@@ -238,7 +248,7 @@ public class AboutFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_linkButtonActionPerformed
         
-    private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
+    private void licenseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         //show licence
         try {
             String license = IOUtils.toString(
@@ -281,7 +291,7 @@ public class AboutFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_licenseButtonActionPerformed
     
-    private void creditsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsButtonActionPerformed
+    private void creditsButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_creditsButtonActionPerformed
         //show credits
         try {
             String credits = IOUtils.toString(
@@ -336,12 +346,12 @@ public class AboutFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_creditsButtonActionPerformed
     
-    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+    private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void supportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supportButtonActionPerformed
+    private void supportButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_supportButtonActionPerformed
         if (!Desktop.isDesktopSupported())
             return;
         //start browser
@@ -355,19 +365,19 @@ public class AboutFrame extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton closeButton;
-    private javax.swing.JButton creditsButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JButton licenseButton;
-    private javax.swing.JButton linkButton;
-    private javax.swing.JButton supportButton;
+    private JButton closeButton;
+    private JButton creditsButton;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    private JLabel jLabel6;
+    private JLabel jLabel7;
+    private JLabel jLabel8;
+    private JButton licenseButton;
+    private JButton linkButton;
+    private JButton supportButton;
     // End of variables declaration//GEN-END:variables
     
 }

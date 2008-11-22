@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -24,16 +25,27 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
+import javax.swing.JToolBar;
+import javax.swing.JToolBar.Separator;
 import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.ToolTipManager;
 
+import javax.swing.WindowConstants;
 import org.apache.commons.io.IOUtils;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
@@ -69,6 +81,7 @@ import java.util.Calendar;
 import java.util.ListIterator;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
+import org.openide.awt.Mnemonics;
 
 /**
  * MainFrame form
@@ -234,65 +247,63 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        horizontalSplitPane = new javax.swing.JSplitPane();
-        verticalSplitPane = new javax.swing.JSplitPane();
-        smsPanel = new esmska.gui.SMSPanel();
-        queuePanel = new esmska.gui.QueuePanel();
-        contactPanel = new esmska.gui.ContactPanel();
-        statusPanel = new esmska.gui.StatusPanel();
-        jSeparator1 = new javax.swing.JSeparator();
-        toolBar = new javax.swing.JToolBar();
-        compressButton = new javax.swing.JButton();
-        undoButton = new javax.swing.JButton();
-        redoButton = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
-        historyButton = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
-        configButton = new javax.swing.JButton();
-        exitButton = new javax.swing.JButton();
-        menuBar = new javax.swing.JMenuBar();
-        programMenu = new javax.swing.JMenu();
-        configMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        messageMenu = new javax.swing.JMenu();
-        undoMenuItem = new javax.swing.JMenuItem();
-        redoMenuItem = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JSeparator();
-        compressMenuItem = new javax.swing.JMenuItem();
-        sendMenuItem = new javax.swing.JMenuItem();
-        toolsMenu = new javax.swing.JMenu();
-        historyMenuItem = new javax.swing.JMenuItem();
-        logMenuItem = new javax.swing.JMenuItem();
-        jSeparator4 = new javax.swing.JSeparator();
-        importMenuItem = new javax.swing.JMenuItem();
-        exportMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        faqMenuItem = new javax.swing.JMenuItem();
-        getHelpMenuItem = new javax.swing.JMenuItem();
-        translateMenuItem = new javax.swing.JMenuItem();
-        problemMenuItem = new javax.swing.JMenuItem();
-        helpSeparator = new javax.swing.JSeparator();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        horizontalSplitPane = new JSplitPane();
+        verticalSplitPane = new JSplitPane();
+        smsPanel = new SMSPanel();
+        queuePanel = new QueuePanel();
+        contactPanel = new ContactPanel();
+        statusPanel = new StatusPanel();
+        jSeparator1 = new JSeparator();
+        toolBar = new JToolBar();
+        compressButton = new JButton();
+        undoButton = new JButton();
+        redoButton = new JButton();
+        jSeparator2 = new Separator();
+        historyButton = new JButton();
+        jSeparator3 = new Separator();
+        configButton = new JButton();
+        exitButton = new JButton();
+        menuBar = new JMenuBar();
+        programMenu = new JMenu();
+        configMenuItem = new JMenuItem();
+        exitMenuItem = new JMenuItem();
+        messageMenu = new JMenu();
+        undoMenuItem = new JMenuItem();
+        redoMenuItem = new JMenuItem();
+        jSeparator5 = new JSeparator();
+        compressMenuItem = new JMenuItem();
+        sendMenuItem = new JMenuItem();
+        toolsMenu = new JMenu();
+        historyMenuItem = new JMenuItem();
+        logMenuItem = new JMenuItem();
+        jSeparator4 = new JSeparator();
+        importMenuItem = new JMenuItem();
+        exportMenuItem = new JMenuItem();
+        helpMenu = new JMenu();
+        faqMenuItem = new JMenuItem();
+        getHelpMenuItem = new JMenuItem();
+        translateMenuItem = new JMenuItem();
+        problemMenuItem = new JMenuItem();
+        helpSeparator = new JSeparator();
+        aboutMenuItem = new JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Esmska"); // NOI18N
         setLocationByPlatform(true);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
         horizontalSplitPane.setBorder(null);
         horizontalSplitPane.setResizeWeight(0.5);
-        horizontalSplitPane.setContinuousLayout(true);
         horizontalSplitPane.setOneTouchExpandable(true);
         horizontalSplitPane.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         verticalSplitPane.setBorder(null);
-        verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        verticalSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         verticalSplitPane.setResizeWeight(1.0);
-        verticalSplitPane.setContinuousLayout(true);
         verticalSplitPane.setOneTouchExpandable(true);
         verticalSplitPane.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -362,8 +373,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
 
-        org.openide.awt.Mnemonics.setLocalizedText(programMenu, l10n.getString("MainFrame.programMenu.text")); // NOI18N
-
+        Mnemonics.setLocalizedText(programMenu, l10n.getString("MainFrame.programMenu.text")); // NOI18N
         configMenuItem.setAction(configAction);
         programMenu.add(configMenuItem);
 
@@ -372,8 +382,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(programMenu);
 
-        org.openide.awt.Mnemonics.setLocalizedText(messageMenu, l10n.getString("MainFrame.messageMenu.text")); // NOI18N
 
+        Mnemonics.setLocalizedText(messageMenu, l10n.getString("MainFrame.messageMenu.text")); // NOI18N
         undoMenuItem.setAction(smsPanel.getUndoAction());
         messageMenu.add(undoMenuItem);
 
@@ -389,8 +399,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(messageMenu);
 
-        org.openide.awt.Mnemonics.setLocalizedText(toolsMenu, l10n.getString("MainFrame.toolsMenu.text")); // NOI18N
 
+        Mnemonics.setLocalizedText(toolsMenu, l10n.getString("MainFrame.toolsMenu.text")); // NOI18N
         historyMenuItem.setAction(historyAction);
         toolsMenu.add(historyMenuItem);
 
@@ -406,44 +416,43 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(toolsMenu);
 
-        org.openide.awt.Mnemonics.setLocalizedText(helpMenu, l10n.getString("MainFrame.helpMenu.text")); // NOI18N
-
-        faqMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        faqMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/faq-16.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(helpMenu, l10n.getString("MainFrame.helpMenu.text")); // NOI18N
+        faqMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+        faqMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/faq-16.png"))); // NOI18N
+        Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text"));
         faqMenuItem.setToolTipText(l10n.getString("MainFrame.faqMenuItem.toolTipText")); // NOI18N
-        faqMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        faqMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 faqMenuItemActionPerformed(evt);
             }
         });
         helpMenu.add(faqMenuItem);
 
-        getHelpMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/getHelp-16.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(getHelpMenuItem, l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
+        getHelpMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/getHelp-16.png"))); // NOI18N
+        Mnemonics.setLocalizedText(getHelpMenuItem, l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
         getHelpMenuItem.setToolTipText(l10n.getString("MainFrame.getHelpMenuItem.toolTipText")); // NOI18N
-        getHelpMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        getHelpMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 getHelpMenuItemActionPerformed(evt);
             }
         });
         helpMenu.add(getHelpMenuItem);
 
-        translateMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/translate-16.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(translateMenuItem, l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
+        translateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/translate-16.png"))); // NOI18N
+        Mnemonics.setLocalizedText(translateMenuItem, l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
         translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
-        translateMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        translateMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 translateMenuItemActionPerformed(evt);
             }
         });
         helpMenu.add(translateMenuItem);
 
-        problemMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/bug-16.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(problemMenuItem, l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
+        problemMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/bug-16.png"))); // NOI18N
+        Mnemonics.setLocalizedText(problemMenuItem, l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
         problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
-        problemMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        problemMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 problemMenuItemActionPerformed(evt);
             }
         });
@@ -457,34 +466,34 @@ public class MainFrame extends javax.swing.JFrame {
 
         setJMenuBar(menuBar);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(statusPanel, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addComponent(jSeparator1, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(toolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(statusPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //if user clicked on close button (event non-null) and notification icon
         //installed or on mac, just hide the main window
         if (evt != null && (NotificationIcon.isInstalled() || OSType.isMac())) {
@@ -516,7 +525,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-private void faqMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_faqMenuItemActionPerformed
+private void faqMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_faqMenuItemActionPerformed
     if (!Desktop.isDesktopSupported()) {
         return;
     }
@@ -529,7 +538,7 @@ private void faqMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }
 }//GEN-LAST:event_faqMenuItemActionPerformed
 
-private void getHelpMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getHelpMenuItemActionPerformed
+private void getHelpMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_getHelpMenuItemActionPerformed
     if (!Desktop.isDesktopSupported()) {
         return;
     }
@@ -542,7 +551,7 @@ private void getHelpMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     }
 }//GEN-LAST:event_getHelpMenuItemActionPerformed
 
-private void translateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateMenuItemActionPerformed
+private void translateMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_translateMenuItemActionPerformed
     if (!Desktop.isDesktopSupported()) {
         return;
     }
@@ -555,7 +564,7 @@ private void translateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {/
     }
 }//GEN-LAST:event_translateMenuItemActionPerformed
 
-private void problemMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_problemMenuItemActionPerformed
+private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_problemMenuItemActionPerformed
     if (!Desktop.isDesktopSupported()) {
         return;
     }
@@ -1029,44 +1038,44 @@ private void problemMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JButton compressButton;
-    private javax.swing.JMenuItem compressMenuItem;
-    private javax.swing.JButton configButton;
-    private javax.swing.JMenuItem configMenuItem;
-    private esmska.gui.ContactPanel contactPanel;
-    private javax.swing.JButton exitButton;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenuItem exportMenuItem;
-    private javax.swing.JMenuItem faqMenuItem;
-    private javax.swing.JMenuItem getHelpMenuItem;
-    private javax.swing.JMenu helpMenu;
-    private javax.swing.JSeparator helpSeparator;
-    private javax.swing.JButton historyButton;
-    private javax.swing.JMenuItem historyMenuItem;
-    private javax.swing.JSplitPane horizontalSplitPane;
-    private javax.swing.JMenuItem importMenuItem;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JMenuItem logMenuItem;
-    private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenu messageMenu;
-    private javax.swing.JMenuItem problemMenuItem;
-    private javax.swing.JMenu programMenu;
-    private esmska.gui.QueuePanel queuePanel;
-    private javax.swing.JButton redoButton;
-    private javax.swing.JMenuItem redoMenuItem;
-    private javax.swing.JMenuItem sendMenuItem;
-    private esmska.gui.SMSPanel smsPanel;
-    private esmska.gui.StatusPanel statusPanel;
-    private javax.swing.JToolBar toolBar;
-    private javax.swing.JMenu toolsMenu;
-    private javax.swing.JMenuItem translateMenuItem;
-    private javax.swing.JButton undoButton;
-    private javax.swing.JMenuItem undoMenuItem;
-    private javax.swing.JSplitPane verticalSplitPane;
+    private JMenuItem aboutMenuItem;
+    private JButton compressButton;
+    private JMenuItem compressMenuItem;
+    private JButton configButton;
+    private JMenuItem configMenuItem;
+    private ContactPanel contactPanel;
+    private JButton exitButton;
+    private JMenuItem exitMenuItem;
+    private JMenuItem exportMenuItem;
+    private JMenuItem faqMenuItem;
+    private JMenuItem getHelpMenuItem;
+    private JMenu helpMenu;
+    private JSeparator helpSeparator;
+    private JButton historyButton;
+    private JMenuItem historyMenuItem;
+    private JSplitPane horizontalSplitPane;
+    private JMenuItem importMenuItem;
+    private JSeparator jSeparator1;
+    private Separator jSeparator2;
+    private Separator jSeparator3;
+    private JSeparator jSeparator4;
+    private JSeparator jSeparator5;
+    private JMenuItem logMenuItem;
+    private JMenuBar menuBar;
+    private JMenu messageMenu;
+    private JMenuItem problemMenuItem;
+    private JMenu programMenu;
+    private QueuePanel queuePanel;
+    private JButton redoButton;
+    private JMenuItem redoMenuItem;
+    private JMenuItem sendMenuItem;
+    private SMSPanel smsPanel;
+    private StatusPanel statusPanel;
+    private JToolBar toolBar;
+    private JMenu toolsMenu;
+    private JMenuItem translateMenuItem;
+    private JButton undoButton;
+    private JMenuItem undoMenuItem;
+    private JSplitPane verticalSplitPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,12 +23,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+import org.openide.awt.Mnemonics;
 
 /** Display log records
  *
@@ -96,13 +104,13 @@ public class LogFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        logList = new javax.swing.JList();
-        closeButton = new javax.swing.JButton();
-        clearButton = new javax.swing.JButton();
-        copyButton = new javax.swing.JButton();
+        jScrollPane1 = new JScrollPane();
+        logList = new JList();
+        closeButton = new JButton();
+        clearButton = new JButton();
+        copyButton = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("LogFrame.title")); // NOI18N
         setIconImage(new ImageIcon(getClass().getResource(RES + "log-48.png")).getImage());
 
@@ -110,77 +118,77 @@ public class LogFrame extends javax.swing.JFrame {
         logList.setCellRenderer(new LogRenderer());
         jScrollPane1.setViewportView(logList);
 
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
-        closeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 closeButtonActionPerformed(evt);
             }
         });
 
-        clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(clearButton, l10n.getString("LogFrame.clearButton.text")); // NOI18N
+        clearButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(clearButton, l10n.getString("LogFrame.clearButton.text"));
         clearButton.setToolTipText(l10n.getString("LogFrame.clearButton.toolTipText")); // NOI18N
-        clearButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        clearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 clearButtonActionPerformed(evt);
             }
         });
 
-        copyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/copy-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(copyButton, l10n.getString("LogFrame.copyButton.text")); // NOI18N
+        copyButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/copy-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(copyButton, l10n.getString("LogFrame.copyButton.text")); // NOI18N
         copyButton.setToolTipText(l10n.getString("LogFrame.copyButton.toolTipText")); // NOI18N
-        copyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        copyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 copyButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(jScrollPane1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(clearButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(copyButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                         .addComponent(closeButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                         .addComponent(closeButton)
                         .addComponent(clearButton))
                     .addComponent(copyButton))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {clearButton, closeButton, copyButton});
+        layout.linkSize(SwingConstants.VERTICAL, new Component[] {clearButton, closeButton, copyButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+    private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+    private void clearButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         log.clearRecords();
     }//GEN-LAST:event_clearButtonActionPerformed
 
-    private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
+    private void copyButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
         try {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             StringBuilder builder = new StringBuilder();
@@ -234,11 +242,11 @@ public class LogFrame extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton clearButton;
-    private javax.swing.JButton closeButton;
-    private javax.swing.JButton copyButton;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList logList;
+    private JButton clearButton;
+    private JButton closeButton;
+    private JButton copyButton;
+    private JScrollPane jScrollPane1;
+    private JList logList;
     // End of variables declaration//GEN-END:variables
     
 }

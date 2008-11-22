@@ -18,9 +18,13 @@ import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -33,8 +37,12 @@ import java.util.TreeSet;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -48,9 +56,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 /** Contact list panel
@@ -173,33 +184,32 @@ public class ContactPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addContactButton = new javax.swing.JButton();
-        removeContactButton = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        addContactButton = new JButton();
+        removeContactButton = new JButton();
+        jScrollPane4 = new JScrollPane();
         contactList = new ContactList();
-        editContactButton = new javax.swing.JButton();
+        editContactButton = new JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(l10n.getString("ContactPanel.border.title"))); // NOI18N
-        addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        setBorder(BorderFactory.createTitledBorder(l10n.getString("ContactPanel.border.title"))); // NOI18N
+        addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
                 formFocusGained(evt);
             }
         });
 
         addContactButton.setAction(addContactAction);
-        addContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        addContactButton.setMargin(new Insets(2, 2, 2, 2));
         addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         addContactButton.setText("");
 
         removeContactButton.setAction(removeContactAction);
-        removeContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        removeContactButton.setMargin(new Insets(2, 2, 2, 2));
         removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         removeContactButton.setText("");
 
         contactList.setModel(contactListModel);
         contactList.setToolTipText(l10n.getString("ContactPanel.contactList.toolTipText")); // NOI18N
         contactList.setCellRenderer(new ContactListRenderer());
-        //key shortcuts
         String command = "choose contact";
         contactList.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), command);
         contactList.getActionMap().put(command, chooseContactAction);
@@ -212,48 +222,48 @@ public class ContactPanel extends javax.swing.JPanel {
                 contactList.requestFocusInWindow();
             }
         });
-        contactList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        contactList.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent evt) {
                 contactListValueChanged(evt);
             }
         });
-        contactList.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        contactList.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent evt) {
                 contactListKeyPressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+            public void keyTyped(KeyEvent evt) {
                 contactListKeyTyped(evt);
             }
         });
         jScrollPane4.setViewportView(contactList);
 
         editContactButton.setAction(editContactAction);
-        editContactButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        editContactButton.setMargin(new Insets(2, 2, 2, 2));
         editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         editContactButton.setText("");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addContactButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(editContactButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(removeContactButton))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                     .addComponent(addContactButton)
                     .addComponent(editContactButton)
                     .addComponent(removeContactButton))
@@ -261,7 +271,7 @@ public class ContactPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private void contactListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_contactListValueChanged
+    private void contactListValueChanged(ListSelectionEvent evt) {//GEN-FIRST:event_contactListValueChanged
         if (evt.getValueIsAdjusting())
             return;
         
@@ -274,11 +284,11 @@ public class ContactPanel extends javax.swing.JPanel {
         actionSupport.fireActionPerformed(ACTION_CONTACT_SELECTION_CHANGED, null);
     }//GEN-LAST:event_contactListValueChanged
 
-    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+    private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         contactList.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
 
-    private void contactListKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactListKeyTyped
+    private void contactListKeyTyped(KeyEvent evt) {//GEN-FIRST:event_contactListKeyTyped
         //do not catch keyboard shortcuts
         if (evt.isActionKey() || evt.isAltDown() || evt.isAltGraphDown() ||
                 evt.isControlDown() || evt.isMetaDown()) {
@@ -299,7 +309,7 @@ public class ContactPanel extends javax.swing.JPanel {
         searchContactAction.actionPerformed(null);
     }//GEN-LAST:event_contactListKeyTyped
 
-    private void contactListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactListKeyPressed
+    private void contactListKeyPressed(KeyEvent evt) {//GEN-FIRST:event_contactListKeyPressed
         //process backspace
         if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
             String searchString = searchContactAction.getSearchString();
@@ -795,11 +805,11 @@ public class ContactPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addContactButton;
-    private javax.swing.JList contactList;
-    private javax.swing.JButton editContactButton;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JButton removeContactButton;
+    private JButton addContactButton;
+    private JList contactList;
+    private JButton editContactButton;
+    private JScrollPane jScrollPane4;
+    private JButton removeContactButton;
     // End of variables declaration//GEN-END:variables
     
 }

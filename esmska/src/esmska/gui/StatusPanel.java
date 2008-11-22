@@ -11,13 +11,21 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.Timer;
+import org.openide.awt.Mnemonics;
 
 /** Status bar panel
  *
@@ -122,21 +130,21 @@ public class StatusPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        statusMessageLabel = new javax.swing.JLabel();
-        statusAnimationLabel = new javax.swing.JLabel();
-        progressBar = new javax.swing.JProgressBar();
+        statusMessageLabel = new JLabel();
+        statusAnimationLabel = new JLabel();
+        progressBar = new JProgressBar();
 
-        org.openide.awt.Mnemonics.setLocalizedText(statusMessageLabel, l10n.getString("StatusPanel.statusMessageLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(statusMessageLabel, l10n.getString("StatusPanel.statusMessageLabel.text")); // NOI18N
         statusMessageLabel.setToolTipText(l10n.getString("StatusPanel.statusMessageLabel.toolTipText")); // NOI18N
         statusMessageLabel.setFocusable(false);
         statusMessageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        statusMessageLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        statusMessageLabel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 statusMessageLabelMouseClicked(evt);
             }
         });
 
-        statusAnimationLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/task-idle.png"))); // NOI18N
+        statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/task-idle.png"))); // NOI18N
         statusAnimationLabel.setFocusable(false);
 
         progressBar.setMaximum(15);
@@ -145,28 +153,28 @@ public class StatusPanel extends javax.swing.JPanel {
         progressBar.setStringPainted(true);
         progressBar.setVisible(false);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(statusMessageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusAnimationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(statusMessageLabel, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(statusAnimationLabel, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusMessageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-            .addComponent(statusAnimationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(progressBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(statusMessageLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            .addComponent(statusAnimationLabel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+            .addComponent(progressBar, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void statusMessageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statusMessageLabelMouseClicked
+    private void statusMessageLabelMouseClicked(MouseEvent evt) {//GEN-FIRST:event_statusMessageLabelMouseClicked
        logAction.actionPerformed(null);
     }//GEN-LAST:event_statusMessageLabelMouseClicked
 
@@ -203,8 +211,8 @@ public class StatusPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar progressBar;
-    private javax.swing.JLabel statusAnimationLabel;
-    private javax.swing.JLabel statusMessageLabel;
+    private JProgressBar progressBar;
+    private JLabel statusAnimationLabel;
+    private JLabel statusMessageLabel;
     // End of variables declaration//GEN-END:variables
 }

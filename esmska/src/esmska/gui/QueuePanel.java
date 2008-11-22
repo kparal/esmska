@@ -8,8 +8,11 @@ package esmska.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.util.Collections;
 import java.util.List;
@@ -17,11 +20,20 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
+import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 import esmska.data.Config;
@@ -336,104 +348,104 @@ public class QueuePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        smsUpButton = new javax.swing.JButton();
-        smsDownButton = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        queueList = new javax.swing.JList();
-        editButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
-        pauseButton = new javax.swing.JToggleButton();
+        smsUpButton = new JButton();
+        smsDownButton = new JButton();
+        jScrollPane2 = new JScrollPane();
+        queueList = new JList();
+        editButton = new JButton();
+        deleteButton = new JButton();
+        pauseButton = new JToggleButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(l10n.getString("QueuePanel.border.title"))); // NOI18N
-        addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        setBorder(BorderFactory.createTitledBorder(l10n.getString("QueuePanel.border.title"))); // NOI18N
+        addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
                 formFocusGained(evt);
             }
         });
 
         smsUpButton.setAction(smsUpAction);
-        smsUpButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        smsUpButton.setMargin(new Insets(2, 2, 2, 2));
         smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         smsUpButton.setText("");
 
         smsDownButton.setAction(smsDownAction);
-        smsDownButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        smsDownButton.setMargin(new Insets(2, 2, 2, 2));
         smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         smsDownButton.setText("");
 
         queueList.setModel(queueListModel);
         queueList.setCellRenderer(new SMSQueueListRenderer());
         queueList.setVisibleRowCount(4);
-        queueList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        queueList.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent evt) {
                 queueListValueChanged(evt);
             }
         });
         jScrollPane2.setViewportView(queueList);
 
         editButton.setAction(editSMSAction);
-        editButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        editButton.setMargin(new Insets(2, 2, 2, 2));
         editButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         editButton.setText("");
 
         deleteButton.setAction(deleteSMSAction);
-        deleteButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        deleteButton.setMargin(new Insets(2, 2, 2, 2));
         deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         deleteButton.setText("");
 
         pauseButton.setAction(smsQueuePauseAction);
-        pauseButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        pauseButton.setMargin(new Insets(2, 2, 2, 2));
         pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         pauseButton.setText("");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                     .addComponent(smsDownButton)
                     .addComponent(smsUpButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(pauseButton))
                     .addComponent(editButton))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
+        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
 
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(pauseButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(smsUpButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(smsDownButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(editButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
                         .addGap(0, 3, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
+        layout.linkSize(SwingConstants.VERTICAL, new Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
 
     }// </editor-fold>//GEN-END:initComponents
     
-    private void queueListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_queueListValueChanged
+    private void queueListValueChanged(ListSelectionEvent evt) {//GEN-FIRST:event_queueListValueChanged
         //update form components
         if (!evt.getValueIsAdjusting()) {
             int queueSize = queueListModel.getSize();
@@ -445,7 +457,7 @@ public class QueuePanel extends javax.swing.JPanel {
         }
 }//GEN-LAST:event_queueListValueChanged
 
-    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+    private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         pauseButton.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
     
@@ -854,13 +866,13 @@ public class QueuePanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JToggleButton pauseButton;
-    private javax.swing.JList queueList;
-    private javax.swing.JButton smsDownButton;
-    private javax.swing.JButton smsUpButton;
+    private JButton deleteButton;
+    private JButton editButton;
+    private JScrollPane jScrollPane2;
+    private JToggleButton pauseButton;
+    private JList queueList;
+    private JButton smsDownButton;
+    private JButton smsUpButton;
     // End of variables declaration//GEN-END:variables
     
 }

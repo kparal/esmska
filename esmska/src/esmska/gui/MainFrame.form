@@ -209,6 +209,7 @@
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="esmska/resources/l10n"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
@@ -224,7 +225,7 @@
           <Component id="jSeparator1" alignment="0" pref="608" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="horizontalSplitPane" pref="584" max="32767" attributes="0"/>
+              <Component id="horizontalSplitPane" pref="596" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Component id="toolBar" alignment="0" pref="608" max="32767" attributes="0"/>
@@ -251,7 +252,6 @@
           <Border info="null"/>
         </Property>
         <Property name="resizeWeight" type="double" value="0.5"/>
-        <Property name="continuousLayout" type="boolean" value="true"/>
         <Property name="oneTouchExpandable" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
@@ -267,7 +267,6 @@
             </Property>
             <Property name="orientation" type="int" value="0"/>
             <Property name="resizeWeight" type="double" value="1.0"/>
-            <Property name="continuousLayout" type="boolean" value="true"/>
             <Property name="oneTouchExpandable" type="boolean" value="true"/>
           </Properties>
           <AuxValues>

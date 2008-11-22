@@ -15,14 +15,28 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.TreeSet;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
 import esmska.operators.OperatorUtil;
@@ -42,6 +56,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
+import org.openide.awt.Mnemonics;
 
 /** Import contacts from external applications
  *
@@ -194,75 +209,75 @@ public class ImportFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        importButtonGroup = new javax.swing.ButtonGroup();
-        cardPanel = new javax.swing.JPanel();
-        applicationPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        kubikRadioButton = new javax.swing.JRadioButton();
-        dreamcomSERadioButton = new javax.swing.JRadioButton();
-        esmskaRadioButton = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
-        vcardRadioButton = new javax.swing.JRadioButton();
-        browsePanel = new javax.swing.JPanel();
-        fileTextField = new javax.swing.JTextField();
-        browseButton = new javax.swing.JButton();
-        infoLabel = new javax.swing.JLabel();
-        fileLabel = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        encodingLabel = new javax.swing.JLabel();
-        problemLabel = new javax.swing.JLabel();
-        resultsPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        contactList = new javax.swing.JList();
-        jLabel8 = new javax.swing.JLabel();
-        validOperatorCheckBox = new javax.swing.JCheckBox();
-        forwardButton = new javax.swing.JButton();
-        progressBar = new javax.swing.JProgressBar();
-        backButton = new javax.swing.JButton();
+        importButtonGroup = new ButtonGroup();
+        cardPanel = new JPanel();
+        applicationPanel = new JPanel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
+        kubikRadioButton = new JRadioButton();
+        dreamcomSERadioButton = new JRadioButton();
+        esmskaRadioButton = new JRadioButton();
+        jLabel4 = new JLabel();
+        vcardRadioButton = new JRadioButton();
+        browsePanel = new JPanel();
+        fileTextField = new JTextField();
+        browseButton = new JButton();
+        infoLabel = new JLabel();
+        fileLabel = new JLabel();
+        jLabel22 = new JLabel();
+        encodingLabel = new JLabel();
+        problemLabel = new JLabel();
+        resultsPanel = new JPanel();
+        jLabel1 = new JLabel();
+        jScrollPane1 = new JScrollPane();
+        contactList = new JList();
+        jLabel8 = new JLabel();
+        validOperatorCheckBox = new JCheckBox();
+        forwardButton = new JButton();
+        progressBar = new JProgressBar();
+        backButton = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("ImportFrame.title")); // NOI18N
+
+
         setIconImage(new ImageIcon(getClass().getResource(RES + "contact-48.png")).getImage());
 
-        cardPanel.setLayout(new java.awt.CardLayout());
+        cardPanel.setLayout(new CardLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, l10n.getString("ImportFrame.jLabel2.text")); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, l10n.getString("ImportFrame.jLabel3.text")); // NOI18N
-
+        jLabel2.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
+        Mnemonics.setLocalizedText(jLabel2, l10n.getString("ImportFrame.jLabel2.text")); // NOI18N
+        Mnemonics.setLocalizedText(jLabel3, l10n.getString("ImportFrame.jLabel3.text"));
         importButtonGroup.add(kubikRadioButton);
-        org.openide.awt.Mnemonics.setLocalizedText(kubikRadioButton, "&Kubík SMS DreamCom"); // NOI18N
 
+        Mnemonics.setLocalizedText(kubikRadioButton, "&Kubík SMS DreamCom"); // NOI18N
         importButtonGroup.add(dreamcomSERadioButton);
-        org.openide.awt.Mnemonics.setLocalizedText(dreamcomSERadioButton, "&DreamCom SE"); // NOI18N
 
+        Mnemonics.setLocalizedText(dreamcomSERadioButton, "&DreamCom SE"); // NOI18N
         importButtonGroup.add(esmskaRadioButton);
         esmskaRadioButton.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(esmskaRadioButton, "&Esmska"); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, l10n.getString("ImportFrame.jLabel4.text")); // NOI18N
 
+        Mnemonics.setLocalizedText(esmskaRadioButton,"&Esmska"); // NOI18N
+        Mnemonics.setLocalizedText(jLabel4, l10n.getString("ImportFrame.jLabel4.text"));
         importButtonGroup.add(vcardRadioButton);
-        org.openide.awt.Mnemonics.setLocalizedText(vcardRadioButton, "&vCard (*.vcard, *.vcf)"); // NOI18N
 
-        javax.swing.GroupLayout applicationPanelLayout = new javax.swing.GroupLayout(applicationPanel);
+        Mnemonics.setLocalizedText(vcardRadioButton, "&vCard (*.vcard, *.vcf)");
+        GroupLayout applicationPanelLayout = new GroupLayout(applicationPanel);
         applicationPanel.setLayout(applicationPanelLayout);
         applicationPanelLayout.setHorizontalGroup(
-            applicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            applicationPanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(applicationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(applicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(applicationPanelLayout.createParallelGroup(Alignment.LEADING)
                     .addGroup(applicationPanelLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(vcardRadioButton))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                    .addComponent(jLabel2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(jLabel3)
                     .addGroup(applicationPanelLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addGroup(applicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(applicationPanelLayout.createParallelGroup(Alignment.LEADING)
                             .addComponent(esmskaRadioButton)
                             .addComponent(kubikRadioButton)
                             .addComponent(dreamcomSERadioButton))
@@ -271,130 +286,129 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
         applicationPanelLayout.setVerticalGroup(
-            applicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            applicationPanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(applicationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(esmskaRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(kubikRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(dreamcomSERadioButton)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(vcardRadioButton)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         cardPanel.add(applicationPanel, "applicationPanel");
 
         fileTextField.setToolTipText(l10n.getString("ImportFrame.fileTextField.toolTipText")); // NOI18N
 
-        browseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/browse-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(browseButton, l10n.getString("ImportFrame.browseButton.text")); // NOI18N
+        browseButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/browse-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(browseButton, l10n.getString("ImportFrame.browseButton.text")); // NOI18N
         browseButton.setToolTipText(l10n.getString("ImportFrame.browseButton.toolTipText")); // NOI18N
-        browseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+
+
+
+
+        browseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 browseButtonActionPerformed(evt);
             }
         });
 
-        infoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(infoLabel, "<<info text>>"); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(fileLabel, l10n.getString("ImportFrame.fileLabel.text")); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel22, l10n.getString("ImportFrame.jLabel22.text")); // NOI18N
-
-        encodingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(encodingLabel, "<<encoding hint>>"); // NOI18N
-
-        problemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(problemLabel, l10n.getString("ImportFrame.problemLabel.text")); // NOI18N
-
-        javax.swing.GroupLayout browsePanelLayout = new javax.swing.GroupLayout(browsePanel);
+        infoLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
+        Mnemonics.setLocalizedText(infoLabel, "<<info text>>");
+        Mnemonics.setLocalizedText(fileLabel, l10n.getString("ImportFrame.fileLabel.text"));
+        Mnemonics.setLocalizedText(jLabel22, l10n.getString("ImportFrame.jLabel22.text"));
+        encodingLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
+        Mnemonics.setLocalizedText(encodingLabel, "<<encoding hint>>");
+        problemLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/info-32.png"))); // NOI18N
+        Mnemonics.setLocalizedText(problemLabel, l10n.getString("ImportFrame.problemLabel.text"));
+        GroupLayout browsePanelLayout = new GroupLayout(browsePanel);
         browsePanel.setLayout(browsePanelLayout);
         browsePanelLayout.setHorizontalGroup(
-            browsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            browsePanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(browsePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(browsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-                    .addComponent(infoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                .addGroup(browsePanelLayout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(jLabel22, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(infoLabel, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(fileLabel)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, browsePanelLayout.createSequentialGroup()
-                        .addComponent(fileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(Alignment.TRAILING, browsePanelLayout.createSequentialGroup()
+                        .addComponent(fileTextField, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(browseButton))
-                    .addComponent(encodingLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-                    .addComponent(problemLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE))
+                    .addComponent(encodingLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(problemLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE))
                 .addContainerGap())
         );
         browsePanelLayout.setVerticalGroup(
-            browsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            browsePanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(browsePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(infoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(fileLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(browsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(browsePanelLayout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(browseButton)
-                    .addComponent(fileTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(fileTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(encodingLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(problemLabel)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         cardPanel.add(browsePanel, "browsePanel");
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, l10n.getString("ImportFrame.jLabel1.text")); // NOI18N
-
+        Mnemonics.setLocalizedText(jLabel1, l10n.getString("ImportFrame.jLabel1.text"));
         contactList.setModel(new DefaultListModel());
         contactList.setCellRenderer(new ContactsListRenderer());
         jScrollPane1.setViewportView(contactList);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel8, l10n.getString("ImportFrame.jLabel8.text")); // NOI18N
 
+        jLabel8.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
+        Mnemonics.setLocalizedText(jLabel8, l10n.getString("ImportFrame.jLabel8.text")); // NOI18N
         validOperatorCheckBox.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(validOperatorCheckBox, l10n.getString("ImportFrame.validOperatorCheckBox.text")); // NOI18N
+        Mnemonics.setLocalizedText(validOperatorCheckBox, l10n.getString("ImportFrame.validOperatorCheckBox.text")); // NOI18N
         validOperatorCheckBox.setToolTipText(l10n.getString("ImportFrame.validOperatorCheckBox.toolTipText")); // NOI18N
-        validOperatorCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+        validOperatorCheckBox.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent evt) {
                 validOperatorCheckBoxStateChanged(evt);
             }
         });
 
-        javax.swing.GroupLayout resultsPanelLayout = new javax.swing.GroupLayout(resultsPanel);
+        GroupLayout resultsPanelLayout = new GroupLayout(resultsPanel);
         resultsPanel.setLayout(resultsPanelLayout);
         resultsPanelLayout.setHorizontalGroup(
-            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            resultsPanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(resultsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(resultsPanelLayout.createParallelGroup(Alignment.LEADING)
                     .addComponent(validOperatorCheckBox)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(jLabel8))
                 .addContainerGap())
         );
         resultsPanelLayout.setVerticalGroup(
-            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            resultsPanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(resultsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(validOperatorCheckBox)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
@@ -403,11 +417,11 @@ public class ImportFrame extends javax.swing.JFrame {
 
         cardPanel.add(resultsPanel, "resultsPanel");
 
-        forwardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/next-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(forwardButton, l10n.getString("ImportFrame.forwardButton.text")); // NOI18N
-        forwardButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        forwardButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        forwardButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/next-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(forwardButton, l10n.getString("ImportFrame.forwardButton.text"));
+        forwardButton.setHorizontalTextPosition(SwingConstants.LEADING);
+        forwardButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 forwardButtonActionPerformed(evt);
             }
         });
@@ -416,50 +430,50 @@ public class ImportFrame extends javax.swing.JFrame {
         progressBar.setString(l10n.getString("ImportFrame.progressBar.string")); // NOI18N
         progressBar.setStringPainted(true);
 
-        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/previous-22.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(backButton, l10n.getString("ImportFrame.backButton.text")); // NOI18N
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/previous-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(backButton, l10n.getString("ImportFrame.backButton.text"));
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(progressBar, GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(forwardButton)
                 .addContainerGap())
-            .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+            .addComponent(cardPanel, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {backButton, forwardButton});
+        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {backButton, forwardButton});
 
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(cardPanel, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                         .addComponent(forwardButton)
                         .addComponent(backButton))
-                    .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {backButton, forwardButton, progressBar});
+        layout.linkSize(SwingConstants.VERTICAL, new Component[] {backButton, forwardButton, progressBar});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+    private void backButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         //parsing
         if (actualCard.equals("browsePanel")) {
             backButton.setVisible(false);
@@ -480,7 +494,7 @@ public class ImportFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_backButtonActionPerformed
     
-    private void forwardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardButtonActionPerformed
+    private void forwardButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_forwardButtonActionPerformed
         //introduction panel
         if (actualCard.equals("applicationPanel")) {
             String nextCard = "browsePanel";
@@ -535,7 +549,7 @@ public class ImportFrame extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_forwardButtonActionPerformed
                 
-    private void validOperatorCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_validOperatorCheckBoxStateChanged
+    private void validOperatorCheckBoxStateChanged(ChangeEvent evt) {//GEN-FIRST:event_validOperatorCheckBoxStateChanged
         if (validOperatorCheckBox.isSelected()) {
             removeInvalidOperators();
         } else {
@@ -551,7 +565,7 @@ public class ImportFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_validOperatorCheckBoxStateChanged
 
-private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
+private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         String file = doBrowseButton();
         if (file != null) {
             fileTextField.setText(file);
@@ -613,33 +627,33 @@ private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel applicationPanel;
-    private javax.swing.JButton backButton;
-    private javax.swing.JButton browseButton;
-    private javax.swing.JPanel browsePanel;
-    private javax.swing.JPanel cardPanel;
-    private javax.swing.JList contactList;
-    private javax.swing.JRadioButton dreamcomSERadioButton;
-    private javax.swing.JLabel encodingLabel;
-    private javax.swing.JRadioButton esmskaRadioButton;
-    private javax.swing.JLabel fileLabel;
-    private javax.swing.JTextField fileTextField;
-    private javax.swing.JButton forwardButton;
-    private javax.swing.ButtonGroup importButtonGroup;
-    private javax.swing.JLabel infoLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton kubikRadioButton;
-    private javax.swing.JLabel problemLabel;
-    private javax.swing.JProgressBar progressBar;
-    private javax.swing.JPanel resultsPanel;
-    private javax.swing.JCheckBox validOperatorCheckBox;
-    private javax.swing.JRadioButton vcardRadioButton;
+    private JPanel applicationPanel;
+    private JButton backButton;
+    private JButton browseButton;
+    private JPanel browsePanel;
+    private JPanel cardPanel;
+    private JList contactList;
+    private JRadioButton dreamcomSERadioButton;
+    private JLabel encodingLabel;
+    private JRadioButton esmskaRadioButton;
+    private JLabel fileLabel;
+    private JTextField fileTextField;
+    private JButton forwardButton;
+    private ButtonGroup importButtonGroup;
+    private JLabel infoLabel;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel22;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel8;
+    private JScrollPane jScrollPane1;
+    private JRadioButton kubikRadioButton;
+    private JLabel problemLabel;
+    private JProgressBar progressBar;
+    private JPanel resultsPanel;
+    private JCheckBox validOperatorCheckBox;
+    private JRadioButton vcardRadioButton;
     // End of variables declaration//GEN-END:variables
     
 }

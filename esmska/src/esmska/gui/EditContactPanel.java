@@ -13,13 +13,26 @@ import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Insets;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import org.jvnet.substance.SubstanceLookAndFeel;
+import org.openide.awt.Mnemonics;
 
 /** Add new or edit current contact
  *
@@ -58,9 +71,9 @@ public class EditContactPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nameTextField = new javax.swing.JTextField();
+        nameTextField = new JTextField();
         nameTextField.requestFocusInWindow();
-        numberTextField = new javax.swing.JTextField() {
+        numberTextField = new JTextField() {
             @Override
             public String getText() {
                 String text = super.getText();
@@ -70,91 +83,91 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         }
         ;
-        operatorComboBox = new esmska.gui.OperatorComboBox();
-        nameLabel = new javax.swing.JLabel();
-        numberLabel = new javax.swing.JLabel();
-        gatewayLabel = new javax.swing.JLabel();
-        suggestOperatorButton = new javax.swing.JButton();
+        operatorComboBox = new OperatorComboBox();
+        nameLabel = new JLabel();
+        numberLabel = new JLabel();
+        gatewayLabel = new JLabel();
+        suggestOperatorButton = new JButton();
 
         nameTextField.setToolTipText(l10n.getString("EditContactPanel.nameTextField.toolTipText")); // NOI18N
-        nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        nameTextField.addFocusListener(new FocusAdapter() {
+            public void focusLost(FocusEvent evt) {
                 nameTextFieldFocusLost(evt);
             }
         });
 
         numberTextField.setColumns(13);
         numberTextField.setToolTipText(l10n.getString("EditContactPanel.numberTextField.toolTipText")); // NOI18N
-        numberTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        numberTextField.addFocusListener(new FocusAdapter() {
+            public void focusLost(FocusEvent evt) {
                 numberTextFieldFocusLost(evt);
             }
         });
-        numberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
+        numberTextField.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
                 numberTextFieldKeyReleased(evt);
             }
         });
 
         nameLabel.setLabelFor(nameTextField);
-        org.openide.awt.Mnemonics.setLocalizedText(nameLabel, l10n.getString("EditContactPanel.nameLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(nameLabel, l10n.getString("EditContactPanel.nameLabel.text")); // NOI18N
         nameLabel.setToolTipText(nameTextField.getToolTipText());
 
         numberLabel.setLabelFor(numberTextField);
-        org.openide.awt.Mnemonics.setLocalizedText(numberLabel, l10n.getString("EditContactPanel.numberLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(numberLabel, l10n.getString("EditContactPanel.numberLabel.text")); // NOI18N
         numberLabel.setToolTipText(numberTextField.getToolTipText());
 
         gatewayLabel.setLabelFor(operatorComboBox);
-        org.openide.awt.Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("EditContactPanel.gatewayLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("EditContactPanel.gatewayLabel.text")); // NOI18N
         gatewayLabel.setToolTipText(operatorComboBox.getToolTipText());
 
-        suggestOperatorButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        suggestOperatorButton.setMargin(new Insets(2, 2, 2, 2));
         suggestOperatorButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addComponent(numberLabel)
                     .addComponent(nameLabel)
                     .addComponent(gatewayLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(operatorComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(suggestOperatorButton))
-                    .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                    .addComponent(numberTextField, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {gatewayLabel, nameLabel, numberLabel});
+        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {gatewayLabel, nameLabel, numberLabel});
 
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(nameLabel)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(numberLabel)
-                    .addComponent(numberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                         .addComponent(gatewayLabel)
-                        .addComponent(operatorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addComponent(suggestOperatorButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {nameTextField, numberTextField});
+        layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, numberTextField});
 
     }// </editor-fold>//GEN-END:initComponents
     
@@ -195,16 +208,16 @@ public class EditContactPanel extends javax.swing.JPanel {
         }
     }
     
-    private void numberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
+    private void numberTextFieldKeyReleased(KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
         //guess operator
         operatorComboBox.selectSuggestedOperator(numberTextField.getText());
     }//GEN-LAST:event_numberTextFieldKeyReleased
 
-    private void nameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
+    private void nameTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
         checkValid(nameTextField);
     }//GEN-LAST:event_nameTextFieldFocusLost
 
-    private void numberTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_numberTextFieldFocusLost
+    private void numberTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_numberTextFieldFocusLost
         checkValid(numberTextField);
     }//GEN-LAST:event_numberTextFieldFocusLost
     
@@ -237,13 +250,13 @@ public class EditContactPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel gatewayLabel;
-    private javax.swing.JLabel nameLabel;
-    private javax.swing.JTextField nameTextField;
-    private javax.swing.JLabel numberLabel;
-    private javax.swing.JTextField numberTextField;
-    private esmska.gui.OperatorComboBox operatorComboBox;
-    private javax.swing.JButton suggestOperatorButton;
+    private JLabel gatewayLabel;
+    private JLabel nameLabel;
+    private JTextField nameTextField;
+    private JLabel numberLabel;
+    private JTextField numberTextField;
+    private OperatorComboBox operatorComboBox;
+    private JButton suggestOperatorButton;
     // End of variables declaration//GEN-END:variables
     
 }
