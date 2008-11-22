@@ -155,19 +155,19 @@ public class OperatorExecutor {
             if (imageBytes == null) {
                 return "";
             }
-
-            ImageIcon image = new ImageIcon(imageBytes);
+            final ImageIcon image = new ImageIcon(imageBytes);
 
             //display dialog
-            final JPanel panel = new JPanel();
-            JLabel label = new JLabel(l10n.getString("OperatorExecutor.recognize_number"),
-                    image, JLabel.CENTER);
-            label.setHorizontalTextPosition(JLabel.CENTER);
-            label.setVerticalTextPosition(JLabel.TOP);
-            panel.add(label);
             FutureTask<String> task = new FutureTask<String>(new Callable<String>() {
                 @Override
                 public String call() {
+                    JPanel panel = new JPanel();
+                    JLabel label = new JLabel(l10n.getString("OperatorExecutor.recognize_number"),
+                            image, JLabel.CENTER);
+                    label.setHorizontalTextPosition(JLabel.CENTER);
+                    label.setVerticalTextPosition(JLabel.TOP);
+                    panel.add(label);
+                    
                     String imageCode = JOptionPane.showInputDialog(MainFrame.getInstance(),
                             panel, null,
                             JOptionPane.QUESTION_MESSAGE);
