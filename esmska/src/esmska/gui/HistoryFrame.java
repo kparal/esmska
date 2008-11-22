@@ -269,11 +269,9 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         deleteButton.setAction(deleteAction);
         deleteButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         resendButton.setAction(resendAction);
         resendButton.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        resendButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
@@ -356,7 +354,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, resendButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {closeButton, deleteButton, resendButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,7 +379,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {deleteButton, resendButton});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {closeButton, deleteButton, resendButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -422,9 +420,9 @@ public class HistoryFrame extends javax.swing.JFrame {
         private final String message = l10n.getString("HistoryFrame.remove_selected");
         
         public DeleteAction() {
-            super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "delete-22.png")));
-            this.putValue(SHORT_DESCRIPTION, l10n.getString("Delete_selected_messages_from_history"));
-            putValue(MNEMONIC_KEY, KeyEvent.VK_D);
+            L10N.setLocalizedText(this, l10n.getString("Delete_"));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "delete-22.png")));
+            putValue(SHORT_DESCRIPTION, l10n.getString("Delete_selected_messages_from_history"));
             this.setEnabled(false);
         }
 
@@ -468,9 +466,9 @@ public class HistoryFrame extends javax.swing.JFrame {
     private class ResendAction extends AbstractAction {
 
         public ResendAction() {
-            super(null, new ImageIcon(HistoryFrame.class.getResource(RES + "send-22.png")));
-            this.putValue(SHORT_DESCRIPTION, l10n.getString("HistoryFrame.resend_message"));
-            putValue(MNEMONIC_KEY, KeyEvent.VK_S);
+            L10N.setLocalizedText(this, l10n.getString("Forward_"));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "send-22.png")));
+            putValue(SHORT_DESCRIPTION, l10n.getString("HistoryFrame.resend_message"));
             this.setEnabled(false);
         }
 
@@ -622,6 +620,10 @@ public class HistoryFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {            //therefore there is timer
                 historyTableSorter.setRowFilter(HistoryRowFilter.this);
+                if (historyTable.getRowCount() > 0) {
+                    historyTable.changeSelection(0, 0, false, false);
+                    historyTable.scrollRectToVisible(historyTable.getCellRect(0, 0, true));
+                }
             }
         });
         public HistoryRowFilter() {

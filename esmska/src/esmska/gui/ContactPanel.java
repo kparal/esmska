@@ -423,10 +423,10 @@ public class ContactPanel extends javax.swing.JPanel {
         
         public RemoveContactAction() {
             super(l10n.getString("Delete_contacts"),
-                    new ImageIcon(ContactPanel.class.getResource(RES + "remove-16.png")));
+                    new ImageIcon(ContactPanel.class.getResource(RES + "delete-16.png")));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Delete_selected_contacts"));
             this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(ContactPanel.class.getResource(RES + "remove-22.png")));
+                    new ImageIcon(ContactPanel.class.getResource(RES + "delete-22.png")));
             this.setEnabled(false);
         }
         @Override
