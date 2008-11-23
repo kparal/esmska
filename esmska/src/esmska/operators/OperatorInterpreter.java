@@ -56,9 +56,11 @@ public class OperatorInterpreter {
      * @throws IntrospectionException when current JRE does not support JavaScript execution
      */
     public OperatorInfo parseInfo(URL script) throws IOException, ScriptException, IntrospectionException {
+        logger.finer("Parsing info of script: " + script.toExternalForm());
         init();
-        if (engine == null)
+        if (engine == null) {
             throw new IntrospectionException("JavaScript execution not supported");
+        }
         Reader reader = null;
         try {
             reader = new InputStreamReader(script.openStream(), "UTF-8");
@@ -82,6 +84,7 @@ public class OperatorInterpreter {
      * @return whether the message was sent successfully
      */
     public boolean sendMessage(Operator operator, Map<OperatorVariable, String> variables) {
+        logger.fine("Sending SMS to: " + operator);
         this.variables = variables;
         init();
         if (operator == null) {
@@ -104,6 +107,7 @@ public class OperatorInterpreter {
 
             //send the message
             sentOk = (Boolean) invocable.invokeFunction("send", new Object[0]);
+            logger.fine("SMS sent ok: " + sentOk);
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Error executing operator script file", ex);
             executor.setErrorMessage(OperatorExecutor.ERROR_UKNOWN);

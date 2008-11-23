@@ -10,12 +10,12 @@ import esmska.utils.L10N;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.GroupLayout;
@@ -33,6 +33,7 @@ import org.openide.awt.Mnemonics;
  */
 public class StatusPanel extends javax.swing.JPanel {
 
+    private static final Logger logger = Logger.getLogger(StatusPanel.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
@@ -189,6 +190,7 @@ public class StatusPanel extends javax.swing.JPanel {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            logger.fine("Showing Log frame...");
             if (logFrame != null && logFrame.isVisible()) {
                 logFrame.requestFocus();
                 logFrame.toFront();

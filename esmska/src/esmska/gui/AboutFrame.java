@@ -237,20 +237,24 @@ public class AboutFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void linkButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_linkButtonActionPerformed
-        if (!Desktop.isDesktopSupported())
+        if (!Desktop.isDesktopSupported()) {
             return;
+        }
         //start browser
         Desktop desktop = Desktop.getDesktop();
+        String url = "http://esmska.googlecode.com/";
         try {
-            desktop.browse(new URL("http://esmska.googlecode.com/").toURI());
+            logger.fine("Browsing URL: " + url);
+            desktop.browse(new URL(url).toURI());
         } catch (Exception e) {
-            logger.log(Level.WARNING, "Could not launch browser", e);
+            logger.log(Level.WARNING, "Could not browse URL: " + url, e);
         }
     }//GEN-LAST:event_linkButtonActionPerformed
         
     private void licenseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         //show licence
         try {
+            logger.fine("Showing license...");
             String license = IOUtils.toString(
                     getClass().getResourceAsStream(RES + "license.txt"), "UTF-8");
             final String agpl = IOUtils.toString(
@@ -271,6 +275,7 @@ public class AboutFrame extends javax.swing.JFrame {
                 @Override
                 public void hyperlinkUpdate(final HyperlinkEvent e) {
                     if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                        logger.fine("Showing GNU AGPL...");
                         tp.setText(null);
                         tp.setContentType("text/plain");
                         tp.setText(agpl);
@@ -294,6 +299,7 @@ public class AboutFrame extends javax.swing.JFrame {
     private void creditsButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_creditsButtonActionPerformed
         //show credits
         try {
+            logger.fine("Showing credits...");
             String credits = IOUtils.toString(
                     getClass().getResourceAsStream(RES + "credits.html"), "UTF-8");
             String translators = l10n.getString("Translators");
@@ -326,6 +332,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED &&
                             Desktop.isDesktopSupported()) {
                         try {
+                            logger.fine("Browsing URL: " + e.getURL());
                             Desktop.getDesktop().browse(e.getURL().toURI());
                         } catch (Exception ex) {
                             logger.log(Level.SEVERE, "Can't browse hyperlink: " + e.getURL(), ex);
@@ -352,14 +359,17 @@ public class AboutFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void supportButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_supportButtonActionPerformed
-        if (!Desktop.isDesktopSupported())
+        if (!Desktop.isDesktopSupported()) {
             return;
+        }
         //start browser
         Desktop desktop = Desktop.getDesktop();
+        String url = l10n.getString("AboutFrame.supportButton.link");
         try {
-            desktop.browse(new URL(l10n.getString("AboutFrame.supportButton.link")).toURI());
+            logger.fine("Browsing URL: " + url);
+            desktop.browse(new URL(url).toURI());
         } catch (Exception e) {
-            logger.log(Level.WARNING, "Could not launch browser", e);
+            logger.log(Level.WARNING, "Could not browse URL: " + url, e);
         }
 }//GEN-LAST:event_supportButtonActionPerformed
     

@@ -23,6 +23,7 @@ import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.JavaType;
 import esmska.utils.OSType;
+import java.util.logging.Logger;
 import javax.swing.LookAndFeel;
 import org.jvnet.lafwidget.LafWidget;
 import org.jvnet.substance.skin.SaharaSkin;
@@ -35,10 +36,13 @@ public class ThemeManager {
     public enum LAF {
         SYSTEM, CROSSPLATFORM, GTK, JGOODIES, SUBSTANCE
     }
-    
+
+    private static final Logger logger = Logger.getLogger(ThemeManager.class.getName());
+
+    /** Disabled constructor */
     private ThemeManager() {
     }
-    
+
     /* Set look and feel found in configuration
      * @throws Throwable when chosen look and feel can't be set
      */
@@ -92,6 +96,8 @@ public class ThemeManager {
             default:
                 throw new IllegalArgumentException("Unknown LaF name");
         }
+
+        logger.fine("New LaF set: " + UIManager.getLookAndFeel());
     }
     
     /** Returns whether GTK is current look and feel */
@@ -152,7 +158,8 @@ public class ThemeManager {
         if (KDEVersion != null && KDEVersion.startsWith("3")) {
             laf = LAF.SYSTEM;
         }
-        
+
+        logger.finer("Suggested LaF: " + laf);
         return laf;
     }
     

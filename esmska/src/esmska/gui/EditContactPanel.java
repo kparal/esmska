@@ -8,7 +8,6 @@ package esmska.gui;
 
 import esmska.ThemeManager;
 import esmska.data.Config;
-import esmska.gui.FormChecker;
 import esmska.data.Contact;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
@@ -20,6 +19,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -39,6 +39,7 @@ import org.openide.awt.Mnemonics;
  * @author  ripper
  */
 public class EditContactPanel extends javax.swing.JPanel {
+    private static final Logger logger = Logger.getLogger(EditContactPanel.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Border fieldBorder = new JTextField().getBorder();
     private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);

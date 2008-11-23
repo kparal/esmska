@@ -152,6 +152,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         //on Mac, move program menu items to system menu
         if (OSType.isMac()) {
+            logger.fine("Running on Mac OS, hiding some menu items...");
             try {
                 ActionBean bean = new ActionBean();
                 bean.setQuitAction(quitAction);
@@ -196,6 +197,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         //check for valid operators
         if (PersistenceManager.getOperators().size() <= 0) {
+            logger.warning("No usable operators found");
             JOptionPane.showMessageDialog(null,
                     new JLabel(l10n.getString("MainFrame.no_operators")),
                     null, JOptionPane.ERROR_MESSAGE);
@@ -226,8 +228,10 @@ public class MainFrame extends javax.swing.JFrame {
     /** Start the mainframe and let it be visible according to user preferences
      * (visible on the screen or hidden to notification area) */
     public void startAndShow() {
+        logger.fine("Showing mainframe...");
         //if the window should be minimized into notification area
         if (config.isStartMinimized() && NotificationIcon.isInstalled()) {
+            logger.fine("Starting hidden in notification icon");
             //hide splashscreen, otherwise on Windows it stays visible until mainframe is shown
             SplashScreen splash = SplashScreen.getSplashScreen();
             if (splash != null && splash.isVisible()) {
@@ -298,12 +302,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         horizontalSplitPane.setBorder(null);
         horizontalSplitPane.setResizeWeight(0.5);
+        horizontalSplitPane.setContinuousLayout(true);
         horizontalSplitPane.setOneTouchExpandable(true);
         horizontalSplitPane.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         verticalSplitPane.setBorder(null);
         verticalSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         verticalSplitPane.setResizeWeight(1.0);
+        verticalSplitPane.setContinuousLayout(true);
         verticalSplitPane.setOneTouchExpandable(true);
         verticalSplitPane.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
@@ -497,6 +503,7 @@ public class MainFrame extends javax.swing.JFrame {
         //if user clicked on close button (event non-null) and notification icon
         //installed or on mac, just hide the main window
         if (evt != null && (NotificationIcon.isInstalled() || OSType.isMac())) {
+            logger.fine("Hiding main window");
             if (OSType.isMac()) {
                 this.setVisible(false);
             } else {
@@ -504,7 +511,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
             return;
         }
-        
+
+        logger.fine("Closing main window...");
         //save all settings
         try {
             saveConfig();
@@ -521,7 +529,9 @@ public class MainFrame extends javax.swing.JFrame {
                         l10n.getString("MainFrame.cant_save_config"),
                         null, JOptionPane.WARNING_MESSAGE);
             }
-            System.exit(saveOk ? 0 : 1);
+            int returnCode = saveOk ? 0 : 1;
+            logger.fine("Exiting program with return code: " + returnCode);
+            System.exit(returnCode);
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -531,10 +541,12 @@ private void faqMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_faqM
     }
     //start browser
     Desktop desktop = Desktop.getDesktop();
+    String url = "http://code.google.com/p/esmska/wiki/FAQ";
     try {
-        desktop.browse(new URL("http://code.google.com/p/esmska/wiki/FAQ").toURI());
+        logger.fine("Browsing URL: " + url);
+        desktop.browse(new URL(url).toURI());
     } catch (Exception e) {
-        logger.log(Level.WARNING, "Could not launch browser", e);
+        logger.log(Level.WARNING, "Could not browse URL: " + url, e);
     }
 }//GEN-LAST:event_faqMenuItemActionPerformed
 
@@ -544,10 +556,12 @@ private void getHelpMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
     }
     //start browser
     Desktop desktop = Desktop.getDesktop();
+    String url = "https://answers.launchpad.net/esmska";
     try {
-        desktop.browse(new URL("https://answers.launchpad.net/esmska").toURI());
+        logger.fine("Browsing URL: " + url);
+        desktop.browse(new URL(url).toURI());
     } catch (Exception e) {
-        logger.log(Level.WARNING, "Could not launch browser", e);
+        logger.log(Level.WARNING, "Could not browse URL: " + url, e);
     }
 }//GEN-LAST:event_getHelpMenuItemActionPerformed
 
@@ -557,10 +571,12 @@ private void translateMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:even
     }
     //start browser
     Desktop desktop = Desktop.getDesktop();
+    String url = "https://translations.launchpad.net/esmska";
     try {
-        desktop.browse(new URL("https://translations.launchpad.net/esmska").toURI());
+        logger.fine("Browsing URL: " + url);
+        desktop.browse(new URL(url).toURI());
     } catch (Exception e) {
-        logger.log(Level.WARNING, "Could not launch browser", e);
+        logger.log(Level.WARNING, "Could not browse URL: " + url, e);
     }
 }//GEN-LAST:event_translateMenuItemActionPerformed
 
@@ -570,15 +586,18 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
     }
     //start browser
     Desktop desktop = Desktop.getDesktop();
+    String url = "http://code.google.com/p/esmska/wiki/Issues";
     try {
-        desktop.browse(new URL("http://code.google.com/p/esmska/wiki/Issues").toURI());
+        logger.fine("Browsing URL: " + url);
+        desktop.browse(new URL(url).toURI());
     } catch (Exception e) {
-        logger.log(Level.WARNING, "Could not launch browser", e);
+        logger.log(Level.WARNING, "Could not browse URL: " + url, e);
     }
 }//GEN-LAST:event_problemMenuItemActionPerformed
     
     /** Notifies about change in sms queue */
     public void smsProcessed(SMS sms) {
+        logger.fine("SMS processed: " + sms.toDebugString());
         if (sms.getStatus() == SMS.Status.SENT_OK) {
             statusPanel.setStatusMessage(
                     MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
@@ -621,6 +640,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
             }
             
             //show the dialog
+            logger.fine("Showing reason why SMS sending failed...");
             MacUtils.setDocumentModalDialog(dialog);
             dialog.setResizable(true);
             dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
@@ -690,6 +710,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
     
     /** load program configuration */
     private void loadConfig() {
+        logger.finer("Initializing according to config...");
         //set frame layout
         if (!config.isForgetLayout()) {
             Dimension mainDimension = config.getMainDimension();
@@ -759,6 +780,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
             limitCal.add(Calendar.DAY_OF_MONTH, -config.getReducedHistoryCount());
             Date limit = limitCal.getTime();
             //traverse through history and erase all older records than the limit time
+            logger.fine("Erasing all history records older than: " + limit);
             ListIterator<Record> iter = records.listIterator();
             while (iter.hasNext()) {
                 Record record = iter.next();
@@ -808,6 +830,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            logger.fine("Showing About frame...");
             if (aboutFrame != null && aboutFrame.isVisible()) {
                 aboutFrame.requestFocus();
                 aboutFrame.toFront();
@@ -831,6 +854,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            logger.fine("Quitting application...");
             MainFrame.this.formWindowClosing(null);
             System.exit(0);
         }
@@ -852,6 +876,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            logger.fine("Showing config frame...");
             if (configFrame != null && configFrame.isVisible()) {
                 configFrame.requestFocus();
                 configFrame.toFront();
@@ -878,6 +903,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            logger.fine("Showing import contacts dialog...");
             if (importFrame != null && importFrame.isVisible()) {
                 importFrame.requestFocus();
                 importFrame.toFront();
@@ -902,6 +928,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            logger.fine("Showing export contacts dialog...");
             ExportManager.exportContacts(MainFrame.this, contacts);
         }
     }
@@ -919,6 +946,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            logger.fine("Showing history frame...");
             if (historyFrame != null && historyFrame.isVisible()) {
                 historyFrame.requestFocus();
                 historyFrame.toFront();

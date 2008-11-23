@@ -57,6 +57,7 @@ import java.util.ListIterator;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -76,7 +77,8 @@ public class QueuePanel extends javax.swing.JPanel {
     public static final int ACTION_QUEUE_PAUSE_CHANGED = 1;
     /** A new message is ready to be sent*/
     public static final int ACTION_NEW_SMS_READY = 2;
-    
+
+    private static final Logger logger = Logger.getLogger(QueuePanel.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final List<SMS> smsQueue = PersistenceManager.getQueue();
@@ -198,6 +200,7 @@ public class QueuePanel extends javax.swing.JPanel {
      * @param sms SMS that is currently being sent
      */
     public void markSMSSending(SMS sms) {
+        logger.fine("Marking this SMS as currently being sent: " + sms.toDebugString());
         sendingSMS.add(sms);
         int index = queueListModel.indexOf(sms);
         if (index >= 0) {
@@ -436,8 +439,8 @@ public class QueuePanel extends javax.swing.JPanel {
                         .addComponent(editButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
-                        .addGap(0, 3, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -512,6 +515,7 @@ public class QueuePanel extends javax.swing.JPanel {
             IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
             
             //fire event
+            logger.fine("SMS requested for editing: " + sms.toDebugString());
             actionSupport.fireActionPerformed(ACTION_REQUEST_EDIT_SMS, null);
         }
     }
@@ -619,6 +623,7 @@ public class QueuePanel extends javax.swing.JPanel {
             pauseButton.setText(null);
             
             //fire event
+            logger.fine("Queue is now: " + (paused?"paused":"unpaused"));
             actionSupport.fireActionPerformed(ACTION_QUEUE_PAUSE_CHANGED, null);
             if (!paused && !readySMS.isEmpty()) {
                 actionSupport.fireActionPerformed(ACTION_NEW_SMS_READY, null);
@@ -672,7 +677,8 @@ public class QueuePanel extends javax.swing.JPanel {
                 smsDelay.clear();
                 //update the timer
                 handleTimerStatus();
-            
+
+                logger.fine("Added new SMS to queue: " + element.toDebugString());
                 int index = smsQueue.indexOf(element);
                 fireIntervalAdded(this, index, index);
             }
@@ -684,6 +690,7 @@ public class QueuePanel extends javax.swing.JPanel {
             int index = smsQueue.indexOf(element);
             boolean removed = smsQueue.remove(element);
             if (removed) {
+                logger.fine("Removed SMS from queue: " + element.toDebugString());
                 //update queue collections
                 readySMS.remove(element);
                 sendingSMS.remove(element);

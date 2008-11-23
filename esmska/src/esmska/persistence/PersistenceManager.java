@@ -117,7 +117,8 @@ public class PersistenceManager {
         if (persistenceManager != null) {
             throw new IllegalStateException("Persistence manager already exists");
         }
-        
+        logger.fine("Setting new userdir path: " + path);
+
         userDir = new File(path);
         configFile = new File(userDir, CONFIG_FILENAME);
         contactsFile = new File(userDir, CONTACTS_FILENAME);
@@ -173,6 +174,7 @@ public class PersistenceManager {
     
     /** Save program configuration */
     public void saveConfig() throws IOException {
+        logger.fine("Saving config...");
         //store current program version into config
         config.setVersion(Config.getLatestVersion());
         
@@ -182,10 +184,12 @@ public class PersistenceManager {
         xmlEncoder.writeObject(config);
         xmlEncoder.close();
         moveFileSafely(temp, configFile);
+        logger.finer("Saved config into file: " + configFile.getAbsolutePath());
     }
     
     /** Load program configuration */
     public void loadConfig() throws IOException {
+        logger.fine("Loading config...");
         if (configFile.exists()) {
             XMLDecoder xmlDecoder = new XMLDecoder(
                     new BufferedInputStream(new FileInputStream(configFile)));
@@ -199,13 +203,16 @@ public class PersistenceManager {
     
     /** Save contacts */
     public void saveContacts() throws IOException {
+        logger.fine("Saving contacts...");
         File temp = createTempFile();
         ExportManager.exportContacts(contacts, temp);
         moveFileSafely(temp, contactsFile);
+        logger.finer("Saved contacts into file: " + contactsFile.getAbsolutePath());
     }
        
     /** Load contacts */
     public void loadContacts() throws Exception {
+        logger.fine("Loading contacts...");
         if (contactsFile.exists()) {
             ArrayList<Contact> newContacts = ImportManager.importContacts(contactsFile,
                     ContactParser.ContactType.ESMSKA_FILE);
@@ -216,13 +223,16 @@ public class PersistenceManager {
     
     /** Save sms queue */
     public void saveQueue() throws IOException {
+        logger.fine("Saving queue...");
         File temp = createTempFile();
         ExportManager.exportQueue(queue, temp);
         moveFileSafely(temp, queueFile);
+        logger.finer("Saved queue into file: " + queueFile.getAbsolutePath());
     }
     
     /** Load sms queue */
     public void loadQueue() throws IOException {
+        logger.fine("Loading queue");
         if (queueFile.exists()) {
             ArrayList<SMS> newQueue = ImportManager.importQueue(queueFile);
             queue.clear();
@@ -232,13 +242,16 @@ public class PersistenceManager {
     
     /** Save sms history */
     public void saveHistory() throws IOException {
+        logger.fine("Saving history...");
         File temp = createTempFile();
         ExportManager.exportHistory(history.getRecords(), temp);
         moveFileSafely(temp, historyFile);
+        logger.finer("Saved history into file: " + historyFile.getAbsolutePath());
     }
     
     /** Load sms history */
     public void loadHistory() throws Exception {
+        logger.fine("Loading history...");
         if (historyFile.exists()) {
             ArrayList<History.Record> records = ImportManager.importHistory(historyFile);
             history.clearRecords();
@@ -248,13 +261,16 @@ public class PersistenceManager {
     
     /** Save keyring. */
     public void saveKeyring() throws Exception {
+        logger.fine("Saving keyring...");
         File temp = createTempFile();
         ExportManager.exportKeyring(keyring, temp);
         moveFileSafely(temp, keyringFile);
+        logger.finer("Saved keyring into file: " + keyringFile.getAbsolutePath());
     }
     
     /** Load keyring. */
     public void loadKeyring() throws Exception {
+        logger.fine("Loading keyring...");
         if (keyringFile.exists()) {
             keyring = ImportManager.importKeyring(keyringFile);
         }
@@ -265,6 +281,7 @@ public class PersistenceManager {
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
     public void loadOperators() throws IOException, IntrospectionException {
+        logger.fine("Loading operators...");
         TreeSet<Operator> newOperators = new TreeSet<Operator>();
         if (operatorDir.exists()) {
             newOperators = ImportManager.importOperators(operatorDir);

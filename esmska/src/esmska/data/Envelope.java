@@ -17,6 +17,7 @@ import esmska.persistence.PersistenceManager;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.text.Normalizer;
+import java.util.logging.Logger;
 
 /** Class for preparing attributes of sms (single or multiple)
  *
@@ -24,6 +25,7 @@ import java.text.Normalizer;
  */
 public class Envelope {
     private static final Config config = PersistenceManager.getConfig();
+    private static final Logger logger = Logger.getLogger(Envelope.class.getName());
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
 
@@ -47,8 +49,9 @@ public class Envelope {
     /** set text of sms */
     public void setText(String text) {
         String oldText = this.text;
-        if (config.isRemoveAccents())
+        if (config.isRemoveAccents()) {
             text = removeAccents(text);
+        }
         this.text = text;
         changeSupport.firePropertyChange("text", oldText, text);
     }
@@ -70,8 +73,9 @@ public class Envelope {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());
-            if (operator == null)
+            if (operator == null) {
                 continue;
+            }
             int value = operator.getMaxChars() * operator.getMaxParts();
             value -= getSignatureLength(c); //subtract signature length
             min = Math.min(min,value);
@@ -84,8 +88,9 @@ public class Envelope {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());
-            if (operator == null)
+            if (operator == null) {
                 continue;
+            }
             min = Math.min(min, operator.getSMSLength());
         }
         return min;
@@ -96,16 +101,18 @@ public class Envelope {
         int worstOperator = Integer.MAX_VALUE;
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());
-            if (operator == null)
+            if (operator == null) {
                 continue;
+            }
             worstOperator = Math.min(worstOperator,
                     operator.getSMSLength());
         }
         
         chars += getSignatureLength();
         int count = chars / worstOperator;
-        if (chars % worstOperator != 0)
+        if (chars % worstOperator != 0) {
             count++;
+        }
         return count;
     }
     
@@ -121,8 +128,9 @@ public class Envelope {
         //find maximum signature length
         for (Contact c : contacts) {
             Operator operator = OperatorUtil.getOperator(c.getOperator());
-            if (operator == null)
+            if (operator == null) {
                 continue;
+            }
             worstSignature = Math.max(worstSignature, 
                     operator.getSignatureExtraLength());
         }
@@ -156,6 +164,8 @@ public class Envelope {
                 list.add(sms);
             }
         }
+        logger.fine("Envelope specified for " + contacts.size() + 
+                " contact(s) generated " + list.size() + " SMS(s)");
         return list;
     }
     

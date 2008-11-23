@@ -107,6 +107,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         //add development panel in development versions
         if (Config.getLatestVersion().contains("beta")) {
+            logger.finer("Development version, showing development tab");
             tabbedPane.addTab("Devel", develPanel);
         }
         
@@ -155,8 +156,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         if (laf.equals(LAF.JGOODIES)) {
             ArrayList<String> themes = new ArrayList<String>();
-            for (Object o : PlasticLookAndFeel.getInstalledThemes())
-                themes.add(((PlasticTheme)o).getName());
+            for (Object o : PlasticLookAndFeel.getInstalledThemes()) {
+                themes.add(((PlasticTheme) o).getName());
+            }
             themeComboBox.setModel(new DefaultComboBoxModel(themes.toArray()));
             themeComboBox.setSelectedItem(config.getLafJGoodiesTheme());
             themeComboBox.setEnabled(true);
@@ -188,9 +190,13 @@ public class ConfigFrame extends javax.swing.JFrame {
     
     /** Reaction for operator key (login, password) change */
     private void updateKeyring() {
-        Operator operator = operatorComboBox.getSelectedOperator();
-        if (operator == null)
+        if (!fullyInicialized) {
             return;
+        }
+        Operator operator = operatorComboBox.getSelectedOperator();
+        if (operator == null) {
+            return;
+        }
         
         String[] key = new String[]{loginTextField.getText(), 
             new String(passwordField.getPassword())};
@@ -206,6 +212,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     
     /** Reaction to proxy configuration change */
     private void updateProxy() {
+        if (!fullyInicialized) {
+            return;
+        }
         boolean useProxy = useProxyCheckBox.isSelected();
         boolean sameProxy = sameProxyCheckBox.isSelected();
         if (useProxy) {
@@ -1011,6 +1020,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         //update skin in realtime
         if (fullyInicialized && lafWhenLoaded.equals(lafComboBox.getSelectedItem())) {
+            logger.fine("Changing LaF theme in realtime...");
             try {
                 ThemeManager.setLaF();
                 SwingUtilities.updateComponentTreeUI(MainFrame.getInstance());
@@ -1044,6 +1054,8 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
+        boolean temp = fullyInicialized;
+        fullyInicialized = false;
         Operator operator = operatorComboBox.getSelectedOperator();
         String[] key = keyring.getKey(operator != null ? operator.getName() : null);
         if (key == null) {
@@ -1053,6 +1065,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             loginTextField.setText(key[0]);
             passwordField.setText(key[1]);
         }
+        fullyInicialized = temp;
     }//GEN-LAST:event_operatorComboBoxItemStateChanged
 
     private void clearKeyringButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
@@ -1097,7 +1110,7 @@ private void notificationAreaCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
 
 private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_advancedCheckBoxActionPerformed
     boolean showAdvanced = advancedCheckBox.isSelected();
-    
+
     checkUpdatesCheckBox.setVisible(showAdvanced);
     windowDecorationsCheckBox.setVisible(showAdvanced);
     windowCenteredCheckBox.setVisible(showAdvanced);

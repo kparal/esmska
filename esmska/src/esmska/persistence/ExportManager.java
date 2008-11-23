@@ -71,6 +71,7 @@ public class ExportManager {
     
     /** Export contacts with info and file chooser dialog */
     public static void exportContacts(Component parent, Collection<Contact> contacts) {
+        logger.finer("About to export " + contacts.size() + " contacts");
         //show info
         String message = l10n.getString("ExportManager.export_info");
         JOptionPane.showMessageDialog(parent,new JLabel(message),l10n.getString("ExportManager.contact_export"),
@@ -92,9 +93,11 @@ public class ExportManager {
         }
         
         File file = chooser.getSelectedFile();
-        
+        logger.finer("File chosen for contacts export: " + file.getAbsolutePath());
+
         //check if file can be written
         if (file.exists() && !file.canWrite()) {
+            logger.info("File '" + file.getAbsolutePath() + "' can't be written");
             JOptionPane.showMessageDialog(parent,
                     MessageFormat.format(l10n.getString("ExportManager.cant_write"), file.getAbsolutePath()),
                     null, JOptionPane.ERROR_MESSAGE);
@@ -126,6 +129,7 @@ public class ExportManager {
     /** Export contacts to csv file */
     public static void exportContacts(Collection<Contact> contacts, File file)
     throws IOException {
+        logger.finer("Exporting " + contacts.size() + " contacts to CSV file: " + file.getAbsolutePath());
         CsvWriter writer = null;
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
@@ -147,6 +151,7 @@ public class ExportManager {
     /** Export contacts to vCard file */
     public static void exportContactsToVCard(Collection<Contact> contacts, File file)
             throws IOException {
+        logger.finer("Exporting " + contacts.size() + " contacts to vCard file: " + file.getAbsolutePath());
         OutputStream output = null;
         
         try {
@@ -191,6 +196,7 @@ public class ExportManager {
 
     /** Export sms queue to file */
     public static void exportQueue(Collection<SMS> queue, File file) throws IOException {
+        logger.finer("Exporting queue of " + queue.size() + " SMSs to file: " + file.getAbsolutePath());
         CsvWriter writer = null;
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
@@ -214,6 +220,7 @@ public class ExportManager {
     
     /** Export sms history to file */
     public static void exportHistory(Collection<History.Record> history, File file) throws IOException {
+        logger.finer("Exporting history of " + history.size() + " records to file: " + file.getAbsolutePath());
         CsvWriter writer = null;
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
                 DateFormat.LONG, Locale.ROOT);
@@ -247,6 +254,7 @@ public class ExportManager {
      */
     public static void exportKeyring(Keyring keyring, File file)
             throws IOException, GeneralSecurityException {
+        logger.finer("Exporting keyring to file: " + file.getAbsolutePath());
         CsvWriter writer = null;
         try {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.PrivilegedActionException;
 import java.text.Collator;
+import java.util.logging.Logger;
 import javax.script.ScriptException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -21,6 +22,7 @@ import javax.swing.ImageIcon;
  */
 public class DefaultOperator implements Operator {
 
+    private static final Logger logger = Logger.getLogger(DefaultOperator.class.getName());
     private static final OperatorInterpreter interpreter = new OperatorInterpreter();
     private URL script;
     private String name, version, maintainer, countryPrefix;
@@ -69,6 +71,8 @@ public class DefaultOperator implements Operator {
         if (icon.getIconWidth() <= 0) { //non-existing icon, zero-sized image
             icon = Icons.OPERATOR_DEFAULT;
         }
+
+        logger.finer("Created new operator: " + toString());
     }
 
     @Override
@@ -92,6 +96,11 @@ public class DefaultOperator implements Operator {
         }
         Operator o = (Operator) obj;
         return this.compareTo(o) == 0;
+    }
+
+    @Override
+    public String toString() {
+        return name + " [version=" + version + "]";
     }
 
     @Override

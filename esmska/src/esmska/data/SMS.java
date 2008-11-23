@@ -9,6 +9,9 @@
 
 package esmska.data;
 
+import esmska.utils.LogUtils;
+import esmska.utils.Nullator;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /** SMS entity class
@@ -16,6 +19,8 @@ import javax.swing.ImageIcon;
  * @author ripper
  */
 public class SMS {
+    private static final Logger logger = Logger.getLogger(SMS.class.getName());
+
     private String number; //recipient number
     private String name; //recipient name
     private String text; //message text
@@ -115,10 +120,12 @@ public class SMS {
     
     public void setStatus(Status status) {
         this.status = status;
+        logger.finer("SMS status changed: " + toDebugString());
     }
     
     public void setErrMsg(String errMsg) {
         this.errMsg = errMsg;
+        logger.finer("SMS error message changed: " + toDebugString());
     }
     
     public void setName(String name) {
@@ -127,11 +134,18 @@ public class SMS {
 
     public void setOperatorMsg(String operatorMsg) {
         this.operatorMsg = operatorMsg;
+        logger.finer("SMS operator message changed: " + toDebugString());
     }
     // </editor-fold>
     
     @Override
     public String toString() {
-        return getName()!=null&&!getName().equals("")?getName():getNumber();
+        return !Nullator.isEmpty(getName())?getName():getNumber();
+    }
+
+    public String toDebugString() {
+        return "[name=" + name + ", number=" + LogUtils.anonymizeNumber(number) +
+                ", operator=" + operator + ", status=" + status + ", operatorMsg=" +
+                operatorMsg + ", errMsg=" + errMsg + "]";
     }
 }

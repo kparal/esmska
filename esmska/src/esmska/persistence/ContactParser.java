@@ -22,6 +22,7 @@ import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.utils.Nullator;
 import java.io.FileInputStream;
+import java.util.logging.Logger;
 import net.wimpi.pim.Pim;
 import net.wimpi.pim.contact.io.ContactUnmarshaller;
 import net.wimpi.pim.contact.model.Communications;
@@ -45,7 +46,8 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
         /** vCard file format (.vcard, .vcf) */
         VCARD_FILE
     }
-    
+
+    private static final Logger logger = Logger.getLogger(ContactParser.class.getName());
     private static final Config config = PersistenceManager.getConfig();
     private File file;
     private ContactType type;
@@ -79,6 +81,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
     
     /** parse csv file and return contacts */
     private ArrayList<Contact> parseCSV() throws IOException {
+        logger.finer("Parsing CSV file '" + file + "' as type " + type);
         contacts.clear();
         
         Charset charset = Charset.forName("UTF-8");
@@ -162,12 +165,14 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                 reader.close();
             }
         }
-        
+
+        logger.finer("Parsed " + contacts.size() + " contacts");
         return contacts;
     }
     
     /** parse vcard file and return contacts */
     private ArrayList<Contact> parseVCARD() throws IOException {
+        logger.finer("Parsing CSV file '" + file + "' as type " + type);
         contacts.clear();
         
         ContactIOFactory ciof = Pim.getContactIOFactory();
@@ -249,7 +254,8 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                 input.close();
             }
         }
-        
+
+        logger.finer("Parsed " + contacts.size() + " contacts");
         return contacts;
     }
 }

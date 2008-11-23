@@ -4,11 +4,15 @@
  */
 package esmska.transfer;
 
+import java.util.logging.Logger;
+
 /** Sets system-wide internet proxies.
  * 
  * @author ripper
  */
 public class ProxyManager {
+
+    private static final Logger logger = Logger.getLogger(ProxyManager.class.getName());
 
     /** Set system-wide proxy.
      * 
@@ -40,5 +44,8 @@ public class ProxyManager {
         proxy = (socksProxy == null ? new String[0] : socksProxy.split(":"));
         System.setProperty("socksProxyHost", (proxy.length > 0 ? proxy[0] : ""));
         System.setProperty("socksProxyPort", (proxy.length > 1 ? proxy[1] : ""));
+
+        logger.fine("Network proxy set - httpProxy: " + httpProxy +
+                ", httpsProxy: " + httpsProxy + ", socksProxy: " + socksProxy);
     }
 }

@@ -18,6 +18,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
@@ -34,6 +35,7 @@ import javax.swing.text.JTextComponent;
  * @author ripper
  */
 public class OperatorComboBox extends JComboBox {
+    private static final Logger logger = Logger.getLogger(OperatorComboBox.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final TreeSet<Operator> operators = PersistenceManager.getOperators();

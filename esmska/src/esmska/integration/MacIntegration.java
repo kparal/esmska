@@ -86,7 +86,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     public void handleOpenApplication(ApplicationEvent e) {
         e.setHandled(true);
 
-        // we are using different l&f, so there is no need to strict use of HIG
+        // if we are using different l&f there is no need to strict use of HIG
         if (!ThemeManager.isAquaCurrentLaF()) {
             return;
         }

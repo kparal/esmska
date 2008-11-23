@@ -48,19 +48,21 @@ public class Main {
         if (!JavaType.isSupported()) {
             logger.severe(l10n.getString("Main.unsupported_java"));
         }
-        
+
         //parse commandline arguments
         CommandLineParser clp = new CommandLineParser();
         if (! clp.parseArgs(args)) {
-          System.exit(1);
+            System.exit(1);
         }
-        configPath = clp.getConfigPath();
-        
+        logger.fine("Esmska " + Config.getLatestVersion() + " starting...");
+
         //remember Mac UI for MenuBar from default l&f
         String macBarUI = UIManager.getString("MenuBarUI");
         
         //portable mode
+        configPath = clp.getConfigPath();
         if (clp.isPortable() && configPath == null) {
+            logger.fine("Entering portable mode");
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception ex) {
@@ -74,15 +76,16 @@ public class Main {
             chooser.setMultiSelectionEnabled(false);
             int result = chooser.showOpenDialog(null);
             if (result == JFileChooser.APPROVE_OPTION) {
-              configPath = chooser.getSelectedFile().getPath();
+                configPath = chooser.getSelectedFile().getPath();
+                logger.config("New config path: " + configPath);
             }
         }
-        
+
         //load user files
         PersistenceManager pm = null;
         try {
             if (configPath != null) {
-              PersistenceManager.setUserDir(configPath);
+                PersistenceManager.setUserDir(configPath);
             }
             pm = PersistenceManager.getInstance();
             try {
@@ -140,8 +143,9 @@ public class Main {
             }
         }
 
-        //do some incialization if this is the first run
+        //do some initialization if this is the first run
         if (Nullator.isEmpty(PersistenceManager.getConfig().getVersion())) { //first run means version is empty
+            logger.fine("First run, doing initialization...");
             //set country prefix from locale
             PersistenceManager.getConfig().setCountryPrefix(
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
@@ -172,6 +176,7 @@ public class Main {
         
         //set MenuBar usage on Mac OS
         if (macBarUI != null && OSType.isMac()) {
+            logger.fine("Setting Mac OS UI");
             UIManager.put("MenuBarUI", macBarUI);
         }
         

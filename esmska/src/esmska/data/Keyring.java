@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.logging.Logger;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
@@ -21,6 +22,7 @@ import org.apache.commons.codec.binary.Base64;
  * @author ripper
  */
 public class Keyring {
+    private static final Logger logger = Logger.getLogger(Keyring.class.getName());
 
     /** AES passphrase */
     private static final byte[] passphrase = new byte[]{
@@ -56,6 +58,7 @@ public class Keyring {
         }
 
         keyring.put(operatorName, key);
+        logger.finer("New keyring key added: [operatorName=" + operatorName + "]");
     }
 
     /** Put keys for more operators. If a key for particular operator already exists,
@@ -66,7 +69,7 @@ public class Keyring {
      */
     public void putKeys(Map<String, String[]> keys) {
         for (Entry<String, String[]> entry : keys.entrySet()) {
-            keyring.put(entry.getKey(), entry.getValue());
+            putKey(entry.getKey(), entry.getValue());
         }
     }
 
@@ -75,6 +78,7 @@ public class Keyring {
      */
     public void removeKey(String operatorName) {
         keyring.remove(operatorName);
+        logger.finer("A keyring key removed: [operatorName=" + operatorName + "]");
     }
 
     /** Get set of all operator names, which are in the keyring.
@@ -89,6 +93,7 @@ public class Keyring {
      */
     public void clearKeys() {
         keyring.clear();
+        logger.finer("All keyring keys removed");
     }
 
     /** Encrypt input string. The string is encrypted using AES encryption with

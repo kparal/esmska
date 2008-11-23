@@ -42,6 +42,7 @@ public class UpdateChecker {
     /** Checks for updates and if updates are found notifies all added listeners
      */
     public void checkForUpdates() {
+        logger.fine("Checking for program updates...");
         SwingWorker updateCheckerWorker = new UpdateCheckerWorker();
         updateCheckerWorker.execute();
     }
@@ -58,8 +59,9 @@ public class UpdateChecker {
         if (matcher.find()) {
             downloadedVersion = matcher.group(1);
         }
+        logger.finer("Found last online program version: " + downloadedVersion);
         String currentVersion = Config.getLatestVersion();
-        
+
         return compareVersions(downloadedVersion, currentVersion) > 0;
     }
     
@@ -128,6 +130,7 @@ public class UpdateChecker {
 
         @Override
         protected void done() {
+            logger.fine("Found program update: " + updateAvailable);
             if (updateAvailable) {
                 actionSupport.fireActionPerformed(ACTION_UPDATE_FOUND, null);
             }

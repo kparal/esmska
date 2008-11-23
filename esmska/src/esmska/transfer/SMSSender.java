@@ -63,7 +63,7 @@ public class SMSSender {
     /** Send new ready SMS */
     private void sendNew() {
         Set<SMS> readySMS = mainFrame.getQueuePanel().getReadySMS();
-        
+
         for (SMS sms : readySMS) {
             String operator = sms.getOperator();
             if (workers.containsKey(operator)) {
@@ -72,6 +72,7 @@ public class SMSSender {
                 continue;
             }
             
+            logger.fine("Sending new SMS: " + sms);
             mainFrame.getStatusPanel().setTaskRunning(true);
             mainFrame.getStatusPanel().setStatusMessage(
                     MessageFormat.format(l10n.getString("SMSSender.sending_message"),
@@ -89,6 +90,7 @@ public class SMSSender {
     
     /** Handle processed SMS */
     private void finishedSending(SMS sms) {
+        logger.fine("Finished sending SMS: " + sms);
         workers.remove(sms.getOperator());
         mainFrame.smsProcessed(sms);
         //look for another sms to send

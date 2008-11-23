@@ -252,6 +252,9 @@
           <Border info="null"/>
         </Property>
         <Property name="resizeWeight" type="double" value="0.5"/>
+        <Property name="continuousLayout" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
         <Property name="oneTouchExpandable" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
@@ -267,6 +270,9 @@
             </Property>
             <Property name="orientation" type="int" value="0"/>
             <Property name="resizeWeight" type="double" value="1.0"/>
+            <Property name="continuousLayout" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="true" type="code"/>
+            </Property>
             <Property name="oneTouchExpandable" type="boolean" value="true"/>
           </Properties>
           <AuxValues>

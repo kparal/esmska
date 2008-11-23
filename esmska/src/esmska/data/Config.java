@@ -6,9 +6,12 @@
 package esmska.data;
 
 import esmska.ThemeManager;
+import esmska.utils.LogUtils;
+import esmska.utils.Nullator;
 import java.awt.Dimension;
 import java.beans.*;
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 /** Config properties of the whole program
  * @author ripper
@@ -16,6 +19,7 @@ import java.io.Serializable;
 public class Config extends Object implements Serializable {
 
     private static final String LATEST_VERSION = "0.13.0 beta";
+    private static final Logger logger = Logger.getLogger(Config.class.getName());
 
     private String version = "";
     private String senderName = "";
@@ -49,7 +53,23 @@ public class Config extends Object implements Serializable {
     private boolean showAdvancedSettings = false;
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this) {
+        @Override
+        public void firePropertyChange(PropertyChangeEvent evt) {
+            //ensure privacy on sensitive values
+            Object newValue = evt.getNewValue();
+            Object oldValue = evt.getOldValue();
+            if (Nullator.isEqual("senderNumber",evt.getPropertyName())) {
+                newValue = LogUtils.anonymizeNumber((String)newValue);
+                oldValue = LogUtils.anonymizeNumber((String)oldValue);
+            }
+            //log change
+            logger.config("Config changed - property: " + evt.getPropertyName() +
+                    ", old: " + oldValue + ", new: " + newValue);
+            //fire change
+            super.firePropertyChange(evt);
+        }
+    };
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);

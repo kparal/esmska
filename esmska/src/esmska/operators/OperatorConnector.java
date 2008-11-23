@@ -91,6 +91,7 @@ public class OperatorConnector {
         Header languageHeader = new Header("Accept-Language", languageCode);
         headerSet.add(languageHeader);
         client.getHostConfiguration().getParams().setParameter("http.default-headers", headerSet);
+        logger.finer("Preferred language set: " + languageCode);
     }
     
     /** Sets binary content, clears text content. */
@@ -165,6 +166,7 @@ public class OperatorConnector {
      * @throws java.io.IOException When there is some problem with connection
      */
     private boolean doGet(String url) throws IOException {
+        logger.fine("Getting url: " + url);
         GetMethod method = new GetMethod(url);
 
         //set referer
@@ -199,8 +201,11 @@ public class OperatorConnector {
         //save response
         if (text) { //text content
             setTextContent(new String(response, method.getResponseCharSet()));
+            logger.finest("Retrieved text web content: " + contentType + "\n" +
+                    "#### WEB CONTENT ####\n" + getTextContent() + "\n#### WEB CONTENT ####");
         } else { //binary content
             setBinaryContent(response);
+            logger.finest("Retrieved binary web content: " + contentType);
         }
 
         //if text response, check for meta redirects
@@ -208,6 +213,7 @@ public class OperatorConnector {
             String redirect = checkMetaRedirect(textContent);
             if (redirect != null) {
                 //redirect to new url
+                logger.fine("Following web redirect to: " + redirect);
                 return followMetaRedirect(redirect, method.getURI());
             }
         }
@@ -222,6 +228,7 @@ public class OperatorConnector {
      * @throws java.io.IOException When there is some problem with connection
      */
     private boolean doPost(String url, String[] postData) throws IOException {
+        logger.fine("Posting data to url: " + url);
         PostMethod method = new PostMethod(url);
 
         //set referer
@@ -262,8 +269,11 @@ public class OperatorConnector {
         //save response
         if (text) { //text content
             setTextContent(new String(response, method.getResponseCharSet()));
+            logger.finest("Retrieved text web content: " + contentType + "\n" +
+                    "#### WEB CONTENT ####\n" + getTextContent() + "\n#### WEB CONTENT ####");
         } else { //binary content
             setBinaryContent(response);
+            logger.finest("Retrieved binary web content: " + contentType);
         }
 
         //check for HTTP redirection
@@ -289,6 +299,7 @@ public class OperatorConnector {
                 newURL = "/" + newURL;
             }
             //redirect to new url
+            logger.fine("Following http redirect to: " + newURL);
             return doGet(newURL);
         }
 
@@ -297,6 +308,7 @@ public class OperatorConnector {
             String redirect = checkMetaRedirect(textContent);
             if (redirect != null) {
                 //redirect to new url
+                logger.fine("Following web redirect to: " + redirect);
                 return followMetaRedirect(redirect, method.getURI());
             }
         }

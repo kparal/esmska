@@ -492,6 +492,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             if (selectedHistory == null) {
                 return;
             }
+            logger.fine("Forwarding message from history: " + selectedHistory.toDebugString());
             //fire event and close
             actionSupport.fireActionPerformed(ACTION_RESEND_SMS, null);
             closeButton.doClick(0);

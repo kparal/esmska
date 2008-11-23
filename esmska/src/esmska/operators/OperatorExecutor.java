@@ -151,6 +151,7 @@ public class OperatorExecutor {
      */
     public String recognizeImage(byte[] imageBytes) throws InterruptedException,
             InvocationTargetException, ExecutionException {
+        logger.fine("Showing security code...");
         try {
             if (imageBytes == null) {
                 return "";
@@ -216,6 +217,7 @@ public class OperatorExecutor {
     /** Pauses the execution for specified amount of time.
      * Nothing happens if the amount is negative. */
     public void sleep(long milliseconds) throws InterruptedException {
+        logger.fine("Sleeping for " + milliseconds + " ms...");
         if (milliseconds <= 0) {
             return;
         }

@@ -520,6 +520,7 @@ public class ImportFrame extends javax.swing.JFrame {
             
             File file = new File(filename);
             if (!(file.isFile() && file.canRead())) {
+                logger.info("File can't be read: " + file.getAbsolutePath());
                 JOptionPane.showMessageDialog(this, 
                         MessageFormat.format(l10n.getString("ImportFrame.file_cant_be_read"), file.getAbsolutePath()),
                         null, JOptionPane.ERROR_MESSAGE);
@@ -539,8 +540,10 @@ public class ImportFrame extends javax.swing.JFrame {
         if (actualCard.equals("resultsPanel")) {
             DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
             importedContacts.clear();
-            for (Object o : contactListModel.toArray())
+            for (Object o : contactListModel.toArray()) {
                 importedContacts.add((Contact) o);
+            }
+            logger.fine("Imported " + importedContacts.size() + " new contacts: " + importedContacts);
             
             actionSupport.fireActionPerformed(ACTION_IMPORT_CONTACTS, null);
             this.setVisible(false);
@@ -556,8 +559,9 @@ public class ImportFrame extends javax.swing.JFrame {
             DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
             contactListModel.clear();
             try {
-                for (Contact c : worker.get())
+                for (Contact c : worker.get()) {
                     contactListModel.addElement(c);
+                }
                 removeExistingContacts();
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Problem getting new contacts", ex);
@@ -576,17 +580,20 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
     private class ParseContactsFinishedListener implements PropertyChangeListener {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-            if (! "state".equals(evt.getPropertyName()))
+            if (! "state".equals(evt.getPropertyName())) {
                 return;
-            if (! SwingWorker.StateValue.DONE.equals(evt.getNewValue()))
+            }
+            if (! SwingWorker.StateValue.DONE.equals(evt.getNewValue())) {
                 return;
+            }
             try {
                 DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
                 contactListModel.clear();
                 ArrayList<Contact> contacts = worker.get();
                 Collections.sort(contacts);
-                for (Contact c : contacts)
+                for (Contact c : contacts) {
                     contactListModel.addElement(c);
+                }
                 removeExistingContacts();
                 validOperatorCheckBoxStateChanged(null);
                 

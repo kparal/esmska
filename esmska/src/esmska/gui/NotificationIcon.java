@@ -159,6 +159,7 @@ public class NotificationIcon {
         if (!installed) {
             return;
         }
+        logger.fine("Toggling mainframe visibility...");
         MainFrame frame = MainFrame.getInstance();
         
         //if iconified, just deiconify and return
@@ -187,7 +188,9 @@ public class NotificationIcon {
      * nothing happens. If notification area is not supported, nothing happens.
      */
     public static void install() {
+        logger.fine("Installing notification icon...");
         if (!isSupported()) {
+            logger.fine("Notification icon not supported");
             return;
         }
         getInstance();
@@ -206,7 +209,9 @@ public class NotificationIcon {
      * nothing happens. If notification area is not supported, nothing happens.
      */
     public static void uninstall() {
+        logger.fine("Uninstalling notification icon...");
         if (!isSupported()) {
+            logger.fine("Notification icon not supported");
             return;
         }
         getInstance();

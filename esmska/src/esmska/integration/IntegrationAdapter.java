@@ -5,8 +5,6 @@ package esmska.integration;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import esmska.gui.MainFrame;
 import esmska.utils.OSType;
 
 /**
@@ -17,7 +15,7 @@ import esmska.utils.OSType;
  */
 public class IntegrationAdapter {
 
-    private static final Logger logger = Logger.getLogger(MainFrame.class.getName());
+    private static final Logger logger = Logger.getLogger(IntegrationAdapter.class.getName());
     private static IntegrationAdapter instance = null;
     protected ActionBean bean;
 

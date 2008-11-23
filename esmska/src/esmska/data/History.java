@@ -5,12 +5,14 @@
 package esmska.data;
 
 import esmska.utils.ActionEventSupport;
+import esmska.utils.LogUtils;
 import esmska.utils.Nullator;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.ListIterator;
+import java.util.logging.Logger;
 
 /** SMS history entity
  *
@@ -24,6 +26,8 @@ public class History {
     public static final int ACTION_REMOVE_RECORD = 1;
     /** all records deleted */
     public static final int ACTION_CLEAR_RECORDS = 2;
+
+    private static final Logger logger = Logger.getLogger(History.class.getName());
     private ArrayList<Record> records = new ArrayList<Record>();
     
    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
@@ -51,6 +55,7 @@ public class History {
     public void addRecord(Record record) {
         records.add(record);
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
+        logger.finer("New history record added: " + record.toDebugString());
     }
     
     /** add new records */
@@ -58,6 +63,7 @@ public class History {
         for (Record record : records) {
             this.records.add(record);
         }
+        logger.finer(records.size() + " new history records added");
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
     }
     
@@ -65,6 +71,7 @@ public class History {
     public void removeRecord(Record record) {
         records.remove(record);
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
+        logger.finer("A history record removed: " + record.toDebugString());
     }
     
     /** remove existing records */
@@ -72,6 +79,7 @@ public class History {
         for (Record record : records) {
             this.records.remove(record);
         }
+        logger.finer(records.size() + " history records removed");
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
     }
     
@@ -79,6 +87,7 @@ public class History {
     public void clearRecords() {
         records.clear();
         actionSupport.fireActionPerformed(ACTION_CLEAR_RECORDS, null);
+        logger.finer("All history records removed");
     }
     
     /** Find last (as in time) record sent to specified operator.
@@ -167,5 +176,10 @@ public class History {
             this.date = date;
         }
         // </editor-fold>
+
+        public String toDebugString() {
+            return "[name=" + name + ", number=" + LogUtils.anonymizeNumber(number) +
+                    ", operator=" + operator + "]";
+         }
     }
 }

@@ -190,6 +190,7 @@ public class LogFrame extends javax.swing.JFrame {
 
     private void copyButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
         try {
+            logger.fine("Copying logs to clipboard");
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             StringBuilder builder = new StringBuilder();
             for (Log.Record record : log.getRecords()) {

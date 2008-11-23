@@ -10,7 +10,6 @@ import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Envelope;
-import esmska.gui.FormChecker;
 import esmska.data.SMS;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
@@ -230,8 +229,9 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** set selected contacts in contact list or contact to display */
     public void setContacts(Collection<Contact> contacts) {
-        if (contacts == null)
+        if (contacts == null) {
             throw new NullPointerException("contacts");
+        }
 
         disableContactListeners = true;
         int count = contacts.size();
@@ -508,9 +508,10 @@ public class SMSPanel extends javax.swing.JPanel {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!validateForm(true))
+            if (!validateForm(true)) {
                 return;
-            
+            }
+            logger.fine("Sending new message to queue");
             actionSupport.fireActionPerformed(ACTION_SEND_SMS, null);
             
             smsTextPane.setText(null);
@@ -581,6 +582,7 @@ public class SMSPanel extends javax.swing.JPanel {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            logger.fine("Compressing message");
             String text = smsTextPane.getText();
             if (text == null || text.equals("")) {
                 return;
@@ -659,16 +661,6 @@ public class SMSPanel extends javax.swing.JPanel {
         }
     }
     
-    /** Listener for envelope */
-    private class EnvelopePropertyListener implements PropertyChangeListener {
-        @Override
-        public void propertyChange(PropertyChangeEvent evt) {
-            if (evt.getPropertyName().equals("contacts")) {
-                updateProgressBars();
-            }
-        }
-    }
-    
     /** Listener for sms text pane */
     private class SMSTextPaneListener extends AbstractDocumentListener {
         /** count number of chars in sms and take action */
@@ -681,8 +673,9 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsCounterLabel.setForeground(Color.RED);
                 smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.2"),
                         chars));
-            } else //chars ok
+            } else { //chars ok
                 smsCounterLabel.setForeground(UIManager.getColor("Label.foreground"));
+            }
         }
         /** update form components */
         private void updateUI(DocumentEvent e) {
@@ -752,10 +745,11 @@ public class SMSPanel extends javax.swing.JPanel {
         }
         /** calculate which style is appropriate for given position */
         private Style getStyle(int offset) {
-            if ((offset / envelope.getSMSLength()) % 2 == 0) //even sms
+            if ((offset / envelope.getSMSLength()) % 2 == 0) { //even sms
                 return regular;
-            else
+            } else {
                 return highlight;
+            }
         }
         @Override
         public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {

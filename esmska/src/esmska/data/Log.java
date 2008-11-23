@@ -8,6 +8,7 @@ import esmska.utils.ActionEventSupport;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /** Class for collecting log messages
@@ -21,6 +22,8 @@ public class Log {
     public static final int ACTION_REMOVE_RECORD = 1;
     /** all records deleted */
     public static final int ACTION_CLEAR_RECORDS = 2;
+
+    private static final Logger logger = Logger.getLogger(Log.class.getName());
     private ArrayList<Record> records = new ArrayList<Record>();
     
    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
@@ -43,18 +46,21 @@ public class Log {
     public void addRecord(Record record) {
         records.add(record);
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
+        logger.finer("A new log record added: " + record);
     }
     
     /** remove existing record */
     public void removeRecord(Record record) {
         records.remove(record);
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
+        logger.finer("A log record removed: " + record);
     }
     
     /** delete all records */
     public void clearRecords() {
         records.clear();
         actionSupport.fireActionPerformed(ACTION_CLEAR_RECORDS, null);
+        logger.finer("All log records removed");
     }
     
     /** Single log record
@@ -90,5 +96,10 @@ public class Log {
             return time;
         }
         // </editor-fold>
+
+        @Override
+        public String toString() {
+            return "[time=" + time + "]";
+        }
     }
 }

@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
@@ -73,6 +74,7 @@ public class ContactPanel extends javax.swing.JPanel {
     public static final int ACTION_CONTACT_CHOSEN = 1;
     
     private static final String RES = "/esmska/resources/";
+    private static final Logger logger = Logger.getLogger(ContactPanel.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     private Config config = PersistenceManager.getConfig();
@@ -120,8 +122,9 @@ public class ContactPanel extends javax.swing.JPanel {
      * @return true, if contact with same name was found, false otherwise
      */
     public boolean setSelectedContact(String name) {
-        if (name == null || name.length() == 0)
+        if (name == null || name.length() == 0) {
             return false;
+        }
         for (Contact c : contacts) {
             if (c.getName().equals(name)) {
                 contactList.setSelectedValue(c, true);
@@ -136,8 +139,9 @@ public class ContactPanel extends javax.swing.JPanel {
      */
     public HashSet<Contact> getSelectedContacts() {
         HashSet<Contact> selectedContacts = new HashSet<Contact>();
-        for (Object o : contactList.getSelectedValues())
+        for (Object o : contactList.getSelectedValues()) {
             selectedContacts.add((Contact) o);
+        }
         return selectedContacts;
     }
        
@@ -148,8 +152,9 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** select first contact in contact list, if possible and no other contact selected */
     public void ensureContactSelected() {
-        if (contactList.getSelectedIndex() < 0 && contactListModel.getSize() > 0)
+        if (contactList.getSelectedIndex() < 0 && contactListModel.getSize() > 0) {
             contactList.setSelectedIndex(0);
+        }
     }
     
     /** Add margins to selected contact to make selection nicer. Has effect only
@@ -170,8 +175,9 @@ public class ContactPanel extends javax.swing.JPanel {
         contactList.setSelectedIndex(index);
         //let 3 contacts be visible before and after the selected contact
         for (int j = index - 3; j <= index + 3; j++) {
-            if (j >= 0 && j < contactListModel.getSize())
+            if (j >= 0 && j < contactListModel.getSize()) {
                 contactList.ensureIndexIsVisible(j);
+            }
         }
         contactList.ensureIndexIsVisible(index);
     }
@@ -272,8 +278,9 @@ public class ContactPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void contactListValueChanged(ListSelectionEvent evt) {//GEN-FIRST:event_contactListValueChanged
-        if (evt.getValueIsAdjusting())
+        if (evt.getValueIsAdjusting()) {
             return;
+        }
         
         // update components
         int count = contactList.getSelectedIndices().length;
@@ -530,8 +537,9 @@ public class ContactPanel extends javax.swing.JPanel {
         
         /** @return true if contact is matched by search string, false otherwise */
         public boolean isContactMatched(Contact contact) {
-            if (searchString.equals(""))
+            if (searchString.equals("")) {
                 return true;
+            }
             return (contact.getName().toLowerCase().contains(searchString) ||
                         contact.getNumber().contains(searchString));
         }
@@ -600,8 +608,9 @@ public class ContactPanel extends javax.swing.JPanel {
         @Override
         public void updateUI() {
             super.updateUI();
-            if (searchField != null)
+            if (searchField != null) {
                 searchField.updateUI();
+            }
         }
     }
     
@@ -619,6 +628,7 @@ public class ContactPanel extends javax.swing.JPanel {
             return new ArrayList<Contact>(contacts).indexOf(element);
         }
         public void add(Contact element) {
+            logger.fine("Adding new contact: "+ element);
             if (contacts.add(element)) {
                 int index = indexOf(element);
                 fireIntervalAdded(this, index, index);
@@ -628,6 +638,7 @@ public class ContactPanel extends javax.swing.JPanel {
             return contacts.contains(element);
         }
         public boolean remove(Contact element) {
+            logger.fine("Removing contact: " + element);
             int index = indexOf(element);
             boolean removed = contacts.remove(element);
             if (removed) {
@@ -639,10 +650,12 @@ public class ContactPanel extends javax.swing.JPanel {
 //            for (Object o : elements)
 //                remove((Contact)o); //TODO fix 'out of memory' when using remove()
             int size = getSize();
+            logger.fine("Removing " + elements.size() + " contacts: " + elements);
             contacts.removeAll(elements);
             fireIntervalRemoved(this, 0, size);
         }
         public void addAll(Collection<Contact> elements) {
+            logger.fine("Adding " + elements.size() + " contacts: " + elements);
             contacts.addAll(elements);
             fireContentsChanged(this, 0, getSize());
         }
@@ -697,6 +710,7 @@ public class ContactPanel extends javax.swing.JPanel {
         }
         /** Show dialog with existing or new (null) contact */
         public void show(Contact contact) {
+            logger.fine("Showing edit contact dialog for contact: " + contact);
             this.contact = contact;
             init();
             setLocationRelativeTo(MainFrame.getInstance());
@@ -755,8 +769,9 @@ public class ContactPanel extends javax.swing.JPanel {
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             String number = contact.getNumber();
-            if (number.startsWith(config.getCountryPrefix()))
+            if (number.startsWith(config.getCountryPrefix())) {
                 number = number.substring(config.getCountryPrefix().length());
+            }
             label.setToolTipText(number);
             //set background on non-matching contacts when searching
             if (!searchContactAction.getSearchString().equals("") &&

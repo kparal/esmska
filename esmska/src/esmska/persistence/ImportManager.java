@@ -50,13 +50,17 @@ public class ImportManager {
     /** Import contacts from file */
     public static ArrayList<Contact> importContacts(File file, ContactParser.ContactType type)
             throws Exception {
+        logger.finer("Importing contacts of type " + type + " from file: " + file.getAbsolutePath());
         ContactParser parser = new ContactParser(file, type);
         parser.execute();
+        ArrayList<Contact> contacts = parser.get();
+        logger.finer("Imported " + contacts.size() + " contacts");
         return parser.get();
     }
 
     /** Import sms queue from file */
     public static ArrayList<SMS> importQueue(File file) throws IOException {
+        logger.finer("Importing queue from file: " + file.getAbsolutePath());
         ArrayList<SMS> queue = new ArrayList<SMS>();
         CsvReader reader = null;
         
@@ -85,13 +89,15 @@ public class ImportManager {
                 reader.close();
             }
         }
-        
+
+        logger.finer("Imported " + queue.size() + " SMSs to queue");
         return queue;
     }
 
     /** Import sms history from file */
     public static ArrayList<History.Record> importHistory(File file)
             throws IOException, ParseException {
+        logger.finer("Importing history from file: " + file.getAbsolutePath());
         ArrayList<History.Record> history = new ArrayList<History.Record>();
         CsvReader reader = null;
         
@@ -128,7 +134,8 @@ public class ImportManager {
                 reader.close();
             }
         }
-        
+
+        logger.finer("Imported " + history.size() + " history records");
         return history;
     }
 
@@ -139,6 +146,7 @@ public class ImportManager {
      */
     public static TreeSet<Operator> importOperators(String resource) throws
             IOException, IntrospectionException {
+        logger.finer("Importing operators from resource: " + resource);
         URL operatorBase = ImportManager.class.getResource(resource);
         if (operatorBase == null || //resource doesn't exist
                 !operatorBase.getProtocol().equals("jar")) { //resource not packed in jar
@@ -166,6 +174,7 @@ public class ImportManager {
      */
     public static TreeSet<Operator> importOperators(File directory) throws
             IOException, IntrospectionException {
+        logger.finer("Importing operators from directory: " + directory.getAbsolutePath());
         if (!directory.canRead() || !directory.isDirectory()) {
             throw new IOException("Invalid operator directory: " + directory.getAbsolutePath());
         }
@@ -193,6 +202,7 @@ public class ImportManager {
      */
     private static TreeSet<Operator> importOperators(Set<URL> operatorURLs) throws
             IntrospectionException {
+        logger.finer("Importing operators from set of " + operatorURLs.size() + " URLs");
         TreeSet<Operator> operators = new TreeSet<Operator>();
 
         for (URL operatorURL : operatorURLs) {
@@ -210,6 +220,7 @@ public class ImportManager {
             }
         }
 
+        logger.finer("Imported " + operators.size() + " operators");
         return operators;
     }
 
@@ -222,6 +233,7 @@ public class ImportManager {
      */
     public static Keyring importKeyring(File file)
             throws IOException, GeneralSecurityException {
+        logger.finer("Importing keyring from file: " + file.getAbsolutePath());
         Keyring keyring = new Keyring();
         CsvReader reader = null;
         
@@ -241,7 +253,8 @@ public class ImportManager {
                 reader.close();
             }
         }
-        
+
+        logger.finer("Imported keyring");
         return keyring;
     }
 }

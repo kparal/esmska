@@ -25,8 +25,9 @@ public class OperatorUtil {
      *         Returns null if no operator is found or provided name was null.
      */
     public static Operator getOperator(String name) {
-        if (name == null)
+        if (name == null) {
             return null;
+        }
         
         for (Operator operator : operators) {
             if (operator.getName().equals(name)) {
@@ -45,8 +46,9 @@ public class OperatorUtil {
      * @throws NullPointerException If number is null.
      */
     public static String getCountryPrefix(String number) {
-        if (number == null)
+        if (number == null) {
             throw new NullPointerException("number");
+        }
         
         for (Operator operator : operators) {
             String prefix = operator.getCountryPrefix();
