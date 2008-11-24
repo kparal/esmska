@@ -13,7 +13,6 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.ExperienceBlue;
-import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -24,6 +23,7 @@ import esmska.persistence.PersistenceManager;
 import esmska.utils.JavaType;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import java.util.Arrays;
 import java.util.logging.Logger;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -40,7 +40,7 @@ public class ThemeManager {
     }
 
     private static final Logger logger = Logger.getLogger(ThemeManager.class.getName());
-    private static final LookAndFeelInfo[] installedLafs = UIManager.getInstalledLookAndFeels();
+    private static LookAndFeelInfo[] installedLafs = UIManager.getInstalledLookAndFeels();
 
     static {
         //if Nimbus is available, let's replace Metal with it
@@ -51,13 +51,24 @@ public class ThemeManager {
     private ThemeManager() {
     }
 
-    /* Set look and feel found in configuration
+    /* Set look and feel found in configuration. If it is not possible, use
+     * the next best one.
      * @throws Throwable when chosen look and feel can't be set
      */
     public static void setLaF() throws Throwable {
         Config config = PersistenceManager.getConfig();
         ThemeManager.LAF laf = config.getLookAndFeel();
-        
+
+        //if selected LaF is not supported, then use a suggested one
+        if (!isLaFSupported(laf)) {
+            LAF newLaf = suggestBestLAF();
+            logger.info("Look and feel '" + laf + "' is no longer supported on " +
+                    "your system, selected a new one: " + newLaf);
+            laf = newLaf;
+            config.setLookAndFeel(laf);
+        }
+
+        //set window decorations
         JFrame.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());
         JDialog.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());
         
@@ -69,7 +80,18 @@ public class ThemeManager {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
                 break;
             case GTK:
-                UIManager.setLookAndFeel(GTKLookAndFeel.class.getName());
+                boolean found = false;
+                for (LookAndFeelInfo lafInfo : installedLafs) {
+                    if ("GTK+".equals(lafInfo.getName())) {
+                        UIManager.setLookAndFeel(lafInfo.getClassName());
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    //GTK requested and supported, but now we can't find it among installed LAFs
+                    throw new IllegalStateException("GTK LaF requested, but not found");
+                }
                 break;
             case JGOODIES:
                 String themeString = config.getLafJGoodiesTheme();
@@ -96,10 +118,8 @@ public class ThemeManager {
                 }
                 SubstanceLookAndFeel.setSkin(skin != null ? skin : new SaharaSkin().getClass().getName());
                 UIManager.setLookAndFeel(new SubstanceLookAndFeel());
-                
                 //set Substance specific addons
                 UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
-                
                 break;
             default:
                 throw new IllegalArgumentException("Unknown LaF name");
@@ -132,14 +152,29 @@ public class ThemeManager {
     public static boolean isLaFSupported(LAF laf) {
         switch (laf) {
             case SYSTEM:
+                //if system and crossplatform classnames are equal, then
+                //there is no special "system" laf
+                return !UIManager.getSystemLookAndFeelClassName().equals(
+                        UIManager.getCrossPlatformLookAndFeelClassName());
+            case CROSSPLATFORM:
+                //always supported
                 return true;
-            case CROSSPLATFORM: 
+            case GTK:
+                //only if installed
+                for (LookAndFeelInfo lafInfo : installedLafs) {
+                    if ("GTK+".equals(lafInfo.getName())) {
+                        //and if different from system laf, because in that
+                        //case there is no reason to display it twice
+                        return !lafInfo.getClassName().equals(
+                                UIManager.getSystemLookAndFeelClassName());
+                    }
+                }
+                return false;
+            case JGOODIES:
+                //always supported
                 return true;
-            case GTK: 
-                return !OSType.isWindows();
-            case JGOODIES: 
-                return true;
-            case SUBSTANCE: 
+            case SUBSTANCE:
+                //always supported
                 return true;
             default: 
                 throw new IllegalArgumentException("Uknown LAF: " + laf);
@@ -152,7 +187,7 @@ public class ThemeManager {
      */
     public static LAF suggestBestLAF() {
         LAF laf = LAF.SUBSTANCE;
-        
+
         //set system LaF on OpenJDK, because Substance throws exceptions
         if (JavaType.isOpenJDK()) {
             laf = LAF.SYSTEM;
@@ -165,6 +200,11 @@ public class ThemeManager {
         String KDEVersion = OSType.getKDEDesktopVersion();
         if (KDEVersion != null && KDEVersion.startsWith("3")) {
             laf = LAF.SYSTEM;
+        }
+
+        //if the suggested LaF is not supported, suggest crossplatform LaF as a safe choice
+        if (!isLaFSupported(laf)) {
+            laf = LAF.CROSSPLATFORM;
         }
 
         logger.finer("Suggested LaF: " + laf);
