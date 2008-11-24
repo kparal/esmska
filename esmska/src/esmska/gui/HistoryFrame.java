@@ -284,10 +284,8 @@ public class HistoryFrame extends javax.swing.JFrame {
         );
 
         deleteButton.setAction(deleteAction);
-        deleteButton.setMargin(new Insets(2, 2, 2, 2));
 
         resendButton.setAction(resendAction);
-        resendButton.setMargin(new Insets(2, 2, 2, 2));
 
         closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
         Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_"));
@@ -329,7 +327,6 @@ public class HistoryFrame extends javax.swing.JFrame {
         clearButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
         clearButton.setMnemonic('r');
         clearButton.setToolTipText(l10n.getString("HistoryFrame.clearButton.toolTipText")); // NOI18N
-        clearButton.setMargin(new Insets(2, 2, 2, 2));
         clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         /*
          * HistoryFrame.java
@@ -382,7 +379,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                     .addComponent(clearButton))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                     .addComponent(deleteButton))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.LEADING, false)

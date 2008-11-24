@@ -122,7 +122,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("EditContactPanel.gatewayLabel.text")); // NOI18N
         gatewayLabel.setToolTipText(operatorComboBox.getToolTipText());
 
-        suggestOperatorButton.setMargin(new Insets(2, 2, 2, 2));
         suggestOperatorButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
         GroupLayout layout = new GroupLayout(this);
@@ -138,7 +137,7 @@ public class EditContactPanel extends javax.swing.JPanel {
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(suggestOperatorButton))
                     .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)

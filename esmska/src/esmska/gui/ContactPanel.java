@@ -204,12 +204,10 @@ public class ContactPanel extends javax.swing.JPanel {
         });
 
         addContactButton.setAction(addContactAction);
-        addContactButton.setMargin(new Insets(2, 2, 2, 2));
         addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         addContactButton.setText("");
 
         removeContactButton.setAction(removeContactAction);
-        removeContactButton.setMargin(new Insets(2, 2, 2, 2));
         removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         removeContactButton.setText("");
 
@@ -244,7 +242,6 @@ public class ContactPanel extends javax.swing.JPanel {
         jScrollPane4.setViewportView(contactList);
 
         editContactButton.setAction(editContactAction);
-        editContactButton.setMargin(new Insets(2, 2, 2, 2));
         editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         editContactButton.setText("");
 
@@ -267,7 +264,7 @@ public class ContactPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                     .addComponent(addContactButton)

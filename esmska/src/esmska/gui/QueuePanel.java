@@ -367,12 +367,10 @@ public class QueuePanel extends javax.swing.JPanel {
         });
 
         smsUpButton.setAction(smsUpAction);
-        smsUpButton.setMargin(new Insets(2, 2, 2, 2));
         smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         smsUpButton.setText("");
 
         smsDownButton.setAction(smsDownAction);
-        smsDownButton.setMargin(new Insets(2, 2, 2, 2));
         smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         smsDownButton.setText("");
 
@@ -387,17 +385,14 @@ public class QueuePanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(queueList);
 
         editButton.setAction(editSMSAction);
-        editButton.setMargin(new Insets(2, 2, 2, 2));
         editButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         editButton.setText("");
 
         deleteButton.setAction(deleteSMSAction);
-        deleteButton.setMargin(new Insets(2, 2, 2, 2));
         deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         deleteButton.setText("");
 
         pauseButton.setAction(smsQueuePauseAction);
-        pauseButton.setMargin(new Insets(2, 2, 2, 2));
         pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         pauseButton.setText("");
 
@@ -411,7 +406,7 @@ public class QueuePanel extends javax.swing.JPanel {
                     .addComponent(smsDownButton)
                     .addComponent(smsUpButton))
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -440,7 +435,7 @@ public class QueuePanel extends javax.swing.JPanel {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
