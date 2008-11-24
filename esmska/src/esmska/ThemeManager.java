@@ -22,9 +22,11 @@ import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.JavaType;
+import esmska.utils.Nullator;
 import esmska.utils.OSType;
 import java.util.logging.Logger;
 import javax.swing.LookAndFeel;
+import javax.swing.UIManager.LookAndFeelInfo;
 import org.jvnet.lafwidget.LafWidget;
 import org.jvnet.substance.skin.SaharaSkin;
 
@@ -38,6 +40,12 @@ public class ThemeManager {
     }
 
     private static final Logger logger = Logger.getLogger(ThemeManager.class.getName());
+    private static final LookAndFeelInfo[] installedLafs = UIManager.getInstalledLookAndFeels();
+
+    static {
+        //if Nimbus is available, let's replace Metal with it
+        setNimbusAsCrossplatformLAF();
+    }
 
     /** Disabled constructor */
     private ThemeManager() {
@@ -103,19 +111,19 @@ public class ThemeManager {
     /** Returns whether GTK is current look and feel */
     public static boolean isGTKCurrentLaF() {
         LookAndFeel laf = UIManager.getLookAndFeel();
-        if (laf == null) {
-            return false;
-        }
-        return laf.getName().equals("GTK look and feel");
+        return Nullator.isEqual(laf.getName(), "GTK look and feel");
     }
 
     /** Returns whether Aqua (Mac OS native) is current look and feel */
     public static boolean isAquaCurrentLaF() {
         LookAndFeel laf = UIManager.getLookAndFeel();
-        if (laf == null) {
-            return false;
-        }
-        return laf.getName().equals("Mac OS X");
+        return Nullator.isEqual(laf.getName(), "Mac OS X");
+    }
+
+    /** Returns whether Nimbus is current look and feel */
+    public static boolean isNimbusCurrentLaF() {
+        LookAndFeel laf = UIManager.getLookAndFeel();
+        return Nullator.isEqual(laf.getName(), "Nimbus");
     }
     
     /** Returns whether specified LaF is supported on current configuration
@@ -162,5 +170,17 @@ public class ThemeManager {
         logger.finer("Suggested LaF: " + laf);
         return laf;
     }
-    
+
+
+    /** If Nimbus LaF is available (from Java 6 Update 10), set it as the
+     * default crossplatform LaF instead of Metal.
+     */
+    private static void setNimbusAsCrossplatformLAF() {
+        for (LookAndFeelInfo lafInfo : installedLafs) {
+            if ("Nimbus".equals(lafInfo.getName())) {
+                System.setProperty("swing.crossplatformlaf", lafInfo.getClassName());
+                return;
+            }
+        }
+    }
 }
