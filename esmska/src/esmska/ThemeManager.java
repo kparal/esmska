@@ -23,7 +23,6 @@ import esmska.persistence.PersistenceManager;
 import esmska.utils.JavaType;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
-import java.util.Arrays;
 import java.util.logging.Logger;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager.LookAndFeelInfo;

@@ -25,8 +25,9 @@ public class ActionEventSupport {
      * @param source Source object, for which the ActionEventSupport should work. May not be null.
      */
     public ActionEventSupport(Object source) {
-        if (source == null)
+        if (source == null) {
             throw new NullPointerException("source");
+        }
         this.source = source;
     }
     

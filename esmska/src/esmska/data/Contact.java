@@ -82,16 +82,19 @@ public class Contact extends Object implements Comparable<Contact> {
         
         //name
         result = collator.compare(this.getName(), c.getName());
-        if (result != 0)
+        if (result != 0) {
             return result;
+        }
         //number
         result = collator.compare(this.getNumber(), c.getNumber());
-        if (result != 0)
+        if (result != 0) {
             return result;
+        }
         //operator
         if (this.getOperator() == null) {
-            if (c.getOperator() != null)
+            if (c.getOperator() != null) {
                 result = -1;
+            }
         } else {
             result = this.getOperator().compareTo(c.getOperator());
         }
@@ -106,10 +109,12 @@ public class Contact extends Object implements Comparable<Contact> {
     
     @Override
     public boolean equals(Object obj) {
-        if (obj == this)
+        if (obj == this) {
             return true;
-        if (!(obj instanceof Contact))
+        }
+        if (!(obj instanceof Contact)) {
             return false;
+        }
         Contact c = (Contact) obj;
         
         return getName().equals(c.getName()) && getNumber().equals(c.getNumber()) 

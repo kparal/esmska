@@ -162,8 +162,9 @@ public class ImportFrame extends javax.swing.JFrame {
                 }
             }
         }
-        for (Object skip : skipped)
+        for (Object skip : skipped) {
             contactListModel.removeElement(skip);
+        }
     }
     
     /** remove contacts without known operator */
@@ -173,11 +174,13 @@ public class ImportFrame extends javax.swing.JFrame {
         ArrayList<Object> skipped = new ArrayList<Object>();
         for (Object impor : imported) {
             Contact c = (Contact) impor;
-            if (OperatorUtil.getOperator(c.getOperator()) == null)
+            if (OperatorUtil.getOperator(c.getOperator()) == null) {
                 skipped.add(c);
+            }
         }
-        for (Object skip : skipped)
+        for (Object skip : skipped) {
             contactListModel.removeElement(skip);
+        }
     }
     
     /** update labels on browse panel according to type of import */

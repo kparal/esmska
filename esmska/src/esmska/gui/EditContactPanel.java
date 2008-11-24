@@ -13,7 +13,6 @@ import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Insets;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;

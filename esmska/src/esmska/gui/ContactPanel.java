@@ -18,7 +18,6 @@ import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
