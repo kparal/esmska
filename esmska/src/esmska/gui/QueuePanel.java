@@ -720,6 +720,7 @@ public class QueuePanel extends javax.swing.JPanel {
 
         public SMSQueueListRenderer() {
             panel.add(delayLabel, BorderLayout.LINE_END);
+            delayLabel.setOpaque(true);
         }
         
         @Override
@@ -735,15 +736,14 @@ public class QueuePanel extends javax.swing.JPanel {
                 text = text.substring(config.getCountryPrefix().length());
             }
             label.setText(text);
-            //tweak colors on different look and feels
-            label.setOpaque(false);
-            delayLabel.setForeground(label.getForeground());
             //problematic sms colored
             if ((sms.getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
-                panel.setBackground(Color.RED);
-            } else {
-                panel.setBackground(label.getBackground());
+                label.setBackground(Color.RED);
             }
+            //set colors on other components
+            delayLabel.setForeground(label.getForeground());
+            delayLabel.setBackground(label.getBackground());
+            panel.setBackground(label.getBackground());
             //add operator logo
             Operator operator = OperatorUtil.getOperator(sms.getOperator());
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
@@ -760,7 +760,7 @@ public class QueuePanel extends javax.swing.JPanel {
             }
             //add to panel
             panel.add(label, BorderLayout.CENTER);
-            
+
             return panel;
         }
         /** transform string to html with linebreaks */
