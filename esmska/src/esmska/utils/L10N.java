@@ -7,7 +7,9 @@ package esmska.utils;
 
 import java.util.ResourceBundle;
 import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JTabbedPane;
+import org.openide.awt.Actions;
 import org.openide.awt.Mnemonics;
 
 /** Class containing useful methods when doing internacionalization and localization
@@ -17,7 +19,10 @@ import org.openide.awt.Mnemonics;
 public class L10N {
     /** Resource bundle containing all translations */
     public static final ResourceBundle l10nBundle = ResourceBundle.getBundle("esmska.resources.l10n");
-    
+    //openide Mnemonics class allows to set mnemonics only on buttons,
+    //so we use fake button and after copy the settings to other objects
+    private static final JButton button = new JButton();
+
     /** Set a name and mnemonics to an Action.
      * 
      * @param action Action to modify
@@ -26,14 +31,15 @@ public class L10N {
      * @see org.openide.awt.Mnemonics#setLocalizedText(javax.swing.AbstractButton, java.lang.String) 
      */
     public static void setLocalizedText(Action action, String text) {
-        int index = Mnemonics.findMnemonicAmpersand(text);
-        if (index < 0) {
-            action.putValue(Action.NAME, text);
-        } else {
-            String name = text.substring(0, index) + text.substring(index + 1);
-            action.putValue(Action.NAME, name);
-            action.putValue(Action.MNEMONIC_KEY,name.codePointAt(index));
-        }
+        button.setText(null);
+        button.setMnemonic(-1);
+        button.setDisplayedMnemonicIndex(-1);
+
+        Mnemonics.setLocalizedText(button, text);
+
+        action.putValue(Action.NAME, button.getText());
+        action.putValue(Action.MNEMONIC_KEY, button.getMnemonic());
+        action.putValue(Action.DISPLAYED_MNEMONIC_INDEX_KEY, button.getDisplayedMnemonicIndex());
     }
     
     /** Set a name and mnemonics to a pane in JTabbedPane.
@@ -45,13 +51,14 @@ public class L10N {
      * @see org.openide.awt.Mnemonics#setLocalizedText(javax.swing.AbstractButton, java.lang.String) 
      */
     public static void setLocalizedText(JTabbedPane tabbedPane, int tabIndex, String text) {
-        int index = Mnemonics.findMnemonicAmpersand(text);
-        if (index < 0) {
-            tabbedPane.setTitleAt(tabIndex, text);
-        } else {
-            String name = text.substring(0, index) + text.substring(index + 1);
-            tabbedPane.setTitleAt(tabIndex, name);
-            tabbedPane.setMnemonicAt(tabIndex, name.codePointAt(index));
-        }
+        button.setText(null);
+        button.setMnemonic(-1);
+        button.setDisplayedMnemonicIndex(-1);
+
+        Mnemonics.setLocalizedText(button, text);
+
+        tabbedPane.setTitleAt(tabIndex, button.getText());
+        tabbedPane.setMnemonicAt(tabIndex, button.getMnemonic());
+        tabbedPane.setDisplayedMnemonicIndexAt(tabIndex, button.getDisplayedMnemonicIndex());
     }
 }
