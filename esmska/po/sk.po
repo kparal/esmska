@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-18 11:22+0200\n"
+"POT-Creation-Date: 2008-11-26 01:47+0200\n"
 "PO-Revision-Date: 2008-11-16 20:49+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-18 10:21+0000\n"
+"X-Launchpad-Export-Date: 2008-11-26 00:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -129,6 +129,10 @@ msgstr "Dostupné voľby:"
 msgid "java -jar esmska.jar [OPTIONS]"
 msgstr "java -jar esmska.jar [VOĽBY]"
 
+#: CommandLineParser.debug
+msgid "Print debugging output."
+msgstr ""
+
 #: CommandLineParser.debugNetwork
 msgid "Print debugging output of the network communication."
 msgstr "Vypisovať odlaďovací výstup sieťovej komunikácie."
@@ -171,6 +175,10 @@ msgstr "Zobraziť túto nápovedu."
 #: CommandLineParser.usage
 msgid "Usage:"
 msgstr "Použitie:"
+
+#: CommandLineParser.version
+msgid "Print program version and exit."
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
@@ -314,8 +322,9 @@ msgid "&Number:"
 msgstr "Čís&lo:"
 
 #: ConfigFrame.jLabel10.text
-msgid "Ope&rator:"
-msgstr "Ope&rátor"
+msgctxt "ConfigFrame.jLabel10.text"
+msgid "&Gateway:"
+msgstr ""
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
@@ -386,13 +395,9 @@ msgstr ""
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
-"Here you can set your login credentials for operators which require it.\n"
+"Here you can set your login credentials for gateways which require it.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Tu si môžete nastaviť svoje prihlasovacie údaje k operátorom, ktorý to "
-"vyžadujú.\n"
-"</html>"
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -782,6 +787,10 @@ msgstr "Dátum"
 msgid "Delete"
 msgstr "Vymazať"
 
+#: Delete_
+msgid "&Delete"
+msgstr ""
+
 #: Delete_contacts
 msgid "Delete contacts"
 msgstr "Zmazať kontakty"
@@ -799,8 +808,8 @@ msgid "Delete selected messages"
 msgstr "Odstrániť vybrané správy"
 
 #: Delete_selected_messages_from_history
-msgid "Delete selected messages from history (Alt+D)"
-msgstr "Odstrániť vybrané správy z histórie (Alt+D)"
+msgid "Delete selected messages from history"
+msgstr ""
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
@@ -941,6 +950,11 @@ msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "vCard súbory (*.vcard, *.vcf)"
 
+#: Forward_
+msgctxt "Forward_"
+msgid "&Forward"
+msgstr ""
+
 #: Hide_program
 msgid "Hide program"
 msgstr "Skyť program"
@@ -982,8 +996,8 @@ msgid "Really remove all selected messages from history?"
 msgstr "Skutočne si prajete vymazať z histórie všetky vybrané správy?"
 
 #: HistoryFrame.resend_message
-msgid "Resend message to someone else (Alt+S)"
-msgstr "Preposlať správu niekomu inému (Alt+S)"
+msgid "Resend message to someone else"
+msgstr ""
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
@@ -1053,8 +1067,9 @@ msgid "The file {0} can''t be read!"
 msgstr "Súbor {0} nieje možné prečítať!"
 
 #: ImportFrame.forwardButton.text
+msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
-msgstr "&Pokračovať"
+msgstr ""
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1678,8 +1693,8 @@ msgstr ""
 "nebudete ho musiet vždy vypisovať do telefónneho čísla."
 
 #: SMSPanel.sendButton.toolTipText
-msgid "Send message (Alt+S, Ctrl+Enter)"
-msgstr "Poslať správu (Alt+S, Ctrl+Enter)"
+msgid "Send message (Ctrl+Enter)"
+msgstr ""
 
 #. #Single quotes need to be doubled!
 #: SMSPanel.singleProgressBar

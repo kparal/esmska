@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-18 11:22+0200\n"
+"POT-Creation-Date: 2008-11-26 01:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,6 +117,10 @@ msgstr ""
 msgid "java -jar esmska.jar [OPTIONS]"
 msgstr ""
 
+#: CommandLineParser.debug
+msgid "Print debugging output."
+msgstr ""
+
 #: CommandLineParser.debugNetwork
 msgid "Print debugging output of the network communication."
 msgstr ""
@@ -153,6 +157,10 @@ msgstr ""
 
 #: CommandLineParser.usage
 msgid "Usage:"
+msgstr ""
+
+#: CommandLineParser.version
+msgid "Print program version and exit."
 msgstr ""
 
 #: Compress_
@@ -267,7 +275,8 @@ msgid "&Number:"
 msgstr ""
 
 #: ConfigFrame.jLabel10.text
-msgid "Ope&rator:"
+msgctxt "ConfigFrame.jLabel10.text"
+msgid "&Gateway:"
 msgstr ""
 
 #: ConfigFrame.jLabel11.text
@@ -326,7 +335,7 @@ msgstr ""
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
-"Here you can set your login credentials for operators which require it.\n"
+"Here you can set your login credentials for gateways which require it.\n"
 "</html>"
 msgstr ""
 
@@ -649,6 +658,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: Delete_
+msgid "&Delete"
+msgstr ""
+
 #: Delete_contacts
 msgid "Delete contacts"
 msgstr ""
@@ -666,7 +679,7 @@ msgid "Delete selected messages"
 msgstr ""
 
 #: Delete_selected_messages_from_history
-msgid "Delete selected messages from history (Alt+D)"
+msgid "Delete selected messages from history"
 msgstr ""
 
 #. #This string is located in the operating-system menu item
@@ -793,6 +806,11 @@ msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr ""
 
+#: Forward_
+msgctxt "Forward_"
+msgid "&Forward"
+msgstr ""
+
 #: Hide_program
 msgid "Hide program"
 msgstr ""
@@ -834,7 +852,7 @@ msgid "Really remove all selected messages from history?"
 msgstr ""
 
 #: HistoryFrame.resend_message
-msgid "Resend message to someone else (Alt+S)"
+msgid "Resend message to someone else"
 msgstr ""
 
 #: HistoryFrame.searchField.toolTipText
@@ -903,6 +921,7 @@ msgid "The file {0} can''t be read!"
 msgstr ""
 
 #: ImportFrame.forwardButton.text
+msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
 msgstr ""
 
@@ -1445,7 +1464,7 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
-msgid "Send message (Alt+S, Ctrl+Enter)"
+msgid "Send message (Ctrl+Enter)"
 msgstr ""
 
 #. #Single quotes need to be doubled!

@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-18 11:22+0200\n"
+"POT-Creation-Date: 2008-11-26 01:47+0200\n"
 "PO-Revision-Date: 2008-10-15 21:04+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-18 10:21+0000\n"
+"X-Launchpad-Export-Date: 2008-11-26 00:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -128,6 +128,10 @@ msgstr "Opzioni disponibili:"
 msgid "java -jar esmska.jar [OPTIONS]"
 msgstr "java -jar esmska.jar [OPTIONS]"
 
+#: CommandLineParser.debug
+msgid "Print debugging output."
+msgstr ""
+
 #: CommandLineParser.debugNetwork
 msgid "Print debugging output of the network communication."
 msgstr ""
@@ -165,6 +169,10 @@ msgstr ""
 #: CommandLineParser.usage
 msgid "Usage:"
 msgstr "Utilizzo:"
+
+#: CommandLineParser.version
+msgid "Print program version and exit."
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
@@ -278,8 +286,9 @@ msgid "&Number:"
 msgstr "&Numero:"
 
 #: ConfigFrame.jLabel10.text
-msgid "Ope&rator:"
-msgstr "Ope&ratore:"
+msgctxt "ConfigFrame.jLabel10.text"
+msgid "&Gateway:"
+msgstr ""
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
@@ -337,7 +346,7 @@ msgstr ""
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
-"Here you can set your login credentials for operators which require it.\n"
+"Here you can set your login credentials for gateways which require it.\n"
 "</html>"
 msgstr ""
 
@@ -660,6 +669,10 @@ msgstr "Data"
 msgid "Delete"
 msgstr "Elimina"
 
+#: Delete_
+msgid "&Delete"
+msgstr ""
+
 #: Delete_contacts
 msgid "Delete contacts"
 msgstr "Elimina contatti"
@@ -677,8 +690,8 @@ msgid "Delete selected messages"
 msgstr "Elimina messaggi selezionati"
 
 #: Delete_selected_messages_from_history
-msgid "Delete selected messages from history (Alt+D)"
-msgstr "Elimina i messaggi selezionati dalla cronologia (Alt+D)"
+msgid "Delete selected messages from history"
+msgstr ""
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
@@ -804,6 +817,11 @@ msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr ""
 
+#: Forward_
+msgctxt "Forward_"
+msgid "&Forward"
+msgstr ""
+
 #: Hide_program
 msgid "Hide program"
 msgstr "Nascondi programma"
@@ -846,8 +864,8 @@ msgstr ""
 "Vuoi veramente eliminare tutti i messaggi selezionati dalla cronologia?"
 
 #: HistoryFrame.resend_message
-msgid "Resend message to someone else (Alt+S)"
-msgstr "Rispedisci messaggio a qualcun altro (Alt+S)"
+msgid "Resend message to someone else"
+msgstr ""
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
@@ -915,8 +933,9 @@ msgid "The file {0} can''t be read!"
 msgstr ""
 
 #: ImportFrame.forwardButton.text
+msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
-msgstr "&Avanti"
+msgstr ""
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1457,8 +1476,8 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
-msgid "Send message (Alt+S, Ctrl+Enter)"
-msgstr "Invia messaggio (Alt+S, Ctrl+Enter)"
+msgid "Send message (Ctrl+Enter)"
+msgstr ""
 
 #. #Single quotes need to be doubled!
 #: SMSPanel.singleProgressBar

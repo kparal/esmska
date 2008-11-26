@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-18 11:22+0200\n"
-"PO-Revision-Date: 2008-11-16 01:08+0000\n"
+"POT-Creation-Date: 2008-11-26 01:47+0200\n"
+"PO-Revision-Date: 2008-11-25 23:52+0000\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-18 10:21+0000\n"
+"X-Launchpad-Export-Date: 2008-11-26 00:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -123,6 +123,10 @@ msgstr "Dostupné volby:"
 msgid "java -jar esmska.jar [OPTIONS]"
 msgstr "java -jar esmska.jar [VOLBY]"
 
+#: CommandLineParser.debug
+msgid "Print debugging output."
+msgstr "Vypisovat ladící výstup."
+
 #: CommandLineParser.debugNetwork
 msgid "Print debugging output of the network communication."
 msgstr "Vypisovat ladící výstup síťové komunikace."
@@ -164,6 +168,10 @@ msgstr "Zobrazit tuto nápovědu."
 #: CommandLineParser.usage
 msgid "Usage:"
 msgstr "Použití:"
+
+#: CommandLineParser.version
+msgid "Print program version and exit."
+msgstr "Vypsat verzi programu a skončit."
 
 #: Compress_
 msgid "&Compress"
@@ -307,8 +315,9 @@ msgid "&Number:"
 msgstr "Čís&lo:"
 
 #: ConfigFrame.jLabel10.text
-msgid "Ope&rator:"
-msgstr "Ope&rátor:"
+msgctxt "ConfigFrame.jLabel10.text"
+msgid "&Gateway:"
+msgstr "&Brána:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
@@ -378,12 +387,11 @@ msgstr ""
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
-"Here you can set your login credentials for operators which require it.\n"
+"Here you can set your login credentials for gateways which require it.\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"Zde si můžete nastavit své přihlašovací údaje pro operátory, kteří to "
-"vyžadují.\n"
+"Zde si můžete nastavit své přihlašovací údaje pro brány, které to vyžadují.\n"
 "</html>"
 
 #: ConfigFrame.lafComboBox.toolTipText
@@ -774,6 +782,10 @@ msgstr "Datum"
 msgid "Delete"
 msgstr "Odstranit"
 
+#: Delete_
+msgid "&Delete"
+msgstr "O&dstranit"
+
 #: Delete_contacts
 msgid "Delete contacts"
 msgstr "Odstranit kontakty"
@@ -791,8 +803,8 @@ msgid "Delete selected messages"
 msgstr "Odstranit označené zprávy"
 
 #: Delete_selected_messages_from_history
-msgid "Delete selected messages from history (Alt+D)"
-msgstr "Odstranit označené zprávy z historie (Alt+D)"
+msgid "Delete selected messages from history"
+msgstr "Odstranit označené zprávy z historie"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
@@ -934,6 +946,11 @@ msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "vCard soubory (*.vcard, *.vcf)"
 
+#: Forward_
+msgctxt "Forward_"
+msgid "&Forward"
+msgstr "Přepo&slat"
+
 #: Hide_program
 msgid "Hide program"
 msgstr "Skrýt program"
@@ -975,8 +992,8 @@ msgid "Really remove all selected messages from history?"
 msgstr "Opravdu z historie odstranit všechny označené zprávy?"
 
 #: HistoryFrame.resend_message
-msgid "Resend message to someone else (Alt+S)"
-msgstr "Přeposlat zprávu někomu jinému (Alt+S)"
+msgid "Resend message to someone else"
+msgstr "Přeposlat zprávu někomu jinému"
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
@@ -1046,6 +1063,7 @@ msgid "The file {0} can''t be read!"
 msgstr "Soubor {0} nelze přečíst!"
 
 #: ImportFrame.forwardButton.text
+msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
 msgstr "&Pokračovat"
 
@@ -1670,8 +1688,8 @@ msgstr ""
 "nebudete jej muset vždy vypisovat do telefonního čísla."
 
 #: SMSPanel.sendButton.toolTipText
-msgid "Send message (Alt+S, Ctrl+Enter)"
-msgstr "Odeslat zprávu (Alt+S, Ctrl+Enter)"
+msgid "Send message (Ctrl+Enter)"
+msgstr "Odeslat zprávu (Ctrl+Enter)"
 
 #. #Single quotes need to be doubled!
 #: SMSPanel.singleProgressBar
@@ -1960,6 +1978,9 @@ msgstr "Znovu spustit frontu sms"
 #~ msgstr ""
 #~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Podpořte "
 #~ "projekt</a></html>"
+
+#~ msgid "Ope&rator:"
+#~ msgstr "Ope&rátor:"
 
 #~ msgid "List of available operators web gateways"
 #~ msgstr "Seznam dostupných webových bran operátorů"
