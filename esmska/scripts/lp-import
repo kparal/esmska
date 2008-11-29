@@ -2,6 +2,8 @@
 
 # Imports PO files exported from Launchpad to PO directory
 
+# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii
+
 # trap and exit on error
 set -e
 trap "echo Import failed." ERR

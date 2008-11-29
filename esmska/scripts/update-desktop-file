@@ -2,6 +2,8 @@
 
 # Update desktop file localization strings from properties files.
 
+# Dependencies: native2ascii
+
 # trap and exit on error
 set -e
 trap "echo Updating desktop file failed." ERR
@@ -28,7 +30,7 @@ for FILE in `find "$L10N" -name 'l10n_*.properties'`; do
     CONTENT=`native2ascii -reverse "$FILE"`
     TRANS=`echo "$CONTENT" | grep ^DesktopFile.name= | sed -r 's/^.*?=//'`
     if [ -n "$TRANS" ]; then
-	echo "Name[$LOCALE]=$TRANS" >> "$DESKTOP"
+	    echo "Name[$LOCALE]=$TRANS" >> "$DESKTOP"
     fi
 done
 
@@ -45,7 +47,7 @@ for FILE in `find "$L10N" -name 'l10n_*.properties'`; do
     CONTENT=`native2ascii -reverse "$FILE"`
     TRANS=`echo "$CONTENT" | grep ^DesktopFile.genericName= | sed -r 's/^.*?=//'`
     if [ -n "$TRANS" ]; then
-	echo "GenericName[$LOCALE]=$TRANS" >> "$DESKTOP"
+	    echo "GenericName[$LOCALE]=$TRANS" >> "$DESKTOP"
     fi
 done
 
@@ -62,6 +64,6 @@ for FILE in `find "$L10N" -name 'l10n_*.properties'`; do
     CONTENT=`native2ascii -reverse "$FILE"`
     TRANS=`echo "$CONTENT" | grep ^DesktopFile.comment= | sed -r 's/^.*?=//'`
     if [ -n "$TRANS" ]; then
-	echo "Comment[$LOCALE]=$TRANS" >> "$DESKTOP"
+	    echo "Comment[$LOCALE]=$TRANS" >> "$DESKTOP"
     fi
 done

@@ -3,6 +3,8 @@
 # Creates a tarball containing POT file and czech PO file
 # intended for import in Launchpad Translations
 
+# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii
+
 # trap and exit on error
 set -e
 trap "echo Export failed." ERR

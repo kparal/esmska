@@ -4,6 +4,8 @@
 # updates PO files to be up to date,
 # updates properties files from PO files.
 
+# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii
+
 # trap and exit on error 
 set -e
 trap "echo Updating PO files failed." ERR

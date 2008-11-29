@@ -3,6 +3,8 @@
 # Create distribution packages from dist directory
 # in order to be released
 
+# Dependencies: zip, unix2dos
+
 # trap and exit on error
 set -e
 trap "echo Packaging failed." ERR
