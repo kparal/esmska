@@ -1,0 +1,170 @@
+README for Esmska
+=================
+
+Esmska is a program for sending SMS over the Internet.
+
+Program links:
+Esmska homepage . . . . . . http://esmska.googlecode.com/
+Documentation . . . . . . . http://code.google.com/p/esmska/w/list
+Issues. . . . . . . . . . . http://code.google.com/p/esmska/wiki/Issues
+Forums. . . . . . . . . . . https://answers.launchpad.net/esmska
+
+Program files:
+README          - This file.
+include/        - Files included in the binary distribution.
+lib/            - Program compilation and runtime libraries.
+nbproject/      - Project files for the NetBeans IDE.
+operators/      - Script files for using operator gateways.
+po/             - Localization files.
+resources/      - Different resource files.
+scripts/        - Various scripts for managing building process.
+src/            - Program sources.
+test/           - Program test sources.
+
+Program license can be found in include/license/.
+
+Project root directory can be opened by NetBeans 6.5 as its project.
+
+
+Compilation requirements
+========================
+
+ * Java 6 JDK (Sun tested)
+ * Ant
+   o in Ubuntu packaged as 'ant'
+ 
+Provided by lib/ directory:
+ * CopyLibs
+   o included in NetBeans IDE 6.1
+ * Mac UI
+   o included in Apple Java
+   o will be solved in future
+ * all runtime requirements
+
+
+Runtime requirements
+====================
+
+ * Java 6 JRE (Sun and OpenJDK tested)
+ 
+Provided by lib/ directory:
+ * Beans Binding 1.2.1
+   o https://beansbinding.dev.java.net/
+ * Apache Commons CLI 1.1
+   o http://commons.apache.org/cli/
+ * Apache Commons Codec 1.3
+   o http://commons.apache.org/codec/
+ * Apache Commons HttpClient 3.1
+   o http://hc.apache.org/httpclient-3.x/
+ * Apache Commons IO 1.4
+   o http://commons.apache.org/io/
+ * Apache Commons Logging 1.1.1
+   o http://commons.apache.org/logging/
+ * Javascript Engine
+   o js-engine.jar
+   o https://scripting.dev.java.net/
+ * Mozilla Rhino 1.7R1
+   o http://www.mozilla.org/rhino/
+ * jPim 0.1 modified
+   o http://jpim.sourceforge.net/
+   o dead project, sources internally modified to fix some bugs
+   o sources available in the lib/ directory
+ * OpenIDE libraries:
+   o org-openide-awt.jar
+   o org-openide-util.jar
+   o http://platform.netbeans.org/
+   o included in NetBeans IDE 6.1
+ * Substance 4.3_12
+   o substance-lite-feel.jar
+   o https://substance.dev.java.net/
+ * JavaCSV 2.0
+   o https://sourceforge.net/projects/javacsv/
+ * JGoodies Looks 2.1.4
+   o http://www.jgoodies.com/freeware/looks/
+
+If you wish to use other libraries than the ones provided in lib/ directory
+(e.g. package maintainers may want this) you can specify classpaths to
+individual libraries in file lib/nblibraries.properties. Variables ending with
+'.classpath' will be of interest to you.
+
+
+Compiling program
+=================
+
+In sources root directory (where build.xml is located) run this command:
+
+ $ ant clean jar
+
+All the sources should be compiled in the build/ directory. In the dist/
+directory the resulting esmska.jar should be created, together with all needed
+libraries, available operators and some additional files copied from include/ 
+directory.
+
+
+Running program
+===============
+
+After compiling you can run Esmska by command:
+
+ $ ./dist/esmska.sh
+ 
+or
+
+ $ ant run
+
+from the sources root directory.
+
+
+Packaging program
+=================
+
+You can run command:
+
+ $ ./scripts/create-package NAME
+ 
+to obtain binary program packages NAME.zip and NAME.tar.gz inside the scripts/
+directory.
+
+When creating custom packages it may be good to note that the only important
+files for the program are esmska.jar, lib/ and operators/ directory. All other
+files are intended only for the end-user and the program does not use them.
+
+Package maintainer should be interested in resources/ directory. It contains
+many files useful for making packages. Especially an always up-to-date
+esmska.desktop file should be used, because it contains localized menu item 
+translations.
+
+
+Working with translations
+=========================
+
+Program uses src/esmska/resources/l10n*.properties files for localization.
+There are gettext files in the po/ directory for simplifying user contributions.
+By running command:
+
+ $ ./scripts/update-translations
+
+a new po/esmska.pot template is generated, all PO message catalogs are updated
+and localized properties files are generated from them.
+
+
+Creating Java WebStart package
+==============================
+
+First of all it is necessary to create a digital key to sign the jars. By using
+'keytool' command create a keystore file with a key alias:
+
+ $ keytool -genkeypair -keystore KEYSTORE -alias ALIAS -validity DAYS
+
+Edit file nbproject/project.properties and set variables 'jnlp.signjar.keystore'
+and 'jnlp.signjar.alias' to determine path to your keystore and your key alias.
+
+The key password can be placed into file nbproject/private/private.properties as
+a line 'jnlp.signjar.storepass=PASSWORD'. This way it will not be necessary to
+type password everytime you build it. It supposes that keystore and key have the
+same password.
+
+Now open the project in NetBeans IDE and run the 'javaws' task. It is not
+possible to build WebStart package on the command-line without using NetBeans.
+
+
