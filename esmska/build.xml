@@ -66,7 +66,18 @@
     nbproject/build-impl.xml file. 
 
     -->
-    
+
+    <!-- before building check whether Mac libs should not be excluded -->
+    <target name="-pre-init" depends="-exclude-mac"/>
+
+    <!-- if 'noMac' property set then exclude Mac source files and libraries from project -->
+    <target name="-exclude-mac" if="noMac">
+        <!-- overwrite properties that would be otherwise set afterwards by NetBeans project files -->
+        <property name="excludes" value="esmska/integration/MacIntegration.java"/>
+        <property name="libs.MacUI.classpath" value=""/>
+        <echo message="Building without Mac OS support as requested."/>
+    </target>
+
     <!-- overwrite 'jar' target not to create jnlp automatically -->
     <target name="jar" depends="init,compile,-pre-jar,-do-jar-with-manifest,-do-jar-without-manifest,
         -do-jar-with-mainclass,-do-jar-with-libraries,-post-jar" description="Build JAR."/>

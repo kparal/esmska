@@ -38,7 +38,8 @@ Provided by lib/ directory:
    o included in NetBeans IDE 6.1
  * Mac UI
    o included in Apple Java
-   o will be solved in future
+   o optional: see compiling section for information how to build without Mac OS
+     support
  * all runtime requirements
 
 
@@ -94,6 +95,11 @@ Compiling program
 In sources root directory (where build.xml is located) run this command:
 
  $ ant clean jar
+ 
+If you want to build the program without Mac OS support (for example Linux
+package maintainers not willing to use Apple library), use command:
+
+ $ ant -DnoMac=true clean jar
 
 All the sources should be compiled in the build/ directory. In the dist/
 directory the resulting esmska.jar should be created, together with all needed

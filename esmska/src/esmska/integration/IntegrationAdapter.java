@@ -43,7 +43,8 @@ public class IntegrationAdapter {
                     instance = (IntegrationAdapter) Class.forName(
                             "esmska.integration.MacIntegration").newInstance();
                 } catch (Exception e) {
-                    logger.log(Level.SEVERE, "Cannot set up integration for Mac OS X.", e);
+                    logger.log(Level.WARNING, "Cannot set up integration for Mac OS X. " +
+                            "Was the program compiled without Mac support?", e);
                     instance = new IntegrationAdapter();
                 }
                 break;
