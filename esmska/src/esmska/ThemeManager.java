@@ -22,7 +22,6 @@ import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.JavaType;
 import esmska.utils.Nullator;
-import esmska.utils.OSType;
 import java.util.logging.Logger;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -108,7 +107,6 @@ public class ThemeManager {
             case SUBSTANCE:
                 String skinString = config.getLafSubstanceSkin();
                 String skin = null;
-                new SubstanceLookAndFeel();
                 for (SkinInfo skinInfo : SubstanceLookAndFeel.getAllSkins().values()) {
                     if (skinInfo.getDisplayName().equals(skinString)) {
                         skin = skinInfo.getClassName();
@@ -116,9 +114,9 @@ public class ThemeManager {
                     }
                 }
                 SubstanceLookAndFeel.setSkin(skin != null ? skin : new SaharaSkin().getClass().getName());
-                UIManager.setLookAndFeel(new SubstanceLookAndFeel());
                 //set Substance specific addons
                 UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
+                UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown LaF name");
@@ -143,6 +141,12 @@ public class ThemeManager {
     public static boolean isNimbusCurrentLaF() {
         LookAndFeel laf = UIManager.getLookAndFeel();
         return Nullator.isEqual(laf.getName(), "Nimbus");
+    }
+
+    /** Returns whether Substance is current look and feel */
+    public static boolean isSubstanceCurrentLaF() {
+        LookAndFeel laf = UIManager.getLookAndFeel();
+        return laf.getName() != null && laf.getName().startsWith("Substance");
     }
     
     /** Returns whether specified LaF is supported on current configuration
@@ -193,11 +197,6 @@ public class ThemeManager {
         }
         //set system LaF on Apple, because Apple users are used to consistent look
         if (JavaType.isAppleJava()) {
-            laf = LAF.SYSTEM;
-        }
-        //set system LaF on KDE3, because there is a problem with small fonts in Substance
-        String KDEVersion = OSType.getKDEDesktopVersion();
-        if (KDEVersion != null && KDEVersion.startsWith("3")) {
             laf = LAF.SYSTEM;
         }
 

@@ -70,6 +70,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 import javax.swing.undo.UndoManager;
+import org.jvnet.substance.SubstanceLookAndFeel;
+import org.jvnet.substance.skin.SkinChangeListener;
 import org.openide.awt.Mnemonics;
 
 /** Panel for writing and sending sms, and for setting immediate contact
@@ -720,9 +722,15 @@ public class SMSPanel extends javax.swing.JPanel {
                 @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     if ("lookAndFeel".equals(evt.getPropertyName())) {
-                        StyleConstants.setForeground(regular, UIManager.getColor("TextArea.foreground"));
-                        SMSTextPaneDocumentFilter.this.requestUpdate();
+                        lafChanged();
                     }
+                }
+            });
+            // the same for substance skins (they do not notify UIManager from some reason)
+            SubstanceLookAndFeel.registerSkinChangeListener(new SkinChangeListener() {
+                @Override
+                public void skinChanged() {
+                    lafChanged();
                 }
             });
         }
@@ -779,6 +787,11 @@ public class SMSPanel extends javax.swing.JPanel {
         /** request recoloring externally */
         public void requestUpdate() {
             timer.restart();
+        }
+        /** update text color on LaF change */
+        private void lafChanged() {
+            StyleConstants.setForeground(regular, UIManager.getColor("TextArea.foreground"));
+            SMSTextPaneDocumentFilter.this.requestUpdate();
         }
     }
     

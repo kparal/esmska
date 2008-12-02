@@ -38,7 +38,6 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -63,6 +62,7 @@ import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
+import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
 
 /** Contact list panel
  *
@@ -751,7 +751,7 @@ public class ContactPanel extends javax.swing.JPanel {
     }
     
     /** Renderer for items in contact list */
-    private class ContactListRenderer extends DefaultListCellRenderer {
+    private class ContactListRenderer extends SubstanceDefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
         
         @Override

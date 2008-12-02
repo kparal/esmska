@@ -6,8 +6,10 @@
 
 package esmska.gui;
 
+import esmska.ThemeManager;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -20,7 +22,6 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -47,6 +48,7 @@ import esmska.integration.IntegrationAdapter;
 import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import java.awt.BorderLayout;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.HashMap;
@@ -64,6 +66,11 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import org.jvnet.substance.api.ComponentState;
+import org.jvnet.substance.api.SubstanceColorScheme;
+import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
+import org.jvnet.substance.painter.highlight.SubstanceHighlightPainter;
+import org.jvnet.substance.skin.SkinChangeListener;
 
 /** SMS queue panel
  *
@@ -374,7 +381,7 @@ public class QueuePanel extends javax.swing.JPanel {
         smsDownButton.setText("");
 
         queueList.setModel(queueListModel);
-        queueList.setCellRenderer(new SMSQueueListRenderer());
+        queueList.setCellRenderer(new SMSQueueListRenderer(queueList));
         queueList.setVisibleRowCount(4);
         queueList.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent evt) {
@@ -712,21 +719,48 @@ public class QueuePanel extends javax.swing.JPanel {
     }
     
     /** Renderer for items in queue list */
-    private class SMSQueueListRenderer extends DefaultListCellRenderer {
+    private class SMSQueueListRenderer extends SubstanceDefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
         private final JLabel delayLabel = new JLabel("", SwingConstants.TRAILING);
-        private final JPanel panel = new JPanel(new BorderLayout());
         private final ImageIcon sendIcon = new ImageIcon(getClass().getResource(RES + "send-16.png"));
+        private final boolean isSubstance = ThemeManager.isSubstanceCurrentLaF();
+        private boolean selected = false; //whether current item is selected
+        private final JList jlist; //list to render
+        private SubstanceColorScheme scheme; //current Substance color scheme for this list
+        private SubstanceHighlightPainter painter; //current Substance highlight painter for this list
 
-        public SMSQueueListRenderer() {
+        private final JPanel panel = new JPanel(new BorderLayout()) { //panel to wrap multiple labels
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                //Substance is not painting highlights on JPanels, therefore we must
+                //handle this painting on our own
+                if (isSubstance && selected) {
+                    painter.paintHighlight((Graphics2D) g, this, getWidth(),
+                            getHeight(), 1f, null, scheme, scheme, 0f);
+                }
+            }
+        };
+
+        public SMSQueueListRenderer(JList list) {
+            this.jlist = list;
             panel.add(delayLabel, BorderLayout.LINE_END);
             delayLabel.setOpaque(true);
+            
+            updateSubstanceSkinValues();
+            SubstanceLookAndFeel.registerSkinChangeListener(new SkinChangeListener() {
+                @Override
+                public void skinChanged() {
+                    updateSubstanceSkinValues();
+                }
+            });
         }
         
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = lafRenderer.getListCellRendererComponent(list, value, index,
                     isSelected, false); //looks better without cell focus
+            selected = isSelected;
             JLabel label = (JLabel) c;
             SMS sms = (SMS)value;
             
@@ -780,6 +814,14 @@ public class QueuePanel extends javax.swing.JPanel {
             }
             output.append("</html>");
             return output.toString();
+        }
+        /** on substance skin update reinitialize some properties */
+        private void updateSubstanceSkinValues() {
+            if (!isSubstance) {
+                return;
+            }
+            scheme = SubstanceLookAndFeel.getCurrentSkin(jlist).getColorScheme(jlist, ComponentState.SELECTED);
+            painter = SubstanceLookAndFeel.getCurrentSkin(jlist).getHighlightPainter();
         }
     }
     
