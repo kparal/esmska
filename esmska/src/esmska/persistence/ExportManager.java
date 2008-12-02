@@ -48,6 +48,7 @@ import esmska.data.SMS;
 import esmska.gui.MainFrame;
 import esmska.utils.ConfirmingFileChooser;
 import esmska.utils.L10N;
+import esmska.utils.Tuple;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -260,9 +261,9 @@ public class ExportManager {
             writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
             writer.writeComment(l10n.getString("ExportManager.login"));
             for (String operatorName : keyring.getOperatorNames()) {
-                String[] key = keyring.getKey(operatorName);
-                String login = key[0];
-                String password = Keyring.encrypt(key[1]);
+                Tuple<String, String> key = keyring.getKey(operatorName);
+                String login = key.get1();
+                String password = Keyring.encrypt(key.get2());
                 writer.writeRecord(new String[] {
                     operatorName,
                     login,

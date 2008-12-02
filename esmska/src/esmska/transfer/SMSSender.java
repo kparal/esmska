@@ -27,6 +27,7 @@ import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
+import esmska.utils.Tuple;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -141,10 +142,10 @@ public class SMSSender {
         map.put(OperatorVariable.SENDERNAME, sms.getSenderName());
         map.put(OperatorVariable.SENDERNUMBER, sms.getSenderNumber());
         
-        String[] key = keyring.getKey(sms.getOperator());
+        Tuple<String, String> key = keyring.getKey(sms.getOperator());
         if (key != null) {
-            map.put(OperatorVariable.LOGIN, key[0]);
-            map.put(OperatorVariable.PASSWORD, key[1]);
+            map.put(OperatorVariable.LOGIN, key.get1());
+            map.put(OperatorVariable.PASSWORD, key.get2());
         }
         
         if (config.isDemandDeliveryReport()) {

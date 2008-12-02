@@ -60,6 +60,7 @@ import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
 import esmska.utils.JavaType;
 import esmska.utils.Nullator;
+import esmska.utils.Tuple;
 import java.awt.Toolkit;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -84,9 +85,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Keyring keyring = PersistenceManager.getKeyring();
-    /* when to take updates seriously */
+    /** when to take updates seriously */
     private boolean fullyInicialized;
-    /* the active LaF when dialog is opened, needed for live-updating LaF skins */
+    /** the active LaF when dialog is opened, needed for live-updating LaF skins */
     private LAF lafWhenLoaded;
     private DefaultComboBoxModel lafModel = new DefaultComboBoxModel();
     
@@ -197,10 +198,10 @@ public class ConfigFrame extends javax.swing.JFrame {
             return;
         }
         
-        String[] key = new String[]{loginTextField.getText(), 
-            new String(passwordField.getPassword())};
+        Tuple<String, String> key = new Tuple<String, String>(loginTextField.getText(),
+            new String(passwordField.getPassword()));
         
-        if (Nullator.isEmpty(key[0]) && Nullator.isEmpty(key[1])) {
+        if (Nullator.isEmpty(key.get1()) && Nullator.isEmpty(key.get2())) {
             //if both empty, remove the key
             keyring.removeKey(operator.getName());
         } else {
@@ -1056,13 +1057,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         boolean temp = fullyInicialized;
         fullyInicialized = false;
         Operator operator = operatorComboBox.getSelectedOperator();
-        String[] key = keyring.getKey(operator != null ? operator.getName() : null);
+        Tuple<String, String> key = keyring.getKey(operator != null ? operator.getName() : null);
         if (key == null) {
             loginTextField.setText(null);
             passwordField.setText(null);
         } else {
-            loginTextField.setText(key[0]);
-            passwordField.setText(key[1]);
+            loginTextField.setText(key.get1());
+            passwordField.setText(key.get2());
         }
         fullyInicialized = temp;
     }//GEN-LAST:event_operatorComboBoxItemStateChanged

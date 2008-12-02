@@ -20,6 +20,7 @@ import esmska.data.Contact;
 import esmska.data.SMS;
 import esmska.operators.DefaultOperator;
 import esmska.operators.Operator;
+import esmska.utils.Tuple;
 import java.beans.IntrospectionException;
 import java.io.FileFilter;
 import java.net.JarURLConnection;
@@ -245,7 +246,7 @@ public class ImportManager {
                 String login = reader.get(1);
                 String password = Keyring.decrypt(reader.get(2));
 
-                String[] key = new String[]{login, password};
+                Tuple<String, String> key = new Tuple<String, String>(login, password);
                 keyring.putKey(operatorName, key);
             }
         } finally {

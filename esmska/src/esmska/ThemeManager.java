@@ -49,7 +49,7 @@ public class ThemeManager {
     private ThemeManager() {
     }
 
-    /* Set look and feel found in configuration. If it is not possible, use
+    /** Set look and feel found in configuration. If it is not possible, use
      * the next best one.
      * @throws Throwable when chosen look and feel can't be set
      */

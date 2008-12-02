@@ -4,6 +4,7 @@
  */
 package esmska.data;
 
+import esmska.utils.Tuple;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
@@ -31,25 +32,26 @@ public class Keyring {
     };
     private static final SecretKeySpec keySpec = new SecretKeySpec(passphrase, "AES");
     private static final String CIPHER_TRANSFORMATION = "AES/ECB/PKCS5Padding";
-    private Map<String, String[]> keyring = Collections.synchronizedMap(
-            new HashMap<String, String[]>());
+    /** map of [operator, [login, password]] */
+    private Map<String, Tuple<String, String>> keyring = Collections.synchronizedMap(
+            new HashMap<String, Tuple<String, String>>());
 
     /** Get key for chosen operator.
      * @param operatorName Name of the operator.
-     * @return String array in the form [login, password] if key for this operator
+     * @return tuple in the form [login, password] if key for this operator
      *         exists. Null otherwise.
      */
-    public String[] getKey(String operatorName) {
+    public Tuple<String, String> getKey(String operatorName) {
         return keyring.get(operatorName);
     }
 
     /** Put key for chosen operator. If a key for this operator already exists,
      * overwrite previous one.
      * @param operatorName Name of the operator.
-     * @param key String array in the form [login, password].
+     * @param key tuple in the form [login, password].
      * @throws IllegalArgumentException If operatorName or key is null.
      */
-    public void putKey(String operatorName, String[] key) {
+    public void putKey(String operatorName, Tuple<String, String> key) {
         if (operatorName == null) {
             throw new IllegalArgumentException("operatorName");
         }
@@ -63,12 +65,12 @@ public class Keyring {
 
     /** Put keys for more operators. If a key for particular operator already exists,
      * overwrite previous one.
-     * @param keys Map in the form &lt;operatorName, Key&gt;, where Key is in the
+     * @param keys Map in the form [operatorName, Key], where Key is in the
      *             form [login, password].
      * @throws IllegalArgumentException If some operatorName or some key is null.
      */
-    public void putKeys(Map<String, String[]> keys) {
-        for (Entry<String, String[]> entry : keys.entrySet()) {
+    public void putKeys(Map<String, Tuple<String, String>> keys) {
+        for (Entry<String, Tuple<String, String>> entry : keys.entrySet()) {
             putKey(entry.getKey(), entry.getValue());
         }
     }
