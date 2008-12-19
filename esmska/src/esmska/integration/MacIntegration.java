@@ -91,7 +91,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
             return;
         }
 
-        // turn off mnemonics and tool tips
+        // turn off mnemonics, tool tips and icons from menu
         JMenuBar bar = MainFrame.getInstance().getJMenuBar();
         for (Component menu : bar.getComponents()) {
             JMenu m = (JMenu) menu;
@@ -101,10 +101,12 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
             for (Component c : m.getPopupMenu().getComponents()) {
                 if (c instanceof JMenuItem) {
                     JMenuItem i = (JMenuItem) c;
+                    i.setIcon(null);
                     i.setMnemonic(-1);
                     i.setToolTipText(null);
                 } else if (c instanceof JMenu) {
                     JMenu jm = (JMenu) c;
+                    jm.setIcon(null);
                     jm.setMnemonic(-1);
                     jm.setToolTipText(null);
                 }
