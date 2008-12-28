@@ -79,7 +79,7 @@ public class ImportFrame extends javax.swing.JFrame {
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     private ArrayList<Contact> importedContacts = new ArrayList<Contact>(); //results from import
     private String actualCard = "applicationPanel";
-    private JFileChooser chooser = new JFileChooser();
+    private static JFileChooser chooser = new JFileChooser();
     
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
