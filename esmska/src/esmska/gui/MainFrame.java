@@ -111,8 +111,8 @@ public class MainFrame extends javax.swing.JFrame {
     private Config config = PersistenceManager.getConfig();
     /** sms history */
     private History history = PersistenceManager.getHistory();
-    /** whether user data were saved successfully */
-    private boolean saveOk = true;
+    /** shutdown handler thread */
+    private Thread shutdownThread = new ShutdownThread();
     
     
     /**
@@ -209,6 +209,9 @@ public class MainFrame extends javax.swing.JFrame {
             updateChecker.addActionListener(new UpdateListener());
             updateChecker.checkForUpdates();
         }
+
+        //add shutdown handler, when program is closed externally (logout, SIGTERM, etc)
+        Runtime.getRuntime().addShutdownHook(shutdownThread);
     }
     
     /** Get current instance */
@@ -236,7 +239,114 @@ public class MainFrame extends javax.swing.JFrame {
             this.setVisible(true);
         }
     }
-    
+
+    /** Notifies about change in sms queue */
+    public void smsProcessed(SMS sms) {
+        logger.fine("SMS processed: " + sms.toDebugString());
+        if (sms.getStatus() == SMS.Status.SENT_OK) {
+            statusPanel.setStatusMessage(
+                    MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
+                    true, Icons.STATUS_MESSAGE, true);
+            createHistory(sms);
+
+            if (smsPanel.getText().length() > 0) {
+                smsPanel.requestFocusInWindow();
+            } else {
+                contactPanel.requestFocusInWindow();
+            }
+        } else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
+            logger.info("Message for " + sms + " could not be sent");
+            queuePanel.setPaused(true);
+            statusPanel.setStatusMessage(
+                    MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms),
+                    true, Icons.STATUS_WARNING, true);
+
+            //prepare dialog
+            String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
+            JLabel label = new JLabel(
+                    MessageFormat.format(l10n.getString("MainFrame.sms_failed2"),
+                    sms, cause));
+            label.setVerticalAlignment(SwingConstants.TOP);
+            JPanel panel = new JPanel(new BorderLayout());
+            panel.add(label, BorderLayout.CENTER);
+            JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE);
+            JDialog dialog = pane.createDialog(MainFrame.this, null);
+
+            //check if the dialog is not wider than screen
+            //(very ugly, but it seems there is no clean solution in Swing for this)
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int width = panel.getWidth();
+            int height = panel.getHeight();
+            if (dialog.getWidth() > screenSize.getWidth()) { //wider than screen
+                width = (int) screenSize.getWidth() * 2/3;
+                height = height * (panel.getWidth() / width);
+                panel.setPreferredSize(new Dimension(width, height));
+                dialog = pane.createDialog(MainFrame.this, null); //create dialog again
+            }
+
+            //show the dialog
+            logger.fine("Showing reason why SMS sending failed...");
+            MacUtils.setDocumentModalDialog(dialog);
+            dialog.setResizable(true);
+            dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
+            dialog.setVisible(true);
+
+            //transfer focus
+            if (smsPanel.getText().length() > 0) {
+                smsPanel.requestFocusInWindow();
+            } else {
+                queuePanel.requestFocusInWindow();
+            }
+        }
+
+        //show operator message if present
+        if (!Nullator.isEmpty(sms.getOperatorMsg())) {
+            statusPanel.setStatusMessage(sms.getOperator() + ": " + sms.getOperatorMsg(),
+                    true, Icons.STATUS_MESSAGE, true);
+        }
+
+        if (!smsSender.isRunning()) {
+            statusPanel.setTaskRunning(false);
+        }
+        queuePanel.smsProcessed(sms);
+    }
+
+    /** Display random tip from the collection of tips */
+    public void showTipOfTheDay() {
+        try {
+            List tips = IOUtils.readLines(
+                    getClass().getResourceAsStream(RES + "tips.txt"), "UTF-8");
+            int random = new Random().nextInt(tips.size());
+            statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
+                    l10n.getString((String)tips.get(random)), false, null, false);
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Can't display tip of the day", ex);
+        }
+    }
+
+    /** get action used to show history frame */
+    public Action getHistoryAction() {
+        return historyAction;
+    }
+
+    /** get action used to exit the application */
+    public Action getQuitAction() {
+        return quitAction;
+    }
+
+    /** get action used to show settings frame */
+    public Action getConfigAction() {
+        return configAction;
+    }
+
+    public StatusPanel getStatusPanel() {
+        return statusPanel;
+    }
+
+    public QueuePanel getQueuePanel() {
+        return queuePanel;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -483,7 +593,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -507,26 +617,20 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         logger.fine("Closing main window...");
-        //save all settings
-        try {
-            saveConfig();
-            saveContacts();
-            saveQueue();
-            saveHistory();
-            saveKeyring();
-        } catch (Throwable t) {
-            logger.log(Level.SEVERE, "Serious error during saving", t);
-        } finally {
-            if (!saveOk) { //some data were not saved
-                logger.warning("Some config files were not saved");
-                JOptionPane.showMessageDialog(this,
-                        l10n.getString("MainFrame.cant_save_config"),
-                        null, JOptionPane.WARNING_MESSAGE);
-            }
-            int returnCode = saveOk ? 0 : 1;
-            logger.fine("Exiting program with return code: " + returnCode);
-            System.exit(returnCode);
+
+        //user requested program close, shutdown handler not needed
+        Runtime.getRuntime().removeShutdownHook(shutdownThread);
+
+        //save end exit
+        boolean saveOk = saveAll();
+        if (!saveOk) { //some data were not saved
+            JOptionPane.showMessageDialog(this,
+                    l10n.getString("MainFrame.cant_save_config"),
+                    null, JOptionPane.WARNING_MESSAGE);
         }
+        int returnCode = saveOk ? 0 : 1;
+        logger.fine("Exiting program with return code: " + returnCode);
+        System.exit(returnCode);
     }//GEN-LAST:event_formWindowClosing
 
 private void faqMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_faqMenuItemActionPerformed
@@ -588,76 +692,25 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         logger.log(Level.WARNING, "Could not browse URL: " + url, e);
     }
 }//GEN-LAST:event_problemMenuItemActionPerformed
-    
-    /** Notifies about change in sms queue */
-    public void smsProcessed(SMS sms) {
-        logger.fine("SMS processed: " + sms.toDebugString());
-        if (sms.getStatus() == SMS.Status.SENT_OK) {
-            statusPanel.setStatusMessage(
-                    MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
-                    true, Icons.STATUS_MESSAGE, true);
-            createHistory(sms);
-            
-            if (smsPanel.getText().length() > 0) {
-                smsPanel.requestFocusInWindow();
-            } else {
-                contactPanel.requestFocusInWindow();
-            }
-        } else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
-            logger.info("Message for " + sms + " could not be sent");
-            queuePanel.setPaused(true);
-            statusPanel.setStatusMessage(
-                    MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms),
-                    true, Icons.STATUS_WARNING, true);
-            
-            //prepare dialog
-            String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
-            JLabel label = new JLabel(
-                    MessageFormat.format(l10n.getString("MainFrame.sms_failed2"),
-                    sms, cause));
-            label.setVerticalAlignment(SwingConstants.TOP);
-            JPanel panel = new JPanel(new BorderLayout());
-            panel.add(label, BorderLayout.CENTER);
-            JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE);
-            JDialog dialog = pane.createDialog(MainFrame.this, null);
-            
-            //check if the dialog is not wider than screen
-            //(very ugly, but it seems there is no clean solution in Swing for this)
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();            
-            int width = panel.getWidth();
-            int height = panel.getHeight();
-            if (dialog.getWidth() > screenSize.getWidth()) { //wider than screen
-                width = (int) screenSize.getWidth() * 2/3;
-                height = height * (panel.getWidth() / width);
-                panel.setPreferredSize(new Dimension(width, height));
-                dialog = pane.createDialog(MainFrame.this, null); //create dialog again
-            }
-            
-            //show the dialog
-            logger.fine("Showing reason why SMS sending failed...");
-            MacUtils.setDocumentModalDialog(dialog);
-            dialog.setResizable(true);
-            dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
-            dialog.setVisible(true);
-            
-            //transfer focus
-            if (smsPanel.getText().length() > 0) {
-                smsPanel.requestFocusInWindow();
-            } else {
-                queuePanel.requestFocusInWindow();
-            }
-        }
 
-        //show operator message if present
-        if (!Nullator.isEmpty(sms.getOperatorMsg())) {
-            statusPanel.setStatusMessage(sms.getOperator() + ": " + sms.getOperatorMsg(),
-                    true, Icons.STATUS_MESSAGE, true);
+    /** Save all user data
+     * @return true if all saved ok; false otherwise
+     */
+    private boolean saveAll() {
+        logger.fine("Saving user data...");
+        boolean saveOk = true;
+        //save all settings
+        try {
+            saveOk = saveConfig() && saveOk;
+            saveOk = saveContacts() && saveOk;
+            saveOk = saveQueue() && saveOk;
+            saveOk = saveHistory() && saveOk;
+            saveOk = saveKeyring() && saveOk;
+            return saveOk;
+        } catch (Throwable t) {
+            logger.log(Level.SEVERE, "Serious error during saving user data", t);
+            return false;
         }
-        
-        if (!smsSender.isRunning()) {
-            statusPanel.setTaskRunning(false);
-        }
-        queuePanel.smsProcessed(sms);
     }
     
     /** Saves history of sent sms */
@@ -674,21 +727,10 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         history.addRecord(record);
     }
     
-    /** Display random tip from the collection of tips */
-    public void showTipOfTheDay() {
-        try {
-            List tips = IOUtils.readLines(
-                    getClass().getResourceAsStream(RES + "tips.txt"), "UTF-8");
-            int random = new Random().nextInt(tips.size());
-            statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
-                    l10n.getString((String)tips.get(random)), false, null, false);
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, "Can't display tip of the day", ex);
-        }
-    }
-    
-    /** save program configuration */
-    private void saveConfig() {
+    /** save program configuration
+     * @return true if saved ok; false otherwise
+     */
+    private boolean saveConfig() {
         //save frame layout
         config.setMainDimension(this.getSize());
         config.setHorizontalSplitPaneLocation(horizontalSplitPane.getDividerLocation());
@@ -696,9 +738,10 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         
         try {
             persistenceManager.saveConfig();
+            return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save config", ex);
-            saveOk = false;
+            return false;
         }
     }
     
@@ -744,28 +787,36 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
     }
     
-    /** save contacts */
-    private void saveContacts() {
+    /** save contacts
+     * @return true if saved ok; false otherwise
+     */
+    private boolean saveContacts() {
         try {
             persistenceManager.saveContacts();
+            return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save contacts", ex);
-            saveOk = false;
+            return false;
         }
     }
     
-    /** save sms queue */
-    private void saveQueue() {
+    /** save sms queue
+     * @return true if saved ok; false otherwise
+     */
+    private boolean saveQueue() {
         try {
             persistenceManager.saveQueue();
+            return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save queue", ex);
-            saveOk = false;
+            return false;
         }
     }
     
-    /** save sms history */
-    private void saveHistory() {
+    /** save sms history
+     * @return true if saved ok; false otherwise
+     */
+    private boolean saveHistory() {
         //erase old messages from history if demanded
         if (config.isReducedHistory()) {
             ArrayList<Record> records = history.getRecords();
@@ -790,28 +841,24 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         
         try {
             persistenceManager.saveHistory();
+            return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save history", ex);
-            saveOk = false;
+            return false;
         }
     }
     
-    /** save keyring */
-    private void saveKeyring() {
+    /** save keyring 
+     * @return true if saved ok; false otherwise
+     */
+    private boolean saveKeyring() {
         try {
             persistenceManager.saveKeyring();
+            return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save keyring", ex);
-            saveOk = false;
+            return false;
         }
-    }
-    
-    public StatusPanel getStatusPanel() {
-        return statusPanel;
-    }
-    
-    public QueuePanel getQueuePanel() {
-        return queuePanel;
     }
     
     /** Show about frame */
@@ -854,11 +901,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
     }
     
-    /** get action used to exit the application */
-    public Action getQuitAction() {
-        return quitAction;
-    }
-    
     /** Show config frame */
     private class ConfigAction extends AbstractAction {
         private ConfigFrame configFrame;
@@ -880,11 +922,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
                 configFrame.setVisible(true);
             }
         }
-    }
-    
-    /** get action used to show settings frame */
-    public Action getConfigAction() {
-        return configAction;
     }
     
     /** import data from other programs/formats */
@@ -954,11 +991,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         public HistoryFrame getHistoryFrame() {
             return historyFrame;
         }
-    }
-    
-    /** get action used to show history frame */
-    public Action getHistoryAction() {
-        return historyAction;
     }
     
     /** Listens for events from sms queue */
@@ -1056,6 +1088,15 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         public void actionPerformed(ActionEvent e) {
             statusPanel.setStatusMessage(l10n.getString("MainFrame.new_program_version"), 
                     false, Icons.STATUS_UPDATE, true);
+        }
+    }
+
+    /** Thread used when program is externally forced to shut down (logout, SIGTERM, etc) */
+    private class ShutdownThread extends Thread {
+        @Override
+        public void run() {
+            logger.fine("Program closing down...");
+            saveAll();
         }
     }
     
