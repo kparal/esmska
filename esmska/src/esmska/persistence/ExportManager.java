@@ -65,7 +65,7 @@ public class ExportManager {
             new FileNameExtensionFilter(l10n.getString("ExportManager.csv_filter"), "csv");
     private static final FileFilter vCardFileFilter = 
             new FileNameExtensionFilter(l10n.getString("ExportManager.vcard_filter"), "vcf", "vcard");
-    private static final ConfirmingFileChooser chooser = new ConfirmingFileChooser();
+    private static ConfirmingFileChooser chooser;
 
     /** Disabled constructor */
     private ExportManager() {
@@ -79,8 +79,11 @@ public class ExportManager {
         JOptionPane.showMessageDialog(parent,new JLabel(message),l10n.getString("ExportManager.contact_export"),
                 JOptionPane.INFORMATION_MESSAGE,
                 new ImageIcon(ExportManager.class.getResource(RES + "contact-48.png")));
-        
+
         //choose file
+        if (chooser == null) {
+            chooser = new ConfirmingFileChooser();
+        }
         chooser.setDialogTitle(l10n.getString("ExportManager.choose_export_file"));
         //set dialog type not to erase approve button text later
         chooser.setDialogType(JFileChooser.SAVE_DIALOG);
