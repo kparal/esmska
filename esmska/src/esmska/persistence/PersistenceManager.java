@@ -254,8 +254,10 @@ public class PersistenceManager {
         logger.fine("Loading history...");
         if (historyFile.exists()) {
             ArrayList<History.Record> records = ImportManager.importHistory(historyFile);
+            ContinuousSaveManager.disable(history);
             history.clearRecords();
             history.addRecords(records);
+            ContinuousSaveManager.enable(history);
         }
     }
     
@@ -272,7 +274,9 @@ public class PersistenceManager {
     public void loadKeyring() throws Exception {
         logger.fine("Loading keyring...");
         if (keyringFile.exists()) {
+            ContinuousSaveManager.disable(keyring);
             keyring = ImportManager.importKeyring(keyringFile);
+            ContinuousSaveManager.enable(keyring);
         }
     }
     

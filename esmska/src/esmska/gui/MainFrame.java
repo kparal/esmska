@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,7 +55,6 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
-import esmska.data.Contact;
 import esmska.data.History;
 import esmska.data.History.Record;
 import esmska.data.Icons;
@@ -105,16 +103,12 @@ public class MainFrame extends javax.swing.JFrame {
     private Action exportAction = new ExportAction();
     private HistoryAction historyAction = new HistoryAction();
 
-    /** actual queue of sms's */
-    private List<SMS> smsQueue = PersistenceManager.getQueue();
     /** sender of sms */
     private SMSSender smsSender;
     /** manager of persistence data */
     private PersistenceManager persistenceManager;
     /** program configuration */
     private Config config = PersistenceManager.getConfig();
-    /** sms contacts */
-    private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     /** sms history */
     private History history = PersistenceManager.getHistory();
     /** whether user data were saved successfully */
@@ -187,7 +181,7 @@ public class MainFrame extends javax.swing.JFrame {
                     false, Icons.STATUS_ERROR, true);
         }
         loadConfig();
-        if (smsQueue.size() > 0) {
+        if (PersistenceManager.getQueue().size() > 0) {
             queuePanel.setPaused(true);
         }
         
@@ -929,7 +923,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         @Override
         public void actionPerformed(ActionEvent e) {
             logger.fine("Showing export contacts dialog...");
-            ExportManager.exportContacts(MainFrame.this, contacts);
+            ExportManager.exportContacts(MainFrame.this, PersistenceManager.getContacs());
         }
     }
     

@@ -800,9 +800,9 @@
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.loginTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateKeyring();&#xa;            }&#xa;        });"/>
-              </AuxValues>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="loginTextFieldFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
@@ -824,9 +824,9 @@
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.passwordField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="passwordField.enableInputMethods(true);&#xa;passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateKeyring();&#xa;            }&#xa;        });"/>
-              </AuxValues>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="passwordFieldFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>

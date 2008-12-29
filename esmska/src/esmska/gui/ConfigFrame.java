@@ -19,11 +19,14 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -679,10 +682,9 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         loginTextField.setColumns(15);
         loginTextField.setToolTipText(l10n.getString("ConfigFrame.loginTextField.toolTipText")); // NOI18N
-        loginTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
-            @Override
-            public void onUpdate(DocumentEvent e) {
-                updateKeyring();
+        loginTextField.addFocusListener(new FocusAdapter() {
+            public void focusLost(FocusEvent evt) {
+                loginTextFieldFocusLost(evt);
             }
         });
 
@@ -692,11 +694,9 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         passwordField.setColumns(15);
         passwordField.setToolTipText(l10n.getString("ConfigFrame.passwordField.toolTipText")); // NOI18N
-        passwordField.enableInputMethods(true);
-        passwordField.getDocument().addDocumentListener(new AbstractDocumentListener() {
-            @Override
-            public void onUpdate(DocumentEvent e) {
-                updateKeyring();
+        passwordField.addFocusListener(new FocusAdapter() {
+            public void focusLost(FocusEvent evt) {
+                passwordFieldFocusLost(evt);
             }
         });
 
@@ -1051,6 +1051,12 @@ public class ConfigFrame extends javax.swing.JFrame {
         if (prefix.length() > 0 && !FormChecker.checkCountryPrefix(prefix)) {
             config.setCountryPrefix("");
         }
+        //save config
+        try {
+            PersistenceManager.getInstance().saveConfig();
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, "Could not save config", ex);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
@@ -1121,6 +1127,14 @@ private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(privacyPanel), showAdvanced);
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(connectionPanel), showAdvanced);
 }//GEN-LAST:event_advancedCheckBoxActionPerformed
+
+private void loginTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_loginTextFieldFocusLost
+    updateKeyring();
+}//GEN-LAST:event_loginTextFieldFocusLost
+
+private void passwordFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusLost
+    updateKeyring();
+}//GEN-LAST:event_passwordFieldFocusLost
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();

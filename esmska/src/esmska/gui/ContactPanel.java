@@ -28,11 +28,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
@@ -179,6 +181,15 @@ public class ContactPanel extends javax.swing.JPanel {
             }
         }
         contactList.ensureIndexIsVisible(index);
+    }
+
+    /** Save contacts to disk */
+    private void saveContacts() {
+        try {
+            PersistenceManager.getInstance().saveContacts();
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, "Could not save contacts", ex);
+        }
     }
     
     /** This method is called from within the constructor to
@@ -643,8 +654,6 @@ public class ContactPanel extends javax.swing.JPanel {
             return removed;
         }
         public void removeAll(Collection<Contact> elements) {
-//            for (Object o : elements)
-//                remove((Contact)o); //TODO fix 'out of memory' when using remove()
             int size = getSize();
             logger.fine("Removing " + elements.size() + " contacts: " + elements);
             contacts.removeAll(elements);
@@ -658,14 +667,17 @@ public class ContactPanel extends javax.swing.JPanel {
         @Override
         protected void fireIntervalRemoved(Object source, int index0, int index1) {
             super.fireIntervalRemoved(source, index0, index1);
+            saveContacts();
         }
         @Override
         protected void fireIntervalAdded(Object source, int index0, int index1) {
             super.fireIntervalAdded(source, index0, index1);
+            saveContacts();
         }
         @Override
         protected void fireContentsChanged(Object source, int index0, int index1) {
             super.fireContentsChanged(source, index0, index1);
+            saveContacts();
         }
     }
     

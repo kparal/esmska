@@ -64,6 +64,7 @@ import org.openide.awt.Mnemonics;
  */
 public class ImportFrame extends javax.swing.JFrame {
     public static final int ACTION_IMPORT_CONTACTS = 0;
+    
     private static final Logger logger = Logger.getLogger(ImportFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
@@ -73,13 +74,13 @@ public class ImportFrame extends javax.swing.JFrame {
     private static final String infoVcard = l10n.getString("ImportFrame.infoVcard");
     private static final String encodingUTF8 = l10n.getString("ImportFrame.encodingUTF8");
     private static final String encodingWin1250 = l10n.getString("ImportFrame.encodingWin1250");
+    private static final JFileChooser chooser = new JFileChooser();
 
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
     private ArrayList<Contact> importedContacts = new ArrayList<Contact>(); //results from import
     private String actualCard = "applicationPanel";
-    private static JFileChooser chooser = new JFileChooser();
     
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);

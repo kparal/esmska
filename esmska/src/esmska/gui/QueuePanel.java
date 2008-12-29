@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,6 +59,7 @@ import java.util.ListIterator;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -346,6 +348,15 @@ public class QueuePanel extends javax.swing.JPanel {
         //if found some new ready sms and queue is not paused, inform the listeners
         if (readySMS.size() > waitingBefore && !isPaused()) {
             actionSupport.fireActionPerformed(ACTION_NEW_SMS_READY, null);
+        }
+    }
+
+    /** Saves queue to disk */
+    private void saveQueue() {
+        try {
+            PersistenceManager.getInstance().saveQueue();
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, "Could not save queue", ex);
         }
     }
     
@@ -707,10 +718,12 @@ public class QueuePanel extends javax.swing.JPanel {
         @Override
         protected void fireIntervalRemoved(Object source, int index0, int index1) {
             super.fireIntervalRemoved(source, index0, index1);
+            saveQueue();
         }
         @Override
         protected void fireIntervalAdded(Object source, int index0, int index1) {
             super.fireIntervalAdded(source, index0, index1);
+            saveQueue();
         }
         @Override
         protected void fireContentsChanged(Object source, int index0, int index1) {

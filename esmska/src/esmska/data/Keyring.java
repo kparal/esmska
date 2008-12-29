@@ -4,7 +4,10 @@
  */
 package esmska.data;
 
+import esmska.utils.ActionEventSupport;
+import esmska.utils.Nullator;
 import esmska.utils.Tuple;
+import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
@@ -23,6 +26,14 @@ import org.apache.commons.codec.binary.Base64;
  * @author ripper
  */
 public class Keyring {
+
+    /** new key added or existing changed */
+    public static final int ACTION_ADD_KEY = 0;
+    /** existing key removed */
+    public static final int ACTION_REMOVE_KEY = 1;
+    /** all keys removed */
+    public static final int ACTION_CLEAR_KEYS = 2;
+
     private static final Logger logger = Logger.getLogger(Keyring.class.getName());
 
     /** AES passphrase */
@@ -35,6 +46,17 @@ public class Keyring {
     /** map of [operator, [login, password]] */
     private Map<String, Tuple<String, String>> keyring = Collections.synchronizedMap(
             new HashMap<String, Tuple<String, String>>());
+
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
 
     /** Get key for chosen operator.
      * @param operatorName Name of the operator.
@@ -52,15 +74,25 @@ public class Keyring {
      * @throws IllegalArgumentException If operatorName or key is null.
      */
     public void putKey(String operatorName, Tuple<String, String> key) {
+        if (putKeyImpl(operatorName, key)) {
+            logger.finer("New keyring key added: [operatorName=" + operatorName + "]");
+            actionSupport.fireActionPerformed(ACTION_ADD_KEY, null);
+        }
+    }
+
+    /** Inner execution code for putKey method
+     * @return true if keyring was updated (key was not present or was modified
+     * by the update); false if nothing has changed
+     */
+    private boolean putKeyImpl(String operatorName, Tuple<String, String> key) {
         if (operatorName == null) {
             throw new IllegalArgumentException("operatorName");
         }
         if (key == null) {
             throw new IllegalArgumentException("key");
         }
-
-        keyring.put(operatorName, key);
-        logger.finer("New keyring key added: [operatorName=" + operatorName + "]");
+        Tuple<String, String> previous = keyring.put(operatorName, key);
+        return previous == null || !Nullator.isEqual(previous, key);
     }
 
     /** Put keys for more operators. If a key for particular operator already exists,
@@ -70,8 +102,13 @@ public class Keyring {
      * @throws IllegalArgumentException If some operatorName or some key is null.
      */
     public void putKeys(Map<String, Tuple<String, String>> keys) {
+        int changed = 0;
         for (Entry<String, Tuple<String, String>> entry : keys.entrySet()) {
-            putKey(entry.getKey(), entry.getValue());
+            changed += putKeyImpl(entry.getKey(), entry.getValue()) ? 1 : 0;
+        }
+        if (changed > 0) {
+            logger.finer(changed + " new keyring keys added");
+            actionSupport.fireActionPerformed(ACTION_ADD_KEY, null);
         }
     }
 
@@ -79,8 +116,10 @@ public class Keyring {
      * @param operatorName Name of the operator.
      */
     public void removeKey(String operatorName) {
-        keyring.remove(operatorName);
-        logger.finer("A keyring key removed: [operatorName=" + operatorName + "]");
+        if (keyring.remove(operatorName) != null) {
+            logger.finer("A keyring key removed: [operatorName=" + operatorName + "]");
+            actionSupport.fireActionPerformed(ACTION_REMOVE_KEY, null);
+        }
     }
 
     /** Get set of all operator names, which are in the keyring.
@@ -96,6 +135,7 @@ public class Keyring {
     public void clearKeys() {
         keyring.clear();
         logger.finer("All keyring keys removed");
+        actionSupport.fireActionPerformed(ACTION_CLEAR_KEYS, null);
     }
 
     /** Encrypt input string. The string is encrypted using AES encryption with

@@ -24,13 +24,13 @@ public class History {
     public static final int ACTION_ADD_RECORD = 0;
     /** existing record removed */
     public static final int ACTION_REMOVE_RECORD = 1;
-    /** all records deleted */
+    /** all records removed */
     public static final int ACTION_CLEAR_RECORDS = 2;
 
     private static final Logger logger = Logger.getLogger(History.class.getName());
     private ArrayList<Record> records = new ArrayList<Record>();
     
-   // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
     public void addActionListener(ActionListener actionListener) {
         actionSupport.addActionListener(actionListener);
