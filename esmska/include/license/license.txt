@@ -45,6 +45,8 @@
        * Substance Extras: BSD License
      o Source files which state a specific license at their beginning are
        following that particular license.
+     o Icons used inside the program were taken over from various free software
+       projects.
      o Some of the icons used for depicting individual operator gateways may
        have their own specific license or be copyrighted by the corresponding
        GSM/web gateway provider.
