@@ -42,6 +42,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.openide.awt.Mnemonics;
 
@@ -259,7 +260,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     getClass().getResourceAsStream(RES + "license.txt"), "UTF-8");
             final String agpl = IOUtils.toString(
                             getClass().getResourceAsStream(RES + "gnu-agpl.txt"), "UTF-8");
-            license = license.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+            license = StringEscapeUtils.escapeHtml(license);
             license = license.replaceAll("GNU Affero General Public License", 
                     "<a href=\"agpl\">GNU Affero General Public License</a>");
             

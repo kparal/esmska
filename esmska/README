@@ -59,6 +59,8 @@ Provided by lib/ directory:
    o http://hc.apache.org/httpclient-3.x/
  * Apache Commons IO 1.4
    o http://commons.apache.org/io/
+ * Apache Commons Lang 2.4
+   o http://commons.apache.org/lang/
  * Apache Commons Logging 1.1.1
    o http://commons.apache.org/logging/
  * Javascript Engine

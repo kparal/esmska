@@ -5,6 +5,7 @@
 
 package esmska.operators;
 
+import esmska.data.Config;
 import esmska.data.Keyring;
 import esmska.persistence.PersistenceManager;
 import java.util.Collection;
@@ -17,6 +18,7 @@ import java.util.TreeSet;
 public class OperatorUtil {
     private static final TreeSet<Operator> operators = PersistenceManager.getOperators();
     private static final Keyring keyring = PersistenceManager.getKeyring();
+    private static final Config config = PersistenceManager.getConfig();
     
     /** Find operator by name.
      * @param name Name of the operator. Search is case sensitive.
@@ -167,4 +169,17 @@ public class OperatorUtil {
         return number.startsWith(operator.getCountryPrefix());
     }
     
+    
+    /** String current country prefix from number if possible
+     * 
+     * @param number number, can be null
+     * @return number with stripped country prefix from start if possible; 
+     * otherwise non-modified number
+     */
+    public static String stripCountryPrefix(String number) {
+        if (number != null && number.startsWith(config.getCountryPrefix())) {
+            number = number.substring(config.getCountryPrefix().length());
+        }
+        return number;
+    }
 }

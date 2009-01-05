@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.Timer;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.openide.awt.Mnemonics;
 
 /** Status bar panel
@@ -57,12 +58,13 @@ public class StatusPanel extends javax.swing.JPanel {
      */
     public void setStatusMessage(String message, boolean printTime, ImageIcon icon,
             boolean addToLog) {
+        String messageEsc = StringEscapeUtils.escapeHtml(message);
         Date time = new Date();
         if (printTime) {
             String timestamp = shortTimeFormat.format(new Date());
-            statusMessageLabel.setText("<html>[" + timestamp + "] " + message + "</html>");
+            statusMessageLabel.setText("<html>[" + timestamp + "] " + messageEsc + "</html>");
         } else {
-            statusMessageLabel.setText("<html>" + message + "</html>");
+            statusMessageLabel.setText("<html>" + messageEsc + "</html>");
         }
         statusMessageLabel.setIcon(icon);
         

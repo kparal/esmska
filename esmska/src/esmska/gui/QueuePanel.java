@@ -51,6 +51,7 @@ import esmska.utils.Nullator;
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -68,6 +69,8 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.WordUtils;
 import org.jvnet.substance.api.ComponentState;
 import org.jvnet.substance.api.SubstanceColorScheme;
 import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
@@ -736,6 +739,7 @@ public class QueuePanel extends javax.swing.JPanel {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
         private final JLabel delayLabel = new JLabel("", SwingConstants.TRAILING);
         private final ImageIcon sendIcon = new ImageIcon(getClass().getResource(RES + "send-16.png"));
+        private final URL messageIconURI = getClass().getResource(RES + "message-32.png");
         private final boolean isSubstance = ThemeManager.isSubstanceCurrentLaF();
         private boolean selected = false; //whether current item is selected
         private final JList jlist; //list to render
@@ -778,11 +782,8 @@ public class QueuePanel extends javax.swing.JPanel {
             SMS sms = (SMS)value;
             
             //set text
-            String text = sms.toString();
-            if (text.startsWith(config.getCountryPrefix())) {
-                text = text.substring(config.getCountryPrefix().length());
-            }
-            label.setText(text);
+            label.setText(!Nullator.isEmpty(sms.getName()) ?
+                sms.getName() : OperatorUtil.stripCountryPrefix(sms.getNumber()));
             //problematic sms colored
             if ((sms.getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
                 label.setBackground(Color.RED);
@@ -795,7 +796,15 @@ public class QueuePanel extends javax.swing.JPanel {
             Operator operator = OperatorUtil.getOperator(sms.getOperator());
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
-            panel.setToolTipText(wrapToHTML(sms.getText()));
+            String text = WordUtils.wrap(sms.getText(), 50, null, true);
+            text = StringEscapeUtils.escapeHtml(text);
+            text = text.replaceAll("\n", "<br>");
+            String tooltip = "<html><table><tr><td><img src=\"" + messageIconURI +
+                    "\"></td><td valign=top><b>" + label.getText() + "</b><br>" +
+                    (Nullator.isEmpty(sms.getName())?"":OperatorUtil.stripCountryPrefix(sms.getNumber())+", ") +
+                    sms.getOperator() + "<br><br>" + text +
+                    "</td></tr></table></html>";
+            panel.setToolTipText(tooltip);
             //set delay label
             if (sendingSMS.contains(sms)) {
                 delayLabel.setIcon(sendIcon);
@@ -809,24 +818,6 @@ public class QueuePanel extends javax.swing.JPanel {
             panel.add(label, BorderLayout.CENTER);
 
             return panel;
-        }
-        /** transform string to html with linebreaks */
-        private String wrapToHTML(String text) {
-            StringBuilder output = new StringBuilder();
-            output.append("<html>");
-            int from = 0;
-            while (from < text.length()) {
-                int to = from + 50;
-                to = text.indexOf(' ',to);
-                if (to < 0) {
-                    to = text.length();
-                }
-                output.append(text.substring(from, to));
-                output.append("<br>");
-                from = to + 1;
-            }
-            output.append("</html>");
-            return output.toString();
         }
         /** on substance skin update reinitialize some properties */
         private void updateSubstanceSkinValues() {

@@ -29,6 +29,7 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -63,6 +64,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
 
@@ -765,6 +767,7 @@ public class ContactPanel extends javax.swing.JPanel {
     /** Renderer for items in contact list */
     private class ContactListRenderer extends SubstanceDefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
+        private final URL contactIconURI = getClass().getResource(RES + "contact-32.png");
         
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -776,11 +779,12 @@ public class ContactPanel extends javax.swing.JPanel {
             Operator operator = OperatorUtil.getOperator(contact.getOperator());
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
-            String number = contact.getNumber();
-            if (number.startsWith(config.getCountryPrefix())) {
-                number = number.substring(config.getCountryPrefix().length());
-            }
-            label.setToolTipText(number);
+            String tooltip = "<html><table><tr><td><img src=\"" + contactIconURI +
+                    "\"></td><td valign=top><b>" + StringEscapeUtils.escapeHtml(contact.getName()) +
+                    "</b><br>" + OperatorUtil.stripCountryPrefix(contact.getNumber()) +
+                    "<br>" + StringEscapeUtils.escapeHtml(contact.getOperator()) +
+                    "</td></tr></table></html>";
+            label.setToolTipText(tooltip);
             //set background on non-matching contacts when searching
             if (!searchContactAction.getSearchString().equals("") &&
                     !searchContactAction.isContactMatched(contact)) {

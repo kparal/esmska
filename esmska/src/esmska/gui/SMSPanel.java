@@ -11,6 +11,7 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Envelope;
 import esmska.data.SMS;
+import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
@@ -928,10 +929,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 setText("");
             }
             
-            if (number.startsWith(config.getCountryPrefix())) {
-                number = number.substring(config.getCountryPrefix().length());
-            }
-            setText(number);
+            setText(OperatorUtil.stripCountryPrefix(number));
         }
         
         /** Listener for changes in the field document */
