@@ -464,15 +464,18 @@ public class QueuePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void queueListValueChanged(ListSelectionEvent evt) {//GEN-FIRST:event_queueListValueChanged
-        //update form components
-        if (!evt.getValueIsAdjusting()) {
-            int queueSize = queueListModel.getSize();
-            int selectedItems = queueList.getSelectedIndices().length;
-            deleteSMSAction.setEnabled(queueSize != 0 && selectedItems != 0);
-            editSMSAction.setEnabled(queueSize != 0 && selectedItems == 1);
-            smsUpAction.setEnabled(queueSize != 0 && selectedItems == 1);
-            smsDownAction.setEnabled(queueSize != 0 && selectedItems == 1);
+        if (evt != null && evt.getValueIsAdjusting()) {
+            return;
         }
+        //update form components
+        int queueSize = queueListModel.getSize();
+        int selectedItems = queueList.getSelectedIndices().length;
+        boolean first = queueList.isSelectedIndex(0);
+        boolean last = queueList.isSelectedIndex(queueSize-1);
+        deleteSMSAction.setEnabled(queueSize != 0 && selectedItems != 0);
+        editSMSAction.setEnabled(queueSize != 0 && selectedItems == 1);
+        smsUpAction.setEnabled(queueSize != 0 && selectedItems == 1 && !first);
+        smsDownAction.setEnabled(queueSize != 0 && selectedItems == 1 && !last);
 }//GEN-LAST:event_queueListValueChanged
 
     private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
@@ -727,6 +730,7 @@ public class QueuePanel extends javax.swing.JPanel {
         protected void fireIntervalAdded(Object source, int index0, int index1) {
             super.fireIntervalAdded(source, index0, index1);
             saveQueue();
+            queueListValueChanged(null); //update selection actions
         }
         @Override
         protected void fireContentsChanged(Object source, int index0, int index1) {
