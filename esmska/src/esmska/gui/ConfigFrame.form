@@ -482,6 +482,10 @@
                               <Component id="countryPrefixTextField" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="countryCodeLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="countryCodeComboBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="operatorFilterLabel" min="-2" max="-2" attributes="0"/>
@@ -518,6 +522,8 @@
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="countryPrefixTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="countryCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="countryCodeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -624,7 +630,7 @@
                 </BindingProperty>
               </BindingProperties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryPrefixTextField.setInputVerifier(new InputVerifier() {&#xa;            @Override&#xa;            public boolean verify(JComponent input) {&#xa;                String prefix = countryPrefixTextField.getText();&#xa;                return prefix.length() == 0 || FormChecker.checkCountryPrefix(prefix);&#xa;            }&#xa;        });&#xa;countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                updateCountryCode();&#xa;            }&#xa;});"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryPrefixTextField.setInputVerifier(new InputVerifier() {&#xa;            @Override&#xa;            public boolean verify(JComponent input) {&#xa;                String prefix = countryPrefixTextField.getText();&#xa;                return prefix.length() == 0 || FormChecker.checkCountryPrefix(prefix);&#xa;            }&#xa;        });&#xa;countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                if (!fullyInicialized) {&#xa;                    return;&#xa;                }&#xa;                updateCountryCode();&#xa;            }&#xa;});"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -666,14 +672,6 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="countryCodeLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;&lt;(country: XX)&gt;&gt;" noResource="true"/>
-                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.countryCodeLabel.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JCheckBox" name="demandDeliveryReportCheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
@@ -687,6 +685,34 @@
                 <BindingProperty name="selected" source="config" sourcePath="${demandDeliveryReport}" target="demandDeliveryReportCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
                 <BindingProperty name="enabled" source="useSenderIDCheckBox" sourcePath="${selected}" target="demandDeliveryReportCheckBox" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="countryCodeComboBox">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.countryCodeComboBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="countryCodeComboBoxItemStateChanged"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ArrayList&lt;String&gt; codes = CountryPrefix.getCountryCodes();&#xa;codes.add(0, l10n.getString(&quot;ConfigFrame.unknown_state&quot;));&#xa;countryCodeComboBox.setModel(new DefaultComboBoxModel(codes.toArray()));&#xa;countryCodeComboBox.setSelectedIndex(0);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="countryCodeLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.countryCodeLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="countryCodeComboBox" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value=")" noResource="true"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -757,7 +783,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="193" max="32767" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

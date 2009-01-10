@@ -4,6 +4,8 @@
  */
 package esmska.data;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /** Class containing list of all telephone country prefixes (as defined in
@@ -306,5 +308,13 @@ public class CountryPrefix {
         }
         
         return null;
+    }
+
+    /** Get all country codes sorted ascendingly */
+    public static ArrayList<String> getCountryCodes() {
+        ArrayList<String> list = new ArrayList<String>(map.size());
+        list.addAll(map.keySet());
+        Collections.sort(list);
+        return list;
     }
 }
