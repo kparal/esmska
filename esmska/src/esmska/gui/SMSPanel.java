@@ -932,14 +932,15 @@ public class SMSPanel extends javax.swing.JPanel {
             setText(OperatorUtil.stripCountryPrefix(number));
         }
         
-        /** Listener for changes in the field document */
+        /** Listener for changes in the recipient field */
         private class RecipientDocumentChange implements Runnable {
             @Override
             public void run() {
                 //search for contact
                 contact = null;
                 contact = lookupContact(false);
-                requestSelectContact(contact);
+                requestSelectContact(null);    //ensure contact selection will fire
+                requestSelectContact(contact); //event even if the same contact
 
                 //if not found and is number, guess operator
                 if (contact == null && getNumber() != null) {

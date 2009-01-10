@@ -1004,7 +1004,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
                     if (sms == null) {
                         return;
                     }
-                    contactPanel.clearSelection();
                     smsPanel.setSMS(sms);
                     break;
             }
