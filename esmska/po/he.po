@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-26 01:47+0200\n"
+"POT-Creation-Date: 2009-01-10 21:18+0200\n"
 "PO-Revision-Date: 2008-11-05 13:49+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -43,7 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "שליחת SMS דרך האינטרנט."
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2008 Kamil Páral"
+#, fuzzy
+msgid "2007-2009 Kamil Páral"
 msgstr "2007-2008 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
@@ -221,9 +222,14 @@ msgstr "מוחק את כל שמות המשתמשים והסיסמאות עבור
 msgid "&Connection"
 msgstr "הת&חברות"
 
-#: ConfigFrame.countryCodeLabel.toolTipText
+#: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
 msgstr "קוד המדינה שעבורה מילאת את הקידומת"
+
+#: ConfigFrame.countryCodeLabel.text
+#, fuzzy
+msgid "(country:"
+msgstr "(מדינה: {0})"
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -558,11 +564,6 @@ msgstr ""
 "לסמל שבאזור ההתרעות\n"
 "</html>"
 
-#. #Single quotes need to be doubled!
-#: ConfigFrame.state
-msgid "(country: {0})"
-msgstr "(מדינה: {0})"
-
 #: ConfigFrame.substanceWarning.text
 msgid ""
 "<html><i>\n"
@@ -641,9 +642,11 @@ msgstr ""
 msgid "Unknown"
 msgstr "לא ידוע"
 
+#. #meaning "unknown country"
 #: ConfigFrame.unknown_state
-msgid "(unknown state)"
-msgstr "(מצב לא ידוע)"
+#, fuzzy
+msgid "unknown"
+msgstr "לא ידוע"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -847,12 +850,23 @@ msgstr ""
 msgid "Edit contact"
 msgstr "ערוך איש קשר"
 
+#: Edit_contacts
+#, fuzzy
+msgid "Edit contacts"
+msgstr "ערוך איש קשר"
+
+#: Edit_contacts_collectively
+#, fuzzy
+msgid "Edit contacts collectively"
+msgstr "ערוך איש קשר"
+
 #: Edit_message
 msgid "Edit message"
 msgstr "ערוך הודעה"
 
-#: Edit_selected_contact
-msgid "Edit selected contact"
+#: Edit_selected_contacts
+#, fuzzy
+msgid "Edit selected contacts"
 msgstr "ערוך את איש הקשר הנבחר"
 
 #: Edit_selected_message
@@ -1934,3 +1948,6 @@ msgstr "המשך בתור"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "המשך את תור ה־SMS"
+
+#~ msgid "(unknown state)"
+#~ msgstr "(מצב לא ידוע)"

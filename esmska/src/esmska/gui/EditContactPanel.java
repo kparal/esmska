@@ -17,6 +17,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javax.swing.Action;
@@ -44,6 +45,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);
     
     private Config config = PersistenceManager.getConfig();
+    private boolean multiMode; //edit multiple contacts
 
     private Action suggestOperatorAction;
     /**
@@ -174,7 +176,12 @@ public class EditContactPanel extends javax.swing.JPanel {
     public boolean validateForm() {
         boolean valid = true;
         boolean focusTransfered = false;
-        JComponent[] comps = new JComponent[] {nameTextField, numberTextField};
+        JComponent[] comps;
+        if (multiMode) {
+            comps = new JComponent[] {};
+        } else {
+            comps = new JComponent[] {nameTextField, numberTextField};
+        }
         for (JComponent c : comps) {
             valid = checkValid(c) && valid;
             if (!valid && !focusTransfered) {
@@ -206,6 +213,15 @@ public class EditContactPanel extends javax.swing.JPanel {
             c.setBorder(lineRedBorder);
         }
     }
+
+    /** Enable or disable multi-editing mode */
+    private void setMultiMode(boolean multiMode) {
+        this.multiMode = multiMode;
+
+        nameTextField.setEnabled(!multiMode);
+        numberTextField.setEnabled(!multiMode);
+        suggestOperatorAction.setEnabled(!multiMode);
+    }
     
     private void numberTextFieldKeyReleased(KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
         //guess operator
@@ -222,6 +238,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
+        setMultiMode(false);
         if (contact == null) {
             nameTextField.setText(null);
             numberTextField.setText(config.getCountryPrefix());
@@ -232,6 +249,16 @@ public class EditContactPanel extends javax.swing.JPanel {
             operatorComboBox.setSelectedOperator(contact.getOperator());
         }
     }
+
+    /** Set contacts for collective editing. May not be null. */
+    public void setContacts(Collection<Contact> contacts) {
+        if (contacts.size() <= 1) {
+            setContact(contacts.size() <= 0 ? null : contacts.iterator().next());
+            return;
+        }
+        setMultiMode(true);
+        operatorComboBox.setSelectedOperator(contacts.iterator().next().getOperator());
+    }
     
     /** Get currently edited contact */
     public Contact getContact() {
@@ -241,11 +268,15 @@ public class EditContactPanel extends javax.swing.JPanel {
         c.setOperator(operatorComboBox.getSelectedOperatorName());
         return c;
     }
-    
+
     /** Improve focus etc. before displaying panel */
     public void prepareForShow() {
-        nameTextField.requestFocusInWindow();
-        nameTextField.selectAll();
+        if (multiMode) {
+            operatorComboBox.requestFocusInWindow();
+        } else {
+            nameTextField.requestFocusInWindow();
+            nameTextField.selectAll();
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

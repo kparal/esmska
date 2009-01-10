@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-26 01:47+0200\n"
+"POT-Creation-Date: 2009-01-10 21:18+0200\n"
 "PO-Revision-Date: 2008-11-16 20:49+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -43,7 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "Posielanie SMS cez internet."
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2008 Kamil Páral"
+#, fuzzy
+msgid "2007-2009 Kamil Páral"
 msgstr "2007-2008 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
@@ -224,9 +225,14 @@ msgstr "Vymaže používateľské mená a heslá ku všetkým operátorom"
 msgid "&Connection"
 msgstr "Pri&pojenie"
 
-#: ConfigFrame.countryCodeLabel.toolTipText
+#: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
 msgstr "Kód štátu, pre ktorý ste vyplnili medzinárodné smerové číslo"
+
+#: ConfigFrame.countryCodeLabel.text
+#, fuzzy
+msgid "(country:"
+msgstr "(štát: {0})"
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -573,11 +579,6 @@ msgstr ""
 "do ikony v oznamovacej oblasti.\n"
 "</html>"
 
-#. #Single quotes need to be doubled!
-#: ConfigFrame.state
-msgid "(country: {0})"
-msgstr "(štát: {0})"
-
 #: ConfigFrame.substanceWarning.text
 msgid ""
 "<html><i>\n"
@@ -657,9 +658,11 @@ msgstr ""
 msgid "Unknown"
 msgstr "Neznámy"
 
+#. #meaning "unknown country"
 #: ConfigFrame.unknown_state
-msgid "(unknown state)"
-msgstr "(neznámy štát)"
+#, fuzzy
+msgid "unknown"
+msgstr "Neznámy"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -862,12 +865,23 @@ msgstr ""
 msgid "Edit contact"
 msgstr "Upraviť kontakt"
 
+#: Edit_contacts
+#, fuzzy
+msgid "Edit contacts"
+msgstr "Upraviť kontakt"
+
+#: Edit_contacts_collectively
+#, fuzzy
+msgid "Edit contacts collectively"
+msgstr "Upraviť kontakt"
+
 #: Edit_message
 msgid "Edit message"
 msgstr "Upraviť správu"
 
-#: Edit_selected_contact
-msgid "Edit selected contact"
+#: Edit_selected_contacts
+#, fuzzy
+msgid "Edit selected contacts"
 msgstr "Upraviť vybraný kontakt"
 
 #: Edit_selected_message
@@ -1982,3 +1996,6 @@ msgstr "Spustiť frontu"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "Znovu spustiť SMS frontu"
+
+#~ msgid "(unknown state)"
+#~ msgstr "(neznámy štát)"

@@ -6,7 +6,6 @@
 
 package esmska.gui;
 
-import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Icons;
 import esmska.integration.MacUtils;
@@ -80,7 +79,6 @@ public class ContactPanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(ContactPanel.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
-    private Config config = PersistenceManager.getConfig();
     
     private Action addContactAction = new AddContactAction();
     private Action editContactAction = new EditContactAction();
@@ -293,8 +291,8 @@ public class ContactPanel extends javax.swing.JPanel {
         
         // update components
         int count = contactList.getSelectedIndices().length;
-        removeContactAction.setEnabled(count != 0);
-        editContactAction.setEnabled(count == 1);
+        removeContactAction.setEnabled(count > 0);
+        editContactAction.setEnabled(count > 0);
         
         //fire event
         actionSupport.fireActionPerformed(ACTION_CONTACT_SELECTION_CHANGED, null);
@@ -393,7 +391,7 @@ public class ContactPanel extends javax.swing.JPanel {
             ContactDialog contactDialog = new ContactDialog();
             contactDialog.setTitle(l10n.getString("New_contact"));
             contactDialog.setOptions(options, createOption, createOption);
-            contactDialog.show(null);
+            contactDialog.show((Contact)null);
             Contact c = contactDialog.getContact();
             if (c == null) {
                 return;
@@ -413,9 +411,9 @@ public class ContactPanel extends javax.swing.JPanel {
                 cancelOption, saveOption);
         
         public EditContactAction() {
-            super(l10n.getString("Edit_contact"),
+            super(l10n.getString("Edit_contacts"),
                     new ImageIcon(ContactPanel.class.getResource(RES + "edit-16.png")));
-            this.putValue(SHORT_DESCRIPTION,l10n.getString("Edit_selected_contact"));
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("Edit_selected_contacts"));
             this.putValue(LARGE_ICON_KEY,
                     new ImageIcon(ContactPanel.class.getResource(RES + "edit-22.png")));
             this.setEnabled(false);
@@ -423,20 +421,52 @@ public class ContactPanel extends javax.swing.JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
-            Contact contact = (Contact)contactList.getSelectedValue();
-            ContactDialog contactDialog = new ContactDialog();
-            contactDialog.setTitle(l10n.getString("Edit_contact"));
-            contactDialog.setOptions(options, saveOption, saveOption);
-            contactDialog.show(contact);
-            Contact c = contactDialog.getContact();
-            if (c == null) {
+
+            Object[] contacts = contactList.getSelectedValues();
+
+            if (contacts.length <= 0) {
+                logger.warning("Trying to edit contact when none selected");
                 return;
             }
-            contactListModel.remove(contact);
-            contactListModel.add(c);
+
+            ContactDialog contactDialog = new ContactDialog();
+            contactDialog.setOptions(options, saveOption, saveOption);
+
+            if (contacts.length == 1) { //edit single contact
+                Contact contact = (Contact) contacts[0];
+                contactDialog.setTitle(l10n.getString("Edit_contact"));
+                contactDialog.show(contact);
+                Contact c = contactDialog.getContact();
+                if (c == null) {
+                    return;
+                }
+                contactListModel.remove(contact);
+                contactListModel.add(c);
+
+                contactList.clearSelection();
+                contactList.setSelectedValue(c, true);
+            } else { //multiple contacts edited
+                contactDialog.setTitle(l10n.getString("Edit_contacts_collectively"));
+                ArrayList<Contact> list = new ArrayList<Contact>(contacts.length);
+                for (Object contact : contacts) {
+                    list.add((Contact) contact);
+                }
+                contactDialog.show(list);
+                Contact c = contactDialog.getContact();
+                if (c == null) {
+                    return;
+                }
+                for (Contact contact : list) {
+                    //only operator is common for all contacts
+                    contact.setOperator(c.getOperator());
+                }
+
+                contactListModel.fireContentsChanged(contactListModel, 0, contactListModel.getSize());
+                int[] selection = contactList.getSelectedIndices();
+                contactList.clearSelection();
+                contactList.setSelectedIndices(selection);
+            }
             
-            contactList.clearSelection();
-            contactList.setSelectedValue(c, true);
         }
     }
     
@@ -729,13 +759,27 @@ public class ContactPanel extends javax.swing.JPanel {
             panel.prepareForShow();
             setVisible(true);
         }
+        /** Show dialog for editing multiple contacts. May not be null. */
+        public void show(Collection<Contact> contacts) {
+            if (contacts.size() <= 1) {
+                show(contacts.size() <= 0 ? null : contacts.iterator().next());
+                return;
+            }
+
+            logger.fine("Showing edit contact dialog for " + contacts.size() + " contacts");
+            this.contact = null;
+            init();
+            setLocationRelativeTo(MainFrame.getInstance());
+            optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
+            panel.setContacts(contacts);
+            panel.prepareForShow();
+            setVisible(true);
+        }
         @Override
         public void propertyChange(PropertyChangeEvent e) {
             String prop = e.getPropertyName();
             
-            if (isVisible()
-            && (e.getSource() == optionPane)
-            && (JOptionPane.VALUE_PROPERTY.equals(prop))) {
+            if (isVisible() && e.getSource() == optionPane && JOptionPane.VALUE_PROPERTY.equals(prop)) {
                 Object value = optionPane.getValue();
                 
                 if (value == JOptionPane.UNINITIALIZED_VALUE) {
@@ -758,7 +802,7 @@ public class ContactPanel extends javax.swing.JPanel {
                 setVisible(false);
             }
         }
-        /** Get currently displayed contact */
+        /** Get currently displayed contact. May be null (cancelled by user). */
         public Contact getContact() {
             return contact;
         }

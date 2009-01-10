@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-26 01:47+0200\n"
+"POT-Creation-Date: 2009-01-10 21:18+0200\n"
 "PO-Revision-Date: 2008-11-01 14:48+0000\n"
 "Last-Translator: nanker <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -43,7 +43,7 @@ msgid "Sending SMS over Internet."
 msgstr ""
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2008 Kamil Páral"
+msgid "2007-2009 Kamil Páral"
 msgstr ""
 
 #: AboutFrame.licenseButton.text
@@ -210,8 +210,12 @@ msgstr ""
 msgid "&Connection"
 msgstr ""
 
-#: ConfigFrame.countryCodeLabel.toolTipText
+#: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
+msgstr ""
+
+#: ConfigFrame.countryCodeLabel.text
+msgid "(country:"
 msgstr ""
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
@@ -482,11 +486,6 @@ msgid ""
 "</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled!
-#: ConfigFrame.state
-msgid "(country: {0})"
-msgstr ""
-
 #: ConfigFrame.substanceWarning.text
 msgid ""
 "<html><i>\n"
@@ -548,9 +547,11 @@ msgstr ""
 msgid "Unknown"
 msgstr "Ukendt"
 
+#. #meaning "unknown country"
 #: ConfigFrame.unknown_state
-msgid "(unknown state)"
-msgstr ""
+#, fuzzy
+msgid "unknown"
+msgstr "Ukendt"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -735,12 +736,23 @@ msgstr ""
 msgid "Edit contact"
 msgstr "Redigér kontakt"
 
+#: Edit_contacts
+#, fuzzy
+msgid "Edit contacts"
+msgstr "Redigér kontakt"
+
+#: Edit_contacts_collectively
+#, fuzzy
+msgid "Edit contacts collectively"
+msgstr "Redigér kontakt"
+
 #: Edit_message
 msgid "Edit message"
 msgstr "Redigér besked"
 
-#: Edit_selected_contact
-msgid "Edit selected contact"
+#: Edit_selected_contacts
+#, fuzzy
+msgid "Edit selected contacts"
 msgstr "Redigér valgte kontakter"
 
 #: Edit_selected_message
