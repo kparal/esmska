@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-10 21:19+0200\n"
-"PO-Revision-Date: 2009-01-10 21:19+0100\n"
+"POT-Creation-Date: 2009-01-10 23:18+0200\n"
+"PO-Revision-Date: 2009-01-10 23:18+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-26 00:32+0000\n"
+"X-Launchpad-Export-Date: 2009-01-10 22:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -119,10 +119,6 @@ msgstr "&Zavřít"
 msgid "Available options:"
 msgstr "Dostupné volby:"
 
-#: CommandLineParser.basic_usage
-msgid "java -jar esmska.jar [OPTIONS]"
-msgstr "java -jar esmska.jar [VOLBY]"
-
 #: CommandLineParser.debug
 msgid "Print debugging output."
 msgstr "Vypisovat ladící výstup."
@@ -151,6 +147,10 @@ msgstr ""
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
 msgstr "Neplatná volba na příkazovém řádku! (\"{0}\")"
+
+#: CommandLineParser.options
+msgid "OPTIONS"
+msgstr "VOLBY"
 
 #: CommandLineParser.path
 msgid "path"
@@ -1980,8 +1980,8 @@ msgstr "Spustit frontu"
 msgid "Unpause sms queue"
 msgstr "Znovu spustit frontu sms"
 
-#~ msgid "(unknown state)"
-#~ msgstr "(neznámý stát)"
+#~ msgid "java -jar esmska.jar [OPTIONS]"
+#~ msgstr "java -jar esmska.jar [VOLBY]"
 
 #~ msgid ""
 #~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
@@ -1992,6 +1992,9 @@ msgstr "Znovu spustit frontu sms"
 
 #~ msgid "Ope&rator:"
 #~ msgstr "Ope&rátor:"
+
+#~ msgid "(unknown state)"
+#~ msgstr "(neznámý stát)"
 
 #~ msgid "List of available operators web gateways"
 #~ msgstr "Seznam dostupných webových bran operátorů"

@@ -1,4 +1,4 @@
-# French translation for esmska
+# Russian translation for esmska
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the esmska package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-10 23:17+0200\n"
-"PO-Revision-Date: 2008-12-22 00:23+0000\n"
-"Last-Translator: Arnaud Bonatti <arnaud.bonatti@gmail.com>\n"
-"Language-Team: French <fr@li.org>\n"
+"PO-Revision-Date: 2008-12-31 17:23+0000\n"
+"Last-Translator: shaxter <morskov@mail.ru>\n"
+"Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,23 +24,23 @@ msgstr ""
 
 #: AboutFrame.Credits
 msgid "Credits"
-msgstr "Crédits"
+msgstr "Список разработчиков"
 
 #: AboutFrame.License
 msgid "License"
-msgstr "Licence"
+msgstr "Лицензия"
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr "Merci"
+msgstr "Спасибо"
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
-msgstr "C&rédits"
+msgstr "&Благодарности"
 
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
-msgstr "Envoi de SMS par Internet."
+msgstr "Отправка СМС через Интернет"
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2009 Kamil Páral"
@@ -48,11 +48,11 @@ msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
-msgstr "&Licence"
+msgstr "&Лицензия"
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
-msgstr "<html><a href=\"http://esmska.googlecode.com/\">Accueil</a></html>"
+msgstr ""
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -64,7 +64,7 @@ msgstr ""
 #. #Do not change this value
 #: AboutFrame.supportButton.link
 msgid "http://code.google.com/p/esmska/wiki/Support"
-msgstr "http://code.google.com/p/esmska/wiki/Support"
+msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid "Support project"
@@ -79,51 +79,51 @@ msgstr ""
 
 #: AboutFrame.title
 msgid "About Esmska"
-msgstr "À propos de Esmska"
+msgstr "Об Esmska"
 
 #: About_
 msgid "&About"
-msgstr "&À propos"
+msgstr "&О программе"
 
 #: Add_contact
 msgid "Add contact"
-msgstr "Ajouter un contact"
+msgstr "Добавление контакта"
 
 #: Add_new_contact
 msgid "Add new contact"
-msgstr "Ajouter un nouveau contact"
+msgstr "Добавить новый контакт"
 
 #: Cancel
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Отмена"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
-msgstr "Copier"
+msgstr "Копировать"
 
 #: ClipboardPopupMenu.Cut
 msgid "Cut"
-msgstr "Couper"
+msgstr "Вырезать"
 
 #: ClipboardPopupMenu.Paste
 msgid "Paste"
-msgstr "Coller"
+msgstr "Вставить"
 
 #: Close_
 msgid "&Close"
-msgstr "&Fermer"
+msgstr "&Закрыть"
 
 #: CommandLineParser.available_options
 msgid "Available options:"
-msgstr "Options disponibles :"
+msgstr "Доступные параметры:"
 
 #: CommandLineParser.debug
 msgid "Print debugging output."
-msgstr ""
+msgstr "Печатать отладочной отчет"
 
 #: CommandLineParser.debugNetwork
 msgid "Print debugging output of the network communication."
-msgstr ""
+msgstr "Печатать отладочной отчет сетевого соединения"
 
 #: CommandLineParser.debugNetworkFull
 msgid ""
@@ -140,7 +140,7 @@ msgstr ""
 #. #Single quotes need to be doubled!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr "Option invalide dans la ligne de commande ! (''{0}'')"
+msgstr "Неверный параметр в соммандной строке! (''{0}'')"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
@@ -148,22 +148,20 @@ msgstr ""
 
 #: CommandLineParser.path
 msgid "path"
-msgstr "chemin"
+msgstr "путь"
 
 #: CommandLineParser.set_user_path
 msgid ""
 "Set the path to the user configuration directory. Can't be used with -p."
 msgstr ""
-"Donner le chemin pour le répertoire de la configuration utilisateur. "
-"Utilisation impossible avec -p"
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr "Afficher l'aide."
+msgstr ""
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr "Utilisation:"
+msgstr "Обращение:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
@@ -171,11 +169,11 @@ msgstr ""
 
 #: Compress_
 msgid "&Compress"
-msgstr "&Compresser"
+msgstr "&Сжатие"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr ""
+msgstr "Д&ополнительные настройки"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
@@ -183,11 +181,11 @@ msgstr ""
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
-msgstr "&Apparence"
+msgstr "&Внешний вид"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Check for a &new program version on startup"
-msgstr ""
+msgstr "Проверять о&бновление версии программы при запуске"
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 msgid ""
@@ -203,12 +201,11 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Deletes all usernames and passwords for all operators"
-msgstr ""
-"Supprime tous les utilisateurs et mots de passe pour tous les opérateurs"
+msgstr "Удалить все имена пользователей и пороли для всех операторов"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
-msgstr "&Connexion"
+msgstr "По&дключение"
 
 #: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -263,7 +260,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr "&Général"
+msgstr "&Общие"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -283,20 +280,20 @@ msgstr ""
 
 #: ConfigFrame.jLabel1.text
 msgid "&Number:"
-msgstr ""
+msgstr "&Номер:"
 
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "Ш&люз:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr ""
+msgstr "&Имя пользователя:"
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr "Mot de pa&sse :"
+msgstr "Па&роль:"
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -309,15 +306,15 @@ msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
-msgstr ""
+msgstr "H&TTP шлюз:"
 
 #: ConfigFrame.jLabel15.text
 msgid "HTTP&S proxy:"
-msgstr ""
+msgstr "HTTP&S шлюз:"
 
 #: ConfigFrame.jLabel16.text
 msgid "SO&CKS proxy:"
-msgstr "Proxy SO&CKS :"
+msgstr "SO&CKS шлюз:"
 
 #: ConfigFrame.jLabel17.text
 msgid ""
@@ -329,12 +326,12 @@ msgstr ""
 
 #: ConfigFrame.jLabel2.text
 msgid "The &default country prefix number:"
-msgstr ""
+msgstr "Префикс номер страны по у&молчанию"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Имя:"
 
 #: ConfigFrame.jLabel7.text
 msgid ""
@@ -367,7 +364,7 @@ msgstr ""
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
-msgstr ""
+msgstr "&Вид"
 
 #: ConfigFrame.multiplatform_look
 msgid "Multiplatform"
@@ -375,7 +372,7 @@ msgstr ""
 
 #: ConfigFrame.notificationAreaCheckBox.text
 msgid "Show icon in the &notification area"
-msgstr ""
+msgstr "Показывать значок в области уведомлений"
 
 #: ConfigFrame.notificationAreaCheckBox.toolTipText
 msgid ""
@@ -406,11 +403,11 @@ msgstr ""
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
 msgid "O&perators"
-msgstr "O&pérateurs"
+msgstr "О&ператоры"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
-msgstr "Le mot de passe appartenant au nom d'utilisateur"
+msgstr ""
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
@@ -461,13 +458,6 @@ msgid ""
 "may seem not to match\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Le nom renseigné prend de la place dans le message, mais n'y paraît pas."
-"<br>\n"
-"C'est pour cette raison que la couleur du texte du message et le compteur de "
-"messages<br>\n"
-"peuvent laisser croire qu'ils diffèrent\n"
-"</html>"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
@@ -510,7 +500,7 @@ msgstr ""
 
 #: ConfigFrame.system_look
 msgid "System"
-msgstr "Système"
+msgstr "Система"
 
 #: ConfigFrame.themeComboBox.toolTipText
 msgid ""
@@ -521,11 +511,11 @@ msgstr ""
 
 #: ConfigFrame.themeLabel.text
 msgid "The&me:"
-msgstr "Th&ème :"
+msgstr "Т&ема:"
 
 #: ConfigFrame.tipsCheckBox.text
 msgid "Show program &tip on startup"
-msgstr "Afficher programme et &conseil au démarrage"
+msgstr ""
 
 #: ConfigFrame.tipsCheckBox.toolTipText
 msgid ""
@@ -537,11 +527,11 @@ msgstr ""
 
 #: ConfigFrame.title
 msgid "Preferences - Esmska"
-msgstr ""
+msgstr "Опции - Esmska"
 
 #: ConfigFrame.toolbarVisibleCheckBox.text
 msgid "Show the &toolbar"
-msgstr ""
+msgstr "Показать &панель инструментов"
 
 #: ConfigFrame.toolbarVisibleCheckBox.toolTipText
 msgid ""
@@ -552,7 +542,7 @@ msgstr ""
 
 #: ConfigFrame.unknown_look
 msgid "Unknown"
-msgstr ""
+msgstr "Неизвестно"
 
 #. #meaning "unknown country"
 #: ConfigFrame.unknown_state
@@ -561,7 +551,7 @@ msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
-msgstr ""
+msgstr "Использовать п&рокси сервер"
 
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
@@ -618,15 +608,15 @@ msgstr ""
 
 #: Contact
 msgid "Contact"
-msgstr ""
+msgstr "Контакт"
 
 #: ContactPanel.border.title
 msgid "Contacts"
-msgstr ""
+msgstr "Контакты"
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
-msgstr ""
+msgstr "Список контактов (Alt+K)"
 
 #: ContactPanel.remove_following_contacts
 msgid "<html><h3>Really remove following contacts?</h3></html>"
@@ -634,19 +624,19 @@ msgstr ""
 
 #: Contact_export_
 msgid "Contact &export"
-msgstr ""
+msgstr "в&ыгрузить Контакты"
 
 #: Contact_import_
 msgid "Contact &import"
-msgstr ""
+msgstr "з&агрузить Контакты"
 
 #: Create
 msgid "Create"
-msgstr "Créer"
+msgstr "Создать"
 
 #: Credits.authors
 msgid "Written by:"
-msgstr ""
+msgstr "Автор:"
 
 #: Credits.contributors
 msgid "Contributions from:"
@@ -654,57 +644,57 @@ msgstr ""
 
 #: Credits.graphics
 msgid "Graphics:"
-msgstr ""
+msgstr "Графика"
 
 #: Credits.sponsors
 msgid "Sponsors:"
-msgstr ""
+msgstr "Спонсоры:"
 
 #: Credits.translators
 msgid "Translated by:"
-msgstr ""
+msgstr "Перевод:"
 
 #: Date
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: Delete
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: Delete_
 msgid "&Delete"
-msgstr ""
+msgstr "&Удалить"
 
 #: Delete_contacts
 msgid "Delete contacts"
-msgstr ""
+msgstr "Удалить контакт"
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr ""
+msgstr "Удалить сообщения"
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
-msgstr ""
+msgstr "Удалить выбранные контакты"
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr "Supprimer les messages sélectionnés"
+msgstr "Удалить выбранные сообщения"
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
-msgstr ""
+msgstr "Удалить выбранные сообщения из архива"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
 msgid "Send SMS over the Internet"
-msgstr ""
+msgstr "Отправить СМС через интернет"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.genericName
 msgid "SMS Sender"
-msgstr ""
+msgstr "СМС Отправитель"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.name
@@ -714,20 +704,20 @@ msgstr ""
 #: EditContactPanel.gatewayLabel.text
 msgctxt "EditContactPanel.gatewayLabel.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "Ш&люз:"
 
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Имя:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
-msgstr ""
+msgstr "Имя контакта"
 
 #: EditContactPanel.numberLabel.text
 msgid "Nu&mber:"
-msgstr ""
+msgstr "Н&омер:"
 
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
@@ -737,15 +727,10 @@ msgid ""
 "country prefix is set in the program preferences.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Numéro de téléphone du contact avec le préfixe du pays.<br>\n"
-"Le préfixe du pays n'a pas besoin d'être donné si le défaut<br>\n"
-"préfixe du pays figure dans les préférences du programme.\n"
-"</html>"
 
 #: Edit_contact
 msgid "Edit contact"
-msgstr ""
+msgstr "Редактировать контакт"
 
 #: Edit_contacts
 msgid "Edit contacts"
@@ -757,7 +742,7 @@ msgstr ""
 
 #: Edit_message
 msgid "Edit message"
-msgstr ""
+msgstr "Редакторовать сообщение"
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
@@ -765,7 +750,7 @@ msgstr ""
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr ""
+msgstr "Править выбранное сообщение"
 
 #. #Single quotes need to be doubled!
 #: ExportManager.cant_write
@@ -782,12 +767,12 @@ msgstr ""
 
 #: ExportManager.contact_list
 msgid "Contact list"
-msgstr ""
+msgstr "Список контактов"
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "CSV файлы (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
@@ -831,20 +816,20 @@ msgstr ""
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "vCard файлы (*.vcard, *.vcf)"
 
 #: Forward_
 msgctxt "Forward_"
 msgid "&Forward"
-msgstr ""
+msgstr "&Вперёд"
 
 #: Hide_program
 msgid "Hide program"
-msgstr ""
+msgstr "Скрыть программу"
 
 #: History
 msgid "History"
-msgstr ""
+msgstr "Журнал"
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
@@ -852,35 +837,35 @@ msgstr ""
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
-msgstr ""
+msgstr "Номер:"
 
 #: HistoryFrame.jLabel2.text
 msgid "Name:"
-msgstr ""
+msgstr "Имя:"
 
 #: HistoryFrame.jLabel3.text
 msgid "Date:"
-msgstr ""
+msgstr "Дата:"
 
 #: HistoryFrame.jLabel4.text
 msgid "Gateway:"
-msgstr ""
+msgstr "Шлюз:"
 
 #: HistoryFrame.jLabel5.text
 msgid "Sender number:"
-msgstr ""
+msgstr "Номер отправителя:"
 
 #: HistoryFrame.jLabel6.text
 msgid "Sender name:"
-msgstr ""
+msgstr "Имя отправителя:"
 
 #: HistoryFrame.remove_selected
 msgid "Really remove all selected messages from history?"
-msgstr ""
+msgstr "Удалить все выбранные сообщения из журнала?"
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
-msgstr ""
+msgstr "Переотправить сообщение позже"
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
@@ -888,7 +873,7 @@ msgstr ""
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
-msgstr ""
+msgstr "&Поиск:"
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
@@ -896,25 +881,25 @@ msgstr ""
 
 #: Import
 msgid "Import"
-msgstr ""
+msgstr "Импорт"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "CSV файлы (*.csv)"
 
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
 msgid "Select"
-msgstr ""
+msgstr "Выбрать"
 
 #: ImportFrame.backButton.text
 msgid "&Back"
-msgstr ""
+msgstr "&Назад"
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
-msgstr ""
+msgstr "О&бзор..."
 
 #: ImportFrame.browseButton.toolTipText
 msgid "Find contacts file using dialog"
@@ -950,7 +935,7 @@ msgstr ""
 #: ImportFrame.forwardButton.text
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
-msgstr ""
+msgstr "&Вперёд"
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1030,7 +1015,7 @@ msgstr ""
 #: ImportFrame.progressBar.string
 msgctxt "ImportFrame.progressBar.string"
 msgid "Please wait..."
-msgstr ""
+msgstr "Ждите..."
 
 #: ImportFrame.title
 msgid "Contact import - Esmska"
@@ -1039,7 +1024,7 @@ msgstr ""
 #: ImportFrame.vCard_filter
 msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "vCard файлы (*.vcard, *.vcf)"
 
 #: ImportFrame.validOperatorCheckBox.text
 msgid "Import only contacts with known operator"
@@ -1056,15 +1041,15 @@ msgstr ""
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
-msgstr ""
+msgstr "О&чистить"
 
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
-msgstr ""
+msgstr "Очистить текущий журнал"
 
 #: LogFrame.copyButton.text
 msgid "Co&py to clipboard"
-msgstr ""
+msgstr "Ко&пировать в буфер"
 
 #: LogFrame.copyButton.toolTipText
 msgid "Copy the whole log contents to the system clipboard"
@@ -1076,7 +1061,7 @@ msgstr ""
 
 #: Log_
 msgid "&Log"
-msgstr ""
+msgstr "&Журнал"
 
 #: Main.already_running
 msgid ""
@@ -1190,7 +1175,7 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &Problem..."
-msgstr "Envoyer un compte rendu de &problème"
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1206,7 +1191,7 @@ msgstr ""
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
-msgstr "Afficher l'historique des messages envoyés"
+msgstr ""
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
@@ -1374,7 +1359,7 @@ msgstr ""
 
 #: Preferences
 msgid "Preferences"
-msgstr "Préférences"
+msgstr ""
 
 #: Preferences_
 msgid "&Preferences"
@@ -1421,7 +1406,7 @@ msgstr ""
 
 #: Quit
 msgid "Quit"
-msgstr "Quitter"
+msgstr ""
 
 #: Quit_
 msgid "&Quit"
@@ -1429,7 +1414,7 @@ msgstr ""
 
 #: Recipient
 msgid "Recipient"
-msgstr "Destinataire"
+msgstr ""
 
 #: Redo_
 msgid "&Redo"
@@ -1437,7 +1422,7 @@ msgstr ""
 
 #: Replace
 msgid "Replace"
-msgstr "Remplacer"
+msgstr ""
 
 #: SMSPanel.Redo_change_in_message_text
 msgid "Redo undone change in message text"
@@ -1542,12 +1527,12 @@ msgstr ""
 
 #: Save
 msgid "Save"
-msgstr "Enregistrer"
+msgstr ""
 
 #: Select
 msgctxt "Select"
 msgid "Select"
-msgstr "Sélectionner"
+msgstr ""
 
 #: Send_
 msgid "&Send"
@@ -1572,7 +1557,7 @@ msgstr ""
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
-msgstr "Veuillez patienter..."
+msgstr ""
 
 #: StatusPanel.statusMessageLabel.text
 msgid "Welcome"
@@ -1731,9 +1716,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Anthony Guéchoum https://launchpad.net/~athael\n"
-"  Arnaud Bonatti https://launchpad.net/~arnaud.bonatti\n"
-"  Elizabeth https://launchpad.net/~dutertre-eliz"
+"  shaxter https://launchpad.net/~morskov"
 
 #: Undo_
 msgid "&Undo"
@@ -1750,6 +1733,3 @@ msgstr ""
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr ""
-
-#~ msgid "java -jar esmska.jar [OPTIONS]"
-#~ msgstr "java -jar esmska.jar [OPTIONS]"

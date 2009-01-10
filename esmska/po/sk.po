@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-10 21:18+0200\n"
-"PO-Revision-Date: 2008-11-16 20:49+0000\n"
+"POT-Creation-Date: 2009-01-10 23:17+0200\n"
+"PO-Revision-Date: 2008-11-26 16:32+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-26 00:32+0000\n"
+"X-Launchpad-Export-Date: 2009-01-10 22:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -43,9 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "Posielanie SMS cez internet."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2009 Kamil Páral"
-msgstr "2007-2008 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -126,13 +125,9 @@ msgstr "&Zavrieť"
 msgid "Available options:"
 msgstr "Dostupné voľby:"
 
-#: CommandLineParser.basic_usage
-msgid "java -jar esmska.jar [OPTIONS]"
-msgstr "java -jar esmska.jar [VOĽBY]"
-
 #: CommandLineParser.debug
 msgid "Print debugging output."
-msgstr ""
+msgstr "Vypísať ladiaci výstup."
 
 #: CommandLineParser.debugNetwork
 msgid "Print debugging output of the network communication."
@@ -159,6 +154,10 @@ msgstr ""
 msgid "Invalid option on the command line! (''{0}'')"
 msgstr "Neplatná voľba z príkazového riadku! (''{0}'')"
 
+#: CommandLineParser.options
+msgid "OPTIONS"
+msgstr ""
+
 #: CommandLineParser.path
 msgid "path"
 msgstr "cesta"
@@ -179,7 +178,7 @@ msgstr "Použitie:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr ""
+msgstr "Vypísať verziu programu a skončiť."
 
 #: Compress_
 msgid "&Compress"
@@ -230,9 +229,8 @@ msgid "The country code for which you have filled out the prefix number"
 msgstr "Kód štátu, pre ktorý ste vyplnili medzinárodné smerové číslo"
 
 #: ConfigFrame.countryCodeLabel.text
-#, fuzzy
 msgid "(country:"
-msgstr "(štát: {0})"
+msgstr ""
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -330,7 +328,7 @@ msgstr "Čís&lo:"
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Brána"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
@@ -404,6 +402,9 @@ msgid ""
 "Here you can set your login credentials for gateways which require it.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Tu môžete nastaviť Vaše prihlasovacie údaje pre brány, ktoré to požadujú.\n"
+"</html>"
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -660,9 +661,8 @@ msgstr "Neznámy"
 
 #. #meaning "unknown country"
 #: ConfigFrame.unknown_state
-#, fuzzy
 msgid "unknown"
-msgstr "Neznámy"
+msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -792,7 +792,7 @@ msgstr "Vymazať"
 
 #: Delete_
 msgid "&Delete"
-msgstr ""
+msgstr "O&dstrániť"
 
 #: Delete_contacts
 msgid "Delete contacts"
@@ -812,7 +812,7 @@ msgstr "Odstrániť vybrané správy"
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
-msgstr ""
+msgstr "Zmazať zvolené správy z histórie."
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
@@ -866,23 +866,20 @@ msgid "Edit contact"
 msgstr "Upraviť kontakt"
 
 #: Edit_contacts
-#, fuzzy
 msgid "Edit contacts"
-msgstr "Upraviť kontakt"
+msgstr ""
 
 #: Edit_contacts_collectively
-#, fuzzy
 msgid "Edit contacts collectively"
-msgstr "Upraviť kontakt"
+msgstr ""
 
 #: Edit_message
 msgid "Edit message"
 msgstr "Upraviť správu"
 
 #: Edit_selected_contacts
-#, fuzzy
 msgid "Edit selected contacts"
-msgstr "Upraviť vybraný kontakt"
+msgstr ""
 
 #: Edit_selected_message
 msgid "Edit selected message"
@@ -967,7 +964,7 @@ msgstr "vCard súbory (*.vcard, *.vcf)"
 #: Forward_
 msgctxt "Forward_"
 msgid "&Forward"
-msgstr ""
+msgstr "&Pokračovať"
 
 #: Hide_program
 msgid "Hide program"
@@ -1011,7 +1008,7 @@ msgstr "Skutočne si prajete vymazať z histórie všetky vybrané správy?"
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
-msgstr ""
+msgstr "Preposlať správu inému príjemcovi."
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
@@ -1083,7 +1080,7 @@ msgstr "Súbor {0} nieje možné prečítať!"
 #: ImportFrame.forwardButton.text
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
-msgstr ""
+msgstr "&Pokračovať"
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1708,7 +1705,7 @@ msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Ctrl+Enter)"
-msgstr ""
+msgstr "Poslať správu (Ctrl+Enter)"
 
 #. #Single quotes need to be doubled!
 #: SMSPanel.singleProgressBar
@@ -1997,5 +1994,5 @@ msgstr "Spustiť frontu"
 msgid "Unpause sms queue"
 msgstr "Znovu spustiť SMS frontu"
 
-#~ msgid "(unknown state)"
-#~ msgstr "(neznámy štát)"
+#~ msgid "java -jar esmska.jar [OPTIONS]"
+#~ msgstr "java -jar esmska.jar [VOĽBY]"

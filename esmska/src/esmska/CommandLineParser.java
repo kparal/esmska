@@ -144,7 +144,7 @@ public class CommandLineParser {
     private static void printUsage() {
         HelpFormatter formatter = new HelpFormatter();
         formatter.setSyntaxPrefix(l10n.getString("CommandLineParser.usage") + " ");
-        formatter.printHelp(l10n.getString("CommandLineParser.basic_usage"), 
+        formatter.printHelp("java -jar esmska.jar [" + l10n.getString("CommandLineParser.options") + "]",
                 "\n" + l10n.getString("CommandLineParser.available_options"), options, null);
     }
 }
