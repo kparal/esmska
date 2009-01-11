@@ -1,5 +1,5 @@
 [Desktop Entry]
-Categories=Network;Java;
+Categories=Network;InstantMessaging;Java;
 Exec=esmska
 Icon=esmska
 StartupWMClass=esmska-Main
