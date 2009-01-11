@@ -8,6 +8,7 @@ Esmska homepage . . . . . . http://esmska.googlecode.com/
 Documentation . . . . . . . http://code.google.com/p/esmska/w/list
 Issues. . . . . . . . . . . http://code.google.com/p/esmska/wiki/Issues
 Forums. . . . . . . . . . . https://answers.launchpad.net/esmska
+Source code . . . . . . . . http://esmska.googlecode.com/svn/
 
 Program files:
 README          - This file.
@@ -25,6 +26,16 @@ Program license can be found in include/license/.
 
 Project root directory can be opened by NetBeans 6.5 as its project.
 
+Getting program
+===============
+
+You can check-out any version of Esmska from its subversion repository by using:
+
+ $ svn checkout http://esmska.googlecode.com/svn/tags/esmska-VERSION
+
+You can also checkout the current development branch by using:
+
+ $ svn checkout http://esmska.googlecode.com/svn/trunk
 
 Compilation requirements
 ========================
