@@ -24,7 +24,7 @@ public class JavaType {
         }
     }
     
-    /** Checks whether the current Java implementation is Sun Java */
+    /** Checks whether the current Java implementation is from Sun (Sun Java or OpenJDK) */
     public static boolean isSunJava() {
         return vendor.toLowerCase().contains("sun microsystems");
     }
