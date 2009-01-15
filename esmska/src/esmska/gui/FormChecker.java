@@ -47,7 +47,7 @@ public class FormChecker {
     }
     
     /** Check valid country prefix
-     * @return true if prefix is in form +[0-9]{1,3}, false otherwise
+     * @return true if prefix is in form +[0-9]{1,4}, false otherwise
      */
     public static boolean checkCountryPrefix(String prefix) {
         if (prefix == null) {
@@ -57,7 +57,7 @@ public class FormChecker {
             return false;
         }
         prefix = prefix.substring(1); //strip the "+"
-        if (prefix.length() < 1 || prefix.length() > 3) {
+        if (prefix.length() < 1 || prefix.length() > 4) {
             return false;
         }
         for (Character c : prefix.toCharArray()) {
