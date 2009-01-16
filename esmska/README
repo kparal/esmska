@@ -13,6 +13,7 @@ Source code . . . . . . . . http://esmska.googlecode.com/svn/
 Program files:
 README          - This file.
 include/        - Files included in the binary distribution.
+launch4j/       - Configuration files for Launch4J.
 lib/            - Program compilation and runtime libraries.
 nbproject/      - Project files for the NetBeans IDE.
 operators/      - Script files for using operator gateways.

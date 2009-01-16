@@ -134,5 +134,20 @@
                 <include name="esmska.sh"/>
             </fileset>
         </chmod>
+        <!-- create exe launcher -->
+        <antcall target="exe"/>
+    </target>
+
+    <!-- create exe launcher for MS Windows -->
+    <target name="exe" depends="-pre-exe" if="launch4j.dir">
+		<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask"
+            classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
+		<launch4j configFile="./launch4j/esmska.xml" />
+	</target>
+
+    <!-- check if launch4j.dir property is set -->
+    <target name="-pre-exe" unless="launch4j.dir">
+        <echo message="Launch4j directory not defined! Please define launch4j.dir property
+in nbproject/private/private.properties file, if you want to create the MS Windows exe launcher."/>
     </target>
 </project>

@@ -28,7 +28,7 @@ mkdir "$TMPDIR/$FINALNAME"
 cp -r ../dist/* "$TMPDIR/$FINALNAME/"
 
 # convert text files to CRLF for windows users
-unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/*.bat "$TMPDIR/$FINALNAME"/license/*.txt
+unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/license/*.txt
 
 # create packages
 cd "$TMPDIR"
