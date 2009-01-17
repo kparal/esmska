@@ -2,7 +2,7 @@
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
   <jar>esmska.jar</jar>
-  <outfile>../dist/esmska.exe</outfile>
+  <outfile>../include/esmska.exe</outfile>
   <errTitle>Esmska</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
