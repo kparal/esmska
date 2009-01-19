@@ -8,6 +8,12 @@
 set -e
 trap "echo Creating exe failed." ERR
 
+# check dependency
+if [ ! `which launch4j` ]; then
+    echo "launch4j command not found. Exiting."
+    exit 1
+fi
+
 # go to the program directory
 cd "`dirname "$0"`"
 

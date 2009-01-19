@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create distribution packages from dist directory
-# in order to be released
+# in the program root
 
 # Dependencies: zip, unix2dos
 
@@ -14,13 +14,16 @@ cd "`dirname "$0"`"
 
 # usage
 if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
-    echo "Usage: $0 version_dir"
-    echo "Example: $0 esmska-0.1.0"
+    echo "Usage: $0 version"
+    echo "Example: $0 0.1.0"
     exit 1
 fi
 
+VERSION="$1"
+FINALNAME="esmska-$1"
+OUTPUT_DIR="${PWD}/.."
+
 # create temp dirs
-FINALNAME="$1"
 TMPDIR=`mktemp -d -t esmska-packaging.XXXX`
 mkdir "$TMPDIR/$FINALNAME"
 
@@ -36,7 +39,7 @@ zip -rq9 "$FINALNAME.zip" "$FINALNAME"
 tar c "$FINALNAME" | gzip -9 > "$FINALNAME.tar.gz"
 
 # move packages to current directory
-cd "$OLDPWD"
+cd "$OUTPUT_DIR"
 mv "$TMPDIR/$FINALNAME.zip" "$TMPDIR/$FINALNAME.tar.gz" .
 
 # delete temp dirs
