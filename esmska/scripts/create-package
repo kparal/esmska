@@ -33,7 +33,7 @@ unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/license/*.txt
 # create packages
 cd "$TMPDIR"
 zip -rq9 "$FINALNAME.zip" "$FINALNAME"
-tar czf "$FINALNAME.tar.gz" "$FINALNAME"
+tar c "$FINALNAME" | gzip -9 > "$FINALNAME.tar.gz"
 
 # move packages to current directory
 cd "$OLDPWD"
