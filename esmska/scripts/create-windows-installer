@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Create MS Windows installer from dist directory
+# in the program root
+
+# Dependencies: installjammer
+
+# trap and exit on error
+set -e
+trap "echo Creating installer failed." ERR
+
+# check dependency
+if [ ! `which installjammer` ]; then
+    echo "'installjammer' command not found. \
+MS Windows installer will not be created."
+    exit 0
+fi
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+# usage
+if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0 version"
+    echo "Example: $0 0.1.0"
+    exit 1
+fi
+
+VERSION="$1"
+PROJECT_DIR="${PWD}/../installjammer"
+PROJECT_FILE="${PROJECT_DIR}/Esmska.mpi"
+OUTPUT_DIR="${PWD}/.."
+
+# create temp dir
+BUILD_DIR=`mktemp -d -t esmska-packaging.XXXX`
+
+# build installer
+installjammer --build-for-release --quiet --build-dir "$BUILD_DIR" \
+--output-dir "$OUTPUT_DIR" -DVersion "$VERSION" -- "$PROJECT_FILE"
+
+# delete temp files
+rm -rf "$BUILD_DIR"
+rm "${PROJECT_DIR}/build.log"
+

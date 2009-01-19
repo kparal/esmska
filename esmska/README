@@ -13,6 +13,7 @@ Source code . . . . . . . . http://esmska.googlecode.com/svn/
 Program files:
 README          - This file.
 include/        - Files included in the binary distribution.
+installjammer/  - Configuration files for InstallJammer.
 launch4j/       - Configuration files for Launch4J.
 lib/            - Program compilation and runtime libraries.
 nbproject/      - Project files for the NetBeans IDE.
@@ -144,8 +145,7 @@ You can run command:
 
  $ ./scripts/create-package NAME
  
-to obtain binary program packages NAME.zip and NAME.tar.gz inside the scripts/
-directory.
+to obtain binary program packages inside the program root directory.
 
 When creating custom packages it may be good to note that the only important
 files for the program are esmska.jar, lib/ and operators/ directory. All other

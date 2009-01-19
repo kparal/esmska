@@ -3,7 +3,7 @@
 # Create distribution packages from dist directory
 # in the program root
 
-# Dependencies: zip, unix2dos
+# Dependencies: unix2dos
 
 # trap and exit on error
 set -e
@@ -33,15 +33,18 @@ cp -r ../dist/* "$TMPDIR/$FINALNAME/"
 # convert text files to CRLF for windows users
 unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/license/*.txt
 
-# create packages
+# create os-independent package
 cd "$TMPDIR"
-zip -rq9 "$FINALNAME.zip" "$FINALNAME"
 tar c "$FINALNAME" | gzip -9 > "$FINALNAME.tar.gz"
 
-# move packages to current directory
+# move package to current directory
 cd "$OUTPUT_DIR"
-mv "$TMPDIR/$FINALNAME.zip" "$TMPDIR/$FINALNAME.tar.gz" .
+mv "$TMPDIR/$FINALNAME.tar.gz" .
 
 # delete temp dirs
 rm -rf "$TMPDIR"
+
+# create windows installer
+cd "`dirname "$0"`"
+./create-windows-installer "$VERSION"
 
