@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-15 12:06+0200\n"
-"PO-Revision-Date: 2008-11-26 16:32+0000\n"
+"POT-Creation-Date: 2009-01-20 13:27+0200\n"
+"PO-Revision-Date: 2009-01-12 07:58+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-10 22:08+0000\n"
+"X-Launchpad-Export-Date: 2009-01-20 12:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -156,7 +156,7 @@ msgstr "Neplatná voľba z príkazového riadku! (''{0}'')"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr ""
+msgstr "Možnosti"
 
 #: CommandLineParser.path
 msgid "path"
@@ -230,7 +230,7 @@ msgstr "Kód štátu, pre ktorý ste vyplnili medzinárodné smerové číslo"
 
 #: ConfigFrame.countryCodeLabel.text
 msgid "(country:"
-msgstr ""
+msgstr "(krajina:"
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -662,7 +662,7 @@ msgstr "Neznámy"
 #. #meaning "unknown country"
 #: ConfigFrame.unknown_state
 msgid "unknown"
-msgstr ""
+msgstr "neznáma"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -867,11 +867,11 @@ msgstr "Upraviť kontakt"
 
 #: Edit_contacts
 msgid "Edit contacts"
-msgstr ""
+msgstr "Upraviť kontakty"
 
 #: Edit_contacts_collectively
 msgid "Edit contacts collectively"
-msgstr ""
+msgstr "Upraviť kontakty hromadne"
 
 #: Edit_message
 msgid "Edit message"
@@ -879,7 +879,7 @@ msgstr "Upraviť správu"
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
-msgstr ""
+msgstr "Upraviť vybrané kontakty"
 
 #: Edit_selected_message
 msgid "Edit selected message"
@@ -1519,16 +1519,12 @@ msgstr ""
 "<br>nahláste problém na domovských stránkach programu."
 
 #: OperatorExecutor.ERROR_WRONG_AUTH
-#, fuzzy
 msgid ""
 "You have entered incorrect login credentials.<br>This gateway requires "
 "registration and you can't send messages throught it without one.<br>Visit "
 "the website of this gateway and find out how to register or log in.<br>Then "
 "enter the login credentials in program preferences."
 msgstr ""
-"Zadali ste nesprávne prihlasovacie údaje.<br>Táto brána vyžaduje "
-"redistráciu, bez nej cez ňu nieje možné posielať správy.<br>Prihlasovacie "
-"údaje môžete vyplniť v \"nastaveniach programu\"."
 
 #: OperatorExecutor.ERROR_WRONG_CODE
 msgid "You have entered the wrong security code."
@@ -1995,6 +1991,3 @@ msgstr "Spustiť frontu"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "Znovu spustiť SMS frontu"
-
-#~ msgid "java -jar esmska.jar [OPTIONS]"
-#~ msgstr "java -jar esmska.jar [VOĽBY]"

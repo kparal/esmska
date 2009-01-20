@@ -1,7 +1,7 @@
-# French translation for esmska
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Spanish translation for esmska
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the esmska package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 #. extracted from ../src/esmska/resources/l10n.properties
 msgid ""
@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-20 13:27+0200\n"
-"PO-Revision-Date: 2008-12-22 00:23+0000\n"
-"Last-Translator: Arnaud Bonatti <arnaud.bonatti@gmail.com>\n"
-"Language-Team: French <fr@li.org>\n"
+"PO-Revision-Date: 2009-01-17 02:05+0000\n"
+"Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
+"Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,39 +20,40 @@ msgstr ""
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
-msgstr ""
+msgstr "Reconozco eso"
 
 #: AboutFrame.Credits
 msgid "Credits"
-msgstr "Crédits"
+msgstr "Créditos"
 
 #: AboutFrame.License
 msgid "License"
-msgstr "Licence"
+msgstr "Licencia"
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr "Merci"
+msgstr "Gracias"
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
-msgstr "C&rédits"
+msgstr "C&réditos"
 
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
-msgstr "Envoi de SMS par Internet."
+msgstr "Enviar SMS por internet."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2009 Kamil Páral"
-msgstr ""
+msgstr "2007-2009 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
-msgstr "&Licence"
+msgstr "&Licencia"
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
-msgstr "<html><a href=\"http://esmska.googlecode.com/\">Accueil</a></html>"
+msgstr ""
+"<html><a href=\"http://esmska.googlecode.com/\">Página de inicio</a></html>"
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -60,6 +61,9 @@ msgid ""
 "Show program home page\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Mostrar página principal de programa\n"
+"</html>"
 
 #. #Do not change this value
 #: AboutFrame.supportButton.link
@@ -79,43 +83,43 @@ msgstr ""
 
 #: AboutFrame.title
 msgid "About Esmska"
-msgstr "À propos de Esmska"
+msgstr "Sobre Esmska"
 
 #: About_
 msgid "&About"
-msgstr "&À propos"
+msgstr "&Sobre"
 
 #: Add_contact
 msgid "Add contact"
-msgstr "Ajouter un contact"
+msgstr "Añadir contacto"
 
 #: Add_new_contact
 msgid "Add new contact"
-msgstr "Ajouter un nouveau contact"
+msgstr "Añadir nuevo contacto"
 
 #: Cancel
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Cancelar"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
-msgstr "Copier"
+msgstr "Copiar"
 
 #: ClipboardPopupMenu.Cut
 msgid "Cut"
-msgstr "Couper"
+msgstr "Cortar"
 
 #: ClipboardPopupMenu.Paste
 msgid "Paste"
-msgstr "Coller"
+msgstr "Pegar"
 
 #: Close_
 msgid "&Close"
-msgstr "&Fermer"
+msgstr ""
 
 #: CommandLineParser.available_options
 msgid "Available options:"
-msgstr "Options disponibles :"
+msgstr ""
 
 #: CommandLineParser.debug
 msgid "Print debugging output."
@@ -140,7 +144,7 @@ msgstr ""
 #. #Single quotes need to be doubled!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr "Option invalide dans la ligne de commande ! (''{0}'')"
+msgstr ""
 
 #: CommandLineParser.options
 msgid "OPTIONS"
@@ -148,22 +152,20 @@ msgstr ""
 
 #: CommandLineParser.path
 msgid "path"
-msgstr "chemin"
+msgstr ""
 
 #: CommandLineParser.set_user_path
 msgid ""
 "Set the path to the user configuration directory. Can't be used with -p."
 msgstr ""
-"Donner le chemin pour le répertoire de la configuration utilisateur. "
-"Utilisation impossible avec -p"
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr "Afficher l'aide."
+msgstr ""
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr "Utilisation:"
+msgstr ""
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
@@ -171,7 +173,7 @@ msgstr ""
 
 #: Compress_
 msgid "&Compress"
-msgstr "&Compresser"
+msgstr ""
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -183,7 +185,7 @@ msgstr ""
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
-msgstr "&Apparence"
+msgstr ""
 
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Check for a &new program version on startup"
@@ -204,11 +206,10 @@ msgstr ""
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Deletes all usernames and passwords for all operators"
 msgstr ""
-"Supprime tous les utilisateurs et mots de passe pour tous les opérateurs"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
-msgstr "&Connexion"
+msgstr ""
 
 #: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -263,7 +264,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr "&Général"
+msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -296,7 +297,7 @@ msgstr ""
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr "Mot de pa&sse :"
+msgstr ""
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -317,7 +318,7 @@ msgstr ""
 
 #: ConfigFrame.jLabel16.text
 msgid "SO&CKS proxy:"
-msgstr "Proxy SO&CKS :"
+msgstr ""
 
 #: ConfigFrame.jLabel17.text
 msgid ""
@@ -406,11 +407,11 @@ msgstr ""
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
 msgid "O&perators"
-msgstr "O&pérateurs"
+msgstr ""
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
-msgstr "Le mot de passe appartenant au nom d'utilisateur"
+msgstr ""
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
@@ -461,13 +462,6 @@ msgid ""
 "may seem not to match\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Le nom renseigné prend de la place dans le message, mais n'y paraît pas."
-"<br>\n"
-"C'est pour cette raison que la couleur du texte du message et le compteur de "
-"messages<br>\n"
-"peuvent laisser croire qu'ils diffèrent\n"
-"</html>"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
@@ -510,7 +504,7 @@ msgstr ""
 
 #: ConfigFrame.system_look
 msgid "System"
-msgstr "Système"
+msgstr ""
 
 #: ConfigFrame.themeComboBox.toolTipText
 msgid ""
@@ -521,11 +515,11 @@ msgstr ""
 
 #: ConfigFrame.themeLabel.text
 msgid "The&me:"
-msgstr "Th&ème :"
+msgstr ""
 
 #: ConfigFrame.tipsCheckBox.text
 msgid "Show program &tip on startup"
-msgstr "Afficher programme et &conseil au démarrage"
+msgstr ""
 
 #: ConfigFrame.tipsCheckBox.toolTipText
 msgid ""
@@ -642,7 +636,7 @@ msgstr ""
 
 #: Create
 msgid "Create"
-msgstr "Créer"
+msgstr ""
 
 #: Credits.authors
 msgid "Written by:"
@@ -690,7 +684,7 @@ msgstr ""
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr "Supprimer les messages sélectionnés"
+msgstr ""
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
@@ -737,11 +731,6 @@ msgid ""
 "country prefix is set in the program preferences.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Numéro de téléphone du contact avec le préfixe du pays.<br>\n"
-"Le préfixe du pays n'a pas besoin d'être donné si le défaut<br>\n"
-"préfixe du pays figure dans les préférences du programme.\n"
-"</html>"
 
 #: Edit_contact
 msgid "Edit contact"
@@ -1190,7 +1179,7 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &Problem..."
-msgstr "Envoyer un compte rendu de &problème"
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1206,7 +1195,7 @@ msgstr ""
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
-msgstr "Afficher l'historique des messages envoyés"
+msgstr ""
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
@@ -1375,7 +1364,7 @@ msgstr ""
 
 #: Preferences
 msgid "Preferences"
-msgstr "Préférences"
+msgstr ""
 
 #: Preferences_
 msgid "&Preferences"
@@ -1422,7 +1411,7 @@ msgstr ""
 
 #: Quit
 msgid "Quit"
-msgstr "Quitter"
+msgstr ""
 
 #: Quit_
 msgid "&Quit"
@@ -1430,7 +1419,7 @@ msgstr ""
 
 #: Recipient
 msgid "Recipient"
-msgstr "Destinataire"
+msgstr ""
 
 #: Redo_
 msgid "&Redo"
@@ -1438,7 +1427,7 @@ msgstr ""
 
 #: Replace
 msgid "Replace"
-msgstr "Remplacer"
+msgstr ""
 
 #: SMSPanel.Redo_change_in_message_text
 msgid "Redo undone change in message text"
@@ -1543,12 +1532,12 @@ msgstr ""
 
 #: Save
 msgid "Save"
-msgstr "Enregistrer"
+msgstr ""
 
 #: Select
 msgctxt "Select"
 msgid "Select"
-msgstr "Sélectionner"
+msgstr ""
 
 #: Send_
 msgid "&Send"
@@ -1573,7 +1562,7 @@ msgstr ""
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
-msgstr "Veuillez patienter..."
+msgstr ""
 
 #: StatusPanel.statusMessageLabel.text
 msgid "Welcome"
@@ -1732,9 +1721,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Anthony Guéchoum https://launchpad.net/~athael\n"
-"  Arnaud Bonatti https://launchpad.net/~arnaud.bonatti\n"
-"  Elizabeth https://launchpad.net/~dutertre-eliz"
+"  DiegoJ https://launchpad.net/~diegojromerolopez"
 
 #: Undo_
 msgid "&Undo"
