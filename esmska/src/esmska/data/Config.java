@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class Config extends Object implements Serializable {
 
-    private static final String LATEST_VERSION = "0.13.0 beta3";
+    private static final String LATEST_VERSION = "0.13.0";
     private static final Logger logger = Logger.getLogger(Config.class.getName());
 
     private String version = "";
