@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-28 15:26+0200\n"
+"POT-Creation-Date: 2009-01-28 15:56+0200\n"
 "PO-Revision-Date: 2008-11-05 13:49+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -161,8 +161,10 @@ msgid "path"
 msgstr "נתיב"
 
 #: CommandLineParser.set_user_path
+#, fuzzy
 msgid ""
-"Set the path to the user configuration directory. Can't be used with -p."
+"Set the path to the user configuration directory. Specify an absolute "
+"pathname. Can't be used with -p."
 msgstr "הגדר את הנתיב אל תיקיית תצורת המשתמש. לא ניתן לשימוש עם המשתנה -p."
 
 #: CommandLineParser.show_this_help

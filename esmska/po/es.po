@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-28 15:26+0200\n"
+"POT-Creation-Date: 2009-01-28 15:56+0200\n"
 "PO-Revision-Date: 2009-01-17 02:05+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -156,7 +156,8 @@ msgstr ""
 
 #: CommandLineParser.set_user_path
 msgid ""
-"Set the path to the user configuration directory. Can't be used with -p."
+"Set the path to the user configuration directory. Specify an absolute "
+"pathname. Can't be used with -p."
 msgstr ""
 
 #: CommandLineParser.show_this_help

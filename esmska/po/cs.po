@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-28 15:26+0200\n"
-"PO-Revision-Date: 2009-01-20 12:09+0000\n"
+"POT-Creation-Date: 2009-01-28 15:58+0200\n"
+"PO-Revision-Date: 2009-01-28 15:58+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -158,8 +158,11 @@ msgstr "cesta"
 
 #: CommandLineParser.set_user_path
 msgid ""
-"Set the path to the user configuration directory. Can't be used with -p."
-msgstr "Nastavení cesty k uživatelskému adresáři. Nelze použít s -p."
+"Set the path to the user configuration directory. Specify an absolute "
+"pathname. Can't be used with -p."
+msgstr ""
+"Nastavení cesty k uživatelskému adresáři. Uveďte absolutní cestu. Nelze "
+"použít s -p."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
@@ -1245,11 +1248,12 @@ msgstr ""
 
 #. #If you want to use single quotes ('), you must double them ('')!
 #: Main.cant_read_config
-#, fuzzy
 msgid ""
 "<html>The user configuration directory at ''{0}''<br>can''t be read or "
 "written!</html>"
-msgstr "Nepodařilo se vytvořit adresář nebo číst z adresáře s konfigurací!"
+msgstr ""
+"<html>Adresář s uživatelským nastavením ''{0}''<br>nemohl být přečten nebo "
+"zapsán!</html>"
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
@@ -1340,7 +1344,6 @@ msgid "A new program version has been released!"
 msgstr "Byla vydána nová verze programu!"
 
 #: MainFrame.no_operators
-#, fuzzy
 msgid ""
 "<html>\n"
 "<h2>No operators can be found!</h2>\n"
@@ -1366,7 +1369,7 @@ msgstr ""
 "<li>Operační systém špatně nastavil cestu k programu.<br>\n"
 "Zkuste místo poklikání na <i>esmska.jar</i> raději program spustit "
 "pomocí<br>\n"
-"souboru <i>esmska.sh</i> (v Linuxu, apod) nebo <i>esmska.bat</i> (ve "
+"souboru <i>esmska.sh</i> (v Linuxu, apod) nebo <i>esmska.exe</i> (ve "
 "Windows).</li>\n"
 "</ul></html>"
 

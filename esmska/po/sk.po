@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-28 15:26+0200\n"
+"POT-Creation-Date: 2009-01-28 15:56+0200\n"
 "PO-Revision-Date: 2009-01-12 07:58+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -163,8 +163,10 @@ msgid "path"
 msgstr "cesta"
 
 #: CommandLineParser.set_user_path
+#, fuzzy
 msgid ""
-"Set the path to the user configuration directory. Can't be used with -p."
+"Set the path to the user configuration directory. Specify an absolute "
+"pathname. Can't be used with -p."
 msgstr ""
 "Nastavenie cesty k uživateľskému adresáru. Nieje možné použiť spolu s -p."
 
