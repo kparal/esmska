@@ -105,10 +105,10 @@ public class PersistenceManager {
         
         //create program dir if necessary
         if (!userDir.exists() && !userDir.mkdirs()) {
-            throw new IOException("Can't create program dir");
+            throw new IOException("Can't create program dir '" + userDir.getAbsolutePath() + "'");
         }
         if (!(userDir.canWrite() && userDir.canExecute())) {
-            throw new IOException("Can't write or execute the program dir");
+            throw new IOException("Can't write or execute the program dir '" + userDir.getAbsolutePath() + "'");
         }
     }
     

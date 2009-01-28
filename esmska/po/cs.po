@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-20 13:27+0200\n"
+"POT-Creation-Date: 2009-01-28 15:26+0200\n"
 "PO-Revision-Date: 2009-01-20 12:09+0000\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -143,7 +143,7 @@ msgstr ""
 "Zapnutí přenosného módu - zeptá se na umístění uživatelského adresáře. Nelze "
 "použít s -c."
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
 msgstr "Neplatná volba na příkazovém řádku! (\"{0}\")"
@@ -681,7 +681,7 @@ msgstr ""
 "a podepsaná daným jménem. Tuto funkci podporují pouze někteří operátoři.\n"
 "</html>"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
 msgstr "<html>Uživatelský adresář programu:<br>{0}</html>"
@@ -715,7 +715,7 @@ msgstr ""
 "rámečky oken zvolený vzhled\n"
 "</html>"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: ConfirmingFileChooser.sure_to_replace
 msgid ""
 "<html><h2>A file named ''{0}'' already exists.<br>Do you really want to "
@@ -877,7 +877,7 @@ msgstr "Upravit označené kontakty"
 msgid "Edit selected message"
 msgstr "Upravit označenou zprávu"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
 msgstr "Do souboru \"{0}\" nelze zapisovat!"
@@ -1065,7 +1065,7 @@ msgstr "Zvolte vstupní soubor:"
 msgid "The path to contacts file"
 msgstr "Cesta k souboru s kontakty"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
 msgstr "Soubor {0} nelze přečíst!"
@@ -1243,8 +1243,12 @@ msgstr ""
 "nedoporučujeme spouštět další<br>instance programu, neboť může dojít ke "
 "ztrátě uživatelských dat.</html>"
 
+#. #If you want to use single quotes ('), you must double them ('')!
 #: Main.cant_read_config
-msgid "The user configuration directory can't be read or written!"
+#, fuzzy
+msgid ""
+"<html>The user configuration directory at ''{0}''<br>can''t be read or "
+"written!</html>"
 msgstr "Nepodařilo se vytvořit adresář nebo číst z adresáře s konfigurací!"
 
 #: Main.choose_config_files
@@ -1336,6 +1340,7 @@ msgid "A new program version has been released!"
 msgstr "Byla vydána nová verze programu!"
 
 #: MainFrame.no_operators
+#, fuzzy
 msgid ""
 "<html>\n"
 "<h2>No operators can be found!</h2>\n"
@@ -1347,7 +1352,7 @@ msgid ""
 "<li>The operating system has wrongly set the program path.<br>\n"
 "Instead of clicking on <i>esmska.jar</i> try to run the program rather "
 "using<br>\n"
-"the <i>esmska.sh</i> file (in Linux, etc) or the <i>esmska.bat</i> (in "
+"the <i>esmska.sh</i> file (in Linux, etc) or the <i>esmska.exe</i> (in "
 "Windows).</li>\n"
 "</ul></html>"
 msgstr ""
@@ -1389,17 +1394,17 @@ msgstr "Zobrazit historii odeslaných zpráv"
 msgid "Show program information"
 msgstr "Zobrazit informace o programu"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
 msgstr "Zprávu pro {0} se nepodařilo odeslat!"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 msgstr "<html><h2>Zprávu pro \"{0}\" se nepovedlo odeslat!</h2>{1}</html>"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
 msgstr "Zpráva pro {0} odeslána."
@@ -1661,7 +1666,7 @@ msgid ""
 msgstr ""
 "Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \\\"CamelCase\\\""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1701,19 +1706,19 @@ msgstr ""
 msgid "Send message (Ctrl+Enter)"
 msgstr "Odeslat zprávu (Ctrl+Enter)"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
 msgstr ""
 "<html>Znaků v aktuální zprávě: <b>{0}/{1}</b> (zbývá <b>{2}</b>)</html>"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
 msgstr "{0} znaků ({1} sms)"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
 msgstr "{0} znaků (nelze odeslat!)"
@@ -1748,7 +1753,7 @@ msgstr ""
 msgid "no operator"
 msgstr "žádný operátor"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
 msgstr "Posílám zprávu pro {0} ({1}) ..."

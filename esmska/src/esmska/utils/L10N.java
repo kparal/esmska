@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
-import org.openide.awt.Actions;
 import org.openide.awt.Mnemonics;
 
 /** Class containing useful methods when doing internacionalization and localization

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-20 13:27+0200\n"
+"POT-Creation-Date: 2009-01-28 15:26+0200\n"
 "PO-Revision-Date: 2008-12-13 17:20+0000\n"
 "Last-Translator: zeugma <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -137,7 +137,7 @@ msgid ""
 "directory. Can't be used with -c."
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
 msgstr ""
@@ -570,7 +570,7 @@ msgid ""
 "</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
 msgstr ""
@@ -598,7 +598,7 @@ msgid ""
 "</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: ConfirmingFileChooser.sure_to_replace
 msgid ""
 "<html><h2>A file named ''{0}'' already exists.<br>Do you really want to "
@@ -752,7 +752,7 @@ msgstr ""
 msgid "Edit selected message"
 msgstr "Seçili mesajı düzenle"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
 msgstr ""
@@ -927,7 +927,7 @@ msgstr ""
 msgid "The path to contacts file"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
 msgstr ""
@@ -1070,8 +1070,11 @@ msgid ""
 "because it may cause a user data loss.</html>"
 msgstr ""
 
+#. #If you want to use single quotes ('), you must double them ('')!
 #: Main.cant_read_config
-msgid "The user configuration directory can't be read or written!"
+msgid ""
+"<html>The user configuration directory at ''{0}''<br>can''t be read or "
+"written!</html>"
 msgstr ""
 
 #: Main.choose_config_files
@@ -1168,7 +1171,7 @@ msgid ""
 "<li>The operating system has wrongly set the program path.<br>\n"
 "Instead of clicking on <i>esmska.jar</i> try to run the program rather "
 "using<br>\n"
-"the <i>esmska.sh</i> file (in Linux, etc) or the <i>esmska.bat</i> (in "
+"the <i>esmska.sh</i> file (in Linux, etc) or the <i>esmska.exe</i> (in "
 "Windows).</li>\n"
 "</ul></html>"
 msgstr ""
@@ -1197,17 +1200,17 @@ msgstr ""
 msgid "Show program information"
 msgstr "Program bilgisini göster"
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
 msgstr ""
@@ -1446,7 +1449,7 @@ msgid ""
 "Omit whitespace from current message and rewrite it to \"CamelCase\" format"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1480,18 +1483,18 @@ msgstr ""
 msgid "Send message (Ctrl+Enter)"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
 msgstr ""
@@ -1521,7 +1524,7 @@ msgstr ""
 msgid "no operator"
 msgstr ""
 
-#. #Single quotes need to be doubled!
+#. #If you want to use single quotes ('), you must double them ('')!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
 msgstr ""

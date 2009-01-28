@@ -29,7 +29,10 @@ import esmska.utils.JavaType;
 import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import java.awt.EventQueue;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
+import javax.swing.SwingUtilities;
 
 /** Starter class for the whole program
  *
@@ -64,20 +67,29 @@ public class Main {
         if (clp.isPortable() && configPath == null) {
             logger.fine("Entering portable mode");
             try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, "Could not set system Look and Feel", ex);
-            }
-            JFileChooser chooser = new JFileChooser();
-            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            chooser.setApproveButtonText(l10n.getString("Select"));
-            chooser.setDialogTitle(l10n.getString("Main.choose_config_files"));
-            chooser.setFileHidingEnabled(false);
-            chooser.setMultiSelectionEnabled(false);
-            int result = chooser.showOpenDialog(null);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                configPath = chooser.getSelectedFile().getPath();
-                logger.config("New config path: " + configPath);
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                        } catch (Exception ex) {
+                            logger.log(Level.WARNING, "Could not set system Look and Feel", ex);
+                        }
+                        JFileChooser chooser = new JFileChooser();
+                        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                        chooser.setApproveButtonText(l10n.getString("Select"));
+                        chooser.setDialogTitle(l10n.getString("Main.choose_config_files"));
+                        chooser.setFileHidingEnabled(false);
+                        chooser.setMultiSelectionEnabled(false);
+                        int result = chooser.showOpenDialog(null);
+                        if (result == JFileChooser.APPROVE_OPTION) {
+                            configPath = chooser.getSelectedFile().getPath();
+                            logger.config("New config path: " + configPath);
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Can't display file chooser for portable mode", e);
             }
         }
 
@@ -95,10 +107,19 @@ public class Main {
             }
             try {
                 pm.loadOperators();
-            } catch (IntrospectionException ex) { //OpenJDK 6 seems not to support JavaScript
+            } catch (IntrospectionException ex) { //it seems there is not JavaScript support
                 logger.log(Level.SEVERE, "Current JRE doesn't support JavaScript execution", ex);
-                JOptionPane.showMessageDialog(null, l10n.getString("Main.no_javascript"),
-                    null, JOptionPane.ERROR_MESSAGE);
+                try {
+                    SwingUtilities.invokeAndWait(new Runnable() {
+                        @Override
+                        public void run() {
+                            JOptionPane.showMessageDialog(null, l10n.getString("Main.no_javascript"),
+                                    null, JOptionPane.ERROR_MESSAGE);
+                        }
+                    });
+                } catch (Exception e) {
+                    logger.log(Level.SEVERE, "Can't display error message", e);
+                }
                 System.exit(1);
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Could not load operators", ex);
@@ -125,21 +146,41 @@ public class Main {
             }
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
-            JOptionPane.showMessageDialog(null, l10n.getString("Main.cant_read_config"),
-                    null, JOptionPane.ERROR_MESSAGE);
+            try {
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        JOptionPane.showMessageDialog(null,
+                                MessageFormat.format(l10n.getString("Main.cant_read_config"),
+                                PersistenceManager.getUserDir().getAbsolutePath()),
+                                null, JOptionPane.ERROR_MESSAGE);
+                    }
+                });
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Can't display error message", e);
+            }
         }
         
         //warn if other program instance is already running
         if (pm != null && !pm.isFirstInstance()) {
             logger.warning("Some other instance of the program is already running");
-            String runOption = l10n.getString("Main.run_anyway");
-            String quitOption = l10n.getString("Quit");
-            String[] options = new String[]{runOption, quitOption};
-            int result = JOptionPane.showOptionDialog(null, l10n.getString("Main.already_running"),
-                    null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
-                    options, quitOption);
-            if (result != 0) {
-              System.exit(0);
+            try {
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        String runOption = l10n.getString("Main.run_anyway");
+                        String quitOption = l10n.getString("Quit");
+                        String[] options = new String[]{runOption, quitOption};
+                        int result = JOptionPane.showOptionDialog(null, l10n.getString("Main.already_running"),
+                                null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+                                options, quitOption);
+                        if (result != 0) {
+                            System.exit(0);
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Can't display error message", e);
             }
         }
 
@@ -158,9 +199,18 @@ public class Main {
         
         //set L&F
         try {
-            ThemeManager.setLaF();
-        } catch (Throwable ex) {
-            logger.log(Level.WARNING, "Could not set Look and Feel", ex);
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        ThemeManager.setLaF();
+                    } catch (Throwable ex) {
+                        logger.log(Level.WARNING, "Could not set Look and Feel", ex);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Setting LaF interrupted", e);
         }
         
         //set proxy
@@ -181,7 +231,7 @@ public class Main {
         }
         
         //start main frame
-        java.awt.EventQueue.invokeLater(new java.lang.Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 MainFrame.getInstance().startAndShow();
