@@ -30,7 +30,6 @@ public class Config extends Object implements Serializable {
     private Integer horizontalSplitPaneLocation;
     private Integer verticalSplitPaneLocation;
     private ThemeManager.LAF lookAndFeel = ThemeManager.LAF.SUBSTANCE;
-    private boolean lafWindowDecorated = true;
     private String lafJGoodiesTheme = "Experience Blue";
     private String lafSubstanceSkin = "Sahara";
     private boolean removeAccents = true;
@@ -119,10 +118,6 @@ public class Config extends Object implements Serializable {
 
     public String getLafJGoodiesTheme() {
         return this.lafJGoodiesTheme;
-    }
-
-    public boolean isLafWindowDecorated() {
-        return this.lafWindowDecorated;
     }
 
     public String getLafSubstanceSkin() {
@@ -266,12 +261,6 @@ public class Config extends Object implements Serializable {
         String oldLafJGoodiesTheme = this.lafJGoodiesTheme;
         this.lafJGoodiesTheme = lafJGoodiesTheme;
         changeSupport.firePropertyChange("lafJGoodiesTheme", oldLafJGoodiesTheme, lafJGoodiesTheme);
-    }
-
-    public void setLafWindowDecorated(boolean lafWindowDecorated) {
-        boolean oldLafWindowDecorated = this.lafWindowDecorated;
-        this.lafWindowDecorated = lafWindowDecorated;
-        changeSupport.firePropertyChange("lafWindowDecorated", oldLafWindowDecorated, lafWindowDecorated);
     }
 
     public void setLafSubstanceSkin(String lafSubstanceSkin) {

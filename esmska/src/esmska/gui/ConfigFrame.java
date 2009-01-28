@@ -260,7 +260,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel7 = new JLabel();
         themeComboBox = new JComboBox();
         themeLabel = new JLabel();
-        windowDecorationsCheckBox = new JCheckBox();
         windowCenteredCheckBox = new JCheckBox();
         toolbarVisibleCheckBox = new JCheckBox();
         jLabel5 = new JLabel();
@@ -413,12 +412,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(themeLabel, l10n.getString("ConfigFrame.themeLabel.text")); // NOI18N
         themeLabel.setToolTipText(themeComboBox.getToolTipText());
 
-        Mnemonics.setLocalizedText(windowDecorationsCheckBox, l10n.getString("ConfigFrame.windowDecorationsCheckBox.text")); // NOI18N
-        windowDecorationsCheckBox.setToolTipText(l10n.getString("ConfigFrame.windowDecorationsCheckBox.toolTipText")); // NOI18N
-
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${lafWindowDecorated}"), windowDecorationsCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
         Mnemonics.setLocalizedText(windowCenteredCheckBox, l10n.getString("ConfigFrame.windowCenteredCheckBox.text")); // NOI18N
         windowCenteredCheckBox.setToolTipText(l10n.getString("ConfigFrame.windowCenteredCheckBox.toolTipText")); // NOI18N
 
@@ -478,19 +471,18 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(substanceWarningMark))
                     .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+                    .addGroup(appearancePanelLayout.createSequentialGroup()
+                        .addComponent(themeLabel)
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(themeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(substanceWarning)
                     .addComponent(windowCenteredCheckBox)
                     .addGroup(appearancePanelLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(startMinimizedCheckBox))
                     .addComponent(tipsCheckBox)
                     .addComponent(notificationAreaCheckBox)
-                    .addComponent(toolbarVisibleCheckBox)
-                    .addGroup(appearancePanelLayout.createSequentialGroup()
-                        .addComponent(themeLabel)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(themeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(windowDecorationsCheckBox)
-                    .addComponent(substanceWarning))
+                    .addComponent(toolbarVisibleCheckBox))
                 .addContainerGap())
         );
 
@@ -512,8 +504,6 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(themeLabel)
                     .addComponent(themeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(windowDecorationsCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(windowCenteredCheckBox)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(toolbarVisibleCheckBox)
@@ -523,7 +513,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(startMinimizedCheckBox)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(tipsCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(substanceWarning)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
@@ -1144,8 +1134,8 @@ private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event
     boolean showAdvanced = advancedCheckBox.isSelected();
 
     checkUpdatesCheckBox.setVisible(showAdvanced);
-    windowDecorationsCheckBox.setVisible(showAdvanced);
     windowCenteredCheckBox.setVisible(showAdvanced);
+    startMinimizedCheckBox.setVisible(showAdvanced);
     tipsCheckBox.setVisible(showAdvanced);
     operatorFilterLabel.setVisible(showAdvanced);
     operatorFilterTextField.setVisible(showAdvanced);
@@ -1285,7 +1275,6 @@ private void countryCodeComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:eve
     private JCheckBox useProxyCheckBox;
     private JCheckBox useSenderIDCheckBox;
     private JCheckBox windowCenteredCheckBox;
-    private JCheckBox windowDecorationsCheckBox;
     private BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     

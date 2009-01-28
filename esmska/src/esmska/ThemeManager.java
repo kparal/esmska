@@ -66,10 +66,9 @@ public class ThemeManager {
             config.setLookAndFeel(laf);
         }
 
-        //set window decorations
-        JFrame.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());
-        JDialog.setDefaultLookAndFeelDecorated(config.isLafWindowDecorated());
-        
+        //with most LaFs use system decorations
+        setLaFDecorated(false);
+
         switch (laf) {
             case SYSTEM:
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -117,6 +116,8 @@ public class ThemeManager {
                 //set Substance specific addons
                 UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
                 UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
+                //set LaF decorations
+                setLaFDecorated(true);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown LaF name");
@@ -220,5 +221,12 @@ public class ThemeManager {
                 return;
             }
         }
+    }
+
+    /** Set if frame and dialogs should be decorated by current LaF or by system
+     */
+    private static void setLaFDecorated(boolean decorated) {
+        JFrame.setDefaultLookAndFeelDecorated(decorated);
+        JDialog.setDefaultLookAndFeelDecorated(decorated);
     }
 }
