@@ -15,6 +15,7 @@ import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
+import esmska.utils.Workarounds;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Rectangle;
@@ -63,7 +64,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
 
@@ -824,9 +824,9 @@ public class ContactPanel extends javax.swing.JPanel {
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             String tooltip = "<html><table><tr><td><img src=\"" + contactIconURI +
-                    "\"></td><td valign=top><b>" + StringEscapeUtils.escapeHtml(contact.getName()) +
+                    "\"></td><td valign=top><b>" + Workarounds.escapeHtml(contact.getName()) +
                     "</b><br>" + OperatorUtil.stripCountryPrefix(contact.getNumber()) +
-                    "<br>" + StringEscapeUtils.escapeHtml(contact.getOperator()) +
+                    "<br>" + Workarounds.escapeHtml(contact.getOperator()) +
                     "</td></tr></table></html>";
             label.setToolTipText(tooltip);
             //set background on non-matching contacts when searching

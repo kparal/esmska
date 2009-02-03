@@ -9,6 +9,7 @@ package esmska.gui;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.utils.L10N;
+import esmska.utils.Workarounds;
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -36,7 +37,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.openide.awt.Mnemonics;
 
 /** Display log records
@@ -235,7 +235,7 @@ public class LogFrame extends javax.swing.JFrame {
             //display message and time
             String text = "[" + timeFormat.format(record.getTime()) + "] " +
                     record.getMessage();
-            ((JLabel)c).setText("<html>" + StringEscapeUtils.escapeHtml(text) + "</html>");
+            ((JLabel)c).setText("<html>" + Workarounds.escapeHtml(text) + "</html>");
             //add record icon
             ((JLabel)c).setIcon(record.getIcon() != null ? record.getIcon() :
                 Icons.STATUS_BLANK);

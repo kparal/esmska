@@ -7,6 +7,7 @@ package esmska.gui;
 
 import esmska.data.Log;
 import esmska.utils.L10N;
+import esmska.utils.Workarounds;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +26,6 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.Timer;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.openide.awt.Mnemonics;
 
 /** Status bar panel
@@ -58,7 +58,7 @@ public class StatusPanel extends javax.swing.JPanel {
      */
     public void setStatusMessage(String message, boolean printTime, ImageIcon icon,
             boolean addToLog) {
-        String messageEsc = StringEscapeUtils.escapeHtml(message);
+        String messageEsc = Workarounds.escapeHtml(message);
         Date time = new Date();
         if (printTime) {
             String timestamp = shortTimeFormat.format(new Date());
