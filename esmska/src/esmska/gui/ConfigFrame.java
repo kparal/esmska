@@ -61,7 +61,6 @@ import esmska.transfer.ProxyManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
-import esmska.utils.JavaType;
 import esmska.utils.Nullator;
 import esmska.utils.Tuple;
 import java.awt.Toolkit;
@@ -255,7 +254,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         checkUpdatesCheckBox = new JCheckBox();
         appearancePanel = new JPanel();
         lafComboBox = new JComboBox();
-        substanceWarning = new JLabel();
         lookLabel = new JLabel();
         jLabel7 = new JLabel();
         themeComboBox = new JComboBox();
@@ -266,7 +264,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         notificationAreaCheckBox = new JCheckBox();
         tipsCheckBox = new JCheckBox();
         startMinimizedCheckBox = new JCheckBox();
-        substanceWarningMark = new JLabel();
         operatorPanel = new JPanel();
         useSenderIDCheckBox = new JCheckBox();
         senderNumberTextField = new JTextField();
@@ -391,10 +388,6 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
-        Mnemonics.setLocalizedText(substanceWarning, l10n.getString("ConfigFrame.substanceWarning.text")); // NOI18N
-        substanceWarning.setToolTipText(l10n.getString("ConfigFrame.substanceWarning.toolTipText")); // NOI18N
-        substanceWarning.setVisible(JavaType.isOpenJDK());
-
         lookLabel.setLabelFor(lafComboBox);
         Mnemonics.setLocalizedText(lookLabel, l10n.getString("ConfigFrame.lookLabel.text")); // NOI18N
         lookLabel.setToolTipText(lafComboBox.getToolTipText());
@@ -451,8 +444,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, notificationAreaCheckBox, ELProperty.create("${selected && enabled}"), startMinimizedCheckBox, BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
-        Mnemonics.setLocalizedText(substanceWarningMark, "**");
-        substanceWarningMark.setVisible(JavaType.isOpenJDK());
 
         GroupLayout appearancePanelLayout = new GroupLayout(appearancePanel);
         appearancePanel.setLayout(appearancePanelLayout);
@@ -467,15 +458,12 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(substanceWarningMark))
+                        .addComponent(jLabel5))
                     .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
                     .addGroup(appearancePanelLayout.createSequentialGroup()
                         .addComponent(themeLabel)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(themeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(substanceWarning)
                     .addComponent(windowCenteredCheckBox)
                     .addGroup(appearancePanelLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -497,8 +485,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(appearancePanelLayout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(lookLabel)
                     .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(substanceWarningMark))
+                    .addComponent(jLabel5))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(appearancePanelLayout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(themeLabel)
@@ -513,9 +500,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(startMinimizedCheckBox)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(tipsCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                .addComponent(substanceWarning)
-                .addPreferredGap(ComponentPlacement.RELATED)
+                .addPreferredGap(ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
         );
@@ -943,7 +928,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(jLabel16)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(socksProxyTextField))))
-                .addComponent(jLabel17, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel17, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
             .addContainerGap())
     );
 
@@ -968,7 +953,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
             .addComponent(jLabel17)
             .addContainerGap())
     );
@@ -1265,8 +1250,6 @@ private void countryCodeComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:eve
     private JTextField senderNumberTextField;
     private JTextField socksProxyTextField;
     private JCheckBox startMinimizedCheckBox;
-    private JLabel substanceWarning;
-    private JLabel substanceWarningMark;
     private JTabbedPane tabbedPane;
     private JComboBox themeComboBox;
     private JLabel themeLabel;

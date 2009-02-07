@@ -222,8 +222,6 @@
                               <Component id="lafComboBox" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="substanceWarningMark" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel7" alignment="0" pref="716" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -231,7 +229,6 @@
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="themeComboBox" linkSize="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="substanceWarning" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="windowCenteredCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="21" pref="21" max="21" attributes="0"/>
@@ -253,7 +250,6 @@
                           <Component id="lookLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lafComboBox" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="substanceWarningMark" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -270,9 +266,7 @@
                       <Component id="startMinimizedCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tipsCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="166" max="32767" attributes="0"/>
-                      <Component id="substanceWarning" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="187" max="32767" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -295,19 +289,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lafComboBoxActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="substanceWarning">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.substanceWarning.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.substanceWarning.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="substanceWarning.setVisible(JavaType.isOpenJDK());"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lookLabel">
               <Properties>
@@ -428,14 +409,6 @@
                 <BindingProperty name="selected" source="config" sourcePath="${startMinimized}" target="startMinimizedCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
                 <BindingProperty name="enabled" source="notificationAreaCheckBox" sourcePath="${selected &amp;&amp; enabled}" target="startMinimizedCheckBox" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="substanceWarningMark">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="**" noResource="true"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="substanceWarningMark.setVisible(JavaType.isOpenJDK());"/>
-              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -1010,7 +983,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel17" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel17" alignment="0" pref="716" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1038,7 +1011,7 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="222" max="32767" attributes="0"/>
+                      <EmptySpace pref="207" max="32767" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
