@@ -21,6 +21,7 @@ import esmska.data.Config;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.JavaType;
 import esmska.utils.Nullator;
+import esmska.utils.OSType;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.LookAndFeel;
@@ -190,15 +191,12 @@ public class ThemeManager {
      * @return the best LaF for this platform
      */
     public static LAF suggestBestLAF() {
-        LAF laf = LAF.SUBSTANCE;
+        LAF laf = LAF.SYSTEM;
 
-        //set system LaF on OpenJDK, because Substance throws exceptions
-        if (JavaType.isOpenJDK()) {
-            laf = LAF.SYSTEM;
-        }
-        //set system LaF on Apple, because Apple users are used to consistent look
-        if (JavaType.isAppleJava()) {
-            laf = LAF.SYSTEM;
+        //Windows users are used to fancy and inconsistent looks
+        //On other (Linux) systems Sun Java is very bad in emulating system look
+        if (OSType.isWindows() || JavaType.isSunJava()) {
+            laf = LAF.SUBSTANCE;
         }
 
         //if the suggested LaF is not supported, suggest crossplatform LaF as a safe choice
