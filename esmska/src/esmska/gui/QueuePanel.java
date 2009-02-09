@@ -71,6 +71,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.apache.commons.lang.WordUtils;
+import org.jvnet.substance.api.ColorSchemeAssociationKind;
 import org.jvnet.substance.api.ComponentState;
 import org.jvnet.substance.api.SubstanceColorScheme;
 import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
@@ -748,6 +749,7 @@ public class QueuePanel extends javax.swing.JPanel {
         private boolean selected = false; //whether current item is selected
         private final JList jlist; //list to render
         private SubstanceColorScheme scheme; //current Substance color scheme for this list
+        private SubstanceColorScheme borderScheme; //current Substance border color scheme for this list
         private SubstanceHighlightPainter painter; //current Substance highlight painter for this list
 
         private final JPanel panel = new JPanel(new BorderLayout()) { //panel to wrap multiple labels
@@ -758,7 +760,8 @@ public class QueuePanel extends javax.swing.JPanel {
                 //handle this painting on our own
                 if (isSubstance && selected) {
                     painter.paintHighlight((Graphics2D) g, this, getWidth(),
-                            getHeight(), 1f, null, scheme, scheme, 0f);
+                            getHeight(), 1f, null, scheme, scheme,
+                            borderScheme, borderScheme, 0f);
                 }
             }
         };
@@ -829,6 +832,8 @@ public class QueuePanel extends javax.swing.JPanel {
                 return;
             }
             scheme = SubstanceLookAndFeel.getCurrentSkin(jlist).getColorScheme(jlist, ComponentState.SELECTED);
+            borderScheme = SubstanceLookAndFeel.getCurrentSkin(jlist).getColorScheme(jlist,
+                    ColorSchemeAssociationKind.BORDER ,ComponentState.SELECTED);
             painter = SubstanceLookAndFeel.getCurrentSkin(jlist).getHighlightPainter();
         }
     }

@@ -90,10 +90,9 @@ Provided by lib/ directory:
    o org-openide-util.jar
    o http://platform.netbeans.org/
    o included in NetBeans IDE 6.1
- * Substance 5.1dev081129
-   o substance-lite-feel.jar
+ * Substance 5.1
    o https://substance.dev.java.net/
- * Substance Extras 5.0
+ * Substance Extras 5.1
    o https://substance-extras.dev.java.net/
  * JavaCSV 2.0
    o https://sourceforge.net/projects/javacsv/
