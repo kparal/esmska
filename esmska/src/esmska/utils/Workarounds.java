@@ -19,6 +19,9 @@ public class Workarounds {
      * @see org.​apache.​commons.​lang.​StringEscapeUtils#escapeHtml(String)
      */
     public static String escapeHtml(String input) {
+        if (input == null) {
+            return input;
+        }
         String output = StringEscapeUtils.escapeHtml(input);
         output = output.replaceAll("\\&scaron;", "\\&#353;");
         output = output.replaceAll("\\&Scaron;", "\\&#352;");
