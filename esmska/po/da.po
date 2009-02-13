@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-28 15:56+0200\n"
+"POT-Creation-Date: 2009-02-13 16:14+0200\n"
 "PO-Revision-Date: 2008-11-01 14:48+0000\n"
 "Last-Translator: nanker <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -487,21 +487,6 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.substanceWarning.text
-msgid ""
-"<html><i>\n"
-"** The Substance look is not recommended for your Java version (OpenJDK)!\n"
-"</i></html>"
-msgstr ""
-
-#: ConfigFrame.substanceWarning.toolTipText
-msgid ""
-"<html>\n"
-"Some problems are known when using Substance look with OpenJDK.<br>\n"
-"Use rather Sun Java to use this look.\n"
-"</html>"
-msgstr ""
-
 #: ConfigFrame.system_look
 msgid "System"
 msgstr "System"
@@ -588,18 +573,6 @@ msgid ""
 "<html>Whether the program window should be placed according to operating "
 "system<br>\n"
 "or centered on the screen</html>"
-msgstr ""
-
-#: ConfigFrame.windowDecorationsCheckBox.text
-msgid "Use the look also on program &borders *"
-msgstr ""
-
-#: ConfigFrame.windowDecorationsCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"Whether the programs borders should be painter by the chosen look<br>\n"
-"instead of the operating system\n"
-"</html>"
 msgstr ""
 
 #. #If you want to use single quotes ('), you must double them ('')!
@@ -1264,11 +1237,11 @@ msgid "Pause/unpause sending"
 msgstr ""
 
 #: OperatorComboBox.Choose_suitable_gateway
-msgid "Choose suitable gateway"
+msgid "Guess a suitable gateway"
 msgstr ""
 
 #: OperatorComboBox.Choose_suitable_gateway_for_provided_number
-msgid "Choose suitable gateway for provided number"
+msgid "Guess a suitable gateway for the provided number"
 msgstr ""
 
 #: OperatorComboBox.List_of_available_operators_web_gateways

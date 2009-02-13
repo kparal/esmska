@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-28 15:56+0200\n"
+"POT-Creation-Date: 2009-02-13 16:14+0200\n"
 "PO-Revision-Date: 2008-11-05 13:49+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -564,28 +564,6 @@ msgstr ""
 "לסמל שבאזור ההתרעות\n"
 "</html>"
 
-#: ConfigFrame.substanceWarning.text
-msgid ""
-"<html><i>\n"
-"** The Substance look is not recommended for your Java version (OpenJDK)!\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"** ערכת החזות Substance אינה מומלצת עבור גירסת הג'אווה שלך (OpenJDK)!\n"
-"</i></html>"
-
-#: ConfigFrame.substanceWarning.toolTipText
-msgid ""
-"<html>\n"
-"Some problems are known when using Substance look with OpenJDK.<br>\n"
-"Use rather Sun Java to use this look.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"ישנן כמה בעיות ידועות בעת השימוש בערכת החזות Substance עם OpenJDK.<br>\n"
-"מומלץ להשתמש ב־Java מבית Sun לשימוש בערכה זו. \n"
-"</html>"
-
 #: ConfigFrame.system_look
 msgid "System"
 msgstr "מערכת"
@@ -690,22 +668,6 @@ msgid ""
 msgstr ""
 "<html>האם חלון התוכנה אמור להיות ממוקם בהתאם למערכת ההפעלה<br>\n"
 "או ממורכז למרכז המסך</html>"
-
-#: ConfigFrame.windowDecorationsCheckBox.text
-msgid "Use the look also on program &borders *"
-msgstr "השתמש בערכת החזות גם על &גבולות התוכנה *"
-
-#: ConfigFrame.windowDecorationsCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"Whether the programs borders should be painter by the chosen look<br>\n"
-"instead of the operating system\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"האם יש לצבוע את גבולות התוכנה עם ערכת החזות הנבחרת<br>\n"
-"במקום לפי ערכת מערכת ההפעלה\n"
-"</html>"
 
 #. #If you want to use single quotes ('), you must double them ('')!
 #: ConfirmingFileChooser.sure_to_replace
@@ -1440,11 +1402,13 @@ msgid "Pause/unpause sending"
 msgstr "השהה/המשך את השליחה"
 
 #: OperatorComboBox.Choose_suitable_gateway
-msgid "Choose suitable gateway"
+#, fuzzy
+msgid "Guess a suitable gateway"
 msgstr "בחר שער גישה הולם"
 
 #: OperatorComboBox.Choose_suitable_gateway_for_provided_number
-msgid "Choose suitable gateway for provided number"
+#, fuzzy
+msgid "Guess a suitable gateway for the provided number"
 msgstr "בחר שער גישה הולם עבור המספר שהוזן"
 
 #: OperatorComboBox.List_of_available_operators_web_gateways
@@ -1948,3 +1912,38 @@ msgstr "המשך בתור"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "המשך את תור ה־SMS"
+
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "** The Substance look is not recommended for your Java version "
+#~ "(OpenJDK)!\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "** ערכת החזות Substance אינה מומלצת עבור גירסת הג'אווה שלך (OpenJDK)!\n"
+#~ "</i></html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Some problems are known when using Substance look with OpenJDK.<br>\n"
+#~ "Use rather Sun Java to use this look.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "ישנן כמה בעיות ידועות בעת השימוש בערכת החזות Substance עם OpenJDK.<br>\n"
+#~ "מומלץ להשתמש ב־Java מבית Sun לשימוש בערכה זו. \n"
+#~ "</html>"
+
+#~ msgid "Use the look also on program &borders *"
+#~ msgstr "השתמש בערכת החזות גם על &גבולות התוכנה *"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Whether the programs borders should be painter by the chosen look<br>\n"
+#~ "instead of the operating system\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "האם יש לצבוע את גבולות התוכנה עם ערכת החזות הנבחרת<br>\n"
+#~ "במקום לפי ערכת מערכת ההפעלה\n"
+#~ "</html>"

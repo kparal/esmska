@@ -106,8 +106,8 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
         numberTextField.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent evt) {
-                numberTextFieldKeyReleased(evt);
+            public void keyTyped(KeyEvent evt) {
+                numberTextFieldKeyTyped(evt);
             }
         });
 
@@ -223,11 +223,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         suggestOperatorAction.setEnabled(!multiMode);
     }
     
-    private void numberTextFieldKeyReleased(KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyReleased
-        //guess operator
-        operatorComboBox.selectSuggestedOperator(numberTextField.getText());
-    }//GEN-LAST:event_numberTextFieldKeyReleased
-
     private void nameTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
         checkValid(nameTextField);
     }//GEN-LAST:event_nameTextFieldFocusLost
@@ -235,6 +230,11 @@ public class EditContactPanel extends javax.swing.JPanel {
     private void numberTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_numberTextFieldFocusLost
         checkValid(numberTextField);
     }//GEN-LAST:event_numberTextFieldFocusLost
+
+    private void numberTextFieldKeyTyped(KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyTyped
+        //guess operator
+        operatorComboBox.selectSuggestedOperator(numberTextField.getText());
+    }//GEN-LAST:event_numberTextFieldKeyTyped
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {

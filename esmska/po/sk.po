@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-28 15:56+0200\n"
+"POT-Creation-Date: 2009-02-13 16:14+0200\n"
 "PO-Revision-Date: 2009-01-12 07:58+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -582,28 +582,6 @@ msgstr ""
 "do ikony v oznamovacej oblasti.\n"
 "</html>"
 
-#: ConfigFrame.substanceWarning.text
-msgid ""
-"<html><i>\n"
-"** The Substance look is not recommended for your Java version (OpenJDK)!\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"** Vzhľad Substance nieje pre Vašu verziu javy (OpenJDK) odporúčaný!\n"
-"</i></html>"
-
-#: ConfigFrame.substanceWarning.toolTipText
-msgid ""
-"<html>\n"
-"Some problems are known when using Substance look with OpenJDK.<br>\n"
-"Use rather Sun Java to use this look.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Sú známe problémy pri používaní vzhľadu Substance na OpenJDK.<br>\n"
-"Pre tento vzhľad odporúčame Sun Javu.\n"
-"</html>"
-
 #: ConfigFrame.system_look
 msgid "System"
 msgstr "Systém"
@@ -708,22 +686,6 @@ msgid ""
 msgstr ""
 "<html>Ponechat umiestnenie okna programu na operačnom systéme,<br>\n"
 "alebo ho vdy umiestniť doprostriedku obrazovky</html>"
-
-#: ConfigFrame.windowDecorationsCheckBox.text
-msgid "Use the look also on program &borders *"
-msgstr "Použiť vzhled i na o&kraje oken *"
-
-#: ConfigFrame.windowDecorationsCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"Whether the programs borders should be painter by the chosen look<br>\n"
-"instead of the operating system\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Vykresľovat okraje okien programu zvoleným vzhľadom<br>\n"
-"alebo vzhľadom operačného systému.\n"
-"</html>"
 
 #. #If you want to use single quotes ('), you must double them ('')!
 #: ConfirmingFileChooser.sure_to_replace
@@ -1464,11 +1426,13 @@ msgid "Pause/unpause sending"
 msgstr "Pozastaviť/spustiť odosielanie"
 
 #: OperatorComboBox.Choose_suitable_gateway
-msgid "Choose suitable gateway"
+#, fuzzy
+msgid "Guess a suitable gateway"
 msgstr "Vybrať vhodnú bránu"
 
 #: OperatorComboBox.Choose_suitable_gateway_for_provided_number
-msgid "Choose suitable gateway for provided number"
+#, fuzzy
+msgid "Guess a suitable gateway for the provided number"
 msgstr "Vybrať vhodnú bránu pre zadané číslo"
 
 #: OperatorComboBox.List_of_available_operators_web_gateways
@@ -1998,3 +1962,38 @@ msgstr "Spustiť frontu"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "Znovu spustiť SMS frontu"
+
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "** The Substance look is not recommended for your Java version "
+#~ "(OpenJDK)!\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "** Vzhľad Substance nieje pre Vašu verziu javy (OpenJDK) odporúčaný!\n"
+#~ "</i></html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Some problems are known when using Substance look with OpenJDK.<br>\n"
+#~ "Use rather Sun Java to use this look.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Sú známe problémy pri používaní vzhľadu Substance na OpenJDK.<br>\n"
+#~ "Pre tento vzhľad odporúčame Sun Javu.\n"
+#~ "</html>"
+
+#~ msgid "Use the look also on program &borders *"
+#~ msgstr "Použiť vzhled i na o&kraje oken *"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Whether the programs borders should be painter by the chosen look<br>\n"
+#~ "instead of the operating system\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Vykresľovat okraje okien programu zvoleným vzhľadom<br>\n"
+#~ "alebo vzhľadom operačného systému.\n"
+#~ "</html>"
