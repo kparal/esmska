@@ -663,7 +663,7 @@ public class ContactPanel extends javax.swing.JPanel {
         @Override
         public void doLayout() {
             super.doLayout();
-            if (searchField.isVisible()) {
+            if (searchField.getParent() != null) {
                 //place searchField to a lower right corner
                 Rectangle visibleRect = getVisibleRect();
                 int height = (int) searchField.getPreferredSize().getHeight();
@@ -672,7 +672,7 @@ public class ContactPanel extends javax.swing.JPanel {
                 searchField.setBounds(visibleRect.x + visibleRect.width - width,
                     visibleRect.y + visibleRect.height - height, width, height);
             }
-            if (newContactLabel.isVisible()) {
+            if (newContactLabel.getParent() != null) {
                 //place newContactLabel to the center 5px from all borders
                 Rectangle visibleRect = getVisibleRect();
                 int height = (int) visibleRect.height - 10;
