@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 16:19+0200\n"
+"POT-Creation-Date: 2009-02-13 17:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -586,6 +586,12 @@ msgstr ""
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
+msgstr ""
+
+#: ContactPanel.new_contact_hint
+msgid ""
+"<html>You don't have any contact created. Add a new one with buttons below.</"
+"html>"
 msgstr ""
 
 #: ContactPanel.remove_following_contacts

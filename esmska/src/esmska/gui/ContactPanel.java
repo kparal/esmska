@@ -12,13 +12,16 @@ import esmska.integration.MacUtils;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
+import esmska.utils.AbstractListDataListener;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
+import esmska.utils.Nullator;
 import esmska.utils.Workarounds;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Rectangle;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -62,6 +65,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -107,6 +111,18 @@ public class ContactPanel extends javax.swing.JPanel {
         //add mouse listeners to the contact list
         mouseListener = new ContactMouseListener(contactList, popup);
         contactList.addMouseListener(mouseListener);
+
+        //show new contact hint if there are no contacts
+        ((ContactList)contactList).showNewContactHint(contactListModel.getSize() <= 0);
+        //listen for changes in contacts size and change hint visibility
+        //TODO: rework to listen on contacts instead of contact list
+        contactListModel.addListDataListener(new AbstractListDataListener() {
+            @Override
+            public void onUpdate(ListDataEvent e) {
+                ((ContactList)contactList).showNewContactHint(
+                        contactListModel.getSize() <= 0);
+            }
+        });
     }
     
     /** clear selection of contact list */
@@ -602,16 +618,19 @@ public class ContactPanel extends javax.swing.JPanel {
     /** JList with contacts */
     private class ContactList extends JList {
         JTextField searchField = new JTextField();
+        JLabel newContactLabel = new JLabel(l10n.getString("ContactPanel.new_contact_hint"));
 
         public ContactList() {
             searchField.setFocusable(false);
+            newContactLabel.setVerticalAlignment(JLabel.TOP);
+            newContactLabel.setForeground(SystemColor.textInactiveText);
         }
-        
+
         /** show search field in contact list or hide it
          * @param text text to show; empty or null string hides the field
          */
         public void showSearchField(String text) {
-            if (text == null || "".equals(text)) {
+            if (Nullator.isEmpty(text)) {
                 remove(searchField);
             } else {
                 searchField.setText(text);
@@ -622,7 +641,16 @@ public class ContactPanel extends javax.swing.JPanel {
             searchField.invalidate();
             validate();
         }
-        
+
+        /** Show hint how to add a new contact */
+        public void showNewContactHint(boolean show) {
+            if (show && newContactLabel.getParent() == null) {
+                add(newContactLabel);
+            } else {
+                remove(newContactLabel);
+            }
+        }
+
         /** repaints only the search field, not the whole container */
         public void repaintSearchField() {
             Rectangle oldBounds = searchField.getBounds();
@@ -635,13 +663,23 @@ public class ContactPanel extends javax.swing.JPanel {
         @Override
         public void doLayout() {
             super.doLayout();
-            
-            Rectangle visibleRect = getVisibleRect();
-            int height = (int) searchField.getPreferredSize().getHeight();
-            //+1 bcz first char was cut off sometimes
-            int width = (int) searchField.getPreferredSize().getWidth() + 1;
-            searchField.setBounds(visibleRect.x + visibleRect.width - width,
-                visibleRect.y + visibleRect.height - height, width, height);
+            if (searchField.isVisible()) {
+                //place searchField to a lower right corner
+                Rectangle visibleRect = getVisibleRect();
+                int height = (int) searchField.getPreferredSize().getHeight();
+                //+1 bcz first char was cut off sometimes
+                int width = (int) searchField.getPreferredSize().getWidth() + 1;
+                searchField.setBounds(visibleRect.x + visibleRect.width - width,
+                    visibleRect.y + visibleRect.height - height, width, height);
+            }
+            if (newContactLabel.isVisible()) {
+                //place newContactLabel to the center 5px from all borders
+                Rectangle visibleRect = getVisibleRect();
+                int height = (int) visibleRect.height - 10;
+                int width = (int) visibleRect.width - 10;
+                newContactLabel.setBounds(visibleRect.x + 5,
+                        visibleRect.y + 5, width, height);
+            }
         }
 
         @Override

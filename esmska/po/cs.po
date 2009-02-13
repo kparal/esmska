@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 16:19+0200\n"
-"PO-Revision-Date: 2009-02-13 16:15+0100\n"
+"POT-Creation-Date: 2009-02-13 17:38+0200\n"
+"PO-Revision-Date: 2009-02-13 17:38+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -702,6 +702,14 @@ msgstr "Kontakty"
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
 msgstr "Seznam kontaktů (Alt+K)"
+
+#: ContactPanel.new_contact_hint
+msgid ""
+"<html>You don't have any contact created. Add a new one with buttons below.</"
+"html>"
+msgstr ""
+"<html>Nemáte vytvořený žádný kontakt. Přidejte si nový pomocí tlačítek níže."
+"</html>"
 
 #: ContactPanel.remove_following_contacts
 msgid "<html><h3>Really remove following contacts?</h3></html>"

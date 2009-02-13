@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 16:14+0200\n"
+"POT-Creation-Date: 2009-02-13 17:37+0200\n"
 "PO-Revision-Date: 2008-10-15 21:04+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -598,6 +598,12 @@ msgstr "Contatti"
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
 msgstr "Lista contatti (Alt+K)"
+
+#: ContactPanel.new_contact_hint
+msgid ""
+"<html>You don't have any contact created. Add a new one with buttons below.</"
+"html>"
+msgstr ""
 
 #: ContactPanel.remove_following_contacts
 msgid "<html><h3>Really remove following contacts?</h3></html>"
