@@ -14,9 +14,9 @@ trap "echo Updating PO files failed." ERR
 cd "`dirname "$0"`"
 
 # update POT template
-prop2po -P ../src/esmska/resources/l10n.properties ../po/esmska.pot
+prop2po --progress none -P ../src/esmska/resources/l10n.properties ../po/esmska.pot
 # sort entries by location
-msgattrib -F ../po/esmska.pot -o ../po/esmska.pot 
+msgattrib -F ../po/esmska.pot -o ../po/esmska.pot
 
 # update PO files
 cd ../po
@@ -28,7 +28,7 @@ if ls *.po >/dev/null; then
             dos2unix -a "$PO"
         fi
         # merge
-        msgmerge -U --backup=none "$PO" esmska.pot
+        msgmerge -U -q --backup=none "$PO" esmska.pot
     done
 fi
 
@@ -36,7 +36,7 @@ fi
 if ls *.po >/dev/null; then
     for PO in *.po; do
         LOCALE=${PO%.po}
-        po2prop -t ../src/esmska/resources/l10n.properties \
+        po2prop --progress none -t ../src/esmska/resources/l10n.properties \
         "$PO" ../src/esmska/resources/l10n_${LOCALE}.properties
     done
 fi
@@ -45,3 +45,6 @@ cd "$OLDPWD"
 
 # update desktop file
 ./update-desktop-file
+
+# check for bad translations
+./check-translations

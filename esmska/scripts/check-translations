@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Check translations for bad strings (MessageFormat rules).
+# Currently checks for single apostrophes in MessageFormat translations.
+
+WARNING_MESSAGE="#If you want to use single quotes"
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+cd ../src/esmska/resources
+if ls l10n*.properties >/dev/null; then
+    for PROP in l10n*.properties; do
+	    BAD=`grep -A1 "${WARNING_MESSAGE}" "$PROP" | #the translation is the next line after warning
+	    grep -v "^--$" | #strip grep separator
+    	grep -v "^#" | #strip warning messages
+    	sed "s/''//g" | #replace correct apostrophes (doubled)
+    	grep "'" #find bad apostrophes (single)`
+    	if [ -n "$BAD" ]; then #some bad translations found
+    	    echo "Bad translations found in ${PROP}:"
+    	    echo "$BAD"
+    	fi
+    done
+fi
