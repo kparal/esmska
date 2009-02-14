@@ -123,10 +123,10 @@ public class Keyring {
     }
 
     /** Get set of all operator names, which are in the keyring.
-     * @return Set of all operator names, which are in the keyring.
+     * @return Unmodifiable set of all operator names, which are in the keyring.
      */
     public Set<String> getOperatorNames() {
-        return keyring.keySet();
+        return Collections.unmodifiableSet(keyring.keySet());
     }
 
     /** Clear all operator names and corresponding keys from the keyring. 

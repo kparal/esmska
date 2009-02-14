@@ -819,7 +819,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
     private boolean saveHistory() {
         //erase old messages from history if demanded
         if (config.isReducedHistory()) {
-            ArrayList<Record> records = history.getRecords();
+            List<Record> records = history.getRecords();
             //computer last acceptable record time
             Calendar limitCal = Calendar.getInstance();
             limitCal.add(Calendar.DAY_OF_MONTH, -config.getReducedHistoryCount());

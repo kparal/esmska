@@ -7,7 +7,9 @@ package esmska.data;
 import esmska.utils.ActionEventSupport;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
@@ -37,9 +39,9 @@ public class Log {
     }
     // </editor-fold>
     
-    /** get all records */
-    public ArrayList<Record> getRecords() {
-        return records;
+    /** get all records in unmodifiable list */
+    public List<Record> getRecords() {
+        return Collections.unmodifiableList(records);
     }
 
     /** add new record */

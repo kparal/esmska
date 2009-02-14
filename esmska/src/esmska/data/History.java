@@ -10,7 +10,9 @@ import esmska.utils.Nullator;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Logger;
 
@@ -41,9 +43,9 @@ public class History {
     }
     // </editor-fold>
     
-    /** get all records */
-    public ArrayList<Record> getRecords() {
-        return records;
+    /** get all records in unmodifiable list */
+    public List<Record> getRecords() {
+        return Collections.unmodifiableList(records);
     }
     
     /** get record at index */
