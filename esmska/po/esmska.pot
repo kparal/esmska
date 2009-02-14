@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 17:38+0200\n"
+"POT-Creation-Date: 2009-02-14 20:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgid ""
 "directory. Can't be used with -c."
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
 msgstr ""
@@ -410,6 +410,7 @@ msgstr ""
 msgid "P&rivacy"
 msgstr ""
 
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."
 msgstr ""
@@ -552,7 +553,7 @@ msgid ""
 "</html>"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
 msgstr ""
@@ -568,7 +569,7 @@ msgid ""
 "or centered on the screen</html>"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ConfirmingFileChooser.sure_to_replace
 msgid ""
 "<html><h2>A file named ''{0}'' already exists.<br>Do you really want to "
@@ -728,7 +729,7 @@ msgstr ""
 msgid "Edit selected message"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
 msgstr ""
@@ -903,7 +904,7 @@ msgstr ""
 msgid "The path to contacts file"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
 msgstr ""
@@ -1046,7 +1047,7 @@ msgid ""
 "because it may cause a user data loss.</html>"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
 "<html>The user configuration directory at ''{0}''<br>can''t be read or "
@@ -1176,17 +1177,17 @@ msgstr ""
 msgid "Show program information"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
 msgstr ""
@@ -1425,7 +1426,7 @@ msgid ""
 "Omit whitespace from current message and rewrite it to \"CamelCase\" format"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1459,18 +1460,18 @@ msgstr ""
 msgid "Send message (Ctrl+Enter)"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
 msgstr ""
@@ -1500,7 +1501,7 @@ msgstr ""
 msgid "no operator"
 msgstr ""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
 msgstr ""

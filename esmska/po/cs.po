@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 17:38+0200\n"
+"POT-Creation-Date: 2009-02-14 20:14+0200\n"
 "PO-Revision-Date: 2009-02-13 17:38+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -143,7 +143,7 @@ msgstr ""
 "Zapnutí přenosného módu - zeptá se na umístění uživatelského adresáře. Nelze "
 "použít s -c."
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
 msgstr "Neplatná volba na příkazovém řádku! (\"{0}\")"
@@ -483,6 +483,7 @@ msgstr "Heslo příslušející k danému uživatelskému jménu"
 msgid "P&rivacy"
 msgstr "&Soukromí"
 
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."
 msgstr "O&mezit historii odeslaných zpráv pouze na posledních {0} dní."
@@ -662,7 +663,7 @@ msgstr ""
 "a podepsaná daným jménem. Tuto funkci podporují pouze někteří operátoři.\n"
 "</html>"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
 msgstr "<html>Uživatelský adresář programu:<br>{0}</html>"
@@ -680,7 +681,7 @@ msgstr ""
 "<html>Zda-li nechat umístění okna programu na operačním systému,<br>\n"
 "nebo ho umístit vždy doprostřed obrazovky</html>"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ConfirmingFileChooser.sure_to_replace
 msgid ""
 "<html><h2>A file named ''{0}'' already exists.<br>Do you really want to "
@@ -850,7 +851,7 @@ msgstr "Upravit označené kontakty"
 msgid "Edit selected message"
 msgstr "Upravit označenou zprávu"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
 msgstr "Do souboru \"{0}\" nelze zapisovat!"
@@ -1038,7 +1039,7 @@ msgstr "Zvolte vstupní soubor:"
 msgid "The path to contacts file"
 msgstr "Cesta k souboru s kontakty"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
 msgstr "Soubor {0} nelze přečíst!"
@@ -1216,7 +1217,7 @@ msgstr ""
 "nedoporučujeme spouštět další<br>instance programu, neboť může dojít ke "
 "ztrátě uživatelských dat.</html>"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
 "<html>The user configuration directory at ''{0}''<br>can''t be read or "
@@ -1367,17 +1368,17 @@ msgstr "Zobrazit historii odeslaných zpráv"
 msgid "Show program information"
 msgstr "Zobrazit informace o programu"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
 msgstr "Zprávu pro {0} se nepodařilo odeslat!"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 msgstr "<html><h2>Zprávu pro \"{0}\" se nepovedlo odeslat!</h2>{1}</html>"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
 msgstr "Zpráva pro {0} odeslána."
@@ -1639,7 +1640,7 @@ msgid ""
 msgstr ""
 "Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \\\"CamelCase\\\""
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1679,19 +1680,19 @@ msgstr ""
 msgid "Send message (Ctrl+Enter)"
 msgstr "Odeslat zprávu (Ctrl+Enter)"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
 msgstr ""
 "<html>Znaků v aktuální zprávě: <b>{0}/{1}</b> (zbývá <b>{2}</b>)</html>"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
 msgstr "{0} znaků ({1} sms)"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
 msgstr "{0} znaků (nelze odeslat!)"
@@ -1726,7 +1727,7 @@ msgstr ""
 msgid "no operator"
 msgstr "žádný operátor"
 
-#. #If you want to use single quotes ('), you must double them ('')!
+#. #If you want to use single quotes (') in your translation, you must write them doubled ('')!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
 msgstr "Posílám zprávu pro {0} ({1}) ..."
