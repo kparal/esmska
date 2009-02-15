@@ -26,7 +26,7 @@ public class ActionEventSupport {
      */
     public ActionEventSupport(Object source) {
         if (source == null) {
-            throw new NullPointerException("source");
+            throw new IllegalArgumentException("source");
         }
         this.source = source;
     }
