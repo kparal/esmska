@@ -31,6 +31,7 @@ import org.apache.commons.io.FileUtils;
 
 import esmska.data.Config;
 import esmska.data.Contact;
+import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.Keyring;
 import esmska.data.SMS;
@@ -67,7 +68,6 @@ public class PersistenceManager {
     private static File keyringFile = new File(userDir, KEYRING_FILENAME);
     private static File lockFile = new File(userDir, LOCK_FILENAME);
     
-    private static TreeSet<Contact> contacts = new TreeSet<Contact>();
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
     private static TreeSet<Operator> operators = new TreeSet<Operator>();
     
@@ -139,11 +139,6 @@ public class PersistenceManager {
         return persistenceManager;
     }
     
-    /** return contacts */
-    public static TreeSet<Contact> getContacs() {
-        return contacts;
-    }
-    
     /** return queue */
     public static List<SMS> getQueue() {
         return queue;
@@ -187,7 +182,7 @@ public class PersistenceManager {
     public void saveContacts() throws IOException {
         logger.fine("Saving contacts...");
         File temp = createTempFile();
-        ExportManager.exportContacts(contacts, temp);
+        ExportManager.exportContacts(Contacts.getInstance().getAll(), temp);
         moveFileSafely(temp, contactsFile);
         logger.finer("Saved contacts into file: " + contactsFile.getAbsolutePath());
     }
@@ -198,8 +193,10 @@ public class PersistenceManager {
         if (contactsFile.exists()) {
             ArrayList<Contact> newContacts = ImportManager.importContacts(contactsFile,
                     ContactParser.ContactType.ESMSKA_FILE);
-            contacts.clear();
-            contacts.addAll(newContacts);
+            ContinuousSaveManager.disable(Contacts.getInstance());
+            Contacts.getInstance().clear();
+            Contacts.getInstance().addAll(newContacts);
+            ContinuousSaveManager.enable(Contacts.getInstance());
         }
     }
     

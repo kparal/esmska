@@ -9,10 +9,10 @@ package esmska.gui;
 import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
+import esmska.data.Contacts;
 import esmska.data.Envelope;
 import esmska.data.SMS;
 import esmska.operators.OperatorUtil;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.L10N;
@@ -34,7 +34,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.SortedSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -92,7 +92,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private Envelope envelope = new Envelope();
     /** support for undo and redo in sms text pane */
     private UndoManager smsTextUndoManager = new UndoManager();
-    private TreeSet<Contact> contacts = PersistenceManager.getContacs();
+    private SortedSet<Contact> contacts = Contacts.getInstance().getAll();
     private Config config = Config.getInstance();
     
     private UndoAction undoAction = new UndoAction();

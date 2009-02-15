@@ -6,6 +6,7 @@
 
 package esmska.data;
 
+import esmska.utils.Nullator;
 import java.beans.*;
 import java.text.Collator;
 
@@ -30,22 +31,37 @@ public class Contact extends Object implements Comparable<Contact> {
         changeSupport.removePropertyChangeListener(listener);
     }
     // </editor-fold>
-    
+
+    /** Create an empty contact */
     public Contact() {
         this(null,null,null);
     }
-    
+
+    /** Create new contact with properties copied from provided contact */
+    public Contact(Contact c) {
+        this(c.getName(), c.getNumber(), c.getOperator());
+    }
+
+    /** Create new contact with all properties (may be null) */
     public Contact(String name, String number, String operator) {
-        this.name = name;
-        this.number = number;
-        this.operator = operator;
+        setName(name);
+        setNumber(number);
+        setOperator(operator);
+    }
+
+    /** Copy all contact properties from provided contact to current contact */
+    public void copyFrom(Contact c) {
+        setName(c.getName());
+        setNumber(c.getNumber());
+        setOperator(c.getOperator());
     }
     
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
     public String getName() {
         return this.name;
     }
-    
+
+    /** Get full phone number including the country code (starting with "+") */
     public String getNumber() {
         return this.number;
     }
@@ -59,19 +75,31 @@ public class Contact extends Object implements Comparable<Contact> {
     public void setName(String name) {
         String oldName = this.name;
         this.name = name;
-        changeSupport.firePropertyChange("name", oldName, name);
+        if (!Nullator.isEqual(oldName, name)) {
+            changeSupport.firePropertyChange("name", oldName, name);
+        }
     }
-    
+
+    /** Set full phone number including the country code (starting with "+")
+     * @param number new contact number. Must start with "+". May be null.
+     */
     public void setNumber(String number) {
+        if (number != null && !number.startsWith("+")) {
+            throw new IllegalArgumentException("Number does not start with '+': " + number);
+        }
         String oldNumber = this.number;
         this.number = number;
-        changeSupport.firePropertyChange("number", oldNumber, number);
+        if (!Nullator.isEqual(oldNumber, number)) {
+            changeSupport.firePropertyChange("number", oldNumber, number);
+        }
     }
     
     public void setOperator(String operator) {
         String oldOperator = this.operator;
         this.operator = operator;
-        changeSupport.firePropertyChange("operator", oldOperator, operator);
+        if (!Nullator.isEqual(oldOperator, operator)) {
+            changeSupport.firePropertyChange("operator", oldOperator, operator);
+        }
     }
     // </editor-fold>
     

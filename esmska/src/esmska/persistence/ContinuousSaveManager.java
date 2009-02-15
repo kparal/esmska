@@ -5,6 +5,7 @@
 
 package esmska.persistence;
 
+import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.Keyring;
 import java.awt.event.ActionEvent;
@@ -42,6 +43,17 @@ public class ContinuousSaveManager {
         }
     };
 
+    private static ActionListener contactsSaveListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                PersistenceManager.getInstance().saveContacts();
+            } catch (Exception ex) {
+                logger.log(Level.WARNING, "Could not save contacts", ex);
+            }
+        }
+    };
+
     /** Enable automatic saving of history when changed */
     public static void enable(History history) {
         history.addActionListener(historySaveListener);
@@ -50,6 +62,11 @@ public class ContinuousSaveManager {
     /** Enable automatic saving of keyring when changed */
     public static void enable(Keyring keyring) {
         keyring.addActionListener(keyringSaveListener);
+    }
+
+    /** Enable automatic saving of contacts when changed */
+    public static void enable(Contacts contacts) {
+        contacts.addActionListener(contactsSaveListener);
     }
 
     /** Disable automatic saving of history when changed */
@@ -62,4 +79,8 @@ public class ContinuousSaveManager {
         keyring.removeActionListener(keyringSaveListener);
     }
 
+    /** Disable automatic saving of contacts when changed */
+    public static void disable(Contacts contacts) {
+        contacts.removeActionListener(contactsSaveListener);
+    }
 }

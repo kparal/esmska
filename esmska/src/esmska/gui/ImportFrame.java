@@ -14,7 +14,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.TreeSet;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -39,8 +38,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
+import esmska.data.Contacts;
+import esmska.data.Icons;
 import esmska.operators.OperatorUtil;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.L10N;
 import java.awt.Toolkit;
@@ -63,8 +63,6 @@ import org.openide.awt.Mnemonics;
  * @author  ripper
  */
 public class ImportFrame extends javax.swing.JFrame {
-    public static final int ACTION_IMPORT_CONTACTS = 0;
-    
     private static final Logger logger = Logger.getLogger(ImportFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
@@ -78,8 +76,6 @@ public class ImportFrame extends javax.swing.JFrame {
 
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
-    private TreeSet<Contact> contacts = PersistenceManager.getContacs();
-    private ArrayList<Contact> importedContacts = new ArrayList<Contact>(); //results from import
     private String actualCard = "applicationPanel";
     
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
@@ -137,11 +133,6 @@ public class ImportFrame extends javax.swing.JFrame {
         });
     }
     
-    /** get list of imported contacts */
-    public ArrayList<Contact> getImportedContacts() {
-        return importedContacts;
-    }
-    
     /** browse for file */
     private String doBrowseButton() {
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -156,7 +147,7 @@ public class ImportFrame extends javax.swing.JFrame {
         Object[] imported = contactListModel.toArray();
         ArrayList<Object> skipped = new ArrayList<Object>();
         for (Object impor : imported) {
-            for (Contact exist : contacts) {
+            for (Contact exist : Contacts.getInstance().getAll()) {
                 if (exist.compareTo((Contact) impor) == 0) {
                     skipped.add(impor);
                     break;
@@ -543,13 +534,17 @@ public class ImportFrame extends javax.swing.JFrame {
         //result
         if (actualCard.equals("resultsPanel")) {
             DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
-            importedContacts.clear();
+            ArrayList<Contact> importedContacts = new ArrayList<Contact>();
             for (Object o : contactListModel.toArray()) {
                 importedContacts.add((Contact) o);
             }
             logger.fine("Imported " + importedContacts.size() + " new contacts: " + importedContacts);
-            
-            actionSupport.fireActionPerformed(ACTION_IMPORT_CONTACTS, null);
+
+            Contacts.getInstance().addAll(importedContacts);
+            MainFrame.getInstance().getStatusPanel().setStatusMessage(
+                    l10n.getString("MainFrame.import_complete"), true,
+                    Icons.STATUS_INFO, true);
+
             this.setVisible(false);
             this.dispose();
             return;

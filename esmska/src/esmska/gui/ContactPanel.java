@@ -7,12 +7,11 @@
 package esmska.gui;
 
 import esmska.data.Contact;
+import esmska.data.Contacts;
 import esmska.data.Icons;
 import esmska.integration.MacUtils;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
-import esmska.persistence.PersistenceManager;
-import esmska.utils.AbstractListDataListener;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
@@ -31,14 +30,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
@@ -65,7 +61,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -82,7 +77,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(ContactPanel.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private TreeSet<Contact> contacts = PersistenceManager.getContacs();
+    private Contacts contacts = Contacts.getInstance();
     
     private Action addContactAction = new AddContactAction();
     private Action editContactAction = new EditContactAction();
@@ -113,14 +108,13 @@ public class ContactPanel extends javax.swing.JPanel {
         contactList.addMouseListener(mouseListener);
 
         //show new contact hint if there are no contacts
-        ((ContactList)contactList).showNewContactHint(contactListModel.getSize() <= 0);
+        ((ContactList)contactList).showNewContactHint(contacts.size() <= 0);
         //listen for changes in contacts size and change hint visibility
-        //TODO: rework to listen on contacts instead of contact list
-        contactListModel.addListDataListener(new AbstractListDataListener() {
+        contacts.addActionListener(new ActionListener() {
             @Override
-            public void onUpdate(ListDataEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 ((ContactList)contactList).showNewContactHint(
-                        contactListModel.getSize() <= 0);
+                        contacts.size() <= 0);
             }
         });
     }
@@ -142,7 +136,7 @@ public class ContactPanel extends javax.swing.JPanel {
         if (name == null || name.length() == 0) {
             return false;
         }
-        for (Contact c : contacts) {
+        for (Contact c : contacts.getAll()) {
             if (c.getName().equals(name)) {
                 contactList.setSelectedValue(c, true);
                 return true;
@@ -162,11 +156,6 @@ public class ContactPanel extends javax.swing.JPanel {
         return selectedContacts;
     }
        
-    /** add new contacts to the contact list */
-    public void addContacts(Collection<Contact> contacts) {
-        contactListModel.addAll(contacts);
-    }
-    
     /** select first contact in contact list, if possible and no other contact selected */
     public void ensureContactSelected() {
         if (contactList.getSelectedIndex() < 0 && contactListModel.getSize() > 0) {
@@ -199,15 +188,6 @@ public class ContactPanel extends javax.swing.JPanel {
         contactList.ensureIndexIsVisible(index);
     }
 
-    /** Save contacts to disk */
-    private void saveContacts() {
-        try {
-            PersistenceManager.getInstance().saveContacts();
-        } catch (IOException ex) {
-            logger.log(Level.WARNING, "Could not save contacts", ex);
-        }
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -412,9 +392,7 @@ public class ContactPanel extends javax.swing.JPanel {
             if (c == null) {
                 return;
             }
-            contactListModel.add(c);
-            
-            contactList.clearSelection();
+            contacts.add(c);
             contactList.setSelectedValue(c, true);
         }
     }
@@ -438,9 +416,9 @@ public class ContactPanel extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             contactList.requestFocusInWindow(); //always transfer focus
 
-            Object[] contacts = contactList.getSelectedValues();
+            Object[] selected = contactList.getSelectedValues();
 
-            if (contacts.length <= 0) {
+            if (selected.length <= 0) {
                 logger.warning("Trying to edit contact when none selected");
                 return;
             }
@@ -448,23 +426,21 @@ public class ContactPanel extends javax.swing.JPanel {
             ContactDialog contactDialog = new ContactDialog();
             contactDialog.setOptions(options, saveOption, saveOption);
 
-            if (contacts.length == 1) { //edit single contact
-                Contact contact = (Contact) contacts[0];
+            if (selected.length == 1) { //edit single contact
+                Contact contact = (Contact) selected[0];
                 contactDialog.setTitle(l10n.getString("Edit_contact"));
-                contactDialog.show(contact);
-                Contact c = contactDialog.getContact();
-                if (c == null) {
+                Contact edited = new Contact(contact);
+                contactDialog.show(edited);
+                edited = contactDialog.getContact();
+                if (edited == null) {
                     return;
                 }
-                contactListModel.remove(contact);
-                contactListModel.add(c);
-
-                contactList.clearSelection();
-                contactList.setSelectedValue(c, true);
+                contact.copyFrom(edited);
+                contactList.setSelectedValue(contact, true);
             } else { //multiple contacts edited
                 contactDialog.setTitle(l10n.getString("Edit_contacts_collectively"));
-                ArrayList<Contact> list = new ArrayList<Contact>(contacts.length);
-                for (Object contact : contacts) {
+                ArrayList<Contact> list = new ArrayList<Contact>(selected.length);
+                for (Object contact : selected) {
                     list.add((Contact) contact);
                 }
                 contactDialog.show(list);
@@ -472,14 +448,11 @@ public class ContactPanel extends javax.swing.JPanel {
                 if (c == null) {
                     return;
                 }
+                int[] selection = contactList.getSelectedIndices();
                 for (Contact contact : list) {
                     //only operator is common for all contacts
                     contact.setOperator(c.getOperator());
                 }
-
-                contactListModel.fireContentsChanged(contactListModel, 0, contactListModel.getSize());
-                int[] selection = contactList.getSelectedIndices();
-                contactList.clearSelection();
                 contactList.setSelectedIndices(selection);
             }
             
@@ -536,7 +509,7 @@ public class ContactPanel extends javax.swing.JPanel {
             }
             
             //delete
-            contactListModel.removeAll(condemned);
+            contacts.removeAll(condemned);
         }
     }
     
@@ -624,6 +597,28 @@ public class ContactPanel extends javax.swing.JPanel {
             searchField.setFocusable(false);
             newContactLabel.setVerticalAlignment(JLabel.TOP);
             newContactLabel.setForeground(SystemColor.textInactiveText);
+
+            //listen for changes in contacts and adjust selection accordingly
+            Contacts.getInstance().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int index = getSelectedIndex();
+                    switch (e.getID()) {
+                        case Contacts.ACTION_ADD_CONTACT:
+                        case Contacts.ACTION_REMOVE_CONTACT:
+                        case Contacts.ACTION_CLEAR_CONTACTS:
+                            clearSelection();
+                            break;
+                        case Contacts.ACTION_CHANGE_CONTACT:
+                            clearSelection();
+                            setSelectedIndex(index);
+                            break;
+                        default:
+                            logger.warning("Unknown action event type");
+                            assert false : "Unknown action event type";
+                    }
+                }
+            });
         }
 
         /** show search field in contact list or hide it
@@ -693,61 +688,40 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** Model for contact list */
     private class ContactListModel extends AbstractListModel {
+        private int oldSize = getSize();
+
+        public ContactListModel() {
+            //listen for changes in contacts and fire events accordingly
+            contacts.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    switch (e.getID()) {
+                        case Contacts.ACTION_ADD_CONTACT:
+                            fireContentsChanged(ContactListModel.this, 0, getSize());
+                            break;
+                        case Contacts.ACTION_CHANGE_CONTACT:
+                            fireContentsChanged(ContactListModel.this, 0, getSize());
+                            break;
+                        case Contacts.ACTION_REMOVE_CONTACT:
+                        case Contacts.ACTION_CLEAR_CONTACTS:
+                            fireIntervalRemoved(ContactListModel.this, 0, oldSize);
+                            break;
+                        default:
+                            logger.warning("Unknown action event type");
+                            assert false : "Unknown action event type";
+                    }
+                    oldSize = getSize();
+                }
+            });
+        }
+
         @Override
         public int getSize() {
             return contacts.size();
         }
         @Override
         public Contact getElementAt(int index) {
-            return contacts.toArray(new Contact[0])[index];
-        }
-        public int indexOf(Contact element) {
-            return new ArrayList<Contact>(contacts).indexOf(element);
-        }
-        public void add(Contact element) {
-            logger.fine("Adding new contact: "+ element);
-            if (contacts.add(element)) {
-                int index = indexOf(element);
-                fireIntervalAdded(this, index, index);
-            }
-        }
-        public boolean contains(Contact element) {
-            return contacts.contains(element);
-        }
-        public boolean remove(Contact element) {
-            logger.fine("Removing contact: " + element);
-            int index = indexOf(element);
-            boolean removed = contacts.remove(element);
-            if (removed) {
-                fireIntervalRemoved(this, index, index);
-            }
-            return removed;
-        }
-        public void removeAll(Collection<Contact> elements) {
-            int size = getSize();
-            logger.fine("Removing " + elements.size() + " contacts: " + elements);
-            contacts.removeAll(elements);
-            fireIntervalRemoved(this, 0, size);
-        }
-        public void addAll(Collection<Contact> elements) {
-            logger.fine("Adding " + elements.size() + " contacts: " + elements);
-            contacts.addAll(elements);
-            fireContentsChanged(this, 0, getSize());
-        }
-        @Override
-        protected void fireIntervalRemoved(Object source, int index0, int index1) {
-            super.fireIntervalRemoved(source, index0, index1);
-            saveContacts();
-        }
-        @Override
-        protected void fireIntervalAdded(Object source, int index0, int index1) {
-            super.fireIntervalAdded(source, index0, index1);
-            saveContacts();
-        }
-        @Override
-        protected void fireContentsChanged(Object source, int index0, int index1) {
-            super.fireContentsChanged(source, index0, index1);
-            saveContacts();
+            return contacts.getAll().toArray(new Contact[0])[index];
         }
     }
     

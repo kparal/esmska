@@ -16,7 +16,7 @@ public class Workarounds {
     /** Escape text using html entities.
      *  Fixes bug in OpenJDK where scaron entity is not replaced by 'š'.
      *
-     * @see org.​apache.​commons.​lang.​StringEscapeUtils#escapeHtml(String)
+     * @see ​StringEscapeUtils#escapeHtml(String)
      */
     public static String escapeHtml(String input) {
         if (input == null) {

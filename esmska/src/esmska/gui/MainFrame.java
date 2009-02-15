@@ -55,6 +55,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
+import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.History.Record;
 import esmska.data.Icons;
@@ -941,7 +942,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
             } else {
                 importFrame = new ImportFrame();
                 importFrame.setLocationRelativeTo(MainFrame.this);
-                importFrame.addActionListener(new ImportListener());
                 importFrame.setVisible(true);
             }
         }
@@ -960,7 +960,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         @Override
         public void actionPerformed(ActionEvent e) {
             logger.fine("Showing export contacts dialog...");
-            ExportManager.exportContacts(MainFrame.this, PersistenceManager.getContacs());
+            ExportManager.exportContacts(MainFrame.this, Contacts.getInstance().getAll());
         }
     }
     
@@ -1031,21 +1031,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
     }
     
-    /** Listener for new imported contacts */
-    private class ImportListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            switch (e.getID()) {
-                case ImportFrame.ACTION_IMPORT_CONTACTS:
-                    contactPanel.clearSelection();
-                    contactPanel.addContacts(importAction.getImportFrame().getImportedContacts());
-                    statusPanel.setStatusMessage(l10n.getString("MainFrame.import_complete"),
-                            true, Icons.STATUS_INFO, true);
-                    break;
-            }
-        }
-    }
-
     /** Listens for changes in contact list */
     private class ContactListener implements ActionListener {
         @Override
