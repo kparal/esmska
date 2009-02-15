@@ -22,6 +22,9 @@ import java.util.logging.Logger;
  */
 public class History {
     
+    /** shared instance */
+    private static History instance = new History();
+
     /** new record added */
     public static final int ACTION_ADD_RECORD = 0;
     /** existing record removed */
@@ -31,7 +34,7 @@ public class History {
 
     private static final Logger logger = Logger.getLogger(History.class.getName());
     private ArrayList<Record> records = new ArrayList<Record>();
-    
+
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
     public void addActionListener(ActionListener actionListener) {
@@ -42,7 +45,16 @@ public class History {
         actionSupport.removeActionListener(actionListener);
     }
     // </editor-fold>
-    
+
+    /** disabled contructor */
+    private History() {
+    }
+
+    /** Get shared instance */
+    public static History getInstance() {
+        return instance;
+    }
+
     /** get all records in unmodifiable list */
     public List<Record> getRecords() {
         return Collections.unmodifiableList(records);

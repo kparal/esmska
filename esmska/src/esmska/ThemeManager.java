@@ -18,7 +18,6 @@ import javax.swing.UIManager;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.JavaType;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
@@ -55,7 +54,7 @@ public class ThemeManager {
      * @throws Throwable when chosen look and feel can't be set
      */
     public static void setLaF() throws Throwable {
-        Config config = PersistenceManager.getConfig();
+        Config config = Config.getInstance();
         ThemeManager.LAF laf = config.getLookAndFeel();
 
         //if selected LaF is not supported, then use a suggested one

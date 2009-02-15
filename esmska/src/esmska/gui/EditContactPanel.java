@@ -9,7 +9,6 @@ package esmska.gui;
 import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
 import java.awt.Color;
 import java.awt.Component;
@@ -44,7 +43,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     private static final Border fieldBorder = new JTextField().getBorder();
     private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);
     
-    private Config config = PersistenceManager.getConfig();
+    private Config config = Config.getInstance();
     private boolean multiMode; //edit multiple contacts
 
     private Action suggestOperatorAction;

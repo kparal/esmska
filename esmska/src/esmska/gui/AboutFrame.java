@@ -7,7 +7,6 @@
 package esmska.gui;
 
 import esmska.data.Config;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
 import esmska.utils.Workarounds;
 import java.awt.Component;
@@ -54,7 +53,7 @@ public class AboutFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(AboutFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final Config config = PersistenceManager.getConfig();
+    private static final Config config = Config.getInstance();
     
     /** Creates new form AboutFrame */
     public AboutFrame() {

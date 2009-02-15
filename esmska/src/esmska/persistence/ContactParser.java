@@ -48,7 +48,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
     }
 
     private static final Logger logger = Logger.getLogger(ContactParser.class.getName());
-    private static final Config config = PersistenceManager.getConfig();
+    private static final Config config = Config.getInstance();
     private File file;
     private ContactType type;
     private ArrayList<Contact> contacts = new ArrayList<Contact>();

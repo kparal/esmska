@@ -185,13 +185,13 @@ public class Main {
         }
 
         //do some initialization if this is the first run
-        if (Nullator.isEmpty(PersistenceManager.getConfig().getVersion())) { //first run means version is empty
+        if (Nullator.isEmpty(Config.getInstance().getVersion())) { //first run means version is empty
             logger.fine("First run, doing initialization...");
             //set country prefix from locale
-            PersistenceManager.getConfig().setCountryPrefix(
+            Config.getInstance().setCountryPrefix(
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
             //set suggested LaF for this platform
-            PersistenceManager.getConfig().setLookAndFeel(ThemeManager.suggestBestLAF());
+            Config.getInstance().setLookAndFeel(ThemeManager.suggestBestLAF());
         }
         
         //update from older versions
@@ -214,7 +214,7 @@ public class Main {
         }
         
         //set proxy
-        Config config = PersistenceManager.getConfig();
+        Config config = Config.getInstance();
         if (config.isUseProxy()) {
             if (config.isSameProxy()) {
                 ProxyManager.setProxy(config.getHttpProxy());

@@ -18,6 +18,9 @@ import java.util.logging.Logger;
  */
 public class Config extends Object implements Serializable {
 
+    /** shared instance */
+    private static Config instance = new Config();
+    
     private static final String LATEST_VERSION = "0.13.0";
     private static final Logger logger = Logger.getLogger(Config.class.getName());
 
@@ -50,6 +53,16 @@ public class Config extends Object implements Serializable {
     private boolean startMinimized = false;
     private boolean demandDeliveryReport = false;
     private boolean showAdvancedSettings = false;
+
+    /** Get shared instance */
+    public static Config getInstance() {
+        return instance;
+    }
+
+    /** Set shared instance */
+    public static void setSharedInstance(Config config) {
+        Config.instance = config;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this) {

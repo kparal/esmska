@@ -17,8 +17,8 @@ import java.util.TreeSet;
  */
 public class OperatorUtil {
     private static final TreeSet<Operator> operators = PersistenceManager.getOperators();
-    private static final Keyring keyring = PersistenceManager.getKeyring();
-    private static final Config config = PersistenceManager.getConfig();
+    private static final Keyring keyring = Keyring.getInstance();
+    private static final Config config = Config.getInstance();
     
     /** Find operator by name.
      * @param name Name of the operator. Search is case sensitive.

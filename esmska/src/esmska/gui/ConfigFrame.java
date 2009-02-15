@@ -86,7 +86,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(ConfigFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final Keyring keyring = PersistenceManager.getKeyring();
+    private static final Keyring keyring = Keyring.getInstance();
     /** when to take updates seriously */
     private boolean fullyInicialized;
     /** the active LaF when dialog is opened, needed for live-updating LaF skins */
@@ -244,7 +244,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new BindingGroup();
 
-        config = PersistenceManager.getConfig();
+        config = Config.getInstance();
         develPanel = new JPanel();
         forgetLayoutCheckBox = new JCheckBox();
         develLabel = new JLabel();
@@ -767,7 +767,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
             .addComponent(jLabel13)
             .addContainerGap())
     );
@@ -953,7 +953,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
             .addComponent(jLabel17)
             .addContainerGap())
     );

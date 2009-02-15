@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import esmska.persistence.PersistenceManager;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.text.Normalizer;
@@ -24,7 +23,7 @@ import java.util.logging.Logger;
  * @author ripper
  */
 public class Envelope {
-    private static final Config config = PersistenceManager.getConfig();
+    private static final Config config = Config.getInstance();
     private static final Logger logger = Logger.getLogger(Envelope.class.getName());
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();

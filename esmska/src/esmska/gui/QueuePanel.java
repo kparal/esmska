@@ -37,7 +37,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
-import esmska.data.Config;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.data.SMS;
@@ -94,8 +93,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final List<SMS> smsQueue = PersistenceManager.getQueue();
-    private static final Config config = PersistenceManager.getConfig();
-    private static final History history = PersistenceManager.getHistory();
+    private static final History history = History.getInstance();
     
     private SMSQueuePauseAction smsQueuePauseAction = new SMSQueuePauseAction();
     private Action deleteSMSAction = new DeleteSMSAction();

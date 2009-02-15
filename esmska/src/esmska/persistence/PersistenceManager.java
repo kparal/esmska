@@ -67,12 +67,9 @@ public class PersistenceManager {
     private static File keyringFile = new File(userDir, KEYRING_FILENAME);
     private static File lockFile = new File(userDir, LOCK_FILENAME);
     
-    private static Config config = new Config();
     private static TreeSet<Contact> contacts = new TreeSet<Contact>();
     private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
-    private static History history = new History();
     private static TreeSet<Operator> operators = new TreeSet<Operator>();
-    private static Keyring keyring = new Keyring();
     
     private static boolean customPathSet;
     private FileLock lock;
@@ -142,11 +139,6 @@ public class PersistenceManager {
         return persistenceManager;
     }
     
-    /** return config */
-    public static Config getConfig() {
-        return config;
-    }
-    
     /** return contacts */
     public static TreeSet<Contact> getContacs() {
         return contacts;
@@ -157,31 +149,21 @@ public class PersistenceManager {
         return queue;
     }
     
-    /** return history */
-    public static History getHistory() {
-        return history;
-    }
-    
     /** return operators */
     public static TreeSet<Operator> getOperators() {
         return operators;
-    }
-    
-    /** return keyring */
-    public static Keyring getKeyring() {
-        return keyring;
     }
     
     /** Save program configuration */
     public void saveConfig() throws IOException {
         logger.fine("Saving config...");
         //store current program version into config
-        config.setVersion(Config.getLatestVersion());
+        Config.getInstance().setVersion(Config.getLatestVersion());
         
         File temp = createTempFile();
         XMLEncoder xmlEncoder = new XMLEncoder(
                 new BufferedOutputStream(new FileOutputStream(temp)));
-        xmlEncoder.writeObject(config);
+        xmlEncoder.writeObject(Config.getInstance());
         xmlEncoder.close();
         moveFileSafely(temp, configFile);
         logger.finer("Saved config into file: " + configFile.getAbsolutePath());
@@ -196,7 +178,7 @@ public class PersistenceManager {
             Config newConfig = (Config) xmlDecoder.readObject();
             xmlDecoder.close();
             if (newConfig != null) {
-                config = newConfig;
+                Config.setSharedInstance(newConfig);
             }
         }
     }
@@ -244,7 +226,7 @@ public class PersistenceManager {
     public void saveHistory() throws IOException {
         logger.fine("Saving history...");
         File temp = createTempFile();
-        ExportManager.exportHistory(history.getRecords(), temp);
+        ExportManager.exportHistory(History.getInstance().getRecords(), temp);
         moveFileSafely(temp, historyFile);
         logger.finer("Saved history into file: " + historyFile.getAbsolutePath());
     }
@@ -254,10 +236,10 @@ public class PersistenceManager {
         logger.fine("Loading history...");
         if (historyFile.exists()) {
             ArrayList<History.Record> records = ImportManager.importHistory(historyFile);
-            ContinuousSaveManager.disable(history);
-            history.clearRecords();
-            history.addRecords(records);
-            ContinuousSaveManager.enable(history);
+            ContinuousSaveManager.disable(History.getInstance());
+            History.getInstance().clearRecords();
+            History.getInstance().addRecords(records);
+            ContinuousSaveManager.enable(History.getInstance());
         }
     }
     
@@ -265,7 +247,7 @@ public class PersistenceManager {
     public void saveKeyring() throws Exception {
         logger.fine("Saving keyring...");
         File temp = createTempFile();
-        ExportManager.exportKeyring(keyring, temp);
+        ExportManager.exportKeyring(Keyring.getInstance(), temp);
         moveFileSafely(temp, keyringFile);
         logger.finer("Saved keyring into file: " + keyringFile.getAbsolutePath());
     }
@@ -274,9 +256,10 @@ public class PersistenceManager {
     public void loadKeyring() throws Exception {
         logger.fine("Loading keyring...");
         if (keyringFile.exists()) {
-            ContinuousSaveManager.disable(keyring);
-            keyring = ImportManager.importKeyring(keyringFile);
-            ContinuousSaveManager.enable(keyring);
+            ContinuousSaveManager.disable(Keyring.getInstance());
+            Keyring.getInstance().clearKeys();
+            ImportManager.importKeyring(keyringFile);
+            ContinuousSaveManager.enable(Keyring.getInstance());
         }
     }
     

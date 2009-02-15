@@ -6,7 +6,6 @@ package esmska.update;
 
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.Nullator;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -20,7 +19,7 @@ public class LegacyUpdater {
 
     /** Checks if some update is needed to be done a executes it if neccessary */
     public static void update() {
-        String version = PersistenceManager.getConfig().getVersion();
+        String version = Config.getInstance().getVersion();
         if (version == null) {
             return;
         }
@@ -33,8 +32,8 @@ public class LegacyUpdater {
         //changes to 0.8.0
         if (UpdateChecker.compareVersions(version, "0.8.0") < 0) {
             //set country prefix from locale
-            if (Nullator.isEmpty(PersistenceManager.getConfig().getCountryPrefix())) {
-                PersistenceManager.getConfig().setCountryPrefix(
+            if (Nullator.isEmpty(Config.getInstance().getCountryPrefix())) {
+                Config.getInstance().setCountryPrefix(
                         CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
             }
         }

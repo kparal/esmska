@@ -108,9 +108,9 @@ public class MainFrame extends javax.swing.JFrame {
     /** manager of persistence data */
     private PersistenceManager persistenceManager;
     /** program configuration */
-    private Config config = PersistenceManager.getConfig();
+    private Config config = Config.getInstance();
     /** sms history */
-    private History history = PersistenceManager.getHistory();
+    private History history = History.getInstance();
     /** shutdown handler thread */
     private Thread shutdownThread = new ShutdownThread();
     

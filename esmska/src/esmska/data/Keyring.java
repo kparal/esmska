@@ -27,6 +27,9 @@ import org.apache.commons.codec.binary.Base64;
  */
 public class Keyring {
 
+    /** shared instance */
+    private static Keyring instance = new Keyring();
+
     /** new key added or existing changed */
     public static final int ACTION_ADD_KEY = 0;
     /** existing key removed */
@@ -57,6 +60,15 @@ public class Keyring {
         actionSupport.removeActionListener(actionListener);
     }
     // </editor-fold>
+
+    /** Disabled constructor */
+    private Keyring() {
+    }
+
+    /** Get shared instance */
+    public static Keyring getInstance() {
+        return instance;
+    }
 
     /** Get key for chosen operator.
      * @param operatorName Name of the operator.

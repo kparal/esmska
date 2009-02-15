@@ -39,7 +39,7 @@ public class OperatorComboBox extends JComboBox {
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final TreeSet<Operator> operators = PersistenceManager.getOperators();
-    private static final Config config = PersistenceManager.getConfig();
+    private static final Config config = Config.getInstance();
     private static final OperatorComboBoxRenderer cellRenderer = new OperatorComboBoxRenderer();
     private DefaultComboBoxModel model = new DefaultComboBoxModel(operators.toArray());
     /** used only for non-existing operators */

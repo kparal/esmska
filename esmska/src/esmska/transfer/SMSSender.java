@@ -25,7 +25,6 @@ import esmska.gui.QueuePanel;
 import esmska.operators.OperatorInterpreter;
 import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
 import esmska.utils.Tuple;
 import java.awt.event.ActionListener;
@@ -40,8 +39,8 @@ import java.util.Set;
 public class SMSSender {
     private static final Logger logger = Logger.getLogger(SMSSender.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final Keyring keyring = PersistenceManager.getKeyring();
-    private static final Config config = PersistenceManager.getConfig();
+    private static final Keyring keyring = Keyring.getInstance();
+    private static final Config config = Config.getInstance();
     private static final String NO_REASON_ERROR = l10n.getString("SMSSender.NO_REASON_ERROR");
     
     private MainFrame mainFrame = MainFrame.getInstance(); //reference to main form

@@ -227,15 +227,14 @@ public class ImportManager {
 
     /** Import keyring data from file.
      * @param file File to import from.
-     * @return New keyring.
      * @throws java.io.IOException When some error occur during file processing.
      * @throws java.security.GeneralSecurityException When there is problem with
      *         key decryption.
      */
-    public static Keyring importKeyring(File file)
+    public static void importKeyring(File file)
             throws IOException, GeneralSecurityException {
         logger.finer("Importing keyring from file: " + file.getAbsolutePath());
-        Keyring keyring = new Keyring();
+        Keyring keyring = Keyring.getInstance();
         CsvReader reader = null;
         
         try {
@@ -256,6 +255,5 @@ public class ImportManager {
         }
 
         logger.finer("Imported keyring");
-        return keyring;
     }
 }

@@ -93,7 +93,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** support for undo and redo in sms text pane */
     private UndoManager smsTextUndoManager = new UndoManager();
     private TreeSet<Contact> contacts = PersistenceManager.getContacs();
-    private Config config = PersistenceManager.getConfig();
+    private Config config = Config.getInstance();
     
     private UndoAction undoAction = new UndoAction();
     private RedoAction redoAction = new RedoAction();

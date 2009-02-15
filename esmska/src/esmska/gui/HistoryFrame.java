@@ -54,7 +54,6 @@ import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.History;
 import esmska.integration.MacUtils;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.AbstractDocumentListener;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.L10N;
@@ -77,9 +76,9 @@ public class HistoryFrame extends javax.swing.JFrame {
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Logger logger = Logger.getLogger(HistoryFrame.class.getName());
-    private static final Config config = PersistenceManager.getConfig();
+    private static final Config config = Config.getInstance();
     private DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
-    private History history = PersistenceManager.getHistory();
+    private History history = History.getInstance();
     private HistoryTableModel historyTableModel = new HistoryTableModel();
     private TableRowSorter<HistoryTableModel> historyTableSorter = new TableRowSorter<HistoryTableModel>(historyTableModel);
     private HistoryRowFilter historyTableFilter = new HistoryRowFilter();
@@ -114,7 +113,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         });
         
         //if not Substance LaF, add clipboard popup menu to text components
-        if (!PersistenceManager.getConfig().getLookAndFeel().equals(ThemeManager.LAF.SUBSTANCE)) {
+        if (!config.getLookAndFeel().equals(ThemeManager.LAF.SUBSTANCE)) {
             ClipboardPopupMenu.register(searchField);
             ClipboardPopupMenu.register(textArea);
         }
