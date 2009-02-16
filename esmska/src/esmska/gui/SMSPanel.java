@@ -766,7 +766,7 @@ public class SMSPanel extends javax.swing.JPanel {
             if ((fb.getDocument().getLength() + (text!=null?text.length():0) - length)
                     > envelope.getMaxTextLength()) {
                 MainFrame.getInstance().getStatusPanel().setStatusMessage(
-                        l10n.getString("SMSPanel.Text_is_too_long!"), false, null, false);
+                        l10n.getString("SMSPanel.Text_is_too_long!"), null, null);
                 MainFrame.getInstance().getStatusPanel().hideStatusMessageAfter(5000);
                 int maxlength = envelope.getMaxTextLength() - fb.getDocument().getLength() + length;
                 maxlength = Math.max(maxlength, 0);

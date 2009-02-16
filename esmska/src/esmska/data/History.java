@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class History {
     
     /** shared instance */
-    private static History instance = new History();
+    private static final History instance = new History();
 
     /** new record added */
     public static final int ACTION_ADD_RECORD = 0;

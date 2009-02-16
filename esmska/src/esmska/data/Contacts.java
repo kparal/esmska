@@ -30,7 +30,7 @@ public class Contacts {
     public static final int ACTION_CHANGE_CONTACT = 3;
 
     /** shared instance */
-    private static Contacts instance = new Contacts();
+    private static final Contacts instance = new Contacts();
     private static final Logger logger = Logger.getLogger(Contacts.class.getName());
     private TreeSet<Contact> contacts = new TreeSet<Contact>();
     private ContactChangeListener contactChangeListener = new ContactChangeListener();

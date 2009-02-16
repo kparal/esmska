@@ -19,6 +19,7 @@ import javax.swing.SwingWorker;
 
 import esmska.data.Icons;
 import esmska.data.Keyring;
+import esmska.data.Log;
 import esmska.data.SMS;
 import esmska.gui.MainFrame;
 import esmska.gui.QueuePanel;
@@ -74,10 +75,10 @@ public class SMSSender {
             
             logger.fine("Sending new SMS: " + sms);
             mainFrame.getStatusPanel().setTaskRunning(true);
-            mainFrame.getStatusPanel().setStatusMessage(
+            Log.getInstance().addRecord(new Log.Record(
                     MessageFormat.format(l10n.getString("SMSSender.sending_message"),
                     sms, (operator == null ? l10n.getString("SMSSender.no_operator") : operator)),
-                    true, Icons.STATUS_INFO, true);
+                    null, Icons.STATUS_INFO));
             mainFrame.getQueuePanel().markSMSSending(sms);
             
             SMSWorker worker = new SMSWorker(sms);

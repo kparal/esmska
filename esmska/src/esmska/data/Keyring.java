@@ -28,7 +28,7 @@ import org.apache.commons.codec.binary.Base64;
 public class Keyring {
 
     /** shared instance */
-    private static Keyring instance = new Keyring();
+    private static final Keyring instance = new Keyring();
 
     /** new key added or existing changed */
     public static final int ACTION_ADD_KEY = 0;

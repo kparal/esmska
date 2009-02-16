@@ -59,6 +59,7 @@ import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.History.Record;
 import esmska.data.Icons;
+import esmska.data.Log;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
 import esmska.integration.IntegrationAdapter;
@@ -106,12 +107,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     /** sender of sms */
     private SMSSender smsSender;
-    /** manager of persistence data */
     private PersistenceManager persistenceManager;
-    /** program configuration */
     private Config config = Config.getInstance();
-    /** sms history */
     private History history = History.getInstance();
+    private Log log = Log.getInstance();
     /** shutdown handler thread */
     private Thread shutdownThread = new ShutdownThread();
     
@@ -172,14 +171,17 @@ public class MainFrame extends javax.swing.JFrame {
         
         //init custom components
         smsSender = new SMSSender();
-        
+
+        //add first log record
+        log.addRecord(new Log.Record(l10n.getString("Program_start")));
+
         //load config
         try {
             persistenceManager = PersistenceManager.getInstance();
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not create program dir with config files", ex);
-            statusPanel.setStatusMessage(l10n.getString("MainFrame.cant_create_program_dir"),
-                    false, Icons.STATUS_ERROR, true);
+            log.addRecord(new Log.Record(l10n.getString("MainFrame.cant_create_program_dir"),
+                    null, Icons.STATUS_ERROR));
         }
         loadConfig();
         if (PersistenceManager.getQueue().size() > 0) {
@@ -245,9 +247,8 @@ public class MainFrame extends javax.swing.JFrame {
     public void smsProcessed(SMS sms) {
         logger.fine("SMS processed: " + sms.toDebugString());
         if (sms.getStatus() == SMS.Status.SENT_OK) {
-            statusPanel.setStatusMessage(
-                    MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
-                    true, Icons.STATUS_MESSAGE, true);
+            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
+                    null, Icons.STATUS_MESSAGE));
             createHistory(sms);
 
             if (smsPanel.getText().length() > 0) {
@@ -258,9 +259,8 @@ public class MainFrame extends javax.swing.JFrame {
         } else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
             logger.info("Message for " + sms + " could not be sent");
             queuePanel.setPaused(true);
-            statusPanel.setStatusMessage(
-                    MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms),
-                    true, Icons.STATUS_WARNING, true);
+            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms),
+                    null, Icons.STATUS_WARNING));
 
             //prepare dialog
             String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
@@ -302,8 +302,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         //show operator message if present
         if (!Nullator.isEmpty(sms.getOperatorMsg())) {
-            statusPanel.setStatusMessage(sms.getOperator() + ": " + sms.getOperatorMsg(),
-                    true, Icons.STATUS_MESSAGE, true);
+            log.addRecord(new Log.Record(sms.getOperator() + ": " + sms.getOperatorMsg(),
+                    null, Icons.STATUS_MESSAGE));
         }
 
         if (!smsSender.isRunning()) {
@@ -319,7 +319,7 @@ public class MainFrame extends javax.swing.JFrame {
                     getClass().getResourceAsStream(RES + "tips.txt"), "UTF-8");
             int random = new Random().nextInt(tips.size());
             statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
-                    l10n.getString((String)tips.get(random)), false, null, false);
+                    l10n.getString((String)tips.get(random)), null, null);
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Can't display tip of the day", ex);
         }
@@ -1070,8 +1070,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
     private class UpdateListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            statusPanel.setStatusMessage(l10n.getString("MainFrame.new_program_version"), 
-                    false, Icons.STATUS_UPDATE, true);
+            log.addRecord(new Log.Record(l10n.getString("MainFrame.new_program_version"), null, Icons.STATUS_UPDATE));
         }
     }
 

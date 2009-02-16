@@ -38,40 +38,34 @@ public class StatusPanel extends javax.swing.JPanel {
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
-    private Log log = new Log();
+    private Log log = Log.getInstance();
     private LogAction logAction = new LogAction();
-    private Timer statusTimer = new Timer(5000, new StatusListener());
+    private Timer statusTimer = new Timer(5000, new HideStatusListener());
     
     /** Creates new form StatusPanel */
     public StatusPanel() {
         initComponents();
         statusTimer.setRepeats(false);
-        addToLog(l10n.getString("Program_start"), new Date(), null);
+
+        //listen for changes in log and display last record
+        log.addActionListener(new LogListener());
     }
 
     /** Prints message to status bar
-     * 
+     *
      * @param message text
-     * @param printTime show timestamp before text
+     * @param time show timestamp before text. Use null for no timestamp.
      * @param icon show icon with text. Use null for no icon.
-     * @param addToLog whether the message should be logged
      */
-    public void setStatusMessage(String message, boolean printTime, ImageIcon icon,
-            boolean addToLog) {
+    public void setStatusMessage(String message, Date time, ImageIcon icon) {
         String messageEsc = Workarounds.escapeHtml(message);
-        Date time = new Date();
-        if (printTime) {
-            String timestamp = shortTimeFormat.format(new Date());
+        if (time != null) {
+            String timestamp = shortTimeFormat.format(time);
             statusMessageLabel.setText("<html>[" + timestamp + "] " + messageEsc + "</html>");
         } else {
             statusMessageLabel.setText("<html>" + messageEsc + "</html>");
         }
         statusMessageLabel.setIcon(icon);
-        
-        //add to log
-        if (addToLog) {
-            addToLog(message, time, icon);
-        }
     }
     
     /** Hide current status message after specified time. If new status message
@@ -119,12 +113,6 @@ public class StatusPanel extends javax.swing.JPanel {
         return logAction;
     }
     
-    /** add record to log */
-    private void addToLog(String message, Date time, ImageIcon icon) {
-        Log.Record record = new Log.Record(message, time, icon);
-        log.addRecord(record);
-    }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -198,15 +186,25 @@ public class StatusPanel extends javax.swing.JPanel {
                 logFrame.toFront();
             } else {
                 logFrame = new LogFrame();
-                logFrame.setLog(log);
                 logFrame.setLocationRelativeTo(MainFrame.getInstance());
                 logFrame.setVisible(true);
             }
         }
     }
     
+    /** Listen for log changes */
+    private class LogListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getID() == Log.ACTION_ADD_RECORD) {
+                Log.Record last = log.getLastRecord();
+                setStatusMessage(last.getMessage(), last.getTime(), last.getIcon());
+            }
+        }
+    }
+
     /** Hide all information in status message label */
-    private class StatusListener implements ActionListener {
+    private class HideStatusListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             statusMessageLabel.setIcon(null);

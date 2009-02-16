@@ -44,8 +44,8 @@ import esmska.data.Contact;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.data.Keyring;
+import esmska.data.Log;
 import esmska.data.SMS;
-import esmska.gui.MainFrame;
 import esmska.utils.ConfirmingFileChooser;
 import esmska.utils.L10N;
 import esmska.utils.Tuple;
@@ -117,15 +117,15 @@ public class ExportManager {
             }
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not export contacts to file", ex);
-            MainFrame.getInstance().getStatusPanel().setStatusMessage(
-                l10n.getString("ExportManager.export_failed"), true, Icons.STATUS_ERROR, true);
+            Log.getInstance().addRecord(new Log.Record(
+                    l10n.getString("ExportManager.export_failed"), null, Icons.STATUS_ERROR));
             JOptionPane.showMessageDialog(parent,l10n.getString("ExportManager.export_failed"), null,
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        MainFrame.getInstance().getStatusPanel().setStatusMessage(
-                l10n.getString("ExportManager.export_ok"), true, Icons.STATUS_INFO, true);
+
+        Log.getInstance().addRecord(new Log.Record(
+                    l10n.getString("ExportManager.export_ok"), null, Icons.STATUS_INFO));
         JOptionPane.showMessageDialog(parent,l10n.getString("ExportManager.export_ok!"), null,
                     JOptionPane.INFORMATION_MESSAGE);
     }

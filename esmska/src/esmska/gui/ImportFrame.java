@@ -40,6 +40,7 @@ import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.Icons;
+import esmska.data.Log;
 import esmska.operators.OperatorUtil;
 import esmska.utils.ActionEventSupport;
 import esmska.utils.L10N;
@@ -541,9 +542,8 @@ public class ImportFrame extends javax.swing.JFrame {
             logger.fine("Imported " + importedContacts.size() + " new contacts: " + importedContacts);
 
             Contacts.getInstance().addAll(importedContacts);
-            MainFrame.getInstance().getStatusPanel().setStatusMessage(
-                    l10n.getString("MainFrame.import_complete"), true,
-                    Icons.STATUS_INFO, true);
+            Log.getInstance().addRecord(new Log.Record(
+                    l10n.getString("MainFrame.import_complete"), null, Icons.STATUS_INFO));
 
             this.setVisible(false);
             this.dispose();

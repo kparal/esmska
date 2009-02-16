@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
-import javax.swing.DefaultListModel;
+import javax.swing.AbstractListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -48,8 +48,8 @@ public class LogFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(LogFrame.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.MEDIUM);
-    private Log log = new Log();
-    private DefaultListModel logModel = new DefaultListModel();
+    private Log log = Log.getInstance();
+    private LogListModel logModel = new LogListModel();
     
 
     /** Creates new form LogFrame */
@@ -68,33 +68,6 @@ public class LogFrame extends javax.swing.JFrame {
                 closeButtonActionPerformed(e);
             }
         });
-    }
-    
-    /** set log to display */
-    public void setLog(Log log) {
-        this.log = log;
-        updateList(false);
-        log.addActionListener(new LogListener());
-    }
-    
-    /** update log list
-     * @param onlyLastRecord if true just append last record, if false reload all
-     */
-    private void updateList(boolean onlyLastRecord) {
-        Log.Record lastRecord = null;
-        if (onlyLastRecord) {
-            if (log.getRecords().size() > 0) {
-                lastRecord = log.getRecords().get(log.getRecords().size()-1);
-                logModel.addElement(lastRecord);
-            }
-        } else {
-            logModel.clear();
-            for (Log.Record record : log.getRecords()) {
-                logModel.addElement(record);
-                lastRecord = record;
-            }
-        }
-        logList.setSelectedValue(lastRecord, true);
     }
     
     /** This method is called from within the constructor to
@@ -207,22 +180,47 @@ public class LogFrame extends javax.swing.JFrame {
             logger.log(Level.WARNING, "System clipboard not available", ex);
         }
     }//GEN-LAST:event_copyButtonActionPerformed
-    
-    /** update log frame on log change*/
-    private class LogListener implements ActionListener {
+
+    /** Model for contact list */
+    private class LogListModel extends AbstractListModel {
+        private int oldSize = getSize();
+        public LogListModel() {
+            //listen for changes in log and fire events accordingly
+            log.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    switch (e.getID()) {
+                        case Log.ACTION_ADD_RECORD:
+                            fireContentsChanged(LogListModel.this, 0, getSize());
+                            break;
+                        case Log.ACTION_REMOVE_RECORD:
+                        case Log.ACTION_CLEAR_RECORDS:
+                            fireIntervalRemoved(LogListModel.this, 0, oldSize);
+                            break;
+                        default:
+                            logger.warning("Unknown action event type");
+                            assert false : "Unknown action event type";
+                    }
+                    oldSize = getSize();
+
+                    //select last record in GUI
+                    logList.clearSelection();
+                    int index = getSize() - 1;
+                    logList.setSelectedIndex(index);
+                    logList.ensureIndexIsVisible(index);
+                }
+            });
+        }
         @Override
-        public void actionPerformed(ActionEvent e) {
-            switch (e.getID()) {
-                case Log.ACTION_ADD_RECORD:
-                    updateList(true);
-                    break;
-                case Log.ACTION_CLEAR_RECORDS:
-                    updateList(false);
-                    break;
-            }
+        public int getSize() {
+            return log.size();
+        }
+        @Override
+        public Log.Record getElementAt(int index) {
+            return log.getRecords().get(index);
         }
     }
-    
+
     /** Renderer for records in log list */
     private class LogRenderer implements ListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();

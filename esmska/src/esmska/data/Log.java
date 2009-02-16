@@ -25,10 +25,12 @@ public class Log {
     /** all records deleted */
     public static final int ACTION_CLEAR_RECORDS = 2;
 
+    /** shared instance */
+    private static final Log instance = new Log();
     private static final Logger logger = Logger.getLogger(Log.class.getName());
     private ArrayList<Record> records = new ArrayList<Record>();
-    
-   // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
     public void addActionListener(ActionListener actionListener) {
         actionSupport.addActionListener(actionListener);
@@ -38,7 +40,16 @@ public class Log {
         actionSupport.removeActionListener(actionListener);
     }
     // </editor-fold>
-    
+
+    /** Disabled contructor */
+    private Log() {
+    }
+
+    /** Get shared instance */
+    public static Log getInstance() {
+        return instance;
+    }
+
     /** get all records in unmodifiable list */
     public List<Record> getRecords() {
         return Collections.unmodifiableList(records);
@@ -64,6 +75,31 @@ public class Log {
         actionSupport.fireActionPerformed(ACTION_CLEAR_RECORDS, null);
         logger.finer("All log records removed");
     }
+
+    /** Return number of records
+     * @return See {@link Collection#size}
+     */
+    public int size() {
+        return records.size();
+    }
+
+    /** Return if there are no records
+     * @return See {@link Collection#isEmpty}
+     */
+    public boolean isEmpty() {
+        return records.isEmpty();
+    }
+
+    /** Get lastly added record
+     * @return last record or null if log empty
+     */
+    public Record getLastRecord() {
+        if (records.size() > 0) {
+            return records.get(records.size() - 1);
+        } else {
+            return null;
+        }
+    }
     
     /** Single log record
      */
@@ -73,15 +109,26 @@ public class Log {
         private ImageIcon icon;
         private Date time;
 
+        /** Creates new Record with current time and no icon
+         * 
+         * @param message message of the record, not null
+         */
+        public Record(String message) {
+            this(message, null, null);
+        }
+
         /** Creates new Record
          * 
-         * @param message message of the record
-         * @param time time when event happened
+         * @param message message of the record, not null
+         * @param time time when event happened. You can use null for current time.
          * @param icon optional icon to display or null
          */
         public Record(String message, Date time, ImageIcon icon) {
+            if (message == null) {
+                throw new IllegalArgumentException("message");
+            }
             this.message = message;
-            this.time = time;
+            this.time = (time != null ? time : new Date());
             this.icon = icon;
         }
         
