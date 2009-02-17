@@ -14,14 +14,14 @@
             <MenuItem class="javax.swing.JMenuItem" name="configMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="configAction" type="code"/>
+                  <Connection code="Actions.getConfigAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="quitAction" type="code"/>
+                  <Connection code="Actions.getQuitAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -76,14 +76,14 @@
             <MenuItem class="javax.swing.JMenuItem" name="historyMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="historyAction" type="code"/>
+                  <Connection code="Actions.getHistoryAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="logMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="statusPanel.getLogAction()" type="code"/>
+                  <Connection code="Actions.getLogAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -92,14 +92,14 @@
             <MenuItem class="javax.swing.JMenuItem" name="importMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="importAction" type="code"/>
+                  <Connection code="Actions.getImportAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exportMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="exportAction" type="code"/>
+                  <Connection code="Actions.getExportAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -184,7 +184,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="aboutAction" type="code"/>
+                  <Connection code="Actions.getConfigAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -377,10 +377,10 @@
         <Component class="javax.swing.JButton" name="historyButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="historyAction" type="code"/>
+              <Connection code="Actions.getHistoryAction()" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="historyAction.getValue(Action.NAME).toString() + &quot; (Ctrl+T)&quot;" type="code"/>
+              <Connection code="Actions.getHistoryAction().getValue(Action.NAME).toString() + &quot; (Ctrl+T)&quot;" type="code"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="hideActionText" type="boolean" value="true"/>
@@ -391,10 +391,10 @@
         <Component class="javax.swing.JButton" name="configButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="configAction" type="code"/>
+              <Connection code="Actions.getConfigAction()" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="configAction.getValue(Action.NAME).toString()" type="code"/>
+              <Connection code="Actions.getConfigAction().getValue(Action.NAME).toString()" type="code"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="hideActionText" type="boolean" value="true"/>
@@ -403,10 +403,10 @@
         <Component class="javax.swing.JButton" name="exitButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="quitAction" type="code"/>
+              <Connection code="Actions.getQuitAction()" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="quitAction.getValue(Action.NAME).toString() + &quot; (Ctrl+Q)&quot;" type="code"/>
+              <Connection code="Actions.getQuitAction().getValue(Action.NAME).toString() + &quot; (Ctrl+Q)&quot;" type="code"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="hideActionText" type="boolean" value="true"/>

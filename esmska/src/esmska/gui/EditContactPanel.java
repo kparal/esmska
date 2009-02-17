@@ -59,7 +59,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         }
         
         //set up button for suggesting operator
-        suggestOperatorAction = operatorComboBox.getSuggestOperatorAction(numberTextField);
+        suggestOperatorAction = Actions.getSuggestOperatorAction(operatorComboBox, numberTextField);
         suggestOperatorButton.setAction(suggestOperatorAction);
         suggestOperatorButton.setText(null);
     }

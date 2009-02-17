@@ -12,23 +12,18 @@ import esmska.operators.OperatorUtil;
 import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import java.util.logging.Logger;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import javax.swing.text.JTextComponent;
 
 /** JComboBox showing available operators.
  *
@@ -146,18 +141,6 @@ public class OperatorComboBox extends JComboBox {
         
     }
           
-    /** Get action to automatically select best suitable operator in this list
-     * according to number filled in specified text component.
-     * 
-     * @param numberComponent Text component containing phone number
-     * @return action to automatically select best suitable operator in this list
-     * according to number filled in specified text component
-     */
-    public Action getSuggestOperatorAction(JTextComponent numberComponent) {
-        SuggestOperatorAction action = new SuggestOperatorAction(this, numberComponent);
-        return action;
-    }
-    
     /** Renderer for items in OperatorComboBox */
     private static class OperatorComboBoxRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
@@ -197,29 +180,4 @@ public class OperatorComboBox extends JComboBox {
         }
     }
     
-    /** Select suggested operator in the combobox */
-    private class SuggestOperatorAction extends AbstractAction {
-        private OperatorComboBox operatorComboBox;
-        private JTextComponent numberComponent;
-        
-        public SuggestOperatorAction(OperatorComboBox operatorComboBox, JTextComponent numberComponent) {
-            super(l10n.getString("OperatorComboBox.Choose_suitable_gateway"), 
-                    new ImageIcon(OperatorComboBox.class.getResource(RES + "search-22.png")));
-            this.putValue(SHORT_DESCRIPTION, l10n.getString("OperatorComboBox.Choose_suitable_gateway_for_provided_number"));
-            
-            if (operatorComboBox == null || numberComponent == null) {
-                throw new IllegalArgumentException("Arguments cant be null");
-            }
-            
-            this.operatorComboBox = operatorComboBox;
-            this.numberComponent = numberComponent;
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String number = numberComponent.getText();
-            operatorComboBox.selectSuggestedOperator(number);
-            operatorComboBox.requestFocusInWindow();
-        }
-    }
 }

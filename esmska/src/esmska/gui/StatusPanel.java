@@ -17,8 +17,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -39,7 +37,6 @@ public class StatusPanel extends javax.swing.JPanel {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
     private Log log = Log.getInstance();
-    private LogAction logAction = new LogAction();
     private Timer statusTimer = new Timer(5000, new HideStatusListener());
     
     /** Creates new form StatusPanel */
@@ -108,11 +105,6 @@ public class StatusPanel extends javax.swing.JPanel {
         }
     }
     
-    /** get action to show log frame */
-    public Action getLogAction() {
-        return logAction;
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -166,32 +158,9 @@ public class StatusPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statusMessageLabelMouseClicked(MouseEvent evt) {//GEN-FIRST:event_statusMessageLabelMouseClicked
-       logAction.actionPerformed(null);
+       Actions.getLogAction().actionPerformed(null);
     }//GEN-LAST:event_statusMessageLabelMouseClicked
 
-    /** show the log frame */
-    private class LogAction extends AbstractAction {
-        private LogFrame logFrame;
-        public LogAction() {
-            L10N.setLocalizedText(this, l10n.getString("Log_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "log-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "log-48.png")));
-            this.putValue(SHORT_DESCRIPTION,l10n.getString("Show_application_log"));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            logger.fine("Showing Log frame...");
-            if (logFrame != null && logFrame.isVisible()) {
-                logFrame.requestFocus();
-                logFrame.toFront();
-            } else {
-                logFrame = new LogFrame();
-                logFrame.setLocationRelativeTo(MainFrame.getInstance());
-                logFrame.setVisible(true);
-            }
-        }
-    }
-    
     /** Listen for log changes */
     private class LogListener implements ActionListener {
         @Override

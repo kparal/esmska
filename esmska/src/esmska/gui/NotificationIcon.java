@@ -71,15 +71,15 @@ public class NotificationIcon {
 
         // show history
         historyItem = new MenuItem(l10n.getString("History"));
-        historyItem.addActionListener(MainFrame.getInstance().getHistoryAction());
+        historyItem.addActionListener(Actions.getHistoryAction());
 
         // show settings
         configItem = new MenuItem(l10n.getString("Preferences"));
-        configItem.addActionListener(MainFrame.getInstance().getConfigAction());
+        configItem.addActionListener(Actions.getConfigAction());
 
         // exit program
         quitItem = new MenuItem(l10n.getString("Quit"));
-        quitItem.addActionListener(MainFrame.getInstance().getQuitAction());
+        quitItem.addActionListener(Actions.getQuitAction());
 
         // separator
         separatorItem = new MenuItem("-");

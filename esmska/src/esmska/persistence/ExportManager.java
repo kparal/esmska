@@ -9,7 +9,6 @@
 
 package esmska.persistence;
 
-import java.awt.Component;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,15 +19,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import net.wimpi.pim.Pim;
 import net.wimpi.pim.contact.io.ContactMarshaller;
@@ -42,14 +33,10 @@ import com.csvreader.CsvWriter;
 
 import esmska.data.Contact;
 import esmska.data.History;
-import esmska.data.Icons;
 import esmska.data.Keyring;
-import esmska.data.Log;
 import esmska.data.SMS;
-import esmska.utils.ConfirmingFileChooser;
 import esmska.utils.L10N;
 import esmska.utils.Tuple;
-import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 /** Export program data
@@ -58,76 +45,10 @@ import java.util.ResourceBundle;
  */
 public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     
-    private static final FileFilter csvFileFilter = 
-            new FileNameExtensionFilter(l10n.getString("ExportManager.csv_filter"), "csv");
-    private static final FileFilter vCardFileFilter = 
-            new FileNameExtensionFilter(l10n.getString("ExportManager.vcard_filter"), "vcf", "vcard");
-    private static ConfirmingFileChooser chooser;
-
     /** Disabled constructor */
     private ExportManager() {
-    }
-    
-    /** Export contacts with info and file chooser dialog */
-    public static void exportContacts(Component parent, Collection<Contact> contacts) {
-        logger.finer("About to export " + contacts.size() + " contacts");
-        //show info
-        String message = l10n.getString("ExportManager.export_info");
-        JOptionPane.showMessageDialog(parent,new JLabel(message),l10n.getString("ExportManager.contact_export"),
-                JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon(ExportManager.class.getResource(RES + "contact-48.png")));
-
-        //choose file
-        if (chooser == null) {
-            chooser = new ConfirmingFileChooser();
-        }
-        chooser.setDialogTitle(l10n.getString("ExportManager.choose_export_file"));
-        //set dialog type not to erase approve button text later
-        chooser.setDialogType(JFileChooser.SAVE_DIALOG);
-        chooser.setApproveButtonText(l10n.getString("Save"));
-        chooser.addChoosableFileFilter(csvFileFilter);
-        chooser.addChoosableFileFilter(vCardFileFilter);
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.setFileFilter(csvFileFilter);
-        if (chooser.showSaveDialog(parent) != JFileChooser.APPROVE_OPTION) {
-            return;
-        }
-        
-        File file = chooser.getSelectedFile();
-        logger.finer("File chosen for contacts export: " + file.getAbsolutePath());
-
-        //check if file can be written
-        if (file.exists() && !file.canWrite()) {
-            logger.info("File '" + file.getAbsolutePath() + "' can't be written");
-            JOptionPane.showMessageDialog(parent,
-                    MessageFormat.format(l10n.getString("ExportManager.cant_write"), file.getAbsolutePath()),
-                    null, JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        //save
-        try {
-            if (chooser.getFileFilter() == vCardFileFilter) {
-                exportContactsToVCard(contacts, file);
-            } else {
-                exportContacts(contacts, file);
-            }
-        } catch (IOException ex) {
-            logger.log(Level.WARNING, "Could not export contacts to file", ex);
-            Log.getInstance().addRecord(new Log.Record(
-                    l10n.getString("ExportManager.export_failed"), null, Icons.STATUS_ERROR));
-            JOptionPane.showMessageDialog(parent,l10n.getString("ExportManager.export_failed"), null,
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Log.getInstance().addRecord(new Log.Record(
-                    l10n.getString("ExportManager.export_ok"), null, Icons.STATUS_INFO));
-        JOptionPane.showMessageDialog(parent,l10n.getString("ExportManager.export_ok!"), null,
-                    JOptionPane.INFORMATION_MESSAGE);
     }
     
     /** Export contacts to csv file */

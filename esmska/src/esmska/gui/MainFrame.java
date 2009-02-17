@@ -55,7 +55,6 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
-import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.History.Record;
 import esmska.data.Icons;
@@ -64,7 +63,6 @@ import esmska.data.SMS;
 import esmska.integration.ActionBean;
 import esmska.integration.IntegrationAdapter;
 import esmska.integration.MacUtils;
-import esmska.persistence.ExportManager;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
@@ -97,14 +95,6 @@ public class MainFrame extends javax.swing.JFrame {
     /** custom beans binding group */
     private BindingGroup bindGroup = new BindingGroup();
     
-    // actions
-    private Action quitAction = new QuitAction();
-    private Action aboutAction = new AboutAction();
-    private Action configAction = new ConfigAction();
-    private ImportAction importAction = new ImportAction();
-    private Action exportAction = new ExportAction();
-    private HistoryAction historyAction = new HistoryAction();
-
     /** sender of sms */
     private SMSSender smsSender;
     private PersistenceManager persistenceManager;
@@ -149,9 +139,9 @@ public class MainFrame extends javax.swing.JFrame {
             logger.fine("Running on Mac OS, hiding some menu items...");
             try {
                 ActionBean bean = new ActionBean();
-                bean.setQuitAction(quitAction);
-                bean.setAboutAction(aboutAction);
-                bean.setConfigAction(configAction);
+                bean.setQuitAction(Actions.getQuitAction());
+                bean.setAboutAction(Actions.getAboutAction());
+                bean.setConfigAction(Actions.getConfigAction());
                 
                 IntegrationAdapter.getInstance().setActionBean(bean);
                 programMenu.setVisible(false);
@@ -325,27 +315,39 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    /** get action used to show history frame */
-    public Action getHistoryAction() {
-        return historyAction;
-    }
-
-    /** get action used to exit the application */
-    public Action getQuitAction() {
-        return quitAction;
-    }
-
-    /** get action used to show settings frame */
-    public Action getConfigAction() {
-        return configAction;
-    }
-
     public StatusPanel getStatusPanel() {
         return statusPanel;
     }
 
     public QueuePanel getQueuePanel() {
         return queuePanel;
+    }
+
+    public ContactPanel getContactPanel() {
+        return contactPanel;
+    }
+
+    public SMSPanel getSMSPanel() {
+        return smsPanel;
+    }
+
+    /** Quit the program */
+    public void exit() {
+        logger.fine("Closing program...");
+
+        //user requested program close, shutdown handler not needed
+        Runtime.getRuntime().removeShutdownHook(shutdownThread);
+
+        //save end exit
+        boolean saveOk = saveAll();
+        if (!saveOk) { //some data were not saved
+            JOptionPane.showMessageDialog(this,
+                    l10n.getString("MainFrame.cant_save_config"),
+                    null, JOptionPane.WARNING_MESSAGE);
+        }
+        int returnCode = saveOk ? 0 : 1;
+        logger.fine("Exiting program with return code: " + returnCode);
+        System.exit(returnCode);
     }
 
     /** This method is called from within the constructor to
@@ -455,21 +457,21 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(redoButton);
         toolBar.add(jSeparator2);
 
-        historyButton.setAction(historyAction);
-        historyButton.setToolTipText(historyAction.getValue(Action.NAME).toString() + " (Ctrl+T)");
+        historyButton.setAction(Actions.getHistoryAction());
+        historyButton.setToolTipText(Actions.getHistoryAction().getValue(Action.NAME).toString() + " (Ctrl+T)");
         historyButton.setFocusable(false);
         historyButton.setHideActionText(true);
         toolBar.add(historyButton);
         toolBar.add(jSeparator3);
 
-        configButton.setAction(configAction);
-        configButton.setToolTipText(configAction.getValue(Action.NAME).toString());
+        configButton.setAction(Actions.getConfigAction());
+        configButton.setToolTipText(Actions.getConfigAction().getValue(Action.NAME).toString());
         configButton.setFocusable(false);
         configButton.setHideActionText(true);
         toolBar.add(configButton);
 
-        exitButton.setAction(quitAction);
-        exitButton.setToolTipText(quitAction.getValue(Action.NAME).toString() + " (Ctrl+Q)");
+        exitButton.setAction(Actions.getQuitAction());
+        exitButton.setToolTipText(Actions.getQuitAction().getValue(Action.NAME).toString() + " (Ctrl+Q)");
         exitButton.setFocusable(false);
         exitButton.setHideActionText(true);
         toolBar.add(exitButton);
@@ -483,12 +485,11 @@ public class MainFrame extends javax.swing.JFrame {
                 button.putClientProperty("JButton.buttonType", "gradient");
             }
         }
-
-        Mnemonics.setLocalizedText(programMenu, l10n.getString("MainFrame.programMenu.text")); // NOI18N
-        configMenuItem.setAction(configAction);
+        Mnemonics.setLocalizedText(programMenu,l10n.getString("MainFrame.programMenu.text"));
+        configMenuItem.setAction(Actions.getConfigAction());
         programMenu.add(configMenuItem);
 
-        exitMenuItem.setAction(quitAction);
+        exitMenuItem.setAction(Actions.getQuitAction());
         programMenu.add(exitMenuItem);
 
         menuBar.add(programMenu);
@@ -510,19 +511,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(messageMenu);
 
-
-        Mnemonics.setLocalizedText(toolsMenu, l10n.getString("MainFrame.toolsMenu.text")); // NOI18N
-        historyMenuItem.setAction(historyAction);
+        Mnemonics.setLocalizedText(toolsMenu,l10n.getString("MainFrame.toolsMenu.text"));
+        historyMenuItem.setAction(Actions.getHistoryAction());
         toolsMenu.add(historyMenuItem);
 
-        logMenuItem.setAction(statusPanel.getLogAction());
+        logMenuItem.setAction(Actions.getLogAction());
         toolsMenu.add(logMenuItem);
         toolsMenu.add(jSeparator4);
 
-        importMenuItem.setAction(importAction);
+        importMenuItem.setAction(Actions.getImportAction());
         toolsMenu.add(importMenuItem);
 
-        exportMenuItem.setAction(exportAction);
+        exportMenuItem.setAction(Actions.getExportAction());
         toolsMenu.add(exportMenuItem);
 
         menuBar.add(toolsMenu);
@@ -570,7 +570,7 @@ public class MainFrame extends javax.swing.JFrame {
         helpMenu.add(problemMenuItem);
         helpMenu.add(helpSeparator);
 
-        aboutMenuItem.setAction(aboutAction);
+        aboutMenuItem.setAction(Actions.getConfigAction());
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);
@@ -616,22 +616,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
             return;
         }
-
-        logger.fine("Closing main window...");
-
-        //user requested program close, shutdown handler not needed
-        Runtime.getRuntime().removeShutdownHook(shutdownThread);
-
-        //save end exit
-        boolean saveOk = saveAll();
-        if (!saveOk) { //some data were not saved
-            JOptionPane.showMessageDialog(this,
-                    l10n.getString("MainFrame.cant_save_config"),
-                    null, JOptionPane.WARNING_MESSAGE);
-        }
-        int returnCode = saveOk ? 0 : 1;
-        logger.fine("Exiting program with return code: " + returnCode);
-        System.exit(returnCode);
+        //otherwise exit
+        exit();
     }//GEN-LAST:event_formWindowClosing
 
 private void faqMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_faqMenuItemActionPerformed
@@ -862,137 +848,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
     }
     
-    /** Show about frame */
-    private class AboutAction extends AbstractAction {
-        AboutFrame aboutFrame;
-        public AboutAction() {
-            L10N.setLocalizedText(this, l10n.getString("About_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "about-16.png")));
-            putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.show_information_about_program"));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            logger.fine("Showing About frame...");
-            if (aboutFrame != null && aboutFrame.isVisible()) {
-                aboutFrame.requestFocus();
-                aboutFrame.toFront();
-            } else {
-                aboutFrame = new AboutFrame();
-                aboutFrame.setLocationRelativeTo(MainFrame.this);
-                aboutFrame.setVisible(true);
-            }
-        }
-    }
-    
-    /** Quit the program */
-    private class QuitAction extends AbstractAction {
-        public QuitAction() {
-            L10N.setLocalizedText(this, l10n.getString("Quit_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "exit-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "exit-32.png")));
-            putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.Quit_program"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, 
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            logger.fine("Quitting application...");
-            MainFrame.this.formWindowClosing(null);
-            System.exit(0);
-        }
-    }
-    
-    /** Show config frame */
-    private class ConfigAction extends AbstractAction {
-        private ConfigFrame configFrame;
-        public ConfigAction() {
-            L10N.setLocalizedText(this, l10n.getString("Preferences_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "config-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "config-32.png")));
-            putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.configure_program_behaviour"));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            logger.fine("Showing config frame...");
-            if (configFrame != null && configFrame.isVisible()) {
-                configFrame.requestFocus();
-                configFrame.toFront();
-            } else {
-                configFrame = new ConfigFrame();
-                configFrame.setLocationRelativeTo(MainFrame.this);
-                configFrame.setVisible(true);
-            }
-        }
-    }
-    
-    /** import data from other programs/formats */
-    private class ImportAction extends AbstractAction {
-        private ImportFrame importFrame;
-        public ImportAction() {
-            L10N.setLocalizedText(this, l10n.getString("Contact_import_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "contact-16.png")));
-            this.putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.import_contacts_from_other_applications"));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            logger.fine("Showing import contacts dialog...");
-            if (importFrame != null && importFrame.isVisible()) {
-                importFrame.requestFocus();
-                importFrame.toFront();
-            } else {
-                importFrame = new ImportFrame();
-                importFrame.setLocationRelativeTo(MainFrame.this);
-                importFrame.setVisible(true);
-            }
-        }
-        public ImportFrame getImportFrame() {
-            return importFrame;
-        }
-    }
-    
-    /** export data for other programs */
-    private class ExportAction extends AbstractAction {
-        public ExportAction() {
-            L10N.setLocalizedText(this, l10n.getString("Contact_export_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "contact-16.png")));
-            this.putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.export_contacts_to_file"));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            logger.fine("Showing export contacts dialog...");
-            ExportManager.exportContacts(MainFrame.this, Contacts.getInstance().getAll());
-        }
-    }
-    
-    /** show the history frame */
-    private class HistoryAction extends AbstractAction {
-        private HistoryFrame historyFrame;
-        public HistoryAction() {
-            L10N.setLocalizedText(this, l10n.getString("Message_history_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "history-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "history-32.png")));
-            this.putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.show_history_of_sent_messages"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, 
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            logger.fine("Showing history frame...");
-            if (historyFrame != null && historyFrame.isVisible()) {
-                historyFrame.requestFocus();
-                historyFrame.toFront();
-            } else {
-                historyFrame = new HistoryFrame();
-                historyFrame.setLocationRelativeTo(MainFrame.this);
-                historyFrame.addActionListener(new HistoryListener());
-                historyFrame.setVisible(true);
-            }
-        }
-        public HistoryFrame getHistoryFrame() {
-            return historyFrame;
-        }
-    }
-    
     /** Listens for events from sms queue */
     private class QueueListener implements ActionListener {
         @Override
@@ -1010,27 +865,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         }
     }
 
-    /** Listens for events from sms history table */
-    private class HistoryListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //resend sms
-            History.Record record = historyAction.getHistoryFrame().getSelectedHistory();
-            if (record == null) {
-                return;
-            }
-            
-            SMS sms = new SMS();
-            sms.setName(record.getName());
-            sms.setNumber(record.getNumber());
-            sms.setOperator(record.getOperator());
-            sms.setText(record.getText());
-            
-            contactPanel.clearSelection();
-            smsPanel.setSMS(sms);
-        }
-    }
-    
     /** Listens for changes in contact list */
     private class ContactListener implements ActionListener {
         @Override
