@@ -9,16 +9,14 @@ package esmska.gui;
 import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
+import esmska.utils.AbstractDocumentListener;
 import esmska.utils.L10N;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -30,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.openide.awt.Mnemonics;
 
@@ -38,7 +37,6 @@ import org.openide.awt.Mnemonics;
  * @author  ripper
  */
 public class EditContactPanel extends javax.swing.JPanel {
-    private static final Logger logger = Logger.getLogger(EditContactPanel.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Border fieldBorder = new JTextField().getBorder();
     private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);
@@ -62,6 +60,14 @@ public class EditContactPanel extends javax.swing.JPanel {
         suggestOperatorAction = Actions.getSuggestOperatorAction(operatorComboBox, numberTextField);
         suggestOperatorButton.setAction(suggestOperatorAction);
         suggestOperatorButton.setText(null);
+
+        //listen for changes in number and guess operator
+        numberTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                operatorComboBox.selectSuggestedOperator(numberTextField.getText());
+            }
+        });
     }
     
     /** This method is called from within the constructor to
@@ -102,11 +108,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         numberTextField.addFocusListener(new FocusAdapter() {
             public void focusLost(FocusEvent evt) {
                 numberTextFieldFocusLost(evt);
-            }
-        });
-        numberTextField.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent evt) {
-                numberTextFieldKeyTyped(evt);
             }
         });
 
@@ -229,11 +230,6 @@ public class EditContactPanel extends javax.swing.JPanel {
     private void numberTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_numberTextFieldFocusLost
         checkValid(numberTextField);
     }//GEN-LAST:event_numberTextFieldFocusLost
-
-    private void numberTextFieldKeyTyped(KeyEvent evt) {//GEN-FIRST:event_numberTextFieldKeyTyped
-        //guess operator
-        operatorComboBox.selectSuggestedOperator(numberTextField.getText());
-    }//GEN-LAST:event_numberTextFieldKeyTyped
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
