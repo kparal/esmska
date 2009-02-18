@@ -68,8 +68,18 @@ public class LogFrame extends javax.swing.JFrame {
                 closeButtonActionPerformed(e);
             }
         });
+
+        selectLastRecord();
     }
     
+    /** select last log record in GUI */
+    private void selectLastRecord() {
+        logList.clearSelection();
+        int index = logModel.getSize() - 1;
+        logList.setSelectedIndex(index);
+        logList.ensureIndexIsVisible(index);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -202,12 +212,7 @@ public class LogFrame extends javax.swing.JFrame {
                             assert false : "Unknown action event type";
                     }
                     oldSize = getSize();
-
-                    //select last record in GUI
-                    logList.clearSelection();
-                    int index = getSize() - 1;
-                    logList.setSelectedIndex(index);
-                    logList.ensureIndexIsVisible(index);
+                    selectLastRecord();
                 }
             });
         }
