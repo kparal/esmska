@@ -30,11 +30,16 @@ PODIR="$PWD/../po"
 cd "$PODIR"
 
 # remove value from translator-credits because of Launchpad bug
-mv cs.po cs.po_orig
-sed 's/^".*Launchpad Contributions.*"$/""/' cs.po_orig | 
-  sed 's/^".*launchpad.net.*"$/""/' > cs.po
+for PO in *.po; do
+    mv "$PO" "${PO}_orig"
+    sed 's/^".*Launchpad Contributions.*"$/""/' "${PO}_orig" | 
+      sed 's/^".*launchpad.net.*"$/""/' > "${PO}"
+done
 
 # create tarball
-tar czf "$FILE" esmska.pot cs.po
+tar czf "$FILE" esmska.pot *.po
 
-mv cs.po_orig cs.po
+# rename files back
+for PO in *.po; do
+    mv "${PO}_orig" "${PO}"
+done
