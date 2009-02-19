@@ -19,7 +19,7 @@ prop2po --progress none -P ../src/esmska/resources/l10n.properties ../po/esmska.
 msgattrib -F ../po/esmska.pot -o ../po/esmska.pot
 
 # update PO files
-cd ../po
+pushd ../po >/dev/null
 if ls *.po >/dev/null; then
     for PO in *.po; do
         # remove CR linefeeds which may be present even though they should not be
@@ -41,7 +41,23 @@ if ls *.po >/dev/null; then
     done
 fi
 
-cd "$OLDPWD"
+# workaround for change of some locales
+pushd ../src/esmska/resources/ >/dev/null
+# Hebrew is in Java under old code 'iw'
+if [ -f l10n_he.properties ]; then
+    ln -sf l10n_he.properties l10n_iw.properties 
+fi
+#Jiddish is in Java under old code 'ji'
+if [ -f l10n_yi.properties ]; then
+    ln -sf l10n_yi.properties l10n_ji.properties
+fi
+#Indonesian is in Java under old code 'in'
+if [ -f l10n_id.properties ]; then
+    ln -sf l10n_id.properties l10n_in.properties
+fi
+
+popd >/dev/null
+popd >/dev/null
 
 # update desktop file
 ./update-desktop-file

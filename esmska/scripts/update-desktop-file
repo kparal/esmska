@@ -22,7 +22,7 @@ CONTENT=`native2ascii -reverse "$L10N"/l10n.properties`
 TRANS=`echo "$CONTENT" | grep ^DesktopFile.name= | sed -r 's/^.*?=//'`
 echo "Name=$TRANS" >> "$DESKTOP"
 
-for FILE in `find "$L10N" -name 'l10n_*.properties'`; do
+for FILE in `find "$L10N" -type f -name 'l10n_*.properties'`; do
     BASEFILE=`basename "$FILE"`
     LOCALE=${BASEFILE%.properties}
     LOCALE=${LOCALE#l10n_}
@@ -39,7 +39,7 @@ CONTENT=`native2ascii -reverse "$L10N"/l10n.properties`
 TRANS=`echo "$CONTENT" | grep ^DesktopFile.genericName= | sed -r 's/^.*?=//'`
 echo "GenericName=$TRANS" >> "$DESKTOP"
 
-for FILE in `find "$L10N" -name 'l10n_*.properties'`; do
+for FILE in `find "$L10N" -type f -name 'l10n_*.properties'`; do
     BASEFILE=`basename "$FILE"`
     LOCALE=${BASEFILE%.properties}
     LOCALE=${LOCALE#l10n_}
@@ -56,7 +56,7 @@ CONTENT=`native2ascii -reverse "$L10N"/l10n.properties`
 TRANS=`echo "$CONTENT" | grep ^DesktopFile.comment= | sed -r 's/^.*?=//'`
 echo "Comment=$TRANS" >> "$DESKTOP"
 
-for FILE in `find "$L10N" -name 'l10n_*.properties'`; do
+for FILE in `find "$L10N" -type f -name 'l10n_*.properties'`; do
     BASEFILE=`basename "$FILE"`
     LOCALE=${BASEFILE%.properties}
     LOCALE=${LOCALE#l10n_}
