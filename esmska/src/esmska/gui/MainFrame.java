@@ -570,7 +570,7 @@ public class MainFrame extends javax.swing.JFrame {
         helpMenu.add(problemMenuItem);
         helpMenu.add(helpSeparator);
 
-        aboutMenuItem.setAction(Actions.getConfigAction());
+        aboutMenuItem.setAction(Actions.getAboutAction());
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);
@@ -594,7 +594,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)

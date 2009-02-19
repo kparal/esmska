@@ -184,7 +184,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="Actions.getConfigAction()" type="code"/>
+                  <Connection code="Actions.getAboutAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -236,7 +236,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Component id="toolBar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="horizontalSplitPane" pref="386" max="32767" attributes="0"/>
+              <Component id="horizontalSplitPane" pref="392" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
