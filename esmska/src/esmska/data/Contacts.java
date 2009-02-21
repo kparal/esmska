@@ -32,7 +32,7 @@ public class Contacts {
     /** shared instance */
     private static final Contacts instance = new Contacts();
     private static final Logger logger = Logger.getLogger(Contacts.class.getName());
-    private TreeSet<Contact> contacts = new TreeSet<Contact>();
+    private SortedSet<Contact> contacts = Collections.synchronizedSortedSet(new TreeSet<Contact>());
     private ContactChangeListener contactChangeListener = new ContactChangeListener();
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
@@ -56,7 +56,7 @@ public class Contacts {
     }
 
     /** Get unmodifiable collection of all contacts sorted by name */
-    public SortedSet<Contact> getAll() {
+    public synchronized SortedSet<Contact> getAll() {
         return Collections.unmodifiableSortedSet(contacts);
     }
 
@@ -64,7 +64,7 @@ public class Contacts {
      * @param contact new contact, not null
      * @return See {@link Collection#add}
      */
-    public boolean add(Contact contact) {
+    public synchronized boolean add(Contact contact) {
         if (contact == null) {
             throw new IllegalArgumentException("contact");
         }
@@ -81,7 +81,7 @@ public class Contacts {
      * @param contacts collection of contacts, not null
      * @return See {@link Collection#addAll}
      */
-    public boolean addAll(Collection<Contact> contacts) {
+    public synchronized boolean addAll(Collection<Contact> contacts) {
         if (contacts == null) {
             throw new IllegalArgumentException("contacts");
         }
@@ -102,7 +102,7 @@ public class Contacts {
      * @param contact contact to be removed, not null
      * @return See {@link Collection#remove}
      */
-    public boolean remove(Contact contact) {
+    public synchronized boolean remove(Contact contact) {
         if (contact == null) {
             throw new IllegalArgumentException("contact");
         }
@@ -119,7 +119,7 @@ public class Contacts {
      * @param contacts collection of contacts to be removed, not null
      * @return See {@link Collection#removeAll}
      */
-    public boolean removeAll(Collection<Contact> contacts) {
+    public synchronized boolean removeAll(Collection<Contact> contacts) {
         if (contacts == null) {
             throw new IllegalArgumentException("contacts");
         }
@@ -137,7 +137,7 @@ public class Contacts {
     }
 
     /** Remove all contacts */
-    public void clear() {
+    public synchronized void clear() {
         logger.fine("Removing all contacts");
         for (Contact contact : contacts) {
             contact.removePropertyChangeListener(contactChangeListener);
@@ -150,7 +150,7 @@ public class Contacts {
      * @param contact contact to be searched, not null
      * @return See {@link Collection#contains}
      */
-    public boolean contains(Contact contact) {
+    public synchronized boolean contains(Contact contact) {
         if (contact == null) {
             throw new IllegalArgumentException("contact");
         }
@@ -160,14 +160,14 @@ public class Contacts {
     /** Return number of contacts
      * @return See {@link Collection#size}
      */
-    public int size() {
+    public synchronized int size() {
         return contacts.size();
     }
 
     /** Return if there are no contacts
      * @return See {@link Collection#isEmpty}
      */
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return contacts.isEmpty();
     }
 

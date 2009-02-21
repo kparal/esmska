@@ -75,7 +75,7 @@ public class Keyring {
      * @return tuple in the form [login, password] if key for this operator
      *         exists. Null otherwise.
      */
-    public Tuple<String, String> getKey(String operatorName) {
+    public synchronized Tuple<String, String> getKey(String operatorName) {
         return keyring.get(operatorName);
     }
 
@@ -85,7 +85,7 @@ public class Keyring {
      * @param key tuple in the form [login, password].
      * @throws IllegalArgumentException If operatorName or key is null.
      */
-    public void putKey(String operatorName, Tuple<String, String> key) {
+    public synchronized void putKey(String operatorName, Tuple<String, String> key) {
         if (putKeyImpl(operatorName, key)) {
             logger.finer("New keyring key added: [operatorName=" + operatorName + "]");
             actionSupport.fireActionPerformed(ACTION_ADD_KEY, null);
@@ -113,7 +113,7 @@ public class Keyring {
      *             form [login, password].
      * @throws IllegalArgumentException If some operatorName or some key is null.
      */
-    public void putKeys(Map<String, Tuple<String, String>> keys) {
+    public synchronized void putKeys(Map<String, Tuple<String, String>> keys) {
         int changed = 0;
         for (Entry<String, Tuple<String, String>> entry : keys.entrySet()) {
             changed += putKeyImpl(entry.getKey(), entry.getValue()) ? 1 : 0;
@@ -127,7 +127,7 @@ public class Keyring {
     /** Remove chosen operator from the keyring.
      * @param operatorName Name of the operator.
      */
-    public void removeKey(String operatorName) {
+    public synchronized void removeKey(String operatorName) {
         if (keyring.remove(operatorName) != null) {
             logger.finer("A keyring key removed: [operatorName=" + operatorName + "]");
             actionSupport.fireActionPerformed(ACTION_REMOVE_KEY, null);
@@ -137,14 +137,14 @@ public class Keyring {
     /** Get set of all operator names, which are in the keyring.
      * @return Unmodifiable set of all operator names, which are in the keyring.
      */
-    public Set<String> getOperatorNames() {
+    public synchronized Set<String> getOperatorNames() {
         return Collections.unmodifiableSet(keyring.keySet());
     }
 
     /** Clear all operator names and corresponding keys from the keyring. 
      * The keyring will be empty after this.
      */
-    public void clearKeys() {
+    public synchronized void clearKeys() {
         keyring.clear();
         logger.finer("All keyring keys removed");
         actionSupport.fireActionPerformed(ACTION_CLEAR_KEYS, null);

@@ -28,7 +28,7 @@ public class Log {
     /** shared instance */
     private static final Log instance = new Log();
     private static final Logger logger = Logger.getLogger(Log.class.getName());
-    private ArrayList<Record> records = new ArrayList<Record>();
+    private List<Record> records = Collections.synchronizedList(new ArrayList<Record>());
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -51,26 +51,26 @@ public class Log {
     }
 
     /** get all records in unmodifiable list */
-    public List<Record> getRecords() {
+    public synchronized List<Record> getRecords() {
         return Collections.unmodifiableList(records);
     }
 
     /** add new record */
-    public void addRecord(Record record) {
+    public synchronized void addRecord(Record record) {
         records.add(record);
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
         logger.finer("A new log record added: " + record);
     }
     
     /** remove existing record */
-    public void removeRecord(Record record) {
+    public synchronized void removeRecord(Record record) {
         records.remove(record);
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
         logger.finer("A log record removed: " + record);
     }
     
     /** delete all records */
-    public void clearRecords() {
+    public synchronized void clearRecords() {
         records.clear();
         actionSupport.fireActionPerformed(ACTION_CLEAR_RECORDS, null);
         logger.finer("All log records removed");
@@ -79,21 +79,21 @@ public class Log {
     /** Return number of records
      * @return See {@link Collection#size}
      */
-    public int size() {
+    public synchronized int size() {
         return records.size();
     }
 
     /** Return if there are no records
      * @return See {@link Collection#isEmpty}
      */
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return records.isEmpty();
     }
 
     /** Get lastly added record
      * @return last record or null if log empty
      */
-    public Record getLastRecord() {
+    public synchronized Record getLastRecord() {
         if (records.size() > 0) {
             return records.get(records.size() - 1);
         } else {
