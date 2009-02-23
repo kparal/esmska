@@ -697,8 +697,6 @@ public class ContactPanel extends javax.swing.JPanel {
                 public void actionPerformed(ActionEvent e) {
                     switch (e.getID()) {
                         case Contacts.ACTION_ADD_CONTACT:
-                            fireContentsChanged(ContactListModel.this, 0, getSize());
-                            break;
                         case Contacts.ACTION_CHANGE_CONTACT:
                             fireContentsChanged(ContactListModel.this, 0, getSize());
                             break;

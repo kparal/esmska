@@ -10,6 +10,7 @@ import esmska.data.Keyring;
 import esmska.persistence.PersistenceManager;
 import java.util.Collection;
 import java.util.TreeSet;
+import org.apache.commons.lang.Validate;
 
 /** Helper class for the Operator interface. 
  * 
@@ -21,7 +22,7 @@ public class OperatorUtil {
     private static final Config config = Config.getInstance();
     
     /** Find operator by name.
-     * @param name Name of the operator. Search is case sensitive.
+     * @param name Name of the operator. Search is case sensitive. May be null.
      * @return Operator implementation, when an operator with such name is found.
      *         If multiple such operators are found, returns the first one found.
      *         Returns null if no operator is found or provided name was null.
@@ -42,15 +43,12 @@ public class OperatorUtil {
     /** Extract country prefix from phone number.
      * This method searches through available operators and checks if supplied
      * number starts with any of supported prefixes.
-     * @param number Phone number in fully international format.
+     * @param number Phone number in fully international format. Not null.
      * @return Country prefix if such is found amongst list of supported operator
      *         prefixes. Null otherwise.
-     * @throws NullPointerException If number is null.
      */
     public static String getCountryPrefix(String number) {
-        if (number == null) {
-            throw new NullPointerException("number");
-        }
+        Validate.notNull(number);
         
         for (Operator operator : operators) {
             String prefix = operator.getCountryPrefix();

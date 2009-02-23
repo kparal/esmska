@@ -236,7 +236,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Component id="toolBar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="horizontalSplitPane" pref="392" max="32767" attributes="0"/>
+              <Component id="horizontalSplitPane" pref="398" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -298,7 +298,7 @@
             </Component>
             <Component class="esmska.gui.QueuePanel" name="queuePanel">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="queuePanel.addActionListener(new QueueListener());&#xa;queuePanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="queuePanel.addActionListener(new QueuePanelListener());&#xa;queuePanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">

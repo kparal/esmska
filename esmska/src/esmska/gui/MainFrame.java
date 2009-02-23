@@ -6,6 +6,8 @@
 
 package esmska.gui;
 
+import esmska.data.Queue.Events;
+import esmska.utils.ValuedEvent;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -59,6 +61,7 @@ import esmska.data.History;
 import esmska.data.History.Record;
 import esmska.data.Icons;
 import esmska.data.Log;
+import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
 import esmska.integration.IntegrationAdapter;
@@ -68,6 +71,7 @@ import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import esmska.utils.ValuedListener;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.SplashScreen;
@@ -101,6 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Config config = Config.getInstance();
     private History history = History.getInstance();
     private Log log = Log.getInstance();
+    private Queue queue = Queue.getInstance();
     /** shutdown handler thread */
     private Thread shutdownThread = new ShutdownThread();
     
@@ -174,13 +179,14 @@ public class MainFrame extends javax.swing.JFrame {
                     null, Icons.STATUS_ERROR));
         }
         loadConfig();
-        if (PersistenceManager.getQueue().size() > 0) {
-            queuePanel.setPaused(true);
+        if (queue.size() > 0) {
+            queue.setPaused(true);
         }
         
         //setup components
         contactPanel.requestFocusInWindow();
         contactPanel.ensureContactSelected();
+        queue.addValuedListener(new QueueListener());
         
         //check for valid operators
         if (PersistenceManager.getOperators().size() <= 0) {
@@ -233,75 +239,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    /** Notifies about change in sms queue */
-    public void smsProcessed(SMS sms) {
-        logger.fine("SMS processed: " + sms.toDebugString());
-        if (sms.getStatus() == SMS.Status.SENT_OK) {
-            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
-                    null, Icons.STATUS_MESSAGE));
-            createHistory(sms);
-
-            if (smsPanel.getText().length() > 0) {
-                smsPanel.requestFocusInWindow();
-            } else {
-                contactPanel.requestFocusInWindow();
-            }
-        } else if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
-            logger.info("Message for " + sms + " could not be sent");
-            queuePanel.setPaused(true);
-            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms),
-                    null, Icons.STATUS_WARNING));
-
-            //prepare dialog
-            String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
-            JLabel label = new JLabel(
-                    MessageFormat.format(l10n.getString("MainFrame.sms_failed2"),
-                    sms, cause));
-            label.setVerticalAlignment(SwingConstants.TOP);
-            JPanel panel = new JPanel(new BorderLayout());
-            panel.add(label, BorderLayout.CENTER);
-            JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE);
-            JDialog dialog = pane.createDialog(MainFrame.this, null);
-
-            //check if the dialog is not wider than screen
-            //(very ugly, but it seems there is no clean solution in Swing for this)
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int width = panel.getWidth();
-            int height = panel.getHeight();
-            if (dialog.getWidth() > screenSize.getWidth()) { //wider than screen
-                width = (int) screenSize.getWidth() * 2/3;
-                height = height * (panel.getWidth() / width);
-                panel.setPreferredSize(new Dimension(width, height));
-                dialog = pane.createDialog(MainFrame.this, null); //create dialog again
-            }
-
-            //show the dialog
-            logger.fine("Showing reason why SMS sending failed...");
-            MacUtils.setDocumentModalDialog(dialog);
-            dialog.setResizable(true);
-            dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
-            dialog.setVisible(true);
-
-            //transfer focus
-            if (smsPanel.getText().length() > 0) {
-                smsPanel.requestFocusInWindow();
-            } else {
-                queuePanel.requestFocusInWindow();
-            }
-        }
-
-        //show operator message if present
-        if (!Nullator.isEmpty(sms.getOperatorMsg())) {
-            log.addRecord(new Log.Record(sms.getOperator() + ": " + sms.getOperatorMsg(),
-                    null, Icons.STATUS_MESSAGE));
-        }
-
-        if (!smsSender.isRunning()) {
-            statusPanel.setTaskRunning(false);
-        }
-        queuePanel.smsProcessed(sms);
-    }
-
     /** Display random tip from the collection of tips */
     public void showTipOfTheDay() {
         try {
@@ -317,10 +254,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     public StatusPanel getStatusPanel() {
         return statusPanel;
-    }
-
-    public QueuePanel getQueuePanel() {
-        return queuePanel;
     }
 
     public ContactPanel getContactPanel() {
@@ -424,7 +357,7 @@ public class MainFrame extends javax.swing.JFrame {
         smsPanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         verticalSplitPane.setLeftComponent(smsPanel);
 
-        queuePanel.addActionListener(new QueueListener());
+        queuePanel.addActionListener(new QueuePanelListener());
         queuePanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         verticalSplitPane.setRightComponent(queuePanel);
 
@@ -847,9 +780,99 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
             return false;
         }
     }
-    
-    /** Listens for events from sms queue */
-    private class QueueListener implements ActionListener {
+
+    /** Listen for changes in the queue */
+    private class QueueListener implements ValuedListener<Queue.Events, SMS> {
+        @Override
+        public void eventOccured(ValuedEvent<Events, SMS> e) {
+            switch (e.getEvent()) {
+                case SENDING_SMS:
+                    sendingSMS(e.getValue());
+                    break;
+                case SMS_SENT:
+                    smsSent(e.getValue());
+                    break;
+                case SMS_SENDING_FAILED:
+                    smsFailed(e.getValue());
+                    break;
+            }
+        }
+        private void sendingSMS(SMS sms) {
+            String operator = sms.getOperator();
+            statusPanel.setTaskRunning(true);
+            log.addRecord(new Log.Record(
+                    MessageFormat.format(l10n.getString("SMSSender.sending_message"),
+                    sms, (operator == null ? l10n.getString("SMSSender.no_operator") : operator)),
+                    null, Icons.STATUS_INFO));
+        }
+        private void smsSent(SMS sms) {
+            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
+                    null, Icons.STATUS_MESSAGE));
+            createHistory(sms);
+            finish(sms);
+        }
+        private void smsFailed(SMS sms) {
+            logger.info("Message for " + sms + " could not be sent");
+            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms),
+                    null, Icons.STATUS_WARNING));
+
+            //prepare dialog
+            String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
+            JLabel label = new JLabel(
+                    MessageFormat.format(l10n.getString("MainFrame.sms_failed2"),
+                    sms, cause));
+            label.setVerticalAlignment(SwingConstants.TOP);
+            JPanel panel = new JPanel(new BorderLayout());
+            panel.add(label, BorderLayout.CENTER);
+            JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE);
+            JDialog dialog = pane.createDialog(MainFrame.this, null);
+
+            //check if the dialog is not wider than screen
+            //(very ugly, but it seems there is no clean solution in Swing for this)
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int width = panel.getWidth();
+            int height = panel.getHeight();
+            if (dialog.getWidth() > screenSize.getWidth()) { //wider than screen
+                width = (int) screenSize.getWidth() * 2/3;
+                height = height * (panel.getWidth() / width);
+                panel.setPreferredSize(new Dimension(width, height));
+                dialog = pane.createDialog(MainFrame.this, null); //create dialog again
+            }
+
+            //show the dialog
+            logger.fine("Showing reason why SMS sending failed...");
+            MacUtils.setDocumentModalDialog(dialog);
+            dialog.setResizable(true);
+            dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
+            dialog.setVisible(true);
+
+            finish(sms);
+        }
+        private void finish(SMS sms) {
+            //transfer focus
+            if (smsPanel.getText().length() > 0) {
+                smsPanel.requestFocusInWindow();
+            } else {
+                if (sms.getStatus() == SMS.Status.SENT) {
+                    contactPanel.requestFocusInWindow();
+                } else {
+                    queuePanel.requestFocusInWindow();
+                }
+            }
+            //show operator message if present
+            if (!Nullator.isEmpty(sms.getOperatorMsg())) {
+                log.addRecord(new Log.Record(sms.getOperator() + ": " + sms.getOperatorMsg(),
+                        null, Icons.STATUS_MESSAGE));
+            }
+            //disable task indicator
+            if (!smsSender.isRunning()) {
+                statusPanel.setTaskRunning(false);
+            }
+        }
+    }
+
+    /** Listens for events from queue panel */
+    private class QueuePanelListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
@@ -892,9 +915,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
                     contactPanel.setSelectedContact(smsPanel.getRequestedContactSelection());
                     break;
                 case SMSPanel.ACTION_SEND_SMS:
-                    for (SMS sms : smsPanel.getEnvelope().generate()) {
-                        queuePanel.addSMS(sms);
-                    }
+                    queue.addAll(smsPanel.getEnvelope().generate());
                     break;
             }
         }

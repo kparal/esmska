@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +32,7 @@ import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.Keyring;
+import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.operators.Operator;
 import esmska.utils.Nullator;
@@ -68,7 +67,6 @@ public class PersistenceManager {
     private static File keyringFile = new File(userDir, KEYRING_FILENAME);
     private static File lockFile = new File(userDir, LOCK_FILENAME);
     
-    private static List<SMS> queue = Collections.synchronizedList(new ArrayList<SMS>());
     private static TreeSet<Operator> operators = new TreeSet<Operator>();
     
     private static boolean customPathSet;
@@ -139,11 +137,6 @@ public class PersistenceManager {
         return persistenceManager;
     }
     
-    /** return queue */
-    public static List<SMS> getQueue() {
-        return queue;
-    }
-    
     /** return operators */
     public static TreeSet<Operator> getOperators() {
         return operators;
@@ -204,7 +197,7 @@ public class PersistenceManager {
     public void saveQueue() throws IOException {
         logger.fine("Saving queue...");
         File temp = createTempFile();
-        ExportManager.exportQueue(queue, temp);
+        ExportManager.exportQueue(Queue.getInstance().getAll(), temp);
         moveFileSafely(temp, queueFile);
         logger.finer("Saved queue into file: " + queueFile.getAbsolutePath());
     }
@@ -214,8 +207,10 @@ public class PersistenceManager {
         logger.fine("Loading queue");
         if (queueFile.exists()) {
             ArrayList<SMS> newQueue = ImportManager.importQueue(queueFile);
-            queue.clear();
-            queue.addAll(newQueue);
+            ContinuousSaveManager.disable(Queue.getInstance());
+            Queue.getInstance().clear();
+            Queue.getInstance().addAll(newQueue);
+            ContinuousSaveManager.enable(Queue.getInstance());
         }
     }
     

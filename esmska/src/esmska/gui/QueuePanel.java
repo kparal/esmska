@@ -7,6 +7,8 @@
 package esmska.gui;
 
 import esmska.ThemeManager;
+import esmska.data.Queue.Events;
+import esmska.utils.ValuedEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -14,9 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -33,34 +32,27 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
-import esmska.data.History;
 import esmska.data.Icons;
+import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
-import esmska.persistence.PersistenceManager;
+import esmska.utils.AbstractListDataListener;
 import esmska.utils.ActionEventSupport;
-import esmska.integration.IntegrationAdapter;
 import esmska.utils.L10N;
 import esmska.utils.Nullator;
+import esmska.utils.ValuedListener;
 import esmska.utils.Workarounds;
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.net.URL;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.ListIterator;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -84,45 +76,30 @@ import org.jvnet.substance.skin.SkinChangeListener;
 public class QueuePanel extends javax.swing.JPanel {
     /** A message was requested to be edited */
     public static final int ACTION_REQUEST_EDIT_SMS = 0;
-    /** Queue was paused or unpaused */
-    public static final int ACTION_QUEUE_PAUSE_CHANGED = 1;
-    /** A new message is ready to be sent*/
-    public static final int ACTION_NEW_SMS_READY = 2;
 
     private static final Logger logger = Logger.getLogger(QueuePanel.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final List<SMS> smsQueue = PersistenceManager.getQueue();
-    private static final History history = History.getInstance();
+    private static final Queue queue = Queue.getInstance();
     
-    private SMSQueuePauseAction smsQueuePauseAction = new SMSQueuePauseAction();
     private Action deleteSMSAction = new DeleteSMSAction();
     private Action editSMSAction = new EditSMSAction();
     private Action smsUpAction = new SMSUpAction();
     private Action smsDownAction = new SMSDownAction();
     
     private QueueListModel queueListModel = new QueueListModel();
-    //every second check the queue
-    private Timer timer = new Timer(1000, new DelayListener());
-    //map of <operator name, current delay in seconds>
-    private HashMap<String, Integer> operatorDelay = new HashMap<String, Integer>();
-    //map of <sms, current delay in seconds> - the delay can be different for sms of same operator
-    private HashMap<SMS, Integer> smsDelay = new HashMap<SMS, Integer>();
-    //collection of sms ready and waiting to be sent
-    private LinkedHashSet<SMS> readySMS = new LinkedHashSet<SMS>();
-    //collection of sms currently being sent
-    private HashSet<SMS> sendingSMS = new HashSet<SMS>();
     //sms which have been requested to be edited
     private SMS editRequestedSMS;
     private QueuePopupMenu popup = new QueuePopupMenu();
     private QueueMouseListener mouseListener;
+    //regularly update sms delay indicators
+    private Timer timer = new Timer(500, new DelayListener());
     
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
     public void addActionListener(ActionListener actionListener) {
         actionSupport.addActionListener(actionListener);
     }
-    
     public void removeActionListener(ActionListener actionListener) {
         actionSupport.removeActionListener(actionListener);
     }
@@ -136,14 +113,13 @@ public class QueuePanel extends javax.swing.JPanel {
         mouseListener = new QueueMouseListener(queueList, popup);
         queueList.addMouseListener(mouseListener);
 
-        //if there are some messages in queue, handle all needed routines
-        if (!smsQueue.isEmpty()) {
-            handleTimerStatus();
-            findNewReadySMS();
-        }
-        
-        //update integration sms count
-        IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
+        //when model is changed update actions
+        queueListModel.addListDataListener(new AbstractListDataListener() {
+            @Override
+            public void onUpdate(ListDataEvent e) {
+                queueListValueChanged(null);
+            }
+        });
     }
     
     /** Get SMS which was requested to be edited */
@@ -151,161 +127,15 @@ public class QueuePanel extends javax.swing.JPanel {
         return editRequestedSMS;
     }
     
-    /** get action used to pause/unpause the sms queue */
-    public Action getSMSQueuePauseAction() {
-        return smsQueuePauseAction;
-    }
-    
-    /** Whether queue is currently paused */
-    public boolean isPaused() {
-        return smsQueuePauseAction.isPaused();
-    }
-    
-    /** Sets whether queue is currently paused */
-    public void setPaused(boolean paused) {
-        smsQueuePauseAction.setPaused(paused);
-    }
-    
-    /** Updates status of selected SMS */
-    public void smsProcessed(SMS sms) {
-        sendingSMS.remove(sms);
-        
-        if (sms.getStatus() == SMS.Status.SENT_OK) {
-            queueListModel.remove(sms);
-        }
-        if (sms.getStatus() == SMS.Status.PROBLEMATIC) {
-            int index = queueListModel.indexOf(sms);
-            queueListModel.fireContentsChanged(
-                    queueListModel, index, index);
-        }
-        
-        //update integration sms count
-        IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
-        
-        findNewReadySMS();
-    }
-    
-    /** Add new SMS to the queue. The SMS is added after the last SMS of the
-     * same type of operator.
-     */
-    public void addSMS(SMS sms) {
-        queueListModel.add(sms);
-        IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
-        findNewReadySMS();
-    }
-    
-    /** Get a collection of messages which are ready and waiting to be sent
-     * @return a collection of messages which are ready and waiting to be sent.
-     *  May be empty.
-     */
-    public Set<SMS> getReadySMS() {
-        if (isPaused()) {
-            return Collections.emptySet();
-        } else {
-            return Collections.unmodifiableSet(readySMS);
-        }
-    }
-    
-    /** Mark SMS as currently being sent. This SMS will be distinguished in the queue.
-     * @param sms SMS that is currently being sent
-     */
-    public void markSMSSending(SMS sms) {
-        logger.fine("Marking this SMS as currently being sent: " + sms.toDebugString());
-        sendingSMS.add(sms);
-        int index = queueListModel.indexOf(sms);
-        if (index >= 0) {
-            queueListModel.fireContentsChanged(
-                    queueListModel, index, index);
-        }
-    }
-    
-    /** Return current delay for specified operator and set the value in operator delays map.
-     * @param operatorName name of the operator
-     * @return number of seconds a message from the operator must wait.
-     *  If no operator found, return 0.
-     */
-    private int findCurrentDelay(String operatorName) {
-        if (operatorDelay.containsKey(operatorName)) {
-            return operatorDelay.get(operatorName);
-        }
-        
-        Operator operator = OperatorUtil.getOperator(operatorName);
-        int delay = 0;
-        
-        if (operator == null) { //unknown operator
-            delay = 0;
-        } else if (operator.getDelayBetweenMessages() <= 0) { //operator without delay
-            delay = 0;
-        } else { //search in history
-            History.Record record = history.findLastRecord(operatorName);
-            if (record == null) { //no previous record
-                delay = 0;
-            } else { //compute the delay
-                //FIXME: does not take various daylight saving time etc into account
-                //A more complex library (eg. Joda Time) is needed to calculate true time differences.
-                long difference = (new Date().getTime() - record.getDate().getTime()) / 1000; //in seconds
-                delay = (int) Math.max(operator.getDelayBetweenMessages() - difference, 0);
-                if (timer.isRunning() && delay > 0) {
-                    //delay +1 bcz the timer is currently running, 
-                    //it's not exactly on a precise second's boundary
-                    delay++;
-                }
-            }
-        }
-
-        operatorDelay.put(operatorName, delay);
-        return delay;
-    }
-    
-    /** Return current delay for specified sms and set the value in sms delays map.
-     * The delay is taking into account all previous messages from the same operator
-     * which are waiting to be sent.
-     * @param sms sms in queue
-     * @return number of seconds a message must wait
-     * @throws IllegalArgumentException when sms is null or no such sms is found
-     *  in the queue
-     */
-    private int findCurrentDelay(SMS sms) {
-        if (sms == null) {
-            throw new IllegalArgumentException("sms can't be null");
-        }
-        if (smsDelay.containsKey(sms)) {
-            return smsDelay.get(sms);
-        }
-        Operator operator = OperatorUtil.getOperator(sms.getOperator());
-        if (operator == null || operator.getDelayBetweenMessages() <= 0) {
-            smsDelay.put(sms, 0);
-            return 0;
-        }
-        
-        int index = smsQueue.indexOf(sms);
-        if (index < 0) {
-            throw new IllegalArgumentException("sms not present in sms queue");
-        }
-        ListIterator<SMS> iter = smsQueue.listIterator(index);
-        while (iter.hasPrevious()) {
-            SMS message = iter.previous();
-            if (Nullator.isEqual(sms.getOperator(), message.getOperator())) {
-                int delay = findCurrentDelay(message);
-                delay += operator.getDelayBetweenMessages();
-                smsDelay.put(sms, delay);
-                return delay;
-            }
-        }
-        
-        int delay = findCurrentDelay(sms.getOperator());
-        smsDelay.put(sms, delay);
-        return delay;
-    }
-    
     /** Convert integer message delay to more human readable string delay.
-     * @param delay number of seconds of the delay
+     * @param delay number of milliseconds of the delay
      * @return human readable string of the delay, eg: "3h 15m 47s"
      */
-    private String convertDelayToHumanString(int delay) {
-        int seconds = delay % 60;
-        int minutes = (delay / 60) % 60;
-        int hours = delay / 3600;
+    private String convertDelayToHumanString(long delay) {
+        delay = Math.round(delay / 1000.0);
+        long seconds = delay % 60;
+        long minutes = (delay / 60) % 60;
+        long hours = delay / 3600;
         
         StringBuilder builder = new StringBuilder();
         builder.append(seconds);
@@ -320,46 +150,6 @@ public class QueuePanel extends javax.swing.JPanel {
         }
         
         return builder.toString();
-    }
-    
-    /** Update timer status according to current queue status. This method stops
-     the timer when possible to increase program performance or restarts the timer
-     when it's needed. When timer is stopped, the delays map are also cleared. */
-    private void handleTimerStatus() {
-        if (smsQueue.isEmpty()) {
-            timer.stop();
-            operatorDelay.clear();
-        } else {
-            timer.start();
-        }
-    }
-    
-    /** Search through the sms in queue, find those which are ready to be sent,
-     add them to the collection of ready sms and inform listeners. */
-    private void findNewReadySMS() {
-        int waitingBefore = readySMS.size();
-        
-        //traverse sms queue and look for new ready sms
-        for (SMS sms : smsQueue) {
-            int delay = findCurrentDelay(sms);
-            if (delay <= 0) {
-                readySMS.add(sms);
-            }
-        }
-        
-        //if found some new ready sms and queue is not paused, inform the listeners
-        if (readySMS.size() > waitingBefore && !isPaused()) {
-            actionSupport.fireActionPerformed(ACTION_NEW_SMS_READY, null);
-        }
-    }
-
-    /** Saves queue to disk */
-    private void saveQueue() {
-        try {
-            PersistenceManager.getInstance().saveQueue();
-        } catch (IOException ex) {
-            logger.log(Level.WARNING, "Could not save queue", ex);
-        }
     }
     
     /** This method is called from within the constructor to
@@ -411,9 +201,9 @@ public class QueuePanel extends javax.swing.JPanel {
         deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         deleteButton.setText("");
 
-        pauseButton.setAction(smsQueuePauseAction);
+        pauseButton.setAction(Actions.getQueuePauseAction(false));
         pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        pauseButton.setText("");
+        pauseButton.setText(null);
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -466,15 +256,26 @@ public class QueuePanel extends javax.swing.JPanel {
         if (evt != null && evt.getValueIsAdjusting()) {
             return;
         }
+        if (queueList.getSelectedIndex() >= queueListModel.getSize()) {
+            //selection model has not yet been updated
+            return;
+        }
+
         //update form components
-        int queueSize = queueListModel.getSize();
-        int selectedItems = queueList.getSelectedIndices().length;
-        boolean first = queueList.isSelectedIndex(0);
-        boolean last = queueList.isSelectedIndex(queueSize-1);
-        deleteSMSAction.setEnabled(queueSize != 0 && selectedItems != 0);
-        editSMSAction.setEnabled(queueSize != 0 && selectedItems == 1);
-        smsUpAction.setEnabled(queueSize != 0 && selectedItems == 1 && !first);
-        smsDownAction.setEnabled(queueSize != 0 && selectedItems == 1 && !last);
+        int size = queueList.getSelectedIndices().length;
+        deleteSMSAction.setEnabled(size > 0);
+        editSMSAction.setEnabled(size == 1);
+        
+        SMS sms = (SMS) queueList.getSelectedValue();
+        if (sms != null && size == 1) {
+            List<SMS> list = queue.getAll(sms.getOperator());
+            int index = list.indexOf(sms);
+            smsUpAction.setEnabled(index != 0);
+            smsDownAction.setEnabled(index < list.size() - 1);
+        } else {
+            smsUpAction.setEnabled(false);
+            smsDownAction.setEnabled(false);
+        }
 }//GEN-LAST:event_queueListValueChanged
 
     private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
@@ -496,10 +297,9 @@ public class QueuePanel extends javax.swing.JPanel {
             Object[] smsArray = queueList.getSelectedValues();
             for (Object o : smsArray) {
                 SMS sms = (SMS) o;
-                queueListModel.remove(sms);
+                queue.remove(sms);
             }
-            IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
-            
+
             //transfer focus
             if (queueListModel.getSize() > 0) {
                 queueList.requestFocusInWindow();
@@ -527,9 +327,7 @@ public class QueuePanel extends javax.swing.JPanel {
             }
             
             editRequestedSMS = sms;
-            queueListModel.remove(sms);
-            
-            IntegrationAdapter.getInstance().setSMSCount(smsQueue.size());
+            queue.remove(sms);
             
             //fire event
             logger.fine("SMS requested for editing: " + sms.toDebugString());
@@ -549,22 +347,14 @@ public class QueuePanel extends javax.swing.JPanel {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            int index = queueList.getSelectedIndex();
-            if (index <= 0) {
+            SMS sms = (SMS) queueList.getSelectedValue();
+            if (sms == null) {
                 return;
             }
-            synchronized(smsQueue) {
-                Collections.swap(smsQueue,index,index-1);
-            }
-            //update collections
-            readySMS.clear();
-            smsDelay.clear();
-            findNewReadySMS();
-            //fire event
-            queueListModel.fireContentsChanged(
-                    queueListModel, index-1, index);
-            queueList.setSelectedIndex(index-1);
-            queueList.ensureIndexIsVisible(index-1);
+            queue.movePosition(sms, -1);
+            int index = queueListModel.indexOf(sms);
+            queueList.setSelectedIndex(index);
+            queueList.ensureIndexIsVisible(index);
         }
     }
     
@@ -580,161 +370,59 @@ public class QueuePanel extends javax.swing.JPanel {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            int index = queueList.getSelectedIndex();
-            if (index < 0 || index >= queueListModel.getSize() - 1) {
+            SMS sms = (SMS) queueList.getSelectedValue();
+            if (sms == null) {
                 return;
             }
-            synchronized(smsQueue) {
-                Collections.swap(smsQueue,index,index+1);
-            }
-            //update collections
-            readySMS.clear();
-            smsDelay.clear();
-            findNewReadySMS();
-            //fire event
-            queueListModel.fireContentsChanged(
-                    queueListModel, index, index+1);
-            queueList.setSelectedIndex(index+1);
-            queueList.ensureIndexIsVisible(index+1);
-        }
-    }
-    
-    /** Pause/unpause the sms queue */
-    private class SMSQueuePauseAction extends AbstractAction {
-        private boolean paused = false;
-        private final String nameRunning = l10n.getString("Pause_queue");
-        private final String nameStopped = l10n.getString("Unpause_queue");
-        private final String descRunning = l10n.getString("QueuePanel.Pause_sending_of_sms_in_the_queue");
-        private final String descStopped = l10n.getString("QueuePanel.Unpause_sending_of_sms_in_the_queue");
-        private final ImageIcon pauseIcon = new ImageIcon(QueuePanel.class.getResource(RES + "pause-22.png"));
-        private final ImageIcon pauseIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "pause-16.png"));
-        private final ImageIcon startIcon = new ImageIcon(QueuePanel.class.getResource(RES + "start-22.png"));
-        private final ImageIcon startIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "start-16.png"));
-        public SMSQueuePauseAction() {
-            super();
-            putValue(NAME, nameRunning);
-            putValue(SHORT_DESCRIPTION, descRunning);
-            putValue(SMALL_ICON, pauseIconSmall);
-            putValue(LARGE_ICON_KEY, pauseIcon);
-            putValue(MNEMONIC_KEY, KeyEvent.VK_P);
-            putValue(SELECTED_KEY, false);
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (paused) {
-                putValue(NAME, nameRunning);
-                putValue(SMALL_ICON, pauseIconSmall);
-                putValue(LARGE_ICON_KEY, pauseIcon);
-                putValue(SHORT_DESCRIPTION, descRunning);
-                putValue(SELECTED_KEY, false);
-            } else {
-                putValue(NAME, nameStopped);
-                putValue(SMALL_ICON, startIconSmall);
-                putValue(LARGE_ICON_KEY, startIcon);
-                putValue(SHORT_DESCRIPTION, descStopped);
-                putValue(SELECTED_KEY, true);
-            }
-            paused = !paused;
-            
-            //clear text on pause button
-            pauseButton.setText(null);
-            
-            //fire event
-            logger.fine("Queue is now: " + (paused?"paused":"unpaused"));
-            actionSupport.fireActionPerformed(ACTION_QUEUE_PAUSE_CHANGED, null);
-            if (!paused && !readySMS.isEmpty()) {
-                actionSupport.fireActionPerformed(ACTION_NEW_SMS_READY, null);
-            }
-        }
-        public boolean isPaused() {
-            return paused;
-        }
-        public void setPaused(boolean paused) {
-            //set opposite because actionPerformed will revert it
-            this.paused = !paused;
-            actionPerformed(null);
+            queue.movePosition(sms, 1);
+            int index = queueListModel.indexOf(sms);
+            queueList.setSelectedIndex(index);
+            queueList.ensureIndexIsVisible(index);
         }
     }
     
     /** Model for SMSQueueList */
     private class QueueListModel extends AbstractListModel {
+        private int oldSize = getSize();
+
+        public QueueListModel() {
+            //listen for changes in contacts and fire events accordingly
+            queue.addValuedListener(new ValuedListener<Events, SMS>() {
+                @Override
+                public void eventOccured(ValuedEvent<Events, SMS> e) {
+                    switch (e.getEvent()) {
+                        case SMS_ADDED:
+                        case SENDING_SMS:
+                        case SMS_SENDING_FAILED:
+                        case SMS_POSITION_CHANGED:
+                            fireContentsChanged(QueueListModel.this, 0, getSize());
+                            break;
+                        case SMS_REMOVED:
+                        case QUEUE_CLEARED:
+                            fireIntervalRemoved(QueueListModel.this, 0, oldSize);
+                            break;
+                    }
+                    oldSize = getSize();
+                    timer.start(); //start counting down delays
+                }
+            });
+        }
+
         @Override
         public SMS getElementAt(int index) {
-            return smsQueue.get(index);
+            return queue.getAll().get(index);
         }
         @Override
         public int getSize() {
-            return smsQueue.size();
+            return queue.size();
         }
         public int indexOf(SMS element) {
-            return smsQueue.indexOf(element);
+            return queue.getAll().indexOf(element);
         }
-        public void add(SMS element) {
-            Integer position = null; //where to put the new sms
-            //iterate from the end and find last sms of the same operator
-            ListIterator<SMS> iter = smsQueue.listIterator(smsQueue.size());
-            while (iter.hasPrevious()) {
-                SMS sms = iter.previous();
-                if (Nullator.isEqual(sms.getOperator(), element.getOperator())) {
-                    position = smsQueue.indexOf(sms) + 1; //set the position after this sms
-                    break;
-                }
-            }
-            
-            boolean added = false;
-            //not found any sms of same operator or it was the last sms in the queue
-            if (position == null || position >= smsQueue.size()) {
-                added = smsQueue.add(element);
-            } else { //found position where to put it
-                smsQueue.add(position, element);
-                added = true; //above method does not provide boolean return value
-            }
-            if (added) {
-                //update queue collections
-                smsDelay.clear();
-                //update the timer
-                handleTimerStatus();
+        public void fireContentsChanged(int index0, int index1) {
+            super.fireContentsChanged(this, index0, index1);
+        }
 
-                logger.fine("Added new SMS to queue: " + element.toDebugString());
-                int index = smsQueue.indexOf(element);
-                fireIntervalAdded(this, index, index);
-            }
-        }
-        public boolean contains(SMS element) {
-            return smsQueue.contains(element);
-        }
-        public boolean remove(SMS element) {
-            int index = smsQueue.indexOf(element);
-            boolean removed = smsQueue.remove(element);
-            if (removed) {
-                logger.fine("Removed SMS from queue: " + element.toDebugString());
-                //update queue collections
-                readySMS.remove(element);
-                sendingSMS.remove(element);
-                operatorDelay.remove(element.getOperator()); //TODO: remove only when it's the last message of that operator //edit: really?
-                smsDelay.clear();
-                handleTimerStatus();
-                findNewReadySMS();
-            
-                fireIntervalRemoved(this, index, index);
-            }
-            return removed;
-        }
-        @Override
-        protected void fireIntervalRemoved(Object source, int index0, int index1) {
-            super.fireIntervalRemoved(source, index0, index1);
-            saveQueue();
-        }
-        @Override
-        protected void fireIntervalAdded(Object source, int index0, int index1) {
-            super.fireIntervalAdded(source, index0, index1);
-            saveQueue();
-            queueListValueChanged(null); //update selection actions
-        }
-        @Override
-        protected void fireContentsChanged(Object source, int index0, int index1) {
-            super.fireContentsChanged(source, index0, index1);
-        }
     }
     
     /** Renderer for items in queue list */
@@ -790,7 +478,7 @@ public class QueuePanel extends javax.swing.JPanel {
             label.setText(!Nullator.isEmpty(sms.getName()) ?
                 sms.getName() : OperatorUtil.stripCountryPrefix(sms.getNumber()));
             //problematic sms colored
-            if ((sms.getStatus() == SMS.Status.PROBLEMATIC) && !isSelected) {
+            if ((sms.isProblematic()) && !isSelected) {
                 label.setBackground(Color.RED);
             }
             //set colors on other components
@@ -811,13 +499,13 @@ public class QueuePanel extends javax.swing.JPanel {
                     "</td></tr></table></html>";
             panel.setToolTipText(tooltip);
             //set delay label
-            if (sendingSMS.contains(sms)) {
+            if (queue.getAllWithStatus(SMS.Status.SENDING).contains(sms)) {
                 delayLabel.setIcon(sendIcon);
                 delayLabel.setText(null);
             } else {
                 delayLabel.setIcon(null);
-                delayLabel.setText(convertDelayToHumanString(
-                        findCurrentDelay(sms)));
+                long delay = queue.getSMSDelay(sms);
+                delayLabel.setText(convertDelayToHumanString(delay));
             }
             //add to panel
             panel.add(label, BorderLayout.CENTER);
@@ -836,43 +524,28 @@ public class QueuePanel extends javax.swing.JPanel {
         }
     }
     
-    /** Every second update the information about current message delays */
+    /** Regularly update the information about current message delays */
     private class DelayListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             boolean timerNeeded = false;
-            boolean newSMSReady = false;
-            
-            //for every delay substract one second
-            for (Entry<String, Integer> delay : operatorDelay.entrySet()) {
-                if (delay.getValue() > 0) {
-                    delay.setValue(delay.getValue() - 1);
+
+            for (int i = 0; i < queueListModel.getSize(); i++) {
+                SMS sms = queueListModel.getElementAt(i);
+                long delay = queue.getSMSDelay(sms);
+                if (delay > 0) {
                     timerNeeded = true;
-                    //new operator delay just dropped to 0
-                    if (delay.getValue() <= 0) {
-                        newSMSReady = true;
-                    }
+                    queueListModel.fireContentsChanged(i, i);
                 }
             }
-            
-            if (timerNeeded) {
-                //delays changed, clear current sms delays
-                smsDelay.clear();
-            } else {
+
+            if (!timerNeeded) {
                 //when everything is on 0, no need for timer to run, let's stop it
                 timer.stop();
             }
-            //we have found new ready sms, update the collection
-            if (newSMSReady) {
-                findNewReadySMS();
-            }
-            //update the gui
-            if (queueListModel.getSize() > 0) {
-                queueListModel.fireContentsChanged(queueListModel, 0, queueListModel.getSize() - 1);
-            }
         }
     }
-    
+
     /** Popup menu in the queue list */
     private class QueuePopupMenu extends JPopupMenu {
 
@@ -890,15 +563,15 @@ public class QueuePanel extends javax.swing.JPanel {
             //move sms up action
             menuItem = new JMenuItem(smsUpAction);
             this.add(menuItem);
-            
+
             //move sms down action
             menuItem = new JMenuItem(smsDownAction);
             this.add(menuItem);
-            
+
             this.addSeparator();
-            
+
             //queue pause action
-            menuItem = new JMenuItem(smsQueuePauseAction);
+            menuItem = new JMenuItem(Actions.getQueuePauseAction(true));
             this.add(menuItem);
         }
     }
@@ -909,7 +582,7 @@ public class QueuePanel extends javax.swing.JPanel {
         public QueueMouseListener(JList list, JPopupMenu popup) {
             super(list, popup);
         }
-        
+
         @Override
         public void mouseClicked(MouseEvent e) {
             //transfer on left button doubleclick

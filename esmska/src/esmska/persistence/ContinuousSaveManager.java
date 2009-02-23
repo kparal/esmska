@@ -8,6 +8,11 @@ package esmska.persistence;
 import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.Keyring;
+import esmska.data.Queue;
+import esmska.data.Queue.Events;
+import esmska.data.SMS;
+import esmska.utils.ValuedEvent;
+import esmska.utils.ValuedListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -54,6 +59,23 @@ public class ContinuousSaveManager {
         }
     };
 
+    private static ValuedListener<Queue.Events, SMS> queueValuedListener = new ValuedListener<Queue.Events, SMS>() {
+        @Override
+        public void eventOccured(ValuedEvent<Events, SMS> e) {
+            switch (e.getEvent()) {
+                case QUEUE_CLEARED:
+                case SMS_ADDED:
+                case SMS_POSITION_CHANGED:
+                case SMS_REMOVED:
+                    try {
+                        PersistenceManager.getInstance().saveQueue();
+                    } catch (Exception ex) {
+                        logger.log(Level.WARNING, "Could not save queue", ex);
+                    }
+            }
+        }
+    };
+
     /** Enable automatic saving of history when changed */
     public static void enable(History history) {
         history.addActionListener(historySaveListener);
@@ -69,6 +91,11 @@ public class ContinuousSaveManager {
         contacts.addActionListener(contactsSaveListener);
     }
 
+    /** Enable automatic saving of queue when changed */
+    public static void enable(Queue queue) {
+        queue.addValuedListener(queueValuedListener);
+    }
+
     /** Disable automatic saving of history when changed */
     public static void disable(History history) {
         history.removeActionListener(historySaveListener);
@@ -82,5 +109,10 @@ public class ContinuousSaveManager {
     /** Disable automatic saving of contacts when changed */
     public static void disable(Contacts contacts) {
         contacts.removeActionListener(contactsSaveListener);
+    }
+
+    /** Disable automatic saving of queue when changed */
+    public static void disable(Queue queue) {
+        queue.removeValuedListener(queueValuedListener);
     }
 }

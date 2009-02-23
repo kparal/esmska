@@ -10,10 +10,14 @@ import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.data.Log;
+import esmska.data.Queue;
+import esmska.data.Queue.Events;
 import esmska.data.SMS;
 import esmska.persistence.ExportManager;
 import esmska.utils.ConfirmingFileChooser;
 import esmska.utils.L10N;
+import esmska.utils.ValuedEvent;
+import esmska.utils.ValuedListener;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -111,6 +115,13 @@ public class Actions {
         return logAction;
     }
 
+    /** Pause/unpause the sms queue
+     * @param showName show name of the action (in button text etc)
+     */
+    public static Action getQueuePauseAction(boolean showName) {
+        return new QueuePauseAction(showName);
+    }
+
     /** Get action to automatically select best suitable operator in this list
      * according to number filled in specified text component.
      *
@@ -120,8 +131,7 @@ public class Actions {
      * according to number filled in specified text component
      */
     public static Action getSuggestOperatorAction(OperatorComboBox operatorComboBox, JTextComponent numberComponent) {
-        SuggestOperatorAction action = new SuggestOperatorAction(operatorComboBox, numberComponent);
-        return action;
+        return new SuggestOperatorAction(operatorComboBox, numberComponent);
     }
 
     /** Show about frame */
@@ -380,6 +390,65 @@ public class Actions {
                 logFrame = new LogFrame();
                 logFrame.setLocationRelativeTo(mainFrame);
                 logFrame.setVisible(true);
+            }
+        }
+    }
+
+    /** Pause/unpause the sms queue */
+    private static class QueuePauseAction extends AbstractAction {
+        private final String nameRunning = l10n.getString("Pause_queue");
+        private final String nameStopped = l10n.getString("Unpause_queue");
+        private final String descRunning = l10n.getString("QueuePanel.Pause_sending_of_sms_in_the_queue");
+        private final String descStopped = l10n.getString("QueuePanel.Unpause_sending_of_sms_in_the_queue");
+        private final ImageIcon pauseIcon = new ImageIcon(QueuePanel.class.getResource(RES + "pause-22.png"));
+        private final ImageIcon pauseIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "pause-16.png"));
+        private final ImageIcon startIcon = new ImageIcon(QueuePanel.class.getResource(RES + "start-22.png"));
+        private final ImageIcon startIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "start-16.png"));
+        private static final Queue queue = Queue.getInstance();
+        private boolean showName;
+        public QueuePauseAction() {
+            this(true);
+        }
+        public QueuePauseAction(boolean showName) {
+            super();
+            this.showName = showName;
+            setPaused(queue.isPaused());
+            putValue(MNEMONIC_KEY, KeyEvent.VK_P);
+            queue.addValuedListener(new ValuedListener<Queue.Events, SMS>() {
+                @Override
+                public void eventOccured(ValuedEvent<Events, SMS> e) {
+                    switch (e.getEvent()) {
+                        case QUEUE_PAUSED:
+                            setPaused(true);
+                            break;
+                        case QUEUE_RESUMED:
+                            setPaused(false);
+                            break;
+                    }
+                }
+            });
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            queue.setPaused(!queue.isPaused());
+        }
+        private void setPaused(boolean paused) {
+            if (paused) {
+                if (showName) {
+                    putValue(NAME, nameStopped);
+                }
+                putValue(SMALL_ICON, startIconSmall);
+                putValue(LARGE_ICON_KEY, startIcon);
+                putValue(SHORT_DESCRIPTION, descStopped);
+                putValue(SELECTED_KEY, true);
+            } else {
+                if (showName) {
+                    putValue(NAME, nameRunning);
+                }
+                putValue(SMALL_ICON, pauseIconSmall);
+                putValue(LARGE_ICON_KEY, pauseIcon);
+                putValue(SHORT_DESCRIPTION, descRunning);
+                putValue(SELECTED_KEY, false);
             }
         }
     }

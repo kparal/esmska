@@ -3,9 +3,14 @@
  */
 package esmska.integration;
 
+import esmska.data.Queue;
+import esmska.data.Queue.Events;
+import esmska.data.SMS;
+import esmska.utils.ValuedEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import esmska.utils.OSType;
+import esmska.utils.ValuedListener;
 
 /**
  * Integration adapter. Used to integrate program more closely to specific operating system.
@@ -24,7 +29,18 @@ public class IntegrationAdapter {
      * Constructor.
      */
     protected IntegrationAdapter() {
-        super();
+        setSMSCount(Queue.getInstance().size());
+        Queue.getInstance().addValuedListener(new ValuedListener<Queue.Events, SMS>() {
+            @Override
+            public void eventOccured(ValuedEvent<Events, SMS> e) {
+                switch (e.getEvent()) {
+                    case QUEUE_CLEARED:
+                    case SMS_ADDED:
+                    case SMS_REMOVED:
+                        setSMSCount(Queue.getInstance().size());
+                }
+            }
+        });
     }
 
     /**

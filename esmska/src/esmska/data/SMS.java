@@ -29,20 +29,31 @@ public class SMS {
     private ImageIcon image; //security image
     private String imageCode; //security image code
     private String operator;
-    private Status status = Status.WAITING; //sms status
+    private Status status = Status.NEW; //sms status
     private String errMsg; //potential error
     private String operatorMsg; //additional message from operator
     
     /** Status of SMS */
     public static enum Status {
-        /** new, waiting for sending */
-        WAITING, 
-        /** some error occured during sending */
-        PROBLEMATIC,
-        /** sent ok */
-        SENT_OK; 
+        /** newly created, still not in the queue */
+        NEW,
+        /** waiting in the queue, but still not ready (waiting for delay, etc) */
+        WAITING,
+        /** waiting in the queue, ready to be sent */
+        READY,
+        /** currently being sent */
+        SENDING,
+        /** successfully sent */
+        SENT; 
     }
-    
+
+    /** Return whether some error occured during sending.
+     * SMS is problematic if there is some error message stored.
+     */
+    public boolean isProblematic() {
+        return !Nullator.isEmpty(getErrMsg());
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
     public String getNumber() {
         return number;
@@ -118,7 +129,7 @@ public class SMS {
         this.operator = operator;
     }
     
-    public void setStatus(Status status) {
+    void setStatus(Status status) {
         this.status = status;
         logger.finer("SMS status changed: " + toDebugString());
     }

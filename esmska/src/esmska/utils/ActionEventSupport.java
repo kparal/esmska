@@ -11,7 +11,8 @@ package esmska.utils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 /** Support for firing ActionEvents in classes.
  *
@@ -19,7 +20,7 @@ import java.util.HashSet;
  */
 public class ActionEventSupport {
     Object source;
-    private HashSet<ActionListener> listeners = new HashSet<ActionListener>();
+    private ArrayList<ActionListener> listeners = new ArrayList<ActionListener>();
     
     /** Creates a new instance of ActionEventSupport
      * @param source Source object, for which the ActionEventSupport should work. May not be null.
@@ -44,15 +45,9 @@ public class ActionEventSupport {
     /** Fire new ActionEvent */
     public void fireActionPerformed(int id, String command) {
         ActionEvent event = new ActionEvent(source, id, command);
-        for (ActionListener al : listeners) {
-            al.actionPerformed(event);
+        for (ListIterator<ActionListener> it = listeners.listIterator(listeners.size()); it.hasPrevious(); ) {
+            it.previous().actionPerformed(event);
         }
     }
     
-    /** Fire new ActionEvent */
-    public void fireActionPerformed(ActionEvent event) {
-        for (ActionListener al : listeners) {
-            al.actionPerformed(event);
-        }
-    }
 }

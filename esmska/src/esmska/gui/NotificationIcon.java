@@ -4,6 +4,7 @@
  */
 package esmska.gui;
 
+import esmska.data.Queue;
 import esmska.utils.L10N;
 import java.awt.AWTException;
 import java.awt.Image;
@@ -51,7 +52,6 @@ public class NotificationIcon {
         // show/hide main window
         toggleItem = new MenuItem(l10n.getString("Show/hide_program"));
         toggleItem.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 toggleMainFrameVisibility();
@@ -61,11 +61,9 @@ public class NotificationIcon {
         // pause/unpause sms queue
         pauseQueueItem = new MenuItem(l10n.getString("NotificationIcon.Pause/unpause_sending"));
         pauseQueueItem.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainFrame.getInstance().getQueuePanel().
-                        getSMSQueuePauseAction().actionPerformed(e);
+                Queue.getInstance().setPaused(!Queue.getInstance().isPaused());
             }
         });
 
@@ -109,7 +107,6 @@ public class NotificationIcon {
         
         // add default action on left click
         MouseAdapter mouseAdapter = new MouseAdapter() {
-
             @Override
             public void mousePressed(MouseEvent e) {
                 //single left click toggles window
@@ -177,7 +174,7 @@ public class NotificationIcon {
     private void updateItems() {
         MainFrame frame = MainFrame.getInstance();
         
-        boolean queuePaused = frame.getQueuePanel().isPaused();
+        boolean queuePaused = Queue.getInstance().isPaused();
         pauseQueueItem.setLabel(queuePaused ? unpauseQueue : pauseQueue);
         //visible if visible and not iconified
         boolean visible = frame.isVisible() && (frame.getExtendedState() & JFrame.ICONIFIED) == 0;

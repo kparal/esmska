@@ -51,6 +51,7 @@ public class ThemeManager {
 
     /** Set look and feel found in configuration. If it is not possible, use
      * the next best one.
+     * Must be called on the EDT.
      * @throws Throwable when chosen look and feel can't be set
      */
     public static void setLaF() throws Throwable {

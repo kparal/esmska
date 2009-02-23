@@ -846,7 +846,6 @@ public class SMSPanel extends javax.swing.JPanel {
                     if (disableContactListeners) {
                         return;
                     }
-                    
                     SwingUtilities.invokeLater(recipientDocumentChange);
                 }
             });
