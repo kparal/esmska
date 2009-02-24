@@ -7,7 +7,7 @@
 package esmska.gui;
 
 import esmska.data.Queue.Events;
-import esmska.utils.ValuedEvent;
+import esmska.data.event.ValuedEvent;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -71,7 +71,7 @@ import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
-import esmska.utils.ValuedListener;
+import esmska.data.event.ValuedListener;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.SplashScreen;

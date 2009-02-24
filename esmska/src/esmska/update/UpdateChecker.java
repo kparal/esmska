@@ -4,8 +4,9 @@
  */
 package esmska.update;
 
-import esmska.utils.*;
+import esmska.data.event.ActionEventSupport;
 import esmska.data.Config;
+import esmska.utils.AlphanumComparator;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.HttpURLConnection;

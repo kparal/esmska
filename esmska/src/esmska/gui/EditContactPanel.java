@@ -9,7 +9,7 @@ package esmska.gui;
 import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
-import esmska.utils.AbstractDocumentListener;
+import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import java.awt.Color;
 import java.awt.Component;

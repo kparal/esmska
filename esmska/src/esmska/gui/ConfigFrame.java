@@ -58,7 +58,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
-import esmska.utils.AbstractDocumentListener;
+import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
 import esmska.utils.Nullator;

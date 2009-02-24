@@ -6,11 +6,11 @@ package esmska.integration;
 import esmska.data.Queue;
 import esmska.data.Queue.Events;
 import esmska.data.SMS;
-import esmska.utils.ValuedEvent;
+import esmska.data.event.ValuedEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import esmska.utils.OSType;
-import esmska.utils.ValuedListener;
+import esmska.data.event.ValuedListener;
 
 /**
  * Integration adapter. Used to integrate program more closely to specific operating system.

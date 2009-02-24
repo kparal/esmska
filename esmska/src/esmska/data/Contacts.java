@@ -5,7 +5,7 @@
 
 package esmska.data;
 
-import esmska.utils.ActionEventSupport;
+import esmska.data.event.ActionEventSupport;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

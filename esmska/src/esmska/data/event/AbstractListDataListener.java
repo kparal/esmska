@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package esmska.utils;
+package esmska.data.event;
 
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;

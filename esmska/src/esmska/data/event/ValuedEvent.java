@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package esmska.utils;
+package esmska.data.event;
 
 import java.util.EventObject;
 import org.apache.commons.lang.Validate;

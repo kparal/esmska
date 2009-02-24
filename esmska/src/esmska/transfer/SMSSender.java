@@ -11,7 +11,7 @@ package esmska.transfer;
 
 import esmska.data.Config;
 import esmska.data.Queue.Events;
-import esmska.utils.ValuedEvent;
+import esmska.data.event.ValuedEvent;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +26,7 @@ import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
 import esmska.utils.L10N;
 import esmska.utils.Tuple;
-import esmska.utils.ValuedListener;
+import esmska.data.event.ValuedListener;
 import java.util.List;
 import java.util.ResourceBundle;
 

@@ -4,7 +4,7 @@
  */
 package esmska.data;
 
-import esmska.utils.ActionEventSupport;
+import esmska.data.event.ActionEventSupport;
 import esmska.utils.Nullator;
 import esmska.utils.Tuple;
 import java.awt.event.ActionListener;

@@ -7,8 +7,8 @@ package esmska.data;
 
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
-import esmska.utils.ValuedEventSupport;
-import esmska.utils.ValuedListener;
+import esmska.data.event.ValuedEventSupport;
+import esmska.data.event.ValuedListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

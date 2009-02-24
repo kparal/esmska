@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package esmska.utils;
+package esmska.data.event;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

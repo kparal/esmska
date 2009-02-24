@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package esmska.utils;
+package esmska.data.event;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;

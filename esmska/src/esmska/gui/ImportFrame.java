@@ -42,7 +42,7 @@ import esmska.data.Contacts;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.operators.OperatorUtil;
-import esmska.utils.ActionEventSupport;
+import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;

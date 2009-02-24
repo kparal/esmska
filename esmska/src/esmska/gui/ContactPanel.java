@@ -12,7 +12,7 @@ import esmska.data.Icons;
 import esmska.integration.MacUtils;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
-import esmska.utils.ActionEventSupport;
+import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.DialogButtonSorter;
 import esmska.utils.Nullator;
