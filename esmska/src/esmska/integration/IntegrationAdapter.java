@@ -29,18 +29,6 @@ public class IntegrationAdapter {
      * Constructor.
      */
     protected IntegrationAdapter() {
-        setSMSCount(Queue.getInstance().size());
-        Queue.getInstance().addValuedListener(new ValuedListener<Queue.Events, SMS>() {
-            @Override
-            public void eventOccured(ValuedEvent<Events, SMS> e) {
-                switch (e.getEvent()) {
-                    case QUEUE_CLEARED:
-                    case SMS_ADDED:
-                    case SMS_REMOVED:
-                        setSMSCount(Queue.getInstance().size());
-                }
-            }
-        });
     }
 
     /**
@@ -71,7 +59,8 @@ public class IntegrationAdapter {
         }
 
         instance.initialize();
-
+        instance.startUp();
+        
         return instance;
     }
 
@@ -101,5 +90,23 @@ public class IntegrationAdapter {
      * @param count new sms count. Use null to clear text.
      */
     public void setSMSCount(Integer count) {
+    }
+
+    /** Set some things on start */
+    private void startUp() {
+        //set sms count on startup
+        setSMSCount(Queue.getInstance().size());
+        //listen for changes in sms count
+        Queue.getInstance().addValuedListener(new ValuedListener<Queue.Events, SMS>() {
+            @Override
+            public void eventOccured(ValuedEvent<Events, SMS> e) {
+                switch (e.getEvent()) {
+                    case QUEUE_CLEARED:
+                    case SMS_ADDED:
+                    case SMS_REMOVED:
+                        setSMSCount(Queue.getInstance().size());
+                }
+            }
+        });
     }
 }
