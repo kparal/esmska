@@ -9,12 +9,11 @@ package esmska.gui;
 import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.Icons;
-import esmska.integration.MacUtils;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
-import esmska.utils.DialogButtonSorter;
+import esmska.utils.DialogUtils;
 import esmska.utils.Nullator;
 import esmska.utils.Workarounds;
 import java.awt.BorderLayout;
@@ -371,7 +370,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class AddContactAction extends AbstractAction {
         private final String createOption = l10n.getString("Create");
         private final String cancelOption = l10n.getString("Cancel");
-        private final Object[] options = DialogButtonSorter.sortOptions(
+        private final Object[] options = DialogUtils.sortOptions(
                 cancelOption, createOption);
         
         public AddContactAction() {
@@ -401,7 +400,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class EditContactAction extends AbstractAction {
         private final String saveOption = l10n.getString("Save");
         private final String cancelOption = l10n.getString("Cancel");
-        private final Object[] options = DialogButtonSorter.sortOptions(
+        private final Object[] options = DialogUtils.sortOptions(
                 cancelOption, saveOption);
         
         public EditContactAction() {
@@ -463,7 +462,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class RemoveContactAction extends AbstractAction {
         private final String deleteOption = l10n.getString("Delete");
         private final String cancelOption = l10n.getString("Cancel");
-        private final Object[] options = DialogButtonSorter.sortOptions(
+        private final Object[] options = DialogUtils.sortOptions(
                 cancelOption, deleteOption);
         
         public RemoveContactAction() {
@@ -499,7 +498,7 @@ public class ContactPanel extends javax.swing.JPanel {
                     JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
             JDialog dialog = pane.createDialog(MainFrame.getInstance(), null);
             dialog.setResizable(true);
-            MacUtils.setDocumentModalDialog(dialog);
+            DialogUtils.setDocumentModalDialog(dialog);
             dialog.pack();
             dialog.setVisible(true);
 
@@ -737,7 +736,7 @@ public class ContactPanel extends javax.swing.JPanel {
             init();
             setDefaultCloseOperation(HIDE_ON_CLOSE);
             //integrate modal window better on Mac
-            MacUtils.setDocumentModalDialog(this);
+            DialogUtils.setDocumentModalDialog(this);
         }
         private void init() {
             panel = new EditContactPanel();

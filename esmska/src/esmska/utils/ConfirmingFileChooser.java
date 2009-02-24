@@ -12,7 +12,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import esmska.integration.MacUtils;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -27,7 +26,7 @@ public class ConfirmingFileChooser extends JFileChooser {
     
     private static String overwriteOption = l10n.getString("Replace");
     private static String cancelOption = l10n.getString("Cancel");
-    private static Object[] options = DialogButtonSorter.sortOptions(
+    private static Object[] options = DialogUtils.sortOptions(
                 cancelOption, overwriteOption);
     
     @Override
@@ -46,9 +45,7 @@ public class ConfirmingFileChooser extends JFileChooser {
     @Override
     protected JDialog createDialog(Component parent) throws HeadlessException {
         JDialog dialog = super.createDialog(parent);
-
-        MacUtils.setDocumentModalDialog(dialog);
-
+        DialogUtils.setDocumentModalDialog(dialog);
         return dialog;
     }
     
@@ -64,7 +61,7 @@ public class ConfirmingFileChooser extends JFileChooser {
                 JOptionPane.DEFAULT_OPTION, null, options, overwriteOption);
         
         JDialog confirmDialog = pane.createDialog(getParent(), null);
-        MacUtils.setDocumentModalDialog(confirmDialog);
+        DialogUtils.setDocumentModalDialog(confirmDialog);
         confirmDialog.setResizable(true);
         confirmDialog.pack();
 

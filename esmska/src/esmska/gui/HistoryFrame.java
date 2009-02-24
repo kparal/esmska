@@ -53,11 +53,10 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.History;
-import esmska.integration.MacUtils;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
-import esmska.utils.DialogButtonSorter;
+import esmska.utils.DialogUtils;
 import esmska.utils.OSType;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
@@ -425,7 +424,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     private class DeleteAction extends AbstractAction {
         private final String deleteOption = l10n.getString("Delete");
         private final String cancelOption = l10n.getString("Cancel");
-        private final Object[] options = DialogButtonSorter.sortOptions(
+        private final Object[] options = DialogUtils.sortOptions(
                 cancelOption, deleteOption);
         private final String message = l10n.getString("HistoryFrame.remove_selected");
         
@@ -449,7 +448,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                     JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
             JDialog dialog = pane.createDialog(HistoryFrame.this, null);
             dialog.setResizable(true);
-            MacUtils.setDocumentModalDialog(dialog);
+            DialogUtils.setDocumentModalDialog(dialog);
             dialog.pack();
             dialog.setVisible(true);
 

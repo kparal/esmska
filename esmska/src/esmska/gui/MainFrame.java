@@ -65,13 +65,13 @@ import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
 import esmska.integration.IntegrationAdapter;
-import esmska.integration.MacUtils;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
 import esmska.utils.Nullator;
 import esmska.utils.OSType;
 import esmska.data.event.ValuedListener;
+import esmska.utils.DialogUtils;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.SplashScreen;
@@ -841,7 +841,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
 
             //show the dialog
             logger.fine("Showing reason why SMS sending failed...");
-            MacUtils.setDocumentModalDialog(dialog);
+            DialogUtils.setDocumentModalDialog(dialog);
             dialog.setResizable(true);
             dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
             dialog.setVisible(true);

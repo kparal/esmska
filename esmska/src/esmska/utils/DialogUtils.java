@@ -5,9 +5,9 @@
 package esmska.utils;
 
 import esmska.ThemeManager;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.awt.Dialog.ModalityType;
+import javax.swing.JDialog;
+import org.apache.commons.lang.ArrayUtils;
 
 /** Sort dialog buttons according to current look and feel. Some L&Fs are
  * reversing order of the buttons, which is an unwanted behaviour. This
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author ripper
  */
-public class DialogButtonSorter {
+public class DialogUtils {
 
     /** Sorts options provided to dialog as a buttons according to current look
      * and feel. Some L&Fs are reversing order of the buttons, which is an 
@@ -48,34 +48,42 @@ public class DialogButtonSorter {
      * it like native application.
      *
      * @param options options written in the standard notation (default option rightmost)
-     * @return options adjusted to current environment and LaF
+     * @return options adjusted to current environment and LaF;
+     * null if <code>options</code> was null
      */
     public static Object[] sortOptions(Object... options) {
+        Object[] reversed = ArrayUtils.clone(options);
+        ArrayUtils.reverse(reversed);
+        
         if (OSType.isWindows()) {
-            return reverse(options);
+            return reversed;
         }
         if (OSType.isKDEDesktop() && !ThemeManager.isGTKCurrentLaF() &&
                 !ThemeManager.isNimbusCurrentLaF()) {
-            return reverse(options);
+            return reversed;
         }
         if (ThemeManager.isGTKCurrentLaF() && !OSType.isKDEDesktop()) {
-            return reverse(options);
+            return reversed;
         }
         if (ThemeManager.isAquaCurrentLaF()) {
-            return reverse(options);
+            return reversed;
         }
         if (ThemeManager.isNimbusCurrentLaF() && !OSType.isKDEDesktop()) {
-            return reverse(options);
+            return reversed;
         }
 
         //no change needed
         return options;
     }
 
-    /** Reverses array of objects */
-    private static Object[] reverse(Object... options) {
-        List<Object> list = Arrays.asList(options);
-        Collections.reverse(list);
-        return list.toArray();
+    /** Set dialog to be document modal and set property so it will look as
+     * native modal dialog on Mac.
+     *
+     * @param dialog dialog which should be document modal and Mac native looking
+     */
+    public static void setDocumentModalDialog(JDialog dialog) {
+        dialog.setModalityType(ModalityType.DOCUMENT_MODAL);
+        dialog.getRootPane().putClientProperty("apple.awt.documentModalSheet",
+                Boolean.TRUE);
     }
 }

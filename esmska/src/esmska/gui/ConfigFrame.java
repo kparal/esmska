@@ -13,7 +13,6 @@ import esmska.ThemeManager.LAF;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
-import esmska.integration.MacUtils;
 import esmska.operators.Operator;
 import java.awt.Component;
 import java.awt.Font;
@@ -60,7 +59,7 @@ import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
-import esmska.utils.DialogButtonSorter;
+import esmska.utils.DialogUtils;
 import esmska.utils.Nullator;
 import esmska.utils.Tuple;
 import java.awt.Toolkit;
@@ -1078,7 +1077,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void clearKeyringButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
         String deleteOption = l10n.getString("Delete");
         String cancelOption = l10n.getString("Cancel");
-        Object[] options = DialogButtonSorter.sortOptions(cancelOption, deleteOption);
+        Object[] options = DialogUtils.sortOptions(cancelOption, deleteOption);
         String message = l10n.getString("ConfigFrame.remove_credentials");
 
         //show dialog
@@ -1086,7 +1085,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
         JDialog dialog = pane.createDialog(ConfigFrame.this, null);
         dialog.setResizable(true);
-        MacUtils.setDocumentModalDialog(dialog);
+        DialogUtils.setDocumentModalDialog(dialog);
         dialog.pack();
         dialog.setVisible(true);
 
