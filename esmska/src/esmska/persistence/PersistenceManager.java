@@ -186,10 +186,10 @@ public class PersistenceManager {
         if (contactsFile.exists()) {
             ArrayList<Contact> newContacts = ImportManager.importContacts(contactsFile,
                     ContactParser.ContactType.ESMSKA_FILE);
-            ContinuousSaveManager.disable(Contacts.getInstance());
+            ContinuousSaveManager.disableContacts();
             Contacts.getInstance().clear();
             Contacts.getInstance().addAll(newContacts);
-            ContinuousSaveManager.enable(Contacts.getInstance());
+            ContinuousSaveManager.enableContacts();
         }
     }
     
@@ -207,10 +207,10 @@ public class PersistenceManager {
         logger.fine("Loading queue");
         if (queueFile.exists()) {
             ArrayList<SMS> newQueue = ImportManager.importQueue(queueFile);
-            ContinuousSaveManager.disable(Queue.getInstance());
+            ContinuousSaveManager.disableQueue();
             Queue.getInstance().clear();
             Queue.getInstance().addAll(newQueue);
-            ContinuousSaveManager.enable(Queue.getInstance());
+            ContinuousSaveManager.enableQueue();
         }
     }
     
@@ -228,10 +228,10 @@ public class PersistenceManager {
         logger.fine("Loading history...");
         if (historyFile.exists()) {
             ArrayList<History.Record> records = ImportManager.importHistory(historyFile);
-            ContinuousSaveManager.disable(History.getInstance());
+            ContinuousSaveManager.disableHistory();
             History.getInstance().clearRecords();
             History.getInstance().addRecords(records);
-            ContinuousSaveManager.enable(History.getInstance());
+            ContinuousSaveManager.enableHistory();
         }
     }
     
@@ -248,10 +248,10 @@ public class PersistenceManager {
     public void loadKeyring() throws Exception {
         logger.fine("Loading keyring...");
         if (keyringFile.exists()) {
-            ContinuousSaveManager.disable(Keyring.getInstance());
+            ContinuousSaveManager.disableKeyring();
             Keyring.getInstance().clearKeys();
             ImportManager.importKeyring(keyringFile);
-            ContinuousSaveManager.enable(Keyring.getInstance());
+            ContinuousSaveManager.enableKeyring();
         }
     }
     

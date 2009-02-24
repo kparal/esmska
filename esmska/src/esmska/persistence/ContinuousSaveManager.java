@@ -77,42 +77,42 @@ public class ContinuousSaveManager {
     };
 
     /** Enable automatic saving of history when changed */
-    public static void enable(History history) {
-        history.addActionListener(historySaveListener);
+    public static void enableHistory() {
+        History.getInstance().addActionListener(historySaveListener);
     }
 
     /** Enable automatic saving of keyring when changed */
-    public static void enable(Keyring keyring) {
-        keyring.addActionListener(keyringSaveListener);
+    public static void enableKeyring() {
+        Keyring.getInstance().addActionListener(keyringSaveListener);
     }
 
     /** Enable automatic saving of contacts when changed */
-    public static void enable(Contacts contacts) {
-        contacts.addActionListener(contactsSaveListener);
+    public static void enableContacts() {
+        Contacts.getInstance().addActionListener(contactsSaveListener);
     }
 
     /** Enable automatic saving of queue when changed */
-    public static void enable(Queue queue) {
-        queue.addValuedListener(queueValuedListener);
+    public static void enableQueue() {
+        Queue.getInstance().addValuedListener(queueValuedListener);
     }
 
     /** Disable automatic saving of history when changed */
-    public static void disable(History history) {
-        history.removeActionListener(historySaveListener);
+    public static void disableHistory() {
+        History.getInstance().removeActionListener(historySaveListener);
     }
 
     /** Disable automatic saving of keyring when changed */
-    public static void disable(Keyring keyring) {
-        keyring.removeActionListener(keyringSaveListener);
+    public static void disableKeyring() {
+        Keyring.getInstance().removeActionListener(keyringSaveListener);
     }
 
     /** Disable automatic saving of contacts when changed */
-    public static void disable(Contacts contacts) {
-        contacts.removeActionListener(contactsSaveListener);
+    public static void disableContacts() {
+        Contacts.getInstance().removeActionListener(contactsSaveListener);
     }
 
     /** Disable automatic saving of queue when changed */
-    public static void disable(Queue queue) {
-        queue.removeValuedListener(queueValuedListener);
+    public static void disableQueue() {
+        Queue.getInstance().removeValuedListener(queueValuedListener);
     }
 }
