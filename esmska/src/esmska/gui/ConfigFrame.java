@@ -60,7 +60,6 @@ import esmska.transfer.ProxyManager;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import esmska.utils.DialogUtils;
-import esmska.utils.Nullator;
 import esmska.utils.Tuple;
 import java.awt.Toolkit;
 import java.text.MessageFormat;
@@ -75,6 +74,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
+import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
 
 /** Configure settings form
@@ -184,7 +184,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         boolean temp = fullyInicialized;
         fullyInicialized = false;
-        if (Nullator.isEmpty(countryCode)) {
+        if (StringUtils.isEmpty(countryCode)) {
             countryCodeComboBox.setSelectedIndex(0);
         } else {
             countryCodeComboBox.setSelectedItem(countryCode);
@@ -205,7 +205,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         Tuple<String, String> key = new Tuple<String, String>(loginTextField.getText(),
             new String(passwordField.getPassword()));
         
-        if (Nullator.isEmpty(key.get1()) && Nullator.isEmpty(key.get2())) {
+        if (StringUtils.isEmpty(key.get1()) && StringUtils.isEmpty(key.get2())) {
             //if both empty, remove the key
             keyring.removeKey(operator.getName());
         } else {

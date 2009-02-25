@@ -20,7 +20,6 @@ import esmska.data.Contact;
 import esmska.gui.FormChecker;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
-import esmska.utils.Nullator;
 import java.io.FileInputStream;
 import java.util.logging.Logger;
 import net.wimpi.pim.Pim;
@@ -29,7 +28,6 @@ import net.wimpi.pim.contact.model.Communications;
 import net.wimpi.pim.contact.model.PersonalIdentity;
 import net.wimpi.pim.contact.model.PhoneNumber;
 import net.wimpi.pim.factory.ContactIOFactory;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 
 /** Parse contacts from csv file of different programs. Works in background thread.
@@ -190,7 +188,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                 //FN (formatted name) should be there
                 String name = pi.getFormattedName();
                 //if not, read N (name)
-                if (Nullator.isEmpty(name)) {
+                if (StringUtils.isEmpty(name)) {
                     String firstName = pi.getFirstname();
                     String middleName = "";
                     for (int i = 0; i < pi.getAdditionalNameCount(); i++) {
@@ -200,13 +198,13 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                         }
                     }
                     String lastName = pi.getLastname();
-                    name = (Nullator.isEmpty(firstName) ? "" : firstName + " ") +
-                            (Nullator.isEmpty(middleName) ? "" : middleName + " ") +
-                            (Nullator.isEmpty(lastName) ? "" : lastName);
+                    name = (StringUtils.isEmpty(firstName) ? "" : firstName + " ") +
+                            (StringUtils.isEmpty(middleName) ? "" : middleName + " ") +
+                            (StringUtils.isEmpty(lastName) ? "" : lastName);
                     name = name.trim();
                 }
                 //if no FN nor N, skip contact
-                if (Nullator.isEmpty(name)) {
+                if (StringUtils.isEmpty(name)) {
                     continue;
                 }
                 Communications co = pimContact.getCommunications();
@@ -229,10 +227,10 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     }
                 }
                 //convert to international format
-                if (!Nullator.isEmpty(number)) {
+                if (StringUtils.isNotEmpty(number)) {
                     boolean international = number.startsWith("+");
                     number = number.replaceAll("[^0-9]", "");
-                    if (!international && !Nullator.isEmpty(config.getCountryPrefix())) {
+                    if (!international && StringUtils.isNotEmpty(config.getCountryPrefix())) {
                         number = config.getCountryPrefix() + number;
                     } else {
                         number = "+" + number;

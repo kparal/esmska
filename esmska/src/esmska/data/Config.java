@@ -7,11 +7,11 @@ package esmska.data;
 
 import esmska.ThemeManager;
 import esmska.utils.LogUtils;
-import esmska.utils.Nullator;
 import java.awt.Dimension;
 import java.beans.*;
 import java.io.Serializable;
 import java.util.logging.Logger;
+import org.apache.commons.lang.ObjectUtils;
 
 /** Config properties of the whole program
  * @author ripper
@@ -71,7 +71,7 @@ public class Config extends Object implements Serializable {
             //ensure privacy on sensitive values
             Object newValue = evt.getNewValue();
             Object oldValue = evt.getOldValue();
-            if (Nullator.isEqual("senderNumber",evt.getPropertyName())) {
+            if (ObjectUtils.equals("senderNumber",evt.getPropertyName())) {
                 newValue = LogUtils.anonymizeNumber((String)newValue);
                 oldValue = LogUtils.anonymizeNumber((String)oldValue);
             }

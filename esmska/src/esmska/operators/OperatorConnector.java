@@ -4,7 +4,6 @@
  */
 package esmska.operators;
 
-import esmska.utils.Nullator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -24,6 +23,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 
 /** Class for connecting to HTTP resources and sending GET and POST requests.
  *  For each SMS there should be a separate instance.
@@ -283,7 +283,7 @@ public class OperatorConnector {
                 throw new IOException("Invalid HTTP redirect, no Location header");
             }
             String newURL = header.getValue();
-            if (Nullator.isEmpty(newURL)) {
+            if (StringUtils.isEmpty(newURL)) {
                 throw new IOException("Invalid HTTP redirect, Location header is empty");
             }
             if (newURL.startsWith("./") || newURL.startsWith("../")) {
@@ -335,7 +335,7 @@ public class OperatorConnector {
             String value = params[i];
             String key = params[i - 1];
             //skip empty keys
-            if (Nullator.isEmpty(key)) {
+            if (StringUtils.isEmpty(key)) {
                 continue;
             }
             string += key + "=";

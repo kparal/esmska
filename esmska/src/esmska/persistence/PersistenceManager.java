@@ -35,8 +35,8 @@ import esmska.data.Keyring;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.operators.Operator;
-import esmska.utils.Nullator;
 import esmska.utils.OSType;
+import org.apache.commons.lang.StringUtils;
 
 /** Load and store settings and data
  *
@@ -93,7 +93,7 @@ public class PersistenceManager {
                     break;
             }
             
-            if (!Nullator.isEmpty(path)) {
+            if (StringUtils.isNotEmpty(path)) {
                 setUserDir(path + File.separator + USER_DIRNAME);
             }
         }

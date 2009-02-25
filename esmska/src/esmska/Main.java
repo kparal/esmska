@@ -27,12 +27,12 @@ import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.JavaType;
 import esmska.utils.L10N;
-import esmska.utils.Nullator;
 import esmska.utils.OSType;
 import java.awt.EventQueue;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import javax.swing.SwingUtilities;
+import org.apache.commons.lang.StringUtils;
 
 /** Starter class for the whole program
  *
@@ -185,7 +185,7 @@ public class Main {
         }
 
         //do some initialization if this is the first run
-        if (Nullator.isEmpty(Config.getInstance().getVersion())) { //first run means version is empty
+        if (StringUtils.isEmpty(Config.getInstance().getVersion())) { //first run means version is empty
             logger.fine("First run, doing initialization...");
             //set country prefix from locale
             Config.getInstance().setCountryPrefix(

@@ -68,7 +68,6 @@ import esmska.integration.IntegrationAdapter;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
-import esmska.utils.Nullator;
 import esmska.utils.OSType;
 import esmska.data.event.ValuedListener;
 import esmska.utils.DialogUtils;
@@ -83,6 +82,7 @@ import java.util.Calendar;
 import java.util.ListIterator;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
+import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -854,7 +854,7 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
                 }
             }
             //show operator message if present
-            if (!Nullator.isEmpty(sms.getOperatorMsg())) {
+            if (StringUtils.isNotEmpty(sms.getOperatorMsg())) {
                 log.addRecord(new Log.Record(sms.getOperator() + ": " + sms.getOperatorMsg(),
                         null, Icons.STATUS_MESSAGE));
             }

@@ -9,7 +9,7 @@
 
 package esmska.gui;
 
-import esmska.utils.Nullator;
+import org.apache.commons.lang.StringUtils;
 
 /** Checks for validity of form components
  *
@@ -21,7 +21,7 @@ public class FormChecker {
      * @return true if name is not empty ("" or null), false otherwise
      */
     public static boolean checkContactName(String name) {
-        return !Nullator.isEmpty(name);
+        return StringUtils.isNotEmpty(name);
     }
     
     /** Check valid number

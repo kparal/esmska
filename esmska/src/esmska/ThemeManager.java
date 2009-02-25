@@ -19,12 +19,12 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
 import esmska.utils.JavaType;
-import esmska.utils.Nullator;
 import esmska.utils.OSType;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager.LookAndFeelInfo;
+import org.apache.commons.lang.ObjectUtils;
 import org.jvnet.lafwidget.LafWidget;
 import org.jvnet.substance.skin.SaharaSkin;
 
@@ -130,19 +130,19 @@ public class ThemeManager {
     /** Returns whether GTK is current look and feel */
     public static boolean isGTKCurrentLaF() {
         LookAndFeel laf = UIManager.getLookAndFeel();
-        return Nullator.isEqual(laf.getName(), "GTK look and feel");
+        return ObjectUtils.equals(laf.getName(), "GTK look and feel");
     }
 
     /** Returns whether Aqua (Mac OS native) is current look and feel */
     public static boolean isAquaCurrentLaF() {
         LookAndFeel laf = UIManager.getLookAndFeel();
-        return Nullator.isEqual(laf.getName(), "Mac OS X");
+        return ObjectUtils.equals(laf.getName(), "Mac OS X");
     }
 
     /** Returns whether Nimbus is current look and feel */
     public static boolean isNimbusCurrentLaF() {
         LookAndFeel laf = UIManager.getLookAndFeel();
-        return Nullator.isEqual(laf.getName(), "Nimbus");
+        return ObjectUtils.equals(laf.getName(), "Nimbus");
     }
 
     /** Returns whether Substance is current look and feel */

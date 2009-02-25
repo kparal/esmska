@@ -6,6 +6,7 @@
 package esmska.utils;
 
 import java.io.Serializable;
+import org.apache.commons.lang.ObjectUtils;
 
 /**
  * Container for tuple of two objects of different classes.
@@ -56,7 +57,7 @@ public class Tuple<A, B> implements Serializable {
             return false;
         }
         Tuple<?, ?> other = (Tuple<?, ?>) obj;
-        return Nullator.isEqual(get1(), other.get1()) && Nullator.isEqual(get2(), other.get2());
+        return ObjectUtils.equals(get1(), other.get1()) && ObjectUtils.equals(get2(), other.get2());
     }
 
     @Override

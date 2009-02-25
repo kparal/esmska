@@ -5,7 +5,6 @@
 package esmska.data;
 
 import esmska.data.event.ActionEventSupport;
-import esmska.utils.Nullator;
 import esmska.utils.Tuple;
 import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
@@ -20,6 +19,7 @@ import java.util.logging.Logger;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.ObjectUtils;
 
 /** Storage for logins and passwords to operators.
  * Also offers password encryption and decryption.
@@ -104,7 +104,7 @@ public class Keyring {
             throw new IllegalArgumentException("key");
         }
         Tuple<String, String> previous = keyring.put(operatorName, key);
-        return previous == null || !Nullator.isEqual(previous, key);
+        return previous == null || !ObjectUtils.equals(previous, key);
     }
 
     /** Put keys for more operators. If a key for particular operator already exists,

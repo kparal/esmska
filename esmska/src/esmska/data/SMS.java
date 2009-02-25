@@ -10,7 +10,6 @@
 package esmska.data;
 
 import esmska.utils.LogUtils;
-import esmska.utils.Nullator;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import org.apache.commons.lang.StringUtils;
@@ -76,7 +75,7 @@ public class SMS {
      * SMS is problematic if there is some error message stored.
      */
     public boolean isProblematic() {
-        return !Nullator.isEmpty(getErrMsg());
+        return StringUtils.isNotEmpty(getErrMsg());
     }
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
@@ -207,7 +206,7 @@ public class SMS {
     
     @Override
     public String toString() {
-        return !Nullator.isEmpty(getName())?getName():getNumber();
+        return StringUtils.defaultIfEmpty(getName(), getNumber());
     }
 
     public String toDebugString() {

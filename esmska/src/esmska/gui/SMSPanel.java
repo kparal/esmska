@@ -16,7 +16,6 @@ import esmska.operators.OperatorUtil;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
-import esmska.utils.Nullator;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Toolkit;
@@ -71,6 +70,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 import javax.swing.undo.UndoManager;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinChangeListener;
@@ -132,7 +133,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** validates sms form and returns status */
     private boolean validateForm(boolean transferFocus) {
-        if (Nullator.isEmpty(envelope.getText())) {
+        if (StringUtils.isEmpty(envelope.getText())) {
             if (transferFocus) {
                 smsTextPane.requestFocusInWindow();
             }
@@ -171,7 +172,7 @@ public class SMSPanel extends javax.swing.JPanel {
         String id = recipientTextField.getText(); //name or number
         String operatorName = operatorComboBox.getSelectedOperatorName();
         
-        if (Nullator.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             return null;
         }
         
@@ -181,8 +182,8 @@ public class SMSPanel extends javax.swing.JPanel {
         //search in contact numbers
         if (number != null) {
             for (Contact c : contacts) {
-                if (Nullator.isEqual(c.getNumber(), number)) {
-                    if (Nullator.isEqual(c.getOperator(), operatorName)) {
+                if (ObjectUtils.equals(c.getNumber(), number)) {
+                    if (ObjectUtils.equals(c.getOperator(), operatorName)) {
                         fullContact = c;
                         break;
                     }
@@ -195,7 +196,7 @@ public class SMSPanel extends javax.swing.JPanel {
             //search in contact names if not number
             for (Contact c : contacts) {
                 if (id.equalsIgnoreCase(c.getName())) {
-                    if (Nullator.isEqual(c.getOperator(), operatorName)) {
+                    if (ObjectUtils.equals(c.getOperator(), operatorName)) {
                         fullContact = c;
                         break;
                     }
@@ -806,7 +807,7 @@ public class SMSPanel extends javax.swing.JPanel {
         public RecipientTextField() {
 
             //set tooltip
-            if (Nullator.isEmpty(config.getCountryPrefix())) {
+            if (StringUtils.isEmpty(config.getCountryPrefix())) {
                 setToolTipText(tooltip + tooltipTip + "</html>");
             } else {
                 setToolTipText(tooltip + "</html>");
@@ -874,7 +875,7 @@ public class SMSPanel extends javax.swing.JPanel {
             }
             
             String text = super.getText();
-            if (!Nullator.isEmpty(text) && !text.startsWith("+")) {
+            if (StringUtils.isNotEmpty(text) && !text.startsWith("+")) {
                 text = config.getCountryPrefix() + text;
             }
             //prepend country prefix if not present and text is a number
@@ -923,7 +924,7 @@ public class SMSPanel extends javax.swing.JPanel {
         
         /** Set phone number to display. Handles country prefix correctly. */
         public void setNumber(String number) {
-            if (Nullator.isEmpty(number)) {
+            if (StringUtils.isEmpty(number)) {
                 setText("");
             }
             

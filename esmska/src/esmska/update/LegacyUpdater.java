@@ -6,9 +6,10 @@ package esmska.update;
 
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
-import esmska.utils.Nullator;
 import java.util.Locale;
 import java.util.logging.Logger;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 
 /** Class for updating from older to newer versions of the program.
  * Makes the needed changes when user updates his version.
@@ -23,7 +24,7 @@ public class LegacyUpdater {
         if (version == null) {
             return;
         }
-        if (Nullator.isEqual(version, Config.getLatestVersion())) { //already updated
+        if (ObjectUtils.equals(version, Config.getLatestVersion())) { //already updated
             return;
         }
         logger.fine("Updating from legacy version " + version + " to current version " +
@@ -32,7 +33,7 @@ public class LegacyUpdater {
         //changes to 0.8.0
         if (UpdateChecker.compareVersions(version, "0.8.0") < 0) {
             //set country prefix from locale
-            if (Nullator.isEmpty(Config.getInstance().getCountryPrefix())) {
+            if (StringUtils.isEmpty(Config.getInstance().getCountryPrefix())) {
                 Config.getInstance().setCountryPrefix(
                         CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
             }

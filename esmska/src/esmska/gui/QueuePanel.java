@@ -45,7 +45,6 @@ import esmska.operators.OperatorUtil;
 import esmska.data.event.AbstractListDataListener;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
-import esmska.utils.Nullator;
 import esmska.data.event.ValuedListener;
 import esmska.utils.Workarounds;
 import java.awt.BorderLayout;
@@ -61,6 +60,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.jvnet.substance.api.ColorSchemeAssociationKind;
 import org.jvnet.substance.api.ComponentState;
@@ -475,8 +475,8 @@ public class QueuePanel extends javax.swing.JPanel {
             SMS sms = (SMS)value;
             
             //set text
-            label.setText(!Nullator.isEmpty(sms.getName()) ?
-                sms.getName() : OperatorUtil.stripCountryPrefix(sms.getNumber()));
+            label.setText(StringUtils.defaultIfEmpty(sms.getName(),
+                    OperatorUtil.stripCountryPrefix(sms.getNumber())));
             //problematic sms colored
             if ((sms.isProblematic()) && !isSelected) {
                 label.setBackground(Color.RED);
@@ -494,7 +494,7 @@ public class QueuePanel extends javax.swing.JPanel {
             text = text.replaceAll("\n", "<br>");
             String tooltip = "<html><table><tr><td><img src=\"" + messageIconURI +
                     "\"></td><td valign=top><b>" + label.getText() + "</b><br>" +
-                    (Nullator.isEmpty(sms.getName())?"":OperatorUtil.stripCountryPrefix(sms.getNumber())+", ") +
+                    (StringUtils.isEmpty(sms.getName())?"":OperatorUtil.stripCountryPrefix(sms.getNumber())+", ") +
                     sms.getOperator() + "<br><br>" + text +
                     "</td></tr></table></html>";
             panel.setToolTipText(tooltip);

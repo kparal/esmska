@@ -6,7 +6,6 @@ package esmska.data;
 
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.LogUtils;
-import esmska.utils.Nullator;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Logger;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
@@ -115,7 +115,7 @@ public class History {
         ListIterator<Record> iter = records.listIterator(records.size());
         while (iter.hasPrevious()) {
             Record record = iter.previous();
-            if (Nullator.isEqual(record.getOperator(), operatorName)) {
+            if (ObjectUtils.equals(record.getOperator(), operatorName)) {
                 return record;
             }
         }

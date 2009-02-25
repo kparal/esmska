@@ -14,7 +14,6 @@ import esmska.operators.OperatorUtil;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.DialogUtils;
-import esmska.utils.Nullator;
 import esmska.utils.Workarounds;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -62,6 +61,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.apache.commons.lang.StringUtils;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
 
@@ -624,7 +624,7 @@ public class ContactPanel extends javax.swing.JPanel {
          * @param text text to show; empty or null string hides the field
          */
         public void showSearchField(String text) {
-            if (Nullator.isEmpty(text)) {
+            if (StringUtils.isEmpty(text)) {
                 remove(searchField);
             } else {
                 searchField.setText(text);
