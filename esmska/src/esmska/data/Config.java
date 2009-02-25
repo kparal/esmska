@@ -21,7 +21,7 @@ public class Config extends Object implements Serializable {
     /** shared instance */
     private static Config instance = new Config();
     
-    private static final String LATEST_VERSION = "0.13.0devel";
+    private static final String LATEST_VERSION = "0.14.0devel";
     private static final Logger logger = Logger.getLogger(Config.class.getName());
 
     private String version = "";
