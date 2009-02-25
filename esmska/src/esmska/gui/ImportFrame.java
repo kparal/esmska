@@ -36,11 +36,13 @@ import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListDataEvent;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.Icons;
 import esmska.data.Log;
+import esmska.data.event.AbstractListDataListener;
 import esmska.operators.OperatorUtil;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
@@ -112,6 +114,7 @@ public class ImportFrame extends javax.swing.JFrame {
         chooser.setApproveButtonText(l10n.getString("ImportFrame.Select"));
         chooser.setDialogTitle(l10n.getString("ImportFrame.choose_export_file"));
         chooser.setMultiSelectionEnabled(false);
+        chooser.resetChoosableFileFilters();
         chooser.addChoosableFileFilter(new FileFilter() {
             @Override
             public boolean accept(File f) {
@@ -129,6 +132,20 @@ public class ImportFrame extends javax.swing.JFrame {
                     return l10n.getString("ImportFrame.vCard_filter");
                 } else {
                     return l10n.getString("ImportFrame.CSV_filter");
+                }
+            }
+        });
+
+        //inform if no contacts found
+        contactList.getModel().addListDataListener(new AbstractListDataListener() {
+            @Override
+            public void onUpdate(ListDataEvent e) {
+                int size = contactList.getModel().getSize();
+                foundContactsLabel.setText(size > 0 ?
+                    l10n.getString("ImportFrame.foundContactsLabel.text") :
+                    l10n.getString("ImportFrame.foundNoContacts"));
+                if (actualCard.equals("resultsPanel")) {
+                    forwardButton.setEnabled(size > 0);
                 }
             }
         });
@@ -224,10 +241,10 @@ public class ImportFrame extends javax.swing.JFrame {
         encodingLabel = new JLabel();
         problemLabel = new JLabel();
         resultsPanel = new JPanel();
-        jLabel1 = new JLabel();
+        foundContactsLabel = new JLabel();
         jScrollPane1 = new JScrollPane();
         contactList = new JList();
-        jLabel8 = new JLabel();
+        doImportLabel = new JLabel();
         validOperatorCheckBox = new JCheckBox();
         forwardButton = new JButton();
         progressBar = new JProgressBar();
@@ -367,14 +384,14 @@ public class ImportFrame extends javax.swing.JFrame {
 
         cardPanel.add(browsePanel, "browsePanel");
 
-        Mnemonics.setLocalizedText(jLabel1, l10n.getString("ImportFrame.jLabel1.text"));
+        Mnemonics.setLocalizedText(foundContactsLabel, l10n.getString("ImportFrame.foundContactsLabel.text"));
         contactList.setModel(new DefaultListModel());
         contactList.setCellRenderer(new ContactsListRenderer());
         jScrollPane1.setViewportView(contactList);
 
 
-        jLabel8.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
-        Mnemonics.setLocalizedText(jLabel8, l10n.getString("ImportFrame.jLabel8.text")); // NOI18N
+        doImportLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
+        Mnemonics.setLocalizedText(doImportLabel, l10n.getString("ImportFrame.doImportLabel.text")); // NOI18N
         validOperatorCheckBox.setSelected(true);
         Mnemonics.setLocalizedText(validOperatorCheckBox, l10n.getString("ImportFrame.validOperatorCheckBox.text")); // NOI18N
         validOperatorCheckBox.setToolTipText(l10n.getString("ImportFrame.validOperatorCheckBox.toolTipText")); // NOI18N
@@ -392,22 +409,22 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(resultsPanelLayout.createParallelGroup(Alignment.LEADING)
                     .addComponent(validOperatorCheckBox)
-                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(foundContactsLabel, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
-                    .addComponent(jLabel8))
+                    .addComponent(doImportLabel))
                 .addContainerGap())
         );
         resultsPanelLayout.setVerticalGroup(
             resultsPanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(resultsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(foundContactsLabel)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(validOperatorCheckBox)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8)
+                .addComponent(doImportLabel)
                 .addContainerGap())
         );
 
@@ -480,10 +497,11 @@ public class ImportFrame extends javax.swing.JFrame {
         //result
         if (actualCard.equals("resultsPanel")) {
             String nextCard = "browsePanel";
-            forwardButton.setText(l10n.getString("ImportFrame.forwardButton.text"));
+            Mnemonics.setLocalizedText(forwardButton, l10n.getString("ImportFrame.forwardButton.text"));
             forwardButton.setIcon(new ImageIcon(
                         ImportFrame.class.getResource(RES + "next-22.png")));
             forwardButton.setHorizontalTextPosition(SwingConstants.LEADING);
+            forwardButton.setEnabled(true);
             updateBrowsePanel();
             cardLayout.show(cardPanel, nextCard);
             actualCard = nextCard;
@@ -595,8 +613,8 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
                 }
                 removeExistingContacts();
                 validOperatorCheckBoxStateChanged(null);
-                
-                forwardButton.setText(l10n.getString("Import"));
+
+                Mnemonics.setLocalizedText(forwardButton, l10n.getString("Import_"));
                 forwardButton.setIcon(new ImageIcon(
                         ImportFrame.class.getResource(RES + "contact-22.png")));
                 forwardButton.setHorizontalTextPosition(SwingConstants.TRAILING);
@@ -609,7 +627,7 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
                         null, JOptionPane.ERROR_MESSAGE);
             } finally {
                 progressBar.setVisible(false);
-                forwardButton.setEnabled(true);
+                forwardButton.setEnabled(contactList.getModel().getSize() > 0);
                 backButton.setEnabled(true);
             }
         }
@@ -639,20 +657,20 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
     private JPanel browsePanel;
     private JPanel cardPanel;
     private JList contactList;
+    private JLabel doImportLabel;
     private JRadioButton dreamcomSERadioButton;
     private JLabel encodingLabel;
     private JRadioButton esmskaRadioButton;
     private JLabel fileLabel;
     private JTextField fileTextField;
     private JButton forwardButton;
+    private JLabel foundContactsLabel;
     private ButtonGroup importButtonGroup;
     private JLabel infoLabel;
-    private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel22;
     private JLabel jLabel3;
     private JLabel jLabel4;
-    private JLabel jLabel8;
     private JScrollPane jScrollPane1;
     private JRadioButton kubikRadioButton;
     private JLabel problemLabel;
