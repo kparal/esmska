@@ -45,15 +45,15 @@ fi
 pushd ../src/esmska/resources/ >/dev/null
 # Hebrew is in Java under old code 'iw'
 if [ -f l10n_he.properties ]; then
-    ln -sf l10n_he.properties l10n_iw.properties 
+    cp l10n_he.properties l10n_iw.properties 
 fi
 #Jiddish is in Java under old code 'ji'
 if [ -f l10n_yi.properties ]; then
-    ln -sf l10n_yi.properties l10n_ji.properties
+    cp l10n_yi.properties l10n_ji.properties
 fi
 #Indonesian is in Java under old code 'in'
 if [ -f l10n_id.properties ]; then
-    ln -sf l10n_id.properties l10n_in.properties
+    cp l10n_id.properties l10n_in.properties
 fi
 
 popd >/dev/null
