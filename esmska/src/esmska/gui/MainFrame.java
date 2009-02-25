@@ -353,7 +353,6 @@ public class MainFrame extends javax.swing.JFrame {
         verticalSplitPane.setOneTouchExpandable(true);
         verticalSplitPane.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
-        smsPanel.addActionListener(new SMSListener());
         smsPanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         verticalSplitPane.setLeftComponent(smsPanel);
 
@@ -892,24 +891,6 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
                     break;
                 case ContactPanel.ACTION_CONTACT_CHOSEN:
                     smsPanel.requestFocusInWindow();
-                    break;
-            }
-        }
-    }
-    
-    /** Listens for changes in sms panel */
-    private class SMSListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            switch (e.getID()) {
-                case SMSPanel.ACTION_REQUEST_CLEAR_CONTACT_SELECTION:
-                    contactPanel.clearSelection();
-                    break;
-                case SMSPanel.ACTION_REQUEST_SELECT_CONTACT:
-                    contactPanel.setSelectedContact(smsPanel.getRequestedContactSelection());
-                    break;
-                case SMSPanel.ACTION_SEND_SMS:
-                    queue.addAll(smsPanel.getEnvelope().generate());
                     break;
             }
         }

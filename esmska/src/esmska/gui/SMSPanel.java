@@ -11,10 +11,10 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.Envelope;
+import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.operators.OperatorUtil;
 import esmska.data.event.AbstractDocumentListener;
-import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
 import java.awt.Color;
 import java.awt.Component;
@@ -82,10 +82,6 @@ import org.openide.awt.Mnemonics;
  * @author  ripper
  */
 public class SMSPanel extends javax.swing.JPanel {
-    public static final int ACTION_REQUEST_CLEAR_CONTACT_SELECTION = 0;
-    public static final int ACTION_REQUEST_SELECT_CONTACT = 1;
-    public static final int ACTION_SEND_SMS = 2;
-    
     private static final Logger logger = Logger.getLogger(SMSPanel.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
@@ -96,6 +92,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private UndoManager smsTextUndoManager = new UndoManager();
     private SortedSet<Contact> contacts = Contacts.getInstance().getAll();
     private Config config = Config.getInstance();
+    private MainFrame mainFrame = MainFrame.getInstance();
     
     private UndoAction undoAction = new UndoAction();
     private RedoAction redoAction = new RedoAction();
@@ -105,19 +102,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
     private RecipientTextField recipientField;
     
-    private Contact requestedContactSelection;
     private boolean disableContactListeners;
-    
-    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
-    private ActionEventSupport actionSupport = new ActionEventSupport(this);
-    public void addActionListener(ActionListener actionListener) {
-        actionSupport.addActionListener(actionListener);
-    }
-    
-    public void removeActionListener(ActionListener actionListener) {
-        actionSupport.removeActionListener(actionListener);
-    }
-    // </editor-fold>
     
     /** Creates new form SMSPanel */
     public SMSPanel() {
@@ -215,21 +200,10 @@ public class SMSPanel extends javax.swing.JPanel {
      */
     private void requestSelectContact(Contact contact) {
         if (contact != null) {
-            requestedContactSelection = contact;
-            actionSupport.fireActionPerformed(ACTION_REQUEST_SELECT_CONTACT, null);
+            mainFrame.getContactPanel().setSelectedContact(contact);
         } else {
-            actionSupport.fireActionPerformed(ACTION_REQUEST_CLEAR_CONTACT_SELECTION, null);
+            mainFrame.getContactPanel().clearSelection();
         }
-    }
-    
-    /** get contact which was requested to be selected in contact list */
-    public Contact getRequestedContactSelection() {
-        return requestedContactSelection;
-    }
-    
-    /** get currently used envelope */
-    public Envelope getEnvelope() {
-        return envelope;
     }
     
     /** set selected contacts in contact list or contact to display */
@@ -515,7 +489,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 return;
             }
             logger.fine("Sending new message to queue");
-            actionSupport.fireActionPerformed(ACTION_SEND_SMS, null);
+            Queue.getInstance().addAll(envelope.generate());
             
             smsTextPane.setText(null);
             smsTextUndoManager.discardAllEdits();

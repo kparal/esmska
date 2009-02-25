@@ -44,7 +44,6 @@ import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.event.AbstractListDataListener;
 import esmska.operators.OperatorUtil;
-import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -80,17 +79,6 @@ public class ImportFrame extends javax.swing.JFrame {
     private CardLayout cardLayout;
     private SwingWorker<ArrayList<Contact>,Void> worker; //worker for background thread
     private String actualCard = "applicationPanel";
-    
-    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
-    private ActionEventSupport actionSupport = new ActionEventSupport(this);
-    public void addActionListener(ActionListener actionListener) {
-        actionSupport.addActionListener(actionListener);
-    }
-    
-    public void removeActionListener(ActionListener actionListener) {
-        actionSupport.removeActionListener(actionListener);
-    }
-    // </editor-fold>
     
     /** Creates new form ImportFrame */
     public ImportFrame() {
