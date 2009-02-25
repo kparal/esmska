@@ -235,11 +235,8 @@ public class Actions {
                 return;
             }
 
-            SMS sms = new SMS();
+            SMS sms = new SMS(record.getNumber(), record.getText(), record.getOperator());
             sms.setName(record.getName());
-            sms.setNumber(record.getNumber());
-            sms.setOperator(record.getOperator());
-            sms.setText(record.getText());
 
             mainFrame.getContactPanel().clearSelection();
             mainFrame.getSMSPanel().setSMS(sms);

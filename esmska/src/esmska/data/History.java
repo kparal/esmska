@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Logger;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 
 /** SMS history entity
  *
@@ -131,62 +133,108 @@ public class History {
         private String operator;
         private Date date;
 
+        /** Create new Record. For detailed parameters restrictions see individual setter methods.
+         * @param number not null nor empty
+         * @param text not null
+         * @param operator not null nor empty
+         * @param name
+         * @param senderNumber
+         * @param senderName
+         * @param date null for current time
+         */
+        public Record(String number, String text, String operator,
+                String name, String senderNumber, String senderName, Date date) {
+            setName(name);
+            setNumber(number);
+            setText(text);
+            setSenderNumber(senderNumber);
+            setSenderName(senderName);
+            setOperator(operator);
+            setDate(date);
+        }
+
         // <editor-fold defaultstate="collapsed" desc="Get Methods">
+        /** Recepient number in international format (starting with "+").
+         * Never null nor empty. */
         public String getNumber() {
             return number;
         }
 
+        /** Name of the recepient. Never null. */
         public String getName() {
             return name;
         }
 
+        /** Text of the message. Never null. */
         public String getText() {
             return text;
         }
 
+        /** Sender number. Never null. */
         public String getSenderNumber() {
             return senderNumber;
         }
 
+        /** Sender name. Never null. */
         public String getSenderName() {
             return senderName;
         }
 
+         /** Operator of the message. Never null nor empty. */
         public String getOperator() {
             return operator;
         }
 
+        /** Date of the sending. Never null. */
         public Date getDate() {
             return date;
         }
         // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc="Set Methods">
+        /** Recepient number in international format (starting with "+").
+         * May not be null nor empty. */
         public void setNumber(String number) {
+            Validate.notEmpty(number);
+            if (!number.startsWith("+")) {
+                throw new IllegalArgumentException("Number does not start with '+': " + number);
+            }
             this.number = number;
         }
-        
+
+        /** Name of the recepient. Null value is changed to empty string. */
         public void setName(String name) {
-            this.name = name;
+            this.name = StringUtils.defaultString(name);
         }
-        
+
+
+        /** Text of the message. May not be null. */
         public void setText(String text) {
+            Validate.notNull(text);
             this.text = text;
         }
-        
+
+        /** Sender number. Null value is changed to empty string. */
         public void setSenderNumber(String senderNumber) {
-            this.senderNumber = senderNumber;
+            this.senderNumber = StringUtils.defaultString(senderNumber);
         }
-        
+
+        /** Sender name. Null value is changed to empty string. */
         public void setSenderName(String senderName) {
-            this.senderName = senderName;
+            this.senderName = StringUtils.defaultString(senderName);
         }
-        
+
+        /** Operator of the message. May not be null nor empty. */
         public void setOperator(String operator) {
+            Validate.notEmpty(operator);
             this.operator = operator;
         }
-        
+
+        /** Date of the sending. Null value is inicialized with current time. */
         public void setDate(Date date) {
+            if (date == null) {
+                date = new Date();
+            }
             this.date = date;
         }
         // </editor-fold>

@@ -4,6 +4,7 @@
  */
 package esmska.operators;
 
+import esmska.utils.L10N;
 import java.net.URL;
 import javax.swing.Icon;
 
@@ -12,6 +13,8 @@ import javax.swing.Icon;
  * @author ripper
  */
 public interface Operator extends OperatorInfo, Comparable<Operator> {
+
+    public static final String UNKNOWN = L10N.l10nBundle.getString("Operator.unknown"); //TODO: rework to enum
 
     /** URL of operator script (file or jar URL). */
     URL getScript();

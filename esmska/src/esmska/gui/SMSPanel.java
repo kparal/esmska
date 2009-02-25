@@ -71,6 +71,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 import javax.swing.undo.UndoManager;
+import org.apache.commons.lang.Validate;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinChangeListener;
 import org.openide.awt.Mnemonics;
@@ -232,9 +233,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** set selected contacts in contact list or contact to display */
     public void setContacts(Collection<Contact> contacts) {
-        if (contacts == null) {
-            throw new NullPointerException("contacts");
-        }
+        Validate.notNull(contacts);
 
         disableContactListeners = true;
         int count = contacts.size();
@@ -949,8 +948,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 //update envelope
                 Set<Contact> set = new HashSet<Contact>();
                 set.add(new Contact(contact != null ? contact.getName() : null,
-                        getNumber(),
-                        operatorComboBox.getSelectedOperatorName()));
+                        getNumber(), operatorComboBox.getSelectedOperatorName()));
                 envelope.setContacts(set);
 
                 //update send action

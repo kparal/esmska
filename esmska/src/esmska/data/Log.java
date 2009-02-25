@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import org.apache.commons.lang.ObjectUtils;
 
 /** Class for collecting log messages
  *
@@ -129,19 +130,22 @@ public class Log {
                 throw new IllegalArgumentException("message");
             }
             this.message = message;
-            this.time = (time != null ? time : new Date());
+            this.time = (Date) ObjectUtils.defaultIfNull(time, new Date());
             this.icon = icon;
         }
         
         // <editor-fold defaultstate="collapsed" desc="Get Methods">
+        /** Record icon. May be null. */
         public ImageIcon getIcon() {
             return icon;
         }
 
+        /** Record message. Never null. */
         public String getMessage() {
             return message;
         }
 
+        /** Record time. Never null. */
         public Date getTime() {
             return time;
         }

@@ -29,6 +29,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
+import org.apache.commons.lang.StringUtils;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.openide.awt.Mnemonics;
 
@@ -257,11 +258,16 @@ public class EditContactPanel extends javax.swing.JPanel {
     
     /** Get currently edited contact */
     public Contact getContact() {
-        Contact c = new Contact();
-        c.setName(nameTextField.getText());
-        c.setNumber(numberTextField.getText());
-        c.setOperator(operatorComboBox.getSelectedOperatorName());
-        return c;
+        String name = nameTextField.getText();
+        String number = numberTextField.getText();
+        String operator = operatorComboBox.getSelectedOperatorName();
+        
+        if (StringUtils.isEmpty(name) || StringUtils.isEmpty(number) ||
+                StringUtils.isEmpty(operator)) {
+            return null;
+        } else {
+            return new Contact(name, number, operator);
+        }
     }
 
     /** Improve focus etc. before displaying panel */

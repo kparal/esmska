@@ -151,10 +151,7 @@ public class Envelope {
             int limit = (operator != null ? operator.getMaxChars() : Integer.MAX_VALUE);
             for (int i=0;i<text.length();i+=limit) {
                 String cutText = text.substring(i,Math.min(i+limit,text.length()));
-                SMS sms = new SMS();
-                sms.setNumber(c.getNumber());
-                sms.setText(cutText);
-                sms.setOperator(c.getOperator());
+                SMS sms = new SMS(c.getNumber(), cutText, c.getOperator());
                 sms.setName(c.getName());
                 if (config.isUseSenderID()) { //append signature if requested
                     sms.setSenderNumber(config.getSenderNumber());

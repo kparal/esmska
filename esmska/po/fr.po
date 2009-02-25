@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 20:35+0200\n"
+"POT-Creation-Date: 2009-02-25 19:27+0200\n"
 "PO-Revision-Date: 2008-12-22 00:23+0000\n"
 "Last-Translator: Arnaud Bonatti <arnaud.bonatti@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -1257,6 +1257,10 @@ msgstr ""
 
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
+msgstr ""
+
+#: Operator.unknown
+msgid "Unknown gateway"
 msgstr ""
 
 #: OperatorComboBox.Choose_suitable_gateway

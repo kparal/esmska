@@ -6,9 +6,12 @@
 
 package esmska.data;
 
-import esmska.utils.Nullator;
+import esmska.operators.Operator;
 import java.beans.*;
 import java.text.Collator;
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /** SMS Contact entity
  * @author ripper
@@ -32,17 +35,12 @@ public class Contact extends Object implements Comparable<Contact> {
     }
     // </editor-fold>
 
-    /** Create an empty contact */
-    public Contact() {
-        this(null,null,null);
-    }
-
     /** Create new contact with properties copied from provided contact */
     public Contact(Contact c) {
         this(c.getName(), c.getNumber(), c.getOperator());
     }
 
-    /** Create new contact with all properties (may be null) */
+    /** Create new contact. */
     public Contact(String name, String number, String operator) {
         setName(name);
         setNumber(number);
@@ -57,47 +55,69 @@ public class Contact extends Object implements Comparable<Contact> {
     }
     
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
+    /** Get contact name. Never null. */
     public String getName() {
         return this.name;
     }
 
-    /** Get full phone number including the country code (starting with "+") */
+    /** Get full phone number including the country code (starting with "+")
+     or empty string. Never null. */
     public String getNumber() {
         return this.number;
     }
-    
+
+    /** Get operator. Never null. */
     public String getOperator() {
         return this.operator;
     }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
+    /** Set contact name.
+     * @param name contact name. Null value is changed to empty string.
+     */
     public void setName(String name) {
+        if (name == null) {
+            name = "";
+        }
+
         String oldName = this.name;
         this.name = name;
-        if (!Nullator.isEqual(oldName, name)) {
+        if (!name.equals(oldName)) {
             changeSupport.firePropertyChange("name", oldName, name);
         }
     }
 
-    /** Set full phone number including the country code (starting with "+")
-     * @param number new contact number. Must start with "+". May be null.
+    /** Set full phone number.
+     * @param number new contact number including the country code (starting with "+").
+     * Alternatively it can be an empty string. Null value is changed to empty string.
      */
     public void setNumber(String number) {
-        if (number != null && !number.startsWith("+")) {
+        if (number == null) {
+            number = "";
+        }
+        if (number.length() > 0 && !number.startsWith("+")) {
             throw new IllegalArgumentException("Number does not start with '+': " + number);
         }
+
         String oldNumber = this.number;
         this.number = number;
-        if (!Nullator.isEqual(oldNumber, number)) {
+        if (!number.equals(oldNumber)) {
             changeSupport.firePropertyChange("number", oldNumber, number);
         }
     }
-    
+
+    /** Set contact operator
+     * @param operator new operator. Null value is changed to "unknown" operator.
+     */
     public void setOperator(String operator) {
+        if (operator == null) {
+            operator = Operator.UNKNOWN;
+        }
+
         String oldOperator = this.operator;
         this.operator = operator;
-        if (!Nullator.isEqual(oldOperator, operator)) {
+        if (!operator.equals(oldOperator)) {
             changeSupport.firePropertyChange("operator", oldOperator, operator);
         }
     }
@@ -105,29 +125,11 @@ public class Contact extends Object implements Comparable<Contact> {
     
     @Override
     public int compareTo(Contact c) {
-        int result = 0;
         Collator collator = Collator.getInstance();
-        
-        //name
-        result = collator.compare(this.getName(), c.getName());
-        if (result != 0) {
-            return result;
-        }
-        //number
-        result = collator.compare(this.getNumber(), c.getNumber());
-        if (result != 0) {
-            return result;
-        }
-        //operator
-        if (this.getOperator() == null) {
-            if (c.getOperator() != null) {
-                result = -1;
-            }
-        } else {
-            result = this.getOperator().compareTo(c.getOperator());
-        }
-        
-        return result;
+
+        return new CompareToBuilder().append(name, c.name, collator).
+                append(number, c.number, collator).
+                append(operator, c.operator, collator).toComparison();
     }
     
     @Override
@@ -144,17 +146,15 @@ public class Contact extends Object implements Comparable<Contact> {
             return false;
         }
         Contact c = (Contact) obj;
-        
-        return getName().equals(c.getName()) && getNumber().equals(c.getNumber()) 
-                && getOperator().equals(c.getOperator());
+
+        return new EqualsBuilder().append(name, c.name).append(number, c.number).
+                append(operator, c.operator).isEquals();
     }
     
     @Override
     public int hashCode() {
-        return (getName() == null ? 13 : getName().hashCode()) *
-                (getNumber() == null ? 23 : getNumber().hashCode()) *
-                (getOperator() == null ? 31 : getOperator().hashCode());
+        return new HashCodeBuilder(337, 139).append(name).append(number).
+                append(operator).toHashCode();
     }
-    
     
 }

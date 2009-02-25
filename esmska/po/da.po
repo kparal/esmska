@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 20:35+0200\n"
+"POT-Creation-Date: 2009-02-25 19:27+0200\n"
 "PO-Revision-Date: 2008-11-01 14:48+0000\n"
 "Last-Translator: nanker <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -1242,6 +1242,11 @@ msgstr "Ny kontakt"
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
 msgstr ""
+
+#: Operator.unknown
+#, fuzzy
+msgid "Unknown gateway"
+msgstr "Ukendt operator"
 
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Guess a suitable gateway"

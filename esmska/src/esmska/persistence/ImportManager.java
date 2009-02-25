@@ -76,13 +76,8 @@ public class ImportManager {
                 String senderName = reader.get(4);
                 String senderNumber = reader.get(5);
 
-                SMS sms = new SMS();
-                sms.setName(name);
-                sms.setNumber(number);
-                sms.setText(text);
-                sms.setSenderName(senderName);
-                sms.setSenderNumber(senderNumber);
-                sms.setOperator(operator);
+                SMS sms = new SMS(number, text, operator, name, senderNumber,
+                        senderName);
                 queue.add(sms);
             }
         } finally {
@@ -119,15 +114,8 @@ public class ImportManager {
                         DateFormat.LONG, Locale.ROOT);
                 Date date = df.parse(dateString);
 
-                History.Record record = new History.Record();
-                record.setDate(date);
-                record.setName(name);
-                record.setNumber(number);
-                record.setOperator(operator);
-                record.setText(text);
-                record.setSenderName(senderName);
-                record.setSenderNumber(senderNumber);
-
+                History.Record record = new History.Record(number, text, operator,
+                        name, senderName, senderNumber, date);
                 history.add(record);
             }
         } finally {

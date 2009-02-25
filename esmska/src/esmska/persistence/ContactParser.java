@@ -29,6 +29,8 @@ import net.wimpi.pim.contact.model.Communications;
 import net.wimpi.pim.contact.model.PersonalIdentity;
 import net.wimpi.pim.contact.model.PhoneNumber;
 import net.wimpi.pim.factory.ContactIOFactory;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 
 /** Parse contacts from csv file of different programs. Works in background thread.
  * Returns collection of parsed contacts.
@@ -101,7 +103,6 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
 
             //read all the records
             while (reader.readRecord()) {
-                Contact c = new Contact();
                 String name = "";
                 String number = "";
                 String operator = "";
@@ -123,11 +124,10 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                 if (!FormChecker.checkContactName(name)) {
                     continue;
                 }
-                c.setName(name);
                 if (!FormChecker.checkSMSNumber(number)) {
                     continue;
                 }
-                c.setNumber(number);
+
                 //convert known operators to our operators
                 switch (type) {
                     case KUBIK_DREAMCOM_FILE:
@@ -156,9 +156,8 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                         }
                         break;
                 }
-                c.setOperator(operator);
 
-                contacts.add(c);
+                contacts.add(new Contact(name, number, operator));
             }
         } finally {
             if (reader != null) {
@@ -240,14 +239,11 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     }
                 }
 
-                //create contact
-                Contact contact = new Contact();
-                contact.setName(name);
-                contact.setNumber(number);
-                Operator operator = OperatorUtil.suggestOperator(number, null);
-                contact.setOperator(operator != null ? operator.getName() : null); //guess operator
+                Operator operator = OperatorUtil.suggestOperator(number, null); //guess operator
+                String operatorName = operator != null ? operator.getName() : null;
 
-                contacts.add(contact);
+                //create contact
+                contacts.add(new Contact(name, number, operatorName));
             }
         } finally {
             if (input != null) {

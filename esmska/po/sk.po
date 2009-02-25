@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 20:35+0200\n"
+"POT-Creation-Date: 2009-02-25 19:27+0200\n"
 "PO-Revision-Date: 2009-01-12 07:58+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -1431,6 +1431,11 @@ msgstr "Nový kontakt"
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
 msgstr "Pozastaviť/spustiť odosielanie"
+
+#: Operator.unknown
+#, fuzzy
+msgid "Unknown gateway"
+msgstr "Neznámy operátor"
 
 #: OperatorComboBox.Choose_suitable_gateway
 #, fuzzy

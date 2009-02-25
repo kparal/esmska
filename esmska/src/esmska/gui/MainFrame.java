@@ -635,15 +635,9 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
     
     /** Saves history of sent sms */
     private void createHistory(SMS sms) {
-        History.Record record = new History.Record();
-        record.setDate(new Date());
-        record.setName(sms.getName());
-        record.setNumber(sms.getNumber());
-        record.setOperator(sms.getOperator());
-        record.setSenderName(sms.getSenderName());
-        record.setSenderNumber(sms.getSenderNumber());
-        record.setText(sms.getText());
-        
+        History.Record record = new History.Record(sms.getNumber(), sms.getText(),
+                sms.getOperator(), sms.getName(), sms.getSenderName(),
+                sms.getSenderNumber(), null);
         history.addRecord(record);
     }
     

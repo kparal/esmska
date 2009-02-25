@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 20:35+0200\n"
-"PO-Revision-Date: 2009-02-13 17:38+0100\n"
+"POT-Creation-Date: 2009-02-25 19:27+0200\n"
+"PO-Revision-Date: 2009-02-25 19:27+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1427,6 +1427,10 @@ msgstr "Nový kontakt"
 msgid "Pause/unpause sending"
 msgstr "Pozastavit/spustit odesílání"
 
+#: Operator.unknown
+msgid "Unknown gateway"
+msgstr "Neznámá brána"
+
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Guess a suitable gateway"
 msgstr "Odhadnout vhodnou bránu"
@@ -2008,9 +2012,6 @@ msgstr "Znovu spustit frontu sms"
 
 #~ msgid "Ope&rator:"
 #~ msgstr "Ope&rátor:"
-
-#~ msgid "(unknown state)"
-#~ msgstr "(neznámý stát)"
 
 #~ msgid "List of available operators web gateways"
 #~ msgstr "Seznam dostupných webových bran operátorů"
