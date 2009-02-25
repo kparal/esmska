@@ -33,7 +33,7 @@ public class History {
     public static final int ACTION_CLEAR_RECORDS = 2;
 
     private static final Logger logger = Logger.getLogger(History.class.getName());
-    private List<Record> records = Collections.synchronizedList(new ArrayList<Record>());
+    private final List<Record> records = Collections.synchronizedList(new ArrayList<Record>());
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -56,24 +56,24 @@ public class History {
     }
 
     /** get all records in unmodifiable list */
-    public synchronized List<Record> getRecords() {
+    public List<Record> getRecords() {
         return Collections.unmodifiableList(records);
     }
     
     /** get record at index */
-    public synchronized Record getRecord(int index) {
+    public Record getRecord(int index) {
         return records.get(index);
     }
 
     /** add new record */
-    public synchronized void addRecord(Record record) {
+    public void addRecord(Record record) {
         records.add(record);
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
         logger.finer("New history record added: " + record.toDebugString());
     }
     
     /** add new records */
-    public synchronized void addRecords(Collection<Record> records) {
+    public void addRecords(Collection<Record> records) {
         for (Record record : records) {
             this.records.add(record);
         }
@@ -82,14 +82,14 @@ public class History {
     }
     
     /** remove existing record */
-    public synchronized void removeRecord(Record record) {
+    public void removeRecord(Record record) {
         records.remove(record);
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
         logger.finer("A history record removed: " + record.toDebugString());
     }
     
     /** remove existing records */
-    public synchronized void removeRecords(Collection<Record> records) {
+    public void removeRecords(Collection<Record> records) {
         for (Record record : records) {
             this.records.remove(record);
         }
@@ -98,7 +98,7 @@ public class History {
     }
     
     /** delete all records */
-    public synchronized void clearRecords() {
+    public void clearRecords() {
         records.clear();
         actionSupport.fireActionPerformed(ACTION_CLEAR_RECORDS, null);
         logger.finer("All history records removed");

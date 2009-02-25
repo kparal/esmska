@@ -29,7 +29,7 @@ public class Log {
     /** shared instance */
     private static final Log instance = new Log();
     private static final Logger logger = Logger.getLogger(Log.class.getName());
-    private List<Record> records = Collections.synchronizedList(new ArrayList<Record>());
+    private final List<Record> records = Collections.synchronizedList(new ArrayList<Record>());
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -52,26 +52,26 @@ public class Log {
     }
 
     /** get all records in unmodifiable list */
-    public synchronized List<Record> getRecords() {
+    public List<Record> getRecords() {
         return Collections.unmodifiableList(records);
     }
 
     /** add new record */
-    public synchronized void addRecord(Record record) {
+    public void addRecord(Record record) {
         records.add(record);
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
         logger.finer("A new log record added: " + record);
     }
     
     /** remove existing record */
-    public synchronized void removeRecord(Record record) {
+    public void removeRecord(Record record) {
         records.remove(record);
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
         logger.finer("A log record removed: " + record);
     }
     
     /** delete all records */
-    public synchronized void clearRecords() {
+    public void clearRecords() {
         records.clear();
         actionSupport.fireActionPerformed(ACTION_CLEAR_RECORDS, null);
         logger.finer("All log records removed");
@@ -80,14 +80,14 @@ public class Log {
     /** Return number of records
      * @return See {@link Collection#size}
      */
-    public synchronized int size() {
+    public int size() {
         return records.size();
     }
 
     /** Return if there are no records
      * @return See {@link Collection#isEmpty}
      */
-    public synchronized boolean isEmpty() {
+    public boolean isEmpty() {
         return records.isEmpty();
     }
 
