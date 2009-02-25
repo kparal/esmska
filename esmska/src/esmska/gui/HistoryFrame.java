@@ -54,7 +54,8 @@ import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.History;
 import esmska.data.event.AbstractDocumentListener;
-import esmska.data.event.ActionEventSupport;
+import esmska.data.event.ValuedEventSupport;
+import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
 import esmska.utils.DialogUtils;
 import esmska.utils.OSType;
@@ -71,7 +72,10 @@ import org.openide.awt.Mnemonics;
  * @author  ripper
  */
 public class HistoryFrame extends javax.swing.JFrame {
-    public static final int ACTION_RESEND_SMS = 0;
+    public static enum Events {
+        /** A message is requested to be resent. Event value: History record to resend. */
+        RESEND_SMS;
+    }
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Logger logger = Logger.getLogger(HistoryFrame.class.getName());
@@ -85,17 +89,16 @@ public class HistoryFrame extends javax.swing.JFrame {
     private Action resendAction = new ResendAction();
     private History.Record selectedHistory;
 
-    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
-    private ActionEventSupport actionSupport = new ActionEventSupport(this);
-    public void addActionListener(ActionListener actionListener) {
-        actionSupport.addActionListener(actionListener);
+    // <editor-fold defaultstate="collapsed" desc="ValuedEvent support">
+    private ValuedEventSupport<Events, History.Record> valuedSupport = new ValuedEventSupport<Events, History.Record>(this);
+    public void addValuedListener(ValuedListener<Events, History.Record> valuedListener) {
+        valuedSupport.addValuedListener(valuedListener);
     }
-    
-    public void removeActionListener(ActionListener actionListener) {
-        actionSupport.removeActionListener(actionListener);
+    public void removeValuedListener(ValuedListener<Events, History.Record> valuedListener) {
+        valuedSupport.removeValuedListener(valuedListener);
     }
     // </editor-fold>
-    
+
     /** Creates new form HistoryFrame */
     public HistoryFrame() {
         initComponents();
@@ -123,11 +126,6 @@ public class HistoryFrame extends javax.swing.JFrame {
         }
         history.addActionListener(new HistoryActionListener());
         historyTable.requestFocusInWindow();
-    }
-
-    /** Return currently selected sms history */
-    public History.Record getSelectedHistory() {
-        return selectedHistory;
     }
 
     /** This method is called from within the constructor to
@@ -488,7 +486,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             }
             logger.fine("Forwarding message from history: " + selectedHistory.toDebugString());
             //fire event and close
-            actionSupport.fireActionPerformed(ACTION_RESEND_SMS, null);
+            valuedSupport.fireEventOccured(Events.RESEND_SMS, selectedHistory);
             closeButton.doClick(0);
         }
     }

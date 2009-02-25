@@ -8,6 +8,7 @@ package esmska.gui;
 import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.History;
+import esmska.data.History.Record;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.Queue;
@@ -20,7 +21,6 @@ import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -216,7 +216,7 @@ public class Actions {
             } else {
                 historyFrame = new HistoryFrame();
                 historyFrame.setLocationRelativeTo(mainFrame);
-                historyFrame.addActionListener(new HistoryListener());
+                historyFrame.addValuedListener(new HistoryListener());
                 historyFrame.setVisible(true);
             }
         }
@@ -226,20 +226,22 @@ public class Actions {
     }
 
     /** Listens for events from history table */
-    private static class HistoryListener implements ActionListener {
+    private static class HistoryListener implements ValuedListener<HistoryFrame.Events, History.Record> {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            //resend sms
-            History.Record record = historyAction.getHistoryFrame().getSelectedHistory();
-            if (record == null) {
-                return;
+        public void eventOccured(ValuedEvent<HistoryFrame.Events, Record> e) {
+            switch (e.getEvent()) {
+                case RESEND_SMS:
+                    History.Record record = e.getValue();
+                    if (record == null) {
+                        return;
+                    }
+
+                    SMS sms = new SMS(record.getNumber(), record.getText(), record.getOperator());
+                    sms.setName(record.getName());
+
+                    mainFrame.getContactPanel().clearSelection();
+                    mainFrame.getSMSPanel().setSMS(sms);
             }
-
-            SMS sms = new SMS(record.getNumber(), record.getText(), record.getOperator());
-            sms.setName(record.getName());
-
-            mainFrame.getContactPanel().clearSelection();
-            mainFrame.getSMSPanel().setSMS(sms);
         }
     }
 
