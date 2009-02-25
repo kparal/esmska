@@ -38,6 +38,7 @@ public class StatusPanel extends javax.swing.JPanel {
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
     private Log log = Log.getInstance();
     private Timer statusTimer = new Timer(5000, new HideStatusListener());
+    private Runnable currentHandler;
     
     /** Creates new form StatusPanel */
     public StatusPanel() {
@@ -63,6 +64,19 @@ public class StatusPanel extends javax.swing.JPanel {
             statusMessageLabel.setText("<html>" + messageEsc + "</html>");
         }
         statusMessageLabel.setIcon(icon);
+        //reset handler
+        currentHandler = null;
+        statusMessageLabel.setToolTipText(l10n.getString("StatusPanel.statusMessageLabel.toolTipText"));
+    }
+
+    /** Add handler to mouse click on the log message. The handler will be removed
+     * after another log message is shown.
+     * @param handler handler to execute
+     * @param tooltip tooltip for mouse-over, may be null
+     */
+    public void installClickHandler(Runnable handler, String tooltip) {
+        currentHandler = handler;
+        statusMessageLabel.setToolTipText(tooltip);
     }
     
     /** Hide current status message after specified time. If new status message
@@ -158,7 +172,11 @@ public class StatusPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statusMessageLabelMouseClicked(MouseEvent evt) {//GEN-FIRST:event_statusMessageLabelMouseClicked
-       Actions.getLogAction().actionPerformed(null);
+        if (currentHandler != null) {
+            currentHandler.run();
+        } else {
+            Actions.getLogAction().actionPerformed(null);
+        }
     }//GEN-LAST:event_statusMessageLabelMouseClicked
 
     /** Listen for log changes */
@@ -180,7 +198,7 @@ public class StatusPanel extends javax.swing.JPanel {
             statusMessageLabel.setText(null);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JProgressBar progressBar;
     private JLabel statusAnimationLabel;

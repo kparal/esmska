@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 22:28+0200\n"
+"POT-Creation-Date: 2009-02-26 00:52+0200\n"
 "PO-Revision-Date: 2009-01-12 07:58+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -1980,6 +1980,10 @@ msgstr "Spustiť frontu"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "Znovu spustiť SMS frontu"
+
+#: Update.browseDownloads
+msgid "Click to open program downloads page"
+msgstr ""
 
 #~ msgid ""
 #~ "<html><i>\n"

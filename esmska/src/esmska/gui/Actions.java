@@ -19,11 +19,13 @@ import esmska.utils.ConfirmingFileChooser;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
+import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.ResourceBundle;
@@ -132,6 +134,34 @@ public class Actions {
      */
     public static Action getSuggestOperatorAction(OperatorComboBox operatorComboBox, JTextComponent numberComponent) {
         return new SuggestOperatorAction(operatorComboBox, numberComponent);
+    }
+
+    /** Browse specific URL with a web browser */
+    public static Action getBrowseAction(String url) {
+        return new BrowseAction(url);
+    }
+
+    /** Browse specific URL with a web browser */
+    private static class BrowseAction extends AbstractAction {
+        private final String url;
+        public BrowseAction(String URL) {
+            super();
+            this.url = URL;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!Desktop.isDesktopSupported()) {
+                return;
+            }
+            //start browser
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                logger.fine("Browsing URL: " + url);
+                desktop.browse(new URL(url).toURI());
+            } catch (Exception ex) {
+                logger.log(Level.WARNING, "Could not browse URL: " + url, ex);
+            }
+        }
     }
 
     /** Show about frame */

@@ -71,11 +71,9 @@ import esmska.utils.L10N;
 import esmska.utils.OSType;
 import esmska.data.event.ValuedListener;
 import esmska.utils.DialogUtils;
-import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -460,45 +458,28 @@ public class MainFrame extends javax.swing.JFrame {
         menuBar.add(toolsMenu);
 
         Mnemonics.setLocalizedText(helpMenu, l10n.getString("MainFrame.helpMenu.text")); // NOI18N
-        faqMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+        faqMenuItem.setAction(Actions.getBrowseAction("http://code.google.com/p/esmska/wiki/FAQ"));
         faqMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/faq-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text"));
         faqMenuItem.setToolTipText(l10n.getString("MainFrame.faqMenuItem.toolTipText")); // NOI18N
-        faqMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                faqMenuItemActionPerformed(evt);
-            }
-        });
         helpMenu.add(faqMenuItem);
 
+        getHelpMenuItem.setAction(Actions.getBrowseAction("https://answers.launchpad.net/esmska"));
         getHelpMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/getHelp-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(getHelpMenuItem, l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
         getHelpMenuItem.setToolTipText(l10n.getString("MainFrame.getHelpMenuItem.toolTipText")); // NOI18N
-        getHelpMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                getHelpMenuItemActionPerformed(evt);
-            }
-        });
         helpMenu.add(getHelpMenuItem);
 
+        translateMenuItem.setAction(Actions.getBrowseAction("https://translations.launchpad.net/esmska"));
         translateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/translate-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(translateMenuItem, l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
         translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
-        translateMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                translateMenuItemActionPerformed(evt);
-            }
-        });
         helpMenu.add(translateMenuItem);
 
+        problemMenuItem.setAction(Actions.getBrowseAction("http://code.google.com/p/esmska/wiki/Issues"));
         problemMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/bug-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(problemMenuItem, l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
         problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
-        problemMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                problemMenuItemActionPerformed(evt);
-            }
-        });
         helpMenu.add(problemMenuItem);
         helpMenu.add(helpSeparator);
 
@@ -551,66 +532,6 @@ public class MainFrame extends javax.swing.JFrame {
         //otherwise exit
         exit();
     }//GEN-LAST:event_formWindowClosing
-
-private void faqMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_faqMenuItemActionPerformed
-    if (!Desktop.isDesktopSupported()) {
-        return;
-    }
-    //start browser
-    Desktop desktop = Desktop.getDesktop();
-    String url = "http://code.google.com/p/esmska/wiki/FAQ";
-    try {
-        logger.fine("Browsing URL: " + url);
-        desktop.browse(new URL(url).toURI());
-    } catch (Exception e) {
-        logger.log(Level.WARNING, "Could not browse URL: " + url, e);
-    }
-}//GEN-LAST:event_faqMenuItemActionPerformed
-
-private void getHelpMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_getHelpMenuItemActionPerformed
-    if (!Desktop.isDesktopSupported()) {
-        return;
-    }
-    //start browser
-    Desktop desktop = Desktop.getDesktop();
-    String url = "https://answers.launchpad.net/esmska";
-    try {
-        logger.fine("Browsing URL: " + url);
-        desktop.browse(new URL(url).toURI());
-    } catch (Exception e) {
-        logger.log(Level.WARNING, "Could not browse URL: " + url, e);
-    }
-}//GEN-LAST:event_getHelpMenuItemActionPerformed
-
-private void translateMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_translateMenuItemActionPerformed
-    if (!Desktop.isDesktopSupported()) {
-        return;
-    }
-    //start browser
-    Desktop desktop = Desktop.getDesktop();
-    String url = "https://translations.launchpad.net/esmska";
-    try {
-        logger.fine("Browsing URL: " + url);
-        desktop.browse(new URL(url).toURI());
-    } catch (Exception e) {
-        logger.log(Level.WARNING, "Could not browse URL: " + url, e);
-    }
-}//GEN-LAST:event_translateMenuItemActionPerformed
-
-private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_problemMenuItemActionPerformed
-    if (!Desktop.isDesktopSupported()) {
-        return;
-    }
-    //start browser
-    Desktop desktop = Desktop.getDesktop();
-    String url = "http://code.google.com/p/esmska/wiki/Issues";
-    try {
-        logger.fine("Browsing URL: " + url);
-        desktop.browse(new URL(url).toURI());
-    } catch (Exception e) {
-        logger.log(Level.WARNING, "Could not browse URL: " + url, e);
-    }
-}//GEN-LAST:event_problemMenuItemActionPerformed
 
     /** Save all user data
      * @return true if all saved ok; false otherwise
@@ -901,6 +822,13 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
         @Override
         public void actionPerformed(ActionEvent e) {
             log.addRecord(new Log.Record(l10n.getString("MainFrame.new_program_version"), null, Icons.STATUS_UPDATE));
+            statusPanel.installClickHandler(new Runnable() {
+                @Override
+                public void run() {
+                    Action browseAction = Actions.getBrowseAction("http://code.google.com/p/esmska/wiki/Download?tm=2");
+                    browseAction.actionPerformed(null);
+                }
+            }, l10n.getString("Update.browseDownloads"));
         }
     }
 

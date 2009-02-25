@@ -52,11 +52,11 @@
                       <Component id="jLabel6" pref="129" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel8" pref="120" max="32767" attributes="0"/>
+                      <Component id="jLabel8" pref="163" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="supportButton" min="-2" max="-2" attributes="1"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" pref="121" max="32767" attributes="0"/>
+                      <Component id="jLabel7" pref="163" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" pref="21" max="32767" attributes="0"/>
+              <EmptySpace type="separate" pref="36" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="creditsButton" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="closeButton" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -185,6 +185,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="linkButton">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Actions.getBrowseAction(&quot;http://esmska.googlecode.com/&quot;)" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.linkButton.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
@@ -192,9 +195,6 @@
           <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.linkButton.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkButtonActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
       </AuxValues>
@@ -205,6 +205,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="supportButton">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Actions.getBrowseAction(l10n.getString(&quot;AboutFrame.supportButton.link&quot;))" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="&quot;&lt;html&gt;&lt;a href=\&quot;&quot; + &#xa;        l10n.getString(&quot;AboutFrame.supportButton.link&quot;) +&#xa;        &quot;\&quot;&gt;&quot; + &#xa;        l10n.getString(&quot;AboutFrame.supportButton.text&quot;) + &#xa;        &quot;&lt;/a&gt;&lt;/html&gt;&quot;" type="code"/>
         </Property>
@@ -212,9 +215,6 @@
           <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportButton.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="supportButtonActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="supportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;supportButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
       </AuxValues>

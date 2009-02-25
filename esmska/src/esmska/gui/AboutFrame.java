@@ -142,16 +142,13 @@ public class AboutFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(jLabel5, bundle.getString("AboutFrame.jLabel5.text")); // NOI18N
         jLabel5.setFocusable(false);
 
+        linkButton.setAction(Actions.getBrowseAction("http://esmska.googlecode.com/"));
         Mnemonics.setLocalizedText(linkButton, bundle.getString("AboutFrame.linkButton.text")); // NOI18N
         linkButton.setToolTipText(bundle.getString("AboutFrame.linkButton.toolTipText")); // NOI18N
         linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        linkButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                linkButtonActionPerformed(evt);
-            }
-        });
 
+        supportButton.setAction(Actions.getBrowseAction(l10n.getString("AboutFrame.supportButton.link")));
         Mnemonics.setLocalizedText(supportButton, "<html><a href=\"" +
             l10n.getString("AboutFrame.supportButton.link") +
             "\">" +
@@ -160,11 +157,6 @@ public class AboutFrame extends javax.swing.JFrame {
         supportButton.setToolTipText(bundle.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         supportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         supportButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        supportButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                supportButtonActionPerformed(evt);
-            }
-        });
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,11 +182,11 @@ public class AboutFrame extends javax.swing.JFrame {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addComponent(jLabel8, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(supportButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
+                        .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -221,7 +213,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     .addComponent(supportButton)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(18, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(creditsButton)
                     .addComponent(closeButton)
@@ -235,22 +227,7 @@ public class AboutFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void linkButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_linkButtonActionPerformed
-        if (!Desktop.isDesktopSupported()) {
-            return;
-        }
-        //start browser
-        Desktop desktop = Desktop.getDesktop();
-        String url = "http://esmska.googlecode.com/";
-        try {
-            logger.fine("Browsing URL: " + url);
-            desktop.browse(new URL(url).toURI());
-        } catch (Exception e) {
-            logger.log(Level.WARNING, "Could not browse URL: " + url, e);
-        }
-    }//GEN-LAST:event_linkButtonActionPerformed
-        
+            
     private void licenseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         //show licence
         try {
@@ -357,21 +334,6 @@ public class AboutFrame extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
-
-    private void supportButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_supportButtonActionPerformed
-        if (!Desktop.isDesktopSupported()) {
-            return;
-        }
-        //start browser
-        Desktop desktop = Desktop.getDesktop();
-        String url = l10n.getString("AboutFrame.supportButton.link");
-        try {
-            logger.fine("Browsing URL: " + url);
-            desktop.browse(new URL(url).toURI());
-        } catch (Exception e) {
-            logger.log(Level.WARNING, "Could not browse URL: " + url, e);
-        }
-}//GEN-LAST:event_supportButtonActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

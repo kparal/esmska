@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 22:28+0200\n"
+"POT-Creation-Date: 2009-02-26 00:52+0200\n"
 "PO-Revision-Date: 2008-11-05 13:49+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1930,6 +1930,10 @@ msgstr "המשך בתור"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "המשך את תור ה־SMS"
+
+#: Update.browseDownloads
+msgid "Click to open program downloads page"
+msgstr ""
 
 #~ msgid ""
 #~ "<html><i>\n"

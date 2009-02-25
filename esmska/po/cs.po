@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 22:31+0200\n"
-"PO-Revision-Date: 2009-02-25 22:31+0100\n"
+"POT-Creation-Date: 2009-02-26 00:52+0200\n"
+"PO-Revision-Date: 2009-02-26 00:52+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1968,6 +1968,10 @@ msgstr "Spustit frontu"
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
 msgstr "Znovu spustit frontu sms"
+
+#: Update.browseDownloads
+msgid "Click to open program downloads page"
+msgstr "Klikněte pro otevření stránky s možností stažení programu"
 
 #~ msgid ""
 #~ "<html><i>\n"
