@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 19:27+0200\n"
+"POT-Creation-Date: 2009-02-25 22:28+0200\n"
 "PO-Revision-Date: 2008-10-15 21:04+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -868,10 +868,6 @@ msgstr "&Cerca:"
 msgid "Sent messages history - Esmska"
 msgstr ""
 
-#: Import
-msgid "Import"
-msgstr "Importa"
-
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
@@ -897,6 +893,10 @@ msgstr ""
 #: ImportFrame.choose_export_file
 msgid "Choose the file with exported contacts"
 msgstr ""
+
+#: ImportFrame.doImportLabel.text
+msgid "If you want to import these contacts press Import."
+msgstr "Se vuoi importare questi contatti premi Importa."
 
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
@@ -925,6 +925,15 @@ msgstr ""
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
 msgstr ""
+
+#: ImportFrame.foundContactsLabel.text
+msgid "Following new contacts were found:"
+msgstr "Sono stati trovati i seguenti nuovi contatti:"
+
+#: ImportFrame.foundNoContacts
+#, fuzzy
+msgid "No new contacts were found."
+msgstr "Sono stati trovati i seguenti nuovi contatti:"
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -960,10 +969,6 @@ msgid ""
 "contains invalid data.</html>"
 msgstr ""
 
-#: ImportFrame.jLabel1.text
-msgid "Following new contacts were found:"
-msgstr "Sono stati trovati i seguenti nuovi contatti:"
-
 #: ImportFrame.jLabel2.text
 msgid ""
 "<html>\n"
@@ -988,10 +993,6 @@ msgstr "Scegli da quale applicazione vuoi importare i contatti:"
 msgid ""
 "Or choose the type of the standardized file format you have the contacts in:"
 msgstr ""
-
-#: ImportFrame.jLabel8.text
-msgid "If you want to import these contacts press Import."
-msgstr "Se vuoi importare questi contatti premi Importa."
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1027,6 +1028,11 @@ msgid ""
 "they have operator this program can work with\n"
 "</html>"
 msgstr ""
+
+#: Import_
+#, fuzzy
+msgid "Im&port"
+msgstr "Importa"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"

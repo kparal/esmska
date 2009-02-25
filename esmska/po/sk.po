@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 19:27+0200\n"
+"POT-Creation-Date: 2009-02-25 22:28+0200\n"
 "PO-Revision-Date: 2009-01-12 07:58+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -993,10 +993,6 @@ msgstr "&Hľadať"
 msgid "Sent messages history - Esmska"
 msgstr "História odoslaných sprváv - Esmska"
 
-#: Import
-msgid "Import"
-msgstr "Importovať"
-
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
@@ -1022,6 +1018,10 @@ msgstr "Nájsť súbor s kontaktami pomocou dialogu"
 #: ImportFrame.choose_export_file
 msgid "Choose the file with exported contacts"
 msgstr "Vyberte súbor s vyexportovanými kontaktami"
+
+#: ImportFrame.doImportLabel.text
+msgid "If you want to import these contacts press Import."
+msgstr "Ak si želáte tieto kontakty naimportovať, stlačte Importovať."
 
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
@@ -1052,6 +1052,15 @@ msgstr "Súbor {0} nieje možné prečítať!"
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
 msgstr "&Pokračovať"
+
+#: ImportFrame.foundContactsLabel.text
+msgid "Following new contacts were found:"
+msgstr "Boli nájdené nasledujúce nové kontakty:"
+
+#: ImportFrame.foundNoContacts
+#, fuzzy
+msgid "No new contacts were found."
+msgstr "Boli nájdené nasledujúce nové kontakty:"
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1102,10 +1111,6 @@ msgstr ""
 "<html><h2>Pri spracovávaní súboru sa vyskytla chyba!</h2>Súbor pravdepodobne "
 "obsahuje nesprávne/nesprávne fomátované údaje.</html>\""
 
-#: ImportFrame.jLabel1.text
-msgid "Following new contacts were found:"
-msgstr "Boli nájdené nasledujúce nové kontakty:"
-
 #: ImportFrame.jLabel2.text
 msgid ""
 "<html>\n"
@@ -1140,10 +1145,6 @@ msgid ""
 "Or choose the type of the standardized file format you have the contacts in:"
 msgstr ""
 "Alebo zvoľte, v ktorom zo štandardizovaných formátov súborov máte kontakty:"
-
-#: ImportFrame.jLabel8.text
-msgid "If you want to import these contacts press Import."
-msgstr "Ak si želáte tieto kontakty naimportovať, stlačte Importovať."
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1187,6 +1188,11 @@ msgstr ""
 "Ak zvolíte túto možnosť, v zozname sa zobrazia a budú importované<br>\n"
 "len tie kontakty, s ktorých operátormi vie tento program pracovať.\n"
 "</html>"
+
+#: Import_
+#, fuzzy
+msgid "Im&port"
+msgstr "Importovať"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"

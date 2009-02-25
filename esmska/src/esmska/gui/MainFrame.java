@@ -357,7 +357,7 @@ public class MainFrame extends javax.swing.JFrame {
         smsPanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         verticalSplitPane.setLeftComponent(smsPanel);
 
-        queuePanel.addActionListener(new QueuePanelListener());
+        queuePanel.addValuedListener(new QueuePanelListener());
         queuePanel.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.FALSE);
         verticalSplitPane.setRightComponent(queuePanel);
 
@@ -527,7 +527,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -866,13 +866,13 @@ private void problemMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_
     }
 
     /** Listens for events from queue panel */
-    private class QueuePanelListener implements ActionListener {
+    private class QueuePanelListener implements ValuedListener<QueuePanel.Events, SMS> {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            switch (e.getID()) {
+        public void eventOccured(ValuedEvent<QueuePanel.Events, SMS> e) {
+            switch (e.getEvent()) {
                 //edit sms in queue
-                case QueuePanel.ACTION_REQUEST_EDIT_SMS:
-                    SMS sms = queuePanel.getEditRequestedSMS();
+                case SMS_EDIT_REQUESTED:
+                    SMS sms = e.getValue();
                     if (sms == null) {
                         return;
                     }

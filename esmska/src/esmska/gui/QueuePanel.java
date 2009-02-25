@@ -7,7 +7,6 @@
 package esmska.gui;
 
 import esmska.ThemeManager;
-import esmska.data.Queue.Events;
 import esmska.data.event.ValuedEvent;
 import java.awt.Color;
 import java.awt.Component;
@@ -43,7 +42,7 @@ import esmska.data.SMS;
 import esmska.operators.Operator;
 import esmska.operators.OperatorUtil;
 import esmska.data.event.AbstractListDataListener;
-import esmska.data.event.ActionEventSupport;
+import esmska.data.event.ValuedEventSupport;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
 import esmska.utils.Workarounds;
@@ -74,8 +73,10 @@ import org.jvnet.substance.skin.SkinChangeListener;
  * @author  ripper
  */
 public class QueuePanel extends javax.swing.JPanel {
-    /** A message was requested to be edited */
-    public static final int ACTION_REQUEST_EDIT_SMS = 0;
+    public static enum Events {
+        /** A message wants to be edit. Event value: sms to be edited. */
+        SMS_EDIT_REQUESTED;
+    }
 
     private static final Logger logger = Logger.getLogger(QueuePanel.class.getName());
     private static final String RES = "/esmska/resources/";
@@ -89,22 +90,21 @@ public class QueuePanel extends javax.swing.JPanel {
     
     private QueueListModel queueListModel = new QueueListModel();
     //sms which have been requested to be edited
-    private SMS editRequestedSMS;
     private QueuePopupMenu popup = new QueuePopupMenu();
     private QueueMouseListener mouseListener;
     //regularly update sms delay indicators
     private Timer timer = new Timer(500, new DelayListener());
     
-    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
-    private ActionEventSupport actionSupport = new ActionEventSupport(this);
-    public void addActionListener(ActionListener actionListener) {
-        actionSupport.addActionListener(actionListener);
+    // <editor-fold defaultstate="collapsed" desc="ValuedEvent support">
+    private ValuedEventSupport<Events, SMS> valuedSupport = new ValuedEventSupport<Events, SMS>(this);
+    public void addValuedListener(ValuedListener<Events, SMS> valuedListener) {
+        valuedSupport.addValuedListener(valuedListener);
     }
-    public void removeActionListener(ActionListener actionListener) {
-        actionSupport.removeActionListener(actionListener);
+    public void removeValuedListener(ValuedListener<Events, SMS> valuedListener) {
+        valuedSupport.removeValuedListener(valuedListener);
     }
     // </editor-fold>
-    
+
     /** Creates new form QueuePanel */
     public QueuePanel() {
         initComponents();
@@ -120,11 +120,6 @@ public class QueuePanel extends javax.swing.JPanel {
                 queueListValueChanged(null);
             }
         });
-    }
-    
-    /** Get SMS which was requested to be edited */
-    public SMS getEditRequestedSMS() {
-        return editRequestedSMS;
     }
     
     /** Convert integer message delay to more human readable string delay.
@@ -325,13 +320,11 @@ public class QueuePanel extends javax.swing.JPanel {
             if (sms == null) {
                 return;
             }
-            
-            editRequestedSMS = sms;
             queue.remove(sms);
             
             //fire event
             logger.fine("SMS requested for editing: " + sms.toDebugString());
-            actionSupport.fireActionPerformed(ACTION_REQUEST_EDIT_SMS, null);
+            valuedSupport.fireEventOccured(Events.SMS_EDIT_REQUESTED, sms);
         }
     }
     
@@ -387,9 +380,9 @@ public class QueuePanel extends javax.swing.JPanel {
 
         public QueueListModel() {
             //listen for changes in contacts and fire events accordingly
-            queue.addValuedListener(new ValuedListener<Events, SMS>() {
+            queue.addValuedListener(new ValuedListener<Queue.Events, SMS>() {
                 @Override
-                public void eventOccured(ValuedEvent<Events, SMS> e) {
+                public void eventOccured(ValuedEvent<Queue.Events, SMS> e) {
                     switch (e.getEvent()) {
                         case SMS_ADDED:
                         case SENDING_SMS:

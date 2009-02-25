@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 19:27+0200\n"
+"POT-Creation-Date: 2009-02-25 22:28+0200\n"
 "PO-Revision-Date: 2008-11-05 13:49+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -976,10 +976,6 @@ msgstr "&חיפוש:"
 msgid "Sent messages history - Esmska"
 msgstr "היסטוריית ההודעות שנשלחו - Esmska"
 
-#: Import
-msgid "Import"
-msgstr "ייבא"
-
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
@@ -1005,6 +1001,10 @@ msgstr "חפש אנשי קשר באמצעות הדו־שיח"
 #: ImportFrame.choose_export_file
 msgid "Choose the file with exported contacts"
 msgstr "בחר את הקובץ עם אנשי הקשר המיוצאים"
+
+#: ImportFrame.doImportLabel.text
+msgid "If you want to import these contacts press Import."
+msgstr "אם ברצונך לייבא אנשי קשר אלה לחץ על ייבוא."
 
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
@@ -1035,6 +1035,15 @@ msgstr "לא ניתן לקרוא את הקובץ {0}!"
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
 msgstr ""
+
+#: ImportFrame.foundContactsLabel.text
+msgid "Following new contacts were found:"
+msgstr "אנשי הקשר החדשים הבאים נמצאו:"
+
+#: ImportFrame.foundNoContacts
+#, fuzzy
+msgid "No new contacts were found."
+msgstr "אנשי הקשר החדשים הבאים נמצאו:"
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1082,10 +1091,6 @@ msgstr ""
 "<html><h2>ארעה שגיאה בעת עיבוד הקובץ!</h2>ייתכן והקובץ מכיל נתונים לא תקינים."
 "</html>"
 
-#: ImportFrame.jLabel1.text
-msgid "Following new contacts were found:"
-msgstr "אנשי הקשר החדשים הבאים נמצאו:"
-
 #: ImportFrame.jLabel2.text
 msgid ""
 "<html>\n"
@@ -1118,10 +1123,6 @@ msgstr "בחר מאיזה יישום ברצונך לייבא אנשי קשר:"
 msgid ""
 "Or choose the type of the standardized file format you have the contacts in:"
 msgstr "או בחר את סוג הקובץ המתוקנן בו יש לך אנשי קשר:"
-
-#: ImportFrame.jLabel8.text
-msgid "If you want to import these contacts press Import."
-msgstr "אם ברצונך לייבא אנשי קשר אלה לחץ על ייבוא."
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1165,6 +1166,11 @@ msgstr ""
 "במידה וסומן אנשי הקשר יוצגו ברשימה וייובאו רק כאשר<br>\n"
 "המפעיל שלהם נתמך על ידי התוכנה\n"
 "</html>"
+
+#: Import_
+#, fuzzy
+msgid "Im&port"
+msgstr "ייבא"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"

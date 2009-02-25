@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 19:27+0200\n"
+"POT-Creation-Date: 2009-02-25 22:28+0200\n"
 "PO-Revision-Date: 2008-11-01 14:48+0000\n"
 "Last-Translator: nanker <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -863,10 +863,6 @@ msgstr "&Søg"
 msgid "Sent messages history - Esmska"
 msgstr ""
 
-#: Import
-msgid "Import"
-msgstr "Importér"
-
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
@@ -891,6 +887,10 @@ msgstr ""
 
 #: ImportFrame.choose_export_file
 msgid "Choose the file with exported contacts"
+msgstr ""
+
+#: ImportFrame.doImportLabel.text
+msgid "If you want to import these contacts press Import."
 msgstr ""
 
 #: ImportFrame.encodingUTF8
@@ -920,6 +920,15 @@ msgstr "Denne fil {0} kan ikke læses!"
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
 msgstr ""
+
+#: ImportFrame.foundContactsLabel.text
+msgid "Following new contacts were found:"
+msgstr "Følgende nye kontakter blev fundet:"
+
+#: ImportFrame.foundNoContacts
+#, fuzzy
+msgid "No new contacts were found."
+msgstr "Følgende nye kontakter blev fundet:"
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -955,10 +964,6 @@ msgid ""
 "contains invalid data.</html>"
 msgstr ""
 
-#: ImportFrame.jLabel1.text
-msgid "Following new contacts were found:"
-msgstr "Følgende nye kontakter blev fundet:"
-
 #: ImportFrame.jLabel2.text
 msgid ""
 "<html>\n"
@@ -982,10 +987,6 @@ msgstr ""
 #: ImportFrame.jLabel4.text
 msgid ""
 "Or choose the type of the standardized file format you have the contacts in:"
-msgstr ""
-
-#: ImportFrame.jLabel8.text
-msgid "If you want to import these contacts press Import."
 msgstr ""
 
 #: ImportFrame.problemLabel.text
@@ -1022,6 +1023,11 @@ msgid ""
 "they have operator this program can work with\n"
 "</html>"
 msgstr ""
+
+#: Import_
+#, fuzzy
+msgid "Im&port"
+msgstr "Importér"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"

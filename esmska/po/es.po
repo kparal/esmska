@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 19:27+0200\n"
+"POT-Creation-Date: 2009-02-25 22:28+0200\n"
 "PO-Revision-Date: 2009-01-17 02:05+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -864,10 +864,6 @@ msgstr ""
 msgid "Sent messages history - Esmska"
 msgstr ""
 
-#: Import
-msgid "Import"
-msgstr ""
-
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
@@ -892,6 +888,10 @@ msgstr ""
 
 #: ImportFrame.choose_export_file
 msgid "Choose the file with exported contacts"
+msgstr ""
+
+#: ImportFrame.doImportLabel.text
+msgid "If you want to import these contacts press Import."
 msgstr ""
 
 #: ImportFrame.encodingUTF8
@@ -920,6 +920,14 @@ msgstr ""
 #: ImportFrame.forwardButton.text
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
+msgstr ""
+
+#: ImportFrame.foundContactsLabel.text
+msgid "Following new contacts were found:"
+msgstr ""
+
+#: ImportFrame.foundNoContacts
+msgid "No new contacts were found."
 msgstr ""
 
 #: ImportFrame.infoDreamComSE
@@ -956,10 +964,6 @@ msgid ""
 "contains invalid data.</html>"
 msgstr ""
 
-#: ImportFrame.jLabel1.text
-msgid "Following new contacts were found:"
-msgstr ""
-
 #: ImportFrame.jLabel2.text
 msgid ""
 "<html>\n"
@@ -983,10 +987,6 @@ msgstr ""
 #: ImportFrame.jLabel4.text
 msgid ""
 "Or choose the type of the standardized file format you have the contacts in:"
-msgstr ""
-
-#: ImportFrame.jLabel8.text
-msgid "If you want to import these contacts press Import."
 msgstr ""
 
 #: ImportFrame.problemLabel.text
@@ -1022,6 +1022,10 @@ msgid ""
 "when<br>\n"
 "they have operator this program can work with\n"
 "</html>"
+msgstr ""
+
+#: Import_
+msgid "Im&port"
 msgstr ""
 
 #: LogFrame.clearButton.text
