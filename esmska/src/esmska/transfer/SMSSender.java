@@ -42,7 +42,7 @@ public class SMSSender {
     private static final Queue queue = Queue.getInstance();
     private static final String NO_REASON_ERROR = l10n.getString("SMSSender.NO_REASON_ERROR");
     
-    /** map of <operator,worker>; it show's whether some operator has currently assigned
+    /** map of <operator,worker>; it shows whether some operator has currently assigned
     a background worker (therefore is sending at the moment) */
     private HashMap<String,SMSWorker> workers = new HashMap<String, SMSWorker>();
 
@@ -91,7 +91,7 @@ public class SMSSender {
     /** Handle processed SMS */
     private void finishedSending(SMS sms, boolean success) {
         logger.fine("Finished sending SMS: " + sms);
-        workers.remove(sms.getOperator()); //TODO: check thread safety
+        workers.remove(sms.getOperator());
         if (success) {
             queue.setSMSSent(sms);
         } else {
