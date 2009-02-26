@@ -40,6 +40,10 @@ import org.apache.commons.lang.StringUtils;
  * @author ripper
  */
 public class Main {
+    /** NetBeans has a bug to execute some stuff in design mode. This helps to
+     * determine if the program is really running or only in NetBeans designer. */
+    public static boolean reallyRunning;
+
     private static final Logger logger = Logger.getLogger(Main.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static String configPath; //path to config files
@@ -48,6 +52,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        reallyRunning = true;
+
         //detect JVM and warn if not not supported
         if (!JavaType.isSupported()) {
             logger.severe(l10n.getString("Main.unsupported_java"));
