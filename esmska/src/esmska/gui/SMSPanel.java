@@ -10,10 +10,10 @@ import esmska.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Contacts;
+import esmska.data.CountryPrefix;
 import esmska.data.Envelope;
 import esmska.data.Queue;
 import esmska.data.SMS;
-import esmska.operators.OperatorUtil;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import java.awt.Color;
@@ -902,7 +902,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 setText("");
             }
             
-            setText(OperatorUtil.stripCountryPrefix(number));
+            setText(CountryPrefix.stripCountryPrefix(number));
         }
         
         /** Listener for changes in the recipient field */

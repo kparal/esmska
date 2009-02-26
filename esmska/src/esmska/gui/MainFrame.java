@@ -61,6 +61,7 @@ import esmska.data.History;
 import esmska.data.History.Record;
 import esmska.data.Icons;
 import esmska.data.Log;
+import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
@@ -187,7 +188,7 @@ public class MainFrame extends javax.swing.JFrame {
         queue.addValuedListener(new QueueListener());
         
         //check for valid operators
-        if (PersistenceManager.getOperators().size() <= 0) {
+        if (Operators.getInstance().size() <= 0) {
             logger.warning("No usable operators found");
             JOptionPane.showMessageDialog(null,
                     new JLabel(l10n.getString("MainFrame.no_operators")),

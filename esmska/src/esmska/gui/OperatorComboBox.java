@@ -7,15 +7,15 @@ package esmska.gui;
 
 import esmska.data.Config;
 import esmska.data.Icons;
+import esmska.data.Operators;
 import esmska.operators.Operator;
-import esmska.operators.OperatorUtil;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -33,7 +33,7 @@ public class OperatorComboBox extends JComboBox {
     private static final Logger logger = Logger.getLogger(OperatorComboBox.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final TreeSet<Operator> operators = PersistenceManager.getOperators();
+    private static final SortedSet<Operator> operators = Operators.getInstance().getAll();
     private static final Config config = Config.getInstance();
     private static final OperatorComboBoxRenderer cellRenderer = new OperatorComboBoxRenderer();
     private DefaultComboBoxModel model = new DefaultComboBoxModel(operators.toArray());
@@ -94,7 +94,7 @@ public class OperatorComboBox extends JComboBox {
      */
     public void setSelectedOperator(String operatorName) {
         this.operatorName = operatorName;
-        Operator operator = OperatorUtil.getOperator(operatorName);
+        Operator operator = Operators.getOperator(operatorName);
         if (model.getIndexOf(operator) < 0) {
             setSelectedItem(null);
         } else {
@@ -117,7 +117,7 @@ public class OperatorComboBox extends JComboBox {
             visibleOperators.add(op);
         }
         
-        Operator operator = OperatorUtil.suggestOperator(number, visibleOperators);
+        Operator operator = Operators.suggestOperator(number, visibleOperators);
         
         //none suitable operator found, do nothing
         if (operator == null) {
@@ -125,14 +125,14 @@ public class OperatorComboBox extends JComboBox {
         }
         
         //if perfect match found, select it
-        if (OperatorUtil.matchesWithOperatorPrefix(operator, number)) {
+        if (Operators.matchesWithOperatorPrefix(operator, number)) {
             setSelectedOperator(operator.getName());
             return;
         }
         
         //return if already selected operator with matching country prefix
         Operator selectedOperator = getSelectedOperator();
-        if (OperatorUtil.matchesWithCountryPrefix(selectedOperator, number)) {
+        if (Operators.matchesWithCountryPrefix(selectedOperator, number)) {
             return;
         }
         

@@ -42,8 +42,8 @@ import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.Icons;
 import esmska.data.Log;
+import esmska.data.Operators;
 import esmska.data.event.AbstractListDataListener;
-import esmska.operators.OperatorUtil;
 import esmska.utils.L10N;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -172,7 +172,7 @@ public class ImportFrame extends javax.swing.JFrame {
         ArrayList<Object> skipped = new ArrayList<Object>();
         for (Object impor : imported) {
             Contact c = (Contact) impor;
-            if (OperatorUtil.getOperator(c.getOperator()) == null) {
+            if (Operators.getOperator(c.getOperator()) == null) {
                 skipped.add(c);
             }
         }

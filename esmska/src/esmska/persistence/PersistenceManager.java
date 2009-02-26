@@ -32,6 +32,7 @@ import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.Keyring;
+import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.operators.Operator;
@@ -66,8 +67,6 @@ public class PersistenceManager {
     private static File historyFile = new File(userDir, HISTORY_FILENAME);
     private static File keyringFile = new File(userDir, KEYRING_FILENAME);
     private static File lockFile = new File(userDir, LOCK_FILENAME);
-    
-    private static TreeSet<Operator> operators = new TreeSet<Operator>();
     
     private static boolean customPathSet;
     private FileLock lock;
@@ -135,11 +134,6 @@ public class PersistenceManager {
             persistenceManager = new PersistenceManager();
         }
         return persistenceManager;
-    }
-    
-    /** return operators */
-    public static TreeSet<Operator> getOperators() {
-        return operators;
     }
     
     /** Save program configuration */
@@ -271,8 +265,8 @@ public class PersistenceManager {
                     operatorDir.getAbsolutePath() + "' nor jar operator resource '" +
                     OPERATOR_RESOURCE + "'");
         }
-        operators.clear();
-        operators.addAll(newOperators);
+        Operators.getInstance().clear();
+        Operators.getInstance().addAll(newOperators);
     }
     
     /** Checks if this is the first instance of the program.

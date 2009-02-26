@@ -4,9 +4,11 @@
  */
 package esmska.data;
 
+import esmska.operators.Operator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import org.apache.commons.lang.Validate;
 
 /** Class containing list of all telephone country prefixes (as defined in
  *  <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes">List of country calling codes</a>) 
@@ -15,6 +17,7 @@ import java.util.HashMap;
  * @author ripper
  */
 public class CountryPrefix {
+    private static final Config config = Config.getInstance();
     private static final HashMap<String, String> map = new HashMap<String, String>();
     static {
         map.put("AC", "+247");
@@ -316,5 +319,37 @@ public class CountryPrefix {
         list.addAll(map.keySet());
         Collections.sort(list);
         return list;
+    }
+
+    /** Strip current country prefix from number if possible
+     *
+     * @param number number, can be null
+     * @return number with stripped country prefix from start if possible;
+     * otherwise non-modified number
+     */
+    public static String stripCountryPrefix(String number) {
+        if (number != null && number.startsWith(config.getCountryPrefix())) {
+            number = number.substring(config.getCountryPrefix().length());
+        }
+        return number;
+    }
+
+    /** Extract country prefix from phone number.
+     * This method searches through available operators and checks if supplied
+     * number starts with any of supported prefixes.
+     * @param number Phone number in fully international format. Not null.
+     * @return Country prefix if such is found amongst list of supported operator
+     *         prefixes. Null otherwise.
+     */
+    public static String extractCountryPrefix(String number) {
+        Validate.notNull(number);
+
+        for (Operator operator : Operators.getInstance().getAll()) {
+            String prefix = operator.getCountryPrefix();
+            if (prefix.length() > 0 && number.startsWith(prefix)) {
+                return prefix;
+            }
+        }
+        return null;
     }
 }

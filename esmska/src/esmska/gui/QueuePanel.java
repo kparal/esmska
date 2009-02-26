@@ -7,6 +7,7 @@
 package esmska.gui;
 
 import esmska.ThemeManager;
+import esmska.data.CountryPrefix;
 import esmska.data.event.ValuedEvent;
 import java.awt.Color;
 import java.awt.Component;
@@ -37,10 +38,10 @@ import javax.swing.event.ListSelectionListener;
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 import esmska.data.Icons;
+import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.operators.Operator;
-import esmska.operators.OperatorUtil;
 import esmska.data.event.AbstractListDataListener;
 import esmska.data.event.ValuedEventSupport;
 import esmska.utils.L10N;
@@ -469,7 +470,7 @@ public class QueuePanel extends javax.swing.JPanel {
             
             //set text
             label.setText(StringUtils.defaultIfEmpty(sms.getName(),
-                    OperatorUtil.stripCountryPrefix(sms.getNumber())));
+                    CountryPrefix.stripCountryPrefix(sms.getNumber())));
             //problematic sms colored
             if ((sms.isProblematic()) && !isSelected) {
                 label.setBackground(Color.RED);
@@ -479,7 +480,7 @@ public class QueuePanel extends javax.swing.JPanel {
             delayLabel.setBackground(label.getBackground());
             panel.setBackground(label.getBackground());
             //add operator logo
-            Operator operator = OperatorUtil.getOperator(sms.getOperator());
+            Operator operator = Operators.getOperator(sms.getOperator());
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             String text = WordUtils.wrap(sms.getText(), 50, null, true);
@@ -487,7 +488,7 @@ public class QueuePanel extends javax.swing.JPanel {
             text = text.replaceAll("\n", "<br>");
             String tooltip = "<html><table><tr><td><img src=\"" + messageIconURI +
                     "\"></td><td valign=top><b>" + label.getText() + "</b><br>" +
-                    (StringUtils.isEmpty(sms.getName())?"":OperatorUtil.stripCountryPrefix(sms.getNumber())+", ") +
+                    (StringUtils.isEmpty(sms.getName())?"":CountryPrefix.stripCountryPrefix(sms.getNumber())+", ") +
                     sms.getOperator() + "<br><br>" + text +
                     "</td></tr></table></html>";
             panel.setToolTipText(tooltip);

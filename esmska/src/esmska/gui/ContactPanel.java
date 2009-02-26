@@ -8,9 +8,10 @@ package esmska.gui;
 
 import esmska.data.Contact;
 import esmska.data.Contacts;
+import esmska.data.CountryPrefix;
 import esmska.data.Icons;
+import esmska.data.Operators;
 import esmska.operators.Operator;
-import esmska.operators.OperatorUtil;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.DialogUtils;
@@ -829,12 +830,12 @@ public class ContactPanel extends javax.swing.JPanel {
             Contact contact = (Contact)value;
             JLabel label = ((JLabel)c);
             //add operator logo
-            Operator operator = OperatorUtil.getOperator(contact.getOperator());
+            Operator operator = Operators.getOperator(contact.getOperator());
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             String tooltip = "<html><table><tr><td><img src=\"" + contactIconURI +
                     "\"></td><td valign=top><b>" + Workarounds.escapeHtml(contact.getName()) +
-                    "</b><br>" + OperatorUtil.stripCountryPrefix(contact.getNumber()) +
+                    "</b><br>" + CountryPrefix.stripCountryPrefix(contact.getNumber()) +
                     "<br>" + Workarounds.escapeHtml(contact.getOperator()) +
                     "</td></tr></table></html>";
             label.setToolTipText(tooltip);

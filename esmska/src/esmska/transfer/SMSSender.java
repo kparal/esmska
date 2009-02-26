@@ -19,10 +19,10 @@ import java.util.logging.Logger;
 import javax.swing.SwingWorker;
 
 import esmska.data.Keyring;
+import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.operators.OperatorInterpreter;
-import esmska.operators.OperatorUtil;
 import esmska.operators.OperatorVariable;
 import esmska.utils.L10N;
 import esmska.utils.Tuple;
@@ -124,7 +124,7 @@ public class SMSSender {
             boolean success = false;
             try {
                 OperatorInterpreter interpreter = new OperatorInterpreter();
-                success = interpreter.sendMessage(OperatorUtil.getOperator(sms.getOperator()),
+                success = interpreter.sendMessage(Operators.getOperator(sms.getOperator()),
                         extractVariables(sms));
                 sms.setOperatorMsg(interpreter.getOperatorMessage());
                 sms.setErrMsg(null);

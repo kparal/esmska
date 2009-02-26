@@ -8,7 +8,6 @@
 package esmska.data;
 
 import esmska.operators.Operator;
-import esmska.operators.OperatorUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -71,7 +70,7 @@ public class Envelope {
     public int getMaxTextLength() {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Operator operator = OperatorUtil.getOperator(c.getOperator());
+            Operator operator = Operators.getOperator(c.getOperator());
             if (operator == null) {
                 continue;
             }
@@ -86,7 +85,7 @@ public class Envelope {
     public int getSMSLength() {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Operator operator = OperatorUtil.getOperator(c.getOperator());
+            Operator operator = Operators.getOperator(c.getOperator());
             if (operator == null) {
                 continue;
             }
@@ -99,7 +98,7 @@ public class Envelope {
     public int getSMSCount(int chars) {
         int worstOperator = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Operator operator = OperatorUtil.getOperator(c.getOperator());
+            Operator operator = Operators.getOperator(c.getOperator());
             if (operator == null) {
                 continue;
             }
@@ -126,7 +125,7 @@ public class Envelope {
         int worstSignature = 0;
         //find maximum signature length
         for (Contact c : contacts) {
-            Operator operator = OperatorUtil.getOperator(c.getOperator());
+            Operator operator = Operators.getOperator(c.getOperator());
             if (operator == null) {
                 continue;
             }
@@ -147,7 +146,7 @@ public class Envelope {
     public ArrayList<SMS> generate() {
         ArrayList<SMS> list = new ArrayList<SMS>();
         for (Contact c : contacts) {
-            Operator operator = OperatorUtil.getOperator(c.getOperator());
+            Operator operator = Operators.getOperator(c.getOperator());
             int limit = (operator != null ? operator.getMaxChars() : Integer.MAX_VALUE);
             for (int i=0;i<text.length();i+=limit) {
                 String cutText = text.substring(i,Math.min(i+limit,text.length()));
@@ -167,7 +166,7 @@ public class Envelope {
     
     /** get length of signature needed to be substracted from message length */
     private int getSignatureLength(Contact c) {
-        Operator operator = OperatorUtil.getOperator(c.getOperator());
+        Operator operator = Operators.getOperator(c.getOperator());
         if (operator != null && config.isUseSenderID() &&
                 config.getSenderName() != null &&
                 config.getSenderName().length() > 0) {

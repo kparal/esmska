@@ -15,7 +15,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
-/** Class managing all program contacts.
+/** Class managing all program contacts
  * @author ripper
  */
 public class Contacts {

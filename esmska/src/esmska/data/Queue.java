@@ -6,7 +6,6 @@
 package esmska.data;
 
 import esmska.operators.Operator;
-import esmska.operators.OperatorUtil;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import java.awt.event.ActionEvent;
@@ -388,7 +387,7 @@ public class Queue {
             return del;
         }
 
-        Operator operator = OperatorUtil.getOperator(operatorName);
+        Operator operator = Operators.getOperator(operatorName);
         long delay = 0;
 
         if (operator == null) { //unknown operator
@@ -428,7 +427,7 @@ public class Queue {
             return delay; //therefore operator delay is sms delay
         }
         int index = list.indexOf(sms);
-        Operator operator = OperatorUtil.getOperator(operatorName);
+        Operator operator = Operators.getOperator(operatorName);
         int opDelay = operator != null ? operator.getDelayBetweenMessages() * 1000 : 0;
         if (index >= 0) { //in the queue
             delay = delay + (index * opDelay);
