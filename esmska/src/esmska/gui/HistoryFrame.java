@@ -50,7 +50,7 @@ import javax.swing.table.TableRowSorter;
 
 import org.jvnet.substance.SubstanceLookAndFeel;
 
-import esmska.ThemeManager;
+import esmska.gui.ThemeManager;
 import esmska.data.Config;
 import esmska.data.History;
 import esmska.data.event.AbstractDocumentListener;

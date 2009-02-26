@@ -5,7 +5,7 @@
  */
 package esmska.data;
 
-import esmska.ThemeManager;
+import esmska.gui.ThemeManager;
 import esmska.utils.LogUtils;
 import java.awt.Dimension;
 import java.beans.*;

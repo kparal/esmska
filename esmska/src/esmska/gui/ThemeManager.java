@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package esmska;
+package esmska.gui;
 
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;

@@ -6,7 +6,7 @@
 
 package esmska.gui;
 
-import esmska.ThemeManager;
+import esmska.gui.ThemeManager;
 import esmska.data.CountryPrefix;
 import esmska.data.event.ValuedEvent;
 import java.awt.Color;

@@ -9,7 +9,7 @@ package esmska.gui;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import esmska.*;
-import esmska.ThemeManager.LAF;
+import esmska.gui.ThemeManager.LAF;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Keyring;

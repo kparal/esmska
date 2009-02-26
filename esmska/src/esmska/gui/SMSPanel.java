@@ -6,7 +6,7 @@
 
 package esmska.gui;
 
-import esmska.ThemeManager;
+import esmska.gui.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Contacts;

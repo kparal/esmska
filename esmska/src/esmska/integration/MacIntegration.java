@@ -10,7 +10,7 @@ import com.apple.eawt.Application;
 import com.apple.eawt.ApplicationEvent;
 import com.apple.eawt.ApplicationListener;
 
-import esmska.ThemeManager;
+import esmska.gui.ThemeManager;
 import esmska.gui.MainFrame;
 import esmska.gui.NotificationIcon;
 import java.awt.Component;

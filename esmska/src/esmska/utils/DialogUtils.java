@@ -4,7 +4,7 @@
  */
 package esmska.utils;
 
-import esmska.ThemeManager;
+import esmska.gui.ThemeManager;
 import java.awt.Dialog.ModalityType;
 import javax.swing.JDialog;
 import org.apache.commons.lang.ArrayUtils;

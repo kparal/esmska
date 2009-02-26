@@ -9,6 +9,7 @@
 
 package esmska;
 
+import esmska.gui.ThemeManager;
 import esmska.update.LegacyUpdater;
 import java.beans.IntrospectionException;
 import java.util.Locale;
