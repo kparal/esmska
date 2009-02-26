@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package esmska.operators;
+package esmska.transfer;
 
 /** Enum of operator variables applicable in the operator script.
  * Beware that values of all these variables are encoded in the x-www-form-urlencoded

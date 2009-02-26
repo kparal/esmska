@@ -13,7 +13,7 @@ import esmska.ThemeManager.LAF;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

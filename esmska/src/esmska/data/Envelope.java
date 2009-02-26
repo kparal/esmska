@@ -7,7 +7,7 @@
 
 package esmska.data;
 
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;

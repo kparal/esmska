@@ -41,7 +41,7 @@ import esmska.data.Icons;
 import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import esmska.data.event.AbstractListDataListener;
 import esmska.data.event.ValuedEventSupport;
 import esmska.utils.L10N;

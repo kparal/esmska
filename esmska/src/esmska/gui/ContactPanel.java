@@ -11,7 +11,7 @@ import esmska.data.Contacts;
 import esmska.data.CountryPrefix;
 import esmska.data.Icons;
 import esmska.data.Operators;
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.DialogUtils;

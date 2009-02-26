@@ -5,7 +5,7 @@
 
 package esmska.data;
 
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import java.awt.event.ActionEvent;

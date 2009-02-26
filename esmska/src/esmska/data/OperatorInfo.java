@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package esmska.operators;
+package esmska.data;
 
 /** Interface pro operator scripts.
  * All operator scripts must implement this interface in order to be used in the program.

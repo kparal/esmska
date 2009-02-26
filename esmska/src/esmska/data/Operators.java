@@ -7,7 +7,7 @@ package esmska.data;
 
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.SortedSet;

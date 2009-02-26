@@ -8,7 +8,7 @@ package esmska.gui;
 import esmska.data.Config;
 import esmska.data.Icons;
 import esmska.data.Operators;
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import esmska.utils.L10N;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;

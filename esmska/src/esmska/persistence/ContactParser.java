@@ -19,7 +19,7 @@ import javax.swing.SwingWorker;
 import esmska.data.Contact;
 import esmska.data.Operators;
 import esmska.gui.FormChecker;
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import java.io.FileInputStream;
 import java.util.logging.Logger;
 import net.wimpi.pim.Pim;

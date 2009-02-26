@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package esmska.operators;
+package esmska.data;
 
-import esmska.data.Icons;
+import esmska.transfer.OperatorInterpreter;
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.net.URL;

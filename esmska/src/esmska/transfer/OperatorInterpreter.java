@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package esmska.operators;
+package esmska.transfer;
 
+import esmska.data.OperatorInfo;
+import esmska.data.Operator;
 import esmska.utils.L10N;
 import java.beans.IntrospectionException;
 import java.io.IOException;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package esmska.operators;
+package esmska.data;
 
 import esmska.utils.L10N;
 import java.net.URL;

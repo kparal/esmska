@@ -35,7 +35,7 @@ import esmska.data.Keyring;
 import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
-import esmska.operators.Operator;
+import esmska.data.Operator;
 import esmska.utils.OSType;
 import org.apache.commons.lang.StringUtils;
 
