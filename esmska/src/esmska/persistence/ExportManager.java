@@ -36,7 +36,7 @@ import esmska.data.History;
 import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.utils.L10N;
-import esmska.utils.Tuple;
+import esmska.data.Tuple;
 import java.util.ResourceBundle;
 
 /** Export program data

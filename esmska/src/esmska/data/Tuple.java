@@ -3,7 +3,7 @@
  * with author's permission.
  *
  */
-package esmska.utils;
+package esmska.data;
 
 import java.io.Serializable;
 import org.apache.commons.lang.ObjectUtils;

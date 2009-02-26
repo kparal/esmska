@@ -20,7 +20,7 @@ import esmska.data.Contact;
 import esmska.data.SMS;
 import esmska.data.DefaultOperator;
 import esmska.data.Operator;
-import esmska.utils.Tuple;
+import esmska.data.Tuple;
 import java.beans.IntrospectionException;
 import java.io.FileFilter;
 import java.net.JarURLConnection;

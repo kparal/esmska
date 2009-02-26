@@ -60,7 +60,7 @@ import esmska.transfer.ProxyManager;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import esmska.utils.DialogUtils;
-import esmska.utils.Tuple;
+import esmska.data.Tuple;
 import java.awt.Toolkit;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;

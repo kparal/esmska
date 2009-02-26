@@ -23,7 +23,7 @@ import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.utils.L10N;
-import esmska.utils.Tuple;
+import esmska.data.Tuple;
 import esmska.data.event.ValuedListener;
 import java.util.List;
 import java.util.ResourceBundle;
