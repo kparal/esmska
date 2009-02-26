@@ -6,7 +6,6 @@
 
 package esmska.gui;
 
-import esmska.Main;
 import esmska.data.Queue.Events;
 import esmska.data.event.ValuedEvent;
 import java.awt.BorderLayout;
@@ -76,6 +75,7 @@ import esmska.utils.DialogUtils;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
+import java.beans.Beans;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -189,7 +189,7 @@ public class MainFrame extends javax.swing.JFrame {
         queue.addValuedListener(new QueueListener());
         
         //check for valid operators
-        if (Operators.getInstance().size() <= 0 && Main.reallyRunning) {
+        if (Operators.getInstance().size() <= 0 && !Beans.isDesignTime()) {
             logger.warning("No usable operators found");
             JOptionPane.showMessageDialog(null,
                     new JLabel(l10n.getString("MainFrame.no_operators")),
@@ -210,7 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         //only if really running, NetBeans has a bug to execute this in design mode
-        if (Main.reallyRunning) {
+        if (!Beans.isDesignTime()) {
             //add shutdown handler, when program is closed externally (logout, SIGTERM, etc)
             Runtime.getRuntime().addShutdownHook(shutdownThread);
         }
