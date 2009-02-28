@@ -6,15 +6,18 @@
 
 package esmska.gui;
 
-import esmska.gui.ThemeManager;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Collection;
 import java.util.ResourceBundle;
 import javax.swing.Action;
@@ -44,6 +47,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     
     private Config config = Config.getInstance();
     private boolean multiMode; //edit multiple contacts
+    private boolean userSet; //whether operator was set by user or by program
 
     private Action suggestOperatorAction;
     /**
@@ -66,7 +70,10 @@ public class EditContactPanel extends javax.swing.JPanel {
         numberTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
-                operatorComboBox.selectSuggestedOperator(numberTextField.getText());
+                if (!userSet) {
+                    operatorComboBox.selectSuggestedOperator(numberTextField.getText());
+                    userSet = false;
+                }
             }
         });
     }
@@ -112,6 +119,12 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
+        operatorComboBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent evt) {
+                operatorComboBoxItemStateChanged(evt);
+            }
+        });
+
         nameLabel.setLabelFor(nameTextField);
         Mnemonics.setLocalizedText(nameLabel, l10n.getString("EditContactPanel.nameLabel.text")); // NOI18N
         nameLabel.setToolTipText(nameTextField.getToolTipText());
@@ -125,6 +138,11 @@ public class EditContactPanel extends javax.swing.JPanel {
         gatewayLabel.setToolTipText(operatorComboBox.getToolTipText());
 
         suggestOperatorButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        suggestOperatorButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                suggestOperatorButtonActionPerformed(evt);
+            }
+        });
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -231,6 +249,14 @@ public class EditContactPanel extends javax.swing.JPanel {
     private void numberTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_numberTextFieldFocusLost
         checkValid(numberTextField);
     }//GEN-LAST:event_numberTextFieldFocusLost
+
+    private void suggestOperatorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_suggestOperatorButtonActionPerformed
+        userSet = false;
+    }//GEN-LAST:event_suggestOperatorButtonActionPerformed
+
+    private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
+        userSet = true;
+    }//GEN-LAST:event_operatorComboBoxItemStateChanged
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
@@ -244,6 +270,7 @@ public class EditContactPanel extends javax.swing.JPanel {
             numberTextField.setText(contact.getNumber());
             operatorComboBox.setSelectedOperator(contact.getOperator());
         }
+        userSet = false;
     }
 
     /** Set contacts for collective editing. May not be null. */

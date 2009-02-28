@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
@@ -30,8 +29,6 @@ import javax.swing.ListCellRenderer;
  * @author ripper
  */
 public class OperatorComboBox extends JComboBox {
-    private static final Logger logger = Logger.getLogger(OperatorComboBox.class.getName());
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final SortedSet<Operator> operators = Operators.getInstance().getAll();
     private static final Config config = Config.getInstance();
