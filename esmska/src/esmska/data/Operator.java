@@ -14,7 +14,7 @@ import javax.swing.Icon;
  */
 public interface Operator extends OperatorInfo, Comparable<Operator> {
 
-    public static final String UNKNOWN = L10N.l10nBundle.getString("Operator.unknown"); //TODO: rework to enum
+    public static final String UNKNOWN = L10N.l10nBundle.getString("Operator.unknown");
 
     /** URL of operator script (file or jar URL). */
     URL getScript();
