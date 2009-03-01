@@ -74,6 +74,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
 
@@ -91,6 +92,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     /** the active LaF when dialog is opened, needed for live-updating LaF skins */
     private LAF lafWhenLoaded;
     private DefaultComboBoxModel lafModel = new DefaultComboBoxModel();
+    private Character passwordEchoChar;
     
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
@@ -287,6 +289,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel12 = new JLabel();
         clearKeyringButton = new JButton();
         jLabel13 = new JLabel();
+        showPasswordCheckBox = new JCheckBox();
         privacyPanel = new JPanel();
         reducedHistoryCheckBox = new JCheckBox();
         reducedHistorySpinner = new JSpinner();
@@ -694,6 +697,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         passwordField.setColumns(15);
         passwordField.setToolTipText(l10n.getString("ConfigFrame.passwordField.toolTipText")); // NOI18N
+        passwordField.enableInputMethods(true);
         passwordField.addFocusListener(new FocusAdapter() {
             public void focusLost(FocusEvent evt) {
                 passwordFieldFocusLost(evt);
@@ -712,9 +716,17 @@ public class ConfigFrame extends javax.swing.JFrame {
                 clearKeyringButtonActionPerformed(evt);
             }
         });
-        Mnemonics.setLocalizedText(jLabel13, l10n.getString("ConfigFrame.jLabel13.text"));
+
+        Mnemonics.setLocalizedText(jLabel13, l10n.getString("ConfigFrame.jLabel13.text")); // NOI18N
         jLabel13.setToolTipText(MessageFormat.format(l10n.getString("ConfigFrame.user_directory"),
             PersistenceManager.getUserDir().getAbsolutePath()));
+        Mnemonics.setLocalizedText(showPasswordCheckBox, l10n.getString("ConfigFrame.showPasswordCheckBox.text"));
+    showPasswordCheckBox.setToolTipText(l10n.getString("ConfigFrame.showPasswordCheckBox.toolTipText")); // NOI18N
+    showPasswordCheckBox.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            showPasswordCheckBoxActionPerformed(evt);
+        }
+    });
 
         GroupLayout loginPanelLayout = new GroupLayout(loginPanel);
     loginPanel.setLayout(loginPanelLayout);
@@ -725,19 +737,22 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addContainerGap()
             .addGroup(loginPanelLayout.createParallelGroup(Alignment.LEADING)
                 .addComponent(jLabel9, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
-                .addGroup(loginPanelLayout.createParallelGroup(Alignment.TRAILING, false)
-                    .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(passwordField))
-                    .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(loginTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addGroup(loginPanelLayout.createSequentialGroup()
+                    .addGroup(loginPanelLayout.createParallelGroup(Alignment.TRAILING, false)
+                        .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(passwordField))
+                        .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(loginTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(showPasswordCheckBox))
                 .addComponent(clearKeyringButton)
                 .addComponent(jLabel13, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
             .addContainerGap())
@@ -763,10 +778,11 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(loginPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel12)
-                .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(showPasswordCheckBox))
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
             .addComponent(jLabel13)
             .addContainerGap())
     );
@@ -952,7 +968,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
             .addComponent(jLabel17)
             .addContainerGap())
     );
@@ -1148,6 +1164,17 @@ private void countryCodeComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:eve
     countryPrefixTextField.setText(prefix);
     fullyInicialized = temp;
 }//GEN-LAST:event_countryCodeComboBoxItemStateChanged
+
+private void showPasswordCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_showPasswordCheckBoxActionPerformed
+    if (showPasswordCheckBox.isSelected()) {
+        //set password to be displayed
+        passwordEchoChar = passwordField.getEchoChar();
+        passwordField.setEchoChar((char) 0);
+    } else {
+        //set password to be hidden
+        passwordField.setEchoChar((Character) ObjectUtils.defaultIfNull(passwordEchoChar, '*'));
+    }
+}//GEN-LAST:event_showPasswordCheckBoxActionPerformed
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
@@ -1247,6 +1274,7 @@ private void countryCodeComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:eve
     private JCheckBox sameProxyCheckBox;
     private JTextField senderNameTextField;
     private JTextField senderNumberTextField;
+    private JCheckBox showPasswordCheckBox;
     private JTextField socksProxyTextField;
     private JCheckBox startMinimizedCheckBox;
     private JTabbedPane tabbedPane;

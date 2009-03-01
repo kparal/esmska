@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-26 00:52+0200\n"
-"PO-Revision-Date: 2009-02-26 00:52+0100\n"
+"POT-Creation-Date: 2009-03-01 16:28+0200\n"
+"PO-Revision-Date: 2009-03-01 16:28+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -547,6 +547,14 @@ msgstr ""
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
 msgstr "Číslo odesilatele v mezinárodním formátu (začínající na znak \"+\")"
+
+#: ConfigFrame.showPasswordCheckBox.text
+msgid "Show"
+msgstr "Zobrazit"
+
+#: ConfigFrame.showPasswordCheckBox.toolTipText
+msgid "Set the password to be shown or hidden"
+msgstr "Zviditelnit nebo zneviditelnit psaní hesla"
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
