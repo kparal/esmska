@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-01 16:28+0200\n"
+"POT-Creation-Date: 2009-03-02 18:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,7 +197,7 @@ msgid "&Delete all login credentials"
 msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
-msgid "Deletes all usernames and passwords for all operators"
+msgid "Delete all usernames and passwords for all operators"
 msgstr ""
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
@@ -462,7 +462,7 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show"
+msgid "Show password"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText

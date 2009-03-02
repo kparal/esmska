@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-01 16:28+0200\n"
-"PO-Revision-Date: 2009-03-01 16:28+0100\n"
+"POT-Creation-Date: 2009-03-02 18:56+0200\n"
+"PO-Revision-Date: 2009-03-02 18:56+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -213,8 +213,8 @@ msgid "&Delete all login credentials"
 msgstr "O&dstranit všechny přihlašovací údaje"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
-msgid "Deletes all usernames and passwords for all operators"
-msgstr "Vymaže uživatelské jména a hesla u všech operátorů"
+msgid "Delete all usernames and passwords for all operators"
+msgstr "Vymazat uživatelská jména a hesla u všech operátorů"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
@@ -549,8 +549,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "Číslo odesilatele v mezinárodním formátu (začínající na znak \"+\")"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show"
-msgstr "Zobrazit"
+msgid "Show password"
+msgstr "Zobrazit heslo"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -1980,6 +1980,9 @@ msgstr "Znovu spustit frontu sms"
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Klikněte pro otevření stránky s možností stažení programu"
+
+#~ msgid "Show"
+#~ msgstr "Zobrazit"
 
 #~ msgid ""
 #~ "<html><i>\n"

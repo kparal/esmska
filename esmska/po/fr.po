@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-01 16:27+0200\n"
+"POT-Creation-Date: 2009-03-02 18:55+0200\n"
 "PO-Revision-Date: 2008-12-22 00:23+0000\n"
 "Last-Translator: Arnaud Bonatti <arnaud.bonatti@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -204,7 +204,8 @@ msgid "&Delete all login credentials"
 msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
-msgid "Deletes all usernames and passwords for all operators"
+#, fuzzy
+msgid "Delete all usernames and passwords for all operators"
 msgstr ""
 "Supprime tous les utilisateurs et mots de passe pour tous les opérateurs"
 
@@ -477,8 +478,9 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show"
-msgstr ""
+#, fuzzy
+msgid "Show password"
+msgstr "Mot de pa&sse :"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"

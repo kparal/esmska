@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-01 16:27+0200\n"
+"POT-Creation-Date: 2009-03-02 18:55+0200\n"
 "PO-Revision-Date: 2008-11-05 13:49+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -216,7 +216,8 @@ msgid "&Delete all login credentials"
 msgstr "&מחק את כל פרטי ההתחברות"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
-msgid "Deletes all usernames and passwords for all operators"
+#, fuzzy
+msgid "Delete all usernames and passwords for all operators"
 msgstr "מוחק את כל שמות המשתמשים והסיסמאות עבור כל המפעילים"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
@@ -538,8 +539,9 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "מספר השולח במבנה בינלאומי (מתחיל בסימן '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show"
-msgstr ""
+#, fuzzy
+msgid "Show password"
+msgstr "הצג את התוכנה"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
