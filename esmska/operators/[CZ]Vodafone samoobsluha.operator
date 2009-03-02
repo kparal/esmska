@@ -92,7 +92,7 @@ function send() {
         content = EXEC.postURL("https://samoobsluha.vodafone.cz/login.php", [], postData)
         
         // search for errors
-        re = /<div class="warningbox">/
+        re = /<div class="warning">/
         match = re.exec(content)
         if (undefined != match) { // if found
             // login was not successfull
@@ -122,7 +122,7 @@ function send() {
     content = EXEC.postURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [], postData)
 
     // check if receiver added successfully
-    re = /<div class="warningbox">(.+?)<\/div>/
+    re = /<div class="warning">(.+?)<\/div>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // operator told us what's wrong
@@ -139,7 +139,7 @@ function send() {
 
     // apparently operator does not report any error here but unfortunately silently ignores it
     // anyway, let's try to detect possible error
-    re = /<div class="warningbox">(.+?)<\/div>/
+    re = /<div class="warning">(.+?)<\/div>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // operator told us what's wrong
@@ -169,7 +169,7 @@ function send() {
     }
     
     // error was never achieved here, but try to find it
-    re = /<div class="warningbox">(.+?)<\/div>/
+    re = /<div class="warning">(.+?)<\/div>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // operator told us what's wrong
