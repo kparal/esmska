@@ -31,6 +31,13 @@ public interface OperatorInfo {
      * The maintainer must be in format "NAME &lt;EMAIL&gt;". Name and email are mandatory.
      */
     String getMaintainer();
+
+    /** The URL of the webpage of this gateway. On this URL users can get more information
+     * about this gateway, register an account, check if it is working, etc.
+     * Can be an empty string, but that is strongly discouraged. The website address should
+     * be provided if possible.
+     */
+    String getWebsite();
     
     /** Telephone country prefix.
      * The prefix starts with "+" sign and is 1-3 digits long.

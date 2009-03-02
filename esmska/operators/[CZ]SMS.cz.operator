@@ -1,13 +1,18 @@
+
 function getName() {
     return "[CZ]SMS.cz"
 }
 
 function getVersion() {
-    return "2008-10-29"
+    return "2009-03-02"
 }
 
 function getMaintainer() {
     return "Igor Štefanko <igstef@gmail.com>"
+}
+
+function getWebsite() {
+    return "http://sms.cz"
 }
 
 function getCountryPrefix() {

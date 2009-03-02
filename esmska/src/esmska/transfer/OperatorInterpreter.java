@@ -36,7 +36,7 @@ public class OperatorInterpreter {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final ScriptEngineManager manager = new ScriptEngineManager();
     private Map<OperatorVariable, String> variables;
-    private OperatorExecutor executor = new OperatorExecutor();
+    private OperatorExecutor executor = new OperatorExecutor(null);
     private ScriptEngine engine;
     private Invocable invocable;
     
@@ -44,7 +44,6 @@ public class OperatorInterpreter {
     private void init() {
         engine = manager.getEngineByName("js");
         invocable = (Invocable) engine;
-        executor = new OperatorExecutor();
         if (variables == null) {
              variables = new HashMap<OperatorVariable, String>();
         }
@@ -89,6 +88,8 @@ public class OperatorInterpreter {
         logger.fine("Sending SMS to: " + operator);
         this.variables = variables;
         init();
+        executor = new OperatorExecutor(operator);
+        
         if (operator == null) {
             executor.setErrorMessage(l10n.getString("OperatorInterpreter.unknown_operator"));
             return false;

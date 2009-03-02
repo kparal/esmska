@@ -4,11 +4,15 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-10-28"
+    return "2009-03-02"
 }
 
 function getMaintainer() {
     return "Kamil Páral <ripper42@gmail.com>"
+}
+
+function getWebsite() {
+    return "http://sms.t-zones.cz"
 }
 
 function getCountryPrefix() {

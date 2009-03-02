@@ -4,11 +4,15 @@ function getName() {
 }
 
 function getVersion() {
-    return "2008-10-28"
+    return "2009-03-02"
 }
 
 function getMaintainer() {
     return "Martin Jansa <Martin.Jansa@gmail.com>"
+}
+
+function getWebsite() {
+    return "https://samoobsluha.vodafone.cz"
 }
 
 function getCountryPrefix() {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 18:55+0200\n"
+"POT-Creation-Date: 2009-03-02 22:35+0200\n"
 "PO-Revision-Date: 2008-11-01 14:48+0000\n"
 "Last-Translator: nanker <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -1302,21 +1302,26 @@ msgstr ""
 msgid "A message from operator:<br>"
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_UKNOWN
 msgid ""
-"An unknown error has occured. The operator may have changed<br>it's webpages "
+"An unknown error has occured. The operator may have changed<br>its webpages "
 "or has a problem with them currently.<br>Try again later.<br><br>Also make "
 "sure that you have working connection to the Internet<br>and that you are "
-"using the latest program version.<br><br>If the problems persist and "
-"operator web gateway works,<br>report the problem on program homepage."
+"using the latest program version.<br><br>If the problem persists and "
+"operator <a href=\"{0}\">web gateway</a> works,<br>report the problem on "
+"program homepage."
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_WRONG_AUTH
 msgid ""
 "You have entered incorrect login credentials.<br>This gateway requires "
-"registration and you can't send messages throught it without one.<br>Visit "
-"the website of this gateway and find out how to register or log in.<br>Then "
-"enter the login credentials in program preferences."
+"registration and you can''t send messages throught it without one.<br>Visit "
+"the <a href=\"{0}\">website of this gateway</a> and find out how to register "
+"or log in.<br>Then enter the login credentials in program preferences."
+"<br><br>If you receive this message repeatedly, visit the website of the "
+"gateway<br>and check that logging in works."
 msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_CODE

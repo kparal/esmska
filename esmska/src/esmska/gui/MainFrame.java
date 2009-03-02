@@ -737,9 +737,18 @@ public class MainFrame extends javax.swing.JFrame {
 
             //prepare dialog
             String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
-            JLabel label = new JLabel(
+            JHtmlLabel label = new JHtmlLabel(
                     MessageFormat.format(l10n.getString("MainFrame.sms_failed2"),
                     sms, cause));
+            label.addValuedListener(new ValuedListener<JHtmlLabel.Events, String>() {
+                @Override
+                public void eventOccured(ValuedEvent<JHtmlLabel.Events, String> e) {
+                    switch (e.getEvent()) {
+                        case LINK_CLICKED:
+                            Actions.getBrowseAction(e.getValue()).actionPerformed(null);
+                    }
+                }
+            });
             label.setVerticalAlignment(SwingConstants.TOP);
             JPanel panel = new JPanel(new BorderLayout());
             panel.add(label, BorderLayout.CENTER);

@@ -4,10 +4,12 @@
  */
 package esmska.transfer;
 
+import esmska.data.Operator;
 import esmska.gui.MainFrame;
 import esmska.utils.L10N;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -41,7 +43,7 @@ public class OperatorExecutor {
     public static final String ERROR_WRONG_SIGNATURE =
             l10n.getString("OperatorExecutor.ERROR_WRONG_SIGNATURE");
     /** Message that login or password was wrong. */
-    public static final String ERROR_WRONG_AUTH =
+    public static String ERROR_WRONG_AUTH =
             l10n.getString("OperatorExecutor.ERROR_WRONG_AUTH");
     /** Message that user has not waited long enough to send another message
      * or message quota has been reached. */
@@ -57,7 +59,7 @@ public class OperatorExecutor {
     public static final String ERROR_OPERATOR_MESSAGE =
             l10n.getString("OperatorExecutor.ERROR_OPERATOR_MESSAGE");
     /** Message that uknown error happened, maybe error in the script. */
-    public static final String ERROR_UKNOWN =
+    public static String ERROR_UKNOWN =
             l10n.getString("OperatorExecutor.ERROR_UKNOWN");
     /** Message saying how many free SMS are remaining. */
     public static final String INFO_FREE_SMS_REMAINING = 
@@ -73,6 +75,15 @@ public class OperatorExecutor {
     private String errorMessage;
     private String operatorMessage;
     private String referer;
+    private Operator operator;
+
+    public OperatorExecutor(Operator operator) {
+        this.operator = operator;
+        if (operator != null) {
+            ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, operator.getWebsite());
+            ERROR_UKNOWN = MessageFormat.format(ERROR_UKNOWN, operator.getWebsite());
+        }
+    }
 
     /** Make a GET request to a provided URL
      * @param url base url where to connect, without any parameters or "?" at the end.
