@@ -6,7 +6,6 @@
 
 package esmska.gui;
 
-import esmska.gui.ThemeManager;
 import esmska.data.CountryPrefix;
 import esmska.data.event.ValuedEvent;
 import java.awt.Color;
@@ -121,31 +120,6 @@ public class QueuePanel extends javax.swing.JPanel {
                 queueListValueChanged(null);
             }
         });
-    }
-    
-    /** Convert integer message delay to more human readable string delay.
-     * @param delay number of milliseconds of the delay
-     * @return human readable string of the delay, eg: "3h 15m 47s"
-     */
-    private String convertDelayToHumanString(long delay) {
-        delay = Math.round(delay / 1000.0);
-        long seconds = delay % 60;
-        long minutes = (delay / 60) % 60;
-        long hours = delay / 3600;
-        
-        StringBuilder builder = new StringBuilder();
-        builder.append(seconds);
-        builder.append(l10n.getString("QueuePanel.second_shortcut"));
-        if (minutes > 0) {
-            builder.insert(0, l10n.getString("QueuePanel.minute_shortcut") + " ");
-            builder.insert(0, minutes);
-        }
-        if (hours > 0) {
-            builder.insert(0, l10n.getString("QueuePanel.hour_shortcut") + " ");
-            builder.insert(0, hours);
-        }
-        
-        return builder.toString();
     }
     
     /** This method is called from within the constructor to
@@ -499,7 +473,7 @@ public class QueuePanel extends javax.swing.JPanel {
             } else {
                 delayLabel.setIcon(null);
                 long delay = queue.getSMSDelay(sms);
-                delayLabel.setText(convertDelayToHumanString(delay));
+                delayLabel.setText(Operators.convertDelayToHumanString(delay, true));
             }
             //add to panel
             panel.add(label, BorderLayout.CENTER);

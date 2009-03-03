@@ -6,13 +6,14 @@
 package esmska.gui;
 
 import esmska.data.Config;
-import esmska.data.Icons;
 import esmska.data.Operators;
 import esmska.data.Operator;
 import esmska.utils.L10N;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
@@ -23,6 +24,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import org.apache.commons.lang.StringUtils;
 
 /** JComboBox showing available operators.
  *
@@ -30,6 +32,7 @@ import javax.swing.ListCellRenderer;
  */
 public class OperatorComboBox extends JComboBox {
     private static final ResourceBundle l10n = L10N.l10nBundle;
+    private static final String RES = "/esmska/resources/";
     private static final SortedSet<Operator> operators = Operators.getInstance().getAll();
     private static final Config config = Config.getInstance();
     private static final OperatorComboBoxRenderer cellRenderer = new OperatorComboBoxRenderer();
@@ -41,7 +44,7 @@ public class OperatorComboBox extends JComboBox {
         filterOperators();
         setModel(model);
         setRenderer(cellRenderer);
-        setToolTipText(l10n.getString("OperatorComboBox.List_of_available_operators_web_gateways"));
+        setToolTipText(l10n.getString("OperatorComboBox.tooltip"));
         if (model.getSize() > 0) {
             setSelectedIndex(0);
         }
@@ -141,7 +144,13 @@ public class OperatorComboBox extends JComboBox {
     /** Renderer for items in OperatorComboBox */
     private static class OperatorComboBoxRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
-        
+        private final URL keyringIconURI = getClass().getResource(RES + "keyring-16.png");
+        private final String pattern = l10n.getString("OperatorComboBox.operatorTooltip");
+        private final String noReg = l10n.getString("OperatorComboBox.noRegistration");
+        private final String registration = MessageFormat.format("<img src=\"{0}\"> ", keyringIconURI) +
+                l10n.getString("OperatorComboBox.needRegistration");
+        private final String international = l10n.getString("OperatorComboBox.international");
+
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = lafRenderer.getListCellRendererComponent(list, value, 
@@ -151,9 +160,24 @@ public class OperatorComboBox extends JComboBox {
             }
             JLabel label = (JLabel) c;
             Operator operator = (Operator)value;
-            label.setText(operator != null ? operator.getName() : l10n.getString("Unknown_operator"));
-            label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
+            label.setText(operator.getName());
+            label.setIcon(operator.getIcon());
+
+            label.setToolTipText(generateTooltip(operator));
             return label;
+        }
+
+        /** Generate tooltip with operator info */
+        private String generateTooltip(Operator operator) {
+            String country = operator.getName().substring(1).replaceFirst("].*", "");
+            assert StringUtils.isNotEmpty(country) : "There always must be some country in operator name";
+            String local = MessageFormat.format(l10n.getString("OperatorComboBox.onlyCountry"), country);
+            String tooltip = MessageFormat.format(pattern,
+                    operator.getName(), operator.getWebsite(),
+                    operator.isLoginRequired() ? registration : noReg,
+                    Operators.convertDelayToHumanString(operator.getDelayBetweenMessages(), false),
+                    country.equals("INT") ? international : local);
+            return tooltip;
         }
     }
     

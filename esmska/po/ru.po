@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 23:16+0200\n"
+"POT-Creation-Date: 2009-03-03 15:41+0200\n"
 "PO-Revision-Date: 2008-12-31 17:23+0000\n"
 "Last-Translator: shaxter <morskov@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1268,7 +1268,36 @@ msgstr ""
 msgid "Guess a suitable gateway for the provided number"
 msgstr ""
 
-#: OperatorComboBox.List_of_available_operators_web_gateways
+#: OperatorComboBox.international
+msgid "Can be used internationally."
+msgstr ""
+
+#: OperatorComboBox.needRegistration
+msgid "Requires registration on the website."
+msgstr ""
+
+#: OperatorComboBox.noRegistration
+msgid "Does not require registration."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: OperatorComboBox.onlyCountry
+msgid "Only usable for the country: {0}"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: OperatorComboBox.operatorTooltip
+msgid ""
+"<html>\n"
+"<b>{0}</b><br>\n"
+"Website: <a href=\"{1}\">{1}</a><br><br>\n"
+"{2}<br>\n"
+"Delay between messages: {3}<br>\n"
+"{4}\n"
+"</html>"
+msgstr ""
+
+#: OperatorComboBox.tooltip
 msgid ""
 "<html>\n"
 "List of available operators web gateways.<br>\n"

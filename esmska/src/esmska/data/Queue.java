@@ -5,7 +5,6 @@
 
 package esmska.data;
 
-import esmska.data.Operator;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import java.awt.event.ActionEvent;
@@ -415,7 +414,7 @@ public class Queue {
      * which are waiting to be sent. If sms is not found in the queue, it is
      * considered to be at the end of the queue.
      * @param sms sms, not null
-     * @return number of seconds a message must wait
+     * @return number of milliseconds a message must wait
      */
     public long getSMSDelay(SMS sms) {
         Validate.notNull(sms);

@@ -7,9 +7,10 @@ package esmska.data;
 
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
-import esmska.data.Operator;
+import esmska.utils.L10N;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
@@ -31,6 +32,7 @@ public class Operators {
     /** shared instance */
     private static final Operators instance = new Operators();
     private static final Logger logger = Logger.getLogger(Operators.class.getName());
+    private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final SortedSet<Operator> operators = Collections.synchronizedSortedSet(new TreeSet<Operator>());
     private static final Keyring keyring = Keyring.getInstance();
 
@@ -286,5 +288,33 @@ public class Operators {
         }
         return number.startsWith(operator.getCountryPrefix());
     }
-    
+
+    /** Convert message delay to more human readable string delay.
+     * @param delay number of seconds (or milliseconds) of the delay
+     * @param inMilliseconds if true,then <code>delay</code> is specified in
+     * milliseconds, otherwise in seconds
+     * @return human readable string of the delay, eg: "3h 15m 47s"
+     */
+    public static String convertDelayToHumanString(long delay, boolean inMilliseconds) {
+        if (inMilliseconds) {
+            delay = Math.round(delay / 1000.0);
+        }
+        long seconds = delay % 60;
+        long minutes = (delay / 60) % 60;
+        long hours = delay / 3600;
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(seconds);
+        builder.append(l10n.getString("QueuePanel.second_shortcut"));
+        if (minutes > 0) {
+            builder.insert(0, l10n.getString("QueuePanel.minute_shortcut") + " ");
+            builder.insert(0, minutes);
+        }
+        if (hours > 0) {
+            builder.insert(0, l10n.getString("QueuePanel.hour_shortcut") + " ");
+            builder.insert(0, hours);
+        }
+
+        return builder.toString();
+    }
 }

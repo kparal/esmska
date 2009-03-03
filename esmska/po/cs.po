@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 23:17+0200\n"
-"PO-Revision-Date: 2009-03-02 23:16+0100\n"
+"POT-Creation-Date: 2009-03-03 15:44+0200\n"
+"PO-Revision-Date: 2009-03-03 15:44+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1451,7 +1451,43 @@ msgstr "Odhadnout vhodnou bránu"
 msgid "Guess a suitable gateway for the provided number"
 msgstr "Odhadnout vhodnou bránu pro zadané číslo"
 
-#: OperatorComboBox.List_of_available_operators_web_gateways
+#: OperatorComboBox.international
+msgid "Can be used internationally."
+msgstr "Lze použít mezinárodně."
+
+#: OperatorComboBox.needRegistration
+msgid "Requires registration on the website."
+msgstr "Vyžaduje registraci na webové stránce."
+
+#: OperatorComboBox.noRegistration
+msgid "Does not require registration."
+msgstr "Nevyžaduje registraci."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: OperatorComboBox.onlyCountry
+msgid "Only usable for the country: {0}"
+msgstr "Lze použít pouze pro zemi: {0}"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: OperatorComboBox.operatorTooltip
+msgid ""
+"<html>\n"
+"<b>{0}</b><br>\n"
+"Website: <a href=\"{1}\">{1}</a><br><br>\n"
+"{2}<br>\n"
+"Delay between messages: {3}<br>\n"
+"{4}\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"<b>{0}</b><br>\n"
+"Webová stránka: <a href=\"{1}\">{1}</a><br><br>\n"
+"{2}<br>\n"
+"Prodleva mezi zprávami: {3}<br>\n"
+"{4}\n"
+"</html>"
+
+#: OperatorComboBox.tooltip
 msgid ""
 "<html>\n"
 "List of available operators web gateways.<br>\n"
