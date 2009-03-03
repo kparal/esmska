@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-03 15:41+0200\n"
+"POT-Creation-Date: 2009-03-03 17:02+0200\n"
 "PO-Revision-Date: 2008-12-31 17:23+0000\n"
 "Last-Translator: shaxter <morskov@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-20 12:12+0000\n"
+"X-Launchpad-Export-Date: 2009-03-03 15:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -201,9 +201,8 @@ msgid "&Delete all login credentials"
 msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
-#, fuzzy
 msgid "Delete all usernames and passwords for all operators"
-msgstr "Удалить все имена пользователей и пороли для всех операторов"
+msgstr ""
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
@@ -467,9 +466,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Show password"
-msgstr "Па&роль:"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -1031,9 +1029,8 @@ msgid ""
 msgstr ""
 
 #: Import_
-#, fuzzy
 msgid "Im&port"
-msgstr "Импорт"
+msgstr ""
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
@@ -1256,9 +1253,8 @@ msgid "Pause/unpause sending"
 msgstr ""
 
 #: Operator.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Неизвестно"
+msgstr ""
 
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Guess a suitable gateway"

@@ -1,7 +1,7 @@
-# Turkish translation for esmska
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Brazilian Portuguese translation for esmska
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the esmska package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 #. extracted from ../src/esmska/resources/l10n.properties
 msgid ""
@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-03 17:02+0200\n"
-"PO-Revision-Date: 2008-12-13 17:20+0000\n"
-"Last-Translator: zeugma <Unknown>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"PO-Revision-Date: 2009-01-27 04:18+0000\n"
+"Last-Translator: Alexandre Sapata Carbonell <alexandrenescau@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,31 +24,31 @@ msgstr ""
 
 #: AboutFrame.Credits
 msgid "Credits"
-msgstr "Hazırlayanlar"
+msgstr ""
 
 #: AboutFrame.License
 msgid "License"
-msgstr "Lisans"
+msgstr "Licença"
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr "Teşekkürler"
+msgstr "Obrigado"
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
-msgstr "K&atkıda Bulunanlar"
+msgstr ""
 
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
-msgstr ""
+msgstr "Mandando SMS pela internet."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2009 Kamil Páral"
-msgstr ""
+msgstr "2007-2009 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
-msgstr "&Lisans"
+msgstr "&Licença"
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
@@ -59,12 +59,12 @@ msgid ""
 "<html>\n"
 "Show program home page\n"
 "</html>"
-msgstr "<html>Programın ana sayfasını göster</html>"
+msgstr ""
 
 #. #Do not change this value
 #: AboutFrame.supportButton.link
 msgid "http://code.google.com/p/esmska/wiki/Support"
-msgstr "http://code.google.com/p/esmska/wiki/Support"
+msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid "Support project"
@@ -83,39 +83,39 @@ msgstr ""
 
 #: About_
 msgid "&About"
-msgstr "&Hakkında"
+msgstr ""
 
 #: Add_contact
 msgid "Add contact"
-msgstr "Bağlantı ekle"
+msgstr ""
 
 #: Add_new_contact
 msgid "Add new contact"
-msgstr "Yeni bağlantı ekle"
+msgstr ""
 
 #: Cancel
 msgid "Cancel"
-msgstr "İptal Et"
+msgstr ""
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
-msgstr "Kopyala"
+msgstr ""
 
 #: ClipboardPopupMenu.Cut
 msgid "Cut"
-msgstr "Kes"
+msgstr ""
 
 #: ClipboardPopupMenu.Paste
 msgid "Paste"
-msgstr "Yapıştır"
+msgstr ""
 
 #: Close_
 msgid "&Close"
-msgstr "&Kapat"
+msgstr ""
 
 #: CommandLineParser.available_options
 msgid "Available options:"
-msgstr "Kullanılabilir seçenekler:"
+msgstr ""
 
 #: CommandLineParser.debug
 msgid "Print debugging output."
@@ -162,7 +162,7 @@ msgstr ""
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr "Kullanım:"
+msgstr ""
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
@@ -206,7 +206,7 @@ msgstr ""
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
-msgstr "&Bağlantı"
+msgstr ""
 
 #: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -261,7 +261,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr "&Genel"
+msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -281,7 +281,7 @@ msgstr ""
 
 #: ConfigFrame.jLabel1.text
 msgid "&Number:"
-msgstr "&Numara:"
+msgstr ""
 
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
@@ -290,11 +290,11 @@ msgstr ""
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr "&Kullanıcı adı:"
+msgstr ""
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr "&Şifre:"
+msgstr ""
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -307,11 +307,11 @@ msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
-msgstr "H&TTP proxy:"
+msgstr ""
 
 #: ConfigFrame.jLabel15.text
 msgid "HTTP&S proxy:"
-msgstr "HTTP&S proxy:"
+msgstr ""
 
 #: ConfigFrame.jLabel16.text
 msgid "SO&CKS proxy:"
@@ -332,7 +332,7 @@ msgstr ""
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
-msgstr "&İsim:"
+msgstr ""
 
 #: ConfigFrame.jLabel7.text
 msgid ""
@@ -495,7 +495,7 @@ msgstr ""
 
 #: ConfigFrame.system_look
 msgid "System"
-msgstr "Sistem"
+msgstr ""
 
 #: ConfigFrame.themeComboBox.toolTipText
 msgid ""
@@ -537,7 +537,7 @@ msgstr ""
 
 #: ConfigFrame.unknown_look
 msgid "Unknown"
-msgstr "Bilinmeyen"
+msgstr ""
 
 #. #meaning "unknown country"
 #: ConfigFrame.unknown_state
@@ -591,15 +591,15 @@ msgstr ""
 
 #: Contact
 msgid "Contact"
-msgstr "Bağlantı"
+msgstr ""
 
 #: ContactPanel.border.title
 msgid "Contacts"
-msgstr "Bağlantılar"
+msgstr ""
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
-msgstr "Bağlantı listesi (Alt+K)"
+msgstr ""
 
 #: ContactPanel.new_contact_hint
 msgid ""
@@ -621,11 +621,11 @@ msgstr ""
 
 #: Create
 msgid "Create"
-msgstr "Oluştur"
+msgstr ""
 
 #: Credits.authors
 msgid "Written by:"
-msgstr "Yazan:"
+msgstr ""
 
 #: Credits.contributors
 msgid "Contributions from:"
@@ -633,7 +633,7 @@ msgstr ""
 
 #: Credits.graphics
 msgid "Graphics:"
-msgstr "Grafikler:"
+msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -641,39 +641,39 @@ msgstr ""
 
 #: Credits.translators
 msgid "Translated by:"
-msgstr "Çeviren:"
+msgstr ""
 
 #: Date
 msgid "Date"
-msgstr "Tarih"
+msgstr ""
 
 #: Delete
 msgid "Delete"
-msgstr "Sil"
+msgstr ""
 
 #: Delete_
 msgid "&Delete"
-msgstr "&Sil"
+msgstr ""
 
 #: Delete_contacts
 msgid "Delete contacts"
-msgstr "Bağlantıları sil"
+msgstr ""
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr "Mesajları  sil"
+msgstr ""
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
-msgstr "Seçili bağlantıları sil"
+msgstr ""
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr "Seçili mesajları sil"
+msgstr ""
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
-msgstr "Geçmişteki seçili mesajları sil"
+msgstr ""
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
@@ -688,7 +688,7 @@ msgstr ""
 #. #This string is located in the operating-system menu item
 #: DesktopFile.name
 msgid "Esmska"
-msgstr "Esmska"
+msgstr ""
 
 #: EditContactPanel.gatewayLabel.text
 msgctxt "EditContactPanel.gatewayLabel.text"
@@ -698,11 +698,11 @@ msgstr ""
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
 msgid "&Name:"
-msgstr "&İsim:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
-msgstr "Bağlantı ismi"
+msgstr ""
 
 #: EditContactPanel.numberLabel.text
 msgid "Nu&mber:"
@@ -719,7 +719,7 @@ msgstr ""
 
 #: Edit_contact
 msgid "Edit contact"
-msgstr "Bağlantıyı düzenle"
+msgstr ""
 
 #: Edit_contacts
 msgid "Edit contacts"
@@ -731,7 +731,7 @@ msgstr ""
 
 #: Edit_message
 msgid "Edit message"
-msgstr "Mesajı düzenle"
+msgstr ""
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
@@ -739,7 +739,7 @@ msgstr ""
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr "Seçili mesajı düzenle"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
@@ -756,12 +756,12 @@ msgstr ""
 
 #: ExportManager.contact_list
 msgid "Contact list"
-msgstr "Bağlantı listesi"
+msgstr ""
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
 msgid "CSV files (*.csv)"
-msgstr "CSV dosyaları (*.csv)"
+msgstr ""
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
@@ -814,11 +814,11 @@ msgstr ""
 
 #: Hide_program
 msgid "Hide program"
-msgstr "Programı gizle"
+msgstr ""
 
 #: History
 msgid "History"
-msgstr "Geçmiş"
+msgstr ""
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
@@ -826,19 +826,19 @@ msgstr ""
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
-msgstr "Numara:"
+msgstr ""
 
 #: HistoryFrame.jLabel2.text
 msgid "Name:"
-msgstr "Ad:"
+msgstr ""
 
 #: HistoryFrame.jLabel3.text
 msgid "Date:"
-msgstr "Tarih:"
+msgstr ""
 
 #: HistoryFrame.jLabel4.text
 msgid "Gateway:"
-msgstr "Ağ geçidi:"
+msgstr ""
 
 #: HistoryFrame.jLabel5.text
 msgid "Sender number:"
@@ -862,7 +862,7 @@ msgstr ""
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
-msgstr "&Ara:"
+msgstr ""
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
@@ -876,15 +876,15 @@ msgstr ""
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
 msgid "Select"
-msgstr "Seç"
+msgstr ""
 
 #: ImportFrame.backButton.text
 msgid "&Back"
-msgstr "&Geri"
+msgstr ""
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
-msgstr "&Gözat..."
+msgstr ""
 
 #: ImportFrame.browseButton.toolTipText
 msgid "Find contacts file using dialog"
@@ -1004,7 +1004,7 @@ msgstr ""
 #: ImportFrame.progressBar.string
 msgctxt "ImportFrame.progressBar.string"
 msgid "Please wait..."
-msgstr "Lütfen bekleyin..."
+msgstr ""
 
 #: ImportFrame.title
 msgid "Contact import - Esmska"
@@ -1034,7 +1034,7 @@ msgstr ""
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
-msgstr "&Temizle"
+msgstr ""
 
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
@@ -1054,7 +1054,7 @@ msgstr ""
 
 #: Log_
 msgid "&Log"
-msgstr "&Kayıt"
+msgstr ""
 
 #: Main.already_running
 msgid ""
@@ -1094,7 +1094,7 @@ msgstr ""
 
 #: MainFrame.Quit_program
 msgid "Quit program"
-msgstr "Programdan çık"
+msgstr ""
 
 #: MainFrame.cant_create_program_dir
 msgid "Directory with program settings can't be created!"
@@ -1134,7 +1134,7 @@ msgstr ""
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr "&Yardım"
+msgstr ""
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
@@ -1146,7 +1146,7 @@ msgstr ""
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr "&Mesaj"
+msgstr ""
 
 #: MainFrame.new_program_version
 msgid "A new program version has been released!"
@@ -1179,7 +1179,7 @@ msgstr ""
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
-msgstr "&Program"
+msgstr ""
 
 #: MainFrame.redoButton.toolTipText
 msgid "Redo (Ctrl+Y)"
@@ -1191,7 +1191,7 @@ msgstr ""
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr "Program bilgisini göster"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
@@ -1214,7 +1214,7 @@ msgstr ""
 
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
-msgstr "&Araçlar"
+msgstr ""
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate This Application..."
@@ -1402,7 +1402,7 @@ msgstr ""
 
 #: Program_start
 msgid "Program start"
-msgstr "Programı başlat"
+msgstr ""
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
@@ -1432,7 +1432,7 @@ msgstr ""
 #. #Shortcut for "minute"
 #: QueuePanel.minute_shortcut
 msgid "m"
-msgstr "dk"
+msgstr ""
 
 #. #Shortcut for "second"
 #: QueuePanel.second_shortcut
@@ -1441,11 +1441,11 @@ msgstr ""
 
 #: Quit
 msgid "Quit"
-msgstr "Çık"
+msgstr ""
 
 #: Quit_
 msgid "&Quit"
-msgstr "&Çık"
+msgstr ""
 
 #: Recipient
 msgid "Recipient"
@@ -1473,7 +1473,7 @@ msgstr ""
 
 #: SMSPanel.border.title
 msgid "Message"
-msgstr "Mesaj"
+msgstr ""
 
 #: SMSPanel.compress
 msgid ""
@@ -1536,7 +1536,7 @@ msgstr ""
 
 #: SMSPanel.textLabel.text
 msgid "Te&xt:"
-msgstr "&Metin:"
+msgstr ""
 
 #: SMSPanel.textLabel.toolTipText
 msgid ""
@@ -1562,24 +1562,24 @@ msgstr ""
 
 #: Save
 msgid "Save"
-msgstr "Kaydet"
+msgstr ""
 
 #: Select
 msgctxt "Select"
 msgid "Select"
-msgstr "Seç"
+msgstr ""
 
 #: Send_
 msgid "&Send"
-msgstr "&Gönder"
+msgstr ""
 
 #: Send_message
 msgid "Send message"
-msgstr "Mesaj gönder"
+msgstr ""
 
 #: Show/hide_program
 msgid "Show/hide program"
-msgstr "Programı göster/gizle"
+msgstr ""
 
 #: Show_application_log
 msgid "Show application log"
@@ -1587,16 +1587,16 @@ msgstr ""
 
 #: Show_program
 msgid "Show program"
-msgstr "Programı göster"
+msgstr ""
 
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
-msgstr "Lütfen bekleyin..."
+msgstr ""
 
 #: StatusPanel.statusMessageLabel.text
 msgid "Welcome"
-msgstr "Hoşgeldiniz"
+msgstr ""
 
 #: StatusPanel.statusMessageLabel.toolTipText
 msgid "Click to show application log"
@@ -1604,7 +1604,7 @@ msgstr ""
 
 #: Text
 msgid "Text"
-msgstr "Metin"
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.1
@@ -1751,7 +1751,8 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  zeugma https://launchpad.net/~sunder67"
+"  Alexandre Sapata Carbonell https://launchpad.net/~alexandre-sapata-"
+"carbonell"
 
 #: Undo_
 msgid "&Undo"

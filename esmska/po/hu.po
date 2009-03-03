@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-03 15:41+0200\n"
+"POT-Creation-Date: 2009-03-03 17:02+0200\n"
 "PO-Revision-Date: 2008-12-19 15:10+0000\n"
 "Last-Translator: BalintX <koczkahun@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-20 12:12+0000\n"
+"X-Launchpad-Export-Date: 2009-03-03 15:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -161,13 +161,10 @@ msgid "path"
 msgstr "elérési út"
 
 #: CommandLineParser.set_user_path
-#, fuzzy
 msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
-"Beállítja az elérési útját a felhasználó konfigurációs könyvtárának. Nem "
-"használható a -p opcióval."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
@@ -1078,13 +1075,10 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
-#, fuzzy
 msgid ""
 "<html>The user configuration directory at ''{0}''<br>can''t be read or "
 "written!</html>"
 msgstr ""
-"Beállítja az elérési útját a felhasználó konfigurációs könyvtárának. Nem "
-"használható a -p opcióval."
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
