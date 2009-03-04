@@ -352,7 +352,6 @@ public class OperatorConnector {
      * 
      * @param page A HTML page as string.
      * @return URL of the new address if meta redirect found; null otherwise.
-     *  If the resulting URL is relative URL, it will always start with '/'.
      */
     private static String checkMetaRedirect(String page) {
         Pattern pattern = Pattern.compile("<meta\\s+http-equiv=[^>]*refresh[^>]*" +
@@ -360,9 +359,6 @@ public class OperatorConnector {
         Matcher matcher = pattern.matcher(page);
         if (matcher.find()) {
             String redirect = matcher.group(1);
-            if (!redirect.startsWith("http://") && !redirect.startsWith("https://") && !redirect.startsWith("/")) {
-                redirect = "/" + redirect;
-            }
             return redirect;
         }
         return null;
@@ -370,8 +366,9 @@ public class OperatorConnector {
 
     /** Follow a meta redirect.
      * 
-     * @param redirectURL new URL. May be absolute or relative.
-     * @param currentURI current URI
+     * @param redirectURL new URL. May be absolute or relative. It if starts with
+     * slash (/) it is applied to domain root.
+     * @param currentURI current URI. Absolute or relative.
      * @return result of doGet(url) method
      * @throws java.io.IOException Problem when connecting
      */
@@ -383,20 +380,54 @@ public class OperatorConnector {
             throw new IllegalArgumentException("currentURI");
         }
 
-        //convert relative to absolute URL
         if (redirectURL.startsWith("/")) {
-            String uri = currentURI.getEscapedURI();
-            int slash = uri.indexOf('/', "https://".length());
-            if (slash > 0) {
-                uri = uri.substring(0, slash);
+            //relative redirect with slash
+            if (!isAbsoluteURL(currentURI.getEscapedURI())) {
+                //current uri is not absolute, nothing to do with it
+                //keep redirect url intact
+            } else {
+                //current uri is absolute, strip it to domain and append redirect
+                String uri = currentURI.getEscapedURI();
+                int slash = uri.indexOf('/', "https://".length());
+                if (slash > 0) {
+                    uri = uri.substring(0, slash);
+                }
+                redirectURL = uri + redirectURL;
             }
-            redirectURL = uri + redirectURL;
+        } else if (!isAbsoluteURL(redirectURL)) {
+            //relative redirect without slash
+            if (!isAbsoluteURL(currentURI.getEscapedURI())) {
+                //current uri is not absolute, strip it to last slash
+                //and append redirect
+                String uri = currentURI.getEscapedURI();
+                int slash = uri.lastIndexOf('/');
+                if (slash > 0) {
+                    uri = uri.substring(0, slash + 1);
+                } else {
+                    uri = "";
+                }
+                redirectURL = uri + redirectURL;
+            } else {
+                //current uri is absolute, strip it to last slash
+                //(but preserve domain) and append redirect
+                String uri = currentURI.getEscapedURI();
+                int slash = uri.lastIndexOf('/');
+                if (slash > "https://".length()) {
+                    uri = uri.substring(0, slash);
+                }
+                redirectURL = uri + "/" + redirectURL;
+            }
+        } else {
+            //absolute redirect
+            //keep redirect url intact
         }
+
         //check for redirection loops
         if (url.equalsIgnoreCase(redirectURL)) {
             throw new IOException("HTTP meta redirection endless loop detected");
         }
 
+        logger.fine("New redirect URL is: " + redirectURL);
         return doGet(redirectURL);
     }
     
@@ -438,7 +469,13 @@ public class OperatorConnector {
             
         } catch (Exception ex) {
             throw new IOException("The redirect '" + redirect + "' is not valid " +
-                    "redirect to URL '" + oldUrl + "'");
+                    "redirect to URL '" + oldUrl + "'", ex);
         }
     }
+
+    /** Return true if string starts with http:// or https:// */
+    private static boolean isAbsoluteURL(String url) {
+        return url.startsWith("http://") || url.startsWith("https://");
+    }
+
 }
