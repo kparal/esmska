@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-03 17:02+0200\n"
+"POT-Creation-Date: 2009-03-04 20:21+0200\n"
 "PO-Revision-Date: 2008-12-19 15:10+0000\n"
 "Last-Translator: BalintX <koczkahun@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -123,21 +123,20 @@ msgstr "&Bezárás"
 msgid "Available options:"
 msgstr "Lehetséges opciók:"
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.debug
-msgid "Print debugging output."
-msgstr "Hibakereső kimenet kiírása"
-
-#: CommandLineParser.debugNetwork
-msgid "Print debugging output of the network communication."
-msgstr "Hálózati kommunikáció hibakereső kimenet kiírása"
-
-#: CommandLineParser.debugNetworkFull
 msgid ""
-"Print debugging output of the network communication including the content of "
-"the messages. This option implies --debug-network option."
+"Print debugging output. Possible modes are:\n"
+"* {0} - program and web content debugging. Default choice when no mode "
+"specified.\n"
+"* {1} - network only debugging (but with more detail). Prints HTTP headers, "
+"all redirects, web content, etc.\n"
+"* {2} - {0} and {1} modes combined."
 msgstr ""
-"Hálózati kommunikáció hibakereső kimenet kiírása az üzenetek tartalmával "
-"együtt. Ez az opció a --debug-network opcióra utal."
+
+#: CommandLineParser.debugMode
+msgid "debug mode"
+msgstr ""
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
@@ -1782,3 +1781,16 @@ msgstr ""
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr ""
+
+#~ msgid "Print debugging output of the network communication."
+#~ msgstr "Hálózati kommunikáció hibakereső kimenet kiírása"
+
+#~ msgid ""
+#~ "Print debugging output of the network communication including the content "
+#~ "of the messages. This option implies --debug-network option."
+#~ msgstr ""
+#~ "Hálózati kommunikáció hibakereső kimenet kiírása az üzenetek tartalmával "
+#~ "együtt. Ez az opció a --debug-network opcióra utal."
+
+#~ msgid "Print debugging output."
+#~ msgstr "Hibakereső kimenet kiírása"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-03 17:02+0200\n"
+"POT-Creation-Date: 2009-03-04 20:21+0200\n"
 "PO-Revision-Date: 2008-12-31 17:23+0000\n"
 "Last-Translator: shaxter <morskov@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -117,18 +117,19 @@ msgstr "&Закрыть"
 msgid "Available options:"
 msgstr "Доступные параметры:"
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.debug
-msgid "Print debugging output."
-msgstr "Печатать отладочной отчет"
-
-#: CommandLineParser.debugNetwork
-msgid "Print debugging output of the network communication."
-msgstr "Печатать отладочной отчет сетевого соединения"
-
-#: CommandLineParser.debugNetworkFull
 msgid ""
-"Print debugging output of the network communication including the content of "
-"the messages. This option implies --debug-network option."
+"Print debugging output. Possible modes are:\n"
+"* {0} - program and web content debugging. Default choice when no mode "
+"specified.\n"
+"* {1} - network only debugging (but with more detail). Prints HTTP headers, "
+"all redirects, web content, etc.\n"
+"* {2} - {0} and {1} modes combined."
+msgstr ""
+
+#: CommandLineParser.debugMode
+msgid "debug mode"
 msgstr ""
 
 #: CommandLineParser.enable_portable_mode
@@ -1772,3 +1773,9 @@ msgstr ""
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr ""
+
+#~ msgid "Print debugging output of the network communication."
+#~ msgstr "Печатать отладочной отчет сетевого соединения"
+
+#~ msgid "Print debugging output."
+#~ msgstr "Печатать отладочной отчет"

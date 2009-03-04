@@ -202,7 +202,7 @@ public class OperatorConnector {
         if (text) { //text content
             setTextContent(new String(response, method.getResponseCharSet()));
             logger.finest("Retrieved text web content: " + contentType + "\n" +
-                    "#### WEB CONTENT ####\n" + getTextContent() + "\n#### WEB CONTENT ####");
+                    "#### WEB CONTENT START ####\n" + getTextContent() + "\n#### WEB CONTENT END ####");
         } else { //binary content
             setBinaryContent(response);
             logger.finest("Retrieved binary web content: " + contentType);
@@ -270,7 +270,7 @@ public class OperatorConnector {
         if (text) { //text content
             setTextContent(new String(response, method.getResponseCharSet()));
             logger.finest("Retrieved text web content: " + contentType + "\n" +
-                    "#### WEB CONTENT ####\n" + getTextContent() + "\n#### WEB CONTENT ####");
+                    "#### WEB CONTENT START ####\n" + getTextContent() + "\n#### WEB CONTENT END ####");
         } else { //binary content
             setBinaryContent(response);
             logger.finest("Retrieved binary web content: " + contentType);

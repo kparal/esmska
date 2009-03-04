@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-03 17:03+0200\n"
+"POT-Creation-Date: 2009-03-04 20:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,18 +113,19 @@ msgstr ""
 msgid "Available options:"
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.debug
-msgid "Print debugging output."
-msgstr ""
-
-#: CommandLineParser.debugNetwork
-msgid "Print debugging output of the network communication."
-msgstr ""
-
-#: CommandLineParser.debugNetworkFull
 msgid ""
-"Print debugging output of the network communication including the content of "
-"the messages. This option implies --debug-network option."
+"Print debugging output. Possible modes are:\n"
+"* {0} - program and web content debugging. Default choice when no mode "
+"specified.\n"
+"* {1} - network only debugging (but with more detail). Prints HTTP headers, "
+"all redirects, web content, etc.\n"
+"* {2} - {0} and {1} modes combined."
+msgstr ""
+
+#: CommandLineParser.debugMode
+msgid "debug mode"
 msgstr ""
 
 #: CommandLineParser.enable_portable_mode

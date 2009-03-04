@@ -25,6 +25,7 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
+import org.apache.commons.lang.StringUtils;
 
 /** Parses program arguments from command line
  *
@@ -43,14 +44,15 @@ public class CommandLineParser {
             l10n.getString("CommandLineParser.path")).hasArg().
             withDescription(l10n.getString("CommandLineParser.set_user_path")).
             withLongOpt("config").create("c");
-    private static final Option debugNetwork = new Option(null, "debug-network", false,
-            l10n.getString("CommandLineParser.debugNetwork"));
-    private static final Option debugNetworkFull = new Option(null, "debug-network-full", false,
-            l10n.getString("CommandLineParser.debugNetworkFull"));
     private static final Option version = new Option(null, "version", false,
             l10n.getString("CommandLineParser.version"));
-    private static final Option debug = new Option(null, "debug", false,
-            l10n.getString("CommandLineParser.debug"));
+    private static final String debugDesc = MessageFormat.format(
+            l10n.getString("CommandLineParser.debug"),
+            "standard", "network", "full");
+    private static final Option debug = OptionBuilder.
+            withArgName(l10n.getString("CommandLineParser.debugMode")).
+            hasOptionalArg().withDescription(debugDesc).withLongOpt("debug").
+            create();
 
     static {
         OptionGroup configGroup = new OptionGroup();
@@ -59,8 +61,6 @@ public class CommandLineParser {
 
         options.addOption(help);
         options.addOptionGroup(configGroup);
-        options.addOption(debugNetwork);
-        options.addOption(debugNetworkFull);
         options.addOption(version);
         options.addOption(debug);
     }
@@ -86,38 +86,34 @@ public class CommandLineParser {
             if (opts.contains(config)) {
                 configPath = config.getValue();
             }
-            if (opts.contains(debugNetwork)) {
-                System.setProperty("org.apache.commons.logging.Log",
-                        "org.apache.commons.logging.impl.SimpleLog");
-                System.setProperty("org.apache.commons.logging.simplelog.showdatetime", 
-                        "true");
-                System.setProperty("org.apache.commons.logging.simplelog.log.httpclient.wire.header",
-                        "debug");
-                System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient",
-                        "debug");
-            }
-            if (opts.contains(debugNetworkFull)) {
-                System.setProperty("org.apache.commons.logging.Log",
-                        "org.apache.commons.logging.impl.SimpleLog");
-                System.setProperty("org.apache.commons.logging.simplelog.showdatetime",
-                        "true");
-                System.setProperty("org.apache.commons.logging.simplelog.log.httpclient.wire", 
-                        "debug");
-                System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient", 
-                        "debug");
-            }
             if (opts.contains(version)) {
                 System.out.println("Esmska " + Config.getLatestVersion());
                 System.exit(0);
             }
             if (opts.contains(debug)) {
-                Logger mainLogger = Logger.getLogger("esmska");
-                mainLogger.setLevel(Level.ALL);
-                
-                ConsoleHandler console = new ConsoleHandler();
-                console.setLevel(Level.ALL);
-                mainLogger.addHandler(console);
-                mainLogger.setUseParentHandlers(false);
+                String debugMode = debug.getValue();
+                //in network and full mode enable httpclient logging
+                if (StringUtils.equals(debugMode, "network") ||
+                        StringUtils.equals(debugMode, "full")) {
+                    System.setProperty("org.apache.commons.logging.Log",
+                            "org.apache.commons.logging.impl.SimpleLog");
+                    System.setProperty("org.apache.commons.logging.simplelog.showdatetime",
+                            "true");
+                    System.setProperty("org.apache.commons.logging.simplelog.log.httpclient.wire",
+                            "debug");
+                    System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient",
+                            "debug");
+                }
+                //enable program logging always except network mode
+                if (!StringUtils.equals(debugMode, "network")) {
+                    Logger mainLogger = Logger.getLogger("esmska");
+                    mainLogger.setLevel(Level.ALL);
+
+                    ConsoleHandler console = new ConsoleHandler();
+                    console.setLevel(Level.ALL);
+                    mainLogger.addHandler(console);
+                    mainLogger.setUseParentHandlers(false);
+                }
             }
 
         } catch (ParseException ex) {

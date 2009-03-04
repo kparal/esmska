@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-03 17:02+0200\n"
-"PO-Revision-Date: 2009-03-03 15:36+0000\n"
+"POT-Creation-Date: 2009-03-04 20:24+0200\n"
+"PO-Revision-Date: 2009-03-04 20:24+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -119,21 +119,26 @@ msgstr "&Zavřít"
 msgid "Available options:"
 msgstr "Dostupné volby:"
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.debug
-msgid "Print debugging output."
-msgstr "Vypisovat ladící výstup."
-
-#: CommandLineParser.debugNetwork
-msgid "Print debugging output of the network communication."
-msgstr "Vypisovat ladící výstup síťové komunikace."
-
-#: CommandLineParser.debugNetworkFull
 msgid ""
-"Print debugging output of the network communication including the content of "
-"the messages. This option implies --debug-network option."
+"Print debugging output. Possible modes are:\n"
+"* {0} - program and web content debugging. Default choice when no mode "
+"specified.\n"
+"* {1} - network only debugging (but with more detail). Prints HTTP headers, "
+"all redirects, web content, etc.\n"
+"* {2} - {0} and {1} modes combined."
 msgstr ""
-"Vypisovat ladící výstup síťové komunikace včetně obsahu zpráv. Tato volba "
-"zahrnuje volbu --debug-network."
+"Vypisovat ladící výstup. Možné režimy jsou:\n"
+"* {0} - ladění programu a webového obsahu. Výchozí volba když není "
+"specifikovaný režim.\n"
+"* {1} - ladění pouze sítě (ale podrobněji). Vypisuje hlavičky HTTP, všechny "
+"přesměrování, webový obsah, atd.\n"
+"* {2} - režimy {0} a {1} dohromady."
+
+#: CommandLineParser.debugMode
+msgid "debug mode"
+msgstr "režim ladění"
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
@@ -2023,6 +2028,19 @@ msgstr "Znovu spustit frontu sms"
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Klikněte pro otevření stránky s možností stažení programu"
+
+#~ msgid "Print debugging output of the network communication."
+#~ msgstr "Vypisovat ladící výstup síťové komunikace."
+
+#~ msgid ""
+#~ "Print debugging output of the network communication including the content "
+#~ "of the messages. This option implies --debug-network option."
+#~ msgstr ""
+#~ "Vypisovat ladící výstup síťové komunikace včetně obsahu zpráv. Tato volba "
+#~ "zahrnuje volbu --debug-network."
+
+#~ msgid "Print debugging output."
+#~ msgstr "Vypisovat ladící výstup."
 
 #~ msgid ""
 #~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
