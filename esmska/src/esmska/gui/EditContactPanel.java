@@ -215,10 +215,10 @@ public class EditContactPanel extends javax.swing.JPanel {
     private boolean checkValid(JComponent c) {
         boolean valid = true;
         if (c == nameTextField) {
-            valid = FormChecker.checkContactName(nameTextField.getText());
+            valid = StringUtils.isNotEmpty(nameTextField.getText());
             updateBorder(c, valid);
         } else if (c == numberTextField) {
-            valid = FormChecker.checkSMSNumber(numberTextField.getText());
+            valid = Contact.isValidNumber(numberTextField.getText());
             updateBorder(c, valid);
         }
         return valid;

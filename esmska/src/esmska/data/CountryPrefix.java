@@ -4,7 +4,6 @@
  */
 package esmska.data;
 
-import esmska.data.Operator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -351,5 +350,27 @@ public class CountryPrefix {
             }
         }
         return null;
+    }
+
+    /** Check validity of country prefix
+     * @return true if prefix is in form +[0-9]{1,4}, false otherwise
+     */
+    public static boolean isValidCountryPrefix(String prefix) {
+        if (prefix == null) {
+            return false;
+        }
+        if (!prefix.startsWith("+")) {
+            return false;
+        }
+        prefix = prefix.substring(1); //strip the "+"
+        if (prefix.length() < 1 || prefix.length() > 4) {
+            return false;
+        }
+        for (Character c : prefix.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

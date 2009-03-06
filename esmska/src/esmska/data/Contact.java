@@ -39,7 +39,7 @@ public class Contact extends Object implements Comparable<Contact> {
         this(c.getName(), c.getNumber(), c.getOperator());
     }
 
-    /** Create new contact. */
+    /** Create new contact. For detailed parameters restrictions see individual setter methods. */
     public Contact(String name, String number, String operator) {
         setName(name);
         setNumber(number);
@@ -59,7 +59,7 @@ public class Contact extends Object implements Comparable<Contact> {
         return this.name;
     }
 
-    /** Get full phone number including the country code (starting with "+")
+    /** Get valid full phone number including the country code (starting with "+")
      or empty string. Never null. */
     public String getNumber() {
         return this.number;
@@ -88,15 +88,15 @@ public class Contact extends Object implements Comparable<Contact> {
     }
 
     /** Set full phone number.
-     * @param number new contact number including the country code (starting with "+").
-     * Alternatively it can be an empty string. Null value is changed to empty string.
+     * @param number new contact number. Must be valid (see {@link #isValidNumber})
+     * or an empty string. Null value is changed to an empty string.
      */
     public void setNumber(String number) {
         if (number == null) {
             number = "";
         }
-        if (number.length() > 0 && !number.startsWith("+")) {
-            throw new IllegalArgumentException("Number does not start with '+': " + number);
+        if (number.length() > 0 && !isValidNumber(number)) {
+            throw new IllegalArgumentException("Number is not valid: " + number);
         }
 
         String oldNumber = this.number;
@@ -121,7 +121,29 @@ public class Contact extends Object implements Comparable<Contact> {
         }
     }
     // </editor-fold>
-    
+
+    /** Check validity of phone number
+     * @return true if number is in form +[0-9]{2,15}, false otherwise
+     */
+    public static boolean isValidNumber(String number) {
+        if (number == null) {
+            return false;
+        }
+        if (!number.startsWith("+")) {
+            return false;
+        }
+        number = number.substring(1); //strip the "+"
+        if (number.length() < 2 || number.length() > 15) {
+            return false;
+        }
+        for (Character c : number.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public int compareTo(Contact c) {
         Collator collator = Collator.getInstance();

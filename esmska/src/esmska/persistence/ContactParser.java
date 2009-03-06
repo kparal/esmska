@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import javax.swing.SwingWorker;
 import esmska.data.Contact;
 import esmska.data.Operators;
-import esmska.gui.FormChecker;
 import esmska.data.Operator;
 import java.io.FileInputStream;
 import java.util.logging.Logger;
@@ -119,10 +118,10 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                         operator = reader.get(2);
                 }
 
-                if (!FormChecker.checkContactName(name)) {
+                if (StringUtils.isEmpty(name)) {
                     continue;
                 }
-                if (!FormChecker.checkSMSNumber(number)) {
+                if (!Contact.isValidNumber(number)) {
                     continue;
                 }
 

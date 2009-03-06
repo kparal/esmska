@@ -587,7 +587,7 @@
                 </BindingProperty>
               </BindingProperties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryPrefixTextField.setInputVerifier(new InputVerifier() {&#xa;            @Override&#xa;            public boolean verify(JComponent input) {&#xa;                String prefix = countryPrefixTextField.getText();&#xa;                return prefix.length() == 0 || FormChecker.checkCountryPrefix(prefix);&#xa;            }&#xa;        });&#xa;countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                if (!fullyInicialized) {&#xa;                    return;&#xa;                }&#xa;                updateCountryCode();&#xa;            }&#xa;});"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryPrefixTextField.setInputVerifier(new InputVerifier() {&#xa;            @Override&#xa;            public boolean verify(JComponent input) {&#xa;                String prefix = countryPrefixTextField.getText();&#xa;                return prefix.isEmpty() || CountryPrefix.isValidCountryPrefix(prefix);&#xa;            }&#xa;        });&#xa;countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                if (!fullyInicialized) {&#xa;                    return;&#xa;                }&#xa;                updateCountryCode();&#xa;            }&#xa;});"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -745,7 +745,7 @@
                       <Component id="showPasswordCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="154" max="32767" attributes="0"/>
+                      <EmptySpace pref="169" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1032,7 +1032,7 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="207" max="32767" attributes="0"/>
+                      <EmptySpace pref="222" max="32767" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

@@ -8,7 +8,6 @@ package esmska.gui;
 
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
-import esmska.*;
 import esmska.gui.ThemeManager.LAF;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
@@ -550,7 +549,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             @Override
             public boolean verify(JComponent input) {
                 String prefix = countryPrefixTextField.getText();
-                return prefix.length() == 0 || FormChecker.checkCountryPrefix(prefix);
+                return prefix.isEmpty() || CountryPrefix.isValidCountryPrefix(prefix);
             }
         });
         countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
@@ -782,7 +781,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
             .addComponent(jLabel13)
             .addContainerGap())
     );
@@ -968,7 +967,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
             .addComponent(jLabel17)
             .addContainerGap())
     );
@@ -1064,7 +1063,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void formWindowClosed(WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         //check validity of country prefix
         String prefix = countryPrefixTextField.getText();
-        if (prefix.length() > 0 && !FormChecker.checkCountryPrefix(prefix)) {
+        if (prefix.length() > 0 && !CountryPrefix.isValidCountryPrefix(prefix)) {
             config.setCountryPrefix("");
         }
         //save config

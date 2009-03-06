@@ -136,7 +136,7 @@ public class SMSPanel extends javax.swing.JPanel {
             return false;
         }
         for (Contact c : envelope.getContacts()) {
-            if (!FormChecker.checkSMSNumber(c.getNumber())) {
+            if (!Contact.isValidNumber(c.getNumber())) {
                 if (transferFocus) {
                     recipientTextField.requestFocusInWindow();
                 }
@@ -852,7 +852,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 text = config.getCountryPrefix() + text;
             }
             //prepend country prefix if not present and text is a number
-            if (FormChecker.checkSMSNumber(text)) {
+            if (Contact.isValidNumber(text)) {
                 return text;
             } else { //text is a name
                 return super.getText();
@@ -888,7 +888,7 @@ public class SMSPanel extends javax.swing.JPanel {
             }
             
             String text = getText();
-            if (FormChecker.checkSMSNumber(text)) {
+            if (Contact.isValidNumber(text)) {
                 return text;
             } else {
                 return null;
