@@ -38,11 +38,13 @@ public class OperatorInterpreter {
     
     /** recreate needed variables before every use */
     private void init() {
-        engine = manager.getEngineByName("js");
+        if (engine == null) {
+            engine = manager.getEngineByName("js");
+            invocable = (Invocable) engine;
+        }
         if (engine == null) {
             throw new IllegalStateException("JavaScript execution not supported");
         }
-        invocable = (Invocable) engine;
         if (variables == null) {
              variables = new HashMap<OperatorVariable, String>();
         }
