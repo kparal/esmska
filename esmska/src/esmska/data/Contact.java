@@ -6,7 +6,6 @@
 
 package esmska.data;
 
-import esmska.data.Operator;
 import java.beans.*;
 import java.text.Collator;
 import org.apache.commons.lang.builder.CompareToBuilder;

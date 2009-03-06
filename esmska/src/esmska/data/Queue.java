@@ -73,6 +73,7 @@ public class Queue {
     private static final Logger logger = Logger.getLogger(Queue.class.getName());
     private static final History history = History.getInstance();
 
+    /** map of [operator name;SMS[*]] */
     private final SortedMap<String,List<SMS>> queue = Collections.synchronizedSortedMap(new TreeMap<String,List<SMS>>());
     private final AtomicBoolean paused = new AtomicBoolean();
     //map of <operator name, current delay in seconds>
