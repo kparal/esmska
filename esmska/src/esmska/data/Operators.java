@@ -8,12 +8,22 @@ package esmska.data;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
+import java.beans.IntrospectionException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import org.apache.commons.lang.Validate;
 
 /** Class managing all operators
@@ -35,6 +45,8 @@ public class Operators {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final SortedSet<Operator> operators = Collections.synchronizedSortedSet(new TreeSet<Operator>());
     private static final Keyring keyring = Keyring.getInstance();
+    private static final ScriptEngineManager manager = new ScriptEngineManager();
+    private static ScriptEngine jsEngine;
 
     // <editor-fold defaultstate="collapsed" desc="ValuedEvent support">
     private ValuedEventSupport<Events, Operator> valuedSupport = new ValuedEventSupport<Events, Operator>(this);
@@ -316,5 +328,37 @@ public class Operators {
         }
 
         return builder.toString();
+    }
+
+    /** Parse OperatorInfo implementation from the provided URL.
+     * @param script URL (file or jar) of operator script
+     * @return OperatorInfo implementation
+     * @throws IOException when there is problem accessing the script file
+     * @throws ScriptException when the script is not valid
+     * @throws IntrospectionException when current JRE does not support JavaScript execution
+     */
+    public static OperatorInfo parseInfo(URL script) throws IOException, ScriptException, IntrospectionException {
+        logger.finer("Parsing info of script: " + script.toExternalForm());
+        if (jsEngine == null) {
+            jsEngine = manager.getEngineByName("js");
+        }
+        if (jsEngine == null) {
+            throw new IntrospectionException("JavaScript execution not supported");
+        }
+        Invocable invocable = (Invocable) jsEngine;
+        Reader reader = null;
+        try {
+            reader = new InputStreamReader(script.openStream(), "UTF-8");
+            //the script must be evaluated before extracting the interface
+            jsEngine.eval(reader);
+            OperatorInfo operatorInfo = invocable.getInterface(OperatorInfo.class);
+            return operatorInfo;
+        } finally {
+            try {
+                reader.close();
+            } catch (Exception ex) {
+                logger.log(Level.WARNING, "Error closing script: " + script.toExternalForm(), ex);
+            }
+        }
     }
 }

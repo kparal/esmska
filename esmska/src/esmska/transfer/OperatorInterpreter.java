@@ -4,14 +4,11 @@
  */
 package esmska.transfer;
 
-import esmska.data.OperatorInfo;
 import esmska.data.Operator;
 import esmska.utils.L10N;
-import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +20,6 @@ import java.util.logging.Logger;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 
 /** Class that takes care of parsing operator script files for extracting 
  * operator info and sending messages.
@@ -43,41 +39,15 @@ public class OperatorInterpreter {
     /** recreate needed variables before every use */
     private void init() {
         engine = manager.getEngineByName("js");
+        if (engine == null) {
+            throw new IllegalStateException("JavaScript execution not supported");
+        }
         invocable = (Invocable) engine;
         if (variables == null) {
              variables = new HashMap<OperatorVariable, String>();
         }
     }
     
-    /** Parse OperatorInfo implementation from the provided URL.
-     * @param script URL (file or jar) of operator script
-     * @return OperatorInfo implementation
-     * @throws IOException when there is problem accessing the script file
-     * @throws ScriptException when the script is not valid
-     * @throws IntrospectionException when current JRE does not support JavaScript execution
-     */
-    public OperatorInfo parseInfo(URL script) throws IOException, ScriptException, IntrospectionException {
-        logger.finer("Parsing info of script: " + script.toExternalForm());
-        init();
-        if (engine == null) {
-            throw new IntrospectionException("JavaScript execution not supported");
-        }
-        Reader reader = null;
-        try {
-            reader = new InputStreamReader(script.openStream(), "UTF-8");
-            //the script must be evaluated before extracting the interface
-            engine.eval(reader);
-            OperatorInfo operatorInfo = invocable.getInterface(OperatorInfo.class);
-            return operatorInfo;
-        } finally {
-            try {
-                reader.close();
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, "Error closing script: " + script.toExternalForm(), ex);
-            }
-        }
-    }
-
     /** Send message for provided Operator with provided variables.
      * @param operator Operator, which should be used to send message.
      * @param variables Map of OperatorVariable to String. May contain null values.

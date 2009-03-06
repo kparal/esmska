@@ -4,7 +4,6 @@
  */
 package esmska.data;
 
-import esmska.transfer.OperatorInterpreter;
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +22,6 @@ import javax.swing.ImageIcon;
 public class DefaultOperator implements Operator {
 
     private static final Logger logger = Logger.getLogger(DefaultOperator.class.getName());
-    private static final OperatorInterpreter interpreter = new OperatorInterpreter();
     private URL script;
     private String name, version, maintainer, website, countryPrefix;
     private String[] operatorPrefixes, supportedLanguages;
@@ -44,7 +42,7 @@ public class DefaultOperator implements Operator {
             PrivilegedActionException, IntrospectionException {
         this.script = script;
         
-        OperatorInfo info = interpreter.parseInfo(script);
+        OperatorInfo info = Operators.parseInfo(script);
         if (info == null || info.getName() == null || info.getName().length() <= 0) {
             throw new ScriptException("Not a valid operator script", script.toExternalForm(), 0);
         }
