@@ -34,7 +34,7 @@ public class Config extends Object implements Serializable {
     private Integer verticalSplitPaneLocation;
     private ThemeManager.LAF lookAndFeel = ThemeManager.LAF.SUBSTANCE;
     private String lafJGoodiesTheme = "Experience Blue";
-    private String lafSubstanceSkin = "Sahara";
+    private String lafSubstanceSkin = "Business Black Steel";
     private boolean removeAccents = true;
     private boolean checkForUpdates = true;
     private boolean startCentered = false;
