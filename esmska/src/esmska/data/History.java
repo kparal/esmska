@@ -98,6 +98,28 @@ public class History {
         logger.finer(records.size() + " history records removed");
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
     }
+
+    /** Remove all records older than limit time
+     * @param date limit time which records to keep, older are removed; not null
+     */
+    public void removeRecordsOlderThan(Date date) {
+        Validate.notNull(date);
+        
+        logger.fine("Erasing all history records older than: " + date);
+        synchronized (records) {
+            ListIterator<Record> iter = records.listIterator();
+            while (iter.hasNext()) {
+                Record record = iter.next();
+                if (record.getDate().before(date)) {
+                    iter.remove();
+                } else {
+                    //records are sorted in time, therefore on first newer message
+                    //stop iterating
+                    break;
+                }
+            }
+        }
+    }
     
     /** delete all records */
     public void clearRecords() {

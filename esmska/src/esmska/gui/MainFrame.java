@@ -658,24 +658,12 @@ public class MainFrame extends javax.swing.JFrame {
     private boolean saveHistory() {
         //erase old messages from history if demanded
         if (config.isReducedHistory()) {
-            List<Record> records = history.getRecords();
             //computer last acceptable record time
             Calendar limitCal = Calendar.getInstance();
             limitCal.add(Calendar.DAY_OF_MONTH, -config.getReducedHistoryCount());
             Date limit = limitCal.getTime();
-            //traverse through history and erase all older records than the limit time
-            logger.fine("Erasing all history records older than: " + limit);
-            ListIterator<Record> iter = records.listIterator();
-            while (iter.hasNext()) {
-                Record record = iter.next();
-                if (record.getDate().before(limit)) {
-                    iter.remove();
-                } else {
-                    //records are sorted in time, therefore on first newer message
-                    //stop iterating
-                    break;
-                }
-            }
+            //remove old records
+            history.removeRecordsOlderThan(limit);
         }
         
         try {
