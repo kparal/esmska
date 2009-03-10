@@ -289,8 +289,8 @@ public class EditContactPanel extends javax.swing.JPanel {
         String number = numberTextField.getText();
         String operator = operatorComboBox.getSelectedOperatorName();
         
-        if (StringUtils.isEmpty(name) || StringUtils.isEmpty(number) ||
-                StringUtils.isEmpty(operator)) {
+        if (!multiMode && (StringUtils.isEmpty(name) || StringUtils.isEmpty(number) ||
+                StringUtils.isEmpty(operator))) {
             return null;
         } else {
             return new Contact(name, number, operator);
