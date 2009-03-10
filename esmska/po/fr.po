@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-07 16:36+0200\n"
+"POT-Creation-Date: 2009-03-10 14:50+0200\n"
 "PO-Revision-Date: 2008-12-22 00:23+0000\n"
 "Last-Translator: Arnaud Bonatti <arnaud.bonatti@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -601,6 +601,12 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: ContactPanel.addedContact
+#, fuzzy
+msgid "Added new contact: {0}"
+msgstr "Ajouter un nouveau contact"
+
 #: ContactPanel.border.title
 msgid "Contacts"
 msgstr ""
@@ -609,10 +615,30 @@ msgstr ""
 msgid "Contact list (Alt+K)"
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: ContactPanel.editedContact
+msgid "Contact {0} modified"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: ContactPanel.editedContacts
+msgid "{0} contacts modified"
+msgstr ""
+
 #: ContactPanel.new_contact_hint
 msgid ""
 "<html>You don't have any contact created. Add a new one with buttons below.</"
 "html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: ContactPanel.removeContact
+msgid "{0} removed from contacts"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: ContactPanel.removeContacts
+msgid "{0} contacts removed"
 msgstr ""
 
 #: ContactPanel.remove_following_contacts

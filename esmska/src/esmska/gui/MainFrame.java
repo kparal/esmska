@@ -58,7 +58,6 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
 import esmska.data.History;
-import esmska.data.History.Record;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.Operators;
@@ -79,7 +78,6 @@ import java.beans.Beans;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.ListIterator;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import org.apache.commons.lang.StringUtils;
@@ -101,11 +99,11 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** sender of sms */
     private SMSSender smsSender;
-    private PersistenceManager persistenceManager;
-    private Config config = Config.getInstance();
-    private History history = History.getInstance();
-    private Log log = Log.getInstance();
-    private Queue queue = Queue.getInstance();
+    private static PersistenceManager persistenceManager;
+    private static final Config config = Config.getInstance();
+    private static final History history = History.getInstance();
+    private static final Log log = Log.getInstance();
+    private static final Queue queue = Queue.getInstance();
     /** shutdown handler thread */
     private Thread shutdownThread = new ShutdownThread();
     

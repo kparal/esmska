@@ -10,6 +10,7 @@ import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.CountryPrefix;
 import esmska.data.Icons;
+import esmska.data.Log;
 import esmska.data.Operators;
 import esmska.data.Operator;
 import esmska.data.event.ActionEventSupport;
@@ -30,6 +31,7 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -77,8 +79,9 @@ public class ContactPanel extends javax.swing.JPanel {
     private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(ContactPanel.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private Contacts contacts = Contacts.getInstance();
-    
+    private static final Contacts contacts = Contacts.getInstance();
+    private static final Log log = Log.getInstance();
+
     private Action addContactAction = new AddContactAction();
     private Action editContactAction = new EditContactAction();
     private Action removeContactAction = new RemoveContactAction();
@@ -394,6 +397,9 @@ public class ContactPanel extends javax.swing.JPanel {
             }
             contacts.add(c);
             contactList.setSelectedValue(c, true);
+            log.addRecord(new Log.Record(
+                    MessageFormat.format(l10n.getString("ContactPanel.addedContact"), c.getName()),
+                    null, Icons.STATUS_INFO));
         }
     }
     
@@ -437,6 +443,9 @@ public class ContactPanel extends javax.swing.JPanel {
                 }
                 contact.copyFrom(edited);
                 contactList.setSelectedValue(contact, true);
+                log.addRecord(new Log.Record(
+                    MessageFormat.format(l10n.getString("ContactPanel.editedContact"), contact.getName()),
+                    null, Icons.STATUS_INFO));
             } else { //multiple contacts edited
                 contactDialog.setTitle(l10n.getString("Edit_contacts_collectively"));
                 ArrayList<Contact> list = new ArrayList<Contact>(selected.length);
@@ -454,6 +463,9 @@ public class ContactPanel extends javax.swing.JPanel {
                     contact.setOperator(c.getOperator());
                 }
                 contactList.setSelectedIndices(selection);
+                log.addRecord(new Log.Record(
+                    MessageFormat.format(l10n.getString("ContactPanel.editedContacts"), list.size()),
+                    null, Icons.STATUS_INFO));
             }
             
         }
@@ -510,6 +522,16 @@ public class ContactPanel extends javax.swing.JPanel {
             
             //delete
             contacts.removeAll(condemned);
+
+            String message;
+            if (condemned.size() == 1) {
+                message = MessageFormat.format(l10n.getString("ContactPanel.removeContact"),
+                        condemned.iterator().next().getName());
+            } else {
+                message = MessageFormat.format(l10n.getString("ContactPanel.removeContacts"),
+                        condemned.size());
+            }
+            log.addRecord(new Log.Record(message, null, Icons.STATUS_INFO));
         }
     }
     

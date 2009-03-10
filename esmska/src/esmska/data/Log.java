@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import org.apache.commons.lang.ObjectUtils;
 
-/** Class for collecting log messages
+/** Class for collecting user-side log messages
  *
  * @author ripper
  */
