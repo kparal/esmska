@@ -29,7 +29,7 @@ PODIR="$PWD/../po"
 
 cd "$PODIR"
 
-# remove value from translator-credits because of Launchpad bug
+# remove value from translator-credits because of Launchpad bug #278955
 for PO in *.po; do
     mv "$PO" "${PO}_orig"
     sed 's/^".*Launchpad Contributions.*"$/""/' "${PO}_orig" | 
