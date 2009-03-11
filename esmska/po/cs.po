@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-10 14:52+0200\n"
-"PO-Revision-Date: 2009-03-10 14:52+0100\n"
+"POT-Creation-Date: 2009-03-11 14:57+0200\n"
+"PO-Revision-Date: 2009-03-11 13:54+0000\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-03 15:52+0000\n"
+"X-Launchpad-Export-Date: 2009-03-11 13:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -2060,19 +2060,6 @@ msgstr "Znovu spustit frontu sms"
 msgid "Click to open program downloads page"
 msgstr "Klikněte pro otevření stránky s možností stažení programu"
 
-#~ msgid "Print debugging output of the network communication."
-#~ msgstr "Vypisovat ladící výstup síťové komunikace."
-
-#~ msgid ""
-#~ "Print debugging output of the network communication including the content "
-#~ "of the messages. This option implies --debug-network option."
-#~ msgstr ""
-#~ "Vypisovat ladící výstup síťové komunikace včetně obsahu zpráv. Tato volba "
-#~ "zahrnuje volbu --debug-network."
-
-#~ msgid "Print debugging output."
-#~ msgstr "Vypisovat ladící výstup."
-
 #~ msgid ""
 #~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "
 #~ "project</a></html>"
@@ -2123,6 +2110,19 @@ msgstr "Klikněte pro otevření stránky s možností stažení programu"
 
 #~ msgid "List of available operators web gateways"
 #~ msgstr "Seznam dostupných webových bran operátorů"
+
+#~ msgid "Print debugging output of the network communication."
+#~ msgstr "Vypisovat ladící výstup síťové komunikace."
+
+#~ msgid ""
+#~ "Print debugging output of the network communication including the content "
+#~ "of the messages. This option implies --debug-network option."
+#~ msgstr ""
+#~ "Vypisovat ladící výstup síťové komunikace včetně obsahu zpráv. Tato volba "
+#~ "zahrnuje volbu --debug-network."
+
+#~ msgid "Print debugging output."
+#~ msgstr "Vypisovat ladící výstup."
 
 #~ msgid "Show"
 #~ msgstr "Zobrazit"

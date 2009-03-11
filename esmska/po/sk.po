@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-10 14:50+0200\n"
-"PO-Revision-Date: 2009-02-26 22:38+0000\n"
-"Last-Translator: sudca <Unknown>\n"
+"POT-Creation-Date: 2009-03-11 14:57+0200\n"
+"PO-Revision-Date: 2009-03-11 13:54+0000\n"
+"Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-03 15:52+0000\n"
+"X-Launchpad-Export-Date: 2009-03-11 13:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -166,6 +166,8 @@ msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
+"Nastavenie cesty k používateľskému adresáru. Uveďte absolútnu cestu. Nieje "
+"možné použiť s -p."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
@@ -217,7 +219,7 @@ msgstr "O&dstrániť všetky prihlasovacie údaje"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all operators"
-msgstr ""
+msgstr "Zmazať všetky používateľské mená a heslá k všetkým operátorom"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
@@ -554,11 +556,11 @@ msgstr "Číslo odosielateľa v medzinárodnom formáte (začínajúce znakom \"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Show password"
-msgstr ""
+msgstr "Zobraziť heslá"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
-msgstr ""
+msgstr "Zobrazí alebo nezobrazí písanie hesla"
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -710,9 +712,8 @@ msgstr "Kontakt"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
-#, fuzzy
 msgid "Added new contact: {0}"
-msgstr "Pridať nový kontakt"
+msgstr ""
 
 #: ContactPanel.border.title
 msgid "Contacts"
@@ -724,21 +725,21 @@ msgstr "Zoznam kontaktov (Alt+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
-#, fuzzy
 msgid "Contact {0} modified"
-msgstr "Meno kontaktu"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContacts
-#, fuzzy
 msgid "{0} contacts modified"
-msgstr "Exportovať kontakty do súboru"
+msgstr ""
 
 #: ContactPanel.new_contact_hint
 msgid ""
 "<html>You don't have any contact created. Add a new one with buttons below.</"
 "html>"
 msgstr ""
+"<html>Nemáte vytvorené žiadny kontakt. Pridajte nový pomocou tlačidieľ "
+"nižššie.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContact
@@ -1092,7 +1093,7 @@ msgstr "Boli nájdené nasledujúce nové kontakty:"
 
 #: ImportFrame.foundNoContacts
 msgid "No new contacts were found."
-msgstr ""
+msgstr "Neboli nájdené žiadne nové kontakty."
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1223,7 +1224,7 @@ msgstr ""
 
 #: Import_
 msgid "Im&port"
-msgstr ""
+msgstr "Im&portovať"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
@@ -1265,6 +1266,8 @@ msgid ""
 "<html>The user configuration directory at ''{0}''<br>can''t be read or "
 "written!</html>"
 msgstr ""
+"<html>Adresár s používateľskými nastaveniami ''{0}''<br>nemohol byť načítaný "
+"alebo zapísaný!</html>"
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
@@ -1371,6 +1374,17 @@ msgid ""
 "Windows).</li>\n"
 "</ul></html>"
 msgstr ""
+"<html>\n"
+"<h2>Nepodarilo sa nájsť žiadnych operátorov!</h2>\n"
+"Bez operátorov je program nepoužiteľný. Príčina problému môže byť:<br>\n"
+"<ul>\n"
+"<li>Váš program je nekorektne nainštalovaný a niektoré súbory buť<br>\n"
+"chýbajú alebo sú poškodené. Vyskúšajte ho opäť stiahnuť.</li>\n"
+"<li>Operačný systém nesprávne nastavil cestu k programu.<br>\n"
+"Zkúste namiesto poklikania na <i>esmska.jar</i> spustit program pomocou<br>\n"
+"súboru <i>esmska.sh</i> (v Linuxe, a pod.) alebo <i>esmska.exe</i> (vo "
+"Windows).</li>\n"
+"</ul></html>"
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &Problem..."
@@ -1457,32 +1471,32 @@ msgstr "Pozastaviť/spustiť odosielanie"
 
 #: Operator.unknown
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Neznáma brána"
 
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Guess a suitable gateway"
-msgstr ""
+msgstr "Odhadnúť vhodnú bránu"
 
 #: OperatorComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
-msgstr ""
+msgstr "Odhadnúť vhodnú bránu pre zadané číslo"
 
 #: OperatorComboBox.international
 msgid "Can be used internationally."
-msgstr ""
+msgstr "Možné použiť medzinárodne"
 
 #: OperatorComboBox.needRegistration
 msgid "Requires registration on the website."
-msgstr ""
+msgstr "Vyžaduje registráciu na webovej stránke"
 
 #: OperatorComboBox.noRegistration
 msgid "Does not require registration."
-msgstr ""
+msgstr "Nevyžaduje registráciu"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
 msgid "Only usable for the country: {0}"
-msgstr ""
+msgstr "Možné použiť len pre krajinu: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.operatorTooltip
@@ -1495,9 +1509,15 @@ msgid ""
 "{4}\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<b>{0}</b><br>\n"
+"Webová stránka: <a href=\"{1}\">{1}</a><br><br>\n"
+"{2}<br>\n"
+"Odstup medzi správami: {3}<br>\n"
+"{4}\n"
+"</html>"
 
 #: OperatorComboBox.tooltip
-#, fuzzy
 msgid ""
 "<html>\n"
 "List of available operators web gateways.<br>\n"
@@ -1509,12 +1529,6 @@ msgid ""
 "to see detailed information about that gateway.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Zoznam dostupných webových brán operáorov.<br>\n"
-"<br>\n"
-"Predpona [XX] označuje zem, pre ktorú daná brána funguje.<br>\n"
-"Predpona [INT] označuje mezinárodné brány.\n"
-"</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
@@ -1550,6 +1564,12 @@ msgid ""
 "operator <a href=\"{0}\">web gateway</a> works,<br>report the problem on "
 "program homepage."
 msgstr ""
+"Vyskytla sa neznáma chyba. Operátor možno zmenil<br>svoje webové stránky "
+"alebo má snimi aktuálne problémy.<br>Skuste to neskôr.<br><br>Taktiež sa "
+"uistite, že máte funkčné pripojenie k internetu<br>a že používate najnovšiu "
+"verziou programu.<br><br>Ak problém pretrváva a <a href=\"{0}\">webová "
+"brána</a> operátora funguje,<br> nahláste problém na domovskej stránke "
+"programu."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_WRONG_AUTH
@@ -1561,6 +1581,13 @@ msgid ""
 "<br><br>If you have entered your login credentials correctly, visit the "
 "website<br>of the gateway and check that logging in works."
 msgstr ""
+"Zadali ste nesprávne prihlasovacie údaje.<br>Táto brána vyžaduje "
+"registráciu, bez ktorej nieje možné cez túto bránu posielať správy."
+"<br>Navštívte <a href=\"{0}\">webovú stránku</a> tejto brány a zistite ako "
+"sa zaregistrovať či prihlásiť.<br>Potom vyplňte prihlasovacie údaje v "
+"nastaveniach programu.<br><br>Ak máte prihlasovacie údaje vyplnené správne, "
+"navštívte webovú stránku brány<br>a preverte ujistite sa, že prihlásenie "
+"funguje."
 
 #: OperatorExecutor.ERROR_WRONG_CODE
 msgid "You have entered the wrong security code."
@@ -2031,20 +2058,7 @@ msgstr "Znovu spustiť SMS frontu"
 
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
-msgstr ""
-
-#~ msgid "Print debugging output of the network communication."
-#~ msgstr "Vypisovať odlaďovací výstup sieťovej komunikácie."
-
-#~ msgid ""
-#~ "Print debugging output of the network communication including the content "
-#~ "of the messages. This option implies --debug-network option."
-#~ msgstr ""
-#~ "Vypisovať odlaďovací výstup sieťovej komunikácie vrátane obsahu správ.\n"
-#~ "Táto voľba zahŕňa voľbu --debug-network."
-
-#~ msgid "Print debugging output."
-#~ msgstr "Vypísať ladiaci výstup."
+msgstr "Kliknite pre otvorenie stránky s možnosťou stiahnutia programu"
 
 #~ msgid ""
 #~ "<html><i>\n"
@@ -2080,3 +2094,16 @@ msgstr ""
 #~ "Vykresľovat okraje okien programu zvoleným vzhľadom<br>\n"
 #~ "alebo vzhľadom operačného systému.\n"
 #~ "</html>"
+
+#~ msgid "Print debugging output of the network communication."
+#~ msgstr "Vypisovať odlaďovací výstup sieťovej komunikácie."
+
+#~ msgid ""
+#~ "Print debugging output of the network communication including the content "
+#~ "of the messages. This option implies --debug-network option."
+#~ msgstr ""
+#~ "Vypisovať odlaďovací výstup sieťovej komunikácie vrátane obsahu správ.\n"
+#~ "Táto voľba zahŕňa voľbu --debug-network."
+
+#~ msgid "Print debugging output."
+#~ msgstr "Vypísať ladiaci výstup."

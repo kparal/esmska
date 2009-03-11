@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-10 14:50+0200\n"
+"POT-Creation-Date: 2009-03-11 14:57+0200\n"
 "PO-Revision-Date: 2008-11-01 14:48+0000\n"
 "Last-Translator: nanker <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-03 15:52+0000\n"
+"X-Launchpad-Export-Date: 2009-03-11 13:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -599,9 +599,8 @@ msgstr "Kontakt"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
-#, fuzzy
 msgid "Added new contact: {0}"
-msgstr "Tilføj ny kontakt"
+msgstr ""
 
 #: ContactPanel.border.title
 msgid "Contacts"
@@ -613,9 +612,8 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
-#, fuzzy
 msgid "Contact {0} modified"
-msgstr "Navn på kontakt"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContacts

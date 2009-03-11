@@ -1,7 +1,7 @@
-# Hungarian translation for esmska
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Polish translation for esmska
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the esmska package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 #. extracted from ../src/esmska/resources/l10n.properties
 msgid ""
@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-11 14:57+0200\n"
-"PO-Revision-Date: 2008-12-19 15:10+0000\n"
-"Last-Translator: BalintX <koczkahun@gmail.com>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
+"PO-Revision-Date: 2009-03-05 20:43+0000\n"
+"Last-Translator: skrzat <Unknown>\n"
+"Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,27 +20,27 @@ msgstr ""
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
-msgstr "Elismerem"
+msgstr ""
 
 #: AboutFrame.Credits
 msgid "Credits"
-msgstr "Készítők"
+msgstr ""
 
 #: AboutFrame.License
 msgid "License"
-msgstr "Licensz"
+msgstr "Licencja"
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr "Köszönöm"
+msgstr "Dziękuję"
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
-msgstr "K&észítők"
+msgstr ""
 
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
-msgstr "SMS küldés Interneten keresztül."
+msgstr "Wysyłanie SMS przez Internet."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2009 Kamil Páral"
@@ -48,11 +48,11 @@ msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
-msgstr "L&icensz"
+msgstr "&Licencja"
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
-msgstr "<html><a href=\"http://esmska.googlecode.com/\">Honlap</a></html>"
+msgstr ""
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -60,18 +60,15 @@ msgid ""
 "Show program home page\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"A program honlapjának megmutatása\n"
-"</html>"
 
 #. #Do not change this value
 #: AboutFrame.supportButton.link
 msgid "http://code.google.com/p/esmska/wiki/Support"
-msgstr "http://code.google.com/p/esmska/wiki/Support"
+msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid "Support project"
-msgstr "Projekt támogatása"
+msgstr "Wspomóż projekt"
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -79,49 +76,46 @@ msgid ""
 "Do you like this project? Help to keep it running...\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Tetszik ez a projekt? Segíts, hogy futhasson...\n"
-"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
-msgstr "Az Esmska-ról"
+msgstr "O programie Esmska"
 
 #: About_
 msgid "&About"
-msgstr "&Névjegy"
+msgstr "&O programie"
 
 #: Add_contact
 msgid "Add contact"
-msgstr "Kapcsolat hozzáadása"
+msgstr "Dodaj kontakt"
 
 #: Add_new_contact
 msgid "Add new contact"
-msgstr "Új kapcsolat hozzáadása"
+msgstr "Dodaj nowy kontakt"
 
 #: Cancel
 msgid "Cancel"
-msgstr "Mégsem"
+msgstr "Anuluj"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
-msgstr "Másolás"
+msgstr "Kopiuj"
 
 #: ClipboardPopupMenu.Cut
 msgid "Cut"
-msgstr "Kivágás"
+msgstr "Wytnij"
 
 #: ClipboardPopupMenu.Paste
 msgid "Paste"
-msgstr "Beillesztés"
+msgstr "Wstaw"
 
 #: Close_
 msgid "&Close"
-msgstr "&Bezárás"
+msgstr "&Zamknij"
 
 #: CommandLineParser.available_options
 msgid "Available options:"
-msgstr "Lehetséges opciók:"
+msgstr "Dostępne opcje:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.debug
@@ -143,21 +137,19 @@ msgid ""
 "Enable the portable mode - ask for location of the user configuration "
 "directory. Can't be used with -c."
 msgstr ""
-"Hordozható mód bekapcsolása - megkérdezi a helyét a felhasználó "
-"konfigurációs könyvtárának. Nem használható a -c móddal."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr "Helytelen opció a parancssorban! (''{0}'')"
+msgstr ""
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr ""
+msgstr "OPCJE"
 
 #: CommandLineParser.path
 msgid "path"
-msgstr "elérési út"
+msgstr ""
 
 #: CommandLineParser.set_user_path
 msgid ""
@@ -167,35 +159,35 @@ msgstr ""
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr "Megmutatja ezt a segítséget."
+msgstr ""
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr "Használat:"
+msgstr "Użycie:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr "Programverzió kiírása és kilépés."
+msgstr "Drukuj wesję programu i wyjdź."
 
 #: Compress_
 msgid "&Compress"
-msgstr "&Tömörítés"
+msgstr "&Kompresuj"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr "&Haladó beállítások"
+msgstr "&Zaawansowane ustawienia"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr "Megmutatja a dolgokat több beállítási lehetőséggel."
+msgstr ""
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
-msgstr "Meg&jelenés"
+msgstr ""
 
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Check for a &new program version on startup"
-msgstr "Új pr&ogramverzió keresése indításnál"
+msgstr "Sprawdź czy jest nowa wersja programu przy stacie"
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 msgid ""
@@ -211,11 +203,11 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all operators"
-msgstr ""
+msgstr "Skasuj wszystkie nazwy użytkowników i hasła dla wszystkich operatorów"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
-msgstr ""
+msgstr "&Połączenie"
 
 #: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -223,7 +215,7 @@ msgstr ""
 
 #: ConfigFrame.countryCodeLabel.text
 msgid "(country:"
-msgstr ""
+msgstr "(kraj:"
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -270,7 +262,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr ""
+msgstr "&Ogólne"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -290,20 +282,20 @@ msgstr ""
 
 #: ConfigFrame.jLabel1.text
 msgid "&Number:"
-msgstr ""
+msgstr "&Numer:"
 
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Brama:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr ""
+msgstr "&Nazwa użytkownika:"
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr ""
+msgstr "&Hasło:"
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -341,7 +333,7 @@ msgstr ""
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Nazwa:"
 
 #: ConfigFrame.jLabel7.text
 msgid ""
@@ -382,7 +374,7 @@ msgstr ""
 
 #: ConfigFrame.notificationAreaCheckBox.text
 msgid "Show icon in the &notification area"
-msgstr ""
+msgstr "Pokaż ikonę w obszarze &powiadomień"
 
 #: ConfigFrame.notificationAreaCheckBox.toolTipText
 msgid ""
@@ -413,15 +405,15 @@ msgstr ""
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
 msgid "O&perators"
-msgstr ""
+msgstr "O&peratorzy"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
-msgstr ""
+msgstr "Hasło należące do użytkownika"
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
-msgstr ""
+msgstr "P&rywatność"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
@@ -438,7 +430,7 @@ msgstr ""
 
 #: ConfigFrame.removeAccentsCheckBox.text
 msgid "Remove &diacritics from messages"
-msgstr ""
+msgstr "&Usuń znaki narodowe z wiadomości"
 
 #: ConfigFrame.removeAccentsCheckBox.toolTipText
 msgid ""
@@ -472,11 +464,11 @@ msgstr ""
 
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
-msgstr ""
+msgstr "Numer nadawcy w formacie międzynarodowym (znak '+' na początku)"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Show password"
-msgstr ""
+msgstr "Pokaż hasło"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -492,7 +484,7 @@ msgstr ""
 
 #: ConfigFrame.startMinimizedCheckBox.text
 msgid "Hide program to &icon on startup"
-msgstr ""
+msgstr "Ukryj program do &ikony przy starcie"
 
 #: ConfigFrame.startMinimizedCheckBox.toolTipText
 msgid ""
@@ -504,7 +496,7 @@ msgstr ""
 
 #: ConfigFrame.system_look
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: ConfigFrame.themeComboBox.toolTipText
 msgid ""
@@ -515,11 +507,11 @@ msgstr ""
 
 #: ConfigFrame.themeLabel.text
 msgid "The&me:"
-msgstr ""
+msgstr "&Skórka"
 
 #: ConfigFrame.tipsCheckBox.text
 msgid "Show program &tip on startup"
-msgstr ""
+msgstr "Pokaż poradę przy starcie"
 
 #: ConfigFrame.tipsCheckBox.toolTipText
 msgid ""
@@ -535,7 +527,7 @@ msgstr ""
 
 #: ConfigFrame.toolbarVisibleCheckBox.text
 msgid "Show the &toolbar"
-msgstr ""
+msgstr "Pokaż pasek &narzędzi"
 
 #: ConfigFrame.toolbarVisibleCheckBox.toolTipText
 msgid ""
@@ -546,12 +538,12 @@ msgstr ""
 
 #: ConfigFrame.unknown_look
 msgid "Unknown"
-msgstr ""
+msgstr "Nieznany"
 
 #. #meaning "unknown country"
 #: ConfigFrame.unknown_state
 msgid "unknown"
-msgstr ""
+msgstr "nieznany"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -563,7 +555,7 @@ msgstr ""
 
 #: ConfigFrame.useSenderIDCheckBox.text
 msgid "Add a sender &signature to the message"
-msgstr ""
+msgstr "Dodaj podpis nadawcy do wiadomości"
 
 #: ConfigFrame.useSenderIDCheckBox.toolTipText
 msgid ""
@@ -581,7 +573,7 @@ msgstr ""
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
-msgstr ""
+msgstr "Uruchamiaj program wycentrowany na ekranie"
 
 #: ConfigFrame.windowCenteredCheckBox.toolTipText
 msgid ""
@@ -600,7 +592,7 @@ msgstr ""
 
 #: Contact
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
@@ -609,11 +601,11 @@ msgstr ""
 
 #: ContactPanel.border.title
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakty"
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
-msgstr ""
+msgstr "Lista kontaktów (Alt-K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
@@ -647,19 +639,19 @@ msgstr ""
 
 #: Contact_export_
 msgid "Contact &export"
-msgstr ""
+msgstr "&Eksport kontaktów"
 
 #: Contact_import_
 msgid "Contact &import"
-msgstr ""
+msgstr "&Import kontaktów"
 
 #: Create
 msgid "Create"
-msgstr ""
+msgstr "Utwórz"
 
 #: Credits.authors
 msgid "Written by:"
-msgstr ""
+msgstr "Napisany przez:"
 
 #: Credits.contributors
 msgid "Contributions from:"
@@ -667,80 +659,80 @@ msgstr ""
 
 #: Credits.graphics
 msgid "Graphics:"
-msgstr ""
+msgstr "Grafiki:"
 
 #: Credits.sponsors
 msgid "Sponsors:"
-msgstr ""
+msgstr "Sponsorzy"
 
 #: Credits.translators
 msgid "Translated by:"
-msgstr ""
+msgstr "Przetłumaczony przez:"
 
 #: Date
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: Delete
 msgid "Delete"
-msgstr ""
+msgstr "Skasuj"
 
 #: Delete_
 msgid "&Delete"
-msgstr ""
+msgstr "&Skasuj"
 
 #: Delete_contacts
 msgid "Delete contacts"
-msgstr ""
+msgstr "Skasuj kontakty"
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr ""
+msgstr "Skasuj wiadomości"
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
-msgstr ""
+msgstr "Skasuj zaznaczone kontakty"
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr ""
+msgstr "Skasuj zaznaczone kontakty"
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
-msgstr ""
+msgstr "Skasuj zaznaczone kontakty z historii"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
 msgid "Send SMS over the Internet"
-msgstr ""
+msgstr "Wyślij SMS przez Internet"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.genericName
 msgid "SMS Sender"
-msgstr ""
+msgstr "Nadawca SMS"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.name
 msgid "Esmska"
-msgstr ""
+msgstr "Esmska"
 
 #: EditContactPanel.gatewayLabel.text
 msgctxt "EditContactPanel.gatewayLabel.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Brama:"
 
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Nazwa:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
-msgstr ""
+msgstr "Nazwa kontaktu"
 
 #: EditContactPanel.numberLabel.text
 msgid "Nu&mber:"
-msgstr ""
+msgstr "Nu&mer:"
 
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
@@ -753,11 +745,11 @@ msgstr ""
 
 #: Edit_contact
 msgid "Edit contact"
-msgstr ""
+msgstr "Edytuj kontakt"
 
 #: Edit_contacts
 msgid "Edit contacts"
-msgstr ""
+msgstr "Edytuj kontakty"
 
 #: Edit_contacts_collectively
 msgid "Edit contacts collectively"
@@ -765,15 +757,15 @@ msgstr ""
 
 #: Edit_message
 msgid "Edit message"
-msgstr ""
+msgstr "Edytuj wiadomość"
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
-msgstr ""
+msgstr "Edytuj zaznaczone kontakty"
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr ""
+msgstr "Edytuj zaznaczoną wiadomość"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
@@ -786,7 +778,7 @@ msgstr ""
 
 #: ExportManager.contact_export
 msgid "Contact export"
-msgstr ""
+msgstr "Eksport kontaktu"
 
 #: ExportManager.contact_list
 msgid "Contact list"
@@ -795,11 +787,11 @@ msgstr ""
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "Pliki CSV (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
-msgstr ""
+msgstr "Błąd eksportu kontaktu!"
 
 #: ExportManager.export_info
 msgid ""
@@ -818,15 +810,15 @@ msgstr ""
 
 #: ExportManager.export_ok
 msgid "Contact export finished successfully"
-msgstr ""
+msgstr "Eksport kontaktu zakończony pomyślnie"
 
 #: ExportManager.export_ok!
 msgid "Contact export finished successfully!"
-msgstr ""
+msgstr "Eksport kontaktu zakończony pomyślnie!"
 
 #: ExportManager.history
 msgid "Sent messages history"
-msgstr ""
+msgstr "Historia wysłanych wiadomości"
 
 #: ExportManager.login
 msgid "Usernames and password to individual operators"
@@ -834,25 +826,25 @@ msgstr ""
 
 #: ExportManager.sms_queue
 msgid "SMS queue to be sent"
-msgstr ""
+msgstr "Kolejka SMS do wysłania"
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "Pliki vCard (*.vcard, *.vcf)"
 
 #: Forward_
 msgctxt "Forward_"
 msgid "&Forward"
-msgstr ""
+msgstr "&Przekaż"
 
 #: Hide_program
 msgid "Hide program"
-msgstr ""
+msgstr "Ukryj program"
 
 #: History
 msgid "History"
-msgstr ""
+msgstr "Historia"
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
@@ -860,35 +852,35 @@ msgstr ""
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
-msgstr ""
+msgstr "Numer:"
 
 #: HistoryFrame.jLabel2.text
 msgid "Name:"
-msgstr ""
+msgstr "Nazwa:"
 
 #: HistoryFrame.jLabel3.text
 msgid "Date:"
-msgstr ""
+msgstr "Data:"
 
 #: HistoryFrame.jLabel4.text
 msgid "Gateway:"
-msgstr ""
+msgstr "Brama:"
 
 #: HistoryFrame.jLabel5.text
 msgid "Sender number:"
-msgstr ""
+msgstr "Numer nadawcy:"
 
 #: HistoryFrame.jLabel6.text
 msgid "Sender name:"
-msgstr ""
+msgstr "Nazwa nadawcy:"
 
 #: HistoryFrame.remove_selected
 msgid "Really remove all selected messages from history?"
-msgstr ""
+msgstr "Czy na pewno usunąć zaznaczone wiadomości z historii?"
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
-msgstr ""
+msgstr "Wyślij ponownie wiadomość do kogoś innego"
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
@@ -896,7 +888,7 @@ msgstr ""
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
-msgstr ""
+msgstr "&Szukaj:"
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
@@ -905,16 +897,16 @@ msgstr ""
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "Pliki CSV (*.csv)"
 
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
 msgid "Select"
-msgstr ""
+msgstr "Zaznacz"
 
 #: ImportFrame.backButton.text
 msgid "&Back"
-msgstr ""
+msgstr "&Wstecz"
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
@@ -948,25 +940,25 @@ msgstr ""
 
 #: ImportFrame.fileTextField.toolTipText
 msgid "The path to contacts file"
-msgstr ""
+msgstr "Ścieżka do pliku z kontaktami"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
-msgstr ""
+msgstr "Plik {0} nie może zostać odczytany!"
 
 #: ImportFrame.forwardButton.text
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
-msgstr ""
+msgstr "&Przekaż"
 
 #: ImportFrame.foundContactsLabel.text
 msgid "Following new contacts were found:"
-msgstr ""
+msgstr "Znaleziono następujące nowe kontakty:"
 
 #: ImportFrame.foundNoContacts
 msgid "No new contacts were found."
-msgstr ""
+msgstr "Nie znaleziono nowych kontaktów."
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1020,7 +1012,7 @@ msgstr ""
 
 #: ImportFrame.jLabel3.text
 msgid "Choose from which application you want to import contacts:"
-msgstr ""
+msgstr "Wskaż, z której aplikacji chcesz zaimportować kontakty:"
 
 #: ImportFrame.jLabel4.text
 msgid ""
@@ -1038,7 +1030,7 @@ msgstr ""
 #: ImportFrame.progressBar.string
 msgctxt "ImportFrame.progressBar.string"
 msgid "Please wait..."
-msgstr ""
+msgstr "Proszę czekać..."
 
 #: ImportFrame.title
 msgid "Contact import - Esmska"
@@ -1047,11 +1039,11 @@ msgstr ""
 #: ImportFrame.vCard_filter
 msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "Pliki vCard (*.vcard, *.vcf)"
 
 #: ImportFrame.validOperatorCheckBox.text
 msgid "Import only contacts with known operator"
-msgstr ""
+msgstr "Importuj tylko kontakty ze znanego operatora"
 
 #: ImportFrame.validOperatorCheckBox.toolTipText
 msgid ""
@@ -1064,11 +1056,11 @@ msgstr ""
 
 #: Import_
 msgid "Im&port"
-msgstr ""
+msgstr "Im&port"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
-msgstr ""
+msgstr "&Czyść"
 
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
@@ -1076,7 +1068,7 @@ msgstr ""
 
 #: LogFrame.copyButton.text
 msgid "Co&py to clipboard"
-msgstr ""
+msgstr "Ko&piuj do schowka"
 
 #: LogFrame.copyButton.toolTipText
 msgid "Copy the whole log contents to the system clipboard"
@@ -1106,7 +1098,7 @@ msgstr ""
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
-msgstr ""
+msgstr "Wybierz położenie plików konfiguracyjnych"
 
 #: Main.no_javascript
 msgid ""
@@ -1117,7 +1109,7 @@ msgstr ""
 
 #: Main.run_anyway
 msgid "Run anyway"
-msgstr ""
+msgstr "Uruchom mimo to"
 
 #: Main.unsupported_java
 msgid ""
@@ -1128,31 +1120,31 @@ msgstr ""
 
 #: MainFrame.Quit_program
 msgid "Quit program"
-msgstr ""
+msgstr "Wyjdź z programu"
 
 #: MainFrame.cant_create_program_dir
 msgid "Directory with program settings can't be created!"
-msgstr ""
+msgstr "Katalog z ustawieniami programu nie może zostać utworzony!"
 
 #: MainFrame.cant_save_config
 msgid "Some of the configuration files couldn't be saved!"
-msgstr ""
+msgstr "Niektóre pliki konfiguracyjne nie mogą być zapisane!"
 
 #: MainFrame.compressButton.toolTipText
 msgid "Compress message (Ctrl+K)"
-msgstr ""
+msgstr "Kompresuj wiadomość (Ctrl+K)"
 
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
-msgstr ""
+msgstr "Konfiguruj zachowanie programu"
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
-msgstr ""
+msgstr "Eksport kontaktu do pliku"
 
 #: MainFrame.faqMenuItem.text
 msgid "Frequently Asked &Questions"
-msgstr ""
+msgstr "Najczęściej &zadawane pytania"
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
@@ -1160,7 +1152,7 @@ msgstr ""
 
 #: MainFrame.getHelpMenuItem.text
 msgid "Get &Help Online..."
-msgstr ""
+msgstr "Otwórz &pomoc online..."
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
@@ -1168,7 +1160,7 @@ msgstr ""
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr ""
+msgstr "&Pomoc"
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
@@ -1176,15 +1168,15 @@ msgstr ""
 
 #: MainFrame.import_contacts_from_other_applications
 msgid "Import contacts from other applications"
-msgstr ""
+msgstr "Importuj kontakty z innych aplikacji"
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr ""
+msgstr "&Wiadomość"
 
 #: MainFrame.new_program_version
 msgid "A new program version has been released!"
-msgstr ""
+msgstr "Nowa wersja programu została opublikowana!"
 
 #: MainFrame.no_operators
 msgid ""
@@ -1205,82 +1197,82 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &Problem..."
-msgstr ""
+msgstr "Zgłoś &problem..."
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
-msgstr ""
+msgstr "Zgłoś problem lub sugestię"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
-msgstr ""
+msgstr "P&rogram"
 
 #: MainFrame.redoButton.toolTipText
 msgid "Redo (Ctrl+Y)"
-msgstr ""
+msgstr "Ponów (Ctrl+Y)"
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
-msgstr ""
+msgstr "Pokaż historię wysłanych wiadomości"
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr ""
+msgstr "Pokaż informacje o programie"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
-msgstr ""
+msgstr "Nie można wysłać wiadomości do {0}!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed2
 msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-msgstr ""
+msgstr "<html><h2>Nie można wysłać wiadomości do {0}!</h2>{1}</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
-msgstr ""
+msgstr "Wiadomość do {0} wysłana."
 
 #: MainFrame.tip
 msgid "Tip:"
-msgstr ""
+msgstr "Porada:"
 
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
-msgstr ""
+msgstr "&Narzędzia"
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate This Application..."
-msgstr ""
+msgstr "&Przetłumacz tę aplikację..."
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
-msgstr ""
+msgstr "Pomóż przetłumaczyć ten program na swój język ojczysty."
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"
-msgstr ""
+msgstr "Cofnij (Ctrl+Z)"
 
 #: Message_history_
 msgid "Message &history"
-msgstr ""
+msgstr "&Historia wiadomości"
 
 #: Move_down
 msgid "Move down"
-msgstr ""
+msgstr "Przesuń w dół"
 
 #: Move_up
 msgid "Move up"
-msgstr ""
+msgstr "Przesuń w górę"
 
 #: Multiple_sending
 msgid "Multiple sending"
-msgstr ""
+msgstr "Wielokrotne wysyłanie"
 
 #: New_contact
 msgid "New contact"
-msgstr ""
+msgstr "Nowy kontakt"
 
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
@@ -1288,7 +1280,7 @@ msgstr ""
 
 #: Operator.unknown
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Nieznana brama"
 
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Guess a suitable gateway"
@@ -1304,11 +1296,11 @@ msgstr ""
 
 #: OperatorComboBox.needRegistration
 msgid "Requires registration on the website."
-msgstr ""
+msgstr "Wymaga rejestracji na stronie WWW."
 
 #: OperatorComboBox.noRegistration
 msgid "Does not require registration."
-msgstr ""
+msgstr "Nie wymaga rejestracji."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
@@ -1359,7 +1351,7 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
 msgid "A message from operator:<br>"
-msgstr ""
+msgstr "Wiadomość od operatora:<br>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_UKNOWN
@@ -1385,19 +1377,19 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_CODE
 msgid "You have entered the wrong security code."
-msgstr ""
+msgstr "Wpisałeś niepoprawny kod bezpieczeństwa."
 
 #: OperatorExecutor.ERROR_WRONG_NUMBER
 msgid "You have entered incorrect recipient number."
-msgstr ""
+msgstr "Wpisałeś niepoprawny numer odbiorcy."
 
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
-msgstr ""
+msgstr "Wpisałeś niepoprawny podpis nadawcy (numer lub nazwę)."
 
 #: OperatorExecutor.ERROR_WRONG_TEXT
 msgid "You have entered incorrect message text. Empty or too long?"
-msgstr ""
+msgstr "Wpisałeś niepoprawny tekst wiadomości. Pusty lub zbyt długi?"
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
@@ -1415,27 +1407,27 @@ msgstr ""
 
 #: OperatorExecutor.recognize_number
 msgid "Please enter the code from the picture:"
-msgstr ""
+msgstr "Wprowadź kod z obrazka:"
 
 #: OperatorInterpreter.unknown_operator
 msgid "Unknown operator!"
-msgstr ""
+msgstr "Nieznany operator!"
 
 #: Pause_queue
 msgid "Pause queue"
-msgstr ""
+msgstr "Wstrzymaj kolejkę"
 
 #: Pause_sms_queue
 msgid "Pause sms queue"
-msgstr ""
+msgstr "Wstrzymaj kolejkę SMS"
 
 #: Preferences
 msgid "Preferences"
-msgstr ""
+msgstr "Właściwości"
 
 #: Preferences_
 msgid "&Preferences"
-msgstr ""
+msgstr "&Właściwości"
 
 #: Program_start
 msgid "Program start"
@@ -1443,15 +1435,15 @@ msgstr ""
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
-msgstr ""
+msgstr "Przesuń SMS w dół w kolejce"
 
 #: QueuePanel.Move_sms_up_in_the_queue
 msgid "Move sms up in the queue"
-msgstr ""
+msgstr "Przesuń SMS w górę w kolejce"
 
 #: QueuePanel.Pause_sending_of_sms_in_the_queue
 msgid "Pause sending of sms in the queue"
-msgstr ""
+msgstr "Wstrzymaj wysyłanie SMS w kolejce"
 
 #: QueuePanel.Unpause_sending_of_sms_in_the_queue
 msgid "Unpause sending of sms in the queue"
@@ -1459,7 +1451,7 @@ msgstr ""
 
 #: QueuePanel.border.title
 msgid "Queue"
-msgstr ""
+msgstr "Kolejka"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -1478,23 +1470,23 @@ msgstr ""
 
 #: Quit
 msgid "Quit"
-msgstr ""
+msgstr "Wyjdź"
 
 #: Quit_
 msgid "&Quit"
-msgstr ""
+msgstr "&Wyjdź"
 
 #: Recipient
 msgid "Recipient"
-msgstr ""
+msgstr "Odbiorca"
 
 #: Redo_
 msgid "&Redo"
-msgstr ""
+msgstr "&Ponów"
 
 #: Replace
 msgid "Replace"
-msgstr ""
+msgstr "Zamień"
 
 #: SMSPanel.Redo_change_in_message_text
 msgid "Redo undone change in message text"
@@ -1502,15 +1494,15 @@ msgstr ""
 
 #: SMSPanel.Text_is_too_long!
 msgid "Text is too long!"
-msgstr ""
+msgstr "Tekst jest za długi!"
 
 #: SMSPanel.Undo_change_in_message_text
 msgid "Undo change in message text"
-msgstr ""
+msgstr "Cofnij zmianę w tekście wiadomości."
 
 #: SMSPanel.border.title
 msgid "Message"
-msgstr ""
+msgstr "Wiadomość"
 
 #: SMSPanel.compress
 msgid ""
@@ -1526,11 +1518,11 @@ msgstr ""
 #: SMSPanel.gatewayLabel.text
 msgctxt "SMSPanel.gatewayLabel.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Brama:"
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"
-msgstr ""
+msgstr "&Odbiorca:"
 
 #: SMSPanel.recipientTextField.tooltip
 msgid ""
@@ -1549,7 +1541,7 @@ msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Ctrl+Enter)"
-msgstr ""
+msgstr "Wyślij wiadomość (Ctrl+Enter)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.singleProgressBar
@@ -1560,20 +1552,20 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
-msgstr ""
+msgstr "{0} znaków ({1} sms)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
-msgstr ""
+msgstr "{0} znaków (nie można wysłać!)"
 
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
-msgstr ""
+msgstr "0 znaków (0 sms)"
 
 #: SMSPanel.textLabel.text
 msgid "Te&xt:"
-msgstr ""
+msgstr "&Tekst:"
 
 #: SMSPanel.textLabel.toolTipText
 msgid ""
@@ -1590,33 +1582,33 @@ msgstr ""
 
 #: SMSSender.no_operator
 msgid "no operator"
-msgstr ""
+msgstr "brak operatora"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
-msgstr ""
+msgstr "Wysyłanie wiadomości do {0} ({1}) ..."
 
 #: Save
 msgid "Save"
-msgstr ""
+msgstr "Zapisz"
 
 #: Select
 msgctxt "Select"
 msgid "Select"
-msgstr ""
+msgstr "Zaznacz"
 
 #: Send_
 msgid "&Send"
-msgstr ""
+msgstr "&Wyślij"
 
 #: Send_message
 msgid "Send message"
-msgstr ""
+msgstr "Wyślij wiadomość"
 
 #: Show/hide_program
 msgid "Show/hide program"
-msgstr ""
+msgstr "Wyślij wiadomość"
 
 #: Show_application_log
 msgid "Show application log"
@@ -1624,12 +1616,12 @@ msgstr ""
 
 #: Show_program
 msgid "Show program"
-msgstr ""
+msgstr "Pokaż program"
 
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
-msgstr ""
+msgstr "Proszę czekać..."
 
 #: StatusPanel.statusMessageLabel.text
 msgid "Welcome"
@@ -1641,7 +1633,7 @@ msgstr ""
 
 #: Text
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #. #Write the tip as short as possible
 #: Tip.1
@@ -1751,6 +1743,7 @@ msgstr ""
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
+"Twoje kontakty mogą być zaimportowane z wielu innych programów lub formatów."
 
 #. #Write the tip as short as possible
 #: Tip.4
@@ -1760,18 +1753,18 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.5
 msgid "All your sent messages are available in the message history."
-msgstr ""
+msgstr "Wszystkie wysłane wiadomości są dostępne w historii wiadomości."
 
 #. #Write the tip as short as possible
 #: Tip.6
 msgid "The message history can be search through."
-msgstr ""
+msgstr "Historia wiadomości może być przeszukiwana."
 
 #. #Write the tip as short as possible
 #: Tip.7
 msgid ""
 "You can search in contact list. Just click into it and write a few letters."
-msgstr ""
+msgstr "Możesz szukać w liście kontaktów. Kliknij na nią i wpisz kilka liter."
 
 #. #Write the tip as short as possible
 #: Tip.8
@@ -1788,15 +1781,15 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  BalintX https://launchpad.net/~koczkahun"
+"  skrzat https://launchpad.net/~radek-floraland"
 
 #: Undo_
 msgid "&Undo"
-msgstr ""
+msgstr "&Cofnij"
 
 #: Unknown_operator
 msgid "Unknown operator"
-msgstr ""
+msgstr "Nieznany operator"
 
 #: Unpause_queue
 msgid "Unpause queue"
@@ -1809,16 +1802,3 @@ msgstr ""
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr ""
-
-#~ msgid "Print debugging output of the network communication."
-#~ msgstr "Hálózati kommunikáció hibakereső kimenet kiírása"
-
-#~ msgid ""
-#~ "Print debugging output of the network communication including the content "
-#~ "of the messages. This option implies --debug-network option."
-#~ msgstr ""
-#~ "Hálózati kommunikáció hibakereső kimenet kiírása az üzenetek tartalmával "
-#~ "együtt. Ez az opció a --debug-network opcióra utal."
-
-#~ msgid "Print debugging output."
-#~ msgstr "Hibakereső kimenet kiírása"

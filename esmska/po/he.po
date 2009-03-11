@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-10 14:50+0200\n"
+"POT-Creation-Date: 2009-03-11 14:57+0200\n"
 "PO-Revision-Date: 2009-02-01 17:56+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-03 15:52+0000\n"
+"X-Launchpad-Export-Date: 2009-03-11 13:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -701,9 +701,8 @@ msgstr "איש קשר"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
-#, fuzzy
 msgid "Added new contact: {0}"
-msgstr "הוסף איש קשר חדש"
+msgstr ""
 
 #: ContactPanel.border.title
 msgid "Contacts"
@@ -715,15 +714,13 @@ msgstr "רשימת אנשי הקשר (Alt+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
-#, fuzzy
 msgid "Contact {0} modified"
-msgstr "שם איש הקשר"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContacts
-#, fuzzy
 msgid "{0} contacts modified"
-msgstr "ייצוא אנשי הקשר לקובץ"
+msgstr ""
 
 #: ContactPanel.new_contact_hint
 msgid ""
@@ -1483,7 +1480,6 @@ msgid ""
 msgstr ""
 
 #: OperatorComboBox.tooltip
-#, fuzzy
 msgid ""
 "<html>\n"
 "List of available operators web gateways.<br>\n"
@@ -1495,12 +1491,6 @@ msgid ""
 "to see detailed information about that gateway.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"רשימת שערי גישת הרשת של המפעילות הסלולריות.<br>\n"
-"<br>\n"
-"הקידומת [XX] מציינת את המדינה עבורה שער הגישה עובד.<br>\n"
-"הקידומת [INT] מציינת שערי גישה בינלאומיים.\n"
-"</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
@@ -1993,19 +1983,6 @@ msgstr "המשך את תור ה־SMS"
 msgid "Click to open program downloads page"
 msgstr ""
 
-#~ msgid "Print debugging output of the network communication."
-#~ msgstr "הצגת פלט תקשורת הרשת לניפוי שגיאות"
-
-#~ msgid ""
-#~ "Print debugging output of the network communication including the content "
-#~ "of the messages. This option implies --debug-network option."
-#~ msgstr ""
-#~ "הצגת פלט תקשורת הרשת לניפוי שגיאות כולל תוכן ההודעות. אפשרות זו מרמזת על "
-#~ "האפשרות  --debug-network option."
-
-#~ msgid "Print debugging output."
-#~ msgstr "הצג פלט ניפוי שגיאות."
-
 #~ msgid ""
 #~ "<html><i>\n"
 #~ "** The Substance look is not recommended for your Java version "
@@ -2040,3 +2017,16 @@ msgstr ""
 #~ "האם יש לצבוע את גבולות התוכנה עם ערכת החזות הנבחרת<br>\n"
 #~ "במקום לפי ערכת מערכת ההפעלה\n"
 #~ "</html>"
+
+#~ msgid "Print debugging output of the network communication."
+#~ msgstr "הצגת פלט תקשורת הרשת לניפוי שגיאות"
+
+#~ msgid ""
+#~ "Print debugging output of the network communication including the content "
+#~ "of the messages. This option implies --debug-network option."
+#~ msgstr ""
+#~ "הצגת פלט תקשורת הרשת לניפוי שגיאות כולל תוכן ההודעות. אפשרות זו מרמזת על "
+#~ "האפשרות  --debug-network option."
+
+#~ msgid "Print debugging output."
+#~ msgstr "הצג פלט ניפוי שגיאות."
