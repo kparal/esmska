@@ -1779,11 +1779,8 @@ msgstr ""
 #: Translators
 msgid "translator-credits"
 msgstr ""
-"carbonell\n"
-"\n"
 "Launchpad Contributions:\n"
 "  Alexandre Sapata Carbonell https://launchpad.net/~alexandre-sapata-"
-"carbonell"
 
 #: Undo_
 msgid "&Undo"
