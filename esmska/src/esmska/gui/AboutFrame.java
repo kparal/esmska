@@ -97,7 +97,7 @@ public class AboutFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         ResourceBundle bundle = ResourceBundle.getBundle("esmska/resources/l10n"); // NOI18N
         setTitle(bundle.getString("AboutFrame.title")); // NOI18N
-        setIconImage(new ImageIcon(getClass().getResource(RES + "about-24.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource(RES + "about-22.png")).getImage());
         setLocationByPlatform(true);
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -164,22 +164,22 @@ public class AboutFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(jLabel5, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(jLabel3, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(jLabel2, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(jLabel1, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                    .addComponent(jLabel5, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addComponent(jLabel3, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addComponent(jLabel2, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addComponent(jLabel1, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(creditsButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(licenseButton)
-                        .addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                         .addComponent(closeButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                        .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(linkButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                        .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                         .addPreferredGap(ComponentPlacement.RELATED)
