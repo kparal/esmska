@@ -66,6 +66,7 @@ public class ExportManager {
                     contact.getOperator()
                 });
             }
+            writer.flush();
         } finally {
             if (writer != null) {
                 writer.close();
@@ -111,6 +112,7 @@ public class ExportManager {
             //do the export
             marshaller.marshallContacts(output,
                     conts.toArray(new net.wimpi.pim.contact.model.Contact[0]));
+            output.flush();
 
         } finally {
             if (output != null) {
@@ -136,6 +138,7 @@ public class ExportManager {
                     sms.getSenderNumber()
                 });
             }
+            writer.flush();
         } finally {
             if (writer != null) {
                 writer.close();
@@ -163,6 +166,7 @@ public class ExportManager {
                     record.getSenderNumber()
                 });
             }
+            writer.flush();
         } finally {
             if (writer != null) {
                 writer.close();
@@ -194,6 +198,7 @@ public class ExportManager {
                     password
                 });
             }
+            writer.flush();
         } finally {
             if (writer != null) {
                 writer.close();
