@@ -34,6 +34,9 @@ public class OperatorConnector {
     private static final Logger logger = Logger.getLogger(OperatorConnector.class.getName());
     private static final String USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686; cs-CZ; rv:1.9.0.2)" +
             " Gecko/2008092313 Ubuntu/8.04 (hardy) Firefox/3.0.2";
+    private static final Pattern metaRedirPattern = Pattern.compile(
+            "<meta\\s+http-equiv=[^>]*refresh[^>]*url=([^>]*)(\"|')[^>]*>",
+            Pattern.CASE_INSENSITIVE);
     private final HttpClient client = new HttpClient();
     private String url;
     private String[] params;
@@ -142,6 +145,18 @@ public class OperatorConnector {
         URL address = new URL(fullURL);
         client.getHostConfiguration().setHost(address.getHost(), address.getPort(),
                 address.getProtocol());
+
+        //set proxy
+        if ("http".equals(address.getProtocol())) {
+            client.getHostConfiguration().setProxyHost(
+                    ProxyManager.getProxyHost(ProxyManager.ProxyType.HTTP));
+        } else if ("https".equals(address.getProtocol())) {
+            client.getHostConfiguration().setProxyHost(
+                    ProxyManager.getProxyHost(ProxyManager.ProxyType.HTTPS));
+        } else {
+            client.getHostConfiguration().setProxyHost(
+                    ProxyManager.getProxyHost(ProxyManager.ProxyType.SOCKS));
+        }
     }
     
     /** Perform a connection (GET or POST, depending on configuration).
@@ -294,8 +309,7 @@ public class OperatorConnector {
                             "be an absolute path and is: '" + newURL + "'", ex);
                 }
             }
-            if (!newURL.startsWith("http://") && !newURL.startsWith("https://") 
-                    && !newURL.startsWith("/")) {
+            if (!isAbsoluteURL(newURL) && !newURL.startsWith("/")) {
                 newURL = "/" + newURL;
             }
             //redirect to new url
@@ -354,9 +368,7 @@ public class OperatorConnector {
      * @return URL of the new address if meta redirect found; null otherwise.
      */
     private static String checkMetaRedirect(String page) {
-        Pattern pattern = Pattern.compile("<meta\\s+http-equiv=[^>]*refresh[^>]*" +
-                "url=([^>]*)(\"|')[^>]*>", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(page);
+        Matcher matcher = metaRedirPattern.matcher(page);
         if (matcher.find()) {
             String redirect = matcher.group(1);
             return redirect;

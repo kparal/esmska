@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-11 14:57+0200\n"
-"PO-Revision-Date: 2009-01-17 02:05+0000\n"
+"POT-Creation-Date: 2009-03-15 22:51+0200\n"
+"PO-Revision-Date: 2009-03-15 12:56+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-11 13:56+0000\n"
+"X-Launchpad-Export-Date: 2009-03-15 17:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -72,7 +72,7 @@ msgstr "http://code.google.com/p/esmska/wiki/Support"
 
 #: AboutFrame.supportButton.text
 msgid "Support project"
-msgstr ""
+msgstr "Ayudar al proyecto"
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -80,6 +80,9 @@ msgid ""
 "Do you like this project? Help to keep it running...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"¿Le gusta este proyecto? Ayude a que continúe existiendo...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -115,11 +118,11 @@ msgstr "Pegar"
 
 #: Close_
 msgid "&Close"
-msgstr ""
+msgstr "&Cerrar"
 
 #: CommandLineParser.available_options
 msgid "Available options:"
-msgstr ""
+msgstr "Opciones disponibles:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.debug
@@ -134,26 +137,28 @@ msgstr ""
 
 #: CommandLineParser.debugMode
 msgid "debug mode"
-msgstr ""
+msgstr "modo de depuración"
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
 "Enable the portable mode - ask for location of the user configuration "
 "directory. Can't be used with -c."
 msgstr ""
+"Activar modo transportable - pregunta por la ubicación del directorio de "
+"configuración del usuario. No se puede usar con la opción -c."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr ""
+msgstr "¡Opción no válida en la línea de órdenes! (\"{0}\")"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr ""
+msgstr "OPCIONES"
 
 #: CommandLineParser.path
 msgid "path"
-msgstr ""
+msgstr "ruta"
 
 #: CommandLineParser.set_user_path
 msgid ""
@@ -325,8 +330,7 @@ msgstr ""
 #: ConfigFrame.jLabel17.text
 msgid ""
 "<html><i>\n"
-"* If you are not directly connected to the Internet it is neccessary that "
-"your proxy works as a SOCKS proxy server.\n"
+"* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
 

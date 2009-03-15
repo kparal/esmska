@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-11 14:57+0200\n"
-"PO-Revision-Date: 2009-03-11 13:54+0000\n"
-"Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
+"POT-Creation-Date: 2009-03-15 22:51+0200\n"
+"PO-Revision-Date: 2009-03-11 17:06+0000\n"
+"Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-11 13:56+0000\n"
+"X-Launchpad-Export-Date: 2009-03-15 17:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -135,10 +135,16 @@ msgid ""
 "all redirects, web content, etc.\n"
 "* {2} - {0} and {1} modes combined."
 msgstr ""
+"Vypisovať ladiaci výstup. Možné režimy:\n"
+"* {0} - ladenie programu a webového obsahu. Východzia voľba ak nieje zvolený "
+"režim ladenia.\n"
+"* {1} - iba ladenie siete (podrobnejšie). Vypisuje HTTP hlavičke, všetky "
+"presmerovania,webový obsah, a pod.\n"
+"* {2} - kombinácia režimov {0} a {1}."
 
 #: CommandLineParser.debugMode
 msgid "debug mode"
-msgstr ""
+msgstr "ladiací režim"
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
@@ -369,14 +375,9 @@ msgstr "SO&CKS proxy:"
 #: ConfigFrame.jLabel17.text
 msgid ""
 "<html><i>\n"
-"* If you are not directly connected to the Internet it is neccessary that "
-"your proxy works as a SOCKS proxy server.\n"
+"* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
-"<html><i>\n"
-"* Ak nemáte priame pripojenie do internetu, je nutné, aby Váš proxy server "
-"fungoval ako SOCKS proxy server.\n"
-"</i></html>"
 
 #: ConfigFrame.jLabel2.text
 msgid "The &default country prefix number:"
@@ -713,7 +714,7 @@ msgstr "Kontakt"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
 msgid "Added new contact: {0}"
-msgstr ""
+msgstr "Pridaný nový kontakt: {0}"
 
 #: ContactPanel.border.title
 msgid "Contacts"
@@ -726,12 +727,12 @@ msgstr "Zoznam kontaktov (Alt+K)"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
 msgid "Contact {0} modified"
-msgstr ""
+msgstr "Kontakt {0} upravený"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContacts
 msgid "{0} contacts modified"
-msgstr ""
+msgstr "{0} kontaktov upravených"
 
 #: ContactPanel.new_contact_hint
 msgid ""
@@ -744,12 +745,12 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContact
 msgid "{0} removed from contacts"
-msgstr ""
+msgstr "Kontakt {0} odstránený"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContacts
 msgid "{0} contacts removed"
-msgstr ""
+msgstr "{0} kontaktov odstránených"
 
 #: ContactPanel.remove_following_contacts
 msgid "<html><h3>Really remove following contacts?</h3></html>"
@@ -1529,6 +1530,15 @@ msgid ""
 "to see detailed information about that gateway.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Zoznam dostupných webových brán operátorov.<br>\n"
+"<br>\n"
+"Predpona [XX] označuje krajinu, pre ktorú táto brána funguje.<br>\n"
+"Predpona [INT] označuje medzinárodnú bránu.<br>\n"
+"<br>\n"
+"Presnutím kurzoru myši nad jednotlivé brány v rozbaľovacom<br>\n"
+"menu sa zobrazia podrobnejšie informácie o danej bráne.\n"
+"</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
@@ -2059,6 +2069,17 @@ msgstr "Znovu spustiť SMS frontu"
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Kliknite pre otvorenie stránky s možnosťou stiahnutia programu"
+
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "* If you are not directly connected to the Internet it is neccessary that "
+#~ "your proxy works as a SOCKS proxy server.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "* Ak nemáte priame pripojenie do internetu, je nutné, aby Váš proxy "
+#~ "server fungoval ako SOCKS proxy server.\n"
+#~ "</i></html>"
 
 #~ msgid ""
 #~ "<html><i>\n"

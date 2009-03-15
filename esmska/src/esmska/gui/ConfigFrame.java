@@ -781,7 +781,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
             .addComponent(jLabel13)
             .addContainerGap())
     );
