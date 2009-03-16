@@ -60,7 +60,7 @@ public class ProxyManager {
     }
 
     /** Get ProxyHost for current proxy settings for a particular proxy type
-     * @param proxy type, not null
+     * @param proxyType proxy type, not null
      * @return ProxyHost for current proxy settings or null if no proxy set
      */
     public static ProxyHost getProxyHost(ProxyType proxyType) {

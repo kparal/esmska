@@ -18,7 +18,7 @@ import javax.swing.text.html.HTML;
  * sends a ValuedEvent.
  * 
  * @author Jeffrey Bush
- * @see http://forums.sun.com/thread.jspa?forumID=57&threadID=574895
+ * @see <a href="http://forums.sun.com/thread.jspa?forumID=57&threadID=574895">Original source code</a>
  */
 public class JHtmlLabel extends JLabel implements MouseListener, MouseMotionListener {
 

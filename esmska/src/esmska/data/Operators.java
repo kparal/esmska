@@ -170,7 +170,7 @@ public class Operators {
     }
 
     /** Find operator by name.
-     * @param name Name of the operator. Search is case sensitive. May be null.
+     * @param operatorName Name of the operator. Search is case sensitive. May be null.
      * @return Operator implementation, when an operator with such name is found.
      *         If multiple such operators are found, returns the first one found.
      *         Returns null if no operator is found or provided name was null.
