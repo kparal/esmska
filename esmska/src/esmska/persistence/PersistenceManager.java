@@ -143,10 +143,13 @@ public class PersistenceManager {
         Config.getInstance().setVersion(Config.getLatestVersion());
         
         File temp = createTempFile();
-        XMLEncoder xmlEncoder = new XMLEncoder(
-                new BufferedOutputStream(new FileOutputStream(temp)));
+        FileOutputStream out = new FileOutputStream(temp);
+        XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(out));
         xmlEncoder.writeObject(Config.getInstance());
+        xmlEncoder.flush();
+        out.getChannel().force(false);
         xmlEncoder.close();
+
         moveFileSafely(temp, configFile);
         logger.finer("Saved config into file: " + configFile.getAbsolutePath());
     }
@@ -168,8 +171,14 @@ public class PersistenceManager {
     /** Save contacts */
     public void saveContacts() throws IOException {
         logger.fine("Saving contacts...");
+
         File temp = createTempFile();
-        ExportManager.exportContacts(Contacts.getInstance().getAll(), temp);
+        FileOutputStream out = new FileOutputStream(temp);
+        ExportManager.exportContacts(Contacts.getInstance().getAll(), out);
+        out.flush();
+        out.getChannel().force(false);
+        out.close();
+
         moveFileSafely(temp, contactsFile);
         logger.finer("Saved contacts into file: " + contactsFile.getAbsolutePath());
     }
@@ -190,8 +199,14 @@ public class PersistenceManager {
     /** Save sms queue */
     public void saveQueue() throws IOException {
         logger.fine("Saving queue...");
+
         File temp = createTempFile();
-        ExportManager.exportQueue(Queue.getInstance().getAll(), temp);
+        FileOutputStream out = new FileOutputStream(temp);
+        ExportManager.exportQueue(Queue.getInstance().getAll(), out);
+        out.flush();
+        out.getChannel().force(false);
+        out.close();
+
         moveFileSafely(temp, queueFile);
         logger.finer("Saved queue into file: " + queueFile.getAbsolutePath());
     }
@@ -211,8 +226,14 @@ public class PersistenceManager {
     /** Save sms history */
     public void saveHistory() throws IOException {
         logger.fine("Saving history...");
+
         File temp = createTempFile();
-        ExportManager.exportHistory(History.getInstance().getRecords(), temp);
+        FileOutputStream out = new FileOutputStream(temp);
+        ExportManager.exportHistory(History.getInstance().getRecords(), out);
+        out.flush();
+        out.getChannel().force(false);
+        out.close();
+
         moveFileSafely(temp, historyFile);
         logger.finer("Saved history into file: " + historyFile.getAbsolutePath());
     }
@@ -232,8 +253,14 @@ public class PersistenceManager {
     /** Save keyring. */
     public void saveKeyring() throws Exception {
         logger.fine("Saving keyring...");
+
         File temp = createTempFile();
-        ExportManager.exportKeyring(Keyring.getInstance(), temp);
+        FileOutputStream out = new FileOutputStream(temp);
+        ExportManager.exportKeyring(Keyring.getInstance(), out);
+        out.flush();
+        out.getChannel().force(false);
+        out.close();
+        
         moveFileSafely(temp, keyringFile);
         logger.finer("Saved keyring into file: " + keyringFile.getAbsolutePath());
     }

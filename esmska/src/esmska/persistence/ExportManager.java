@@ -9,8 +9,6 @@
 
 package esmska.persistence;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
@@ -38,6 +36,7 @@ import esmska.data.SMS;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
 import java.util.ResourceBundle;
+import org.apache.commons.lang.Validate;
 
 /** Export program data
  *
@@ -51,158 +50,151 @@ public class ExportManager {
     private ExportManager() {
     }
     
-    /** Export contacts to csv file */
-    public static void exportContacts(Collection<Contact> contacts, File file)
+    /** Export contacts to csv file
+     * @param contacts contacts, not null
+     * @param out output stream, not null
+     */
+    public static void exportContacts(Collection<Contact> contacts, OutputStream out)
     throws IOException {
-        logger.finer("Exporting " + contacts.size() + " contacts to CSV file: " + file.getAbsolutePath());
-        CsvWriter writer = null;
-        try {
-            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            writer.writeComment(l10n.getString("ExportManager.contact_list"));
-            for (Contact contact : contacts) {
-                writer.writeRecord(new String[] {
-                    contact.getName(),
-                    contact.getNumber(),
-                    contact.getOperator()
-                });
-            }
-            writer.flush();
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
+        Validate.notNull(contacts);
+        Validate.notNull(out);
+
+        logger.finer("Exporting " + contacts.size() + " contacts to CSV");
+        CsvWriter writer = new CsvWriter(out, ',', Charset.forName("UTF-8"));
+
+        writer.writeComment(l10n.getString("ExportManager.contact_list"));
+        for (Contact contact : contacts) {
+            writer.writeRecord(new String[] {
+                contact.getName(),
+                contact.getNumber(),
+                contact.getOperator()
+            });
         }
+        writer.flush();
     }
     
-    /** Export contacts to vCard file */
-    public static void exportContactsToVCard(Collection<Contact> contacts, File file)
+    /** Export contacts to vCard file
+     * @param contacts contacts, not null
+     * @param out output stream, not null
+     */
+    public static void exportContactsToVCard(Collection<Contact> contacts, OutputStream out)
             throws IOException {
-        logger.finer("Exporting " + contacts.size() + " contacts to vCard file: " + file.getAbsolutePath());
-        OutputStream output = null;
+        Validate.notNull(contacts);
+        Validate.notNull(out);
+
+        logger.finer("Exporting " + contacts.size() + " contacts to vCard");
         
-        try {
-            output = new FileOutputStream(file);
-            
-            ContactIOFactory ciof = Pim.getContactIOFactory();
-            ContactModelFactory cmf = Pim.getContactModelFactory();
-            ContactMarshaller marshaller = ciof.createContactMarshaller();
-            marshaller.setEncoding("UTF-8");
-            ArrayList<net.wimpi.pim.contact.model.Contact> conts =
-                    new ArrayList<net.wimpi.pim.contact.model.Contact>();
+        ContactIOFactory ciof = Pim.getContactIOFactory();
+        ContactModelFactory cmf = Pim.getContactModelFactory();
+        ContactMarshaller marshaller = ciof.createContactMarshaller();
+        marshaller.setEncoding("UTF-8");
+        ArrayList<net.wimpi.pim.contact.model.Contact> conts =
+                new ArrayList<net.wimpi.pim.contact.model.Contact>();
 
-            //convert contacts to vcard library contacts
-            for (Contact contact : contacts) {
-                net.wimpi.pim.contact.model.Contact c = cmf.createContact();
+        //convert contacts to vcard library contacts
+        for (Contact contact : contacts) {
+            net.wimpi.pim.contact.model.Contact c = cmf.createContact();
 
-                PersonalIdentity pid = cmf.createPersonalIdentity();
-                pid.setFormattedName(contact.getName());
-                pid.setFirstname("");
-                pid.setLastname(contact.getName());
-                c.setPersonalIdentity(pid);
+            PersonalIdentity pid = cmf.createPersonalIdentity();
+            pid.setFormattedName(contact.getName());
+            pid.setFirstname("");
+            pid.setLastname(contact.getName());
+            c.setPersonalIdentity(pid);
 
-                Communications comm = cmf.createCommunications();
-                PhoneNumber number = cmf.createPhoneNumber();
-                number.setNumber(contact.getNumber());
-                comm.addPhoneNumber(number);
-                c.setCommunications(comm);
+            Communications comm = cmf.createCommunications();
+            PhoneNumber number = cmf.createPhoneNumber();
+            number.setNumber(contact.getNumber());
+            comm.addPhoneNumber(number);
+            c.setCommunications(comm);
 
-                conts.add(c);
-            }
-
-            //do the export
-            marshaller.marshallContacts(output,
-                    conts.toArray(new net.wimpi.pim.contact.model.Contact[0]));
-            output.flush();
-
-        } finally {
-            if (output != null) {
-                output.close();
-            }
+            conts.add(c);
         }
+
+        //do the export
+        marshaller.marshallContacts(out,
+                conts.toArray(new net.wimpi.pim.contact.model.Contact[0]));
+        out.flush();
     }
 
-    /** Export sms queue to file */
-    public static void exportQueue(Collection<SMS> queue, File file) throws IOException {
-        logger.finer("Exporting queue of " + queue.size() + " SMSs to file: " + file.getAbsolutePath());
-        CsvWriter writer = null;
-        try {
-            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            writer.writeComment(l10n.getString("ExportManager.sms_queue"));
-            for (SMS sms : queue) {
-                writer.writeRecord(new String[] {
-                    sms.getName(),
-                    sms.getNumber(),
-                    sms.getOperator(),
-                    sms.getText(),
-                    sms.getSenderName(),
-                    sms.getSenderNumber()
-                });
-            }
-            writer.flush();
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
+    /** Export sms queue to file
+     * @param queue queue, not null
+     * @param out output stream, not null
+     */
+    public static void exportQueue(Collection<SMS> queue, OutputStream out) throws IOException {
+        Validate.notNull(queue);
+        Validate.notNull(out);
+
+        logger.finer("Exporting queue of " + queue.size() + " SMSs");
+        CsvWriter writer = new CsvWriter(out, ',', Charset.forName("UTF-8"));
+
+        writer.writeComment(l10n.getString("ExportManager.sms_queue"));
+        for (SMS sms : queue) {
+            writer.writeRecord(new String[] {
+                sms.getName(),
+                sms.getNumber(),
+                sms.getOperator(),
+                sms.getText(),
+                sms.getSenderName(),
+                sms.getSenderNumber()
+            });
         }
+        writer.flush();
     }
     
-    /** Export sms history to file */
-    public static void exportHistory(Collection<History.Record> history, File file) throws IOException {
-        logger.finer("Exporting history of " + history.size() + " records to file: " + file.getAbsolutePath());
-        CsvWriter writer = null;
+    /** Export sms history to file
+     * @param history history, not null
+     * @param out output stream, not null
+     */
+    public static void exportHistory(Collection<History.Record> history, OutputStream out) throws IOException {
+        Validate.notNull(history);
+        Validate.notNull(out);
+
+        logger.finer("Exporting history of " + history.size() + " records");
+        CsvWriter writer = new CsvWriter(out, ',', Charset.forName("UTF-8"));
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
                 DateFormat.LONG, Locale.ROOT);
-        try {
-            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            writer.writeComment(l10n.getString("ExportManager.history"));
-            for (History.Record record : history) {
-                writer.writeRecord(new String[] {
-                    df.format(record.getDate()),
-                    record.getName(),
-                    record.getNumber(),
-                    record.getOperator(),
-                    record.getText(),
-                    record.getSenderName(),
-                    record.getSenderNumber()
-                });
-            }
-            writer.flush();
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
+
+        writer.writeComment(l10n.getString("ExportManager.history"));
+        for (History.Record record : history) {
+            writer.writeRecord(new String[] {
+                df.format(record.getDate()),
+                record.getName(),
+                record.getNumber(),
+                record.getOperator(),
+                record.getText(),
+                record.getSenderName(),
+                record.getSenderNumber()
+            });
         }
+        writer.flush();
     }
     
     /** Export keyring to file.
-     * @param keyring Keyring to export.
-     * @param file File where to export.
+     * @param keyring keyring to export, not null
+     * @param out output stream, not null
      * @throws java.io.IOException When some error occur during file processing.
      * @throws java.security.GeneralSecurityException When there is problem with
      *         key encryption.
      */
-    public static void exportKeyring(Keyring keyring, File file)
+    public static void exportKeyring(Keyring keyring, OutputStream out)
             throws IOException, GeneralSecurityException {
-        logger.finer("Exporting keyring to file: " + file.getAbsolutePath());
-        CsvWriter writer = null;
-        try {
-            writer = new CsvWriter(file.getPath(), ',', Charset.forName("UTF-8"));
-            writer.writeComment(l10n.getString("ExportManager.login"));
-            for (String operatorName : keyring.getOperatorNames()) {
-                Tuple<String, String> key = keyring.getKey(operatorName);
-                String login = key.get1();
-                String password = Keyring.encrypt(key.get2());
-                writer.writeRecord(new String[] {
-                    operatorName,
-                    login,
-                    password
-                });
-            }
-            writer.flush();
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
+        Validate.notNull(keyring);
+        Validate.notNull(out);
+
+        logger.finer("Exporting keyring");
+        CsvWriter writer = new CsvWriter(out, ',', Charset.forName("UTF-8"));
+
+        writer.writeComment(l10n.getString("ExportManager.login"));
+        for (String operatorName : keyring.getOperatorNames()) {
+            Tuple<String, String> key = keyring.getKey(operatorName);
+            String login = key.get1();
+            String password = Keyring.encrypt(key.get2());
+            writer.writeRecord(new String[] {
+                operatorName,
+                login,
+                password
+            });
         }
+        writer.flush();
     }
 }

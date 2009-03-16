@@ -24,6 +24,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -353,11 +354,14 @@ public class Actions {
             //save
             logger.finer("About to export " + contacts.size() + " contacts");
             try {
+                FileOutputStream out = new FileOutputStream(file);
                 if (chooser.getFileFilter() == vCardFileFilter) {
-                    ExportManager.exportContactsToVCard(contacts, file);
+                    ExportManager.exportContactsToVCard(contacts, out);
                 } else {
-                    ExportManager.exportContacts(contacts, file);
+                    ExportManager.exportContacts(contacts, out);
                 }
+                out.flush();
+                out.close();
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "Could not export contacts to file", ex);
                 Log.getInstance().addRecord(new Log.Record(
