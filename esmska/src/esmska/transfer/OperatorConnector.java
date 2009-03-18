@@ -21,6 +21,7 @@ import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -55,6 +56,12 @@ public class OperatorConnector {
 
         //set user-agent - just to be sure that the server won't screw us
         client.getParams().setParameter(HttpMethodParams.USER_AGENT, USER_AGENT);
+
+        //set wise redirect policy
+        //allow circular redirects because some sites use it (with cookies)
+        client.getParams().setParameter(HttpClientParams.ALLOW_CIRCULAR_REDIRECTS, true);
+        client.getParams().setParameter(HttpClientParams.REJECT_RELATIVE_REDIRECT, false);
+        client.getParams().setParameter(HttpClientParams.MAX_REDIRECTS, 100);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
