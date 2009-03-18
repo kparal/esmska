@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-16 12:21+0200\n"
-"PO-Revision-Date: 2009-03-15 22:18+0000\n"
+"POT-Creation-Date: 2009-03-18 17:24+0200\n"
+"PO-Revision-Date: 2009-03-18 17:24+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -525,12 +525,16 @@ msgid "Do you really like to remove all entered login credentials?"
 msgstr "Opravdu chcete odstranit všechny vyplněné přihlašovací údaje?"
 
 #: ConfigFrame.sameProxyCheckBox.text
-msgid "Use &this proxy for all protocols"
-msgstr "Pro všechny protokoly použít &tuto proxy"
+msgid "Same as &HTTP proxy"
+msgstr "Stejná jako &HTTP proxy"
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
-msgid "An address in the 'HTTP proxy' field will be used for all protocols"
-msgstr "Pro všechny protokoly se použije adresa zadaná v poli \"HTTP proxy\""
+msgid ""
+"An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
+"field"
+msgstr ""
+"Adresa zadaná v poli \"HTTP proxy\" se použije taktéž pro pole \"HTTPS proxy"
+"\""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -2056,6 +2060,9 @@ msgstr "Znovu spustit frontu sms"
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Klikněte pro otevření stránky s možností stažení programu"
+
+#~ msgid "Use &this proxy for all protocols"
+#~ msgstr "Pro všechny protokoly použít &tuto proxy"
 
 #~ msgid ""
 #~ "<html><a href=\"http://code.google.com/p/esmska/wiki/Podporte\">Support "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-16 12:21+0200\n"
+"POT-Creation-Date: 2009-03-18 17:22+0200\n"
 "PO-Revision-Date: 2009-03-11 17:06+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -530,11 +530,15 @@ msgid "Do you really like to remove all entered login credentials?"
 msgstr "Naozaj si prajete odstrániť všetky vyplnené prihlasovacie údaje?"
 
 #: ConfigFrame.sameProxyCheckBox.text
-msgid "Use &this proxy for all protocols"
-msgstr "Používať tento proxy server pre všetky protokoly."
+#, fuzzy
+msgid "Same as &HTTP proxy"
+msgstr "H&TTP proxy:"
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
-msgid "An address in the 'HTTP proxy' field will be used for all protocols"
+#, fuzzy
+msgid ""
+"An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
+"field"
 msgstr "Pre všetky protokoly sa použije adresa zadaná v poli \"HTTP proxy\""
 
 #: ConfigFrame.senderNameTextField.toolTipText
@@ -2069,6 +2073,9 @@ msgstr "Znovu spustiť SMS frontu"
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Kliknite pre otvorenie stránky s možnosťou stiahnutia programu"
+
+#~ msgid "Use &this proxy for all protocols"
+#~ msgstr "Používať tento proxy server pre všetky protokoly."
 
 #~ msgid ""
 #~ "<html><i>\n"

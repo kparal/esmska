@@ -26,15 +26,6 @@ public class ProxyManager {
 
     /** Set system-wide proxy.
      * 
-     * @param proxy proxy for HTTP, HTTPS and SOCKS in form "host" or "host:port".
-     *  Use null or empty string for unsetting the proxy.
-     */
-    public static void setProxy(String proxy) {
-        setProxy(proxy, proxy, proxy);
-    }
-    
-    /** Set system-wide proxy.
-     * 
      * @param httpProxy proxy for HTTP in form "host" or "host:port".
      *  Use null or empty string for unsetting the proxy.
      * @param httpsProxy proxy for HTTPS in form "host" or "host:port".

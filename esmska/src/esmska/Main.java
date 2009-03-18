@@ -217,12 +217,8 @@ public class Main {
         //set proxy
         Config config = Config.getInstance();
         if (config.isUseProxy()) {
-            if (config.isSameProxy()) {
-                ProxyManager.setProxy(config.getHttpProxy());
-            } else {
-                ProxyManager.setProxy(config.getHttpProxy(),
-                        config.getHttpsProxy(), config.getSocksProxy());
-            }
+            ProxyManager.setProxy(config.getHttpProxy(),
+                    config.getHttpsProxy(), config.getSocksProxy());
         }
         
         //set MenuBar usage on Mac OS

@@ -221,17 +221,13 @@ public class ConfigFrame extends javax.swing.JFrame {
             return;
         }
         boolean useProxy = useProxyCheckBox.isSelected();
-        boolean sameProxy = sameProxyCheckBox.isSelected();
+
         if (useProxy) {
-            if (sameProxy) {
-                ProxyManager.setProxy(httpProxyTextField.getText());
-            } else {
-                ProxyManager.setProxy(httpProxyTextField.getText(),
-                        httpsProxyTextField.getText(),
-                        socksProxyTextField.getText());
-            }
+            ProxyManager.setProxy(httpProxyTextField.getText(),
+                    httpsProxyTextField.getText(),
+                    socksProxyTextField.getText());
         } else {
-            ProxyManager.setProxy(null);
+            ProxyManager.setProxy(null, null, null);
         }
     }
     
@@ -856,6 +852,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
         @Override
         public void onUpdate(DocumentEvent e) {
+            if (sameProxyCheckBox.isSelected()) {
+                httpsProxyTextField.setText(httpProxyTextField.getText());
+            }
             updateProxy();
         }
     });
@@ -892,7 +891,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${socksProxy}"), socksProxyTextField, BeanProperty.create("text"));
     bindingGroup.addBinding(binding);
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ, sameProxyCheckBox, ELProperty.create("${enabled && !selected}"), socksProxyTextField, BeanProperty.create("enabled"));
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, sameProxyCheckBox, ELProperty.create("${enabled}"), socksProxyTextField, BeanProperty.create("enabled"));
     bindingGroup.addBinding(binding);
 
     socksProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
@@ -928,25 +927,27 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addGap(21, 21, 21)
                     .addGroup(connectionPanelLayout.createParallelGroup(Alignment.LEADING, false)
                         .addGroup(connectionPanelLayout.createSequentialGroup()
-                            .addGap(12, 12, 12)
-                            .addComponent(sameProxyCheckBox))
-                        .addGroup(connectionPanelLayout.createSequentialGroup()
                             .addComponent(jLabel14)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(httpProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addGroup(connectionPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel16)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(socksProxyTextField))
+                        .addGroup(Alignment.TRAILING, connectionPanelLayout.createSequentialGroup()
                             .addComponent(jLabel15)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(httpsProxyTextField))
                         .addGroup(connectionPanelLayout.createSequentialGroup()
-                            .addComponent(jLabel16)
-                            .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(socksProxyTextField))))
+                            .addGap(6, 6, 6)
+                            .addComponent(sameProxyCheckBox))))
                 .addComponent(jLabel17, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
             .addContainerGap())
     );
 
     connectionPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel14, jLabel15, jLabel16});
+
+    connectionPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {httpProxyTextField, httpsProxyTextField, socksProxyTextField});
 
     connectionPanelLayout.setVerticalGroup(
         connectionPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -958,11 +959,11 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addComponent(httpProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(sameProxyCheckBox)
-            .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel15)
                 .addComponent(httpsProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(sameProxyCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel16)
@@ -971,6 +972,8 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(jLabel17)
             .addContainerGap())
     );
+
+    connectionPanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {httpProxyTextField, httpsProxyTextField, socksProxyTextField});
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.connectionPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/connection-16.png")), connectionPanel); // NOI18N
     closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-16 12:21+0200\n"
+"POT-Creation-Date: 2009-03-18 17:22+0200\n"
 "PO-Revision-Date: 2009-03-15 12:56+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -454,11 +454,13 @@ msgid "Do you really like to remove all entered login credentials?"
 msgstr ""
 
 #: ConfigFrame.sameProxyCheckBox.text
-msgid "Use &this proxy for all protocols"
+msgid "Same as &HTTP proxy"
 msgstr ""
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
-msgid "An address in the 'HTTP proxy' field will be used for all protocols"
+msgid ""
+"An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
+"field"
 msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText

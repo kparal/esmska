@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-16 12:21+0200\n"
+"POT-Creation-Date: 2009-03-18 17:22+0200\n"
 "PO-Revision-Date: 2009-02-01 17:56+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -514,11 +514,15 @@ msgid "Do you really like to remove all entered login credentials?"
 msgstr "האם אתה בטוח שברצונך להסיר את כל פרטי ההתחברות שהוזנו?"
 
 #: ConfigFrame.sameProxyCheckBox.text
-msgid "Use &this proxy for all protocols"
-msgstr "השתמש במ&תווך זה עבור כל הפרוטוקולים"
+#, fuzzy
+msgid "Same as &HTTP proxy"
+msgstr "מ&תווך HTTP:"
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
-msgid "An address in the 'HTTP proxy' field will be used for all protocols"
+#, fuzzy
+msgid ""
+"An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
+"field"
 msgstr "הכתובת שבשדה 'מתווך HTTP' תשמש עבור כל הפרוטוקולים"
 
 #: ConfigFrame.senderNameTextField.toolTipText
@@ -1977,6 +1981,9 @@ msgstr "המשך את תור ה־SMS"
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr ""
+
+#~ msgid "Use &this proxy for all protocols"
+#~ msgstr "השתמש במ&תווך זה עבור כל הפרוטוקולים"
 
 #~ msgid ""
 #~ "<html><i>\n"
