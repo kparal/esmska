@@ -86,8 +86,8 @@ function send() {
         postData = ["nextURL", "checkStatus.jsp", "errURL", "clickError.jsp",
                     "username", LOGIN, "password", PASSWORD,
                     "Submit", ""]
-        content = EXEC.postURL("https://sms1.client.tmo.cz/.gang/login", [], postData)
-        
+        content = EXEC.postURL("https://login1.client.tmo.cz/.gang/login", [], postData)
+
         // seach for errors
         re = /<div class="error_box">/
         match = re.exec(content)
