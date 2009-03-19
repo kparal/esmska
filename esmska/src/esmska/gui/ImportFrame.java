@@ -45,6 +45,7 @@ import esmska.data.Log;
 import esmska.data.Operators;
 import esmska.data.event.AbstractListDataListener;
 import esmska.utils.L10N;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -84,6 +85,14 @@ public class ImportFrame extends javax.swing.JFrame {
     public ImportFrame() {
         initComponents();
         
+        //set window images
+        ArrayList<Image> images = new ArrayList<Image>();
+        images.add(new ImageIcon(getClass().getResource(RES + "contact-16.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "contact-22.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "contact-32.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "contact-48.png")).getImage());
+        setIconImages(images);
+
         //close on Ctrl+W
         String command = "close";
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
@@ -242,7 +251,6 @@ public class ImportFrame extends javax.swing.JFrame {
         setTitle(l10n.getString("ImportFrame.title")); // NOI18N
 
 
-        setIconImage(new ImageIcon(getClass().getResource(RES + "contact-48.png")).getImage());
 
         cardPanel.setLayout(new CardLayout());
 
@@ -367,7 +375,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(encodingLabel)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(problemLabel)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         cardPanel.add(browsePanel, "browsePanel");

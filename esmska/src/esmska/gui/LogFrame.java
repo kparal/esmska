@@ -11,6 +11,7 @@ import esmska.data.Log;
 import esmska.utils.L10N;
 import esmska.utils.Workarounds;
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -19,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,7 +59,14 @@ public class LogFrame extends javax.swing.JFrame {
         initComponents();
         closeButton.requestFocusInWindow();
         this.getRootPane().setDefaultButton(closeButton);
-        
+
+        //set window images
+        ArrayList<Image> images = new ArrayList<Image>();
+        images.add(new ImageIcon(getClass().getResource(RES + "log-16.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "log-32.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "log-48.png")).getImage());
+        setIconImages(images);
+
         //close on Ctrl+W
         String command = "close";
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
@@ -96,7 +105,6 @@ public class LogFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("LogFrame.title")); // NOI18N
-        setIconImage(new ImageIcon(getClass().getResource(RES + "log-48.png")).getImage());
 
         logList.setModel(logModel);
         logList.setCellRenderer(new LogRenderer());

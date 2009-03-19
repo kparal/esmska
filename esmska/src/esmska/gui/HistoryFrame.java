@@ -59,6 +59,7 @@ import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
 import esmska.utils.DialogUtils;
 import esmska.utils.OSType;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
@@ -102,7 +103,14 @@ public class HistoryFrame extends javax.swing.JFrame {
     /** Creates new form HistoryFrame */
     public HistoryFrame() {
         initComponents();
-        
+
+        //set window images
+        ArrayList<Image> images = new ArrayList<Image>();
+        images.add(new ImageIcon(getClass().getResource(RES + "history-16.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "history-32.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "history-48.png")).getImage());
+        setIconImages(images);
+
         //close on Ctrl+W
         String command = "close";
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
@@ -162,7 +170,6 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("HistoryFrame.title")); // NOI18N
-        setIconImage(new ImageIcon(getClass().getResource(RES + "history-48.png")).getImage());
 
         historyTable.setModel(historyTableModel);
         historyTable.setDefaultRenderer(Date.class, new TableDateRenderer());

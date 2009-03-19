@@ -14,12 +14,14 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +61,15 @@ public class AboutFrame extends javax.swing.JFrame {
         initComponents();
         closeButton.requestFocusInWindow();
         this.getRootPane().setDefaultButton(closeButton);
-        
+
+        //set window images
+        ArrayList<Image> images = new ArrayList<Image>();
+        images.add(new ImageIcon(getClass().getResource(RES + "about-16.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "about-22.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "about-32.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "about-48.png")).getImage());
+        setIconImages(images);
+
         //close on Ctrl+W
         String command = "close";
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
@@ -97,7 +107,6 @@ public class AboutFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         ResourceBundle bundle = ResourceBundle.getBundle("esmska/resources/l10n"); // NOI18N
         setTitle(bundle.getString("AboutFrame.title")); // NOI18N
-        setIconImage(new ImageIcon(getClass().getResource(RES + "about-22.png")).getImage());
         setLocationByPlatform(true);
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);

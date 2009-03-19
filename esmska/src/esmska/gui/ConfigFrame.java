@@ -60,6 +60,7 @@ import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import esmska.utils.DialogUtils;
 import esmska.data.Tuple;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -96,7 +97,14 @@ public class ConfigFrame extends javax.swing.JFrame {
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
         initComponents();
-        
+
+        //set window images
+        ArrayList<Image> images = new ArrayList<Image>();
+        images.add(new ImageIcon(getClass().getResource(RES + "config-16.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "config-32.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "config-48.png")).getImage());
+        setIconImages(images);
+
         //close on Ctrl+W
         String command = "close";
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
@@ -334,7 +342,6 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("ConfigFrame.title")); // NOI18N
-        setIconImage(new ImageIcon(getClass().getResource(RES + "config-48.png")).getImage());
         addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent evt) {
                 formWindowClosed(evt);
