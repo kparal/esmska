@@ -61,7 +61,7 @@ public class OperatorConnector {
         //allow circular redirects because some sites use it (with cookies)
         client.getParams().setParameter(HttpClientParams.ALLOW_CIRCULAR_REDIRECTS, true);
         client.getParams().setParameter(HttpClientParams.REJECT_RELATIVE_REDIRECT, false);
-        client.getParams().setParameter(HttpClientParams.MAX_REDIRECTS, 100);
+        client.getParams().setParameter(HttpClientParams.MAX_REDIRECTS, 50);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
