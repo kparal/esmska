@@ -47,7 +47,7 @@ public class UpdateChecker {
     public static final int ACTION_NO_UPDATE_AVAILABLE = 3;
 
     private static final Logger logger = Logger.getLogger(UpdateChecker.class.getName());
-    private static final String UPDATE_FILE_URL = "http://ripper.profitux.cz/esmska/version.xml";
+    private static final String UPDATE_FILE_URL = "http://ripper.profitux.cz/esmska/update/version.php";
 
     private String onlineVersion = "0.0.0";
     private HashSet<OperatorUpdateInfo> operatorUpdates = new HashSet<OperatorUpdateInfo>();
