@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-18 17:22+0200\n"
+"POT-Creation-Date: 2009-03-21 15:52+0200\n"
 "PO-Revision-Date: 2009-02-01 17:56+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1332,6 +1332,10 @@ msgstr "ייבא אנשי קשר מיישומים אחרים"
 #: MainFrame.messageMenu.text
 msgid "&Message"
 msgstr "הו&דעה"
+
+#: MainFrame.newOperatorUpdate
+msgid "Gateway updates are available!"
+msgstr ""
 
 #: MainFrame.new_program_version
 msgid "A new program version has been released!"

@@ -6,6 +6,7 @@
 package esmska.data;
 
 import esmska.gui.ThemeManager;
+import esmska.utils.AlphanumComparator;
 import esmska.utils.LogUtils;
 import java.awt.Dimension;
 import java.beans.*;
@@ -63,6 +64,49 @@ public class Config extends Object implements Serializable {
     public static void setSharedInstance(Config config) {
         Config.instance = config;
     }
+    
+    /** Get latest program version */
+    public static final String getLatestVersion() {
+        return LATEST_VERSION;
+    }
+
+    /** Compares two program versions. Handles if some of them is marked as beta.
+     * @param version1 first version. Null means lowest possible version.
+     * @param version2 second version. Null means lowest possible version.
+     * @return positive number if version1 > version2, zero if version1 == version2,
+     *         negative number otherwise
+     */
+    public static int compareVersions(String version1, String version2) {
+        if (version1 == null) {
+            return (version2 == null ? 0 : -1);
+        }
+
+        String v1 = version1;
+        String v2 = version2;
+
+        //handle beta versions
+        boolean beta1 = version1.toLowerCase().contains("beta");
+        boolean beta2 = version2.toLowerCase().contains("beta");
+        if (beta1) {
+            v1 = version1.substring(0, version1.toLowerCase().indexOf("beta")).trim();
+        }
+        if (beta2) {
+            v2 = version2.substring(0, version2.toLowerCase().indexOf("beta")).trim();
+        }
+
+        AlphanumComparator comparator = new AlphanumComparator();
+        if (beta1 && beta2) {
+            return comparator.compare(version1, version2);
+        } else if (beta1) {
+            return (comparator.compare(v1, v2) == 0 ? -1 :
+                comparator.compare(v1, v2));
+        } else if (beta2) {
+            return (comparator.compare(v1, v2) == 0 ? 1 :
+                comparator.compare(v1, v2));
+        } else {
+            return comparator.compare(v1, v2);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this) {
@@ -93,10 +137,6 @@ public class Config extends Object implements Serializable {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
-    public static final String getLatestVersion() {
-        return LATEST_VERSION;
-    }
-
     public String getSenderName() {
         return senderName;
     }

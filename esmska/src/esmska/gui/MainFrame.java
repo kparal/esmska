@@ -821,14 +821,23 @@ public class MainFrame extends javax.swing.JFrame {
     private class UpdateListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            log.addRecord(new Log.Record(l10n.getString("MainFrame.new_program_version"), null, Icons.STATUS_UPDATE));
-            statusPanel.installClickHandler(new Runnable() {
-                @Override
-                public void run() {
-                    Action browseAction = Actions.getBrowseAction("http://code.google.com/p/esmska/wiki/Download?tm=2");
-                    browseAction.actionPerformed(null);
-                }
-            }, l10n.getString("Update.browseDownloads"));
+            switch (e.getID()) {
+                case UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE:
+                case UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE:
+                    log.addRecord(new Log.Record(l10n.getString("MainFrame.new_program_version"), null, Icons.STATUS_UPDATE_IMPORTANT));
+                    //on click open program homepage in browser
+                    statusPanel.installClickHandler(new Runnable() {
+                        @Override
+                        public void run() {
+                            Action browseAction = Actions.getBrowseAction("http://code.google.com/p/esmska/wiki/Download?tm=2");
+                            browseAction.actionPerformed(null);
+                        }
+                    }, l10n.getString("Update.browseDownloads"));
+                    break;
+                case UpdateChecker.ACTION_OPERATOR_UPDATE_AVAILABLE:
+                    log.addRecord(new Log.Record(l10n.getString("MainFrame.newOperatorUpdate"), null, Icons.STATUS_UPDATE));
+                    break;
+            }
         }
     }
 

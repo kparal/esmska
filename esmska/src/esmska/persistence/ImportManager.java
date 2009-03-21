@@ -197,7 +197,15 @@ public class ImportManager {
         for (URL operatorURL : operatorURLs) {
             try {
                 DefaultOperator operator = new DefaultOperator(operatorURL);
-                operators.add(operator);
+                //check that this operator can be used in this program
+                if (Config.compareVersions(Config.getLatestVersion(),
+                        operator.getMinProgramVersion()) >= 0) {
+                    operators.add(operator);
+                } else {
+                    logger.info("Operator " + operator.getName() +
+                            " requires program of version at least " +
+                            operator.getMinProgramVersion() + ", skipping.");
+                }
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "Problem accessing operator resource: " +
                         operatorURL.toExternalForm(), ex);

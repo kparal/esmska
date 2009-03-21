@@ -4,30 +4,54 @@
  */
 package esmska.update;
 
-import esmska.data.event.ActionEventSupport;
 import esmska.data.Config;
-import esmska.utils.AlphanumComparator;
+import esmska.data.Operator;
+import esmska.data.Operators;
+import esmska.data.event.ActionEventSupport;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.SwingWorker;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import org.apache.commons.io.IOUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-/** Checks for newer version of the program on program's website
+/** Checks for newer program or operator version on program's website
+ *
+ * First of all you must run the {@link #checkForUpdates()} method, only after it
+ * has finished the other methods will give you correct answer about updates
+ * availability.
  *
  * @author ripper
  */
 public class UpdateChecker {
 
-    public static final int ACTION_UPDATE_FOUND = 0;
+    /** new program version is available */
+    public static final int ACTION_PROGRAM_UPDATE_AVAILABLE = 0;
+    /** new or updated operator script is available */
+    public static final int ACTION_OPERATOR_UPDATE_AVAILABLE = 1;
+    /** new program version and operator script is available */
+    public static final int ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE = 2;
+    /** no updates found */
+    public static final int ACTION_NO_UPDATE_AVAILABLE = 3;
+
     private static final Logger logger = Logger.getLogger(UpdateChecker.class.getName());
-    private static final String UPDATE_FILE_URL = "http://esmska.googlecode.com/svn/files/version.txt";
+    private static final String UPDATE_FILE_URL = "http://ripper.profitux.cz/esmska/version.xml";
+
+    private String onlineVersion = "0.0.0";
+    private HashSet<OperatorUpdateInfo> operatorUpdates = new HashSet<OperatorUpdateInfo>();
+    private AtomicBoolean running = new AtomicBoolean();
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -40,101 +64,107 @@ public class UpdateChecker {
     }
     // </editor-fold>
     
-    /** Checks for updates and if updates are found notifies all added listeners
+    /** Checks for updates asynchronously and notify all added listeners after being finished
      */
     public void checkForUpdates() {
+        running.set(true);
         logger.fine("Checking for program updates...");
-        SwingWorker updateCheckerWorker = new UpdateCheckerWorker();
-        updateCheckerWorker.execute();
+
+        final HttpDownloader downloader = new HttpDownloader(UPDATE_FILE_URL, false);
+        downloader.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals("state") &&
+                        evt.getNewValue() == SwingWorker.StateValue.DONE &&
+                        downloader.isFinishedOk()) {
+                    try {
+                        parseVersionFile(downloader.getTextContent());
+                        boolean updateAvailable = isProgramUpdateAvailable();
+                        logger.fine("Found program update: " + updateAvailable);
+                        boolean operatorUpdateAvailable = !getOperatorUpdates().isEmpty();
+                        logger.fine("Found operator update: " + operatorUpdateAvailable);
+                        //send events
+                        if (updateAvailable) {
+                            if (operatorUpdateAvailable) {
+                                actionSupport.fireActionPerformed(ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE, null);
+                            } else {
+                                actionSupport.fireActionPerformed(ACTION_PROGRAM_UPDATE_AVAILABLE, null);
+                            }
+                        } else if (operatorUpdateAvailable) {
+                            actionSupport.fireActionPerformed(ACTION_OPERATOR_UPDATE_AVAILABLE, null);
+                        } else {
+                            actionSupport.fireActionPerformed(ACTION_NO_UPDATE_AVAILABLE, null);
+                        }
+                    } catch (Exception e) {
+                        logger.log(Level.WARNING, "Could not check for updates", e);
+                    } finally {
+                        running.set(false);
+                    }
+                }
+            }
+        });
+        downloader.execute();
     }
 
     /** Check whether downloaded file text indicates newer version available.
-     * Handles if current version is marked as beta.
-     * @param text contents of the update file
-     * @return true if new program version is available, otherwise false
+     * @param text contents of the version file
      */
-    private boolean parseUpdateFile(String text) {
-        String downloadedVersion = "0.0.0";
-        Pattern pattern = Pattern.compile("^Esmska: ([0-9.]+)$", Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(text);
-        if (matcher.find()) {
-            downloadedVersion = matcher.group(1);
-        }
-        logger.finer("Found last online program version: " + downloadedVersion);
-        String currentVersion = Config.getLatestVersion();
+    private synchronized void parseVersionFile(String text) throws Exception {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        XPathFactory xpf = XPathFactory.newInstance();
+        XPath xpath = xpf.newXPath();
 
-        return compareVersions(downloadedVersion, currentVersion) > 0;
+        Document doc = db.parse(IOUtils.toInputStream(text, "UTF-8"));
+
+        onlineVersion = doc.getElementsByTagName(VersionFile.TAG_LAST_VERSION).
+                item(0).getTextContent();
+
+        operatorUpdates.clear();
+        NodeList operators = doc.getElementsByTagName(VersionFile.TAG_OPERATOR);
+        for (int i = 0; i < operators.getLength(); i++) {
+            Node operator = operators.item(i);
+            String name = xpath.evaluate(VersionFile.TAG_NAME + "/text()", operator);
+            String version = xpath.evaluate(VersionFile.TAG_VERSION + "/text()", operator);
+            String url = xpath.evaluate(VersionFile.TAG_DOWNLOAD + "/text()", operator);
+            String minVersion = xpath.evaluate(VersionFile.TAG_MIN_VERSION + "/text()", operator);
+            String iconUrl = xpath.evaluate(VersionFile.TAG_ICON + "/text()", operator);
+
+            OperatorUpdateInfo info = new OperatorUpdateInfo(name, version, url, minVersion, iconUrl);
+
+            Operator op = Operators.getOperator(name);
+            if (op == null || Config.compareVersions(version, op.getVersion()) > 0) {
+                //only add new or updated operators
+                operatorUpdates.add(info);
+            }
+        }
+    }
+
+    /** Whether checking for updates is (still) running */
+    public boolean isRunning() {
+        return running.get();
+    }
+
+    /** Whether a new program update is available */
+    public synchronized boolean isProgramUpdateAvailable() {
+        return Config.compareVersions(onlineVersion, Config.getLatestVersion()) > 0;
+    }
+
+    /** Get latest program version available online */
+    public synchronized String getLatestProgramVersion() {
+        return onlineVersion;
+    }
+
+    /** Whether an operator update is available */
+    public synchronized boolean isOperatorUpdateAvailable() {
+        return !operatorUpdates.isEmpty();
+    }
+
+    /** Get info about operator updates 
+     * @return unmodifiable set of operator updates info
+     */
+    public synchronized Set<OperatorUpdateInfo> getOperatorUpdates() {
+        return Collections.unmodifiableSet(operatorUpdates);
     }
     
-    /** Compares two program versions. Handles if some of them is marked as beta.
-     * @param version1 first version. Null means lowest possible version.
-     * @param version2 second version. Null means lowest possible version.
-     * @return positive number if version1 > version2, zero if version1 == version2,
-     *         negative number otherwise
-     */
-    public static int compareVersions(String version1, String version2) {
-        if (version1 == null) {
-            return (version2 == null ? 0 : -1);
-        }
-        
-        String v1 = version1;
-        String v2 = version2;
-        
-        //handle beta versions
-        boolean beta1 = version1.toLowerCase().contains("beta");
-        boolean beta2 = version2.toLowerCase().contains("beta");
-        if (beta1) {
-            v1 = version1.substring(0, version1.toLowerCase().indexOf("beta")).trim();
-        }
-        if (beta2) {
-            v2 = version2.substring(0, version2.toLowerCase().indexOf("beta")).trim();
-        }
-        
-        AlphanumComparator comparator = new AlphanumComparator();
-        if (beta1 && beta2) {
-            return comparator.compare(version1, version2);
-        } else if (beta1) {
-            return (comparator.compare(v1, v2) == 0 ? -1 :
-                comparator.compare(v1, v2));
-        } else if (beta2) {
-            return (comparator.compare(v1, v2) == 0 ? 1 :
-                comparator.compare(v1, v2));
-        } else {
-            return comparator.compare(v1, v2);
-        }
-    }
-
-    /** SwingWorker which checks downloads and check update file in another thread
-     */
-    private class UpdateCheckerWorker extends SwingWorker<Boolean, Object> {
-
-        private boolean updateAvailable;
-
-        @Override
-        protected Boolean doInBackground() {
-            try {
-                URL url = new URL(UPDATE_FILE_URL);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                
-                String content = IOUtils.toString(con.getInputStream(), "UTF-8");
-                con.getInputStream().close();
-                con.disconnect();
-
-                updateAvailable = parseUpdateFile(content);
-            } catch (MalformedURLException ex) {
-                logger.log(Level.SEVERE, "URL not correct", ex);
-            } catch (IOException ex) {
-                logger.log(Level.WARNING, "Can't download update file", ex);
-            }
-            return updateAvailable;
-        }
-
-        @Override
-        protected void done() {
-            logger.fine("Found program update: " + updateAvailable);
-            if (updateAvailable) {
-                actionSupport.fireActionPerformed(ACTION_UPDATE_FOUND, null);
-            }
-        }
-    }
 }

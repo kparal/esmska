@@ -32,6 +32,11 @@ public interface OperatorInfo {
      */
     String getMaintainer();
 
+    /** Minimal program version required to run this script.
+     * This string is in a format "x.y.z", where x,y,z are numbers.
+     */
+    String getMinProgramVersion();
+
     /** The URL of the webpage of this gateway. On this URL users can get more information
      * about this gateway, register an account, check if it is working, etc.
      * Can be an empty string, but that is strongly discouraged. The website address should

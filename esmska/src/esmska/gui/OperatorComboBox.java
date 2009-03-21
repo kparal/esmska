@@ -6,6 +6,7 @@
 package esmska.gui;
 
 import esmska.data.Config;
+import esmska.data.CountryPrefix;
 import esmska.data.Operators;
 import esmska.data.Operator;
 import esmska.utils.L10N;
@@ -24,7 +25,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import org.apache.commons.lang.StringUtils;
 
 /** JComboBox showing available operators.
  *
@@ -169,14 +169,13 @@ public class OperatorComboBox extends JComboBox {
 
         /** Generate tooltip with operator info */
         private String generateTooltip(Operator operator) {
-            String country = operator.getName().substring(1).replaceFirst("].*", "");
-            assert StringUtils.isNotEmpty(country) : "There always must be some country in operator name";
+            String country = CountryPrefix.extractCountryCode(operator.getName());
             String local = MessageFormat.format(l10n.getString("OperatorComboBox.onlyCountry"), country);
             String tooltip = MessageFormat.format(pattern,
                     operator.getName(), operator.getWebsite(),
                     operator.isLoginRequired() ? registration : noReg,
                     Operators.convertDelayToHumanString(operator.getDelayBetweenMessages(), false),
-                    country.equals("INT") ? international : local);
+                    country.equals(CountryPrefix.INTERNATIONAL_CODE) ? international : local);
             return tooltip;
         }
     }

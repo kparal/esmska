@@ -10,6 +10,7 @@ import java.net.URL;
 import java.security.PrivilegedActionException;
 import java.text.Collator;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.script.ScriptException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -23,12 +24,14 @@ public class DefaultOperator implements Operator {
 
     private static final Logger logger = Logger.getLogger(DefaultOperator.class.getName());
     private URL script;
-    private String name, version, maintainer, website, countryPrefix;
+    private String name, version, maintainer, website, countryPrefix, minProgramVersion;
     private String[] operatorPrefixes, supportedLanguages;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
             delayBetweenMessages;
     private Icon icon;
     private boolean loginRequired;
+    private static final Pattern namePattern = 
+            Pattern.compile("^\\[(\\w\\w|" + CountryPrefix.INTERNATIONAL_CODE + ")\\].+");
 
     /** Creates new DefaultOperator.
      * 
@@ -37,6 +40,7 @@ public class DefaultOperator implements Operator {
      * @throws ScriptException When operator script is invalid
      * @throws PrivilegedActionException When operator script is invalid
      * @throws IntrospectionException When current JRE does not support JavaScript execution
+     * @throws IllegalArgumentException When operator name is not valid
      */
     public DefaultOperator(URL script) throws IOException, ScriptException,
             PrivilegedActionException, IntrospectionException {
@@ -46,12 +50,16 @@ public class DefaultOperator implements Operator {
         if (info == null || info.getName() == null || info.getName().length() <= 0) {
             throw new ScriptException("Not a valid operator script", script.toExternalForm(), 0);
         }
+        if (!namePattern.matcher(info.getName()).matches()) {
+            throw new IllegalArgumentException("Operator name not valid: " + info.getName());
+        }
         
         //remember all the values from OperatorInfo interface internally in order
         //to increase speed (Java code vs JavaScript execution for every method access).
         name = info.getName();
         version = info.getVersion();
         maintainer = info.getMaintainer();
+        minProgramVersion = info.getMinProgramVersion();
         website = info.getWebsite();
         countryPrefix = info.getCountryPrefix();
         operatorPrefixes = info.getOperatorPrefixes();
@@ -125,6 +133,11 @@ public class DefaultOperator implements Operator {
     @Override
     public String getMaintainer() {
         return maintainer;
+    }
+
+    @Override
+    public String getMinProgramVersion() {
+        return minProgramVersion;
     }
 
     @Override

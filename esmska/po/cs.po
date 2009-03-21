@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-18 17:24+0200\n"
-"PO-Revision-Date: 2009-03-18 17:24+0100\n"
+"POT-Creation-Date: 2009-03-21 15:53+0200\n"
+"PO-Revision-Date: 2009-03-21 15:53+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1352,6 +1352,10 @@ msgstr "Importovat kontakty z jiných aplikací"
 #: MainFrame.messageMenu.text
 msgid "&Message"
 msgstr "&Zpráva"
+
+#: MainFrame.newOperatorUpdate
+msgid "Gateway updates are available!"
+msgstr "Jsou dostupné aktualizované brány!"
 
 #: MainFrame.new_program_version
 msgid "A new program version has been released!"

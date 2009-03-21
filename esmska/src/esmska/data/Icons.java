@@ -19,6 +19,7 @@ public class Icons {
     public static final ImageIcon STATUS_ERROR = new ImageIcon(Icons.class.getResource(RES + "error-16.png"));
     public static final ImageIcon STATUS_BLANK = new ImageIcon(Icons.class.getResource(RES + "blank-16.png"));
     public static final ImageIcon STATUS_UPDATE = new ImageIcon(Icons.class.getResource(RES + "update-16.png"));
+    public static final ImageIcon STATUS_UPDATE_IMPORTANT = new ImageIcon(Icons.class.getResource(RES + "updateImportant-16.png"));
     public static final ImageIcon OPERATOR_BLANK = STATUS_BLANK;
     public static final ImageIcon OPERATOR_DEFAULT = new ImageIcon(Icons.class.getResource(RES + "operator-16.png"));
 }

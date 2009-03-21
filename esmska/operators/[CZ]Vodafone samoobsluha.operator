@@ -11,6 +11,10 @@ function getMaintainer() {
     return "Martin Jansa <Martin.Jansa@gmail.com>"
 }
 
+function getMinProgramVersion() {
+    return "0.15.0beta"
+}
+
 function getWebsite() {
     return "https://samoobsluha.vodafone.cz"
 }

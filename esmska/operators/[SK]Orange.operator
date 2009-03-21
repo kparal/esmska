@@ -11,6 +11,10 @@ function getMaintainer() {
     return "Tomáš Kováčik <tomas.kovacik@gmail.com>"
 }
 
+function getMinProgramVersion() {
+    return "0.15.0beta"
+}
+
 function getWebsite() {
     return "https://www.orangeportal.sk"
 }

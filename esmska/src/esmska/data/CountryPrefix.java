@@ -7,6 +7,9 @@ package esmska.data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
 /** Class containing list of all telephone country prefixes (as defined in
@@ -16,8 +19,13 @@ import org.apache.commons.lang.Validate;
  * @author ripper
  */
 public class CountryPrefix {
+    /** Country code for "international" */
+    public static final String INTERNATIONAL_CODE = "INT";
+
     private static final Config config = Config.getInstance();
     private static final HashMap<String, String> map = new HashMap<String, String>();
+    private static final Pattern operatorNamePattern = 
+            Pattern.compile("^\\[(\\w\\w|" + INTERNATIONAL_CODE + ")\\].*");
     static {
         map.put("AC", "+247");
         map.put("AD", "+376");
@@ -372,5 +380,19 @@ public class CountryPrefix {
             }
         }
         return true;
+    }
+
+    /** Extract country code from operator name
+     * @param operatorName operator name; may be invalid or null
+     * @return country code CC or INT; or null when <code>operatorName</code>
+     * invalid or null
+     */
+    public static String extractCountryCode(String operatorName) {
+        Matcher matcher = operatorNamePattern.matcher(StringUtils.defaultString(operatorName));
+        if (operatorName == null || !matcher.matches()) {
+            assert false : "There always should be some country in operator name";
+            return null;
+        }
+        return matcher.group(1);
     }
 }
