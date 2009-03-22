@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-21 15:52+0200\n"
+"POT-Creation-Date: 2009-03-22 12:37+0200\n"
 "PO-Revision-Date: 2009-03-15 22:18+0000\n"
 "Last-Translator: Alexandre Sapata Carbonell <alexandrenescau@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -51,7 +51,7 @@ msgid "&License"
 msgstr "&Licença"
 
 #: AboutFrame.linkButton.text
-msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
+msgid "<html><a href=\"\">Homepage</a></html>"
 msgstr ""
 
 #: AboutFrame.linkButton.toolTipText
@@ -61,13 +61,8 @@ msgid ""
 "</html>"
 msgstr ""
 
-#. #Do not change this value
-#: AboutFrame.supportButton.link
-msgid "http://code.google.com/p/esmska/wiki/Support"
-msgstr ""
-
 #: AboutFrame.supportButton.text
-msgid "Support project"
+msgid "<html><a href=\"\">Support project</a></html>"
 msgstr ""
 
 #: AboutFrame.supportButton.toolTipText
@@ -1339,8 +1334,8 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
-"You are sending the message to early. The operator either requires a certain "
-"interval<br>you have to wait before sending another message or it "
+"You are sending the message too early. The operator either requires a "
+"certain interval<br>you have to wait before sending another message or it "
 "limits<br>the maximum number of possible messages in some time period. Try "
 "it later."
 msgstr ""
@@ -1364,9 +1359,9 @@ msgid ""
 "An unknown error has occured. The operator may have changed<br>its webpages "
 "or has a problem with them currently.<br>Try again later.<br><br>Also make "
 "sure that you have working connection to the Internet<br>and that you are "
-"using the latest program version.<br><br>If the problem persists and "
-"operator <a href=\"{0}\">web gateway</a> works,<br>report the problem on "
-"program homepage."
+"using the <a href=\"{0}\">latest program version</a>.<br><br>If the problem "
+"persists and operator <a href=\"{1}\">web gateway</a> works,<br>report the "
+"problem on <a href=\"{2}\">program homepage</a>."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!

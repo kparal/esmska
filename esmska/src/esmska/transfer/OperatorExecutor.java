@@ -7,6 +7,7 @@ package esmska.transfer;
 import esmska.data.Operator;
 import esmska.gui.MainFrame;
 import esmska.utils.L10N;
+import esmska.utils.Links;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
@@ -81,7 +82,8 @@ public class OperatorExecutor {
         this.operator = operator;
         if (operator != null) {
             ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, operator.getWebsite());
-            ERROR_UKNOWN = MessageFormat.format(ERROR_UKNOWN, operator.getWebsite());
+            ERROR_UKNOWN = MessageFormat.format(ERROR_UKNOWN, Links.DOWNLOAD, 
+                    operator.getWebsite(), Links.ISSUES);
         }
     }
 

@@ -71,6 +71,7 @@ import esmska.utils.L10N;
 import esmska.utils.OSType;
 import esmska.data.event.ValuedListener;
 import esmska.utils.DialogUtils;
+import esmska.utils.Links;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
@@ -461,25 +462,25 @@ public class MainFrame extends javax.swing.JFrame {
         menuBar.add(toolsMenu);
 
         Mnemonics.setLocalizedText(helpMenu, l10n.getString("MainFrame.helpMenu.text")); // NOI18N
-        faqMenuItem.setAction(Actions.getBrowseAction("http://code.google.com/p/esmska/wiki/FAQ"));
+        faqMenuItem.setAction(Actions.getBrowseAction(Links.FAQ));
         faqMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/faq-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text"));
         faqMenuItem.setToolTipText(l10n.getString("MainFrame.faqMenuItem.toolTipText")); // NOI18N
         helpMenu.add(faqMenuItem);
 
-        getHelpMenuItem.setAction(Actions.getBrowseAction("https://answers.launchpad.net/esmska"));
+        getHelpMenuItem.setAction(Actions.getBrowseAction(Links.FORUM));
         getHelpMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/getHelp-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(getHelpMenuItem, l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
         getHelpMenuItem.setToolTipText(l10n.getString("MainFrame.getHelpMenuItem.toolTipText")); // NOI18N
         helpMenu.add(getHelpMenuItem);
 
-        translateMenuItem.setAction(Actions.getBrowseAction("https://translations.launchpad.net/esmska"));
+        translateMenuItem.setAction(Actions.getBrowseAction(Links.TRANSLATE));
         translateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/translate-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(translateMenuItem, l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
         translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
         helpMenu.add(translateMenuItem);
 
-        problemMenuItem.setAction(Actions.getBrowseAction("http://code.google.com/p/esmska/wiki/Issues"));
+        problemMenuItem.setAction(Actions.getBrowseAction(Links.ISSUES));
         problemMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/bug-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(problemMenuItem, l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
         problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
@@ -510,7 +511,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -829,7 +830,7 @@ public class MainFrame extends javax.swing.JFrame {
                     statusPanel.installClickHandler(new Runnable() {
                         @Override
                         public void run() {
-                            Action browseAction = Actions.getBrowseAction("http://code.google.com/p/esmska/wiki/Download?tm=2");
+                            Action browseAction = Actions.getBrowseAction(Links.DOWNLOAD);
                             browseAction.actionPerformed(null);
                         }
                     }, l10n.getString("Update.browseDownloads"));

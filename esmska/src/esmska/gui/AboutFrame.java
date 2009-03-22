@@ -8,6 +8,7 @@ package esmska.gui;
 
 import esmska.data.Config;
 import esmska.utils.L10N;
+import esmska.utils.Links;
 import esmska.utils.Workarounds;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -150,18 +151,14 @@ public class AboutFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(jLabel5, bundle.getString("AboutFrame.jLabel5.text")); // NOI18N
         jLabel5.setFocusable(false);
 
-        linkButton.setAction(Actions.getBrowseAction("http://esmska.googlecode.com/"));
+        linkButton.setAction(Actions.getBrowseAction(Links.HOMEPAGE));
         Mnemonics.setLocalizedText(linkButton, bundle.getString("AboutFrame.linkButton.text")); // NOI18N
         linkButton.setToolTipText(bundle.getString("AboutFrame.linkButton.toolTipText")); // NOI18N
         linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
-        supportButton.setAction(Actions.getBrowseAction(l10n.getString("AboutFrame.supportButton.link")));
-        Mnemonics.setLocalizedText(supportButton, "<html><a href=\"" +
-            l10n.getString("AboutFrame.supportButton.link") +
-            "\">" +
-            l10n.getString("AboutFrame.supportButton.text") +
-            "</a></html>");
+        supportButton.setAction(Actions.getBrowseAction(Links.DONATE));
+        Mnemonics.setLocalizedText(supportButton, l10n.getString("AboutFrame.supportButton.text")); // NOI18N
         supportButton.setToolTipText(bundle.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         supportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         supportButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
@@ -190,11 +187,11 @@ public class AboutFrame extends javax.swing.JFrame {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                        .addComponent(jLabel8, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(supportButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)))
+                        .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 

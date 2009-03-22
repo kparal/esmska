@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-21 15:52+0200\n"
+"POT-Creation-Date: 2009-03-22 12:37+0200\n"
 "PO-Revision-Date: 2009-03-11 17:06+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -51,7 +51,8 @@ msgid "&License"
 msgstr "&Licencia"
 
 #: AboutFrame.linkButton.text
-msgid "<html><a href=\"http://esmska.googlecode.com/\">Homepage</a></html>"
+#, fuzzy
+msgid "<html><a href=\"\">Homepage</a></html>"
 msgstr ""
 "<html><a href=\\\"http://esmska.googlecode.com/\\\">Domovská stránka</a></"
 "html>"
@@ -66,14 +67,9 @@ msgstr ""
 "Zobraziť domovskú stránku programu\n"
 "</html>"
 
-#. #Do not change this value
-#: AboutFrame.supportButton.link
-msgid "http://code.google.com/p/esmska/wiki/Support"
-msgstr "http://code.google.com/p/esmska/wiki/Support"
-
 #: AboutFrame.supportButton.text
-msgid "Support project"
-msgstr "Podporte projekt"
+msgid "<html><a href=\"\">Support project</a></html>"
+msgstr ""
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -1549,9 +1545,10 @@ msgstr ""
 "</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
+#, fuzzy
 msgid ""
-"You are sending the message to early. The operator either requires a certain "
-"interval<br>you have to wait before sending another message or it "
+"You are sending the message too early. The operator either requires a "
+"certain interval<br>you have to wait before sending another message or it "
 "limits<br>the maximum number of possible messages in some time period. Try "
 "it later."
 msgstr ""
@@ -1574,13 +1571,14 @@ msgstr "Správa od operátora:<br>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_UKNOWN
+#, fuzzy
 msgid ""
 "An unknown error has occured. The operator may have changed<br>its webpages "
 "or has a problem with them currently.<br>Try again later.<br><br>Also make "
 "sure that you have working connection to the Internet<br>and that you are "
-"using the latest program version.<br><br>If the problem persists and "
-"operator <a href=\"{0}\">web gateway</a> works,<br>report the problem on "
-"program homepage."
+"using the <a href=\"{0}\">latest program version</a>.<br><br>If the problem "
+"persists and operator <a href=\"{1}\">web gateway</a> works,<br>report the "
+"problem on <a href=\"{2}\">program homepage</a>."
 msgstr ""
 "Vyskytla sa neznáma chyba. Operátor možno zmenil<br>svoje webové stránky "
 "alebo má snimi aktuálne problémy.<br>Skuste to neskôr.<br><br>Taktiež sa "
@@ -2077,6 +2075,12 @@ msgstr "Znovu spustiť SMS frontu"
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Kliknite pre otvorenie stránky s možnosťou stiahnutia programu"
+
+#~ msgid "http://code.google.com/p/esmska/wiki/Support"
+#~ msgstr "http://code.google.com/p/esmska/wiki/Support"
+
+#~ msgid "Support project"
+#~ msgstr "Podporte projekt"
 
 #~ msgid "Use &this proxy for all protocols"
 #~ msgstr "Používať tento proxy server pre všetky protokoly."
