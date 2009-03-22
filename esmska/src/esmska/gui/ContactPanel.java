@@ -28,6 +28,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
@@ -760,6 +762,14 @@ public class ContactPanel extends javax.swing.JPanel {
             setDefaultCloseOperation(HIDE_ON_CLOSE);
             //integrate modal window better on Mac
             DialogUtils.setDocumentModalDialog(this);
+
+            //handle closing by user
+            this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent evt) {
+                    formWindowClosing(evt);
+                }
+            });
         }
         private void init() {
             panel = new EditContactPanel();
@@ -837,6 +847,15 @@ public class ContactPanel extends javax.swing.JPanel {
         /** Get currently displayed contact. May be null (cancelled by user). */
         public Contact getContact() {
             return contact;
+        }
+        /** Respond to user closing */
+        private void formWindowClosing(WindowEvent evt) {
+            if (evt == null) {
+                //window closed programatically
+                return;
+            }
+            //not confirmed
+            contact = null;
         }
     }
     
