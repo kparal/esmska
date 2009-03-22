@@ -9,6 +9,9 @@ import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Operators;
 import esmska.data.Operator;
+import esmska.data.Operators.Events;
+import esmska.data.event.ValuedEvent;
+import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
@@ -33,9 +36,9 @@ import javax.swing.ListCellRenderer;
 public class OperatorComboBox extends JComboBox {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final String RES = "/esmska/resources/";
-    private static final SortedSet<Operator> operators = Operators.getInstance().getAll();
     private static final Config config = Config.getInstance();
     private static final OperatorComboBoxRenderer cellRenderer = new OperatorComboBoxRenderer();
+    private static SortedSet<Operator> operators = Operators.getInstance().getAll();
     private DefaultComboBoxModel model = new DefaultComboBoxModel(operators.toArray());
     /** used only for non-existing operators */
     private String operatorName;
@@ -59,6 +62,21 @@ public class OperatorComboBox extends JComboBox {
                 filterOperators();
                 if (model.getSize() > 0) {
                     setSelectedIndex(0);
+                }
+            }
+        });
+
+        //add listener to operator updates
+        Operators.getInstance().addValuedListener(new ValuedListener<Operators.Events, Operator>() {
+            @Override
+            public void eventOccured(ValuedEvent<Events, Operator> e) {
+                switch (e.getEvent()) {
+                    case ADDED_OPERATOR:
+                    case ADDED_OPERATORS:
+                    case CLEARED_OPERATORS:
+                    case REMOVED_OPERATOR:
+                    case REMOVED_OPERATORS:
+                        updateOperators();
                 }
             }
         });
@@ -199,5 +217,15 @@ public class OperatorComboBox extends JComboBox {
             model.addElement(operator);
         }
     }
-    
+
+    /** Update model when operators are updated */
+    private void updateOperators() {
+        String opName = getSelectedOperatorName();
+        operators = Operators.getInstance().getAll();
+        model.removeAllElements();
+        for (Operator op : operators) {
+            model.addElement(op);
+        }
+        setSelectedOperator(opName);
+    }
 }
