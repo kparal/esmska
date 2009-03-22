@@ -6,6 +6,7 @@ package esmska.update;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -23,13 +24,12 @@ public class OperatorUpdateInfo {
 
     /** Constructor.
      *
-     * @param name operator name
-     * @param version operator version
-     * @param downloadUrl url where to download operator script
-     * @param minProgramVersion minimal required program version to run operator
-     * @param iconUrl url where to download operator icon
+     * @param name operator name; not null nor empty
+     * @param version operator version; not null nor empty
+     * @param downloadUrl url where to download operator script; not null nor empty
+     * @param minProgramVersion minimal required program version to run operator; not null nor empty
+     * @param iconUrl url where to download operator icon; empty string is changed to null
      * @throws java.net.MalformedURLException if some of the urls where not valid
-     * @throws IllegalArgumentException if some parameters are null or empty
      */
     public OperatorUpdateInfo(String name, String version, String downloadUrl,
             String minProgramVersion, String iconUrl) throws MalformedURLException {
@@ -37,36 +37,35 @@ public class OperatorUpdateInfo {
         Validate.notEmpty(version);
         Validate.notEmpty(downloadUrl);
         Validate.notEmpty(minProgramVersion);
-        Validate.notEmpty(iconUrl);
 
         this.name = name;
         this.version = version;
         this.downloadUrl = new URL(downloadUrl);
         this.minProgramVersion = minProgramVersion;
-        this.iconUrl = new URL(iconUrl);
+        this.iconUrl = StringUtils.isNotEmpty(iconUrl) ? new URL(iconUrl) : null;
     }
 
-    /** operator name */
+    /** operator name, not null nor empty */
     public String getName() {
         return name;
     }
 
-    /** operator version */
+    /** operator version, not null nor empty */
     public String getVersion() {
         return version;
     }
 
-    /** url where to download operator script */
+    /** url where to download operator script, not null nor empty */
     public URL getDownloadUrl() {
         return downloadUrl;
     }
 
-    /** minimal required program version to run operator */
+    /** minimal required program version to run operator, not null nor empty */
     public String getMinProgramVersion() {
         return minProgramVersion;
     }
 
-    /** url where to download operator icon */
+    /** url where to download operator icon, may be null */
     public URL getIconUrl() {
         return iconUrl;
     }

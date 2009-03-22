@@ -5,6 +5,7 @@
 package esmska.update;
 
 import esmska.data.Config;
+import esmska.data.Icons;
 import esmska.data.Operator;
 import esmska.data.Operators;
 import esmska.persistence.PersistenceManager;
@@ -85,7 +86,9 @@ public class VersionFile {
             Node minVersion = doc.createElement(TAG_MIN_VERSION);
             minVersion.setTextContent(op.getMinProgramVersion());
             Node icon = doc.createElement(TAG_ICON);
-            icon.setTextContent(downloadBase + op.getName() + ".png");
+            if (op.getIcon() != Icons.OPERATOR_DEFAULT) {
+                icon.setTextContent(downloadBase + op.getName() + ".png");
+            }
 
             operator.appendChild(name);
             operator.appendChild(version);
