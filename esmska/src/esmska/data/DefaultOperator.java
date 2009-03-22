@@ -47,6 +47,7 @@ public class DefaultOperator implements Operator {
         this.script = script;
         
         OperatorInfo info = Operators.parseInfo(script);
+        //check operator name is valid
         if (info == null || info.getName() == null || info.getName().length() <= 0) {
             throw new ScriptException("Not a valid operator script", script.toExternalForm(), 0);
         }

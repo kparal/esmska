@@ -851,7 +851,7 @@
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel13.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="MessageFormat.format(l10n.getString(&quot;ConfigFrame.user_directory&quot;), &#xa;        PersistenceManager.getUserDir().getAbsolutePath())" type="code"/>
+                  <Connection code="MessageFormat.format(l10n.getString(&quot;ConfigFrame.user_directory&quot;), &#xa;        PersistenceManager.getConfigDir().getAbsolutePath())" type="code"/>
                 </Property>
               </Properties>
             </Component>

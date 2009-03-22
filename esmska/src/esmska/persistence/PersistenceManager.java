@@ -47,7 +47,7 @@ public class PersistenceManager {
     private static final Logger logger = Logger.getLogger(PersistenceManager.class.getName());
     private static PersistenceManager persistenceManager;
     
-    private static final String USER_DIRNAME = "esmska";
+    private static final String PROGRAM_DIRNAME = "esmska";
     private static final String OPERATOR_DIRNAME = "operators";
     private static final String CONFIG_FILENAME = "settings.xml";
     private static final String CONTACTS_FILENAME = "contacts.csv";
@@ -57,16 +57,21 @@ public class PersistenceManager {
     private static final String LOCK_FILENAME = "running.lock";
     private static final String OPERATOR_RESOURCE = "/esmska/operators/scripts";
     
-    private static File userDir =
+    private static File configDir =
             new File(System.getProperty("user.home") + File.separator + ".config",
-            USER_DIRNAME);
-    private static File operatorDir = new File(OPERATOR_DIRNAME);
-    private static File configFile = new File(userDir, CONFIG_FILENAME);
-    private static File contactsFile = new File(userDir, CONTACTS_FILENAME);
-    private static File queueFile = new File(userDir, QUEUE_FILENAME);
-    private static File historyFile = new File(userDir, HISTORY_FILENAME);
-    private static File keyringFile = new File(userDir, KEYRING_FILENAME);
-    private static File lockFile = new File(userDir, LOCK_FILENAME);
+            PROGRAM_DIRNAME);
+    private static File dataDir =
+            new File(System.getProperty("user.home") + File.separator + ".local" +
+            File.separator + "share", PROGRAM_DIRNAME);
+
+    private static File globalOperatorDir = new File(OPERATOR_DIRNAME);
+    private static File localOperatorDir = new File(dataDir, OPERATOR_DIRNAME);
+    private static File configFile = new File(configDir, CONFIG_FILENAME);
+    private static File contactsFile = new File(configDir, CONTACTS_FILENAME);
+    private static File queueFile = new File(configDir, QUEUE_FILENAME);
+    private static File historyFile = new File(configDir, HISTORY_FILENAME);
+    private static File keyringFile = new File(configDir, KEYRING_FILENAME);
+    private static File lockFile = new File(configDir, LOCK_FILENAME);
     
     private static boolean customPathSet;
     private FileLock lock;
@@ -75,57 +80,94 @@ public class PersistenceManager {
     private PersistenceManager() throws IOException {
         //adjust program dir according to operating system
         if (!customPathSet) {
-            String path;
+            String confDir, datDir;
             
             switch (OSType.detect()) {
-                case LINUX:
-                    path = System.getenv("XDG_CONFIG_HOME");
-                    break;
                 case MAC_OS_X:
-                    path = System.getProperty("user.home") + "/Library/Application Support";
+                    confDir = System.getProperty("user.home") + "/Library/Application Support";
+                    datDir = confDir;
                     break;
                 case WINDOWS:
-                    path = System.getenv("APPDATA");
+                    confDir = System.getenv("APPDATA");
+                    datDir = confDir;
                     break;
+                case LINUX:
                 default:
-                    path = System.getenv("XDG_CONFIG_HOME");
+                    confDir = System.getenv("XDG_CONFIG_HOME");
+                    datDir = System.getenv("XDG_DATA_HOME");
                     break;
             }
             
-            if (StringUtils.isNotEmpty(path)) {
-                setUserDir(path + File.separator + USER_DIRNAME);
+            if (StringUtils.isNotEmpty(confDir)) {
+                setConfigDir(confDir + File.separator + PROGRAM_DIRNAME);
+            }
+            if (StringUtils.isNotEmpty(datDir)) {
+                setDataDir(datDir + File.separator + PROGRAM_DIRNAME);
             }
         }
         
-        //create program dir if necessary
-        if (!userDir.exists() && !userDir.mkdirs()) {
-            throw new IOException("Can't create program dir '" + userDir.getAbsolutePath() + "'");
+        //create config dir if necessary
+        if (!configDir.exists() && !configDir.mkdirs()) {
+            throw new IOException("Can't create config dir '" + configDir.getAbsolutePath() + "'");
         }
-        if (!(userDir.canWrite() && userDir.canExecute())) {
-            throw new IOException("Can't write or execute the program dir '" + userDir.getAbsolutePath() + "'");
+        if (!(configDir.canWrite() && configDir.canExecute())) {
+            throw new IOException("Can't write or execute the config dir '" + configDir.getAbsolutePath() + "'");
+        }
+        //create data dir if necessary
+        if (!dataDir.exists() && !dataDir.mkdirs()) {
+            throw new IOException("Can't create data dir '" + dataDir.getAbsolutePath() + "'");
+        }
+        if (!(dataDir.canWrite() && dataDir.canExecute())) {
+            throw new IOException("Can't write or execute the data dir '" + dataDir.getAbsolutePath() + "'");
+        }
+        //create local operators dir
+        if (!localOperatorDir.exists() && !localOperatorDir.mkdirs()) {
+            throw new IOException("Can't create local operator dir '" + localOperatorDir.getAbsolutePath() + "'");
         }
     }
     
-    /** Set user directory to custom path */
-    public static void setUserDir(String path) {
+    /** Set config directory */
+    private static void setConfigDir(String path) {
         if (persistenceManager != null) {
             throw new IllegalStateException("Persistence manager already exists");
         }
-        logger.fine("Setting new userdir path: " + path);
+        logger.fine("Setting new config dir path: " + path);
 
-        userDir = new File(path);
-        configFile = new File(userDir, CONFIG_FILENAME);
-        contactsFile = new File(userDir, CONTACTS_FILENAME);
-        queueFile = new File(userDir, QUEUE_FILENAME);
-        historyFile = new File(userDir, HISTORY_FILENAME);
-        keyringFile = new File(userDir, KEYRING_FILENAME);
-        lockFile = new File(userDir, LOCK_FILENAME);
-        customPathSet = true;
+        configDir = new File(path);
+        configFile = new File(configDir, CONFIG_FILENAME);
+        contactsFile = new File(configDir, CONTACTS_FILENAME);
+        queueFile = new File(configDir, QUEUE_FILENAME);
+        historyFile = new File(configDir, HISTORY_FILENAME);
+        keyringFile = new File(configDir, KEYRING_FILENAME);
+        lockFile = new File(configDir, LOCK_FILENAME);
     }
     
-    /** Get user configuration dir */
-    public static File getUserDir() {
-        return userDir;
+    /** Get configuration directory */
+    public static File getConfigDir() {
+        return configDir;
+    }
+
+    /** Set data directory */
+    private static void setDataDir(String path) {
+        if (persistenceManager != null) {
+            throw new IllegalStateException("Persistence manager already exists");
+        }
+        logger.fine("Setting new data dir path: " + path);
+
+        dataDir = new File(path);
+        localOperatorDir = new File(dataDir, OPERATOR_DIRNAME);
+    }
+
+    /** Get data directory */
+    public static File getDataDir() {
+        return dataDir;
+    }
+
+    /** Set custom directories */
+    public static void setCustomDirs(String configDir, String dataDir) {
+        setConfigDir(configDir);
+        setDataDir(dataDir);
+        customPathSet = true;
     }
     
     /** Get PersistenceManager */
@@ -282,18 +324,41 @@ public class PersistenceManager {
      */
     public void loadOperators() throws IOException, IntrospectionException {
         logger.fine("Loading operators...");
-        TreeSet<Operator> newOperators = new TreeSet<Operator>();
-        if (operatorDir.exists()) {
-            newOperators = ImportManager.importOperators(operatorDir);
+        ArrayList<Operator> globalOperators = new ArrayList<Operator>();
+        TreeSet<Operator> localOperators = new TreeSet<Operator>();
+        //global operators
+        if (globalOperatorDir.exists()) {
+            globalOperators = new ArrayList<Operator>(ImportManager.importOperators(globalOperatorDir));
         } else if (PersistenceManager.class.getResource(OPERATOR_RESOURCE) != null) {
-            newOperators = ImportManager.importOperators(OPERATOR_RESOURCE);
+            globalOperators = new ArrayList<Operator>(ImportManager.importOperators(OPERATOR_RESOURCE));
         } else {
             throw new IOException("Could not find operator directory '" +
-                    operatorDir.getAbsolutePath() + "' nor jar operator resource '" +
+                    globalOperatorDir.getAbsolutePath() + "' nor jar operator resource '" +
                     OPERATOR_RESOURCE + "'");
         }
+        //local operators
+        if (localOperatorDir.exists()) {
+            localOperators = ImportManager.importOperators(localOperatorDir);
+        }
+        //replace old global versions with new local ones
+        for (Operator op : localOperators) {
+            int index = globalOperators.indexOf(op);
+            if (index >= 0) {
+                Operator globOp = globalOperators.get(index);
+                if (op.getVersion().compareTo(globOp.getVersion()) > 0) {
+                    globalOperators.set(index, op);
+                    logger.finer("Local operator " + op.getName() + " is newer, replacing global one.");
+                } else {
+                    logger.finer("Local operator " + op.getName() + " is not newer than global one, skipping.");
+                }
+            } else {
+                globalOperators.add(op);
+                logger.finer("Local operator " + op.getName() + " is additional to global ones, adding to operator list.");
+            }
+        }
+        //load it
         Operators.getInstance().clear();
-        Operators.getInstance().addAll(newOperators);
+        Operators.getInstance().addAll(globalOperators);
     }
     
     /** Checks if this is the first instance of the program.

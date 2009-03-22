@@ -170,7 +170,6 @@ public class ImportManager {
         HashSet<URL> operatorURLs = new HashSet<URL>();
         
         File[] files = directory.listFiles(new FileFilter() {
-
             @Override
             public boolean accept(File pathname) {
                 return pathname.getAbsolutePath().endsWith(".operator") && pathname.canRead();

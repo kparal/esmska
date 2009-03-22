@@ -721,7 +721,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         Mnemonics.setLocalizedText(jLabel13, l10n.getString("ConfigFrame.jLabel13.text")); // NOI18N
         jLabel13.setToolTipText(MessageFormat.format(l10n.getString("ConfigFrame.user_directory"),
-            PersistenceManager.getUserDir().getAbsolutePath()));
+            PersistenceManager.getConfigDir().getAbsolutePath()));
         Mnemonics.setLocalizedText(showPasswordCheckBox, l10n.getString("ConfigFrame.showPasswordCheckBox.text"));
     showPasswordCheckBox.setToolTipText(l10n.getString("ConfigFrame.showPasswordCheckBox.toolTipText")); // NOI18N
     showPasswordCheckBox.addActionListener(new ActionListener() {

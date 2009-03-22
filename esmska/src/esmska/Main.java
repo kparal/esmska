@@ -98,7 +98,7 @@ public class Main {
         PersistenceManager pm = null;
         try {
             if (configPath != null) {
-                PersistenceManager.setUserDir(configPath);
+                PersistenceManager.setCustomDirs(configPath, configPath);
             }
             pm = PersistenceManager.getInstance();
             try {
@@ -153,7 +153,7 @@ public class Main {
                     public void run() {
                         JOptionPane.showMessageDialog(null,
                                 MessageFormat.format(l10n.getString("Main.cant_read_config"),
-                                PersistenceManager.getUserDir().getAbsolutePath()),
+                                PersistenceManager.getConfigDir().getAbsolutePath()),
                                 null, JOptionPane.ERROR_MESSAGE);
                     }
                 });
