@@ -900,8 +900,16 @@ public class ContactPanel extends javax.swing.JPanel {
         
         @Override
         public void mouseClicked(MouseEvent e) {
-            //transfer on left button doubleclick
             if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() > 1) {
+                //edit contact on left button doubleclick
+                editContactAction.actionPerformed(null);
+            } else if (SwingUtilities.isMiddleMouseButton(e)) {
+                //transfer focus on middleclick
+                //if user clicked on unselected item, select it
+                int index = list.locationToIndex(e.getPoint());
+                if (index >= 0 && !list.isSelectedIndex(index)) {
+                    list.setSelectedIndex(index);
+                }
                 chooseContactAction.actionPerformed(null);
             }
         }
