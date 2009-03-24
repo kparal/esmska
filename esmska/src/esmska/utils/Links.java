@@ -5,8 +5,6 @@
 
 package esmska.utils;
 
-import java.util.Locale;
-
 /** Class containing links to program websites
  *
  * @author ripper
@@ -26,12 +24,4 @@ public class Links {
     public static final String TRANSLATE = "https://translations.launchpad.net/esmska";
     /** program donations and other support */
     public static String DONATE = "http://code.google.com/p/esmska/wiki/Support";
-
-    //change some locale-specific pages
-    static {
-        //Czech language
-        if ("cs".equals(Locale.getDefault().getLanguage())) {
-            DONATE = "http://code.google.com/p/esmska/wiki/Podporte";
-        }
-    }
 }
