@@ -82,7 +82,7 @@ public class OperatorExecutor {
         this.operator = operator;
         if (operator != null) {
             ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, operator.getWebsite());
-            ERROR_UKNOWN = MessageFormat.format(ERROR_UKNOWN, Links.DOWNLOAD, 
+            ERROR_UKNOWN = MessageFormat.format(ERROR_UKNOWN, Links.RUN_UPDATER,
                     operator.getWebsite(), Links.ISSUES);
         }
     }

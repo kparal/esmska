@@ -21,6 +21,7 @@ import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.update.UpdateChecker;
 import esmska.utils.DialogUtils;
+import esmska.utils.Links;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -44,6 +45,7 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
+import org.apache.commons.lang.StringUtils;
 
 /** Class containing common actions used in GUIs
  *
@@ -164,6 +166,17 @@ public class Actions {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (StringUtils.startsWith(url, "esmska://")) {
+                //internal program action link
+                if (Links.RUN_UPDATER.equals(url)) {
+                    getUpdateAction(null).actionPerformed(null);
+                } else {
+                    assert false : "Unknown internal action link: " + url;
+                    logger.warning("Unknown internal action link: " + url);
+                }
+                return;
+            }
+
             if (!Desktop.isDesktopSupported()) {
                 return;
             }

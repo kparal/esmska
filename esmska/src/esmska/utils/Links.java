@@ -5,7 +5,7 @@
 
 package esmska.utils;
 
-/** Class containing links to program websites
+/** Class containing links to program websites or other program actions
  *
  * @author ripper
  */
@@ -24,4 +24,7 @@ public class Links {
     public static final String TRANSLATE = "https://translations.launchpad.net/esmska";
     /** program donations and other support */
     public static String DONATE = "http://code.google.com/p/esmska/wiki/Support";
+
+    /** internal program link telling to run the update dialog */
+    public static String RUN_UPDATER = "esmska://run-updater";
 }

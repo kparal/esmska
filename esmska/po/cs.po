@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-25 19:19+0200\n"
-"PO-Revision-Date: 2009-03-25 19:19+0100\n"
+"POT-Creation-Date: 2009-03-25 23:26+0200\n"
+"PO-Revision-Date: 2009-03-25 23:25+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1578,16 +1578,16 @@ msgid ""
 "An unknown error has occured. The operator may have changed<br>its webpages "
 "or has a problem with them currently.<br>Try again later.<br><br>Also make "
 "sure that you have working connection to the Internet<br>and that you are "
-"using the <a href=\"{0}\">latest program version</a>.<br><br>If the problem "
-"persists and operator <a href=\"{1}\">web gateway</a> works,<br>report the "
-"problem on <a href=\"{2}\">program homepage</a>."
+"using the <a href=\"{0}\">latest program and gateway version</a>.<br><br>If "
+"the problem persists and operator <a href=\"{1}\">web gateway</a> works,"
+"<br>report the problem on <a href=\"{2}\">program homepage</a>."
 msgstr ""
 "Došlo k neznámé chybě. Operátor možná změnil<br>své webové stránky, nebo s "
 "nimi má aktuálně potíže.<br>Zkuste to později.<br><br>Taktéž se ujistěte, že "
 "máte funkční připojení k Internetu<br>a že používáte <a href=\"{0}"
-"\">nejnovější verzi programu</a>.<br><br>Pokud potíže přetrvají a <a href="
-"\"{1}\">webová brána</a> operátora funguje,<br>nahlaste problém na <a href="
-"\"{2}\">domovských stránkách programu</a>."
+"\">nejnovější verzi programu a brány</a>.<br><br>Pokud potíže přetrvají a <a "
+"href=\"{1}\">webová brána</a> operátora funguje,<br>nahlaste problém na <a "
+"href=\"{2}\">domovských stránkách programu</a>."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_WRONG_AUTH
@@ -2003,6 +2003,14 @@ msgid "Use Help menu to ask a question or report a problem."
 msgstr "Použijte nabídku Nápověda pro položení dotazu nebo nahlášení problému."
 
 #. #Write the tip as short as possible
+#: Tip.26
+msgid ""
+"Integrated gateway updater will help you solve problems with message sending."
+msgstr ""
+"Začleněný mechanismus aktualizace bran vám pomůže s problémy při odesílání "
+"zpráv."
+
+#. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr "Své kontakty můžete importovat z mnoha jiných programů či formátů."
@@ -2019,7 +2027,7 @@ msgstr "V historii zpráv najdete všechny své odeslané zprávy."
 
 #. #Write the tip as short as possible
 #: Tip.6
-msgid "The message history can be search through."
+msgid "The message history can be searched through."
 msgstr "Historii zpráv lze snadno prohledávat."
 
 #. #Write the tip as short as possible

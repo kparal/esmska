@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JLabel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.html.HTML;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Shows HTML text in a JLabel. This only adds the feature of executing links
@@ -78,7 +79,8 @@ public class JHtmlLabel extends JLabel implements MouseListener, MouseMotionList
             setToolTipText(null);
         } else {
             setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            setToolTipText((String) attr.getAttribute(HTML.Attribute.HREF));
+            String tooltip = (String) attr.getAttribute(HTML.Attribute.HREF);
+            setToolTipText(StringUtils.startsWith(tooltip, "esmska://") ? null : tooltip);
         }
     }
 

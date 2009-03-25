@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-25 19:15+0200\n"
+"POT-Creation-Date: 2009-03-25 23:23+0200\n"
 "PO-Revision-Date: 2009-03-15 12:56+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1378,9 +1378,9 @@ msgid ""
 "An unknown error has occured. The operator may have changed<br>its webpages "
 "or has a problem with them currently.<br>Try again later.<br><br>Also make "
 "sure that you have working connection to the Internet<br>and that you are "
-"using the <a href=\"{0}\">latest program version</a>.<br><br>If the problem "
-"persists and operator <a href=\"{1}\">web gateway</a> works,<br>report the "
-"problem on <a href=\"{2}\">program homepage</a>."
+"using the <a href=\"{0}\">latest program and gateway version</a>.<br><br>If "
+"the problem persists and operator <a href=\"{1}\">web gateway</a> works,"
+"<br>report the problem on <a href=\"{2}\">program homepage</a>."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1759,6 +1759,12 @@ msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
 
 #. #Write the tip as short as possible
+#: Tip.26
+msgid ""
+"Integrated gateway updater will help you solve problems with message sending."
+msgstr ""
+
+#. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
@@ -1775,7 +1781,7 @@ msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.6
-msgid "The message history can be search through."
+msgid "The message history can be searched through."
 msgstr ""
 
 #. #Write the tip as short as possible
