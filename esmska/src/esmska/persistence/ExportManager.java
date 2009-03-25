@@ -36,6 +36,7 @@ import esmska.data.SMS;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
 import java.util.ResourceBundle;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.Validate;
 
 /** Export program data
@@ -50,7 +51,7 @@ public class ExportManager {
     private ExportManager() {
     }
     
-    /** Export contacts to csv file
+    /** Export contacts to csv format
      * @param contacts contacts, not null
      * @param out output stream, not null
      */
@@ -73,7 +74,7 @@ public class ExportManager {
         writer.flush();
     }
     
-    /** Export contacts to vCard file
+    /** Export contacts to vCard format
      * @param contacts contacts, not null
      * @param out output stream, not null
      */
@@ -116,7 +117,7 @@ public class ExportManager {
         out.flush();
     }
 
-    /** Export sms queue to file
+    /** Export sms queue
      * @param queue queue, not null
      * @param out output stream, not null
      */
@@ -141,7 +142,7 @@ public class ExportManager {
         writer.flush();
     }
     
-    /** Export sms history to file
+    /** Export sms history
      * @param history history, not null
      * @param out output stream, not null
      */
@@ -169,7 +170,7 @@ public class ExportManager {
         writer.flush();
     }
     
-    /** Export keyring to file.
+    /** Export keyring
      * @param keyring keyring to export, not null
      * @param out output stream, not null
      * @throws java.io.IOException When some error occur during file processing.
@@ -196,5 +197,33 @@ public class ExportManager {
             });
         }
         writer.flush();
+    }
+
+    /** Export operator script and icon
+     *
+     * @param scriptContents operator script contents, not null nor empty
+     * @param icon operator icon, may be null
+     * @param scriptOut output stream for operator script, not null
+     * @param iconOut output stream for operator icon, mustn't be null
+     * if <code>icon</code> is not null
+     * @throws java.io.IOException if there was some problem with saving data
+     */
+    public static void exportOperator(String scriptContents, byte[] icon, OutputStream scriptOut, OutputStream iconOut)
+            throws IOException {
+        Validate.notEmpty(scriptContents);
+        Validate.notNull(scriptOut);
+        if (icon != null) {
+            Validate.notNull(iconOut);
+        }
+
+        logger.finer("Exporting operator");
+
+        IOUtils.write(scriptContents, scriptOut, "UTF-8");
+        scriptOut.flush();
+
+        if (icon != null) {
+            IOUtils.write(icon, iconOut);
+            iconOut.flush();
+        }
     }
 }

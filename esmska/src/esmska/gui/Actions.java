@@ -19,6 +19,8 @@ import esmska.utils.ConfirmingFileChooser;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
+import esmska.update.UpdateChecker;
+import esmska.utils.DialogUtils;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -59,6 +61,7 @@ public class Actions {
     private static Action importAction;
     private static Action exportAction;
     private static Action logAction;
+    private static Action updateAction;
 
     private static MainFrame mainFrame = MainFrame.getInstance();
 
@@ -140,6 +143,16 @@ public class Actions {
     /** Browse specific URL with a web browser */
     public static Action getBrowseAction(String url) {
         return new BrowseAction(url);
+    }
+
+    /** Show the update dialog
+     * @param updateChecker update checker, may be null
+     */
+    public static Action getUpdateAction(UpdateChecker updateChecker) {
+        if (updateAction == null) {
+            updateAction = new UpdateAction(updateChecker);
+        }
+        return updateAction;
     }
 
     /** Browse specific URL with a web browser */
@@ -483,6 +496,39 @@ public class Actions {
                 putValue(SHORT_DESCRIPTION, descRunning);
                 putValue(SELECTED_KEY, false);
             }
+        }
+    }
+
+    /** Show the update dialog */
+    private static class UpdateAction extends AbstractAction {
+        private UpdateChecker updateChecker;
+        public UpdateAction(UpdateChecker updateChecker) {
+            this.updateChecker = updateChecker;
+            L10N.setLocalizedText(this, l10n.getString("CheckUpdates_"));
+            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "updateManager-16.png")));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "updateManager-48.png")));
+            this.putValue(SHORT_DESCRIPTION,l10n.getString("CheckUpdatesTooltip"));
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //pause the queue so no further messages are sent
+            Queue queue = Queue.getInstance();
+            if (!queue.isEmpty()) {
+                queue.setPaused(true);
+            }
+            //don't allow to send messages during update process
+            if (mainFrame.getSMSSender().isRunning()) {
+                JOptionPane.showMessageDialog(mainFrame,
+                    new JLabel(l10n.getString("Update.queueRunning")),
+                    null, JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            logger.fine("Showing Update dialog...");
+            UpdateDialog dialog = new UpdateDialog(mainFrame, true, updateChecker);
+            dialog.setLocationRelativeTo(mainFrame);
+            DialogUtils.setDocumentModalDialog(dialog);
+            dialog.setVisible(true);
         }
     }
 }

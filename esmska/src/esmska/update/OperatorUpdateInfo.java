@@ -4,6 +4,7 @@
  */
 package esmska.update;
 
+import esmska.data.Config;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.commons.lang.StringUtils;
@@ -68,6 +69,12 @@ public class OperatorUpdateInfo {
     /** url where to download operator icon, may be null */
     public URL getIconUrl() {
         return iconUrl;
+    }
+
+    /** Returns whether operator required program version is lower or same as
+     * current program version (can be used), or not (can't be used). */
+    public boolean canBeUsed() {
+        return Config.compareVersions(Config.getLatestVersion(), minProgramVersion) >= 0;
     }
 
     @Override

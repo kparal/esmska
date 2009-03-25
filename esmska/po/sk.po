@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-22 12:37+0200\n"
+"POT-Creation-Date: 2009-03-25 19:15+0200\n"
 "PO-Revision-Date: 2009-03-11 17:06+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -101,6 +101,15 @@ msgstr "Pridať nový kontakt"
 msgid "Cancel"
 msgstr "Zrušiť"
 
+#: CheckUpdatesTooltip
+#, fuzzy
+msgid "Check for program and gateway updates"
+msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
+
+#: CheckUpdates_
+msgid "&Updates checker"
+msgstr ""
+
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
 msgstr "Kopírovať"
@@ -114,6 +123,7 @@ msgid "Paste"
 msgstr "Vložiť"
 
 #: Close_
+#, fuzzy
 msgid "&Close"
 msgstr "&Zavrieť"
 
@@ -200,14 +210,15 @@ msgid "&Appearance"
 msgstr "Vzhľ&ad"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Check for a &new program version on startup"
-msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
+msgid "Automatically check for &updates"
+msgstr ""
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"After program startup perform a check whether a new program<br>\n"
-"version was released and eventually notify in status bar\n"
+"After program startup perform a check whether a new program version<br>\n"
+"or gateway updates were released and eventually notify the user\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -1356,11 +1367,12 @@ msgid "&Message"
 msgstr "&Správa"
 
 #: MainFrame.newOperatorUpdate
-msgid "Gateway updates are available!"
+msgid "<a href=\"\">Gateway updates</a> are available!"
 msgstr ""
 
 #: MainFrame.new_program_version
-msgid "A new program version has been released!"
+#, fuzzy
+msgid "A <a href=\"\">new program version</a> has been released!"
 msgstr "Bola vydaná nová verzia programu!"
 
 #: MainFrame.no_operators
@@ -2072,9 +2084,108 @@ msgstr "Spustiť frontu"
 msgid "Unpause sms queue"
 msgstr "Znovu spustiť SMS frontu"
 
+#: Update.allUpdated
+msgid "All gateways have been successfully updated."
+msgstr ""
+
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Kliknite pre otvorenie stránky s možnosťou stiahnutia programu"
+
+#: Update.checking
+msgid "Checking..."
+msgstr ""
+
+#: Update.downloadFailed
+msgid "Downloading of some gateways failed!"
+msgstr ""
+
+#: Update.downloading
+msgid "Downloading..."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Update.gwTooltip
+msgid "gateway version: {0}"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Update.gwUpdated
+msgid "Gateway updated: {0}"
+msgstr ""
+
+#: Update.installFailed
+msgid "Installation of some gateways failed!"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Update.invalidGw
+msgid "{0} (needs program version: {1})"
+msgstr ""
+
+#: Update.noUpdates
+msgid ""
+"<html><h2>No updates found</h2>There are no updated gateways available at "
+"the moment.</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Update.notLatest
+msgid ""
+"<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
+"than you currently use.</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Update.programUpdateAvailable
+msgid ""
+"<html>There is a new program version available on <a href=\"{0}\">program "
+"homepage</a>.</html>"
+msgstr ""
+
+#: Update.queueRunning
+msgid ""
+"<html><h2>You are currently sending messages</h2>\n"
+"No messages may be sent during program update. Please wait until<br>\n"
+"messages currently being sent are finished and then open this dialog again.</"
+"html>"
+msgstr ""
+
+#: Update.showDialog
+#, fuzzy
+msgid "Click to open an update manager"
+msgstr "Kliknite pre otvorenie stránky s možnosťou stiahnutia programu"
+
+#: Update.update_
+msgid "&Update"
+msgstr ""
+
+#: Update.updatesFound
+msgid ""
+"<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
+"found. It is recommended to update them now.</html>"
+msgstr ""
+
+#: UpdateDialog.checkButton.text
+#, fuzzy
+msgid "Check for &updates"
+msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
+
+#: UpdateDialog.topLabel.text
+msgid ""
+"<html>\n"
+"<h2>Check for updated gateways</h2>\n"
+"Updated gateways may help you fix problems with sending messages.\n"
+"</html>"
+msgstr ""
+
+#, fuzzy
+#~ msgctxt "UpdateDialog.closeButton.text"
+#~ msgid "&Close"
+#~ msgstr "&Zavrieť"
+
+#~ msgid "Check for a &new program version on startup"
+#~ msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
 
 #~ msgid "http://code.google.com/p/esmska/wiki/Support"
 #~ msgstr "http://code.google.com/p/esmska/wiki/Support"

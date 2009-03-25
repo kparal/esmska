@@ -28,4 +28,18 @@ public class Workarounds {
         return output;
     }
 
+    /** Strip html tags from text.
+     *
+     * @param input input text
+     * @return text with all html tags removed. Entities encoded by html codes
+     * are unescaped back to standard characters.
+     */
+    public static String stripHtml(String input) {
+        if (input == null) {
+            return input;
+        }
+        String output = input.replaceAll("\\<.*?>","");
+        output = StringEscapeUtils.unescapeHtml(output);
+        return output;
+    }
 }

@@ -37,7 +37,9 @@ import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.Operator;
 import esmska.utils.OSType;
+import java.text.MessageFormat;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 
 /** Load and store settings and data
  *
@@ -360,6 +362,82 @@ public class PersistenceManager {
         Operators.getInstance().clear();
         Operators.getInstance().addAll(globalOperators);
     }
+
+    /** Save new operator to file. New or updated operator is saved in global operator
+     * directory (if there are sufficient permissions), otherwise in local operator
+     * directory.
+     *
+     * @param scriptName name of the operator/script (without suffix), not null nor empty
+     * @param scriptContents contents of the operator script file, not null nor empty
+     * @param icon operator icon, may be null
+     */
+    public void saveOperator(String scriptName, String scriptContents, byte[] icon) throws IOException {
+        Validate.notEmpty(scriptName);
+        Validate.notEmpty(scriptContents);
+
+        logger.fine("Saving operator...");
+
+        File temp = createTempFile();
+        FileOutputStream out = new FileOutputStream(temp);
+
+        File iconTemp = null;
+        FileOutputStream iconOut = null;
+        if (icon != null) {
+            iconTemp = createTempFile();
+            iconOut = new FileOutputStream(iconTemp);
+        }
+
+        //export the operator
+        ExportManager.exportOperator(scriptContents, icon, out, iconOut);
+
+        out.flush();
+        out.getChannel().force(false);
+        out.close();
+
+        if (icon != null) {
+            iconOut.flush();
+            iconOut.getChannel().force(false);
+            iconOut.close();
+        }
+
+        //move script file to correct location
+        File scriptFileGlobal = new File(globalOperatorDir, scriptName + ".operator");
+        File scriptFileLocal = new File(localOperatorDir, scriptName + ".operator");
+        if (globalOperatorDir.canWrite() && (!scriptFileGlobal.exists() || scriptFileGlobal.canWrite())) {
+            //first try global dir
+            moveFileSafely(temp, scriptFileGlobal);
+            logger.finer("Saved operator script into file: " + scriptFileGlobal.getAbsolutePath());
+        } else if (localOperatorDir.canWrite() && (!scriptFileLocal.exists() || scriptFileLocal.canWrite())) {
+            //second try local dir
+            moveFileSafely(temp, scriptFileLocal);
+            logger.finer("Saved operator script into file: " + scriptFileLocal.getAbsolutePath());
+        } else {
+            //report error
+            throw new IOException(MessageFormat.format("Could not save operator " +
+                    "{0} to '{1}' nor to '{2}' - no write permissions?", scriptName,
+                    scriptFileGlobal, scriptFileLocal));
+        }
+
+        //move icon file to correct location
+        if (icon != null) {
+            File iconFileGlobal = new File(globalOperatorDir, scriptName + ".png");
+            File iconFileLocal = new File(localOperatorDir, scriptName + ".png");
+            if (globalOperatorDir.canWrite() && (!iconFileGlobal.exists() || iconFileGlobal.canWrite())) {
+                //first try global dir
+                moveFileSafely(iconTemp, iconFileGlobal);
+                logger.finer("Saved operator icon into file: " + iconFileGlobal.getAbsolutePath());
+            } else if (localOperatorDir.canWrite() && (!iconFileLocal.exists() || iconFileLocal.canWrite())) {
+                //second try local dir
+                moveFileSafely(iconTemp, iconFileLocal);
+                logger.finer("Saved operator icon into file: " + iconFileLocal.getAbsolutePath());
+            } else {
+                //report error
+                throw new IOException(MessageFormat.format("Could not save operator icon " +
+                        "{0} to '{1}' nor to '{2}' - no write permissions?", scriptName,
+                        iconFileGlobal, iconFileLocal));
+            }
+        }
+    }
     
     /** Checks if this is the first instance of the program.
      * Manages instances by using an exclusive lock on a file.
@@ -384,16 +462,24 @@ public class PersistenceManager {
     /** Moves file from srcFile to destFile safely (using backup of destFile).
      * If move fails, exception is thrown and attempt to restore destFile from
      * backup is made.
+     * @param srcFile source file, not null
+     * @param destFile destination file, not null
      */
     private void moveFileSafely(File srcFile, File destFile) throws IOException {
+        Validate.notNull(srcFile);
+        Validate.notNull(destFile);
+
         File backup = backupFile(destFile);
         try {
             FileUtils.moveFile(srcFile, destFile);
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Moving of " + srcFile.getAbsolutePath() + " to " +
-                    destFile.getAbsolutePath() + " failed, trying to restore from backup");
+                    destFile.getAbsolutePath() + " failed, trying to restore from backup", ex);
             FileUtils.deleteQuietly(destFile);
-            FileUtils.moveFile(backup, destFile);
+            //backup may be null if the destination file didn't exist
+            if (backup != null) {
+                FileUtils.moveFile(backup, destFile);
+            }
             throw ex;
         }
         FileUtils.deleteQuietly(backup);

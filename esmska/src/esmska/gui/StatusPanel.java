@@ -16,7 +16,6 @@ import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -32,7 +31,6 @@ import org.openide.awt.Mnemonics;
  */
 public class StatusPanel extends javax.swing.JPanel {
 
-    private static final Logger logger = Logger.getLogger(StatusPanel.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
@@ -54,9 +52,14 @@ public class StatusPanel extends javax.swing.JPanel {
      * @param message text
      * @param time show timestamp before text. Use null for no timestamp.
      * @param icon show icon with text. Use null for no icon.
+     * @param html if there are html tags inside the text. Even if this is true,
+     * the text should not contain &lt;html&gt; start and end tags.
      */
-    public void setStatusMessage(String message, Date time, ImageIcon icon) {
-        String messageEsc = Workarounds.escapeHtml(message);
+    public void setStatusMessage(String message, Date time, ImageIcon icon, boolean html) {
+        String messageEsc = message;
+        if (!html) {
+            messageEsc = Workarounds.escapeHtml(message);
+        }
         if (time != null) {
             String timestamp = shortTimeFormat.format(time);
             statusMessageLabel.setText("<html>[" + timestamp + "] " + messageEsc + "</html>");
@@ -185,7 +188,7 @@ public class StatusPanel extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             if (e.getID() == Log.ACTION_ADD_RECORD) {
                 Log.Record last = log.getLastRecord();
-                setStatusMessage(last.getMessage(), last.getTime(), last.getIcon());
+                setStatusMessage(last.getMessage(), last.getTime(), last.getIcon(), false);
             }
         }
     }

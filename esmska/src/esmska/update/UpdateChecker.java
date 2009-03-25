@@ -13,6 +13,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
@@ -65,9 +66,15 @@ public class UpdateChecker {
     }
     // </editor-fold>
     
-    /** Checks for updates asynchronously and notify all added listeners after being finished
+    /** Checks for updates asynchronously and notify all added listeners after being finished.
+     * Does nothing if already running.
      */
     public void checkForUpdates() {
+        if (running.get()) {
+            //do nothing if already running
+            return;
+        }
+
         running.set(true);
         logger.fine("Checking for program updates...");
 
@@ -132,11 +139,23 @@ public class UpdateChecker {
             String iconUrl = xpath.evaluate(VersionFile.TAG_ICON + "/text()", operator);
 
             OperatorUpdateInfo info = new OperatorUpdateInfo(name, version, url, minVersion, iconUrl);
+            operatorUpdates.add(info);
+        }
 
-            Operator op = Operators.getOperator(name);
-            if (op == null || Config.compareVersions(version, op.getVersion()) > 0) {
-                //only add new or updated operators
-                operatorUpdates.add(info);
+        //only add new or updated operators
+        refreshUpdatedOperators();
+    }
+
+    /** Go through all downloaded update information and only leave those operators
+     which are new or updated compared to current ones. This can be used to reload
+     update info after partial update. */
+    public void refreshUpdatedOperators() {
+        for (Iterator<OperatorUpdateInfo> it = operatorUpdates.iterator(); it.hasNext(); ) {
+            OperatorUpdateInfo info = it.next();
+            Operator op = Operators.getOperator(info.getName());
+            if (op != null && Config.compareVersions(info.getVersion(), op.getVersion()) <= 0) {
+                //operator is same or older, remove it
+                it.remove();
             }
         }
     }
@@ -167,5 +186,5 @@ public class UpdateChecker {
     public synchronized Set<OperatorUpdateInfo> getOperatorUpdates() {
         return Collections.unmodifiableSet(operatorUpdates);
     }
-    
+
 }

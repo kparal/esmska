@@ -5,6 +5,7 @@
 
 package esmska.update;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -14,10 +15,10 @@ import javax.swing.SwingWorker;
 import org.apache.commons.io.IOUtils;
 
 /** Download file via HTTP.
- *
+ * Returns String or byte[] depending if text or binary content was required.
  * @author ripper
  */
-public class HttpDownloader extends SwingWorker<Void, Void> {
+public class HttpDownloader extends SwingWorker<Object, Void> {
     private static final Logger logger = Logger.getLogger(HttpDownloader.class.getName());
 
     private String url;
@@ -37,11 +38,15 @@ public class HttpDownloader extends SwingWorker<Void, Void> {
     }
 
     @Override
-    protected Void doInBackground() {
+    protected Object doInBackground() {
         InputStream in = null;
         try {
             URL link = new URL(url);
             HttpURLConnection con = (HttpURLConnection) link.openConnection();
+            if (con.getResponseCode() != 200) {
+                throw new IOException("Downloading of file '" + url + "' not succeeded, " +
+                        "server responded: " + con.getResponseCode() + " " + con.getResponseMessage());
+            }
             in = con.getInputStream();
             if (binary) {
                 binaryContent = IOUtils.toByteArray(in);
@@ -50,6 +55,7 @@ public class HttpDownloader extends SwingWorker<Void, Void> {
             }
             con.disconnect();
             finishedOk = true;
+            return binary ? binaryContent : textContent;
         } catch (Throwable t) {
             logger.log(Level.WARNING, "Could not download file: " + url, t);
         } finally {

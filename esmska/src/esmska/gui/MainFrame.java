@@ -72,6 +72,7 @@ import esmska.utils.OSType;
 import esmska.data.event.ValuedListener;
 import esmska.utils.DialogUtils;
 import esmska.utils.Links;
+import esmska.utils.Workarounds;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
@@ -99,7 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
     private BindingGroup bindGroup = new BindingGroup();
     
     /** sender of sms */
-    private SMSSender smsSender;
+    private static final SMSSender smsSender = new SMSSender();
     private static PersistenceManager persistenceManager;
     private static final Config config = Config.getInstance();
     private static final History history = History.getInstance();
@@ -107,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
     private static final Queue queue = Queue.getInstance();
     /** shutdown handler thread */
     private Thread shutdownThread = new ShutdownThread();
-    
+    private UpdateChecker updateChecker = new UpdateChecker();
     
     /**
      * Creates new form MainFrame
@@ -163,9 +164,6 @@ public class MainFrame extends javax.swing.JFrame {
         ToolTipManager.sharedInstance().setInitialDelay(750);
         ToolTipManager.sharedInstance().setDismissDelay(60000);
         
-        //init custom components
-        smsSender = new SMSSender();
-
         //add first log record
         log.addRecord(new Log.Record(l10n.getString("Program_start")));
 
@@ -190,7 +188,7 @@ public class MainFrame extends javax.swing.JFrame {
         //check for valid operators
         if (Operators.getInstance().size() <= 0 && !Beans.isDesignTime()) {
             logger.warning("No usable operators found");
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(this,
                     new JLabel(l10n.getString("MainFrame.no_operators")),
                     null, JOptionPane.ERROR_MESSAGE);
         }
@@ -203,7 +201,6 @@ public class MainFrame extends javax.swing.JFrame {
         
         //check for updates
         if (config.isCheckForUpdates()) {
-            UpdateChecker updateChecker = new UpdateChecker();
             updateChecker.addActionListener(new UpdateListener());
             updateChecker.checkForUpdates();
         }
@@ -248,7 +245,7 @@ public class MainFrame extends javax.swing.JFrame {
                     getClass().getResourceAsStream(RES + "tips.txt"), "UTF-8");
             int random = new Random().nextInt(tips.size());
             statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
-                    l10n.getString((String)tips.get(random)), null, null);
+                    l10n.getString((String)tips.get(random)), null, null, false);
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Can't display tip of the day", ex);
         }
@@ -264,6 +261,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     public SMSPanel getSMSPanel() {
         return smsPanel;
+    }
+
+    public SMSSender getSMSSender() {
+        return smsSender;
     }
 
     /** Quit the program */
@@ -322,6 +323,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu = new JMenu();
         historyMenuItem = new JMenuItem();
         logMenuItem = new JMenuItem();
+        updateMenuItem = new JMenuItem();
         jSeparator4 = new JSeparator();
         importMenuItem = new JMenuItem();
         exportMenuItem = new JMenuItem();
@@ -451,6 +453,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         logMenuItem.setAction(Actions.getLogAction());
         toolsMenu.add(logMenuItem);
+
+        updateMenuItem.setAction(Actions.getUpdateAction(updateChecker));
+        toolsMenu.add(updateMenuItem);
         toolsMenu.add(jSeparator4);
 
         importMenuItem.setAction(Actions.getImportAction());
@@ -824,8 +829,9 @@ public class MainFrame extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
                 case UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE:
-                case UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE:
-                    log.addRecord(new Log.Record(l10n.getString("MainFrame.new_program_version"), null, Icons.STATUS_UPDATE_IMPORTANT));
+                    String message = l10n.getString("MainFrame.new_program_version");
+                    log.addRecord(new Log.Record(Workarounds.stripHtml(message), null, Icons.STATUS_UPDATE_IMPORTANT));
+                    statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE_IMPORTANT, true);
                     //on click open program homepage in browser
                     statusPanel.installClickHandler(new Runnable() {
                         @Override
@@ -835,10 +841,23 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                     }, l10n.getString("Update.browseDownloads"));
                     break;
+                case UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE:
                 case UpdateChecker.ACTION_OPERATOR_UPDATE_AVAILABLE:
-                    log.addRecord(new Log.Record(l10n.getString("MainFrame.newOperatorUpdate"), null, Icons.STATUS_UPDATE));
+                    message = l10n.getString("MainFrame.newOperatorUpdate");
+                    log.addRecord(new Log.Record(Workarounds.stripHtml(message), null, Icons.STATUS_UPDATE));
+                    statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE, true);
+                    //on click open update dialog
+                    statusPanel.installClickHandler(new Runnable() {
+                        @Override
+                        public void run() {
+                            Action updateAction = updateMenuItem.getAction();
+                            updateAction.actionPerformed(null);
+                        }
+                    }, l10n.getString("Update.showDialog"));
                     break;
             }
+            //don't respond to further checks
+            updateChecker.removeActionListener(this);
         }
     }
 
@@ -890,6 +909,7 @@ public class MainFrame extends javax.swing.JFrame {
     private JMenuItem translateMenuItem;
     private JButton undoButton;
     private JMenuItem undoMenuItem;
+    private JMenuItem updateMenuItem;
     private JSplitPane verticalSplitPane;
     // End of variables declaration//GEN-END:variables
 }
