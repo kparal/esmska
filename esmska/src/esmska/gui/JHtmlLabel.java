@@ -39,6 +39,10 @@ public class JHtmlLabel extends JLabel implements MouseListener, MouseMotionList
     }
     // </editor-fold>
 
+    public JHtmlLabel() {
+        this(null);
+    }
+
     public JHtmlLabel(String text) {
         super(text);
         acc = (AccessibleJLabel) getAccessibleContext();
@@ -48,12 +52,15 @@ public class JHtmlLabel extends JLabel implements MouseListener, MouseMotionList
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        AttributeSet attr = (AttributeSet) acc.getCharacterAttribute(acc.getIndexAtPoint(e.getPoint())).
-                getAttribute(HTML.Tag.A);
-        String url = null;
-        if (attr != null) {
-            url = (String) attr.getAttribute(HTML.Attribute.HREF);
+        AttributeSet charAttr = acc.getCharacterAttribute(acc.getIndexAtPoint(e.getPoint()));
+        if (charAttr == null) {
+            return;
         }
+        AttributeSet attr = (AttributeSet) charAttr.getAttribute(HTML.Tag.A);
+        if (attr == null) {
+            return;
+        }
+        String url = (String) attr.getAttribute(HTML.Attribute.HREF);
         if (url != null) {
             valuedSupport.fireEventOccured(Events.LINK_CLICKED, url);
         }
@@ -61,8 +68,11 @@ public class JHtmlLabel extends JLabel implements MouseListener, MouseMotionList
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        AttributeSet attr = (AttributeSet) acc.getCharacterAttribute(acc.getIndexAtPoint(e.getPoint())).
-                getAttribute(HTML.Tag.A);
+        AttributeSet charAttr = acc.getCharacterAttribute(acc.getIndexAtPoint(e.getPoint()));
+        AttributeSet attr = null;
+        if (charAttr != null) {
+                attr = (AttributeSet) charAttr.getAttribute(HTML.Tag.A);
+        }
         if (attr == null) {
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             setToolTipText(null);
