@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-25 23:26+0200\n"
-"PO-Revision-Date: 2009-03-25 23:25+0100\n"
+"POT-Creation-Date: 2009-03-26 13:00+0200\n"
+"PO-Revision-Date: 2009-03-26 13:00+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2079,6 +2079,10 @@ msgstr "Všechny brány byly úspěšně aktualizovány."
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Klikněte pro otevření stránky s možností stažení programu"
+
+#: Update.checkFailed
+msgid "Retrieving update information failed!"
+msgstr "Nepodařilo se získat informace o aktualizacích!"
 
 #: Update.checking
 msgid "Checking..."

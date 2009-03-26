@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-25 23:23+0200\n"
+"POT-Creation-Date: 2009-03-26 12:59+0200\n"
 "PO-Revision-Date: 2008-12-19 15:10+0000\n"
 "Last-Translator: BalintX <koczkahun@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -1829,6 +1829,10 @@ msgstr ""
 
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
+msgstr ""
+
+#: Update.checkFailed
+msgid "Retrieving update information failed!"
 msgstr ""
 
 #: Update.checking

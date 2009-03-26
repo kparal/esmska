@@ -261,6 +261,7 @@ public class UpdateDialog extends javax.swing.JDialog {
     private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         if (downloader != null && !downloader.isDone()) {
             //cancel downloading of updates
+            logger.finer("Cancelling downloading of updates...");
             downloader.cancel(false);
         }
         setVisible(false);
@@ -286,10 +287,12 @@ public class UpdateDialog extends javax.swing.JDialog {
                 checkButton.requestFocusInWindow();
                 break;
             case CHECKING:
+                logger.finer("Checking for updates...");
                 Mnemonics.setLocalizedText(checkButton, l10n.getString("UpdateDialog.checkButton.text"));
                 progressBar.setString(l10n.getString("Update.checking"));
                 break;
             case READY_TO_UPDATE:
+                logger.finer(updates.size() + " updates found");
                 Mnemonics.setLocalizedText(checkButton, l10n.getString("Update.update_"));
                 topLabel.setText(l10n.getString("Update.updatesFound"));
                 populateGwList();
@@ -297,11 +300,13 @@ public class UpdateDialog extends javax.swing.JDialog {
                 updateCheckButton();
                 break;
             case NO_UPDATE:
+                logger.finer("No updates found");
                 Mnemonics.setLocalizedText(checkButton, l10n.getString("UpdateDialog.checkButton.text"));
                 topLabel.setText(l10n.getString("Update.noUpdates"));
                 closeButton.requestFocusInWindow();
                 break;
             case DOWNLOADING:
+                logger.finer("Downloading updates...");
                 Mnemonics.setLocalizedText(checkButton, l10n.getString("Update.update_"));
                 topLabel.setText(l10n.getString("Update.updatesFound"));
                 progressBar.setString(l10n.getString("Update.downloading"));
@@ -421,6 +426,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         }
 
         //save the data to harddisk
+        logger.finer("Saving " + scripts.size() + " updates to disk");
         for (Tuple3<OperatorUpdateInfo, String, byte[]> script : scripts) {
             try {
                 PersistenceManager.getInstance().saveOperator(
@@ -437,6 +443,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         }
 
         //reload all operators
+        logger.finer("Reloading operators...");
         try {
             PersistenceManager.getInstance().loadOperators();
         } catch (Exception ex) {
@@ -446,6 +453,7 @@ public class UpdateDialog extends javax.swing.JDialog {
 
         //update the checkboxes
         populateGwList();
+
         //set new state
         if (updates.size() > 0) {
             setFormState(FormState.READY_TO_UPDATE);
@@ -509,6 +517,12 @@ public class UpdateDialog extends javax.swing.JDialog {
                     updates.clear();
                     setFormState(FormState.NO_UPDATE);
                     break;
+                case UpdateChecker.ACTION_CHECK_FAILED:
+                    updates.clear();
+                    setFormState(FormState.NO_UPDATE);
+                    infoLabel.setIcon(Icons.STATUS_ERROR);
+                    infoLabel.setText(l10n.getString("Update.checkFailed"));
+                    break;
             }
         }
         /** take downloaded info, retrieve updates information, sort it by operator name */
@@ -541,6 +555,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         }
         @Override
         protected ArrayList<Tuple3<OperatorUpdateInfo,String,byte[]>> doInBackground() throws Exception {
+            logger.finer("Downloading " + infos.size() + " updates");
             for (OperatorUpdateInfo info : infos) {
                 try {
                     //download script

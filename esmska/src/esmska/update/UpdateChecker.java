@@ -11,6 +11,7 @@ import esmska.data.event.ActionEventSupport;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -46,6 +47,8 @@ public class UpdateChecker {
     public static final int ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE = 2;
     /** no updates found */
     public static final int ACTION_NO_UPDATE_AVAILABLE = 3;
+    /** could not check updates - network error? */
+    public static final int ACTION_CHECK_FAILED = 4;
 
     private static final Logger logger = Logger.getLogger(UpdateChecker.class.getName());
     private static final String UPDATE_FILE_URL = 
@@ -83,9 +86,12 @@ public class UpdateChecker {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if (evt.getPropertyName().equals("state") &&
-                        evt.getNewValue() == SwingWorker.StateValue.DONE &&
-                        downloader.isFinishedOk()) {
+                        evt.getNewValue() == SwingWorker.StateValue.DONE) {
                     try {
+                        if (!downloader.isFinishedOk()) {
+                            throw new IOException("Could not download version file");
+                        }
+                        //version file is downloaded ok
                         parseVersionFile(downloader.getTextContent());
                         boolean updateAvailable = isProgramUpdateAvailable();
                         logger.fine("Found program update: " + updateAvailable);
@@ -105,6 +111,7 @@ public class UpdateChecker {
                         }
                     } catch (Exception e) {
                         logger.log(Level.WARNING, "Could not check for updates", e);
+                        actionSupport.fireActionPerformed(ACTION_CHECK_FAILED, null);
                     } finally {
                         running.set(false);
                     }
