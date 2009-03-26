@@ -193,7 +193,8 @@ public class OperatorComboBox extends JComboBox {
                     operator.getName(), operator.getWebsite(),
                     operator.isLoginRequired() ? registration : noReg,
                     Operators.convertDelayToHumanString(operator.getDelayBetweenMessages(), false),
-                    country.equals(CountryPrefix.INTERNATIONAL_CODE) ? international : local);
+                    country.equals(CountryPrefix.INTERNATIONAL_CODE) ? international : local,
+                    operator.getVersion());
             return tooltip;
         }
     }
