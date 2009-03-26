@@ -142,13 +142,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="22" pref="22" max="22" attributes="0"/>
+                              <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                           <Component id="checkUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="424" max="32767" attributes="0"/>
+                      <EmptySpace pref="491" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -159,7 +163,9 @@
                       <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="342" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="318" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -189,6 +195,22 @@
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${checkForUpdates}" target="checkUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkUpdatesCheckBoxActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="unstableUpdatesCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.unstableUpdatesCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.unstableUpdatesCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="selected" source="config" sourcePath="${checkForUnstableUpdates}" target="unstableUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
           </SubComponents>

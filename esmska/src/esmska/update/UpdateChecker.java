@@ -96,7 +96,8 @@ public class UpdateChecker {
                         //version file is downloaded ok
                         parseVersionFile(downloader.getTextContent());
                         boolean updateAvailable = isProgramUpdateAvailable();
-                        logger.fine("Found program update: " + updateAvailable);
+                        logger.fine("Found program update: " + (updateAvailable ?
+                            getLatestProgramVersion() : "false"));
                         boolean operatorUpdateAvailable = !getOperatorUpdates().isEmpty();
                         logger.fine("Found operator update: " + operatorUpdateAvailable);
                         //send events
@@ -188,7 +189,7 @@ public class UpdateChecker {
 
     /** Get latest program version available online */
     public synchronized String getLatestProgramVersion() {
-        return onlineVersion;
+        return config.isCheckForUnstableUpdates() ? onlineUnstableVersion : onlineVersion;
     }
 
     /** Whether an operator update is available */

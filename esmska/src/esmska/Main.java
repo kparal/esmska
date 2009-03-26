@@ -33,7 +33,6 @@ import java.awt.EventQueue;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import javax.swing.SwingUtilities;
-import org.apache.commons.lang.StringUtils;
 
 /** Starter class for the whole program
  *
@@ -186,13 +185,14 @@ public class Main {
         }
 
         //do some initialization if this is the first run
-        if (StringUtils.isEmpty(Config.getInstance().getVersion())) { //first run means version is empty
+        Config config = Config.getInstance();
+        if (config.isFirstRun()) {
             logger.fine("First run, doing initialization...");
             //set country prefix from locale
-            Config.getInstance().setCountryPrefix(
+            config.setCountryPrefix(
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
             //set suggested LaF for this platform
-            Config.getInstance().setLookAndFeel(ThemeManager.suggestBestLAF());
+            config.setLookAndFeel(ThemeManager.suggestBestLAF());
         }
         
         //update from older versions
@@ -215,10 +215,14 @@ public class Main {
         }
         
         //set proxy
-        Config config = Config.getInstance();
         if (config.isUseProxy()) {
             ProxyManager.setProxy(config.getHttpProxy(),
                     config.getHttpsProxy(), config.getSocksProxy());
+        }
+
+        //do some changes for unstable version
+        if (!Config.isStableVersion()) {
+            config.setCheckForUnstableUpdates(true);
         }
         
         //set MenuBar usage on Mac OS

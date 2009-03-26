@@ -829,7 +829,8 @@ public class MainFrame extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
                 case UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE:
-                    String message = l10n.getString("MainFrame.new_program_version");
+                    String message = MessageFormat.format(l10n.getString("MainFrame.new_program_version"),
+                            updateChecker.getLatestProgramVersion());
                     log.addRecord(new Log.Record(Workarounds.stripHtml(message), null, Icons.STATUS_UPDATE_IMPORTANT));
                     statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE_IMPORTANT, true);
                     //on click open program homepage in browser

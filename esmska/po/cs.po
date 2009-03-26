@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 13:18+0200\n"
-"PO-Revision-Date: 2009-03-26 13:18+0100\n"
+"POT-Creation-Date: 2009-03-26 20:33+0200\n"
+"PO-Revision-Date: 2009-03-26 20:33+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -653,6 +653,26 @@ msgstr "Neznámý"
 #: ConfigFrame.unknown_state
 msgid "unknown"
 msgstr "neznámý"
+
+#: ConfigFrame.unstableUpdatesCheckBox.text
+msgid "Use u&nstable versions"
+msgstr "Používat &nestabilní verze"
+
+#: ConfigFrame.unstableUpdatesCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Notify also also about unstable program versions.<br>\n"
+"<br>\n"
+"<b>Warning: Unstable versions are meant only for experienced users<br>\n"
+"not afraid of losing their program data.</b>\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Taktéž upozorňovat na nestabilní verze programu.<br>\n"
+"<br>\n"
+"<b>Varování: Nestabilní verze jsou určeny pouze zkušeným uživatelům,<br>\n"
+"kteří se nebojí ztráty dat z programu.</b>\n"
+"</html>"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -1359,9 +1379,10 @@ msgstr "&Zpráva"
 msgid "<a href=\"\">Gateway updates</a> are available!"
 msgstr "Jsou dostupné <a href=\"\">aktualizované brány</a>!"
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
-msgid "A <a href=\"\">new program version</a> has been released!"
-msgstr "Byla vydána <a href=\"\">nová verze programu</a>!"
+msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
+msgstr "Byla vydána <a href=\"\">nová verze programu</a> ({0})!"
 
 #: MainFrame.no_operators
 msgid ""
@@ -2137,11 +2158,11 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.programUpdateAvailable
 msgid ""
-"<html>There is a new program version available on <a href=\"{0}\">program "
-"homepage</a>.</html>"
+"<html>There is a new program version ({0}) available on the <a href=\"{1}"
+"\">program homepage</a>.</html>"
 msgstr ""
 "<html>Na <a href=\"{0}\">domovské stránce</a> je dostupná nová verze "
-"programu.</html>"
+"programu ({0}).</html>"
 
 #: Update.queueRunning
 msgid ""

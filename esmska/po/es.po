@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 13:15+0200\n"
+"POT-Creation-Date: 2009-03-26 20:33+0200\n"
 "PO-Revision-Date: 2009-03-15 12:56+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -558,6 +558,20 @@ msgstr ""
 #. #meaning "unknown country"
 #: ConfigFrame.unknown_state
 msgid "unknown"
+msgstr ""
+
+#: ConfigFrame.unstableUpdatesCheckBox.text
+msgid "Use u&nstable versions"
+msgstr ""
+
+#: ConfigFrame.unstableUpdatesCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Notify also also about unstable program versions.<br>\n"
+"<br>\n"
+"<b>Warning: Unstable versions are meant only for experienced users<br>\n"
+"not afraid of losing their program data.</b>\n"
+"</html>"
 msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.text
@@ -1193,8 +1207,9 @@ msgstr ""
 msgid "<a href=\"\">Gateway updates</a> are available!"
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
-msgid "A <a href=\"\">new program version</a> has been released!"
+msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
 msgstr ""
 
 #: MainFrame.no_operators
@@ -1883,8 +1898,8 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.programUpdateAvailable
 msgid ""
-"<html>There is a new program version available on <a href=\"{0}\">program "
-"homepage</a>.</html>"
+"<html>There is a new program version ({0}) available on the <a href=\"{1}"
+"\">program homepage</a>.</html>"
 msgstr ""
 
 #: Update.queueRunning

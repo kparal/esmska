@@ -495,7 +495,8 @@ public class UpdateDialog extends javax.swing.JDialog {
             infoLabel.setIcon(Icons.STATUS_UPDATE_IMPORTANT);
         } else if (programUpdate) {
             //there is a program update available
-            infoLabel.setText(MessageFormat.format(l10n.getString("Update.programUpdateAvailable"), Links.DOWNLOAD));
+            infoLabel.setText(MessageFormat.format(l10n.getString("Update.programUpdateAvailable"),
+                    updateChecker.getLatestProgramVersion(), Links.DOWNLOAD));
             infoLabel.setIcon(Icons.STATUS_UPDATE_IMPORTANT);
         }
     }

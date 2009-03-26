@@ -13,6 +13,7 @@ import java.beans.*;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 
 /** Config properties of the whole program
  * @author ripper
@@ -67,8 +68,13 @@ public class Config extends Object implements Serializable {
     }
     
     /** Get latest program version */
-    public static final String getLatestVersion() {
+    public static String getLatestVersion() {
         return LATEST_VERSION;
+    }
+
+    /** Whether the current program version is stable or unstable */
+    public static boolean isStableVersion() {
+        return !LATEST_VERSION.contains("beta");
     }
 
     /** Compares two program versions. Handles if some of them is marked as beta.
@@ -108,6 +114,12 @@ public class Config extends Object implements Serializable {
         } else {
             return comparator.compare(v1, v2);
         }
+    }
+
+    /** Return whether this is the first program run (no config existed before) */
+    public boolean isFirstRun() {
+        //on first run version is empty
+        return StringUtils.isEmpty(version);
     }
 
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
@@ -346,7 +358,12 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("checkForUpdates", old, checkForUpdates);
     }
 
+    /** Set if should check for unstable versions. If currently using unstable
+     version this is always set to true, regardless of the input. */
     public void setCheckForUnstableUpdates(boolean checkForUnstableUpdates) {
+        if (!isStableVersion()) {
+            checkForUnstableUpdates = true;
+        }
         boolean old = this.checkForUnstableUpdates;
         this.checkForUnstableUpdates = checkForUnstableUpdates;
         changeSupport.firePropertyChange("checkForUnstableUpdates", old, checkForUnstableUpdates);
