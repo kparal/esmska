@@ -17,6 +17,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.apache.commons.lang.Validate;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -28,6 +29,7 @@ public class VersionFile {
 
     static final String TAG_ROOT = "esmska";
     static final String TAG_LAST_VERSION = "latestStableVersion";
+    static final String TAG_LAST_UNSTABLE_VERSION = "latestUnstableVersion";
     static final String TAG_OPERATOR = "operator";
     static final String TAG_NAME = "name";
     static final String TAG_VERSION = "version";
@@ -37,23 +39,42 @@ public class VersionFile {
     
     private static final String downloadBase = "http://ripper.profitux.cz/esmska/operators/";
 
-    private static String programVersion = Config.getLatestVersion();
+    private static String stableProgramVersion = Config.getLatestVersion();
+    private static String unstableProgramVersion = stableProgramVersion;
 
     /** Create new version file printed to standard output
      * @param args the command line arguments; the first argument is optional and
-     * may contain the latest stable program version to use
+     * may contain the latest stable program version to use; the second argument
+     * is optional and may contain the latest unstable program version to use
      */
     public static void main(String[] args) throws Exception {
         if (args.length > 0) {
-            programVersion = args[0];
+            stableProgramVersion = args[0];
         }
+        if (args.length > 1) {
+            unstableProgramVersion = args[1];
+        }
+
         PersistenceManager.getInstance().loadOperators();
 
-        create(System.out);
+        create(System.out, null, null);
     }
 
-    /** Create new version file printed to provided output stream */
-    public static void create(OutputStream out) throws Exception {
+    /** Create new version file printed to provided output stream
+     * @param out output stream, not null
+     * @param stableProgramVersion latest stable program version, may be null
+     * @param unstableProgramVersion latest unstable program version, may be null
+     */
+    public static void create(OutputStream out, String stableProgramVersion, 
+            String unstableProgramVersion) throws Exception {
+        Validate.notNull(out);
+        if (stableProgramVersion != null) {
+            VersionFile.stableProgramVersion = stableProgramVersion;
+        }
+        if (unstableProgramVersion != null) {
+            VersionFile.unstableProgramVersion = unstableProgramVersion;
+        }
+
         Document doc = createDocument();
         serializetoXML(doc, out);
         out.flush();
@@ -69,10 +90,15 @@ public class VersionFile {
         Node root = doc.createElement(TAG_ROOT);
         doc.appendChild(root);
 
-        //latest version
+        //latest stable version
         Node lastVersion = doc.createElement(TAG_LAST_VERSION);
-        lastVersion.setTextContent(programVersion);
+        lastVersion.setTextContent(stableProgramVersion);
         root.appendChild(lastVersion);
+
+        //latest unstable version
+        Node lastUnstableVersion = doc.createElement(TAG_LAST_UNSTABLE_VERSION);
+        lastUnstableVersion.setTextContent(unstableProgramVersion);
+        root.appendChild(lastUnstableVersion);
 
         //operators
         for (Operator op : Operators.getInstance().getAll()) {

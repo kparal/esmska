@@ -38,6 +38,7 @@ public class Config extends Object implements Serializable {
     private String lafSubstanceSkin = "Business Black Steel";
     private boolean removeAccents = true;
     private boolean checkForUpdates = true;
+    private boolean checkForUnstableUpdates = false;
     private boolean startCentered = false;
     private boolean toolbarVisible = true;
     private String countryPrefix = "";
@@ -96,7 +97,8 @@ public class Config extends Object implements Serializable {
 
         AlphanumComparator comparator = new AlphanumComparator();
         if (beta1 && beta2) {
-            return comparator.compare(version1, version2);
+            return comparator.compare(v1, v2) == 0 ? version1.compareTo(version2) :
+                comparator.compare(v1, v2);
         } else if (beta1) {
             return (comparator.compare(v1, v2) == 0 ? -1 :
                 comparator.compare(v1, v2));
@@ -187,6 +189,10 @@ public class Config extends Object implements Serializable {
 
     public boolean isCheckForUpdates() {
         return checkForUpdates;
+    }
+
+    public boolean isCheckForUnstableUpdates() {
+        return checkForUnstableUpdates;
     }
 
     public boolean isStartCentered() {
@@ -338,6 +344,12 @@ public class Config extends Object implements Serializable {
         boolean old = this.checkForUpdates;
         this.checkForUpdates = checkForUpdates;
         changeSupport.firePropertyChange("checkForUpdates", old, checkForUpdates);
+    }
+
+    public void setCheckForUnstableUpdates(boolean checkForUnstableUpdates) {
+        boolean old = this.checkForUnstableUpdates;
+        this.checkForUnstableUpdates = checkForUnstableUpdates;
+        changeSupport.firePropertyChange("checkForUnstableUpdates", old, checkForUnstableUpdates);
     }
 
     public void setStartCentered(boolean startCentered) {

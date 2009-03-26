@@ -53,8 +53,10 @@ public class UpdateChecker {
     private static final Logger logger = Logger.getLogger(UpdateChecker.class.getName());
     private static final String UPDATE_FILE_URL = 
             "http://ripper.profitux.cz/esmska/update/version.php?ref=" + Config.getLatestVersion();
+    private static final Config config = Config.getInstance();
 
     private String onlineVersion = "0.0.0";
+    private String onlineUnstableVersion = "0.0.0";
     private HashSet<OperatorUpdateInfo> operatorUpdates = new HashSet<OperatorUpdateInfo>();
     private AtomicBoolean running = new AtomicBoolean();
 
@@ -134,6 +136,8 @@ public class UpdateChecker {
 
         onlineVersion = doc.getElementsByTagName(VersionFile.TAG_LAST_VERSION).
                 item(0).getTextContent();
+        onlineUnstableVersion = doc.getElementsByTagName(VersionFile.TAG_LAST_UNSTABLE_VERSION).
+                item(0).getTextContent();
 
         operatorUpdates.clear();
         NodeList operators = doc.getElementsByTagName(VersionFile.TAG_OPERATOR);
@@ -172,9 +176,14 @@ public class UpdateChecker {
         return running.get();
     }
 
-    /** Whether a new program update is available */
+    /** Whether a new program update is available. According to user preference
+     it checks against latest stable or unstable program version. */
     public synchronized boolean isProgramUpdateAvailable() {
-        return Config.compareVersions(onlineVersion, Config.getLatestVersion()) > 0;
+        if (config.isCheckForUnstableUpdates()) {
+            return Config.compareVersions(onlineUnstableVersion, Config.getLatestVersion()) > 0;
+        } else {
+            return Config.compareVersions(onlineVersion, Config.getLatestVersion()) > 0;
+        }
     }
 
     /** Get latest program version available online */

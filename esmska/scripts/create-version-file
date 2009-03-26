@@ -9,8 +9,8 @@ trap "echo Creating version file failed." ERR
 
 # usage
 if [ "$1" = "-h" -o "$1" = "--help" ]; then
-    echo "Usage: $0 [latest_program_version]"
-    echo "Example: $0 0.1.0"
+    echo "Usage: $0 [latest_stable_program_version] [latest_unstable_program_version]"
+    echo "Example: $0 0.1.0 0.2.0beta1"
     exit 1
 fi
 
@@ -19,5 +19,5 @@ cd "`dirname "$0"`"
 cd ..
 
 # run version file creator
-java -cp ./dist/esmska.jar esmska.update.VersionFile $1 > version.xml
+java -cp ./dist/esmska.jar esmska.update.VersionFile $1 $2 > version.xml
 
