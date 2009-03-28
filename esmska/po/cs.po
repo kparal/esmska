@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 20:33+0200\n"
-"PO-Revision-Date: 2009-03-26 20:33+0100\n"
+"POT-Creation-Date: 2009-03-28 19:04+0200\n"
+"PO-Revision-Date: 2009-03-28 19:04+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -200,8 +200,8 @@ msgid "&Appearance"
 msgstr "&Vzhled"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates"
-msgstr "Automaticky kontrolovat akt&ualizace"
+msgid "Automatically check for &updates of:"
+msgstr "Automaticky kontrolovat akt&ualizace:"
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 msgid ""
@@ -655,24 +655,36 @@ msgid "unknown"
 msgstr "neznámý"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "Use u&nstable versions"
-msgstr "Používat &nestabilní verze"
+msgid "also u&nstable versions"
+msgstr "včetně &nestabilních verzí"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
-"Notify also also about unstable program versions.<br>\n"
+"Notify also also about unstable versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
 "not afraid of losing their program data.</b>\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"Taktéž upozorňovat na nestabilní verze programu.<br>\n"
+"Taktéž upozorňovat na nestabilní verze.<br>\n"
 "<br>\n"
 "<b>Varování: Nestabilní verze jsou určeny pouze zkušeným uživatelům,<br>\n"
 "kteří se nebojí ztráty dat z programu.</b>\n"
 "</html>"
+
+#: ConfigFrame.updateCheckAll
+msgid "program and gateways"
+msgstr "programu a bran"
+
+#: ConfigFrame.updateCheckGateway
+msgid "gateways only"
+msgstr "pouze bran"
+
+#: ConfigFrame.updateCheckProgram
+msgid "program only"
+msgstr "pouze programu"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"

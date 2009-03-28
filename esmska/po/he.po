@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 20:33+0200\n"
+"POT-Creation-Date: 2009-03-28 18:59+0200\n"
 "PO-Revision-Date: 2009-02-01 17:56+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -200,8 +200,9 @@ msgid "&Appearance"
 msgstr "&חזות"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates"
-msgstr ""
+#, fuzzy
+msgid "Automatically check for &updates of:"
+msgstr "חפש אחר גרסאות תוכנה &חדשות עם ההפעלה"
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 #, fuzzy
@@ -647,18 +648,32 @@ msgid "unknown"
 msgstr "לא ידועה"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "Use u&nstable versions"
+msgid "also u&nstable versions"
 msgstr ""
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
-"Notify also also about unstable program versions.<br>\n"
+"Notify also also about unstable versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
 "not afraid of losing their program data.</b>\n"
 "</html>"
 msgstr ""
+
+#: ConfigFrame.updateCheckAll
+#, fuzzy
+msgid "program and gateways"
+msgstr "חפש אחר גרסאות תוכנה &חדשות עם ההפעלה"
+
+#: ConfigFrame.updateCheckGateway
+msgid "gateways only"
+msgstr ""
+
+#: ConfigFrame.updateCheckProgram
+#, fuzzy
+msgid "program only"
+msgstr "&תוכנה"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"

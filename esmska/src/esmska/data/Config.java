@@ -20,6 +20,18 @@ import org.apache.commons.lang.StringUtils;
  */
 public class Config extends Object implements Serializable {
 
+    /** How the update checks should be performed */
+    public static enum CheckUpdatePolicy {
+        /** never check for anything */
+        CHECK_NONE,
+        /** check only for program updates */
+        CHECK_PROGRAM,
+        /** check only for gateway updates */
+        CHECK_GATEWAYS,
+        /** check for program and gateway updates */
+        CHECK_ALL
+    }
+
     /** shared instance */
     private static Config instance = new Config();
     
@@ -38,7 +50,7 @@ public class Config extends Object implements Serializable {
     private String lafJGoodiesTheme = "Experience Blue";
     private String lafSubstanceSkin = "Business Black Steel";
     private boolean removeAccents = true;
-    private boolean checkForUpdates = true;
+    private CheckUpdatePolicy checkUpdatePolicy = CheckUpdatePolicy.CHECK_ALL;
     private boolean checkForUnstableUpdates = false;
     private boolean startCentered = false;
     private boolean toolbarVisible = true;
@@ -126,6 +138,11 @@ public class Config extends Object implements Serializable {
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this) {
         @Override
         public void firePropertyChange(PropertyChangeEvent evt) {
+            //do nothing if value not changed - the super method will check it anyway
+            //but this way we don't have to log it
+            if (ObjectUtils.equals(evt.getOldValue(), evt.getNewValue())) {
+                return;
+            }
             //ensure privacy on sensitive values
             Object newValue = evt.getNewValue();
             Object oldValue = evt.getOldValue();
@@ -199,8 +216,11 @@ public class Config extends Object implements Serializable {
         return this.removeAccents;
     }
 
-    public boolean isCheckForUpdates() {
-        return checkForUpdates;
+    /**
+     * @return never null
+     */
+    public CheckUpdatePolicy getCheckUpdatePolicy() {
+        return checkUpdatePolicy;
     }
 
     public boolean isCheckForUnstableUpdates() {
@@ -352,10 +372,16 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("removeAccents", oldRemoveAccents, removeAccents);
     }
 
-    public void setCheckForUpdates(boolean checkForUpdates) {
-        boolean old = this.checkForUpdates;
-        this.checkForUpdates = checkForUpdates;
-        changeSupport.firePropertyChange("checkForUpdates", old, checkForUpdates);
+    /** Set check update policy
+     * @param checkUpdatePolicy null is converted to default value
+     */
+    public void setCheckUpdatePolicy(CheckUpdatePolicy checkUpdatePolicy) {
+        if (checkUpdatePolicy == null) {
+            checkUpdatePolicy = CheckUpdatePolicy.CHECK_ALL;
+        }
+        CheckUpdatePolicy old = this.checkUpdatePolicy;
+        this.checkUpdatePolicy = checkUpdatePolicy;
+        changeSupport.firePropertyChange("checkUpdatePolicy", old, checkUpdatePolicy);
     }
 
     /** Set if should check for unstable versions. If currently using unstable

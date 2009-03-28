@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 20:33+0200\n"
+"POT-Creation-Date: 2009-03-28 18:59+0200\n"
 "PO-Revision-Date: 2009-03-11 17:06+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -210,8 +210,9 @@ msgid "&Appearance"
 msgstr "Vzhľ&ad"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates"
-msgstr ""
+#, fuzzy
+msgid "Automatically check for &updates of:"
+msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 #, fuzzy
@@ -665,18 +666,32 @@ msgid "unknown"
 msgstr "neznáma"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "Use u&nstable versions"
+msgid "also u&nstable versions"
 msgstr ""
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
-"Notify also also about unstable program versions.<br>\n"
+"Notify also also about unstable versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
 "not afraid of losing their program data.</b>\n"
 "</html>"
 msgstr ""
+
+#: ConfigFrame.updateCheckAll
+#, fuzzy
+msgid "program and gateways"
+msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
+
+#: ConfigFrame.updateCheckGateway
+msgid "gateways only"
+msgstr ""
+
+#: ConfigFrame.updateCheckProgram
+#, fuzzy
+msgid "program only"
+msgstr "P&rogram"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"

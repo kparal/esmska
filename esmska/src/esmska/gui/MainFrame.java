@@ -57,6 +57,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
+import esmska.data.Config.CheckUpdatePolicy;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.data.Log;
@@ -200,7 +201,7 @@ public class MainFrame extends javax.swing.JFrame {
         bindGroup.bind();
         
         //check for updates
-        if (config.isCheckForUpdates()) {
+        if (config.getCheckUpdatePolicy() != CheckUpdatePolicy.CHECK_NONE) {
             updateChecker.addActionListener(new UpdateListener());
             updateChecker.checkForUpdates();
         }
@@ -827,8 +828,26 @@ public class MainFrame extends javax.swing.JFrame {
     private class UpdateListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            switch (e.getID()) {
+            CheckUpdatePolicy policy = config.getCheckUpdatePolicy();
+            int event = e.getID();
+
+            //if many updates found and should check only for some of them, announce
+            //only the requested
+            if (event == UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE) {
+                if (policy == CheckUpdatePolicy.CHECK_PROGRAM) {
+                    event = UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE;
+                } else if (policy == CheckUpdatePolicy.CHECK_GATEWAYS) {
+                    event = UpdateChecker.ACTION_OPERATOR_UPDATE_AVAILABLE;
+                }
+            }
+
+            switch (event) {
                 case UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE:
+                    if (policy != CheckUpdatePolicy.CHECK_ALL &&
+                            policy != CheckUpdatePolicy.CHECK_PROGRAM) {
+                        //user doesn't want to know
+                        break;
+                    }
                     String message = MessageFormat.format(l10n.getString("MainFrame.new_program_version"),
                             updateChecker.getLatestProgramVersion());
                     log.addRecord(new Log.Record(Workarounds.stripHtml(message), null, Icons.STATUS_UPDATE_IMPORTANT));
@@ -842,8 +861,14 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                     }, l10n.getString("Update.browseDownloads"));
                     break;
-                case UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE:
                 case UpdateChecker.ACTION_OPERATOR_UPDATE_AVAILABLE:
+                    if (policy != CheckUpdatePolicy.CHECK_ALL &&
+                            policy != CheckUpdatePolicy.CHECK_GATEWAYS) {
+                        //user doesn't want to know
+                        break;
+                    }
+                    //otherwise do same as for program and operator update
+                case UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE:
                     message = l10n.getString("MainFrame.newOperatorUpdate");
                     log.addRecord(new Log.Record(Workarounds.stripHtml(message), null, Icons.STATUS_UPDATE));
                     statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE, true);

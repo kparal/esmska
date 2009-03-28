@@ -145,14 +145,17 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="22" pref="22" max="22" attributes="0"/>
-                              <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="unstableUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="updatePolicyComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="491" max="32767" attributes="0"/>
+                      <EmptySpace pref="310" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -162,10 +165,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="checkUpdatesCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="updatePolicyComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="318" max="32767" attributes="0"/>
+                      <EmptySpace pref="311" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -194,7 +200,11 @@
                 </Property>
               </Properties>
               <BindingProperties>
-                <BindingProperty name="selected" source="config" sourcePath="${checkForUpdates}" target="checkUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="selected" source="config" sourcePath="${checkUpdatePolicy}" target="checkUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false">
+                  <Property name="converter" type="org.jdesktop.beansbinding.Converter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                    <Connection code="new CheckUpdateConverter()" type="code"/>
+                  </Property>
+                </BindingProperty>
               </BindingProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkUpdatesCheckBoxActionPerformed"/>
@@ -211,6 +221,27 @@
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${checkForUnstableUpdates}" target="unstableUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="updatePolicyComboBox">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new DefaultComboBoxModel(new CheckUpdatePolicy[]{CheckUpdatePolicy.CHECK_PROGRAM, CheckUpdatePolicy.CHECK_GATEWAYS, CheckUpdatePolicy.CHECK_ALL})" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="checkUpdatesCheckBox" name="toolTipText" type="property"/>
+                </Property>
+                <Property name="renderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new UpdatePolicyComboRenderer()" type="code"/>
+                </Property>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="selectedItem" source="config" sourcePath="${checkUpdatePolicy}" target="updatePolicyComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false">
+                  <Property name="converter" type="org.jdesktop.beansbinding.Converter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                    <Connection code="new UpdatePolicyConverter()" type="code"/>
+                  </Property>
+                </BindingProperty>
+                <BindingProperty name="enabled" source="checkUpdatesCheckBox" sourcePath="${selected}" target="updatePolicyComboBox" targetPath="enabled" updateStrategy="1" immediately="false"/>
               </BindingProperties>
             </Component>
           </SubComponents>
