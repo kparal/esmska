@@ -74,7 +74,7 @@ public class OperatorUpdateInfo {
     /** Returns whether operator required program version is lower or same as
      * current program version (can be used), or not (can't be used). */
     public boolean canBeUsed() {
-        return Config.compareVersions(Config.getLatestVersion(), minProgramVersion) >= 0;
+        return Config.compareProgramVersions(Config.getLatestVersion(), minProgramVersion) >= 0;
     }
 
     @Override

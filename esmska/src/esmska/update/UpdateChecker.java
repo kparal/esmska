@@ -165,7 +165,7 @@ public class UpdateChecker {
         for (Iterator<OperatorUpdateInfo> it = operatorUpdates.iterator(); it.hasNext(); ) {
             OperatorUpdateInfo info = it.next();
             Operator op = Operators.getOperator(info.getName());
-            if (op != null && Config.compareVersions(info.getVersion(), op.getVersion()) <= 0) {
+            if (op != null && info.getVersion().compareTo(op.getVersion()) <= 0) {
                 //operator is same or older, remove it
                 it.remove();
             }
@@ -181,9 +181,9 @@ public class UpdateChecker {
      it checks against latest stable or unstable program version. */
     public synchronized boolean isProgramUpdateAvailable() {
         if (config.isCheckForUnstableUpdates()) {
-            return Config.compareVersions(onlineUnstableVersion, Config.getLatestVersion()) > 0;
+            return Config.compareProgramVersions(onlineUnstableVersion, Config.getLatestVersion()) > 0;
         } else {
-            return Config.compareVersions(onlineVersion, Config.getLatestVersion()) > 0;
+            return Config.compareProgramVersions(onlineVersion, Config.getLatestVersion()) > 0;
         }
     }
 

@@ -31,7 +31,7 @@ public class LegacyUpdater {
                 Config.getLatestVersion());
         
         //changes to 0.8.0
-        if (Config.compareVersions(version, "0.8.0") < 0) {
+        if (Config.compareProgramVersions(version, "0.8.0") < 0) {
             //set country prefix from locale
             if (StringUtils.isEmpty(Config.getInstance().getCountryPrefix())) {
                 Config.getInstance().setCountryPrefix(

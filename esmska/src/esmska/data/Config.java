@@ -95,7 +95,7 @@ public class Config extends Object implements Serializable {
      * @return positive number if version1 > version2, zero if version1 == version2,
      *         negative number otherwise
      */
-    public static int compareVersions(String version1, String version2) {
+    public static int compareProgramVersions(String version1, String version2) {
         if (version1 == null) {
             return (version2 == null ? 0 : -1);
         }

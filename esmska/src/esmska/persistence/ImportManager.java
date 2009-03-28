@@ -197,7 +197,7 @@ public class ImportManager {
             try {
                 DefaultOperator operator = new DefaultOperator(operatorURL);
                 //check that this operator can be used in this program
-                if (Config.compareVersions(Config.getLatestVersion(),
+                if (Config.compareProgramVersions(Config.getLatestVersion(),
                         operator.getMinProgramVersion()) >= 0) {
                     operators.add(operator);
                 } else {
