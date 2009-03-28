@@ -82,9 +82,7 @@ public class Contact extends Object implements Comparable<Contact> {
 
         String oldName = this.name;
         this.name = name;
-        if (!name.equals(oldName)) {
-            changeSupport.firePropertyChange("name", oldName, name);
-        }
+        changeSupport.firePropertyChange("name", oldName, name);
     }
 
     /** Set full phone number.
@@ -101,9 +99,7 @@ public class Contact extends Object implements Comparable<Contact> {
 
         String oldNumber = this.number;
         this.number = number;
-        if (!number.equals(oldNumber)) {
-            changeSupport.firePropertyChange("number", oldNumber, number);
-        }
+        changeSupport.firePropertyChange("number", oldNumber, number);
     }
 
     /** Set contact operator
@@ -116,9 +112,7 @@ public class Contact extends Object implements Comparable<Contact> {
 
         String oldOperator = this.operator;
         this.operator = operator;
-        if (!operator.equals(oldOperator)) {
-            changeSupport.firePropertyChange("operator", oldOperator, operator);
-        }
+        changeSupport.firePropertyChange("operator", oldOperator, operator);
     }
     // </editor-fold>
 
