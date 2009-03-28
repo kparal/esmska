@@ -112,14 +112,14 @@ public class PersistenceManager {
         if (!configDir.exists() && !configDir.mkdirs()) {
             throw new IOException("Can't create config dir '" + configDir.getAbsolutePath() + "'");
         }
-        if (!(configDir.canWrite() && configDir.canExecute())) {
+        if (!(canWrite(configDir) && configDir.canExecute())) {
             throw new IOException("Can't write or execute the config dir '" + configDir.getAbsolutePath() + "'");
         }
         //create data dir if necessary
         if (!dataDir.exists() && !dataDir.mkdirs()) {
             throw new IOException("Can't create data dir '" + dataDir.getAbsolutePath() + "'");
         }
-        if (!(dataDir.canWrite() && dataDir.canExecute())) {
+        if (!(canWrite(dataDir) && dataDir.canExecute())) {
             throw new IOException("Can't write or execute the data dir '" + dataDir.getAbsolutePath() + "'");
         }
         //create local operators dir
@@ -403,18 +403,18 @@ public class PersistenceManager {
         //move script file to correct location
         File scriptFileGlobal = new File(globalOperatorDir, scriptName + ".operator");
         File scriptFileLocal = new File(localOperatorDir, scriptName + ".operator");
-        if (globalOperatorDir.canWrite() && (!scriptFileGlobal.exists() || scriptFileGlobal.canWrite())) {
+        if (canWrite(globalOperatorDir) && (!scriptFileGlobal.exists() || canWrite(scriptFileGlobal))) {
             //first try global dir
             moveFileSafely(temp, scriptFileGlobal);
             logger.finer("Saved operator script into file: " + scriptFileGlobal.getAbsolutePath());
-        } else if (localOperatorDir.canWrite() && (!scriptFileLocal.exists() || scriptFileLocal.canWrite())) {
+        } else if (canWrite(localOperatorDir) && (!scriptFileLocal.exists() || canWrite(scriptFileLocal))) {
             //second try local dir
             moveFileSafely(temp, scriptFileLocal);
             logger.finer("Saved operator script into file: " + scriptFileLocal.getAbsolutePath());
         } else {
             //report error
             throw new IOException(MessageFormat.format("Could not save operator " +
-                    "{0} to '{1}' nor to '{2}' - no write permissions?", scriptName,
+                    "{0} to ''{1}'' nor to ''{2}'' - no write permissions?", scriptName,
                     scriptFileGlobal, scriptFileLocal));
         }
 
@@ -422,11 +422,11 @@ public class PersistenceManager {
         if (icon != null) {
             File iconFileGlobal = new File(globalOperatorDir, scriptName + ".png");
             File iconFileLocal = new File(localOperatorDir, scriptName + ".png");
-            if (globalOperatorDir.canWrite() && (!iconFileGlobal.exists() || iconFileGlobal.canWrite())) {
+            if (canWrite(globalOperatorDir) && (!iconFileGlobal.exists() || canWrite(iconFileGlobal))) {
                 //first try global dir
                 moveFileSafely(iconTemp, iconFileGlobal);
                 logger.finer("Saved operator icon into file: " + iconFileGlobal.getAbsolutePath());
-            } else if (localOperatorDir.canWrite() && (!iconFileLocal.exists() || iconFileLocal.canWrite())) {
+            } else if (canWrite(localOperatorDir) && (!iconFileLocal.exists() || canWrite(iconFileLocal))) {
                 //second try local dir
                 moveFileSafely(iconTemp, iconFileLocal);
                 logger.finer("Saved operator icon into file: " + iconFileLocal.getAbsolutePath());
@@ -504,5 +504,53 @@ public class PersistenceManager {
         FileUtils.copyFile(file, backup);
         file.delete();
         return backup;
+    }
+
+    /** Test if it is possible to write to a certain file/directory.
+     * It doesn't have to exist. This method is available because of Java bug
+     * on Windows which does not check permissions in File.canWrite() but only
+     * read-only bit (<a href="http://www.velocityreviews.com/forums/t303199-java-reporting-incorrect-directory-permission-under-windows-xp.html">reference1</a>,
+     * <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4939819>referece2</a>).
+     * @param file File, existing or not existing; not null
+     * @return true if file can be written, false if not
+     */
+    public static boolean canWrite(File file) {
+        Validate.notNull(file);
+
+        if (!OSType.isWindows()) {
+            //on POSIX systems file.canWrite() works
+            return file.canWrite();
+        }
+
+        //file.canWrite() does not work on Windows
+        boolean success = false;
+        try {
+            if (file.exists()) {
+                if (file.isDirectory()) {
+                    //try to create file inside directory
+                    String name = "writeTest.esmska";
+                    File f = new File(file, name);
+                    while (f.exists()) {
+                        name = name + ".1";
+                        f = new File(file, name);
+                    }
+                    f.createNewFile();
+                    success = f.delete();
+                } else {
+                    //try to open file for writing
+                    FileOutputStream out = new FileOutputStream(file);
+                    out.close();
+                    success = true;
+                }
+            } else {
+                //try to create and delete the file
+                FileUtils.touch(file);
+                success = file.delete();
+            }
+        } catch (Exception ex) {
+            //be quiet, don't report anything
+            success = false;
+        }
+        return success;
     }
 }
