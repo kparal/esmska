@@ -210,7 +210,7 @@ test
 
 }
 FileGroup ::68F8A674-A81E-A9C7-3A76-943F6C547A7F -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-x86 HPUX-hppa Linux-x86 Solaris-sparc Windows TarArchive ZipArchive} -name {Program Files} -parent FileGroups
-File ::9A9C4A05-3D1F-902C-95DF-ABB201598EFE -type dir -directory <%InstallDir%> -name ../dist -location ../dist -parent 68F8A674-A81E-A9C7-3A76-943F6C547A7F
+File ::9A9C4A05-3D1F-902C-95DF-ABB201598EFE -type dir -directory <%InstallDir%> -name ../dist-win -location ../dist-win -parent 68F8A674-A81E-A9C7-3A76-943F6C547A7F
 Component ::B46C71F7-437D-89EA-EE29-EF423EB5226A -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-x86 HPUX-hppa Linux-x86 Solaris-sparc Windows} -name {Default Component} -parent Components
 SetupType ::4255F5B0-A867-F594-5EBC-C48939F0B06E -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-x86 HPUX-hppa Linux-x86 Solaris-sparc Windows} -name Typical -parent SetupTypes
 SetupType ::78C33A2C-EF28-4063-8C23-7B72D0E08A4A -setup Install -active No -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-x86 HPUX-hppa Linux-x86 Solaris-sparc Windows} -name Custom -parent SetupTypes

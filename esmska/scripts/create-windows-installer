@@ -3,7 +3,7 @@
 # Create MS Windows installer from dist directory
 # in the program root
 
-# Dependencies: installjammer
+# Dependencies: installjammer, unix2dos
 
 # trap and exit on error
 set -e
@@ -30,9 +30,15 @@ VERSION="$1"
 PROJECT_DIR="${PWD}/../installjammer"
 PROJECT_FILE="${PROJECT_DIR}/Esmska.mpi"
 OUTPUT_DIR="${PWD}/.."
+DIST_DIR="${PWD}/../dist-win"
 
 # create temp dir
 BUILD_DIR=`mktemp -d -t esmska-packaging.XXXX`
+
+# copy dist directory to dist-win directory
+cp -r ../dist "$DIST_DIR"
+# and convert text files to CRLF
+unix2dos "$DIST_DIR"/*.txt "$DIST_DIR"/license/*.txt "$DIST_DIR"/*.conf
 
 # build installer
 installjammer --build-for-release --quiet --build-dir "$BUILD_DIR" \
@@ -40,5 +46,6 @@ installjammer --build-for-release --quiet --build-dir "$BUILD_DIR" \
 
 # delete temp files
 rm -rf "$BUILD_DIR"
+rm -rf "$DIST_DIR"
 rm "${PROJECT_DIR}/build.log"
 
