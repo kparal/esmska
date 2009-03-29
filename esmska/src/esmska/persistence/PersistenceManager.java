@@ -52,6 +52,7 @@ public class PersistenceManager {
     private static final String PROGRAM_DIRNAME = "esmska";
     private static final String OPERATOR_DIRNAME = "operators";
     private static final String CONFIG_FILENAME = "settings.xml";
+    private static final String GLOBAL_CONFIG_FILENAME = "esmska.conf";
     private static final String CONTACTS_FILENAME = "contacts.csv";
     private static final String QUEUE_FILENAME = "queue.csv";
     private static final String HISTORY_FILENAME = "history.csv";
@@ -69,6 +70,7 @@ public class PersistenceManager {
     private static File globalOperatorDir = new File(OPERATOR_DIRNAME);
     private static File localOperatorDir = new File(dataDir, OPERATOR_DIRNAME);
     private static File configFile = new File(configDir, CONFIG_FILENAME);
+    private static File globalConfigFile = new File(GLOBAL_CONFIG_FILENAME);
     private static File contactsFile = new File(configDir, CONTACTS_FILENAME);
     private static File queueFile = new File(configDir, QUEUE_FILENAME);
     private static File historyFile = new File(configDir, HISTORY_FILENAME);
@@ -200,8 +202,20 @@ public class PersistenceManager {
     
     /** Load program configuration */
     public void loadConfig() throws IOException {
-        logger.fine("Loading config...");
+        //system-wide config
+        if (globalConfigFile.exists()) {
+            logger.fine("Loading global config...");
+            try {
+                ImportManager.importGlobalConfig(globalConfigFile);
+            } catch (Exception ex) {
+                //don't stop here, continue to load local config
+                logger.log(Level.WARNING, "Failed to load global configuration", ex);
+            }
+        }
+
+        //per-user config
         if (configFile.exists()) {
+            logger.fine("Loading local config...");
             XMLDecoder xmlDecoder = new XMLDecoder(
                     new BufferedInputStream(new FileInputStream(configFile)));
             Config newConfig = (Config) xmlDecoder.readObject();
@@ -209,6 +223,9 @@ public class PersistenceManager {
             if (newConfig != null) {
                 Config.setSharedInstance(newConfig);
             }
+        } else {
+            //set new config, to apply changes made through global config
+            Config.setSharedInstance(new Config());
         }
     }
     

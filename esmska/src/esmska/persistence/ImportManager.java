@@ -10,6 +10,7 @@ package esmska.persistence;
 
 import com.csvreader.CsvReader;
 import esmska.data.*;
+import esmska.data.Config.GlobalConfig;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -23,6 +24,9 @@ import esmska.data.Operator;
 import esmska.data.Tuple;
 import java.beans.IntrospectionException;
 import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
@@ -30,6 +34,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.jar.JarEntry;
@@ -250,5 +255,38 @@ public class ImportManager {
         }
 
         logger.finer("Imported keyring");
+    }
+
+    /** Import configuration from system-wide config into Config defaults */
+    public static void importGlobalConfig(File file) throws IOException {
+        logger.finer("Importing global configuration from file: " + file.getAbsolutePath());
+
+        GlobalConfig globalConfig = GlobalConfig.getInstance();
+        Reader reader = null;
+
+        try {
+            reader = new InputStreamReader(new FileInputStream(file), "UTF-8");
+            Properties props = new Properties();
+            props.load(reader);
+
+            //checkUpdatePolicy
+            String prop = props.getProperty("checkUpdatePolicy");
+            if ("none".equals(prop)) {
+                globalConfig.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_NONE);
+            } else if ("program".equals(prop)) {
+                globalConfig.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_PROGRAM);
+            } else if ("gateways".equals(prop)) {
+                globalConfig.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_GATEWAYS);
+            } else if ("all".equals(prop)) {
+                globalConfig.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_ALL);
+            }
+
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+
+        logger.finer("Imported global configuration");
     }
 }

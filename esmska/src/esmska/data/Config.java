@@ -32,6 +32,8 @@ public class Config extends Object implements Serializable {
         CHECK_ALL
     }
 
+    /** system-wide config */
+    private static GlobalConfig globalConfig = GlobalConfig.getInstance();
     /** shared instance */
     private static Config instance = new Config();
     
@@ -50,7 +52,7 @@ public class Config extends Object implements Serializable {
     private String lafJGoodiesTheme = "Experience Blue";
     private String lafSubstanceSkin = "Business Black Steel";
     private boolean removeAccents = true;
-    private CheckUpdatePolicy checkUpdatePolicy = CheckUpdatePolicy.CHECK_ALL;
+    private CheckUpdatePolicy checkUpdatePolicy = globalConfig.checkUpdatePolicy;
     private boolean checkForUnstableUpdates = false;
     private boolean startCentered = false;
     private boolean toolbarVisible = true;
@@ -497,4 +499,32 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("showAdvancedSettings", old, showAdvancedSettings);
     }
     // </editor-fold>
+
+    /** Class representing system-wide config. This holds defaults used in
+     * Config class. Only changes to GlobalConfig applied before Config class
+     * instantiation are reflected.
+     */
+    public static class GlobalConfig {
+        private static final GlobalConfig instance = new GlobalConfig();
+
+        private CheckUpdatePolicy checkUpdatePolicy = CheckUpdatePolicy.CHECK_ALL;
+
+        private GlobalConfig() {
+        }
+
+        /** get shared instance */
+        public static GlobalConfig getInstance() {
+            return instance;
+        }
+
+        /** @see Config#setCheckUpdatePolicy */
+        public void setCheckUpdatePolicy(CheckUpdatePolicy checkUpdatePolicy) {
+            if (checkUpdatePolicy == null) {
+                checkUpdatePolicy = CheckUpdatePolicy.CHECK_ALL;
+            }
+            this.checkUpdatePolicy = checkUpdatePolicy;
+        }
+
+    }
+
 }
