@@ -22,7 +22,7 @@
     </information>
 <!--${JNLP.SECURITY}-->
     <resources>
-<!--${JNLP.RESOURCES.RUNTIME}-->
+        <j2se version="1.6+"/>
         <property name="apple.laf.useScreenMenuBar" value="true"/>
 <!--${JNLP.RESOURCES.MAIN.JAR}-->
 <!--${JNLP.RESOURCES.JARS}-->
