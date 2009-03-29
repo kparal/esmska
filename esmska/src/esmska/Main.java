@@ -193,6 +193,11 @@ public class Main {
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
             //set suggested LaF for this platform
             config.setLookAndFeel(ThemeManager.suggestBestLAF());
+            //set update policy if run as java webstart
+            if (Config.isRunAsWebStart()) {
+                //run as webstart, disable updates checking
+                config.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_NONE);
+            }
         }
         
         //update from older versions

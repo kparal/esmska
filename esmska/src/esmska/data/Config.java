@@ -89,6 +89,12 @@ public class Config extends Object implements Serializable {
         return !LATEST_VERSION.contains("beta");
     }
 
+    /** Whether the program is run as Java WebStart or not */
+    public static boolean isRunAsWebStart() {
+        //property esmska.isWebstart is set in JNLP file
+        return System.getProperty("esmska.isWebstart") != null;
+    }
+
     /** Compares two program versions. Handles if some of them is marked as beta.
      * @param version1 first version. Null means lowest possible version.
      * @param version2 second version. Null means lowest possible version.

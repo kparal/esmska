@@ -24,6 +24,7 @@
     <resources>
         <j2se version="1.6+"/>
         <property name="apple.laf.useScreenMenuBar" value="true"/>
+        <property name="esmska.isWebstart" value="true"/>
 <!--${JNLP.RESOURCES.MAIN.JAR}-->
 <!--${JNLP.RESOURCES.JARS}-->
     </resources>
