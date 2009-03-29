@@ -147,14 +147,19 @@ You can run command:
 to obtain binary program packages inside the program root directory.
 
 When creating custom packages it may be good to note that the only important
-files for the program are esmska.jar, lib/ and operators/ directory. All other
-files are intended only for the end-user and the program does not use them.
+files for the program are esmska.jar, esmska.conf, lib/ and operators/ 
+directory. All other files are intended only for the end-user and the program
+does not use them.
 
 Package maintainer should be interested in resources/ directory. It contains
 many files useful for making packages. Especially an always up-to-date
 esmska.desktop file should be used, because it contains localized menu item 
 translations.
 
+You should also see the esmska.conf file, which is a system-wide configuration
+file. You can set some default configuration there (like turning off update
+notification for example, when you are distributing program through linux
+repositories).
 
 Working with translations
 =========================
