@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-28 18:59+0200\n"
+"POT-Creation-Date: 2009-03-30 19:18+0200\n"
 "PO-Revision-Date: 2008-10-15 21:04+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-16 11:20+0000\n"
+"X-Launchpad-Export-Date: 2009-03-30 16:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -122,7 +122,6 @@ msgid "Paste"
 msgstr "Incolla"
 
 #: Close_
-#, fuzzy
 msgid "&Close"
 msgstr "&Chiudi"
 
@@ -199,9 +198,8 @@ msgid "&Appearance"
 msgstr "&Aspetto"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
-#, fuzzy
 msgid "Automatically check for &updates of:"
-msgstr "Controlla se è presente una &nuova versione del programma all'avvio"
+msgstr ""
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 msgid ""
@@ -459,9 +457,8 @@ msgid "Do you really like to remove all entered login credentials?"
 msgstr ""
 
 #: ConfigFrame.sameProxyCheckBox.text
-#, fuzzy
 msgid "Same as &HTTP proxy"
-msgstr "H&TTP proxy:"
+msgstr ""
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
 msgid ""
@@ -576,9 +573,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.updateCheckAll
-#, fuzzy
 msgid "program and gateways"
-msgstr "Controlla se è presente una &nuova versione del programma all'avvio"
+msgstr ""
 
 #: ConfigFrame.updateCheckGateway
 msgid "gateways only"
@@ -1951,9 +1947,8 @@ msgid ""
 msgstr ""
 
 #: UpdateDialog.checkButton.text
-#, fuzzy
 msgid "Check for &updates"
-msgstr "Controlla se è presente una &nuova versione del programma all'avvio"
+msgstr ""
 
 #: UpdateDialog.topLabel.text
 msgid ""
@@ -1962,14 +1957,6 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
-
-#, fuzzy
-#~ msgctxt "UpdateDialog.closeButton.text"
-#~ msgid "&Close"
-#~ msgstr "&Chiudi"
-
-#~ msgid "Check for a &new program version on startup"
-#~ msgstr "Controlla se è presente una &nuova versione del programma all'avvio"
 
 #~ msgid "http://code.google.com/p/esmska/wiki/Support"
 #~ msgstr "http://code.google.com/p/esmska/wiki/Support"

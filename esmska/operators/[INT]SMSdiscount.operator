@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0beta"
+    return "0.15.0beta1"
 }
 
 function getWebsite() {

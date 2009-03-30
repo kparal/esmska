@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-28 18:59+0200\n"
-"PO-Revision-Date: 2009-03-11 17:06+0000\n"
+"POT-Creation-Date: 2009-03-30 19:18+0200\n"
+"PO-Revision-Date: 2009-03-20 06:50+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-16 11:20+0000\n"
+"X-Launchpad-Export-Date: 2009-03-30 16:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -123,7 +123,6 @@ msgid "Paste"
 msgstr "Vložiť"
 
 #: Close_
-#, fuzzy
 msgid "&Close"
 msgstr "&Zavrieť"
 
@@ -210,9 +209,8 @@ msgid "&Appearance"
 msgstr "Vzhľ&ad"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
-#, fuzzy
 msgid "Automatically check for &updates of:"
-msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
+msgstr ""
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 #, fuzzy
@@ -386,6 +384,9 @@ msgid ""
 "* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
+"<html><i>\n"
+"* Autentikácia menom/heslom nieje zatiaľ podporovaná.\n"
+"</i></html>"
 
 #: ConfigFrame.jLabel2.text
 msgid "The &default country prefix number:"
@@ -538,16 +539,14 @@ msgid "Do you really like to remove all entered login credentials?"
 msgstr "Naozaj si prajete odstrániť všetky vyplnené prihlasovacie údaje?"
 
 #: ConfigFrame.sameProxyCheckBox.text
-#, fuzzy
 msgid "Same as &HTTP proxy"
-msgstr "H&TTP proxy:"
+msgstr "Rovnaké ako &HTTP proxy"
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
 "field"
-msgstr "Pre všetky protokoly sa použije adresa zadaná v poli \"HTTP proxy\""
+msgstr "Adresa v poli 'HTTP proxy' bude použitá aj pre pole 'HTTPS proxy'"
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -680,9 +679,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.updateCheckAll
-#, fuzzy
 msgid "program and gateways"
-msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
+msgstr ""
 
 #: ConfigFrame.updateCheckGateway
 msgid "gateways only"
@@ -2210,9 +2208,8 @@ msgid ""
 msgstr ""
 
 #: UpdateDialog.checkButton.text
-#, fuzzy
 msgid "Check for &updates"
-msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
+msgstr ""
 
 #: UpdateDialog.topLabel.text
 msgid ""
@@ -2222,22 +2219,11 @@ msgid ""
 "</html>"
 msgstr ""
 
-#, fuzzy
-#~ msgctxt "UpdateDialog.closeButton.text"
-#~ msgid "&Close"
-#~ msgstr "&Zavrieť"
-
-#~ msgid "Check for a &new program version on startup"
-#~ msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
-
 #~ msgid "http://code.google.com/p/esmska/wiki/Support"
 #~ msgstr "http://code.google.com/p/esmska/wiki/Support"
 
 #~ msgid "Support project"
 #~ msgstr "Podporte projekt"
-
-#~ msgid "Use &this proxy for all protocols"
-#~ msgstr "Používať tento proxy server pre všetky protokoly."
 
 #~ msgid ""
 #~ "<html><i>\n"
@@ -2249,6 +2235,9 @@ msgstr ""
 #~ "* Ak nemáte priame pripojenie do internetu, je nutné, aby Váš proxy "
 #~ "server fungoval ako SOCKS proxy server.\n"
 #~ "</i></html>"
+
+#~ msgid "Use &this proxy for all protocols"
+#~ msgstr "Používať tento proxy server pre všetky protokoly."
 
 #~ msgid ""
 #~ "<html><i>\n"
