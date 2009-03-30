@@ -32,6 +32,10 @@ for PO in `find . -name 'esmska-*.po'`; do
     FILE=`basename "$PO"`
     LOCALE=${FILE%.po}
     LOCALE=${LOCALE#esmska-}
+    if [ "$LOCALE" = "cs" ]; then
+        # don't update czech locale from LP, it is managed internally
+        continue
+    fi
     cp "$PO" "$PODIR/$LOCALE.po"
 done
 
