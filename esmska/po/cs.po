@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-31 11:52+0200\n"
-"PO-Revision-Date: 2009-03-31 11:52+0100\n"
+"POT-Creation-Date: 2009-04-04 13:37+0200\n"
+"PO-Revision-Date: 2009-04-04 13:37+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2042,8 +2042,7 @@ msgstr "Použijte nabídku Nápověda pro položení dotazu nebo nahlášení pr
 msgid ""
 "Integrated gateway updater will help you solve problems with message sending."
 msgstr ""
-"Začleněný mechanismus aktualizace bran vám pomůže s problémy při odesílání "
-"zpráv."
+"Začleněná možnost aktualizace bran vám pomůže s problémy při odesílání zpráv."
 
 #. #Write the tip as short as possible
 #: Tip.3
