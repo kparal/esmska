@@ -10,6 +10,7 @@ import esmska.data.Operator;
 import esmska.data.Operators;
 import esmska.persistence.PersistenceManager;
 import java.io.OutputStream;
+import java.net.URI;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -36,8 +37,10 @@ public class VersionFile {
     static final String TAG_DOWNLOAD = "downloadURL";
     static final String TAG_MIN_VERSION = "minProgramVersion";
     static final String TAG_ICON = "iconURL";
-    
-    private static final String downloadBase = "http://ripper.profitux.cz/esmska/operators/";
+
+    private static final String downloadProtocol = "http";
+    private static final String downloadHost = "ripper.profitux.cz";
+    private static final String downloadPath = "/esmska/operators/";
 
     private static String stableProgramVersion = Config.getLatestVersion();
     private static String unstableProgramVersion = stableProgramVersion;
@@ -108,12 +111,14 @@ public class VersionFile {
             Node version = doc.createElement(TAG_VERSION);
             version.setTextContent(op.getVersion());
             Node download = doc.createElement(TAG_DOWNLOAD);
-            download.setTextContent(downloadBase + op.getName() + ".operator");
+            URI dlUri = new URI(downloadProtocol, downloadHost, downloadPath + op.getName() + ".operator", null);
+            download.setTextContent(dlUri.toURL().toString());
             Node minVersion = doc.createElement(TAG_MIN_VERSION);
             minVersion.setTextContent(op.getMinProgramVersion());
             Node icon = doc.createElement(TAG_ICON);
             if (op.getIcon() != Icons.OPERATOR_DEFAULT) {
-                icon.setTextContent(downloadBase + op.getName() + ".png");
+                URI iconUri = new URI(downloadProtocol, downloadHost, downloadPath + op.getName() + ".png", null);
+                icon.setTextContent(iconUri.toURL().toString());
             }
 
             operator.appendChild(name);
