@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Create MS Windows portable package from dist directory
+# in the program root
+
+# Dependencies: 7z, unix2dos
+
+# trap and exit on error
+set -e
+trap "echo Creating portable package failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+JRE="../portable/jre-win.7z"
+
+# check dependency
+JRE=`readlink -f "$JRE"`
+if [ ! -f "$JRE" ]; then
+    echo "JRE not found in $JRE. MS Windows portable package will \
+not be created."
+    exit 0
+fi
+
+# usage
+if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0 version"
+    echo "Example: $0 0.1.0"
+    exit 1
+fi
+
+VERSION="$1"
+ROOTDIR="esmska-$VERSION"
+FINALNAME="Esmska-$VERSION-portable.7z"
+OUTPUT_DIR="${PWD}/.."
+
+# create temp dir
+TMPDIR=`mktemp -d -t esmska-packaging.XXXX`
+BUILD_DIR="$TMPDIR/$ROOTDIR"
+mkdir "$BUILD_DIR"
+
+# copy dist directory to dist-win directory
+cp -r ../dist/* ../portable/esmska-portable.exe "$BUILD_DIR"
+# and convert text files to CRLF
+unix2dos "$BUILD_DIR"/*.txt "$BUILD_DIR"/license/*.txt "$BUILD_DIR"/*.conf
+# delete unnecessary files
+rm "$BUILD_DIR"/esmska.sh "$BUILD_DIR"/esmska.exe
+# extract JRE
+7z x -o"$BUILD_DIR" "$JRE" >/dev/null
+
+# create archive
+if [ -f "$OUTPUT_DIR/$FINALNAME" ]; then
+    rm "$OUTPUT_DIR/$FINALNAME"
+fi
+7z a -mx=9 "$OUTPUT_DIR/$FINALNAME" "$BUILD_DIR" >/dev/null
+
+# delete temp files
+rm -rf "$BUILD_DIR"
+

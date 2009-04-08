@@ -39,6 +39,8 @@ BUILD_DIR=`mktemp -d -t esmska-packaging.XXXX`
 cp -r ../dist "$DIST_DIR"
 # and convert text files to CRLF
 unix2dos "$DIST_DIR"/*.txt "$DIST_DIR"/license/*.txt "$DIST_DIR"/*.conf
+# delete unnecessary files
+rm "$DIST_DIR"/esmska.sh
 
 # build installer
 installjammer --build-for-release --quiet --build-dir "$BUILD_DIR" \

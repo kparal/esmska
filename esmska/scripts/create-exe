@@ -19,4 +19,5 @@ cd "`dirname "$0"`"
 
 # run launch4j
 launch4j "${PWD}/../launch4j/esmska.xml"
+launch4j "${PWD}/../launch4j/esmska-portable.xml"
 
