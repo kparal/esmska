@@ -9,23 +9,19 @@
 
 package esmska.persistence;
 
+import android.provider.Contacts;
+import android.syncml.pim.vcard.ContactStruct;
+import android.syncml.pim.vcard.VCardComposer;
+import android.syncml.pim.vcard.VCardException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-import net.wimpi.pim.Pim;
-import net.wimpi.pim.contact.io.ContactMarshaller;
-import net.wimpi.pim.contact.model.Communications;
-import net.wimpi.pim.contact.model.PersonalIdentity;
-import net.wimpi.pim.contact.model.PhoneNumber;
-import net.wimpi.pim.factory.ContactIOFactory;
-import net.wimpi.pim.factory.ContactModelFactory;
 
 import com.csvreader.CsvWriter;
 
@@ -79,41 +75,28 @@ public class ExportManager {
      * @param out output stream, not null
      */
     public static void exportContactsToVCard(Collection<Contact> contacts, OutputStream out)
-            throws IOException {
+            throws IOException, VCardException {
         Validate.notNull(contacts);
         Validate.notNull(out);
 
         logger.finer("Exporting " + contacts.size() + " contacts to vCard");
         
-        ContactIOFactory ciof = Pim.getContactIOFactory();
-        ContactModelFactory cmf = Pim.getContactModelFactory();
-        ContactMarshaller marshaller = ciof.createContactMarshaller();
-        marshaller.setEncoding("UTF-8");
-        ArrayList<net.wimpi.pim.contact.model.Contact> conts =
-                new ArrayList<net.wimpi.pim.contact.model.Contact>();
+        VCardComposer composer = new VCardComposer();
 
-        //convert contacts to vcard library contacts
         for (Contact contact : contacts) {
-            net.wimpi.pim.contact.model.Contact c = cmf.createContact();
+            ContactStruct struct = new ContactStruct();
 
-            PersonalIdentity pid = cmf.createPersonalIdentity();
-            pid.setFormattedName(contact.getName());
-            pid.setFirstname("");
-            pid.setLastname(contact.getName());
-            c.setPersonalIdentity(pid);
+            struct.name = contact.getName();
+            struct.addPhone(contact.getNumber(),
+                    String.valueOf(Contacts.Phones.TYPE_MOBILE), null);
 
-            Communications comm = cmf.createCommunications();
-            PhoneNumber number = cmf.createPhoneNumber();
-            number.setNumber(contact.getNumber());
-            comm.addPhoneNumber(number);
-            c.setCommunications(comm);
+            String vcardString = composer.createVCard(struct, VCardComposer.VERSION_VCARD30_INT);
 
-            conts.add(c);
+            IOUtils.write(vcardString, out, "UTF-8");
+            //create empty lines between contacts
+            IOUtils.write("\n", out, "UTF-8");
         }
 
-        //do the export
-        marshaller.marshallContacts(out,
-                conts.toArray(new net.wimpi.pim.contact.model.Contact[0]));
         out.flush();
     }
 

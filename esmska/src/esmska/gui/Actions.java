@@ -28,7 +28,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Collection;
@@ -388,7 +387,7 @@ public class Actions {
                 }
                 out.flush();
                 out.close();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not export contacts to file", ex);
                 Log.getInstance().addRecord(new Log.Record(
                         l10n.getString("ExportManager.export_failed"), null, Icons.STATUS_ERROR));

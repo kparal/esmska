@@ -9,6 +9,11 @@
 
 package esmska.persistence;
 
+import android.syncml.pim.PropertyNode;
+import android.syncml.pim.VDataBuilder;
+import android.syncml.pim.VNode;
+import android.syncml.pim.vcard.VCardException;
+import android.syncml.pim.vcard.VCardParser;
 import com.csvreader.CsvReader;
 import esmska.data.Config;
 import java.io.File;
@@ -19,15 +24,12 @@ import javax.swing.SwingWorker;
 import esmska.data.Contact;
 import esmska.data.Operators;
 import esmska.data.Operator;
-import java.io.FileInputStream;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
-import net.wimpi.pim.Pim;
-import net.wimpi.pim.contact.io.ContactUnmarshaller;
-import net.wimpi.pim.contact.model.Communications;
-import net.wimpi.pim.contact.model.PersonalIdentity;
-import net.wimpi.pim.contact.model.PhoneNumber;
-import net.wimpi.pim.factory.ContactIOFactory;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 
 /** Parse contacts from csv file of different programs. Works in background thread.
  * Returns collection of parsed contacts.
@@ -167,88 +169,114 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
     }
     
     /** parse vcard file and return contacts */
-    private ArrayList<Contact> parseVCARD() throws IOException {
-        logger.finer("Parsing CSV file '" + file + "' as type " + type);
+    private ArrayList<Contact> parseVCARD() throws IOException, VCardException {
+        logger.finer("Parsing vCard file '" + file + "' as type " + type);
         contacts.clear();
-        
-        ContactIOFactory ciof = Pim.getContactIOFactory();
-        ContactUnmarshaller unmarshaller = ciof.createContactUnmarshaller();
-        unmarshaller.setStrict(false); //in order to parse older vCard 2.1 files
-        unmarshaller.setEncoding("UTF-8");
-        
-        FileInputStream input = null;
-        
-        try {
-            input = new FileInputStream(file);
-            net.wimpi.pim.contact.model.Contact[] pimContacts =
-                    unmarshaller.unmarshallContacts(input);
-            for (net.wimpi.pim.contact.model.Contact pimContact : pimContacts) {
-                PersonalIdentity pi = pimContact.getPersonalIdentity();
-                //FN (formatted name) should be there
-                String name = pi.getFormattedName();
-                //if not, read N (name)
-                if (StringUtils.isEmpty(name)) {
-                    String firstName = pi.getFirstname();
-                    String middleName = "";
-                    for (int i = 0; i < pi.getAdditionalNameCount(); i++) {
-                        middleName += pi.getAdditionalName(i);
-                        if (i < pi.getAdditionalNameCount() - 1) {
-                            middleName += " ";
-                        }
-                    }
-                    String lastName = pi.getLastname();
-                    name = (StringUtils.isEmpty(firstName) ? "" : firstName + " ") +
-                            (StringUtils.isEmpty(middleName) ? "" : middleName + " ") +
-                            (StringUtils.isEmpty(lastName) ? "" : lastName);
-                    name = name.trim();
-                }
-                //if no FN nor N, skip contact
-                if (StringUtils.isEmpty(name)) {
-                    continue;
-                }
-                Communications co = pimContact.getCommunications();
-                String number = "";
-                //select best phone number if available
-                if (co != null && co.getPhoneNumberCount() > 0) {
-                    PhoneNumber preffered = co.getPreferredPhoneNumber();
-                    PhoneNumber[] cellulars = co.listPhoneNumbersByType(PhoneNumber.TYPE_CELLULAR);
-                    PhoneNumber[] messengers = co.listPhoneNumbersByType(PhoneNumber.TYPE_MESSAGING);
-                    PhoneNumber first = (PhoneNumber) co.getPhoneNumbers().next();
-                    //priority: preffered > cellular > messaging > first listed
-                    if (preffered != null) {
-                        number = preffered.getNumber();
-                    } else if (cellulars.length > 0) {
-                        number = cellulars[0].getNumber();
-                    } else if (messengers.length > 0) {
-                        number = messengers[0].getNumber();
-                    } else {
-                        number = first.getNumber();
-                    }
-                }
-                //convert to international format
-                if (StringUtils.isNotEmpty(number)) {
-                    boolean international = number.startsWith("+");
-                    number = number.replaceAll("[^0-9]", "");
-                    if (!international && StringUtils.isNotEmpty(config.getCountryPrefix())) {
-                        number = config.getCountryPrefix() + number;
-                    } else {
-                        number = "+" + number;
-                    }
-                }
 
-                Operator operator = Operators.suggestOperator(number, null); //guess operator
-                String operatorName = operator != null ? operator.getName() : null;
+        VCardParser parser = new VCardParser();
+        VDataBuilder builder = new VDataBuilder();
 
-                //create contact
-                contacts.add(new Contact(name, number, operatorName));
+        //read whole file to string
+        String vcardString = FileUtils.readFileToString(file, "UTF-8");
+
+        boolean parsed = parser.parse(vcardString, "UTF-8", builder);
+        if (!parsed) {
+            throw new VCardException("Could not parse vCard file: " + file);
+        }
+
+        //get all parsed contacts
+        List<VNode> pimContacts = builder.vNodeList;
+
+        for (VNode contact : pimContacts) {
+            ArrayList<PropertyNode> props = contact.propList;
+
+            //contact name - FN property
+            String name = null;
+            for (PropertyNode prop : props) {
+                if ("FN".equals(prop.propName)) {
+                    name = prop.propValue;
+                    break;
+                }
             }
-        } finally {
-            if (input != null) {
-                input.close();
+            //contact name - N property (in case FN wasn't present)
+            if (name == null) {
+                for (PropertyNode prop : props) {
+                    if ("N".equals(prop.propName)) {
+                        //replace separators as spaces between name parts
+                        name = StringUtils.replace(prop.propValue, ";", " ");
+                        break;
+                    }
+                }
             }
+            //skip contact without name
+            if (StringUtils.isEmpty(name)) {
+                continue;
+            }
+
+            //phone number - TEL property
+            String number = null;
+            boolean preferred = false, cellular = false;
+            for (PropertyNode prop : props) {
+                if ("TEL".equals(prop.propName)) {
+                    Set<String> types = prop.paramMap_TYPE;
+                    if (StringUtils.isEmpty(number)) {
+                        //first number
+                        number = prop.propValue;
+                    }
+                    if (!preferred && containsIgnoreCase(types, "PREF")) {
+                        //found first preferred number
+                        number = prop.propValue;
+                        preferred = true;
+                    }
+                    if (!preferred && !cellular && containsIgnoreCase(types, "CELL")) {
+                        //found first cellular and there was no previously preferred number
+                        number = prop.propValue;
+                        cellular = true;
+                    }
+                }
+            }
+            //convert number to international format
+            if (StringUtils.isNotEmpty(number)) {
+                boolean international = number.startsWith("+");
+                number = number.replaceAll("[^0-9]", "");
+                if (!international && StringUtils.isNotEmpty(config.getCountryPrefix())) {
+                    number = config.getCountryPrefix() + number;
+                } else {
+                    number = "+" + number;
+                }
+            }
+            //skip contact without valid number
+            if (!Contact.isValidNumber(number)) {
+                continue;
+            }
+
+            //guess operator
+            Operator operator = Operators.suggestOperator(number, null);
+            String operatorName = operator != null ? operator.getName() : null;
+
+            //create contact
+            contacts.add(new Contact(name, number, operatorName));
         }
 
         logger.finer("Parsed " + contacts.size() + " contacts");
         return contacts;
+    }
+
+    /** Check if set of strings contains particular string regardless of
+     * case sensitivity.
+     * @param set not null
+     * @param item not null
+     * @return true if set contains item case-insensitively
+     */
+    private boolean containsIgnoreCase(Set<String> set, String item) {
+        Validate.notNull(set);
+        Validate.notNull(item);
+
+        for (String s : set) {
+            if (StringUtils.equalsIgnoreCase(s, item)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
