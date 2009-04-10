@@ -59,6 +59,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
+import org.apache.commons.lang.ObjectUtils;
 import org.openide.awt.Mnemonics;
 
 /** Import contacts from external applications
@@ -160,16 +161,18 @@ public class ImportFrame extends javax.swing.JFrame {
     private void removeExistingContacts() {
         DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
         Object[] imported = contactListModel.toArray();
-        ArrayList<Object> skipped = new ArrayList<Object>();
+        ArrayList<Contact> skipped = new ArrayList<Contact>();
         for (Object impor : imported) {
             for (Contact exist : Contacts.getInstance().getAll()) {
-                if (exist.compareTo((Contact) impor) == 0) {
-                    skipped.add(impor);
+                Contact imp = (Contact) impor;
+                if (ObjectUtils.equals(exist.getName(), imp.getName()) &&
+                        ObjectUtils.equals(exist.getNumber(), imp.getNumber())) {
+                    skipped.add(imp);
                     break;
                 }
             }
         }
-        for (Object skip : skipped) {
+        for (Contact skip : skipped) {
             contactListModel.removeElement(skip);
         }
     }
