@@ -67,7 +67,15 @@ function send() {
         SENDERNUMBER = SENDERNUMBER.substring(4);
 
     // start page
+    EXEC.setReferer("http://katalog.1188.cz")
     content = EXEC.getURL("http://sms.1188.cz", [])
+
+    // get hidden field
+    // they have very ugly hack - two hidden fields, one is removed by 
+    // javascript, one is left
+    re = /\/\*\nvar el = document.getElementById\('(.*?)'\);/
+    match = re.exec(content);
+    var hidden = match[1]
 
     // get image id
     re = /<img class="codeImage" src="(.+?)"/
@@ -75,6 +83,7 @@ function send() {
     var image = match[1]
     
     // download image
+    EXEC.setReferer("http://sms.1188.cz")
     content = EXEC.getURL("http://sms.1188.cz" + image, [])
     
     // show image
@@ -82,7 +91,8 @@ function send() {
 
     // send message
     postData = ["adress", NUMBER, "code", code, 
-                "text", MESSAGE, "send", "ODESLAT"]
+                "text", MESSAGE, "send", "ODESLAT",
+                hidden, "1"]
     content = EXEC.postURL("http://sms.1188.cz/", [], postData)
 
     // check if message was successfully sent
@@ -103,6 +113,8 @@ function send() {
     }
 
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    // gateway is broken and does not currently report errors, therefore in
+    // this state it is very probably it is an error
+    EXEC.setErrorMessage(EXEC.ERROR_NO_REASON)
     return false
 }
