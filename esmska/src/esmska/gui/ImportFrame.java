@@ -614,6 +614,7 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
                 forwardButton.setIcon(new ImageIcon(
                         ImportFrame.class.getResource(RES + "contact-22.png")));
                 forwardButton.setHorizontalTextPosition(SwingConstants.TRAILING);
+                forwardButton.setEnabled(contactList.getModel().getSize() > 0);
                 cardLayout.show(cardPanel, "resultsPanel");
                 actualCard = "resultsPanel";
             } catch (Exception ex) {
@@ -621,9 +622,9 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
                 JOptionPane.showMessageDialog(ImportFrame.this, 
                         l10n.getString("ImportFrame.invalid_file"),
                         null, JOptionPane.ERROR_MESSAGE);
+                forwardButton.setEnabled(true);
             } finally {
                 progressBar.setVisible(false);
-                forwardButton.setEnabled(contactList.getModel().getSize() > 0);
                 backButton.setEnabled(true);
             }
         }
