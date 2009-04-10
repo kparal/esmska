@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-04 13:37+0200\n"
-"PO-Revision-Date: 2009-04-04 13:37+0100\n"
+"POT-Creation-Date: 2009-04-11 01:55+0200\n"
+"PO-Revision-Date: 2009-04-11 01:55+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2151,11 +2151,11 @@ msgstr "{0} (vyžaduje verzi programu: {1})"
 
 #: Update.noUpdates
 msgid ""
-"<html><h2>No updates found</h2>There are no updated gateways available at "
-"the moment.</html>"
+"<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
+"latest versions of all the available gateways.</html>"
 msgstr ""
-"<html><h2>Nenalezeny žádné aktualizace</h2>V současnosti nejsou dostupné "
-"žádné aktualizované brány.</html>"
+"<html><h2>Všechny brány jsou aktuální</h2>V dané chvíli používáte nejnovější "
+"verze u všech dostupných bran.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.notLatest
@@ -2217,6 +2217,13 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid ""
+#~ "<html><h2>No updates found</h2>There are no updated gateways available at "
+#~ "the moment.</html>"
+#~ msgstr ""
+#~ "<html><h2>Nenalezeny žádné aktualizace</h2>V současnosti nejsou dostupné "
+#~ "žádné aktualizované brány.</html>"
 
 #, fuzzy
 #~ msgctxt "UpdateDialog.closeButton.text"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-31 11:51+0200\n"
+"POT-Creation-Date: 2009-04-11 01:53+0200\n"
 "PO-Revision-Date: 2008-12-19 15:10+0000\n"
 "Last-Translator: BalintX <koczkahun@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -1895,8 +1895,8 @@ msgstr ""
 
 #: Update.noUpdates
 msgid ""
-"<html><h2>No updates found</h2>There are no updated gateways available at "
-"the moment.</html>"
+"<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
+"latest versions of all the available gateways.</html>"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
