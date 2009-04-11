@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-11 01:53+0200\n"
+"POT-Creation-Date: 2009-04-11 02:06+0200\n"
 "PO-Revision-Date: 2008-12-31 17:23+0000\n"
 "Last-Translator: shaxter <morskov@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-30 16:00+0000\n"
+"X-Launchpad-Export-Date: 2009-04-11 00:04+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -93,9 +93,8 @@ msgid "Cancel"
 msgstr "Отмена"
 
 #: CheckUpdatesTooltip
-#, fuzzy
 msgid "Check for program and gateway updates"
-msgstr "Проверять о&бновление версии программы при запуске"
+msgstr ""
 
 #: CheckUpdates_
 msgid "&Updates checker"

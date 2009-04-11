@@ -8,19 +8,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-11 01:53+0200\n"
-"PO-Revision-Date: 2009-03-05 20:43+0000\n"
+"POT-Creation-Date: 2009-04-11 02:06+0200\n"
+"PO-Revision-Date: 2009-03-31 10:43+0000\n"
 "Last-Translator: skrzat <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-30 16:00+0000\n"
+"X-Launchpad-Export-Date: 2009-04-11 00:04+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
-msgstr ""
+msgstr "Potwierdzam"
 
 #: AboutFrame.Credits
 msgid "Credits"
@@ -52,7 +52,7 @@ msgstr "&Licencja"
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr ""
+msgstr "<html><a href=\"\">Strona domowa</a></html>"
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -60,6 +60,9 @@ msgid ""
 "Show program home page\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Pokaż stronę domową programu\n"
+"</html>"
 
 #: AboutFrame.supportButton.text
 msgid "<html><a href=\"\">Support project</a></html>"
@@ -93,9 +96,8 @@ msgid "Cancel"
 msgstr "Anuluj"
 
 #: CheckUpdatesTooltip
-#, fuzzy
 msgid "Check for program and gateway updates"
-msgstr "Sprawdź czy jest nowa wersja programu przy stacie"
+msgstr "Sprawdź aktualizacje programu i bramek"
 
 #: CheckUpdates_
 msgid "&Updates checker"
@@ -573,9 +575,8 @@ msgid "gateways only"
 msgstr ""
 
 #: ConfigFrame.updateCheckProgram
-#, fuzzy
 msgid "program only"
-msgstr "P&rogram"
+msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -1212,9 +1213,8 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
-#, fuzzy
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
-msgstr "Nowa wersja programu została opublikowana!"
+msgstr ""
 
 #: MainFrame.no_operators
 msgid ""
@@ -1802,9 +1802,8 @@ msgstr "Wszystkie wysłane wiadomości są dostępne w historii wiadomości."
 
 #. #Write the tip as short as possible
 #: Tip.6
-#, fuzzy
 msgid "The message history can be searched through."
-msgstr "Historia wiadomości może być przeszukiwana."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.7

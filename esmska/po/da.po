@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-11 01:53+0200\n"
+"POT-Creation-Date: 2009-04-11 02:06+0200\n"
 "PO-Revision-Date: 2008-11-01 14:48+0000\n"
 "Last-Translator: nanker <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-30 16:00+0000\n"
+"X-Launchpad-Export-Date: 2009-04-11 00:04+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -51,9 +51,8 @@ msgid "&License"
 msgstr ""
 
 #: AboutFrame.linkButton.text
-#, fuzzy
 msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr "<html><a href=\"http://esmska.googlecode.com/\">Hjemmeside</a></html>"
+msgstr ""
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -576,9 +575,8 @@ msgid "gateways only"
 msgstr ""
 
 #: ConfigFrame.updateCheckProgram
-#, fuzzy
 msgid "program only"
-msgstr "P&rogram"
+msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -1215,9 +1213,8 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
-#, fuzzy
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
-msgstr "En ny programversion er tilgængelig!"
+msgstr ""
 
 #: MainFrame.no_operators
 msgid ""

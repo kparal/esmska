@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-11 01:53+0200\n"
-"PO-Revision-Date: 2009-03-20 06:50+0000\n"
+"POT-Creation-Date: 2009-04-11 02:06+0200\n"
+"PO-Revision-Date: 2009-03-31 10:18+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-30 16:00+0000\n"
+"X-Launchpad-Export-Date: 2009-04-11 00:04+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -51,11 +51,8 @@ msgid "&License"
 msgstr "&Licencia"
 
 #: AboutFrame.linkButton.text
-#, fuzzy
 msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr ""
-"<html><a href=\\\"http://esmska.googlecode.com/\\\">Domovská stránka</a></"
-"html>"
+msgstr "<html><a href=\"\">Domovská stránka</a></html>"
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -69,7 +66,7 @@ msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid "<html><a href=\"\">Support project</a></html>"
-msgstr ""
+msgstr "<html><a href=\"\">Podpor projekt</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -102,13 +99,12 @@ msgid "Cancel"
 msgstr "Zrušiť"
 
 #: CheckUpdatesTooltip
-#, fuzzy
 msgid "Check for program and gateway updates"
-msgstr "Pri štarte kontrolovať dostupnosť &novej verzie programu"
+msgstr "Skontrolovať aktualizácie programu a brán"
 
 #: CheckUpdates_
 msgid "&Updates checker"
-msgstr ""
+msgstr "Kontrola akt&ualizácií"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -210,10 +206,9 @@ msgstr "Vzhľ&ad"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Automatically check for &updates of:"
-msgstr ""
+msgstr "Automaticky kontrolovať akt&ualizácie:"
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
@@ -221,8 +216,8 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Po spustení programu skontrolovat, dostupnoť novšej<br>\n"
-"verzie programu, prípadne upozorniť v stavovom riadku\n"
+"Po spustení programu skontrolovať, či nevyšla nová verzia programu<br>\n"
+"alebo aktualizácia brán, prípadne upozorniť používateľa\n"
 "</html>"
 
 #: ConfigFrame.clearKeyringButton.text
@@ -666,9 +661,10 @@ msgstr "neznáma"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
 msgid "also u&nstable versions"
-msgstr ""
+msgstr "vrátane &nestabilných verzií"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "Notify also also about unstable versions.<br>\n"
@@ -677,19 +673,24 @@ msgid ""
 "not afraid of potentially losing their program data.</b>\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Tiež upozorňovať na nestabilné verzie<br>\n"
+"<br>\n"
+"<b>Varovanie: Nestabilné verzie sú určené pre pokročilých používateľov<br>\n"
+"ktorý sa neboja prípadnej straty dát.</b>\n"
+"</html>"
 
 #: ConfigFrame.updateCheckAll
 msgid "program and gateways"
-msgstr ""
+msgstr "program a brány"
 
 #: ConfigFrame.updateCheckGateway
 msgid "gateways only"
-msgstr ""
+msgstr "iba brány"
 
 #: ConfigFrame.updateCheckProgram
-#, fuzzy
 msgid "program only"
-msgstr "P&rogram"
+msgstr "iba program"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -1395,13 +1396,12 @@ msgstr "&Správa"
 
 #: MainFrame.newOperatorUpdate
 msgid "<a href=\"\">Gateway updates</a> are available!"
-msgstr ""
+msgstr "<a href=\"\">Aktualizácie brán</a> are available!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
-#, fuzzy
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
-msgstr "Bola vydaná nová verzia programu!"
+msgstr "Bola vydaná <a href=\"\">nová verzia programu</a> ({0})!"
 
 #: MainFrame.no_operators
 msgid ""
@@ -1545,7 +1545,6 @@ msgstr "Možné použiť len pre krajinu: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.operatorTooltip
-#, fuzzy
 msgid ""
 "<html>\n"
 "<b>{0}</b><br>\n"
@@ -1560,8 +1559,9 @@ msgstr ""
 "<b>{0}</b><br>\n"
 "Webová stránka: <a href=\"{1}\">{1}</a><br><br>\n"
 "{2}<br>\n"
-"Odstup medzi správami: {3}<br>\n"
-"{4}\n"
+"Oneskorenie medzi správami: {3}<br>\n"
+"{4}<br>\n"
+"Gateway version: {5}\n"
 "</html>"
 
 #: OperatorComboBox.tooltip
@@ -1587,16 +1587,16 @@ msgstr ""
 "</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
-#, fuzzy
 msgid ""
 "You are sending the message too early. The operator either requires a "
 "certain interval<br>you have to wait before sending another message or it "
 "limits<br>the maximum number of possible messages in some time period. Try "
 "it later."
 msgstr ""
-"Odosielate správu príliš skoro. Operátor asi vyžaduje určitý interval,"
-"<br>ktorý je nutné počkať pred odoslaním ďalšej správy, alebo "
-"obmedzuje<br>maximálny počet správ za určitý časový úsek. Skúste to neskôr."
+"Posielate správu príliš skoro. Operátor buď vyžaduje určitý interval,"
+"<br>ktorý je nutné počkať pred odoslaním nasledujúcej správy, alebo "
+"omedzuje<br>počet odoslaných správ za určitý časový interval. Skúste to "
+"neskôr."
 
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
@@ -1613,7 +1613,6 @@ msgstr "Správa od operátora:<br>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_UKNOWN
-#, fuzzy
 msgid ""
 "An unknown error has occured. The operator may have changed<br>its webpages "
 "or has a problem with them currently.<br>Try again later.<br><br>Also make "
@@ -1623,11 +1622,11 @@ msgid ""
 "<br>report the problem on <a href=\"{2}\">program homepage</a>."
 msgstr ""
 "Vyskytla sa neznáma chyba. Operátor možno zmenil<br>svoje webové stránky "
-"alebo má snimi aktuálne problémy.<br>Skuste to neskôr.<br><br>Taktiež sa "
-"uistite, že máte funkčné pripojenie k internetu<br>a že používate najnovšiu "
-"verziou programu.<br><br>Ak problém pretrváva a <a href=\"{0}\">webová "
-"brána</a> operátora funguje,<br> nahláste problém na domovskej stránke "
-"programu."
+"alebo má s nimi aktuálne problémy.<br>Skúste to neskôr.<br><br>Taktiež sa "
+"uistite, že máte funkčné pripojenie k internetu<br>a že používate <a href="
+"\"{0}\">najnovšiu verziou programu a brán</a>.<br><br>Ak problém pretrváva a "
+"<a href=\"{1}\">webová brána</a> operátora funguje,<br> nahláste problém na "
+"<a href=\"{2}\">domovskej stránke</a> programu."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_WRONG_AUTH
@@ -2054,6 +2053,8 @@ msgstr "Otázky a hlásenia problémov môžete realizovať v ponuke Nápoveda."
 msgid ""
 "Integrated gateway updater will help you solve problems with message sending."
 msgstr ""
+"Doplnený mechanizmus aktualizácií brán Vám pomôže s problémami pri "
+"odosielaní správ."
 
 #. #Write the tip as short as possible
 #: Tip.3
@@ -2073,9 +2074,8 @@ msgstr "V histórii správ najdete všetky Vaše odoslané správy."
 
 #. #Write the tip as short as possible
 #: Tip.6
-#, fuzzy
 msgid "The message history can be searched through."
-msgstr "Históriu správ môžete ľahko prehľadávať."
+msgstr "V histórii správ je možné ľahko vyhľadávať."
 
 #. #Write the tip as short as possible
 #: Tip.7
@@ -2123,7 +2123,7 @@ msgstr "Znovu spustiť SMS frontu"
 
 #: Update.allUpdated
 msgid "All gateways have been successfully updated."
-msgstr ""
+msgstr "Všetky brány boli úspešne aktualizované."
 
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
@@ -2131,38 +2131,38 @@ msgstr "Kliknite pre otvorenie stránky s možnosťou stiahnutia programu"
 
 #: Update.checkFailed
 msgid "Retrieving update information failed!"
-msgstr ""
+msgstr "Nepodarilo sa získať informácie o aktualizáciách."
 
 #: Update.checking
 msgid "Checking..."
-msgstr ""
+msgstr "Prebieha kontrola..."
 
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
-msgstr ""
+msgstr "Stiahnutie niektorých brán zlyhalo!"
 
 #: Update.downloading
 msgid "Downloading..."
-msgstr ""
+msgstr "Sťahujem..."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwTooltip
 msgid "gateway version: {0}"
-msgstr ""
+msgstr "verzia brány: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
 msgid "Gateway updated: {0}"
-msgstr ""
+msgstr "Aktualizovaná brána: {0}"
 
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
-msgstr ""
+msgstr "Inštalácia niektorých brán zlyhala!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.invalidGw
 msgid "{0} (needs program version: {1})"
-msgstr ""
+msgstr "{0} (vyžaduje verziu programu: {1})"
 
 #: Update.noUpdates
 msgid ""
@@ -2176,6 +2176,8 @@ msgid ""
 "<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
 "than you currently use.</html>"
 msgstr ""
+"<html>Niektoré brány vyžadujú<a href=\"{0}\">novšiu verziu programu</a> ako "
+"aktuálne používate.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.programUpdateAvailable
@@ -2183,6 +2185,8 @@ msgid ""
 "<html>There is a new program version ({0}) available on the <a href=\"{1}"
 "\">program homepage</a>.</html>"
 msgstr ""
+"<html>Na <a href=\"{1}\">domovskej stránke</a> je dostupná nová verzia ({0}) "
+"programu.</html>"
 
 #: Update.queueRunning
 msgid ""
@@ -2191,25 +2195,29 @@ msgid ""
 "messages currently being sent are finished and then open this dialog again.</"
 "html>"
 msgstr ""
+"<html><h2>Aktuálne posielate správy</h2>\n"
+"Počas aktualizácie nieje možné odosielať sptrávy. Prosím počkajte na<br>\n"
+"ukončenie odosielania správ a otvorte opäť tento dialóg.</html>"
 
 #: Update.showDialog
-#, fuzzy
 msgid "Click to open an update manager"
-msgstr "Kliknite pre otvorenie stránky s možnosťou stiahnutia programu"
+msgstr "Kliknite pre otvorenie správcu aktualizícií"
 
 #: Update.update_
 msgid "&Update"
-msgstr ""
+msgstr "Akt&ualizovať"
 
 #: Update.updatesFound
 msgid ""
 "<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
 "found. It is recommended to update them now.</html>"
 msgstr ""
+"<html><h2>Našli sa aktualizácie brán</h2>Našli sa aktualizácie pre brány. "
+"Odporúčame ich aktualizáciu.</html>"
 
 #: UpdateDialog.checkButton.text
 msgid "Check for &updates"
-msgstr ""
+msgstr "Skontrolovať akt&ulizácie"
 
 #: UpdateDialog.topLabel.text
 msgid ""
@@ -2218,12 +2226,17 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Skontrolovať aktualizácie brán</h2>\n"
+"Aktualizácie brán Vám môžu pomôcť s problémami pri posielaní správ.\n"
+"</html>"
 
-#~ msgid "http://code.google.com/p/esmska/wiki/Support"
-#~ msgstr "http://code.google.com/p/esmska/wiki/Support"
-
-#~ msgid "Support project"
-#~ msgstr "Podporte projekt"
+#~ msgid ""
+#~ "<html><h2>No updates found</h2>There are no updated gateways available at "
+#~ "the moment.</html>"
+#~ msgstr ""
+#~ "<html><h2>Nenašli sa nové aktualizácie</h2>V súčastnosti niesú prístupné "
+#~ "žiadne aktualizácie brán.</html>"
 
 #~ msgid ""
 #~ "<html><i>\n"
@@ -2273,6 +2286,12 @@ msgstr ""
 #~ "Vykresľovat okraje okien programu zvoleným vzhľadom<br>\n"
 #~ "alebo vzhľadom operačného systému.\n"
 #~ "</html>"
+
+#~ msgid "http://code.google.com/p/esmska/wiki/Support"
+#~ msgstr "http://code.google.com/p/esmska/wiki/Support"
+
+#~ msgid "Support project"
+#~ msgstr "Podporte projekt"
 
 #~ msgid "Print debugging output of the network communication."
 #~ msgstr "Vypisovať odlaďovací výstup sieťovej komunikácie."
