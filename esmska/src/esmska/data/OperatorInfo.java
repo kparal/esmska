@@ -43,6 +43,12 @@ public interface OperatorInfo {
      * be provided if possible.
      */
     String getWebsite();
+
+    /** Short description of the website (purpose, restrictions, etc). Just one or two
+     * sentences. Write it in a language corresponding to the gateway (i.e. english
+     * for [INT] websites, local language for local gateways). Can be empty.
+     */
+    String getDescription();
     
     /** Telephone country prefix.
      * The prefix starts with "+" sign and is 1-3 digits long.

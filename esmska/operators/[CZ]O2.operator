@@ -12,11 +12,15 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0beta1"
+    return "0.15.0beta2"
 }
 
 function getWebsite() {
     return "http://sms.1188.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána O2."
 }
 
 function getCountryPrefix() {

@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import org.apache.commons.lang.WordUtils;
 
 /** JComboBox showing available operators.
  *
@@ -189,8 +190,10 @@ public class OperatorComboBox extends JComboBox {
         private String generateTooltip(Operator operator) {
             String country = CountryPrefix.extractCountryCode(operator.getName());
             String local = MessageFormat.format(l10n.getString("OperatorComboBox.onlyCountry"), country);
+            String description = WordUtils.wrap(operator.getDescription(), 50, "<br>&nbsp;&nbsp;", false);
+
             String tooltip = MessageFormat.format(pattern,
-                    operator.getName(), operator.getWebsite(),
+                    operator.getName(), operator.getWebsite(), description,
                     operator.isLoginRequired() ? registration : noReg,
                     Operators.convertDelayToHumanString(operator.getDelayBetweenMessages(), false),
                     country.equals(CountryPrefix.INTERNATIONAL_CODE) ? international : local,

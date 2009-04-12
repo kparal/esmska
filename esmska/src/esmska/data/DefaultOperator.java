@@ -24,7 +24,8 @@ public class DefaultOperator implements Operator {
 
     private static final Logger logger = Logger.getLogger(DefaultOperator.class.getName());
     private URL script;
-    private String name, version, maintainer, website, countryPrefix, minProgramVersion;
+    private String name, version, maintainer, website, description,
+            countryPrefix, minProgramVersion;
     private String[] operatorPrefixes, supportedLanguages;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
             delayBetweenMessages;
@@ -62,6 +63,7 @@ public class DefaultOperator implements Operator {
         maintainer = info.getMaintainer();
         minProgramVersion = info.getMinProgramVersion();
         website = info.getWebsite();
+        description = info.getDescription();
         countryPrefix = info.getCountryPrefix();
         operatorPrefixes = info.getOperatorPrefixes();
         smsLength = info.getSMSLength();
@@ -144,6 +146,11 @@ public class DefaultOperator implements Operator {
     @Override
     public String getWebsite() {
         return website;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 
     @Override
