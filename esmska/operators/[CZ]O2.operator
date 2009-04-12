@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-11"
+    return "2009-04-12"
 }
 
 function getMaintainer() {
@@ -61,10 +61,9 @@ function send() {
     var re, match, content, params, postData
 
     // change variables to correct form
-    if (NUMBER.indexOf("+420") == 0)
+    if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)
-    if (SENDERNUMBER.indexOf("+420") == 0)
-        SENDERNUMBER = SENDERNUMBER.substring(4);
+    }
 
     // start page
     EXEC.setReferer("http://katalog.1188.cz")
