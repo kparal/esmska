@@ -62,6 +62,8 @@ public interface OperatorInfo {
     /** Length of one SMS.
      * Usually, this number wil be around 160. Many operators add some characters when sending
      * from their website, therefore this number can be often smaller.
+     * It can happen that length of the sms can't be determined (it is different for
+     * different numbers). In this case provide a negative number.
      */
     int getSMSLength();
     

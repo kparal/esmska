@@ -80,7 +80,9 @@ public class Envelope {
         return min;
     }
     
-    /** get length of one sms */
+    /** get length of one sms
+     * @return length of one sms or -1 when sms length is unspecified
+     */
     public int getSMSLength() {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
@@ -90,10 +92,16 @@ public class Envelope {
             }
             min = Math.min(min, operator.getSMSLength());
         }
+        if (min <= 0) {
+            //sms length is unspecified
+            min = -1;
+        }
         return min;
     }
     
-    /** get number of sms from these characters */
+    /** get number of sms from these characters 
+     * @return resulting number of sms or -1 when length of sms is unspecified
+     */
     public int getSMSCount(int chars) {
         int worstOperator = Integer.MAX_VALUE;
         for (Contact c : contacts) {
@@ -104,7 +112,12 @@ public class Envelope {
             worstOperator = Math.min(worstOperator,
                     operator.getSMSLength());
         }
-        
+
+        if (worstOperator <= 0) {
+            //sms length is unspecified
+            return -1;
+        }
+
         chars += getSignatureLength();
         int count = chars / worstOperator;
         if (chars % worstOperator != 0) {

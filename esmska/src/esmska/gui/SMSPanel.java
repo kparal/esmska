@@ -287,25 +287,28 @@ public class SMSPanel extends javax.swing.JPanel {
     
     /** updates values on progress bars according to currently written message chars*/
     private void updateProgressBars() {
-        int smsLength = smsTextPane.getText().length();
+        int currentLength = smsTextPane.getText().length();
+        int smsLength = envelope.getSMSLength();
         
         //set maximums
-        singleProgressBar.setMaximum(envelope.getSMSLength());
+        singleProgressBar.setMaximum(Math.max(smsLength, 0));
         fullProgressBar.setMaximum(envelope.getMaxTextLength());
         
         //if we are at the end of the whole message, the current message length
         //can be lesser than usual
-        int remainder = envelope.getMaxTextLength() % envelope.getSMSLength();
-        if (envelope.getMaxTextLength() - smsLength < remainder) {
-            //we have crossed the remainder border, let's update maximum on progress bar
-            singleProgressBar.setMaximum(remainder);
+        if (smsLength > 0) {
+            int remainder = envelope.getMaxTextLength() % smsLength;
+            if (envelope.getMaxTextLength() - currentLength < remainder) {
+                //we have crossed the remainder border, let's update maximum on progress bar
+                singleProgressBar.setMaximum(remainder);
+            }
         }
         
         //set values
-        fullProgressBar.setValue(smsLength);
-        singleProgressBar.setValue(smsLength % envelope.getSMSLength());
+        fullProgressBar.setValue(currentLength);
+        singleProgressBar.setValue(smsLength > 0 ? currentLength % smsLength : 0);
         //on the border counts we want progress bar full instead of empty
-        if (singleProgressBar.getValue() == 0 && smsLength > 0) {
+        if (singleProgressBar.getValue() == 0 && currentLength > 0) {
             singleProgressBar.setValue(singleProgressBar.getMaximum());
         }
         
@@ -643,13 +646,22 @@ public class SMSPanel extends javax.swing.JPanel {
         private void countChars(DocumentEvent e) {
             int chars = e.getDocument().getLength();
             int smsCount = envelope.getSMSCount(chars);
-            smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.1"),
+            if (smsCount < 0) {
+                //don't count messages
+                smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.3"),
                     chars, smsCount));
-            if (chars > envelope.getMaxTextLength()) { //chars more than max
+            } else {
+                //count messags
+                smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.1"),
+                    chars, smsCount));
+            }
+            if (chars > envelope.getMaxTextLength()) {
+                //chars more than max
                 smsCounterLabel.setForeground(Color.RED);
                 smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.2"),
                         chars));
-            } else { //chars ok
+            } else {
+                //chars ok
                 smsCounterLabel.setForeground(UIManager.getColor("Label.foreground"));
             }
         }
@@ -718,16 +730,28 @@ public class SMSPanel extends javax.swing.JPanel {
         }
         /** color parts of sms */
         private void colorDocument(int from, int length) {
+            int smsLength = envelope.getSMSLength();
             while (from < length) {
-                int to = ((from / envelope.getSMSLength()) + 1) * envelope.getSMSLength() - 1;
-                to = to<length-1?to:length-1;
+                int to = 0;
+                if (smsLength <= 0) {
+                    //unspecified sms length, color it all with same color
+                    to = length - 1;
+                } else {
+                    to = ((from / smsLength) + 1) * smsLength - 1;
+                }
+                to = to < length-1 ? to : length-1;
                 doc.setCharacterAttributes(from,to-from+1,getStyle(from),false);
                 from = to + 1;
             }
         }
         /** calculate which style is appropriate for given position */
         private Style getStyle(int offset) {
-            if ((offset / envelope.getSMSLength()) % 2 == 0) { //even sms
+            if (envelope.getSMSLength() <= 0) {
+                //unspecified sms length
+                return regular;
+            }
+            if ((offset / envelope.getSMSLength()) % 2 == 0) {
+                //even sms
                 return regular;
             } else {
                 return highlight;

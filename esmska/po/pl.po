@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-11 02:06+0200\n"
+"POT-Creation-Date: 2009-04-12 13:04+0200\n"
 "PO-Revision-Date: 2009-03-31 10:43+0000\n"
 "Last-Translator: skrzat <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -1597,6 +1597,12 @@ msgstr "{0} znaków ({1} sms)"
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
 msgstr "{0} znaków (nie można wysłać!)"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSPanel.smsCounterLabel.3
+#, fuzzy
+msgid "{0} chars"
+msgstr "{0} znaków ({1} sms)"
 
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
