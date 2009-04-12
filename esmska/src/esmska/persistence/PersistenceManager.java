@@ -36,7 +36,7 @@ import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.Operator;
-import esmska.utils.OSType;
+import esmska.utils.RuntimeUtils;
 import java.text.MessageFormat;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
@@ -86,7 +86,7 @@ public class PersistenceManager {
         if (!customPathSet) {
             String confDir, datDir;
             
-            switch (OSType.detect()) {
+            switch (RuntimeUtils.detectOS()) {
                 case MAC_OS_X:
                     confDir = System.getProperty("user.home") + "/Library/Application Support";
                     datDir = confDir;
@@ -534,7 +534,7 @@ public class PersistenceManager {
     public static boolean canWrite(File file) {
         Validate.notNull(file);
 
-        if (!OSType.isWindows()) {
+        if (!RuntimeUtils.isWindows()) {
             //on POSIX systems file.canWrite() works
             return file.canWrite();
         }

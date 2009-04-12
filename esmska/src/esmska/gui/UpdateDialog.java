@@ -22,7 +22,7 @@ import esmska.update.HttpDownloader;
 import esmska.update.OperatorUpdateInfo;
 import esmska.update.UpdateChecker;
 import esmska.utils.L10N;
-import esmska.utils.Links;
+import esmska.data.Links;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;

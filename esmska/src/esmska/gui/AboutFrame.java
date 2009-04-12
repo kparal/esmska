@@ -8,8 +8,8 @@ package esmska.gui;
 
 import esmska.data.Config;
 import esmska.utils.L10N;
-import esmska.utils.Links;
-import esmska.utils.Workarounds;
+import esmska.data.Links;
+import esmska.utils.MiscUtils;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -241,7 +241,7 @@ public class AboutFrame extends javax.swing.JFrame {
                     getClass().getResourceAsStream(RES + "license.txt"), "UTF-8");
             final String agpl = IOUtils.toString(
                             getClass().getResourceAsStream(RES + "gnu-agpl.txt"), "UTF-8");
-            license = Workarounds.escapeHtml(license);
+            license = MiscUtils.escapeHtml(license);
             license = license.replaceAll("GNU Affero General Public License", 
                     "<a href=\"agpl\">GNU Affero General Public License</a>");
             

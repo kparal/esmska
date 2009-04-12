@@ -7,11 +7,11 @@ package esmska.utils;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
-/** Workaround methods for bugs in JREs
+/** Various helper methods.
  *
  * @author ripper
  */
-public class Workarounds {
+public class MiscUtils {
 
     /** Escape text using html entities.
      *  Fixes bug in OpenJDK where scaron entity is not replaced by 'š'.
@@ -42,4 +42,5 @@ public class Workarounds {
         output = StringEscapeUtils.unescapeHtml(output);
         return output;
     }
+    
 }

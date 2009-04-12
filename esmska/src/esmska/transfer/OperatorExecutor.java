@@ -7,7 +7,7 @@ package esmska.transfer;
 import esmska.data.Operator;
 import esmska.gui.MainFrame;
 import esmska.utils.L10N;
-import esmska.utils.Links;
+import esmska.data.Links;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;

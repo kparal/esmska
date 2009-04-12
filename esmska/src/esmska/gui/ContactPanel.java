@@ -15,8 +15,8 @@ import esmska.data.Operators;
 import esmska.data.Operator;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
-import esmska.utils.DialogUtils;
-import esmska.utils.Workarounds;
+import esmska.utils.MiscUtils;
+import esmska.utils.RuntimeUtils;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Rectangle;
@@ -376,7 +376,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class AddContactAction extends AbstractAction {
         private final String createOption = l10n.getString("Create");
         private final String cancelOption = l10n.getString("Cancel");
-        private final Object[] options = DialogUtils.sortOptions(
+        private final Object[] options = RuntimeUtils.sortDialogOptions(
                 cancelOption, createOption);
         
         public AddContactAction() {
@@ -409,7 +409,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class EditContactAction extends AbstractAction {
         private final String saveOption = l10n.getString("Save");
         private final String cancelOption = l10n.getString("Cancel");
-        private final Object[] options = DialogUtils.sortOptions(
+        private final Object[] options = RuntimeUtils.sortDialogOptions(
                 cancelOption, saveOption);
         
         public EditContactAction() {
@@ -477,7 +477,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private class RemoveContactAction extends AbstractAction {
         private final String deleteOption = l10n.getString("Delete");
         private final String cancelOption = l10n.getString("Cancel");
-        private final Object[] options = DialogUtils.sortOptions(
+        private final Object[] options = RuntimeUtils.sortDialogOptions(
                 cancelOption, deleteOption);
         
         public RemoveContactAction() {
@@ -513,7 +513,7 @@ public class ContactPanel extends javax.swing.JPanel {
                     JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
             JDialog dialog = pane.createDialog(MainFrame.getInstance(), null);
             dialog.setResizable(true);
-            DialogUtils.setDocumentModalDialog(dialog);
+            RuntimeUtils.setDocumentModalDialog(dialog);
             dialog.pack();
             dialog.setVisible(true);
 
@@ -761,7 +761,7 @@ public class ContactPanel extends javax.swing.JPanel {
             init();
             setDefaultCloseOperation(HIDE_ON_CLOSE);
             //integrate modal window better on Mac
-            DialogUtils.setDocumentModalDialog(this);
+            RuntimeUtils.setDocumentModalDialog(this);
 
             //handle closing by user
             this.addWindowListener(new WindowAdapter() {
@@ -875,9 +875,9 @@ public class ContactPanel extends javax.swing.JPanel {
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             String tooltip = "<html><table><tr><td><img src=\"" + contactIconURI +
-                    "\"></td><td valign=top><b>" + Workarounds.escapeHtml(contact.getName()) +
+                    "\"></td><td valign=top><b>" + MiscUtils.escapeHtml(contact.getName()) +
                     "</b><br>" + CountryPrefix.stripCountryPrefix(contact.getNumber()) +
-                    "<br>" + Workarounds.escapeHtml(contact.getOperator()) +
+                    "<br>" + MiscUtils.escapeHtml(contact.getOperator()) +
                     "</td></tr></table></html>";
             label.setToolTipText(tooltip);
             //set background on non-matching contacts when searching

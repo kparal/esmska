@@ -50,15 +50,13 @@ import javax.swing.table.TableRowSorter;
 
 import org.jvnet.substance.SubstanceLookAndFeel;
 
-import esmska.gui.ThemeManager;
 import esmska.data.Config;
 import esmska.data.History;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
-import esmska.utils.DialogUtils;
-import esmska.utils.OSType;
+import esmska.utils.RuntimeUtils;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
@@ -334,7 +332,7 @@ public class HistoryFrame extends javax.swing.JFrame {
          * HistoryFrame.java
          *
          * Created on 27. prosinec 2007, 12:22
-         */ if (OSType.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
+         */ if (RuntimeUtils.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
             clearButton.setVisible(false);
         }
         clearButton.addActionListener(new ActionListener() {
@@ -429,7 +427,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     private class DeleteAction extends AbstractAction {
         private final String deleteOption = l10n.getString("Delete");
         private final String cancelOption = l10n.getString("Cancel");
-        private final Object[] options = DialogUtils.sortOptions(
+        private final Object[] options = RuntimeUtils.sortDialogOptions(
                 cancelOption, deleteOption);
         private final String message = l10n.getString("HistoryFrame.remove_selected");
         
@@ -453,7 +451,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                     JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
             JDialog dialog = pane.createDialog(HistoryFrame.this, null);
             dialog.setResizable(true);
-            DialogUtils.setDocumentModalDialog(dialog);
+            RuntimeUtils.setDocumentModalDialog(dialog);
             dialog.pack();
             dialog.setVisible(true);
 

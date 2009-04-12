@@ -6,6 +6,7 @@ package esmska.gui;
 
 import esmska.data.Queue;
 import esmska.utils.L10N;
+import esmska.utils.RuntimeUtils;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -23,7 +24,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import esmska.utils.OSType;
 import java.awt.Dimension;
 import java.util.ResourceBundle;
 
@@ -95,7 +95,7 @@ public class NotificationIcon {
         popup.add(quitItem);
 
         //unpopulate menu on some platforms
-        switch (OSType.detect()) {
+        switch (RuntimeUtils.detectOS()) {
             //on MAC, it's not needed to have items to system provided actions
             case MAC_OS_X:
                 popup.remove(toggleItem);

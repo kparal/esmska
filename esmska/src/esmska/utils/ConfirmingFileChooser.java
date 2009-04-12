@@ -26,7 +26,7 @@ public class ConfirmingFileChooser extends JFileChooser {
     
     private static String overwriteOption = l10n.getString("Replace");
     private static String cancelOption = l10n.getString("Cancel");
-    private static Object[] options = DialogUtils.sortOptions(
+    private static Object[] options = RuntimeUtils.sortDialogOptions(
                 cancelOption, overwriteOption);
     
     @Override
@@ -45,7 +45,7 @@ public class ConfirmingFileChooser extends JFileChooser {
     @Override
     protected JDialog createDialog(Component parent) throws HeadlessException {
         JDialog dialog = super.createDialog(parent);
-        DialogUtils.setDocumentModalDialog(dialog);
+        RuntimeUtils.setDocumentModalDialog(dialog);
         return dialog;
     }
     
@@ -61,7 +61,7 @@ public class ConfirmingFileChooser extends JFileChooser {
                 JOptionPane.DEFAULT_OPTION, null, options, overwriteOption);
         
         JDialog confirmDialog = pane.createDialog(getParent(), null);
-        DialogUtils.setDocumentModalDialog(confirmDialog);
+        RuntimeUtils.setDocumentModalDialog(confirmDialog);
         confirmDialog.setResizable(true);
         confirmDialog.pack();
 

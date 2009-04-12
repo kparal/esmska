@@ -9,7 +9,7 @@ package esmska.gui;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.utils.L10N;
-import esmska.utils.Workarounds;
+import esmska.utils.MiscUtils;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -246,7 +246,7 @@ public class LogFrame extends javax.swing.JFrame {
             //display message and time
             String text = "[" + timeFormat.format(record.getTime()) + "] " +
                     record.getMessage();
-            ((JLabel)c).setText("<html>" + Workarounds.escapeHtml(text) + "</html>");
+            ((JLabel)c).setText("<html>" + MiscUtils.escapeHtml(text) + "</html>");
             //add record icon
             ((JLabel)c).setIcon(record.getIcon() != null ? record.getIcon() :
                 Icons.STATUS_BLANK);

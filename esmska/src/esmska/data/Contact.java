@@ -138,6 +138,18 @@ public class Contact extends Object implements Comparable<Contact> {
         return true;
     }
 
+    /** Modify (phone) number into anonymous one
+     * @param number (phone) number, may be null
+     * @return the same string with all the numbers replaced by 'N'
+     */
+    public static String anonymizeNumber(String number) {
+        if (number == null) {
+            return number;
+        } else {
+            return number.replaceAll("\\d", "N");
+        }
+    }
+
     @Override
     public int compareTo(Contact c) {
         Collator collator = Collator.getInstance();

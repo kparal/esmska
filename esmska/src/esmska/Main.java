@@ -26,9 +26,8 @@ import esmska.data.CountryPrefix;
 import esmska.gui.MainFrame;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
-import esmska.utils.JavaType;
 import esmska.utils.L10N;
-import esmska.utils.OSType;
+import esmska.utils.RuntimeUtils;
 import java.awt.EventQueue;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -48,7 +47,7 @@ public class Main {
      */
     public static void main(String[] args) {
         //detect JVM and warn if not not supported
-        if (!JavaType.isSupported()) {
+        if (!RuntimeUtils.isSupportedJava()) {
             logger.severe(l10n.getString("Main.unsupported_java"));
         }
 
@@ -231,7 +230,7 @@ public class Main {
         }
         
         //set MenuBar usage on Mac OS
-        if (macBarUI != null && OSType.isMac()) {
+        if (macBarUI != null && RuntimeUtils.isMac()) {
             logger.fine("Setting Mac OS UI");
             UIManager.put("MenuBarUI", macBarUI);
         }

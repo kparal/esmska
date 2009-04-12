@@ -45,7 +45,7 @@ import esmska.data.event.AbstractListDataListener;
 import esmska.data.event.ValuedEventSupport;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
-import esmska.utils.Workarounds;
+import esmska.utils.MiscUtils;
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -458,7 +458,7 @@ public class QueuePanel extends javax.swing.JPanel {
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
             //set tooltip
             String text = WordUtils.wrap(sms.getText(), 50, null, true);
-            text = Workarounds.escapeHtml(text);
+            text = MiscUtils.escapeHtml(text);
             text = text.replaceAll("\n", "<br>");
             String tooltip = "<html><table><tr><td><img src=\"" + messageIconURI +
                     "\"></td><td valign=top><b>" + label.getText() + "</b><br>" +

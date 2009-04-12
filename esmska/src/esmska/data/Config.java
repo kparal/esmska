@@ -7,7 +7,6 @@ package esmska.data;
 
 import esmska.gui.ThemeManager;
 import esmska.utils.AlphanumComparator;
-import esmska.utils.LogUtils;
 import java.awt.Dimension;
 import java.beans.*;
 import java.io.Serializable;
@@ -155,8 +154,8 @@ public class Config extends Object implements Serializable {
             Object newValue = evt.getNewValue();
             Object oldValue = evt.getOldValue();
             if (ObjectUtils.equals("senderNumber",evt.getPropertyName())) {
-                newValue = LogUtils.anonymizeNumber((String)newValue);
-                oldValue = LogUtils.anonymizeNumber((String)oldValue);
+                newValue = Contact.anonymizeNumber((String)newValue);
+                oldValue = Contact.anonymizeNumber((String)oldValue);
             }
             //log change
             logger.config("Config changed - property: " + evt.getPropertyName() +

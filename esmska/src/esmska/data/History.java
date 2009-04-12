@@ -5,7 +5,6 @@
 package esmska.data;
 
 import esmska.data.event.ActionEventSupport;
-import esmska.utils.LogUtils;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -262,7 +261,7 @@ public class History {
         // </editor-fold>
 
         public String toDebugString() {
-            return "[name=" + name + ", number=" + LogUtils.anonymizeNumber(number) +
+            return "[name=" + name + ", number=" + Contact.anonymizeNumber(number) +
                     ", operator=" + operator + "]";
          }
     }

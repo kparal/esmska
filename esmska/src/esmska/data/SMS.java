@@ -9,7 +9,6 @@
 
 package esmska.data;
 
-import esmska.utils.LogUtils;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import org.apache.commons.lang.StringUtils;
@@ -210,7 +209,7 @@ public class SMS {
     }
 
     public String toDebugString() {
-        return "[name=" + name + ", number=" + LogUtils.anonymizeNumber(number) +
+        return "[name=" + name + ", number=" + Contact.anonymizeNumber(number) +
                 ", operator=" + operator + ", status=" + status + ", operatorMsg=" +
                 operatorMsg + ", errMsg=" + errMsg + "]";
     }

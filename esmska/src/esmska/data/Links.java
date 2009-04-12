@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package esmska.utils;
+package esmska.data;
 
 /** Class containing links to program websites or other program actions
  *

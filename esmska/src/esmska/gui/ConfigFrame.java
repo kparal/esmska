@@ -59,8 +59,8 @@ import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
-import esmska.utils.DialogUtils;
 import esmska.data.Tuple;
+import esmska.utils.RuntimeUtils;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.MessageFormat;
@@ -1150,7 +1150,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void clearKeyringButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
         String deleteOption = l10n.getString("Delete");
         String cancelOption = l10n.getString("Cancel");
-        Object[] options = DialogUtils.sortOptions(cancelOption, deleteOption);
+        Object[] options = RuntimeUtils.sortDialogOptions(cancelOption, deleteOption);
         String message = l10n.getString("ConfigFrame.remove_credentials");
 
         //show dialog
@@ -1158,7 +1158,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
         JDialog dialog = pane.createDialog(ConfigFrame.this, null);
         dialog.setResizable(true);
-        DialogUtils.setDocumentModalDialog(dialog);
+        RuntimeUtils.setDocumentModalDialog(dialog);
         dialog.pack();
         dialog.setVisible(true);
 

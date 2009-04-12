@@ -20,8 +20,8 @@ import esmska.utils.L10N;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.update.UpdateChecker;
-import esmska.utils.DialogUtils;
-import esmska.utils.Links;
+import esmska.data.Links;
+import esmska.utils.RuntimeUtils;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -539,7 +539,7 @@ public class Actions {
             logger.fine("Showing Update dialog...");
             UpdateDialog dialog = new UpdateDialog(mainFrame, true, updateChecker);
             dialog.setLocationRelativeTo(mainFrame);
-            DialogUtils.setDocumentModalDialog(dialog);
+            RuntimeUtils.setDocumentModalDialog(dialog);
             dialog.setVisible(true);
         }
     }

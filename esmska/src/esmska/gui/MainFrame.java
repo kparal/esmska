@@ -69,11 +69,10 @@ import esmska.integration.IntegrationAdapter;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
-import esmska.utils.OSType;
 import esmska.data.event.ValuedListener;
-import esmska.utils.DialogUtils;
-import esmska.utils.Links;
-import esmska.utils.Workarounds;
+import esmska.data.Links;
+import esmska.utils.MiscUtils;
+import esmska.utils.RuntimeUtils;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
@@ -134,14 +133,14 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //hide only when notification icon present or on mac
-                if (NotificationIcon.isInstalled() || OSType.isMac()) {
+                if (NotificationIcon.isInstalled() || RuntimeUtils.isMac()) {
                     formWindowClosing(new WindowEvent(MainFrame.this, 0));
                 }
             }
         });
         
         //on Mac, move program menu items to system menu
-        if (OSType.isMac()) {
+        if (RuntimeUtils.isMac()) {
             logger.fine("Running on Mac OS, hiding some menu items...");
             try {
                 ActionBean bean = new ActionBean();
@@ -530,9 +529,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //if user clicked on close button (event non-null) and notification icon
         //installed or on mac, just hide the main window
-        if (evt != null && (NotificationIcon.isInstalled() || OSType.isMac())) {
+        if (evt != null && (NotificationIcon.isInstalled() || RuntimeUtils.isMac())) {
             logger.fine("Hiding main window");
-            if (OSType.isMac()) {
+            if (RuntimeUtils.isMac()) {
                 this.setVisible(false);
             } else {
                 NotificationIcon.toggleMainFrameVisibility();
@@ -762,7 +761,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             //show the dialog
             logger.fine("Showing reason why SMS sending failed...");
-            DialogUtils.setDocumentModalDialog(dialog);
+            RuntimeUtils.setDocumentModalDialog(dialog);
             dialog.setResizable(true);
             dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
             dialog.setVisible(true);
@@ -850,7 +849,7 @@ public class MainFrame extends javax.swing.JFrame {
                     }
                     String message = MessageFormat.format(l10n.getString("MainFrame.new_program_version"),
                             updateChecker.getLatestProgramVersion());
-                    log.addRecord(new Log.Record(Workarounds.stripHtml(message), null, Icons.STATUS_UPDATE_IMPORTANT));
+                    log.addRecord(new Log.Record(MiscUtils.stripHtml(message), null, Icons.STATUS_UPDATE_IMPORTANT));
                     statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE_IMPORTANT, true);
                     //on click open program homepage in browser
                     statusPanel.installClickHandler(new Runnable() {
@@ -870,7 +869,7 @@ public class MainFrame extends javax.swing.JFrame {
                     //otherwise do same as for program and operator update
                 case UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE:
                     message = l10n.getString("MainFrame.newOperatorUpdate");
-                    log.addRecord(new Log.Record(Workarounds.stripHtml(message), null, Icons.STATUS_UPDATE));
+                    log.addRecord(new Log.Record(MiscUtils.stripHtml(message), null, Icons.STATUS_UPDATE));
                     statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE, true);
                     //on click open update dialog
                     statusPanel.installClickHandler(new Runnable() {

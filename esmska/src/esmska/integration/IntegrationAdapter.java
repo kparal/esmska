@@ -9,8 +9,8 @@ import esmska.data.SMS;
 import esmska.data.event.ValuedEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import esmska.utils.OSType;
 import esmska.data.event.ValuedListener;
+import esmska.utils.RuntimeUtils;
 
 /**
  * Integration adapter. Used to integrate program more closely to specific operating system.
@@ -41,7 +41,7 @@ public class IntegrationAdapter {
             return instance;
         }
 
-        switch (OSType.detect()) {
+        switch (RuntimeUtils.detectOS()) {
             case MAC_OS_X:
                 try {
                     instance = (IntegrationAdapter) Class.forName(

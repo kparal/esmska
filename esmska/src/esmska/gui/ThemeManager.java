@@ -18,8 +18,7 @@ import javax.swing.UIManager;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
-import esmska.utils.JavaType;
-import esmska.utils.OSType;
+import esmska.utils.RuntimeUtils;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.LookAndFeel;
@@ -195,7 +194,7 @@ public class ThemeManager {
 
         //Windows users are used to fancy and inconsistent looks
         //On other (Linux) systems Sun Java is very bad in emulating system look
-        if (OSType.isWindows() || JavaType.isSunJava()) {
+        if (RuntimeUtils.isWindows() || RuntimeUtils.isSunJava()) {
             laf = LAF.SUBSTANCE;
         }
 

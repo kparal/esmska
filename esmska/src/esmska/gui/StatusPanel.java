@@ -7,7 +7,7 @@ package esmska.gui;
 
 import esmska.data.Log;
 import esmska.utils.L10N;
-import esmska.utils.Workarounds;
+import esmska.utils.MiscUtils;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +58,7 @@ public class StatusPanel extends javax.swing.JPanel {
     public void setStatusMessage(String message, Date time, ImageIcon icon, boolean html) {
         String messageEsc = message;
         if (!html) {
-            messageEsc = Workarounds.escapeHtml(message);
+            messageEsc = MiscUtils.escapeHtml(message);
         }
         if (time != null) {
             String timestamp = shortTimeFormat.format(time);
