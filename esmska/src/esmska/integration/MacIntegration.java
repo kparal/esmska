@@ -10,6 +10,7 @@ import com.apple.eawt.Application;
 import com.apple.eawt.ApplicationEvent;
 import com.apple.eawt.ApplicationListener;
 
+import esmska.gui.ImportFrame;
 import esmska.gui.ThemeManager;
 import esmska.gui.MainFrame;
 import esmska.gui.NotificationIcon;
@@ -119,9 +120,15 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
      */
     @Override
     public void handleOpenFile(ApplicationEvent e) {
-        e.setHandled(false);
+        e.setHandled(true);
+
+        //import dropped contacts
+        String fileName = e.getFilename();
+        ImportFrame importFrame = new ImportFrame();
+        importFrame.importFile(fileName);
+        importFrame.setVisible(true);
     }
-    
+
     /**
      * @see com.apple.eawt.ApplicationListener#handlePreferences(com.apple.eawt.ApplicationEvent)
      */

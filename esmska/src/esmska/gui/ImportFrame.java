@@ -60,6 +60,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.Validate;
 import org.openide.awt.Mnemonics;
 
 /** Import contacts from external applications
@@ -149,6 +150,25 @@ public class ImportFrame extends javax.swing.JFrame {
         });
     }
     
+    /** Change frame to parsing state and start parsing provided file
+     * @param fileName file to parse; must be vCard file, otherwise nothing happens;
+     *  not null
+     */
+    public void importFile(String fileName) {
+        Validate.notNull(fileName);
+        boolean supported = fileName.endsWith("vcard") || fileName.endsWith("vcf");
+        if (!supported) {
+            // TODO improve handling unsupported file type
+            return;
+        }
+
+        vcardRadioButton.setSelected(true);
+        cardLayout.show(cardPanel, "browsePanel");
+        actualCard = "browsePanel";
+        fileTextField.setText(fileName);
+        forwardButtonActionPerformed(null);
+    }
+
     /** browse for file */
     private String doBrowseButton() {
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
