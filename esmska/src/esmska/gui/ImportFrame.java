@@ -150,17 +150,11 @@ public class ImportFrame extends javax.swing.JFrame {
         });
     }
     
-    /** Change frame to parsing state and start parsing provided file
-     * @param fileName file to parse; must be vCard file, otherwise nothing happens;
-     *  not null
+    /** Change frame to parsing state and start parsing provided vCard file
+     * @param fileName file to parse; not null
      */
-    public void importFile(String fileName) {
+    public void importVCardFile(String fileName) {
         Validate.notNull(fileName);
-        boolean supported = fileName.endsWith("vcard") || fileName.endsWith("vcf");
-        if (!supported) {
-            // TODO improve handling unsupported file type
-            return;
-        }
 
         vcardRadioButton.setSelected(true);
         cardLayout.show(cardPanel, "browsePanel");

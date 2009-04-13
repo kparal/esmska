@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.gui.dnd.ImportVCardTransferHandler;
 import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.CountryPrefix;
@@ -43,6 +44,7 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.DropMode;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -111,6 +113,10 @@ public class ContactPanel extends javax.swing.JPanel {
         //add mouse listeners to the contact list
         mouseListener = new ContactMouseListener(contactList, popup);
         contactList.addMouseListener(mouseListener);
+
+        //add DnD support for contact list
+        contactList.setDropMode(DropMode.ON);
+        contactList.setTransferHandler(new ImportVCardTransferHandler());
 
         //show new contact hint if there are no contacts
         ((ContactList)contactList).showNewContactHint(contacts.size() <= 0);

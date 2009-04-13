@@ -125,7 +125,8 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
         //import dropped contacts
         String fileName = e.getFilename();
         ImportFrame importFrame = new ImportFrame();
-        importFrame.importFile(fileName);
+        importFrame.setLocationRelativeTo(MainFrame.getInstance());
+        importFrame.importVCardFile(fileName);
         importFrame.setVisible(true);
     }
 
