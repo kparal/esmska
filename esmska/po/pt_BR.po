@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 14:05+0200\n"
+"POT-Creation-Date: 2009-04-13 15:26+0200\n"
 "PO-Revision-Date: 2009-03-30 18:10+0000\n"
 "Last-Translator: Alexandre Sapata Carbonell <alexandrenescau@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -982,8 +982,9 @@ msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.foundContactsLabel.text
-msgid "Following new contacts were found:"
+msgid "Following {0} new contacts were found:"
 msgstr ""
 
 #: ImportFrame.foundNoContacts
