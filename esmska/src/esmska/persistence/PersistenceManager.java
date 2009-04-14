@@ -209,7 +209,8 @@ public class PersistenceManager {
                 ImportManager.importGlobalConfig(globalConfigFile);
             } catch (Exception ex) {
                 //don't stop here, continue to load local config
-                logger.log(Level.WARNING, "Failed to load global configuration", ex);
+                logger.log(Level.WARNING, "Failed to load global configuration: "
+                        + globalConfigFile, ex);
             }
         }
 
