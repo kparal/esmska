@@ -20,7 +20,7 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Oficiální brána Orange."
+    return "Oficiálna brána Orange."
 }
 
 function getCountryPrefix() {
