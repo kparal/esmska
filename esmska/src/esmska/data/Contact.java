@@ -8,6 +8,7 @@ package esmska.data;
 
 import java.beans.*;
 import java.text.Collator;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -147,6 +148,30 @@ public class Contact extends Object implements Comparable<Contact> {
             return number;
         } else {
             return number.replaceAll("\\d", "N");
+        }
+    }
+
+    /** Try to extract valid number from some local format (like "(1) 222 333")
+     *  and convert it into international number.
+     * @param number number in non-standard format; may be null
+     * @return parsed valid (international) number or null
+     */
+    public static String parseNumber(String number) {
+        if (StringUtils.isEmpty(number)) {
+            return null;
+        }
+        boolean international = number.startsWith("+");
+        number = number.replaceAll("[^0-9]", "");
+        if (!international && StringUtils.isNotEmpty(Config.getInstance().getCountryPrefix())) {
+            number = Config.getInstance().getCountryPrefix() + number;
+        } else {
+            number = "+" + number;
+        }
+
+        if (isValidNumber(number)) {
+            return number;
+        } else {
+            return null;
         }
     }
 

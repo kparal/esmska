@@ -235,18 +235,10 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     }
                 }
             }
-            //convert number to international format
-            if (StringUtils.isNotEmpty(number)) {
-                boolean international = number.startsWith("+");
-                number = number.replaceAll("[^0-9]", "");
-                if (!international && StringUtils.isNotEmpty(config.getCountryPrefix())) {
-                    number = config.getCountryPrefix() + number;
-                } else {
-                    number = "+" + number;
-                }
-            }
+            //convert number to valid format (or null)
+            number = Contact.parseNumber(number);
             //skip contact without valid number
-            if (!Contact.isValidNumber(number)) {
+            if (number == null) {
                 continue;
             }
 

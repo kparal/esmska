@@ -6,7 +6,7 @@
 
 package esmska.gui;
 
-import esmska.gui.dnd.ImportVCardTransferHandler;
+import esmska.gui.dnd.ImportContactsTransferHandler;
 import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.CountryPrefix;
@@ -86,7 +86,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private static final Contacts contacts = Contacts.getInstance();
     private static final Log log = Log.getInstance();
 
-    private Action addContactAction = new AddContactAction();
+    private Action addContactAction = new AddContactAction(null);
     private Action editContactAction = new EditContactAction();
     private Action removeContactAction = new RemoveContactAction();
     private Action chooseContactAction = new ChooseContactAction();
@@ -116,7 +116,7 @@ public class ContactPanel extends javax.swing.JPanel {
 
         //add DnD support for contact list
         contactList.setDropMode(DropMode.ON);
-        contactList.setTransferHandler(new ImportVCardTransferHandler());
+        contactList.setTransferHandler(new ImportContactsTransferHandler());
 
         //show new contact hint if there are no contacts
         ((ContactList)contactList).showNewContactHint(contacts.size() <= 0);
@@ -183,6 +183,14 @@ public class ContactPanel extends javax.swing.JPanel {
             return;
         }
         setSelectedContactIndexWithMargins(indices[0]);
+    }
+
+    /** Shows dialog for adding contact with predefined values
+     * @param skeleton skeleton of contact to show as default values; may be null
+     */
+    public void showAddContactDialog(Contact skeleton) {
+        AddContactAction action = new AddContactAction(skeleton);
+        action.actionPerformed(null);
     }
     
     /** sets selected index in contact list with making intelligent
@@ -384,13 +392,18 @@ public class ContactPanel extends javax.swing.JPanel {
         private final String cancelOption = l10n.getString("Cancel");
         private final Object[] options = RuntimeUtils.sortDialogOptions(
                 cancelOption, createOption);
-        
-        public AddContactAction() {
+        private final Contact skeleton;
+
+        /** Constructor
+         * @param skeleton skeleton of contact to show as default values; may be null
+         */
+        public AddContactAction(Contact skeleton) {
             super(l10n.getString("Add_contact"),
                     new ImageIcon(ContactPanel.class.getResource(RES + "add-16.png")));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Add_new_contact"));
             this.putValue(LARGE_ICON_KEY,
                     new ImageIcon(ContactPanel.class.getResource(RES + "add-22.png")));
+            this.skeleton = skeleton;
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -398,7 +411,7 @@ public class ContactPanel extends javax.swing.JPanel {
             ContactDialog contactDialog = new ContactDialog();
             contactDialog.setTitle(l10n.getString("New_contact"));
             contactDialog.setOptions(options, createOption, createOption);
-            contactDialog.show((Contact)null);
+            contactDialog.show(skeleton);
             Contact c = contactDialog.getContact();
             if (c == null) {
                 return;
