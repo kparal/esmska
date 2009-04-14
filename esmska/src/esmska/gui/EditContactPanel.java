@@ -299,6 +299,12 @@ public class EditContactPanel extends javax.swing.JPanel {
 
     /** Improve focus etc. before displaying panel */
     public void prepareForShow() {
+        //no operator, try to suggest one
+        if (operatorComboBox.getSelectedOperator() == null) {
+            suggestOperatorAction.actionPerformed(null);
+        }
+
+        //give focus
         if (multiMode) {
             operatorComboBox.requestFocusInWindow();
         } else {
