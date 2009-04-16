@@ -208,6 +208,15 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     }
                 }
             }
+            //contact name - ORG property (in case FN and N wasn't present)
+            if (name == null) {
+                for (PropertyNode prop : props) {
+                    if ("ORG".equals(prop.propName)) {
+                        name = prop.propValue;
+                        break;
+                    }
+                }
+            }
             //skip contact without name
             if (StringUtils.isEmpty(name)) {
                 continue;
