@@ -43,12 +43,15 @@ public class OperatorComboBox extends JComboBox {
     private DefaultComboBoxModel model = new DefaultComboBoxModel(operators.toArray());
     /** used only for non-existing operators */
     private String operatorName;
+    private final String tooltip = MessageFormat.format(
+            l10n.getString("OperatorComboBox.tooltip"),
+            getClass().getResource(RES + "info-22.png"));
     
     public OperatorComboBox() {
         filterOperators();
         setModel(model);
         setRenderer(cellRenderer);
-        setToolTipText(l10n.getString("OperatorComboBox.tooltip"));
+        setToolTipText(tooltip);
         if (model.getSize() > 0) {
             setSelectedIndex(0);
         }
