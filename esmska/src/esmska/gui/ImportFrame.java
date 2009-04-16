@@ -141,8 +141,8 @@ public class ImportFrame extends javax.swing.JFrame {
             public void onUpdate(ListDataEvent e) {
                 int size = contactList.getModel().getSize();
                 foundContactsLabel.setText(size > 0 ?
-                    MessageFormat.format(l10n.getString("ImportFrame.foundContactsLabel.text"), size) :
-                    l10n.getString("ImportFrame.foundNoContacts"));
+                    MessageFormat.format(l10n.getString("ImportFrame.foundContacts"), size) :
+                    l10n.getString("ImportFrame.foundContactsLabel.text"));
                 if (actualCard.equals("resultsPanel")) {
                     forwardButton.setEnabled(size > 0);
                 }

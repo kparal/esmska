@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-16 13:42+0200\n"
+"POT-Creation-Date: 2009-04-16 15:41+0200\n"
 "PO-Revision-Date: 2009-03-31 10:43+0000\n"
 "Last-Translator: skrzat <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -986,12 +986,13 @@ msgid "&Forward"
 msgstr "&Przekaż"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: ImportFrame.foundContactsLabel.text
+#: ImportFrame.foundContacts
 #, fuzzy
 msgid "Following {0} new contacts were found:"
 msgstr "Znaleziono następujące nowe kontakty:"
 
-#: ImportFrame.foundNoContacts
+#: ImportFrame.foundContactsLabel.text
+#, fuzzy
 msgid "No new contacts were found."
 msgstr "Nie znaleziono nowych kontaktów."
 
@@ -1951,6 +1952,11 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#, fuzzy
+#~ msgctxt "ImportFrame.foundNoContacts"
+#~ msgid "No new contacts were found."
+#~ msgstr "Nie znaleziono nowych kontaktów."
 
 #~ msgid "Support project"
 #~ msgstr "Wspomóż projekt"

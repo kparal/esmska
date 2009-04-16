@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-16 13:42+0200\n"
-"PO-Revision-Date: 2009-04-16 13:42+0100\n"
+"POT-Creation-Date: 2009-04-16 15:41+0200\n"
+"PO-Revision-Date: 2009-04-16 15:41+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1123,11 +1123,11 @@ msgid "&Forward"
 msgstr "&Pokračovat"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: ImportFrame.foundContactsLabel.text
+#: ImportFrame.foundContacts
 msgid "Following {0} new contacts were found:"
-msgstr "Byly nalezeno následujících {0} nových kontaktů:"
+msgstr "Bylo nalezeno následujících {0} nových kontaktů:"
 
-#: ImportFrame.foundNoContacts
+#: ImportFrame.foundContactsLabel.text
 msgid "No new contacts were found."
 msgstr "Nebyly nalezeny žádné nové kontakty."
 
@@ -2228,6 +2228,11 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#, fuzzy
+#~ msgctxt "ImportFrame.foundNoContacts"
+#~ msgid "No new contacts were found."
+#~ msgstr "Nebyly nalezeny žádné nové kontakty."
 
 #~ msgid ""
 #~ "<html><h2>No updates found</h2>There are no updated gateways available at "
