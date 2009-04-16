@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-12"
+    return "2009-04-17"
 }
 
 function getMaintainer() {
@@ -116,8 +116,6 @@ function send() {
     }
 
     // if neither success nor error message was found
-    // gateway is broken and does not currently report errors, therefore in
-    // this state it is very probably it is an error
-    EXEC.setErrorMessage(EXEC.ERROR_NO_REASON)
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
     return false
 }
