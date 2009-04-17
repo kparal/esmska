@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-12"
+    return "2009-04-17"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0beta2"
+    return "0.15.0"
 }
 
 function getWebsite() {
