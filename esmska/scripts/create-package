@@ -3,8 +3,6 @@
 # Create distribution packages from dist directory
 # in the program root
 
-# Dependencies: unix2dos
-
 # trap and exit on error
 set -e
 trap "echo Packaging failed." ERR
@@ -29,10 +27,6 @@ mkdir "$TMPDIR/$FINALNAME"
 
 # copy files
 cp -r ../dist/* "$TMPDIR/$FINALNAME/"
-
-# convert text files to CRLF for windows users
-unix2dos "$TMPDIR/$FINALNAME"/*.txt "$TMPDIR/$FINALNAME"/license/*.txt \
-         "$TMPDIR/$FINALNAME"/*.conf
 
 # create os-independent package
 cd "$TMPDIR"
