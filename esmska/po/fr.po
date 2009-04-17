@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-16 15:41+0200\n"
-"PO-Revision-Date: 2008-12-22 00:23+0000\n"
-"Last-Translator: Arnaud Bonatti <arnaud.bonatti@gmail.com>\n"
+"POT-Creation-Date: 2009-04-17 11:21+0200\n"
+"PO-Revision-Date: 2009-04-13 23:08+0000\n"
+"Last-Translator: Pierre Slamich <pierre.slamich@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-04-11 00:04+0000\n"
+"X-Launchpad-Export-Date: 2009-04-17 09:20+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -44,7 +44,7 @@ msgstr "Envoi de SMS par Internet."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2009 Kamil Páral"
-msgstr ""
+msgstr "2007-2009 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -60,6 +60,9 @@ msgid ""
 "Show program home page\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Afficher la page d'accueil du logiciel\n"
+"</html>"
 
 #: AboutFrame.supportButton.text
 msgid "<html><a href=\"\">Support project</a></html>"
@@ -71,6 +74,9 @@ msgid ""
 "Do you like this project? Help to keep it running...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Ce projet vous plaît ? Aidez-nous à poursuivre le travail...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -148,7 +154,7 @@ msgstr "Option invalide dans la ligne de commande ! (''{0}'')"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr ""
+msgstr "OPTIONS"
 
 #: CommandLineParser.path
 msgid "path"
@@ -218,7 +224,7 @@ msgstr ""
 
 #: ConfigFrame.countryCodeLabel.text
 msgid "(country:"
-msgstr ""
+msgstr "(pays:"
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -1845,7 +1851,8 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Anthony Guéchoum https://launchpad.net/~athael\n"
 "  Arnaud Bonatti https://launchpad.net/~arnaud.bonatti\n"
-"  Elizabeth https://launchpad.net/~dutertre-eliz"
+"  Elizabeth https://launchpad.net/~dutertre-eliz\n"
+"  Pierre Slamich https://launchpad.net/~pierre-slamich"
 
 #: Undo_
 msgid "&Undo"

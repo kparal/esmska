@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-16 15:41+0200\n"
-"PO-Revision-Date: 2009-03-31 10:18+0000\n"
+"POT-Creation-Date: 2009-04-17 11:21+0200\n"
+"PO-Revision-Date: 2009-04-14 09:40+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-04-11 00:04+0000\n"
+"X-Launchpad-Export-Date: 2009-04-17 09:20+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -664,7 +664,6 @@ msgid "also u&nstable versions"
 msgstr "vrátane &nestabilných verzií"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Notify also also about unstable versions.<br>\n"
@@ -674,10 +673,10 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Tiež upozorňovať na nestabilné verzie<br>\n"
+"Informovať aj o nestabilných verziách.<br>\n"
 "<br>\n"
-"<b>Varovanie: Nestabilné verzie sú určené pre pokročilých používateľov<br>\n"
-"ktorý sa neboja prípadnej straty dát.</b>\n"
+"<b>Varovanie: Nestabilné verzie sú určené pre pokročilých používateľov,<br>\n"
+"ktorý sa neboja prípadnej straty dát</b>\n"
 "</html>"
 
 #: ConfigFrame.updateCheckAll
@@ -1129,12 +1128,10 @@ msgstr "&Pokračovať"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.foundContacts
-#, fuzzy
 msgid "Following {0} new contacts were found:"
-msgstr "Boli nájdené nasledujúce nové kontakty:"
+msgstr "Bolo nájdených nasledujúcich {0} nových kontaktov:"
 
 #: ImportFrame.foundContactsLabel.text
-#, fuzzy
 msgid "No new contacts were found."
 msgstr "Neboli nájdené žiadne nové kontakty."
 
@@ -1548,7 +1545,6 @@ msgstr "Možné použiť len pre krajinu: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.operatorTooltip
-#, fuzzy
 msgid ""
 "<html>\n"
 "<b>{0}</b><br>\n"
@@ -1562,11 +1558,12 @@ msgid ""
 msgstr ""
 "<html>\n"
 "<b>{0}</b><br>\n"
-"Webová stránka: <a href=\"{1}\">{1}</a><br><br>\n"
-"{2}<br>\n"
-"Oneskorenie medzi správami: {3}<br>\n"
-"{4}<br>\n"
-"Gateway version: {5}\n"
+"Webová stránka: <a href=\"{1}\">{1}</a><br>\n"
+"Popis: {2}<br><br>\n"
+"{3}<br>\n"
+"Oneskorenie medzi správami: {4}<br>\n"
+"{5}<br>\n"
+"Verzia brány: {6}\n"
 "</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1852,9 +1849,8 @@ msgstr "{0} znakov (nemožno odoslať!)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.3
-#, fuzzy
 msgid "{0} chars"
-msgstr "{0} znakov ({1} sms)"
+msgstr "{0} znakov"
 
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
@@ -2183,6 +2179,8 @@ msgid ""
 "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
 "latest versions of all the available gateways.</html>"
 msgstr ""
+"<html><h2>Všetky brány sú aktuálne</h2>Aktuálne používate najnovšie verzie "
+"všetkých dostupných brán.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.notLatest
@@ -2244,18 +2242,6 @@ msgstr ""
 "<h2>Skontrolovať aktualizácie brán</h2>\n"
 "Aktualizácie brán Vám môžu pomôcť s problémami pri posielaní správ.\n"
 "</html>"
-
-#, fuzzy
-#~ msgctxt "ImportFrame.foundNoContacts"
-#~ msgid "No new contacts were found."
-#~ msgstr "Neboli nájdené žiadne nové kontakty."
-
-#~ msgid ""
-#~ "<html><h2>No updates found</h2>There are no updated gateways available at "
-#~ "the moment.</html>"
-#~ msgstr ""
-#~ "<html><h2>Nenašli sa nové aktualizácie</h2>V súčastnosti niesú prístupné "
-#~ "žiadne aktualizácie brán.</html>"
 
 #~ msgid ""
 #~ "<html><i>\n"
@@ -2324,3 +2310,10 @@ msgstr ""
 
 #~ msgid "Print debugging output."
 #~ msgstr "Vypísať ladiaci výstup."
+
+#~ msgid ""
+#~ "<html><h2>No updates found</h2>There are no updated gateways available at "
+#~ "the moment.</html>"
+#~ msgstr ""
+#~ "<html><h2>Nenašli sa nové aktualizácie</h2>V súčastnosti niesú prístupné "
+#~ "žiadne aktualizácie brán.</html>"

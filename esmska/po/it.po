@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-16 15:41+0200\n"
+"POT-Creation-Date: 2009-04-17 11:21+0200\n"
 "PO-Revision-Date: 2008-10-15 21:04+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-04-11 00:04+0000\n"
+"X-Launchpad-Export-Date: 2009-04-17 09:20+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -991,14 +991,12 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.foundContacts
-#, fuzzy
 msgid "Following {0} new contacts were found:"
-msgstr "Sono stati trovati i seguenti nuovi contatti:"
+msgstr ""
 
 #: ImportFrame.foundContactsLabel.text
-#, fuzzy
 msgid "No new contacts were found."
-msgstr "Sono stati trovati i seguenti nuovi contatti:"
+msgstr ""
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1963,11 +1961,6 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
-
-#, fuzzy
-#~ msgctxt "ImportFrame.foundNoContacts"
-#~ msgid "No new contacts were found."
-#~ msgstr "Sono stati trovati i seguenti nuovi contatti:"
 
 #~ msgid "Use &this proxy for all protocols"
 #~ msgstr "Usa &questo proxy per tutti i protocolli"
