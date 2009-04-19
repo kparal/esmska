@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-17 11:22+0200\n"
+"POT-Creation-Date: 2009-04-19 14:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -892,10 +892,12 @@ msgstr ""
 msgid "Gateway:"
 msgstr ""
 
+#. #Write it short!
 #: HistoryFrame.jLabel5.text
 msgid "Sender number:"
 msgstr ""
 
+#. #Write it short!
 #: HistoryFrame.jLabel6.text
 msgid "Sender name:"
 msgstr ""
