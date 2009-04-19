@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 14:35+0200\n"
+"POT-Creation-Date: 2009-04-19 18:09+0200\n"
 "PO-Revision-Date: 2009-04-13 23:08+0000\n"
 "Last-Translator: Pierre Slamich <pierre.slamich@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -1187,6 +1187,10 @@ msgstr ""
 
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
+msgstr ""
+
+#: MainFrame.donateMenuItem.text
+msgid "&Support this project!"
 msgstr ""
 
 #: MainFrame.export_contacts_to_file

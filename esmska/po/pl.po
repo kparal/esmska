@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 14:35+0200\n"
+"POT-Creation-Date: 2009-04-19 18:09+0200\n"
 "PO-Revision-Date: 2009-03-31 10:43+0000\n"
 "Last-Translator: skrzat <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -1174,6 +1174,11 @@ msgstr "Kompresuj wiadomość (Ctrl+K)"
 msgid "Configure program behaviour"
 msgstr "Konfiguruj zachowanie programu"
 
+#: MainFrame.donateMenuItem.text
+#, fuzzy
+msgid "&Support this project!"
+msgstr "Wspomóż projekt"
+
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
 msgstr "Eksport kontaktu do pliku"
@@ -1951,6 +1956,3 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
-
-#~ msgid "Support project"
-#~ msgstr "Wspomóż projekt"

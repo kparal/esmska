@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 14:35+0200\n"
+"POT-Creation-Date: 2009-04-19 18:09+0200\n"
 "PO-Revision-Date: 2009-02-01 17:56+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1323,6 +1323,11 @@ msgstr "דחוס את ההודעה (Ctrl+K)"
 msgid "Configure program behaviour"
 msgstr "הגדרת התנהגות התוכנה"
 
+#: MainFrame.donateMenuItem.text
+#, fuzzy
+msgid "&Support this project!"
+msgstr "תמוך בפרוייקט"
+
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
 msgstr "ייצוא אנשי הקשר לקובץ"
@@ -2169,9 +2174,6 @@ msgstr ""
 
 #~ msgid "http://code.google.com/p/esmska/wiki/Support"
 #~ msgstr "http://code.google.com/p/esmska/wiki/Support"
-
-#~ msgid "Support project"
-#~ msgstr "תמוך בפרוייקט"
 
 #~ msgid "Print debugging output of the network communication."
 #~ msgstr "הצגת פלט תקשורת הרשת לניפוי שגיאות"

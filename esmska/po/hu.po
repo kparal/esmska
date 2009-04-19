@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 14:35+0200\n"
+"POT-Creation-Date: 2009-04-19 18:09+0200\n"
 "PO-Revision-Date: 2008-12-19 15:10+0000\n"
 "Last-Translator: BalintX <koczkahun@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -1179,6 +1179,11 @@ msgstr ""
 msgid "Configure program behaviour"
 msgstr ""
 
+#: MainFrame.donateMenuItem.text
+#, fuzzy
+msgid "&Support this project!"
+msgstr "Projekt támogatása"
+
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
 msgstr ""
@@ -1958,9 +1963,6 @@ msgstr ""
 
 #~ msgid "http://code.google.com/p/esmska/wiki/Support"
 #~ msgstr "http://code.google.com/p/esmska/wiki/Support"
-
-#~ msgid "Support project"
-#~ msgstr "Projekt támogatása"
 
 #~ msgid "Print debugging output of the network communication."
 #~ msgstr "Hálózati kommunikáció hibakereső kimenet kiírása"

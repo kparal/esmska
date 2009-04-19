@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 14:35+0200\n"
+"POT-Creation-Date: 2009-04-19 18:09+0200\n"
 "PO-Revision-Date: 2009-03-15 12:56+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1179,6 +1179,11 @@ msgstr ""
 msgid "Configure program behaviour"
 msgstr ""
 
+#: MainFrame.donateMenuItem.text
+#, fuzzy
+msgid "&Support this project!"
+msgstr "Ayudar al proyecto"
+
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
 msgstr ""
@@ -1958,6 +1963,3 @@ msgstr ""
 
 #~ msgid "http://code.google.com/p/esmska/wiki/Support"
 #~ msgstr "http://code.google.com/p/esmska/wiki/Support"
-
-#~ msgid "Support project"
-#~ msgstr "Ayudar al proyecto"

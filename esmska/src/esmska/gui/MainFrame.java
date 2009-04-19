@@ -332,6 +332,7 @@ public class MainFrame extends javax.swing.JFrame {
         getHelpMenuItem = new JMenuItem();
         translateMenuItem = new JMenuItem();
         problemMenuItem = new JMenuItem();
+        donateMenuItem = new JMenuItem();
         helpSeparator = new JSeparator();
         aboutMenuItem = new JMenuItem();
 
@@ -490,6 +491,12 @@ public class MainFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(problemMenuItem, l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
         problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
         helpMenu.add(problemMenuItem);
+
+        donateMenuItem.setAction(Actions.getBrowseAction(Links.DONATE));
+        donateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/heart-16.png"))); // NOI18N
+        Mnemonics.setLocalizedText(donateMenuItem, l10n.getString("MainFrame.donateMenuItem.text")); // NOI18N
+        donateMenuItem.setToolTipText(l10n.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
+        helpMenu.add(donateMenuItem);
         helpMenu.add(helpSeparator);
 
         aboutMenuItem.setAction(Actions.getAboutAction());
@@ -516,7 +523,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -902,6 +909,7 @@ public class MainFrame extends javax.swing.JFrame {
     private JButton configButton;
     private JMenuItem configMenuItem;
     private ContactPanel contactPanel;
+    private JMenuItem donateMenuItem;
     private JButton exitButton;
     private JMenuItem exitMenuItem;
     private JMenuItem exportMenuItem;

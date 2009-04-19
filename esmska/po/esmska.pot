@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 14:35+0200\n"
+"POT-Creation-Date: 2009-04-19 18:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1165,6 +1165,10 @@ msgstr ""
 
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
+msgstr ""
+
+#: MainFrame.donateMenuItem.text
+msgid "&Support this project!"
 msgstr ""
 
 #: MainFrame.export_contacts_to_file

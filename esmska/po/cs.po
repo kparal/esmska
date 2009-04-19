@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 14:35+0200\n"
-"PO-Revision-Date: 2009-04-16 15:41+0100\n"
+"POT-Creation-Date: 2009-04-19 18:09+0200\n"
+"PO-Revision-Date: 2009-04-19 18:09+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1354,6 +1354,10 @@ msgstr "Zkomprimovat zprávu (Ctrl+K)"
 msgid "Configure program behaviour"
 msgstr "Nastavit chování programu"
 
+#: MainFrame.donateMenuItem.text
+msgid "&Support this project!"
+msgstr "&Podpořte tento projekt!"
+
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
 msgstr "Exportovat kontakty do souboru"
@@ -2253,9 +2257,6 @@ msgstr ""
 
 #~ msgid "http://code.google.com/p/esmska/wiki/Support"
 #~ msgstr "http://code.google.com/p/esmska/wiki/Podporte"
-
-#~ msgid "Support project"
-#~ msgstr "Podpořte projekt"
 
 #~ msgid "Use &this proxy for all protocols"
 #~ msgstr "Pro všechny protokoly použít &tuto proxy"
