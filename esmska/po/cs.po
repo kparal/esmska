@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 18:09+0200\n"
+"POT-Creation-Date: 2009-04-19 18:58+0200\n"
 "PO-Revision-Date: 2009-04-19 18:09+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -1001,6 +1001,7 @@ msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "vCard soubory (*.vcard, *.vcf)"
 
+#. #Action to resend message
 #: Forward_
 msgctxt "Forward_"
 msgid "&Forward"
