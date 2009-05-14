@@ -31,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -142,6 +143,13 @@ public class HistoryFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        deleteButton = new JButton();
+        resendButton = new JButton();
+        closeButton = new JButton();
+        searchField = new JTextField();
+        searchLabel = new JLabel();
+        clearButton = new JButton();
+        jSplitPane1 = new JSplitPane();
         jScrollPane1 = new JScrollPane();
         historyTable = new JTable();
         jPanel1 = new JPanel();
@@ -159,15 +167,71 @@ public class HistoryFrame extends javax.swing.JFrame {
         senderNameLabel = new JLabel();
         jScrollPane2 = new JScrollPane();
         textArea = new JTextArea();
-        deleteButton = new JButton();
-        resendButton = new JButton();
-        closeButton = new JButton();
-        searchField = new JTextField();
-        searchLabel = new JLabel();
-        clearButton = new JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("HistoryFrame.title")); // NOI18N
+
+        deleteButton.setAction(deleteAction);
+
+        resendButton.setAction(resendAction);
+
+        closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_"));
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
+
+        searchField.setColumns(15);
+        searchField.setToolTipText(l10n.getString("HistoryFrame.searchField.toolTipText")); // NOI18N
+        searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                historyTableFilter.requestUpdate();
+            }
+        });
+
+        //on Mac OS X this will create a native search field with inline icons
+        searchField.putClientProperty("JTextField.variant", "search");
+        String command = "clear";
+        searchField.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), command);
+        searchField.getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchField.setText(null);
+            }
+        });
+        searchField.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                searchFieldFocusGained(evt);
+            }
+        });
+
+        searchLabel.setLabelFor(searchField);
+        Mnemonics.setLocalizedText(searchLabel, l10n.getString("HistoryFrame.searchLabel.text")); // NOI18N
+        searchLabel.setToolTipText(searchField.getToolTipText());
+
+        clearButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
+        clearButton.setMnemonic('r');
+        clearButton.setToolTipText(l10n.getString("HistoryFrame.clearButton.toolTipText")); // NOI18N
+        clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        /*
+         * HistoryFrame.java
+         *
+         * Created on 27. prosinec 2007, 12:22
+         */ if (RuntimeUtils.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
+            clearButton.setVisible(false);
+        }
+        clearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
+        jSplitPane1.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        jSplitPane1.setResizeWeight(1.0);
+        jSplitPane1.setContinuousLayout(true);
 
         historyTable.setModel(historyTableModel);
         historyTable.setDefaultRenderer(Date.class, new TableDateRenderer());
@@ -187,6 +251,8 @@ public class HistoryFrame extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(historyTable);
+
+        jSplitPane1.setLeftComponent(jScrollPane1);
 
 
 
@@ -247,7 +313,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(senderNameLabel)))
                 .addPreferredGap(ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2))
+                .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6});
@@ -283,63 +349,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
 
-        deleteButton.setAction(deleteAction);
-
-        resendButton.setAction(resendAction);
-
-        closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_"));
-        closeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                closeButtonActionPerformed(evt);
-            }
-        });
-
-        searchField.setColumns(15);
-        searchField.setToolTipText(l10n.getString("HistoryFrame.searchField.toolTipText")); // NOI18N
-        searchField.getDocument().addDocumentListener(new AbstractDocumentListener() {
-            @Override
-            public void onUpdate(DocumentEvent e) {
-                historyTableFilter.requestUpdate();
-            }
-        });
-
-        //on Mac OS X this will create a native search field with inline icons
-        searchField.putClientProperty("JTextField.variant", "search");
-        String command = "clear";
-        searchField.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), command);
-        searchField.getActionMap().put(command, new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchField.setText(null);
-            }
-        });
-        searchField.addFocusListener(new FocusAdapter() {
-            public void focusGained(FocusEvent evt) {
-                searchFieldFocusGained(evt);
-            }
-        });
-
-        searchLabel.setLabelFor(searchField);
-        Mnemonics.setLocalizedText(searchLabel, l10n.getString("HistoryFrame.searchLabel.text")); // NOI18N
-        searchLabel.setToolTipText(searchField.getToolTipText());
-
-        clearButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
-        clearButton.setMnemonic('r');
-        clearButton.setToolTipText(l10n.getString("HistoryFrame.clearButton.toolTipText")); // NOI18N
-        clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        /*
-         * HistoryFrame.java
-         *
-         * Created on 27. prosinec 2007, 12:22
-         */ if (RuntimeUtils.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
-            clearButton.setVisible(false);
-        }
-        clearButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                clearButtonActionPerformed(evt);
-            }
-        });
+        jSplitPane1.setRightComponent(jPanel1);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -348,15 +358,13 @@ public class HistoryFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
-                            .addComponent(jPanel1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jSplitPane1, GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                            .addComponent(deleteButton)
+                        .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                            .addComponent(closeButton)
                             .addComponent(resendButton)
-                            .addComponent(closeButton)))
+                            .addComponent(deleteButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchLabel)
                         .addPreferredGap(ComponentPlacement.RELATED)
@@ -379,15 +387,13 @@ public class HistoryFrame extends javax.swing.JFrame {
                     .addComponent(clearButton))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                    .addComponent(deleteButton))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-                    .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(resendButton)
-                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)
+                        .addPreferredGap(ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
                         .addComponent(closeButton))
-                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSplitPane1, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -682,6 +688,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     private JPanel jPanel1;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
+    private JSplitPane jSplitPane1;
     private JLabel nameLabel;
     private JLabel numberLabel;
     private JLabel operatorLabel;
