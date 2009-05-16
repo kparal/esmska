@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 18:58+0200\n"
+"POT-Creation-Date: 2009-05-16 23:26+0200\n"
 "PO-Revision-Date: 2009-02-01 17:56+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -96,6 +96,11 @@ msgstr "הוסף איש קשר חדש"
 
 #: Cancel
 msgid "Cancel"
+msgstr "ביטול"
+
+#: Cancel_
+#, fuzzy
+msgid "&Cancel"
 msgstr "ביטול"
 
 #: CheckUpdatesTooltip
@@ -1040,6 +1045,19 @@ msgstr "&חיפוש:"
 msgid "Sent messages history - Esmska"
 msgstr "היסטוריית ההודעות שנשלחו - Esmska"
 
+#: ImageCodeDialog.introLabel.text
+msgid ""
+"<html>\n"
+"<h2>Security code required</h2>\n"
+"The chosen gateway requires you to enter the security code from the picture "
+"below:\n"
+"</html>"
+msgstr ""
+
+#: ImageCodeDialog.jLabel2.text
+msgid "&Image code:"
+msgstr ""
+
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
@@ -1474,6 +1492,10 @@ msgstr "איש קשר חדש"
 msgid "Pause/unpause sending"
 msgstr "השהה/המשך את השליחה"
 
+#: OK_
+msgid "&OK"
+msgstr ""
+
 #: Operator.unknown
 msgid "Unknown gateway"
 msgstr ""
@@ -1606,10 +1628,6 @@ msgid ""
 msgstr ""
 "שער הגישה אינו מציין נתונים אודות שליחה מוצלחת. ייתכן כי ההודעה נשלחה או "
 "ייתכן שהיא <b>איננה</b> נשלחה."
-
-#: OperatorExecutor.recognize_number
-msgid "Please enter the code from the picture:"
-msgstr "אנא הזן את הקוד שבתמונה:"
 
 #: OperatorInterpreter.unknown_operator
 msgid "Unknown operator!"
@@ -2123,6 +2141,9 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "Please enter the code from the picture:"
+#~ msgstr "אנא הזן את הקוד שבתמונה:"
 
 #~ msgid ""
 #~ "<html><i>\n"

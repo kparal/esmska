@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 18:58+0200\n"
+"POT-Creation-Date: 2009-05-16 23:26+0200\n"
 "PO-Revision-Date: 2009-03-31 10:43+0000\n"
 "Last-Translator: skrzat <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -93,6 +93,11 @@ msgstr "Dodaj nowy kontakt"
 
 #: Cancel
 msgid "Cancel"
+msgstr "Anuluj"
+
+#: Cancel_
+#, fuzzy
+msgid "&Cancel"
 msgstr "Anuluj"
 
 #: CheckUpdatesTooltip
@@ -930,6 +935,19 @@ msgstr "&Szukaj:"
 msgid "Sent messages history - Esmska"
 msgstr ""
 
+#: ImageCodeDialog.introLabel.text
+msgid ""
+"<html>\n"
+"<h2>Security code required</h2>\n"
+"The chosen gateway requires you to enter the security code from the picture "
+"below:\n"
+"</html>"
+msgstr ""
+
+#: ImageCodeDialog.jLabel2.text
+msgid "&Image code:"
+msgstr ""
+
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
@@ -1325,6 +1343,10 @@ msgstr "Nowy kontakt"
 msgid "Pause/unpause sending"
 msgstr ""
 
+#: OK_
+msgid "&OK"
+msgstr ""
+
 #: Operator.unknown
 msgid "Unknown gateway"
 msgstr "Nieznana brama"
@@ -1455,10 +1477,6 @@ msgid ""
 "The gateway doesn't provide any information about successful sending. The "
 "message might be and <b>might not be</b> delivered."
 msgstr ""
-
-#: OperatorExecutor.recognize_number
-msgid "Please enter the code from the picture:"
-msgstr "Wprowadź kod z obrazka:"
 
 #: OperatorInterpreter.unknown_operator
 msgid "Unknown operator!"
@@ -1957,3 +1975,6 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "Please enter the code from the picture:"
+#~ msgstr "Wprowadź kod z obrazka:"

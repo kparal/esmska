@@ -5,23 +5,19 @@
 package esmska.transfer;
 
 import esmska.data.Operator;
-import esmska.gui.MainFrame;
 import esmska.utils.L10N;
 import esmska.data.Links;
+import esmska.data.Operators;
+import esmska.data.SMS;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import org.apache.commons.lang.StringUtils;
 
 /** Class containing methods, which can be called from operator scripts.
  *  For each operator script a separate class should be created.
@@ -76,10 +72,11 @@ public class OperatorExecutor {
     private String errorMessage;
     private String operatorMessage;
     private String referer;
-    private Operator operator;
+    private SMS sms;
 
-    public OperatorExecutor(Operator operator) {
-        this.operator = operator;
+    public OperatorExecutor(SMS sms) {
+        this.sms = sms;
+        Operator operator = Operators.getOperator(sms.getOperator());
         if (operator != null) {
             ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, operator.getWebsite());
             ERROR_UKNOWN = MessageFormat.format(ERROR_UKNOWN, Links.RUN_UPDATER,
@@ -164,48 +161,19 @@ public class OperatorExecutor {
      */
     public String recognizeImage(byte[] imageBytes) throws InterruptedException,
             InvocationTargetException, ExecutionException {
-        logger.fine("Showing security code...");
-        try {
-            if (imageBytes == null) {
-                return "";
-            }
-            final ImageIcon image = new ImageIcon(imageBytes);
-
-            //display dialog
-            FutureTask<String> task = new FutureTask<String>(new Callable<String>() {
-                @Override
-                public String call() {
-                    JPanel panel = new JPanel();
-                    JLabel label = new JLabel(l10n.getString("OperatorExecutor.recognize_number"),
-                            image, JLabel.CENTER);
-                    label.setHorizontalTextPosition(JLabel.CENTER);
-                    label.setVerticalTextPosition(JLabel.TOP);
-                    panel.add(label);
-                    
-                    String imageCode = JOptionPane.showInputDialog(MainFrame.getInstance(),
-                            panel, null,
-                            JOptionPane.QUESTION_MESSAGE);
-                    return imageCode;
-                }
-            });
-            SwingUtilities.invokeAndWait(task);
-            //receive result
-            String imageCode = task.get();
-
-            return imageCode != null ? imageCode : "";
-        } catch (InterruptedException ex) {
-            logger.log(Level.WARNING, "Could not execute recognizeImage", ex);
-            throw ex;
-        } catch (ExecutionException ex) {
-            logger.log(Level.WARNING, "Could not execute recognizeImage", ex);
-            throw ex;
-        } catch (InvocationTargetException ex) {
-            logger.log(Level.WARNING, "Could not execute recognizeImage", ex);
-            throw ex;
-        } catch (RuntimeException ex) {
-            logger.log(Level.WARNING, "Could not execute recognizeImage", ex);
-            throw ex;
+        logger.fine("Resolving security code...");
+        if (imageBytes == null) {
+            return "";
         }
+        ImageIcon image = new ImageIcon(imageBytes);
+        sms.setImage(image);
+
+        boolean resolved = ImageCodeManager.getResolver().resolveImageCode(sms);
+        if (!resolved) {
+            logger.info("Could not resolve security code or resolving cancelled");
+        }
+
+        return StringUtils.defaultString(sms.getImageCode());
     }
 
     /** Error message displayed when sending was unsuccessful.

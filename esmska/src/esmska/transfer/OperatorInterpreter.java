@@ -4,7 +4,12 @@
  */
 package esmska.transfer;
 
+import esmska.data.Config;
+import esmska.data.Keyring;
 import esmska.data.Operator;
+import esmska.data.Operators;
+import esmska.data.SMS;
+import esmska.data.Tuple;
 import esmska.utils.L10N;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,8 +36,10 @@ public class OperatorInterpreter {
     private static final Logger logger = Logger.getLogger(OperatorInterpreter.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final ScriptEngineManager manager = new ScriptEngineManager();
+    private static final Keyring keyring = Keyring.getInstance();
+    private static final Config config = Config.getInstance();
     private Map<OperatorVariable, String> variables;
-    private OperatorExecutor executor = new OperatorExecutor(null);
+    private OperatorExecutor executor;
     private ScriptEngine engine;
     private Invocable invocable;
     
@@ -56,11 +63,13 @@ public class OperatorInterpreter {
      *                  Doesn't have to contain all the keys from OperatorVariable.
      * @return whether the message was sent successfully
      */
-    public boolean sendMessage(Operator operator, Map<OperatorVariable, String> variables) {
+    public boolean sendMessage(SMS sms) {
+        Operator operator = Operators.getOperator(sms.getOperator());
+        this.variables = extractVariables(sms);
+
         logger.fine("Sending SMS to: " + operator);
-        this.variables = variables;
         init();
-        executor = new OperatorExecutor(operator);
+        executor = new OperatorExecutor(sms);
         
         if (operator == null) {
             executor.setErrorMessage(l10n.getString("OperatorInterpreter.unknown_operator"));
@@ -98,6 +107,27 @@ public class OperatorInterpreter {
         return sentOk;
     }
 
+    /** Extract variables from SMS to a map */
+    private static HashMap<OperatorVariable,String> extractVariables(SMS sms) {
+        HashMap<OperatorVariable,String> map = new HashMap<OperatorVariable, String>();
+        map.put(OperatorVariable.NUMBER, sms.getNumber());
+        map.put(OperatorVariable.MESSAGE, sms.getText());
+        map.put(OperatorVariable.SENDERNAME, sms.getSenderName());
+        map.put(OperatorVariable.SENDERNUMBER, sms.getSenderNumber());
+
+        Tuple<String, String> key = keyring.getKey(sms.getOperator());
+        if (key != null) {
+            map.put(OperatorVariable.LOGIN, key.get1());
+            map.put(OperatorVariable.PASSWORD, key.get2());
+        }
+
+        if (config.isDemandDeliveryReport()) {
+            map.put(OperatorVariable.DELIVERY_REPORT, "true");
+        }
+
+        return map;
+    }
+
     /** Forward all the declared variables into the script.
      * All variable values are transformed to the x-www-form-urlencoded format.
      */
@@ -124,13 +154,23 @@ public class OperatorInterpreter {
         }
     }
 
-    /** Get the error message created when sending of the message failed. May be null. */
+    /** Get the error message created when sending of the message failed. May be null.
+     * @throws IllegalStateException when called before sending any sms
+     */
     public String getErrorMessage() {
+        if (executor == null) {
+            throw new IllegalStateException("Getting error message before even sending the very sms");
+        }
         return executor.getErrorMessage();
     }
     
-    /** Get additional message from operator. May be null. */
+    /** Get additional message from operator. May be null.
+     * @throws IllegalStateException when called before sending any sms
+     */
     public String getOperatorMessage() {
+        if (executor == null) {
+            throw new IllegalStateException("Getting operator message before even sending the very sms");
+        }
         return executor.getOperatorMessage();
     }
 }

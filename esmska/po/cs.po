@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 18:58+0200\n"
-"PO-Revision-Date: 2009-04-19 18:09+0100\n"
+"POT-Creation-Date: 2009-05-16 23:30+0200\n"
+"PO-Revision-Date: 2009-05-16 23:29+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -92,6 +92,10 @@ msgstr "Přidat nový kontakt"
 #: Cancel
 msgid "Cancel"
 msgstr "Zrušit"
+
+#: Cancel_
+msgid "&Cancel"
+msgstr "&Zrušit"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
@@ -1065,6 +1069,23 @@ msgstr "&Hledat:"
 msgid "Sent messages history - Esmska"
 msgstr "Historie odeslaných zpráv - Esmska"
 
+#: ImageCodeDialog.introLabel.text
+msgid ""
+"<html>\n"
+"<h2>Security code required</h2>\n"
+"The chosen gateway requires you to enter the security code from the picture "
+"below:\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"<h2>Vyžadován bezpečnostní kód</h2>\n"
+"Zvolená brána požaduje, abyste opsali bezpečnostní kód z obrázku níže:\n"
+"</html>"
+
+#: ImageCodeDialog.jLabel2.text
+msgid "&Image code:"
+msgstr "&Kód v obrázku:"
+
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
@@ -1517,6 +1538,10 @@ msgstr "Nový kontakt"
 msgid "Pause/unpause sending"
 msgstr "Pozastavit/spustit odesílání"
 
+#: OK_
+msgid "&OK"
+msgstr "&OK"
+
 #: Operator.unknown
 msgid "Unknown gateway"
 msgstr "Neznámá brána"
@@ -1685,10 +1710,6 @@ msgid ""
 msgstr ""
 "Brána neposkytuje žádné informace o úspěšném odeslání. Zpráva mohla a "
 "<b>nemusela</b> být doručena."
-
-#: OperatorExecutor.recognize_number
-msgid "Please enter the code from the picture:"
-msgstr "Opište kód z obrázku:"
 
 #: OperatorInterpreter.unknown_operator
 msgid "Unknown operator!"
@@ -2235,6 +2256,9 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid "Please enter the code from the picture:"
+#~ msgstr "Opište kód z obrázku:"
 
 #, fuzzy
 #~ msgctxt "ImportFrame.foundNoContacts"

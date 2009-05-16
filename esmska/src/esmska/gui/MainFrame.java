@@ -71,6 +71,7 @@ import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
 import esmska.data.Links;
+import esmska.transfer.ImageCodeManager;
 import esmska.utils.MiscUtils;
 import esmska.utils.RuntimeUtils;
 import java.awt.Image;
@@ -184,6 +185,7 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanel.requestFocusInWindow();
         contactPanel.ensureContactSelected();
         queue.addValuedListener(new QueueListener());
+        ImageCodeManager.setResolver(new ImageCodeDialog(this, true));
         
         //check for valid operators
         if (Operators.getInstance().size() <= 0 && !Beans.isDesignTime()) {

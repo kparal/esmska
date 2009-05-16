@@ -9,7 +9,6 @@
 
 package esmska.transfer;
 
-import esmska.data.Config;
 import esmska.data.Queue.Events;
 import esmska.data.event.ValuedEvent;
 import java.util.HashMap;
@@ -18,12 +17,9 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingWorker;
 
-import esmska.data.Keyring;
-import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.utils.L10N;
-import esmska.data.Tuple;
 import esmska.data.event.ValuedListener;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -35,8 +31,6 @@ import java.util.ResourceBundle;
 public class SMSSender {
     private static final Logger logger = Logger.getLogger(SMSSender.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final Keyring keyring = Keyring.getInstance();
-    private static final Config config = Config.getInstance();
     private static final Queue queue = Queue.getInstance();
     private static final String NO_REASON_ERROR = l10n.getString("SMSSender.NO_REASON_ERROR");
     
@@ -122,8 +116,7 @@ public class SMSSender {
             boolean success = false;
             try {
                 OperatorInterpreter interpreter = new OperatorInterpreter();
-                success = interpreter.sendMessage(Operators.getOperator(sms.getOperator()),
-                        extractVariables(sms));
+                success = interpreter.sendMessage(sms);
                 sms.setOperatorMsg(interpreter.getOperatorMessage());
                 sms.setErrMsg(null);
                 if (!success) {
@@ -136,27 +129,6 @@ public class SMSSender {
             }
             return success;
         }
-    }
-    
-    /** Extract variables from SMS to a map */
-    private static HashMap<OperatorVariable,String> extractVariables(SMS sms) {
-        HashMap<OperatorVariable,String> map = new HashMap<OperatorVariable, String>();
-        map.put(OperatorVariable.NUMBER, sms.getNumber());
-        map.put(OperatorVariable.MESSAGE, sms.getText());
-        map.put(OperatorVariable.SENDERNAME, sms.getSenderName());
-        map.put(OperatorVariable.SENDERNUMBER, sms.getSenderNumber());
-        
-        Tuple<String, String> key = keyring.getKey(sms.getOperator());
-        if (key != null) {
-            map.put(OperatorVariable.LOGIN, key.get1());
-            map.put(OperatorVariable.PASSWORD, key.get2());
-        }
-        
-        if (config.isDemandDeliveryReport()) {
-            map.put(OperatorVariable.DELIVERY_REPORT, "true");
-        }
-        
-        return map;
     }
     
     /** Listen for changes in the sms queue */
