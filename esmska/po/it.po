@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 23:26+0200\n"
+"POT-Creation-Date: 2009-05-17 14:32+0200\n"
 "PO-Revision-Date: 2008-10-15 21:04+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-04-19 16:56+0000\n"
+"X-Launchpad-Export-Date: 2009-05-17 12:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -1198,9 +1198,8 @@ msgid "Configure program behaviour"
 msgstr ""
 
 #: MainFrame.donateMenuItem.text
-#, fuzzy
 msgid "&Support this project!"
-msgstr "Progetto di supporto"
+msgstr ""
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
@@ -1990,9 +1989,3 @@ msgstr ""
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Per favore inserisci il codice dalla figura:"
-
-#~ msgid "Use &this proxy for all protocols"
-#~ msgstr "Usa &questo proxy per tutti i protocolli"
-
-#~ msgid "http://code.google.com/p/esmska/wiki/Support"
-#~ msgstr "http://code.google.com/p/esmska/wiki/Support"

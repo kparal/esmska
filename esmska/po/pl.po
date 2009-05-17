@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 23:26+0200\n"
+"POT-Creation-Date: 2009-05-17 14:32+0200\n"
 "PO-Revision-Date: 2009-03-31 10:43+0000\n"
 "Last-Translator: skrzat <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-04-19 16:56+0000\n"
+"X-Launchpad-Export-Date: 2009-05-17 12:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -1194,9 +1194,8 @@ msgid "Configure program behaviour"
 msgstr "Konfiguruj zachowanie programu"
 
 #: MainFrame.donateMenuItem.text
-#, fuzzy
 msgid "&Support this project!"
-msgstr "Wspomóż projekt"
+msgstr ""
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
