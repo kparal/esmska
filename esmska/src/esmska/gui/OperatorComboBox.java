@@ -153,8 +153,9 @@ public class OperatorComboBox extends JComboBox {
         }
         
         //return if already selected operator with matching country prefix
+        //and is not international
         Operator selectedOperator = getSelectedOperator();
-        if (Operators.matchesWithCountryPrefix(selectedOperator, number)) {
+        if (Operators.matchesWithCountryPrefix(selectedOperator, number, false)) {
             return;
         }
         

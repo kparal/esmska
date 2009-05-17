@@ -24,6 +24,7 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
 /** Class managing all operators
@@ -237,7 +238,32 @@ public class Operators {
         //search in country prefixes
         synchronized(selectedOperators) {
             for (Operator op : selectedOperators) {
-                if (matchesWithCountryPrefix(op, number)) {
+                if (matchesWithCountryPrefix(op, number, false)) {
+                    //prefer operators without login requirements
+                    if (op.isLoginRequired()) {
+                        if (operator == null) {
+                            operator = op;
+                        } else if (keyring.getKey(operator.getName()) == null &&
+                                keyring.getKey(op.getName()) != null) {
+                            //prefer operators with filled in credentials
+                            operator = op;
+                        }
+                    } else {
+                        return op;
+                    }
+                }
+            }
+        }
+
+        //if no operator without login found, but some operator with login found
+        if (operator != null) {
+            return operator;
+        }
+
+        //search in international operators
+        synchronized(selectedOperators) {
+            for (Operator op : selectedOperators) {
+                if (StringUtils.isEmpty(op.getCountryPrefix())) {
                     //prefer operators without login requirements
                     if (op.isLoginRequired()) {
                         if (operator == null) {
@@ -290,14 +316,21 @@ public class Operators {
      *
      * @param operator operator
      * @param number phone number
+     * @param acceptInternational whether international operators (with empty country
+     * prefix) should be also accepted as matching
      * @return true if current operator matches the number with it's country prefix;
      * false if operator of phone number is null or if phone number is shorter
      * than 2 characters
      */
-    public static boolean matchesWithCountryPrefix(Operator operator, String number) {
+    public static boolean matchesWithCountryPrefix(Operator operator, String number, boolean acceptInternational) {
         if (operator == null || number == null || number.length() < 2) {
             return false;
         }
+
+        if (!acceptInternational && StringUtils.isEmpty(operator.getCountryPrefix())) {
+            return false;
+        }
+
         return number.startsWith(operator.getCountryPrefix());
     }
 
