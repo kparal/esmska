@@ -118,28 +118,32 @@ public class RuntimeUtils {
      * and feel. Some L&Fs are reversing order of the buttons, which is an
      * unwanted behaviour. This method reverts it again for such L&Fs, so options
      * are in original order. In every case be sure never rely on exact
-     * option position.
-     *
-     * More detailed explanation:
-     * There are two ways to display options:
-     * 1. Standard (default option rightmost): Cancel | Action
-     * 2. Windows-like (default option leftmost): Action | Cancel
-     *
-     * In Esmska all dialogs are written using the standard notation.
-     *
-     * Desktop environments divided by the way of displaying options:
-     * 1. Standard: Gnome, Mac OS
-     * 2. Windows like: Windows, KDE
-     *
-     * In following LAFs and OSs Java displays the options in wrong order:
-     * 1. Metal: Windows, KDE
-     * 2. GTK: Gnome, Mac OS
-     * 3. Windows: Windows (available nowhere else)
-     * 4. Aqua: Mac OS (available nowhere else)
-     * 5. JGoodies: Windows, KDE
-     * 6. Substance: Windows, KDE
-     * 7. Nimbus: Windows, Gnome, Mac
-     *
+     * option position.<br>
+     * <br>
+     * This method is intended to be used only for dialogs created with
+     * JOptionPane methods (works around its own option swapping). For custom
+     * dialogs use {@link #sortOptions(java.lang.Object[])}.<br>
+     * <br>
+     * More detailed explanation:<br>
+     * There are two ways to display options:<br>
+     * 1. Standard (default option rightmost): Cancel | Action<br>
+     * 2. Windows-like (default option leftmost): Action | Cancel<br>
+     * <br>
+     * In Esmska all dialogs are written using the standard notation.<br>
+     * <br>
+     * Desktop environments are divided by the way of displaying options:<br>
+     * 1. Standard: Gnome, Mac OS<br>
+     * 2. Windows like: Windows, KDE<br>
+     * <br>
+     * In following LAFs and OSs Java displays the options in wrong order:<br>
+     * 1. Metal: Windows, KDE<br>
+     * 2. GTK: Gnome, Mac OS<br>
+     * 3. Windows: Windows (available nowhere else)<br>
+     * 4. Aqua: Mac OS (available nowhere else)<br>
+     * 5. JGoodies: Windows, KDE<br>
+     * 6. Substance: Windows, KDE<br>
+     * 7. Nimbus: Windows, Gnome, Mac<br>
+     * <br>
      * In these cases this method will revert the button order to display
      * it like native application.
      *
@@ -165,6 +169,38 @@ public class RuntimeUtils {
             return reversed;
         }
         if (ThemeManager.isNimbusCurrentLaF() && !isKDEDesktop()) {
+            return reversed;
+        }
+
+        //no change needed
+        return options;
+    }
+
+    /** Sorts options provided to custom dialog as a buttons according to current
+     * desktop environment.<br>
+     * <br>
+     * For dialogs created by JOptionPane use
+     * {@link #sortDialogOptions(java.lang.Object[])}.<br>
+     * <br>
+     * More detailed explanation:<br>
+     * There are two ways to display options:<br>
+     * 1. Standard (default option rightmost): Cancel | Action<br>
+     * 2. Windows-like (default option leftmost): Action | Cancel<br>
+     * <br>
+     * In Esmska all dialogs are written using the standard notation.<br>
+     * <br>
+     * Desktop environments are divided by the way of displaying options:<br>
+     * 1. Standard: Gnome, Mac OS<br>
+     * 2. Windows like: Windows, KDE<br>
+     * <br>
+     * In the second case this method will revert the button order to display
+     * it like native application.
+     */
+    public static Object[] sortOptions(Object... options) {
+        if (isWindows() || isKDEDesktop()) {
+            //revert options
+            Object[] reversed = ArrayUtils.clone(options);
+            ArrayUtils.reverse(reversed);
             return reversed;
         }
 

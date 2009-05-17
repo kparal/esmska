@@ -19,6 +19,7 @@ import esmska.transfer.ImageCodeResolver;
 import esmska.utils.L10N;
 import esmska.utils.RuntimeUtils;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -112,6 +113,12 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         //set components
         queueScrollPane.setVisible(false);
         queueList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        //sort buttons
+        Object[] buttons = RuntimeUtils.sortOptions(cancelButton, okButton);
+        buttonPanel.removeAll();
+        buttonPanel.add((Component)buttons[0]);
+        buttonPanel.add((Component)buttons[1]);
     }
 
     /** This method <b>must not</b> be called from EDT. For description see
@@ -139,9 +146,10 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
                 public void run() {
                     smsQueue.put(sms, blockingQueue);
                     queueModel.addElement(sms);
-                    if (queueModel.getSize() > 1 && !queueScrollPane.isVisible()) {
+                    if (queueModel.getSize() > 1) {
                         //show list of other waiting sms, if more than one
                         queueScrollPane.setVisible(true);
+                        //update dimensions
                         validate();
                     }
                     if (queueList.getSelectedValue() == null) {
@@ -181,10 +189,11 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         queueList = new JList();
         jPanel1 = new JPanel();
         imageLabel = new JLabel();
-        okButton = new JButton();
-        cancelButton = new JButton();
         codeTextField = new JTextField();
         jLabel2 = new JLabel();
+        buttonPanel = new JPanel();
+        cancelButton = new JButton();
+        okButton = new JButton();
         introLabel = new JLabel();
 
         addWindowListener(new WindowAdapter() {
@@ -205,19 +214,6 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setIcon(defaultIcon);
 
-        Mnemonics.setLocalizedText(okButton, l10n.getString("OK_"));
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
-        Mnemonics.setLocalizedText(cancelButton, l10n.getString("Cancel_"));
-        cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
         codeTextField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent evt) {
                 codeTextFieldKeyPressed(evt);
@@ -227,6 +223,22 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         jLabel2.setLabelFor(codeTextField);
 
         Mnemonics.setLocalizedText(jLabel2, l10n.getString("ImageCodeDialog.jLabel2.text"));
+        buttonPanel.setLayout(new GridLayout(1, 0, 5, 0));
+        Mnemonics.setLocalizedText(cancelButton, l10n.getString("Cancel_"));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        buttonPanel.add(cancelButton);
+        Mnemonics.setLocalizedText(okButton, l10n.getString("OK_"));
+        okButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        buttonPanel.add(okButton);
+
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
 
@@ -235,31 +247,25 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
             .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(imageLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cancelButton)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(okButton))
+                    .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imageLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                     .addGroup(Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(codeTextField, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))
+                        .addComponent(codeTextField, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(codeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(okButton)
-                    .addComponent(cancelButton))
-                .addContainerGap())
+                .addPreferredGap(ComponentPlacement.UNRELATED)
+                .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
         introLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/keyring-48.png"))); // NOI18N
@@ -271,7 +277,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(introLabel, GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                    .addComponent(introLabel, GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(queueScrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(ComponentPlacement.RELATED)
@@ -285,7 +291,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
                 .addComponent(introLabel)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                     .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -387,6 +393,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JPanel buttonPanel;
     private JButton cancelButton;
     private JTextField codeTextField;
     private JLabel imageLabel;
