@@ -62,6 +62,10 @@ public interface OperatorInfo {
      * to automatically guess correct operator when user is typing in the phone number.
      * All the prefixes must be declared <b>including</b> the country prefix!
      * This is just a user-convenience function, you can easily declare an empty array here.
+     * <br><br>
+     * Example: When the country prefix is "+420" and this gateway allows sending messages
+     * to operator which owns prefixes "606" and "777", then the resulting array of allowed prefixes
+     * is ["+420606", "+420777"].
      */
     String[] getOperatorPrefixes();
     
