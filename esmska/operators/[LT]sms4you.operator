@@ -20,7 +20,7 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Mokamas gateway i visus Lietuvos tinklus"
+    return "Mokamas gateway i visus Lietuvos tinklus."
 }
 
 function getCountryPrefix() {
