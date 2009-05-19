@@ -188,8 +188,8 @@ public class OperatorExecutor {
         this.operatorMessage = operatorMessage;
     }
     
-    /** Referer used for the following requests.
-     * Use null for clearing the field.
+    /** Referer (HTTP 'Referer' header) used for all following requests.
+     * Use null for resetting current value back to none.
      */
     public void setReferer(String referer) {
         this.referer = referer;
