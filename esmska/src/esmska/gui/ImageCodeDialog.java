@@ -119,6 +119,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         buttonPanel.removeAll();
         buttonPanel.add((Component)buttons[0]);
         buttonPanel.add((Component)buttons[1]);
+        getRootPane().setDefaultButton(okButton);
     }
 
     /** This method <b>must not</b> be called from EDT. For description see
@@ -214,12 +215,6 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setIcon(defaultIcon);
 
-        codeTextField.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent evt) {
-                codeTextFieldKeyPressed(evt);
-            }
-        });
-
         jLabel2.setLabelFor(codeTextField);
 
         Mnemonics.setLocalizedText(jLabel2, l10n.getString("ImageCodeDialog.jLabel2.text"));
@@ -259,7 +254,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(codeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -291,7 +286,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
                 .addComponent(introLabel)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                     .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -362,14 +357,6 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
             queueScrollPane.setVisible(false);
         }
     }//GEN-LAST:event_formWindowDeactivated
-
-    private void codeTextFieldKeyPressed(KeyEvent evt) {//GEN-FIRST:event_codeTextFieldKeyPressed
-        switch (evt.getKeyCode()) {
-            case KeyEvent.VK_ENTER:
-                okButton.doClick(0);
-                break;
-        }
-    }//GEN-LAST:event_codeTextFieldKeyPressed
 
     /** Renderer for items in sms list */
     private class QueueRenderer extends SubstanceDefaultListCellRenderer {
