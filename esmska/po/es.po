@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-17 14:32+0200\n"
-"PO-Revision-Date: 2009-03-15 12:56+0000\n"
+"POT-Creation-Date: 2009-05-25 23:41+0200\n"
+"PO-Revision-Date: 2009-05-20 20:40+0000\n"
 "Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-17 12:32+0000\n"
+"X-Launchpad-Export-Date: 2009-05-25 21:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -52,7 +52,7 @@ msgstr "&Licencia"
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr ""
+msgstr "<html><a href=\"\">Página de inicio</a></html>"
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -99,9 +99,8 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: Cancel_
-#, fuzzy
 msgid "&Cancel"
-msgstr "Cancelar"
+msgstr "&Cancelar"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
@@ -179,11 +178,11 @@ msgstr ""
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr ""
+msgstr "Uso:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr ""
+msgstr "Imprime la versión de programa y sale."
 
 #: Compress_
 msgid "&Compress"

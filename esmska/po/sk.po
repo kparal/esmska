@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-17 14:32+0200\n"
-"PO-Revision-Date: 2009-04-19 16:52+0000\n"
-"Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
+"POT-Creation-Date: 2009-05-25 23:41+0200\n"
+"PO-Revision-Date: 2009-05-25 21:16+0000\n"
+"Last-Translator: helix84 <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-17 12:32+0000\n"
+"X-Launchpad-Export-Date: 2009-05-25 21:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -24,7 +24,7 @@ msgstr "Súhlasím"
 
 #: AboutFrame.Credits
 msgid "Credits"
-msgstr "Credits"
+msgstr "Zásluhy"
 
 #: AboutFrame.License
 msgid "License"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid "<html><a href=\"\">Support project</a></html>"
-msgstr "<html><a href=\"\">Podpor projekt</a></html>"
+msgstr "<html><a href=\"\">Podporiť projekt</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -75,7 +75,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Páči sa Vám tento projekt? Pomôžte ho udržať v chode...\n"
+"Páči sa vám tento projekt? Pomôžte ho udržať v chode...\n"
 "</html>"
 
 #: AboutFrame.title
@@ -99,9 +99,8 @@ msgid "Cancel"
 msgstr "Zrušiť"
 
 #: Cancel_
-#, fuzzy
 msgid "&Cancel"
-msgstr "Zrušiť"
+msgstr "&Zrušiť"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
@@ -142,10 +141,10 @@ msgid ""
 "* {2} - {0} and {1} modes combined."
 msgstr ""
 "Vypisovať ladiaci výstup. Možné režimy:\n"
-"* {0} - ladenie programu a webového obsahu. Východzia voľba ak nieje zvolený "
-"režim ladenia.\n"
-"* {1} - iba ladenie siete (podrobnejšie). Vypisuje HTTP hlavičke, všetky "
-"presmerovania,webový obsah, a pod.\n"
+"* {0} - ladenie programu a webového obsahu. Predvolená voľba ak nie je "
+"zvolený režim ladenia.\n"
+"* {1} - iba ladenie siete (podrobnejšie). Vypisuje hlavičky HTTP, všetky "
+"presmerovania, webový obsah, a pod.\n"
 "* {2} - kombinácia režimov {0} a {1}."
 
 #: CommandLineParser.debugMode
@@ -157,13 +156,13 @@ msgid ""
 "Enable the portable mode - ask for location of the user configuration "
 "directory. Can't be used with -c."
 msgstr ""
-"Zapnutie prenosného módu - spýta sa na umiestnenie uživateľského adresára. "
-"Nieje možné použiť spolu s -c."
+"Zapnutie prenosného režimu - spýta sa na umiestnenie používateľského "
+"adresára. Nie je možné použiť spolu s voľbou -c."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr "Neplatná voľba z príkazového riadku! (''{0}'')"
+msgstr "Neplatná voľba na príkazovom riadku! (''{0}'')"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
@@ -178,12 +177,12 @@ msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
-"Nastavenie cesty k používateľskému adresáru. Uveďte absolútnu cestu. Nieje "
-"možné použiť s -p."
+"Nastavenie cesty k používateľskému adresáru. Uveďte absolútnu cestu. Nie je "
+"možné použiť s voľbou -p."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr "Zobraziť túto nápovedu."
+msgstr "Zobraziť tohto pomocníka."
 
 #: CommandLineParser.usage
 msgid "Usage:"
@@ -195,7 +194,7 @@ msgstr "Vypísať verziu programu a skončiť."
 
 #: Compress_
 msgid "&Compress"
-msgstr "S&komprimovat"
+msgstr "&Zhutniť"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -256,7 +255,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Mezinárodné smerové číslo krajiny, začínajúce znakom '+'.<br>\n"
+"Mezinárodné smerové číslo krajiny, začínajúce znakom „+“.<br>\n"
 "Pri vypĺňaní sa toto smerové číslo bude predpokladať pri všetkých číslach, "
 "které nebudú<br>\n"
 "zadané v mezinárodnom tvare. Taktiež sa skráti zobrazenie týchto čísiel vo "
@@ -265,7 +264,7 @@ msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request the &delivery report"
-msgstr "Požadovať poslanie doručen&ky"
+msgstr "Požadovať poslanie &doručenky"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -278,7 +277,7 @@ msgid ""
 msgstr ""
 "<html>\n"
 "Vyžiada si poslanie potvrdenia o doručení správy. Potvrdenie príde na<br>\n"
-"telefónne číslo odesielateľa. Tôto funkciu podporujô iba niektorí "
+"telefónne číslo odesielateľa. Túto funkciu podporujú iba niektorí "
 "operátori.\n"
 "</html>"
 
@@ -287,12 +286,12 @@ msgid ""
 "This tab is for developing purposes only. It will not be visible in the "
 "final release."
 msgstr ""
-"Táto záložka je len pre potreby vývoja. V konečnej verzii programu sa nebude "
-"prítomna."
+"Táto záložka je len na potreby vývoja. V konečnej verzii programu nebude "
+"prítomná."
 
 #: ConfigFrame.forgetLayoutCheckBox.text
 msgid "Use default form &layout"
-msgstr "Používať východiskové &rozloženie formulára"
+msgstr "Používať predvolené roz&loženie formulára"
 
 #: ConfigFrame.forgetLayoutCheckBox.toolTipText
 msgid ""
@@ -303,12 +302,12 @@ msgid ""
 msgstr ""
 "<html>\n"
 "Aktuálne rozmery programu budú ignorované a pri nasledujúcom<br>\n"
-"štarte programu sa použijú východiskové hodnoty\n"
+"štarte programu sa použijú predvolené hodnoty\n"
 "</html>"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr "Všeo&becne"
+msgstr "Všeo&becné"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -318,7 +317,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Adresa HTTP proxy serveru v tvare 'adresa' alebo 'adresa:port'.\n"
+"Adresa HTTP proxy serveru v tvare „adresa“ alebo „adresa:port“.\n"
 "Napríklad: proxy.firma.com:80\n"
 "</html>"
 
@@ -330,7 +329,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Adresa HTTPS proxy serveru v tvare 'adresa' alebo 'adresa:port'.\n"
+"Adresa HTTPS proxy serveru v tvare „adresa“ alebo „adresa:port“.\n"
 "Napríklad: proxy.firma.com:443\n"
 "</html>"
 
@@ -361,9 +360,9 @@ msgid ""
 msgstr ""
 "<html><i>\n"
 "Napriek faktu, že sú uložené heslá zašifrované, je možné dostať sa k "
-"pôvodnému obsahu. Dôrazne doporučujeme nastaviť prístupové práva tak, aby "
-"iný používatelia nemali prístup k <u>adresáru s kofiguračnými súbormi "
-"programu</u>.\n"
+"pôvodnému obsahu. Dôrazne odporúčame nastaviť prístupové práva tak, aby iní "
+"používatelia nemali prístup k <u>adresáru s konfiguračnými súbormi programu</"
+"u>.\n"
 "</i></html>"
 
 #: ConfigFrame.jLabel14.text
@@ -385,12 +384,12 @@ msgid ""
 "</i></html>"
 msgstr ""
 "<html><i>\n"
-"* Autentikácia menom/heslom nieje zatiaľ podporovaná.\n"
+"* Overenie pomocou mena a hesla nie je zatiaľ podporované.\n"
 "</i></html>"
 
 #: ConfigFrame.jLabel2.text
 msgid "The &default country prefix number:"
-msgstr "Východiskové mezinárodné smerové číslo krajiny"
+msgstr "Pre&dvolené mezinárodné smerové číslo krajiny"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
@@ -404,7 +403,7 @@ msgid ""
 "</i></html>"
 msgstr ""
 "<html><i>\n"
-"* Program je potrebné reštartovať aby sa prejavyli zmeny!\n"
+"* Program je potrebné reštartovať aby sa prejavili zmeny!\n"
 "</i></html>"
 
 #: ConfigFrame.jLabel9.text
@@ -414,7 +413,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Tu môžete nastaviť Vaše prihlasovacie údaje pre brány, ktoré to požadujú.\n"
+"Tu môžete nastaviť svoje prihlasovacie údaje pre brány, ktoré to požadujú.\n"
 "</html>"
 
 #: ConfigFrame.lafComboBox.toolTipText
@@ -424,7 +423,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Umožní Vám zmeniť vzhľad programu\n"
+"Umožní vám zmeniť vzhľad programu\n"
 "</html>"
 
 #: ConfigFrame.loginPanel.TabConstraints.tabTitle
@@ -433,7 +432,7 @@ msgstr "Prih&lasovacie údaje"
 
 #: ConfigFrame.loginTextField.toolTipText
 msgid "Username needed for logging in to the operator web gateway"
-msgstr "Uživateľské meno potrebné na prihlásenie k webovej bráne operátora"
+msgstr "Používateľské meno potrebné na prihlásenie k webovej bráne operátora"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -482,10 +481,10 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"V zozname operátorov budú zobrazený iba operátori, ktorých<br>\n"
+"V zozname operátorov budú zobrazení iba operátori, ktorých<br>\n"
 "názov obsahuje vzor zadaný v tomto poli. Takto je možné<br>\n"
 "zobraziť iba operátorov krajiny XX zadaním vzoru [XX]. Je možné<br>\n"
-"zadať viac vzorov oddelených čiarkou. Bere sa ohľad na velkosť písmen.\n"
+"zadať viac vzorov oddelených čiarkou. Berie sa ohľad na velkosť písmen.\n"
 "</html>"
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
@@ -514,7 +513,7 @@ msgid ""
 msgstr ""
 "<html> \n"
 "Pri ukončení programu sa história odoslaných správ<br>\n"
-"uloží iba za zvolené poslendé obdobie\n"
+"uloží iba za zvolené posledné obdobie\n"
 "</html>"
 
 #: ConfigFrame.removeAccentsCheckBox.text
@@ -530,13 +529,13 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Pred odoslaním správy budú vymazané všetky diaktritické značky.<br>\n"
+"Pred odoslaním správy budú vymazané všetky diaktritické znamienka.<br>\n"
 "Pozn: Táto funkcia nemusí byť funkčná pre všetky jazyky.\n"
 "</html>"
 
 #: ConfigFrame.remove_credentials
 msgid "Do you really like to remove all entered login credentials?"
-msgstr "Naozaj si prajete odstrániť všetky vyplnené prihlasovacie údaje?"
+msgstr "Naozaj si želáte odstrániť všetky vyplnené prihlasovacie údaje?"
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
@@ -546,7 +545,7 @@ msgstr "Rovnaké ako &HTTP proxy"
 msgid ""
 "An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
 "field"
-msgstr "Adresa v poli 'HTTP proxy' bude použitá aj pre pole 'HTTPS proxy'"
+msgstr "Adresa v poli „HTTP proxy“ sa použije aj v poli „HTTPS proxy“"
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -557,18 +556,18 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Vyplnené meno zaberá v správe miesto, nieje ho však vidieť,<br>\n"
-"preto vyfarbovanie textu zprávy a ukazovateľ počtu sms<br>\n"
-"nebudú zdanlivo súhlasit.\n"
+"Vyplnené meno zaberá v správe miesto, nie je ho však vidieť,<br>\n"
+"preto vyfarbovanie textu zprávy a ukazovateľ počtu SMS<br>\n"
+"nebudú zdanlivo súhlasiť.\n"
 "</html>"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
-msgstr "Číslo odosielateľa v medzinárodnom formáte (začínajúce znakom \"+\")"
+msgstr "Číslo odosielateľa v medzinárodnom formáte (začínajúce znakom „+“)"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Show password"
-msgstr "Zobraziť heslá"
+msgstr "Zobraziť heslo"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -582,7 +581,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Adresa SOCKS proxy serveru v tvare \"adresa\" alebo \"adresa:port\"\n"
+"Adresa SOCKS proxy serveru v tvare „adresa“ alebo „adresa:port“\n"
 "Napríklad: proxy.firma.com:1080\n"
 "</html>"
 
@@ -1082,10 +1081,15 @@ msgid ""
 "below:\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Je požadovaný bezpečnostný kód</h2>\n"
+"Zvolená brána vyžaduje aby ste zadali bezpečnostný kód z nižšie zobrazního "
+"obrázka:\n"
+"</html>"
 
 #: ImageCodeDialog.jLabel2.text
 msgid "&Image code:"
-msgstr ""
+msgstr "&kód v obrázku:"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
@@ -1381,7 +1385,7 @@ msgstr "Nastaviť správanie sa programu"
 
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
-msgstr ""
+msgstr "&Podporte tento projekt!"
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
@@ -1541,7 +1545,7 @@ msgstr "Pozastaviť/spustiť odosielanie"
 
 #: OK_
 msgid "&OK"
-msgstr ""
+msgstr "&OK"
 
 #: Operator.unknown
 msgid "Unknown gateway"
@@ -1609,6 +1613,16 @@ msgid ""
 "to see detailed information about that gateway.</td></tr></table>\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Zoznam dostupných webových brán operátorov.<br>\n"
+"<br>\n"
+"Predpona [XX] označuje krajinu kde daná brána funguje.<br>\n"
+"Predpona [INT] označuje medzinárodne brány.<br>\n"
+"<br>\n"
+"<table><tr><td><img src=\"{0}\"></td><td>Presunutím myši nad jednotlivé "
+"brány v rozbaľovacom menu<br>\n"
+"si zobrazíte podrobnejšie informácie o konkrétnej bráne.</td></tr></table>\n"
+"</html>"
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
@@ -2128,6 +2142,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Kamil Páral https://launchpad.net/~kamil.paral\n"
 "  TomasKovacik https://launchpad.net/~nail-nodomain\n"
+"  helix84 https://launchpad.net/~helix84\n"
 "  sudca https://launchpad.net/~sudca"
 
 #: Undo_
