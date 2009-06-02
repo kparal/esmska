@@ -202,9 +202,26 @@ public class HistoryFrame extends javax.swing.JFrame {
                 searchField.setText(null);
             }
         });
+
+        //focus on Ctrl+F
+        command = "focus search field";
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK), command);
+        getRootPane().getActionMap().put(command, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchField.requestFocusInWindow();
+                searchFieldFocusGained(null);
+            }
+        });
         searchField.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
                 searchFieldFocusGained(evt);
+            }
+        });
+        searchField.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent evt) {
+                searchFieldKeyPressed(evt);
             }
         });
 
@@ -428,6 +445,15 @@ public class HistoryFrame extends javax.swing.JFrame {
     private void searchFieldFocusGained(FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusGained
         searchField.selectAll();
     }//GEN-LAST:event_searchFieldFocusGained
+
+    private void searchFieldKeyPressed(KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN ||
+                evt.getKeyCode() == KeyEvent.VK_UP) {
+            //redirect the event to the history table
+            historyTable.requestFocusInWindow();
+            historyTable.dispatchEvent(evt);
+        }
+    }//GEN-LAST:event_searchFieldKeyPressed
 
     /** Delete sms from history */
     private class DeleteAction extends AbstractAction {
