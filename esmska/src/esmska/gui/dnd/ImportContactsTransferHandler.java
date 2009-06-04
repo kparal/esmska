@@ -63,17 +63,19 @@ public class ImportContactsTransferHandler extends TransferHandler {
     @Override
     public boolean importData(TransferSupport support) {
         if (!canImport(support)) {
+            logger.warning("Can't import contacts data by drag&drop, unsupported format.");
             return false;
         }
 
         try {
-            //we must text uriListFlavor before stringFlavor, because stringFlavor
+            //we must try uriListFlavor before stringFlavor, because stringFlavor
             //appears to be subset of it
             if (support.isDataFlavorSupported(DataFlavor.javaFileListFlavor) ||
                     support.isDataFlavorSupported(uriListFlavor)) {
-                //dropped file
+                //dropped a file
 
                 if (!isVCard(support)) {
+                    logger.warning("Can't import contacts data by drag&drop, not a vCard file.");
                     return false;
                 }
 
@@ -85,7 +87,7 @@ public class ImportContactsTransferHandler extends TransferHandler {
                 importFrame.importVCardFile(fileName);
                 importFrame.setVisible(true);
             } else if (support.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-                //dropped string
+                //dropped a string
 
                 String data = (String) support.getTransferable().getTransferData(DataFlavor.stringFlavor);
 
@@ -94,6 +96,7 @@ public class ImportContactsTransferHandler extends TransferHandler {
                 StringUtils.trim(data);
                 if (data == null || data.length() > 100 || data.contains("\n")) {
                     //no data, too long or not valid
+                    logger.warning("Can't import contacts data by drag&drop, not a valid string.");
                     return false;
                 }
                 String pNumber = Contact.parseNumber(data);
