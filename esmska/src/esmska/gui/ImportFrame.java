@@ -157,6 +157,7 @@ public class ImportFrame extends javax.swing.JFrame {
         Validate.notNull(fileName);
 
         vcardRadioButton.setSelected(true);
+        updateBrowsePanel();
         cardLayout.show(cardPanel, "browsePanel");
         actualCard = "browsePanel";
         fileTextField.setText(fileName);
