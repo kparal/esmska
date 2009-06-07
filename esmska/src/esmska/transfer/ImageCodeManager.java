@@ -14,7 +14,9 @@ import org.apache.commons.lang.Validate;
 public class ImageCodeManager {
     private static ImageCodeResolver resolver = new DefaultImageCodeResolver();
 
-    /** Get current preferred security image resolver */
+    /** Get current preferred security image resolver. By default the
+     * {@link DefaultImageCodeResolver} is returned.
+     */
     public synchronized static ImageCodeResolver getResolver() {
         return resolver;
     }
