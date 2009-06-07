@@ -48,6 +48,7 @@ import esmska.data.event.ValuedListener;
 import esmska.utils.MiscUtils;
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -59,12 +60,14 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.jvnet.substance.api.ColorSchemeAssociationKind;
 import org.jvnet.substance.api.ComponentState;
 import org.jvnet.substance.api.SubstanceColorScheme;
 import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
+import org.jvnet.substance.painter.border.SubstanceBorderPainter;
 import org.jvnet.substance.painter.highlight.SubstanceHighlightPainter;
 import org.jvnet.substance.skin.SkinChangeListener;
 
@@ -404,7 +407,8 @@ public class QueuePanel extends javax.swing.JPanel {
         private final JList jlist; //list to render
         private SubstanceColorScheme scheme; //current Substance color scheme for this list
         private SubstanceColorScheme borderScheme; //current Substance border color scheme for this list
-        private SubstanceHighlightPainter painter; //current Substance highlight painter for this list
+        private SubstanceHighlightPainter highlPainter; //current Substance highlight painter for this list
+        private SubstanceBorderPainter borderPainter; //current Substance border painter for this list
 
         private final JPanel panel = new JPanel(new BorderLayout()) { //panel to wrap multiple labels
             @Override
@@ -413,9 +417,14 @@ public class QueuePanel extends javax.swing.JPanel {
                 //Substance is not painting highlights on JPanels, therefore we must
                 //handle this painting on our own
                 if (isSubstance && selected) {
-                    painter.paintHighlight((Graphics2D) g, this, getWidth(),
-                            getHeight(), 1f, null, scheme, scheme,
-                            borderScheme, borderScheme, 0f);
+                    highlPainter.paintHighlight((Graphics2D) g, this, getWidth(),
+                            getHeight(), null, scheme, scheme, 1f);
+                    //do some black magic to get component contour - one pixel is
+                    //substracted from right and bottom, bcz it was cut off otherwise
+                    Rectangle contour = new Rectangle(0, 0, getWidth() - 1, getHeight() - 1);
+                    borderPainter.paintBorder((Graphics2D) g, this, getWidth(),
+                            getHeight(), contour, contour, borderScheme,
+                            borderScheme, 1f, true);
                 }
             }
         };
@@ -485,10 +494,14 @@ public class QueuePanel extends javax.swing.JPanel {
             if (!isSubstance) {
                 return;
             }
-            scheme = SubstanceLookAndFeel.getCurrentSkin(jlist).getColorScheme(jlist, ComponentState.SELECTED);
+            scheme = SubstanceLookAndFeel.getCurrentSkin(jlist).getColorScheme(jlist,
+                    ColorSchemeAssociationKind.HIGHLIGHT, ComponentState.SELECTED);
             borderScheme = SubstanceLookAndFeel.getCurrentSkin(jlist).getColorScheme(jlist,
-                    ColorSchemeAssociationKind.BORDER ,ComponentState.SELECTED);
-            painter = SubstanceLookAndFeel.getCurrentSkin(jlist).getHighlightPainter();
+                    ColorSchemeAssociationKind.HIGHLIGHT_BORDER, ComponentState.SELECTED);
+            highlPainter = SubstanceLookAndFeel.getCurrentSkin(jlist).getHighlightPainter();
+            borderPainter = (SubstanceBorderPainter) ObjectUtils.defaultIfNull(
+                    SubstanceLookAndFeel.getCurrentSkin(jlist).getHighlightBorderPainter(),
+                    SubstanceLookAndFeel.getCurrentSkin(jlist).getBorderPainter());
         }
     }
     
