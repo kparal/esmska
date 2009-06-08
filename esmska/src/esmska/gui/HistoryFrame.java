@@ -431,9 +431,14 @@ public class HistoryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_historyTableMouseClicked
 
     private void historyTableKeyPressed(KeyEvent evt) {//GEN-FIRST:event_historyTableKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            evt.consume();
-            resendButton.doClick(0);
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_ENTER: 
+                evt.consume();
+                resendButton.doClick(0);
+                break;
+            case KeyEvent.VK_DELETE:
+                deleteButton.doClick(0);
+                break;
         }
     }//GEN-LAST:event_historyTableKeyPressed
 
