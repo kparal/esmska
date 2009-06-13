@@ -38,6 +38,7 @@ import esmska.data.SMS;
 import esmska.data.Operator;
 import esmska.utils.RuntimeUtils;
 import java.text.MessageFormat;
+import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
@@ -51,6 +52,7 @@ public class PersistenceManager {
     
     private static final String PROGRAM_DIRNAME = "esmska";
     private static final String OPERATOR_DIRNAME = "operators";
+    private static final String BACKUP_DIRNAME = "backups";
     private static final String CONFIG_FILENAME = "settings.xml";
     private static final String GLOBAL_CONFIG_FILENAME = "esmska.conf";
     private static final String CONTACTS_FILENAME = "contacts.csv";
@@ -69,6 +71,7 @@ public class PersistenceManager {
 
     private static File globalOperatorDir = new File(OPERATOR_DIRNAME);
     private static File localOperatorDir = new File(dataDir, OPERATOR_DIRNAME);
+    private static File backupDir = new File(configDir, BACKUP_DIRNAME);
     private static File configFile = new File(configDir, CONFIG_FILENAME);
     private static File globalConfigFile = new File(GLOBAL_CONFIG_FILENAME);
     private static File contactsFile = new File(configDir, CONTACTS_FILENAME);
@@ -128,6 +131,10 @@ public class PersistenceManager {
         if (!localOperatorDir.exists() && !localOperatorDir.mkdirs()) {
             throw new IOException("Can't create local operator dir '" + localOperatorDir.getAbsolutePath() + "'");
         }
+        //create backup dir
+        if (!backupDir.exists() && !backupDir.mkdirs()) {
+            throw new IOException("Can't create backup dir '" + backupDir.getAbsolutePath() + "'");
+        }
     }
     
     /** Set config directory */
@@ -138,6 +145,7 @@ public class PersistenceManager {
         logger.fine("Setting new config dir path: " + path);
 
         configDir = new File(path);
+        backupDir = new File(configDir, BACKUP_DIRNAME);
         configFile = new File(configDir, CONFIG_FILENAME);
         contactsFile = new File(configDir, CONTACTS_FILENAME);
         queueFile = new File(configDir, QUEUE_FILENAME);
@@ -475,6 +483,19 @@ public class PersistenceManager {
             return false;
         }
         return true;
+    }
+
+    /** Proceed with a backup. Backs up today's configuration (if not backed up
+     * already). Preserves last 7 backups, older ones are deleted.
+     */
+    public void backupConfigFiles() throws IOException {
+        BackupManager bm = new BackupManager(backupDir);
+        File[] list = new File[] {
+            configFile, contactsFile, historyFile,
+            keyringFile, queueFile
+        };
+        bm.backupFiles(Arrays.asList(list), false);
+        bm.removeOldBackups(7);
     }
 
     /** Moves file from srcFile to destFile safely (using backup of destFile).

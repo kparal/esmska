@@ -29,6 +29,7 @@ import esmska.transfer.ProxyManager;
 import esmska.utils.L10N;
 import esmska.utils.RuntimeUtils;
 import java.awt.EventQueue;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import javax.swing.SwingUtilities;
@@ -92,13 +93,41 @@ public class Main {
             }
         }
 
-        //load user files
+        //get persistence manager
         PersistenceManager pm = null;
         try {
             if (configPath != null) {
                 PersistenceManager.setCustomDirs(configPath, configPath);
             }
             pm = PersistenceManager.getInstance();
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
+            try {
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        JOptionPane.showMessageDialog(null,
+                                MessageFormat.format(l10n.getString("Main.cant_read_config"),
+                                PersistenceManager.getConfigDir().getAbsolutePath()),
+                                null, JOptionPane.ERROR_MESSAGE);
+                    }
+                });
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Can't display error message", e);
+            }
+        }
+
+        //backup files
+        if (pm != null) {
+            try {
+                pm.backupConfigFiles();
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, "Could not back up configuration", ex);
+            }
+        }
+
+        //load user files
+        if (pm != null) {
             try {
                 pm.loadConfig();
             } catch (Exception ex) {
@@ -142,21 +171,6 @@ public class Main {
                 pm.loadKeyring();
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not load keyring file", ex);
-            }
-        } catch (Exception ex) {
-            logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
-            try {
-                SwingUtilities.invokeAndWait(new Runnable() {
-                    @Override
-                    public void run() {
-                        JOptionPane.showMessageDialog(null,
-                                MessageFormat.format(l10n.getString("Main.cant_read_config"),
-                                PersistenceManager.getConfigDir().getAbsolutePath()),
-                                null, JOptionPane.ERROR_MESSAGE);
-                    }
-                });
-            } catch (Exception e) {
-                logger.log(Level.SEVERE, "Can't display error message", e);
             }
         }
         
