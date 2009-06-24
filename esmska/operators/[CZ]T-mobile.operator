@@ -50,7 +50,8 @@ function getSignatureExtraLength() {
 }
 
 function getDelayBetweenMessages() {
-    return 30
+    // the delay is 30s, but the second 15s is forced during sending
+    return 15
 }
 
 function isLoginRequired() {
