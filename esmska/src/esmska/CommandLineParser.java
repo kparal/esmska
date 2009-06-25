@@ -84,14 +84,14 @@ public class CommandLineParser {
                 isPortable = true;
             }
             if (opts.contains(config)) {
-                configPath = config.getValue();
+                configPath = opts.get(opts.indexOf(config)).getValue();
             }
             if (opts.contains(version)) {
                 System.out.println("Esmska " + Config.getLatestVersion());
                 System.exit(0);
             }
             if (opts.contains(debug)) {
-                String debugMode = debug.getValue();
+                String debugMode = opts.get(opts.indexOf(debug)).getValue();
                 //in network and full mode enable httpclient logging
                 if (StringUtils.equals(debugMode, "network") ||
                         StringUtils.equals(debugMode, "full")) {
