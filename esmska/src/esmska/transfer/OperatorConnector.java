@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -40,7 +41,6 @@ public class OperatorConnector {
             Pattern.CASE_INSENSITIVE);
     private final HttpClient client = new HttpClient();
     private String url;
-    private String[] params;
     private String[] postData;
     private boolean doPost;
     private String textContent;
@@ -116,7 +116,30 @@ public class OperatorConnector {
         this.binaryContent = null;
     }
     // </editor-fold>
-    
+
+    /** Remove specified cookie from the cookie cache. Removes all cookies that
+     * satisfies the requirements (the parameters). The parameters are handled
+     * like having logical AND between them. Any of the parameter may be null to
+     * mean "any value". Therefore all null parameters mean remove all cookies.
+     *
+     * @param name name of the cookie; may be null
+     * @param domain domain of the cookie; may be null
+     * @param path path of the cookie; may be null
+     */
+    public void forgetCookie(String name, String domain, String path) {
+        Cookie[] cookies = client.getState().getCookies();
+        for (int i = 0; i < cookies.length; i++) {
+            Cookie cookie = cookies[i];
+            if ((name == null || name.equals(cookie.getName())) &&
+                    (domain == null || domain.equals(cookie.getDomain())) &&
+                    (path == null || path.equals(cookie.getPath()))) {
+                cookies[i] = null;
+            }
+        }
+        client.getState().clearCookies();
+        client.getState().addCookies(cookies);
+    }
+
     /** Prepare connector for a new connection.
      * @param url URL where to connect. If you specify <tt>params</tt>, this must not 
      *  contain '?'.
@@ -137,7 +160,6 @@ public class OperatorConnector {
             throw new IllegalArgumentException("url");
         }
         this.url = url;
-        this.params = params;
         this.doPost = doPost;
         this.postData = postData;
 

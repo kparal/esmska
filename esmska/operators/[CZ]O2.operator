@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-17"
+    return "2009-07-02"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0"
+    return "0.16.0beta2"
 }
 
 function getWebsite() {
@@ -92,6 +92,10 @@ function send() {
     // show image
     var code = EXEC.recognizeImage(content)
 
+    // request for the security image set a cookie which causes troubles, 
+    // let's discard it
+    EXEC.forgetCookie("PHPSESSID", "sms.1188.cz", null)
+    
     // send message
     postData = ["adress", NUMBER, "code", code, 
                 "text", MESSAGE, "send", "ODESLAT",

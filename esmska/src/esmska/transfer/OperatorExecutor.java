@@ -84,6 +84,13 @@ public class OperatorExecutor {
         }
     }
 
+    /** For description see {@link OperatorConnector#forgetCookie(
+     * java.lang.String, java.lang.String, java.lang.String)}
+     */
+    public void forgetCookie(String name, String domain, String path) {
+        connector.forgetCookie(name, domain, path);
+    }
+
     /** Make a GET request to a provided URL
      * @param url base url where to connect, without any parameters or "?" at the end.
      *            In special cases when you don't use params, you can use url as a full url.
