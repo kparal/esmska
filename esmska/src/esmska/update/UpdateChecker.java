@@ -159,8 +159,11 @@ public class UpdateChecker {
     }
 
     /** Go through all downloaded update information and only leave those operators
-     which are new or updated compared to current ones. This can be used to reload
-     update info after partial update. */
+     * which are new or updated compared to current ones. This can be used to reload
+     * update info after partial update. Also removes operators requiring more recent
+     * program version than available online (stable/unstable depending on config
+     * settings).
+     */
     public void refreshUpdatedOperators() {
         for (Iterator<OperatorUpdateInfo> it = operatorUpdates.iterator(); it.hasNext(); ) {
             OperatorUpdateInfo info = it.next();
@@ -168,6 +171,13 @@ public class UpdateChecker {
             if (op != null && info.getVersion().compareTo(op.getVersion()) <= 0) {
                 //operator is same or older, remove it
                 it.remove();
+                continue;
+            }
+            if (Config.compareProgramVersions(info.getMinProgramVersion(),
+                    getLatestProgramVersion()) > 0) {
+                //required program version is newer than available online, remove it
+                it.remove();
+                continue;
             }
         }
     }
@@ -194,7 +204,7 @@ public class UpdateChecker {
 
     /** Whether an operator update is available */
     public synchronized boolean isOperatorUpdateAvailable() {
-        return !operatorUpdates.isEmpty();
+            return !operatorUpdates.isEmpty();
     }
 
     /** Get info about operator updates 
