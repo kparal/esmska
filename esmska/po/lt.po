@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 20:22+0200\n"
-"PO-Revision-Date: 2009-05-25 22:37+0000\n"
-"Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
+"POT-Creation-Date: 2009-07-02 09:18+0200\n"
+"PO-Revision-Date: 2009-06-30 16:51+0000\n"
+"Last-Translator: dos.lt <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-06-07 11:40+0000\n"
+"X-Launchpad-Export-Date: 2009-07-02 00:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -24,7 +24,7 @@ msgstr "Aš tai pripažįstu"
 
 #: AboutFrame.Credits
 msgid "Credits"
-msgstr "Kreditai"
+msgstr "Padėka kūrėjams"
 
 #: AboutFrame.License
 msgid "License"
@@ -32,11 +32,11 @@ msgstr "Licencija"
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr "Ačiū"
+msgstr "Padėka"
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
-msgstr "Kreditai"
+msgstr "Padėkos"
 
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
@@ -52,7 +52,7 @@ msgstr "Licencija"
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr "<html><a href=\"\">Pradinis</a></html>"
+msgstr "<html><a href=\"\">Pagrindinis puslapis</a></html>"
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -84,7 +84,7 @@ msgstr "Apie Esmska"
 
 #: About_
 msgid "&About"
-msgstr "Apie"
+msgstr "&Apie"
 
 #: Add_contact
 msgid "Add contact"
@@ -96,15 +96,15 @@ msgstr "Pridėti naują kontaktą"
 
 #: Cancel
 msgid "Cancel"
-msgstr "Atšaukti"
+msgstr "Atsisakyti"
 
 #: Cancel_
 msgid "&Cancel"
-msgstr ""
+msgstr "&Atsisakyti"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
-msgstr "Patikrinti programos ir gateway atnaujinimus"
+msgstr "Tikrinti programos ir operatorių atnaujinimus"
 
 #: CheckUpdates_
 msgid "&Updates checker"
@@ -158,7 +158,7 @@ msgstr ""
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr ""
+msgstr "Nustatymai"
 
 #: CommandLineParser.path
 msgid "path"
@@ -172,15 +172,15 @@ msgstr ""
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr ""
+msgstr "Rodyti pagalbą"
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr ""
+msgstr "Naudojimas:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr ""
+msgstr "Spausdinti programos versiją ir išeiti"
 
 #: Compress_
 msgid "&Compress"
@@ -243,7 +243,7 @@ msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request the &delivery report"
-msgstr ""
+msgstr "Pranešti apie pristatytą žinutę"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -275,7 +275,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr ""
+msgstr "&Pagrindiniai"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -300,7 +300,7 @@ msgstr "Numeris:"
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Operatoriai:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
@@ -340,7 +340,7 @@ msgstr ""
 
 #: ConfigFrame.jLabel2.text
 msgid "The &default country prefix number:"
-msgstr ""
+msgstr "Šalies kodas pagal nutylėjimą:"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
@@ -375,6 +375,7 @@ msgstr "Prisijungimo duomenys"
 #: ConfigFrame.loginTextField.toolTipText
 msgid "Username needed for logging in to the operator web gateway"
 msgstr ""
+"Norint prisijungti prie web operatoriaus - nurodykite vartotojo duomenis"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -382,7 +383,7 @@ msgstr ""
 
 #: ConfigFrame.multiplatform_look
 msgid "Multiplatform"
-msgstr ""
+msgstr "Multiplatforma"
 
 #: ConfigFrame.notificationAreaCheckBox.text
 msgid "Show icon in the &notification area"
@@ -1871,7 +1872,8 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Kamil Páral https://launchpad.net/~kamil.paral\n"
-"  TheSpy https://launchpad.net/~sourness"
+"  TheSpy https://launchpad.net/~sourness\n"
+"  dos.lt https://launchpad.net/~smscentras"
 
 #: Undo_
 msgid "&Undo"
@@ -1978,7 +1980,7 @@ msgstr ""
 
 #: UpdateDialog.checkButton.text
 msgid "Check for &updates"
-msgstr ""
+msgstr "Ieškoti atnaujinimų"
 
 #: UpdateDialog.topLabel.text
 msgid ""
@@ -1987,6 +1989,10 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Ieškoti atnaujintų operatorių</h2>\n"
+"Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
+"</html>"
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Įveskite kodą iš paveiklėlio."
