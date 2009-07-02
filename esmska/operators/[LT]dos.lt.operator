@@ -1,0 +1,128 @@
+
+function getName() {
+    return "[LT]dos.lt"
+}
+
+function getVersion() {
+    return "2009-07-02"
+}
+
+function getMaintainer() {
+    return "dos.lt komanda <smscentras@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "0.15.0"
+}
+
+function getWebsite() {
+    return "http://www.dos.lt"
+}
+
+function getDescription() {
+    return "SMS į visus Lietuvos tinklus."
+}
+
+function getCountryPrefix() {
+    return "+370"
+}
+
+function getOperatorPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 800
+}
+
+function getMaxParts() {
+    return 1
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function getSupportedLanguages() {
+    return ["lt"]
+}
+
+function send() {
+   
+    var re, match, content, params, postData, freeSMS
+
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+
+    // send message
+    getData = ["usr", LOGIN, "psw", PASSWORD, "num", NUMBER, "txt", MESSAGE]
+    content = EXEC.getURL("http://www.dos.lt/sms.php", getData)
+
+    // wrong username/nousername
+    re = /ERR:1/
+    match = re.exec(content)
+    if (undefined != match) {
+	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+    
+    // wrong password/nopassword 
+    re = /ERR:2/
+    match = re.exec(content)
+    if (undefined != match) {
+	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }    
+   
+    // invalid number   
+    re=/ERR:3/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
+        return false
+    }
+    
+    // invalid text   
+    re=/ERR:4/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_TEXT)
+        return false
+    }    
+
+    // insufficient credit 
+    re=/ERR:5/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
+        return false
+    }
+
+
+    // check if message was successfully sent
+    re = /OK:/
+    match = re.exec(content)
+    if (undefined != match) {
+    	  return true
+    }
+
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    return false
+}
+
