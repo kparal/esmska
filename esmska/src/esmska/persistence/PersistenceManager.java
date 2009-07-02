@@ -432,6 +432,8 @@ public class PersistenceManager {
         if (canWrite(globalOperatorDir) && (!scriptFileGlobal.exists() || canWrite(scriptFileGlobal))) {
             //first try global dir
             moveFileSafely(temp, scriptFileGlobal);
+            //set readable for everyone
+            scriptFileGlobal.setReadable(true, false);
             logger.finer("Saved operator script into file: " + scriptFileGlobal.getAbsolutePath());
         } else if (canWrite(localOperatorDir) && (!scriptFileLocal.exists() || canWrite(scriptFileLocal))) {
             //second try local dir
