@@ -64,9 +64,7 @@ Runtime requirements
  
 Provided by lib/ directory:
  * Android vCard
-   o http://source.android.com/
-   o extracted only classes handling vCard manipulation
-   o sources mildly modified, available in the lib/ directory
+   o http://code.google.com/p/android-vcard/
  * Apache Commons CLI 1.2
    o http://commons.apache.org/cli/
  * Apache Commons Codec 1.3
