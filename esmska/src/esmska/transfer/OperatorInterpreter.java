@@ -57,10 +57,8 @@ public class OperatorInterpreter {
         }
     }
     
-    /** Send message for provided Operator with provided variables.
-     * @param operator Operator, which should be used to send message.
-     * @param variables Map of OperatorVariable to String. May contain null values.
-     *                  Doesn't have to contain all the keys from OperatorVariable.
+    /** Send a message
+     * @param sms sms to be sent
      * @return whether the message was sent successfully
      */
     public boolean sendMessage(SMS sms) {
