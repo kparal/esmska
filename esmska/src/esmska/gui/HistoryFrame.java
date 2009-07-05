@@ -143,6 +143,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
         deleteButton = new JButton();
         resendButton = new JButton();
         closeButton = new JButton();
@@ -170,7 +171,6 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("HistoryFrame.title")); // NOI18N
-
         deleteButton.setAction(deleteAction);
 
         resendButton.setAction(resendAction);
@@ -206,7 +206,8 @@ public class HistoryFrame extends javax.swing.JFrame {
         //focus on Ctrl+F
         command = "focus search field";
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-            KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK), command);
+            KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+            command);
         getRootPane().getActionMap().put(command, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -233,11 +234,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         clearButton.setMnemonic('r');
         clearButton.setToolTipText(l10n.getString("HistoryFrame.clearButton.toolTipText")); // NOI18N
         clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        /*
-         * HistoryFrame.java
-         *
-         * Created on 27. prosinec 2007, 12:22
-         */ if (RuntimeUtils.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
+        if (RuntimeUtils.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
             clearButton.setVisible(false);
         }
         clearButton.addActionListener(new ActionListener() {
