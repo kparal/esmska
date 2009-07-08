@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import javax.swing.SwingUtilities;
+import org.apache.commons.lang.ArrayUtils;
 
 /** Starter class for the whole program
  *
@@ -184,10 +185,11 @@ public class Main {
                         String runOption = l10n.getString("Main.run_anyway");
                         String quitOption = l10n.getString("Quit");
                         String[] options = new String[]{runOption, quitOption};
+                        options = RuntimeUtils.sortDialogOptions(options);
                         int result = JOptionPane.showOptionDialog(null, l10n.getString("Main.already_running"),
                                 null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
                                 options, quitOption);
-                        if (result != 0) {
+                        if (result != ArrayUtils.indexOf(options, runOption)) {
                             System.exit(0);
                         }
                     }
