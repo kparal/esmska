@@ -77,7 +77,7 @@ import org.jvnet.substance.skin.SkinChangeListener;
  */
 public class QueuePanel extends javax.swing.JPanel {
     public static enum Events {
-        /** A message wants to be edit. Event value: sms to be edited. */
+        /** A message wants to be edited. Event value: sms to be edited. */
         SMS_EDIT_REQUESTED;
     }
 
@@ -298,8 +298,6 @@ public class QueuePanel extends javax.swing.JPanel {
             if (sms == null) {
                 return;
             }
-            queue.remove(sms);
-            
             //fire event
             logger.fine("SMS requested for editing: " + sms.toDebugString());
             valuedSupport.fireEventOccured(Events.SMS_EDIT_REQUESTED, sms);

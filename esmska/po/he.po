@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 09:18+0200\n"
+"POT-Creation-Date: 2009-07-09 00:48+0200\n"
 "PO-Revision-Date: 2009-06-07 12:46+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1681,6 +1681,16 @@ msgstr "שע'"
 #: QueuePanel.minute_shortcut
 msgid "m"
 msgstr "ד'"
+
+#: QueuePanel.replaceSms
+msgid ""
+"<html>\n"
+"<h2>Replace the text?</h2>\n"
+"You are currently composing a new message. Do you want to discard the "
+"text<br>\n"
+"and replace it with the selected message from the queue?\n"
+"</html>"
+msgstr ""
 
 #. #Shortcut for "second"
 #: QueuePanel.second_shortcut

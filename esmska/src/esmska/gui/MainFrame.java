@@ -83,6 +83,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
 
@@ -469,7 +470,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(toolsMenu);
 
-        Mnemonics.setLocalizedText(helpMenu, l10n.getString("MainFrame.helpMenu.text")); // NOI18N
+        Mnemonics.setLocalizedText(helpMenu,l10n.getString("MainFrame.helpMenu.text")); // NOI18N
         faqMenuItem.setAction(Actions.getBrowseAction(Links.FAQ));
         faqMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/faq-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text"));
@@ -478,25 +479,25 @@ public class MainFrame extends javax.swing.JFrame {
 
         getHelpMenuItem.setAction(Actions.getBrowseAction(Links.FORUM));
         getHelpMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/getHelp-16.png"))); // NOI18N
-        Mnemonics.setLocalizedText(getHelpMenuItem, l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(getHelpMenuItem,l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
         getHelpMenuItem.setToolTipText(l10n.getString("MainFrame.getHelpMenuItem.toolTipText")); // NOI18N
         helpMenu.add(getHelpMenuItem);
 
         translateMenuItem.setAction(Actions.getBrowseAction(Links.TRANSLATE));
         translateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/translate-16.png"))); // NOI18N
-        Mnemonics.setLocalizedText(translateMenuItem, l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(translateMenuItem,l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
         translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
         helpMenu.add(translateMenuItem);
 
         problemMenuItem.setAction(Actions.getBrowseAction(Links.ISSUES));
         problemMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/bug-16.png"))); // NOI18N
-        Mnemonics.setLocalizedText(problemMenuItem, l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(problemMenuItem,l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
         problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
         helpMenu.add(problemMenuItem);
 
         donateMenuItem.setAction(Actions.getBrowseAction(Links.DONATE));
         donateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/heart-16.png"))); // NOI18N
-        Mnemonics.setLocalizedText(donateMenuItem, l10n.getString("MainFrame.donateMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(donateMenuItem,l10n.getString("MainFrame.donateMenuItem.text")); // NOI18N
         donateMenuItem.setToolTipText(l10n.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         helpMenu.add(donateMenuItem);
         helpMenu.add(helpSeparator);
@@ -811,7 +812,24 @@ public class MainFrame extends javax.swing.JFrame {
                     if (sms == null) {
                         return;
                     }
+                    //if currently writing some sms then ask whether to overwrite text
+                    if (StringUtils.isNotEmpty(smsPanel.getText().trim())) {
+                        String replaceOption = l10n.getString("Replace");
+                        String cancelOption = l10n.getString("Cancel");
+                        String[] options = new String[]{cancelOption, replaceOption};
+                        options = RuntimeUtils.sortDialogOptions(options);
+                        int result = JOptionPane.showOptionDialog(MainFrame.this, 
+                                new JLabel(l10n.getString("QueuePanel.replaceSms")),
+                                null, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                                options, replaceOption);
+                        //if not chosen to replace don't do anything
+                        if (result != ArrayUtils.indexOf(options, replaceOption)) {
+                            return;
+                        }
+                    }
+                    //edit the message
                     smsPanel.setSMS(sms);
+                    queue.remove(sms);
                     break;
             }
         }
