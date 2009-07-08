@@ -114,6 +114,7 @@ public class RuntimeUtils {
         return isSunJava() || isOpenJDK() || isAppleJava();
     }
 
+    @SuppressWarnings("unchecked")
     /** Sorts options provided to dialog as a buttons according to current look
      * and feel. Some L&Fs are reversing order of the buttons, which is an
      * unwanted behaviour. This method reverts it again for such L&Fs, so options
@@ -151,8 +152,8 @@ public class RuntimeUtils {
      * @return options adjusted to current environment and LaF;
      * null if <code>options</code> was null
      */
-    public static Object[] sortDialogOptions(Object... options) {
-        Object[] reversed = ArrayUtils.clone(options);
+    public static <T> T[] sortDialogOptions(T... options) {
+        T[] reversed = (T[]) ArrayUtils.clone(options);
         ArrayUtils.reverse(reversed);
 
         if (isWindows()) {
@@ -176,6 +177,7 @@ public class RuntimeUtils {
         return options;
     }
 
+    @SuppressWarnings("unchecked")
     /** Sorts options provided to custom dialog as a buttons according to current
      * desktop environment.<br>
      * <br>
@@ -196,10 +198,10 @@ public class RuntimeUtils {
      * In the second case this method will revert the button order to display
      * it like native application.
      */
-    public static Object[] sortOptions(Object... options) {
+    public static <T> T[] sortOptions(T... options) {
         if (isWindows() || isKDEDesktop()) {
             //revert options
-            Object[] reversed = ArrayUtils.clone(options);
+            T[] reversed = (T[]) ArrayUtils.clone(options);
             ArrayUtils.reverse(reversed);
             return reversed;
         }
