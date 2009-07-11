@@ -246,7 +246,8 @@ public class SMSPanel extends javax.swing.JPanel {
     public void setSMS(final SMS sms) {
         recipientField.setNumber(sms.getNumber());
         smsTextPane.setText(sms.getText());
-        
+        smsTextUndoManager.discardAllEdits();
+
         //recipient textfield will change operator, must wait and change operator back
         SwingUtilities.invokeLater(new Runnable() {
             @Override
