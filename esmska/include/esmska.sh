@@ -9,19 +9,17 @@ fi
 # go to the program directory
 cd "`dirname "$SCRIPT"`"
 
+# setup some additional parameters for Mac OS X
+if [ `uname` == "Darwin" ]; then
+    OPS="-Xdock:name=Esmska -Xdock:icon=icons/esmska.png -Dfile.encoding=UTF8 -Dapple.laf.useScreenMenuBar=true"
+fi
+
 # run program
-case "`uname`" in
-    Darwin*)
-        java -Xdock:name=Esmska -Xdock:icon=icons/esmska.png -Dfile.encoding=UTF8 -Dapple.laf.useScreenMenuBar=true -jar esmska.jar $*
-        ;;
-    *)
-        if [ "$JAVA_HOME" ]; then
-            "$JAVA_HOME"/bin/java -jar esmska.jar $*
-                             else
-            java -jar esmska.jar $*
-        fi
-    ;;
-esac
+if [ "$JAVA_HOME" ]; then
+    "$JAVA_HOME"/bin/java $OPS -jar esmska.jar $*
+                     else
+    java $OPS -jar esmska.jar $*
+fi
 
 # return exitcode
 EXITCODE="$?"
