@@ -10,12 +10,20 @@ fi
 cd "`dirname "$SCRIPT"`"
 
 # run program
-if [ "$JAVA_HOME" ]; then
-    "$JAVA_HOME"/bin/java -jar esmska.jar $*
-                     else
-    java -jar esmska.jar $*
-fi
+case "`uname`" in
+    Darwin*)
+        java -Xdock:name=Esmska -Xdock:icon=icons/esmska.png -Dfile.encoding=UTF8 -Dapple.laf.useScreenMenuBar=true -jar esmska.jar $*
+        ;;
+    *)
+        if [ "$JAVA_HOME" ]; then
+            "$JAVA_HOME"/bin/java -jar esmska.jar $*
+                             else
+            java -jar esmska.jar $*
+        fi
+    ;;
+esac
 
 # return exitcode
 EXITCODE="$?"
 exit ${EXITCODE}
+
