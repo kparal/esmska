@@ -91,14 +91,14 @@ public class OperatorInterpreter {
             sentOk = (Boolean) invocable.invokeFunction("send", new Object[0]);
             logger.fine("SMS sent ok: " + sentOk);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, "Error executing operator script file", ex);
+            logger.log(Level.SEVERE, "Error executing operator script file " + operator, ex);
             executor.setErrorMessage(OperatorExecutor.ERROR_UKNOWN);
             return false;
         } finally {
             try {
                 reader.close();
             } catch (IOException ex) {
-                logger.log(Level.SEVERE, "Error closing operator script file", ex);
+                logger.log(Level.SEVERE, "Error closing operator script file " + operator, ex);
             }
         }
 
