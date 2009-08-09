@@ -112,13 +112,13 @@ public class VersionFile {
             version.setTextContent(op.getVersion());
             Node download = doc.createElement(TAG_DOWNLOAD);
             URI dlUri = new URI(downloadProtocol, downloadHost, downloadPath + op.getName() + ".operator", null);
-            download.setTextContent(dlUri.toURL().toString());
+            download.setTextContent(dlUri.toASCIIString());
             Node minVersion = doc.createElement(TAG_MIN_VERSION);
             minVersion.setTextContent(op.getMinProgramVersion());
             Node icon = doc.createElement(TAG_ICON);
             if (op.getIcon() != Icons.OPERATOR_DEFAULT) {
                 URI iconUri = new URI(downloadProtocol, downloadHost, downloadPath + op.getName() + ".png", null);
-                icon.setTextContent(iconUri.toURL().toString());
+                icon.setTextContent(iconUri.toASCIIString());
             }
 
             operator.appendChild(name);

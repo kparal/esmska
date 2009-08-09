@@ -179,7 +179,7 @@ public class ImportManager {
             public boolean accept(File pathname) {
                 return pathname.getAbsolutePath().endsWith(".operator") && pathname.canRead();
             }
-            });
+        });
 
         for (File f : files) {
             operatorURLs.add(f.toURI().toURL());
