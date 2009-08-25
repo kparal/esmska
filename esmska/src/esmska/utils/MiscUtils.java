@@ -25,6 +25,7 @@ public class MiscUtils {
         String output = StringEscapeUtils.escapeHtml(input);
         output = output.replaceAll("\\&scaron;", "\\&#353;");
         output = output.replaceAll("\\&Scaron;", "\\&#352;");
+        output = output.replaceAll("\\&euro;", "\\&#8364;");
         return output;
     }
 
