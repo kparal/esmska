@@ -14,7 +14,8 @@ import org.apache.commons.lang.StringEscapeUtils;
 public class MiscUtils {
 
     /** Escape text using html entities.
-     *  Fixes bug in OpenJDK where scaron entity is not replaced by 'š'.
+     *  Fixes bug in OpenJDK where scaron entity is not replaced by 'š' and
+     *  euro by '€'.
      *
      * @see ​StringEscapeUtils#escapeHtml(String)
      */
