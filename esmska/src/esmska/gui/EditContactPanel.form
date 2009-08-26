@@ -27,12 +27,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="operatorComboBox" pref="135" max="32767" attributes="0"/>
+                      <Component id="operatorComboBox" pref="149" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="suggestOperatorButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="nameTextField" alignment="0" pref="169" max="32767" attributes="0"/>
-                  <Component id="numberTextField" alignment="1" pref="169" max="32767" attributes="0"/>
+                  <Component id="nameTextField" alignment="0" pref="183" max="32767" attributes="0"/>
+                  <Component id="numberTextField" alignment="1" pref="183" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>

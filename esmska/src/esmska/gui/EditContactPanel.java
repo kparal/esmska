@@ -157,11 +157,11 @@ public class EditContactPanel extends javax.swing.JPanel {
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(suggestOperatorButton))
-                    .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
+                    .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

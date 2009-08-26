@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-09 00:49+0200\n"
-"PO-Revision-Date: 2009-07-09 00:49+0100\n"
+"POT-Creation-Date: 2009-08-26 20:29+0200\n"
+"PO-Revision-Date: 2009-08-26 20:29+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -224,8 +224,8 @@ msgid "&Delete all login credentials"
 msgstr "O&dstranit všechny přihlašovací údaje"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
-msgid "Delete all usernames and passwords for all operators"
-msgstr "Vymazat uživatelská jména a hesla u všech operátorů"
+msgid "Delete all usernames and passwords for all gateways"
+msgstr "Vymazat uživatelská jména a hesla u všech bran"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
@@ -267,13 +267,12 @@ msgid ""
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
 "to the phone number of the sender. This function is supported only by some "
-"operators.\n"
+"gateways.\n"
 "</html>"
 msgstr ""
 "<html>\n"
 "Vyžádá si zaslání potvrzení o doručení zprávy. Potvrzení přijde<br>\n"
-"na telefonní číslo odesilatele. Tuto funkci podporují pouze někteří "
-"operátoři.\n"
+"na telefonní číslo odesilatele. Tuto funkci podporují pouze některé brány.\n"
 "</html>"
 
 #: ConfigFrame.develLabel.text
@@ -425,8 +424,8 @@ msgid "&Login credentials"
 msgstr "Při&hlašovací údaje"
 
 #: ConfigFrame.loginTextField.toolTipText
-msgid "Username needed for logging in to the operator web gateway"
-msgstr "Uživatelské jméno potřebné k přihlášení k webové bráně operátora"
+msgid "Username needed for logging in to the gateway"
+msgstr "Uživatelské jméno potřebné pro přihlášení k webové bráně"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -460,29 +459,29 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.operatorFilterLabel.text
-msgid "Show &only operator gateways with names containing:"
-msgstr "Zobrazova&t pouze brány operátorů mající v názvu:"
+msgid "Show &only gateways with names containing:"
+msgstr "Zobrazova&t pouze brány mající v názvu:"
 
 #: ConfigFrame.operatorFilterTextField.toolTipText
 msgid ""
 "<html>\n"
-"In the operator list only those will be displayed, which contains<br>\n"
+"In the gateway list only those will be displayed, which contains<br>\n"
 "a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only operators for country XX by entering pattern [XX].<br>\n"
+"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
 "You can enter more patterns separated by comma. Patterns are case "
 "sensitive.\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"V seznamu operátorů budou zobrazeni pouze ti, kteří budou<br>\n"
-"obsahovat ve svém názvu vzor zadaný v tomto poli. Jednoduše tak<br>\n"
-"lze například zobrazit pouze operátory pro zemi XX zadáním vzoru [XX].<br>\n"
+"V seznamu bran budou zobrazeny pouze ty, které ve svém<br>\n"
+"názvu obsahují vzor zadaný v tomto poli. Jednoduše tak lze<br>\n"
+"například zobrazit pouze brány pro zemi XX zadáním vzoru [XX].<br>\n"
 "Lze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n"
 "</html>"
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
-msgid "O&perators"
-msgstr "O&perátoři"
+msgid "&Gateways"
+msgstr "&Brány"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
@@ -707,12 +706,12 @@ msgid ""
 "<html>\n"
 "With signature added the SMS will come to the recipient from the entered "
 "number<br>\n"
-"and signed with entered name. Only some operators support this feature.\n"
+"and signed with entered name. Only some gateways support this feature.\n"
 "</html>"
 msgstr ""
 "<html>\n"
 "Při připojení podpisu přijde SMS adresátovi ze zadaného čísla<br>\n"
-"a podepsaná daným jménem. Tuto funkci podporují pouze někteří operátoři.\n"
+"a podepsaná daným jménem. Tuto funkci podporují pouze některé brány.\n"
 "</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -873,9 +872,8 @@ msgid "Esmska"
 msgstr "Esmska"
 
 #: EditContactPanel.gatewayLabel.text
-msgctxt "EditContactPanel.gatewayLabel.text"
-msgid "&Gateway:"
-msgstr "&Brána:"
+msgid "Default &gateway:"
+msgstr "Výchozí &brána:"
 
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
@@ -993,8 +991,8 @@ msgid "Sent messages history"
 msgstr "Historie odeslaných sms"
 
 #: ExportManager.login
-msgid "Usernames and password to individual operators"
-msgstr "Uživatelská jména a hesla k jednotlivým operátorům"
+msgid "Usernames and password to individual gateways"
+msgstr "Uživatelská jména a hesla k jednotlivým branám"
 
 #: ExportManager.sms_queue
 msgid "SMS queue to be sent"
@@ -1428,9 +1426,9 @@ msgstr "Byla vydána <a href=\"\">nová verze programu</a> ({0})!"
 #: MainFrame.no_operators
 msgid ""
 "<html>\n"
-"<h2>No operators can be found!</h2>\n"
-"The program is useless without the operators. The cause of the problem may "
-"be:<br>\n"
+"<h2>No gateways can be found!</h2>\n"
+"The program is useless without gateways. The cause of the problem may be:"
+"<br>\n"
 "<ul>\n"
 "<li>Your program is incorrectly installed and some of the files<br>\n"
 "are missing or are corrupted. Try to download it again.</li>\n"
@@ -1442,8 +1440,8 @@ msgid ""
 "</ul></html>"
 msgstr ""
 "<html>\n"
-"<h2>Nepodařilo se nalézt žádné operátory!</h2>\n"
-"Bez operátorů je program nepoužitelný. Problém může pramenit z těchto příčin:"
+"<h2>Nepodařilo se nalézt žádné brány!</h2>\n"
+"Bez bran je program nepoužitelný. Problém může pramenit z těchto příčin:"
 "<br>\n"
 "<ul>\n"
 "<li>Váš program je nekorektně nainstalován a chybí mu některé<br>\n"
@@ -1543,6 +1541,7 @@ msgid "&OK"
 msgstr "&OK"
 
 #: Operator.unknown
+msgctxt "Operator.unknown"
 msgid "Unknown gateway"
 msgstr "Neznámá brána"
 
@@ -1598,7 +1597,7 @@ msgstr ""
 #: OperatorComboBox.tooltip
 msgid ""
 "<html>\n"
-"List of available operators'' web gateways.<br>\n"
+"List of available web gateways.<br>\n"
 "<br>\n"
 "Prefix [XX] indicates country for which the gateway works.<br>\n"
 "Prefix [INT] indicates international gateways.<br>\n"
@@ -1609,7 +1608,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Seznam dostupných webových bran operátorů.<br>\n"
+"Seznam dostupných webových bran.<br>\n"
 "<br>\n"
 "Předpona [XX] označuje zemi, pro kterou daná brána funguje.<br>\n"
 "Předpona [INT] označuje mezinárodní brány.<br>\n"
@@ -1621,29 +1620,27 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
-"You are sending the message too early. The operator either requires a "
-"certain interval<br>you have to wait before sending another message or it "
+"You are sending the message too early. The gateway either requires a certain "
+"interval<br>you have to wait before sending another message or it "
 "limits<br>the maximum number of possible messages in some time period. Try "
 "it later."
 msgstr ""
-"Odesíláte zprávu příliš brzy. Operátor buď vyžaduje určitý interval,"
-"<br>který je nutný vyčkat před odesláním další zprávy, nebo "
-"omezuje<br>maximální možný počet zpráv za jistý časový úsek. Zkuste to "
-"později."
+"Odesíláte zprávu příliš brzy. Brána buď vyžaduje určitý interval,<br>který "
+"je nutný vyčkat před odesláním další zprávy, nebo omezuje<br>maximální možný "
+"počet zpráv za jistý časový úsek. Zkuste to později."
 
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
 msgstr "Pro odeslání této zprávy nemáte dostatečný kredit."
 
 #: OperatorExecutor.ERROR_NO_REASON
-msgid ""
-"The operator hasn't specified any reason why the message sending failed."
+msgid "The gateway hasn't specified any reason why the message sending failed."
 msgstr ""
-"Operátor blíže neupřesnil žádný důvod, proč odeslání této zprávy selhalo."
+"Brána blíže neupřesnila žádný důvod, proč odeslání této zprávy selhalo."
 
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
-msgid "A message from operator:<br>"
-msgstr "Zpráva od operátora:<br>"
+msgid "A message from the gateway:<br>"
+msgstr "Zpráva od brány:<br>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_UKNOWN
@@ -1652,16 +1649,16 @@ msgid ""
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
-"gateway version</a>.<br><br>If the problem persists and operator <a href="
-"\"{1}\">web gateway</a> works,<br>report the problem on <a href=\"{2}"
-"\">program homepage</a>."
+"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
+"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
+"homepage</a>."
 msgstr ""
 "Došlo k neznámé chybě. Poskytovatel brány zřejmě změnil<br>své webové "
 "stránky, nebo s nimi má aktuálně potíže.<br>Zkuste to později.<br><br>Taktéž "
 "se ujistěte, že máte funkční připojení k Internetu<br>a že používáte <a href="
 "\"{0}\">nejnovější verzi programu a brány</a>.<br><br>Pokud potíže přetrvají "
-"a <a href=\"{1}\">webová brána</a> operátora funguje,<br>nahlaste problém na "
-"<a href=\"{2}\">domovských stránkách programu</a>."
+"a <a href=\"{1}\">webová brána</a> funguje,<br>nahlaste problém na <a href="
+"\"{2}\">domovských stránkách programu</a>."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_WRONG_AUTH
@@ -1713,8 +1710,8 @@ msgstr ""
 "<b>nemusela</b> být doručena."
 
 #: OperatorInterpreter.unknown_operator
-msgid "Unknown operator!"
-msgstr "Neznámý operátor!"
+msgid "Unknown gateway!"
+msgstr "Neznámá brána!"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1917,8 +1914,8 @@ msgstr ""
 "o příčině selhání."
 
 #: SMSSender.no_operator
-msgid "no operator"
-msgstr "žádný operátor"
+msgid "no gateway"
+msgstr "žádná brána"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.sending_message
@@ -1991,10 +1988,8 @@ msgstr "Dostupný seznam webových bran lze v nastavení omezit jen na vybrané.
 
 #. #Write the tip as short as possible
 #: Tip.12
-msgid ""
-"Many operator gateways support adding of custom signature. See preferences."
-msgstr ""
-"Mnoho bran operátorů podporuje přidání vlastního podpisu. Viz nastavení."
+msgid "Many gateways support adding a custom signature. See preferences."
+msgstr "Mnoho bran podporuje přidání vlastního podpisu. Viz nastavení."
 
 #. #Write the tip as short as possible
 #: Tip.13
@@ -2149,9 +2144,10 @@ msgstr ""
 msgid "&Undo"
 msgstr "&Zpět"
 
-#: Unknown_operator
-msgid "Unknown operator"
-msgstr "Neznámý operátor"
+#: UnknownGateway
+msgctxt "UnknownGateway"
+msgid "Unknown gateway"
+msgstr "Neznámá brána"
 
 #: Unpause_queue
 msgid "Unpause queue"
@@ -2272,6 +2268,22 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid "O&perators"
+#~ msgstr "O&perátoři"
+
+#~ msgctxt "EditContactPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Brána:"
+
+#~ msgid "Unknown operator!"
+#~ msgstr "Neznámý operátor!"
+
+#~ msgid "no operator"
+#~ msgstr "žádný operátor"
+
+#~ msgid "Unknown operator"
+#~ msgstr "Neznámý operátor"
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Opište kód z obrázku:"

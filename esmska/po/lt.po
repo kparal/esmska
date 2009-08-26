@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-09 00:48+0200\n"
+"POT-Creation-Date: 2009-08-26 20:22+0200\n"
 "PO-Revision-Date: 2009-06-30 16:51+0000\n"
 "Last-Translator: dos.lt <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -215,7 +215,8 @@ msgid "&Delete all login credentials"
 msgstr "Ištrinti visus prisijungimo duomenis."
 
 #: ConfigFrame.clearKeyringButton.toolTipText
-msgid "Delete all usernames and passwords for all operators"
+#, fuzzy
+msgid "Delete all usernames and passwords for all gateways"
 msgstr "Ištrinti visų operatorių prisijungimo vardus ir slaptažodžius"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
@@ -251,7 +252,7 @@ msgid ""
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
 "to the phone number of the sender. This function is supported only by some "
-"operators.\n"
+"gateways.\n"
 "</html>"
 msgstr ""
 
@@ -373,7 +374,8 @@ msgid "&Login credentials"
 msgstr "Prisijungimo duomenys"
 
 #: ConfigFrame.loginTextField.toolTipText
-msgid "Username needed for logging in to the operator web gateway"
+#, fuzzy
+msgid "Username needed for logging in to the gateway"
 msgstr ""
 "Norint prisijungti prie web operatoriaus - nurodykite vartotojo duomenis"
 
@@ -402,23 +404,24 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.operatorFilterLabel.text
-msgid "Show &only operator gateways with names containing:"
+msgid "Show &only gateways with names containing:"
 msgstr ""
 
 #: ConfigFrame.operatorFilterTextField.toolTipText
 msgid ""
 "<html>\n"
-"In the operator list only those will be displayed, which contains<br>\n"
+"In the gateway list only those will be displayed, which contains<br>\n"
 "a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only operators for country XX by entering pattern [XX].<br>\n"
+"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
 "You can enter more patterns separated by comma. Patterns are case "
 "sensitive.\n"
 "</html>"
 msgstr ""
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
-msgid "O&perators"
-msgstr "Operatoriai"
+#, fuzzy
+msgid "&Gateways"
+msgstr "&Operatoriai:"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
@@ -603,7 +606,7 @@ msgid ""
 "<html>\n"
 "With signature added the SMS will come to the recipient from the entered "
 "number<br>\n"
-"and signed with entered name. Only some operators support this feature.\n"
+"and signed with entered name. Only some gateways support this feature.\n"
 "</html>"
 msgstr ""
 
@@ -760,9 +763,9 @@ msgid "Esmska"
 msgstr "Esmska"
 
 #: EditContactPanel.gatewayLabel.text
-msgctxt "EditContactPanel.gatewayLabel.text"
-msgid "&Gateway:"
-msgstr ""
+#, fuzzy
+msgid "Default &gateway:"
+msgstr "&Operatoriai:"
 
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
@@ -864,8 +867,9 @@ msgid "Sent messages history"
 msgstr "Išsiųstų žinučių istorija"
 
 #: ExportManager.login
-msgid "Usernames and password to individual operators"
-msgstr ""
+#, fuzzy
+msgid "Usernames and password to individual gateways"
+msgstr "Ištrinti visų operatorių prisijungimo vardus ir slaptažodžius"
 
 #: ExportManager.sms_queue
 msgid "SMS queue to be sent"
@@ -1250,9 +1254,9 @@ msgstr "Išleista <a href=\"\">nauja ({0}) programos versija</a>!"
 #: MainFrame.no_operators
 msgid ""
 "<html>\n"
-"<h2>No operators can be found!</h2>\n"
-"The program is useless without the operators. The cause of the problem may "
-"be:<br>\n"
+"<h2>No gateways can be found!</h2>\n"
+"The program is useless without gateways. The cause of the problem may be:"
+"<br>\n"
 "<ul>\n"
 "<li>Your program is incorrectly installed and some of the files<br>\n"
 "are missing or are corrupted. Try to download it again.</li>\n"
@@ -1352,8 +1356,10 @@ msgid "&OK"
 msgstr ""
 
 #: Operator.unknown
+#, fuzzy
+msgctxt "Operator.unknown"
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Nežinomas operatorius"
 
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Guess a suitable gateway"
@@ -1398,7 +1404,7 @@ msgstr ""
 #: OperatorComboBox.tooltip
 msgid ""
 "<html>\n"
-"List of available operators'' web gateways.<br>\n"
+"List of available web gateways.<br>\n"
 "<br>\n"
 "Prefix [XX] indicates country for which the gateway works.<br>\n"
 "Prefix [INT] indicates international gateways.<br>\n"
@@ -1411,8 +1417,8 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
-"You are sending the message too early. The operator either requires a "
-"certain interval<br>you have to wait before sending another message or it "
+"You are sending the message too early. The gateway either requires a certain "
+"interval<br>you have to wait before sending another message or it "
 "limits<br>the maximum number of possible messages in some time period. Try "
 "it later."
 msgstr ""
@@ -1422,12 +1428,12 @@ msgid "You don't have sufficient credit to send this message."
 msgstr "Jūs neturite pakankamai kreditų išsiųsti šiai žinutei."
 
 #: OperatorExecutor.ERROR_NO_REASON
-msgid ""
-"The operator hasn't specified any reason why the message sending failed."
+msgid "The gateway hasn't specified any reason why the message sending failed."
 msgstr ""
 
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
-msgid "A message from operator:<br>"
+#, fuzzy
+msgid "A message from the gateway:<br>"
 msgstr "Žinutė nuo operatoriaus:<br>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1437,9 +1443,9 @@ msgid ""
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
-"gateway version</a>.<br><br>If the problem persists and operator <a href="
-"\"{1}\">web gateway</a> works,<br>report the problem on <a href=\"{2}"
-"\">program homepage</a>."
+"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
+"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
+"homepage</a>."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1484,7 +1490,8 @@ msgid ""
 msgstr ""
 
 #: OperatorInterpreter.unknown_operator
-msgid "Unknown operator!"
+#, fuzzy
+msgid "Unknown gateway!"
 msgstr "Nežinomas operatorius!"
 
 #: Pause_queue
@@ -1670,8 +1677,9 @@ msgid ""
 msgstr ""
 
 #: SMSSender.no_operator
-msgid "no operator"
-msgstr ""
+#, fuzzy
+msgid "no gateway"
+msgstr "&Operatoriai:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.sending_message
@@ -1744,8 +1752,7 @@ msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.12
-msgid ""
-"Many operator gateways support adding of custom signature. See preferences."
+msgid "Many gateways support adding a custom signature. See preferences."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -1889,8 +1896,10 @@ msgstr ""
 msgid "&Undo"
 msgstr ""
 
-#: Unknown_operator
-msgid "Unknown operator"
+#: UnknownGateway
+#, fuzzy
+msgctxt "UnknownGateway"
+msgid "Unknown gateway"
 msgstr "Nežinomas operatorius"
 
 #: Unpause_queue
@@ -2003,6 +2012,9 @@ msgstr ""
 "<h2>Ieškoti atnaujintų operatorių</h2>\n"
 "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
 "</html>"
+
+#~ msgid "O&perators"
+#~ msgstr "Operatoriai"
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Įveskite kodą iš paveiklėlio."
