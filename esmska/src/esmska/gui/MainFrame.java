@@ -575,8 +575,8 @@ public class MainFrame extends javax.swing.JFrame {
     /** Saves history of sent sms */
     private void createHistory(SMS sms) {
         History.Record record = new History.Record(sms.getNumber(), sms.getText(),
-                sms.getOperator(), sms.getName(), sms.getSenderName(),
-                sms.getSenderNumber(), null);
+                sms.getOperator(), sms.getName(), sms.getSenderNumber(),
+                sms.getSenderName(), null);
         history.addRecord(record);
     }
     

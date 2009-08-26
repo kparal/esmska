@@ -120,7 +120,7 @@ public class ImportManager {
                 Date date = df.parse(dateString);
 
                 History.Record record = new History.Record(number, text, operator,
-                        name, senderName, senderNumber, date);
+                        name, senderNumber, senderName, date);
                 history.add(record);
             }
         } finally {
