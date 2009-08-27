@@ -1,45 +1,43 @@
 #!/bin/bash
 
-# Creates a tarball containing POT file and czech PO file
-# intended for import in Launchpad Translations
+# Exports all translations to a bazaar branch to be used by Launchpad
 
-# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii
+# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii, bzr
 
 # trap and exit on error
 set -e
 trap "echo Export failed." ERR
 
 # usage
-if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
-    echo "Usage: $0 output_tarball"
-    echo "Example: $0 lp-esmska.tar.gz"
+if [ $# != 0 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0"
+    echo "Example: $0"
     exit 1
 fi
-
-# get absolute path of output file
-FILE=`readlink -f "$1"`
 
 # go to the program directory
 cd "`dirname "$0"`"
 
 PODIR="$PWD/../po"
+BZRDIR="$PWD/../../../translations/import"
 
 # update translations
 ./update-translations
 
+# copy translations
 cd "$PODIR"
+echo "Copying files..."
+cp esmska.pot "$BZRDIR"
 
 # remove value from translator-credits because of Launchpad bug #278955
 for PO in *.po; do
-    mv "$PO" "${PO}_orig"
-    sed 's/^".*Launchpad Contributions.*"$/""/' "${PO}_orig" | 
-      sed 's/^".*launchpad.net.*"$/""/' > "${PO}"
+    sed 's/^".*Launchpad Contributions.*"$/""/' "$PO" | 
+      sed 's/^".*launchpad.net.*"$/""/' > "$BZRDIR/$PO"
 done
 
-# create tarball
-tar czf "$FILE" esmska.pot *.po
+# commit changes
+cd "$BZRDIR"
+echo "Commiting changes..."
+bzr add .
+bzr commit -m "translation update"
 
-# rename files back
-for PO in *.po; do
-    mv "${PO}_orig" "${PO}"
-done

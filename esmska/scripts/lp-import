@@ -26,7 +26,7 @@ echo "Updating bazaar checkout..."
 bzr update "$BZRDIR"
 
 # copy
-echo "Copying new files..."
+echo "Copying files..."
 cd "$BZRDIR"
 for PO in `find . -name '*.po'`; do
     FILE=`basename "$PO"`
