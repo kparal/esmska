@@ -14,6 +14,8 @@ cd "`dirname "$0"`"
 DESKTOP="../resources/esmska.desktop"
 L10N="../src/esmska/resources"
 
+echo "Updating desktop file..."
+
 # delete old lines
 sed -i -r '/^Name|^GenericName|^Comment/d' "$DESKTOP"
 

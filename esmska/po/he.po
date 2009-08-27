@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-26 20:22+0200\n"
-"PO-Revision-Date: 2009-06-07 12:46+0000\n"
+"POT-Creation-Date: 2009-08-27 12:37+0200\n"
+"PO-Revision-Date: 2009-07-02 08:44+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-07-02 00:08+0000\n"
+"X-Launchpad-Export-Date: 2009-08-27 09:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -217,9 +217,8 @@ msgid "&Delete all login credentials"
 msgstr "&מחק את כל פרטי ההתחברות"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
-#, fuzzy
 msgid "Delete all usernames and passwords for all gateways"
-msgstr "מחיקת שם המשתמש והסיסמה עבור כל המפעילות"
+msgstr ""
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
@@ -255,7 +254,6 @@ msgid "Request the &delivery report"
 msgstr "מבקש את דוח &ההעברה"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
@@ -264,10 +262,6 @@ msgid ""
 "gateways.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"יבקש את שליחת דוח ההעברה של ההודעה. הדוח יגיע אל מספר הטלפון של השולח.<br>\n"
-"פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
-"</html>"
 
 #: ConfigFrame.develLabel.text
 msgid ""
@@ -414,9 +408,8 @@ msgid "&Login credentials"
 msgstr "&פרטי התחברות"
 
 #: ConfigFrame.loginTextField.toolTipText
-#, fuzzy
 msgid "Username needed for logging in to the gateway"
-msgstr "נדרש שם משתמש לצורך התחברות אל שער הגישה של הספק"
+msgstr ""
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -449,12 +442,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.operatorFilterLabel.text
-#, fuzzy
 msgid "Show &only gateways with names containing:"
-msgstr "הצג שערי גישה של מפעילים בעלי שמות המכילים:"
+msgstr ""
 
 #: ConfigFrame.operatorFilterTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "In the gateway list only those will be displayed, which contains<br>\n"
@@ -464,17 +455,10 @@ msgid ""
 "sensitive.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"ברשימת המפעילים יופיעו אך ורק מפעילים, המכילים תבנית בשם המסופק<br>\n"
-"בשדה זה. בדרך זו תוכל להציג מפעילים רק עבור המדינה XX על ידי הזנת התבנית "
-"[XX].<br>\n"
-"תוכל להזין תבניות נוספות המופרדות בפסיקים. התבניות תלויות רישיות.\n"
-"</html>"
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "&Gateways"
-msgstr "שער &גישה:"
+msgstr ""
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
@@ -685,7 +669,6 @@ msgid "Add a sender &signature to the message"
 msgstr "הוסף חתימת &שולח להודעה"
 
 #: ConfigFrame.useSenderIDCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "With signature added the SMS will come to the recipient from the entered "
@@ -693,11 +676,6 @@ msgid ""
 "and signed with entered name. Only some gateways support this feature.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"עם תוספת חתימה, הודעת ה־ SMS תגיע אל הנמען מהמספר שהוזן וחתומה בשם שהוזן."
-"<br>\n"
-"רק כמה מהמפעילים תומכים בתכונה זו.\n"
-"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.user_directory
@@ -855,9 +833,8 @@ msgid "Esmska"
 msgstr "Esmska"
 
 #: EditContactPanel.gatewayLabel.text
-#, fuzzy
 msgid "Default &gateway:"
-msgstr "שער &גישה:"
+msgstr ""
 
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
@@ -975,9 +952,8 @@ msgid "Sent messages history"
 msgstr "היסטוריית ההודעות שנשלחו"
 
 #: ExportManager.login
-#, fuzzy
 msgid "Usernames and password to individual gateways"
-msgstr "שמות משתמש וסיסמאות למפעילים מסויימים"
+msgstr ""
 
 #: ExportManager.sms_queue
 msgid "SMS queue to be sent"
@@ -1503,10 +1479,9 @@ msgid "&OK"
 msgstr ""
 
 #: Operator.unknown
-#, fuzzy
 msgctxt "Operator.unknown"
 msgid "Unknown gateway"
-msgstr "מפעיל לא ידוע"
+msgstr ""
 
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Guess a suitable gateway"
@@ -1575,14 +1550,12 @@ msgid "You don't have sufficient credit to send this message."
 msgstr "אין לך די אשראי לשליחת הודעה זו."
 
 #: OperatorExecutor.ERROR_NO_REASON
-#, fuzzy
 msgid "The gateway hasn't specified any reason why the message sending failed."
-msgstr "המפעיל לא ציין סיבה כלשהי לכשל בשליחת ההודעה."
+msgstr ""
 
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
-#, fuzzy
 msgid "A message from the gateway:<br>"
-msgstr "הודעה מהמפעיל:<br>"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_UKNOWN
@@ -1640,9 +1613,8 @@ msgstr ""
 "ייתכן שהיא <b>איננה</b> נשלחה."
 
 #: OperatorInterpreter.unknown_operator
-#, fuzzy
 msgid "Unknown gateway!"
-msgstr "מפעיל לא ידוע!"
+msgstr ""
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1838,9 +1810,8 @@ msgstr ""
 "בו השתמשת."
 
 #: SMSSender.no_operator
-#, fuzzy
 msgid "no gateway"
-msgstr "שער גישה:"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.sending_message
@@ -1911,9 +1882,8 @@ msgstr "בהעדפות תוכל להגביל את רשימת שערי הגישה
 
 #. #Write the tip as short as possible
 #: Tip.12
-#, fuzzy
 msgid "Many gateways support adding a custom signature. See preferences."
-msgstr "שערי גישה של מפעילים רבים מוסיף חתימה אישית. עיין בהעדפות."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.13
@@ -2056,10 +2026,9 @@ msgid "&Undo"
 msgstr "&בטל"
 
 #: UnknownGateway
-#, fuzzy
 msgctxt "UnknownGateway"
 msgid "Unknown gateway"
-msgstr "מפעיל לא ידוע"
+msgstr ""
 
 #: Unpause_queue
 msgid "Unpause queue"
@@ -2173,8 +2142,8 @@ msgstr ""
 #~ msgid "&Gateway:"
 #~ msgstr "שער &גישה:"
 
-#~ msgid "no operator"
-#~ msgstr "אין מפעיל"
-
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "אנא הזן את הקוד שבתמונה:"
+
+#~ msgid "no operator"
+#~ msgstr "אין מפעיל"

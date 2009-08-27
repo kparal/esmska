@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Imports PO files exported from Launchpad to PO directory
+# Imports PO files exported from Launchpad to a Bazaar branch
 
-# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii
+# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii, bzr
 
 # trap and exit on error
 set -e
@@ -12,35 +12,31 @@ trap "echo Import failed." ERR
 cd "`dirname "$0"`"
 
 # usage
-if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
-    echo "Usage: $0 lp_tarball_with_translations"
-    echo "Example: $0 launchpad-export.tar.gz"
+if [ $# != 0 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0"
+    echo "Example: $0"
     exit 1
 fi
 
 PODIR="$PWD/../po"
+BZRDIR="$PWD/../../../translations/export"
 
-# create temp dir
-TMPDIR=`mktemp -d -t esmska-lp-import.XXXX`
-
-# extract
-tar xzf "$1" -C "$TMPDIR"
+# update bazaar branch
+echo "Updating bazaar checkout..."
+bzr update "$BZRDIR"
 
 # copy
-cd "$TMPDIR"
-for PO in `find . -name 'esmska-*.po'`; do
+echo "Copying new files..."
+cd "$BZRDIR"
+for PO in `find . -name '*.po'`; do
     FILE=`basename "$PO"`
     LOCALE=${FILE%.po}
-    LOCALE=${LOCALE#esmska-}
     if [ "$LOCALE" = "cs" ]; then
         # don't update czech locale from LP, it is managed internally
         continue
     fi
     cp "$PO" "$PODIR/$LOCALE.po"
 done
-
-# delete temp dir
-rm -r "$TMPDIR"
 
 # update translations
 cd "$OLDPWD"

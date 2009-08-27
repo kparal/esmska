@@ -13,6 +13,7 @@ trap "echo Updating PO files failed." ERR
 # go to the program directory
 cd "`dirname "$0"`"
 
+echo "Updating PO translations..."
 # update POT template
 prop2po --progress none -P ../src/esmska/resources/l10n.properties ../po/esmska.pot
 # sort entries by location
@@ -32,6 +33,7 @@ if ls *.po >/dev/null; then
     done
 fi
 
+echo "Generating properties translations..."
 # generate properties files
 if ls *.po >/dev/null; then
     for PO in *.po; do

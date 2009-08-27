@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-26 20:22+0200\n"
-"PO-Revision-Date: 2009-06-07 12:46+0000\n"
-"Last-Translator: jiri4711 <jwprojekt@gmail.com>\n"
+"POT-Creation-Date: 2009-08-27 12:37+0200\n"
+"PO-Revision-Date: 2009-07-26 17:49+0000\n"
+"Last-Translator: Lukas Bögelein <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-07-02 00:08+0000\n"
+"X-Launchpad-Export-Date: 2009-08-27 09:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -66,7 +66,7 @@ msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid "<html><a href=\"\">Support project</a></html>"
-msgstr ""
+msgstr "<html><a href=\"\">Unterstütze das Projekt</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -178,7 +178,7 @@ msgstr ""
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr ""
+msgstr "Zeige diese Hilfe an."
 
 #: CommandLineParser.usage
 msgid "Usage:"
@@ -194,7 +194,7 @@ msgstr "&Komprimieren"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr ""
+msgstr "Erweiterte Optionen"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
@@ -1876,6 +1876,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Lukas Bögelein https://launchpad.net/~lukas-boegelein\n"
 "  jiri4711 https://launchpad.net/~jwprojekt"
 
 #: Undo_

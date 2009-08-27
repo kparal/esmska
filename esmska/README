@@ -29,6 +29,7 @@ Program license can be found in include/license/.
 
 Project root directory can be opened by NetBeans IDE as its project.
 
+
 Getting program
 ===============
 
@@ -39,6 +40,7 @@ You can check-out any version of Esmska from its subversion repository by using:
 You can also checkout the current development branch by using:
 
  $ svn checkout http://esmska.googlecode.com/svn/trunk
+
 
 Compilation requirements
 ========================
@@ -163,6 +165,7 @@ You should also see the esmska.conf file, which is a system-wide configuration
 file. You can set some default configuration there (like turning off update
 notification for example, when you are distributing program through linux
 repositories).
+
 
 Working with translations
 =========================

@@ -8,6 +8,8 @@ WARNING_MESSAGE="#If you want to use single quotes"
 # go to the program directory
 cd "`dirname "$0"`"
 
+echo "Checking for bad translations..."
+
 cd ../src/esmska/resources
 if ls l10n*.properties >/dev/null; then
     for PROP in l10n*.properties; do
