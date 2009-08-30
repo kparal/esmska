@@ -19,7 +19,7 @@ fi
 cd "`dirname "$0"`"
 
 PODIR="$PWD/../po"
-BZRDIR="$PWD/../../../translations/import"
+BZRDIR="$PWD/../../../translations/export"
 
 # update translations
 ./update-translations
