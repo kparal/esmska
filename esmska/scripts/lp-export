@@ -31,8 +31,7 @@ cp esmska.pot "$BZRDIR"
 
 # remove value from translator-credits because of Launchpad bug #278955
 for PO in *.po; do
-    sed 's/^".*Launchpad Contributions.*"$/""/' "$PO" | 
-      sed 's/^".*launchpad.net.*"$/""/' > "$BZRDIR/$PO"
+    sed '/#\. #Provide names and contacts to translators/,/^$/d' "$PO" > "$BZRDIR/$PO"
 done
 
 # commit changes
