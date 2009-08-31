@@ -81,6 +81,7 @@ import java.beans.Beans;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import org.apache.commons.lang.ArrayUtils;
@@ -249,6 +250,23 @@ public class MainFrame extends javax.swing.JFrame {
             int random = new Random().nextInt(tips.size());
             statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
                     l10n.getString((String)tips.get(random)), null, null, false);
+            //REMOVE: hack for ČPS
+            if (Locale.getDefault().getLanguage().equals("cs") &&
+                    new Date().before(new Date(2009, 9, 10)) &&
+                    (new Random().nextDouble() < 0.3) ||
+                    new Date().after(new Date(2009, 9, 1))) {
+                statusPanel.setStatusMessage(
+                    "<b>Esmska podporuje piráty!</b> Pouze svobodné vody Internetu vám zaručí funkčnost programu " +
+                    "i v budoucnu. <a href='http://www.ceskapiratskastrana.cz'>www.ceskapiratskastrana.cz</a>", null,
+                    new ImageIcon(Icons.class.getResource(RES + "cps-16.png")), true);
+                statusPanel.installClickHandler(new Runnable() {
+                        @Override
+                        public void run() {
+                            Action browseAction = Actions.getBrowseAction("http://www.ceskapiratskastrana.cz");
+                            browseAction.actionPerformed(null);
+                        }
+                    }, "http://www.ceskapiratskastrana.cz");
+            }
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Can't display tip of the day", ex);
         }
