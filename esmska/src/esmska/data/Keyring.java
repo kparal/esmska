@@ -5,7 +5,6 @@
 package esmska.data;
 
 import esmska.data.event.ActionEventSupport;
-import esmska.data.Tuple;
 import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
