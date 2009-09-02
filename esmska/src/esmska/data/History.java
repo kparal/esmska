@@ -70,7 +70,7 @@ public class History {
     public void addRecord(Record record) {
         records.add(record);
         actionSupport.fireActionPerformed(ACTION_ADD_RECORD, null);
-        logger.finer("New history record added: " + record.toDebugString());
+        logger.finer("New history record added: " + record);
     }
     
     /** add new records */
@@ -86,7 +86,7 @@ public class History {
     public void removeRecord(Record record) {
         records.remove(record);
         actionSupport.fireActionPerformed(ACTION_REMOVE_RECORD, null);
-        logger.finer("A history record removed: " + record.toDebugString());
+        logger.finer("A history record removed: " + record);
     }
     
     /** remove existing records */
@@ -260,9 +260,9 @@ public class History {
         }
         // </editor-fold>
 
-        public String toDebugString() {
-            return "[name=" + name + ", number=" + Contact.anonymizeNumber(number) +
-                    ", operator=" + operator + "]";
+        @Override
+        public String toString() {
+            return "[date=" + date + ", name=" + name + "]";
          }
     }
 }

@@ -523,7 +523,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             if (selectedHistory == null) {
                 return;
             }
-            logger.fine("Forwarding message from history: " + selectedHistory.toDebugString());
+            logger.fine("Forwarding message from history: " + selectedHistory);
             //fire event and close
             valuedSupport.fireEventOccured(Events.RESEND_SMS, selectedHistory);
             closeButton.doClick(0);
