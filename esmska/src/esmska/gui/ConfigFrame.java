@@ -14,6 +14,7 @@ import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
 import esmska.data.Operator;
+import esmska.data.Operators;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -65,6 +66,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.InputVerifier;
@@ -710,7 +713,15 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap(210, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab(l10n.getString("ConfigFrame.operatorPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), operatorPanel); // NOI18N
+        tabbedPane.addTab(l10n.getString("ConfigFrame.operatorPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), operatorPanel); //find first operator for which we have key and select it
+        SortedSet<String> operators = new TreeSet<String>(keyring.getOperatorNames());
+        for (String operator : operators) {
+            Operator op = Operators.getOperator(operator);
+            if (op != null) {
+                operatorComboBox.setSelectedOperator(operator);
+                break;
+            }
+        }
         operatorComboBoxItemStateChanged(null);
 
         operatorComboBox.addItemListener(new ItemListener() {
@@ -823,7 +834,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
             .addComponent(jLabel13)
             .addContainerGap())
     );

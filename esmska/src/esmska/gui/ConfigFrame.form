@@ -795,7 +795,7 @@
                       <Component id="showPasswordCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="154" max="32767" attributes="0"/>
+                      <EmptySpace pref="169" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -808,7 +808,7 @@
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="operatorComboBoxItemStateChanged"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBoxItemStateChanged(null);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="//find first operator for which we have key and select it&#xa;SortedSet&lt;String&gt; operators = new TreeSet&lt;String&gt;(keyring.getOperatorNames());&#xa;for (String operator : operators) {&#xa;    Operator op = Operators.getOperator(operator);&#xa;    if (op != null) {&#xa;        operatorComboBox.setSelectedOperator(operator);&#xa;        break;&#xa;    }&#xa;}&#xa;operatorComboBoxItemStateChanged(null);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
