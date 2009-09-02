@@ -369,7 +369,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
             JLabel label = ((JLabel)c);
 
             //set text
-            label.setText(sms.toString());
+            label.setText(sms.getRecipient());
             //add operator logo
             Operator operator = Operators.getOperator(sms.getOperator());
             label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);

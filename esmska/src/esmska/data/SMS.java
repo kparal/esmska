@@ -77,6 +77,12 @@ public class SMS {
         return StringUtils.isNotEmpty(getErrMsg());
     }
 
+    /** Return name of the recipient, or if that's empty, his number
+     */
+    public String getRecipient() {
+        return StringUtils.defaultIfEmpty(name, number);
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
     /** Recepient number in international format (starting with "+").
         Never null nor empty. */
@@ -182,13 +188,13 @@ public class SMS {
     void setStatus(Status status) {
         Validate.notNull(status);
         this.status = status;
-        logger.finer("SMS status changed: " + toDebugString());
+        logger.finer("SMS " + this + " has a new status: " + this.status);
     }
 
     /** Error message from sending. Null value is changed to empty string. */
     public void setErrMsg(String errMsg) {
         this.errMsg = StringUtils.defaultString(errMsg);
-        logger.finer("SMS error message changed: " + toDebugString());
+        logger.finer("SMS " + this + " has a new error message: " + this.errMsg);
     }
 
     /** Name of the recepient. Null value is changed to empty string. */
@@ -199,15 +205,19 @@ public class SMS {
     /** Message from operator. Null value is changed to empty string. */
     public void setOperatorMsg(String operatorMsg) {
         this.operatorMsg = StringUtils.defaultString(operatorMsg);
-        logger.finer("SMS operator message changed: " + toDebugString());
+        logger.finer("SMS " + this + " has a new operator message: " + this.operatorMsg);
     }
     // </editor-fold>
     
     @Override
     public String toString() {
-        return StringUtils.defaultIfEmpty(getName(), getNumber());
+        return "[recipient=" + StringUtils.defaultIfEmpty(name, Contact.anonymizeNumber(number)) +
+               ", operator=" + operator + "]";
     }
 
+    /** Return very detailed description of the instance, used mainly for
+     * debugging purposes.
+     */
     public String toDebugString() {
         return "[name=" + name + ", number=" + Contact.anonymizeNumber(number) +
                 ", operator=" + operator + ", status=" + status + ", operatorMsg=" +

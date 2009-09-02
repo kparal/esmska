@@ -194,7 +194,7 @@ public class Queue {
         }
 
         if (added) {
-            logger.fine("Added new SMS to queue: " + sms.toDebugString());
+            logger.fine("Added new SMS to queue: " + sms);
             valuedSupport.fireEventOccured(Events.SMS_ADDED, sms);
             markIfReady(sms);
             timer.start();
@@ -242,7 +242,7 @@ public class Queue {
         }
 
         if (removed) {
-            logger.fine("Removed SMS from queue: " + sms.toDebugString());
+            logger.fine("Removed SMS from queue: " + sms);
             valuedSupport.fireEventOccured(Events.SMS_REMOVED, sms);
             markAllIfReady();
         }
@@ -344,7 +344,7 @@ public class Queue {
                 //nothing to move
                 return;
             }
-            logger.fine("Moving sms " + sms.toDebugString() + "with delta " + positionDelta);
+            logger.fine("Moving sms " + sms + "with delta " + positionDelta);
 
             List<SMS> list = queue.get(operator);
             int currentPos = list.indexOf(sms);
@@ -443,7 +443,7 @@ public class Queue {
     public void setSMSSent(SMS sms) {
         Validate.notNull(sms);
 
-        logger.fine("Marking sms as successfully sent: " + sms.toDebugString());
+        logger.fine("Marking sms as successfully sent: " + sms);
         sms.setStatus(SMS.Status.SENT);
         valuedSupport.fireEventOccured(Events.SMS_SENT, sms);
 
@@ -458,7 +458,7 @@ public class Queue {
     public void setSMSSending(SMS sms) {
         Validate.notNull(sms);
 
-        logger.fine("Marking SMS as currently being sent: " + sms.toDebugString());
+        logger.fine("Marking SMS as currently being sent: " + sms);
         sms.setStatus(SMS.Status.SENDING);
         valuedSupport.fireEventOccured(Events.SENDING_SMS, sms);
     }
@@ -469,7 +469,7 @@ public class Queue {
     public void setSMSFailed(SMS sms) {
         Validate.notNull(sms);
 
-        logger.fine("Marking SMS as failed during sending: " + sms.toDebugString());
+        logger.fine("Marking SMS as failed during sending: " + sms);
         //pause the queue when sms fail
         setPaused(true);
         //set sms to be waiting again
@@ -487,7 +487,7 @@ public class Queue {
 
         long delay = getSMSDelay(sms);
         if (sms.getStatus() == SMS.Status.WAITING && delay <= 0) {
-            logger.finer("Marking SMS as ready: " + sms.toDebugString());
+            logger.finer("Marking SMS as ready: " + sms);
             sms.setStatus(SMS.Status.READY);
             valuedSupport.fireEventOccured(Events.NEW_SMS_READY, sms);
         }
@@ -509,7 +509,7 @@ public class Queue {
                         break;
                     }
                     if (sms.getStatus() == SMS.Status.WAITING) {
-                        logger.finer("Marking SMS as ready: " + sms.toDebugString());
+                        logger.finer("Marking SMS as ready: " + sms);
                         sms.setStatus(SMS.Status.READY);
                         ready.add(sms);
                     }

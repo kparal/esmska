@@ -69,7 +69,7 @@ public class SMSSender {
                 continue;
             }
             
-            logger.fine("Sending new SMS: " + sms);
+            logger.fine("Sending new SMS: " + sms.toDebugString());
             queue.setSMSSending(sms);
             
             SMSWorker worker = new SMSWorker(sms);
@@ -82,7 +82,7 @@ public class SMSSender {
     
     /** Handle processed SMS */
     private void finishedSending(SMS sms, boolean success) {
-        logger.fine("Finished sending SMS: " + sms);
+        logger.fine("Finished sending SMS: " + sms.toDebugString());
         workers.remove(sms.getOperator());
         if (success) {
             queue.setSMSSent(sms);

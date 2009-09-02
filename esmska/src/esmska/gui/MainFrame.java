@@ -741,25 +741,25 @@ public class MainFrame extends javax.swing.JFrame {
             statusPanel.setTaskRunning(true);
             log.addRecord(new Log.Record(
                     MessageFormat.format(l10n.getString("SMSSender.sending_message"),
-                    sms, (operator == null ? l10n.getString("SMSSender.no_operator") : operator)),
+                    sms.getRecipient(), (operator == null ? l10n.getString("SMSSender.no_operator") : operator)),
                     null, Icons.STATUS_INFO));
         }
         private void smsSent(SMS sms) {
-            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms),
+            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms.getRecipient()),
                     null, Icons.STATUS_MESSAGE));
             createHistory(sms);
             finish(sms);
         }
         private void smsFailed(SMS sms) {
-            logger.info("Message for " + sms + " could not be sent");
-            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms),
+            logger.info("Message could not be sent: " + sms);
+            log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms.getRecipient()),
                     null, Icons.STATUS_WARNING));
 
             //prepare dialog
             String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
             JHtmlLabel label = new JHtmlLabel(
                     MessageFormat.format(l10n.getString("MainFrame.sms_failed2"),
-                    sms, cause));
+                    sms.getRecipient(), cause));
             label.addValuedListener(new ValuedListener<JHtmlLabel.Events, String>() {
                 @Override
                 public void eventOccured(ValuedEvent<JHtmlLabel.Events, String> e) {

@@ -299,7 +299,7 @@ public class QueuePanel extends javax.swing.JPanel {
                 return;
             }
             //fire event
-            logger.fine("SMS requested for editing: " + sms.toDebugString());
+            logger.fine("SMS requested for editing: " + sms);
             valuedSupport.fireEventOccured(Events.SMS_EDIT_REQUESTED, sms);
         }
     }
