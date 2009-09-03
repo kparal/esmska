@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-17"
+    return "2009-09-03"
 }
 
 function getMaintainer() {
@@ -76,16 +76,12 @@ function send() {
     // start page
     content = EXEC.getURL("https://sms1.client.tmo.cz/sms.jsp", [])
 
-    // search if we are not already logged in (previous logout failed or something)
-    re = /<div class="relogin">/
+    // search if we are already logged in (previous logout failed or something)
+    re = /\/.gang\/logout\/tzones/
     match = re.exec(content)
     if (undefined != match) { // if found
-        re = /Uživatel je již přihlášen/
-        match = re.exec(content)
-        if (undefined != match) { // if found
             // we are already logged in
             logged = true
-        }
     }
 
     // if not logged in, do it
@@ -93,18 +89,19 @@ function send() {
         // post credentials
         postData = ["nextURL", "checkStatus.jsp", "errURL", "clickError.jsp",
                     "username", LOGIN, "password", PASSWORD,
-                    "Submit", ""]
-        content = EXEC.postURL("https://login1.client.tmo.cz/.gang/login", [], postData)
+                    "submit", "Přihlásit"]
+        content = EXEC.postURL("https://www1.t-mobile.cz/.gang/login/tzones", [], postData)
+        content = EXEC.postURL("https://www1.t-mobile.cz/.gang/login/tzones", [], postData)
 
         // seach for errors
-        re = /<div class="error_box">/
+        re = /<div class="error_box">([^]*?)<\/div>/
         match = re.exec(content)
         if (undefined != match) { // if found
             re = /Uživatel je již přihlášen/
-            match = re.exec(content)
-            if (undefined == match) { // if not found
+            match2 = re.exec(content)
+            if (undefined == match2) { // if not found
                 // login was not successfull
-                EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+                EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
                 logout()
                 return false
             }
