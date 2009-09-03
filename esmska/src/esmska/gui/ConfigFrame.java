@@ -64,6 +64,7 @@ import esmska.data.Tuple;
 import esmska.utils.RuntimeUtils;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
@@ -714,7 +715,8 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
 
         tabbedPane.addTab(l10n.getString("ConfigFrame.operatorPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), operatorPanel); //find first operator for which we have key and select it
-        SortedSet<String> operators = new TreeSet<String>(keyring.getOperatorNames());
+        SortedSet<String> operators = new TreeSet<String>(Collator.getInstance());
+        operators.addAll(keyring.getOperatorNames());
         for (String operator : operators) {
             Operator op = Operators.getOperator(operator);
             if (op != null) {
