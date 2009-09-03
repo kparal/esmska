@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashSet;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +27,7 @@ import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 
 /** Class for connecting to HTTP resources and sending GET and POST requests.
  *  For each SMS there should be a separate instance.
@@ -38,6 +40,12 @@ public class OperatorConnector {
             " Gecko/2008092313 Ubuntu/8.04 (hardy) Firefox/3.0.2";
     private static final Pattern metaRedirPattern = Pattern.compile(
             "<meta\\s+http-equiv=[^>]*refresh[^>]*url=([^>]*)(\"|')[^>]*>",
+            Pattern.CASE_INSENSITIVE);
+    private static final Pattern metaCharsetPattern = Pattern.compile(
+            "<meta\\s+http-equiv=[^>]*content-type[^>]*charset=([^>]*)(\"|')[^>]*>",
+            Pattern.CASE_INSENSITIVE);
+    private static final Pattern xmlCharsetPattern = Pattern.compile(
+            "<\\?xml[^>]*encoding=(\"|')([^>]*)(\"|')[^>]*\\?>",
             Pattern.CASE_INSENSITIVE);
     private final HttpClient client = new HttpClient();
     private String url;
@@ -62,6 +70,9 @@ public class OperatorConnector {
         client.getParams().setParameter(HttpClientParams.ALLOW_CIRCULAR_REDIRECTS, true);
         client.getParams().setParameter(HttpClientParams.REJECT_RELATIVE_REDIRECT, false);
         client.getParams().setParameter(HttpClientParams.MAX_REDIRECTS, 50);
+
+        //set UTF-8 as default charset
+        client.getParams().setParameter(HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
@@ -204,6 +215,30 @@ public class OperatorConnector {
         }
     }
 
+    /** Find charset definition inside html/xml file
+     * @param content content retrieved from web page
+     * @return charset name or null if none found
+     */
+    private String findContentCharset(byte[] content) {
+        Validate.notNull(content);
+        try {
+            String text = new String(content, "UTF-8");
+            Matcher matcher = metaCharsetPattern.matcher(text);
+            if (matcher.find()) {
+                String charset = matcher.group(1);
+                return charset;
+            }
+            matcher = xmlCharsetPattern.matcher(text);
+            if (matcher.find()) {
+                String charset = matcher.group(2);
+                return charset;
+            }
+        } catch (Exception ex) {
+            logger.log(Level.FINER, "Could not find encoding of reponse: ", ex);
+        }
+        return null;
+    }
+
     /** Perform GET request.
      * @param url URL where to connect
      * @return true if connection succeeded; false otherwise
@@ -244,7 +279,9 @@ public class OperatorConnector {
 
         //save response
         if (text) { //text content
-            setTextContent(new String(response, method.getResponseCharSet()));
+            String charset = findContentCharset(response);
+            setTextContent(new String(response, 
+                    StringUtils.defaultIfEmpty(charset, method.getResponseCharSet())));
             logger.finest("Retrieved text web content: " + contentType + "\n" +
                     "#### WEB CONTENT START ####\n" + getTextContent() + "\n#### WEB CONTENT END ####");
         } else { //binary content
@@ -312,7 +349,9 @@ public class OperatorConnector {
 
         //save response
         if (text) { //text content
-            setTextContent(new String(response, method.getResponseCharSet()));
+            String charset = findContentCharset(response);
+            setTextContent(new String(response,
+                    StringUtils.defaultIfEmpty(charset, method.getResponseCharSet())));
             logger.finest("Retrieved text web content: " + contentType + "\n" +
                     "#### WEB CONTENT START ####\n" + getTextContent() + "\n#### WEB CONTENT END ####");
         } else { //binary content
