@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-09-03"
+    return "2009-09-04"
 }
 
 function getMaintainer() {
@@ -91,6 +91,9 @@ function send() {
                     "username", LOGIN, "password", PASSWORD,
                     "submit", "Přihlásit"]
         content = EXEC.postURL("https://www1.t-mobile.cz/.gang/login/tzones", [], postData)
+        // it just doesn't work if you send it only once, don't ask me why,
+        // cookie issues maybe
+        // so send it for a second time
         content = EXEC.postURL("https://www1.t-mobile.cz/.gang/login/tzones", [], postData)
 
         // seach for errors
