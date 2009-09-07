@@ -10,6 +10,7 @@ package esmska;
 
 import esmska.data.Config;
 import esmska.utils.L10N;
+import esmska.utils.LogSupport;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -92,27 +93,19 @@ public class CommandLineParser {
             }
             if (opts.contains(debug)) {
                 String debugMode = opts.get(opts.indexOf(debug)).getValue();
-                //in network and full mode enable httpclient logging
-                if (StringUtils.equals(debugMode, "network") ||
-                        StringUtils.equals(debugMode, "full")) {
-                    System.setProperty("org.apache.commons.logging.Log",
-                            "org.apache.commons.logging.impl.SimpleLog");
-                    System.setProperty("org.apache.commons.logging.simplelog.showdatetime",
-                            "true");
-                    System.setProperty("org.apache.commons.logging.simplelog.log.httpclient.wire",
-                            "debug");
-                    System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient",
-                            "debug");
-                }
-                //enable program logging always except network mode
-                if (!StringUtils.equals(debugMode, "network")) {
-                    Logger mainLogger = Logger.getLogger("esmska");
-                    mainLogger.setLevel(Level.ALL);
 
-                    ConsoleHandler console = new ConsoleHandler();
-                    console.setLevel(Level.ALL);
-                    mainLogger.addHandler(console);
-                    mainLogger.setUseParentHandlers(false);
+                //in debug mode always print everything on console
+                LogSupport.getConsoleHandler().setLevel(Level.ALL);
+
+                //enable httpclient debug, restrict program debug
+                if (StringUtils.equals(debugMode, "network")) {
+                    LogSupport.enableHttpClientLogging();
+                    LogSupport.getEsmskaLogger().setLevel(Level.INFO);
+                }
+                //enable httpclient and full program debug (with web content)
+                if (StringUtils.equals(debugMode, "full")) {
+                    LogSupport.enableHttpClientLogging();
+                    LogSupport.getEsmskaLogger().setLevel(Level.ALL);
                 }
             }
 

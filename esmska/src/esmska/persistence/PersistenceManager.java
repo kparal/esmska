@@ -60,6 +60,7 @@ public class PersistenceManager {
     private static final String HISTORY_FILENAME = "history.csv";
     private static final String KEYRING_FILENAME = "keyring.csv";
     private static final String LOCK_FILENAME = "running.lock";
+    private static final String LOG_FILENAME = "console.log";
     private static final String OPERATOR_RESOURCE = "/esmska/operators/scripts";
     
     private static File configDir =
@@ -79,6 +80,7 @@ public class PersistenceManager {
     private static File historyFile = new File(configDir, HISTORY_FILENAME);
     private static File keyringFile = new File(configDir, KEYRING_FILENAME);
     private static File lockFile = new File(configDir, LOCK_FILENAME);
+    private static File logFile = new File(configDir, LOG_FILENAME);
     
     private static boolean customPathSet;
     private FileLock lock;
@@ -152,6 +154,7 @@ public class PersistenceManager {
         historyFile = new File(configDir, HISTORY_FILENAME);
         keyringFile = new File(configDir, KEYRING_FILENAME);
         lockFile = new File(configDir, LOCK_FILENAME);
+        logFile = new File(configDir, LOG_FILENAME);
     }
     
     /** Get configuration directory */
@@ -189,7 +192,12 @@ public class PersistenceManager {
         }
         return persistenceManager;
     }
-    
+
+    /** Get file used for logging */
+    public File getLogFile() {
+        return logFile;
+    }
+
     /** Save program configuration */
     public void saveConfig() throws IOException {
         logger.fine("Saving config...");

@@ -27,8 +27,10 @@ import esmska.gui.MainFrame;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.L10N;
+import esmska.utils.LogSupport;
 import esmska.utils.RuntimeUtils;
 import java.awt.EventQueue;
+import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -48,6 +50,11 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //initialize logging
+        LogSupport.init();
+        //store records for pushing it to logfile later
+        LogSupport.storeRecords(true);
+
         //detect JVM and warn if not not supported
         if (!RuntimeUtils.isSupportedJava()) {
             logger.severe(l10n.getString("Main.unsupported_java"));
@@ -124,6 +131,19 @@ public class Main {
                 pm.backupConfigFiles();
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "Could not back up configuration", ex);
+            }
+        }
+
+        //initialize file logging
+        if (pm != null) {
+            File logFile = pm.getLogFile();
+            try {
+                LogSupport.initFileHandler(logFile);
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, "Could not start logging into " + logFile.getAbsolutePath(), ex);
+            } finally {
+                //no need to store records anymore
+                LogSupport.storeRecords(false);
             }
         }
 
