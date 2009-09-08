@@ -113,6 +113,13 @@ public class PersistenceManager {
             if (StringUtils.isNotEmpty(datDir)) {
                 setDataDir(datDir + File.separator + PROGRAM_DIRNAME);
             }
+
+            //adjust location of some specific files
+            switch (RuntimeUtils.detectOS()) {
+                case MAC_OS_X:
+                    logFile = new File(System.getProperty("user.home") + "/Library/Log", "Esmska.log");
+                    break;
+            }
         }
         
         //create config dir if necessary
