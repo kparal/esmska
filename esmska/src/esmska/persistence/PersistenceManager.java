@@ -502,9 +502,14 @@ public class PersistenceManager {
         BackupManager bm = new BackupManager(backupDir);
         File[] list = new File[] {
             configFile, contactsFile, historyFile,
-            keyringFile, queueFile
+            keyringFile, queueFile, logFile
         };
-        bm.backupFiles(Arrays.asList(list), false);
+        boolean backed = bm.backupFiles(Arrays.asList(list), false);
+        if (backed) {
+            //logfile was backed up, delete it so it won't grow indefinitely,
+            //we will start with a fresh one
+            logFile.delete();
+        }
         bm.removeOldBackups(7);
     }
 

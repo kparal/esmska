@@ -47,8 +47,10 @@ public class BackupManager {
      * @param files files to back up. Not null. Non-existent files are ignored.
      * @param overwrite if backup should overwrite already existing subdirectory
      * (i.e. backup from today)
+     * @return true if files were backed up; false if they weren't (e.g. backup
+     * already existed and wasn't overwritten)
      */
-    public void backupFiles(Collection<File> files, boolean overwrite) throws IOException {
+    public boolean backupFiles(Collection<File> files, boolean overwrite) throws IOException {
         Validate.notNull(files);
 
         String today = dateFormat.format(new Date());
@@ -58,7 +60,7 @@ public class BackupManager {
             if (!overwrite) {
                 logger.fine("Backup already exists in '" + backupDir.getAbsolutePath() +
                         "', skipping backup");
-                return;
+                return false;
             }
         } else {
             FileUtils.forceMkdir(backupDir);
@@ -74,6 +76,7 @@ public class BackupManager {
         }
 
         logger.fine("Files backed up to '" + backupDir.getAbsolutePath() + "'");
+        return true;
     }
 
     /** Clean backup directory from old backup subdirs.
