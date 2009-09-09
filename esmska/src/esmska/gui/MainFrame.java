@@ -223,6 +223,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return instance;
     }
+
+    /** Query if MainFrame was already instantiated */
+    public static boolean isInstantiated() {
+        return instance != null;
+    }
     
     /** Start the mainframe and let it be visible according to user preferences
      * (visible on the screen or hidden to notification area) */
@@ -302,7 +307,7 @@ public class MainFrame extends javax.swing.JFrame {
                     l10n.getString("MainFrame.cant_save_config"),
                     null, JOptionPane.WARNING_MESSAGE);
         }
-        int returnCode = saveOk ? 0 : 1;
+        int returnCode = saveOk ? 0 : 3;
         logger.fine("Exiting program with return code: " + returnCode);
         System.exit(returnCode);
     }

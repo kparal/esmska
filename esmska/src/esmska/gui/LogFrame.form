@@ -115,7 +115,7 @@
           <Image iconType="3" name="/esmska/resources/copy-22.png"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="esmska/resources/l10n.properties" key="LogFrame.copyButton.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="esmska/resources/l10n.properties" key="CopyToClipboard_" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="esmska/resources/l10n.properties" key="LogFrame.copyButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>

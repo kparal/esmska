@@ -48,7 +48,7 @@ import org.apache.commons.lang.Validate;
  */
 public class PersistenceManager {
     private static final Logger logger = Logger.getLogger(PersistenceManager.class.getName());
-    private static PersistenceManager persistenceManager;
+    private static PersistenceManager instance;
     
     private static final String PROGRAM_DIRNAME = "esmska";
     private static final String OPERATOR_DIRNAME = "operators";
@@ -148,7 +148,7 @@ public class PersistenceManager {
     
     /** Set config directory */
     private static void setConfigDir(String path) {
-        if (persistenceManager != null) {
+        if (instance != null) {
             throw new IllegalStateException("Persistence manager already exists");
         }
         logger.fine("Setting new config dir path: " + path);
@@ -171,7 +171,7 @@ public class PersistenceManager {
 
     /** Set data directory */
     private static void setDataDir(String path) {
-        if (persistenceManager != null) {
+        if (instance != null) {
             throw new IllegalStateException("Persistence manager already exists");
         }
         logger.fine("Setting new data dir path: " + path);
@@ -194,10 +194,15 @@ public class PersistenceManager {
     
     /** Get PersistenceManager */
     public static PersistenceManager getInstance() throws IOException {
-        if (persistenceManager == null) {
-            persistenceManager = new PersistenceManager();
+        if (instance == null) {
+            instance = new PersistenceManager();
         }
-        return persistenceManager;
+        return instance;
+    }
+
+    /** Query if PersistenceManager was already instantiated */
+    public static boolean isInstantiated() {
+        return instance != null;
     }
 
     /** Get file used for logging */

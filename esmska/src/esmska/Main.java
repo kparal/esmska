@@ -24,6 +24,7 @@ import javax.swing.UIManager;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.gui.MainFrame;
+import esmska.gui.ExceptionDialog;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.L10N;
@@ -54,6 +55,9 @@ public class Main {
         LogSupport.init();
         //store records for pushing it to logfile later
         LogSupport.storeRecords(true);
+
+        //handle uncaught exceptions
+        Thread.setDefaultUncaughtExceptionHandler(ExceptionDialog.getExceptionHandler());
 
         //detect JVM and warn if not not supported
         if (!RuntimeUtils.isSupportedJava()) {
@@ -169,7 +173,7 @@ public class Main {
                 } catch (Exception e) {
                     logger.log(Level.SEVERE, "Can't display error message", e);
                 }
-                System.exit(1);
+                System.exit(2);
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Could not load operators", ex);
             }

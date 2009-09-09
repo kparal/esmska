@@ -97,6 +97,7 @@ public class LogFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
         jScrollPane1 = new JScrollPane();
         logList = new JList();
         closeButton = new JButton();
@@ -105,13 +106,12 @@ public class LogFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("LogFrame.title")); // NOI18N
-
         logList.setModel(logModel);
         logList.setCellRenderer(new LogRenderer());
         jScrollPane1.setViewportView(logList);
 
         closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
+        Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_"));
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 closeButtonActionPerformed(evt);
@@ -128,7 +128,7 @@ public class LogFrame extends javax.swing.JFrame {
         });
 
         copyButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/copy-22.png"))); // NOI18N
-        Mnemonics.setLocalizedText(copyButton, l10n.getString("LogFrame.copyButton.text")); // NOI18N
+        Mnemonics.setLocalizedText(copyButton, l10n.getString("CopyToClipboard_"));
         copyButton.setToolTipText(l10n.getString("LogFrame.copyButton.toolTipText")); // NOI18N
         copyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
