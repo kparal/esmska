@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-08 01:02+0200\n"
+"POT-Creation-Date: 2009-09-10 00:04+0200\n"
 "PO-Revision-Date: 2009-07-02 08:44+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-07 10:38+0000\n"
+"X-Launchpad-Export-Date: 2009-09-09 11:04+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -760,6 +760,10 @@ msgstr "יי&צוא אנשי קשר"
 msgid "Contact &import"
 msgstr "יי&בוא אנשי קשר"
 
+#: CopyToClipboard_
+msgid "Co&py to clipboard"
+msgstr "ה&עתק ללוח הגזירים"
+
 #: Create
 msgid "Create"
 msgstr "צור"
@@ -885,6 +889,15 @@ msgstr "ערוך את אנשי הקשר הנבחרים"
 #: Edit_selected_message
 msgid "Edit selected message"
 msgstr "ערוך את ההודעה הנבחרת"
+
+#: ExceptionDialog.copyButton.toolTipText
+#, fuzzy
+msgid "Copy the detailed exception message to the system clipboard"
+msgstr "העתק את תוכן הרישום כולו ללוח הגזירים של המערכת"
+
+#: ExceptionDialog.detailsLabel.text
+msgid "Details:"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
@@ -1242,10 +1255,6 @@ msgstr "&נקה"
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
 msgstr "מנקה את הרישום הנוכחי"
-
-#: LogFrame.copyButton.text
-msgid "Co&py to clipboard"
-msgstr "ה&עתק ללוח הגזירים"
 
 #: LogFrame.copyButton.toolTipText
 msgid "Copy the whole log contents to the system clipboard"
@@ -2019,6 +2028,23 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Yaron https://launchpad.net/~sh-yaron"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: UncaughtExceptionDialog.errorLabel
+msgid ""
+"<html>\n"
+"<h2>Ooops! An error has occurred!</h2>\n"
+"A program error has been detected. Please visit program homepage:<br>\n"
+"<br>\n"
+"<a href=\"{0}\">{0}</a><br>\n"
+"<br>\n"
+"and report what you were doing when it happened. Also attach a detailed "
+"description below and this file:<br><br>\n"
+"<i>{1}</i><br>\n"
+"<br>\n"
+"Thank you!\n"
+"</html>"
+msgstr ""
 
 #: Undo_
 msgid "&Undo"

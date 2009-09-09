@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-08 01:02+0200\n"
+"POT-Creation-Date: 2009-09-10 00:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -674,6 +674,10 @@ msgstr ""
 msgid "Contact &import"
 msgstr ""
 
+#: CopyToClipboard_
+msgid "Co&py to clipboard"
+msgstr ""
+
 #: Create
 msgid "Create"
 msgstr ""
@@ -793,6 +797,14 @@ msgstr ""
 
 #: Edit_selected_message
 msgid "Edit selected message"
+msgstr ""
+
+#: ExceptionDialog.copyButton.toolTipText
+msgid "Copy the detailed exception message to the system clipboard"
+msgstr ""
+
+#: ExceptionDialog.detailsLabel.text
+msgid "Details:"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1109,10 +1121,6 @@ msgstr ""
 
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
-msgstr ""
-
-#: LogFrame.copyButton.text
-msgid "Co&py to clipboard"
 msgstr ""
 
 #: LogFrame.copyButton.toolTipText
@@ -1857,6 +1865,23 @@ msgstr ""
 #. #Provide names and contacts to translators
 #: Translators
 msgid "translator-credits"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: UncaughtExceptionDialog.errorLabel
+msgid ""
+"<html>\n"
+"<h2>Ooops! An error has occurred!</h2>\n"
+"A program error has been detected. Please visit program homepage:<br>\n"
+"<br>\n"
+"<a href=\"{0}\">{0}</a><br>\n"
+"<br>\n"
+"and report what you were doing when it happened. Also attach a detailed "
+"description below and this file:<br><br>\n"
+"<i>{1}</i><br>\n"
+"<br>\n"
+"Thank you!\n"
+"</html>"
 msgstr ""
 
 #: Undo_

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-08 01:02+0200\n"
-"PO-Revision-Date: 2009-09-08 01:02+0100\n"
+"POT-Creation-Date: 2009-09-10 00:07+0200\n"
+"PO-Revision-Date: 2009-09-10 00:07+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -798,6 +798,10 @@ msgstr "&Export kontaktů"
 msgid "Contact &import"
 msgstr "&Import kontaktů"
 
+#: CopyToClipboard_
+msgid "Co&py to clipboard"
+msgstr "Zkopírovat do &schránky"
+
 #: Create
 msgid "Create"
 msgstr "Vytvořit"
@@ -923,6 +927,14 @@ msgstr "Upravit označené kontakty"
 #: Edit_selected_message
 msgid "Edit selected message"
 msgstr "Upravit označenou zprávu"
+
+#: ExceptionDialog.copyButton.toolTipText
+msgid "Copy the detailed exception message to the system clipboard"
+msgstr "Zkopírovat podrobnou chybovou zprávu do systémové schránky"
+
+#: ExceptionDialog.detailsLabel.text
+msgid "Details:"
+msgstr "Podrobnosti:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
@@ -1288,10 +1300,6 @@ msgstr "&Vyčistit"
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
 msgstr "Vymaže aktuální protokol"
-
-#: LogFrame.copyButton.text
-msgid "Co&py to clipboard"
-msgstr "Zkopírovat do &schránky"
 
 #: LogFrame.copyButton.toolTipText
 msgid "Copy the whole log contents to the system clipboard"
@@ -2137,6 +2145,35 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Kamil Páral https://launchpad.net/~kamil.paral"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: UncaughtExceptionDialog.errorLabel
+msgid ""
+"<html>\n"
+"<h2>Ooops! An error has occurred!</h2>\n"
+"A program error has been detected. Please visit program homepage:<br>\n"
+"<br>\n"
+"<a href=\"{0}\">{0}</a><br>\n"
+"<br>\n"
+"and report what you were doing when it happened. Also attach a detailed "
+"description below and this file:<br><br>\n"
+"<i>{1}</i><br>\n"
+"<br>\n"
+"Thank you!\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"<h2>Jejda! V programu došlo k chybě!</h2>\n"
+"V programu nastala chyba. Prosím navštivte domovskou stránku programu:<br>\n"
+"<br>\n"
+"<a href=\"{0}\">{0}</a><br>\n"
+"<br>\n"
+"a nahlaste, co jste dělali, když k tomu došlo. Také přiložte podrobnější "
+"popis níže a rovněž tento soubor:<br><br>\n"
+"<i>{1}</i><br>\n"
+"<br>\n"
+"Děkujeme!\n"
+"</html>"
 
 #: Undo_
 msgid "&Undo"
