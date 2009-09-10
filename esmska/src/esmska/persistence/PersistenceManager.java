@@ -36,10 +36,10 @@ import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.Operator;
+import esmska.integration.IntegrationAdapter;
 import esmska.utils.RuntimeUtils;
 import java.text.MessageFormat;
 import java.util.Arrays;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
 /** Load and store settings and data
@@ -89,37 +89,19 @@ public class PersistenceManager {
     private PersistenceManager() throws IOException {
         //adjust program dir according to operating system
         if (!customPathSet) {
-            String confDir, datDir;
-            
-            switch (RuntimeUtils.detectOS()) {
-                case MAC_OS_X:
-                    confDir = System.getProperty("user.home") + "/Library/Application Support";
-                    datDir = confDir;
-                    break;
-                case WINDOWS:
-                    confDir = System.getenv("APPDATA");
-                    datDir = confDir;
-                    break;
-                case LINUX:
-                default:
-                    confDir = System.getenv("XDG_CONFIG_HOME");
-                    datDir = System.getenv("XDG_DATA_HOME");
-                    break;
-            }
-            
-            if (StringUtils.isNotEmpty(confDir)) {
-                setConfigDir(confDir + File.separator + PROGRAM_DIRNAME);
-            }
-            if (StringUtils.isNotEmpty(datDir)) {
-                setDataDir(datDir + File.separator + PROGRAM_DIRNAME);
-            }
+            IntegrationAdapter integration = IntegrationAdapter.getInstance();
 
-            //adjust location of some specific files
-            switch (RuntimeUtils.detectOS()) {
-                case MAC_OS_X:
-                    logFile = new File(System.getProperty("user.home") + "/Library/Log", "Esmska.log");
-                    break;
+            String programDir = integration.getProgramDirName(PROGRAM_DIRNAME);
+            File confDir = integration.getConfigDir(configDir);
+            File datDir = integration.getDataDir(dataDir);
+
+            if (!configDir.equals(confDir)) {
+                setConfigDir(new File(confDir, programDir).getAbsolutePath());
             }
+            if (!dataDir.equals(datDir)) {
+                setDataDir(new File(datDir, programDir).getAbsolutePath());
+            }
+            logFile = integration.getLogFile(logFile);
         }
         
         //create config dir if necessary

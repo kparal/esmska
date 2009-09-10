@@ -10,11 +10,16 @@ import com.apple.eawt.Application;
 import com.apple.eawt.ApplicationEvent;
 import com.apple.eawt.ApplicationListener;
 
+import com.apple.eio.FileManager;
 import esmska.gui.ImportFrame;
 import esmska.gui.ThemeManager;
 import esmska.gui.MainFrame;
 import esmska.gui.NotificationIcon;
 import java.awt.Component;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -26,36 +31,76 @@ import javax.swing.JMenuItem;
  * @version 1.0
  */
 public class MacIntegration extends IntegrationAdapter implements ApplicationListener {
-    
+
+    private static final Logger logger = Logger.getLogger(MacIntegration.class.getName());
+    private static final String PROGRAM_DIRNAME = "Esmska";
+    private static final String LOG_FILENAME = "Esmska.log";
     private Application app;
-    
+
     /**
      * @see esmska.integration.IntegrationAdapter#initialize()
      */
     @Override
     protected void initialize() {
         app = new Application();
-        
+
         app.setEnabledAboutMenu(true);
         app.setEnabledPreferencesMenu(true);
-        
+
         app.addApplicationListener(this);
     }
-    
+
+    @Override
+    public File getConfigDir(File defaultConfigDir) {
+        try {
+            return new File(FileManager.findFolder(FileManager.kUserDomain, FileManager.OSTypeToInt("prefs")));
+        } catch (FileNotFoundException ex) {
+            logger.log(Level.WARNING, "Could not find directory for config files", ex);
+            return new File(System.getProperty("user.home") + "/Library/Preferences");
+        }
+    }
+
+    @Override
+    public File getDataDir(File defaultDataDir) {
+        try {
+            return new File(FileManager.findFolder(FileManager.kUserDomain, FileManager.OSTypeToInt("asup")));
+        } catch (FileNotFoundException ex) {
+            logger.log(Level.WARNING, "Could not find directory for data files", ex);
+            return new File(System.getProperty("user.home") + "/Library/Application Support");
+        }
+    }
+
+    @Override
+    public File getLogFile(File defaultLogFile) {
+        try {
+            return new File(FileManager.findFolder(FileManager.kUserDomain, FileManager.OSTypeToInt("logs")),
+                    LOG_FILENAME);
+        } catch (FileNotFoundException ex) {
+            logger.log(Level.WARNING, "Could not find directory for log files", ex);
+            return new File(System.getProperty("user.home") + "/Library/Logs", LOG_FILENAME);
+        }
+    }
+
+    @Override
+    public String getProgramDirName(String defaultProgramDirName) {
+        //Mac users are used to capitalized names
+        return PROGRAM_DIRNAME;
+    }
+
     /**
      * @see esmska.integration.IntegrationAdapter#setActionBean(esmska.integration.ActionBean)
      */
     @Override
     public void setActionBean(ActionBean bean) {
         super.setActionBean(bean);
-        
+
         NotificationIcon icon = NotificationIcon.getInstance();
         if (icon != null) {
             PopupMenu menu = icon.getPopup();
             app.setDockMenu(menu);
         }
     }
-    
+
     // public interface -------------------------------------------------------
     /**
      * @see IntegrationAdapter#setSMSCount(Integer)
@@ -68,7 +113,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
             app.setDockIconBadge(count.toString());
         }
     }
-    
+
     // implementation of app interface ----------------------------------------
     /**
      * @see com.apple.eawt.ApplicationListener#handleAbout(com.apple.eawt.ApplicationEvent)
@@ -76,10 +121,10 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     @Override
     public void handleAbout(ApplicationEvent e) {
         e.setHandled(true);
-        bean.getAboutAction().actionPerformed(new ActionEvent(e.getSource(), 
+        bean.getAboutAction().actionPerformed(new ActionEvent(e.getSource(),
                 ActionEvent.ACTION_PERFORMED, "aboutSelected"));
     }
-    
+
     /**
      * @see com.apple.eawt.ApplicationListener#handleOpenApplication(com.apple.eawt.ApplicationEvent)
      */
@@ -114,7 +159,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
             }
         }
     }
-    
+
     /**
      * @see com.apple.eawt.ApplicationListener#handleOpenFile(com.apple.eawt.ApplicationEvent)
      */
@@ -139,7 +184,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
         bean.getConfigAction().actionPerformed(new ActionEvent(e.getSource(),
                 ActionEvent.ACTION_PERFORMED, "configSelected"));
     }
-    
+
     /**
      * @see com.apple.eawt.ApplicationListener#handlePrintFile(com.apple.eawt.ApplicationEvent)
      */
@@ -147,17 +192,17 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     public void handlePrintFile(ApplicationEvent e) {
         e.setHandled(false);
     }
-    
+
     /**
      * @see com.apple.eawt.ApplicationListener#handleQuit(com.apple.eawt.ApplicationEvent)
      */
     @Override
     public void handleQuit(ApplicationEvent e) {
         e.setHandled(true);
-        bean.getQuitAction().actionPerformed(new ActionEvent(e.getSource(), 
+        bean.getQuitAction().actionPerformed(new ActionEvent(e.getSource(),
                 ActionEvent.ACTION_PERFORMED, "quitSelected"));
     }
-    
+
     /**
      * @see com.apple.eawt.ApplicationListener#handleReOpenApplication(com.apple.eawt.ApplicationEvent)
      */

@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import esmska.data.event.ValuedListener;
 import esmska.utils.RuntimeUtils;
+import java.io.File;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Integration adapter. Used to integrate program more closely to specific operating system.
@@ -52,6 +54,9 @@ public class IntegrationAdapter {
                     instance = new IntegrationAdapter();
                 }
                 break;
+            case WINDOWS:
+                instance = new WindowsIntegration();
+                break;
             default:
                 // fall back to default implementation
                 instance = new IntegrationAdapter();
@@ -90,6 +95,36 @@ public class IntegrationAdapter {
      * @param count new sms count. Use null to clear text.
      */
     public void setSMSCount(Integer count) {
+    }
+
+    /** Returns how the program directory in system directories should be named */
+    public String getProgramDirName(String defaultProgramDirName) {
+        return defaultProgramDirName;
+    }
+
+    /** Get the location of system config directory (not program config directory) */
+    public File getConfigDir(File defaultConfigDir) {
+        String confDir = System.getenv("XDG_CONFIG_HOME");
+        if (StringUtils.isNotEmpty(confDir)) {
+            return new File(confDir);
+        } else {
+            return defaultConfigDir;
+        }
+    }
+
+    /** Get the location of system data directory (not program data directory) */
+    public File getDataDir(File defaultDataDir) {
+        String datDir = System.getenv("XDG_DATA_HOME");
+        if (StringUtils.isNotEmpty(datDir)) {
+            return new File(datDir);
+        } else {
+            return defaultDataDir;
+        }
+    }
+
+    /** Get the location of a program log file */
+    public File getLogFile(File defaultLogFile) {
+        return defaultLogFile;
     }
 
     /** Set some things on start */
