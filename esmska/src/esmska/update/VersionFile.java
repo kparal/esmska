@@ -9,6 +9,7 @@ import esmska.data.Icons;
 import esmska.data.Operator;
 import esmska.data.Operators;
 import esmska.persistence.PersistenceManager;
+import java.io.File;
 import java.io.OutputStream;
 import java.net.URI;
 import javax.xml.parsers.DocumentBuilder;
@@ -33,9 +34,10 @@ public class VersionFile {
     static final String TAG_LAST_UNSTABLE_VERSION = "latestUnstableVersion";
     static final String TAG_OPERATOR = "operator";
     static final String TAG_NAME = "name";
+    static final String TAG_FILENAME = "fileName";
     static final String TAG_VERSION = "version";
-    static final String TAG_DOWNLOAD = "downloadURL";
     static final String TAG_MIN_VERSION = "minProgramVersion";
+    static final String TAG_DOWNLOAD = "downloadURL";
     static final String TAG_ICON = "iconURL";
 
     private static final String downloadProtocol = "http";
@@ -108,23 +110,30 @@ public class VersionFile {
             Node operator = doc.createElement(TAG_OPERATOR);
             Node name = doc.createElement(TAG_NAME);
             name.setTextContent(op.getName());
+            String opFileName = new File(op.getScript().toURI()).
+                    getName().replaceFirst("\\.operator$", "");
+            Node fileName = doc.createElement(TAG_FILENAME);
+            fileName.setTextContent(opFileName);
             Node version = doc.createElement(TAG_VERSION);
             version.setTextContent(op.getVersion());
-            Node download = doc.createElement(TAG_DOWNLOAD);
-            URI dlUri = new URI(downloadProtocol, downloadHost, downloadPath + op.getName() + ".operator", null);
-            download.setTextContent(dlUri.toASCIIString());
             Node minVersion = doc.createElement(TAG_MIN_VERSION);
             minVersion.setTextContent(op.getMinProgramVersion());
+            Node download = doc.createElement(TAG_DOWNLOAD);
+            URI dlUri = new URI(downloadProtocol, downloadHost,
+                    downloadPath + opFileName + ".operator", null);
+            download.setTextContent(dlUri.toASCIIString());
             Node icon = doc.createElement(TAG_ICON);
             if (op.getIcon() != Icons.OPERATOR_DEFAULT) {
-                URI iconUri = new URI(downloadProtocol, downloadHost, downloadPath + op.getName() + ".png", null);
+                URI iconUri = new URI(downloadProtocol, downloadHost,
+                        downloadPath + opFileName + ".png", null);
                 icon.setTextContent(iconUri.toASCIIString());
             }
 
             operator.appendChild(name);
+            operator.appendChild(fileName);
             operator.appendChild(version);
-            operator.appendChild(download);
             operator.appendChild(minVersion);
+            operator.appendChild(download);
             operator.appendChild(icon);
 
             root.appendChild(operator);

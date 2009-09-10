@@ -145,12 +145,14 @@ public class UpdateChecker {
         for (int i = 0; i < operators.getLength(); i++) {
             Node operator = operators.item(i);
             String name = xpath.evaluate(VersionFile.TAG_NAME + "/text()", operator);
+            String fileName = xpath.evaluate(VersionFile.TAG_FILENAME + "/text()", operator);
             String version = xpath.evaluate(VersionFile.TAG_VERSION + "/text()", operator);
-            String url = xpath.evaluate(VersionFile.TAG_DOWNLOAD + "/text()", operator);
             String minVersion = xpath.evaluate(VersionFile.TAG_MIN_VERSION + "/text()", operator);
+            String url = xpath.evaluate(VersionFile.TAG_DOWNLOAD + "/text()", operator);
             String iconUrl = xpath.evaluate(VersionFile.TAG_ICON + "/text()", operator);
 
-            OperatorUpdateInfo info = new OperatorUpdateInfo(name, version, url, minVersion, iconUrl);
+            OperatorUpdateInfo info = new OperatorUpdateInfo(name, fileName,
+                    version, minVersion, url, iconUrl);
             operatorUpdates.add(info);
         }
 

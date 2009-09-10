@@ -430,7 +430,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         for (Tuple3<OperatorUpdateInfo, String, byte[]> script : scripts) {
             try {
                 PersistenceManager.getInstance().saveOperator(
-                        script.get1().getName(), script.get2(), script.get3());
+                        script.get1().getFileName(), script.get2(), script.get3());
                 //don't forget to remove it from downloaded updates
                 updates.remove(script.get1());
                 log.addRecord(new Log.Record(
