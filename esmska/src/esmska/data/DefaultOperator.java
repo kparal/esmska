@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import javax.script.ScriptException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import org.apache.commons.lang.StringUtils;
 
 /** Default implementation of the Operator interface.
  * This implementation caches all information retrieved from operator script
@@ -49,7 +50,7 @@ public class DefaultOperator implements Operator {
         
         OperatorInfo info = Operators.parseInfo(script);
         //check operator name is valid
-        if (info == null || info.getName() == null || info.getName().length() <= 0) {
+        if (info == null || StringUtils.isEmpty(info.getName())) {
             throw new ScriptException("Not a valid operator script", script.toExternalForm(), 0);
         }
         if (!namePattern.matcher(info.getName()).matches()) {
