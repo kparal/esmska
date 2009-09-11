@@ -8,15 +8,12 @@ import esmska.data.event.ActionEventSupport;
 import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
-import java.security.InvalidKeyException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.logging.Logger;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.ObjectUtils;
 
@@ -28,29 +25,38 @@ public class Keyring {
 
     /** shared instance */
     private static final Keyring instance = new Keyring();
-
     /** new key added or existing changed */
     public static final int ACTION_ADD_KEY = 0;
     /** existing key removed */
     public static final int ACTION_REMOVE_KEY = 1;
     /** all keys removed */
     public static final int ACTION_CLEAR_KEYS = 2;
-
     private static final Logger logger = Logger.getLogger(Keyring.class.getName());
-
-    /** AES passphrase */
+    /** randomly generated passphrase */
     private static final byte[] passphrase = new byte[]{
-        -53, -103, 123, -53, -119, -12, -27, -82,
-        3, -115, 119, -101, 86, 92, 92, 28
+        -47, 12, -115, -66, 28, 102, 93, 101,
+        -98, -87, 96, -11, -72, 117, -39, 39,
+        102, 73, -122, 91, -14, -118, 5, -82,
+        -126, 3, 38, -19, -63, -127, 46, -82,
+        27, -38, -89, 29, 10, 81, -108, 17,
+        -96, -71, 120, 63, -128, -3, -3, -63,
+        65, -40, 109, 70, 69, -122, 80, -83,
+        37, -45, 61, 60, -12, -101, 0, -126,
+        44, -125, -83, 47, -48, -7, 8, 16,
+        127, 25, -1, -23, 27, -78, 124, 36,
+        59, 52, -66, 40, -31, -7, 111, -101,
+        -5, 85, -65, -90, -56, -51, 53, 44,
+        20, 15, 111, 37, -97, 120, -60, 53,
+        -80, 69, 34, 109, -71, 101, -66, 77,
+        52, -14, 112, 112, 97, 12, -76, -96,
+        -101, 103, -59, 38, -24, -10, -85, -119
     };
-    private static final SecretKeySpec keySpec = new SecretKeySpec(passphrase, "AES");
-    private static final String CIPHER_TRANSFORMATION = "AES/ECB/PKCS5Padding";
     /** map of [operator, [login, password]] */
     private final Map<String, Tuple<String, String>> keyring = Collections.synchronizedMap(
             new HashMap<String, Tuple<String, String>>());
-
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
+
     public void addActionListener(ActionListener actionListener) {
         actionSupport.addActionListener(actionListener);
     }
@@ -149,59 +155,61 @@ public class Keyring {
         actionSupport.fireActionPerformed(ACTION_CLEAR_KEYS, null);
     }
 
-    /** Encrypt input string. The string is encrypted using AES encryption with
-     * internal passphrase and the result is encoded using the Base64 encoding.
+    /** Encrypt input string. The string is encrypted using XOR encryption with
+     * internal passphrase, doubled and the result is encoded using the Base64 encoding.
      * @param input Input string. Null is transformed to empty string.
-     * @return Encrypted string using AES encryption with internal passphrase and
-     *         after that encoded using the Base64 encoding.
-     * @throws GeneralSecurityException When the platform does not support the
-     *                                  particular encryption.
+     * @return Encrypted string 
      */
-    public static String encrypt(String input) throws GeneralSecurityException {
+    public static String encrypt(String input) {
         if (input == null) {
             input = "";
         }
 
         try {
-            Cipher cipher = Cipher.getInstance(CIPHER_TRANSFORMATION);
-            cipher.init(Cipher.ENCRYPT_MODE, keySpec);
-            byte[] cleartext = input.getBytes("UTF-8");
-            byte[] ciphertext = cipher.doFinal(cleartext);
+            byte[] inputArray = input.getBytes("UTF-8");
+            byte[] encrArray = new byte[inputArray.length*2];
 
-            return new String(Base64.encodeBase64(ciphertext), "UTF-8");
+            for (int i = 0; i < inputArray.length; i++) {
+                byte k = i < passphrase.length ? passphrase[i] : 0;
+                encrArray[2*i] = (byte) (inputArray[i] ^ k);
+                //let's double the string, if hides too short password lengths
+                encrArray[2*i+1] = encrArray[2*i];
+            }
 
+            String encrString = new String(Base64.encodeBase64(encrArray), "US-ASCII");
+            return encrString;
         } catch (UnsupportedEncodingException ex) {
-            throw new GeneralSecurityException(ex);
-        } catch (InvalidKeyException ex) {
-            throw new GeneralSecurityException("Internal key is invalid", ex);
+            assert false : "Basic charsets must be supported";
+            throw new IllegalStateException("Basic charsets must be supported", ex);
         }
     }
 
-    /** Decrypt input string. The input string is decoded using the Base64 encoding
-     * and the result is decrypted using AES encryption with internal passphrase.
+    /** Decrypt input string. The input string is decoded using the Base64 encoding,
+     * halved, and the result is decrypted using XOR encryption with internal passphrase.
      * @param input Input string. The input must originate from the encrypt() function.
      *              Null is transformed to empty string.
      * @return Decrypted string.
-     * @throws GeneralSecurityException When the platform does not support the
-     *                                  particular encryption.
      */
-    public static String decrypt(String input) throws GeneralSecurityException {
+    public static String decrypt(String input) {
         if (input == null) {
             input = "";
         }
 
         try {
-            Cipher cipher = Cipher.getInstance(CIPHER_TRANSFORMATION);
-            cipher.init(Cipher.DECRYPT_MODE, keySpec);
-            byte[] ciphertext = Base64.decodeBase64(input.getBytes("UTF-8"));
-            byte[] cleartext = cipher.doFinal(ciphertext);
+            byte[] encrArray = Base64.decodeBase64(input.getBytes("US-ASCII"));
+            byte[] decrArray = new byte[encrArray.length/2];
 
-            return new String(cleartext, "UTF-8");
+            for (int i = 0; i < encrArray.length; i+=2) {
+                byte k = i/2 < passphrase.length ? passphrase[i/2] : 0;
+                //array must be halved, encrypted is doubled
+                decrArray[i/2] = (byte) (encrArray[i] ^ k);
+            }
 
+            String decrString = new String(decrArray, "UTF-8");
+            return decrString;
         } catch (UnsupportedEncodingException ex) {
-            throw new GeneralSecurityException(ex);
-        } catch (InvalidKeyException ex) {
-            throw new GeneralSecurityException("Internal key is invalid", ex);
+            assert false : "Basic charsets must be supported";
+            throw new IllegalStateException("Basic charsets must be supported", ex);
         }
     }
 }
