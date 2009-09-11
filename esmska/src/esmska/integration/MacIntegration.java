@@ -38,9 +38,13 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     private Application app;
 
     @Override
+    protected void initialize() {
+        app = new Application();
+    }
+
+    @Override
     public void activateGUI() {
         // make it more Mac-like, listen for Mac events
-        app = new Application();
         app.setEnabledAboutMenu(true);
         app.setEnabledPreferencesMenu(true);
         app.addApplicationListener(this);
