@@ -127,6 +127,11 @@ public class IntegrationAdapter {
         return defaultLogFile;
     }
 
+    /** Inicialize stuff to handle GUI stuff, adjust GUI for the current envirnonment */
+    public void activateGUI() {
+        return;
+    }
+
     /** Set some things on start */
     private void startUp() {
         //set sms count on startup

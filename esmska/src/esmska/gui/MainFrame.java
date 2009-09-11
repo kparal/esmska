@@ -150,8 +150,11 @@ public class MainFrame extends javax.swing.JFrame {
                 bean.setQuitAction(Actions.getQuitAction());
                 bean.setAboutAction(Actions.getAboutAction());
                 bean.setConfigAction(Actions.getConfigAction());
-                
-                IntegrationAdapter.getInstance().setActionBean(bean);
+
+                IntegrationAdapter integration = IntegrationAdapter.getInstance();
+                integration.setActionBean(bean);
+                integration.activateGUI();
+
                 programMenu.setVisible(false);
                 aboutMenuItem.setVisible(false);
                 //should be helpSeparator.setVisible(false); but bug #6365547 in Apple Java precludes it

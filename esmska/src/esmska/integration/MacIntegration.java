@@ -37,17 +37,38 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     private static final String LOG_FILENAME = "Esmska.log";
     private Application app;
 
-    /**
-     * @see esmska.integration.IntegrationAdapter#initialize()
-     */
     @Override
-    protected void initialize() {
+    public void activateGUI() {
+        // make it more Mac-like, listen for Mac events
         app = new Application();
-
         app.setEnabledAboutMenu(true);
         app.setEnabledPreferencesMenu(true);
-
         app.addApplicationListener(this);
+
+        // turn off mnemonics, tool tips and icons from menu
+        // if we are not using Aqua l&f there is no need to strict use of HIG
+        if (ThemeManager.isAquaCurrentLaF()) {
+            JMenuBar bar = MainFrame.getInstance().getJMenuBar();
+            for (Component menu : bar.getComponents()) {
+                JMenu m = (JMenu) menu;
+                m.setMnemonic(-1);
+                m.setToolTipText(null);
+
+                for (Component c : m.getPopupMenu().getComponents()) {
+                    if (c instanceof JMenuItem) {
+                        JMenuItem i = (JMenuItem) c;
+                        i.setIcon(null);
+                        i.setMnemonic(-1);
+                        i.setToolTipText(null);
+                    } else if (c instanceof JMenu) {
+                        JMenu jm = (JMenu) c;
+                        jm.setIcon(null);
+                        jm.setMnemonic(-1);
+                        jm.setToolTipText(null);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -129,38 +150,6 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     @Override
     public void handleOpenApplication(ApplicationEvent e) {
         e.setHandled(true);
-
-        // skip if GUI not yet created
-        if (!MainFrame.isInstantiated()) {
-            return;
-        }
-
-        // if we are using different l&f there is no need to strict use of HIG
-        if (!ThemeManager.isAquaCurrentLaF()) {
-            return;
-        }
-
-        // turn off mnemonics, tool tips and icons from menu
-        JMenuBar bar = MainFrame.getInstance().getJMenuBar();
-        for (Component menu : bar.getComponents()) {
-            JMenu m = (JMenu) menu;
-            m.setMnemonic(-1);
-            m.setToolTipText(null);
-
-            for (Component c : m.getPopupMenu().getComponents()) {
-                if (c instanceof JMenuItem) {
-                    JMenuItem i = (JMenuItem) c;
-                    i.setIcon(null);
-                    i.setMnemonic(-1);
-                    i.setToolTipText(null);
-                } else if (c instanceof JMenu) {
-                    JMenu jm = (JMenu) c;
-                    jm.setIcon(null);
-                    jm.setMnemonic(-1);
-                    jm.setToolTipText(null);
-                }
-            }
-        }
     }
 
     /**
@@ -212,12 +201,6 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     @Override
     public void handleReOpenApplication(ApplicationEvent e) {
         e.setHandled(true);
-
-        // skip if GUI not yet created
-        if (!MainFrame.isInstantiated()) {
-            return;
-        }
-        
         MainFrame.getInstance().setVisible(true);
     }
 }
