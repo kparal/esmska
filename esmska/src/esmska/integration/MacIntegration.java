@@ -52,12 +52,10 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
 
     @Override
     public File getConfigDir(File defaultConfigDir) {
-        try {
-            return new File(FileManager.findFolder(FileManager.kUserDomain, FileManager.OSTypeToInt("prefs")));
-        } catch (FileNotFoundException ex) {
-            logger.log(Level.WARNING, "Could not find directory for config files", ex);
-            return new File(System.getProperty("user.home") + "/Library/Preferences");
-        }
+        //Config dir should be in ~/Library/Preferences, but it should store only
+        //Esmska.xml, nothing more. For simplicity we have decided to put all
+        //into data dir.
+        return getDataDir(defaultConfigDir);
     }
 
     @Override
