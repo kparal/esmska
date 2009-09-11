@@ -130,6 +130,11 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     public void handleOpenApplication(ApplicationEvent e) {
         e.setHandled(true);
 
+        // skip if GUI not yet created
+        if (!MainFrame.isInstantiated()) {
+            return;
+        }
+
         // if we are using different l&f there is no need to strict use of HIG
         if (!ThemeManager.isAquaCurrentLaF()) {
             return;
@@ -207,6 +212,12 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     @Override
     public void handleReOpenApplication(ApplicationEvent e) {
         e.setHandled(true);
+
+        // skip if GUI not yet created
+        if (!MainFrame.isInstantiated()) {
+            return;
+        }
+        
         MainFrame.getInstance().setVisible(true);
     }
 }
