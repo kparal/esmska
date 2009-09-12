@@ -16,10 +16,12 @@ import java.awt.event.MouseEvent;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 import javax.swing.plaf.ToolBarUI;
 
 /**
@@ -42,19 +44,8 @@ public class UnifiedToolbarSupport extends MouseAdapter {
     public UnifiedToolbarSupport() {
         this.frame = MainFrame.getInstance();
 
-        // add this listener for repainting issue (should be fixed better)
-        frame.addWindowFocusListener(new WindowAdapter() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-                frame.getToolbar().repaint();
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                frame.getToolbar().repaint();
-            }
-        });
+        // add custom window listener for setting border
+        frame.addWindowFocusListener(new UnifiedToolbarWindowAdapter());
 
         // install listeners on toolbar
         final JToolBar toolbar = frame.getToolbar();
@@ -124,13 +115,13 @@ public class UnifiedToolbarSupport extends MouseAdapter {
         public void paint(Graphics g, JComponent c) {
             Graphics2D graphics2D = (Graphics2D) g.create();
 
-            paint(graphics2D, c, c.getWidth(), c.getHeight());
+            paint(graphics2D, c.getWidth(), c.getHeight());
 
             graphics2D.dispose();
             super.paint(graphics2D, c);
         }
 
-        public void paint(Graphics2D graphics2D, Component component, int width, int height) {
+        public void paint(Graphics2D graphics2D, int width, int height) {
 
             boolean focused = MainFrame.getInstance().isFocused();
 
@@ -140,6 +131,49 @@ public class UnifiedToolbarSupport extends MouseAdapter {
             GradientPaint paint = new GradientPaint(0, 1, topColor, 0, height, bottomColor);
             graphics2D.setPaint(paint);
             graphics2D.fillRect(0, 0, width, height);
+        }
+    }
+
+    /**
+     * Window adapter for setting border. Color of bottom line depends on focus
+     * state of window. Setting new border also solves problem with repainting
+     * of gradient. Border adds some more space to match HIG more closely.
+     *
+     * @author Marian Bouček
+     */
+    private class UnifiedToolbarWindowAdapter extends WindowAdapter {
+
+        private Border activeBorder;
+        private Border inactiveBorder;
+
+        /**
+         * Creates new instance of window adapter.
+         */
+        public UnifiedToolbarWindowAdapter() {
+            activeBorder = createBorderWithColor(new Color(64, 64, 64));
+            inactiveBorder = createBorderWithColor(new Color(135, 135, 135));
+        }
+
+        @Override
+        public void windowGainedFocus(WindowEvent e) {
+            frame.getToolbar().setBorder(activeBorder);
+        }
+
+        @Override
+        public void windowLostFocus(WindowEvent e) {
+            frame.getToolbar().setBorder(inactiveBorder);
+        }
+
+        /**
+         * Creates border with specified bottom line color.
+         *
+         * @param c bottom line color
+         * @return border
+         */
+        private Border createBorderWithColor(Color c) {
+            return BorderFactory.createCompoundBorder(
+                    BorderFactory.createMatteBorder(0, 0, 1, 0, c),
+                    BorderFactory.createEmptyBorder(5, 0, 3, 0));
         }
     }
 }

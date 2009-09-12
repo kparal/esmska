@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -89,6 +90,9 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
             frame.getVerticalSplitPane().setBackground(LEOPARD_PANEL_COLOR);
             frame.getStatusPanel().setBackground(LEOPARD_PANEL_COLOR);
             frame.getContentPane().setBackground(LEOPARD_PANEL_COLOR);
+
+            // add some more space to match HIG closely
+            frame.getStatusPanel().setBorder(BorderFactory.createEmptyBorder(0, 2, 4, 2));
         }
     }
 
