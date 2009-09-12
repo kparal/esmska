@@ -14,6 +14,8 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JToolBar;
@@ -40,8 +42,23 @@ public class UnifiedToolbarSupport extends MouseAdapter {
     public UnifiedToolbarSupport() {
         this.frame = MainFrame.getInstance();
 
+        // add this listener for repainting issue (should be fixed better)
+        frame.addWindowFocusListener(new WindowAdapter() {
+
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+                frame.getToolbar().repaint();
+            }
+
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                frame.getToolbar().repaint();
+            }
+        });
+
         // install listeners on toolbar
         final JToolBar toolbar = frame.getToolbar();
+        toolbar.setDoubleBuffered(true);
         toolbar.addMouseListener(this);
         toolbar.addMouseMotionListener(this);
 
