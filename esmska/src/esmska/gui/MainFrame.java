@@ -118,6 +118,12 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         instance = this;
+
+        // if we are using Aqua L&F, set textured window property
+        if (ThemeManager.isAquaCurrentLaF()) {
+            getRootPane().putClientProperty("apple.awt.brushMetalLook", "true");
+        }
+
         initComponents();
         
         //set window images
@@ -294,6 +300,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     public SMSSender getSMSSender() {
         return smsSender;
+    }
+    
+    public JToolBar getToolbar() {
+        return toolBar;
+    }
+
+    public QueuePanel getQueuePanel() {
+        return queuePanel;
+    }
+
+    public JSplitPane getHorizontalSplitPane() {
+        return horizontalSplitPane;
+    }
+
+    public JSplitPane getVerticalSplitPane() {
+        return verticalSplitPane;
     }
 
     /** Quit the program */

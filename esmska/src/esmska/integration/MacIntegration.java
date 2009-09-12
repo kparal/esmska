@@ -15,6 +15,7 @@ import esmska.gui.ImportFrame;
 import esmska.gui.ThemeManager;
 import esmska.gui.MainFrame;
 import esmska.gui.NotificationIcon;
+import java.awt.Color;
 import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,13 +29,14 @@ import javax.swing.JMenuItem;
  * Integration for Mac OS X.
  * 
  * @author Marian Boucek
- * @version 1.0
  */
 public class MacIntegration extends IntegrationAdapter implements ApplicationListener {
 
     private static final Logger logger = Logger.getLogger(MacIntegration.class.getName());
     private static final String PROGRAM_DIRNAME = "Esmska";
     private static final String LOG_FILENAME = "Esmska.log";
+    private static final Color LEOPARD_PANEL_COLOR = new Color(232, 232, 232);
+
     private Application app;
 
     @Override
@@ -52,7 +54,9 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
         // turn off mnemonics, tool tips and icons from menu
         // if we are not using Aqua l&f there is no need to strict use of HIG
         if (ThemeManager.isAquaCurrentLaF()) {
-            JMenuBar bar = MainFrame.getInstance().getJMenuBar();
+            MainFrame frame = MainFrame.getInstance();
+            JMenuBar bar = frame.getJMenuBar();
+
             for (Component menu : bar.getComponents()) {
                 JMenu m = (JMenu) menu;
                 m.setMnemonic(-1);
@@ -72,6 +76,19 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
                     }
                 }
             }
+
+            // create unified toolbar support
+            new UnifiedToolbarSupport();
+
+            // set background color to all panels
+            // this color doesnt depend on focused state of window
+            frame.getSMSPanel().setBackground(LEOPARD_PANEL_COLOR);
+            frame.getContactPanel().setBackground(LEOPARD_PANEL_COLOR);
+            frame.getQueuePanel().setBackground(LEOPARD_PANEL_COLOR);
+            frame.getHorizontalSplitPane().setBackground(LEOPARD_PANEL_COLOR);
+            frame.getVerticalSplitPane().setBackground(LEOPARD_PANEL_COLOR);
+            frame.getStatusPanel().setBackground(LEOPARD_PANEL_COLOR);
+            frame.getContentPane().setBackground(LEOPARD_PANEL_COLOR);
         }
     }
 
@@ -153,7 +170,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
      */
     @Override
     public void handleOpenApplication(ApplicationEvent e) {
-        e.setHandled(true);
+        e.setHandled(false);
     }
 
     /**
