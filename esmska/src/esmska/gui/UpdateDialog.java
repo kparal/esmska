@@ -11,13 +11,13 @@
 
 package esmska.gui;
 
+import esmska.Context;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.Tuple3;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.gui.JHtmlLabel.Events;
-import esmska.persistence.PersistenceManager;
 import esmska.update.HttpDownloader;
 import esmska.update.OperatorUpdateInfo;
 import esmska.update.UpdateChecker;
@@ -429,7 +429,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         logger.finer("Saving " + scripts.size() + " updates to disk");
         for (Tuple3<OperatorUpdateInfo, String, byte[]> script : scripts) {
             try {
-                PersistenceManager.getInstance().saveOperator(
+                Context.persistenceManager.saveOperator(
                         script.get1().getFileName(), script.get2(), script.get3());
                 //don't forget to remove it from downloaded updates
                 updates.remove(script.get1());
@@ -445,7 +445,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         //reload all operators
         logger.finer("Reloading operators...");
         try {
-            PersistenceManager.getInstance().loadOperators();
+            Context.persistenceManager.loadOperators();
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not reload operators", ex);
             installOk = false;

@@ -4,6 +4,7 @@
  */
 package esmska.gui;
 
+import esmska.Context;
 import esmska.data.Queue;
 import esmska.data.Queue.Events;
 import esmska.data.SMS;
@@ -92,7 +93,7 @@ public class NotificationIcon {
         
         // popup menu
         popup = new PopupMenu();
-        MainFrame.getInstance().add(popup); //every popup must have parent
+        Context.mainFrame.add(popup); //every popup must have parent
         
         // populate menu
         popup.add(toggleItem);
@@ -184,7 +185,7 @@ public class NotificationIcon {
             return;
         }
         logger.fine("Toggling mainframe visibility...");
-        MainFrame frame = MainFrame.getInstance();
+        MainFrame frame = Context.mainFrame;
         
         //if iconified, just deiconify and return
         if ((frame.getExtendedState() & JFrame.ICONIFIED) != 0) {
@@ -199,7 +200,7 @@ public class NotificationIcon {
 
     /** Update labels in popup menu according to current program state */
     private void updateItems() {
-        MainFrame frame = MainFrame.getInstance();
+        MainFrame frame = Context.mainFrame;
         
         boolean queuePaused = queue.isPaused();
         pauseQueueItem.setLabel(queuePaused ? unpauseQueue : pauseQueue);
@@ -259,7 +260,7 @@ public class NotificationIcon {
         getInstance();
 
         //if mainframe currently hidden, show it before removing icon from system tray
-        if (!MainFrame.getInstance().isVisible()) {
+        if (!Context.mainFrame.isVisible()) {
             toggleMainFrameVisibility();
         }
         

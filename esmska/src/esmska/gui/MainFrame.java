@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.Context;
 import esmska.data.Queue.Events;
 import esmska.data.event.ValuedEvent;
 import java.awt.BorderLayout;
@@ -66,7 +67,6 @@ import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
 import esmska.integration.IntegrationAdapter;
-import esmska.persistence.PersistenceManager;
 import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
@@ -104,7 +104,6 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** sender of sms */
     private static final SMSSender smsSender = new SMSSender();
-    private static PersistenceManager persistenceManager;
     private static final Config config = Config.getInstance();
     private static final History history = History.getInstance();
     private static final Log log = Log.getInstance();
@@ -118,6 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         instance = this;
+        Context.mainFrame = instance;
 
         // if we are using Aqua L&F, set textured window property
         // must be called before components inicialization
@@ -181,13 +181,6 @@ public class MainFrame extends javax.swing.JFrame {
         log.addRecord(new Log.Record(l10n.getString("Program_start")));
 
         //load config
-        try {
-            persistenceManager = PersistenceManager.getInstance();
-        } catch (IOException ex) {
-            logger.log(Level.WARNING, "Could not create program dir with config files", ex);
-            log.addRecord(new Log.Record(l10n.getString("MainFrame.cant_create_program_dir"),
-                    null, Icons.STATUS_ERROR));
-        }
         loadConfig();
         if (queue.size() > 0) {
             queue.setPaused(true);
@@ -226,7 +219,9 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
-    /** Get current instance */
+    /** Get current instance. Should be called only for inicialization, after that
+     * the instance is available in the Context.
+     */
     public static MainFrame getInstance() {
         if (instance == null) {
             instance = new MainFrame();
@@ -234,11 +229,6 @@ public class MainFrame extends javax.swing.JFrame {
         return instance;
     }
 
-    /** Query if MainFrame was already instantiated */
-    public static boolean isInstantiated() {
-        return instance != null;
-    }
-    
     /** Start the mainframe and let it be visible according to user preferences
      * (visible on the screen or hidden to notification area) */
     public void startAndShow() {
@@ -639,7 +629,7 @@ public class MainFrame extends javax.swing.JFrame {
         config.setVerticalSplitPaneLocation(verticalSplitPane.getDividerLocation());
         
         try {
-            persistenceManager.saveConfig();
+            Context.persistenceManager.saveConfig();
             return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save config", ex);
@@ -694,7 +684,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private boolean saveContacts() {
         try {
-            persistenceManager.saveContacts();
+            Context.persistenceManager.saveContacts();
             return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save contacts", ex);
@@ -707,7 +697,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private boolean saveQueue() {
         try {
-            persistenceManager.saveQueue();
+            Context.persistenceManager.saveQueue();
             return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save queue", ex);
@@ -730,7 +720,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         try {
-            persistenceManager.saveHistory();
+            Context.persistenceManager.saveHistory();
             return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save history", ex);
@@ -743,7 +733,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private boolean saveKeyring() {
         try {
-            persistenceManager.saveKeyring();
+            Context.persistenceManager.saveKeyring();
             return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save keyring", ex);

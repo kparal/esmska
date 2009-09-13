@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.Context;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Contacts;
@@ -91,7 +92,6 @@ public class SMSPanel extends javax.swing.JPanel {
     private UndoManager smsTextUndoManager = new UndoManager();
     private SortedSet<Contact> contacts = Contacts.getInstance().getAll();
     private Config config = Config.getInstance();
-    private MainFrame mainFrame = MainFrame.getInstance();
     
     private UndoAction undoAction = new UndoAction();
     private RedoAction redoAction = new RedoAction();
@@ -199,9 +199,9 @@ public class SMSPanel extends javax.swing.JPanel {
      */
     private void requestSelectContact(Contact contact) {
         if (contact != null) {
-            mainFrame.getContactPanel().setSelectedContact(contact);
+            Context.mainFrame.getContactPanel().setSelectedContact(contact);
         } else {
-            mainFrame.getContactPanel().clearSelection();
+            Context.mainFrame.getContactPanel().clearSelection();
         }
     }
     
@@ -763,9 +763,9 @@ public class SMSPanel extends javax.swing.JPanel {
             //if reached size limit, crop the text and show a warning
             if ((fb.getDocument().getLength() + (text!=null?text.length():0) - length)
                     > envelope.getMaxTextLength()) {
-                MainFrame.getInstance().getStatusPanel().setStatusMessage(
+                Context.mainFrame.getStatusPanel().setStatusMessage(
                         l10n.getString("SMSPanel.Text_is_too_long!"), null, null, false);
-                MainFrame.getInstance().getStatusPanel().hideStatusMessageAfter(5000);
+                Context.mainFrame.getStatusPanel().hideStatusMessageAfter(5000);
                 int maxlength = envelope.getMaxTextLength() - fb.getDocument().getLength() + length;
                 maxlength = Math.max(maxlength, 0);
                 text = text.substring(0, maxlength);

@@ -174,17 +174,15 @@ public class PersistenceManager {
         customPathSet = true;
     }
     
-    /** Get PersistenceManager */
+    /** Get PersistenceManager. Should be called only for inicialization, after
+     * that the instance is available in the Context.
+     * @throws IOException could not read/write configuration files/directories
+     */
     public static PersistenceManager getInstance() throws IOException {
         if (instance == null) {
             instance = new PersistenceManager();
         }
         return instance;
-    }
-
-    /** Query if PersistenceManager was already instantiated */
-    public static boolean isInstantiated() {
-        return instance != null;
     }
 
     /** Get file used for logging */

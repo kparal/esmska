@@ -8,6 +8,7 @@ package esmska.gui;
 
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
+import esmska.Context;
 import esmska.data.Config.CheckUpdatePolicy;
 import esmska.gui.ThemeManager.LAF;
 import esmska.data.Config;
@@ -1097,7 +1098,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             logger.fine("Changing LaF theme in realtime...");
             try {
                 ThemeManager.setLaF();
-                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance());
+                SwingUtilities.updateComponentTreeUI(Context.mainFrame);
                 SwingUtilities.updateComponentTreeUI(this);
             } catch (Throwable ex) {
                 logger.log(Level.SEVERE, "Problem while live-updating the look&feel skin", ex);
@@ -1127,7 +1128,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
         //save config
         try {
-            PersistenceManager.getInstance().saveConfig();
+            Context.persistenceManager.saveConfig();
         } catch (IOException ex) {
             logger.log(Level.WARNING, "Could not save config", ex);
         }

@@ -5,6 +5,7 @@
 
 package esmska.gui;
 
+import esmska.Context;
 import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.History;
@@ -63,8 +64,6 @@ public class Actions {
     private static Action exportAction;
     private static Action logAction;
     private static Action updateAction;
-
-    private static MainFrame mainFrame = MainFrame.getInstance();
 
     /** Show about frame */
     public static Action getAboutAction() {
@@ -206,7 +205,7 @@ public class Actions {
                 aboutFrame.toFront();
             } else {
                 aboutFrame = new AboutFrame();
-                aboutFrame.setLocationRelativeTo(mainFrame);
+                aboutFrame.setLocationRelativeTo(Context.mainFrame);
                 aboutFrame.setVisible(true);
             }
         }
@@ -229,7 +228,7 @@ public class Actions {
                 configFrame.toFront();
             } else {
                 configFrame = new ConfigFrame();
-                configFrame.setLocationRelativeTo(mainFrame);
+                configFrame.setLocationRelativeTo(Context.mainFrame);
                 configFrame.setVisible(true);
             }
         }
@@ -248,7 +247,7 @@ public class Actions {
         @Override
         public void actionPerformed(ActionEvent e) {
             logger.fine("Quitting application...");
-            mainFrame.exit();
+            Context.mainFrame.exit();
         }
     }
 
@@ -271,7 +270,7 @@ public class Actions {
                 historyFrame.toFront();
             } else {
                 historyFrame = new HistoryFrame();
-                historyFrame.setLocationRelativeTo(mainFrame);
+                historyFrame.setLocationRelativeTo(Context.mainFrame);
                 historyFrame.addValuedListener(new HistoryListener());
                 historyFrame.setVisible(true);
             }
@@ -295,8 +294,8 @@ public class Actions {
                     SMS sms = new SMS(record.getNumber(), record.getText(), record.getOperator());
                     sms.setName(record.getName());
 
-                    mainFrame.getContactPanel().clearSelection();
-                    mainFrame.getSMSPanel().setSMS(sms);
+                    Context.mainFrame.getContactPanel().clearSelection();
+                    Context.mainFrame.getSMSPanel().setSMS(sms);
             }
         }
     }
@@ -317,7 +316,7 @@ public class Actions {
                 importFrame.toFront();
             } else {
                 importFrame = new ImportFrame();
-                importFrame.setLocationRelativeTo(mainFrame);
+                importFrame.setLocationRelativeTo(Context.mainFrame);
                 importFrame.setVisible(true);
             }
         }
@@ -344,7 +343,7 @@ public class Actions {
             logger.fine("Showing export contacts dialog...");
             //show info
             String message = l10n.getString("ExportManager.export_info");
-            JOptionPane.showMessageDialog(mainFrame, new JLabel(message), l10n.getString("ExportManager.contact_export"),
+            JOptionPane.showMessageDialog(Context.mainFrame, new JLabel(message), l10n.getString("ExportManager.contact_export"),
                     JOptionPane.INFORMATION_MESSAGE,
                     new ImageIcon(getClass().getResource(RES + "contact-48.png")));
 
@@ -360,7 +359,7 @@ public class Actions {
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setFileFilter(csvFileFilter);
             }
-            if (chooser.showSaveDialog(mainFrame) != JFileChooser.APPROVE_OPTION) {
+            if (chooser.showSaveDialog(Context.mainFrame) != JFileChooser.APPROVE_OPTION) {
                 return;
             }
 
@@ -370,7 +369,7 @@ public class Actions {
             //check if file can be written
             if (file.exists() && !file.canWrite()) {
                 logger.info("File '" + file.getAbsolutePath() + "' can't be written");
-                JOptionPane.showMessageDialog(mainFrame,
+                JOptionPane.showMessageDialog(Context.mainFrame,
                         MessageFormat.format(l10n.getString("ExportManager.cant_write"), file.getAbsolutePath()),
                         null, JOptionPane.ERROR_MESSAGE);
                 return;
@@ -391,14 +390,14 @@ public class Actions {
                 logger.log(Level.WARNING, "Could not export contacts to file", ex);
                 Log.getInstance().addRecord(new Log.Record(
                         l10n.getString("ExportManager.export_failed"), null, Icons.STATUS_ERROR));
-                JOptionPane.showMessageDialog(mainFrame, l10n.getString("ExportManager.export_failed"), null,
+                JOptionPane.showMessageDialog(Context.mainFrame, l10n.getString("ExportManager.export_failed"), null,
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             Log.getInstance().addRecord(new Log.Record(
                     l10n.getString("ExportManager.export_ok"), null, Icons.STATUS_INFO));
-            JOptionPane.showMessageDialog(mainFrame, l10n.getString("ExportManager.export_ok!"), null,
+            JOptionPane.showMessageDialog(Context.mainFrame, l10n.getString("ExportManager.export_ok!"), null,
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -446,7 +445,7 @@ public class Actions {
                 logFrame.toFront();
             } else {
                 logFrame = new LogFrame();
-                logFrame.setLocationRelativeTo(mainFrame);
+                logFrame.setLocationRelativeTo(Context.mainFrame);
                 logFrame.setVisible(true);
             }
         }
@@ -529,16 +528,16 @@ public class Actions {
                 queue.setPaused(true);
             }
             //don't allow to send messages during update process
-            if (mainFrame.getSMSSender().isRunning()) {
-                JOptionPane.showMessageDialog(mainFrame,
+            if (Context.mainFrame.getSMSSender().isRunning()) {
+                JOptionPane.showMessageDialog(Context.mainFrame,
                     new JLabel(l10n.getString("Update.queueRunning")),
                     null, JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             logger.fine("Showing Update dialog...");
-            UpdateDialog dialog = new UpdateDialog(mainFrame, true, updateChecker);
-            dialog.setLocationRelativeTo(mainFrame);
+            UpdateDialog dialog = new UpdateDialog(Context.mainFrame, true, updateChecker);
+            dialog.setLocationRelativeTo(Context.mainFrame);
             RuntimeUtils.setDocumentModalDialog(dialog);
             dialog.setVisible(true);
         }

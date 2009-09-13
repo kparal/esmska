@@ -10,14 +10,13 @@
  */
 package esmska.gui;
 
+import esmska.Context;
 import esmska.data.Config;
 import esmska.data.Links;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.gui.JHtmlLabel.Events;
-import esmska.persistence.PersistenceManager;
 import esmska.utils.L10N;
-import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -27,11 +26,9 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -72,16 +69,11 @@ public class ExceptionDialog extends javax.swing.JDialog {
         super(parent, modal);
 
         //get path to logfile
-        try {
-            if (PersistenceManager.isInstantiated()) {
-                logFilePath = PersistenceManager.getInstance().getLogFile().getAbsolutePath();
-            } else {
-                //don't try to instantiate PersistenceManager on your own,
-                //either it already failed or the error happened before
-                //it's default initialization
-            }
-        } catch (IOException ex) {
-            logger.log(Level.WARNING, "Could not access PersistenceManager", ex);
+        if (Context.persistenceManager != null) {
+            logFilePath = Context.persistenceManager.getLogFile().getAbsolutePath();
+        } else {
+            //don't try to instantiate PersistenceManager on your own,
+            //the error happened before it's default initialization
         }
 
         initComponents();
@@ -120,7 +112,7 @@ public class ExceptionDialog extends javax.swing.JDialog {
     /** Get instance of ExceptionDialog */
     public static ExceptionDialog getInstance() {
         if (instance == null) {
-            JFrame parent = MainFrame.isInstantiated() ? MainFrame.getInstance() : null;
+            JFrame parent = Context.mainFrame != null ? Context.mainFrame : null;
             instance = new ExceptionDialog(parent, true);
         }
         return instance;
@@ -208,17 +200,7 @@ public class ExceptionDialog extends javax.swing.JDialog {
         @Override
         public void eventOccured(ValuedEvent<Events, String> e) {
             if (e.getEvent() == Events.LINK_CLICKED) {
-                    String url = e.getValue();
-                    if (!Desktop.isDesktopSupported()) {
-                        return;
-                    }
-                    Desktop desktop = Desktop.getDesktop();
-                try {
-                    logger.fine("Browsing URL: " + url);
-                    desktop.browse(new URL(url).toURI());
-                } catch (Exception ex) {
-                    logger.log(Level.WARNING, "Could not browse URL: " + url, ex);
-                }
+                Actions.getBrowseAction(e.getValue()).actionPerformed(null);
             }
         }
     });

@@ -11,6 +11,7 @@ import com.apple.eawt.ApplicationEvent;
 import com.apple.eawt.ApplicationListener;
 
 import com.apple.eio.FileManager;
+import esmska.Context;
 import esmska.gui.ImportFrame;
 import esmska.gui.ThemeManager;
 import esmska.gui.MainFrame;
@@ -55,7 +56,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
         // turn off mnemonics, tool tips and icons from menu
         // if we are not using Aqua l&f there is no need to strict use of HIG
         if (ThemeManager.isAquaCurrentLaF()) {
-            MainFrame frame = MainFrame.getInstance();
+            MainFrame frame = Context.mainFrame;
             JMenuBar bar = frame.getJMenuBar();
 
             for (Component menu : bar.getComponents()) {
@@ -187,7 +188,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
         //import dropped contacts
         String fileName = e.getFilename();
         ImportFrame importFrame = new ImportFrame();
-        importFrame.setLocationRelativeTo(MainFrame.getInstance());
+        importFrame.setLocationRelativeTo(Context.mainFrame);
         importFrame.importVCardFile(fileName);
         importFrame.setVisible(true);
     }
@@ -226,6 +227,6 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     @Override
     public void handleReOpenApplication(ApplicationEvent e) {
         e.setHandled(true);
-        MainFrame.getInstance().setVisible(true);
+        Context.mainFrame.setVisible(true);
     }
 }

@@ -3,9 +3,9 @@
  */
 package esmska.gui.dnd;
 
+import esmska.Context;
 import esmska.data.Contact;
 import esmska.gui.ImportFrame;
-import esmska.gui.MainFrame;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
@@ -83,7 +83,7 @@ public class ImportContactsTransferHandler extends TransferHandler {
                 String fileName = files.get(0).getAbsolutePath();
 
                 ImportFrame importFrame = new ImportFrame();
-                importFrame.setLocationRelativeTo(MainFrame.getInstance());
+                importFrame.setLocationRelativeTo(Context.mainFrame);
                 importFrame.importVCardFile(fileName);
                 importFrame.setVisible(true);
             } else if (support.isDataFlavorSupported(DataFlavor.stringFlavor)) {
@@ -114,7 +114,7 @@ public class ImportContactsTransferHandler extends TransferHandler {
                 }
 
                 Contact skeleton = new Contact(name, number, null);
-                MainFrame.getInstance().getContactPanel().showAddContactDialog(skeleton);
+                Context.mainFrame.getContactPanel().showAddContactDialog(skeleton);
             } else {
                 String msg = "Unknown supported DnD flavor: " + Arrays.toString(support.getDataFlavors());
                 assert false : msg;

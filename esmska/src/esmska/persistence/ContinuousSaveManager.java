@@ -5,6 +5,7 @@
 
 package esmska.persistence;
 
+import esmska.Context;
 import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.Keyring;
@@ -30,7 +31,7 @@ public class ContinuousSaveManager {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                PersistenceManager.getInstance().saveHistory();
+                Context.persistenceManager.saveHistory();
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "Could not save history", ex);
             }
@@ -41,7 +42,7 @@ public class ContinuousSaveManager {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                PersistenceManager.getInstance().saveKeyring();
+                Context.persistenceManager.saveKeyring();
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not save keyring", ex);
             }
@@ -52,7 +53,7 @@ public class ContinuousSaveManager {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                PersistenceManager.getInstance().saveContacts();
+                Context.persistenceManager.saveContacts();
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Could not save contacts", ex);
             }
@@ -68,7 +69,7 @@ public class ContinuousSaveManager {
                 case SMS_POSITION_CHANGED:
                 case SMS_REMOVED:
                     try {
-                        PersistenceManager.getInstance().saveQueue();
+                        Context.persistenceManager.saveQueue();
                     } catch (Exception ex) {
                         logger.log(Level.WARNING, "Could not save queue", ex);
                     }

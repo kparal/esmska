@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import org.apache.commons.lang.ArrayUtils;
 
@@ -109,6 +110,7 @@ public class Main {
                 PersistenceManager.setCustomDirs(configPath, configPath);
             }
             pm = PersistenceManager.getInstance();
+            Context.persistenceManager = pm;
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
             try {
@@ -116,88 +118,87 @@ public class Main {
                     @Override
                     public void run() {
                         JOptionPane.showMessageDialog(null,
-                                MessageFormat.format(l10n.getString("Main.cant_read_config"),
-                                PersistenceManager.getConfigDir().getAbsolutePath()),
+                                new JLabel(MessageFormat.format(l10n.getString("Main.cant_read_config"),
+                                PersistenceManager.getConfigDir().getAbsolutePath(),
+                                PersistenceManager.getDataDir().getAbsolutePath())),
+                                null, JOptionPane.ERROR_MESSAGE);
+                    }
+                });
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Can't display error message", e);
+            } finally {
+                //if it is not possible to access config dir, we don't want to
+                //run anymore
+                System.exit(5);
+            }
+        }
+
+        //backup files
+        try {
+            pm.backupConfigFiles();
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, "Could not back up configuration", ex);
+        }
+
+        //initialize file logging
+        File logFile = pm.getLogFile();
+        try {
+            LogSupport.initFileHandler(logFile);
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, "Could not start logging into " + logFile.getAbsolutePath(), ex);
+        } finally {
+            //no need to store records anymore
+            LogSupport.storeRecords(false);
+        }
+
+        //load user files
+        try {
+            pm.loadConfig();
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, "Could not load config file", ex);
+        }
+        try {
+            pm.loadOperators();
+        } catch (IntrospectionException ex) { //it seems there is not JavaScript support
+            logger.log(Level.SEVERE, "Current JRE doesn't support JavaScript execution", ex);
+            try {
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        JOptionPane.showMessageDialog(null, l10n.getString("Main.no_javascript"),
                                 null, JOptionPane.ERROR_MESSAGE);
                     }
                 });
             } catch (Exception e) {
                 logger.log(Level.SEVERE, "Can't display error message", e);
             }
+            System.exit(2);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Could not load operators", ex);
         }
-
-        //backup files
-        if (pm != null) {
-            try {
-                pm.backupConfigFiles();
-            } catch (IOException ex) {
-                logger.log(Level.WARNING, "Could not back up configuration", ex);
-            }
+        try {
+            pm.loadContacts();
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, "Could not load contacts file", ex);
         }
-
-        //initialize file logging
-        if (pm != null) {
-            File logFile = pm.getLogFile();
-            try {
-                LogSupport.initFileHandler(logFile);
-            } catch (IOException ex) {
-                logger.log(Level.WARNING, "Could not start logging into " + logFile.getAbsolutePath(), ex);
-            } finally {
-                //no need to store records anymore
-                LogSupport.storeRecords(false);
-            }
+        try {
+            pm.loadQueue();
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, "Could not load queue file", ex);
         }
-
-        //load user files
-        if (pm != null) {
-            try {
-                pm.loadConfig();
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, "Could not load config file", ex);
-            }
-            try {
-                pm.loadOperators();
-            } catch (IntrospectionException ex) { //it seems there is not JavaScript support
-                logger.log(Level.SEVERE, "Current JRE doesn't support JavaScript execution", ex);
-                try {
-                    SwingUtilities.invokeAndWait(new Runnable() {
-                        @Override
-                        public void run() {
-                            JOptionPane.showMessageDialog(null, l10n.getString("Main.no_javascript"),
-                                    null, JOptionPane.ERROR_MESSAGE);
-                        }
-                    });
-                } catch (Exception e) {
-                    logger.log(Level.SEVERE, "Can't display error message", e);
-                }
-                System.exit(2);
-            } catch (Exception ex) {
-                logger.log(Level.SEVERE, "Could not load operators", ex);
-            }
-            try {
-                pm.loadContacts();
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, "Could not load contacts file", ex);
-            }
-            try {
-                pm.loadQueue();
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, "Could not load queue file", ex);
-            }
-            try {
-                pm.loadHistory();
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, "Could not load history file", ex);
-            }
-            try {
-                pm.loadKeyring();
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, "Could not load keyring file", ex);
-            }
+        try {
+            pm.loadHistory();
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, "Could not load history file", ex);
+        }
+        try {
+            pm.loadKeyring();
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, "Could not load keyring file", ex);
         }
         
         //warn if other program instance is already running
-        if (pm != null && !pm.isFirstInstance()) {
+        if (!pm.isFirstInstance()) {
             logger.warning("Some other instance of the program is already running");
             try {
                 SwingUtilities.invokeAndWait(new Runnable() {

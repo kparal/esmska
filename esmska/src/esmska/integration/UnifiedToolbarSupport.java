@@ -3,6 +3,7 @@
  */
 package esmska.integration;
 
+import esmska.Context;
 import esmska.gui.MainFrame;
 
 import java.awt.Color;
@@ -42,7 +43,7 @@ public class UnifiedToolbarSupport extends MouseAdapter {
      * @param frame main frame
      */
     public UnifiedToolbarSupport() {
-        this.frame = MainFrame.getInstance();
+        this.frame = Context.mainFrame;
 
         // add custom window listener for setting border
         frame.addWindowFocusListener(new UnifiedToolbarWindowAdapter());
@@ -123,7 +124,7 @@ public class UnifiedToolbarSupport extends MouseAdapter {
 
         public void paint(Graphics2D graphics2D, int width, int height) {
 
-            boolean focused = MainFrame.getInstance().isFocused();
+            boolean focused = Context.mainFrame.isFocused();
 
             Color topColor = focused ? ACTIVE_TOP_GRADIENT_COLOR : INACTIVE_TOP_GRADIENT_COLOR;
             Color bottomColor = focused ? ACTIVE_BOTTOM_GRADIENT_COLOR : INACTIVE_BOTTOM_GRADIENT_COLOR;

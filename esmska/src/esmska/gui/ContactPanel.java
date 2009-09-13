@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.Context;
 import esmska.gui.dnd.ImportContactsTransferHandler;
 import esmska.data.Contact;
 import esmska.data.Contacts;
@@ -530,7 +531,7 @@ public class ContactPanel extends javax.swing.JPanel {
             //confirm
             JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE, 
                     JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
-            JDialog dialog = pane.createDialog(MainFrame.getInstance(), null);
+            JDialog dialog = pane.createDialog(Context.mainFrame, null);
             dialog.setResizable(true);
             RuntimeUtils.setDocumentModalDialog(dialog);
             dialog.pack();
@@ -814,7 +815,7 @@ public class ContactPanel extends javax.swing.JPanel {
             logger.fine("Showing edit contact dialog for contact: " + contact);
             this.contact = contact;
             init();
-            setLocationRelativeTo(MainFrame.getInstance());
+            setLocationRelativeTo(Context.mainFrame);
             optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
             panel.setContact(contact);
             panel.prepareForShow();
@@ -830,7 +831,7 @@ public class ContactPanel extends javax.swing.JPanel {
             logger.fine("Showing edit contact dialog for " + contacts.size() + " contacts");
             this.contact = null;
             init();
-            setLocationRelativeTo(MainFrame.getInstance());
+            setLocationRelativeTo(Context.mainFrame);
             optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
             panel.setContacts(contacts);
             panel.prepareForShow();

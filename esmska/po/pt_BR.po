@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-10 00:04+0200\n"
+"POT-Creation-Date: 2009-09-13 17:37+0200\n"
 "PO-Revision-Date: 2009-08-27 22:47+0000\n"
 "Last-Translator: Alexandre Sapata Carbonell <alexandrenescau@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -1149,8 +1149,16 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
-"<html>The user configuration directory at ''{0}''<br>can''t be read or "
-"written!</html>"
+"<html><h2>Error accessing user directories</h2>There is a problem with "
+"reading or writing some of your configuration directories<br>(wrong "
+"permissions maybe?). These directories are:\n"
+"<ul>\n"
+"<li>User configuration directory: <i>{0}</i></li>\n"
+"<li>User data directory: <i>{1}</i></li>\n"
+"</ul>\n"
+"You can get more detailed information when you run the program from the "
+"console.<br>It is not possible to continue, Esmska will now exit.\n"
+"</html>"
 msgstr ""
 
 #: Main.choose_config_files
@@ -1177,10 +1185,6 @@ msgstr ""
 
 #: MainFrame.Quit_program
 msgid "Quit program"
-msgstr ""
-
-#: MainFrame.cant_create_program_dir
-msgid "Directory with program settings can't be created!"
 msgstr ""
 
 #: MainFrame.cant_save_config
