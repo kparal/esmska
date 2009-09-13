@@ -120,6 +120,7 @@ public class MainFrame extends javax.swing.JFrame {
         instance = this;
 
         // if we are using Aqua L&F, set textured window property
+        // must be called before components inicialization
         if (ThemeManager.isAquaCurrentLaF()) {
             getRootPane().putClientProperty("apple.awt.brushMetalLook", "true");
         }

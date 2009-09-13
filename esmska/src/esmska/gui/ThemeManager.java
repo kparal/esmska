@@ -38,6 +38,8 @@ public class ThemeManager {
 
     private static final Logger logger = Logger.getLogger(ThemeManager.class.getName());
     private static LookAndFeelInfo[] installedLafs = UIManager.getInstalledLookAndFeels();
+    //remember Mac UI for MenuBar from default l&f
+    private static final String macBarUI = UIManager.getString("MenuBarUI");
 
     static {
         //if Nimbus is available, let's replace Metal with it
@@ -121,6 +123,12 @@ public class ThemeManager {
                 break;
             default:
                 throw new IllegalArgumentException("Unknown LaF name");
+        }
+
+        //set MenuBar usage on Mac OS
+        if (RuntimeUtils.isMac() && macBarUI != null) {
+            logger.fine("Setting Mac OS MenuBar UI");
+            UIManager.put("MenuBarUI", macBarUI);
         }
 
         logger.fine("New LaF set: " + UIManager.getLookAndFeel());

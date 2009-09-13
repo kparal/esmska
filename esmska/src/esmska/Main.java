@@ -71,9 +71,6 @@ public class Main {
         }
         logger.fine("Esmska " + Config.getLatestVersion() + " starting...");
 
-        //remember Mac UI for MenuBar from default l&f
-        String macBarUI = UIManager.getString("MenuBarUI");
-        
         //portable mode
         configPath = clp.getConfigPath();
         if (clp.isPortable() && configPath == null) {
@@ -267,12 +264,6 @@ public class Main {
         //do some changes for unstable version
         if (!Config.isStableVersion()) {
             config.setCheckForUnstableUpdates(true);
-        }
-        
-        //set MenuBar usage on Mac OS
-        if (macBarUI != null && RuntimeUtils.isMac()) {
-            logger.fine("Setting Mac OS UI");
-            UIManager.put("MenuBarUI", macBarUI);
         }
         
         //start main frame
