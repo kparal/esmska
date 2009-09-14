@@ -18,11 +18,15 @@ import esmska.gui.MainFrame;
 import esmska.gui.NotificationIcon;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -40,6 +44,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     private static final Color LEOPARD_PANEL_COLOR = new Color(232, 232, 232);
 
     private Application app;
+    private int visibleSheets;
 
     @Override
     protected void initialize() {
@@ -146,7 +151,27 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
         }
     }
 
-    // public interface -------------------------------------------------------
+    @Override
+    public void registerModalSheet(JDialog dialog) {
+        dialog.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+                visibleSheets++;
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                visibleSheets--;
+            }
+        });
+    }
+
+    @Override
+    public boolean isModalSheetVisible() {
+        return visibleSheets > 0;
+    }
+
     /**
      * @see IntegrationAdapter#setSMSCount(Integer)
      */

@@ -105,33 +105,38 @@ public class UnifiedToolbarSupport extends MouseAdapter {
      * 
      * @author Kenneth Orr
      */
-    private class UnifiedToolbarUI extends ToolBarUI {
+    private static class UnifiedToolbarUI extends ToolBarUI {
 
-        private Color ACTIVE_TOP_GRADIENT_COLOR = new Color(0xbcbcbc);
-        private Color ACTIVE_BOTTOM_GRADIENT_COLOR = new Color(0x9a9a9a);
-        private Color INACTIVE_TOP_GRADIENT_COLOR = new Color(0xe4e4e4);
-        private Color INACTIVE_BOTTOM_GRADIENT_COLOR = new Color(0xd1d1d1);
+        private static final Color ACTIVE_TOP_GRADIENT_COLOR = new Color(0xbcbcbc);
+        private static final Color ACTIVE_BOTTOM_GRADIENT_COLOR = new Color(0x9a9a9a);
+        private static final Color INACTIVE_TOP_GRADIENT_COLOR = new Color(0xe4e4e4);
+        private static final Color INACTIVE_BOTTOM_GRADIENT_COLOR = new Color(0xd1d1d1);
 
+        private static final MainFrame FRAME = MainFrame.getInstance();
+        private static final IntegrationAdapter ADAPTER = IntegrationAdapter.getInstance();
+
+        /**
+         * Paints gradient. Colors depends on focused state of main window.
+         *
+         * @param g graphics
+         * @param c painted component
+         */
         @Override
         public void paint(Graphics g, JComponent c) {
-            Graphics2D graphics2D = (Graphics2D) g.create();
 
-            paint(graphics2D, c.getWidth(), c.getHeight());
-
-            graphics2D.dispose();
-            super.paint(graphics2D, c);
-        }
-
-        public void paint(Graphics2D graphics2D, int width, int height) {
-
-            boolean focused = Context.mainFrame.isFocused();
+            int height = c.getHeight();
+            boolean focused = FRAME.isFocused() || ADAPTER.isModalSheetVisible();
 
             Color topColor = focused ? ACTIVE_TOP_GRADIENT_COLOR : INACTIVE_TOP_GRADIENT_COLOR;
             Color bottomColor = focused ? ACTIVE_BOTTOM_GRADIENT_COLOR : INACTIVE_BOTTOM_GRADIENT_COLOR;
 
             GradientPaint paint = new GradientPaint(0, 1, topColor, 0, height, bottomColor);
+
+            Graphics2D graphics2D = (Graphics2D) g.create();
             graphics2D.setPaint(paint);
-            graphics2D.fillRect(0, 0, width, height);
+            graphics2D.fillRect(0, 0, c.getWidth(), height);
+
+            graphics2D.dispose();
         }
     }
 

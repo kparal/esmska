@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import esmska.data.event.ValuedListener;
 import esmska.utils.RuntimeUtils;
 import java.io.File;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -130,6 +132,27 @@ public class IntegrationAdapter {
     /** Inicialize stuff to handle GUI stuff, adjust GUI for the current envirnonment */
     public void activateGUI() {
         return;
+    }
+
+    /**
+     * <p>Register modal sheet for proper handling. Probably usable only on Mac,
+     * other OS doesnt have concept of sheet window.</p>
+     *
+     * <p>Default implementation does nothing.</p>
+     *
+     * @param dialog registered dialog
+     */
+    public void registerModalSheet(JDialog dialog) {
+        return;
+    }
+
+    /**
+     * Is some modal sheet of main window visible?
+     *
+     * @return in default implementation, it always return <code>false</code>
+     */
+    public boolean isModalSheetVisible() {
+        return false;
     }
 
     /** Set some things on start */

@@ -4,7 +4,9 @@
  */
 package esmska.utils;
 
+import esmska.gui.MainFrame;
 import esmska.gui.ThemeManager;
+import esmska.integration.IntegrationAdapter;
 import java.awt.Dialog.ModalityType;
 import javax.swing.JDialog;
 import org.apache.commons.lang.ArrayUtils;
@@ -212,6 +214,7 @@ public class RuntimeUtils {
 
     /** Set dialog to be document modal and set property so it will look as
      * native modal dialog on Mac (has no effect on other platforms).
+     * Also notifies Integration adapter about this event.
      *
      * @param dialog dialog which should be document modal and Mac native
      * looking (only on Mac)
@@ -220,5 +223,6 @@ public class RuntimeUtils {
         dialog.setModalityType(ModalityType.DOCUMENT_MODAL);
         dialog.getRootPane().putClientProperty("apple.awt.documentModalSheet",
                 Boolean.TRUE);
+       IntegrationAdapter.getInstance().registerModalSheet(dialog);
     }
 }
