@@ -109,8 +109,8 @@ public class Main {
             if (configPath != null) {
                 PersistenceManager.setCustomDirs(configPath, configPath);
             }
-            pm = PersistenceManager.getInstance();
-            Context.persistenceManager = pm;
+            PersistenceManager.instantiate();
+            pm = Context.persistenceManager;
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
             try {
@@ -271,7 +271,8 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MainFrame.getInstance().startAndShow();
+                MainFrame.instantiate();
+                Context.mainFrame.startAndShow();
             }
         });
     }

@@ -115,7 +115,7 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    private MainFrame() {
         instance = this;
         Context.mainFrame = instance;
 
@@ -219,14 +219,15 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
-    /** Get current instance. Should be called only for inicialization, after that
-     * the instance is available in the Context.
+    /** Create an instance of MainFrame. Should be called only for the first
+     * inicialization, after that the instance is available in the Context.
      */
-    public static MainFrame getInstance() {
+    public static void instantiate() {
         if (instance == null) {
             instance = new MainFrame();
+        } else {
+            throw new IllegalStateException("MainFrame is already instantiated");
         }
-        return instance;
     }
 
     /** Start the mainframe and let it be visible according to user preferences

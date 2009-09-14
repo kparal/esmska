@@ -112,7 +112,6 @@ public class UnifiedToolbarSupport extends MouseAdapter {
         private static final Color INACTIVE_TOP_GRADIENT_COLOR = new Color(0xe4e4e4);
         private static final Color INACTIVE_BOTTOM_GRADIENT_COLOR = new Color(0xd1d1d1);
 
-        private static final MainFrame FRAME = MainFrame.getInstance();
         private static final IntegrationAdapter ADAPTER = IntegrationAdapter.getInstance();
 
         /**
@@ -125,7 +124,7 @@ public class UnifiedToolbarSupport extends MouseAdapter {
         public void paint(Graphics g, JComponent c) {
 
             int height = c.getHeight();
-            boolean focused = FRAME.isFocused() || ADAPTER.isModalSheetVisible();
+            boolean focused = Context.mainFrame.isFocused() || ADAPTER.isModalSheetVisible();
 
             Color topColor = focused ? ACTIVE_TOP_GRADIENT_COLOR : INACTIVE_TOP_GRADIENT_COLOR;
             Color bottomColor = focused ? ACTIVE_BOTTOM_GRADIENT_COLOR : INACTIVE_BOTTOM_GRADIENT_COLOR;

@@ -9,6 +9,7 @@
 
 package esmska.persistence;
 
+import esmska.Context;
 import java.beans.IntrospectionException;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -174,15 +175,17 @@ public class PersistenceManager {
         customPathSet = true;
     }
     
-    /** Get PersistenceManager. Should be called only for inicialization, after
+    /** Create instance of PersistenceManager. Should be called only for inicialization, after
      * that the instance is available in the Context.
      * @throws IOException could not read/write configuration files/directories
      */
-    public static PersistenceManager getInstance() throws IOException {
+    public static void instantiate() throws IOException {
         if (instance == null) {
             instance = new PersistenceManager();
+            Context.persistenceManager = instance;
+        } else {
+            throw new IllegalStateException("PersistanceManager is already instantiated");
         }
-        return instance;
     }
 
     /** Get file used for logging */

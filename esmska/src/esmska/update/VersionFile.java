@@ -4,6 +4,7 @@
  */
 package esmska.update;
 
+import esmska.Context;
 import esmska.data.Config;
 import esmska.data.Icons;
 import esmska.data.Operator;
@@ -60,7 +61,8 @@ public class VersionFile {
             unstableProgramVersion = args[1];
         }
 
-        PersistenceManager.getInstance().loadOperators();
+        PersistenceManager.instantiate();
+        Context.persistenceManager.loadOperators();
 
         create(System.out, null, null);
     }
