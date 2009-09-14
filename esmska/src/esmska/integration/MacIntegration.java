@@ -22,8 +22,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -46,7 +44,7 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
 
     private Application app;
     private int visibleSheets;
-    private Set<JDialog> registeredSheets = new HashSet<JDialog>();
+    private final ModalSheetCounter modalSheetCounter = new ModalSheetCounter();
 
     @Override
     protected void initialize() {
@@ -155,20 +153,8 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
 
     @Override
     public void registerModalSheet(JDialog dialog) {
-        if (registeredSheets.add(dialog)) {
-            dialog.addWindowListener(new WindowAdapter() {
-
-                @Override
-                public void windowOpened(WindowEvent e) {
-                    visibleSheets++;
-                }
-
-                @Override
-                public void windowDeactivated(WindowEvent e) {
-                    visibleSheets--;
-                }
-            });
-        }
+        dialog.removeWindowListener(modalSheetCounter);
+        dialog.addWindowListener(modalSheetCounter);
     }
 
     @Override
@@ -257,5 +243,19 @@ public class MacIntegration extends IntegrationAdapter implements ApplicationLis
     public void handleReOpenApplication(ApplicationEvent e) {
         e.setHandled(true);
         Context.mainFrame.setVisible(true);
+    }
+
+    /** Window listener that counts how many we have opened modal dialogs */
+    private class ModalSheetCounter extends WindowAdapter {
+
+        @Override
+        public void windowOpened(WindowEvent e) {
+            visibleSheets++;
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+            visibleSheets--;
+        }
     }
 }
