@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-13 17:51+0200\n"
+"POT-Creation-Date: 2009-09-15 20:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1779,8 +1779,7 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"A small donation is one of the options how to support future program "
-"development."
+"Integrated gateway updater will help you solve problems with message sending."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -1825,12 +1824,6 @@ msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
 
 #. #Write the tip as short as possible
-#: Tip.26
-msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
-msgstr ""
-
-#. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
@@ -1864,6 +1857,13 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.donation
+msgid ""
+"A small donation is one of the options how to support future program "
+"development."
 msgstr ""
 
 #. #Provide names and contacts to translators

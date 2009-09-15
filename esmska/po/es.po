@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-13 17:50+0200\n"
-"PO-Revision-Date: 2009-09-10 20:15+0000\n"
-"Last-Translator: Federico Vera <Unknown>\n"
+"POT-Creation-Date: 2009-09-15 20:50+0200\n"
+"PO-Revision-Date: 2009-09-15 03:17+0000\n"
+"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-13 09:57+0000\n"
+"X-Launchpad-Export-Date: 2009-09-15 11:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -108,7 +108,7 @@ msgstr ""
 
 #: CheckUpdates_
 msgid "&Updates checker"
-msgstr ""
+msgstr "&Buscador de actualizaciones"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -139,6 +139,13 @@ msgid ""
 "* {2} - {0} and {1} modes combined. Also prints webpage contents (lots of "
 "output)."
 msgstr ""
+"Imprimir la salida del depurador. Los modos posibles son:\n"
+"* {0} - depuración de programa. Opción por defecto cuando no se especifica "
+"ningún modo.\n"
+"* {1} - depuración de red. Imprime las cabeceras HTTP, todas las "
+"redirecciones, etc.\n"
+"* {2} - modos {0} y {1} combinados. También imprime contenidos de la página "
+"web (mucho texto de salida)."
 
 #: CommandLineParser.debugMode
 msgid "debug mode"
@@ -170,10 +177,12 @@ msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
+"Especifica la ruta al directorio de configuración del usuario. Usar un "
+"nombre de ruta absoluto. No se puede usar con la opción -p."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr ""
+msgstr "Muestra esta ayuda."
 
 #: CommandLineParser.usage
 msgid "Usage:"
@@ -181,27 +190,27 @@ msgstr "Uso:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr "Imprime la versión de programa y sale."
+msgstr "Imprime la version del programa y sale."
 
 #: Compress_
 msgid "&Compress"
-msgstr ""
+msgstr "&Comprimir"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr ""
+msgstr "Configuraciones avanza&das"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr ""
+msgstr "Mostrar items con configuraciones más avanzadas"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
-msgstr ""
+msgstr "&Apariencia"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Automatically check for &updates of:"
-msgstr ""
+msgstr "B&uscar automáticamente actualizaciones de:"
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 msgid ""
@@ -218,10 +227,11 @@ msgstr ""
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
 msgstr ""
+"Eliminar todos los nombres de usuarios y contraseñas de todos los operadores"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
-msgstr ""
+msgstr "&Conexión"
 
 #: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -229,7 +239,7 @@ msgstr ""
 
 #: ConfigFrame.countryCodeLabel.text
 msgid "(country:"
-msgstr ""
+msgstr "(país:"
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -241,10 +251,17 @@ msgid ""
 "shorter in many labels.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"El código internacional de país comenzando con el signo '+'.<br>\n"
+"Cuando es especificado éste código aparecerá en todos los número escritos "
+"sin el<br>\n"
+"formato internacional. La apariencia de éste código será mucho mas corta en "
+"muchas etiquetas.\n"
+"</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request the &delivery report"
-msgstr ""
+msgstr "Solicitar reporte de &entrega"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -255,16 +272,24 @@ msgid ""
 "gateways.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Enviará una solicitud de informe de entrega del mensaje. El informe "
+"llegará<br>\n"
+"al número de teléfono del remitente. Esta función es soportada solo por "
+"algunos operadores.\n"
+"</html>"
 
 #: ConfigFrame.develLabel.text
 msgid ""
 "This tab is for developing purposes only. It will not be visible in the "
 "final release."
 msgstr ""
+"El contenido de esta pestaña es para propósitos de desarrollo solamente. No "
+"estará visible en la final release."
 
 #: ConfigFrame.forgetLayoutCheckBox.text
 msgid "Use default form &layout"
-msgstr ""
+msgstr "Usar &plantilla predeterminada"
 
 #: ConfigFrame.forgetLayoutCheckBox.toolTipText
 msgid ""
@@ -273,10 +298,14 @@ msgid ""
 "layout will be restored on the next program startup\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Las dimensiones actuales del programa serán ignoradas y la plantilla<br>\n"
+"predeterminada será restaurada la próxima vez que inicie el programa.\n"
+"</html>"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr ""
+msgstr "&General"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -285,6 +314,10 @@ msgid ""
 "Example: proxy.company.com:80\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Dirección del servidor proxy HTTP en el formato 'host' o 'host:puerto'.\n"
+"Ejemplo: proxy.empresa.com:80\n"
+"</html>"
 
 #: ConfigFrame.httpsProxyTextField.toolTipText
 msgid ""
@@ -293,23 +326,27 @@ msgid ""
 "Example: proxy.company.com:443\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Dirección del servidor proxy HTTP en el formato 'host' o 'host:puerto'.\n"
+"Ejemplo: proxy.empresa.com:443\n"
+"</html>"
 
 #: ConfigFrame.jLabel1.text
 msgid "&Number:"
-msgstr ""
+msgstr "&Número:"
 
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Operador:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr ""
+msgstr "Nombre de &usuario:"
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr ""
+msgstr "Contra&seña:"
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -319,18 +356,24 @@ msgid ""
 "no other user has the access to the <u>program configuration directory</u>.\n"
 "</i></html>"
 msgstr ""
+"<html><i>\n"
+"Aunque las contraseñas guardadas son encriptadas su contenido aún puede ser "
+"recuperado. Recomendamos que configure los permisos de acceso de tal manera "
+"que ningún otro usuario pueda acceder al <u>directorio de configuracion del "
+"programa</u>.\n"
+"</i></html>"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
-msgstr ""
+msgstr "Proxy H&TTP:"
 
 #: ConfigFrame.jLabel15.text
 msgid "HTTP&S proxy:"
-msgstr ""
+msgstr "Proxy HTTP&S:"
 
 #: ConfigFrame.jLabel16.text
 msgid "SO&CKS proxy:"
-msgstr ""
+msgstr "Proxy SO&CKS:"
 
 #: ConfigFrame.jLabel17.text
 msgid ""
@@ -338,15 +381,18 @@ msgid ""
 "* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
+"<html><i>\n"
+"* Autenticación de usuario/contraseña no está actualmente soportado.\n"
+"</i></html>"
 
 #: ConfigFrame.jLabel2.text
 msgid "The &default country prefix number:"
-msgstr ""
+msgstr "El código de país &predeterminado"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Nombre:"
 
 #: ConfigFrame.jLabel7.text
 msgid ""
@@ -354,6 +400,9 @@ msgid ""
 "* A program restart is neccessary to apply the changes!\n"
 "</i></html>"
 msgstr ""
+"<html><i>\n"
+"* ¡Es necesario reiniciar para que los cambios surtan efecto!\n"
+"</i></html>"
 
 #: ConfigFrame.jLabel9.text
 msgid ""
@@ -361,6 +410,10 @@ msgid ""
 "Here you can set your login credentials for gateways which require it.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Aquí puede configurar sus credenciales de acceso para los operadores que así "
+"lo requieran.\n"
+"</html>"
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -368,26 +421,29 @@ msgid ""
 "Allows you to change the appearance of the program\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Permite cambiar la apariencia del programa\n"
+"</html>"
 
 #: ConfigFrame.loginPanel.TabConstraints.tabTitle
 msgid "&Login credentials"
-msgstr ""
+msgstr "&Credenciales de acceso"
 
 #: ConfigFrame.loginTextField.toolTipText
 msgid "Username needed for logging in to the gateway"
-msgstr ""
+msgstr "Nombre de usuario requerido para poder acceder al operador"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
-msgstr ""
+msgstr "Apariencia"
 
 #: ConfigFrame.multiplatform_look
 msgid "Multiplatform"
-msgstr ""
+msgstr "Multiplataforma"
 
 #: ConfigFrame.notificationAreaCheckBox.text
 msgid "Show icon in the &notification area"
-msgstr ""
+msgstr "Mostrar icono en el área de &notificación"
 
 #: ConfigFrame.notificationAreaCheckBox.toolTipText
 msgid ""
@@ -400,10 +456,18 @@ msgid ""
 "feature is available only from Java 6 Update 10.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Mostrar icono en el área del administrador de ventana (tambien llamado "
+"<i>área de notificación</i>).<br>\n"
+"<br>\n"
+"Precaución, si usas los modernos gestores de ventanas (Compiz, Beryl, ...) "
+"esta<br>\n"
+"característica está solo disponible con Java 6 Update 10.\n"
+"</html>"
 
 #: ConfigFrame.operatorFilterLabel.text
 msgid "Show &only gateways with names containing:"
-msgstr ""
+msgstr "Mostrar sol&o los operadores cuyos nombres contienen:"
 
 #: ConfigFrame.operatorFilterTextField.toolTipText
 msgid ""
@@ -415,14 +479,22 @@ msgid ""
 "sensitive.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"En la lista de operadores aparecerán solo aquellos que contienen<br>\n"
+"en sus nombres el patrón especificado en este campo. De esta manera puedes "
+"fácilmente<br>\n"
+"ver por ej. los operadores del país XX escribiendo el patrón [XX].<br>\n"
+"Puedes ingresar mas patrones separándolos por coma. Los patrones son "
+"sensibles a mayúsculas y minúsculas.\n"
+"</html>"
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
 msgid "&Gateways"
-msgstr ""
+msgstr "&Operadores"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
-msgstr ""
+msgstr "La contraseña perteneciente al nombre de usuario"
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
@@ -431,7 +503,7 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."
-msgstr ""
+msgstr "&Restringir el historial de envíos a los últimos {0} días."
 
 #: ConfigFrame.reducedHistoryCheckBox.toolTipText
 msgid ""
@@ -443,7 +515,7 @@ msgstr ""
 
 #: ConfigFrame.removeAccentsCheckBox.text
 msgid "Remove &diacritics from messages"
-msgstr ""
+msgstr "Eliminar &diacríticos de los mensajes"
 
 #: ConfigFrame.removeAccentsCheckBox.toolTipText
 msgid ""
@@ -453,20 +525,27 @@ msgid ""
 "Note: This may not work for all languages.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Todos los diacríticos serán eliminados del mensaje antes de ser enviado."
+"<br>\n"
+"Nota: esto puede que no funcione para todos los lenguajes.\n"
+"</html>"
 
 #: ConfigFrame.remove_credentials
 msgid "Do you really like to remove all entered login credentials?"
-msgstr ""
+msgstr "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
-msgstr ""
+msgstr "Igual al proxy &HTTP"
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
 msgid ""
 "An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
 "field"
 msgstr ""
+"Una dirección en el campo 'proxy HTTP' será usado también para el campo "
+"'proxy HTTPS'"
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -480,14 +559,16 @@ msgstr ""
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
+"Número del remitente en el formato internacional (comenzando con el signo "
+"'+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Show password"
-msgstr ""
+msgstr "Mostrar contraseña"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
-msgstr ""
+msgstr "Mostrar u ocultar la contraseña"
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -496,10 +577,14 @@ msgid ""
 "Example: proxy.company.com:1080\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Dirección del servidor proxy SOCKS en el formato 'host' o 'host:puerto'.\n"
+"Ejemplo: proxy.empresa.com:1080\n"
+"</html>"
 
 #: ConfigFrame.startMinimizedCheckBox.text
 msgid "Hide program to &icon on startup"
-msgstr ""
+msgstr "Minimizar en el &icono al inicio"
 
 #: ConfigFrame.startMinimizedCheckBox.toolTipText
 msgid ""
@@ -508,25 +593,29 @@ msgid ""
 "to the icon in the notification area\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Inmediatamente despues de inciar el programa se minimiza<br>\n"
+"en el icono situado en el área de notificación\n"
+"</html>"
 
 #: ConfigFrame.system_look
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: ConfigFrame.themeComboBox.toolTipText
 msgid ""
 "<html>\n"
 "Color motives for the chosen look\n"
 "</html>"
-msgstr ""
+msgstr "Colores disponibles para la apariencia elegida"
 
 #: ConfigFrame.themeLabel.text
 msgid "The&me:"
-msgstr ""
+msgstr "Te&ma"
 
 #: ConfigFrame.tipsCheckBox.text
 msgid "Show program &tip on startup"
-msgstr ""
+msgstr "Mostrar &consejos al inicio"
 
 #: ConfigFrame.tipsCheckBox.toolTipText
 msgid ""
@@ -535,14 +624,18 @@ msgid ""
 "in the status bar on program startup\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Mostrar consejos aleatorios a cerca del programa<br>\n"
+"en la barra de tareas al inicio\n"
+"</html>"
 
 #: ConfigFrame.title
 msgid "Preferences - Esmska"
-msgstr ""
+msgstr "Preferencias - Esmska"
 
 #: ConfigFrame.toolbarVisibleCheckBox.text
 msgid "Show the &toolbar"
-msgstr ""
+msgstr "Mostra la barra de &tareas"
 
 #: ConfigFrame.toolbarVisibleCheckBox.toolTipText
 msgid ""
@@ -550,19 +643,23 @@ msgid ""
 "Show the toolbar which helps to access some actions with mouse more easily\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Muestra la barra de tareas que facilita el acceso a algunas funciones "
+"fácilmente con el mouse\n"
+"</html>"
 
 #: ConfigFrame.unknown_look
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #. #meaning "unknown country"
 #: ConfigFrame.unknown_state
 msgid "unknown"
-msgstr ""
+msgstr "desconocido"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
 msgid "also u&nstable versions"
-msgstr ""
+msgstr "también versiones i&nestables"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
@@ -573,22 +670,29 @@ msgid ""
 "not afraid of potentially losing their program data.</b>\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Notifica también acerca de versiones inestables.<br>\n"
+"<br>\n"
+"<b>Precaución: versiones inestables son solo recomendables para usuarios con "
+"experiencia<br>\n"
+"no temerosos a la potencial perdida de datos.</b>\n"
+"</html>"
 
 #: ConfigFrame.updateCheckAll
 msgid "program and gateways"
-msgstr ""
+msgstr "programa y operadores"
 
 #: ConfigFrame.updateCheckGateway
 msgid "gateways only"
-msgstr ""
+msgstr "operadores solamente"
 
 #: ConfigFrame.updateCheckProgram
 msgid "program only"
-msgstr ""
+msgstr "programa solamente"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
-msgstr ""
+msgstr "Usar servidor pro&xy"
 
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
@@ -1791,8 +1895,7 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"A small donation is one of the options how to support future program "
-"development."
+"Integrated gateway updater will help you solve problems with message sending."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -1837,12 +1940,6 @@ msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
 
 #. #Write the tip as short as possible
-#: Tip.26
-msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
-msgstr ""
-
-#. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
@@ -1878,13 +1975,21 @@ msgstr ""
 msgid "Don't forget to provide your country prefix number in the preferences."
 msgstr ""
 
+#. #Write the tip as short as possible
+#: Tip.donation
+msgid ""
+"A small donation is one of the options how to support future program "
+"development."
+msgstr ""
+
 #. #Provide names and contacts to translators
 #: Translators
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  DiegoJ https://launchpad.net/~diegojromerolopez\n"
-"  Federico Vera https://launchpad.net/~fedevera"
+"  Federico Vera https://launchpad.net/~fedevera\n"
+"  Miguel Zilli https://launchpad.net/~miguelzilli"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel

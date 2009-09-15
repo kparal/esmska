@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-13 17:42+0200\n"
-"PO-Revision-Date: 2009-09-13 17:42+0100\n"
+"POT-Creation-Date: 2009-09-15 20:45+0200\n"
+"PO-Revision-Date: 2009-09-15 20:42+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2052,11 +2052,9 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"A small donation is one of the options how to support future program "
-"development."
+"Integrated gateway updater will help you solve problems with message sending."
 msgstr ""
-"Malý finanční příspěvek je jedna z možností, jak podpořit další vývoj "
-"programu."
+"Začleněná možnost aktualizace bran vám pomůže s problémy při odesílání zpráv."
 
 #. #Write the tip as short as possible
 #: Tip.2
@@ -2106,13 +2104,6 @@ msgid "Use Help menu to ask a question or report a problem."
 msgstr "Použijte nabídku Nápověda pro položení dotazu nebo nahlášení problému."
 
 #. #Write the tip as short as possible
-#: Tip.26
-msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
-msgstr ""
-"Začleněná možnost aktualizace bran vám pomůže s problémy při odesílání zpráv."
-
-#. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr "Své kontakty můžete importovat z mnoha jiných programů či formátů."
@@ -2150,6 +2141,15 @@ msgstr ""
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
 msgstr "Nezapomeňte si v nastavení vyplnit předčíslí své země."
+
+#. #Write the tip as short as possible
+#: Tip.donation
+msgid ""
+"A small donation is one of the options how to support future program "
+"development."
+msgstr ""
+"Malý finanční příspěvek je jedna z možností, jak podpořit další vývoj "
+"programu."
 
 #. #Provide names and contacts to translators
 #: Translators
@@ -2315,6 +2315,13 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid ""
+#~ "Select multiple messages in history simply by holding and dragging mouse "
+#~ "cursor."
+#~ msgstr ""
+#~ "Více zpráv z historie označíte naráz jednoduše stisknutím a táhnutím "
+#~ "kurzoru myši."
 
 #~ msgid ""
 #~ "<html>The user configuration directory at ''{0}''<br>can''t be read or "

@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-13 17:50+0200\n"
+"POT-Creation-Date: 2009-09-15 20:50+0200\n"
 "PO-Revision-Date: 2009-07-02 08:41+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-13 09:57+0000\n"
+"X-Launchpad-Export-Date: 2009-09-15 11:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -1792,8 +1792,7 @@ msgstr "Program jest otwarty i darmowy. Przyłącz się i pomoż w jego rozwoju!
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"A small donation is one of the options how to support future program "
-"development."
+"Integrated gateway updater will help you solve problems with message sending."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -1838,12 +1837,6 @@ msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
 
 #. #Write the tip as short as possible
-#: Tip.26
-msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
-msgstr ""
-
-#. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
@@ -1878,6 +1871,13 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
+msgstr ""
+
+#. #Write the tip as short as possible
+#: Tip.donation
+msgid ""
+"A small donation is one of the options how to support future program "
+"development."
 msgstr ""
 
 #. #Provide names and contacts to translators
@@ -2018,9 +2018,6 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "Directory with program settings can't be created!"
-#~ msgstr "Katalog z ustawieniami programu nie może zostać utworzony!"
-
 #~ msgid "O&perators"
 #~ msgstr "O&peratorzy"
 
@@ -2036,6 +2033,9 @@ msgstr ""
 
 #~ msgid "Unknown operator"
 #~ msgstr "Nieznany operator"
+
+#~ msgid "Directory with program settings can't be created!"
+#~ msgstr "Katalog z ustawieniami programu nie może zostać utworzony!"
 
 #~ msgid "no operator"
 #~ msgstr "brak operatora"
