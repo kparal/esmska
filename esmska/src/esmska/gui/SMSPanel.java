@@ -554,7 +554,6 @@ public class SMSPanel extends javax.swing.JPanel {
     private class CompressAction extends AbstractAction {
         public CompressAction() {
             L10N.setLocalizedText(this, l10n.getString("Compress_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "compress-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
             putValue(SHORT_DESCRIPTION,l10n.getString("SMSPanel.compress"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K,

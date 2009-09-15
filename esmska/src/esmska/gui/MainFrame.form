@@ -124,9 +124,6 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="Actions.getBrowseAction(Links.FAQ)" type="code"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/faq-16.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.faqMenuItem.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -156,9 +153,6 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="Actions.getBrowseAction(Links.TRANSLATE)" type="code"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/translate-16.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.translateMenuItem.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -171,9 +165,6 @@
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="Actions.getBrowseAction(Links.ISSUES)" type="code"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/bug-16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.problemMenuItem.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>

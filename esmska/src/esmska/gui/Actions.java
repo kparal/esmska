@@ -194,7 +194,6 @@ public class Actions {
         AboutFrame aboutFrame;
         public AboutAction() {
             L10N.setLocalizedText(this, l10n.getString("About_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "about-16.png")));
             putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.show_information_about_program"));
         }
         @Override
@@ -305,7 +304,6 @@ public class Actions {
         private ImportFrame importFrame;
         public ImportAction() {
             L10N.setLocalizedText(this, l10n.getString("Contact_import_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "contact-16.png")));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.import_contacts_from_other_applications"));
         }
         @Override
@@ -332,7 +330,6 @@ public class Actions {
 
         public ExportAction() {
             L10N.setLocalizedText(this, l10n.getString("Contact_export_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "contact-16.png")));
             this.putValue(SHORT_DESCRIPTION, l10n.getString("MainFrame.export_contacts_to_file"));
         }
 
@@ -516,7 +513,6 @@ public class Actions {
         public UpdateAction(UpdateChecker updateChecker) {
             this.updateChecker = updateChecker;
             L10N.setLocalizedText(this, l10n.getString("CheckUpdates_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "updateManager-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "updateManager-48.png")));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("CheckUpdatesTooltip"));
         }

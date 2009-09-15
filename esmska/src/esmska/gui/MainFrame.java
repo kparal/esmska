@@ -510,7 +510,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         Mnemonics.setLocalizedText(helpMenu,l10n.getString("MainFrame.helpMenu.text")); // NOI18N
         faqMenuItem.setAction(Actions.getBrowseAction(Links.FAQ));
-        faqMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/faq-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text"));
         faqMenuItem.setToolTipText(l10n.getString("MainFrame.faqMenuItem.toolTipText")); // NOI18N
         helpMenu.add(faqMenuItem);
@@ -522,13 +521,11 @@ public class MainFrame extends javax.swing.JFrame {
         helpMenu.add(getHelpMenuItem);
 
         translateMenuItem.setAction(Actions.getBrowseAction(Links.TRANSLATE));
-        translateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/translate-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(translateMenuItem,l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
         translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
         helpMenu.add(translateMenuItem);
 
         problemMenuItem.setAction(Actions.getBrowseAction(Links.ISSUES));
-        problemMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/bug-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(problemMenuItem,l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
         problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
         helpMenu.add(problemMenuItem);
@@ -564,7 +561,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
