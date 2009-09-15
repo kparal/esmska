@@ -64,6 +64,7 @@ import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableCellRenderer;
 import org.openide.awt.Mnemonics;
 
@@ -421,10 +422,10 @@ public class HistoryFrame extends javax.swing.JFrame {
 }//GEN-LAST:event_closeButtonActionPerformed
 
     private void historyTableMouseClicked(MouseEvent evt) {//GEN-FIRST:event_historyTableMouseClicked
-        if (evt.getClickCount() != 2) { //only on double click
-            return;
+        //only on left double click
+        if (SwingUtilities.isLeftMouseButton(evt) && evt.getClickCount() >= 2) {
+            resendButton.doClick(0);
         }
-        resendButton.doClick(0);
     }//GEN-LAST:event_historyTableMouseClicked
 
     private void historyTableKeyPressed(KeyEvent evt) {//GEN-FIRST:event_historyTableKeyPressed
