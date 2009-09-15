@@ -203,7 +203,10 @@ public class MainFrame extends javax.swing.JFrame {
         //use bindings
         Binding bind = Bindings.createAutoBinding(UpdateStrategy.READ, config, 
                 BeanProperty.create("toolbarVisible"), toolBar, BeanProperty.create("visible"));
+        Binding bind2 = Bindings.createAutoBinding(UpdateStrategy.READ, config,
+                BeanProperty.create("notificationIconVisible"), exitButton, BeanProperty.create("visible"));
         bindGroup.addBinding(bind);
+        bindGroup.addBinding(bind2);
         bindGroup.bind();
         
         //check for updates
@@ -561,7 +564,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
