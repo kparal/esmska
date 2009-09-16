@@ -404,6 +404,7 @@ public class ContactPanel extends javax.swing.JPanel {
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Add_new_contact"));
             this.putValue(LARGE_ICON_KEY,
                     new ImageIcon(ContactPanel.class.getResource(RES + "add-22.png")));
+            this.putValue(MNEMONIC_KEY, KeyEvent.VK_A);
             this.skeleton = skeleton;
         }
         @Override
