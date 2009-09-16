@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 20:45+0200\n"
-"PO-Revision-Date: 2009-09-15 20:42+0100\n"
+"POT-Creation-Date: 2009-09-16 23:34+0200\n"
+"PO-Revision-Date: 2009-09-16 23:34+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -86,8 +86,8 @@ msgid "Add contact"
 msgstr "Přidat kontakt"
 
 #: Add_new_contact
-msgid "Add new contact"
-msgstr "Přidat nový kontakt"
+msgid "Add new contact (Alt+A)"
+msgstr "Přidat nový kontakt (Alt+A)"
 
 #: Cancel
 msgid "Cancel"
@@ -1760,11 +1760,11 @@ msgid "Move sms up in the queue"
 msgstr "Posunout sms ve frontě výše"
 
 #: QueuePanel.Pause_sending_of_sms_in_the_queue
-msgid "Pause sending of sms in the queue"
+msgid "Pause sending of sms in the queue (Alt+P)"
 msgstr "Pozastavit odesílání sms ve frontě (Alt+P)"
 
 #: QueuePanel.Unpause_sending_of_sms_in_the_queue
-msgid "Unpause sending of sms in the queue"
+msgid "Unpause sending of sms in the queue (Alt+P)"
 msgstr "Pokračovat v odesílání sms ve frontě (Alt+P)"
 
 #: QueuePanel.border.title
