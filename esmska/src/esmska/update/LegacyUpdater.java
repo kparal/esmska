@@ -53,7 +53,7 @@ public class LegacyUpdater {
         }
 
         //changes to 0.17.0
-        if (Config.compareProgramVersions(version, "0.17.0") < 0) {
+        if (Config.compareProgramVersions(version, "0.16.0") <= 0) {
             //keyring encryption changed from AES to XOR
             logger.fine("Updating keyring file to newer encryption...");
             try {
