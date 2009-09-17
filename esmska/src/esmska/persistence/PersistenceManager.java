@@ -372,19 +372,29 @@ public class PersistenceManager {
             localOperators = ImportManager.importOperators(localOperatorDir);
         }
         //replace old global versions with new local ones
-        for (Operator op : localOperators) {
-            int index = globalOperators.indexOf(op);
+        for (Operator localOp : localOperators) {
+            int index = globalOperators.indexOf(localOp);
             if (index >= 0) {
-                Operator globOp = globalOperators.get(index);
-                if (op.getVersion().compareTo(globOp.getVersion()) > 0) {
-                    globalOperators.set(index, op);
-                    logger.finer("Local operator " + op.getName() + " is newer, replacing global one.");
+                Operator globalOp = globalOperators.get(index);
+                if (localOp.getVersion().compareTo(globalOp.getVersion()) > 0) {
+                    globalOperators.set(index, localOp);
+                    logger.finer("Local operator " + localOp.getName() + " is newer, replacing global one.");
                 } else {
-                    logger.finer("Local operator " + op.getName() + " is not newer than global one, skipping.");
+                    logger.finer("Local operator " + localOp.getName() + " is same or older than global one, deleting...");
+                    File opFile = null;
+                    try {
+                        opFile = new File(localOp.getScript().toURI());
+                        File opIcon = new File(opFile.getAbsolutePath().replaceFirst("\\.operator$", ".png"));
+                        opFile.delete();
+                        FileUtils.deleteQuietly(opIcon); //icon may not be present
+                    } catch (Exception ex) {
+                        logger.log(Level.WARNING, "Failed to delete old local operator " +
+                                localOp.getName() + " (" + opFile + ")", ex);
+                    }
                 }
             } else {
-                globalOperators.add(op);
-                logger.finer("Local operator " + op.getName() + " is additional to global ones, adding to operator list.");
+                globalOperators.add(localOp);
+                logger.finer("Local operator " + localOp.getName() + " is additional to global ones, adding to operator list.");
             }
         }
         //load it
