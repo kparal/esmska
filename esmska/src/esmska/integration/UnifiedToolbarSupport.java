@@ -62,15 +62,18 @@ public class UnifiedToolbarSupport extends MouseAdapter {
             }
         }
 
-        // set background painter
-        SwingUtilities.invokeLater(new Runnable() {
+        // set background painter only on Mac OS X 10.5 Leopard
+        // on 10.6 it has been fixed and works properly
+        if (System.getProperty("os.version").contains("10.5")) {
+            SwingUtilities.invokeLater(new Runnable() {
 
-            @Override
-            public void run() {
-                toolbar.setUI(new UnifiedToolbarUI());
-                toolbar.invalidate();
-            }
-        });
+                @Override
+                public void run() {
+                    toolbar.setUI(new UnifiedToolbarUI());
+                    toolbar.invalidate();
+                }
+            });
+        }
     }
 
     /**
