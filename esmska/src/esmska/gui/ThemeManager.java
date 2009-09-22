@@ -157,6 +157,15 @@ public class ThemeManager {
         LookAndFeel laf = UIManager.getLookAndFeel();
         return laf.getName() != null && laf.getName().startsWith("Substance");
     }
+
+    /** Returns whether current LaF skin is dark-toned,
+     * mainly in text-areas
+     */
+    public static boolean isCurrentSkinDark() {
+        //currently only Substance skins are dark
+        return isSubstanceCurrentLaF() &&
+                SubstanceLookAndFeel.getCurrentSkin().getMainDefaultColorScheme().isDark();
+    }
     
     /** Returns whether specified LaF is supported on current configuration
      * (operating system, java version, etc).

@@ -684,6 +684,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private class SMSTextPaneDocumentFilter extends DocumentFilter {
         private StyledDocument doc;
         private Style regular, highlight;
+        private Color alternateTextColor = Color.BLUE;
         //updating after each event is slow, therefore there is timer
         private Timer timer = new Timer(100, new ActionListener() { 
             @Override
@@ -699,9 +700,8 @@ public class SMSPanel extends javax.swing.JPanel {
             doc = smsTextPane.getStyledDocument();
             Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
             regular = doc.addStyle("regular", def);
-            StyleConstants.setForeground(regular, UIManager.getColor("TextArea.foreground"));
             highlight = doc.addStyle("highlight", def);
-            StyleConstants.setForeground(highlight, Color.BLUE);
+            lafChangedImpl();
             
             // listen for changes in Look and Feel and change color of regular text
             UIManager.addPropertyChangeListener(new PropertyChangeListener() {
@@ -788,8 +788,14 @@ public class SMSPanel extends javax.swing.JPanel {
         }
         /** update text color on LaF change */
         private void lafChanged() {
-            StyleConstants.setForeground(regular, UIManager.getColor("TextArea.foreground"));
+            lafChangedImpl();
             SMSTextPaneDocumentFilter.this.requestUpdate();
+        }
+        /** main executive code for lafChanged() without any notifications or callbacks */
+        private void lafChangedImpl() {
+            StyleConstants.setForeground(regular, UIManager.getColor("TextArea.foreground"));
+            alternateTextColor = ThemeManager.isCurrentSkinDark() ? Color.CYAN : Color.BLUE;
+            StyleConstants.setForeground(highlight, alternateTextColor);
         }
     }
     
