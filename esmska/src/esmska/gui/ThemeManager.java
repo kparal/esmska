@@ -25,7 +25,7 @@ import javax.swing.LookAndFeel;
 import javax.swing.UIManager.LookAndFeelInfo;
 import org.apache.commons.lang.ObjectUtils;
 import org.jvnet.lafwidget.LafWidget;
-import org.jvnet.substance.skin.SaharaSkin;
+import org.jvnet.substance.skin.BusinessBlackSteelSkin;
 
 /** Manage and set look and feel
  *
@@ -114,7 +114,7 @@ public class ThemeManager {
                         break;
                     }
                 }
-                SubstanceLookAndFeel.setSkin(skin != null ? skin : new SaharaSkin().getClass().getName());
+                SubstanceLookAndFeel.setSkin(skin != null ? skin : new BusinessBlackSteelSkin().getClass().getName());
                 //set Substance specific addons
                 UIManager.put(LafWidget.TEXT_EDIT_CONTEXT_MENU, Boolean.TRUE);
                 UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
