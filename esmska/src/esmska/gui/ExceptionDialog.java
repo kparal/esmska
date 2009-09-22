@@ -263,7 +263,7 @@ public class ExceptionDialog extends javax.swing.JDialog {
         private static boolean dialogAlreadyShown = false;
 
         @Override
-        public void uncaughtException(Thread t, Throwable e) {
+        public void uncaughtException(Thread t, final Throwable e) {
             //do magic to extract traceback text with some usable formatting
             StringWriter stringWr = new StringWriter();
             PrintWriter wr = new PrintWriter(stringWr);
@@ -273,14 +273,14 @@ public class ExceptionDialog extends javax.swing.JDialog {
             logger.severe("Uncaught exception detected: " + traceback);
 
             if (SwingUtilities.isEventDispatchThread()) {
-                displayDialog(traceback);
+                displayDialog(e, traceback);
             } else {
                 try {
                     SwingUtilities.invokeAndWait(new Runnable() {
 
                         @Override
                         public void run() {
-                            displayDialog(traceback);
+                            displayDialog(e, traceback);
                         }
                     });
                 } catch (Exception ex) {
@@ -296,8 +296,26 @@ public class ExceptionDialog extends javax.swing.JDialog {
             }
         }
 
+        /** Check whether this exception related to some of Esmska classes
+         * or happened somewhere else.
+         */
+        private boolean isRelatedToEsmska(Throwable e) {
+            for (StackTraceElement ste : e.getStackTrace()) {
+                if (ste.getClassName().contains("esmska.")) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /** display the exception dialog */
-        private void displayDialog(String traceback) {
+        private void displayDialog(Throwable e, String traceback) {
+            if (!isRelatedToEsmska(e)) {
+                // we will not bother users about exceptions not directly
+                // related to our code
+                logger.fine("Exception not related to Esmska, not showing exception dialog...");
+                return;
+            }
             if (dialogAlreadyShown) {
                 //show the dialog only once, to avoid recursive pop-up
                 logger.fine("Exception dialog already shown once, skipping this time.");
