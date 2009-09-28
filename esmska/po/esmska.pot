@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-16 23:35+0200\n"
+"POT-Creation-Date: 2009-09-28 15:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,6 +227,19 @@ msgid ""
 "numbers written not in the<br>\n"
 "international format. Also the appeareance of these numbers will be much "
 "shorter in many labels.\n"
+"</html>"
+msgstr ""
+
+#: ConfigFrame.debugCheckBox.text
+msgid "Create a log with de&bug information"
+msgstr ""
+
+#: ConfigFrame.debugCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"This option is only required when working with program developers<br>\n"
+"in order to solve some problem. In other cases it is recommended<br>\n"
+"to have it turned off.\n"
 "</html>"
 msgstr ""
 

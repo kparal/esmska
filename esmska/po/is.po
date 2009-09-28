@@ -1,4 +1,4 @@
-# Lithuanian translation for esmska
+# Icelandic translation for esmska
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the esmska package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -9,50 +9,50 @@ msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-28 15:48+0200\n"
-"PO-Revision-Date: 2009-07-02 08:46+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
-"Language-Team: Lithuanian <lt@li.org>\n"
+"PO-Revision-Date: 2009-09-21 11:35+0000\n"
+"Last-Translator: Ævar Arnfjörð Bjarmason <avarab@gmail.com>\n"
+"Language-Team: Icelandic <is@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-23 11:08+0000\n"
+"X-Launchpad-Export-Date: 2009-09-23 11:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
-msgstr "Aš tai pripažįstu"
+msgstr ""
 
 #: AboutFrame.Credits
 msgid "Credits"
-msgstr "Padėka kūrėjams"
+msgstr ""
 
 #: AboutFrame.License
 msgid "License"
-msgstr "Licencija"
+msgstr ""
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr "Padėka"
+msgstr ""
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
-msgstr "Padėkos"
+msgstr ""
 
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
-msgstr "SMS siuntimas internetu."
+msgstr ""
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2009 Kamil Páral"
-msgstr "2007-2009"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
-msgstr "Licencija"
+msgstr ""
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr "<html><a href=\"\">Pagrindinis puslapis</a></html>"
+msgstr ""
 
 #: AboutFrame.linkButton.toolTipText
 msgid ""
@@ -60,13 +60,10 @@ msgid ""
 "Show program home page\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Rodyti programos puslapį\n"
-"</html>"
 
 #: AboutFrame.supportButton.text
 msgid "<html><a href=\"\">Support project</a></html>"
-msgstr "<html><a href=\"\">Paremkite projektą</a></html>"
+msgstr ""
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -74,21 +71,18 @@ msgid ""
 "Do you like this project? Help to keep it running...\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Patinka projektas? Padėkite vystyti ...\n"
-"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
-msgstr "Apie Esmska"
+msgstr ""
 
 #: About_
 msgid "&About"
-msgstr "&Apie"
+msgstr ""
 
 #: Add_contact
 msgid "Add contact"
-msgstr "Pridėti kontaktą"
+msgstr ""
 
 #: Add_new_contact
 msgid "Add new contact (Alt+A)"
@@ -96,39 +90,39 @@ msgstr ""
 
 #: Cancel
 msgid "Cancel"
-msgstr "Atsisakyti"
+msgstr ""
 
 #: Cancel_
 msgid "&Cancel"
-msgstr "&Atsisakyti"
+msgstr ""
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
-msgstr "Tikrinti programos ir operatorių atnaujinimus"
+msgstr ""
 
 #: CheckUpdates_
 msgid "&Updates checker"
-msgstr "Atna&ujinimų tikrinimas"
+msgstr ""
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
-msgstr "Kopijuoti"
+msgstr ""
 
 #: ClipboardPopupMenu.Cut
 msgid "Cut"
-msgstr "Kirpti"
+msgstr ""
 
 #: ClipboardPopupMenu.Paste
 msgid "Paste"
-msgstr "Įkelti"
+msgstr ""
 
 #: Close_
 msgid "&Close"
-msgstr "Uždaryti"
+msgstr ""
 
 #: CommandLineParser.available_options
 msgid "Available options:"
-msgstr "Galimi pasirinkimai"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.debug
@@ -157,11 +151,11 @@ msgstr ""
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr "Nustatymai"
+msgstr ""
 
 #: CommandLineParser.path
 msgid "path"
-msgstr "kelias"
+msgstr ""
 
 #: CommandLineParser.set_user_path
 msgid ""
@@ -171,23 +165,23 @@ msgstr ""
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr "Rodyti pagalbą"
+msgstr ""
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr "Naudojimas:"
+msgstr ""
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr "Spausdinti programos versiją ir išeiti"
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
-msgstr "&Suspausti"
+msgstr ""
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr "Iš&plėstinės parinktys"
+msgstr ""
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
@@ -195,11 +189,11 @@ msgstr ""
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
-msgstr "&Išvaizda"
+msgstr ""
 
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Automatically check for &updates of:"
-msgstr "Automatiškai tikrinti atnaujinimus:"
+msgstr ""
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 msgid ""
@@ -211,7 +205,7 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
-msgstr "Ištrinti visus prisijungimo duomenis."
+msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
@@ -219,7 +213,7 @@ msgstr ""
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
-msgstr "&Ryšys"
+msgstr ""
 
 #: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -227,7 +221,7 @@ msgstr ""
 
 #: ConfigFrame.countryCodeLabel.text
 msgid "(country:"
-msgstr "(šalis:"
+msgstr ""
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -255,7 +249,7 @@ msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request the &delivery report"
-msgstr "Pranešti apie pristatytą žinutę"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -287,7 +281,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr "&Pagrindiniai"
+msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -307,20 +301,20 @@ msgstr ""
 
 #: ConfigFrame.jLabel1.text
 msgid "&Number:"
-msgstr "Numeris:"
+msgstr ""
 
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr "&Operatoriai:"
+msgstr ""
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr "Prisijungimo vardas:"
+msgstr ""
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr "Slaptažodis:"
+msgstr ""
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -352,12 +346,12 @@ msgstr ""
 
 #: ConfigFrame.jLabel2.text
 msgid "The &default country prefix number:"
-msgstr "Šalies kodas pagal nutylėjimą:"
+msgstr ""
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
-msgstr "Vardas:"
+msgstr ""
 
 #: ConfigFrame.jLabel7.text
 msgid ""
@@ -382,7 +376,7 @@ msgstr ""
 
 #: ConfigFrame.loginPanel.TabConstraints.tabTitle
 msgid "&Login credentials"
-msgstr "Prisijungimo duomenys"
+msgstr ""
 
 #: ConfigFrame.loginTextField.toolTipText
 msgid "Username needed for logging in to the gateway"
@@ -394,7 +388,7 @@ msgstr ""
 
 #: ConfigFrame.multiplatform_look
 msgid "Multiplatform"
-msgstr "Multiplatforma"
+msgstr ""
 
 #: ConfigFrame.notificationAreaCheckBox.text
 msgid "Show icon in the &notification area"
@@ -437,7 +431,7 @@ msgstr ""
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
-msgstr "Privatumas"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
@@ -467,7 +461,7 @@ msgstr ""
 
 #: ConfigFrame.remove_credentials
 msgid "Do you really like to remove all entered login credentials?"
-msgstr "Ar tikrai norite pašalinti visus įvestus prisijungimo duomenis?"
+msgstr ""
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
@@ -490,11 +484,11 @@ msgstr ""
 
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
-msgstr "Siuntėjo numeris tarptautiniu formatu (prasideda ženklu '+')"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Show password"
-msgstr "Rodyti slaptažodį"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -564,7 +558,7 @@ msgstr ""
 
 #: ConfigFrame.unknown_look
 msgid "Unknown"
-msgstr "Nežinomas"
+msgstr ""
 
 #. #meaning "unknown country"
 #: ConfigFrame.unknown_state
@@ -625,7 +619,7 @@ msgstr ""
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
-msgstr "Startuoti programą ekrano &centre"
+msgstr ""
 
 #: ConfigFrame.windowCenteredCheckBox.toolTipText
 msgid ""
@@ -649,15 +643,15 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
 msgid "Added new contact: {0}"
-msgstr "Pridėtas naujas kontaktas: {0}"
+msgstr ""
 
 #: ContactPanel.border.title
 msgid "Contacts"
-msgstr "Kontaktai"
+msgstr ""
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
-msgstr "Kontaktų sąrašas (Alt+K)"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
@@ -674,13 +668,11 @@ msgid ""
 "<html>You don't have any contact created. Add a new one with buttons below.</"
 "html>"
 msgstr ""
-"<html>Jūs neturite kontaktų. Norint pridėti spauskite žemiau esantį mygtuką."
-"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContact
 msgid "{0} removed from contacts"
-msgstr "{0} pašalintas iš kontaktų"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContacts
@@ -693,11 +685,11 @@ msgstr ""
 
 #: Contact_export_
 msgid "Contact &export"
-msgstr "&Exportuoti kontaktus"
+msgstr ""
 
 #: Contact_import_
 msgid "Contact &import"
-msgstr "&Importuoti kontaktus"
+msgstr ""
 
 #: CopyToClipboard_
 msgid "Co&py to clipboard"
@@ -705,74 +697,74 @@ msgstr ""
 
 #: Create
 msgid "Create"
-msgstr "Sukurti"
+msgstr ""
 
 #: Credits.authors
 msgid "Written by:"
-msgstr "Autoriai:"
+msgstr ""
 
 #: Credits.contributors
 msgid "Contributions from:"
-msgstr "Pagalbininkai:"
+msgstr ""
 
 #: Credits.graphics
 msgid "Graphics:"
-msgstr "Grafika:"
+msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"
-msgstr "Sponsoriai:"
+msgstr ""
 
 #: Credits.translators
 msgid "Translated by:"
-msgstr "Vertėjai:"
+msgstr ""
 
 #: Date
 msgid "Date"
-msgstr "Data"
+msgstr ""
 
 #: Delete
 msgid "Delete"
-msgstr "Ištrinti"
+msgstr ""
 
 #: Delete_
 msgid "&Delete"
-msgstr "&Ištrinti"
+msgstr ""
 
 #: Delete_contacts
 msgid "Delete contacts"
-msgstr "Ištrinti kontaktus"
+msgstr ""
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr "Ištrinti žinutes"
+msgstr ""
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
-msgstr "Ištrinti pažymėtus kontaktus"
+msgstr ""
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr "Ištrinti pažymėtas žinutes"
+msgstr ""
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
-msgstr "Ištrinti pažymėtas žinutes iš istorijos"
+msgstr ""
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
 msgid "Send SMS over the Internet"
-msgstr "Siųsk SMS internetu"
+msgstr ""
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.genericName
 msgid "SMS Sender"
-msgstr "SMS Siuntėjas"
+msgstr ""
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.name
 msgid "Esmska"
-msgstr "Esmska"
+msgstr ""
 
 #: EditContactPanel.gatewayLabel.text
 msgid "Default &gateway:"
@@ -781,7 +773,7 @@ msgstr ""
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
 msgid "&Name:"
-msgstr "&Vardas:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -789,7 +781,7 @@ msgstr ""
 
 #: EditContactPanel.numberLabel.text
 msgid "Nu&mber:"
-msgstr "Nu&meris:"
+msgstr ""
 
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
@@ -802,11 +794,11 @@ msgstr ""
 
 #: Edit_contact
 msgid "Edit contact"
-msgstr "Tvarkyti kontaktą"
+msgstr ""
 
 #: Edit_contacts
 msgid "Edit contacts"
-msgstr "Tvarkyti kontaktus"
+msgstr ""
 
 #: Edit_contacts_collectively
 msgid "Edit contacts collectively"
@@ -814,15 +806,15 @@ msgstr ""
 
 #: Edit_message
 msgid "Edit message"
-msgstr "Tvarkyti žinutę"
+msgstr ""
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
-msgstr "Tvarkyti pažymėtus kontaktus"
+msgstr ""
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr "Tvarkyti pažymėtą žinutę"
+msgstr ""
 
 #: ExceptionDialog.copyButton.toolTipText
 msgid "Copy the detailed exception message to the system clipboard"
@@ -847,16 +839,16 @@ msgstr ""
 
 #: ExportManager.contact_list
 msgid "Contact list"
-msgstr "Kontaktų sąrašas"
+msgstr ""
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
 msgid "CSV files (*.csv)"
-msgstr "CSV failai (*.csv)"
+msgstr ""
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
-msgstr "Kontaktų eksportas nepavyko!"
+msgstr ""
 
 #: ExportManager.export_info
 msgid ""
@@ -875,15 +867,15 @@ msgstr ""
 
 #: ExportManager.export_ok
 msgid "Contact export finished successfully"
-msgstr "Kontaktų eksportas sėkmingai užbaigtas"
+msgstr ""
 
 #: ExportManager.export_ok!
 msgid "Contact export finished successfully!"
-msgstr "Kontaktų eksportas sėkmingai užbaigtas!"
+msgstr ""
 
 #: ExportManager.history
 msgid "Sent messages history"
-msgstr "Išsiųstų žinučių istorija"
+msgstr ""
 
 #: ExportManager.login
 msgid "Usernames and password to individual gateways"
@@ -896,7 +888,7 @@ msgstr ""
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr "vCard failai (*.vcard, *.vcf)"
+msgstr ""
 
 #. #Action to resend message
 #: Forward_
@@ -906,11 +898,11 @@ msgstr ""
 
 #: Hide_program
 msgid "Hide program"
-msgstr "Paslėpti programą"
+msgstr ""
 
 #: History
 msgid "History"
-msgstr "Istorija"
+msgstr ""
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
@@ -918,15 +910,15 @@ msgstr ""
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
-msgstr "Numeris:"
+msgstr ""
 
 #: HistoryFrame.jLabel2.text
 msgid "Name:"
-msgstr "Vardas:"
+msgstr ""
 
 #: HistoryFrame.jLabel3.text
 msgid "Date:"
-msgstr "Data:"
+msgstr ""
 
 #: HistoryFrame.jLabel4.text
 msgid "Gateway:"
@@ -935,20 +927,20 @@ msgstr ""
 #. #Write it short!
 #: HistoryFrame.jLabel5.text
 msgid "Sender number:"
-msgstr "Siuntėjo numeris:"
+msgstr ""
 
 #. #Write it short!
 #: HistoryFrame.jLabel6.text
 msgid "Sender name:"
-msgstr "Siuntėjo vardas:"
+msgstr ""
 
 #: HistoryFrame.remove_selected
 msgid "Really remove all selected messages from history?"
-msgstr "Ar tikrai pašalinti visas pažymėtas žinutes iš istorijos?"
+msgstr ""
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
-msgstr "Persiųsk žinutę kitam"
+msgstr ""
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
@@ -960,7 +952,7 @@ msgstr ""
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
-msgstr "Išsiųstų žinučių istorija - Esmska"
+msgstr ""
 
 #: ImageCodeDialog.introLabel.text
 msgid ""
@@ -978,7 +970,7 @@ msgstr ""
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
-msgstr "CSV failai (*.csv)"
+msgstr ""
 
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
@@ -987,7 +979,7 @@ msgstr ""
 
 #: ImportFrame.backButton.text
 msgid "&Back"
-msgstr "&Atgal"
+msgstr ""
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
@@ -1040,7 +1032,7 @@ msgstr ""
 
 #: ImportFrame.foundContactsLabel.text
 msgid "No new contacts were found."
-msgstr "Naujų kontaktų nerasta."
+msgstr ""
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1112,20 +1104,20 @@ msgstr ""
 #: ImportFrame.progressBar.string
 msgctxt "ImportFrame.progressBar.string"
 msgid "Please wait..."
-msgstr "Prašome palaukti..."
+msgstr ""
 
 #: ImportFrame.title
 msgid "Contact import - Esmska"
-msgstr "Importuoti kontaktus - Esmska"
+msgstr ""
 
 #: ImportFrame.vCard_filter
 msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr "vCard failai (*.vcard, *.vcf)"
+msgstr ""
 
 #: ImportFrame.validOperatorCheckBox.text
 msgid "Import only contacts with known operator"
-msgstr "Importuoti kontaktus tik su žinomais operatoriais"
+msgstr ""
 
 #: ImportFrame.validOperatorCheckBox.toolTipText
 msgid ""
@@ -1138,11 +1130,11 @@ msgstr ""
 
 #: Import_
 msgid "Im&port"
-msgstr "Im&portuoti"
+msgstr ""
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
-msgstr "Iš&valyti"
+msgstr ""
 
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
@@ -1206,7 +1198,7 @@ msgstr ""
 
 #: MainFrame.Quit_program
 msgid "Quit program"
-msgstr "Išjungti programą"
+msgstr ""
 
 #: MainFrame.cant_save_config
 msgid "Some of the configuration files couldn't be saved!"
@@ -1214,51 +1206,51 @@ msgstr ""
 
 #: MainFrame.compressButton.toolTipText
 msgid "Compress message (Ctrl+K)"
-msgstr "Suspausti žinutę (Ctrl+K)"
+msgstr ""
 
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
-msgstr "Konfiguruoti programos elgesį"
+msgstr ""
 
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
-msgstr "Paremti šį projektą!"
+msgstr ""
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
-msgstr "Eksportuoti kontaktus į failą"
+msgstr ""
 
 #: MainFrame.faqMenuItem.text
 msgid "Frequently Asked &Questions"
-msgstr "Danžiausiai Užduodami &Klausimai"
+msgstr ""
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
-msgstr "Žiūrėti Dažniausiai Užduodamus Klausimus (online)"
+msgstr ""
 
 #: MainFrame.getHelpMenuItem.text
 msgid "Get &Help Online..."
-msgstr "&Pagalba internete..."
+msgstr ""
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
-msgstr "Klausk pagalbos forume"
+msgstr ""
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr "&Pagalba"
+msgstr ""
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
-msgstr "Kontaktų importas sėkmingai baigtas"
+msgstr ""
 
 #: MainFrame.import_contacts_from_other_applications
 msgid "Import contacts from other applications"
-msgstr "Importuoti kontaktus iš kitų programų"
+msgstr ""
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr "&Žinutė"
+msgstr ""
 
 #: MainFrame.newOperatorUpdate
 msgid "<a href=\"\">Gateway updates</a> are available!"
@@ -1267,7 +1259,7 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
-msgstr "Išleista <a href=\"\">nauja ({0}) programos versija</a>!"
+msgstr ""
 
 #: MainFrame.no_operators
 msgid ""
@@ -1288,15 +1280,15 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &Problem..."
-msgstr "Pranešti apie &problemą..."
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
-msgstr "Pranešti apie problemą arba reikalauti naujų programos savybių"
+msgstr ""
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
-msgstr "P&rograma"
+msgstr ""
 
 #: MainFrame.redoButton.toolTipText
 msgid "Redo (Ctrl+Y)"
@@ -1304,11 +1296,11 @@ msgstr ""
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
-msgstr "Rodyti išsiųstų žinučių istoriją"
+msgstr ""
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr "Rodyti programos informaciją"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
@@ -1331,15 +1323,15 @@ msgstr ""
 
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
-msgstr "Įran&kiai"
+msgstr ""
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate This Application..."
-msgstr "&Išversti šią programą..."
+msgstr ""
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
-msgstr "Padėkite išversti programą į jūsų gimtąją kalbą"
+msgstr ""
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"
@@ -1347,15 +1339,15 @@ msgstr ""
 
 #: Message_history_
 msgid "Message &history"
-msgstr "Žinučių &istorija"
+msgstr ""
 
 #: Move_down
 msgid "Move down"
-msgstr "Pastumti žemyn"
+msgstr ""
 
 #: Move_up
 msgid "Move up"
-msgstr "Pastumti auksčiau"
+msgstr ""
 
 #: Multiple_sending
 msgid "Multiple sending"
@@ -1363,7 +1355,7 @@ msgstr ""
 
 #: New_contact
 msgid "New contact"
-msgstr "Naujas kontaktas"
+msgstr ""
 
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
@@ -1388,20 +1380,20 @@ msgstr ""
 
 #: OperatorComboBox.international
 msgid "Can be used internationally."
-msgstr "Gali būti naudojamas visame pasaulyje."
+msgstr ""
 
 #: OperatorComboBox.needRegistration
 msgid "Requires registration on the website."
-msgstr "Reikalauja registracijos puslapyje."
+msgstr ""
 
 #: OperatorComboBox.noRegistration
 msgid "Does not require registration."
-msgstr "Nereikalauja registracijos."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
 msgid "Only usable for the country: {0}"
-msgstr "Tinkamas naudoti tik šioje šalyje:"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.operatorTooltip
@@ -1442,7 +1434,7 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
-msgstr "Jūs neturite pakankamai kreditų išsiųsti šiai žinutei."
+msgstr ""
 
 #: OperatorExecutor.ERROR_NO_REASON
 msgid "The gateway hasn't specified any reason why the message sending failed."
@@ -1477,27 +1469,27 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_CODE
 msgid "You have entered the wrong security code."
-msgstr "Įvedėte klaidingą apsaugos kodą."
+msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_NUMBER
 msgid "You have entered incorrect recipient number."
-msgstr "Ivedėte klaidingą gavėjo numerį."
+msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
-msgstr "Įvedėte klaidingą siuntėjo parašą (numerį arba vardą)."
+msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_TEXT
 msgid "You have entered incorrect message text. Empty or too long?"
-msgstr "Įvedėte neteisingą tekstą. Tekstas tuščias arba per ilgas."
+msgstr ""
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
-msgstr "Kreditų likutis:"
+msgstr ""
 
 #: OperatorExecutor.INFO_FREE_SMS_REMAINING
 msgid "Free SMS remaining:"
-msgstr "Nemokamų žinučių likutis:"
+msgstr ""
 
 #: OperatorExecutor.INFO_STATUS_NOT_PROVIDED
 msgid ""
@@ -1511,19 +1503,19 @@ msgstr ""
 
 #: Pause_queue
 msgid "Pause queue"
-msgstr "Pristabdyti eilę"
+msgstr ""
 
 #: Pause_sms_queue
 msgid "Pause sms queue"
-msgstr "Pristabdyti sms eilę"
+msgstr ""
 
 #: Preferences
 msgid "Preferences"
-msgstr "Nustatymai"
+msgstr ""
 
 #: Preferences_
 msgid "&Preferences"
-msgstr "&Nustatymai"
+msgstr ""
 
 #: Program_start
 msgid "Program start"
@@ -1531,11 +1523,11 @@ msgstr ""
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
-msgstr "Pastumti sms eilėje žemyn"
+msgstr ""
 
 #: QueuePanel.Move_sms_up_in_the_queue
 msgid "Move sms up in the queue"
-msgstr "Pastumti sms eilėje aukštyn"
+msgstr ""
 
 #: QueuePanel.Pause_sending_of_sms_in_the_queue
 msgid "Pause sending of sms in the queue (Alt+P)"
@@ -1547,17 +1539,17 @@ msgstr ""
 
 #: QueuePanel.border.title
 msgid "Queue"
-msgstr "Eilė"
+msgstr ""
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
 msgid "h"
-msgstr "h"
+msgstr ""
 
 #. #Shortcut for "minute"
 #: QueuePanel.minute_shortcut
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: QueuePanel.replaceSms
 msgid ""
@@ -1572,19 +1564,19 @@ msgstr ""
 #. #Shortcut for "second"
 #: QueuePanel.second_shortcut
 msgid "s"
-msgstr "s"
+msgstr ""
 
 #: Quit
 msgid "Quit"
-msgstr "Išeiti"
+msgstr ""
 
 #: Quit_
 msgid "&Quit"
-msgstr "&Išeiti"
+msgstr ""
 
 #: Recipient
 msgid "Recipient"
-msgstr "Gavėjas"
+msgstr ""
 
 #: Redo_
 msgid "&Redo"
@@ -1600,7 +1592,7 @@ msgstr ""
 
 #: SMSPanel.Text_is_too_long!
 msgid "Text is too long!"
-msgstr "Tekstas yra per ilgas!"
+msgstr ""
 
 #: SMSPanel.Undo_change_in_message_text
 msgid "Undo change in message text"
@@ -1608,7 +1600,7 @@ msgstr ""
 
 #: SMSPanel.border.title
 msgid "Message"
-msgstr "Žinutė"
+msgstr ""
 
 #: SMSPanel.compress
 msgid ""
@@ -1619,16 +1611,16 @@ msgstr ""
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
-msgstr "<html>Simbolių žinutėje: <b>{0}/{1}</b> (<b>{2}</b> liko)</html>"
+msgstr ""
 
 #: SMSPanel.gatewayLabel.text
 msgctxt "SMSPanel.gatewayLabel.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "Net&gátt:"
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"
-msgstr "G&avėjas"
+msgstr ""
 
 #: SMSPanel.recipientTextField.tooltip
 msgid ""
@@ -1647,36 +1639,36 @@ msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Ctrl+Enter)"
-msgstr "Išsiųsti žinutę (Ctrl+Enter)"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
-msgstr "<html>Simbolių žinutėje: <b>{0}/{1}</b> (<b>{2}</b> liko)</html>"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
-msgstr "{0} simboliai(-ų) ({1} sms)"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
-msgstr "{0} simboliai(-ų) (siuntimas negalimas!)"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.3
 msgid "{0} chars"
-msgstr "{0} simboliai(-ų)"
+msgstr ""
 
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
-msgstr "0 simbolių (0 sms)"
+msgstr ""
 
 #: SMSPanel.textLabel.text
 msgid "Te&xt:"
-msgstr "Te&kstas:"
+msgstr ""
 
 #: SMSPanel.textLabel.toolTipText
 msgid ""
@@ -1702,24 +1694,24 @@ msgstr ""
 
 #: Save
 msgid "Save"
-msgstr "Išsaugoti"
+msgstr ""
 
 #: Select
 msgctxt "Select"
 msgid "Select"
-msgstr "Pasirinkti"
+msgstr ""
 
 #: Send_
 msgid "&Send"
-msgstr "&Siųsti"
+msgstr ""
 
 #: Send_message
 msgid "Send message"
-msgstr "Išsiųsti žinutę"
+msgstr ""
 
 #: Show/hide_program
 msgid "Show/hide program"
-msgstr "Rodyti/paslėpti programą"
+msgstr ""
 
 #: Show_application_log
 msgid "Show application log"
@@ -1727,16 +1719,16 @@ msgstr ""
 
 #: Show_program
 msgid "Show program"
-msgstr "Rodyti programą"
+msgstr ""
 
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
-msgstr "Prašome palaukti..."
+msgstr ""
 
 #: StatusPanel.statusMessageLabel.text
 msgid "Welcome"
-msgstr "Sveiki atvykę"
+msgstr ""
 
 #: StatusPanel.statusMessageLabel.toolTipText
 msgid "Click to show application log"
@@ -1744,20 +1736,18 @@ msgstr ""
 
 #: Text
 msgid "Text"
-msgstr "Tekstas"
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.1
 msgid ""
 "To send multiple messages select more contacts in the list using Ctrl key."
 msgstr ""
-"Norint išsiųsti žinutę keliems numeriams, sąraše rinkitės kontaktus nuspaudę "
-"Ctrl mygtuką."
 
 #. #Write the tip as short as possible
 #: Tip.10
 msgid "Program appearance can be modified according to your taste."
-msgstr "Programos išvaizda gali būti pakeista pagal jūsų skonį."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.11
@@ -1773,12 +1763,12 @@ msgstr ""
 #: Tip.13
 msgid ""
 "Your contacts can be exported as text and therefore can be used elsewhere."
-msgstr "Jūsų kontaktai gali būti eksportuoti ir panaudoti bet kur kitur."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.14
 msgid "If the written message is too long use the compress function."
-msgstr "Jeigu parašyta žinutė yra per ilga, naudokite suspaudimo funkciją."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.15
@@ -1796,13 +1786,12 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.17
 msgid "Something broken? Enhancement suggestion? Let us know on our homepage!"
-msgstr "Kažkas neveikia? Turi siųlymą patobulint? Duok žinot mūsų puslapyje!"
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.18
 msgid "Program is open and free. Join in and help us improve it!"
 msgstr ""
-"Programa yra atvira ir nemokama. Prisijunk ir padek mums patobulint ją!"
 
 #. #Write the tip as short as possible
 #: Tip.19
@@ -1855,7 +1844,6 @@ msgstr ""
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
-"Jūsų kontaktai gali būti importuoti iš daugelio kitų programų ar formatų."
 
 #. #Write the tip as short as possible
 #: Tip.4
@@ -1865,7 +1853,7 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.5
 msgid "All your sent messages are available in the message history."
-msgstr "Visos jūsų išsiųstos žinutės yra pasiekiamos žinučių istorijoje."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.6
@@ -1877,8 +1865,6 @@ msgstr ""
 msgid ""
 "You can search in contact list. Just click into it and write a few letters."
 msgstr ""
-"Jūs galite ieškoti kontaktų saraše. Tiesiog nuspauskite ant sąrašo ir "
-"įrašykite keletą raidžių."
 
 #. #Write the tip as short as possible
 #: Tip.8
@@ -1888,7 +1874,7 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
-msgstr "Nustatymuose nepamirškite nurodyti savo šalies prefikso numerį."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.donation
@@ -1902,9 +1888,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Kamil Páral https://launchpad.net/~kamil.paral\n"
-"  TheSpy https://launchpad.net/~sourness\n"
-"  dos.lt https://launchpad.net/~smscentras"
+"  Ævar Arnfjörð Bjarmason https://launchpad.net/~avarab"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -1934,11 +1918,11 @@ msgstr ""
 
 #: Unpause_queue
 msgid "Unpause queue"
-msgstr "Paleisti eilę"
+msgstr ""
 
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
-msgstr "Paleisti sms eilę"
+msgstr ""
 
 #: Update.allUpdated
 msgid "All gateways have been successfully updated."
@@ -1954,7 +1938,7 @@ msgstr ""
 
 #: Update.checking
 msgid "Checking..."
-msgstr "Tikrinama..."
+msgstr ""
 
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
@@ -1962,7 +1946,7 @@ msgstr ""
 
 #: Update.downloading
 msgid "Downloading..."
-msgstr "Siunčiama..."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwTooltip
@@ -2002,8 +1986,6 @@ msgid ""
 "<html>There is a new program version ({0}) available on the <a href=\"{1}"
 "\">program homepage</a>.</html>"
 msgstr ""
-"<html>Nauja programos versija ({0}) pasiekiama <a href=\"{1}\">programos "
-"puslapyje</a>.</html>"
 
 #: Update.queueRunning
 msgid ""
@@ -2019,7 +2001,7 @@ msgstr ""
 
 #: Update.update_
 msgid "&Update"
-msgstr "Atna&ujinti"
+msgstr ""
 
 #: Update.updatesFound
 msgid ""
@@ -2029,7 +2011,7 @@ msgstr ""
 
 #: UpdateDialog.checkButton.text
 msgid "Check for &updates"
-msgstr "Ieškoti atnaujinimų"
+msgstr ""
 
 #: UpdateDialog.topLabel.text
 msgid ""
@@ -2038,13 +2020,3 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"<h2>Ieškoti atnaujintų operatorių</h2>\n"
-"Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
-"</html>"
-
-#~ msgid "O&perators"
-#~ msgstr "Operatoriai"
-
-#~ msgid "Please enter the code from the picture:"
-#~ msgstr "Įveskite kodą iš paveiklėlio."

@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-16 23:33+0200\n"
-"PO-Revision-Date: 2009-09-16 07:28+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2009-09-28 15:48+0200\n"
+"PO-Revision-Date: 2009-09-18 17:46+0000\n"
+"Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-16 09:55+0000\n"
+"X-Launchpad-Export-Date: 2009-09-23 11:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -66,7 +66,7 @@ msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid "<html><a href=\"\">Support project</a></html>"
-msgstr ""
+msgstr "<html><a href=\"\">Soportar proyecto</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -91,9 +91,8 @@ msgid "Add contact"
 msgstr "Añadir contacto"
 
 #: Add_new_contact
-#, fuzzy
 msgid "Add new contact (Alt+A)"
-msgstr "Añadir nuevo contacto"
+msgstr "Añadir nuevo contacto (Alt+A)"
 
 #: Cancel
 msgid "Cancel"
@@ -105,7 +104,7 @@ msgstr "&Cancelar"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
-msgstr ""
+msgstr "Buscar actualizaciones del programa y de la pasarela"
 
 #: CheckUpdates_
 msgid "&Updates checker"
@@ -223,7 +222,7 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
-msgstr ""
+msgstr "&Eliminar todos los credenciales de login"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
@@ -259,6 +258,19 @@ msgstr ""
 "formato internacional. La apariencia de éste código será mucho mas corta en "
 "muchas etiquetas.\n"
 "</html>"
+
+#: ConfigFrame.debugCheckBox.text
+msgid "Create a log with de&bug information"
+msgstr ""
+
+#: ConfigFrame.debugCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"This option is only required when working with program developers<br>\n"
+"in order to solve some problem. In other cases it is recommended<br>\n"
+"to have it turned off.\n"
+"</html>"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request the &delivery report"
@@ -499,7 +511,7 @@ msgstr "La contraseña perteneciente al nombre de usuario"
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
-msgstr ""
+msgstr "P&rivacidad"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
@@ -697,11 +709,11 @@ msgstr "Usar servidor pro&xy"
 
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
-msgstr ""
+msgstr "Cuándo se debe usar un servidor promiscuo (proxy) para conexiones"
 
 #: ConfigFrame.useSenderIDCheckBox.text
 msgid "Add a sender &signature to the message"
-msgstr ""
+msgstr "Añadir una &firma de remitente al mensaje"
 
 #: ConfigFrame.useSenderIDCheckBox.toolTipText
 msgid ""
@@ -738,30 +750,30 @@ msgstr ""
 
 #: Contact
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
 msgid "Added new contact: {0}"
-msgstr ""
+msgstr "Añadido nuevo contacto: {0}"
 
 #: ContactPanel.border.title
 msgid "Contacts"
-msgstr ""
+msgstr "Contactos"
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
-msgstr ""
+msgstr "Lista de contactos (Alt+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
 msgid "Contact {0} modified"
-msgstr ""
+msgstr "Contacto {0} modificado"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContacts
 msgid "{0} contacts modified"
-msgstr ""
+msgstr "{0} contactos modificados"
 
 #: ContactPanel.new_contact_hint
 msgid ""
@@ -772,89 +784,90 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContact
 msgid "{0} removed from contacts"
-msgstr ""
+msgstr "{0} eliminados de los contactos"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContacts
 msgid "{0} contacts removed"
-msgstr ""
+msgstr "{0} contactos eliminados"
 
 #: ContactPanel.remove_following_contacts
 msgid "<html><h3>Really remove following contacts?</h3></html>"
 msgstr ""
+"<html><h3>¿Realmente desea eliminar los siguientes contactos?</h3></html>"
 
 #: Contact_export_
 msgid "Contact &export"
-msgstr ""
+msgstr "&Exportar contactos"
 
 #: Contact_import_
 msgid "Contact &import"
-msgstr ""
+msgstr "&Importar contactos"
 
 #: CopyToClipboard_
 msgid "Co&py to clipboard"
-msgstr ""
+msgstr "Co&piar a portapapeles"
 
 #: Create
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 #: Credits.authors
 msgid "Written by:"
-msgstr ""
+msgstr "Escrito por:"
 
 #: Credits.contributors
 msgid "Contributions from:"
-msgstr ""
+msgstr "Contribuciones de:"
 
 #: Credits.graphics
 msgid "Graphics:"
-msgstr ""
+msgstr "Gráficos:"
 
 #: Credits.sponsors
 msgid "Sponsors:"
-msgstr ""
+msgstr "Patrocinadores:"
 
 #: Credits.translators
 msgid "Translated by:"
-msgstr ""
+msgstr "Traducido por:"
 
 #: Date
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #: Delete
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: Delete_
 msgid "&Delete"
-msgstr ""
+msgstr "&Eliminar"
 
 #: Delete_contacts
 msgid "Delete contacts"
-msgstr ""
+msgstr "Eliminar contactos"
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr ""
+msgstr "Eliminar mensajes"
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
-msgstr ""
+msgstr "Eliminar contactos seleccionados"
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr ""
+msgstr "Eliminar mensajes seleccionados"
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
-msgstr ""
+msgstr "Eliminar mensajes seleccionados del historial"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
 msgid "Send SMS over the Internet"
-msgstr ""
+msgstr "Enviar SMS por internet"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.genericName
@@ -864,24 +877,24 @@ msgstr ""
 #. #This string is located in the operating-system menu item
 #: DesktopFile.name
 msgid "Esmska"
-msgstr ""
+msgstr "Esmska"
 
 #: EditContactPanel.gatewayLabel.text
 msgid "Default &gateway:"
-msgstr ""
+msgstr "&Pasarela por defecto:"
 
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Nombre:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
-msgstr ""
+msgstr "Nombre de contacto"
 
 #: EditContactPanel.numberLabel.text
 msgid "Nu&mber:"
-msgstr ""
+msgstr "Nú&mero:"
 
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
@@ -894,40 +907,41 @@ msgstr ""
 
 #: Edit_contact
 msgid "Edit contact"
-msgstr ""
+msgstr "Editar contacto"
 
 #: Edit_contacts
 msgid "Edit contacts"
-msgstr ""
+msgstr "Editar contactos"
 
 #: Edit_contacts_collectively
 msgid "Edit contacts collectively"
-msgstr ""
+msgstr "Editar contactos colectivamente"
 
 #: Edit_message
 msgid "Edit message"
-msgstr ""
+msgstr "Editar mensaje"
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
-msgstr ""
+msgstr "Editar contactos seleccionados"
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr ""
+msgstr "Editar mensaje seleccionado"
 
 #: ExceptionDialog.copyButton.toolTipText
 msgid "Copy the detailed exception message to the system clipboard"
 msgstr ""
+"Copie el mensaje con la excepción detallada al portapapeles del sistema"
 
 #: ExceptionDialog.detailsLabel.text
 msgid "Details:"
-msgstr ""
+msgstr "Detalles:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
-msgstr ""
+msgstr "¡El archivo \"{0}\" no puede escribirse!"
 
 #: ExportManager.choose_export_file
 msgid "Choose location and type of exported file"
@@ -944,7 +958,7 @@ msgstr ""
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "Archivos CSV (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
