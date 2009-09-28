@@ -69,6 +69,7 @@ public class Config extends Object implements Serializable {
     private boolean startMinimized = false;
     private boolean demandDeliveryReport = false;
     private boolean showAdvancedSettings = false;
+    private boolean debugMode = false;
 
     /** Get shared instance */
     public static Config getInstance() {
@@ -297,6 +298,10 @@ public class Config extends Object implements Serializable {
     public boolean isShowAdvancedSettings() {
         return showAdvancedSettings;
     }
+
+    public boolean isDebugMode() {
+        return debugMode;
+    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
@@ -496,6 +501,12 @@ public class Config extends Object implements Serializable {
         boolean old = this.showAdvancedSettings;
         this.showAdvancedSettings = showAdvancedSettings;
         changeSupport.firePropertyChange("showAdvancedSettings", old, showAdvancedSettings);
+    }
+
+    public void setDebugMode(boolean debugMode) {
+        boolean old = this.debugMode;
+        this.debugMode = debugMode;
+        changeSupport.firePropertyChange("debugMode", old, debugMode);
     }
     // </editor-fold>
 

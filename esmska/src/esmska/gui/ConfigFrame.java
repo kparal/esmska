@@ -278,6 +278,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         checkUpdatesCheckBox = new JCheckBox();
         unstableUpdatesCheckBox = new JCheckBox();
         updatePolicyComboBox = new JComboBox();
+        debugCheckBox = new JCheckBox();
         appearancePanel = new JPanel();
         lafComboBox = new JComboBox();
         lookLabel = new JLabel();
@@ -400,6 +401,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = Bindings.createAutoBinding(UpdateStrategy.READ, checkUpdatesCheckBox, ELProperty.create("${selected}"), updatePolicyComboBox, BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        Mnemonics.setLocalizedText(debugCheckBox, l10n.getString("ConfigFrame.debugCheckBox.text"));
+        debugCheckBox.setToolTipText(l10n.getString("ConfigFrame.debugCheckBox.toolTipText")); // NOI18N
+        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${debugMode}"), debugCheckBox, BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+
         GroupLayout generalPanelLayout = new GroupLayout(generalPanel);
         generalPanel.setLayout(generalPanelLayout);
 
@@ -414,7 +420,8 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
                             .addComponent(unstableUpdatesCheckBox)
-                            .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(debugCheckBox))
                 .addContainerGap(310, Short.MAX_VALUE))
         );
         generalPanelLayout.setVerticalGroup(
@@ -428,7 +435,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(unstableUpdatesCheckBox)
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(debugCheckBox)
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
@@ -837,7 +846,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
             .addComponent(jLabel13)
             .addContainerGap())
     );
@@ -1200,6 +1209,7 @@ private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event
     tipsCheckBox.setVisible(showAdvanced);
     operatorFilterLabel.setVisible(showAdvanced);
     operatorFilterTextField.setVisible(showAdvanced);
+    debugCheckBox.setVisible(showAdvanced);
     
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(privacyPanel), showAdvanced);
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(connectionPanel), showAdvanced);
@@ -1375,6 +1385,7 @@ private void checkUpdatesCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:e
     private JComboBox countryCodeComboBox;
     private JLabel countryCodeLabel;
     private JTextField countryPrefixTextField;
+    private JCheckBox debugCheckBox;
     private JCheckBox demandDeliveryReportCheckBox;
     private JLabel develLabel;
     private JPanel develPanel;

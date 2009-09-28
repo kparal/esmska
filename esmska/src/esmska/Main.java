@@ -196,6 +196,13 @@ public class Main {
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not load keyring file", ex);
         }
+
+        //initialize logging if set from Config
+        if (Config.getInstance().isDebugMode()) {
+            //set "full" logging, but don't log to console
+            LogSupport.enableHttpClientLogging();
+            LogSupport.getEsmskaLogger().setLevel(Level.ALL);
+        }
         
         //warn if other program instance is already running
         if (!pm.isFirstInstance()) {
