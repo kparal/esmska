@@ -261,7 +261,7 @@ public class MainFrame extends javax.swing.JFrame {
                     l10n.getString((String)tips.get(random)), null, null, false);
             //REMOVE: hack for ČPS
             if (Locale.getDefault().getLanguage().equals("cs") &&
-                    new Random().nextDouble() < 0.15) {
+                    new Random().nextDouble() < 0.10) {
                 statusPanel.setStatusMessage(
                     "<b>Esmska podporuje piráty!</b> Pouze svobodné vody Internetu vám zaručí funkčnost programu " +
                     "i v budoucnu. <a href='http://www.ceskapiratskastrana.cz'>www.ceskapiratskastrana.cz</a>", null,
