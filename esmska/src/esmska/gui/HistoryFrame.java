@@ -15,6 +15,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -133,7 +135,6 @@ public class HistoryFrame extends javax.swing.JFrame {
             historyTable.getSelectionModel().setSelectionInterval(0, 0);
         }
         history.addActionListener(new HistoryActionListener());
-        historyTable.requestFocusInWindow();
     }
 
     /** This method is called from within the constructor to
@@ -143,7 +144,6 @@ public class HistoryFrame extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
 
         deleteButton = new JButton();
         resendButton = new JButton();
@@ -172,6 +172,14 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("HistoryFrame.title")); // NOI18N
+        addWindowFocusListener(new WindowFocusListener() {
+            public void windowGainedFocus(WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(WindowEvent evt) {
+            }
+        });
+
         deleteButton.setAction(deleteAction);
 
         resendButton.setAction(resendAction);
@@ -457,6 +465,10 @@ public class HistoryFrame extends javax.swing.JFrame {
             historyTable.dispatchEvent(evt);
         }
     }//GEN-LAST:event_searchFieldKeyPressed
+
+    private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        historyTable.requestFocusInWindow();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /** Delete sms from history */
     private class DeleteAction extends AbstractAction {

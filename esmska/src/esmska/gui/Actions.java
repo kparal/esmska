@@ -265,7 +265,8 @@ public class Actions {
         @Override
         public void actionPerformed(ActionEvent e) {
             logger.fine("Showing history frame...");
-            if (historyFrame != null && historyFrame.isVisible()) {
+            if (historyFrame != null) {
+                historyFrame.setVisible(true);
                 historyFrame.requestFocus();
                 historyFrame.toFront();
             } else {
@@ -438,7 +439,8 @@ public class Actions {
         @Override
         public void actionPerformed(ActionEvent e) {
             logger.fine("Showing Log frame...");
-            if (logFrame != null && logFrame.isVisible()) {
+            if (logFrame != null) {
+                logFrame.setVisible(true);
                 logFrame.requestFocus();
                 logFrame.toFront();
             } else {

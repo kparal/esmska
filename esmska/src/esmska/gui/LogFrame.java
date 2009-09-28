@@ -19,6 +19,8 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -57,7 +59,6 @@ public class LogFrame extends javax.swing.JFrame {
     /** Creates new form LogFrame */
     public LogFrame() {
         initComponents();
-        closeButton.requestFocusInWindow();
         this.getRootPane().setDefaultButton(closeButton);
 
         //set window images
@@ -97,7 +98,6 @@ public class LogFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-
         jScrollPane1 = new JScrollPane();
         logList = new JList();
         closeButton = new JButton();
@@ -106,6 +106,14 @@ public class LogFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("LogFrame.title")); // NOI18N
+        addWindowFocusListener(new WindowFocusListener() {
+            public void windowGainedFocus(WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(WindowEvent evt) {
+            }
+        });
+
         logList.setModel(logModel);
         logList.setCellRenderer(new LogRenderer());
         jScrollPane1.setViewportView(logList);
@@ -198,6 +206,10 @@ public class LogFrame extends javax.swing.JFrame {
             logger.log(Level.WARNING, "System clipboard not available", ex);
         }
     }//GEN-LAST:event_copyButtonActionPerformed
+
+    private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        closeButton.requestFocusInWindow();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /** Model for contact list */
     private class LogListModel extends AbstractListModel {

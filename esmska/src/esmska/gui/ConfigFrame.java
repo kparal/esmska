@@ -28,6 +28,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -174,7 +175,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
         
         //end of init
-        closeButton.requestFocusInWindow();
         fullyInicialized = true;
     }
 
@@ -376,7 +376,15 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("ConfigFrame.title")); // NOI18N
+        addWindowFocusListener(new WindowFocusListener() {
+            public void windowGainedFocus(WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(WindowEvent evt) {
+            }
+        });
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
@@ -1156,6 +1164,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         formWindowClosing(null);
         this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
@@ -1292,6 +1301,10 @@ private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClo
         logger.log(Level.WARNING, "Could not save config", ex);
     }
 }//GEN-LAST:event_formWindowClosing
+
+private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+    closeButton.requestFocusInWindow();
+}//GEN-LAST:event_formWindowGainedFocus
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
