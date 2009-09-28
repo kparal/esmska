@@ -77,6 +77,7 @@ import esmska.utils.RuntimeUtils;
 import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.beans.Beans;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -126,7 +127,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         initComponents();
-        
+
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
         images.add(new ImageIcon(getClass().getResource(RES + "esmska-16.png")).getImage());
@@ -383,6 +384,13 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Esmska"); // NOI18N
         setLocationByPlatform(true);
+        addWindowFocusListener(new WindowFocusListener() {
+            public void windowGainedFocus(WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(WindowEvent evt) {
+            }
+        });
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
@@ -564,7 +572,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -589,6 +597,11 @@ public class MainFrame extends javax.swing.JFrame {
         //otherwise exit
         exit();
     }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        //work around bug http://code.google.com/p/esmska/issues/detail?id=182
+        this.setVisible(true);
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /** Save all user data
      * @return true if all saved ok; false otherwise
