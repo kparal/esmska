@@ -101,8 +101,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     private static final Keyring keyring = Keyring.getInstance();
     /** when to take updates seriously */
     private boolean fullyInicialized;
-    /** the active LaF when dialog is opened, needed for live-updating LaF skins */
-    private LAF lafWhenLoaded;
     private DefaultComboBoxModel lafModel = new DefaultComboBoxModel();
     private Character passwordEchoChar;
     private static final HashSet<String> restartRequests = new HashSet<String>();
@@ -148,15 +146,15 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         }
         
-        //select current laf and remember it
-        lafWhenLoaded = config.getLookAndFeel();
-        if (lafModel.getIndexOf(lafWhenLoaded) >= 0) {
-            lafModel.setSelectedItem(lafWhenLoaded);
+        //select chosen laf
+        LAF laf = config.getLookAndFeel();
+        if (lafModel.getIndexOf(laf) >= 0) {
+            lafModel.setSelectedItem(laf);
         } else {
-            logger.warning("Current LaF '" + lafWhenLoaded + "' not present in " +
+            logger.warning("Chosen LaF '" + laf + "' not present in " +
                     "the list of available LaFs!");
         }
-        
+
         //update other components
         updateThemeComboBox();
         updateCountryCode();
@@ -185,9 +183,12 @@ public class ConfigFrame extends javax.swing.JFrame {
     
     /** Update theme according to L&F */
     private void updateThemeComboBox() {
+        boolean temp = fullyInicialized;
+        fullyInicialized = false;
+
         themeComboBox.setEnabled(false);
         LAF laf = (LAF) lafComboBox.getSelectedItem();
-        
+
         if (laf.equals(LAF.JGOODIES)) {
             ArrayList<String> themes = new ArrayList<String>();
             for (Object o : PlasticLookAndFeel.getInstalledThemes()) {
@@ -207,6 +208,8 @@ public class ConfigFrame extends javax.swing.JFrame {
             themeComboBox.setSelectedItem(config.getLafSubstanceSkin());
             themeComboBox.setEnabled(true);
         }
+
+        fullyInicialized = temp;
     }
     
     /** Update country code according to country  */
@@ -1132,7 +1135,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
 
         //update skin in realtime
-        if (fullyInicialized && lafWhenLoaded.equals(lafComboBox.getSelectedItem())) {
+        if (fullyInicialized && ThemeManager.getActiveLaF() == lafComboBox.getSelectedItem()) {
             logger.fine("Changing LaF theme in realtime...");
             try {
                 ThemeManager.setLaF();
