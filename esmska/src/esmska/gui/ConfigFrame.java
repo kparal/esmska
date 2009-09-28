@@ -376,11 +376,10 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("ConfigFrame.title")); // NOI18N
         addWindowListener(new WindowAdapter() {
-            public void windowClosed(WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowClosing(WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
         Mnemonics.setLocalizedText(removeAccentsCheckBox, l10n.getString("ConfigFrame.removeAccentsCheckBox.text"));
@@ -1155,23 +1154,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_lafComboBoxActionPerformed
                             
     private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        formWindowClosing(null);
         this.setVisible(false);
-        this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
-
-    private void formWindowClosed(WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        //check validity of country prefix
-        String prefix = countryPrefixTextField.getText();
-        if (prefix.length() > 0 && !CountryPrefix.isValidCountryPrefix(prefix)) {
-            config.setCountryPrefix("");
-        }
-        //save config
-        try {
-            Context.persistenceManager.saveConfig();
-        } catch (IOException ex) {
-            logger.log(Level.WARNING, "Could not save config", ex);
-        }
-    }//GEN-LAST:event_formWindowClosed
 
     private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
         boolean temp = fullyInicialized;
@@ -1293,6 +1278,20 @@ private void debugCheckBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_deb
     }
     updateRestartLabel();
 }//GEN-LAST:event_debugCheckBoxItemStateChanged
+
+private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    //check validity of country prefix
+    String prefix = countryPrefixTextField.getText();
+    if (prefix.length() > 0 && !CountryPrefix.isValidCountryPrefix(prefix)) {
+        config.setCountryPrefix("");
+    }
+    //save config
+    try {
+        Context.persistenceManager.saveConfig();
+    } catch (IOException ex) {
+        logger.log(Level.WARNING, "Could not save config", ex);
+    }
+}//GEN-LAST:event_formWindowClosing
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();

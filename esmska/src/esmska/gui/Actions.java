@@ -222,7 +222,8 @@ public class Actions {
         @Override
         public void actionPerformed(ActionEvent e) {
             logger.fine("Showing config frame...");
-            if (configFrame != null && configFrame.isVisible()) {
+            if (configFrame != null) {
+                configFrame.setVisible(true);
                 configFrame.requestFocus();
                 configFrame.toFront();
             } else {
