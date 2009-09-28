@@ -38,6 +38,7 @@ public class ThemeManager {
 
     private static final Logger logger = Logger.getLogger(ThemeManager.class.getName());
     private static LookAndFeelInfo[] installedLafs = UIManager.getInstalledLookAndFeels();
+    private static LAF activeLaf = LAF.CROSSPLATFORM;
     //remember Mac UI for MenuBar from default l&f
     private static final String macBarUI = UIManager.getString("MenuBarUI");
 
@@ -74,9 +75,11 @@ public class ThemeManager {
         switch (laf) {
             case SYSTEM:
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                activeLaf = LAF.SYSTEM;
                 break;
             case CROSSPLATFORM:
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+                activeLaf = LAF.CROSSPLATFORM;
                 break;
             case GTK:
                 boolean found = false;
@@ -91,6 +94,7 @@ public class ThemeManager {
                     //GTK requested and supported, but now we can't find it among installed LAFs
                     throw new IllegalStateException("GTK LaF requested, but not found");
                 }
+                activeLaf = LAF.GTK;
                 break;
             case JGOODIES:
                 String themeString = config.getLafJGoodiesTheme();
@@ -104,6 +108,7 @@ public class ThemeManager {
                 }
                 PlasticLookAndFeel.setPlasticTheme(theme != null ? theme : new ExperienceBlue());
                 UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
+                activeLaf = LAF.JGOODIES;
                 break;
             case SUBSTANCE:
                 String skinString = config.getLafSubstanceSkin();
@@ -120,6 +125,7 @@ public class ThemeManager {
                 UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
                 //set LaF decorations
                 setLaFDecorated(true);
+                activeLaf = LAF.SUBSTANCE;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown LaF name");
@@ -134,6 +140,11 @@ public class ThemeManager {
         logger.fine("New LaF set: " + UIManager.getLookAndFeel());
     }
     
+    /** Returns currently active look and feel */
+    public static LAF getActiveLaF() {
+        return activeLaf;
+    }
+
     /** Returns whether GTK is current look and feel */
     public static boolean isGTKCurrentLaF() {
         LookAndFeel laf = UIManager.getLookAndFeel();

@@ -16,6 +16,7 @@ import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
 import esmska.data.Operator;
 import esmska.data.Operators;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -67,6 +69,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.Collator;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -100,11 +104,13 @@ public class ConfigFrame extends javax.swing.JFrame {
     private LAF lafWhenLoaded;
     private DefaultComboBoxModel lafModel = new DefaultComboBoxModel();
     private Character passwordEchoChar;
+    private static final HashSet<String> restartRequests = new HashSet<String>();
+    private static final HashMap<String, Object> originalSettings = new HashMap<String, Object>();
     
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
         initComponents();
-        
+
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
         images.add(new ImageIcon(getClass().getResource(RES + "config-16.png")).getImage());
@@ -150,22 +156,31 @@ public class ConfigFrame extends javax.swing.JFrame {
                     "the list of available LaFs!");
         }
         
-        //update themes according to current laf
-        updateThemeComboBox();
-        
         //update other components
+        updateThemeComboBox();
         updateCountryCode();
         updateUnstableUpdateCheckbox();
         if (!NotificationIcon.isSupported()) {
             notificationAreaCheckBox.setSelected(false);
         }
+        updateRestartLabel();
         
         //show simple or advanced settings
         advancedCheckBoxActionPerformed(null);
+
+        //store original settings
+        if (!originalSettings.containsKey("debugMode")) {
+            originalSettings.put("debugMode", config.isDebugMode());
+        }
         
         //end of init
         closeButton.requestFocusInWindow();
         fullyInicialized = true;
+    }
+
+    /** Show or hide restartLabel according to requests in restartRequests */
+    private void updateRestartLabel() {
+        restartLabel.setVisible(!restartRequests.isEmpty());
     }
     
     /** Update theme according to L&F */
@@ -282,12 +297,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         appearancePanel = new JPanel();
         lafComboBox = new JComboBox();
         lookLabel = new JLabel();
-        jLabel7 = new JLabel();
         themeComboBox = new JComboBox();
         themeLabel = new JLabel();
         windowCenteredCheckBox = new JCheckBox();
         toolbarVisibleCheckBox = new JCheckBox();
-        jLabel5 = new JLabel();
         notificationAreaCheckBox = new JCheckBox();
         tipsCheckBox = new JCheckBox();
         startMinimizedCheckBox = new JCheckBox();
@@ -332,6 +345,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel17 = new JLabel();
         closeButton = new JButton();
         advancedCheckBox = new JCheckBox();
+        restartLabel = new JLabel();
         Mnemonics.setLocalizedText(forgetLayoutCheckBox, l10n.getString("ConfigFrame.forgetLayoutCheckBox.text"));
         forgetLayoutCheckBox.setToolTipText(l10n.getString("ConfigFrame.forgetLayoutCheckBox.toolTipText")); // NOI18N
         Binding binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${forgetLayout}"), forgetLayoutCheckBox, BeanProperty.create("selected"));
@@ -406,6 +420,12 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${debugMode}"), debugCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
+        debugCheckBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent evt) {
+                debugCheckBoxItemStateChanged(evt);
+            }
+        });
+
         GroupLayout generalPanelLayout = new GroupLayout(generalPanel);
         generalPanel.setLayout(generalPanelLayout);
 
@@ -437,7 +457,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(unstableUpdatesCheckBox)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(debugCheckBox)
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
@@ -454,7 +474,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(lookLabel, l10n.getString("ConfigFrame.lookLabel.text")); // NOI18N
         lookLabel.setToolTipText(lafComboBox.getToolTipText());
 
-        Mnemonics.setLocalizedText(jLabel7, l10n.getString("ConfigFrame.jLabel7.text"));
         themeComboBox.setToolTipText(l10n.getString("ConfigFrame.themeComboBox.toolTipText")); // NOI18N
         themeComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -476,8 +495,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${toolbarVisible}"), toolbarVisibleCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-
-        Mnemonics.setLocalizedText(jLabel5, "*");
         Mnemonics.setLocalizedText(notificationAreaCheckBox, l10n.getString("ConfigFrame.notificationAreaCheckBox.text"));
         notificationAreaCheckBox.setToolTipText(l10n.getString("ConfigFrame.notificationAreaCheckBox.toolTipText")); // NOI18N
         notificationAreaCheckBox.setEnabled(NotificationIcon.isSupported());
@@ -515,10 +532,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addGroup(appearancePanelLayout.createSequentialGroup()
                         .addComponent(lookLabel)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(jLabel5))
-                    .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+                        .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGroup(appearancePanelLayout.createSequentialGroup()
                         .addComponent(themeLabel)
                         .addPreferredGap(ComponentPlacement.RELATED)
@@ -530,7 +544,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(tipsCheckBox)
                     .addComponent(notificationAreaCheckBox)
                     .addComponent(toolbarVisibleCheckBox))
-                .addContainerGap())
+                .addContainerGap(459, Short.MAX_VALUE))
         );
 
         appearancePanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lafComboBox, themeComboBox});
@@ -543,8 +557,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(appearancePanelLayout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(lookLabel)
-                    .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(appearancePanelLayout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(themeLabel)
@@ -559,9 +572,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(startMinimizedCheckBox)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(tipsCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         appearancePanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {lafComboBox, themeComboBox});
@@ -721,7 +732,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(demandDeliveryReportCheckBox)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(l10n.getString("ConfigFrame.operatorPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), operatorPanel); //find first operator for which we have key and select it
@@ -846,7 +857,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
             .addComponent(jLabel13)
             .addContainerGap())
     );
@@ -1036,7 +1047,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
             .addComponent(jLabel17)
             .addContainerGap())
     );
@@ -1062,14 +1073,23 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
     });
 
+    restartLabel.setBackground(new Color(240, 240, 159));
+    restartLabel.setFont(restartLabel.getFont().deriveFont((restartLabel.getFont().getStyle() | Font.ITALIC)));
+    restartLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
+    Mnemonics.setLocalizedText(restartLabel,l10n.getString("ConfigFrame.restartLabel.text"));
+    restartLabel.setBorder(BorderFactory.createLineBorder(new Color(255, 164, 0)));
+    restartLabel.setOpaque(true);
+    restartLabel.setVisible(false);
+
         GroupLayout layout = new GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(Alignment.LEADING)
-        .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        .addGroup(layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                .addComponent(tabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+                .addComponent(restartLabel, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(advancedCheckBox)
                     .addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
@@ -1080,7 +1100,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         layout.createParallelGroup(Alignment.LEADING)
         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(restartLabel)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(closeButton)
@@ -1122,6 +1144,14 @@ public class ConfigFrame extends javax.swing.JFrame {
         LAF laf = (LAF) lafComboBox.getSelectedItem();
         config.setLookAndFeel(laf);
         updateThemeComboBox();
+
+        // show warning if restart required
+        if (laf != ThemeManager.getActiveLaF()) {
+            restartRequests.add("lafComboBox");
+        } else {
+            restartRequests.remove("lafComboBox");
+        }
+        updateRestartLabel();
     }//GEN-LAST:event_lafComboBoxActionPerformed
                             
     private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
@@ -1250,6 +1280,19 @@ private void showPasswordCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:e
 private void checkUpdatesCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_checkUpdatesCheckBoxActionPerformed
     updateUnstableUpdateCheckbox();
 }//GEN-LAST:event_checkUpdatesCheckBoxActionPerformed
+
+private void debugCheckBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_debugCheckBoxItemStateChanged
+    if (!fullyInicialized) {
+        return;
+    }
+    // show warning if restart required
+    if (debugCheckBox.isSelected() != (Boolean) originalSettings.get("debugMode")) {
+        restartRequests.add("debugCheckBox");
+    } else {
+        restartRequests.remove("debugCheckBox");
+    }
+    updateRestartLabel();
+}//GEN-LAST:event_debugCheckBoxItemStateChanged
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
@@ -1406,8 +1449,6 @@ private void checkUpdatesCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:e
     private JLabel jLabel2;
     private JLabel jLabel3;
     private JLabel jLabel4;
-    private JLabel jLabel5;
-    private JLabel jLabel7;
     private JLabel jLabel9;
     private JComboBox lafComboBox;
     private JPanel loginPanel;
@@ -1423,6 +1464,7 @@ private void checkUpdatesCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:e
     private JCheckBox reducedHistoryCheckBox;
     private JSpinner reducedHistorySpinner;
     private JCheckBox removeAccentsCheckBox;
+    private JLabel restartLabel;
     private JCheckBox sameProxyCheckBox;
     private JTextField senderNameTextField;
     private JTextField senderNumberTextField;

@@ -91,26 +91,29 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="tabbedPane" alignment="1" pref="728" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Component id="restartLabel" alignment="0" pref="728" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="advancedCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="502" max="32767" attributes="0"/>
                       <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="tabbedPane" pref="420" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="tabbedPane" pref="390" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="restartLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="advancedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -174,7 +177,7 @@
                       <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="debugCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="287" max="32767" attributes="0"/>
+                      <EmptySpace pref="257" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -259,6 +262,9 @@
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${debugMode}" target="debugCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="debugCheckBoxItemStateChanged"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -286,10 +292,7 @@
                               <Component id="lookLabel" linkSize="6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lafComboBox" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel7" alignment="0" pref="716" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="themeLabel" linkSize="6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -304,7 +307,7 @@
                           <Component id="notificationAreaCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="toolbarVisibleCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="459" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -315,7 +318,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lookLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lafComboBox" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -332,9 +334,7 @@
                       <Component id="startMinimizedCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tipsCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="187" max="32767" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -366,13 +366,6 @@
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection component="lafComboBox" name="toolTipText" type="property"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel7">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel7.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>
@@ -424,11 +417,6 @@
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${toolbarVisible}" target="toolbarVisibleCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="*" noResource="true"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="notificationAreaCheckBox">
               <Properties>
@@ -567,7 +555,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="demandDeliveryReportCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="210" max="32767" attributes="0"/>
+                      <EmptySpace pref="180" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -811,7 +799,7 @@
                       <Component id="showPasswordCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="154" max="32767" attributes="0"/>
+                      <EmptySpace pref="124" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1098,7 +1086,7 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" linkSize="9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="222" max="32767" attributes="0"/>
+                      <EmptySpace pref="192" max="32767" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1266,6 +1254,35 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advancedCheckBoxActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="restartLabel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="9f" green="f0" red="f0" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="restartLabel" italic="true" property="font" relativeSize="true" size="0"/>
+          </FontInfo>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/esmska/resources/info-22.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.restartLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Color PropertyName="color" blue="0" green="a4" red="ff" type="rgb"/>
+            </LineBorder>
+          </Border>
+        </Property>
+        <Property name="opaque" type="boolean" value="true"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="restartLabel.setVisible(false);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
