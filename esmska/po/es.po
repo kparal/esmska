@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 15:48+0200\n"
-"PO-Revision-Date: 2009-09-18 17:46+0000\n"
-"Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
+"POT-Creation-Date: 2009-09-30 22:51+0200\n"
+"PO-Revision-Date: 2009-09-28 23:10+0000\n"
+"Last-Translator: Kamus <kamusin@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-23 11:08+0000\n"
+"X-Launchpad-Export-Date: 2009-09-30 06:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -235,7 +235,7 @@ msgstr "&Conexión"
 
 #: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
-msgstr ""
+msgstr "El código del pais para el cual se ha llenado el número prefijo"
 
 #: ConfigFrame.countryCodeLabel.text
 msgid "(country:"
@@ -261,7 +261,7 @@ msgstr ""
 
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
-msgstr ""
+msgstr "Crear un log con información de de&bug"
 
 #: ConfigFrame.debugCheckBox.toolTipText
 msgid ""
@@ -271,6 +271,12 @@ msgid ""
 "to have it turned off.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Está opción es solamente requerida cuando se trabaja con "
+"desarrolladores<br>\n"
+"en orden para resolver algún problema. En otros casos es recomendado<br>\n"
+"mantenerlo apagado.\n"
+"</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request the &delivery report"
@@ -407,16 +413,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "&Nombre:"
 
-#: ConfigFrame.jLabel7.text
-msgid ""
-"<html><i>\n"
-"* A program restart is neccessary to apply the changes!\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"* ¡Es necesario reiniciar para que los cambios surtan efecto!\n"
-"</i></html>"
-
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
@@ -547,6 +543,14 @@ msgstr ""
 #: ConfigFrame.remove_credentials
 msgid "Do you really like to remove all entered login credentials?"
 msgstr "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
+
+#: ConfigFrame.restartLabel.text
+#, fuzzy
+msgid "A program restart is neccessary to apply the changes."
+msgstr ""
+"<html><i>\n"
+"* ¡Es necesario reiniciar para que los cambios surtan efecto!\n"
+"</i></html>"
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
@@ -723,15 +727,21 @@ msgid ""
 "and signed with entered name. Only some gateways support this feature.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Con la firma agregada el SMS vendrá al recipiente desde el numero "
+"ingresado<br>\n"
+"y  firmado con el nombre. Solamente algunas puertas de enlace soportan esta "
+"característica.\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
-msgstr ""
+msgstr "<html> Directorio de configuración de usuario:<br>{0}</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
-msgstr ""
+msgstr "Iniciar el programa en el &centered de la pantalla"
 
 #: ConfigFrame.windowCenteredCheckBox.toolTipText
 msgid ""
@@ -739,6 +749,9 @@ msgid ""
 "system<br>\n"
 "or centered on the screen</html>"
 msgstr ""
+"<html>Si la ventana del programa debe ser ubicada de acuerdo al sistema "
+"operativo<br>\n"
+"o centrado en la pantalla.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfirmingFileChooser.sure_to_replace
@@ -985,24 +998,24 @@ msgstr ""
 
 #: ExportManager.export_ok!
 msgid "Contact export finished successfully!"
-msgstr ""
+msgstr "Exportación de contactos finalizada exitosamente!"
 
 #: ExportManager.history
 msgid "Sent messages history"
-msgstr ""
+msgstr "Historial de mensajes enviados"
 
 #: ExportManager.login
 msgid "Usernames and password to individual gateways"
-msgstr ""
+msgstr "Usuarios y contraseñas a puertas de enlaces individuales"
 
 #: ExportManager.sms_queue
 msgid "SMS queue to be sent"
-msgstr ""
+msgstr "SMS en cola para ser enviado"
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "Archivos Vcard (*.vcard, *.vcf)"
 
 #. #Action to resend message
 #: Forward_
@@ -1012,7 +1025,7 @@ msgstr ""
 
 #: Hide_program
 msgid "Hide program"
-msgstr ""
+msgstr "Esconder programa"
 
 #: History
 msgid "History"
@@ -1020,11 +1033,11 @@ msgstr ""
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
-msgstr ""
+msgstr "Limpiar termino de búsqueda (Alt+R,Escape)"
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
-msgstr ""
+msgstr "Número:"
 
 #: HistoryFrame.jLabel2.text
 msgid "Name:"
@@ -1076,15 +1089,20 @@ msgid ""
 "below:\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Requiere Código de Seguridad</h2>\n"
+"La puerta de enlace requiere que ingrese el código de seguridad en la "
+"siguiente imagen:\n"
+"</html>"
 
 #: ImageCodeDialog.jLabel2.text
 msgid "&Image code:"
-msgstr ""
+msgstr "Código &Image"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "Archivos CSV (*.csv)"
 
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
@@ -1101,19 +1119,21 @@ msgstr ""
 
 #: ImportFrame.browseButton.toolTipText
 msgid "Find contacts file using dialog"
-msgstr ""
+msgstr "Buscar contactos using el cuadro de diálogo"
 
 #: ImportFrame.choose_export_file
 msgid "Choose the file with exported contacts"
-msgstr ""
+msgstr "Elija el archivo de contactos exportados"
 
 #: ImportFrame.doImportLabel.text
 msgid "If you want to import these contacts press Import."
-msgstr ""
+msgstr "Si quiere importar estos contactos presione Importar."
 
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
 msgstr ""
+"<html>El programa espera que el archivo este usando codificación UTF-8.</"
+"html>"
 
 #: ImportFrame.encodingWin1250
 msgid ""
@@ -1142,11 +1162,11 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.foundContacts
 msgid "Following {0} new contacts were found:"
-msgstr ""
+msgstr "Lo siguientes {0} nuevos contactos se encontraron:"
 
 #: ImportFrame.foundContactsLabel.text
 msgid "No new contacts were found."
-msgstr ""
+msgstr "No se han encontrado nuevos contactos."
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1290,6 +1310,16 @@ msgstr ""
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Main.configsNewer
+msgid ""
+"<html><h2>Program is too old!</h2>Your user data files were written by a "
+"more recent program version ({0})<br>than your current version is ({1}). "
+"Maybe you have installed an older version<br>of Esmska by accident. You can "
+"fix that by downloading and installing the latest<br>version of Esmska."
+"<br><br>It is <i>not</i> recommended to proceed, user data loss may occur!"
 msgstr ""
 
 #: Main.no_javascript
@@ -2004,6 +2034,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  DiegoJ https://launchpad.net/~diegojromerolopez\n"
 "  Federico Vera https://launchpad.net/~fedevera\n"
+"  Kamus https://launchpad.net/~kamus\n"
 "  Miguel Zilli https://launchpad.net/~miguelzilli"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!

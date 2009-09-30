@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 15:48+0200\n"
+"POT-Creation-Date: 2009-09-30 22:51+0200\n"
 "PO-Revision-Date: 2009-07-02 08:44+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -385,16 +385,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "&שם:"
 
-#: ConfigFrame.jLabel7.text
-msgid ""
-"<html><i>\n"
-"* A program restart is neccessary to apply the changes!\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"* אתחול התוכנה נדרש כדי להחל את השינויים!\n"
-"</i></html>"
-
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
@@ -517,6 +507,14 @@ msgstr ""
 #: ConfigFrame.remove_credentials
 msgid "Do you really like to remove all entered login credentials?"
 msgstr "האם אתה בטוח שברצונך להסיר את כל פרטי ההתחברות שהוזנו?"
+
+#: ConfigFrame.restartLabel.text
+#, fuzzy
+msgid "A program restart is neccessary to apply the changes."
+msgstr ""
+"<html><i>\n"
+"* אתחול התוכנה נדרש כדי להחל את השינויים!\n"
+"</i></html>"
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
@@ -1308,6 +1306,16 @@ msgstr ""
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
 msgstr "בחר את מיקום קבצי התצורה"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Main.configsNewer
+msgid ""
+"<html><h2>Program is too old!</h2>Your user data files were written by a "
+"more recent program version ({0})<br>than your current version is ({1}). "
+"Maybe you have installed an older version<br>of Esmska by accident. You can "
+"fix that by downloading and installing the latest<br>version of Esmska."
+"<br><br>It is <i>not</i> recommended to proceed, user data loss may occur!"
+msgstr ""
 
 #: Main.no_javascript
 msgid ""

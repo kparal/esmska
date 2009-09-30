@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 15:46+0200\n"
-"PO-Revision-Date: 2009-09-28 15:46+0100\n"
+"POT-Creation-Date: 2009-09-30 22:48+0200\n"
+"PO-Revision-Date: 2009-09-30 22:48+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -406,16 +406,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "J&méno:"
 
-#: ConfigFrame.jLabel7.text
-msgid ""
-"<html><i>\n"
-"* A program restart is neccessary to apply the changes!\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"* Pro projevení změn je nutný restart programu!\n"
-"</i></html>"
-
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
@@ -545,6 +535,10 @@ msgstr ""
 #: ConfigFrame.remove_credentials
 msgid "Do you really like to remove all entered login credentials?"
 msgstr "Opravdu chcete odstranit všechny vyplněné přihlašovací údaje?"
+
+#: ConfigFrame.restartLabel.text
+msgid "A program restart is neccessary to apply the changes."
+msgstr "Pro projevení změn je nutný restart programu."
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
@@ -1370,6 +1364,21 @@ msgstr ""
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
 msgstr "Zvolte umístění konfiguračních souborů"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Main.configsNewer
+msgid ""
+"<html><h2>Program is too old!</h2>Your user data files were written by a "
+"more recent program version ({0})<br>than your current version is ({1}). "
+"Maybe you have installed an older version<br>of Esmska by accident. You can "
+"fix that by downloading and installing the latest<br>version of Esmska."
+"<br><br>It is <i>not</i> recommended to proceed, user data loss may occur!"
+msgstr ""
+"<html><h2>Program je příliš starý!</h2>Vaše uživatelské soubory byly zapsány "
+"novější verzí programu ({0})<br>než je vaše aktuální verze ({1}). Možná jste "
+"nainstalovali starší verzi<br>Esmsky omylem. Můžete to opravit stáhnutím a "
+"instalací nejnovější<br>verzí Esmsky.<br><br><i>Není</i> doporučeno "
+"pokračovat dále, může dojít ke ztrátě uživatelských dat!"
 
 #: Main.no_javascript
 msgid ""

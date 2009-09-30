@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 15:49+0200\n"
+"POT-Creation-Date: 2009-09-30 22:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -349,13 +349,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr ""
 
-#: ConfigFrame.jLabel7.text
-msgid ""
-"<html><i>\n"
-"* A program restart is neccessary to apply the changes!\n"
-"</i></html>"
-msgstr ""
-
 #: ConfigFrame.jLabel9.text
 msgid ""
 "<html>\n"
@@ -457,6 +450,10 @@ msgstr ""
 
 #: ConfigFrame.remove_credentials
 msgid "Do you really like to remove all entered login credentials?"
+msgstr ""
+
+#: ConfigFrame.restartLabel.text
+msgid "A program restart is neccessary to apply the changes."
 msgstr ""
 
 #: ConfigFrame.sameProxyCheckBox.text
@@ -1172,6 +1169,16 @@ msgstr ""
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Main.configsNewer
+msgid ""
+"<html><h2>Program is too old!</h2>Your user data files were written by a "
+"more recent program version ({0})<br>than your current version is ({1}). "
+"Maybe you have installed an older version<br>of Esmska by accident. You can "
+"fix that by downloading and installing the latest<br>version of Esmska."
+"<br><br>It is <i>not</i> recommended to proceed, user data loss may occur!"
 msgstr ""
 
 #: Main.no_javascript

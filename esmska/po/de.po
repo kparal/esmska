@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 15:48+0200\n"
-"PO-Revision-Date: 2009-08-27 22:46+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2009-09-30 22:51+0200\n"
+"PO-Revision-Date: 2009-09-27 07:45+0000\n"
+"Last-Translator: Samuel Creshal <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-23 11:07+0000\n"
+"X-Launchpad-Export-Date: 2009-09-30 06:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -32,7 +32,7 @@ msgstr "Nutzungsbedingungen - Lizenz"
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr ""
+msgstr "Vielen Dank"
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
@@ -92,7 +92,7 @@ msgstr "Kontakt hinzufügen"
 
 #: Add_new_contact
 msgid "Add new contact (Alt+A)"
-msgstr ""
+msgstr "Neuen Kontakt hinzufügen (Alt+A)"
 
 #: Cancel
 msgid "Cancel"
@@ -100,7 +100,7 @@ msgstr "Abbrechen"
 
 #: Cancel_
 msgid "&Cancel"
-msgstr ""
+msgstr "Abre&chen"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
@@ -139,6 +139,10 @@ msgid ""
 "* {2} - {0} and {1} modes combined. Also prints webpage contents (lots of "
 "output)."
 msgstr ""
+"Modi für die Ausgabe von Debug-Informationen:\n"
+"{0} – Programm-Debugging (Standard)\n"
+"{1} – Netzwerk-Debugging: Alle HTTP-Header, Weiterleitungen etc. ausgeben.\n"
+"{2} – Alles. {0}, {1}, und alle Webseiteninhalte (sehr umfangreiche Ausgabe)."
 
 #: CommandLineParser.debugMode
 msgid "debug mode"
@@ -149,11 +153,13 @@ msgid ""
 "Enable the portable mode - ask for location of the user configuration "
 "directory. Can't be used with -c."
 msgstr ""
+"Portablen Modus einschalten – fragt nach der Lage des "
+"Einstellungsverzeichnisses. Kann nicht mit -c benutzt werden."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr ""
+msgstr "Ungültige Kommandozeilenoption ''{0}''!"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
@@ -168,6 +174,8 @@ msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
+"Pfad für das Einstellungsverzeichnis (absoluter Pfadname) festlegen. Kann "
+"nicht mit -p benutzt werden."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
@@ -191,7 +199,7 @@ msgstr "Erweiterte Optionen"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr ""
+msgstr "Erweiterte Einstellungen anzeigen"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -211,15 +219,15 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
-msgstr ""
+msgstr "Alle Login-&Daten löschen"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
-msgstr ""
+msgstr "Alle Usernamen und Passwörter für alle Gateways löschen"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
-msgstr ""
+msgstr "Verbindung"
 
 #: ConfigFrame.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -227,7 +235,7 @@ msgstr ""
 
 #: ConfigFrame.countryCodeLabel.text
 msgid "(country:"
-msgstr ""
+msgstr "(Land:"
 
 #: ConfigFrame.countryPrefixTextField.toolTipText
 msgid ""
@@ -287,7 +295,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr ""
+msgstr "All&gemein"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -307,20 +315,20 @@ msgstr ""
 
 #: ConfigFrame.jLabel1.text
 msgid "&Number:"
-msgstr ""
+msgstr "&Nummer:"
 
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Gateway:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr ""
+msgstr "Ben&utzername:"
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr ""
+msgstr "Pa&sswort:"
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -333,15 +341,15 @@ msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
-msgstr ""
+msgstr "H&TTP-Proxy:"
 
 #: ConfigFrame.jLabel15.text
 msgid "HTTP&S proxy:"
-msgstr ""
+msgstr "HTTP&S-Proxy:"
 
 #: ConfigFrame.jLabel16.text
 msgid "SO&CKS proxy:"
-msgstr ""
+msgstr "SO&CKS-Proxy:"
 
 #: ConfigFrame.jLabel17.text
 msgid ""
@@ -357,14 +365,7 @@ msgstr ""
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
-msgstr ""
-
-#: ConfigFrame.jLabel7.text
-msgid ""
-"<html><i>\n"
-"* A program restart is neccessary to apply the changes!\n"
-"</i></html>"
-msgstr ""
+msgstr "&Name:"
 
 #: ConfigFrame.jLabel9.text
 msgid ""
@@ -429,7 +430,7 @@ msgstr ""
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
 msgid "&Gateways"
-msgstr ""
+msgstr "&Gateways"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
@@ -467,6 +468,10 @@ msgstr ""
 
 #: ConfigFrame.remove_credentials
 msgid "Do you really like to remove all entered login credentials?"
+msgstr ""
+
+#: ConfigFrame.restartLabel.text
+msgid "A program restart is neccessary to apply the changes."
 msgstr ""
 
 #: ConfigFrame.sameProxyCheckBox.text
@@ -1184,6 +1189,16 @@ msgstr ""
 msgid "Choose the location of the configuration files"
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Main.configsNewer
+msgid ""
+"<html><h2>Program is too old!</h2>Your user data files were written by a "
+"more recent program version ({0})<br>than your current version is ({1}). "
+"Maybe you have installed an older version<br>of Esmska by accident. You can "
+"fix that by downloading and installing the latest<br>version of Esmska."
+"<br><br>It is <i>not</i> recommended to proceed, user data loss may occur!"
+msgstr ""
+
 #: Main.no_javascript
 msgid ""
 "<html>You current Java doesn't support execution of the JavaScript "
@@ -1895,6 +1910,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Lukas Bögelein https://launchpad.net/~lukas-boegelein\n"
+"  Samuel Creshal https://launchpad.net/~samuel-creshal\n"
 "  jiri4711 https://launchpad.net/~jwprojekt"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
