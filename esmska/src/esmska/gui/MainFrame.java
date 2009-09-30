@@ -355,6 +355,7 @@ public class MainFrame extends javax.swing.JFrame {
         jSeparator3 = new Separator();
         configButton = new JButton();
         exitButton = new JButton();
+        donateButton = new JButton();
         menuBar = new JMenuBar();
         programMenu = new JMenu();
         configMenuItem = new JMenuItem();
@@ -465,6 +466,15 @@ public class MainFrame extends javax.swing.JFrame {
         exitButton.setHideActionText(true);
         toolBar.add(exitButton);
 
+        donateButton.setAction(Actions.getBrowseAction(Links.DONATE));
+        donateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/heart-32.png"))); // NOI18N
+        donateButton.setToolTipText(l10n.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
+        donateButton.setFocusable(false);
+        donateButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        donateButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        toolBar.add(Box.createHorizontalGlue());
+        toolBar.add(donateButton);
+
         for (Component comp : toolBar.getComponents()) {
             if (comp instanceof JButton) {
                 JButton button = (JButton) comp;
@@ -572,7 +582,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -980,6 +990,7 @@ public class MainFrame extends javax.swing.JFrame {
     private JButton configButton;
     private JMenuItem configMenuItem;
     private ContactPanel contactPanel;
+    private JButton donateButton;
     private JMenuItem donateMenuItem;
     private JButton exitButton;
     private JMenuItem exitMenuItem;
