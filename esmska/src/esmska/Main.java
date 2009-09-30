@@ -228,8 +228,39 @@ public class Main {
             }
         }
 
-        //do some initialization if this is the first run
+        //warn if configuration files are newer than program version (user has
+        //executed an older program version)
         Config config = Config.getInstance();
+        final String dataVersion = config.getVersion();
+        final String programVersion = Config.getLatestVersion();
+        if (Config.compareProgramVersions(dataVersion, programVersion) > 0) {
+            logger.warning("Configuration files are newer (" + dataVersion +
+                    ") then current program version (" + programVersion + ")! " +
+                    "Data corruption may occur!");
+            try {
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        String runOption = l10n.getString("Main.run_anyway");
+                        String quitOption = l10n.getString("Quit");
+                        String[] options = new String[]{runOption, quitOption};
+                        options = RuntimeUtils.sortDialogOptions(options);
+                        int result = JOptionPane.showOptionDialog(null,
+                                new JLabel(MessageFormat.format(l10n.getString("Main.configsNewer"),
+                                dataVersion, programVersion)),
+                                null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+                                options, quitOption);
+                        if (result != ArrayUtils.indexOf(options, runOption)) {
+                            System.exit(0);
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Can't display error message", e);
+            }
+        }
+
+        //do some initialization if this is the first run
         if (config.isFirstRun()) {
             logger.fine("First run, doing initialization...");
             //set country prefix from locale
