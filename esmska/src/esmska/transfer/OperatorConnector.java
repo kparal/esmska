@@ -295,7 +295,8 @@ public class OperatorConnector {
             if (redirect != null) {
                 //redirect to new url
                 logger.fine("Following web redirect to: " + redirect);
-                return followMetaRedirect(redirect, method.getURI());
+                String redir = computeRedirect(redirect, method.getURI());
+                return doGet(redir);
             }
         }
 
@@ -369,16 +370,8 @@ public class OperatorConnector {
             if (StringUtils.isEmpty(newURL)) {
                 throw new IOException("Invalid HTTP redirect, Location header is empty");
             }
-            if (newURL.startsWith("./") || newURL.startsWith("../")) {
-                try {
-                    newURL = convertRelativeRedirectToAbsolute(url, newURL);
-                } catch (IOException ex) {
-                    throw new IOException("Invalid HTTP redirect, Location header must " +
-                            "be an absolute path and is: '" + newURL + "'", ex);
-                }
-            }
             if (!isAbsoluteURL(newURL) && !newURL.startsWith("/")) {
-                newURL = "/" + newURL;
+                newURL = computeRedirect(newURL, method.getURI());
             }
             //redirect to new url
             logger.fine("Following http redirect to: " + newURL);
@@ -391,7 +384,8 @@ public class OperatorConnector {
             if (redirect != null) {
                 //redirect to new url
                 logger.fine("Following web redirect to: " + redirect);
-                return followMetaRedirect(redirect, method.getURI());
+                String redir = computeRedirect(redirect, method.getURI());
+                return doGet(redir);
             }
         }
 
@@ -444,20 +438,29 @@ public class OperatorConnector {
         return null;
     }
 
-    /** Follow a meta redirect.
+    /** Combine an old URL and a redirect to a new URL.
      * 
      * @param redirectURL new URL. May be absolute or relative. It if starts with
      * slash (/) it is applied to domain root.
      * @param currentURI current URI. Absolute or relative.
-     * @return result of doGet(url) method
-     * @throws java.io.IOException Problem when connecting
+     * @return new URL to get
+     * @throws java.io.IOException Problem when computing redirect
      */
-    private boolean followMetaRedirect(String redirectURL, URI currentURI) throws IOException {
+    private String computeRedirect(String redirectURL, URI currentURI) throws IOException {
         if (redirectURL == null) {
             throw new IllegalArgumentException("redirectURL");
         }
         if (currentURI == null) {
             throw new IllegalArgumentException("currentURI");
+        }
+
+        if (redirectURL.startsWith("./") || redirectURL.startsWith("../")) {
+            try {
+                redirectURL = convertRelativeRedirectToAbsolute(currentURI.toString(), redirectURL);
+            } catch (IOException ex) {
+                throw new IOException("Invalid HTTP redirect, Location header must " +
+                        "be an absolute path and is: '" + redirectURL + "'", ex);
+            }
         }
 
         if (redirectURL.startsWith("/")) {
@@ -507,8 +510,8 @@ public class OperatorConnector {
             throw new IOException("HTTP meta redirection endless loop detected");
         }
 
-        logger.fine("New redirect URL is: " + redirectURL);
-        return doGet(redirectURL);
+        logger.fine("Computed new redirect full URL is: " + redirectURL);
+        return redirectURL;
     }
     
     /** Convert relative redirect to absolute url
