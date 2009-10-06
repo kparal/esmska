@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-17"
+    return "2009-10-06"
 }
 
 function getMaintainer() {
@@ -70,7 +70,7 @@ function send() {
 
     // send message
     getData = ["username", LOGIN, "password", PASSWORD, "from", SENDERNUMBER, "to", NUMBER, "text", MESSAGE]
-    content = EXEC.getURL("https://myaccount.smsdiscount.com/clx/sendsms.php", getData)
+    content = EXEC.getURL("https://www.smsdiscount.com/myaccount/sendsms.php", getData)
 
     // wrong username/password/nousername/nopassword 
     re = /<description>error<\/description>/
@@ -110,13 +110,14 @@ function send() {
     re = /<resultstring>success<\/resultstring>/
     match = re.exec(content)
     if (undefined != match) {
-    	//get remanining credit and display it like remaining free SMS
-	    postData = ["user", LOGIN, "pass", PASSWORD]
-    	content = EXEC.postURL("https://myaccount.smsdiscount.com/clx/index.php?part=tplogin", [], postData)
-    	re = /<span id="balanceid"><b>&euro;&nbsp;([0-9]+.[0-9]+)<\/b>/
+    	//get remanining credit and display it
+	postData = ["user", LOGIN, "pass", PASSWORD]
+    	EXEC.postURL("https://www.smsdiscount.com/myaccount/index.php?part=tplogin", [], postData)
+    	content = EXEC.getURL("https://www.smsdiscount.com/myaccount/index.php?part=menu", []) 
+    	re = /<span id="balanceid">[\s\S]*?<b>[\s\S]*?&euro;&nbsp;([0-9\.]*)[\s\S]*?<\/b>/
     	match = re.exec(content);
     	if (undefined != match) { // if found
-    		EXEC.setOperatorMessage(EXEC.INFO_CREDIT_REMAINING + "€" + match[1])
+    		EXEC.setOperatorMessage(EXEC.INFO_CREDIT_REMAINING + "EUR: " + match[1])
     	}
         return true
     }
