@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-10-06"
+    return "2009-10-06_2"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0"
+    return "0.17.0beta3"
 }
 
 function getWebsite() {
@@ -112,12 +112,11 @@ function send() {
     if (undefined != match) {
     	//get remanining credit and display it
 	postData = ["user", LOGIN, "pass", PASSWORD]
-    	EXEC.postURL("https://www.smsdiscount.com/myaccount/index.php?part=tplogin", [], postData)
-    	content = EXEC.getURL("https://www.smsdiscount.com/myaccount/index.php?part=menu", []) 
+    	content = EXEC.postURL("https://www.smsdiscount.com/myaccount/index.php?part=tplogin", [], postData)
     	re = /<span id="balanceid">[\s\S]*?<b>[\s\S]*?&euro;&nbsp;([0-9\.]*)[\s\S]*?<\/b>/
     	match = re.exec(content);
     	if (undefined != match) { // if found
-    		EXEC.setOperatorMessage(EXEC.INFO_CREDIT_REMAINING + "EUR: " + match[1])
+    		EXEC.setOperatorMessage(EXEC.INFO_CREDIT_REMAINING + "€" + match[1])
     	}
         return true
     }
