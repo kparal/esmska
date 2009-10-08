@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-06-24"
+    return "2009-10-08"
 }
 
 function getMaintainer() {
@@ -69,7 +69,7 @@ function send() {
     EXEC.getURL("https://login.client.tmo.cz/um/cs/logout.jsp", []);
 
     // sms sending page
-    content = EXEC.getURL("http://sms.t-zones.cz/", [])
+    content = EXEC.getURL("https://sms1.client.tmo.cz/sms.jsp", [])
     var time = new Date().getTime()
    
     // find counter
@@ -95,7 +95,7 @@ function send() {
                 "recipient", NUMBER, "text", MESSAGE,
                 "send", "Odeslat", "mtype", "0",
                 "captcha", captcha]
-    content = EXEC.postURL("http://sms.t-zones.cz/", [], postData)
+    content = EXEC.postURL("http://sms.t-zones.cz/open.jsp?site=1", [], postData)
 
     // check if message was successfully sent
     re = /(SMS zpr.va byl. odeslán.|SMS was sent)/
