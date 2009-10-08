@@ -58,6 +58,8 @@ public class OperatorExecutor {
     /** Message that uknown error happened, maybe error in the script. */
     public static String ERROR_UKNOWN =
             l10n.getString("OperatorExecutor.ERROR_UKNOWN");
+    public static String ERROR_FIX_IN_PROGRESS =
+            l10n.getString("OperatorExecutor.ERROR_FIX_IN_PROGRESS");
     /** Message saying how many free SMS are remaining. */
     public static final String INFO_FREE_SMS_REMAINING = 
             l10n.getString("OperatorExecutor.INFO_FREE_SMS_REMAINING") + " ";
@@ -184,10 +186,31 @@ public class OperatorExecutor {
     }
 
     /** Error message displayed when sending was unsuccessful.
-     * You can use simple HTML tags (HTML 3.2).
+     * You can use simple HTML tags (HTML 3.2).<br>
+     * <br>
+     * Some predefined messages take additional parameters:
+     * <ul>
+     * <li>ERROR_FIX_IN_PROGRESS: URL to reported bug</li>
+     * </ul>
+     * @param errorMessage error message, may be one of predefined
+     * @param params may be empty or null, mandatory for some predefined messages
+     */
+    public void setErrorMessage(String errorMessage, String[] params) {
+        //process additional params
+        if (ERROR_FIX_IN_PROGRESS.equals(errorMessage)) {
+            if (params == null || params.length <= 0) {
+                throw new IllegalArgumentException("Missing additional parameters " +
+                        "for selected error message");
+            }
+            errorMessage = MessageFormat.format(errorMessage, params[0]);
+        }
+        this.errorMessage = errorMessage;
+    }
+
+    /** Same as calling {@link #setErrorMessage(String, null)}
      */
     public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+        setErrorMessage(errorMessage, null);
     }
 
     /** Additional optional message from operator that is shown after message sending. */

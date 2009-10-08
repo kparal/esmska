@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-30 22:51+0200\n"
-"PO-Revision-Date: 2009-09-24 06:54+0000\n"
+"POT-Creation-Date: 2009-10-08 20:07+0200\n"
+"PO-Revision-Date: 2009-10-02 11:15+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-09-30 06:45+0000\n"
+"X-Launchpad-Export-Date: 2009-10-03 06:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -262,7 +262,7 @@ msgstr ""
 
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
-msgstr ""
+msgstr "Vytvárať &záznam s ladiacími informáciami."
 
 #: ConfigFrame.debugCheckBox.toolTipText
 msgid ""
@@ -272,6 +272,10 @@ msgid ""
 "to have it turned off.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Táto voľba je potrebná iba ak spolupracujete s vývojármi programu<br>\n"
+"na vyriešení nejakého prblému. Inak je odporúčané mať ju vypnutú.\n"
+"</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request the &delivery report"
@@ -539,12 +543,8 @@ msgid "Do you really like to remove all entered login credentials?"
 msgstr "Naozaj si želáte odstrániť všetky vyplnené prihlasovacie údaje?"
 
 #: ConfigFrame.restartLabel.text
-#, fuzzy
 msgid "A program restart is neccessary to apply the changes."
-msgstr ""
-"<html><i>\n"
-"* Program je potrebné reštartovať aby sa prejavili zmeny!\n"
-"</i></html>"
+msgstr "Aby sa zmeny prejavili je potrebné program reštartovať."
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
@@ -1382,6 +1382,11 @@ msgid ""
 "fix that by downloading and installing the latest<br>version of Esmska."
 "<br><br>It is <i>not</i> recommended to proceed, user data loss may occur!"
 msgstr ""
+"<html><h2>Program je príliš starý!</h2>Vaše používateľské dáta boli zapísané "
+"novšou verziou programu ({0})<br>ako je Vaša aktuálna verzia ({1}). Možno "
+"ste nainštalovali staršiu verziu Esmsky<br>omylom. Môžete to opraviť "
+"stiahnutím a nainštalovaním najnovšej<br>verzie Esmsky.<br><br><i>Nieje</i> "
+"odporúčané pokračovať, môžete stratiť nejaké používateľské dáta!"
 
 #: Main.no_javascript
 msgid ""
@@ -1666,6 +1671,20 @@ msgstr ""
 "niektorej bráne presuňte<br>\n"
 "kurzor myši nad danú bránu v rolovaciom zozname.</td></tr></table>\n"
 "</html>"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: OperatorExecutor.ERROR_FIX_IN_PROGRESS
+msgid ""
+"The gateway maintainers have modified their webpage and it can''t be used "
+"from Esmska<br>\n"
+"at the moment. The fix is being worked on, you can track <a href=\"{0}\">its "
+"status</a>.<br>\n"
+"<br>\n"
+"In the meantime you can send requests to gateway maintainers to create "
+"stable and<br>\n"
+"immutable machine-readable interface for their gateway. That would eliminate "
+"these problems."
+msgstr ""
 
 #: OperatorExecutor.ERROR_LIMIT_REACHED
 msgid ""
