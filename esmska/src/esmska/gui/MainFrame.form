@@ -248,7 +248,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Component id="toolBar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="horizontalSplitPane" pref="422" max="32767" attributes="0"/>
+              <Component id="horizontalSplitPane" pref="430" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -430,7 +430,7 @@
               <Connection code="Actions.getBrowseAction(Links.DONATE)" type="code"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/esmska/resources/heart-32.png"/>
+              <Image iconType="3" name="/esmska/resources/heart-22to32.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>

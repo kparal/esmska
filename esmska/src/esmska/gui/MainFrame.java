@@ -467,7 +467,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(exitButton);
 
         donateButton.setAction(Actions.getBrowseAction(Links.DONATE));
-        donateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/heart-32.png"))); // NOI18N
+        donateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/heart-22to32.png"))); // NOI18N
         donateButton.setToolTipText(l10n.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         donateButton.setFocusable(false);
         donateButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -582,7 +582,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
