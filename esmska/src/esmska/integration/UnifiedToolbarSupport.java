@@ -39,8 +39,6 @@ public class UnifiedToolbarSupport extends MouseAdapter {
 
     /**
      * Creates new instance and install support.
-     * 
-     * @param frame main frame
      */
     public UnifiedToolbarSupport() {
         this.frame = Context.mainFrame;

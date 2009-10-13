@@ -207,7 +207,7 @@ public class OperatorExecutor {
         this.errorMessage = errorMessage;
     }
 
-    /** Same as calling {@link #setErrorMessage(String, null)}
+    /** Same as calling <code>setErrorMessage(String, null)</code>
      */
     public void setErrorMessage(String errorMessage) {
         setErrorMessage(errorMessage, null);
