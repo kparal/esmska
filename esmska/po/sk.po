@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-11 15:07+0200\n"
-"PO-Revision-Date: 2009-10-09 09:34+0000\n"
+"POT-Creation-Date: 2009-10-13 20:42+0200\n"
+"PO-Revision-Date: 2009-10-11 14:31+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-10-10 08:13+0000\n"
+"X-Launchpad-Export-Date: 2009-10-12 07:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -1375,7 +1375,6 @@ msgstr "Zvoľte umiestnenie konfiguračných súborov"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.configsNewer
-#, fuzzy
 msgid ""
 "<html><h2>Program is too old!</h2>Your user data files were written by a "
 "more recent program version ({0})<br>than your current version is ({1}). "
@@ -1383,11 +1382,6 @@ msgid ""
 "fix that by downloading and installing the latest<br>version of Esmska."
 "<br><br><i>It is not recommended to proceed, user data loss may occur!</i>"
 msgstr ""
-"<html><h2>Program je príliš starý!</h2>Vaše používateľské dáta boli zapísané "
-"novšou verziou programu ({0})<br>ako je Vaša aktuálna verzia ({1}). Možno "
-"ste nainštalovali staršiu verziu Esmsky<br>omylom. Môžete to opraviť "
-"stiahnutím a nainštalovaním najnovšej<br>verzie Esmsky.<br><br><i>Nieje</i> "
-"odporúčané pokračovať, môžete stratiť nejaké používateľské dáta!"
 
 #: Main.no_javascript
 msgid ""
