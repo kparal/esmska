@@ -112,6 +112,7 @@ public class AlphanumComparator implements Comparator
       if (result != 0) return result;
     }
 
-    return 0;
+    // the longer string wins
+    return new Integer(s1.length()).compareTo(s2.length());
   }
 }
