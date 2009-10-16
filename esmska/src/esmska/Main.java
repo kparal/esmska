@@ -276,7 +276,9 @@ public class Main {
         }
         
         //update from older versions
-        LegacyUpdater.update();
+        if (!config.isFirstRun()) {
+            LegacyUpdater.update();
+        }
         
         //set L&F
         try {
