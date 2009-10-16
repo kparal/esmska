@@ -402,7 +402,15 @@ public class Queue {
                 //FIXME: does not take various daylight saving time etc into account
                 //A more complex library (eg. Joda Time) is needed to calculate true time differences.
                 long difference = (new Date().getTime() - record.getDate().getTime()); //in milliseconds
-                delay = Math.max(operator.getDelayBetweenMessages() * 1000 - difference, 0);
+                if (difference < 0) {
+                    //last message was sent in the future
+                    //that's clearly wrong, the user probably messed up system time
+                    //the best thing we can do is just try to send the message without a delay
+                    delay = 0;
+                } else {
+                    //let's compute the real remaining delay
+                    delay = Math.max(operator.getDelayBetweenMessages() * 1000 - difference, 0);
+                }
             }
         }
 
