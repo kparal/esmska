@@ -36,7 +36,7 @@ public class Config extends Object implements Serializable {
     /** shared instance */
     private static Config instance = new Config();
     
-    private static final String LATEST_VERSION = "0.17.0.99beta";
+    private static final String LATEST_VERSION = "0.17.0.99";
     private static final Logger logger = Logger.getLogger(Config.class.getName());
 
     private String version = "";
@@ -88,7 +88,7 @@ public class Config extends Object implements Serializable {
 
     /** Whether the current program version is stable or unstable */
     public static boolean isStableVersion() {
-        return !LATEST_VERSION.contains("beta");
+        return !(LATEST_VERSION.contains("beta") || LATEST_VERSION.contains(".99"));
     }
 
     /** Whether the program is run as Java WebStart or not */
