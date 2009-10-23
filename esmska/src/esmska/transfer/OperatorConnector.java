@@ -4,6 +4,7 @@
  */
 package esmska.transfer;
 
+import esmska.data.Tuple;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -26,6 +27,7 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
@@ -55,6 +57,8 @@ public class OperatorConnector {
     private byte[] binaryContent;
     private String referer;
     private String fullURL;
+    // remembers last redirect and number of requests to that URL
+    private Tuple<String, Integer> lastRedirect = new Tuple<String, Integer>(null,0);
 
     /** Constructor for OperatorConnector. */
     public OperatorConnector() {
@@ -505,8 +509,15 @@ public class OperatorConnector {
             //keep redirect url intact
         }
 
+        if (ObjectUtils.equals(lastRedirect.get1(), redirectURL)) {
+            lastRedirect.set2(lastRedirect.get2() + 1);
+        } else {
+            lastRedirect.set1(redirectURL);
+            lastRedirect.set2(0);
+        }
+
         //check for redirection loops
-        if (url.equalsIgnoreCase(redirectURL)) {
+        if (lastRedirect.get2() > 5) {
             throw new IOException("HTTP meta redirection endless loop detected");
         }
 
