@@ -63,6 +63,11 @@ function getSupportedLanguages() {
 function send() {
     var re, match, content, params, postData, jsessionid
 
+    // because of invalid SSL certificate orangeportal.sk does not work at the moment
+    EXEC.setErrorMessage(EXEC.ERROR_FIX_IN_PROGRESS, 
+        ["http://code.google.com/p/esmska/issues/detail?id=183"])
+    return false
+
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
