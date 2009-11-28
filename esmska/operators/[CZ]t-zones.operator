@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-09-04"
+    return "2009-11-28"
 }
 
 function getMaintainer() {
@@ -90,11 +90,12 @@ function send() {
         postData = ["nextURL", "checkStatus.jsp", "errURL", "clickError.jsp",
                     "username", LOGIN, "password", PASSWORD,
                     "submit", "Přihlásit"]
-        content = EXEC.postURL("https://www1.t-mobile.cz/.gang/login/tzones", [], postData)
         // it just doesn't work if you send it only once, don't ask me why,
         // cookie issues maybe
-        // so send it for a second time
-        content = EXEC.postURL("https://www1.t-mobile.cz/.gang/login/tzones", [], postData)
+        // so send it twice
+        content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
+        content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
+        content = EXEC.getURL("https://www.t-mobile.cz/.gang/mdh/http://login.client.tmo.cz/.gang/login", [])
 
         // seach for errors
         re = /<div class="error_box">([^]*?)<\/div>/
@@ -115,7 +116,16 @@ function send() {
     }
 
     // sms sending page
-    content = EXEC.getURL("https://sms1.client.tmo.cz/closed.jsp", [])
+    content = EXEC.getURL("https://sms.client.tmo.cz/", [])
+
+    // seach for errors, sometimes overload errors are displayed here
+    re = /<div class="error_box">([^]*?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        EXEC.setErrorMessage(EXEC.ERROR_OPERATOR_MESSAGE + match[1])
+        logout()
+        return false
+    }
 
     // find counter
     re = /<input type="hidden" name="counter" value="(.*)" \/>/
@@ -128,7 +138,7 @@ function send() {
                 "send", "Odeslat", "mtype", "0",
                 "confirmation", DELIVERY_REPORT?"1":"0",
                 "history", "on"]
-    content = EXEC.postURL("https://sms1.client.tmo.cz/closed.jsp", [], postData)
+    content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
 
     // check if message was successfully sent
     re = /SMS zpr.v. byl. odeslán./
