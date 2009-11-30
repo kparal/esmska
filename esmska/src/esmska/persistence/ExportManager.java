@@ -87,8 +87,7 @@ public class ExportManager {
             ContactStruct struct = new ContactStruct();
 
             struct.name = contact.getName();
-            struct.addPhone(contact.getNumber(),
-                    String.valueOf(Contacts.Phones.TYPE_MOBILE), null);
+            struct.addPhone(Contacts.Phones.TYPE_MOBILE, contact.getNumber(), null, true);
 
             String vcardString = composer.createVCard(struct, VCardComposer.VERSION_VCARD30_INT);
 
