@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-11-26"
+    return "2009-12-03"
 }
 
 function getMaintainer() {
@@ -65,7 +65,7 @@ function send() {
 
     // because of invalid SSL certificate orangeportal.sk does not work at the moment
     EXEC.setErrorMessage(EXEC.ERROR_FIX_IN_PROGRESS, 
-        ["http://code.google.com/p/esmska/issues/detail?id=183"])
+        ["http://code.google.com/p/esmska/issues/detail?id=183#c53"])
     return false
 
     // check that login and password supplied
