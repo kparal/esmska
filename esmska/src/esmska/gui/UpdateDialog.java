@@ -345,6 +345,10 @@ public class UpdateDialog extends javax.swing.JDialog {
             //add to panel
             gwPanel.add(checkbox);
         }
+
+        //fix redrawing issues on multiplatform laf
+        gwPanel.setVisible(false);
+        gwPanel.setVisible(true);
     }
 
     /** Count selected checkbox and enable/disable update button */
