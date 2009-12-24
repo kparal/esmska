@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.event.ValuedEvent;
 import java.awt.Color;
@@ -85,6 +86,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Queue queue = Queue.getInstance();
+    private static final Config config = Config.getInstance();
     
     private Action deleteSMSAction = new DeleteSMSAction();
     private Action editSMSAction = new EditSMSAction();
@@ -123,6 +125,15 @@ public class QueuePanel extends javax.swing.JPanel {
                 queueListValueChanged(null);
             }
         });
+
+        //set visibility of advanced controls
+        showAdvancedControls(config.isShowAdvancedControls());
+    }
+
+    /** Show or hide advanced controls (buttons, etc) */
+    public void showAdvancedControls(boolean show) {
+        smsUpButton.setVisible(show);
+        smsDownButton.setVisible(show);
     }
     
     /** This method is called from within the constructor to

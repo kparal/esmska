@@ -307,6 +307,7 @@
                           <Component id="tipsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="notificationAreaCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="toolbarVisibleCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="advancedControlsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="459" max="32767" attributes="0"/>
                   </Group>
@@ -335,7 +336,9 @@
                       <Component id="startMinimizedCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tipsCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="178" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="advancedControlsCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="154" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -464,6 +467,22 @@
                 <BindingProperty name="selected" source="config" sourcePath="${startMinimized}" target="startMinimizedCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
                 <BindingProperty name="enabled" source="notificationAreaCheckBox" sourcePath="${selected &amp;&amp; enabled}" target="startMinimizedCheckBox" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="advancedControlsCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.advancedControlsCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.advancedControlsCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="selected" source="config" sourcePath="${showAdvancedControls}" target="advancedControlsCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advancedControlsCheckBoxActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -800,7 +819,7 @@
                       <Component id="showPasswordCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="139" max="32767" attributes="0"/>
+                      <EmptySpace pref="124" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

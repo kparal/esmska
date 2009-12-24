@@ -307,6 +307,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         notificationAreaCheckBox = new JCheckBox();
         tipsCheckBox = new JCheckBox();
         startMinimizedCheckBox = new JCheckBox();
+        advancedControlsCheckBox = new JCheckBox();
         operatorPanel = new JPanel();
         useSenderIDCheckBox = new JCheckBox();
         senderNumberTextField = new JTextField();
@@ -438,7 +439,6 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         GroupLayout generalPanelLayout = new GroupLayout(generalPanel);
         generalPanel.setLayout(generalPanelLayout);
-
         generalPanelLayout.setHorizontalGroup(
             generalPanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(generalPanelLayout.createSequentialGroup()
@@ -471,6 +471,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
 
         tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
+
         lafComboBox.setModel(lafModel);
         lafComboBox.setToolTipText(l10n.getString("ConfigFrame.lafComboBox.toolTipText")); // NOI18N
         lafComboBox.setRenderer(new LaFComboRenderer());
@@ -530,6 +531,17 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, notificationAreaCheckBox, ELProperty.create("${selected && enabled}"), startMinimizedCheckBox, BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        Mnemonics.setLocalizedText(advancedControlsCheckBox, l10n.getString("ConfigFrame.advancedControlsCheckBox.text"));
+        advancedControlsCheckBox.setToolTipText(l10n.getString("ConfigFrame.advancedControlsCheckBox.toolTipText")); // NOI18N
+        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showAdvancedControls}"), advancedControlsCheckBox, BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
+
+        advancedControlsCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                advancedControlsCheckBoxActionPerformed(evt);
+            }
+        });
+
         GroupLayout appearancePanelLayout = new GroupLayout(appearancePanel);
         appearancePanel.setLayout(appearancePanelLayout);
 
@@ -553,7 +565,8 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addComponent(startMinimizedCheckBox))
                     .addComponent(tipsCheckBox)
                     .addComponent(notificationAreaCheckBox)
-                    .addComponent(toolbarVisibleCheckBox))
+                    .addComponent(toolbarVisibleCheckBox)
+                    .addComponent(advancedControlsCheckBox))
                 .addContainerGap(459, Short.MAX_VALUE))
         );
 
@@ -582,7 +595,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(startMinimizedCheckBox)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(tipsCheckBox)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(advancedControlsCheckBox)
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         appearancePanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {lafComboBox, themeComboBox});
@@ -756,7 +771,6 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         }
         operatorComboBoxItemStateChanged(null);
-
         operatorComboBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent evt) {
                 operatorComboBoxItemStateChanged(evt);
@@ -764,6 +778,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         });
 
         Mnemonics.setLocalizedText(jLabel9, l10n.getString("ConfigFrame.jLabel9.text")); // NOI18N
+
         jLabel10.setLabelFor(operatorComboBox);
         Mnemonics.setLocalizedText(jLabel10, l10n.getString("ConfigFrame.jLabel10.text")); // NOI18N
         jLabel10.setToolTipText(operatorComboBox.getToolTipText());
@@ -850,7 +865,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         loginPanelLayout.createParallelGroup(Alignment.LEADING)
         .addGroup(loginPanelLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabel9)
+            .addComponent(jLabel9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.UNRELATED)
             .addGroup(loginPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel10)
@@ -868,7 +883,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
             .addPreferredGap(ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-            .addComponent(jLabel13)
+            .addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
 
@@ -1058,7 +1073,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
-            .addComponent(jLabel17)
+            .addComponent(jLabel17, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
 
@@ -1237,6 +1252,7 @@ private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event
     operatorFilterLabel.setVisible(showAdvanced);
     operatorFilterTextField.setVisible(showAdvanced);
     debugCheckBox.setVisible(showAdvanced);
+    advancedControlsCheckBox.setVisible(showAdvanced);
     
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(privacyPanel), showAdvanced);
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(connectionPanel), showAdvanced);
@@ -1308,6 +1324,14 @@ private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClo
 private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
     closeButton.requestFocusInWindow();
 }//GEN-LAST:event_formWindowGainedFocus
+
+private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_advancedControlsCheckBoxActionPerformed
+    if (!fullyInicialized) {
+        return;
+    }
+    
+    Context.mainFrame.getQueuePanel().showAdvancedControls(config.isShowAdvancedControls());
+}//GEN-LAST:event_advancedControlsCheckBoxActionPerformed
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
@@ -1434,6 +1458,7 @@ private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindo
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JCheckBox advancedCheckBox;
+    private JCheckBox advancedControlsCheckBox;
     private JPanel appearancePanel;
     private JCheckBox checkUpdatesCheckBox;
     private JButton clearKeyringButton;

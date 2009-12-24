@@ -70,6 +70,7 @@ public class Config extends Object implements Serializable {
     private boolean demandDeliveryReport = false;
     private boolean showAdvancedSettings = false;
     private boolean debugMode = false;
+    private boolean showAdvancedControls = false;
 
     /** Get shared instance */
     public static Config getInstance() {
@@ -223,6 +224,11 @@ public class Config extends Object implements Serializable {
     public boolean isRemoveAccents() {
         return this.removeAccents;
     }
+
+    public boolean isShowAdvancedControls() {
+        return showAdvancedControls;
+    }
+
 
     /**
      * @return never null
@@ -507,6 +513,12 @@ public class Config extends Object implements Serializable {
         boolean old = this.debugMode;
         this.debugMode = debugMode;
         changeSupport.firePropertyChange("debugMode", old, debugMode);
+    }
+
+    public void setShowAdvancedControls(boolean showAdvancedControls) {
+        boolean old = this.showAdvancedControls;
+        this.showAdvancedControls = showAdvancedControls;
+        changeSupport.firePropertyChange("showAdvancedControls", old, showAdvancedControls);
     }
     // </editor-fold>
 
