@@ -164,9 +164,11 @@ public class UpdateChecker {
      * which are new or updated compared to current ones. This can be used to reload
      * update info after partial update. Also removes operators requiring more recent
      * program version than available online (stable/unstable depending on config
-     * settings).
+     * settings) and operators hidden by the user (operator filter).
      */
     public void refreshUpdatedOperators() {
+        String[] patterns = config.getOperatorFilter().split(",");
+
         for (Iterator<OperatorUpdateInfo> it = operatorUpdates.iterator(); it.hasNext(); ) {
             OperatorUpdateInfo info = it.next();
             Operator op = Operators.getOperator(info.getName());
@@ -178,6 +180,19 @@ public class UpdateChecker {
             if (Config.compareProgramVersions(info.getMinProgramVersion(),
                     getLatestProgramVersion()) > 0) {
                 //required program version is newer than available online, remove it
+                it.remove();
+                continue;
+            }
+            //compare operator name against operator filter
+            boolean filtered = true;
+            for (String pattern : patterns) {
+                if (info.getName().contains(pattern)) {
+                    filtered = false;
+                    continue;
+                }
+            }
+            if (filtered) {
+                //there has been no match against filter, remove it
                 it.remove();
                 continue;
             }
