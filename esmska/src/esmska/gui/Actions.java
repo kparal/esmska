@@ -432,7 +432,6 @@ public class Actions {
         private LogFrame logFrame;
         public LogAction() {
             L10N.setLocalizedText(this, l10n.getString("Log_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "log-16.png")));
             putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "log-48.png")));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Show_application_log"));
         }
