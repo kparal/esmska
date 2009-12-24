@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-13 20:42+0200\n"
-"PO-Revision-Date: 2009-10-08 19:33+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2009-12-24 11:42+0200\n"
+"PO-Revision-Date: 2009-12-13 00:54+0000\n"
+"Last-Translator: nanker <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-10-09 06:48+0000\n"
+"X-Launchpad-Export-Date: 2009-12-14 04:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -32,7 +32,7 @@ msgstr ""
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr ""
+msgstr "Tack"
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
@@ -40,7 +40,7 @@ msgstr ""
 
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
-msgstr ""
+msgstr "Sänder SMS över Internet"
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2009 Kamil Páral"
@@ -82,11 +82,11 @@ msgstr "&Om"
 
 #: Add_contact
 msgid "Add contact"
-msgstr ""
+msgstr "Lägg till kontakt"
 
 #: Add_new_contact
 msgid "Add new contact (Alt+A)"
-msgstr ""
+msgstr "Lägg till en ny kontakt (Alt+A)"
 
 #: Cancel
 msgid "Cancel"
@@ -181,7 +181,7 @@ msgstr ""
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr ""
+msgstr "A&vancerade inställningar"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
@@ -783,9 +783,8 @@ msgstr "Nu&mer:"
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
 "<html>\n"
-"Telephone number of the contact including the country prefix.<br>\n"
-"Country prefix doesn't have to be filled in if the default<br>\n"
-"country prefix is set in the program preferences.\n"
+"Contact phone number<br>\n"
+"(in the international format - including the country prefix)\n"
 "</html>"
 msgstr ""
 
@@ -1909,6 +1908,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Kamil Páral https://launchpad.net/~kamil.paral\n"
 "  Umut https://launchpad.net/~umut1990\n"
 "  nairobie https://launchpad.net/~samuel-ostman"
 

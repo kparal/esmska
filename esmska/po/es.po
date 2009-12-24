@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-13 20:42+0200\n"
-"PO-Revision-Date: 2009-09-30 21:36+0000\n"
-"Last-Translator: Kamus <kamusin@gmail.com>\n"
+"POT-Creation-Date: 2009-12-24 11:42+0200\n"
+"PO-Revision-Date: 2009-12-02 15:13+0000\n"
+"Last-Translator: Alfonso E. Romero <alfonsoeromero@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-10-01 06:41+0000\n"
+"X-Launchpad-Export-Date: 2009-12-03 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -219,6 +219,12 @@ msgid ""
 "or gateway updates were released and eventually notify the user\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Después del inicio del programa se realiza una comprobación de nuevas "
+"versiones del programa<br>\n"
+"o actualizaciones de operadores y en caso positivo se le notifica al "
+"usuario\n"
+"</html>"
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
@@ -546,7 +552,7 @@ msgstr "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
-msgstr ""
+msgstr "Es necesario reiniciar el programa para aplicar los cambios"
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
@@ -756,6 +762,9 @@ msgid ""
 "replace it?</h2>This file already exists in ''{1}''.<br>By replacing it you "
 "will overwrite the whole it''s contents.</html>"
 msgstr ""
+"<html><h2>Ya existe el archivo ''{0}''.<br>¿Realmente desea remplazarlo?</"
+"h2>Este archivo ya existe en ''{1}''.<br>Al remplazarlo se sobreescribirá "
+"todo su contenido.</html>"
 
 #: Contact
 msgid "Contact"
@@ -789,6 +798,8 @@ msgid ""
 "<html>You don't have any contact created. Add a new one with buttons below.</"
 "html>"
 msgstr ""
+"<html>No ha creado ningún contacto. Añada uno nuevo con los botones de abajo."
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContact
@@ -908,9 +919,8 @@ msgstr "Nú&mero:"
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
 "<html>\n"
-"Telephone number of the contact including the country prefix.<br>\n"
-"Country prefix doesn't have to be filled in if the default<br>\n"
-"country prefix is set in the program preferences.\n"
+"Contact phone number<br>\n"
+"(in the international format - including the country prefix)\n"
 "</html>"
 msgstr ""
 
@@ -954,7 +964,7 @@ msgstr "¡El archivo \"{0}\" no puede escribirse!"
 
 #: ExportManager.choose_export_file
 msgid "Choose location and type of exported file"
-msgstr ""
+msgstr "Elija la ubicación y tipo de archivo a exportar"
 
 #: ExportManager.contact_export
 msgid "Contact export"
@@ -962,7 +972,7 @@ msgstr ""
 
 #: ExportManager.contact_list
 msgid "Contact list"
-msgstr ""
+msgstr "Lista de contactos"
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
@@ -1041,11 +1051,11 @@ msgstr ""
 
 #: HistoryFrame.jLabel3.text
 msgid "Date:"
-msgstr ""
+msgstr "Fecha:"
 
 #: HistoryFrame.jLabel4.text
 msgid "Gateway:"
-msgstr ""
+msgstr "Puerta de enlace:"
 
 #. #Write it short!
 #: HistoryFrame.jLabel5.text
@@ -1071,7 +1081,7 @@ msgstr ""
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
-msgstr ""
+msgstr "&Buscar:"
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
@@ -1107,7 +1117,7 @@ msgstr ""
 
 #: ImportFrame.backButton.text
 msgid "&Back"
-msgstr ""
+msgstr "&Atrás"
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
@@ -1139,7 +1149,7 @@ msgstr ""
 
 #: ImportFrame.fileLabel.text
 msgid "Choose input file:"
-msgstr ""
+msgstr "Elegir archivo de entrada:"
 
 #: ImportFrame.fileTextField.toolTipText
 msgid "The path to contacts file"
@@ -1148,12 +1158,12 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
-msgstr ""
+msgstr "¡No se pudo leer el archivo {0}!"
 
 #: ImportFrame.forwardButton.text
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
-msgstr ""
+msgstr "Si&guiente"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.foundContacts
@@ -2042,8 +2052,10 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Alfonso E. Romero https://launchpad.net/~alfonsoeromero\n"
 "  DiegoJ https://launchpad.net/~diegojromerolopez\n"
 "  Federico Vera https://launchpad.net/~fedevera\n"
+"  Javier Acuña Ditzel https://launchpad.net/~santoposmoderno\n"
 "  Kamus https://launchpad.net/~kamus\n"
 "  Miguel Zilli https://launchpad.net/~miguelzilli"
 

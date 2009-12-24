@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-13 20:42+0200\n"
-"PO-Revision-Date: 2009-09-30 21:36+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2009-12-24 11:42+0200\n"
+"PO-Revision-Date: 2009-12-03 01:14+0000\n"
+"Last-Translator: Fabian Affolter <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-10-01 06:41+0000\n"
+"X-Launchpad-Export-Date: 2009-12-05 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -395,7 +395,7 @@ msgstr ""
 
 #: ConfigFrame.multiplatform_look
 msgid "Multiplatform"
-msgstr ""
+msgstr "Multi-Plattform"
 
 #: ConfigFrame.notificationAreaCheckBox.text
 msgid "Show icon in the &notification area"
@@ -434,11 +434,11 @@ msgstr "&Gateways"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
-msgstr ""
+msgstr "Das Passwort gehört zum Benutzernamen"
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
-msgstr ""
+msgstr "P&rivatsphäre"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
@@ -797,9 +797,8 @@ msgstr ""
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
 "<html>\n"
-"Telephone number of the contact including the country prefix.<br>\n"
-"Country prefix doesn't have to be filled in if the default<br>\n"
-"country prefix is set in the program preferences.\n"
+"Contact phone number<br>\n"
+"(in the international format - including the country prefix)\n"
 "</html>"
 msgstr ""
 
@@ -1923,6 +1922,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Fabian Affolter https://launchpad.net/~fab-fedoraproject\n"
 "  Lukas Bögelein https://launchpad.net/~lukas-boegelein\n"
 "  Samuel Creshal https://launchpad.net/~samuel-creshal\n"
 "  jiri4711 https://launchpad.net/~jwprojekt"
@@ -2048,7 +2048,7 @@ msgstr ""
 
 #: UpdateDialog.checkButton.text
 msgid "Check for &updates"
-msgstr ""
+msgstr "Auf Aktualisierungen prüfen"
 
 #: UpdateDialog.topLabel.text
 msgid ""
