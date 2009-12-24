@@ -234,6 +234,7 @@ public class OperatorComboBox extends JComboBox {
         for (Operator op : operators) {
             model.addElement(op);
         }
+        filterOperators();
         setSelectedOperator(opName);
     }
 }
