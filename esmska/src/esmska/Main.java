@@ -70,7 +70,10 @@ public class Main {
         if (! clp.parseArgs(args)) {
             System.exit(1);
         }
+
+        //log some basic stuff for debugging
         logger.fine("Esmska " + Config.getLatestVersion() + " starting...");
+        logger.finer("System info: " + RuntimeUtils.getSystemInfo());
 
         //portable mode
         configPath = clp.getConfigPath();

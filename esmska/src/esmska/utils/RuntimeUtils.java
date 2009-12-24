@@ -4,7 +4,6 @@
  */
 package esmska.utils;
 
-import esmska.gui.MainFrame;
 import esmska.gui.ThemeManager;
 import esmska.integration.IntegrationAdapter;
 import java.awt.Dialog.ModalityType;
@@ -114,6 +113,36 @@ public class RuntimeUtils {
      */
     public static boolean isSupportedJava() {
         return isSunJava() || isOpenJDK() || isAppleJava();
+    }
+
+    /** Get basic information about current system. Useful for debugging
+     * print-outs.
+     */
+    public static String getSystemInfo() {
+        String[] props = new String[]{
+            "os.name", "os.version", "os.arch", "user.name", "user.home",
+            "user.dir", "java.version", "java.vendor", "java.vm.name",
+            "java.vm.version"
+        };
+
+        StringBuilder builder = new StringBuilder();
+        for (String prop : props) {
+            builder.append(prop);
+            builder.append("=");
+            builder.append(System.getProperty(prop));
+            builder.append("; ");
+        }
+        
+        if (isGnomeDesktop()) {
+            builder.append("desktop=GNOME");
+        } else if (isKDEDesktop()) {
+            builder.append("desktop=KDE (version " + getKDEDesktopVersion() + ")");
+        } else {
+            // delete the trailing semicolon
+            builder.delete(builder.length()-2, builder.length());
+        }
+
+        return builder.toString();
     }
 
     @SuppressWarnings("unchecked")
