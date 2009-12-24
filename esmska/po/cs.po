@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 11:43+0200\n"
-"PO-Revision-Date: 2009-12-24 11:43+0100\n"
+"POT-Creation-Date: 2009-12-24 20:57+0200\n"
+"PO-Revision-Date: 2009-12-24 20:57+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -196,6 +196,22 @@ msgstr "Po&kročilá nastavení"
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
 msgstr "Zobrazit položky s pokročilejším nastavením"
+
+#: ConfigFrame.advancedControlsCheckBox.text
+msgid "Show a&dvanced controls"
+msgstr "Zobrazit pokročilé ovlá&dací prvky"
+
+#: ConfigFrame.advancedControlsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show or hide some additional buttons and other <br>\n"
+"advanced controls in the main program window\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Zobrazit či schovat některá další tlačítka a jiné<br>\n"
+"pokročilé ovládací prvky v hlavním okně programu\n"
+"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"

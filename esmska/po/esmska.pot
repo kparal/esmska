@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 11:46+0200\n"
+"POT-Creation-Date: 2009-12-24 20:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,6 +181,18 @@ msgstr ""
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
+msgstr ""
+
+#: ConfigFrame.advancedControlsCheckBox.text
+msgid "Show a&dvanced controls"
+msgstr ""
+
+#: ConfigFrame.advancedControlsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show or hide some additional buttons and other <br>\n"
+"advanced controls in the main program window\n"
+"</html>"
 msgstr ""
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle

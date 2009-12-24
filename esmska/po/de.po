@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 11:42+0200\n"
+"POT-Creation-Date: 2009-12-24 20:56+0200\n"
 "PO-Revision-Date: 2009-12-03 01:14+0000\n"
 "Last-Translator: Fabian Affolter <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -200,6 +200,18 @@ msgstr "Erweiterte Optionen"
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
 msgstr "Erweiterte Einstellungen anzeigen"
+
+#: ConfigFrame.advancedControlsCheckBox.text
+msgid "Show a&dvanced controls"
+msgstr ""
+
+#: ConfigFrame.advancedControlsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show or hide some additional buttons and other <br>\n"
+"advanced controls in the main program window\n"
+"</html>"
+msgstr ""
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 11:42+0200\n"
+"POT-Creation-Date: 2009-12-24 20:56+0200\n"
 "PO-Revision-Date: 2009-12-02 10:42+0000\n"
 "Last-Translator: evfool <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -194,6 +194,18 @@ msgstr "&Haladó beállítások"
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
 msgstr "Megmutatja a dolgokat több beállítási lehetőséggel."
+
+#: ConfigFrame.advancedControlsCheckBox.text
+msgid "Show a&dvanced controls"
+msgstr ""
+
+#: ConfigFrame.advancedControlsCheckBox.toolTipText
+msgid ""
+"<html>\n"
+"Show or hide some additional buttons and other <br>\n"
+"advanced controls in the main program window\n"
+"</html>"
+msgstr ""
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
