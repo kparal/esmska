@@ -165,6 +165,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         topLabel = new JLabel();
         gwScrollPane = new JScrollPane();
         gwPanel = new JPanel();
+        jPanel1 = new JPanel();
         infoLabel = new InfoLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -192,21 +193,32 @@ public class UpdateDialog extends javax.swing.JDialog {
 
         infoLabel.setVisible(false);
 
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(infoLabel, GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(infoLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(gwScrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                    .addComponent(topLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gwScrollPane, GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                    .addComponent(topLabel, GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                    .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(closeButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(checkButton))
-                    .addComponent(progressBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                    .addComponent(infoLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
+                    .addComponent(progressBar, GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -215,9 +227,9 @@ public class UpdateDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(topLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(gwScrollPane, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addComponent(gwScrollPane, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
@@ -612,6 +624,7 @@ public class UpdateDialog extends javax.swing.JDialog {
     private JPanel gwPanel;
     private JScrollPane gwScrollPane;
     private InfoLabel infoLabel;
+    private JPanel jPanel1;
     private JProgressBar progressBar;
     private JLabel topLabel;
     // End of variables declaration//GEN-END:variables

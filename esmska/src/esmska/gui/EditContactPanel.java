@@ -32,6 +32,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
@@ -110,8 +111,9 @@ public class EditContactPanel extends javax.swing.JPanel {
         numberLabel = new JLabel();
         gatewayLabel = new JLabel();
         suggestOperatorButton = new JButton();
-        credentialsInfoLabel = new InfoLabel();
+        jPanel1 = new JPanel();
         countryInfoLabel = new InfoLabel();
+        credentialsInfoLabel = new InfoLabel();
 
         nameTextField.setToolTipText(l10n.getString("EditContactPanel.nameTextField.toolTipText")); // NOI18N
         nameTextField.addFocusListener(new FocusAdapter() {
@@ -152,14 +154,29 @@ public class EditContactPanel extends javax.swing.JPanel {
                 suggestOperatorButtonActionPerformed(evt);
             }
         });
+
+        Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("InfoLabel.gwWrongCountry")); // NOI18N
+        countryInfoLabel.setVisible(false);
         Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
             "InfoLabel.gwCredentialsNeeded"));
         credentialsInfoLabel.setText(MessageFormat.format(
             l10n.getString("InfoLabel.gwCredentialsNeeded"), Links.CONFIG_CREDENTIALS));
     credentialsInfoLabel.setVisible(false);
 
-        Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("InfoLabel.gwWrongCountry")); // NOI18N
-    countryInfoLabel.setVisible(false);
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+    jPanel1.setLayout(jPanel1Layout);
+    jPanel1Layout.setHorizontalGroup(
+        jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        .addComponent(credentialsInfoLabel, Alignment.TRAILING)
+        .addComponent(countryInfoLabel)
+    );
+    jPanel1Layout.setVerticalGroup(
+        jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        .addGroup(jPanel1Layout.createSequentialGroup()
+            .addComponent(credentialsInfoLabel)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(countryInfoLabel))
+    );
 
         GroupLayout layout = new GroupLayout(this);
     this.setLayout(layout);
@@ -168,6 +185,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addComponent(numberLabel)
@@ -176,13 +194,11 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(suggestOperatorButton))
-                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
-                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)))
-                .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
-                .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
+                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))))
             .addContainerGap())
     );
 
@@ -205,11 +221,9 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(gatewayLabel)
                     .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addComponent(suggestOperatorButton))
-            .addPreferredGap(ComponentPlacement.UNRELATED)
-            .addComponent(credentialsInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(countryInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(72, Short.MAX_VALUE))
+            .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(74, Short.MAX_VALUE))
     );
 
     layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, numberTextField});
@@ -369,6 +383,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     private InfoLabel countryInfoLabel;
     private InfoLabel credentialsInfoLabel;
     private JLabel gatewayLabel;
+    private JPanel jPanel1;
     private JLabel nameLabel;
     private JTextField nameTextField;
     private JLabel numberLabel;
