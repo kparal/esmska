@@ -308,6 +308,7 @@ public class CountryPrefix {
      * 
      * @param countryPrefix telephone country prefix as defined in
      *  <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes">List of country calling codes</a>.
+     * May be null or invalid.
      * @return corresponding two letter country code or null if country prefix wasn't found
      */
     public static String getCountryCode(String countryPrefix) {
@@ -347,13 +348,15 @@ public class CountryPrefix {
     }
 
     /** Extract country prefix from phone number.
-     * @param number Phone number in fully international format. Not null.
-     * @return Country prefix if such valid is found in the number.
+     * @param number Phone number in fully international format. May be null or
+     * incomplete.
+     * @return Country prefix if valid one is found in the number.
      * Null otherwise.
      */
     public static String extractCountryPrefix(String number) {
-        Validate.notNull(number);
-
+        if (number == null) {
+            return null;
+        }
         for (String prefix : map.values()) {
             if (number.startsWith(prefix)) {
                 return prefix;

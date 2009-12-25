@@ -82,6 +82,7 @@ public class EditContactPanel extends javax.swing.JPanel {
                     operatorComboBox.selectSuggestedOperator(numberTextField.getText());
                     userSet = false;
                 }
+                updateCountryInfoLabel();
             }
         });
 
@@ -178,7 +179,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(credentialsInfoLabel)
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(countryInfoLabel))
+            .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
     );
 
         GroupLayout layout = new GroupLayout(this);
@@ -283,6 +284,38 @@ public class EditContactPanel extends javax.swing.JPanel {
         numberTextField.setEnabled(!multiMode);
         suggestOperatorAction.setEnabled(!multiMode);
     }
+
+    /** Show warning if user selected gateway which does not send
+     * messages to country from which is the number
+     */
+    private void updateCountryInfoLabel() {
+        countryInfoLabel.setVisible(false);
+
+        //ensure that fields are sufficiently filled in
+        Operator operator = operatorComboBox.getSelectedOperator();
+        String number = numberTextField.getText();
+        if (operator == null || StringUtils.isEmpty(number)) {
+            return;
+        }
+        String prefix = CountryPrefix.extractCountryPrefix(number);
+        String numberCountryCode = CountryPrefix.getCountryCode(prefix);
+        if (StringUtils.isEmpty(numberCountryCode)) {
+            return;
+        }
+        
+        //skip on INT gateways
+        String gwCountryCode = CountryPrefix.extractCountryCode(operator.getName());
+        if (gwCountryCode == null || CountryPrefix.INTERNATIONAL_CODE.equals(gwCountryCode)) {
+            return;
+        }
+
+        if (!numberCountryCode.equals(gwCountryCode)) {
+            String text = MessageFormat.format(l10n.getString("EditContactPanel.countryInfoLabel.text"),
+                    gwCountryCode, numberCountryCode);
+            countryInfoLabel.setText(text);
+            countryInfoLabel.setVisible(true);
+        }
+    }
     
     private void nameTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
         checkValid(nameTextField);
@@ -309,22 +342,8 @@ public class EditContactPanel extends javax.swing.JPanel {
             credentialsInfoLabel.setVisible(false);
         }
 
-        //show warning if user selected gateway which does not send
-        //messages to his own country
-        countryInfoLabel.setVisible(false);
-        if (operator != null) {
-            String countryCode = CountryPrefix.extractCountryCode(operator.getName());
-            String userCountry = StringUtils.defaultIfEmpty(
-                    CountryPrefix.getCountryCode(config.getCountryPrefix()),
-                    "unknown");
-            if (countryCode != null && !CountryPrefix.INTERNATIONAL_CODE.equals(countryCode) &&
-                !countryCode.equals(userCountry)) {
-                String text = MessageFormat.format(l10n.getString("EditContactPanel.countryInfoLabel.text"),
-                        countryCode, userCountry, Links.CONFIG_GATEWAYS);
-                countryInfoLabel.setText(text);
-                countryInfoLabel.setVisible(true);
-            }
-        }
+        //also update countryInfoLabel
+        updateCountryInfoLabel();
     }//GEN-LAST:event_operatorComboBoxItemStateChanged
     
     /** Set contact to be edited or use null for new one */
