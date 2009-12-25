@@ -332,6 +332,43 @@ public class SMSPanel extends javax.swing.JPanel {
                 l10n.getString("SMSPanel.fullProgressBar"),
                 current, max, (max - current)));
     }
+
+    /** Show warning if user selected gateway which does not send
+     * messages to country from which is the number
+     */
+    private void updateCountryInfoLabel() {
+        countryInfoLabel.setVisible(false);
+
+        if (recipientField.getContact() != null) {
+            //only handle custom numbers, not contacts
+            return;
+        }
+
+        //ensure that fields are sufficiently filled in
+        Operator operator = operatorComboBox.getSelectedOperator();
+        String number = recipientField.getNumber();
+        if (operator == null || !Contact.isValidNumber(number)) {
+            return;
+        }
+        String prefix = CountryPrefix.extractCountryPrefix(number);
+        String numberCountryCode = CountryPrefix.getCountryCode(prefix);
+        if (StringUtils.isEmpty(numberCountryCode)) {
+            return;
+        }
+
+        //skip on INT gateways
+        String gwCountryCode = CountryPrefix.extractCountryCode(operator.getName());
+        if (gwCountryCode == null || CountryPrefix.INTERNATIONAL_CODE.equals(gwCountryCode)) {
+            return;
+        }
+
+        if (!numberCountryCode.equals(gwCountryCode)) {
+            String text = MessageFormat.format(l10n.getString("SMSPanel.countryInfoLabel.text"),
+                    numberCountryCode, gwCountryCode);
+            countryInfoLabel.setText(text);
+            countryInfoLabel.setVisible(true);
+        }
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -355,6 +392,7 @@ public class SMSPanel extends javax.swing.JPanel {
         jPanel1 = new JPanel();
         credentialsInfoLabel = new InfoLabel();
         numberInfoLabel = new InfoLabel();
+        countryInfoLabel = new InfoLabel();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
         addFocusListener(new FocusAdapter() {
@@ -428,17 +466,23 @@ credentialsInfoLabel.setVisible(false);
         Mnemonics.setLocalizedText(numberInfoLabel, l10n.getString("SMSPanel.numberInfoLabel.text")); // NOI18N
 numberInfoLabel.setVisible(false);
 
+        Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("SMSPanel.countryInfoLabel.text")); // NOI18N
+countryInfoLabel.setVisible(false);
+
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
 jPanel1.setLayout(jPanel1Layout);
 jPanel1Layout.setHorizontalGroup(
     jPanel1Layout.createParallelGroup(Alignment.LEADING)
     .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
     .addComponent(numberInfoLabel, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+    .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
         .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
             .addComponent(numberInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(countryInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(credentialsInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
     );
@@ -495,7 +539,7 @@ jPanel1Layout.setHorizontalGroup(
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
@@ -529,6 +573,9 @@ jPanel1Layout.setHorizontalGroup(
         } else {
             credentialsInfoLabel.setVisible(false);
         }
+
+        //also update other info labels
+        updateCountryInfoLabel();
     }//GEN-LAST:event_operatorComboBoxItemStateChanged
     
     /** Send sms to queue */
@@ -1019,13 +1066,15 @@ jPanel1Layout.setHorizontalGroup(
                         getNumber(), operatorComboBox.getSelectedOperatorName()));
                 envelope.setContacts(set);
 
-                //update send action
+                //update components
                 sendAction.updateStatus();
+                updateCountryInfoLabel();
             }
         }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private InfoLabel countryInfoLabel;
     private InfoLabel credentialsInfoLabel;
     private JProgressBar fullProgressBar;
     private JLabel gatewayLabel;

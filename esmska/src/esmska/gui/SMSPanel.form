@@ -86,7 +86,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane1" pref="114" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="98" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -209,12 +209,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="credentialsInfoLabel" alignment="0" pref="311" max="32767" attributes="0"/>
               <Component id="numberInfoLabel" alignment="0" pref="311" max="32767" attributes="0"/>
+              <Component id="countryInfoLabel" alignment="0" pref="311" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Component id="numberInfoLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="countryInfoLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="credentialsInfoLabel" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -240,6 +243,16 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="numberInfoLabel.setVisible(false);"/>
+          </AuxValues>
+        </Component>
+        <Component class="esmska.gui.InfoLabel" name="countryInfoLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="SMSPanel.countryInfoLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryInfoLabel.setVisible(false);"/>
           </AuxValues>
         </Component>
       </SubComponents>
