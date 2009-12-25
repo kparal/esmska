@@ -331,29 +331,31 @@ public class CountryPrefix {
     /** Strip current country prefix from number if possible
      *
      * @param number number, can be null
-     * @return number with stripped country prefix from start if possible;
-     * otherwise non-modified number
+     * @return number with stripped country prefix from start if possible 
+     * (valid prefix); otherwise non-modified number
      */
     public static String stripCountryPrefix(String number) {
-        if (number != null && number.startsWith(config.getCountryPrefix())) {
-            number = number.substring(config.getCountryPrefix().length());
+        if (number == null) {
+            return number;
+        }
+        for (String prefix : map.values()) {
+            if (number.startsWith(prefix)) {
+                return number.substring(prefix.length());
+            }
         }
         return number;
     }
 
     /** Extract country prefix from phone number.
-     * This method searches through available operators and checks if supplied
-     * number starts with any of supported prefixes.
      * @param number Phone number in fully international format. Not null.
-     * @return Country prefix if such is found amongst list of supported operator
-     *         prefixes. Null otherwise.
+     * @return Country prefix if such valid is found in the number.
+     * Null otherwise.
      */
     public static String extractCountryPrefix(String number) {
         Validate.notNull(number);
 
-        for (Operator operator : Operators.getInstance().getAll()) {
-            String prefix = operator.getCountryPrefix();
-            if (prefix.length() > 0 && number.startsWith(prefix)) {
+        for (String prefix : map.values()) {
+            if (number.startsWith(prefix)) {
                 return prefix;
             }
         }
@@ -361,25 +363,11 @@ public class CountryPrefix {
     }
 
     /** Check validity of country prefix
-     * @return true if prefix is in form +[0-9]{1,4}, false otherwise
+     * @return true if prefix is in form +[0-9]{1,4} and is valid for some
+     * existing country, false otherwise
      */
     public static boolean isValidCountryPrefix(String prefix) {
-        if (prefix == null) {
-            return false;
-        }
-        if (!prefix.startsWith("+")) {
-            return false;
-        }
-        prefix = prefix.substring(1); //strip the "+"
-        if (prefix.length() < 1 || prefix.length() > 4) {
-            return false;
-        }
-        for (Character c : prefix.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
+        return map.values().contains(prefix);
     }
 
     /** Extract country code from operator name
