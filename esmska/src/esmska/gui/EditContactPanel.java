@@ -84,6 +84,9 @@ public class EditContactPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        //update components
+        operatorComboBoxItemStateChanged(null);
     }
     
     /** This method is called from within the constructor to
@@ -155,20 +158,20 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
-        Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("InfoLabel.gwWrongCountry")); // NOI18N
+        Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("EditContactPanel.countryInfoLabel.text")); // NOI18N
         countryInfoLabel.setVisible(false);
         Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
-            "InfoLabel.gwCredentialsNeeded"));
+            "EditContactPanel.credentialsInfoLabel.text"));
         credentialsInfoLabel.setText(MessageFormat.format(
-            l10n.getString("InfoLabel.gwCredentialsNeeded"), Links.CONFIG_CREDENTIALS));
+            l10n.getString("EditContactPanel.credentialsInfoLabel.text"), Links.CONFIG_CREDENTIALS));
     credentialsInfoLabel.setVisible(false);
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        .addComponent(credentialsInfoLabel, Alignment.TRAILING)
-        .addComponent(countryInfoLabel)
+        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+        .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
@@ -316,7 +319,7 @@ public class EditContactPanel extends javax.swing.JPanel {
                     "unknown");
             if (countryCode != null && !CountryPrefix.INTERNATIONAL_CODE.equals(countryCode) &&
                 !countryCode.equals(userCountry)) {
-                String text = MessageFormat.format(l10n.getString("InfoLabel.gwWrongCountry"),
+                String text = MessageFormat.format(l10n.getString("EditContactPanel.countryInfoLabel.text"),
                         countryCode, userCountry, Links.CONFIG_GATEWAYS);
                 countryInfoLabel.setText(text);
                 countryInfoLabel.setVisible(true);

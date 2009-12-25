@@ -156,8 +156,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="credentialsInfoLabel" alignment="1" max="32767" attributes="0"/>
-              <Component id="countryInfoLabel" alignment="0" max="32767" attributes="0"/>
+              <Component id="credentialsInfoLabel" alignment="1" pref="405" max="32767" attributes="0"/>
+              <Component id="countryInfoLabel" alignment="0" pref="405" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -174,7 +174,7 @@
         <Component class="esmska.gui.InfoLabel" name="countryInfoLabel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="esmska/resources/l10n.properties" key="InfoLabel.gwWrongCountry" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.countryInfoLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -184,11 +184,11 @@
         <Component class="esmska.gui.InfoLabel" name="credentialsInfoLabel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="esmska/resources/l10n.properties" key="InfoLabel.gwCredentialsNeeded" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.credentialsInfoLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="credentialsInfoLabel.setText(MessageFormat.format(&#xa;    l10n.getString(&quot;InfoLabel.gwCredentialsNeeded&quot;), Links.CONFIG_CREDENTIALS));&#xa;credentialsInfoLabel.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="credentialsInfoLabel.setText(MessageFormat.format(&#xa;    l10n.getString(&quot;EditContactPanel.credentialsInfoLabel.text&quot;), Links.CONFIG_CREDENTIALS));&#xa;credentialsInfoLabel.setVisible(false);"/>
           </AuxValues>
         </Component>
       </SubComponents>

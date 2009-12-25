@@ -12,6 +12,9 @@ import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.CountryPrefix;
 import esmska.data.Envelope;
+import esmska.data.Keyring;
+import esmska.data.Links;
+import esmska.data.Operator;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.event.AbstractDocumentListener;
@@ -24,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
@@ -46,6 +51,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -92,6 +98,7 @@ public class SMSPanel extends javax.swing.JPanel {
     private UndoManager smsTextUndoManager = new UndoManager();
     private SortedSet<Contact> contacts = Contacts.getInstance().getAll();
     private Config config = Config.getInstance();
+    private Keyring keyring = Keyring.getInstance();
     
     private UndoAction undoAction = new UndoAction();
     private RedoAction redoAction = new RedoAction();
@@ -345,6 +352,8 @@ public class SMSPanel extends javax.swing.JPanel {
         gatewayLabel = new JLabel();
         recipientTextField = new SMSPanel.RecipientTextField();
         recipientLabel = new JLabel();
+        jPanel1 = new JPanel();
+        infoLabel = new InfoLabel();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
         addFocusListener(new FocusAdapter() {
@@ -354,6 +363,11 @@ public class SMSPanel extends javax.swing.JPanel {
         });
 
         operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
+        operatorComboBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent evt) {
+                operatorComboBoxItemStateChanged(evt);
+            }
+        });
 
         fullProgressBar.setMaximum(1000);
 
@@ -370,7 +384,6 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextUndoManager.addEdit(e.getEdit());
             }
         });
-        //this mapping is here bcz of some weird performance improvements when holding undo key stroke
         int menuMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
         String command = "undo";
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, menuMask), command);
@@ -388,14 +401,14 @@ public class SMSPanel extends javax.swing.JPanel {
     jScrollPane1.setViewportView(smsTextPane);
 
     textLabel.setLabelFor(smsTextPane);
-        Mnemonics.setLocalizedText(textLabel, l10n.getString("SMSPanel.textLabel.text")); // NOI18N
+    Mnemonics.setLocalizedText(textLabel,l10n.getString("SMSPanel.textLabel.text")); // NOI18N
     textLabel.setToolTipText(l10n.getString("SMSPanel.textLabel.toolTipText")); // NOI18N
 
     sendButton.setAction(sendAction);
+
     sendButton.setToolTipText(l10n.getString("SMSPanel.sendButton.toolTipText")); // NOI18N
-
-
         Mnemonics.setLocalizedText(smsCounterLabel, l10n.getString("SMSPanel.smsCounterLabel.text")); // NOI18N
+
     singleProgressBar.setMaximum(1000);
 
     gatewayLabel.setLabelFor(operatorComboBox);
@@ -405,34 +418,55 @@ public class SMSPanel extends javax.swing.JPanel {
     recipientLabel.setLabelFor(recipientTextField);
         Mnemonics.setLocalizedText(recipientLabel, l10n.getString("SMSPanel.recipientLabel.text")); // NOI18N
     recipientLabel.setToolTipText(recipientTextField.getToolTipText());
+    Mnemonics.setLocalizedText(infoLabel,l10n.getString(
+        "SMSPanel.infoLabel.text"));
+    infoLabel.setText(MessageFormat.format(
+        l10n.getString("SMSPanel.infoLabel.text"), Links.CONFIG_CREDENTIALS));
+infoLabel.setVisible(false);
+
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+jPanel1.setLayout(jPanel1Layout);
+jPanel1Layout.setHorizontalGroup(
+    jPanel1Layout.createParallelGroup(Alignment.LEADING)
+    .addComponent(infoLabel, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+    );
+    jPanel1Layout.setVerticalGroup(
+        jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        .addComponent(infoLabel)
+    );
 
         GroupLayout layout = new GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addContainerGap()
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                        .addComponent(textLabel)
-                        .addComponent(singleProgressBar, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fullProgressBar, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                        .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(recipientLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(sendButton))
-                        .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                            .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                        .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(gatewayLabel)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                                .addComponent(textLabel)
+                                .addComponent(singleProgressBar, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fullProgressBar, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                    .addPreferredGap(ComponentPlacement.RELATED)
+                                    .addComponent(sendButton))
+                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))))
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(recipientLabel)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
-                .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(gatewayLabel)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                    .addGap(74, 74, 74)
+                    .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addContainerGap())
     );
 
@@ -452,8 +486,10 @@ public class SMSPanel extends javax.swing.JPanel {
                 .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING, false)
                         .addComponent(sendButton)
@@ -474,6 +510,18 @@ public class SMSPanel extends javax.swing.JPanel {
     private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         smsTextPane.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
+
+    private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
+        //show warning if user selected gateway requiring registration
+        //and no credentials are filled in
+        Operator operator = operatorComboBox.getSelectedOperator();
+        if (operator != null && operator.isLoginRequired() &&
+                keyring.getKey(operator.getName()) == null) {
+            infoLabel.setVisible(true);
+        } else {
+            infoLabel.setVisible(false);
+        }
+    }//GEN-LAST:event_operatorComboBoxItemStateChanged
     
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
@@ -964,6 +1012,8 @@ public class SMSPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JProgressBar fullProgressBar;
     private JLabel gatewayLabel;
+    private InfoLabel infoLabel;
+    private JPanel jPanel1;
     private JScrollPane jScrollPane1;
     private OperatorComboBox operatorComboBox;
     private JLabel recipientLabel;

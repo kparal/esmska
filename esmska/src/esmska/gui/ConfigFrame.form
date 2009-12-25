@@ -1278,7 +1278,7 @@
     <Component class="esmska.gui.InfoLabel" name="restartLabel">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="esmska/resources/l10n.properties" key="InfoLabel.restartNeeded" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.restartLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <AuxValues>

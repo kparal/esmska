@@ -1128,7 +1128,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
     });
 
-        Mnemonics.setLocalizedText(restartLabel, l10n.getString("InfoLabel.restartNeeded")); // NOI18N
+        Mnemonics.setLocalizedText(restartLabel, l10n.getString("ConfigFrame.restartLabel.text")); // NOI18N
     restartLabel.setVisible(false);
 
         GroupLayout layout = new GroupLayout(getContentPane());
