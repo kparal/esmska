@@ -294,7 +294,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         //ensure that fields are sufficiently filled in
         Operator operator = operatorComboBox.getSelectedOperator();
         String number = numberTextField.getText();
-        if (operator == null || StringUtils.isEmpty(number)) {
+        if (operator == null || !Contact.isValidNumber(number)) {
             return;
         }
         String prefix = CountryPrefix.extractCountryPrefix(number);

@@ -118,17 +118,19 @@ public class Contact extends Object implements Comparable<Contact> {
     // </editor-fold>
 
     /** Check validity of phone number
-     * @return true if number is in form +[0-9]{2,15}, false otherwise
+     * @return true if number is in form +[0-9]{2,15} with valid country prefix,
+     * false otherwise
      */
     public static boolean isValidNumber(String number) {
         if (number == null) {
             return false;
         }
-        if (!number.startsWith("+")) {
+        String prefix = CountryPrefix.extractCountryPrefix(number);
+        if (prefix == null) {
             return false;
         }
-        number = number.substring(1); //strip the "+"
-        if (number.length() < 2 || number.length() > 15) {
+        number = number.substring(prefix.length());
+        if (number.length() < 1 || number.length() + prefix.length() > 16) {
             return false;
         }
         for (Character c : number.toCharArray()) {
