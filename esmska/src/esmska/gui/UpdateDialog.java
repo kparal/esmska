@@ -165,7 +165,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         topLabel = new JLabel();
         gwScrollPane = new JScrollPane();
         gwPanel = new JPanel();
-        infoLabel = new JHtmlLabel();
+        infoLabel = new InfoLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -190,16 +190,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         gwPanel.setLayout(new BoxLayout(gwPanel, BoxLayout.PAGE_AXIS));
         gwScrollPane.setViewportView(gwPanel);
 
-        infoLabel.setFont(infoLabel.getFont().deriveFont((infoLabel.getFont().getStyle() | Font.ITALIC)));
-        infoLabel.addValuedListener(new ValuedListener<JHtmlLabel.Events, String>() {
-            @Override
-            public void eventOccured(ValuedEvent<Events, String> e) {
-                if (e.getEvent() == Events.LINK_CLICKED) {
-                    Action browseAction = Actions.getBrowseAction(e.getValue());
-                    browseAction.actionPerformed(null);
-                }
-            }
-        });
+        infoLabel.setVisible(false);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,9 +213,9 @@ public class UpdateDialog extends javax.swing.JDialog {
             layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(topLabel)
+                .addComponent(topLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(gwScrollPane, GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(gwScrollPane, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
@@ -463,15 +454,17 @@ public class UpdateDialog extends javax.swing.JDialog {
             setFormState(FormState.READY_TO_UPDATE);
         } else {
             setFormState(FormState.NO_UPDATE);
-            infoLabel.setIcon(Icons.STATUS_INFO);
+            infoLabel.setIcon(Icons.INFO_SMALL);
             infoLabel.setText(l10n.getString("Update.allUpdated"));
+            infoLabel.setVisible(true);
         }
 
         //inform if something went wrong
         if (!dlOk || !installOk) {
-            infoLabel.setIcon(Icons.STATUS_ERROR);
+            infoLabel.setIcon(Icons.ERROR_SMALL);
             infoLabel.setText(!installOk ? l10n.getString("Update.installFailed") :
                 l10n.getString("Update.downloadFailed"));
+            infoLabel.setVisible(true);
         }
 
         //don't leave old entries in update checker
@@ -482,8 +475,7 @@ public class UpdateDialog extends javax.swing.JDialog {
     private void updateInfoLabel() {
         if (formState == FormState.CHECKING || formState == FormState.DOWNLOADING) {
             //display nothing if just doing something
-            infoLabel.setText(null);
-            infoLabel.setIcon(null);
+            infoLabel.setVisible(false);
             return;
         }
 
@@ -496,12 +488,14 @@ public class UpdateDialog extends javax.swing.JDialog {
         if (insufficientVersion) {
             //there is a gateway which can't be installed
             infoLabel.setText(MessageFormat.format(l10n.getString("Update.notLatest"), Links.DOWNLOAD));
-            infoLabel.setIcon(Icons.STATUS_UPDATE_IMPORTANT);
+            infoLabel.setIcon(Icons.UPDATE_IMPORTANT_SMALL);
+            infoLabel.setVisible(true);
         } else if (programUpdate) {
             //there is a program update available
             infoLabel.setText(MessageFormat.format(l10n.getString("Update.programUpdateAvailable"),
                     updateChecker.getLatestProgramVersion(), Links.DOWNLOAD));
-            infoLabel.setIcon(Icons.STATUS_UPDATE_IMPORTANT);
+            infoLabel.setIcon(Icons.UPDATE_IMPORTANT_SMALL);
+            infoLabel.setVisible(true);
         }
     }
 
@@ -525,8 +519,9 @@ public class UpdateDialog extends javax.swing.JDialog {
                 case UpdateChecker.ACTION_CHECK_FAILED:
                     updates.clear();
                     setFormState(FormState.NO_UPDATE);
-                    infoLabel.setIcon(Icons.STATUS_ERROR);
+                    infoLabel.setIcon(Icons.ERROR_SMALL);
                     infoLabel.setText(l10n.getString("Update.checkFailed"));
+                    infoLabel.setVisible(true);
                     break;
             }
         }
@@ -616,7 +611,7 @@ public class UpdateDialog extends javax.swing.JDialog {
     private JButton closeButton;
     private JPanel gwPanel;
     private JScrollPane gwScrollPane;
-    private JHtmlLabel infoLabel;
+    private InfoLabel infoLabel;
     private JProgressBar progressBar;
     private JLabel topLabel;
     // End of variables declaration//GEN-END:variables

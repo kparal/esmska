@@ -46,7 +46,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="topLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="gwScrollPane" pref="109" max="32767" attributes="0"/>
+              <Component id="gwScrollPane" pref="149" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="infoLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -112,16 +112,9 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="esmska.gui.JHtmlLabel" name="infoLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
-          <FontInfo relative="true">
-            <Font component="infoLabel" italic="true" property="font" relativeSize="true" size="0"/>
-          </FontInfo>
-        </Property>
-      </Properties>
+    <Component class="esmska.gui.InfoLabel" name="infoLabel">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="infoLabel.addValuedListener(new ValuedListener&lt;JHtmlLabel.Events, String&gt;() {&#xa;    @Override&#xa;    public void eventOccured(ValuedEvent&lt;Events, String&gt; e) {&#xa;        if (e.getEvent() == Events.LINK_CLICKED) {&#xa;            Action browseAction = Actions.getBrowseAction(e.getValue());&#xa;            browseAction.actionPerformed(null);&#xa;        }&#xa;    }&#xa;});"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="infoLabel.setVisible(false);"/>
       </AuxValues>
     </Component>
   </SubComponents>
