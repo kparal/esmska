@@ -96,12 +96,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="tabbedPane" alignment="1" pref="728" max="32767" attributes="0"/>
-                  <Component id="restartLabel" alignment="0" pref="728" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="advancedCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="502" max="32767" attributes="0"/>
                       <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="restartLabel" alignment="0" pref="728" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -1275,30 +1275,11 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advancedCheckBoxActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="restartLabel">
+    <Component class="esmska.gui.InfoLabel" name="restartLabel">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="9f" green="f0" red="f0" type="rgb"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
-          <FontInfo relative="true">
-            <Font component="restartLabel" italic="true" property="font" relativeSize="true" size="0"/>
-          </FontInfo>
-        </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/esmska/resources/info-22.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.restartLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="esmska/resources/l10n.properties" key="InfoLabel.restartNeeded" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
         </Property>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder>
-              <Color PropertyName="color" blue="0" green="a4" red="ff" type="rgb"/>
-            </LineBorder>
-          </Border>
-        </Property>
-        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="restartLabel.setVisible(false);"/>

@@ -16,7 +16,6 @@ import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
 import esmska.data.Operator;
 import esmska.data.Operators;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -33,7 +32,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -105,7 +103,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     private Character passwordEchoChar;
     private static final HashSet<String> restartRequests = new HashSet<String>();
     private static final HashMap<String, Object> originalSettings = new HashMap<String, Object>();
-    
+
+    public enum Tabs {
+        GENERAL, APPEARANCE, GATEWAYS, CREDENTIALS, PRIVACY, CONNECTION
+    }
+
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
         initComponents();
@@ -162,7 +164,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         if (!NotificationIcon.isSupported()) {
             notificationAreaCheckBox.setSelected(false);
         }
-        updateRestartLabel();
+        updateInfoLabel();
         
         //show simple or advanced settings
         advancedCheckBoxActionPerformed(null);
@@ -176,8 +178,36 @@ public class ConfigFrame extends javax.swing.JFrame {
         fullyInicialized = true;
     }
 
-    /** Show or hide restartLabel according to requests in restartRequests */
-    private void updateRestartLabel() {
+    public void switchToTab(Tabs tab) {
+        Component comp = null;
+        switch (tab) {
+            case GENERAL:
+                comp = generalPanel;
+                break;
+            case APPEARANCE:
+                comp = appearancePanel;
+                break;
+            case GATEWAYS:
+                comp = operatorPanel;
+                break;
+            case CREDENTIALS:
+                comp = loginPanel;
+                break;
+            case PRIVACY:
+                comp = privacyPanel;
+                break;
+            case CONNECTION:
+                comp = connectionPanel;
+                break;
+            default:
+                logger.warning("Unknown tab: " + tab);
+                assert false: "Unknown tab: " + tab;
+        }
+        tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(comp));
+    }
+
+    /** Show or hide infoPanel according to requests in restartRequests */
+    private void updateInfoLabel() {
         restartLabel.setVisible(!restartRequests.isEmpty());
     }
     
@@ -349,7 +379,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel17 = new JLabel();
         closeButton = new JButton();
         advancedCheckBox = new JCheckBox();
-        restartLabel = new JLabel();
+        restartLabel = new InfoLabel();
         Mnemonics.setLocalizedText(forgetLayoutCheckBox, l10n.getString("ConfigFrame.forgetLayoutCheckBox.text"));
         forgetLayoutCheckBox.setToolTipText(l10n.getString("ConfigFrame.forgetLayoutCheckBox.toolTipText")); // NOI18N
         Binding binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${forgetLayout}"), forgetLayoutCheckBox, BeanProperty.create("selected"));
@@ -1098,12 +1128,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
     });
 
-    restartLabel.setBackground(new Color(240, 240, 159));
-    restartLabel.setFont(restartLabel.getFont().deriveFont((restartLabel.getFont().getStyle() | Font.ITALIC)));
-    restartLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/info-22.png"))); // NOI18N
-    Mnemonics.setLocalizedText(restartLabel,l10n.getString("ConfigFrame.restartLabel.text"));
-    restartLabel.setBorder(BorderFactory.createLineBorder(new Color(255, 164, 0)));
-    restartLabel.setOpaque(true);
+        Mnemonics.setLocalizedText(restartLabel, l10n.getString("InfoLabel.restartNeeded")); // NOI18N
     restartLabel.setVisible(false);
 
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -1114,11 +1139,11 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addContainerGap()
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addComponent(tabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                .addComponent(restartLabel, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(advancedCheckBox)
                     .addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
-                    .addComponent(closeButton)))
+                    .addComponent(closeButton))
+                .addComponent(restartLabel, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
             .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -1127,7 +1152,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addContainerGap()
             .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(restartLabel)
+            .addComponent(restartLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(closeButton)
@@ -1176,7 +1201,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         } else {
             restartRequests.remove("lafComboBox");
         }
-        updateRestartLabel();
+        updateInfoLabel();
     }//GEN-LAST:event_lafComboBoxActionPerformed
                             
     private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
@@ -1304,7 +1329,7 @@ private void debugCheckBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_deb
     } else {
         restartRequests.remove("debugCheckBox");
     }
-    updateRestartLabel();
+    updateInfoLabel();
 }//GEN-LAST:event_debugCheckBoxItemStateChanged
 
 private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -1504,7 +1529,7 @@ private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
     private JCheckBox reducedHistoryCheckBox;
     private JSpinner reducedHistorySpinner;
     private JCheckBox removeAccentsCheckBox;
-    private JLabel restartLabel;
+    private InfoLabel restartLabel;
     private JCheckBox sameProxyCheckBox;
     private JTextField senderNameTextField;
     private JTextField senderNumberTextField;

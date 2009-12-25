@@ -57,9 +57,9 @@ public class Actions {
     private static final ResourceBundle l10n = L10N.l10nBundle;
 
     private static Action aboutAction;
-    private static Action configAction;
+    private static ConfigAction configAction;
     private static Action quitAction;
-    private static HistoryAction historyAction;
+    private static Action historyAction;
     private static Action importAction;
     private static Action exportAction;
     private static Action logAction;
@@ -168,6 +168,10 @@ public class Actions {
                 //internal program action link
                 if (Links.RUN_UPDATER.equals(url)) {
                     getUpdateAction(null).actionPerformed(null);
+                } else if (Links.CONFIG_CREDENTIALS.equals(url)) {
+                    ((ConfigAction)getConfigAction()).showTab(ConfigFrame.Tabs.CREDENTIALS);
+                } else if (Links.CONFIG_GATEWAYS.equals(url)) {
+                    ((ConfigAction)getConfigAction()).showTab(ConfigFrame.Tabs.GATEWAYS);
                 } else {
                     assert false : "Unknown internal action link: " + url;
                     logger.warning("Unknown internal action link: " + url);
@@ -232,6 +236,10 @@ public class Actions {
                 configFrame.setVisible(true);
             }
         }
+        public void showTab(ConfigFrame.Tabs tab) {
+            actionPerformed(null);
+            configFrame.switchToTab(tab);
+        }
     }
 
     /** Quit the program */
@@ -275,9 +283,6 @@ public class Actions {
                 historyFrame.addValuedListener(new HistoryListener());
                 historyFrame.setVisible(true);
             }
-        }
-        public HistoryFrame getHistoryFrame() {
-            return historyFrame;
         }
     }
 

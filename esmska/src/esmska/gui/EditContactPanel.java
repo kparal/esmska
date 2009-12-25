@@ -8,6 +8,10 @@ package esmska.gui;
 
 import esmska.data.Config;
 import esmska.data.Contact;
+import esmska.data.CountryPrefix;
+import esmska.data.Keyring;
+import esmska.data.Links;
+import esmska.data.Operator;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import java.awt.Color;
@@ -18,6 +22,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.ResourceBundle;
 import javax.swing.Action;
@@ -46,10 +51,12 @@ public class EditContactPanel extends javax.swing.JPanel {
     private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);
     
     private Config config = Config.getInstance();
+    private Keyring keyring = Keyring.getInstance();
     private boolean multiMode; //edit multiple contacts
     private boolean userSet; //whether operator was set by user or by program
 
     private Action suggestOperatorAction;
+
     /**
      * Creates new form EditContactPanel
      */
@@ -103,6 +110,8 @@ public class EditContactPanel extends javax.swing.JPanel {
         numberLabel = new JLabel();
         gatewayLabel = new JLabel();
         suggestOperatorButton = new JButton();
+        credentialsInfoLabel = new InfoLabel();
+        countryInfoLabel = new InfoLabel();
 
         nameTextField.setToolTipText(l10n.getString("EditContactPanel.nameTextField.toolTipText")); // NOI18N
         nameTextField.addFocusListener(new FocusAdapter() {
@@ -143,51 +152,67 @@ public class EditContactPanel extends javax.swing.JPanel {
                 suggestOperatorButtonActionPerformed(evt);
             }
         });
+        Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
+            "InfoLabel.gwCredentialsNeeded"));
+        credentialsInfoLabel.setText(MessageFormat.format(
+            l10n.getString("InfoLabel.gwCredentialsNeeded"), Links.CONFIG_CREDENTIALS));
+    credentialsInfoLabel.setVisible(false);
+
+        Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("InfoLabel.gwWrongCountry")); // NOI18N
+    countryInfoLabel.setVisible(false);
 
         GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(numberLabel)
-                    .addComponent(nameLabel)
-                    .addComponent(gatewayLabel))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(suggestOperatorButton))
-                    .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                    .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+    this.setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                        .addComponent(numberLabel)
+                        .addComponent(nameLabel)
+                        .addComponent(gatewayLabel))
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(suggestOperatorButton))
+                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)))
+                .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
+            .addContainerGap())
+    );
 
-        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {gatewayLabel, nameLabel, numberLabel});
+    layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {gatewayLabel, nameLabel, numberLabel});
 
-        layout.setVerticalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+    layout.setVerticalGroup(
+        layout.createParallelGroup(Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(nameLabel)
+                .addComponent(nameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(numberLabel)
+                .addComponent(numberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                 .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(nameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(numberLabel)
-                    .addComponent(numberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(gatewayLabel)
-                        .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(suggestOperatorButton))
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                    .addComponent(gatewayLabel)
+                    .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(suggestOperatorButton))
+            .addPreferredGap(ComponentPlacement.UNRELATED)
+            .addComponent(credentialsInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(countryInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(72, Short.MAX_VALUE))
+    );
 
-        layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, numberTextField});
+    layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, numberTextField});
 
     }// </editor-fold>//GEN-END:initComponents
     
@@ -256,6 +281,33 @@ public class EditContactPanel extends javax.swing.JPanel {
 
     private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
         userSet = true;
+
+        //show warning if user selected gateway requiring registration
+        //and no credentials are filled in
+        Operator operator = operatorComboBox.getSelectedOperator();
+        if (operator != null && operator.isLoginRequired() &&
+                keyring.getKey(operator.getName()) == null) {
+            credentialsInfoLabel.setVisible(true);
+        } else {
+            credentialsInfoLabel.setVisible(false);
+        }
+
+        //show warning if user selected gateway which does not send
+        //messages to his own country
+        countryInfoLabel.setVisible(false);
+        if (operator != null) {
+            String countryCode = CountryPrefix.extractCountryCode(operator.getName());
+            String userCountry = StringUtils.defaultIfEmpty(
+                    CountryPrefix.getCountryCode(config.getCountryPrefix()),
+                    "unknown");
+            if (countryCode != null && !CountryPrefix.INTERNATIONAL_CODE.equals(countryCode) &&
+                !countryCode.equals(userCountry)) {
+                String text = MessageFormat.format(l10n.getString("InfoLabel.gwWrongCountry"),
+                        countryCode, userCountry, Links.CONFIG_GATEWAYS);
+                countryInfoLabel.setText(text);
+                countryInfoLabel.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_operatorComboBoxItemStateChanged
     
     /** Set contact to be edited or use null for new one */
@@ -314,6 +366,8 @@ public class EditContactPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private InfoLabel countryInfoLabel;
+    private InfoLabel credentialsInfoLabel;
     private JLabel gatewayLabel;
     private JLabel nameLabel;
     private JTextField nameTextField;

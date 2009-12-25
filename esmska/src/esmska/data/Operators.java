@@ -318,7 +318,7 @@ public class Operators {
      * @param number phone number
      * @param acceptInternational whether international operators (with empty country
      * prefix) should be also accepted as matching
-     * @return true if current operator matches the number with it's country prefix;
+     * @return true if current operator matches the number with its country prefix;
      * false if operator of phone number is null or if phone number is shorter
      * than 2 characters
      */

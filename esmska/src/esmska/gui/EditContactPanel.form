@@ -17,22 +17,28 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="numberLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="nameLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="gatewayLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="operatorComboBox" pref="149" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="numberLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="nameLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="gatewayLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="suggestOperatorButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="operatorComboBox" pref="299" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="suggestOperatorButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="nameTextField" alignment="0" pref="333" max="32767" attributes="0"/>
+                          <Component id="numberTextField" alignment="1" pref="333" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="nameTextField" alignment="0" pref="183" max="32767" attributes="0"/>
-                  <Component id="numberTextField" alignment="1" pref="183" max="32767" attributes="0"/>
+                  <Component id="credentialsInfoLabel" alignment="0" pref="444" max="32767" attributes="0"/>
+                  <Component id="countryInfoLabel" alignment="0" pref="444" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -46,7 +52,7 @@
                   <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nameTextField" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="numberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="numberTextField" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -59,7 +65,11 @@
                   </Group>
                   <Component id="suggestOperatorButton" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="credentialsInfoLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="countryInfoLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="72" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -142,6 +152,26 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="suggestOperatorButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+      </AuxValues>
+    </Component>
+    <Component class="esmska.gui.InfoLabel" name="credentialsInfoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="InfoLabel.gwCredentialsNeeded" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="credentialsInfoLabel.setText(MessageFormat.format(&#xa;    l10n.getString(&quot;InfoLabel.gwCredentialsNeeded&quot;), Links.CONFIG_CREDENTIALS));&#xa;credentialsInfoLabel.setVisible(false);"/>
+      </AuxValues>
+    </Component>
+    <Component class="esmska.gui.InfoLabel" name="countryInfoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="InfoLabel.gwWrongCountry" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryInfoLabel.setVisible(false);"/>
       </AuxValues>
     </Component>
   </SubComponents>
