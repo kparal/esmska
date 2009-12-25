@@ -353,7 +353,8 @@ public class SMSPanel extends javax.swing.JPanel {
         recipientTextField = new SMSPanel.RecipientTextField();
         recipientLabel = new JLabel();
         jPanel1 = new JPanel();
-        infoLabel = new InfoLabel();
+        credentialsInfoLabel = new InfoLabel();
+        numberInfoLabel = new InfoLabel();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
         addFocusListener(new FocusAdapter() {
@@ -418,21 +419,28 @@ public class SMSPanel extends javax.swing.JPanel {
     recipientLabel.setLabelFor(recipientTextField);
         Mnemonics.setLocalizedText(recipientLabel, l10n.getString("SMSPanel.recipientLabel.text")); // NOI18N
     recipientLabel.setToolTipText(recipientTextField.getToolTipText());
-    Mnemonics.setLocalizedText(infoLabel,l10n.getString(
-        "SMSPanel.infoLabel.text"));
-    infoLabel.setText(MessageFormat.format(
-        l10n.getString("SMSPanel.infoLabel.text"), Links.CONFIG_CREDENTIALS));
-infoLabel.setVisible(false);
+    Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
+        "SMSPanel.credentialsInfoLabel.text"));
+    credentialsInfoLabel.setText(MessageFormat.format(
+        l10n.getString("SMSPanel.credentialsInfoLabel.text"), Links.CONFIG_CREDENTIALS));
+credentialsInfoLabel.setVisible(false);
+
+        Mnemonics.setLocalizedText(numberInfoLabel, l10n.getString("SMSPanel.numberInfoLabel.text")); // NOI18N
+numberInfoLabel.setVisible(false);
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
 jPanel1.setLayout(jPanel1Layout);
 jPanel1Layout.setHorizontalGroup(
     jPanel1Layout.createParallelGroup(Alignment.LEADING)
-    .addComponent(infoLabel, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+    .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+    .addComponent(numberInfoLabel, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        .addComponent(infoLabel)
+        .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addComponent(numberInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(credentialsInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
     );
 
         GroupLayout layout = new GroupLayout(this);
@@ -447,11 +455,11 @@ jPanel1Layout.setHorizontalGroup(
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(recipientLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                            .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(gatewayLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                                 .addComponent(textLabel)
@@ -460,10 +468,10 @@ jPanel1Layout.setHorizontalGroup(
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                    .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                                     .addPreferredGap(ComponentPlacement.RELATED)
                                     .addComponent(sendButton))
-                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))))
+                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))))
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(74, 74, 74)
                     .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -487,7 +495,7 @@ jPanel1Layout.setHorizontalGroup(
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
@@ -517,9 +525,9 @@ jPanel1Layout.setHorizontalGroup(
         Operator operator = operatorComboBox.getSelectedOperator();
         if (operator != null && operator.isLoginRequired() &&
                 keyring.getKey(operator.getName()) == null) {
-            infoLabel.setVisible(true);
+            credentialsInfoLabel.setVisible(true);
         } else {
-            infoLabel.setVisible(false);
+            credentialsInfoLabel.setVisible(false);
         }
     }//GEN-LAST:event_operatorComboBoxItemStateChanged
     
@@ -986,6 +994,9 @@ jPanel1Layout.setHorizontalGroup(
         private class RecipientDocumentChange implements Runnable {
             @Override
             public void run() {
+                //reset components
+                numberInfoLabel.setVisible(false);
+
                 //search for contact
                 contact = null;
                 contact = lookupContact(false);
@@ -995,6 +1006,11 @@ jPanel1Layout.setHorizontalGroup(
                 //if not found and is number, guess operator
                 if (contact == null && getNumber() != null) {
                     operatorComboBox.selectSuggestedOperator(getNumber());
+                }
+                
+                //if not found, update numberInfoLabel
+                if (contact == null && StringUtils.isNotEmpty(getText())) {
+                    numberInfoLabel.setVisible(!Contact.isValidNumber(getNumber()));
                 }
 
                 //update envelope
@@ -1010,11 +1026,12 @@ jPanel1Layout.setHorizontalGroup(
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private InfoLabel credentialsInfoLabel;
     private JProgressBar fullProgressBar;
     private JLabel gatewayLabel;
-    private InfoLabel infoLabel;
     private JPanel jPanel1;
     private JScrollPane jScrollPane1;
+    private InfoLabel numberInfoLabel;
     private OperatorComboBox operatorComboBox;
     private JLabel recipientLabel;
     private JTextField recipientTextField;

@@ -37,12 +37,12 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="recipientLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="recipientTextField" pref="309" max="32767" attributes="0"/>
+                              <Component id="recipientTextField" pref="311" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="gatewayLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="operatorComboBox" pref="309" max="32767" attributes="0"/>
+                              <Component id="operatorComboBox" pref="311" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -53,11 +53,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="smsCounterLabel" pref="275" max="32767" attributes="0"/>
+                                      <Component id="smsCounterLabel" pref="277" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" pref="309" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="311" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -86,7 +86,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane1" pref="149" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="114" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -207,24 +207,39 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="infoLabel" alignment="0" pref="309" max="32767" attributes="0"/>
+              <Component id="credentialsInfoLabel" alignment="0" pref="311" max="32767" attributes="0"/>
+              <Component id="numberInfoLabel" alignment="0" pref="311" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="infoLabel" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="numberInfoLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="credentialsInfoLabel" min="-2" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="esmska.gui.InfoLabel" name="infoLabel">
+        <Component class="esmska.gui.InfoLabel" name="credentialsInfoLabel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="esmska/resources/l10n.properties" key="SMSPanel.infoLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="esmska/resources/l10n.properties" key="SMSPanel.credentialsInfoLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="infoLabel.setText(MessageFormat.format(&#xa;    l10n.getString(&quot;SMSPanel.infoLabel.text&quot;), Links.CONFIG_CREDENTIALS));&#xa;infoLabel.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="credentialsInfoLabel.setText(MessageFormat.format(&#xa;    l10n.getString(&quot;SMSPanel.credentialsInfoLabel.text&quot;), Links.CONFIG_CREDENTIALS));&#xa;credentialsInfoLabel.setVisible(false);"/>
+          </AuxValues>
+        </Component>
+        <Component class="esmska.gui.InfoLabel" name="numberInfoLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="esmska/resources/l10n.properties" key="SMSPanel.numberInfoLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="numberInfoLabel.setVisible(false);"/>
           </AuxValues>
         </Component>
       </SubComponents>
