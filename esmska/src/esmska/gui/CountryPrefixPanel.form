@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="esmska/resources/l10n"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="countryPrefixTextField" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="countryCodeLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="countryCodeComboBox" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="103" groupAlignment="3" attributes="0">
+              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="countryPrefixTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="countryCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="countryCodeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JComboBox" name="countryCodeComboBox">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="CountryPrefixPanel.countryCodeComboBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="countryCodeComboBoxItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ArrayList&lt;String&gt; codes = CountryPrefix.getCountryCodes();&#xa;codes.add(0, l10n.getString(&quot;CountryPrefixPanel.unknown_state&quot;));&#xa;countryCodeComboBox.setModel(new DefaultComboBoxModel(codes.toArray()));&#xa;countryCodeComboBox.setSelectedIndex(0);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="countryPrefixTextField">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="CountryPrefixPanel.countryPrefixTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {&#xa;            @Override&#xa;            public void onUpdate(DocumentEvent e) {&#xa;                if (!fullyInicialized) {&#xa;                    return;&#xa;                }&#xa;                updateCountryCode();&#xa;            }&#xa;});"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=")" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="countryCodeLabel">
+      <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="countryCodeComboBox"/>
+        </Property>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="CountryPrefixPanel.countryCodeLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection component="countryCodeComboBox" name="toolTipText" type="property"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="CountryPrefixPanel.jLabel2.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection component="countryPrefixTextField" name="toolTipText" type="property"/>
+        </Property>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

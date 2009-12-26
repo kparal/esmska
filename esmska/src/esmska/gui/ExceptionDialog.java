@@ -84,6 +84,7 @@ public class ExceptionDialog extends javax.swing.JDialog {
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
         images.add(new ImageIcon(getClass().getResource(RES + "error-16.png")).getImage());
+        images.add(new ImageIcon(getClass().getResource(RES + "error-22.png")).getImage());
         images.add(new ImageIcon(getClass().getResource(RES + "error-32.png")).getImage());
         images.add(new ImageIcon(getClass().getResource(RES + "error-48.png")).getImage());
         setIconImages(images);
@@ -93,7 +94,6 @@ public class ExceptionDialog extends javax.swing.JDialog {
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
                 KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), command);
         getRootPane().getActionMap().put(command, new AbstractAction() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 closeButtonActionPerformed(e);

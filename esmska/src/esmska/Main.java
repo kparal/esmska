@@ -25,6 +25,7 @@ import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.gui.MainFrame;
 import esmska.gui.ExceptionDialog;
+import esmska.gui.InitWizardDialog;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.utils.L10N;
@@ -276,6 +277,9 @@ public class Main {
                 //run as webstart, disable updates checking
                 config.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_NONE);
             }
+            //show first run wizard
+            InitWizardDialog dialog = new InitWizardDialog(null, true);
+            dialog.setVisible(true);
         }
         
         //update from older versions

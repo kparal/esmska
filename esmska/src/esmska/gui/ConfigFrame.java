@@ -12,7 +12,6 @@ import esmska.Context;
 import esmska.data.Config.CheckUpdatePolicy;
 import esmska.gui.ThemeManager.LAF;
 import esmska.data.Config;
-import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
 import esmska.data.Operator;
 import esmska.data.Operators;
@@ -75,7 +74,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.InputVerifier;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -159,12 +157,12 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         //update other components
         updateThemeComboBox();
-        updateCountryCode();
         updateUnstableUpdateCheckbox();
         if (!NotificationIcon.isSupported()) {
             notificationAreaCheckBox.setSelected(false);
         }
         updateInfoLabel();
+        countryPrefixPanel.setCountryPrefix(config.getCountryPrefix());
         
         //show simple or advanced settings
         advancedCheckBoxActionPerformed(null);
@@ -239,21 +237,6 @@ public class ConfigFrame extends javax.swing.JFrame {
             themeComboBox.setEnabled(true);
         }
 
-        fullyInicialized = temp;
-    }
-    
-    /** Update country code according to country  */
-    private void updateCountryCode() {
-        String countryPrefix = countryPrefixTextField.getText();
-        String countryCode = CountryPrefix.getCountryCode(countryPrefix);
-
-        boolean temp = fullyInicialized;
-        fullyInicialized = false;
-        if (StringUtils.isEmpty(countryCode)) {
-            countryCodeComboBox.setSelectedIndex(0);
-        } else {
-            countryCodeComboBox.setSelectedItem(countryCode);
-        }
         fullyInicialized = temp;
     }
     
@@ -344,14 +327,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel1 = new JLabel();
         senderNameTextField = new JTextField();
         jLabel3 = new JLabel();
-        countryPrefixTextField = new JTextField();
-        jLabel2 = new JLabel();
         operatorFilterTextField = new JTextField();
         operatorFilterLabel = new JLabel();
         demandDeliveryReportCheckBox = new JCheckBox();
-        countryCodeComboBox = new JComboBox();
-        countryCodeLabel = new JLabel();
-        jLabel4 = new JLabel();
+        countryPrefixPanel = new CountryPrefixPanel();
         loginPanel = new JPanel();
         operatorComboBox = new OperatorComboBox();
         jLabel9 = new JLabel();
@@ -662,33 +641,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(jLabel3, l10n.getString("ConfigFrame.jLabel3.text")); // NOI18N
         jLabel3.setToolTipText(senderNameTextField.getToolTipText());
 
-        countryPrefixTextField.setColumns(5);
-
-        countryPrefixTextField.setToolTipText(l10n.getString("ConfigFrame.countryPrefixTextField.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${countryPrefix}"), countryPrefixTextField, BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        countryPrefixTextField.setInputVerifier(new InputVerifier() {
-            @Override
-            public boolean verify(JComponent input) {
-                String prefix = countryPrefixTextField.getText();
-                return prefix.isEmpty() || CountryPrefix.isValidCountryPrefix(prefix);
-            }
-        });
-        countryPrefixTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
-            @Override
-            public void onUpdate(DocumentEvent e) {
-                if (!fullyInicialized) {
-                    return;
-                }
-                updateCountryCode();
-            }
-        });
-
-        jLabel2.setLabelFor(countryPrefixTextField);
-        Mnemonics.setLocalizedText(jLabel2, l10n.getString("ConfigFrame.jLabel2.text")); // NOI18N
-        jLabel2.setToolTipText(countryPrefixTextField.getToolTipText());
-
         operatorFilterTextField.setColumns(13);
 
         operatorFilterTextField.setToolTipText(l10n.getString("ConfigFrame.operatorFilterTextField.toolTipText")); // NOI18N
@@ -706,21 +658,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, useSenderIDCheckBox, ELProperty.create("${selected}"), demandDeliveryReportCheckBox, BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        countryCodeComboBox.setToolTipText(l10n.getString("ConfigFrame.countryCodeComboBox.toolTipText")); // NOI18N
-        ArrayList<String> codes = CountryPrefix.getCountryCodes();
-        codes.add(0, l10n.getString("ConfigFrame.unknown_state"));
-        countryCodeComboBox.setModel(new DefaultComboBoxModel(codes.toArray()));
-        countryCodeComboBox.setSelectedIndex(0);
-        countryCodeComboBox.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent evt) {
-                countryCodeComboBoxItemStateChanged(evt);
-            }
-        });
-
-        Mnemonics.setLocalizedText(countryCodeLabel, l10n.getString("ConfigFrame.countryCodeLabel.text")); // NOI18N
-        countryCodeLabel.setToolTipText(countryCodeComboBox.getToolTipText());
-
-        Mnemonics.setLocalizedText(jLabel4, ")");
         GroupLayout operatorPanelLayout = new GroupLayout(operatorPanel);
         operatorPanel.setLayout(operatorPanelLayout);
 
@@ -730,16 +667,6 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
                     .addComponent(useSenderIDCheckBox)
-                    .addGroup(operatorPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(countryPrefixTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(countryCodeLabel)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(countryCodeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
                     .addGroup(operatorPanelLayout.createSequentialGroup()
                         .addComponent(operatorFilterLabel)
                         .addPreferredGap(ComponentPlacement.RELATED)
@@ -755,7 +682,8 @@ public class ConfigFrame extends javax.swing.JFrame {
                                 .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
                                     .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(demandDeliveryReportCheckBox))))
+                            .addComponent(demandDeliveryReportCheckBox)))
+                    .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(287, Short.MAX_VALUE))
         );
 
@@ -765,12 +693,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             operatorPanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(operatorPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(countryPrefixTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(countryCodeLabel)
-                    .addComponent(countryCodeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(operatorFilterLabel)
@@ -1291,19 +1214,6 @@ private void passwordFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_passwordF
     updateKeyring();
 }//GEN-LAST:event_passwordFieldFocusLost
 
-private void countryCodeComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_countryCodeComboBoxItemStateChanged
-    if (!fullyInicialized || evt.getStateChange() != ItemEvent.SELECTED) {
-        return;
-    }
-    String code = (String) countryCodeComboBox.getSelectedItem();
-    String prefix = CountryPrefix.getCountryPrefix(code);
-
-    boolean temp = fullyInicialized;
-    fullyInicialized = false;
-    countryPrefixTextField.setText(prefix);
-    fullyInicialized = temp;
-}//GEN-LAST:event_countryCodeComboBoxItemStateChanged
-
 private void showPasswordCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_showPasswordCheckBoxActionPerformed
     if (showPasswordCheckBox.isSelected()) {
         //set password to be displayed
@@ -1334,10 +1244,12 @@ private void debugCheckBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_deb
 
 private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     //check validity of country prefix
-    String prefix = countryPrefixTextField.getText();
-    if (prefix.length() > 0 && !CountryPrefix.isValidCountryPrefix(prefix)) {
-        config.setCountryPrefix("");
+    String prefix = countryPrefixPanel.getCountryPrefix();
+    if (prefix != null) {
+        config.setCountryPrefix(prefix);
     }
+    countryPrefixPanel.setCountryPrefix(config.getCountryPrefix());
+    
     //save config
     try {
         Context.persistenceManager.saveConfig();
@@ -1490,9 +1402,7 @@ private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
     private JButton closeButton;
     private Config config;
     private JPanel connectionPanel;
-    private JComboBox countryCodeComboBox;
-    private JLabel countryCodeLabel;
-    private JTextField countryPrefixTextField;
+    private CountryPrefixPanel countryPrefixPanel;
     private JCheckBox debugCheckBox;
     private JCheckBox demandDeliveryReportCheckBox;
     private JLabel develLabel;
@@ -1511,9 +1421,7 @@ private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
     private JLabel jLabel16;
     private JLabel jLabel17;
     private JLabel jLabel18;
-    private JLabel jLabel2;
     private JLabel jLabel3;
-    private JLabel jLabel4;
     private JLabel jLabel9;
     private JComboBox lafComboBox;
     private JPanel loginPanel;
