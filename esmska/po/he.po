@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 20:56+0200\n"
+"POT-Creation-Date: 2009-12-27 23:43+0200\n"
 "PO-Revision-Date: 2009-11-24 23:29+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -235,31 +235,6 @@ msgstr ""
 msgid "&Connection"
 msgstr "הת&חברות"
 
-#: ConfigFrame.countryCodeComboBox.toolTipText
-msgid "The country code for which you have filled out the prefix number"
-msgstr "קוד המדינה שעבורה מילאת את הקידומת"
-
-#: ConfigFrame.countryCodeLabel.text
-msgid "(country:"
-msgstr "(מדינה:"
-
-#: ConfigFrame.countryPrefixTextField.toolTipText
-msgid ""
-"<html>\n"
-"The international country prefix number starting with '+' sign.<br>\n"
-"When filled out this prefix will be supposed to be present with all the "
-"numbers written not in the<br>\n"
-"international format. Also the appeareance of these numbers will be much "
-"shorter in many labels.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"מספר קידומת המדינה הבינלאומי המתחיל בסימן '+'.<br>\n"
-"כאשר תמלא את הקידומת הזו היא תפקידה יהיה לייצג את כל המספרים שלא נכתבו במבנה "
-"הבינלאומי.<br>\n"
-"כמו כן הופעת מספרים אלו תהיה קצרה בהרבה בתויות רבות.\n"
-"</html>"
-
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
 msgstr ""
@@ -387,10 +362,6 @@ msgid ""
 "* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
-
-#: ConfigFrame.jLabel2.text
-msgid "The &default country prefix number:"
-msgstr "&קידומת המדינה כברירת המחדל:"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
@@ -643,11 +614,6 @@ msgstr ""
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#. #meaning "unknown country"
-#: ConfigFrame.unknown_state
-msgid "unknown"
-msgstr "לא ידועה"
-
 #: ConfigFrame.unstableUpdatesCheckBox.text
 msgid "also u&nstable versions"
 msgstr ""
@@ -783,6 +749,41 @@ msgstr "יי&בוא אנשי קשר"
 msgid "Co&py to clipboard"
 msgstr "ה&עתק ללוח הגזירים"
 
+#: CountryPrefixPanel.countryCodeComboBox.toolTipText
+msgid "The country code for which you have filled out the prefix number"
+msgstr "קוד המדינה שעבורה מילאת את הקידומת"
+
+#: CountryPrefixPanel.countryCodeLabel.text
+#, fuzzy
+msgid "(c&ountry:"
+msgstr "(מדינה:"
+
+#: CountryPrefixPanel.countryPrefixTextField.toolTipText
+msgid ""
+"<html>\n"
+"The international country prefix number starting with '+' sign.<br>\n"
+"When filled out this prefix will be supposed to be present with all the "
+"numbers written not in the<br>\n"
+"international format. Also the appeareance of these numbers will be much "
+"shorter in many labels.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"מספר קידומת המדינה הבינלאומי המתחיל בסימן '+'.<br>\n"
+"כאשר תמלא את הקידומת הזו היא תפקידה יהיה לייצג את כל המספרים שלא נכתבו במבנה "
+"הבינלאומי.<br>\n"
+"כמו כן הופעת מספרים אלו תהיה קצרה בהרבה בתויות רבות.\n"
+"</html>"
+
+#: CountryPrefixPanel.jLabel2.text
+msgid "The &default country prefix number:"
+msgstr "&קידומת המדינה כברירת המחדל:"
+
+#. #meaning "unknown country"
+#: CountryPrefixPanel.unknown_state
+msgid "unknown"
+msgstr "לא ידועה"
+
 #: Create
 msgid "Create"
 msgstr "צור"
@@ -853,6 +854,24 @@ msgstr "שליחת SMS"
 #: DesktopFile.name
 msgid "Esmska"
 msgstr "Esmska"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: EditContactPanel.countryInfoLabel.text
+msgid ""
+"<html>\n"
+"Selected gateway probably sends messages only to: {0}.<br>\n"
+"(and the number seems to be located in: {1})\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: EditContactPanel.credentialsInfoLabel.text
+msgid ""
+"<html>\n"
+"You have selected a gateway which requires registration.<br>\n"
+"Please enter your credentials in the <a href=\"{0}\">options dialog</a>.\n"
+"</html>"
+msgstr ""
 
 #: EditContactPanel.gatewayLabel.text
 msgid "Default &gateway:"
@@ -988,6 +1007,10 @@ msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "קבצי vCard (*.vcard, *.vcf)"
 
+#: Finish_
+msgid "&Finish"
+msgstr ""
+
 #. #Action to resend message
 #: Forward_
 msgctxt "Forward_"
@@ -1056,13 +1079,12 @@ msgstr "היסטוריית ההודעות שנשלחו - Esmska"
 msgid ""
 "<html>\n"
 "<h2>Security code required</h2>\n"
-"The chosen gateway requires you to enter the security code from the picture "
-"below:\n"
+"The chosen gateway requires you to enter the security code displayed below:\n"
 "</html>"
 msgstr ""
 
 #: ImageCodeDialog.jLabel2.text
-msgid "&Image code:"
+msgid "Security &code:"
 msgstr ""
 
 #: ImportFrame.CSV_filter
@@ -1258,6 +1280,14 @@ msgstr ""
 
 #: Import_
 msgid "Im&port"
+msgstr ""
+
+#: InitWizardDialog.jLabel1.text
+msgid ""
+"<html>\n"
+"<h2>First run</h2>\n"
+"Following settings were detected automatically. Are they correct?\n"
+"</html>"
 msgstr ""
 
 #: LogFrame.clearButton.text
@@ -1771,6 +1801,23 @@ msgid ""
 msgstr "השמט רווחים מההודעה ושנה אותה למבנה \"רישיות־מוקפצות\" (לא תקף בעברית)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSPanel.countryInfoLabel.text
+msgid ""
+"<html>\n"
+"Number is from country {0}, but this gateway sends only to {1}.\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSPanel.credentialsInfoLabel.text
+msgid ""
+"<html>\n"
+"Selected gateway requires registration. Enter your credentials in the <a "
+"href=\"{0}\">options dialog</a>.\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1780,6 +1827,10 @@ msgstr "<html>תווים בהודעה כולה: <b>{0}/{1}</b> (נותרו <b>{2
 msgctxt "SMSPanel.gatewayLabel.text"
 msgid "&Gateway:"
 msgstr "שער &גישה:"
+
+#: SMSPanel.numberInfoLabel.text
+msgid "<html>Number is not in a valid international format.</html>"
+msgstr ""
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"

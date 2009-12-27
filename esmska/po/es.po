@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 20:56+0200\n"
-"PO-Revision-Date: 2009-12-02 15:13+0000\n"
+"POT-Creation-Date: 2009-12-27 23:43+0200\n"
+"PO-Revision-Date: 2009-12-24 12:09+0000\n"
 "Last-Translator: Alfonso E. Romero <alfonsoeromero@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-03 04:47+0000\n"
+"X-Launchpad-Export-Date: 2009-12-25 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -251,32 +251,6 @@ msgstr ""
 msgid "&Connection"
 msgstr "&Conexión"
 
-#: ConfigFrame.countryCodeComboBox.toolTipText
-msgid "The country code for which you have filled out the prefix number"
-msgstr "El código del pais para el cual se ha llenado el número prefijo"
-
-#: ConfigFrame.countryCodeLabel.text
-msgid "(country:"
-msgstr "(país:"
-
-#: ConfigFrame.countryPrefixTextField.toolTipText
-msgid ""
-"<html>\n"
-"The international country prefix number starting with '+' sign.<br>\n"
-"When filled out this prefix will be supposed to be present with all the "
-"numbers written not in the<br>\n"
-"international format. Also the appeareance of these numbers will be much "
-"shorter in many labels.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"El código internacional de país comenzando con el signo '+'.<br>\n"
-"Cuando es especificado éste código aparecerá en todos los número escritos "
-"sin el<br>\n"
-"formato internacional. La apariencia de éste código será mucho mas corta en "
-"muchas etiquetas.\n"
-"</html>"
-
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
 msgstr "Crear un log con información de de&bug"
@@ -421,10 +395,6 @@ msgstr ""
 "<html><i>\n"
 "* Autenticación de usuario/contraseña no está actualmente soportado.\n"
 "</i></html>"
-
-#: ConfigFrame.jLabel2.text
-msgid "The &default country prefix number:"
-msgstr "El código de país &predeterminado"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
@@ -683,11 +653,6 @@ msgstr ""
 msgid "Unknown"
 msgstr "Desconocido"
 
-#. #meaning "unknown country"
-#: ConfigFrame.unknown_state
-msgid "unknown"
-msgstr "desconocido"
-
 #: ConfigFrame.unstableUpdatesCheckBox.text
 msgid "also u&nstable versions"
 msgstr "también versiones i&nestables"
@@ -840,6 +805,42 @@ msgstr "&Importar contactos"
 msgid "Co&py to clipboard"
 msgstr "Co&piar a portapapeles"
 
+#: CountryPrefixPanel.countryCodeComboBox.toolTipText
+msgid "The country code for which you have filled out the prefix number"
+msgstr "El código del pais para el cual se ha llenado el número prefijo"
+
+#: CountryPrefixPanel.countryCodeLabel.text
+#, fuzzy
+msgid "(c&ountry:"
+msgstr "(país:"
+
+#: CountryPrefixPanel.countryPrefixTextField.toolTipText
+msgid ""
+"<html>\n"
+"The international country prefix number starting with '+' sign.<br>\n"
+"When filled out this prefix will be supposed to be present with all the "
+"numbers written not in the<br>\n"
+"international format. Also the appeareance of these numbers will be much "
+"shorter in many labels.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"El código internacional de país comenzando con el signo '+'.<br>\n"
+"Cuando es especificado éste código aparecerá en todos los número escritos "
+"sin el<br>\n"
+"formato internacional. La apariencia de éste código será mucho mas corta en "
+"muchas etiquetas.\n"
+"</html>"
+
+#: CountryPrefixPanel.jLabel2.text
+msgid "The &default country prefix number:"
+msgstr "El código de país &predeterminado"
+
+#. #meaning "unknown country"
+#: CountryPrefixPanel.unknown_state
+msgid "unknown"
+msgstr "desconocido"
+
 #: Create
 msgid "Create"
 msgstr "Crear"
@@ -910,6 +911,24 @@ msgstr ""
 #: DesktopFile.name
 msgid "Esmska"
 msgstr "Esmska"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: EditContactPanel.countryInfoLabel.text
+msgid ""
+"<html>\n"
+"Selected gateway probably sends messages only to: {0}.<br>\n"
+"(and the number seems to be located in: {1})\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: EditContactPanel.credentialsInfoLabel.text
+msgid ""
+"<html>\n"
+"You have selected a gateway which requires registration.<br>\n"
+"Please enter your credentials in the <a href=\"{0}\">options dialog</a>.\n"
+"</html>"
+msgstr ""
 
 #: EditContactPanel.gatewayLabel.text
 msgid "Default &gateway:"
@@ -1035,6 +1054,10 @@ msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "Archivos Vcard (*.vcard, *.vcf)"
 
+#: Finish_
+msgid "&Finish"
+msgstr ""
+
 #. #Action to resend message
 #: Forward_
 msgctxt "Forward_"
@@ -1100,11 +1123,11 @@ msgid "Sent messages history - Esmska"
 msgstr ""
 
 #: ImageCodeDialog.introLabel.text
+#, fuzzy
 msgid ""
 "<html>\n"
 "<h2>Security code required</h2>\n"
-"The chosen gateway requires you to enter the security code from the picture "
-"below:\n"
+"The chosen gateway requires you to enter the security code displayed below:\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -1114,8 +1137,8 @@ msgstr ""
 "</html>"
 
 #: ImageCodeDialog.jLabel2.text
-msgid "&Image code:"
-msgstr "Código &Image"
+msgid "Security &code:"
+msgstr ""
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
@@ -1282,6 +1305,14 @@ msgstr ""
 
 #: Import_
 msgid "Im&port"
+msgstr ""
+
+#: InitWizardDialog.jLabel1.text
+msgid ""
+"<html>\n"
+"<h2>First run</h2>\n"
+"Following settings were detected automatically. Are they correct?\n"
+"</html>"
 msgstr ""
 
 #: LogFrame.clearButton.text
@@ -1784,6 +1815,23 @@ msgid ""
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSPanel.countryInfoLabel.text
+msgid ""
+"<html>\n"
+"Number is from country {0}, but this gateway sends only to {1}.\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSPanel.credentialsInfoLabel.text
+msgid ""
+"<html>\n"
+"Selected gateway requires registration. Enter your credentials in the <a "
+"href=\"{0}\">options dialog</a>.\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1792,6 +1840,10 @@ msgstr ""
 #: SMSPanel.gatewayLabel.text
 msgctxt "SMSPanel.gatewayLabel.text"
 msgid "&Gateway:"
+msgstr ""
+
+#: SMSPanel.numberInfoLabel.text
+msgid "<html>Number is not in a valid international format.</html>"
 msgstr ""
 
 #: SMSPanel.recipientLabel.text
@@ -2201,3 +2253,6 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "&Image code:"
+#~ msgstr "Código &Image"

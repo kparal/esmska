@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 20:56+0200\n"
+"POT-Creation-Date: 2009-12-27 23:43+0200\n"
 "PO-Revision-Date: 2009-12-03 22:40+0000\n"
 "Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -233,25 +233,6 @@ msgstr ""
 msgid "&Connection"
 msgstr "&Ryšys"
 
-#: ConfigFrame.countryCodeComboBox.toolTipText
-msgid "The country code for which you have filled out the prefix number"
-msgstr ""
-
-#: ConfigFrame.countryCodeLabel.text
-msgid "(country:"
-msgstr "(šalis:"
-
-#: ConfigFrame.countryPrefixTextField.toolTipText
-msgid ""
-"<html>\n"
-"The international country prefix number starting with '+' sign.<br>\n"
-"When filled out this prefix will be supposed to be present with all the "
-"numbers written not in the<br>\n"
-"international format. Also the appeareance of these numbers will be much "
-"shorter in many labels.\n"
-"</html>"
-msgstr ""
-
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
 msgstr ""
@@ -361,10 +342,6 @@ msgid ""
 "* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
-
-#: ConfigFrame.jLabel2.text
-msgid "The &default country prefix number:"
-msgstr "Šalies kodas pagal nutylėjimą:"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
@@ -575,11 +552,6 @@ msgstr ""
 msgid "Unknown"
 msgstr "Nežinomas"
 
-#. #meaning "unknown country"
-#: ConfigFrame.unknown_state
-msgid "unknown"
-msgstr ""
-
 #: ConfigFrame.unstableUpdatesCheckBox.text
 msgid "also u&nstable versions"
 msgstr ""
@@ -712,6 +684,35 @@ msgstr "&Importuoti kontaktus"
 msgid "Co&py to clipboard"
 msgstr ""
 
+#: CountryPrefixPanel.countryCodeComboBox.toolTipText
+msgid "The country code for which you have filled out the prefix number"
+msgstr ""
+
+#: CountryPrefixPanel.countryCodeLabel.text
+#, fuzzy
+msgid "(c&ountry:"
+msgstr "(šalis:"
+
+#: CountryPrefixPanel.countryPrefixTextField.toolTipText
+msgid ""
+"<html>\n"
+"The international country prefix number starting with '+' sign.<br>\n"
+"When filled out this prefix will be supposed to be present with all the "
+"numbers written not in the<br>\n"
+"international format. Also the appeareance of these numbers will be much "
+"shorter in many labels.\n"
+"</html>"
+msgstr ""
+
+#: CountryPrefixPanel.jLabel2.text
+msgid "The &default country prefix number:"
+msgstr "Šalies kodas pagal nutylėjimą:"
+
+#. #meaning "unknown country"
+#: CountryPrefixPanel.unknown_state
+msgid "unknown"
+msgstr ""
+
 #: Create
 msgid "Create"
 msgstr "Sukurti"
@@ -782,6 +783,24 @@ msgstr "SMS Siuntėjas"
 #: DesktopFile.name
 msgid "Esmska"
 msgstr "Esmska"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: EditContactPanel.countryInfoLabel.text
+msgid ""
+"<html>\n"
+"Selected gateway probably sends messages only to: {0}.<br>\n"
+"(and the number seems to be located in: {1})\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: EditContactPanel.credentialsInfoLabel.text
+msgid ""
+"<html>\n"
+"You have selected a gateway which requires registration.<br>\n"
+"Please enter your credentials in the <a href=\"{0}\">options dialog</a>.\n"
+"</html>"
+msgstr ""
 
 #: EditContactPanel.gatewayLabel.text
 msgid "Default &gateway:"
@@ -906,6 +925,10 @@ msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "vCard failai (*.vcard, *.vcf)"
 
+#: Finish_
+msgid "&Finish"
+msgstr ""
+
 #. #Action to resend message
 #: Forward_
 msgctxt "Forward_"
@@ -974,13 +997,12 @@ msgstr "Išsiųstų žinučių istorija - Esmska"
 msgid ""
 "<html>\n"
 "<h2>Security code required</h2>\n"
-"The chosen gateway requires you to enter the security code from the picture "
-"below:\n"
+"The chosen gateway requires you to enter the security code displayed below:\n"
 "</html>"
 msgstr ""
 
 #: ImageCodeDialog.jLabel2.text
-msgid "&Image code:"
+msgid "Security &code:"
 msgstr ""
 
 #: ImportFrame.CSV_filter
@@ -1147,6 +1169,14 @@ msgstr ""
 #: Import_
 msgid "Im&port"
 msgstr "Im&portuoti"
+
+#: InitWizardDialog.jLabel1.text
+msgid ""
+"<html>\n"
+"<h2>First run</h2>\n"
+"Following settings were detected automatically. Are they correct?\n"
+"</html>"
+msgstr ""
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
@@ -1648,6 +1678,23 @@ msgid ""
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSPanel.countryInfoLabel.text
+msgid ""
+"<html>\n"
+"Number is from country {0}, but this gateway sends only to {1}.\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSPanel.credentialsInfoLabel.text
+msgid ""
+"<html>\n"
+"Selected gateway requires registration. Enter your credentials in the <a "
+"href=\"{0}\">options dialog</a>.\n"
+"</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.fullProgressBar
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
@@ -1656,6 +1703,10 @@ msgstr "<html>Simbolių žinutėje: <b>{0}/{1}</b> (<b>{2}</b> liko)</html>"
 #: SMSPanel.gatewayLabel.text
 msgctxt "SMSPanel.gatewayLabel.text"
 msgid "&Gateway:"
+msgstr ""
+
+#: SMSPanel.numberInfoLabel.text
+msgid "<html>Number is not in a valid international format.</html>"
 msgstr ""
 
 #: SMSPanel.recipientLabel.text
