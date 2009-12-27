@@ -166,16 +166,18 @@ public class OperatorExecutor {
     /** Ask user to recognize provided image code
      * @param imageBytes image bytearray. Java must be able to display this image
      *                   (PNG, GIF, JPEG, maybe something else).
+     * @param hint optional hint that can gateway say to user.
      * @return Recognized image code. Never returns null, may return empty string.
      */
-    public String recognizeImage(byte[] imageBytes) throws InterruptedException,
+    public String recognizeImage(byte[] imageBytes, String hint) throws InterruptedException,
             InvocationTargetException, ExecutionException {
         logger.fine("Resolving security code...");
-        if (imageBytes == null) {
+        if (imageBytes == null && StringUtils.isEmpty(hint)) {
             return "";
         }
-        ImageIcon image = new ImageIcon(imageBytes);
+        ImageIcon image = imageBytes == null ? null : new ImageIcon(imageBytes);
         sms.setImage(image);
+        sms.setImageHint(hint);
 
         boolean resolved = ImageCodeManager.getResolver().resolveImageCode(sms);
         if (!resolved) {

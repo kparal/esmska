@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-10-08"
+    return "2009-12-27"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0"
+    return "0.17.0.99"
 }
 
 function getWebsite() {
@@ -81,7 +81,7 @@ function send() {
     content = EXEC.getURL("http://sms.t-zones.cz/open/captcha.jpg", [])
     
     // show image
-    var captcha = EXEC.recognizeImage(content)
+    var captcha = EXEC.recognizeImage(content, "")
 
     // operator forces us to sleep 15s before sending (add +1s to be sure)
     //exact 15s delay maybe causes exception by server refusing connection

@@ -131,8 +131,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         }
         Validate.notNull(sms);
         
-        ImageIcon imageIcon = sms.getImage();
-        if (imageIcon == null) {
+        if (sms.getImage() == null && StringUtils.isEmpty(sms.getImageHint())) {
             sms.setImageCode(null);
             return false;
         }
@@ -213,6 +212,8 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
 
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setIcon(defaultIcon);
+        imageLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        imageLabel.setVerticalTextPosition(SwingConstants.TOP);
 
         jLabel2.setLabelFor(codeTextField);
 
@@ -246,14 +247,14 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
                     .addGroup(Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(codeTextField, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)))
+                        .addComponent(codeTextField, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(codeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -282,10 +283,10 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
             layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(introLabel)
+                .addComponent(introLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                     .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -310,11 +311,13 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
             } else {
                 //no other sms to show, close dialog
                 imageLabel.setIcon(defaultIcon);
+                imageLabel.setText(null);
                 setVisible(false);
             }
         } else {
             //display image from selected sms
             imageLabel.setIcon(sms.getImage());
+            imageLabel.setText("<html><i>" + sms.getImageHint() + "</i></html>");
         }
 }//GEN-LAST:event_queueListValueChanged
 

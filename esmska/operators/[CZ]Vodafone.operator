@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-17"
+    return "2009-12-27"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0"
+    return "0.17.0.99"
 }
 
 function getWebsite() {
@@ -87,7 +87,7 @@ function send() {
     content = EXEC.getURL("http://www.vodafonesms.cz/imgcode.php", params)
     
     // show image
-    var pictogram = EXEC.recognizeImage(content)
+    var pictogram = EXEC.recognizeImage(content, "")
 
     // send message
     postData = ["message", MESSAGE, "number", NUMBER, 

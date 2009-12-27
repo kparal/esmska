@@ -27,11 +27,12 @@ public class SMS {
     private String senderNumber;
     private String senderName;
     private ImageIcon image; //security image
-    private String imageCode; //security image code
+    private String imageCode = ""; //security image code
+    private String imageHint; //hint from gateway where to find security image (eg. sent to cell)
     private String operator;
     private Status status = Status.NEW; //sms status
     private String errMsg; //potential error
-    private String operatorMsg; //additional message from operator
+    private String operatorMsg = ""; //additional message from operator
     
     /** Status of SMS */
     public static enum Status {
@@ -115,6 +116,11 @@ public class SMS {
         return imageCode;
     }
 
+    /** Hint from gateway where to find security image. May be null. */
+    public String getImageHint() {
+        return imageHint;
+    }
+
     /** Operator of the message. Never null nor empty. */
     public String getOperator() {
         return operator;
@@ -176,6 +182,11 @@ public class SMS {
     /** Security image code. Null value is changed to empty string. */
     public void setImageCode(String imageCode) {
         this.imageCode = StringUtils.defaultString(imageCode);
+    }
+
+    /** Hint from gateway where to find security image. May be null. */
+    public void setImageHint(String imageHint) {
+        this.imageHint = imageHint;
     }
 
     /** Operator of the message. May not be null nor empty. */
