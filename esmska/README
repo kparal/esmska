@@ -99,9 +99,9 @@ Provided by lib/ directory:
    o org-openide-util.jar
    o http://platform.netbeans.org/
    o included in NetBeans IDE 6.1
- * Substance 5.2
+ * Substance 5.3
    o https://substance.dev.java.net/
- * Substance Extras 5.1
+ * Substance Extras 5.3
    o https://substance-extras.dev.java.net/
 
 If you wish to use other libraries than the ones provided in lib/ directory
