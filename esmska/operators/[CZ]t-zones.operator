@@ -4,11 +4,11 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-11-28"
+    return "2009-12-30"
 }
 
 function getMaintainer() {
-    return "Kamil Páral <ripper42@gmail.com>"
+    return "Kamil Páral <kamil.paral@gmail.com>"
 }
 
 function getMinProgramVersion() {
