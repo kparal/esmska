@@ -90,10 +90,6 @@ Provided by lib/ directory:
    o http://www.jgoodies.com/freeware/looks/
  * Mozilla Rhino 1.7R1
    o http://www.mozilla.org/rhino/
- * jPim 0.1 modified
-   o http://jpim.sourceforge.net/
-   o dead project, sources internally modified to fix some bugs
-   o sources available in the lib/ directory
  * OpenIDE libraries:
    o org-openide-awt.jar
    o org-openide-util.jar
