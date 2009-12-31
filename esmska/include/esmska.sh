@@ -24,9 +24,4 @@ if [ "$JAVA_HOME" ]; then
 fi
 
 # run program
-"$JAVA_HOME"java $OPTS -jar esmska.jar $*
-
-# return exitcode
-EXITCODE="$?"
-exit ${EXITCODE}
-
+exec "$JAVA_HOME"java $OPTS -jar esmska.jar $*
