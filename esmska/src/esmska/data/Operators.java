@@ -15,7 +15,9 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
@@ -45,6 +47,7 @@ public class Operators {
     private static final Logger logger = Logger.getLogger(Operators.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final SortedSet<Operator> operators = Collections.synchronizedSortedSet(new TreeSet<Operator>());
+    private static final HashSet<DeprecatedOperator> deprecatedOperators = new HashSet<DeprecatedOperator>();
     private static final Keyring keyring = Keyring.getInstance();
     private static final ScriptEngineManager manager = new ScriptEngineManager();
     private static ScriptEngine jsEngine;
@@ -168,6 +171,19 @@ public class Operators {
      */
     public boolean isEmpty() {
         return operators.isEmpty();
+    }
+
+    /** Get set of currently deprecated operators */
+    public HashSet<DeprecatedOperator> getDeprecatedOperators() {
+        return deprecatedOperators;
+    }
+
+    /** Set currently deprecated operators. May be null to clear them. */
+    public void setDeprecatedOperators(Set<DeprecatedOperator> deprecatedOperators) {
+        Operators.deprecatedOperators.clear();
+        if (deprecatedOperators != null) {
+            Operators.deprecatedOperators.addAll(deprecatedOperators);
+        }
     }
 
     /** Find operator by name.

@@ -31,6 +31,7 @@ import org.apache.commons.io.FileUtils;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Contacts;
+import esmska.data.DeprecatedOperator;
 import esmska.data.History;
 import esmska.data.Keyring;
 import esmska.data.Operators;
@@ -41,7 +42,10 @@ import esmska.integration.IntegrationAdapter;
 import esmska.utils.RuntimeUtils;
 import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import org.apache.commons.lang.Validate;
+import org.xml.sax.SAXException;
 
 /** Load and store settings and data
  *
@@ -62,6 +66,7 @@ public class PersistenceManager {
     private static final String KEYRING_FILENAME = "keyring.csv";
     private static final String LOCK_FILENAME = "running.lock";
     private static final String LOG_FILENAME = "console.log";
+    private static final String DEPRECATED_GWS_FILENAME = "deprecated.xml";
     private static final String OPERATOR_RESOURCE = "/esmska/operators/scripts";
     
     private static File configDir =
@@ -82,6 +87,7 @@ public class PersistenceManager {
     private static File keyringFile = new File(configDir, KEYRING_FILENAME);
     private static File lockFile = new File(configDir, LOCK_FILENAME);
     private static File logFile = new File(configDir, LOG_FILENAME);
+    private static File deprecatedGWsFile = new File(globalOperatorDir, DEPRECATED_GWS_FILENAME);
     
     private static boolean customPathSet;
     private FileLock lock;
@@ -352,11 +358,13 @@ public class PersistenceManager {
     /** Load operators
      * @throws IOException When there is problem accessing operator directory or files
      * @throws IntrospectionException When current JRE does not support JavaScript execution
+     * @throws SAXException When related XML files are not valid
      */
-    public void loadOperators() throws IOException, IntrospectionException {
+    public void loadOperators() throws IOException, IntrospectionException, SAXException {
         logger.fine("Loading operators...");
         ArrayList<Operator> globalOperators = new ArrayList<Operator>();
         TreeSet<Operator> localOperators = new TreeSet<Operator>();
+        HashSet<DeprecatedOperator> deprecatedOperators = new HashSet<DeprecatedOperator>();
         //global operators
         if (globalOperatorDir.exists()) {
             globalOperators = new ArrayList<Operator>(ImportManager.importOperators(globalOperatorDir));
@@ -371,6 +379,43 @@ public class PersistenceManager {
         if (localOperatorDir.exists()) {
             localOperators = ImportManager.importOperators(localOperatorDir);
         }
+        //deprecated operators
+        if (deprecatedGWsFile.canRead()) {
+            deprecatedOperators = ImportManager.importDeprecatedOperators(deprecatedGWsFile);
+        } else if (!RuntimeUtils.isRunAsWebStart()) {
+            logger.warning("Can't find list of deprecated gateways: " +
+                    deprecatedGWsFile.getAbsolutePath());
+        }
+        //filter out deprecated operators
+        for (DeprecatedOperator deprecated : deprecatedOperators) {
+            for (Iterator<Operator> it = globalOperators.iterator(); it.hasNext(); ) {
+                Operator op = it.next();
+                if (deprecated.getName().equals(op.getName()) &&
+                        deprecated.getVersion().compareTo(op.getVersion()) >= 0) {
+                    logger.finer("Global operator " + op.getName() + " is deprecated, skipping.");
+                    it.remove();
+                }
+            }
+            for (Iterator<Operator> it = localOperators.iterator(); it.hasNext(); ) {
+                Operator op = it.next();
+                if (deprecated.getName().equals(op.getName()) &&
+                        deprecated.getVersion().compareTo(op.getVersion()) >= 0) {
+                    //delete deprecated local operator
+                    logger.finer("Local operator " + op.getName() + " is deprecated, deleting...");
+                    it.remove();
+                    File opFile = null;
+                    try {
+                        opFile = new File(op.getScript().toURI());
+                        File opIcon = new File(opFile.getAbsolutePath().replaceFirst("\\.operator$", ".png"));
+                        opFile.delete();
+                        FileUtils.deleteQuietly(opIcon); //icon may not be present
+                    } catch (Exception ex) {
+                        logger.log(Level.WARNING, "Failed to delete deprecated local operator " +
+                                op.getName() + " (" + opFile + ")", ex);
+                    }
+                }
+            }
+        }
         //replace old global versions with new local ones
         for (Operator localOp : localOperators) {
             int index = globalOperators.indexOf(localOp);
@@ -380,6 +425,7 @@ public class PersistenceManager {
                     globalOperators.set(index, localOp);
                     logger.finer("Local operator " + localOp.getName() + " is newer, replacing global one.");
                 } else {
+                    //delete legacy local operators
                     logger.finer("Local operator " + localOp.getName() + " is same or older than global one, deleting...");
                     File opFile = null;
                     try {
@@ -400,6 +446,7 @@ public class PersistenceManager {
         //load it
         Operators.getInstance().clear();
         Operators.getInstance().addAll(globalOperators);
+        Operators.getInstance().setDeprecatedOperators(deprecatedOperators);
     }
 
     /** Save new operator to file. New or updated operator is saved in global operator

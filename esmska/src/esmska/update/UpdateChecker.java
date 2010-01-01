@@ -5,6 +5,7 @@
 package esmska.update;
 
 import esmska.data.Config;
+import esmska.data.DeprecatedOperator;
 import esmska.data.Operator;
 import esmska.data.Operators;
 import esmska.data.event.ActionEventSupport;
@@ -164,7 +165,8 @@ public class UpdateChecker {
      * which are new or updated compared to current ones. This can be used to reload
      * update info after partial update. Also removes operators requiring more recent
      * program version than available online (stable/unstable depending on config
-     * settings) and operators hidden by the user (operator filter).
+     * settings), operators hidden by the user (operator filter) and deprecated
+     * operators.
      */
     public void refreshUpdatedOperators() {
         String[] patterns = config.getOperatorFilter().split(",");
@@ -195,6 +197,15 @@ public class UpdateChecker {
                 //there has been no match against filter, remove it
                 it.remove();
                 continue;
+            }
+            //check for deprecated operators
+            for (DeprecatedOperator depr : Operators.getInstance().getDeprecatedOperators()) {
+                if (info.getName().equals(depr.getName()) &&
+                        info.getVersion().compareTo(depr.getVersion()) <= 0) {
+                    //operator has been deprecated
+                    it.remove();
+                    continue;
+                }
             }
         }
     }

@@ -30,16 +30,20 @@ import org.w3c.dom.Node;
  */
 public class VersionFile {
 
-    static final String TAG_ROOT = "esmska";
-    static final String TAG_LAST_VERSION = "latestStableVersion";
-    static final String TAG_LAST_UNSTABLE_VERSION = "latestUnstableVersion";
-    static final String TAG_OPERATOR = "operator";
-    static final String TAG_NAME = "name";
-    static final String TAG_FILENAME = "fileName";
-    static final String TAG_VERSION = "version";
-    static final String TAG_MIN_VERSION = "minProgramVersion";
-    static final String TAG_DOWNLOAD = "downloadURL";
-    static final String TAG_ICON = "iconURL";
+    public static final String TAG_ROOT = "esmska";
+    public static final String TAG_LAST_VERSION = "latestStableVersion";
+    public static final String TAG_LAST_UNSTABLE_VERSION = "latestUnstableVersion";
+    public static final String TAG_OPERATOR = "operator";
+    public static final String TAG_NAME = "name";
+    public static final String TAG_FILENAME = "fileName";
+    public static final String TAG_VERSION = "version";
+    public static final String TAG_MIN_VERSION = "minProgramVersion";
+    public static final String TAG_DOWNLOAD = "downloadURL";
+    public static final String TAG_ICON = "iconURL";
+
+    //deprecated operators
+    public static final String TAG_DEPRECATED_OPERATOR = "deprecatedOperator";
+    public static final String TAG_REASON = "reason";
 
     private static final String downloadProtocol = "http";
     private static final String downloadHost = "ripper.profitux.cz";

@@ -22,6 +22,7 @@ import esmska.data.SMS;
 import esmska.data.DefaultOperator;
 import esmska.data.Operator;
 import esmska.data.Tuple;
+import esmska.update.VersionFile;
 import java.beans.IntrospectionException;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -40,6 +41,16 @@ import java.util.TreeSet;
 import java.util.jar.JarEntry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /** Import program data
  *
@@ -223,6 +234,48 @@ public class ImportManager {
 
         logger.finer("Imported " + operators.size() + " operators");
         return operators;
+    }
+
+    /** Get set of deprecated operators from a file
+     * @param file xml containing description of deprecated operators
+     * @return set of deprecated operators
+     * @throws IOException problem accessing the file
+     * @throws SAXException problem parsing the file
+     */
+    public static HashSet<DeprecatedOperator> importDeprecatedOperators(File file)
+            throws IOException, SAXException {
+        logger.finer("Importing deprecated operators from file: " + file.getAbsolutePath());
+        if (!file.canRead() || !file.isFile()) {
+            throw new IOException("Invalid deprecated operator file: " + file.getAbsolutePath());
+        }
+
+        HashSet<DeprecatedOperator> deprecated = new HashSet<DeprecatedOperator>();
+
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            XPathFactory xpf = XPathFactory.newInstance();
+            XPath xpath = xpf.newXPath();
+
+            Document doc = db.parse(file);
+
+            NodeList operators = doc.getElementsByTagName(VersionFile.TAG_DEPRECATED_OPERATOR);
+            for (int i = 0; i < operators.getLength(); i++) {
+                Node operator = operators.item(i);
+                String name = xpath.evaluate(VersionFile.TAG_NAME + "/text()", operator);
+                String version = xpath.evaluate(VersionFile.TAG_VERSION + "/text()", operator);
+                String reason = xpath.evaluate(VersionFile.TAG_REASON + "/text()", operator);
+
+                DeprecatedOperator depr = new DeprecatedOperator(name, version, reason);
+                deprecated.add(depr);
+            }
+        } catch (ParserConfigurationException ex) {
+            throw new SAXException(ex);
+        } catch (XPathExpressionException ex) {
+            throw new SAXException(ex);
+        }
+
+        return deprecated;
     }
 
     /** Import keyring data from file.
