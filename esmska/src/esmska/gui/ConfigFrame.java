@@ -155,6 +155,13 @@ public class ConfigFrame extends javax.swing.JFrame {
                     "the list of available LaFs!");
         }
 
+        //disable some stuff on java webstart
+        if (RuntimeUtils.isRunAsWebStart()) {
+            checkUpdatesCheckBox.setEnabled(false);
+            updatePolicyComboBox.setEnabled(false);
+            unstableUpdatesCheckBox.setEnabled(false);
+        }
+
         //update other components
         updateThemeComboBox();
         updateUnstableUpdateCheckbox();
@@ -835,7 +842,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
             .addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );

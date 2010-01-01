@@ -211,7 +211,8 @@ public class MainFrame extends javax.swing.JFrame {
         bindGroup.bind();
         
         //check for updates
-        if (config.getCheckUpdatePolicy() != CheckUpdatePolicy.CHECK_NONE) {
+        if (config.getCheckUpdatePolicy() != CheckUpdatePolicy.CHECK_NONE &&
+                !RuntimeUtils.isRunAsWebStart()) {
             updateChecker.addActionListener(new UpdateListener());
             updateChecker.checkForUpdates();
         }
@@ -478,9 +479,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (Component comp : toolBar.getComponents()) {
             if (comp instanceof JButton) {
                 JButton button = (JButton) comp;
-                //disable mnemonics for buttons
                 button.setMnemonic(0);
-                //make icons prettier on Mac OS X
                 button.putClientProperty("JButton.buttonType", "gradient");
             }
         }
@@ -493,8 +492,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(programMenu);
 
-
         Mnemonics.setLocalizedText(messageMenu, l10n.getString("MainFrame.messageMenu.text")); // NOI18N
+
         undoMenuItem.setAction(smsPanel.getUndoAction());
         messageMenu.add(undoMenuItem);
 
@@ -518,6 +517,9 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu.add(logMenuItem);
 
         updateMenuItem.setAction(Actions.getUpdateAction(updateChecker));
+        if (RuntimeUtils.isRunAsWebStart()) {
+            updateMenuItem.setVisible(false);
+        }
         toolsMenu.add(updateMenuItem);
         toolsMenu.add(jSeparator4);
 
