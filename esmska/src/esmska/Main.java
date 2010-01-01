@@ -273,7 +273,7 @@ public class Main {
             //set suggested LaF for this platform
             config.setLookAndFeel(ThemeManager.suggestBestLAF());
             //set update policy if run as java webstart
-            if (Config.isRunAsWebStart()) {
+            if (RuntimeUtils.isRunAsWebStart()) {
                 //run as webstart, disable updates checking
                 config.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_NONE);
             }
