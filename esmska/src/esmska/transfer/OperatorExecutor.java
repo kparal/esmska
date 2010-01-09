@@ -33,9 +33,9 @@ public class OperatorExecutor {
     /** Message that security code was wrong. */
     public static final String ERROR_WRONG_CODE =
             l10n.getString("OperatorExecutor.ERROR_WRONG_CODE");
-    /** Message that message text was wrong. */
-    public static final String ERROR_WRONG_TEXT =
-            l10n.getString("OperatorExecutor.ERROR_WRONG_TEXT");
+    /** Message that message text was too long. */
+    public static final String ERROR_LONG_TEXT =
+            l10n.getString("OperatorExecutor.ERROR_LONG_TEXT");
     /** Message that sender signature was wrong. */
     public static final String ERROR_WRONG_SIGNATURE =
             l10n.getString("OperatorExecutor.ERROR_WRONG_SIGNATURE");

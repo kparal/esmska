@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-07-02"
+    return "2010-01-09"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0"
+    return "0.18.0beta1"
 }
 
 function getWebsite() {
@@ -101,7 +101,7 @@ function send() {
     re=/ERR:4/
     match = re.exec(content)
     if (undefined != match) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_TEXT)
+        EXEC.setErrorMessage(EXEC.ERROR_LONG_TEXT)
         return false
     }    
 
