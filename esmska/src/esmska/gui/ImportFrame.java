@@ -237,6 +237,8 @@ public class ImportFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
+
         importButtonGroup = new ButtonGroup();
         cardPanel = new JPanel();
         applicationPanel = new JPanel();
@@ -267,27 +269,25 @@ public class ImportFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("ImportFrame.title")); // NOI18N
-
-
-
         cardPanel.setLayout(new CardLayout());
 
         jLabel2.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         Mnemonics.setLocalizedText(jLabel2, l10n.getString("ImportFrame.jLabel2.text")); // NOI18N
         Mnemonics.setLocalizedText(jLabel3, l10n.getString("ImportFrame.jLabel3.text"));
+
         importButtonGroup.add(kubikRadioButton);
-
         Mnemonics.setLocalizedText(kubikRadioButton, "&Kubík SMS DreamCom"); // NOI18N
+
         importButtonGroup.add(dreamcomSERadioButton);
-
         Mnemonics.setLocalizedText(dreamcomSERadioButton, "&DreamCom SE"); // NOI18N
+
         importButtonGroup.add(esmskaRadioButton);
-        esmskaRadioButton.setSelected(true);
 
-
-        Mnemonics.setLocalizedText(esmskaRadioButton,"&Esmska"); // NOI18N
+        Mnemonics.setLocalizedText(esmskaRadioButton, "&Esmska"); // NOI18N
         Mnemonics.setLocalizedText(jLabel4, l10n.getString("ImportFrame.jLabel4.text"));
+
         importButtonGroup.add(vcardRadioButton);
+        vcardRadioButton.setSelected(true);
 
         Mnemonics.setLocalizedText(vcardRadioButton, "&vCard (*.vcard, *.vcf)");
         GroupLayout applicationPanelLayout = new GroupLayout(applicationPanel);
@@ -297,10 +297,11 @@ public class ImportFrame extends javax.swing.JFrame {
             .addGroup(applicationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(applicationPanelLayout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(jLabel2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addGroup(applicationPanelLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(vcardRadioButton))
-                    .addComponent(jLabel2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addGroup(applicationPanelLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -308,15 +309,18 @@ public class ImportFrame extends javax.swing.JFrame {
                             .addComponent(esmskaRadioButton)
                             .addComponent(kubikRadioButton)
                             .addComponent(dreamcomSERadioButton))
-                        .addGap(323, 323, 323))
-                    .addComponent(jLabel4))
+                        .addGap(206, 206, 206)))
                 .addContainerGap())
         );
         applicationPanelLayout.setVerticalGroup(
             applicationPanelLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(applicationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(vcardRadioButton)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(ComponentPlacement.RELATED)
@@ -325,25 +329,21 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(kubikRadioButton)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(dreamcomSERadioButton)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(vcardRadioButton)
                 .addContainerGap(145, Short.MAX_VALUE))
         );
 
         cardPanel.add(applicationPanel, "applicationPanel");
 
+
+
+
+
+
+
         fileTextField.setToolTipText(l10n.getString("ImportFrame.fileTextField.toolTipText")); // NOI18N
-
         browseButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/browse-22.png"))); // NOI18N
-        Mnemonics.setLocalizedText(browseButton, l10n.getString("ImportFrame.browseButton.text")); // NOI18N
+        Mnemonics.setLocalizedText(browseButton, l10n.getString("ImportFrame.browseButton.text"));
         browseButton.setToolTipText(l10n.getString("ImportFrame.browseButton.toolTipText")); // NOI18N
-
-
-
-
-
         browseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 browseButtonActionPerformed(evt);
@@ -388,11 +388,11 @@ public class ImportFrame extends javax.swing.JFrame {
                     .addComponent(browseButton)
                     .addComponent(fileTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(jLabel22)
+                .addComponent(jLabel22, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(encodingLabel)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(problemLabel)
+                .addComponent(problemLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(134, Short.MAX_VALUE))
         );
 
@@ -403,11 +403,11 @@ public class ImportFrame extends javax.swing.JFrame {
         contactList.setCellRenderer(new ContactsListRenderer());
         jScrollPane1.setViewportView(contactList);
 
-
         doImportLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         Mnemonics.setLocalizedText(doImportLabel, l10n.getString("ImportFrame.doImportLabel.text")); // NOI18N
+
         validOperatorCheckBox.setSelected(true);
-        Mnemonics.setLocalizedText(validOperatorCheckBox, l10n.getString("ImportFrame.validOperatorCheckBox.text")); // NOI18N
+        Mnemonics.setLocalizedText(validOperatorCheckBox, l10n.getString("ImportFrame.validOperatorCheckBox.text"));
         validOperatorCheckBox.setToolTipText(l10n.getString("ImportFrame.validOperatorCheckBox.toolTipText")); // NOI18N
         validOperatorCheckBox.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
