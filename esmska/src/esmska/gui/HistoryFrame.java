@@ -48,7 +48,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -68,6 +67,7 @@ import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.table.TableCellRenderer;
+import org.jvnet.substance.api.renderers.SubstanceDefaultTableCellRenderer;
 import org.openide.awt.Mnemonics;
 
 /** Display all sent messages in a frame
@@ -287,8 +287,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
 
 
-
-        Mnemonics.setLocalizedText(jLabel2,l10n.getString("HistoryFrame.jLabel2.text")); // NOI18N
+        Mnemonics.setLocalizedText(jLabel2, l10n.getString("HistoryFrame.jLabel2.text")); // NOI18N
         Mnemonics.setLocalizedText(jLabel1, l10n.getString("HistoryFrame.jLabel1.text"));
         Mnemonics.setLocalizedText(jLabel3, l10n.getString("HistoryFrame.jLabel3.text"));
         Mnemonics.setLocalizedText(jLabel4, l10n.getString("HistoryFrame.jLabel4.text"));
@@ -301,6 +300,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(operatorLabel, "    ");
         Mnemonics.setLocalizedText(senderNumberLabel, "    ");
         Mnemonics.setLocalizedText(senderNameLabel, "    ");
+
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         jScrollPane2.setViewportView(textArea);
@@ -659,7 +659,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     }
 
     /** Renderer for date columns in history table */
-    private class TableDateRenderer extends DefaultTableCellRenderer {
+    private class TableDateRenderer extends SubstanceDefaultTableCellRenderer {
         private final JTable lafTable = new JTable();
         private final ImageIcon icon = new ImageIcon(HistoryFrame.class.getResource(RES + "message-16.png"));
 
