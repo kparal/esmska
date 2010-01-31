@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-27 23:51+0200\n"
-"PO-Revision-Date: 2009-12-27 23:51+0100\n"
+"POT-Creation-Date: 2010-01-31 17:55+0200\n"
+"PO-Revision-Date: 2010-01-31 17:54+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1294,14 +1294,12 @@ msgstr ""
 "</html>"
 
 #: ImportFrame.jLabel3.text
-msgid "Choose from which application you want to import contacts:"
-msgstr "Vyberte, ze které aplikace chcete importovat kontakty:"
+msgid "Or choose the application you want to import contacts from:"
+msgstr "Nebo vyberte aplikaci, ze které chcete kontakty importovat:"
 
 #: ImportFrame.jLabel4.text
-msgid ""
-"Or choose the type of the standardized file format you have the contacts in:"
-msgstr ""
-"Nebo zvolte, ve kterém ze standardizovaných formátů souborů kontakty máte:"
+msgid "Choose the file format you have your contacts stored in:"
+msgstr "Zvolte, ve kterém formátu souborů máte kontakty uloženy:"
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1753,6 +1751,22 @@ msgstr ""
 "je nutný vyčkat před odesláním další zprávy, nebo omezuje<br>maximální možný "
 "počet zpráv za jistý časový úsek. Zkuste to později."
 
+#: OperatorExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+"Zadali jste příliš dlouhý text zprávy.<br>\n"
+"<br>\n"
+"Rada: Pokud je to ve vašem jazyce možné, zkuste nepoužívat národní znaky "
+"(odlišné od standardní<br>\n"
+"anglické znakové sady), jinak to může podstatně zkrátit maximální povolenou "
+"délku zprávy."
+
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
 msgstr "Pro odeslání této zprávy nemáte dostatečný kredit."
@@ -1812,10 +1826,6 @@ msgstr "Zadali jste nesprávné číslo příjemce."
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
 msgstr "Zadali jste nesprávný podpis odesilatele (číslo či jméno)."
-
-#: OperatorExecutor.ERROR_WRONG_TEXT
-msgid "You have entered incorrect message text. Empty or too long?"
-msgstr "Zadali jste nesprávný text zprávy. Prázdný, nebo příliš dlouhý?"
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
@@ -2449,6 +2459,9 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid "You have entered incorrect message text. Empty or too long?"
+#~ msgstr "Zadali jste nesprávný text zprávy. Prázdný, nebo příliš dlouhý?"
 
 #~ msgid "&Image code:"
 #~ msgstr "&Kód v obrázku:"

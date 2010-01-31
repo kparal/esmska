@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-27 23:43+0200\n"
+"POT-Creation-Date: 2010-01-31 17:49+0200\n"
 "PO-Revision-Date: 2009-11-24 23:29+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1227,12 +1227,13 @@ msgstr ""
 "</html>"
 
 #: ImportFrame.jLabel3.text
-msgid "Choose from which application you want to import contacts:"
+#, fuzzy
+msgid "Or choose the application you want to import contacts from:"
 msgstr "בחר מאיזה יישום ברצונך לייבא אנשי קשר:"
 
 #: ImportFrame.jLabel4.text
-msgid ""
-"Or choose the type of the standardized file format you have the contacts in:"
+#, fuzzy
+msgid "Choose the file format you have your contacts stored in:"
 msgstr "או בחר את סוג הקובץ המתוקנן בו יש לך אנשי קשר:"
 
 #: ImportFrame.problemLabel.text
@@ -1623,6 +1624,16 @@ msgid ""
 "it later."
 msgstr ""
 
+#: OperatorExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
 msgstr "אין לך די אשראי לשליחת הודעה זו."
@@ -1669,10 +1680,6 @@ msgstr "הזנת מספר נמען שגוי."
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
 msgstr "הזנת חתימת שולח שגויה (מספר או שם)."
-
-#: OperatorExecutor.ERROR_WRONG_TEXT
-msgid "You have entered incorrect message text. Empty or too long?"
-msgstr "הזנת טקסט שגוי בהודעה. ריק או ארוך מדי?"
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
@@ -2263,6 +2270,9 @@ msgstr ""
 #~ "אין למלא את קידומת המדינה אם קידומת ברירת המחדל<br>\n"
 #~ "מוגדרת בהעדפות התוכנה.\n"
 #~ "</html>"
+
+#~ msgid "You have entered incorrect message text. Empty or too long?"
+#~ msgstr "הזנת טקסט שגוי בהודעה. ריק או ארוך מדי?"
 
 #~ msgid "O&perators"
 #~ msgstr "מ&פעילים"

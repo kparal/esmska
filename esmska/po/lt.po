@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-27 23:43+0200\n"
+"POT-Creation-Date: 2010-01-31 17:49+0200\n"
 "PO-Revision-Date: 2009-12-03 22:40+0000\n"
 "Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -1123,13 +1123,13 @@ msgid ""
 msgstr ""
 
 #: ImportFrame.jLabel3.text
-msgid "Choose from which application you want to import contacts:"
+msgid "Or choose the application you want to import contacts from:"
 msgstr ""
 
 #: ImportFrame.jLabel4.text
-msgid ""
-"Or choose the type of the standardized file format you have the contacts in:"
-msgstr ""
+#, fuzzy
+msgid "Choose the file format you have your contacts stored in:"
+msgstr "Pasirinkite failą, kuriame yra eksportuotas kontaktų sąrašas"
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1502,6 +1502,16 @@ msgid ""
 "it later."
 msgstr ""
 
+#: OperatorExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
 msgstr "Jūs neturite pakankamai kreditų išsiųsti šiai žinutei."
@@ -1548,10 +1558,6 @@ msgstr "Ivedėte klaidingą gavėjo numerį."
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
 msgstr "Įvedėte klaidingą siuntėjo parašą (numerį arba vardą)."
-
-#: OperatorExecutor.ERROR_WRONG_TEXT
-msgid "You have entered incorrect message text. Empty or too long?"
-msgstr "Įvedėte neteisingą tekstą. Tekstas tuščias arba per ilgas."
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
@@ -2126,6 +2132,9 @@ msgstr ""
 "<h2>Ieškoti atnaujintų operatorių</h2>\n"
 "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
 "</html>"
+
+#~ msgid "You have entered incorrect message text. Empty or too long?"
+#~ msgstr "Įvedėte neteisingą tekstą. Tekstas tuščias arba per ilgas."
 
 #~ msgid "O&perators"
 #~ msgstr "Operatoriai"

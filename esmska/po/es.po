@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-27 23:43+0200\n"
-"PO-Revision-Date: 2009-12-24 12:09+0000\n"
-"Last-Translator: Alfonso E. Romero <alfonsoeromero@gmail.com>\n"
+"POT-Creation-Date: 2010-01-31 17:49+0200\n"
+"PO-Revision-Date: 2009-12-27 22:58+0000\n"
+"Last-Translator: mordorq3 <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-25 04:42+0000\n"
+"X-Launchpad-Export-Date: 2009-12-29 04:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -810,9 +810,8 @@ msgid "The country code for which you have filled out the prefix number"
 msgstr "El código del pais para el cual se ha llenado el número prefijo"
 
 #: CountryPrefixPanel.countryCodeLabel.text
-#, fuzzy
 msgid "(c&ountry:"
-msgstr "(país:"
+msgstr ""
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -905,7 +904,7 @@ msgstr "Enviar SMS por internet"
 #. #This string is located in the operating-system menu item
 #: DesktopFile.genericName
 msgid "SMS Sender"
-msgstr ""
+msgstr "SMS Sender"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.name
@@ -999,7 +998,7 @@ msgstr "Elija la ubicación y tipo de archivo a exportar"
 
 #: ExportManager.contact_export
 msgid "Contact export"
-msgstr ""
+msgstr "Exportar contacto"
 
 #: ExportManager.contact_list
 msgid "Contact list"
@@ -1012,7 +1011,7 @@ msgstr "Archivos CSV (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
-msgstr ""
+msgstr "Fallo al exportar el contacto!"
 
 #: ExportManager.export_info
 msgid ""
@@ -1062,7 +1061,7 @@ msgstr ""
 #: Forward_
 msgctxt "Forward_"
 msgid "&Forward"
-msgstr ""
+msgstr "Si&guiente"
 
 #: Hide_program
 msgid "Hide program"
@@ -1070,7 +1069,7 @@ msgstr "Esconder programa"
 
 #: History
 msgid "History"
-msgstr ""
+msgstr "Historial"
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
@@ -1082,7 +1081,7 @@ msgstr "Número:"
 
 #: HistoryFrame.jLabel2.text
 msgid "Name:"
-msgstr ""
+msgstr "Nombre:"
 
 #: HistoryFrame.jLabel3.text
 msgid "Date:"
@@ -1108,11 +1107,11 @@ msgstr ""
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
-msgstr ""
+msgstr "Vuelva a enviar mensaje a otra persona"
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
-msgstr ""
+msgstr "Ingrese el termino a buscar en el historial de mensajes"
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
@@ -1120,21 +1119,15 @@ msgstr "&Buscar:"
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
-msgstr ""
+msgstr "Historial de mensajes enviados  - Esmska"
 
 #: ImageCodeDialog.introLabel.text
-#, fuzzy
 msgid ""
 "<html>\n"
 "<h2>Security code required</h2>\n"
 "The chosen gateway requires you to enter the security code displayed below:\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"<h2>Requiere Código de Seguridad</h2>\n"
-"La puerta de enlace requiere que ingrese el código de seguridad en la "
-"siguiente imagen:\n"
-"</html>"
 
 #: ImageCodeDialog.jLabel2.text
 msgid "Security &code:"
@@ -1148,7 +1141,7 @@ msgstr "Archivos CSV (*.csv)"
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
 msgid "Select"
-msgstr ""
+msgstr "Seleccionar"
 
 #: ImportFrame.backButton.text
 msgid "&Back"
@@ -1156,7 +1149,7 @@ msgstr "&Atrás"
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
-msgstr ""
+msgstr "E&xaminar..."
 
 #: ImportFrame.browseButton.toolTipText
 msgid "Find contacts file using dialog"
@@ -1188,7 +1181,7 @@ msgstr "Elegir archivo de entrada:"
 
 #: ImportFrame.fileTextField.toolTipText
 msgid "The path to contacts file"
-msgstr ""
+msgstr "La ruta de acceso a los contactos de archivo"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.file_cant_be_read
@@ -1222,6 +1215,9 @@ msgid ""
 "create it by using \"Export contacts\" function. Select that file here.</"
 "html>"
 msgstr ""
+"<html> Para importar contactos tu necesitas tener un archivo CSV preparado. "
+"Usted puede crear mediante el uso de \"Exportar contactos\". Seleccione el "
+"archivo aquí. </html>"
 
 #: ImportFrame.infoKubik
 msgid ""
@@ -1260,13 +1256,13 @@ msgid ""
 msgstr ""
 
 #: ImportFrame.jLabel3.text
-msgid "Choose from which application you want to import contacts:"
+msgid "Or choose the application you want to import contacts from:"
 msgstr ""
 
 #: ImportFrame.jLabel4.text
-msgid ""
-"Or choose the type of the standardized file format you have the contacts in:"
-msgstr ""
+#, fuzzy
+msgid "Choose the file format you have your contacts stored in:"
+msgstr "Elija el archivo de contactos exportados"
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1639,6 +1635,16 @@ msgid ""
 "it later."
 msgstr ""
 
+#: OperatorExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
 msgstr ""
@@ -1684,10 +1690,6 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
-msgstr ""
-
-#: OperatorExecutor.ERROR_WRONG_TEXT
-msgid "You have entered incorrect message text. Empty or too long?"
 msgstr ""
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
@@ -2121,7 +2123,8 @@ msgstr ""
 "  Federico Vera https://launchpad.net/~fedevera\n"
 "  Javier Acuña Ditzel https://launchpad.net/~santoposmoderno\n"
 "  Kamus https://launchpad.net/~kamus\n"
-"  Miguel Zilli https://launchpad.net/~miguelzilli"
+"  Miguel Zilli https://launchpad.net/~miguelzilli\n"
+"  mordorq3 https://launchpad.net/~hackers300"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel

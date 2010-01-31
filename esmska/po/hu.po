@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-27 23:43+0200\n"
+"POT-Creation-Date: 2010-01-31 17:49+0200\n"
 "PO-Revision-Date: 2009-12-24 12:11+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -1122,12 +1122,11 @@ msgid ""
 msgstr ""
 
 #: ImportFrame.jLabel3.text
-msgid "Choose from which application you want to import contacts:"
+msgid "Or choose the application you want to import contacts from:"
 msgstr ""
 
 #: ImportFrame.jLabel4.text
-msgid ""
-"Or choose the type of the standardized file format you have the contacts in:"
+msgid "Choose the file format you have your contacts stored in:"
 msgstr ""
 
 #: ImportFrame.problemLabel.text
@@ -1501,6 +1500,16 @@ msgid ""
 "it later."
 msgstr ""
 
+#: OperatorExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
 msgstr ""
@@ -1546,10 +1555,6 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
-msgstr ""
-
-#: OperatorExecutor.ERROR_WRONG_TEXT
-msgid "You have entered incorrect message text. Empty or too long?"
 msgstr ""
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING

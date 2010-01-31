@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-27 23:43+0200\n"
-"PO-Revision-Date: 2009-12-24 12:09+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2010-01-31 17:49+0200\n"
+"PO-Revision-Date: 2010-01-24 05:06+0000\n"
+"Last-Translator: nanker <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-25 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-01-25 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -66,7 +66,7 @@ msgstr ""
 
 #: AboutFrame.supportButton.text
 msgid "<html><a href=\"\">Support project</a></html>"
-msgstr ""
+msgstr "<html><a href=\"\">Støt projekt</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
 msgid ""
@@ -74,6 +74,9 @@ msgid ""
 "Do you like this project? Help to keep it running...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Kan du lide dette projektt? Hjælp med at holde det i luften...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -101,7 +104,7 @@ msgstr "&Afbryd"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
-msgstr ""
+msgstr "Tjek for program og gateway opdateringer"
 
 #: CheckUpdates_
 msgid "&Updates checker"
@@ -139,7 +142,7 @@ msgstr ""
 
 #: CommandLineParser.debugMode
 msgid "debug mode"
-msgstr ""
+msgstr "fejlsøgningstilstand"
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
@@ -176,7 +179,7 @@ msgstr "Brug:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr ""
+msgstr "Udskriv program version og afslut."
 
 #: Compress_
 msgid "&Compress"
@@ -224,7 +227,7 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
-msgstr ""
+msgstr "Slet alle brugernavne og adgangskoder for alle gateways"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
@@ -277,7 +280,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr ""
+msgstr "&Generelt"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -302,7 +305,7 @@ msgstr ""
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Gateway:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
@@ -365,7 +368,7 @@ msgstr ""
 
 #: ConfigFrame.loginTextField.toolTipText
 msgid "Username needed for logging in to the gateway"
-msgstr ""
+msgstr "Brugernavn nødvendigt for at logge på gateway"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -408,15 +411,15 @@ msgstr ""
 
 #: ConfigFrame.operatorPanel.TabConstraints.tabTitle
 msgid "&Gateways"
-msgstr ""
+msgstr "&Gateways"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
-msgstr ""
+msgstr "Adgangskoden som tilhører brugernavnet"
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
-msgstr ""
+msgstr "P&rivatliv"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
@@ -450,17 +453,19 @@ msgstr ""
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
-msgstr ""
+msgstr "En genstart af programmet er nødvendig for at anvende ændringerne."
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
-msgstr ""
+msgstr "Samme som &HTTP proxy"
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
 msgid ""
 "An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
 "field"
 msgstr ""
+"En adresse i 'HTTP proxy' feltet vil også blive anvendt for 'HTTPS proxy' "
+"feltet"
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -477,11 +482,11 @@ msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Show password"
-msgstr ""
+msgstr "Vis adgangskode"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
-msgstr ""
+msgstr "Sæt adgangskoden til at blive vist eller skjult"
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -520,7 +525,7 @@ msgstr ""
 
 #: ConfigFrame.tipsCheckBox.text
 msgid "Show program &tip on startup"
-msgstr ""
+msgstr "Vis program &tips ved start"
 
 #: ConfigFrame.tipsCheckBox.toolTipText
 msgid ""
@@ -536,7 +541,7 @@ msgstr ""
 
 #: ConfigFrame.toolbarVisibleCheckBox.text
 msgid "Show the &toolbar"
-msgstr ""
+msgstr "Vis værk&tøjslinjen"
 
 #: ConfigFrame.toolbarVisibleCheckBox.toolTipText
 msgid ""
@@ -565,19 +570,19 @@ msgstr ""
 
 #: ConfigFrame.updateCheckAll
 msgid "program and gateways"
-msgstr ""
+msgstr "program og gateway"
 
 #: ConfigFrame.updateCheckGateway
 msgid "gateways only"
-msgstr ""
+msgstr "kun gateways"
 
 #: ConfigFrame.updateCheckProgram
 msgid "program only"
-msgstr ""
+msgstr "kun program"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
-msgstr ""
+msgstr "Brug pro&xy server *"
 
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
@@ -635,17 +640,17 @@ msgstr "Kontakter"
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
-msgstr ""
+msgstr "Kontakt liste (Alt+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
 msgid "Contact {0} modified"
-msgstr ""
+msgstr "Kontakt {0} ændret"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContacts
 msgid "{0} contacts modified"
-msgstr ""
+msgstr "{0} kontakter ændret"
 
 #: ContactPanel.new_contact_hint
 msgid ""
@@ -656,16 +661,16 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContact
 msgid "{0} removed from contacts"
-msgstr ""
+msgstr "{0} fjernet fra kontakter"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContacts
 msgid "{0} contacts removed"
-msgstr ""
+msgstr "{0} kontakter fjernet"
 
 #: ContactPanel.remove_following_contacts
 msgid "<html><h3>Really remove following contacts?</h3></html>"
-msgstr ""
+msgstr "<html><h3>Ønsker du virkelig at fjerne følgende kontakter?</h3></html>"
 
 #: Contact_export_
 msgid "Contact &export"
@@ -685,7 +690,7 @@ msgstr ""
 
 #: CountryPrefixPanel.countryCodeLabel.text
 msgid "(c&ountry:"
-msgstr ""
+msgstr "(&land:"
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -705,7 +710,7 @@ msgstr ""
 #. #meaning "unknown country"
 #: CountryPrefixPanel.unknown_state
 msgid "unknown"
-msgstr ""
+msgstr "ukendt"
 
 #: Create
 msgid "Create"
@@ -721,11 +726,11 @@ msgstr "Bidrag fra:"
 
 #: Credits.graphics
 msgid "Graphics:"
-msgstr ""
+msgstr "Grafik:"
 
 #: Credits.sponsors
 msgid "Sponsors:"
-msgstr ""
+msgstr "Sponsorer:"
 
 #: Credits.translators
 msgid "Translated by:"
@@ -741,7 +746,7 @@ msgstr "Slet"
 
 #: Delete_
 msgid "&Delete"
-msgstr ""
+msgstr "&Slet"
 
 #: Delete_contacts
 msgid "Delete contacts"
@@ -827,7 +832,7 @@ msgstr "Redigér kontakt"
 
 #: Edit_contacts
 msgid "Edit contacts"
-msgstr ""
+msgstr "Redigér kontakt"
 
 #: Edit_contacts_collectively
 msgid "Edit contacts collectively"
@@ -839,7 +844,7 @@ msgstr "Redigér besked"
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
-msgstr ""
+msgstr "Redigér udvalgte kontakter"
 
 #: Edit_selected_message
 msgid "Edit selected message"
@@ -851,7 +856,7 @@ msgstr ""
 
 #: ExceptionDialog.detailsLabel.text
 msgid "Details:"
-msgstr ""
+msgstr "Detaljer:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
@@ -868,12 +873,12 @@ msgstr ""
 
 #: ExportManager.contact_list
 msgid "Contact list"
-msgstr ""
+msgstr "Kontaktliste"
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "CSV filer (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
@@ -921,13 +926,13 @@ msgstr "vCard filer (*.vcard, *.vcf)"
 
 #: Finish_
 msgid "&Finish"
-msgstr ""
+msgstr "&Udfør"
 
 #. #Action to resend message
 #: Forward_
 msgctxt "Forward_"
 msgid "&Forward"
-msgstr ""
+msgstr "&Videresend"
 
 #: Hide_program
 msgid "Hide program"
@@ -960,12 +965,12 @@ msgstr "Gateway:"
 #. #Write it short!
 #: HistoryFrame.jLabel5.text
 msgid "Sender number:"
-msgstr ""
+msgstr "Afsender nr.:"
 
 #. #Write it short!
 #: HistoryFrame.jLabel6.text
 msgid "Sender name:"
-msgstr ""
+msgstr "Afsender navn:"
 
 #: HistoryFrame.remove_selected
 msgid "Really remove all selected messages from history?"
@@ -997,12 +1002,12 @@ msgstr ""
 
 #: ImageCodeDialog.jLabel2.text
 msgid "Security &code:"
-msgstr ""
+msgstr "Sikkerheds &kode:"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "CSV filer (*.csv)"
 
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
@@ -1045,7 +1050,7 @@ msgstr "Vælg input fil:"
 
 #: ImportFrame.fileTextField.toolTipText
 msgid "The path to contacts file"
-msgstr ""
+msgstr "Sti til kontaktfil"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.file_cant_be_read
@@ -1055,7 +1060,7 @@ msgstr "Denne fil {0} kan ikke læses!"
 #: ImportFrame.forwardButton.text
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
-msgstr ""
+msgstr "&Videresend"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.foundContacts
@@ -1064,7 +1069,7 @@ msgstr ""
 
 #: ImportFrame.foundContactsLabel.text
 msgid "No new contacts were found."
-msgstr ""
+msgstr "Ingen nye kontakter blev fundet."
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1117,12 +1122,11 @@ msgid ""
 msgstr ""
 
 #: ImportFrame.jLabel3.text
-msgid "Choose from which application you want to import contacts:"
+msgid "Or choose the application you want to import contacts from:"
 msgstr ""
 
 #: ImportFrame.jLabel4.text
-msgid ""
-"Or choose the type of the standardized file format you have the contacts in:"
+msgid "Choose the file format you have your contacts stored in:"
 msgstr ""
 
 #: ImportFrame.problemLabel.text
@@ -1162,7 +1166,7 @@ msgstr ""
 
 #: Import_
 msgid "Im&port"
-msgstr ""
+msgstr "Im&port"
 
 #: InitWizardDialog.jLabel1.text
 msgid ""
@@ -1174,11 +1178,11 @@ msgstr ""
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
-msgstr ""
+msgstr "R&yd"
 
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
-msgstr ""
+msgstr "Ryder aktuel log"
 
 #: LogFrame.copyButton.toolTipText
 msgid "Copy the whole log contents to the system clipboard"
@@ -1190,7 +1194,7 @@ msgstr "Log - Esmska"
 
 #: Log_
 msgid "&Log"
-msgstr ""
+msgstr "&Log"
 
 #: Main.already_running
 msgid ""
@@ -1216,7 +1220,7 @@ msgstr ""
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
-msgstr ""
+msgstr "Vælg en placering til konfigurationsfilerne"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.configsNewer
@@ -1252,7 +1256,7 @@ msgstr "Forlad program"
 
 #: MainFrame.cant_save_config
 msgid "Some of the configuration files couldn't be saved!"
-msgstr ""
+msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 
 #: MainFrame.compressButton.toolTipText
 msgid "Compress message (Ctrl+K)"
@@ -1264,7 +1268,7 @@ msgstr ""
 
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
-msgstr ""
+msgstr "&Støt dette projekt!"
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
@@ -1272,19 +1276,19 @@ msgstr ""
 
 #: MainFrame.faqMenuItem.text
 msgid "Frequently Asked &Questions"
-msgstr ""
+msgstr "Ofte stillede &spørgsmål"
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
-msgstr ""
+msgstr "Se de oftest stillede spørgsmål (online)"
 
 #: MainFrame.getHelpMenuItem.text
 msgid "Get &Help Online..."
-msgstr ""
+msgstr "Få &hjælp online..."
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
-msgstr ""
+msgstr "Stil et spørgsmål i et support forum"
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
@@ -1304,12 +1308,12 @@ msgstr "&Besked:"
 
 #: MainFrame.newOperatorUpdate
 msgid "<a href=\"\">Gateway updates</a> are available!"
-msgstr ""
+msgstr "<a href=\"\">Gateway opdateringer</a> er tilgængelige!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
-msgstr ""
+msgstr "En <a href=\"\">ny program version</a> ({0}) er tilgængelig!"
 
 #: MainFrame.no_operators
 msgid ""
@@ -1330,7 +1334,7 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &Problem..."
-msgstr ""
+msgstr "Rapportér et &problem..."
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1365,7 +1369,7 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
-msgstr ""
+msgstr "Meddelelse til {0} afsendt."
 
 #: MainFrame.tip
 msgid "Tip:"
@@ -1377,15 +1381,15 @@ msgstr "&Værktøjer"
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate This Application..."
-msgstr ""
+msgstr "&Oversæt dette program..."
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
-msgstr ""
+msgstr "Hjælp med at oversætte dette program til dit sprog"
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"
-msgstr ""
+msgstr "Fortryd (Ctrl+Z)"
 
 #: Message_history_
 msgid "Message &history"
@@ -1413,12 +1417,12 @@ msgstr ""
 
 #: OK_
 msgid "&OK"
-msgstr ""
+msgstr "&OK"
 
 #: Operator.unknown
 msgctxt "Operator.unknown"
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Ukendt gateway"
 
 #: OperatorComboBox.Choose_suitable_gateway
 msgid "Guess a suitable gateway"
@@ -1430,15 +1434,15 @@ msgstr ""
 
 #: OperatorComboBox.international
 msgid "Can be used internationally."
-msgstr ""
+msgstr "Kan bruges internationalt."
 
 #: OperatorComboBox.needRegistration
 msgid "Requires registration on the website."
-msgstr ""
+msgstr "Kræver registrering på hjemmesiden."
 
 #: OperatorComboBox.noRegistration
 msgid "Does not require registration."
-msgstr ""
+msgstr "Kræver ikke registrering."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
@@ -1496,6 +1500,16 @@ msgid ""
 "it later."
 msgstr ""
 
+#: OperatorExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
 msgstr ""
@@ -1543,10 +1557,6 @@ msgstr ""
 msgid "You have entered incorrent sender signature (number or name)."
 msgstr ""
 
-#: OperatorExecutor.ERROR_WRONG_TEXT
-msgid "You have entered incorrect message text. Empty or too long?"
-msgstr ""
-
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
 msgstr ""
@@ -1563,7 +1573,7 @@ msgstr ""
 
 #: OperatorInterpreter.unknown_operator
 msgid "Unknown gateway!"
-msgstr ""
+msgstr "Ukendt gateway!"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1587,11 +1597,11 @@ msgstr "Program start"
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
-msgstr ""
+msgstr "Flyt sms ned i køen"
 
 #: QueuePanel.Move_sms_up_in_the_queue
 msgid "Move sms up in the queue"
-msgstr ""
+msgstr "Flyt sms op i køen"
 
 #: QueuePanel.Pause_sending_of_sms_in_the_queue
 msgid "Pause sending of sms in the queue (Alt+P)"
@@ -1770,12 +1780,12 @@ msgstr ""
 
 #: SMSSender.no_operator
 msgid "no gateway"
-msgstr ""
+msgstr "ingen gateway"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
-msgstr ""
+msgstr "Sender meddelelse til {0} ({1}) ..."
 
 #: Save
 msgid "Save"
@@ -1792,7 +1802,7 @@ msgstr "&Send"
 
 #: Send_message
 msgid "Send message"
-msgstr "Send medelelse"
+msgstr "Send meddelelse"
 
 #: Show/hide_program
 msgid "Show/hide program"
@@ -1877,6 +1887,8 @@ msgstr ""
 #: Tip.18
 msgid "Program is open and free. Join in and help us improve it!"
 msgstr ""
+"Programmet er åbent og gratis. Deltag i arbejdet og hjælp os med at forbedre "
+"det!"
 
 #. #Write the tip as short as possible
 #: Tip.19
@@ -1902,6 +1914,8 @@ msgstr ""
 msgid ""
 "4 of 5 zoologist recommend using the operating system with a penguin logo."
 msgstr ""
+"4 ud af 5 zoologer anbefaler brug af et styresystem, der anvender en pingvin "
+"som logo."
 
 #. #Write the tip as short as possible
 #: Tip.22
@@ -1924,6 +1938,8 @@ msgstr ""
 #: Tip.25
 msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
+"Brug hjælpemenuen til at stille et spørgsmål eller til at rapportere et "
+"problem."
 
 #. #Write the tip as short as possible
 #: Tip.3
@@ -2017,48 +2033,50 @@ msgstr ""
 
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
-msgstr ""
+msgstr "Klik for at åbne program downloadside"
 
 #: Update.checkFailed
 msgid "Retrieving update information failed!"
-msgstr ""
+msgstr "Modtagelse af opdateringsinfo mislykkedes!"
 
 #: Update.checking
 msgid "Checking..."
-msgstr ""
+msgstr "Tjekker..."
 
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
-msgstr ""
+msgstr "Downloading af nogle gateways mislykkedes!"
 
 #: Update.downloading
 msgid "Downloading..."
-msgstr ""
+msgstr "Downloader..."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwTooltip
 msgid "gateway version: {0}"
-msgstr ""
+msgstr "gateway version: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
 msgid "Gateway updated: {0}"
-msgstr ""
+msgstr "Gateway opdateret: {0}"
 
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
-msgstr ""
+msgstr "Installation af nogle gateways mislykkedes!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.invalidGw
 msgid "{0} (needs program version: {1})"
-msgstr ""
+msgstr "{0} (behøver program version: {1})"
 
 #: Update.noUpdates
 msgid ""
 "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
 "latest versions of all the available gateways.</html>"
 msgstr ""
+"<html><h2>Alle gateways er opdaterede</h2>Du anvender i øjeblikket de "
+"seneste versioner af alle tilgængelige gateways.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.notLatest
@@ -2073,6 +2091,8 @@ msgid ""
 "<html>There is a new program version ({0}) available on the <a href=\"{1}"
 "\">program homepage</a>.</html>"
 msgstr ""
+"<html>Der er en nyere program version ({0}) tilgængelig på <a href=\"{1}"
+"\">programmets hjemmeside</a>.</html>"
 
 #: Update.queueRunning
 msgid ""

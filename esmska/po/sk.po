@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-27 23:43+0200\n"
-"PO-Revision-Date: 2009-11-24 23:37+0000\n"
+"POT-Creation-Date: 2010-01-31 17:49+0200\n"
+"PO-Revision-Date: 2010-01-05 14:30+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-01-06 04:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -204,7 +204,7 @@ msgstr "Zobraziť položky s pokročilejšími nastaveniami"
 
 #: ConfigFrame.advancedControlsCheckBox.text
 msgid "Show a&dvanced controls"
-msgstr ""
+msgstr "Zobraziť pokročilé ovlá&dacie prvky"
 
 #: ConfigFrame.advancedControlsCheckBox.toolTipText
 msgid ""
@@ -213,6 +213,10 @@ msgid ""
 "advanced controls in the main program window\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Zobraziť alebo schovať niektoré ďalšie tlčítka a iné <br>\n"
+"pokročilé ovládacie prvky v hlavnom okne programu\n"
+"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -802,9 +806,8 @@ msgid "The country code for which you have filled out the prefix number"
 msgstr "Kód štátu, pre ktorý ste vyplnili medzinárodné smerové číslo"
 
 #: CountryPrefixPanel.countryCodeLabel.text
-#, fuzzy
 msgid "(c&ountry:"
-msgstr "(krajina:"
+msgstr "(š&tát:"
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -912,6 +915,10 @@ msgid ""
 "(and the number seems to be located in: {1})\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Zvolená brána pravdepodobne posiela správy iba do: {0}.<br>\n"
+"(a číslo pravdepodobne patrí k: {1})\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: EditContactPanel.credentialsInfoLabel.text
@@ -921,6 +928,10 @@ msgid ""
 "Please enter your credentials in the <a href=\"{0}\">options dialog</a>.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Zvolili ste si bránu vyžadujúcu registráciu.<br>\n"
+"Zadajte prosím svoje prihlšovacie údaje v <a href=\"{0}\">nastaveniach</a>.\n"
+"</html>"
 
 #: EditContactPanel.gatewayLabel.text
 msgid "Default &gateway:"
@@ -946,6 +957,10 @@ msgid ""
 "(in the international format - including the country prefix)\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Telefónne číslo kontaktu<br>\n"
+"(v medzinárodnom tvare - vrátane predvoľby krajiny)\n"
+"</html>"
 
 #: Edit_contact
 msgid "Edit contact"
@@ -1058,7 +1073,7 @@ msgstr "Súbory vCard (*.vcard, *.vcf)"
 
 #: Finish_
 msgid "&Finish"
-msgstr ""
+msgstr "&Koniec"
 
 #. #Action to resend message
 #: Forward_
@@ -1125,7 +1140,6 @@ msgid "Sent messages history - Esmska"
 msgstr "História odoslaných správ - Esmska"
 
 #: ImageCodeDialog.introLabel.text
-#, fuzzy
 msgid ""
 "<html>\n"
 "<h2>Security code required</h2>\n"
@@ -1140,7 +1154,7 @@ msgstr ""
 
 #: ImageCodeDialog.jLabel2.text
 msgid "Security &code:"
-msgstr ""
+msgstr "bezpečnostný &kód:"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
@@ -1287,12 +1301,13 @@ msgstr ""
 "</html>"
 
 #: ImportFrame.jLabel3.text
-msgid "Choose from which application you want to import contacts:"
+#, fuzzy
+msgid "Or choose the application you want to import contacts from:"
 msgstr "Vyberte si, z ktorej aplikácie chcete importovať kontakty:"
 
 #: ImportFrame.jLabel4.text
-msgid ""
-"Or choose the type of the standardized file format you have the contacts in:"
+#, fuzzy
+msgid "Choose the file format you have your contacts stored in:"
 msgstr ""
 "Alebo zvoľte, v ktorom zo štandardizovaných formátov súborov máte kontakty:"
 
@@ -1350,6 +1365,10 @@ msgid ""
 "Following settings were detected automatically. Are they correct?\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Prvé spustenie</h2>\n"
+"Nasledujúce nastavenia boli zistené automaticky. Sú v poriadku?\n"
+"</html>"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
@@ -1419,6 +1438,11 @@ msgid ""
 "fix that by downloading and installing the latest<br>version of Esmska."
 "<br><br><i>It is not recommended to proceed, user data loss may occur!</i>"
 msgstr ""
+"<html><h2>Program je príliš starý!</h2>Vaše používateľské dáta boli zapísané "
+"novšou verziou programu  ({0})<br>ako je vami aktuálne používaná  ({1}). "
+"Možno ste nainštalovali novšiu verziu<br> Esmsky omylom. Môžete to opraviť "
+"stiahnutím a nainštalovaním najnovšej <br>verzie Esmsky.<br><br><i>Nieje "
+"odporúčané pokračovať, môže dôjsť k strate používateľských dát!!</i>"
 
 #: Main.no_javascript
 msgid ""
@@ -1738,6 +1762,16 @@ msgstr ""
 "obmedzuje<br>maximálny počet možných poslaných správ za časový interval. "
 "Skuste to neskôr."
 
+#: OperatorExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
 msgstr "Na odoslanie tejto správy nemáte dostatočný kredit."
@@ -1796,10 +1830,6 @@ msgstr "Zadali ste nesprávne číslo príjemcu."
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
 msgstr "Zadali ste nesprávny podpis odosielateľa (číslo alebo meno)."
-
-#: OperatorExecutor.ERROR_WRONG_TEXT
-msgid "You have entered incorrect message text. Empty or too long?"
-msgstr "Zadali ste nesprávny text správy. Prázdny alebo príliš dlhý?"
 
 #: OperatorExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
@@ -1941,6 +1971,9 @@ msgid ""
 "Number is from country {0}, but this gateway sends only to {1}.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Čislo je zo štátu {0}, ale brána posiela iba do {1}.\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.credentialsInfoLabel.text
@@ -1950,6 +1983,10 @@ msgid ""
 "href=\"{0}\">options dialog</a>.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Zvolená brána vyžaduje registráciu.Vyplňte svoje prihlasovacie údaje v <a "
+"href=\"{0}\">nastaveniach</a>.\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.fullProgressBar
@@ -1965,7 +2002,7 @@ msgstr "&Brána"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
-msgstr ""
+msgstr "<html>Číslo nieje v platnom medzinárodnom tvare.</html>"
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"
@@ -2436,6 +2473,12 @@ msgstr ""
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
 
+#~ msgid "You have entered incorrect message text. Empty or too long?"
+#~ msgstr "Zadali ste nesprávny text správy. Prázdny alebo príliš dlhý?"
+
+#~ msgid "O&perators"
+#~ msgstr "O&perátori"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Telephone number of the contact including the country prefix.<br>\n"
@@ -2448,12 +2491,6 @@ msgstr ""
 #~ "Smerové číslo krajiny nemusí byť vyplnené ak je nastavené<br>\n"
 #~ "východiskové smerové číslo v nastaveniach programu.\n"
 #~ "</html>"
-
-#~ msgid "&Image code:"
-#~ msgstr "&Kód na obrázku:"
-
-#~ msgid "O&perators"
-#~ msgstr "O&perátori"
 
 #~ msgid "Directory with program settings can't be created!"
 #~ msgstr "Nepodarilo sa vytvoriť adresár s nastavením programu!"
@@ -2470,6 +2507,9 @@ msgstr ""
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Brána:"
+
+#~ msgid "&Image code:"
+#~ msgstr "&Kód na obrázku:"
 
 #~ msgid ""
 #~ "<html>The user configuration directory at ''{0}''<br>can''t be read or "
