@@ -66,3 +66,6 @@ done
 sort "$TMPFILE" >> "$DESKTOP"
 rm "$TMPFILE"
 
+# validate desktop file
+desktop-file-validate "$DESKTOP" || echo "DESKTOP FILE NOT VALID!" 1>&2
+
