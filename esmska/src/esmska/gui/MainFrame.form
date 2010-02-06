@@ -183,7 +183,7 @@
                   <Connection code="Actions.getBrowseAction(Links.DONATE)" type="code"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/heart-16.png"/>
+                  <Image iconType="3" name="/esmska/resources/donate-16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.donateMenuItem.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
@@ -433,7 +433,7 @@
               <Connection code="Actions.getBrowseAction(Links.DONATE)" type="code"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/esmska/resources/heart-22to32.png"/>
+              <Image iconType="3" name="/esmska/resources/donate-32.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>

@@ -468,7 +468,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(exitButton);
 
         donateButton.setAction(Actions.getBrowseAction(Links.DONATE));
-        donateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/heart-22to32.png"))); // NOI18N
+        donateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/donate-32.png"))); // NOI18N
         donateButton.setToolTipText(l10n.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         donateButton.setFocusable(false);
         donateButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -554,7 +554,7 @@ public class MainFrame extends javax.swing.JFrame {
         helpMenu.add(problemMenuItem);
 
         donateMenuItem.setAction(Actions.getBrowseAction(Links.DONATE));
-        donateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/heart-16.png"))); // NOI18N
+        donateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/donate-16.png"))); // NOI18N
         Mnemonics.setLocalizedText(donateMenuItem,l10n.getString("MainFrame.donateMenuItem.text")); // NOI18N
         donateMenuItem.setToolTipText(l10n.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         helpMenu.add(donateMenuItem);
