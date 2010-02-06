@@ -103,11 +103,14 @@
                 <attribute name="Class-Path" value="${jar.classpath} lib/operators.jar"/>
             </manifest>
         </jar>
+        <!-- add esmska.ico -->
+        <move file="dist/icons/esmska.ico" todir="dist"/>
         <!-- delete unneeded stuff -->
         <delete includeemptydirs="true">
             <fileset dir="dist" includes="**/*">
                 <exclude name="lib/**"/>
                 <exclude name="*.jar"/>
+                <exclude name="esmska.ico"/>
             </fileset>
         </delete>
         <!-- call 'jnlp' target -->
