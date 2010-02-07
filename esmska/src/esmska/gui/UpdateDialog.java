@@ -15,16 +15,12 @@ import esmska.Context;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.Tuple3;
-import esmska.data.event.ValuedEvent;
-import esmska.data.event.ValuedListener;
-import esmska.gui.JHtmlLabel.Events;
 import esmska.update.HttpDownloader;
 import esmska.update.OperatorUpdateInfo;
 import esmska.update.UpdateChecker;
 import esmska.utils.L10N;
 import esmska.data.Links;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -42,10 +38,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -87,6 +84,11 @@ public class UpdateDialog extends javax.swing.JDialog {
     private Downloader downloader;
     /** current form state */
     private FormState formState = FormState.IDLE;
+    /** Custom executor for executing SwingWorkers. Needed because of bug in Java 6u18:
+     * http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6880336
+     * http://forums.sun.com/thread.jspa?threadID=5424356
+     */
+    private static final ExecutorService executor = Executors.newCachedThreadPool();
 
     private final ImageIcon updateIcon = new ImageIcon(getClass().getResource(RES + "update-22.png"));
     private final ImageIcon updateManagerIcon = new ImageIcon(getClass().getResource(RES + "updateManager-22.png"));
@@ -402,7 +404,7 @@ public class UpdateDialog extends javax.swing.JDialog {
                 }
             }
         });
-        dl.execute();
+        executor.execute(dl);
     }
 
     /** install downloaded updates */
@@ -582,7 +584,7 @@ public class UpdateDialog extends javax.swing.JDialog {
                     if (info.getIconUrl() != null) {
                         //download icon
                         dl = new HttpDownloader(info.getIconUrl().toString(), true);
-                        dl.execute();
+                        executor.execute(dl);
                         icon = (byte[]) dl.get();
                         if (!dl.isFinishedOk()) {
                             continue;

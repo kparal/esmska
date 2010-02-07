@@ -46,7 +46,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="topLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="gwScrollPane" pref="141" max="32767" attributes="0"/>
+              <Component id="gwScrollPane" pref="126" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
