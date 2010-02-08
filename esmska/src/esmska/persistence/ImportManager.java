@@ -34,6 +34,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Set;
@@ -214,13 +215,25 @@ public class ImportManager {
                 DefaultOperator operator = new DefaultOperator(operatorURL);
                 //check that this operator can be used in this program
                 if (Config.compareProgramVersions(Config.getLatestVersion(),
-                        operator.getMinProgramVersion()) >= 0) {
-                    operators.add(operator);
-                } else {
+                        operator.getMinProgramVersion()) < 0) {
                     logger.info("Operator " + operator.getName() +
                             " requires program of version at least " +
                             operator.getMinProgramVersion() + ", skipping.");
+                    continue;
                 }
+                //check that some older version of the same operator is not
+                //already present (can happen when renaming operator file,
+                //see http://code.google.com/p/esmska/issues/detail?id=235)
+                if (operators.contains(operator)) {
+                    for (Iterator<Operator> it = operators.iterator(); it.hasNext(); ) {
+                        Operator op = it.next();
+                        if (op.equals(operator) && 
+                                op.getVersion().compareTo(operator.getVersion()) < 0) {
+                            it.remove();
+                        }
+                    }
+                }
+                operators.add(operator);
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "Problem accessing operator resource: " +
                         operatorURL.toExternalForm(), ex);
