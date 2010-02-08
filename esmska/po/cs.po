@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-31 17:55+0200\n"
-"PO-Revision-Date: 2010-01-31 17:54+0100\n"
+"POT-Creation-Date: 2010-02-08 20:40+0200\n"
+"PO-Revision-Date: 2010-02-08 20:40+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -38,8 +38,8 @@ msgid "Sending SMS over Internet."
 msgstr "Posílání SMS přes Internet."
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2009 Kamil Páral"
-msgstr "2007-2009 Kamil Páral"
+msgid "2007-2010 Kamil Páral"
+msgstr "2007-2010 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -1491,8 +1491,8 @@ msgid "See the most frequently asked questions (online)"
 msgstr "Zobrazit nejčastěji pokládané otázky (online)"
 
 #: MainFrame.getHelpMenuItem.text
-msgid "Get &Help Online..."
-msgstr "Získat &pomoc online..."
+msgid "&Ask the authors..."
+msgstr "Položit dotaz &autorům..."
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
@@ -1554,8 +1554,8 @@ msgstr ""
 "</ul></html>"
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &Problem..."
-msgstr "Nahlásit p&roblém..."
+msgid "Report a &problem or an idea..."
+msgstr "Nahlásit p&roblém či nápad..."
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1601,7 +1601,7 @@ msgid "&Tools"
 msgstr "&Nástroje"
 
 #: MainFrame.translateMenuItem.text
-msgid "&Translate This Application..."
+msgid "&Translate this application..."
 msgstr "Pře&ložit tuto aplikaci..."
 
 #: MainFrame.translateMenuItem.toolTipText
@@ -2459,6 +2459,9 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid "Get &Help Online..."
+#~ msgstr "Získat &pomoc online..."
 
 #~ msgid "You have entered incorrect message text. Empty or too long?"
 #~ msgstr "Zadali jste nesprávný text zprávy. Prázdný, nebo příliš dlouhý?"

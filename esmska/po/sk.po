@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-31 17:49+0200\n"
-"PO-Revision-Date: 2010-01-05 14:30+0000\n"
+"POT-Creation-Date: 2010-02-08 20:37+0200\n"
+"PO-Revision-Date: 2010-02-01 13:36+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-06 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-02-02 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -43,7 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "Posielanie SMS cez internet."
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2009 Kamil Páral"
+#, fuzzy
+msgid "2007-2010 Kamil Páral"
 msgstr "2007-2009 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
@@ -1301,15 +1302,12 @@ msgstr ""
 "</html>"
 
 #: ImportFrame.jLabel3.text
-#, fuzzy
 msgid "Or choose the application you want to import contacts from:"
-msgstr "Vyberte si, z ktorej aplikácie chcete importovať kontakty:"
+msgstr "Alebo vyberte aplikáciu, s ktorej chcete importovať kontakty:"
 
 #: ImportFrame.jLabel4.text
-#, fuzzy
 msgid "Choose the file format you have your contacts stored in:"
-msgstr ""
-"Alebo zvoľte, v ktorom zo štandardizovaných formátov súborov máte kontakty:"
+msgstr "Zvoľte v akom formáte máte kontakty uložené:"
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1501,8 +1499,8 @@ msgid "See the most frequently asked questions (online)"
 msgstr "Zobraziť často kladené otázky (online)"
 
 #: MainFrame.getHelpMenuItem.text
-msgid "Get &Help Online..."
-msgstr "Získať &pomoc online ..."
+msgid "&Ask the authors..."
+msgstr ""
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
@@ -1564,7 +1562,8 @@ msgstr ""
 "</ul></html>"
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &Problem..."
+#, fuzzy
+msgid "Report a &problem or an idea..."
 msgstr "Nahlásiť &problém ..."
 
 #: MainFrame.problemMenuItem.toolTipText
@@ -1611,7 +1610,8 @@ msgid "&Tools"
 msgstr "Nás&troje"
 
 #: MainFrame.translateMenuItem.text
-msgid "&Translate This Application..."
+#, fuzzy
+msgid "&Translate this application..."
 msgstr "Preložiť &túto aplikáciu..."
 
 #: MainFrame.translateMenuItem.toolTipText
@@ -1771,6 +1771,12 @@ msgid ""
 "english character set), otherwise it may reduce the maximum allowed message "
 "length substantially."
 msgstr ""
+"Zadali ste príliš dlhý text správy.<br>\n"
+"<br>\n"
+"Rada: Ak je to vo Vašom jazyku možné, vyskúšajte nepoužiť národné znaky "
+"(odlišné od štandardnej<br>\n"
+"anglickej znakovej sady), inak to môže podstatne skrátiť maximálnu povolenú "
+"dĺžku správy."
 
 #: OperatorExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
@@ -2473,8 +2479,8 @@ msgstr ""
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
 
-#~ msgid "You have entered incorrect message text. Empty or too long?"
-#~ msgstr "Zadali ste nesprávny text správy. Prázdny alebo príliš dlhý?"
+#~ msgid "Get &Help Online..."
+#~ msgstr "Získať &pomoc online ..."
 
 #~ msgid "O&perators"
 #~ msgstr "O&perátori"
@@ -2517,6 +2523,9 @@ msgstr ""
 #~ msgstr ""
 #~ "<html>Adresár s používateľskými nastaveniami „{0}“<br>nebolo možné "
 #~ "načítať alebo doňho zapísať!</html>"
+
+#~ msgid "You have entered incorrect message text. Empty or too long?"
+#~ msgstr "Zadali ste nesprávny text správy. Prázdny alebo príliš dlhý?"
 
 #~ msgid "no operator"
 #~ msgstr "žiadny operátor"

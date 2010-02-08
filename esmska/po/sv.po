@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-31 17:49+0200\n"
-"PO-Revision-Date: 2010-01-17 14:42+0000\n"
-"Last-Translator: Merarom <Unknown>\n"
+"POT-Creation-Date: 2010-02-08 20:37+0200\n"
+"PO-Revision-Date: 2010-01-31 18:25+0000\n"
+"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-18 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-02-01 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -43,7 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "Sänder SMS över Internet"
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2009 Kamil Páral"
+#, fuzzy
+msgid "2007-2010 Kamil Páral"
 msgstr "2007-2009 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
@@ -1283,7 +1284,7 @@ msgid "See the most frequently asked questions (online)"
 msgstr ""
 
 #: MainFrame.getHelpMenuItem.text
-msgid "Get &Help Online..."
+msgid "&Ask the authors..."
 msgstr ""
 
 #: MainFrame.getHelpMenuItem.toolTipText
@@ -1333,7 +1334,8 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &Problem..."
+#, fuzzy
+msgid "Report a &problem or an idea..."
 msgstr "Raportera ett &Problem..."
 
 #: MainFrame.problemMenuItem.toolTipText
@@ -1380,7 +1382,7 @@ msgid "&Tools"
 msgstr "&Verktyg"
 
 #: MainFrame.translateMenuItem.text
-msgid "&Translate This Application..."
+msgid "&Translate this application..."
 msgstr ""
 
 #: MainFrame.translateMenuItem.toolTipText

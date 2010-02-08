@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-31 17:49+0200\n"
+"POT-Creation-Date: 2010-02-08 20:37+0200\n"
 "PO-Revision-Date: 2009-12-03 22:40+0000\n"
 "Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -43,7 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "SMS siuntimas internetu."
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2009 Kamil Páral"
+#, fuzzy
+msgid "2007-2010 Kamil Páral"
 msgstr "2007-2009"
 
 #: AboutFrame.licenseButton.text
@@ -1285,8 +1286,8 @@ msgid "See the most frequently asked questions (online)"
 msgstr "Žiūrėti Dažniausiai Užduodamus Klausimus (online)"
 
 #: MainFrame.getHelpMenuItem.text
-msgid "Get &Help Online..."
-msgstr "&Pagalba internete..."
+msgid "&Ask the authors..."
+msgstr ""
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
@@ -1335,7 +1336,8 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &Problem..."
+#, fuzzy
+msgid "Report a &problem or an idea..."
 msgstr "Pranešti apie &problemą..."
 
 #: MainFrame.problemMenuItem.toolTipText
@@ -1382,7 +1384,8 @@ msgid "&Tools"
 msgstr "Įran&kiai"
 
 #: MainFrame.translateMenuItem.text
-msgid "&Translate This Application..."
+#, fuzzy
+msgid "&Translate this application..."
 msgstr "&Išversti šią programą..."
 
 #: MainFrame.translateMenuItem.toolTipText
@@ -2132,6 +2135,9 @@ msgstr ""
 "<h2>Ieškoti atnaujintų operatorių</h2>\n"
 "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
 "</html>"
+
+#~ msgid "Get &Help Online..."
+#~ msgstr "&Pagalba internete..."
 
 #~ msgid "You have entered incorrect message text. Empty or too long?"
 #~ msgstr "Įvedėte neteisingą tekstą. Tekstas tuščias arba per ilgas."

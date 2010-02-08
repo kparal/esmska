@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-31 17:49+0200\n"
+"POT-Creation-Date: 2010-02-08 20:37+0200\n"
 "PO-Revision-Date: 2009-11-24 22:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -43,7 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "Inviando SMS attraverso Internet"
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2009 Kamil Páral"
+#, fuzzy
+msgid "2007-2010 Kamil Páral"
 msgstr "2007-2009 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
@@ -1283,7 +1284,7 @@ msgid "See the most frequently asked questions (online)"
 msgstr "Guarda le domande più frequenti (online)"
 
 #: MainFrame.getHelpMenuItem.text
-msgid "Get &Help Online..."
+msgid "&Ask the authors..."
 msgstr ""
 
 #: MainFrame.getHelpMenuItem.toolTipText
@@ -1333,7 +1334,8 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &Problem..."
+#, fuzzy
+msgid "Report a &problem or an idea..."
 msgstr "Riporta un &Problema..."
 
 #: MainFrame.problemMenuItem.toolTipText
@@ -1380,7 +1382,8 @@ msgid "&Tools"
 msgstr "&Strumenti"
 
 #: MainFrame.translateMenuItem.text
-msgid "&Translate This Application..."
+#, fuzzy
+msgid "&Translate this application..."
 msgstr "&Traduci Questa Applicazione..."
 
 #: MainFrame.translateMenuItem.toolTipText
