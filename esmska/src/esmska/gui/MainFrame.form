@@ -151,19 +151,6 @@
                 </Property>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="translateMenuItem">
-              <Properties>
-                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="Actions.getBrowseAction(Links.TRANSLATE)" type="code"/>
-                </Property>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.translateMenuItem.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.translateMenuItem.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
-                </Property>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="problemMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -174,6 +161,19 @@
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.problemMenuItem.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="translateMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Actions.getBrowseAction(Links.TRANSLATE)" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.translateMenuItem.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.translateMenuItem.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -251,7 +251,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Component id="toolBar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="horizontalSplitPane" pref="430" max="32767" attributes="0"/>
+              <Component id="horizontalSplitPane" pref="438" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>

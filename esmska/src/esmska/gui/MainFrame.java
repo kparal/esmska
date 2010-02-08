@@ -377,8 +377,8 @@ public class MainFrame extends javax.swing.JFrame {
         helpMenu = new JMenu();
         faqMenuItem = new JMenuItem();
         getHelpMenuItem = new JMenuItem();
-        translateMenuItem = new JMenuItem();
         problemMenuItem = new JMenuItem();
+        translateMenuItem = new JMenuItem();
         donateMenuItem = new JMenuItem();
         helpSeparator = new JSeparator();
         aboutMenuItem = new JMenuItem();
@@ -543,15 +543,15 @@ public class MainFrame extends javax.swing.JFrame {
         getHelpMenuItem.setToolTipText(l10n.getString("MainFrame.getHelpMenuItem.toolTipText")); // NOI18N
         helpMenu.add(getHelpMenuItem);
 
-        translateMenuItem.setAction(Actions.getBrowseAction(Links.TRANSLATE));
-        Mnemonics.setLocalizedText(translateMenuItem,l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
-        translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
-        helpMenu.add(translateMenuItem);
-
         problemMenuItem.setAction(Actions.getBrowseAction(Links.ISSUES));
         Mnemonics.setLocalizedText(problemMenuItem,l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
         problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
         helpMenu.add(problemMenuItem);
+
+        translateMenuItem.setAction(Actions.getBrowseAction(Links.TRANSLATE));
+        Mnemonics.setLocalizedText(translateMenuItem,l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
+        translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
+        helpMenu.add(translateMenuItem);
 
         donateMenuItem.setAction(Actions.getBrowseAction(Links.DONATE));
         donateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/donate-16.png"))); // NOI18N
@@ -584,7 +584,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
