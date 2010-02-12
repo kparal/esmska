@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-08 20:37+0200\n"
-"PO-Revision-Date: 2010-02-01 13:36+0000\n"
+"POT-Creation-Date: 2010-02-12 21:03+0200\n"
+"PO-Revision-Date: 2010-02-08 21:03+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-02 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-02-09 05:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -43,9 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "Posielanie SMS cez internet."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2010 Kamil Páral"
-msgstr "2007-2009 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -1562,9 +1561,8 @@ msgstr ""
 "</ul></html>"
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem or an idea..."
-msgstr "Nahlásiť &problém ..."
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1610,9 +1608,8 @@ msgid "&Tools"
 msgstr "Nás&troje"
 
 #: MainFrame.translateMenuItem.text
-#, fuzzy
 msgid "&Translate this application..."
-msgstr "Preložiť &túto aplikáciu..."
+msgstr ""
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
@@ -2479,9 +2476,6 @@ msgstr ""
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
 
-#~ msgid "Get &Help Online..."
-#~ msgstr "Získať &pomoc online ..."
-
 #~ msgid "O&perators"
 #~ msgstr "O&perátori"
 
@@ -2500,6 +2494,9 @@ msgstr ""
 
 #~ msgid "Directory with program settings can't be created!"
 #~ msgstr "Nepodarilo sa vytvoriť adresár s nastavením programu!"
+
+#~ msgid "Get &Help Online..."
+#~ msgstr "Získať &pomoc online ..."
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Opíšte kód z obrázku:"
