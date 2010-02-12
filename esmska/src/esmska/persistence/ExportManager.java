@@ -9,10 +9,10 @@
 
 package esmska.persistence;
 
-import android.provider.Contacts;
-import android.syncml.pim.vcard.ContactStruct;
-import android.syncml.pim.vcard.VCardComposer;
-import android.syncml.pim.vcard.VCardException;
+import a_vcard.android.provider.Contacts;
+import a_vcard.android.syncml.pim.vcard.ContactStruct;
+import a_vcard.android.syncml.pim.vcard.VCardComposer;
+import a_vcard.android.syncml.pim.vcard.VCardException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;

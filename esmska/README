@@ -65,7 +65,7 @@ Runtime requirements
  * Java 6 JRE (Sun and OpenJDK tested)
  
 Provided by lib/ directory:
- * Android vCard
+ * Android vCard 1.2
    o http://code.google.com/p/android-vcard/
  * Apache Commons CLI 1.2
    o http://commons.apache.org/cli/
