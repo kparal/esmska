@@ -412,8 +412,7 @@ public class Actions {
         private JTextComponent numberComponent;
 
         public SuggestOperatorAction(OperatorComboBox operatorComboBox, JTextComponent numberComponent) {
-            super(l10n.getString("OperatorComboBox.Choose_suitable_gateway"),
-                    new ImageIcon(Actions.class.getResource(RES + "search-22.png")));
+            L10N.setLocalizedText(this, l10n.getString("Suggest_"));
             this.putValue(SHORT_DESCRIPTION, l10n.getString("OperatorComboBox.Choose_suitable_gateway_for_provided_number"));
 
             if (operatorComboBox == null || numberComponent == null) {

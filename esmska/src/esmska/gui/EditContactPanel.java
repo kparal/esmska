@@ -39,7 +39,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import org.apache.commons.lang.StringUtils;
-import org.jvnet.substance.SubstanceLookAndFeel;
 import org.openide.awt.Mnemonics;
 
 /** Add new or edit current contact
@@ -72,7 +71,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         //set up button for suggesting operator
         suggestOperatorAction = Actions.getSuggestOperatorAction(operatorComboBox, numberTextField);
         suggestOperatorButton.setAction(suggestOperatorAction);
-        suggestOperatorButton.setText(null);
 
         //listen for changes in number and guess operator
         numberTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
@@ -152,7 +150,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("EditContactPanel.gatewayLabel.text")); // NOI18N
         gatewayLabel.setToolTipText(operatorComboBox.getToolTipText());
 
-        suggestOperatorButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         suggestOperatorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 suggestOperatorButtonActionPerformed(evt);
@@ -171,15 +168,15 @@ public class EditContactPanel extends javax.swing.JPanel {
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-        .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+        .addComponent(countryInfoLabel)
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
         .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(credentialsInfoLabel)
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+            .addComponent(countryInfoLabel))
     );
 
         GroupLayout layout = new GroupLayout(this);
@@ -198,11 +195,11 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(suggestOperatorButton))
-                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))))
+                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))))
             .addContainerGap())
     );
 
