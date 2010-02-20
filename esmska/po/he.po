@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-12 21:03+0200\n"
+"POT-Creation-Date: 2010-02-20 14:14+0200\n"
 "PO-Revision-Date: 2009-11-24 23:29+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -860,7 +860,7 @@ msgstr "Esmska"
 #: EditContactPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Selected gateway probably sends messages only to: {0}.<br>\n"
+"Selected gateway probably sends messages only to country: {0}.<br>\n"
 "(and the number seems to be located in: {1})\n"
 "</html>"
 msgstr ""
@@ -1551,10 +1551,6 @@ msgctxt "Operator.unknown"
 msgid "Unknown gateway"
 msgstr ""
 
-#: OperatorComboBox.Choose_suitable_gateway
-msgid "Guess a suitable gateway"
-msgstr ""
-
 #: OperatorComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
 msgstr ""
@@ -1587,21 +1583,6 @@ msgid ""
 "Delay between messages: {4}<br>\n"
 "{5}<br>\n"
 "Gateway version: {6}\n"
-"</html>"
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorComboBox.tooltip
-msgid ""
-"<html>\n"
-"List of available web gateways.<br>\n"
-"<br>\n"
-"Prefix [XX] indicates country for which the gateway works.<br>\n"
-"Prefix [INT] indicates international gateways.<br>\n"
-"<br>\n"
-"<table><tr><td><img src=\"{0}\"></td><td>Move your mouse over individual "
-"gateways in the drop-down list<br>\n"
-"to see detailed information about that gateway.</td></tr></table>\n"
 "</html>"
 msgstr ""
 
@@ -1968,6 +1949,10 @@ msgstr "ברוכים הבאים"
 #: StatusPanel.statusMessageLabel.toolTipText
 msgid "Click to show application log"
 msgstr "לחץ להצגת רישום התוכנה"
+
+#: Suggest_
+msgid "&Suggest"
+msgstr ""
 
 #: Text
 msgid "Text"
