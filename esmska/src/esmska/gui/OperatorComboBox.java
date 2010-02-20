@@ -14,6 +14,8 @@ import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
 import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
@@ -43,15 +45,11 @@ public class OperatorComboBox extends JComboBox {
     private DefaultComboBoxModel model = new DefaultComboBoxModel(operators.toArray());
     /** used only for non-existing operators */
     private String operatorName;
-    private final String tooltip = MessageFormat.format(
-            l10n.getString("OperatorComboBox.tooltip"),
-            getClass().getResource(RES + "info-22.png"));
     
     public OperatorComboBox() {
         filterOperators();
         setModel(model);
         setRenderer(cellRenderer);
-        setToolTipText(tooltip);
         if (model.getSize() > 0) {
             setSelectedIndex(0);
         }
@@ -81,6 +79,21 @@ public class OperatorComboBox extends JComboBox {
                     case REMOVED_OPERATOR:
                     case REMOVED_OPERATORS:
                         updateOperators();
+                }
+            }
+        });
+
+        //add listener to change tooltip depending on the chosen operator
+        this.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                switch (e.getStateChange()) {
+                    case ItemEvent.DESELECTED:
+                        setToolTipText(null);
+                        break;
+                    case ItemEvent.SELECTED:
+                        setToolTipText(cellRenderer.generateTooltip(getSelectedOperator()));
+                        break;
                 }
             }
         });
@@ -163,7 +176,7 @@ public class OperatorComboBox extends JComboBox {
         setSelectedOperator(operator.getName());
         
     }
-          
+
     /** Renderer for items in OperatorComboBox */
     private static class OperatorComboBoxRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
@@ -192,6 +205,9 @@ public class OperatorComboBox extends JComboBox {
 
         /** Generate tooltip with operator info */
         private String generateTooltip(Operator operator) {
+            if (operator == null) {
+                return null;
+            }
             String country = CountryPrefix.extractCountryCode(operator.getName());
             String local = MessageFormat.format(l10n.getString("OperatorComboBox.onlyCountry"), country);
             String description = WordUtils.wrap(operator.getDescription(), 50, "<br>&nbsp;&nbsp;", false);
