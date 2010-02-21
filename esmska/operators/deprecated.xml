@@ -10,4 +10,9 @@
     <version>2009-12-03</version>
     <reason>It doesn't work at all because of invalid HTTPS web certificate. More information available at http://code.google.com/p/esmska/issues/detail?id=183#c53.</reason>
   </deprecatedOperator>
+  <deprecatedOperator>
+    <name>[LT]sms4you</name>
+    <version>2010-02-21</version>
+    <reason>The gateway became international and was renamed to [INT]sms4you.</reason>
+  </deprecatedOperator>
 </esmska>

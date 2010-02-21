@@ -1,6 +1,6 @@
 
 function getName() {
-    return "[LT]sms4you"
+    return "[INT]sms4you"
 }
 
 function getVersion() {
@@ -20,11 +20,11 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Mokamas gateway i visus Lietuvos tinklus."
+    return "Paid gateway allowing to send SMS almost to any country in the world."
 }
 
 function getCountryPrefix() {
-    return "+370"
+    return ""
 }
 
 function getOperatorPrefixes() {
@@ -56,7 +56,7 @@ function isLoginRequired() {
 }
 
 function getSupportedLanguages() {
-    return ["lt"]
+    return ["en","lt"]
 }
 
 function send() {
@@ -68,10 +68,10 @@ function send() {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
         return false
     }
-
+    
     // send message
-    getData = ["id", LOGIN, "pass", PASSWORD, "number", NUMBER, "message", MESSAGE]
-    content = EXEC.getURL("http://www.sms4you.lt/service/sendsms.php", getData)
+    getData = ["id", LOGIN, "pass", PASSWORD, "number", NUMBER, "sender", SENDERNUMBER, "message", MESSAGE]
+    content = EXEC.getURL("https://service.sms4you.lt/sendsms.php", getData)
 
     // wrong username/password/nousername/nopassword 
     re = /err:1/
