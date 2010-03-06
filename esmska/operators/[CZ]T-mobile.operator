@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-12-30"
+    return "2010-03-06"
 }
 
 function getMaintainer() {
