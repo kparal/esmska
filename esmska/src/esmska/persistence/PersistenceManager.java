@@ -40,10 +40,12 @@ import esmska.data.SMS;
 import esmska.data.Operator;
 import esmska.integration.IntegrationAdapter;
 import esmska.utils.RuntimeUtils;
+import java.io.FilenameFilter;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 import org.apache.commons.lang.Validate;
 import org.xml.sax.SAXException;
 
@@ -561,6 +563,25 @@ public class PersistenceManager {
             //logfile was backed up, delete it so it won't grow indefinitely,
             //we will start with a fresh one
             logFile.delete();
+            //we also have to delete all files starting with the same name, but
+            //having extra suffix [0-9]+, because they are created when multiple
+            //program instances are run
+            //see http://code.google.com/p/esmska/issues/detail?id=195
+            File parent = logFile.getParentFile();
+            final String logName = logFile.getName();
+            File[] oldLogs = parent.listFiles(new FilenameFilter() {
+                private final Pattern pattern = Pattern.compile(
+                        "^" + Pattern.quote(logName) + "\\.[0-9]+$");
+                @Override
+                public boolean accept(File dir, String name) {
+                    return pattern.matcher(name).matches();
+                }
+            });
+            if (oldLogs != null) {
+                for (File oldLog : oldLogs) {
+                    oldLog.delete();
+                }
+            }
         }
         bm.removeOldBackups(7);
     }

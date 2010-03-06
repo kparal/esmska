@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
 
 /** Class containing list of all telephone country prefixes (as defined in
  *  <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes">List of country calling codes</a>) 
