@@ -15,6 +15,8 @@ import esmska.data.Icons;
 import esmska.data.Operator;
 import esmska.data.Operators;
 import esmska.data.SMS;
+import esmska.data.event.ValuedEvent;
+import esmska.data.event.ValuedListener;
 import esmska.transfer.ImageCodeResolver;
 import esmska.utils.L10N;
 import esmska.utils.RuntimeUtils;
@@ -187,7 +189,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         queueScrollPane = new JScrollPane();
         queueList = new JList();
         jPanel1 = new JPanel();
-        imageLabel = new JLabel();
+        imageLabel = new JHtmlLabel();
         codeTextField = new JTextField();
         jLabel2 = new JLabel();
         buttonPanel = new JPanel();
@@ -239,12 +241,12 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
 
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imageLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addGroup(Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(buttonPanel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(codeTextField, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))
@@ -253,8 +255,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(codeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -262,6 +263,16 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
                 .addPreferredGap(ComponentPlacement.UNRELATED)
                 .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
+
+        imageLabel.addValuedListener(new ValuedListener<JHtmlLabel.Events, String>() {
+            @Override
+            public void eventOccured(ValuedEvent<JHtmlLabel.Events, String> e) {
+                switch (e.getEvent()) {
+                    case LINK_CLICKED:
+                    Actions.getBrowseAction(e.getValue()).actionPerformed(null);
+                }
+            }
+        });
 
         introLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/keyring-48.png"))); // NOI18N
         Mnemonics.setLocalizedText(introLabel, l10n.getString("ImageCodeDialog.introLabel.text"));
@@ -286,7 +297,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
                 .addComponent(introLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -385,7 +396,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
     private JPanel buttonPanel;
     private JButton cancelButton;
     private JTextField codeTextField;
-    private JLabel imageLabel;
+    private JHtmlLabel imageLabel;
     private JLabel introLabel;
     private JLabel jLabel2;
     private JPanel jPanel1;

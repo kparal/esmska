@@ -44,7 +44,7 @@
               <Component id="introLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="queueScrollPane" pref="230" max="32767" attributes="1"/>
+                  <Component id="queueScrollPane" pref="200" max="32767" attributes="1"/>
                   <Component id="jPanel1" alignment="1" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -80,27 +80,26 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="buttonPanel" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="imageLabel" alignment="0" pref="169" max="32767" attributes="0"/>
+                      <Component id="buttonPanel" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="codeTextField" pref="74" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
+                  <Component id="imageLabel" pref="128" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="imageLabel" pref="152" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="codeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -112,7 +111,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="imageLabel">
+        <Component class="esmska.gui.JHtmlLabel" name="imageLabel">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -121,6 +120,9 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="1"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="imageLabel.addValuedListener(new ValuedListener&lt;JHtmlLabel.Events, String&gt;() {&#xa;    @Override&#xa;    public void eventOccured(ValuedEvent&lt;JHtmlLabel.Events, String&gt; e) {&#xa;        switch (e.getEvent()) {&#xa;            case LINK_CLICKED:&#xa;                Actions.getBrowseAction(e.getValue()).actionPerformed(null);&#xa;        }&#xa;    }&#xa;});"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="codeTextField">
         </Component>
