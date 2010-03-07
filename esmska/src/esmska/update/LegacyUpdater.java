@@ -31,10 +31,11 @@ public class LegacyUpdater {
 
     private static final Logger logger = Logger.getLogger(LegacyUpdater.class.getName());
 
-    /** Checks if some update is needed to be done a executes it if neccessary */
+    /** Checks if some update is needed to be done and executes it if neccessary */
     public static void update() {
         String version = Config.getInstance().getVersion();
-        if (version == null) {
+        if (StringUtils.isEmpty(version)) {
+            //program is started for the first time, no update neccessary
             return;
         }
         if (ObjectUtils.equals(version, Config.getLatestVersion())) { //already updated
