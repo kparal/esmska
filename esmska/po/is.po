@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 14:14+0200\n"
+"POT-Creation-Date: 2010-03-12 18:39+0200\n"
 "PO-Revision-Date: 2009-09-28 17:17+0000\n"
 "Last-Translator: Ævar Arnfjörð Bjarmason <avarab@gmail.com>\n"
 "Language-Team: Icelandic <is@li.org>\n"
@@ -718,6 +718,10 @@ msgstr ""
 
 #: Credits.graphics
 msgid "Graphics:"
+msgstr ""
+
+#: Credits.moreDonators
+msgid "and others..."
 msgstr ""
 
 #: Credits.sponsors

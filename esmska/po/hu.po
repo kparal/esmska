@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 14:14+0200\n"
-"PO-Revision-Date: 2009-12-24 12:11+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2010-03-12 18:39+0200\n"
+"PO-Revision-Date: 2010-03-09 09:21+0000\n"
+"Last-Translator: Gergely Szarka <szarka.honved@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-25 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-03-10 05:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -44,7 +44,7 @@ msgstr "SMS küldés Interneten keresztül."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2010 Kamil Páral"
-msgstr ""
+msgstr "2007-2010 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -159,7 +159,7 @@ msgstr "Helytelen opció a parancssorban! (''{0}'')"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr ""
+msgstr "KAPCSOLÓK"
 
 #: CommandLineParser.path
 msgid "path"
@@ -282,7 +282,7 @@ msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
-msgstr ""
+msgstr "&Általános"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -302,20 +302,20 @@ msgstr ""
 
 #: ConfigFrame.jLabel1.text
 msgid "&Number:"
-msgstr ""
+msgstr "&Szám:"
 
 #: ConfigFrame.jLabel10.text
 msgctxt "ConfigFrame.jLabel10.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Átjáró:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr ""
+msgstr "&Felhasználónév:"
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
-msgstr ""
+msgstr "&Jelszó:"
 
 #: ConfigFrame.jLabel13.text
 msgid ""
@@ -328,15 +328,15 @@ msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
-msgstr ""
+msgstr "H&TTP proxy:"
 
 #: ConfigFrame.jLabel15.text
 msgid "HTTP&S proxy:"
-msgstr ""
+msgstr "HTTP&S proxy:"
 
 #: ConfigFrame.jLabel16.text
 msgid "SO&CKS proxy:"
-msgstr ""
+msgstr "SO&CKS proxy:"
 
 #: ConfigFrame.jLabel17.text
 msgid ""
@@ -344,11 +344,14 @@ msgid ""
 "* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
+"<html><i>\n"
+"* Felhasználónév/jelszó hitelesítés jelenleg nem támogatott.\n"
+"</i></html>"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
-msgstr ""
+msgstr "&Név:"
 
 #: ConfigFrame.jLabel9.text
 msgid ""
@@ -570,15 +573,15 @@ msgstr ""
 
 #: ConfigFrame.updateCheckAll
 msgid "program and gateways"
-msgstr ""
+msgstr "program és átjárók"
 
 #: ConfigFrame.updateCheckGateway
 msgid "gateways only"
-msgstr ""
+msgstr "csak átjárók"
 
 #: ConfigFrame.updateCheckProgram
 msgid "program only"
-msgstr ""
+msgstr "csak program"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -682,7 +685,7 @@ msgstr ""
 
 #: CopyToClipboard_
 msgid "Co&py to clipboard"
-msgstr ""
+msgstr "Vágólapra má&solás"
 
 #: CountryPrefixPanel.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -718,7 +721,7 @@ msgstr ""
 
 #: Credits.authors
 msgid "Written by:"
-msgstr ""
+msgstr "Írta:"
 
 #: Credits.contributors
 msgid "Contributions from:"
@@ -726,6 +729,10 @@ msgstr ""
 
 #: Credits.graphics
 msgid "Graphics:"
+msgstr ""
+
+#: Credits.moreDonators
+msgid "and others..."
 msgstr ""
 
 #: Credits.sponsors
@@ -754,7 +761,7 @@ msgstr ""
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr ""
+msgstr "Üzenetek törlése"
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
@@ -771,7 +778,7 @@ msgstr ""
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
 msgid "Send SMS over the Internet"
-msgstr ""
+msgstr "SMS küldése Internet-en keresztül"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.genericName
@@ -840,7 +847,7 @@ msgstr ""
 
 #: Edit_message
 msgid "Edit message"
-msgstr ""
+msgstr "Üzenet szerkesztése"
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
@@ -848,7 +855,7 @@ msgstr ""
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr ""
+msgstr "A kiválaszott üzenet szerkesztése"
 
 #: ExceptionDialog.copyButton.toolTipText
 msgid "Copy the detailed exception message to the system clipboard"
@@ -878,7 +885,7 @@ msgstr ""
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "CSV fájlok (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
@@ -936,7 +943,7 @@ msgstr ""
 
 #: Hide_program
 msgid "Hide program"
-msgstr ""
+msgstr "Program elrejtése"
 
 #: History
 msgid "History"
@@ -974,7 +981,7 @@ msgstr ""
 
 #: HistoryFrame.remove_selected
 msgid "Really remove all selected messages from history?"
-msgstr ""
+msgstr "Biztosan törli az összes kiválasztott üzeneteket az előzményekből?"
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
@@ -986,7 +993,7 @@ msgstr ""
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
-msgstr ""
+msgstr "&Keresés:"
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
@@ -1020,7 +1027,7 @@ msgstr ""
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
-msgstr ""
+msgstr "T&allózás..."
 
 #: ImportFrame.browseButton.toolTipText
 msgid "Find contacts file using dialog"
@@ -1256,7 +1263,7 @@ msgstr ""
 
 #: MainFrame.cant_save_config
 msgid "Some of the configuration files couldn't be saved!"
-msgstr ""
+msgstr "Néhány konfigurációs fájl nem lett mentve!"
 
 #: MainFrame.compressButton.toolTipText
 msgid "Compress message (Ctrl+K)"
@@ -1276,7 +1283,7 @@ msgstr ""
 
 #: MainFrame.faqMenuItem.text
 msgid "Frequently Asked &Questions"
-msgstr ""
+msgstr "Gyakran Ismételt &Kérdések"
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
@@ -1304,7 +1311,7 @@ msgstr ""
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr ""
+msgstr "&Üzenet"
 
 #: MainFrame.newOperatorUpdate
 msgid "<a href=\"\">Gateway updates</a> are available!"
@@ -1342,7 +1349,7 @@ msgstr ""
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
-msgstr ""
+msgstr "P&rogram"
 
 #: MainFrame.redoButton.toolTipText
 msgid "Redo (Ctrl+Y)"
@@ -1354,7 +1361,7 @@ msgstr ""
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr ""
+msgstr "Program információ megjelenítése"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
@@ -1389,7 +1396,7 @@ msgstr ""
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"
-msgstr ""
+msgstr "Visszavonás (Ctrl+Z)"
 
 #: Message_history_
 msgid "Message &history"
@@ -1434,11 +1441,11 @@ msgstr ""
 
 #: OperatorComboBox.needRegistration
 msgid "Requires registration on the website."
-msgstr ""
+msgstr "Regisztráció szükséges a weboldalon."
 
 #: OperatorComboBox.noRegistration
 msgid "Does not require registration."
-msgstr ""
+msgstr "Nem szükséges regisztráció."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
@@ -1554,7 +1561,7 @@ msgstr ""
 
 #: OperatorInterpreter.unknown_operator
 msgid "Unknown gateway!"
-msgstr ""
+msgstr "Ismeretlen átjáró!"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1574,7 +1581,7 @@ msgstr ""
 
 #: Program_start
 msgid "Program start"
-msgstr ""
+msgstr "Programindítás"
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
@@ -1647,7 +1654,7 @@ msgstr ""
 
 #: SMSPanel.Text_is_too_long!
 msgid "Text is too long!"
-msgstr ""
+msgstr "A szöveg túl hosszú!"
 
 #: SMSPanel.Undo_change_in_message_text
 msgid "Undo change in message text"
@@ -1715,7 +1722,7 @@ msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Ctrl+Enter)"
-msgstr ""
+msgstr "Üzenet küldése (Ctrl+Enter)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.singleProgressBar
@@ -1969,6 +1976,8 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  BalintX https://launchpad.net/~koczkahun\n"
+"  Gergely Szarka https://launchpad.net/~gszarka\n"
+"  Krasznecz Zoltán https://launchpad.net/~krasznecz-zoltan\n"
 "  Roth Róbert https://launchpad.net/~evfool"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!

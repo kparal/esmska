@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 14:14+0200\n"
+"POT-Creation-Date: 2010-03-12 18:39+0200\n"
 "PO-Revision-Date: 2009-12-24 12:18+0000\n"
 "Last-Translator: Alexey Reztsov <ariafan@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -739,6 +739,10 @@ msgstr ""
 #: Credits.graphics
 msgid "Graphics:"
 msgstr "Графика"
+
+#: Credits.moreDonators
+msgid "and others..."
+msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"

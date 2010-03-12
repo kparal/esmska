@@ -299,7 +299,7 @@ public class AboutFrame extends javax.swing.JFrame {
             String document = MessageFormat.format(credits, l10n.getString("Credits.authors"),
                     l10n.getString("Credits.contributors"), l10n.getString("Credits.graphics"),
                     l10n.getString("Credits.sponsors"), l10n.getString("Credits.translators"),
-                    translators);
+                    translators, Links.DONATORS, l10n.getString("Credits.moreDonators"));
             
             JTextPane tp = new JTextPane();
             tp.setContentType("text/html; charset=UTF-8");

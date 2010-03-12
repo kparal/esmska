@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 14:14+0200\n"
-"PO-Revision-Date: 2009-12-03 22:40+0000\n"
-"Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
+"POT-Creation-Date: 2010-03-12 18:39+0200\n"
+"PO-Revision-Date: 2010-02-21 17:41+0000\n"
+"Last-Translator: TheSpy <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-05 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-02-22 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -43,13 +43,12 @@ msgid "Sending SMS over Internet."
 msgstr "SMS siuntimas internetu."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2010 Kamil Páral"
-msgstr "2007-2009"
+msgstr "2007-2010 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
-msgstr "Licencija"
+msgstr "&Licencija"
 
 #: AboutFrame.linkButton.text
 msgid "<html><a href=\"\">Homepage</a></html>"
@@ -97,11 +96,11 @@ msgstr "Pridėti naują kontaktą (Alt+A)"
 
 #: Cancel
 msgid "Cancel"
-msgstr "Atsisakyti"
+msgstr "Atšaukti"
 
 #: Cancel_
 msgid "&Cancel"
-msgstr "&Atsisakyti"
+msgstr "&Atšaukti"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
@@ -117,19 +116,19 @@ msgstr "Kopijuoti"
 
 #: ClipboardPopupMenu.Cut
 msgid "Cut"
-msgstr "Kirpti"
+msgstr "Iškirpti"
 
 #: ClipboardPopupMenu.Paste
 msgid "Paste"
-msgstr "Įkelti"
+msgstr "Įterpti"
 
 #: Close_
 msgid "&Close"
-msgstr "Uždaryti"
+msgstr "&Uždaryti"
 
 #: CommandLineParser.available_options
 msgid "Available options:"
-msgstr "Galimi pasirinkimai"
+msgstr "Galimi pasirinkimai:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.debug
@@ -158,7 +157,7 @@ msgstr ""
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr "Nustatymai"
+msgstr "PARAMETRAI"
 
 #: CommandLineParser.path
 msgid "path"
@@ -690,9 +689,8 @@ msgid "The country code for which you have filled out the prefix number"
 msgstr ""
 
 #: CountryPrefixPanel.countryCodeLabel.text
-#, fuzzy
 msgid "(c&ountry:"
-msgstr "(šalis:"
+msgstr ""
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -729,6 +727,10 @@ msgstr "Pagalbininkai:"
 #: Credits.graphics
 msgid "Graphics:"
 msgstr "Grafika:"
+
+#: Credits.moreDonators
+msgid "and others..."
+msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -1128,9 +1130,8 @@ msgid "Or choose the application you want to import contacts from:"
 msgstr ""
 
 #: ImportFrame.jLabel4.text
-#, fuzzy
 msgid "Choose the file format you have your contacts stored in:"
-msgstr "Pasirinkite failą, kuriame yra eksportuotas kontaktų sąrašas"
+msgstr ""
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1336,9 +1337,8 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem or an idea..."
-msgstr "Pranešti apie &problemą..."
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1384,9 +1384,8 @@ msgid "&Tools"
 msgstr "Įran&kiai"
 
 #: MainFrame.translateMenuItem.text
-#, fuzzy
 msgid "&Translate this application..."
-msgstr "&Išversti šią programą..."
+msgstr ""
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
@@ -2104,10 +2103,12 @@ msgid ""
 "<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
 "found. It is recommended to update them now.</html>"
 msgstr ""
+"<html><h2>Rasti atnaujinti operatoriai</h2>Rasti nauji arba atnaujinti "
+"operatoriai. Rekomenduojame atsinaujinti juos dabar.</html>"
 
 #: UpdateDialog.checkButton.text
 msgid "Check for &updates"
-msgstr "Ieškoti atnaujinimų"
+msgstr "Ieškoti atna&ujinimų"
 
 #: UpdateDialog.topLabel.text
 msgid ""
@@ -2121,14 +2122,14 @@ msgstr ""
 "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
 "</html>"
 
-#~ msgid "Get &Help Online..."
-#~ msgstr "&Pagalba internete..."
-
-#~ msgid "You have entered incorrect message text. Empty or too long?"
-#~ msgstr "Įvedėte neteisingą tekstą. Tekstas tuščias arba per ilgas."
-
 #~ msgid "O&perators"
 #~ msgstr "Operatoriai"
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Įveskite kodą iš paveiklėlio."
+
+#~ msgid "Get &Help Online..."
+#~ msgstr "&Pagalba internete..."
+
+#~ msgid "You have entered incorrect message text. Empty or too long?"
+#~ msgstr "Įvedėte neteisingą tekstą. Tekstas tuščias arba per ilgas."

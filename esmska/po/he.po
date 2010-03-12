@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 14:14+0200\n"
+"POT-Creation-Date: 2010-03-12 18:39+0200\n"
 "PO-Revision-Date: 2009-11-24 23:29+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -800,6 +800,10 @@ msgstr "תרומות מאת:"
 #: Credits.graphics
 msgid "Graphics:"
 msgstr "גרפיקה:"
+
+#: Credits.moreDonators
+msgid "and others..."
+msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"

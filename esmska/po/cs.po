@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 14:16+0200\n"
-"PO-Revision-Date: 2010-02-20 14:15+0100\n"
+"POT-Creation-Date: 2010-03-12 18:40+0200\n"
+"PO-Revision-Date: 2010-03-12 18:39+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -846,6 +846,10 @@ msgstr "Podíleli se:"
 #: Credits.graphics
 msgid "Graphics:"
 msgstr "Grafika:"
+
+#: Credits.moreDonators
+msgid "and others..."
+msgstr "a další..."
 
 #: Credits.sponsors
 msgid "Sponsors:"

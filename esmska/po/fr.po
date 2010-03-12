@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 14:14+0200\n"
+"POT-Creation-Date: 2010-03-12 18:39+0200\n"
 "PO-Revision-Date: 2009-11-25 00:13+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -733,6 +733,10 @@ msgstr ""
 
 #: Credits.graphics
 msgid "Graphics:"
+msgstr ""
+
+#: Credits.moreDonators
+msgid "and others..."
 msgstr ""
 
 #: Credits.sponsors
