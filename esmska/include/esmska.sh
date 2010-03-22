@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Note: Set JAVA_HOME environment variable to specify which java to use
 # Note: Modify OPTS variable below to set custom java options
 
