@@ -2,7 +2,10 @@
 # Note: Set JAVA_HOME environment variable to specify which java to use
 # Note: Modify OPTS variable below to set custom java options
 
-OPTS=""
+# Disable IPv6 because it breaks Java networking on Ubuntu and Debian
+# http://code.google.com/p/esmska/issues/detail?id=252
+# http://code.google.com/p/esmska/issues/detail?id=233
+OPTS="-Djava.net.preferIPv4Stack=true"
 
 # traverse symlinks
 SCRIPT="$0"
