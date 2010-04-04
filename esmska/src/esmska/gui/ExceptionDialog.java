@@ -329,6 +329,18 @@ public class ExceptionDialog extends javax.swing.JDialog {
             dialog.setVisible(true);
         }
     }
+
+    /** Exception handler for exceptions coming from EDT. Needed for handling
+     * exceptions from modal dialogs in Java 6. Read more at:
+     * http://code.google.com/p/esmska/issues/detail?id=256
+     */
+    public static class AwtHandler {
+        /** Method for handling the exception. Just redirects to Esmska's
+         default uncaught exception handler. */
+        public void handle(Throwable t) {
+            exceptionHandler.uncaughtException(Thread.currentThread(), t);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton closeButton;
     private JButton copyButton;

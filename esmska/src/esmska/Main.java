@@ -60,6 +60,10 @@ public class Main {
 
         //handle uncaught exceptions
         Thread.setDefaultUncaughtExceptionHandler(ExceptionDialog.getExceptionHandler());
+        //workaround for Java 6 to process uncaught exceptions from modal dialogs
+        //read more at http://code.google.com/p/esmska/issues/detail?id=256
+        System.setProperty("sun.awt.exception.handler",
+                ExceptionDialog.AwtHandler.class.getName());
 
         //detect JVM and warn if not not supported
         if (!RuntimeUtils.isSupportedJava()) {
