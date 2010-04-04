@@ -96,7 +96,7 @@
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="numberTextFieldFocusLost"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField() {&#xa;    @Override&#xa;    public String getText() {&#xa;        String text = super.getText();&#xa;        if (!text.startsWith(&quot;+&quot;))&#xa;            text = config.getCountryPrefix() + text;&#xa;        return text;&#xa;    }&#xa;}&#xa;"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField() {&#xa;    @Override&#xa;    public String getText() {&#xa;        String text = super.getText();&#xa;        if (StringUtils.isNotEmpty(text) &amp;&amp; !text.startsWith(&quot;+&quot;))&#xa;            text = config.getCountryPrefix() + text;&#xa;        return text;&#xa;    }&#xa;}&#xa;"/>
       </AuxValues>
     </Component>
     <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">

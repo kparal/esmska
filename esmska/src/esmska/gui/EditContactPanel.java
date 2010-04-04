@@ -102,7 +102,7 @@ public class EditContactPanel extends javax.swing.JPanel {
             @Override
             public String getText() {
                 String text = super.getText();
-                if (!text.startsWith("+"))
+                if (StringUtils.isNotEmpty(text) && !text.startsWith("+"))
                 text = config.getCountryPrefix() + text;
                 return text;
             }
