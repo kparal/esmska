@@ -146,9 +146,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="22" pref="22" max="22" attributes="0"/>
+                              <Component id="logLocationLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
@@ -178,7 +182,9 @@
                       <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="debugCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="257" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="logLocationLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="236" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -266,6 +272,16 @@
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="debugCheckBoxItemStateChanged"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="logLocationLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.logLocationLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="logLocationLabel.setText(MessageFormat.format(logLocationLabel.getText(),&#xa;Context.persistenceManager.getLogFile()));&#xa;&#xa;binding = Bindings.createAutoBinding(UpdateStrategy.READ, debugCheckBox, &#xa;        BeanProperty.create(&quot;selected&quot;), logLocationLabel, BeanProperty.create(&quot;visible&quot;));&#xa;bindingGroup.addBinding(binding);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

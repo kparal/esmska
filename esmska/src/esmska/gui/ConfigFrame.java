@@ -317,6 +317,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         unstableUpdatesCheckBox = new JCheckBox();
         updatePolicyComboBox = new JComboBox();
         debugCheckBox = new JCheckBox();
+        logLocationLabel = new JLabel();
         appearancePanel = new JPanel();
         lafComboBox = new JComboBox();
         lookLabel = new JLabel();
@@ -453,338 +454,351 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        Mnemonics.setLocalizedText(logLocationLabel, l10n.getString("ConfigFrame.logLocationLabel.text"));
+        logLocationLabel.setText(MessageFormat.format(logLocationLabel.getText(),
+            Context.persistenceManager.getLogFile()));
+
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, debugCheckBox,
+        BeanProperty.create("selected"), logLocationLabel, BeanProperty.create("visible"));
+    bindingGroup.addBinding(binding);
+
         GroupLayout generalPanelLayout = new GroupLayout(generalPanel);
-        generalPanel.setLayout(generalPanelLayout);
-        generalPanelLayout.setHorizontalGroup(
-            generalPanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(generalPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(removeAccentsCheckBox)
-                    .addGroup(generalPanelLayout.createSequentialGroup()
-                        .addComponent(checkUpdatesCheckBox)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
-                            .addComponent(unstableUpdatesCheckBox)
-                            .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(debugCheckBox))
-                .addContainerGap(310, Short.MAX_VALUE))
-        );
-        generalPanelLayout.setVerticalGroup(
-            generalPanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(generalPanelLayout.createSequentialGroup()
-                .addContainerGap()
+    generalPanel.setLayout(generalPanelLayout);
+    generalPanelLayout.setHorizontalGroup(
+        generalPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(generalPanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(generalPanelLayout.createSequentialGroup()
+                    .addGap(22, 22, 22)
+                    .addComponent(logLocationLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addComponent(removeAccentsCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(generalPanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addGroup(generalPanelLayout.createSequentialGroup()
                     .addComponent(checkUpdatesCheckBox)
-                    .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(unstableUpdatesCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(debugCheckBox)
-                .addContainerGap(257, Short.MAX_VALUE))
-        );
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addComponent(unstableUpdatesCheckBox)
+                        .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addComponent(debugCheckBox))
+            .addContainerGap(310, Short.MAX_VALUE))
+    );
+    generalPanelLayout.setVerticalGroup(
+        generalPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(generalPanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(removeAccentsCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(generalPanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(checkUpdatesCheckBox)
+                .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(unstableUpdatesCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(debugCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(logLocationLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(236, Short.MAX_VALUE))
+    );
 
-        tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
+    tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
 
-        lafComboBox.setModel(lafModel);
-        lafComboBox.setToolTipText(l10n.getString("ConfigFrame.lafComboBox.toolTipText")); // NOI18N
-        lafComboBox.setRenderer(new LaFComboRenderer());
-        lafComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                lafComboBoxActionPerformed(evt);
-            }
-        });
+    lafComboBox.setModel(lafModel);
+    lafComboBox.setToolTipText(l10n.getString("ConfigFrame.lafComboBox.toolTipText")); // NOI18N
+    lafComboBox.setRenderer(new LaFComboRenderer());
+    lafComboBox.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            lafComboBoxActionPerformed(evt);
+        }
+    });
 
-        lookLabel.setLabelFor(lafComboBox);
+    lookLabel.setLabelFor(lafComboBox);
         Mnemonics.setLocalizedText(lookLabel, l10n.getString("ConfigFrame.lookLabel.text")); // NOI18N
-        lookLabel.setToolTipText(lafComboBox.getToolTipText());
+    lookLabel.setToolTipText(lafComboBox.getToolTipText());
 
-        themeComboBox.setToolTipText(l10n.getString("ConfigFrame.themeComboBox.toolTipText")); // NOI18N
-        themeComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                themeComboBoxActionPerformed(evt);
-            }
-        });
+    themeComboBox.setToolTipText(l10n.getString("ConfigFrame.themeComboBox.toolTipText")); // NOI18N
+    themeComboBox.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            themeComboBoxActionPerformed(evt);
+        }
+    });
 
-        themeLabel.setLabelFor(themeComboBox);
+    themeLabel.setLabelFor(themeComboBox);
         Mnemonics.setLocalizedText(themeLabel, l10n.getString("ConfigFrame.themeLabel.text")); // NOI18N
-        themeLabel.setToolTipText(themeComboBox.getToolTipText());
+    themeLabel.setToolTipText(themeComboBox.getToolTipText());
 
         Mnemonics.setLocalizedText(windowCenteredCheckBox, l10n.getString("ConfigFrame.windowCenteredCheckBox.text"));
-        windowCenteredCheckBox.setToolTipText(l10n.getString("ConfigFrame.windowCenteredCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${startCentered}"), windowCenteredCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
+    windowCenteredCheckBox.setToolTipText(l10n.getString("ConfigFrame.windowCenteredCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${startCentered}"), windowCenteredCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(toolbarVisibleCheckBox, l10n.getString("ConfigFrame.toolbarVisibleCheckBox.text"));
-        toolbarVisibleCheckBox.setToolTipText(l10n.getString("ConfigFrame.toolbarVisibleCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${toolbarVisible}"), toolbarVisibleCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
+    toolbarVisibleCheckBox.setToolTipText(l10n.getString("ConfigFrame.toolbarVisibleCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${toolbarVisible}"), toolbarVisibleCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(notificationAreaCheckBox, l10n.getString("ConfigFrame.notificationAreaCheckBox.text"));
-        notificationAreaCheckBox.setToolTipText(l10n.getString("ConfigFrame.notificationAreaCheckBox.toolTipText")); // NOI18N
-        notificationAreaCheckBox.setEnabled(NotificationIcon.isSupported());
+    notificationAreaCheckBox.setToolTipText(l10n.getString("ConfigFrame.notificationAreaCheckBox.toolTipText")); // NOI18N
+    notificationAreaCheckBox.setEnabled(NotificationIcon.isSupported());
 
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${notificationIconVisible}"), notificationAreaCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${notificationIconVisible}"), notificationAreaCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
 
 
-        notificationAreaCheckBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                notificationAreaCheckBoxActionPerformed(evt);
-            }
-        });
+    notificationAreaCheckBox.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            notificationAreaCheckBoxActionPerformed(evt);
+        }
+    });
         Mnemonics.setLocalizedText(tipsCheckBox, l10n.getString("ConfigFrame.tipsCheckBox.text"));
-        tipsCheckBox.setToolTipText(l10n.getString("ConfigFrame.tipsCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showTips}"), tipsCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
+    tipsCheckBox.setToolTipText(l10n.getString("ConfigFrame.tipsCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showTips}"), tipsCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(startMinimizedCheckBox, l10n.getString("ConfigFrame.startMinimizedCheckBox.text"));
-        startMinimizedCheckBox.setToolTipText(l10n.getString("ConfigFrame.startMinimizedCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${startMinimized}"), startMinimizedCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, notificationAreaCheckBox, ELProperty.create("${selected && enabled}"), startMinimizedCheckBox, BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    startMinimizedCheckBox.setToolTipText(l10n.getString("ConfigFrame.startMinimizedCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${startMinimized}"), startMinimizedCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, notificationAreaCheckBox, ELProperty.create("${selected && enabled}"), startMinimizedCheckBox, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(advancedControlsCheckBox, l10n.getString("ConfigFrame.advancedControlsCheckBox.text"));
-        advancedControlsCheckBox.setToolTipText(l10n.getString("ConfigFrame.advancedControlsCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showAdvancedControls}"), advancedControlsCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
+    advancedControlsCheckBox.setToolTipText(l10n.getString("ConfigFrame.advancedControlsCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showAdvancedControls}"), advancedControlsCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
 
-        advancedControlsCheckBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                advancedControlsCheckBoxActionPerformed(evt);
-            }
-        });
+    advancedControlsCheckBox.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            advancedControlsCheckBoxActionPerformed(evt);
+        }
+    });
 
         GroupLayout appearancePanelLayout = new GroupLayout(appearancePanel);
-        appearancePanel.setLayout(appearancePanelLayout);
+    appearancePanel.setLayout(appearancePanelLayout);
 
 
-        appearancePanelLayout.setHorizontalGroup(
-            appearancePanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(appearancePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(appearancePanelLayout.createParallelGroup(Alignment.LEADING)
-                    .addGroup(appearancePanelLayout.createSequentialGroup()
-                        .addComponent(lookLabel)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(appearancePanelLayout.createSequentialGroup()
-                        .addComponent(themeLabel)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(themeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(windowCenteredCheckBox)
-                    .addGroup(appearancePanelLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(startMinimizedCheckBox))
-                    .addComponent(tipsCheckBox)
-                    .addComponent(notificationAreaCheckBox)
-                    .addComponent(toolbarVisibleCheckBox)
-                    .addComponent(advancedControlsCheckBox))
-                .addContainerGap(459, Short.MAX_VALUE))
-        );
-
-        appearancePanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lafComboBox, themeComboBox});
-
-        appearancePanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lookLabel, themeLabel});
-
-        appearancePanelLayout.setVerticalGroup(
-            appearancePanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(appearancePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(appearancePanelLayout.createParallelGroup(Alignment.BASELINE)
+    appearancePanelLayout.setHorizontalGroup(
+        appearancePanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(appearancePanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(appearancePanelLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(appearancePanelLayout.createSequentialGroup()
                     .addComponent(lookLabel)
+                    .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(appearancePanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addGroup(appearancePanelLayout.createSequentialGroup()
                     .addComponent(themeLabel)
+                    .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(themeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(windowCenteredCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(toolbarVisibleCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(notificationAreaCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(startMinimizedCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(appearancePanelLayout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(startMinimizedCheckBox))
                 .addComponent(tipsCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(advancedControlsCheckBox)
-                .addContainerGap(154, Short.MAX_VALUE))
-        );
+                .addComponent(notificationAreaCheckBox)
+                .addComponent(toolbarVisibleCheckBox)
+                .addComponent(advancedControlsCheckBox))
+            .addContainerGap(459, Short.MAX_VALUE))
+    );
 
-        appearancePanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {lafComboBox, themeComboBox});
+    appearancePanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lafComboBox, themeComboBox});
 
-        tabbedPane.addTab(l10n.getString("ConfigFrame.appearancePanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/appearance-16.png")), appearancePanel); // NOI18N
+    appearancePanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lookLabel, themeLabel});
+
+    appearancePanelLayout.setVerticalGroup(
+        appearancePanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(appearancePanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(appearancePanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(lookLabel)
+                .addComponent(lafComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(appearancePanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(themeLabel)
+                .addComponent(themeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(windowCenteredCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(toolbarVisibleCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(notificationAreaCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(startMinimizedCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(tipsCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(advancedControlsCheckBox)
+            .addContainerGap(154, Short.MAX_VALUE))
+    );
+
+    appearancePanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {lafComboBox, themeComboBox});
+
+    tabbedPane.addTab(l10n.getString("ConfigFrame.appearancePanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/appearance-16.png")), appearancePanel); // NOI18N
         Mnemonics.setLocalizedText(useSenderIDCheckBox, l10n.getString("ConfigFrame.useSenderIDCheckBox.text"));
-        useSenderIDCheckBox.setToolTipText(l10n.getString("ConfigFrame.useSenderIDCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${useSenderID}"), useSenderIDCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
+    useSenderIDCheckBox.setToolTipText(l10n.getString("ConfigFrame.useSenderIDCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${useSenderID}"), useSenderIDCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
 
-        senderNumberTextField.setColumns(13);
+    senderNumberTextField.setColumns(13);
 
-        senderNumberTextField.setToolTipText(l10n.getString("ConfigFrame.senderNumberTextField.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${senderNumber}"), senderNumberTextField, BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ, useSenderIDCheckBox, ELProperty.create("${selected}"), senderNumberTextField, BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    senderNumberTextField.setToolTipText(l10n.getString("ConfigFrame.senderNumberTextField.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${senderNumber}"), senderNumberTextField, BeanProperty.create("text"));
+    bindingGroup.addBinding(binding);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, useSenderIDCheckBox, ELProperty.create("${selected}"), senderNumberTextField, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
-        jLabel1.setLabelFor(senderNumberTextField);
+    jLabel1.setLabelFor(senderNumberTextField);
         Mnemonics.setLocalizedText(jLabel1, l10n.getString("ConfigFrame.jLabel1.text")); // NOI18N
-        jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
+    jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
 
-        senderNameTextField.setColumns(13);
+    senderNameTextField.setColumns(13);
 
-        senderNameTextField.setToolTipText(l10n.getString("ConfigFrame.senderNameTextField.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${senderName}"), senderNameTextField, BeanProperty.create("text_ON_ACTION_OR_FOCUS_LOST"));
-        bindingGroup.addBinding(binding);
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ, useSenderIDCheckBox, ELProperty.create("${selected}"), senderNameTextField, BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    senderNameTextField.setToolTipText(l10n.getString("ConfigFrame.senderNameTextField.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${senderName}"), senderNameTextField, BeanProperty.create("text_ON_ACTION_OR_FOCUS_LOST"));
+    bindingGroup.addBinding(binding);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, useSenderIDCheckBox, ELProperty.create("${selected}"), senderNameTextField, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
-        jLabel3.setLabelFor(senderNameTextField);
+    jLabel3.setLabelFor(senderNameTextField);
         Mnemonics.setLocalizedText(jLabel3, l10n.getString("ConfigFrame.jLabel3.text")); // NOI18N
-        jLabel3.setToolTipText(senderNameTextField.getToolTipText());
+    jLabel3.setToolTipText(senderNameTextField.getToolTipText());
 
-        operatorFilterTextField.setColumns(13);
+    operatorFilterTextField.setColumns(13);
 
-        operatorFilterTextField.setToolTipText(l10n.getString("ConfigFrame.operatorFilterTextField.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${operatorFilter}"), operatorFilterTextField, BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
+    operatorFilterTextField.setToolTipText(l10n.getString("ConfigFrame.operatorFilterTextField.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${operatorFilter}"), operatorFilterTextField, BeanProperty.create("text"));
+    bindingGroup.addBinding(binding);
 
-        operatorFilterLabel.setLabelFor(operatorFilterTextField);
+    operatorFilterLabel.setLabelFor(operatorFilterTextField);
         Mnemonics.setLocalizedText(operatorFilterLabel, l10n.getString("ConfigFrame.operatorFilterLabel.text")); // NOI18N
-        operatorFilterLabel.setToolTipText(operatorFilterTextField.getToolTipText());
+    operatorFilterLabel.setToolTipText(operatorFilterTextField.getToolTipText());
 
         Mnemonics.setLocalizedText(demandDeliveryReportCheckBox, l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.text"));
-        demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${demandDeliveryReport}"), demandDeliveryReportCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, useSenderIDCheckBox, ELProperty.create("${selected}"), demandDeliveryReportCheckBox, BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
+    demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${demandDeliveryReport}"), demandDeliveryReportCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, useSenderIDCheckBox, ELProperty.create("${selected}"), demandDeliveryReportCheckBox, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
         GroupLayout operatorPanelLayout = new GroupLayout(operatorPanel);
-        operatorPanel.setLayout(operatorPanelLayout);
+    operatorPanel.setLayout(operatorPanelLayout);
 
-        operatorPanelLayout.setHorizontalGroup(
-            operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(operatorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(useSenderIDCheckBox)
-                    .addGroup(operatorPanelLayout.createSequentialGroup()
-                        .addComponent(operatorFilterLabel)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(operatorFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(operatorPanelLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-                            .addGroup(operatorPanelLayout.createSequentialGroup()
-                                .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-                                    .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(demandDeliveryReportCheckBox)))
-                    .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(287, Short.MAX_VALUE))
-        );
-
-        operatorPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
-
-        operatorPanelLayout.setVerticalGroup(
-            operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(operatorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(operatorFilterLabel)
-                    .addComponent(operatorFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(ComponentPlacement.RELATED)
+    operatorPanelLayout.setHorizontalGroup(
+        operatorPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(operatorPanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
                 .addComponent(useSenderIDCheckBox)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(demandDeliveryReportCheckBox)
-                .addContainerGap(180, Short.MAX_VALUE))
-        );
+                .addGroup(operatorPanelLayout.createSequentialGroup()
+                    .addComponent(operatorFilterLabel)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(operatorFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(operatorPanelLayout.createSequentialGroup()
+                    .addGap(17, 17, 17)
+                    .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(operatorPanelLayout.createSequentialGroup()
+                            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1))
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
+                                .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(demandDeliveryReportCheckBox)))
+                .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addContainerGap(287, Short.MAX_VALUE))
+    );
 
-        tabbedPane.addTab(l10n.getString("ConfigFrame.operatorPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), operatorPanel); //find first operator for which we have key and select it
+    operatorPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
+
+    operatorPanelLayout.setVerticalGroup(
+        operatorPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(operatorPanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(operatorFilterLabel)
+                .addComponent(operatorFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(useSenderIDCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(jLabel1)
+                .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(jLabel3)
+                .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(demandDeliveryReportCheckBox)
+            .addContainerGap(180, Short.MAX_VALUE))
+    );
+
+    tabbedPane.addTab(l10n.getString("ConfigFrame.operatorPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), operatorPanel); // NOI18N
         SortedSet<String> operators = new TreeSet<String>(Collator.getInstance());
-        operators.addAll(keyring.getOperatorNames());
-        for (String operator : operators) {
-            Operator op = Operators.getOperator(operator);
-            if (op != null) {
-                operatorComboBox.setSelectedOperator(operator);
-                break;
-            }
+    operators.addAll(keyring.getOperatorNames());
+    for (String operator : operators) {
+        Operator op = Operators.getOperator(operator);
+        if (op != null) {
+            operatorComboBox.setSelectedOperator(operator);
+            break;
         }
-        operatorComboBoxItemStateChanged(null);
-        operatorComboBox.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent evt) {
-                operatorComboBoxItemStateChanged(evt);
-            }
-        });
+    }
+    operatorComboBoxItemStateChanged(null);
+    operatorComboBox.addItemListener(new ItemListener() {
+        public void itemStateChanged(ItemEvent evt) {
+            operatorComboBoxItemStateChanged(evt);
+        }
+    });
 
         Mnemonics.setLocalizedText(jLabel9, l10n.getString("ConfigFrame.jLabel9.text")); // NOI18N
 
-        jLabel10.setLabelFor(operatorComboBox);
+    jLabel10.setLabelFor(operatorComboBox);
         Mnemonics.setLocalizedText(jLabel10, l10n.getString("ConfigFrame.jLabel10.text")); // NOI18N
-        jLabel10.setToolTipText(operatorComboBox.getToolTipText());
+    jLabel10.setToolTipText(operatorComboBox.getToolTipText());
 
-        loginTextField.setColumns(15);
-        loginTextField.setToolTipText(l10n.getString("ConfigFrame.loginTextField.toolTipText")); // NOI18N
-        loginTextField.addFocusListener(new FocusAdapter() {
-            public void focusLost(FocusEvent evt) {
-                loginTextFieldFocusLost(evt);
-            }
-        });
-
-        jLabel11.setLabelFor(loginTextField);
-        Mnemonics.setLocalizedText(jLabel11, l10n.getString("ConfigFrame.jLabel11.text")); // NOI18N
-        jLabel11.setToolTipText(loginTextField.getToolTipText());
-
-        passwordField.setColumns(15);
-        passwordField.setToolTipText(l10n.getString("ConfigFrame.passwordField.toolTipText")); // NOI18N
-        passwordField.enableInputMethods(true);
-        passwordField.addFocusListener(new FocusAdapter() {
-            public void focusLost(FocusEvent evt) {
-                passwordFieldFocusLost(evt);
-            }
-        });
-
-        jLabel12.setLabelFor(passwordField);
-        Mnemonics.setLocalizedText(jLabel12, l10n.getString("ConfigFrame.jLabel12.text")); // NOI18N
-        jLabel12.setToolTipText(passwordField.getToolTipText());
-
-        clearKeyringButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
-        Mnemonics.setLocalizedText(clearKeyringButton, l10n.getString("ConfigFrame.clearKeyringButton.text"));
-        clearKeyringButton.setToolTipText(l10n.getString("ConfigFrame.clearKeyringButton.toolTipText")); // NOI18N
-        clearKeyringButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                clearKeyringButtonActionPerformed(evt);
-            }
-        });
-        Mnemonics.setLocalizedText(jLabel13, l10n.getString("ConfigFrame.jLabel13.text"));
-        jLabel13.setToolTipText(MessageFormat.format(l10n.getString("ConfigFrame.user_directory"),
-            PersistenceManager.getConfigDir().getAbsolutePath()));
-        Mnemonics.setLocalizedText(showPasswordCheckBox, l10n.getString("ConfigFrame.showPasswordCheckBox.text"));
-    showPasswordCheckBox.setToolTipText(l10n.getString("ConfigFrame.showPasswordCheckBox.toolTipText")); // NOI18N
-    showPasswordCheckBox.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-            showPasswordCheckBoxActionPerformed(evt);
+    loginTextField.setColumns(15);
+    loginTextField.setToolTipText(l10n.getString("ConfigFrame.loginTextField.toolTipText")); // NOI18N
+    loginTextField.addFocusListener(new FocusAdapter() {
+        public void focusLost(FocusEvent evt) {
+            loginTextFieldFocusLost(evt);
         }
+    });
+
+    jLabel11.setLabelFor(loginTextField);
+        Mnemonics.setLocalizedText(jLabel11, l10n.getString("ConfigFrame.jLabel11.text")); // NOI18N
+    jLabel11.setToolTipText(loginTextField.getToolTipText());
+
+    passwordField.setColumns(15);
+    passwordField.setToolTipText(l10n.getString("ConfigFrame.passwordField.toolTipText")); // NOI18N
+    passwordField.enableInputMethods(true);
+    passwordField.addFocusListener(new FocusAdapter() {
+        public void focusLost(FocusEvent evt) {
+            passwordFieldFocusLost(evt);
+        }
+    });
+
+    jLabel12.setLabelFor(passwordField);
+        Mnemonics.setLocalizedText(jLabel12, l10n.getString("ConfigFrame.jLabel12.text")); // NOI18N
+    jLabel12.setToolTipText(passwordField.getToolTipText());
+
+    clearKeyringButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(clearKeyringButton, l10n.getString("ConfigFrame.clearKeyringButton.text"));
+    clearKeyringButton.setToolTipText(l10n.getString("ConfigFrame.clearKeyringButton.toolTipText")); // NOI18N
+    clearKeyringButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            clearKeyringButtonActionPerformed(evt);
+        }
+    });
+        Mnemonics.setLocalizedText(jLabel13, l10n.getString("ConfigFrame.jLabel13.text"));
+    jLabel13.setToolTipText(MessageFormat.format(l10n.getString("ConfigFrame.user_directory"),
+        PersistenceManager.getConfigDir().getAbsolutePath()));
+        Mnemonics.setLocalizedText(showPasswordCheckBox, l10n.getString("ConfigFrame.showPasswordCheckBox.text"));
+showPasswordCheckBox.setToolTipText(l10n.getString("ConfigFrame.showPasswordCheckBox.toolTipText")); // NOI18N
+showPasswordCheckBox.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent evt) {
+        showPasswordCheckBoxActionPerformed(evt);
+    }
     });
 
         GroupLayout loginPanelLayout = new GroupLayout(loginPanel);
@@ -1431,6 +1445,7 @@ private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
     private JLabel jLabel3;
     private JLabel jLabel9;
     private JComboBox lafComboBox;
+    private JLabel logLocationLabel;
     private JPanel loginPanel;
     private JTextField loginTextField;
     private JLabel lookLabel;

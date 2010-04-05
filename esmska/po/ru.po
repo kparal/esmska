@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-12 18:39+0200\n"
+"POT-Creation-Date: 2010-04-05 22:41+0200\n"
 "PO-Revision-Date: 2009-12-24 12:18+0000\n"
 "Last-Translator: Alexey Reztsov <ariafan@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -372,6 +372,11 @@ msgstr ""
 "<html>\n"
 "Позволяет менять вам внешний вид программы.\n"
 "</html>"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: ConfigFrame.logLocationLabel.text
+msgid "<html><i>The log file is stored at: {0}</i></html>"
+msgstr ""
 
 #: ConfigFrame.loginPanel.TabConstraints.tabTitle
 msgid "&Login credentials"

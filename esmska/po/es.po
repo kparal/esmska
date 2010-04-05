@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-12 18:39+0200\n"
-"PO-Revision-Date: 2010-03-08 13:07+0000\n"
-"Last-Translator: Luis Arturo <uisart@hotmail.com>\n"
+"POT-Creation-Date: 2010-04-05 22:41+0200\n"
+"PO-Revision-Date: 2010-03-15 02:31+0000\n"
+"Last-Translator: Carlos Alberto Ospina <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-09 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-03-16 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -425,6 +425,11 @@ msgstr ""
 "<html>\n"
 "Permite cambiar la apariencia del programa\n"
 "</html>"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: ConfigFrame.logLocationLabel.text
+msgid "<html><i>The log file is stored at: {0}</i></html>"
+msgstr ""
 
 #: ConfigFrame.loginPanel.TabConstraints.tabTitle
 msgid "&Login credentials"
@@ -873,7 +878,7 @@ msgstr "Gráficos:"
 
 #: Credits.moreDonators
 msgid "and others..."
-msgstr ""
+msgstr "Y otros..."
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -2345,6 +2350,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Alfonso E. Romero https://launchpad.net/~alfonsoeromero\n"
+"  Carlos Alberto Ospina https://launchpad.net/~atah\n"
 "  DiegoJ https://launchpad.net/~diegojromerolopez\n"
 "  Federico Vera https://launchpad.net/~fedevera\n"
 "  Javier Acuña Ditzel https://launchpad.net/~santoposmoderno\n"

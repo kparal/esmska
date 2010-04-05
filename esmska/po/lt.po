@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-12 18:39+0200\n"
-"PO-Revision-Date: 2010-02-21 17:41+0000\n"
-"Last-Translator: TheSpy <Unknown>\n"
+"POT-Creation-Date: 2010-04-05 22:41+0200\n"
+"PO-Revision-Date: 2010-03-12 18:49+0000\n"
+"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-22 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-03-13 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -360,6 +360,11 @@ msgid ""
 "<html>\n"
 "Allows you to change the appearance of the program\n"
 "</html>"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: ConfigFrame.logLocationLabel.text
+msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr ""
 
 #: ConfigFrame.loginPanel.TabConstraints.tabTitle
