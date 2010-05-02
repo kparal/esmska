@@ -38,8 +38,8 @@ import org.apache.commons.lang.Validate;
 public class OperatorConnector {
 
     private static final Logger logger = Logger.getLogger(OperatorConnector.class.getName());
-    private static final String USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686; cs-CZ; rv:1.9.0.2)" +
-            " Gecko/2008092313 Ubuntu/8.04 (hardy) Firefox/3.0.2";
+    private static final String USER_AGENT = "Mozilla/5.0 (X11; U; Linux x86_64; cs-CZ; rv:1.9.1.9) " +
+            "Gecko/20100402 Ubuntu/9.10 (karmic) Firefox/3.5.9";
     private static final Pattern metaRedirPattern = Pattern.compile(
             "<meta\\s+http-equiv=[^>]*refresh[^>]*url=([^>]*)(\"|')[^>]*>",
             Pattern.CASE_INSENSITIVE);
