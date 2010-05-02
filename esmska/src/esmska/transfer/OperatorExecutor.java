@@ -39,6 +39,9 @@ public class OperatorExecutor {
     /** Message that sender signature was wrong. */
     public static final String ERROR_WRONG_SIGNATURE =
             l10n.getString("OperatorExecutor.ERROR_WRONG_SIGNATURE");
+    /** Message that sender signature was wrong. */
+    public static final String ERROR_SIGNATURE_NEEDED =
+            l10n.getString("OperatorExecutor.ERROR_SIGNATURE_NEEDED");
     /** Message that login or password was wrong. */
     public static String ERROR_WRONG_AUTH =
             l10n.getString("OperatorExecutor.ERROR_WRONG_AUTH");
