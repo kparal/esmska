@@ -1,0 +1,167 @@
+
+function getName() {
+    return "[INT]SMS Global"
+}
+
+function getVersion() {
+    return "2010-05-07"
+}
+
+function getMaintainer() {
+    return "Peng Duan <peng803@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "0.18.0.99"
+}
+
+function getWebsite() {
+    return "http://www.smsglobal.com"
+}
+
+function getDescription() {
+    return "Paid gateway allowing to send SMS almost to any country in the world. It's popular in Australia."
+}
+
+function getCountryPrefix() {
+    return ""
+}
+
+function getOperatorPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 153
+}
+
+function getMaxChars() {
+    return 765
+}
+
+function getMaxParts() {
+    return 1
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function getSupportedLanguages() {
+    return ["en"]
+}
+
+function send() {
+
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+    
+    // check whether there is a supplied sender number
+    if (SENDERNUMBER.length==0){
+        EXEC.setErrorMessage(EXEC.ERROR_SIGNATURE_NEEDED)
+        return false
+    }
+	
+    // strip "+" from telephone numbers, gateway doesn't like it
+    if (NUMBER.indexOf("+") == 0) {
+        NUMBER = NUMBER.substring(1)
+    }
+    if (SENDERNUMBER.indexOf("+") == 0) {
+        SENDERNUMBER = SENDERNUMBER.substring(1)
+    }
+
+    // show error if there is a non-ascii character in the message
+    // the gateway currently does bad job for unicode characters, it sends some
+    // of them correctly, but doesn't send some other ones at all
+    re = /[^\u0001-\u007f]/
+    match = re.exec(MESSAGE)
+    if (undefined != match) {
+        EXEC.setErrorMessage("This gateway does not support national characters at the moment.<br>" +
+        "Please enter English alphabet characters only.")
+        return false
+    }
+
+    // send message
+    postData = ["action", "sendsms", "user", LOGIN, 
+               "password", PASSWORD, "from", SENDERNUMBER, 
+               "to", NUMBER, "text", MESSAGE, 
+               "maxsplit", "5"]
+    content = EXEC.postURL("http://www.smsglobal.com/http-api.php", [], postData)
+
+    // check errors
+    // wrong username/password
+    re = /ERROR: 402|ERROR: 14/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+	
+    // invalid number
+    re = /ERROR: 11|ERROR: 102/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
+        return false
+    }
+    
+    // invalid signature
+    re = /ERROR: 10$/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_SIGNATURE)
+        return false
+    }
+	
+    // insufficient credit
+    re = /ERROR: 88/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
+        var credit = check_credit()
+        if (undefined != credit) {
+            EXEC.setOperatorMessage(EXEC.INFO_CREDIT_REMAINING + credit)
+        }
+        return false
+    }
+
+    // check if message was successfully sent
+    re = /OK: 0/
+    match = re.exec(content)
+    if (undefined != match) {
+        //all ok, get remanining balance and display it
+        var credit = check_credit()
+        if (undefined != credit) {
+            EXEC.setOperatorMessage(EXEC.INFO_CREDIT_REMAINING + credit)
+        }
+        return true
+    }
+	
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    return false
+}
+
+function check_credit() {
+    postData = ["action", "balancesms", "user", LOGIN, "password", PASSWORD]
+    content = EXEC.postURL("http://www.smsglobal.com/http-api.php", [], postData)
+	var re = /BALANCE: (.*);/
+	balance_match = re.exec(content)
+	if (undefined != match) {
+	    return balance_match[1]
+	} else {
+	    return undefined
+	}
+}
+
