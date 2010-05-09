@@ -323,14 +323,30 @@ public class SMSPanel extends javax.swing.JPanel {
         //set tooltips
         int current = singleProgressBar.getValue();
         int max = singleProgressBar.getMaximum();
-        singleProgressBar.setToolTipText(MessageFormat.format(
-                l10n.getString("SMSPanel.singleProgressBar"),
-                current, max, (max - current)));
+        boolean infinite = (max == Integer.MAX_VALUE);
+        if (infinite) {
+            //don't show really big numbers when there is no limit on characters
+            singleProgressBar.setToolTipText(MessageFormat.format(
+                    l10n.getString("SMSPanel.singleProgressBar"),
+                    current, "∞", "∞"));
+        } else {
+            singleProgressBar.setToolTipText(MessageFormat.format(
+                    l10n.getString("SMSPanel.singleProgressBar"),
+                    current, max, (max - current)));
+        }
         current = fullProgressBar.getValue();
         max = fullProgressBar.getMaximum();
-        fullProgressBar.setToolTipText(MessageFormat.format(
-                l10n.getString("SMSPanel.fullProgressBar"),
-                current, max, (max - current)));
+        infinite = (max == Integer.MAX_VALUE);
+        if (infinite) {
+            //don't show really big numbers when there is no limit on characters
+            fullProgressBar.setToolTipText(MessageFormat.format(
+                    l10n.getString("SMSPanel.fullProgressBar"),
+                    current, "∞", "∞"));
+        } else {
+            fullProgressBar.setToolTipText(MessageFormat.format(
+                    l10n.getString("SMSPanel.fullProgressBar"),
+                    current, max, (max - current)));
+        }
     }
 
     /** Show warning if user selected gateway which does not send
