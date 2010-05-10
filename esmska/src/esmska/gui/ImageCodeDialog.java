@@ -59,8 +59,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
-import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
 import org.openide.awt.Mnemonics;
+import org.pushingpixels.substance.api.renderers.SubstanceDefaultListCellRenderer;
 
 /** Dialog for showing security images to be transcribed to textual form
  *

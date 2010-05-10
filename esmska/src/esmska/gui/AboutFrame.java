@@ -44,8 +44,8 @@ import javax.swing.WindowConstants;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import org.apache.commons.io.IOUtils;
-import org.jvnet.substance.SubstanceLookAndFeel;
 import org.openide.awt.Mnemonics;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 
 /** About form
  *

@@ -95,10 +95,12 @@ Provided by lib/ directory:
    o org-openide-util.jar
    o http://platform.netbeans.org/
    o included in NetBeans IDE 6.1
- * Substance 5.3
+ * Substance 6.0
    o https://substance.dev.java.net/
- * Substance Extras 5.3
+ * Substance Extras 6.0
    o https://substance-extras.dev.java.net/
+ * Trident 1.2
+   o http://kenai.com/projects/trident/
 
 If you wish to use other libraries than the ones provided in lib/ directory
 (e.g. package maintainers may want this) you can specify classpaths to

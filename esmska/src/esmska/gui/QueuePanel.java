@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.List;
-
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
@@ -28,15 +27,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
-
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import org.jvnet.substance.SubstanceLookAndFeel;
-
 import esmska.data.Icons;
 import esmska.data.Operators;
 import esmska.data.Queue;
@@ -64,13 +60,14 @@ import javax.swing.Timer;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
-import org.jvnet.substance.api.ColorSchemeAssociationKind;
-import org.jvnet.substance.api.ComponentState;
-import org.jvnet.substance.api.SubstanceColorScheme;
-import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
-import org.jvnet.substance.painter.border.SubstanceBorderPainter;
-import org.jvnet.substance.painter.highlight.SubstanceHighlightPainter;
-import org.jvnet.substance.skin.SkinChangeListener;
+import org.pushingpixels.substance.api.ColorSchemeAssociationKind;
+import org.pushingpixels.substance.api.ComponentState;
+import org.pushingpixels.substance.api.SubstanceColorScheme;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.painter.border.SubstanceBorderPainter;
+import org.pushingpixels.substance.api.painter.highlight.SubstanceHighlightPainter;
+import org.pushingpixels.substance.api.renderers.SubstanceDefaultListCellRenderer;
+import org.pushingpixels.substance.api.skin.SkinChangeListener;
 
 /** SMS queue panel
  *
@@ -427,13 +424,12 @@ public class QueuePanel extends javax.swing.JPanel {
                 //handle this painting on our own
                 if (isSubstance && selected) {
                     highlPainter.paintHighlight((Graphics2D) g, this, getWidth(),
-                            getHeight(), null, scheme, scheme, 1f);
+                            getHeight(), scheme);
                     //do some black magic to get component contour - one pixel is
                     //substracted from right and bottom, bcz it was cut off otherwise
                     Rectangle contour = new Rectangle(0, 0, getWidth() - 1, getHeight() - 1);
                     borderPainter.paintBorder((Graphics2D) g, this, getWidth(),
-                            getHeight(), contour, contour, borderScheme,
-                            borderScheme, 1f, true);
+                            getHeight(), contour, contour, borderScheme);
                 }
             }
         };
@@ -441,7 +437,6 @@ public class QueuePanel extends javax.swing.JPanel {
         public SMSQueueListRenderer(JList list) {
             this.jlist = list;
             panel.add(delayLabel, BorderLayout.LINE_END);
-            delayLabel.setOpaque(true);
             
             updateSubstanceSkinValues();
             SubstanceLookAndFeel.registerSkinChangeListener(new SkinChangeListener() {

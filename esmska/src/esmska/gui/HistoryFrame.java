@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.GroupLayout;
@@ -49,9 +48,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
-
-import org.jvnet.substance.SubstanceLookAndFeel;
-
 import esmska.data.Config;
 import esmska.data.History;
 import esmska.data.event.AbstractDocumentListener;
@@ -66,9 +62,9 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-import javax.swing.table.TableCellRenderer;
-import org.jvnet.substance.api.renderers.SubstanceDefaultTableCellRenderer;
 import org.openide.awt.Mnemonics;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.renderers.SubstanceDefaultTableCellRenderer;
 
 /** Display all sent messages in a frame
  *

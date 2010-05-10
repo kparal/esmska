@@ -70,8 +70,8 @@ import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.apache.commons.lang.StringUtils;
-import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.api.renderers.SubstanceDefaultListCellRenderer;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.renderers.SubstanceDefaultListCellRenderer;
 
 /** Contact list panel
  *

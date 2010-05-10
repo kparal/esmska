@@ -43,6 +43,7 @@
        * OpenIDE: GNU GPL 2
        * Substance: BSD License
        * Substance Extras: BSD License
+       * Trident: BSD License
      o Source files which state a specific license at their beginning are
        following that particular license.
      o Icons used inside the program were taken over from various free software

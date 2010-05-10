@@ -15,8 +15,6 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.ExperienceBlue;
 import javax.swing.JDialog;
 import javax.swing.UIManager;
-import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.skin.SkinInfo;
 import esmska.data.Config;
 import esmska.utils.RuntimeUtils;
 import java.util.logging.Logger;
@@ -24,8 +22,13 @@ import javax.swing.JFrame;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager.LookAndFeelInfo;
 import org.apache.commons.lang.ObjectUtils;
-import org.jvnet.lafwidget.LafWidget;
-import org.jvnet.substance.skin.BusinessBlackSteelSkin;
+import org.pushingpixels.lafwidget.LafWidget;
+import org.pushingpixels.substance.api.ColorSchemeAssociationKind;
+import org.pushingpixels.substance.api.ComponentState;
+import org.pushingpixels.substance.api.DecorationAreaType;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.skin.BusinessBlackSteelSkin;
+import org.pushingpixels.substance.api.skin.SkinInfo;
 
 /** Manage and set look and feel
  *
@@ -175,7 +178,8 @@ public class ThemeManager {
     public static boolean isCurrentSkinDark() {
         //currently only Substance skins are dark
         return isSubstanceCurrentLaF() &&
-                SubstanceLookAndFeel.getCurrentSkin().getMainDefaultColorScheme().isDark();
+                SubstanceLookAndFeel.getCurrentSkin().getColorScheme(DecorationAreaType.GENERAL,
+                ColorSchemeAssociationKind.FILL, ComponentState.ENABLED).isDark();
     }
     
     /** Returns whether specified LaF is supported on current configuration

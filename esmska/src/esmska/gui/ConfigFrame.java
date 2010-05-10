@@ -55,8 +55,6 @@ import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ELProperty;
-import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.skin.SkinInfo;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.data.event.AbstractDocumentListener;
@@ -85,6 +83,8 @@ import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jdesktop.beansbinding.Converter;
 import org.openide.awt.Mnemonics;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.skin.SkinInfo;
 
 /** Configure settings form
  *

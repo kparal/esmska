@@ -54,7 +54,6 @@ import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import org.jvnet.substance.SubstanceLookAndFeel;
 
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
@@ -88,6 +87,7 @@ import javax.swing.JComponent;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 
 /**
  * MainFrame form

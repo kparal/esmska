@@ -79,9 +79,9 @@ import javax.swing.undo.UndoManager;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
-import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.skin.SkinChangeListener;
 import org.openide.awt.Mnemonics;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.skin.SkinChangeListener;
 
 /** Panel for writing and sending sms, and for setting immediate contact
  *
