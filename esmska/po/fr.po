@@ -8,19 +8,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 22:41+0200\n"
-"PO-Revision-Date: 2009-11-25 00:13+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2010-05-13 20:55+0200\n"
+"PO-Revision-Date: 2010-04-30 07:34+0000\n"
+"Last-Translator: dYp <d.y.p@free.fr>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-05-01 03:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
-msgstr ""
+msgstr "Je reconnais que"
 
 #: AboutFrame.Credits
 msgid "Credits"
@@ -43,9 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "Envoi de SMS par Internet."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2010 Kamil Páral"
-msgstr "2007-2009 Kamil Páral"
+msgstr "2007-2010 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -70,9 +69,11 @@ msgid "<html><a href=\"\">Support project</a></html>"
 msgstr "<html><a href=\"\">Supporter le projet</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Do you like this project? Help to keep it running...\n"
+"Do you like this project?<br>\n"
+"Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -93,7 +94,7 @@ msgstr "Ajouter un contact"
 
 #: Add_new_contact
 msgid "Add new contact (Alt+A)"
-msgstr ""
+msgstr "Ajouter nouveau contact (Alt+A)"
 
 #: Cancel
 msgid "Cancel"
@@ -105,11 +106,11 @@ msgstr "&Annuler"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
-msgstr ""
+msgstr "Vérifier les mises à jour"
 
 #: CheckUpdates_
 msgid "&Updates checker"
-msgstr ""
+msgstr "&Contrôleur des mises à jour"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -143,13 +144,15 @@ msgstr ""
 
 #: CommandLineParser.debugMode
 msgid "debug mode"
-msgstr ""
+msgstr "mode débogage"
 
 #: CommandLineParser.enable_portable_mode
 msgid ""
 "Enable the portable mode - ask for location of the user configuration "
 "directory. Can't be used with -c."
 msgstr ""
+"Activer le mode portable - demander l'emplacement du répertoire de la "
+"configuration utilisateur. Utilisation impossible avec -c."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
@@ -180,7 +183,7 @@ msgstr "Utilisation:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr ""
+msgstr "Imprimer la version du logiciel et quitter."
 
 #: Compress_
 msgid "&Compress"
@@ -188,15 +191,15 @@ msgstr "&Compresser"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr ""
+msgstr "Paramètres a&vancés"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr ""
+msgstr "Afficher les paramètres avancés"
 
 #: ConfigFrame.advancedControlsCheckBox.text
 msgid "Show a&dvanced controls"
-msgstr ""
+msgstr "Afficher les contrôles avan&cés"
 
 #: ConfigFrame.advancedControlsCheckBox.toolTipText
 msgid ""
@@ -212,7 +215,7 @@ msgstr "&Apparence"
 
 #: ConfigFrame.checkUpdatesCheckBox.text
 msgid "Automatically check for &updates of:"
-msgstr ""
+msgstr "Recherche automatique des mises à jour"
 
 #: ConfigFrame.checkUpdatesCheckBox.toolTipText
 msgid ""
@@ -221,6 +224,10 @@ msgid ""
 "or gateway updates were released and eventually notify the user\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Après démarrage, contrôler si une nouvelle version<br>\n"
+"existe et éventuellement notifier l'utilisateur\n"
+"</html>"
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
@@ -228,7 +235,7 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
-msgstr ""
+msgstr "Effacer tous les noms et mots de passe pour toutes les passerelles"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
@@ -236,7 +243,7 @@ msgstr "&Connexion"
 
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
-msgstr ""
+msgstr "Créer un log avec informations de dé&bogage"
 
 #: ConfigFrame.debugCheckBox.toolTipText
 msgid ""
@@ -246,10 +253,15 @@ msgid ""
 "to have it turned off.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Option uniquement utile en mode développement<br>\n"
+"pour résoudre certains problèmes. Pour tout autre<br>\n"
+"cas, il est recommandé de le laisser non sélectionné.\n"
+"</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request the &delivery report"
-msgstr ""
+msgstr "Demander l'accusé de réception"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -700,9 +712,8 @@ msgid "The country code for which you have filled out the prefix number"
 msgstr ""
 
 #: CountryPrefixPanel.countryCodeLabel.text
-#, fuzzy
 msgid "(c&ountry:"
-msgstr "(pays:"
+msgstr ""
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -1349,9 +1360,8 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem or an idea..."
-msgstr "Envoyer un compte rendu de &problème"
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1518,6 +1528,12 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
 msgid "A message from the gateway:<br>"
+msgstr ""
+
+#: OperatorExecutor.ERROR_SIGNATURE_NEEDED
+msgid ""
+"This gateway requires that you supply a sender signature. Correct it in the "
+"program settings and try again."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1990,7 +2006,8 @@ msgstr ""
 "  Elizabeth https://launchpad.net/~dutertre-eliz\n"
 "  Kamil Páral https://launchpad.net/~kamil.paral\n"
 "  Mathieu Pasquet https://launchpad.net/~mathieui\n"
-"  Pierre Slamich https://launchpad.net/~pierre-slamich"
+"  Pierre Slamich https://launchpad.net/~pierre-slamich\n"
+"  dYp https://launchpad.net/~dubois-yaen-pujol"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2123,6 +2140,9 @@ msgid ""
 "</html>"
 msgstr ""
 
+#~ msgid "O&perators"
+#~ msgstr "O&pérateurs"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Telephone number of the contact including the country prefix.<br>\n"
@@ -2135,6 +2155,3 @@ msgstr ""
 #~ "Le préfixe du pays n'a pas besoin d'être donné si le défaut<br>\n"
 #~ "préfixe du pays figure dans les préférences du programme.\n"
 #~ "</html>"
-
-#~ msgid "O&perators"
-#~ msgstr "O&pérateurs"

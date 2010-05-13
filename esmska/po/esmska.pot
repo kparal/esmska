@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 22:42+0200\n"
+"POT-Creation-Date: 2010-05-13 21:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,8 @@ msgstr ""
 #: AboutFrame.supportButton.toolTipText
 msgid ""
 "<html>\n"
-"Do you like this project? Help to keep it running...\n"
+"Do you like this project?<br>\n"
+"Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
 
@@ -1498,6 +1499,12 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
 msgid "A message from the gateway:<br>"
+msgstr ""
+
+#: OperatorExecutor.ERROR_SIGNATURE_NEEDED
+msgid ""
+"This gateway requires that you supply a sender signature. Correct it in the "
+"program settings and try again."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!

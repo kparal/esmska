@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 22:42+0200\n"
-"PO-Revision-Date: 2010-04-05 22:42+0100\n"
+"POT-Creation-Date: 2010-05-13 20:58+0200\n"
+"PO-Revision-Date: 2010-05-13 20:58+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -66,11 +66,13 @@ msgstr "<html><a href=\"\">Podpořte projekt</a></html>"
 #: AboutFrame.supportButton.toolTipText
 msgid ""
 "<html>\n"
-"Do you like this project? Help to keep it running...\n"
+"Do you like this project?<br>\n"
+"Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"Líbí se vám tento projekt? Pomozte jej udržet v chodu...\n"
+"Líbí se vám tento projekt?<br>\n"
+"Pomozte jej udržet v chodu malým finančním příspěvkem...\n"
 "</html>"
 
 #: AboutFrame.title
@@ -1759,6 +1761,14 @@ msgstr ""
 #: OperatorExecutor.ERROR_OPERATOR_MESSAGE
 msgid "A message from the gateway:<br>"
 msgstr "Zpráva od brány:<br>"
+
+#: OperatorExecutor.ERROR_SIGNATURE_NEEDED
+msgid ""
+"This gateway requires that you supply a sender signature. Correct it in the "
+"program settings and try again."
+msgstr ""
+"Tato brána vyžaduje vyplněný podpis odesilatele. Zadejte jej v nastavení "
+"programu a zkuste to znovu."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_UKNOWN
