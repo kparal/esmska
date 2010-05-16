@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-13 20:55+0200\n"
-"PO-Revision-Date: 2010-03-15 02:31+0000\n"
-"Last-Translator: Carlos Alberto Ospina <Unknown>\n"
+"POT-Creation-Date: 2010-05-16 19:47+0200\n"
+"PO-Revision-Date: 2010-05-13 19:37+0000\n"
+"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-16 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-05-14 04:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -69,16 +69,12 @@ msgid "<html><a href=\"\">Support project</a></html>"
 msgstr "<html><a href=\"\">Apoyar el proyecto</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"¿Le gusta este proyecto? Ayude a que continúe existiendo...\n"
-"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -1040,8 +1036,8 @@ msgid "Contact export"
 msgstr "Exportar contacto"
 
 #: ExportManager.contact_list
-msgid "Contact list"
-msgstr "Lista de contactos"
+msgid "Contact list (contact name, telephone number, default gateway)"
+msgstr ""
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
@@ -1091,16 +1087,23 @@ msgid "Contact export finished successfully!"
 msgstr "Exportación de contactos finalizada exitosamente!"
 
 #: ExportManager.history
-msgid "Sent messages history"
-msgstr "Historial de mensajes enviados"
+msgid ""
+"Sent messages history (date, recipient name, recipient number, gateway, "
+"message text, sender name, sender number)"
+msgstr ""
 
 #: ExportManager.login
-msgid "Usernames and password to individual gateways"
+#, fuzzy
+msgid ""
+"Usernames and password to individual gateways (gateway name, user login, "
+"user password)"
 msgstr "Usuarios y contraseñas a puertas de enlaces individuales"
 
 #: ExportManager.sms_queue
-msgid "SMS queue to be sent"
-msgstr "SMS en cola para ser enviado"
+msgid ""
+"SMS queue to be sent (recipient name, recipient number, gateway, message "
+"text, sender name, sender number)"
+msgstr ""
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
@@ -2529,6 +2532,15 @@ msgstr ""
 "Las compuertas actualizadas pueden auydarlo a solucionar problemas con el "
 "envío de mensajes.\n"
 "</html>"
+
+#~ msgid "Contact list"
+#~ msgstr "Lista de contactos"
+
+#~ msgid "Sent messages history"
+#~ msgstr "Historial de mensajes enviados"
+
+#~ msgid "SMS queue to be sent"
+#~ msgstr "SMS en cola para ser enviado"
 
 #~ msgid "&Image code:"
 #~ msgstr "Código &Image"

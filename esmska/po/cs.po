@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-13 20:58+0200\n"
-"PO-Revision-Date: 2010-05-13 20:58+0100\n"
+"POT-Creation-Date: 2010-05-16 19:51+0200\n"
+"PO-Revision-Date: 2010-05-16 19:51+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1015,8 +1015,8 @@ msgid "Contact export"
 msgstr "Export kontaktů"
 
 #: ExportManager.contact_list
-msgid "Contact list"
-msgstr "Seznam kontaktů"
+msgid "Contact list (contact name, telephone number, default gateway)"
+msgstr "Seznam kontaktů (jméno kontaktu, telefonní číslo, výchozí brána)"
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
@@ -1062,16 +1062,28 @@ msgid "Contact export finished successfully!"
 msgstr "Export kontaktů úspěšně dokončen!"
 
 #: ExportManager.history
-msgid "Sent messages history"
-msgstr "Historie odeslaných sms"
+msgid ""
+"Sent messages history (date, recipient name, recipient number, gateway, "
+"message text, sender name, sender number)"
+msgstr ""
+"Historie odeslaných zpráv (datum, jméno příjemce, číslo příjemce, brána, "
+"text zprávy, jméno odesilatele, číslo odesilatele)"
 
 #: ExportManager.login
-msgid "Usernames and password to individual gateways"
-msgstr "Uživatelská jména a hesla k jednotlivým branám"
+msgid ""
+"Usernames and password to individual gateways (gateway name, user login, "
+"user password)"
+msgstr ""
+"Uživatelská jména a hesla k jednotlivým branám (název brány, uživatelské "
+"jméno, uživatelské heslo)"
 
 #: ExportManager.sms_queue
-msgid "SMS queue to be sent"
-msgstr "Fronta sms k odeslání"
+msgid ""
+"SMS queue to be sent (recipient name, recipient number, gateway, message "
+"text, sender name, sender number)"
+msgstr ""
+"Fronta SMS k odeslání (jméno příjemce, číslo příjemce, brána, text zprávy, "
+"jméno odesilatele, číslo odesilatele)"
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
@@ -2453,6 +2465,15 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid "Contact list"
+#~ msgstr "Seznam kontaktů"
+
+#~ msgid "Sent messages history"
+#~ msgstr "Historie odeslaných sms"
+
+#~ msgid "SMS queue to be sent"
+#~ msgstr "Fronta sms k odeslání"
 
 #~ msgid "Guess a suitable gateway"
 #~ msgstr "Odhadnout vhodnou bránu"

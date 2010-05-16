@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-13 20:55+0200\n"
-"PO-Revision-Date: 2010-05-05 17:03+0000\n"
-"Last-Translator: Novichkov Alexander <Unknown>\n"
+"POT-Creation-Date: 2010-05-16 19:47+0200\n"
+"PO-Revision-Date: 2010-05-13 19:36+0000\n"
+"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-06 04:05+0000\n"
+"X-Launchpad-Export-Date: 2010-05-14 04:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -69,16 +69,12 @@ msgid "<html><a href=\"\">Support project</a></html>"
 msgstr "<html><a href=\"\">Поддержать проект</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Вам нравится этот проект? Помогите своим участием...\n"
-"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -893,8 +889,8 @@ msgid "Contact export"
 msgstr ""
 
 #: ExportManager.contact_list
-msgid "Contact list"
-msgstr "Список контактов"
+msgid "Contact list (contact name, telephone number, default gateway)"
+msgstr ""
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
@@ -929,15 +925,21 @@ msgid "Contact export finished successfully!"
 msgstr ""
 
 #: ExportManager.history
-msgid "Sent messages history"
-msgstr "Архив отправленных сообщений"
+msgid ""
+"Sent messages history (date, recipient name, recipient number, gateway, "
+"message text, sender name, sender number)"
+msgstr ""
 
 #: ExportManager.login
-msgid "Usernames and password to individual gateways"
+msgid ""
+"Usernames and password to individual gateways (gateway name, user login, "
+"user password)"
 msgstr ""
 
 #: ExportManager.sms_queue
-msgid "SMS queue to be sent"
+msgid ""
+"SMS queue to be sent (recipient name, recipient number, gateway, message "
+"text, sender name, sender number)"
 msgstr ""
 
 #: ExportManager.vcard_filter
@@ -2135,6 +2137,12 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "Contact list"
+#~ msgstr "Список контактов"
+
+#~ msgid "Sent messages history"
+#~ msgstr "Архив отправленных сообщений"
 
 #~ msgid "O&perators"
 #~ msgstr "О&ператоры"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-13 20:55+0200\n"
+"POT-Creation-Date: 2010-05-16 19:47+0200\n"
 "PO-Revision-Date: 2010-03-12 18:48+0000\n"
 "Last-Translator: Gergely Szarka <szarka.honved@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -886,7 +886,7 @@ msgid "Contact export"
 msgstr ""
 
 #: ExportManager.contact_list
-msgid "Contact list"
+msgid "Contact list (contact name, telephone number, default gateway)"
 msgstr ""
 
 #: ExportManager.csv_filter
@@ -922,15 +922,21 @@ msgid "Contact export finished successfully!"
 msgstr ""
 
 #: ExportManager.history
-msgid "Sent messages history"
+msgid ""
+"Sent messages history (date, recipient name, recipient number, gateway, "
+"message text, sender name, sender number)"
 msgstr ""
 
 #: ExportManager.login
-msgid "Usernames and password to individual gateways"
+msgid ""
+"Usernames and password to individual gateways (gateway name, user login, "
+"user password)"
 msgstr ""
 
 #: ExportManager.sms_queue
-msgid "SMS queue to be sent"
+msgid ""
+"SMS queue to be sent (recipient name, recipient number, gateway, message "
+"text, sender name, sender number)"
 msgstr ""
 
 #: ExportManager.vcard_filter

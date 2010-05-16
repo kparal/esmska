@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-13 20:55+0200\n"
+"POT-Creation-Date: 2010-05-16 19:47+0200\n"
 "PO-Revision-Date: 2009-11-24 22:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -882,8 +882,8 @@ msgid "Contact export"
 msgstr ""
 
 #: ExportManager.contact_list
-msgid "Contact list"
-msgstr "Lista contatti"
+msgid "Contact list (contact name, telephone number, default gateway)"
+msgstr ""
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
@@ -918,15 +918,21 @@ msgid "Contact export finished successfully!"
 msgstr ""
 
 #: ExportManager.history
-msgid "Sent messages history"
-msgstr "Cronologia messaggi inviati"
+msgid ""
+"Sent messages history (date, recipient name, recipient number, gateway, "
+"message text, sender name, sender number)"
+msgstr ""
 
 #: ExportManager.login
-msgid "Usernames and password to individual gateways"
+msgid ""
+"Usernames and password to individual gateways (gateway name, user login, "
+"user password)"
 msgstr ""
 
 #: ExportManager.sms_queue
-msgid "SMS queue to be sent"
+msgid ""
+"SMS queue to be sent (recipient name, recipient number, gateway, message "
+"text, sender name, sender number)"
 msgstr ""
 
 #: ExportManager.vcard_filter
@@ -2130,6 +2136,12 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "Contact list"
+#~ msgstr "Lista contatti"
+
+#~ msgid "Sent messages history"
+#~ msgstr "Cronologia messaggi inviati"
 
 #~ msgid "O&perators"
 #~ msgstr "O&peratori"
