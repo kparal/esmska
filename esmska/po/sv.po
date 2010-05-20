@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-16 19:47+0200\n"
+"POT-Creation-Date: 2010-05-20 19:13+0200\n"
 "PO-Revision-Date: 2010-05-13 19:37+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -484,7 +484,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show password"
+#, fuzzy
+msgid "Show &password"
 msgstr "Visa lösenord"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText

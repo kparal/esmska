@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-16 19:47+0200\n"
-"PO-Revision-Date: 2010-05-13 19:37+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2010-05-20 19:13+0200\n"
+"PO-Revision-Date: 2010-05-14 05:39+0000\n"
+"Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-14 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-05-17 05:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -75,6 +75,10 @@ msgid ""
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Páči sa ti tento projekt?<br>\n"
+"Pomôžte ho udržať v chode malou finančnou výpomocou ...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -417,7 +421,7 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.logLocationLabel.text
 msgid "<html><i>The log file is stored at: {0}</i></html>"
-msgstr ""
+msgstr "<html><i>Súbor záznamu je uložený tu: {0}</i></html>"
 
 #: ConfigFrame.loginPanel.TabConstraints.tabTitle
 msgid "&Login credentials"
@@ -564,7 +568,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "Číslo odosielateľa v medzinárodnom formáte (začínajúce znakom „+“)"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show password"
+#, fuzzy
+msgid "Show &password"
 msgstr "Zobraziť heslo"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
@@ -1068,11 +1073,10 @@ msgid ""
 msgstr ""
 
 #: ExportManager.login
-#, fuzzy
 msgid ""
 "Usernames and password to individual gateways (gateway name, user login, "
 "user password)"
-msgstr "Používateľské mená a heslá k jednotlivým bránam"
+msgstr ""
 
 #: ExportManager.sms_queue
 msgid ""
@@ -1777,6 +1781,8 @@ msgid ""
 "This gateway requires that you supply a sender signature. Correct it in the "
 "program settings and try again."
 msgstr ""
+"Táto brána vyžaduje vyplnenie podpisu odosielateľa. Doplnte ju v "
+"nastaveniach programu a skúske opäť."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorExecutor.ERROR_UKNOWN
@@ -2472,15 +2478,6 @@ msgstr ""
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
 
-#~ msgid "Contact list"
-#~ msgstr "Zoznam kontaktov"
-
-#~ msgid "Sent messages history"
-#~ msgstr "História odoslaných správ"
-
-#~ msgid "SMS queue to be sent"
-#~ msgstr "Front SMS na odoslanie"
-
 #~ msgid "O&perators"
 #~ msgstr "O&perátori"
 
@@ -2496,6 +2493,12 @@ msgstr ""
 #~ "Smerové číslo krajiny nemusí byť vyplnené ak je nastavené<br>\n"
 #~ "východiskové smerové číslo v nastaveniach programu.\n"
 #~ "</html>"
+
+#~ msgid "Contact list"
+#~ msgstr "Zoznam kontaktov"
+
+#~ msgid "Sent messages history"
+#~ msgstr "História odoslaných správ"
 
 #~ msgid "Directory with program settings can't be created!"
 #~ msgstr "Nepodarilo sa vytvoriť adresár s nastavením programu!"
@@ -2518,6 +2521,9 @@ msgstr ""
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Brána:"
+
+#~ msgid "SMS queue to be sent"
+#~ msgstr "Front SMS na odoslanie"
 
 #~ msgid "&Image code:"
 #~ msgstr "&Kód na obrázku:"

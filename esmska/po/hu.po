@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-16 19:47+0200\n"
+"POT-Creation-Date: 2010-05-20 19:13+0200\n"
 "PO-Revision-Date: 2010-03-12 18:48+0000\n"
 "Last-Translator: Gergely Szarka <szarka.honved@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -491,7 +491,7 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show password"
+msgid "Show &password"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText

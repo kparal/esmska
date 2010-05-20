@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-16 19:47+0200\n"
+"POT-Creation-Date: 2010-05-20 19:13+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -486,7 +486,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "Siuntėjo numeris tarptautiniu formatu (prasideda ženklu '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show password"
+#, fuzzy
+msgid "Show &password"
 msgstr "Rodyti slaptažodį"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
