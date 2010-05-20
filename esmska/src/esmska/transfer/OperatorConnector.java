@@ -20,6 +20,7 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.URI;
+import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -507,6 +508,26 @@ public class OperatorConnector {
         } else {
             //absolute redirect
             //keep redirect url intact
+        }
+
+        //because some websites sends incorrectly escaped (or more specifically
+        //unescaped) URL characters, see http://code.google.com/p/esmska/issues/detail?id=269,
+        //let's try to build an URI from it, and if it fails, let's try to fix it
+        //and encode characters properly
+        try {
+            URI uri = new URI(redirectURL, true);
+        } catch (URIException ex) {
+            //the URL is bad, we have to fix it
+            logger.log(Level.FINER, "The computed redirect URL has invalid syntax (" +
+                    ex.getMessage() + "): " + redirectURL);
+            try {
+                URI uri = new URI(redirectURL, false);
+                redirectURL = uri.getEscapedURI();
+            } catch (Exception e) {
+                throw new IOException("The computed redirect URL has invalid " +
+                        "syntax and it can't be even fixed (" +
+                        e.getMessage() + "): " + redirectURL);
+            }
         }
 
         if (ObjectUtils.equals(lastRedirect.get1(), redirectURL)) {
