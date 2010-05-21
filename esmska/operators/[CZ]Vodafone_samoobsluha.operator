@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-17"
+    return "2010-05-21"
 }
 
 function getMaintainer() {
@@ -81,7 +81,27 @@ function send() {
     var logged = false
 
     // start page
-    content = EXEC.getURL("https://samoobsluha.vodafone.cz/", [])
+    try {
+        content = EXEC.getURL("https://samoobsluha.vodafone.cz/", [])
+    } catch (e) {
+        // With Sun Java 6 Update 19 and higher this throws SSLHandshakeException
+        // "MD2withRSA is disabled". Read more at:
+        // http://code.google.com/p/esmska/issues/detail?id=271
+        // We have to catch this exception and announce it to the user in that case.
+        if (e.message.indexOf("MD2withRSA is disabled") >= 0) {
+            EXEC.setErrorMessage("Stránky Vodafone Samoobsluhy kvůli zastaralému " +
+            "bezpečnostnímu certifikátu<br>bohužel nadále nefungují pod Sun Java 6 Update 19 " +
+            "a vyšší. Buď nainstalujte<br>starší verzi Sun Java, nebo používejte " +
+            "OpenJDK (pouze pro Linux).<br>Případně použijte jinou bránu.<br><br>Více " +
+            "informací v <a href=\"http://code.google.com/p/esmska/issues/detail?id=271\">" +
+            "issue 271</a>.")
+        } else {
+            // this was a different exception, just rethrow it and let the 
+            // script fail
+            throw e
+        }
+        return false
+    }
 
     // search if we are not already logged in (previous logout failed or something)
     re = /<a href="logout.php"/
