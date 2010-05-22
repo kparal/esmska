@@ -289,7 +289,7 @@ public class AboutFrame extends javax.swing.JFrame {
                 //there are no translators mentioned
                 translators = "";
             } else {
-                translators = "&nbsp;&nbsp;" + translators.replaceAll("\n", "<br>\n").
+                translators = translators.replaceAll("\n", "<br>\n").
                     replaceAll("\n  ", "\n&nbsp;&nbsp;");
                 //add hyperlinks to the Launchpad URLs
                 translators = translators.replaceAll("(https://[^<]*)", 
@@ -299,7 +299,8 @@ public class AboutFrame extends javax.swing.JFrame {
             String document = MessageFormat.format(credits, l10n.getString("Credits.authors"),
                     l10n.getString("Credits.contributors"), l10n.getString("Credits.graphics"),
                     l10n.getString("Credits.sponsors"), l10n.getString("Credits.translators"),
-                    translators, Links.DONATORS, l10n.getString("Credits.moreDonators"));
+                    translators, Links.DONATORS, l10n.getString("Credits.moreDonators"),
+                    l10n.getString("Credits.emailWarn"));
             
             JTextPane tp = new JTextPane();
             tp.setContentType("text/html; charset=UTF-8");

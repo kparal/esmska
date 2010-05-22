@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-20 19:16+0200\n"
+"POT-Creation-Date: 2010-05-22 18:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -716,6 +716,13 @@ msgstr ""
 
 #: Credits.contributors
 msgid "Contributions from:"
+msgstr ""
+
+#: Credits.emailWarn
+msgid ""
+"Personal authors' emails do not serve the purpose of bug reporting, problem "
+"solving and question asking. You won't get any reply to messages of these "
+"kinds. Use Help menu instead. Thanks."
 msgstr ""
 
 #: Credits.graphics

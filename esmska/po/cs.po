@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-20 19:15+0200\n"
-"PO-Revision-Date: 2010-05-20 19:15+0100\n"
+"POT-Creation-Date: 2010-05-22 18:35+0200\n"
+"PO-Revision-Date: 2010-05-22 18:35+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -849,6 +849,16 @@ msgstr "Napsali:"
 #: Credits.contributors
 msgid "Contributions from:"
 msgstr "Podíleli se:"
+
+#: Credits.emailWarn
+msgid ""
+"Personal authors' emails do not serve the purpose of bug reporting, problem "
+"solving and question asking. You won't get any reply to messages of these "
+"kinds. Use Help menu instead. Thanks."
+msgstr ""
+"Osobní e-maily autorů neslouží k hlášení chyb, řešení problémů či kladení "
+"dotazů. Na takové zprávy odpověď nedostanete. Použijte místo toho nabídku "
+"Nápověda. Děkujeme."
 
 #: Credits.graphics
 msgid "Graphics:"

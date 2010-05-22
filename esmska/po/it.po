@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-20 19:13+0200\n"
+"POT-Creation-Date: 2010-05-22 18:30+0200\n"
 "PO-Revision-Date: 2009-11-24 22:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -730,6 +730,13 @@ msgstr "Scritto da:"
 #: Credits.contributors
 msgid "Contributions from:"
 msgstr "Collaborazione di:"
+
+#: Credits.emailWarn
+msgid ""
+"Personal authors' emails do not serve the purpose of bug reporting, problem "
+"solving and question asking. You won't get any reply to messages of these "
+"kinds. Use Help menu instead. Thanks."
+msgstr ""
 
 #: Credits.graphics
 msgid "Graphics:"
