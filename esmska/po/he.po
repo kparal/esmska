@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-22 18:30+0200\n"
-"PO-Revision-Date: 2010-05-13 19:38+0000\n"
+"POT-Creation-Date: 2010-05-23 10:15+0200\n"
+"PO-Revision-Date: 2010-05-22 12:55+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-14 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-05-23 03:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -75,6 +75,10 @@ msgid ""
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"מיזם זה מוערך בעיניך?<br>\n"
+"ניתן לעזור לו באמצעות תרומה כספית זעומה...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -195,7 +199,7 @@ msgstr "הצגת פריטים עם הגדרות מתקדמות יותר"
 
 #: ConfigFrame.advancedControlsCheckBox.text
 msgid "Show a&dvanced controls"
-msgstr ""
+msgstr "הצגת &פקדים מתקדמים"
 
 #: ConfigFrame.advancedControlsCheckBox.toolTipText
 msgid ""
@@ -526,9 +530,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "מספר השולח במבנה בינלאומי (מתחיל בסימן '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Show &password"
-msgstr "הצגת סיסמה"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -2267,21 +2270,21 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "Contact list"
-#~ msgstr "רשימת אנשי הקשר"
-
-#~ msgid "Sent messages history"
-#~ msgstr "היסטוריית ההודעות שנשלחו"
-
-#~ msgid "SMS queue to be sent"
-#~ msgstr "תור SMS לשליחה"
-
 #~ msgid "O&perators"
 #~ msgstr "מ&פעילים"
 
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
 #~ msgstr "שער &גישה:"
+
+#~ msgid "Contact list"
+#~ msgstr "רשימת אנשי הקשר"
+
+#~ msgid "SMS queue to be sent"
+#~ msgstr "תור SMS לשליחה"
+
+#~ msgid "Sent messages history"
+#~ msgstr "היסטוריית ההודעות שנשלחו"
 
 #~ msgid ""
 #~ "<html>\n"

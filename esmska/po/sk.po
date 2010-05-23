@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-22 18:30+0200\n"
-"PO-Revision-Date: 2010-05-14 05:39+0000\n"
+"POT-Creation-Date: 2010-05-23 10:15+0200\n"
+"PO-Revision-Date: 2010-05-20 17:48+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-17 05:06+0000\n"
+"X-Launchpad-Export-Date: 2010-05-21 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -568,9 +568,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "Číslo odosielateľa v medzinárodnom formáte (začínajúce znakom „+“)"
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Show &password"
-msgstr "Zobraziť heslo"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
