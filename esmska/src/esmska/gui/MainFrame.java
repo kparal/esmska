@@ -261,12 +261,13 @@ public class MainFrame extends javax.swing.JFrame {
             int random = new Random().nextInt(tips.size());
             statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
                     l10n.getString((String)tips.get(random)), null, null, false);
-            //REMOVE: hack for ČPS
-            if (Locale.getDefault().getLanguage().equals("cs") &&
-                    new Random().nextDouble() < 0.10) {
+            //TODO: remove hack for ČPS
+            Calendar afterElections = Calendar.getInstance();
+            afterElections.set(2010, 4, 30);
+            if (new Date().before(afterElections.getTime())) {
                 statusPanel.setStatusMessage(
-                    "<b>Esmska podporuje piráty!</b> Pouze svobodné vody Internetu vám zaručí funkčnost programu " +
-                    "i v budoucnu. <a href='http://www.ceskapiratskastrana.cz'>www.ceskapiratskastrana.cz</a>", null,
+                    "<b>Esmska podporuje piráty!</b> Volte Českou pirátskou stranu, volte 23! " +
+                    "<a href='http://www.ceskapiratskastrana.cz'>www.ceskapiratskastrana.cz</a>", null,
                     new ImageIcon(Icons.class.getResource(RES + "cps-16.png")), true);
                 statusPanel.installClickHandler(new Runnable() {
                         @Override
