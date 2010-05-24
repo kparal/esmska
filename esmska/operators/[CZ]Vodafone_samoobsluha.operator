@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-05-21"
+    return "2010-05-24"
 }
 
 function getMaintainer() {
@@ -90,11 +90,10 @@ function send() {
         // We have to catch this exception and announce it to the user in that case.
         if (e.message.indexOf("MD2withRSA is disabled") >= 0) {
             EXEC.setErrorMessage("Stránky Vodafone Samoobsluhy kvůli zastaralému " +
-            "bezpečnostnímu certifikátu<br>bohužel nadále nefungují pod Sun Java 6 Update 19 " +
-            "a vyšší. Buď nainstalujte<br>starší verzi Sun Java, nebo používejte " +
-            "OpenJDK (pouze pro Linux).<br>Případně použijte jinou bránu.<br><br>Více " +
+            "bezpečnostnímu certifikátu<br>bohužel nadále nefungují pod Java 6 Update 19 " +
+            "a vyšší. Buď nainstalujte<br>starší verzi platformy Java, nebo použijte jinou bránu.<br><br>Více " +
             "informací v <a href=\"http://code.google.com/p/esmska/issues/detail?id=271\">" +
-            "issue 271</a>.")
+            "hlášení 271</a>.")
         } else {
             // this was a different exception, just rethrow it and let the 
             // script fail
