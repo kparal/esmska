@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-03-06"
+    return "2010-05-28"
 }
 
 function getMaintainer() {
@@ -69,7 +69,7 @@ function send() {
     EXEC.getURL("https://login.client.tmo.cz/um/cs/logout.jsp", []);
 
     // sms sending page
-    content = EXEC.getURL("https://sms1.client.tmo.cz/sms.jsp", [])
+    content = EXEC.getURL("http://sms.t-zones.cz/open.jsp", [])
     var time = new Date().getTime()
    
     // find counter
