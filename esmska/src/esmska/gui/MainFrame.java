@@ -261,22 +261,6 @@ public class MainFrame extends javax.swing.JFrame {
             int random = new Random().nextInt(tips.size());
             statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
                     l10n.getString((String)tips.get(random)), null, null, false);
-            //TODO: remove hack for ČPS
-            Calendar afterElections = Calendar.getInstance();
-            afterElections.set(2010, 4, 30);
-            if (new Date().before(afterElections.getTime())) {
-                statusPanel.setStatusMessage(
-                    "<b>Esmska podporuje piráty!</b> Volte Českou pirátskou stranu, volte 23! " +
-                    "<a href='http://www.ceskapiratskastrana.cz'>www.ceskapiratskastrana.cz</a>", null,
-                    new ImageIcon(Icons.class.getResource(RES + "cps-16.png")), true);
-                statusPanel.installClickHandler(new Runnable() {
-                        @Override
-                        public void run() {
-                            Action browseAction = Actions.getBrowseAction("http://www.ceskapiratskastrana.cz");
-                            browseAction.actionPerformed(null);
-                        }
-                    }, "http://www.ceskapiratskastrana.cz");
-            }
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Can't display tip of the day", ex);
         }
