@@ -23,6 +23,7 @@ Tip.22
 Tip.23
 Tip.24
 Tip.25
+Tip.26
 Tip.donation
 Tip.donation
 Tip.donation
