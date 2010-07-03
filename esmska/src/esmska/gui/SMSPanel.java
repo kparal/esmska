@@ -62,6 +62,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
@@ -102,7 +104,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     private UndoAction undoAction = new UndoAction();
     private RedoAction redoAction = new RedoAction();
-    private CompressAction compressAction = new CompressAction();
+    private CompressAction compressAction = null;
     private SendAction sendAction = new SendAction();
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
     private SMSTextPaneDocumentFilter smsTextPaneDocumentFilter;
@@ -113,6 +115,7 @@ public class SMSPanel extends javax.swing.JPanel {
     /** Creates new form SMSPanel */
     public SMSPanel() {
         initComponents();
+        compressAction = new CompressAction();
         recipientField = (RecipientTextField) recipientTextField;
         
         //if not Substance LaF, add clipboard popup menu to text components
@@ -671,33 +674,66 @@ jPanel1Layout.setHorizontalGroup(
     
     /** compress current sms text by rewriting it to CamelCase */
     private class CompressAction extends AbstractAction {
+        /** is message selected just partially or as a whole? */
+        private boolean partialSelection = false;
         public CompressAction() {
-            L10N.setLocalizedText(this, l10n.getString("Compress_"));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
+            updateLabels();
             putValue(SHORT_DESCRIPTION,l10n.getString("SMSPanel.compress"));
+            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+
+            // add listener for selection changes and update labels accordingly
+            smsTextPane.addCaretListener(new CaretListener() {
+                @Override
+                public void caretUpdate(CaretEvent e) {
+                    boolean ps = (smsTextPane.getSelectedText() != null);
+                    if (ps != partialSelection) {
+                        partialSelection = ps;
+                        updateLabels();
+                    }
+                }
+            });
+        }
+        /** updates labels according to current status */
+        private void updateLabels() {
+            if (partialSelection) {
+                L10N.setLocalizedText(this, l10n.getString("CompressText_"));
+            } else {
+                L10N.setLocalizedText(this, l10n.getString("Compress_"));
+            }
         }
         @Override
         public void actionPerformed(ActionEvent e) {
             logger.fine("Compressing message");
-            String text = smsTextPane.getText();
-            if (text == null || text.equals("")) {
+            String text = partialSelection ? smsTextPane.getSelectedText() : smsTextPane.getText();
+            if (StringUtils.isEmpty(text)) {
                 return;
             }
 
-            text = text.replaceAll("\\s", " "); //all whitespace to spaces
-            text = Pattern.compile("(\\s)\\s+", Pattern.DOTALL).matcher(text).replaceAll("$1"); //remove duplicate whitespaces
+            String newText = text.replaceAll("\\s", " "); //all whitespace to spaces
+            newText = Pattern.compile("(\\s)\\s+", Pattern.DOTALL).matcher(newText).replaceAll("$1"); //remove duplicate whitespaces
             Pattern pattern = Pattern.compile("\\s+(.)", Pattern.DOTALL);
-            Matcher matcher = pattern.matcher(text);
+            Matcher matcher = pattern.matcher(newText);
             while (matcher.find()) { //find next space+character
-                text = matcher.replaceFirst(matcher.group(1).toUpperCase()); //replace by upper character
-                matcher = pattern.matcher(text);
+                newText = matcher.replaceFirst(matcher.group(1).toUpperCase()); //replace by upper character
+                matcher = pattern.matcher(newText);
             }
-            text = text.replaceAll(" $", ""); //remove trailing space
+            newText = newText.replaceAll(" $", ""); //remove trailing space
 
-            if (!text.equals(smsTextPane.getText())) { //do not replace if already compressed
-                smsTextPane.setText(text);
+            if (newText.equals(text)) { //do not replace if already compressed
+                return;
+            }
+
+            // replace the old text with the compressed one
+            if (partialSelection) {
+                // replace text and leave it selected
+                int selectIndex = smsTextPane.getSelectionStart();
+                smsTextPane.replaceSelection(newText);
+                smsTextPane.setSelectionStart(selectIndex);
+                smsTextPane.setSelectionEnd(selectIndex + newText.length());
+            } else {
+                smsTextPane.setText(newText);
             }
         }
         /** update status according to current conditions */

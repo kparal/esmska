@@ -81,7 +81,6 @@ import java.beans.Beans;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import org.apache.commons.lang.ArrayUtils;
@@ -415,7 +414,6 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(Box.createRigidArea(new Dimension(5, 1)));
 
         compressButton.setAction(smsPanel.getCompressAction());
-        compressButton.setToolTipText(l10n.getString("MainFrame.compressButton.toolTipText")); // NOI18N
         compressButton.setFocusable(false);
         compressButton.setHideActionText(true);
         toolBar.add(compressButton);
@@ -569,7 +567,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
