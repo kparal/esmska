@@ -488,6 +488,11 @@ public class HistoryFrame extends javax.swing.JFrame {
             if (rows.length <= 0) {
                 return;
             }
+            ArrayList<History.Record> histToDelete = new ArrayList<History.Record>();
+            for (int i : rows) {
+                i = historyTable.getRowSorter().convertRowIndexToModel(i);
+                histToDelete.add(history.getRecord(i));
+            }
             
             //show dialog
             JOptionPane pane = new JOptionPane(message, JOptionPane.WARNING_MESSAGE, 
@@ -504,11 +509,6 @@ public class HistoryFrame extends javax.swing.JFrame {
             }
 
             //confirmed, let's delete it
-            ArrayList<History.Record> histToDelete = new ArrayList<History.Record>();
-            for (int i : rows) {
-                i = historyTable.getRowSorter().convertRowIndexToModel(i);
-                histToDelete.add(history.getRecord(i));
-            }
             history.removeRecords(histToDelete);
             
             //refresh table
