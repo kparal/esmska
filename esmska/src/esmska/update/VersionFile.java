@@ -13,6 +13,7 @@ import esmska.persistence.PersistenceManager;
 import java.io.File;
 import java.io.OutputStream;
 import java.net.URI;
+import java.util.HashSet;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -67,6 +68,16 @@ public class VersionFile {
 
         PersistenceManager.instantiate();
         Context.persistenceManager.loadOperators();
+
+        // remove fake operators from the list
+        Operators operators = Operators.getInstance();
+        HashSet<Operator> fakeOperators = new HashSet<Operator>();
+        for (Operator operator : operators.getAll()) {
+            if (operator.getName().contains("]fake")) {
+                fakeOperators.add(operator);
+            }
+        }
+        operators.removeAll(fakeOperators);
 
         create(System.out, null, null);
     }
