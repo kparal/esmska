@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-06-12"
+    return "2010-07-04"
 }
 
 function getMaintainer() {
@@ -16,7 +16,7 @@ function getMinProgramVersion() {
 }
 
 function getWebsite() {
-    return "https://www.coolsms.dk"
+    return "http://www.coolsms.dk"
 }
 
 function getDescription() {
