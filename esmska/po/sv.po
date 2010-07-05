@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-23 10:15+0200\n"
-"PO-Revision-Date: 2010-05-13 19:37+0000\n"
-"Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
+"POT-Creation-Date: 2010-07-05 22:41+0200\n"
+"PO-Revision-Date: 2010-05-31 21:46+0000\n"
+"Last-Translator: Merarom <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-14 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-06-02 03:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -44,7 +44,7 @@ msgstr "Sänder SMS över Internet"
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2010 Kamil Páral"
-msgstr ""
+msgstr "2007-2010 Kamil Paral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -75,6 +75,10 @@ msgid ""
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Gillar du det här projektet? <br>\n"
+"Bidra till att hålla den igång med een liten pengadonation ...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -161,29 +165,36 @@ msgstr "FLAGGOR"
 
 #: CommandLineParser.path
 msgid "path"
-msgstr ""
+msgstr "sökväg"
 
 #: CommandLineParser.set_user_path
 msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
+"Ställ in sökvägen till användarkonfigurationsfilskatalogen. Ange en absolut "
+"sökväg. Kan inte användas med -p."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
-msgstr ""
+msgstr "Visa denna hjälp."
 
 #: CommandLineParser.usage
 msgid "Usage:"
-msgstr ""
+msgstr "Användning:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr ""
+msgstr "Skriv programversion och avsluta."
+
+#: CompressText_
+#, fuzzy
+msgid "&Compress text"
+msgstr "&Komprimera"
 
 #: Compress_
 msgid "&Compress"
-msgstr ""
+msgstr "&Komprimera"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -191,11 +202,11 @@ msgstr "A&vancerade inställningar"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr ""
+msgstr "Visa objekt med mer avancerade inställningar"
 
 #: ConfigFrame.advancedControlsCheckBox.text
 msgid "Show a&dvanced controls"
-msgstr ""
+msgstr "Visa avancera&dkontroll"
 
 #: ConfigFrame.advancedControlsCheckBox.toolTipText
 msgid ""
@@ -204,6 +215,10 @@ msgid ""
 "advanced controls in the main program window\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Visa eller dölja ytterligare några knappar och andra <br>\n"
+"avancerade kontroller i programmets huvudfönster\n"
+"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -231,7 +246,7 @@ msgstr ""
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
-msgstr ""
+msgstr "&Anslutning"
 
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
@@ -484,9 +499,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Show &password"
-msgstr "Visa lösenord"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -802,8 +816,8 @@ msgstr "Esmska"
 #: EditContactPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Selected gateway probably sends messages only to country: {0}.<br>\n"
-"(and the number seems to be located in: {1})\n"
+"Selected gateway does not support your recipient. It sends messages only to "
+"phone numbers with prefixes: {0}.<br>\n"
 "</html>"
 msgstr ""
 
@@ -1279,10 +1293,6 @@ msgstr "Avsluta Program"
 msgid "Some of the configuration files couldn't be saved!"
 msgstr ""
 
-#: MainFrame.compressButton.toolTipText
-msgid "Compress message (Ctrl+K)"
-msgstr ""
-
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
 msgstr "Konfigurera program betende"
@@ -1463,7 +1473,7 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
-msgid "Only usable for the country: {0}"
+msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1685,15 +1695,14 @@ msgid "Message"
 msgstr ""
 
 #: SMSPanel.compress
-msgid ""
-"Omit whitespace from current message and rewrite it to \"CamelCase\" format"
+msgid "Compress the message or currently selected text (Ctrl+K)"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Number is from country {0}, but this gateway sends only to {1}.\n"
+"Recipient not supported by this gateway. Allowed number prefixes: {0}\n"
 "</html>"
 msgstr ""
 
@@ -1947,6 +1956,12 @@ msgstr ""
 msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
 
+#: Tip.26
+msgid ""
+"Esmska is constantly looking for new developers. Help us make the program "
+"better."
+msgstr ""
+
 #. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
@@ -2132,11 +2147,11 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "Contact list"
-#~ msgstr "Kontakt lista"
-
 #~ msgid "Sent messages history"
 #~ msgstr "Skickade medelande historik"
+
+#~ msgid "Contact list"
+#~ msgstr "Kontakt lista"
 
 #~ msgid "&Image code:"
 #~ msgstr "&bild kod:"

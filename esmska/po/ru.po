@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-23 10:15+0200\n"
-"PO-Revision-Date: 2010-05-13 19:36+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2010-07-05 22:41+0200\n"
+"PO-Revision-Date: 2010-06-16 08:05+0000\n"
+"Last-Translator: Alex L. <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-14 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-06-17 03:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -75,6 +75,10 @@ msgid ""
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Вам нравится этот проект?<br>\n"
+"Помогите сохранить его. Сделайте небольшое пожертвование...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -179,6 +183,11 @@ msgstr "Обращение:"
 msgid "Print program version and exit."
 msgstr "Показать версию программы и выйти."
 
+#: CompressText_
+#, fuzzy
+msgid "&Compress text"
+msgstr "&Сжатие"
+
 #: Compress_
 msgid "&Compress"
 msgstr "&Сжатие"
@@ -189,7 +198,7 @@ msgstr "Д&ополнительные настройки"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr ""
+msgstr "Показать списки дополнительных настроек"
 
 #: ConfigFrame.advancedControlsCheckBox.text
 msgid "Show a&dvanced controls"
@@ -202,6 +211,10 @@ msgid ""
 "advanced controls in the main program window\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Показать или скрыть некоторые дополнительные кнопки и<br>\n"
+"расширенные возможности управления в главном окне программы\n"
+"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -263,10 +276,12 @@ msgid ""
 "This tab is for developing purposes only. It will not be visible in the "
 "final release."
 msgstr ""
+"Эта закладка только для разработчиков. Она будет недоступна в финальном "
+"релизе."
 
 #: ConfigFrame.forgetLayoutCheckBox.text
 msgid "Use default form &layout"
-msgstr ""
+msgstr "Использовать раскладку по умолчанию"
 
 #: ConfigFrame.forgetLayoutCheckBox.toolTipText
 msgid ""
@@ -373,7 +388,7 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.logLocationLabel.text
 msgid "<html><i>The log file is stored at: {0}</i></html>"
-msgstr ""
+msgstr "<html><i>Лог файл доступен по следующему пути: {0}</i></html>"
 
 #: ConfigFrame.loginPanel.TabConstraints.tabTitle
 msgid "&Login credentials"
@@ -381,7 +396,7 @@ msgstr "&Логин"
 
 #: ConfigFrame.loginTextField.toolTipText
 msgid "Username needed for logging in to the gateway"
-msgstr ""
+msgstr "Имя пользователя необходимо для авторизации на шлюзе"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -493,9 +508,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "Номер получателя в международном формате (начинаяется со знака '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Show &password"
-msgstr "Показать пароль"
+msgstr "Показать &пароль"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -603,7 +617,7 @@ msgstr ""
 
 #: ConfigFrame.useSenderIDCheckBox.text
 msgid "Add a sender &signature to the message"
-msgstr ""
+msgstr "Добавить &подпись отправителя в сообщение"
 
 #: ConfigFrame.useSenderIDCheckBox.toolTipText
 msgid ""
@@ -751,7 +765,7 @@ msgstr "Графика"
 
 #: Credits.moreDonators
 msgid "and others..."
-msgstr ""
+msgstr "и другие..."
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -812,8 +826,8 @@ msgstr "Esmska"
 #: EditContactPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Selected gateway probably sends messages only to country: {0}.<br>\n"
-"(and the number seems to be located in: {1})\n"
+"Selected gateway does not support your recipient. It sends messages only to "
+"phone numbers with prefixes: {0}.<br>\n"
 "</html>"
 msgstr ""
 
@@ -898,7 +912,7 @@ msgstr ""
 
 #: ExportManager.contact_list
 msgid "Contact list (contact name, telephone number, default gateway)"
-msgstr ""
+msgstr "Список контактов (имя, номер телефона, шлюз по умолчанию)"
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
@@ -1063,7 +1077,7 @@ msgstr ""
 
 #: ImportFrame.doImportLabel.text
 msgid "If you want to import these contacts press Import."
-msgstr ""
+msgstr "Если вы хотите импортировать эти контакты, нажмите на кнопку Импорт."
 
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
@@ -1086,7 +1100,7 @@ msgstr "Путь к файлу контактов"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
-msgstr ""
+msgstr "Файл {0} не может быть прочитан."
 
 #: ImportFrame.forwardButton.text
 msgctxt "ImportFrame.forwardButton.text"
@@ -1184,7 +1198,7 @@ msgstr "vCard файлы (*.vcard, *.vcf)"
 
 #: ImportFrame.validOperatorCheckBox.text
 msgid "Import only contacts with known operator"
-msgstr ""
+msgstr "Импортировать контакты только с известным оператором"
 
 #: ImportFrame.validOperatorCheckBox.toolTipText
 msgid ""
@@ -1197,7 +1211,7 @@ msgstr ""
 
 #: Import_
 msgid "Im&port"
-msgstr ""
+msgstr "Им&порт"
 
 #: InitWizardDialog.jLabel1.text
 msgid ""
@@ -1206,6 +1220,10 @@ msgid ""
 "Following settings were detected automatically. Are they correct?\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Первый запуск</h2>\n"
+"Следующие настройки были определены автоматически. Они правильные?\n"
+"</html>"
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
@@ -1283,31 +1301,27 @@ msgstr ""
 
 #: MainFrame.Quit_program
 msgid "Quit program"
-msgstr ""
+msgstr "Выйти из программы"
 
 #: MainFrame.cant_save_config
 msgid "Some of the configuration files couldn't be saved!"
 msgstr ""
 
-#: MainFrame.compressButton.toolTipText
-msgid "Compress message (Ctrl+K)"
-msgstr ""
-
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
-msgstr ""
+msgstr "Настроить поведение программы"
 
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
-msgstr ""
+msgstr "&Поддержать этот проект!"
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
-msgstr ""
+msgstr "Экспортировать контакты в файл"
 
 #: MainFrame.faqMenuItem.text
 msgid "Frequently Asked &Questions"
-msgstr ""
+msgstr "Часто Задаваемые &Вопросы"
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
@@ -1319,19 +1333,19 @@ msgstr ""
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
-msgstr ""
+msgstr "Задать вопрос на форуме поддержки"
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr ""
+msgstr "Справка"
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
-msgstr ""
+msgstr "Импорт контактов успешно завершен"
 
 #: MainFrame.import_contacts_from_other_applications
 msgid "Import contacts from other applications"
-msgstr ""
+msgstr "Импортировать контакты из других приложений"
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
@@ -1381,11 +1395,11 @@ msgstr ""
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
-msgstr ""
+msgstr "Показать историю отправленных сообщений"
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr ""
+msgstr "Показать информацию о программе"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
@@ -1404,7 +1418,7 @@ msgstr ""
 
 #: MainFrame.tip
 msgid "Tip:"
-msgstr ""
+msgstr "Подсказка:"
 
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
@@ -1412,11 +1426,11 @@ msgstr ""
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate this application..."
-msgstr ""
+msgstr "&Перевести данное приложение..."
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
-msgstr ""
+msgstr "Помогите перевести данное приложение на ваш родной язык"
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"
@@ -1424,7 +1438,7 @@ msgstr ""
 
 #: Message_history_
 msgid "Message &history"
-msgstr ""
+msgstr "История &сообщений"
 
 #: Move_down
 msgid "Move down"
@@ -1440,7 +1454,7 @@ msgstr ""
 
 #: New_contact
 msgid "New contact"
-msgstr ""
+msgstr "Новый контакт"
 
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
@@ -1448,7 +1462,7 @@ msgstr ""
 
 #: OK_
 msgid "&OK"
-msgstr ""
+msgstr "&ОК"
 
 #: Operator.unknown
 msgctxt "Operator.unknown"
@@ -1473,7 +1487,7 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
-msgid "Only usable for the country: {0}"
+msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1569,7 +1583,7 @@ msgstr ""
 
 #: OperatorExecutor.ERROR_WRONG_NUMBER
 msgid "You have entered incorrect recipient number."
-msgstr ""
+msgstr "Вы ввели неверный номер получателя"
 
 #: OperatorExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
@@ -1591,7 +1605,7 @@ msgstr ""
 
 #: OperatorInterpreter.unknown_operator
 msgid "Unknown gateway!"
-msgstr ""
+msgstr "Неизвестный шлюз!"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1603,11 +1617,11 @@ msgstr ""
 
 #: Preferences
 msgid "Preferences"
-msgstr ""
+msgstr "Параметры"
 
 #: Preferences_
 msgid "&Preferences"
-msgstr ""
+msgstr "&Параметры"
 
 #: Program_start
 msgid "Program start"
@@ -1631,7 +1645,7 @@ msgstr ""
 
 #: QueuePanel.border.title
 msgid "Queue"
-msgstr ""
+msgstr "Очередь"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -1664,11 +1678,11 @@ msgstr ""
 
 #: Quit_
 msgid "&Quit"
-msgstr ""
+msgstr "&Выход"
 
 #: Recipient
 msgid "Recipient"
-msgstr ""
+msgstr "Получатель"
 
 #: Redo_
 msgid "&Redo"
@@ -1676,7 +1690,7 @@ msgstr ""
 
 #: Replace
 msgid "Replace"
-msgstr ""
+msgstr "Заменить"
 
 #: SMSPanel.Redo_change_in_message_text
 msgid "Redo undone change in message text"
@@ -1684,7 +1698,7 @@ msgstr ""
 
 #: SMSPanel.Text_is_too_long!
 msgid "Text is too long!"
-msgstr ""
+msgstr "Текст слишком большой!"
 
 #: SMSPanel.Undo_change_in_message_text
 msgid "Undo change in message text"
@@ -1692,18 +1706,17 @@ msgstr ""
 
 #: SMSPanel.border.title
 msgid "Message"
-msgstr ""
+msgstr "Сообщение"
 
 #: SMSPanel.compress
-msgid ""
-"Omit whitespace from current message and rewrite it to \"CamelCase\" format"
+msgid "Compress the message or currently selected text (Ctrl+K)"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Number is from country {0}, but this gateway sends only to {1}.\n"
+"Recipient not supported by this gateway. Allowed number prefixes: {0}\n"
 "</html>"
 msgstr ""
 
@@ -1725,7 +1738,7 @@ msgstr ""
 #: SMSPanel.gatewayLabel.text
 msgctxt "SMSPanel.gatewayLabel.text"
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Шлюз:"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -1733,7 +1746,7 @@ msgstr ""
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"
-msgstr ""
+msgstr "П&олучатель"
 
 #: SMSPanel.recipientTextField.tooltip
 msgid ""
@@ -1752,7 +1765,7 @@ msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Ctrl+Enter)"
-msgstr ""
+msgstr "Отправить сообщение (Ctrl+Enter)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.singleProgressBar
@@ -1781,7 +1794,7 @@ msgstr ""
 
 #: SMSPanel.textLabel.text
 msgid "Te&xt:"
-msgstr ""
+msgstr "Те&кст:"
 
 #: SMSPanel.textLabel.toolTipText
 msgid ""
@@ -1807,24 +1820,24 @@ msgstr ""
 
 #: Save
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: Select
 msgctxt "Select"
 msgid "Select"
-msgstr ""
+msgstr "Выбрать"
 
 #: Send_
 msgid "&Send"
-msgstr ""
+msgstr "&Отправить"
 
 #: Send_message
 msgid "Send message"
-msgstr ""
+msgstr "Отправить сообщение"
 
 #: Show/hide_program
 msgid "Show/hide program"
-msgstr ""
+msgstr "Показать/скрыть программу"
 
 #: Show_application_log
 msgid "Show application log"
@@ -1832,7 +1845,7 @@ msgstr ""
 
 #: Show_program
 msgid "Show program"
-msgstr ""
+msgstr "Показать программу"
 
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
@@ -1841,7 +1854,7 @@ msgstr ""
 
 #: StatusPanel.statusMessageLabel.text
 msgid "Welcome"
-msgstr ""
+msgstr "Добро пожаловать"
 
 #: StatusPanel.statusMessageLabel.toolTipText
 msgid "Click to show application log"
@@ -1853,7 +1866,7 @@ msgstr ""
 
 #: Text
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 #. #Write the tip as short as possible
 #: Tip.1
@@ -1909,6 +1922,7 @@ msgstr ""
 #: Tip.18
 msgid "Program is open and free. Join in and help us improve it!"
 msgstr ""
+"Программа открыта и бесплатна. Присоединяйтесь к нам и помогите улучшить её!"
 
 #. #Write the tip as short as possible
 #: Tip.19
@@ -1946,6 +1960,8 @@ msgstr ""
 #: Tip.23
 msgid "Program can be minimized to a notification area icon. See preferences."
 msgstr ""
+"Программа может быть свернута в область уведомлений. Необходимо изменить "
+"настройки."
 
 #. #Write the tip as short as possible
 #: Tip.24
@@ -1956,11 +1972,20 @@ msgstr ""
 #: Tip.25
 msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
+"Используйте меню «Справка» для того чтобы задать вопрос или сообщить о "
+"проблеме."
+
+#: Tip.26
+msgid ""
+"Esmska is constantly looking for new developers. Help us make the program "
+"better."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
+"Ваши контакты могут быть импортированы из многих программ или форматов."
 
 #. #Write the tip as short as possible
 #: Tip.4
@@ -1970,7 +1995,7 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.5
 msgid "All your sent messages are available in the message history."
-msgstr ""
+msgstr "Все отправленные вами сообщения доступны в истории сообщений."
 
 #. #Write the tip as short as possible
 #: Tip.6
@@ -1991,7 +2016,7 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
-msgstr ""
+msgstr "Не забудьте ввести префикс для вашей страны в настройках."
 
 #. #Write the tip as short as possible
 #: Tip.donation
@@ -2005,6 +2030,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Alex L. https://launchpad.net/~alexal\n"
 "  Alexey Reztsov https://launchpad.net/~ariafan\n"
 "  Novichkov Alexander https://launchpad.net/~berkut\n"
 "  Pasha Vovk https://launchpad.net/~madwolfa\n"
@@ -2035,19 +2061,19 @@ msgstr ""
 #: UnknownGateway
 msgctxt "UnknownGateway"
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Неизвестный шлюз"
 
 #: Unpause_queue
 msgid "Unpause queue"
-msgstr ""
+msgstr "Возобновить очереди"
 
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
-msgstr ""
+msgstr "Возобновить смс очереди"
 
 #: Update.allUpdated
 msgid "All gateways have been successfully updated."
-msgstr ""
+msgstr "Все шлюзы были успешно обновлены."
 
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
@@ -2059,7 +2085,7 @@ msgstr ""
 
 #: Update.checking
 msgid "Checking..."
-msgstr ""
+msgstr "Проверка..."
 
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
@@ -2072,12 +2098,12 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwTooltip
 msgid "gateway version: {0}"
-msgstr ""
+msgstr "версия шлюза: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
 msgid "Gateway updated: {0}"
-msgstr ""
+msgstr "Шлюз обновлен: {0}"
 
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
@@ -2133,6 +2159,8 @@ msgid ""
 "<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
 "found. It is recommended to update them now.</html>"
 msgstr ""
+"<html><h2>Обновленные шлюзы найдены.</h2>Некоторые новые или обновленные "
+"шлюзы были найдены. Рекомендуется обновить их сейчас.</html>"
 
 #: UpdateDialog.checkButton.text
 msgid "Check for &updates"
@@ -2146,15 +2174,15 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "Contact list"
-#~ msgstr "Список контактов"
-
-#~ msgid "Sent messages history"
-#~ msgstr "Архив отправленных сообщений"
-
 #~ msgid "O&perators"
 #~ msgstr "О&ператоры"
 
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
 #~ msgstr "Ш&люз:"
+
+#~ msgid "Contact list"
+#~ msgstr "Список контактов"
+
+#~ msgid "Sent messages history"
+#~ msgstr "Архив отправленных сообщений"

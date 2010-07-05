@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-23 10:15+0200\n"
+"POT-Creation-Date: 2010-07-05 22:41+0200\n"
 "PO-Revision-Date: 2010-05-20 17:48+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -191,6 +191,11 @@ msgstr "Použitie:"
 #: CommandLineParser.version
 msgid "Print program version and exit."
 msgstr "Vypísať verziu programu a skončiť."
+
+#: CompressText_
+#, fuzzy
+msgid "&Compress text"
+msgstr "&Zhutniť"
 
 #: Compress_
 msgid "&Compress"
@@ -927,10 +932,11 @@ msgstr "Esmska"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: EditContactPanel.countryInfoLabel.text
+#, fuzzy
 msgid ""
 "<html>\n"
-"Selected gateway probably sends messages only to country: {0}.<br>\n"
-"(and the number seems to be located in: {1})\n"
+"Selected gateway does not support your recipient. It sends messages only to "
+"phone numbers with prefixes: {0}.<br>\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -1497,10 +1503,6 @@ msgstr "Ukončiť program"
 msgid "Some of the configuration files couldn't be saved!"
 msgstr "Niektoré konfiguračné súbory nebolo možné ukončiť!"
 
-#: MainFrame.compressButton.toolTipText
-msgid "Compress message (Ctrl+K)"
-msgstr "Skomprimovať správu (Ctrl+K)"
-
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
 msgstr "Nastaviť správanie programu"
@@ -1694,7 +1696,8 @@ msgstr "Nevyžaduje registráciu"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
-msgid "Only usable for the country: {0}"
+#, fuzzy
+msgid "Mainly usable for country: {0}"
 msgstr "Možné použiť len pre krajinu: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1964,22 +1967,17 @@ msgid "Message"
 msgstr "Správa"
 
 #: SMSPanel.compress
-msgid ""
-"Omit whitespace from current message and rewrite it to \"CamelCase\" format"
-msgstr ""
-"Vynechať z aktuálnej správy netlačiteľné znaky a prepísať správu do tvaru "
-"„CamelCase“"
+#, fuzzy
+msgid "Compress the message or currently selected text (Ctrl+K)"
+msgstr "Skomprimovať správu (Ctrl+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Number is from country {0}, but this gateway sends only to {1}.\n"
+"Recipient not supported by this gateway. Allowed number prefixes: {0}\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Čislo je zo štátu {0}, ale brána posiela iba do {1}.\n"
-"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.credentialsInfoLabel.text
@@ -2266,6 +2264,12 @@ msgstr "Obťažujú vás tieto tipy? Môžete ich vypnúť v nastaveniach."
 msgid "Use Help menu to ask a question or report a problem."
 msgstr "Otázky a hlásenia problémov môžete realizovať v ponuke Pomocník."
 
+#: Tip.26
+msgid ""
+"Esmska is constantly looking for new developers. Help us make the program "
+"better."
+msgstr ""
+
 #. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
@@ -2483,6 +2487,22 @@ msgstr ""
 "<h2>Skontrolovať aktualizácie brán</h2>\n"
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
+
+#~ msgid ""
+#~ "Omit whitespace from current message and rewrite it to \"CamelCase\" "
+#~ "format"
+#~ msgstr ""
+#~ "Vynechať z aktuálnej správy netlačiteľné znaky a prepísať správu do tvaru "
+#~ "„CamelCase“"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Number is from country {0}, but this gateway sends only to {1}.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Čislo je zo štátu {0}, ale brána posiela iba do {1}.\n"
+#~ "</html>"
 
 #~ msgid "O&perators"
 #~ msgstr "O&perátori"

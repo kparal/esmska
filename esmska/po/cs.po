@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-22 18:35+0200\n"
-"PO-Revision-Date: 2010-05-22 18:35+0100\n"
+"POT-Creation-Date: 2010-07-05 22:52+0200\n"
+"PO-Revision-Date: 2010-07-05 22:51+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -186,6 +186,10 @@ msgstr "Použití:"
 #: CommandLineParser.version
 msgid "Print program version and exit."
 msgstr "Vypsat verzi programu a skončit."
+
+#: CompressText_
+msgid "&Compress text"
+msgstr "Z&komprimovat text"
 
 #: Compress_
 msgid "&Compress"
@@ -927,13 +931,13 @@ msgstr "Esmska"
 #: EditContactPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Selected gateway probably sends messages only to country: {0}.<br>\n"
-"(and the number seems to be located in: {1})\n"
+"Selected gateway does not support your recipient. It sends messages only to "
+"phone numbers with prefixes: {0}.<br>\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"Zvolená brána zřejmě posílá zprávy pouze do země: {0}.<br>\n"
-"(a číslo se zdá býti umístěné v: {1})\n"
+"Zvolená brána nepodporuje vašeho příjemce. Zprávy posílá pouze na telefonní "
+"čísla s prefixy: {0}.<br>\n"
 "</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1499,10 +1503,6 @@ msgstr "Ukončit program"
 msgid "Some of the configuration files couldn't be saved!"
 msgstr "Některé konfigurační soubory nemohly být uloženy!"
 
-#: MainFrame.compressButton.toolTipText
-msgid "Compress message (Ctrl+K)"
-msgstr "Zkomprimovat zprávu (Ctrl+K)"
-
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
 msgstr "Nastavit chování programu"
@@ -1696,8 +1696,8 @@ msgstr "Nevyžaduje registraci."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
-msgid "Only usable for the country: {0}"
-msgstr "Lze použít pouze pro zemi: {0}"
+msgid "Mainly usable for country: {0}"
+msgstr "Lze použít zejména pro zemi: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.operatorTooltip
@@ -1966,20 +1966,18 @@ msgid "Message"
 msgstr "Zpráva"
 
 #: SMSPanel.compress
-msgid ""
-"Omit whitespace from current message and rewrite it to \"CamelCase\" format"
-msgstr ""
-"Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \\\"CamelCase\\\""
+msgid "Compress the message or currently selected text (Ctrl+K)"
+msgstr "Zkomprimovat zprávu nebo aktuálně vybraný text (Ctrl+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Number is from country {0}, but this gateway sends only to {1}.\n"
+"Recipient not supported by this gateway. Allowed number prefixes: {0}\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"Číslo je ze země {0}, ale tato brána posílá pouze do {1}.\n"
+"Příjemce není branou podporován. Povolené prefixy čísla: {0}\n"
 "</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2263,6 +2261,12 @@ msgstr "Obtěžují vás tyto tipy? Můžete si je vypnout v nastavení."
 msgid "Use Help menu to ask a question or report a problem."
 msgstr "Použijte nabídku Nápověda pro položení dotazu nebo nahlášení problému."
 
+#: Tip.26
+msgid ""
+"Esmska is constantly looking for new developers. Help us make the program "
+"better."
+msgstr "Esmska neustále hledá nové vývojáře. Pomozte nám ji zlepšit."
+
 #. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
@@ -2475,6 +2479,22 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid ""
+#~ "Omit whitespace from current message and rewrite it to \"CamelCase\" "
+#~ "format"
+#~ msgstr ""
+#~ "Vynechat z aktuální zprávy bílé znaky a přepsat ji do tvaru \\\"CamelCase"
+#~ "\\\""
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Number is from country {0}, but this gateway sends only to {1}.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Číslo je ze země {0}, ale tato brána posílá pouze do {1}.\n"
+#~ "</html>"
 
 #~ msgid "Contact list"
 #~ msgstr "Seznam kontaktů"

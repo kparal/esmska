@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-23 10:15+0200\n"
+"POT-Creation-Date: 2010-07-05 22:41+0200\n"
 "PO-Revision-Date: 2010-05-22 12:55+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -184,6 +184,11 @@ msgstr "שימוש:"
 #: CommandLineParser.version
 msgid "Print program version and exit."
 msgstr "הצג את גרסת התוכנה וצא."
+
+#: CompressText_
+#, fuzzy
+msgid "&Compress text"
+msgstr "&דחס"
 
 #: Compress_
 msgid "&Compress"
@@ -876,8 +881,8 @@ msgstr "Esmska"
 #: EditContactPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Selected gateway probably sends messages only to country: {0}.<br>\n"
-"(and the number seems to be located in: {1})\n"
+"Selected gateway does not support your recipient. It sends messages only to "
+"phone numbers with prefixes: {0}.<br>\n"
 "</html>"
 msgstr ""
 
@@ -1403,10 +1408,6 @@ msgstr "יציאה מהתוכנית"
 msgid "Some of the configuration files couldn't be saved!"
 msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
-#: MainFrame.compressButton.toolTipText
-msgid "Compress message (Ctrl+K)"
-msgstr "דחוס את ההודעה (Ctrl+K)"
-
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
 msgstr "הגדרת התנהגות התוכנה"
@@ -1587,7 +1588,7 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
-msgid "Only usable for the country: {0}"
+msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1811,15 +1812,15 @@ msgid "Message"
 msgstr "הודעה"
 
 #: SMSPanel.compress
-msgid ""
-"Omit whitespace from current message and rewrite it to \"CamelCase\" format"
-msgstr "השמט רווחים מההודעה ושנה אותה למבנה \"רישיות־מוקפצות\" (לא תקף בעברית)"
+#, fuzzy
+msgid "Compress the message or currently selected text (Ctrl+K)"
+msgstr "דחוס את ההודעה (Ctrl+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Number is from country {0}, but this gateway sends only to {1}.\n"
+"Recipient not supported by this gateway. Allowed number prefixes: {0}\n"
 "</html>"
 msgstr ""
 
@@ -2089,6 +2090,12 @@ msgstr "מוטרד מעצות אלו? תוכל לכבותן בהעדפות."
 msgid "Use Help menu to ask a question or report a problem."
 msgstr "השתמש בתפריט העזרה כדי לשאול שאלה או לדווח על תקלה."
 
+#: Tip.26
+msgid ""
+"Esmska is constantly looking for new developers. Help us make the program "
+"better."
+msgstr ""
+
 #. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
@@ -2269,6 +2276,12 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid ""
+#~ "Omit whitespace from current message and rewrite it to \"CamelCase\" "
+#~ "format"
+#~ msgstr ""
+#~ "השמט רווחים מההודעה ושנה אותה למבנה \"רישיות־מוקפצות\" (לא תקף בעברית)"
 
 #~ msgid "O&perators"
 #~ msgstr "מ&פעילים"

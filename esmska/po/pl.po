@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-23 10:15+0200\n"
-"PO-Revision-Date: 2009-12-24 12:16+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2010-07-05 22:41+0200\n"
+"PO-Revision-Date: 2010-06-26 16:22+0000\n"
+"Last-Translator: leffort <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-25 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-06-27 03:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -43,9 +43,8 @@ msgid "Sending SMS over Internet."
 msgstr "Wysyłanie SMS przez Internet."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2010 Kamil Páral"
-msgstr "2007-2009 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -70,16 +69,12 @@ msgid "<html><a href=\"\">Support project</a></html>"
 msgstr "<html><a href=\"\">Wspomóż projekt</a></html>"
 
 #: AboutFrame.supportButton.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Podoba Ci się ten projekt? Pomóż nam go udoskonalać...\n"
-"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -183,6 +178,11 @@ msgstr "Użycie:"
 #: CommandLineParser.version
 msgid "Print program version and exit."
 msgstr "Drukuj wesję programu i wyjdź."
+
+#: CompressText_
+#, fuzzy
+msgid "&Compress text"
+msgstr "&Kompresuj"
 
 #: Compress_
 msgid "&Compress"
@@ -487,9 +487,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "Numer nadawcy w formacie międzynarodowym (znak '+' na początku)"
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Show &password"
-msgstr "Pokaż hasło"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -696,9 +695,8 @@ msgid "The country code for which you have filled out the prefix number"
 msgstr ""
 
 #: CountryPrefixPanel.countryCodeLabel.text
-#, fuzzy
 msgid "(c&ountry:"
-msgstr "(kraj:"
+msgstr ""
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -806,8 +804,8 @@ msgstr "Esmska"
 #: EditContactPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Selected gateway probably sends messages only to country: {0}.<br>\n"
-"(and the number seems to be located in: {1})\n"
+"Selected gateway does not support your recipient. It sends messages only to "
+"phone numbers with prefixes: {0}.<br>\n"
 "</html>"
 msgstr ""
 
@@ -1147,9 +1145,8 @@ msgid ""
 msgstr ""
 
 #: ImportFrame.jLabel3.text
-#, fuzzy
 msgid "Or choose the application you want to import contacts from:"
-msgstr "Wskaż, z której aplikacji chcesz zaimportować kontakty:"
+msgstr ""
 
 #: ImportFrame.jLabel4.text
 msgid "Choose the file format you have your contacts stored in:"
@@ -1284,10 +1281,6 @@ msgstr "Wyjdź z programu"
 msgid "Some of the configuration files couldn't be saved!"
 msgstr "Niektóre pliki konfiguracyjne nie mogą być zapisane!"
 
-#: MainFrame.compressButton.toolTipText
-msgid "Compress message (Ctrl+K)"
-msgstr "Kompresuj wiadomość (Ctrl+K)"
-
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
 msgstr "Konfiguruj zachowanie programu"
@@ -1359,9 +1352,8 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem or an idea..."
-msgstr "Zgłoś &problem..."
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1407,9 +1399,8 @@ msgid "&Tools"
 msgstr "&Narzędzia"
 
 #: MainFrame.translateMenuItem.text
-#, fuzzy
 msgid "&Translate this application..."
-msgstr "&Przetłumacz tę aplikację..."
+msgstr ""
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
@@ -1470,7 +1461,7 @@ msgstr "Nie wymaga rejestracji."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: OperatorComboBox.onlyCountry
-msgid "Only usable for the country: {0}"
+msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1692,15 +1683,15 @@ msgid "Message"
 msgstr "Wiadomość"
 
 #: SMSPanel.compress
-msgid ""
-"Omit whitespace from current message and rewrite it to \"CamelCase\" format"
-msgstr ""
+#, fuzzy
+msgid "Compress the message or currently selected text (Ctrl+K)"
+msgstr "Kompresuj wiadomość (Ctrl+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
 msgid ""
 "<html>\n"
-"Number is from country {0}, but this gateway sends only to {1}.\n"
+"Recipient not supported by this gateway. Allowed number prefixes: {0}\n"
 "</html>"
 msgstr ""
 
@@ -1954,6 +1945,12 @@ msgstr ""
 msgid "Use Help menu to ask a question or report a problem."
 msgstr ""
 
+#: Tip.26
+msgid ""
+"Esmska is constantly looking for new developers. Help us make the program "
+"better."
+msgstr ""
+
 #. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
@@ -2003,6 +2000,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  leffort https://launchpad.net/~leffort\n"
 "  skrzat https://launchpad.net/~radek-floraland"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2136,27 +2134,18 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "Contact list"
-#~ msgstr "Lista kontaktów"
-
-#~ msgid "Sent messages history"
-#~ msgstr "Historia wysłanych wiadomości"
-
-#~ msgid "SMS queue to be sent"
-#~ msgstr "Kolejka SMS do wysłania"
-
-#~ msgid "Get &Help Online..."
-#~ msgstr "Otwórz &pomoc online..."
-
-#~ msgid "You have entered incorrect message text. Empty or too long?"
-#~ msgstr "Wpisałeś niepoprawny tekst wiadomości. Pusty lub zbyt długi?"
-
 #~ msgid "O&perators"
 #~ msgstr "O&peratorzy"
 
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Brama:"
+
+#~ msgid "SMS queue to be sent"
+#~ msgstr "Kolejka SMS do wysłania"
+
+#~ msgid "Sent messages history"
+#~ msgstr "Historia wysłanych wiadomości"
 
 #~ msgid "Unknown operator!"
 #~ msgstr "Nieznany operator!"
@@ -2170,5 +2159,14 @@ msgstr ""
 #~ msgid "Directory with program settings can't be created!"
 #~ msgstr "Katalog z ustawieniami programu nie może zostać utworzony!"
 
+#~ msgid "Get &Help Online..."
+#~ msgstr "Otwórz &pomoc online..."
+
+#~ msgid "You have entered incorrect message text. Empty or too long?"
+#~ msgstr "Wpisałeś niepoprawny tekst wiadomości. Pusty lub zbyt długi?"
+
 #~ msgid "no operator"
 #~ msgstr "brak operatora"
+
+#~ msgid "Contact list"
+#~ msgstr "Lista kontaktów"
