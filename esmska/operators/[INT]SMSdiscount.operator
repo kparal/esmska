@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-02-12"
+    return "2010-07-05"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.18.0"
+    return "0.19.0.99"
 }
 
 function getWebsite() {
@@ -23,11 +23,11 @@ function getDescription() {
     return "Paid gateway allowing to send SMS almost to any country in the world."
 }
 
-function getCountryPrefix() {
-    return ""
+function getSupportedPrefixes() {
+    return []
 }
 
-function getOperatorPrefixes() {
+function getPreferredPrefixes() {
     return []
 }
 

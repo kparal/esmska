@@ -73,7 +73,7 @@ public class VersionFile {
         Operators operators = Operators.getInstance();
         HashSet<Operator> fakeOperators = new HashSet<Operator>();
         for (Operator operator : operators.getAll()) {
-            if (operator.getName().contains("]fake")) {
+            if (Operators.isFakeOperator(operator.getName())) {
                 fakeOperators.add(operator);
             }
         }

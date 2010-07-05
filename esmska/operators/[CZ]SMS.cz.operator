@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-04-17"
+    return "2010-07-05"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0"
+    return "0.19.0.99"
 }
 
 function getWebsite() {
@@ -23,17 +23,12 @@ function getDescription() {
     return "Brána pro registrované uživatele portálu sms.cz."
 }
 
-function getCountryPrefix() {
-    return "+420"
+function getSupportedPrefixes() {
+    return []
 }
 
-function getOperatorPrefixes() {
-    return ["+420608","+420773","+420774","+420775","+420776","+420777",
-            "+420601","+420602","+420606","+420607","+420720","+420721",
-            "+420722","+420723","+420724","+420725","+420726","+420727",
-            "+420728","+420729","+420603","+420604","+420605","+420730",
-            "+420731","+420732","+420733","+420734","+420735","+420736",
-            "+420737","+420738","+420739"]
+function getPreferredPrefixes() {
+    return []
 }
 
 function getSMSLength() {

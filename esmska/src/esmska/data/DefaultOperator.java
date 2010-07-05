@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.PrivilegedActionException;
 import java.text.Collator;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.script.ScriptException;
@@ -25,9 +26,8 @@ public class DefaultOperator implements Operator {
 
     private static final Logger logger = Logger.getLogger(DefaultOperator.class.getName());
     private URL script;
-    private String name, version, maintainer, website, description,
-            countryPrefix, minProgramVersion;
-    private String[] operatorPrefixes, supportedLanguages;
+    private String name, version, maintainer, website, description, minProgramVersion;
+    private String[] supportedPrefixes, preferredPrefixes, supportedLanguages;
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
             delayBetweenMessages;
     private Icon icon;
@@ -65,8 +65,8 @@ public class DefaultOperator implements Operator {
         minProgramVersion = info.getMinProgramVersion();
         website = info.getWebsite();
         description = info.getDescription();
-        countryPrefix = info.getCountryPrefix();
-        operatorPrefixes = info.getOperatorPrefixes();
+        supportedPrefixes = info.getSupportedPrefixes();
+        preferredPrefixes = info.getPreferredPrefixes();
         smsLength = info.getSMSLength();
         maxParts = info.getMaxParts();
         maxChars = info.getMaxChars();
@@ -83,7 +83,7 @@ public class DefaultOperator implements Operator {
             icon = Icons.OPERATOR_DEFAULT;
         }
 
-        logger.finer("Created new operator: " + toString());
+        logger.log(Level.FINER, "Created new operator: {0}", toString());
     }
 
     @Override
@@ -155,13 +155,13 @@ public class DefaultOperator implements Operator {
     }
 
     @Override
-    public String getCountryPrefix() {
-        return countryPrefix;
+    public String[] getSupportedPrefixes() {
+        return supportedPrefixes;
     }
 
     @Override
-    public String[] getOperatorPrefixes() {
-        return operatorPrefixes;
+    public String[] getPreferredPrefixes() {
+        return preferredPrefixes;
     }
 
     @Override

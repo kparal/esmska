@@ -15,6 +15,7 @@ import esmska.data.Envelope;
 import esmska.data.Keyring;
 import esmska.data.Links;
 import esmska.data.Operator;
+import esmska.data.Operators;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.event.AbstractDocumentListener;
@@ -353,7 +354,7 @@ public class SMSPanel extends javax.swing.JPanel {
     }
 
     /** Show warning if user selected gateway which does not send
-     * messages to country from which is the number
+     * messages to numbers with specified prefix
      */
     private void updateCountryInfoLabel() {
         countryInfoLabel.setVisible(false);
@@ -369,21 +370,11 @@ public class SMSPanel extends javax.swing.JPanel {
         if (operator == null || !Contact.isValidNumber(number)) {
             return;
         }
-        String prefix = CountryPrefix.extractCountryPrefix(number);
-        String numberCountryCode = CountryPrefix.getCountryCode(prefix);
-        if (StringUtils.isEmpty(numberCountryCode)) {
-            return;
-        }
 
-        //skip on INT gateways
-        String gwCountryCode = CountryPrefix.extractCountryCode(operator.getName());
-        if (gwCountryCode == null || CountryPrefix.INTERNATIONAL_CODE.equals(gwCountryCode)) {
-            return;
-        }
-
-        if (!numberCountryCode.equals(gwCountryCode)) {
+        boolean supported = Operators.isNumberSupported(operator, number);
+        if (!supported) {
             String text = MessageFormat.format(l10n.getString("SMSPanel.countryInfoLabel.text"),
-                    numberCountryCode, gwCountryCode);
+                    StringUtils.join(operator.getSupportedPrefixes(), ','));
             countryInfoLabel.setText(text);
             countryInfoLabel.setVisible(true);
         }
@@ -558,7 +549,7 @@ jPanel1Layout.setHorizontalGroup(
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)

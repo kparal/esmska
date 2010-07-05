@@ -16,9 +16,11 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +52,6 @@ public class Operators {
     private static final HashSet<DeprecatedOperator> deprecatedOperators = new HashSet<DeprecatedOperator>();
     private static final Keyring keyring = Keyring.getInstance();
     private static final ScriptEngineManager manager = new ScriptEngineManager();
-    private static ScriptEngine jsEngine;
 
     // <editor-fold defaultstate="collapsed" desc="ValuedEvent support">
     private ValuedEventSupport<Events, Operator> valuedSupport = new ValuedEventSupport<Events, Operator>(this);
@@ -83,7 +84,7 @@ public class Operators {
     public boolean add(Operator operator) {
         Validate.notNull(operator);
 
-        logger.fine("Adding new operator: "+ operator);
+        logger.log(Level.FINE, "Adding new operator: {0}", operator);
         boolean added = operators.add(operator);
 
         if (added) {
@@ -100,7 +101,8 @@ public class Operators {
         Validate.notNull(operators);
         Validate.noNullElements(operators);
 
-        logger.fine("Adding " + operators.size() + " operators: " + operators);
+        logger.log(Level.FINE, "Adding {0} operators: {1}",
+                new Object[]{operators.size(), operators});
         boolean changed = Operators.operators.addAll(operators);
 
         if (changed) {
@@ -116,7 +118,7 @@ public class Operators {
     public boolean remove(Operator operator) {
         Validate.notNull(operator);
 
-        logger.fine("Removing operator: " + operator);
+        logger.log(Level.FINE, "Removing operator: {0}", operator);
         boolean removed = operators.remove(operator);
 
         if (removed) {
@@ -133,7 +135,8 @@ public class Operators {
         Validate.notNull(operators);
         Validate.noNullElements(operators);
 
-        logger.fine("Removing " + operators.size() + " operators: " + operators);
+        logger.log(Level.FINE, "Removing {0} operators: {1}",
+                new Object[]{operators.size(), operators});
         boolean changed = Operators.operators.removeAll(operators);
 
         if (changed) {
@@ -207,9 +210,42 @@ public class Operators {
         return null;
     }
 
+    /** Returns whether the operator is a fake one (used just for development
+     * purposes).
+     */
+    public static boolean isFakeOperator(String operatorName) {
+        return StringUtils.contains(operatorName, "]fake");
+    }
+
     /** Guess operator according to phone number or phone number prefix.
      * Searches through operators and finds the best suited one one
-     * supporting this phone number.
+     * supporting this phone number. <br/><br/>
+     *
+     * Algorithm:
+     * <ol>
+     * <li>Any fake gateway is disqualified.</li>
+     * <li>Any gateway that has some supported prefixes listed and yet is not matching
+     * the number is disqualified.</li>
+     * <li>Gateways are rated by login requirements:
+     *  <ol>
+     *  <li>Login required, credentials not filled in: 0 points</li>
+     *  <li>Login required, credentials filled in: 1 point</li>
+     *  <li>No login required: 2 points</li>
+     *  </ol>
+     * </li>
+     * <li>Gateways are rated by preferred prefixes:
+     *  <ol>
+     *  <li>Gateway has preferred prefixes and they don't match the number: -2 points</li>
+     *  <li>Gateway has preferred prefixes and they match the number: 0 points</li>
+     *  <li>Gateway has no preferred prefixes: 1 point</li>
+     *  </ol>
+     * </li>
+     * <li>Gateway with highest value wins.</li>
+     * <li>In case of draw, higher value from login requirements wins.</li>
+     * <li>In case of draw, the gateways are preferred by the country for which
+     * they are defined: country of the user > international > any other country</li>
+     * <li>In case of draw, the first one is picked.</li>
+     * </ol>
      *
      * @param number phone number or it's prefix. The minimum length is two characters,
      *  for shorter input (or null) the method does nothing.
@@ -224,130 +260,187 @@ public class Operators {
 
         Collection<Operator> selectedOperators =
                 (customOperators != null ? customOperators : operators);
-        Operator operator = null;
 
-        //search in operator prefixes
         synchronized(selectedOperators) {
-            for (Operator op : selectedOperators) {
-                if (matchesWithOperatorPrefix(op, number)) {
-                    //prefer operators without login requirements
-                    if (op.isLoginRequired()) {
-                        if (operator == null) {
-                            operator = op;
-                        } else if (keyring.getKey(operator.getName()) == null &&
-                                keyring.getKey(op.getName()) != null) {
-                            //prefer operators with filled in credentials
-                            operator = op;
-                        }
-                    } else {
-                        return op;
-                    }
+            // map of operator -> tuple(login credentials value, summary value)
+            TreeMap<Operator, Tuple<Integer, Integer>> all = new TreeMap<Operator, Tuple<Integer, Integer>>();
+
+            // select only those operators that support this number and are not fake
+            for (Operator operator : selectedOperators) {
+                if (!Operators.isFakeOperator(operator.getName()) &&
+                        Operators.isNumberSupported(operator, number)) {
+                    all.put(operator, new Tuple<Integer, Integer>(0, 0));
                 }
             }
-        }
 
-        //if no operator without login found, but some operator with login found
-        if (operator != null) {
-            return operator;
-        }
+            if (all.isEmpty()) {
+                // very improbable, at least international gateways should support it always
+                return null;
+            }
 
-        //search in country prefixes
-        synchronized(selectedOperators) {
-            for (Operator op : selectedOperators) {
-                if (matchesWithCountryPrefix(op, number, false)) {
-                    //prefer operators without login requirements
-                    if (op.isLoginRequired()) {
-                        if (operator == null) {
-                            operator = op;
-                        } else if (keyring.getKey(operator.getName()) == null &&
-                                keyring.getKey(op.getName()) != null) {
-                            //prefer operators with filled in credentials
-                            operator = op;
-                        }
+            // rank them according to login requirements
+            for (Entry<Operator, Tuple<Integer,Integer>> entry : all.entrySet()) {
+                Operator operator = entry.getKey();
+                Tuple<Integer, Integer> tuple = entry.getValue();
+                int rank = 0;
+                if (operator.isLoginRequired()) {
+                    if (keyring.getKey(operator.getName()) == null) {
+                        // credentials not filled in
+                        rank = 0;
                     } else {
-                        return op;
+                        // credentials filled in
+                        rank = 1;
                     }
+                } else {
+                    rank = 2;
+                }
+                tuple.set1(rank);
+                tuple.set2(tuple.get2() + rank);
+            }
+
+            // rank them according to preferred prefixes
+            for (Entry<Operator, Tuple<Integer,Integer>> entry : all.entrySet()) {
+                Operator operator = entry.getKey();
+                Tuple<Integer, Integer> tuple = entry.getValue();
+                int rank = 0;
+                if (operator.getPreferredPrefixes().length == 0) {
+                    // no preferred prefixes
+                    rank = 1;
+                } else if (Operators.isNumberPreferred(operator, number)) {
+                    // preferred prefixes match
+                    rank = 0;
+                } else {
+                    // preferred prefixes don't match
+                    rank = -2;
+                }
+                tuple.set2(tuple.get2() + rank);
+            }
+
+            // get highest summary ranks
+            TreeMap<Operator, Tuple<Integer, Integer>> winners = new TreeMap<Operator, Tuple<Integer, Integer>>();
+            int max = Integer.MIN_VALUE;
+            for (Entry<Operator, Tuple<Integer,Integer>> entry : all.entrySet()) {
+                Operator operator = entry.getKey();
+                Tuple<Integer, Integer> tuple = entry.getValue();
+                if (tuple.get2() > max) {
+                    max = tuple.get2();
+                    winners.clear();
+                }
+                if (tuple.get2() == max) {
+                    winners.put(operator, tuple);
                 }
             }
-        }
 
-        //if no operator without login found, but some operator with login found
-        if (operator != null) {
-            return operator;
-        }
+            // do we have a winner?
+            if (winners.size() == 1) {
+                return winners.keySet().iterator().next();
+            }
 
-        //search in international operators
-        synchronized(selectedOperators) {
-            for (Operator op : selectedOperators) {
-                if (StringUtils.isEmpty(op.getCountryPrefix())) {
-                    //prefer operators without login requirements
-                    if (op.isLoginRequired()) {
-                        if (operator == null) {
-                            operator = op;
-                        } else if (keyring.getKey(operator.getName()) == null &&
-                                keyring.getKey(op.getName()) != null) {
-                            //prefer operators with filled in credentials
-                            operator = op;
-                        }
-                    } else {
-                        return op;
-                    }
+            // we have a draw
+            // let's compute highest login requirement rank
+            TreeMap<Operator, Tuple<Integer, Integer>> winnersLogin = new TreeMap<Operator, Tuple<Integer, Integer>>();
+            max = Integer.MIN_VALUE;
+            for (Entry<Operator, Tuple<Integer,Integer>> entry : winners.entrySet()) {
+                Operator operator = entry.getKey();
+                Tuple<Integer, Integer> tuple = entry.getValue();
+                if (tuple.get1() > max) {
+                    max = tuple.get1();
+                    winnersLogin.clear();
+                }
+                if (tuple.get1() == max) {
+                    winnersLogin.put(operator, tuple);
                 }
             }
-        }
 
-        //if no operator without login found, but some operator with login found
-        if (operator != null) {
-            return operator;
-        }
+            // do we have a winner?
+            if (winnersLogin.size() == 1) {
+                return winnersLogin.keySet().iterator().next();
+            }
 
-        return null;
+            // we have a draw
+            // let's compare by gateway country
+            String userCountry = CountryPrefix.getCountryCode(Config.getInstance().getCountryPrefix());
+            // find same country as user country
+            for (Operator operator : winnersLogin.keySet()) {
+                String country = CountryPrefix.extractCountryCode(operator.getName());
+                if (StringUtils.equals(country, userCountry)) {
+                    return operator;
+                }
+            }
+            // find international operator
+            for (Operator operator : winnersLogin.keySet()) {
+                String country = CountryPrefix.extractCountryCode(operator.getName());
+                if (StringUtils.equals(country, CountryPrefix.INTERNATIONAL_CODE)) {
+                    return operator;
+                }
+            }
+
+            // we haven't found a winner
+            // there should be at least one operator left, otherwise there is an error somewhere
+            if (winnersLogin.isEmpty()) {
+                logger.log(Level.WARNING, "No gateways left for comparison when " +
+                    "suggesting the best one, there must be an error somewhere.");
+                return null;
+            }
+            // ah well, let's pick the first one available
+            return winnersLogin.keySet().iterator().next();
+
+        }
     }
 
-    /** Returns whether current operator matches the number with some of
-     * it's operator prefix.
-     *
+    /** Returns whether operator matches the number with its supported prefixes.
+     * 
      * @param operator operator
      * @param number phone number
-     * @return true if current operator matches the number with some of
-     * it's operator prefix; false if operator of phone number is null or if
-     * phone number is shorter than 2 characters
+     * @return true if at least one of supported prefixes matches the number or
+     * if the operator does not have any supported prefixes; false otherwise
      */
-    public static boolean matchesWithOperatorPrefix(Operator operator, String number) {
-        if (operator == null || number == null || number.length() < 2) {
-            return false;
+    public static boolean isNumberSupported(Operator operator, String number) {
+        String[] supportedPrefixes = operator.getSupportedPrefixes();
+        if (supportedPrefixes.length == 0) {
+            // no supported prefixes -> gateway sends anywhere
+            return true;
         }
 
-        //search in operator prefixes
-        for (String prefix : operator.getOperatorPrefixes()) {
+        boolean matched = false;
+        for (String prefix : supportedPrefixes) {
             if (number.startsWith(prefix)) {
-                return true;
+                matched = true;
+                break;
             }
         }
 
-        return false;
+        return matched;
     }
 
-    /** Returns whether current operator matches the number with it's country prefix.
+    /** Returns whether operator matches the number with its preferred prefixes.
      *
      * @param operator operator
      * @param number phone number
-     * @param acceptInternational whether international operators (with empty country
-     * prefix) should be also accepted as matching
-     * @return true if current operator matches the number with its country prefix;
-     * false if operator of phone number is null or if phone number is shorter
-     * than 2 characters
+     * @return true if at least one of preferred prefixes matches the number of
+     * if the operator does not have any preferred prefixes; false otherwise
+     * (or when operator or number is null, or if number is shorter then 2 characters)
      */
-    public static boolean matchesWithCountryPrefix(Operator operator, String number, boolean acceptInternational) {
+    public static boolean isNumberPreferred(Operator operator, String number) {
         if (operator == null || number == null || number.length() < 2) {
             return false;
         }
 
-        if (!acceptInternational && StringUtils.isEmpty(operator.getCountryPrefix())) {
-            return false;
+        String[] preferredPrefixes = operator.getPreferredPrefixes();
+        if (preferredPrefixes.length == 0) {
+            // no preferred prefixes -> gateway sends anywhere in supported prefixes
+            return true;
         }
 
-        return number.startsWith(operator.getCountryPrefix());
+        boolean matched = false;
+        for (String prefix : preferredPrefixes) {
+            if (number.startsWith(prefix)) {
+                matched = true;
+                break;
+            }
+        }
+
+        return matched;
     }
 
     /** Convert message delay to more human readable string delay.
@@ -387,10 +480,8 @@ public class Operators {
      * @throws IntrospectionException when current JRE does not support JavaScript execution
      */
     public static OperatorInfo parseInfo(URL script) throws IOException, ScriptException, IntrospectionException {
-        logger.finer("Parsing info of script: " + script.toExternalForm());
-        if (jsEngine == null) {
-            jsEngine = manager.getEngineByName("js");
-        }
+        logger.log(Level.FINER, "Parsing info of script: {0}", script.toExternalForm());
+        ScriptEngine jsEngine = manager.getEngineByName("js");
         if (jsEngine == null) {
             throw new IntrospectionException("JavaScript execution not supported");
         }

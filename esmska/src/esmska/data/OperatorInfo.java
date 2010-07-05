@@ -5,19 +5,23 @@
 
 package esmska.data;
 
-/** Interface pro operator scripts.
- * All operator scripts must implement this interface in order to be used in the program.
+/** Interface pro gateway scripts.
+ * All gateway scripts must implement this interface in order to be used in the program.
  * @author ripper
  */
 public interface OperatorInfo {
 
-    /** Operator name.
-     * This name will be visible in the list od available operators.
-     * The name must be in the form "[CC]Operator", where CC is country code as defined
+    /** Gateway name.
+     * This name will be visible in the list od available gateways.
+     * The name must be in the form "[CC]Gateway", where CC is country code as defined
      * in <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> 
-     * and Operator is the very name of the operator.
-     * For international operators, allowing to send SMS to multiple countries, use [INT]Operator.
-     * This name must be unique amongst other operator names.
+     * and Gateway is the very name of the gateway.<br/>
+     * Country code should denote which country is the main interest of the gateway, for example:
+     * <ul><li>The gateway is only available in the language of that country.</li>
+     * <li>The gateway sends messages only to customers of that country's operator.</li>
+     * <li>The gateway requires a SIM card bought from that country's operator.</li></ul>
+     * For international gateways, allowing to send SMS to multiple countries, use [INT]Gateway.<br/>
+     * This name must be unique amongst other gateway names.
      */
     String getName();
     
@@ -49,66 +53,81 @@ public interface OperatorInfo {
      * for [INT] websites, local language for local gateways). Can be empty.
      */
     String getDescription();
-    
-    /** Telephone country prefix.
-     * The prefix starts with "+" sign and is 1-3 digits long.
-     * List of country calling codes is on <a href="http://en.wikipedia.org/wiki/Country_calling_codes">Wikipedia</a>.
-     * Country prefix can be empty string, if the operator works internationally, allowing to send SMS to multiple countries.
+
+    /** List of telephone prefixes that are supported by this gateway.
+     * All prefixes that are not mentioned here are *not supported* by this gateway.
+     * For example for a gateway that can send messages only to numbers originating
+     * from Czech Republic (country prefix: +420), and nowhere else, the value is
+     * ["+420"]. (The gateway doesn't have to support all numbers starting with +420,
+     * but it certainly doesn't support any other prefix.)<br/>
+     * The supported prefixes will usually map to country codes. The prefix always
+     * starts with "+" sign and is 1-3 digits long. List of country calling codes is on
+     * <a href="http://en.wikipedia.org/wiki/Country_calling_codes">Wikipedia</a>.<br/>
+     * If the gateway works internationally, allowing to send SMS to multiple countries,
+     * this will be an empty array.
+     *
+     * @return list of supported prefixes; empty array if gateway sends anywhere in the world
      */
-    String getCountryPrefix();
-    
-    /** Array of operator prefixes.
-     * You can specify here list of default operator prefixes. This list will be then used
-     * to automatically guess correct operator when user is typing in the phone number.
-     * All the prefixes must be declared <b>including</b> the country prefix!
-     * This is just a user-convenience function, you can easily declare an empty array here.
-     * <br><br>
-     * Example: When the country prefix is "+420" and this gateway allows sending messages
-     * to operator which owns prefixes "606" and "777", then the resulting array of allowed prefixes
-     * is ["+420606", "+420777"].
+    String[] getSupportedPrefixes();
+
+    /** List of telephone prefixes that are preferred by this gateway.
+     * Preferred prefixes means that there is really high probability that this
+     * gateway will be able to send message to a phone number with that prefix. Sometimes
+     * a gateway support just a certain set of customers (of a single cell operator
+     * for example) and this is a way how to mark them. It usually concerns just
+     * free gateway, paid ones usually send everywhere.<br/>
+     * If the gateway sends messages to any phone number within the supported
+     * prefixes (see {@link #getSupportedPrefixes}) then this will be an empty
+     * array.<br/><br/>
+     * Example: When the supported prefix is ["+420"] and this gateway allows sending
+     * messages to an operator who owns prefixes "606" and "777", then the resulting
+     * array of preferred prefixes is ["+420606", "+420777"].
+     *
+     * @return list of preferred prefixes; empty array if gateway sends to any phone number
+     * in supported prefixes
      */
-    String[] getOperatorPrefixes();
+    String[] getPreferredPrefixes();
     
     /** Length of one SMS.
-     * Usually, this number wil be around 160. Many operators add some characters when sending
+     * Usually, this number wil be around 160. Many gateways add some characters when sending
      * from their website, therefore this number can be often smaller.
      * It can happen that length of the sms can't be determined (it is different for
      * different numbers). In this case provide a negative number.
      */
     int getSMSLength();
     
-    /** Maximum message length the operator allows to send.
+    /** Maximum message length the gateway allows to send.
      * This is the maximum number of characters the user is allowed to type in
-     * into the textarea on the operators website.
+     * into the textarea on the gateway website.
      */
     int getMaxChars();
     
     /** Number of allowed messages which user can send at once.
-     * This is a multiplier of the getMaxChars() number. Some operators offer only
+     * This is a multiplier of the getMaxChars() number. Some gateways offer only
      * very short crippled messages (eg. max 60 chars, rest with advertisement).
      * You can allow user to write a multiple of this number. The message will be
      * split in the program and send as separate standard messages. Be judicius when
      * specifying this number. Eg. in case of forementioned 60 chars max, multiplier
      * of 5 (therefore writing up to 300 chars) should be absolutely sufficient.
-     * For "non-crippled" operators, you should declare '1' here.
+     * For "non-crippled" gateways, you should declare '1' here.
      */
     int getMaxParts();
     
     /** Number of extra characters used to display signature.
-     * Some operators allow to add signature at the end of the message.
+     * Some gateways allow to add signature at the end of the message.
      * This is the number of characters used for "From: " label or something similar.
      * This number will be subtracted from the maximum message length.
-     * If your operator doesn't support signatures, declare '0' here.
+     * If your gateway doesn't support signatures, declare '0' here.
      */
     int getSignatureExtraLength();
     
     /** The delay in seconds that must be kept between sending messages. The program
      * will wait for at least this number of seconds before attempting to send
-     * another message. If there are no operator restrictions, use '0'.
+     * another message. If there are no gateway restrictions, use '0'.
      */
     int getDelayBetweenMessages();
     
-    /** Indicates whether this operator gateway requires login with username and
+    /** Indicates whether this gateway requires login with username and
      * password. If this is true, it means that user must have some credentials
      * assigned from the operator or must register at gateway website prior to
      * using this gateway in program.
@@ -116,7 +135,7 @@ public interface OperatorInfo {
     boolean isLoginRequired();
     
     /** Indicates for which website languages the script is working.
-     * This method is included because operators may have their website translated
+     * This method is included because gateways may have their website translated
      * into many languages and therefore the response may come somehow localized.<br>
      * If the script works independently of website language (no matching on sentences is done),
      * specify just an empty array.

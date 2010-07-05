@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
@@ -30,12 +30,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="operatorComboBox" pref="295" max="32767" attributes="0"/>
+                              <Component id="operatorComboBox" pref="588" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="suggestOperatorButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="nameTextField" alignment="0" pref="329" max="32767" attributes="0"/>
-                          <Component id="numberTextField" alignment="1" pref="329" max="32767" attributes="0"/>
+                          <Component id="nameTextField" alignment="0" pref="622" max="32767" attributes="0"/>
+                          <Component id="numberTextField" alignment="1" pref="622" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -153,7 +153,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="credentialsInfoLabel" alignment="1" pref="440" max="32767" attributes="0"/>
+              <Component id="credentialsInfoLabel" alignment="1" pref="733" max="32767" attributes="0"/>
               <Component id="countryInfoLabel" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>

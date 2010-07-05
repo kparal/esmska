@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2009-12-30"
+    return "2010-07-05"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.15.0"
+    return "0.19.0.99"
 }
 
 function getWebsite() {
@@ -23,11 +23,11 @@ function getDescription() {
     return "Zasílání zpráv výhradně do sítě O2 pomocí e-mailů. Negarantované doručení."
 }
 
-function getCountryPrefix() {
-    return "+420"
+function getSupportedPrefixes() {
+    return ["+420"]
 }
 
-function getOperatorPrefixes() {
+function getPreferredPrefixes() {
     return ["+420601","+420602","+420606","+420607","+420720","+420721",
             "+420722","+420723","+420724","+420725","+420726","+420727",
             "+420728","+420729"]

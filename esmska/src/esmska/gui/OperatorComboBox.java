@@ -111,18 +111,6 @@ public class OperatorComboBox extends JComboBox {
     public String getSelectedOperatorName() {
         return (getSelectedOperator() != null ? getSelectedOperator().getName() : operatorName);
     }
-  
-// Disabled, because it caused issues when selecting non-existing operator and
-// getting the operator back after that. It changed the contact operator from
-// unknown string to null.
-//
-//    /** Set currently selected operator.
-//     * Use null for clearing the selection. Non-existing operator will not change the selection.
-//     */
-//    public void setSelectedOperator(Operator operator) {
-//        operatorName = (operator != null ? operator.getName() : null);
-//        setSelectedItem(operator);
-//    }
     
     /** Set currently selected operator by it's name.
      * Use null for clearing the selection. Non-existing operator will also clear the selection.
@@ -140,8 +128,8 @@ public class OperatorComboBox extends JComboBox {
     /** Select operator according to phone number or phone number prefix.
      * Searches through available (displayed) operators and selects the best
      * suited on supporting this phone number. Doesn't change selection if no 
-     * such operator is found. Doesn't change selection if no operator prefix 
-     * matched and operator with matching country prefix is already selected.
+     * such operator is found.
+     *
      * @param number phone number or it's prefix. The minimum length is two characters,
      *               for shorter input (or null) the method does nothing.
      */
@@ -159,22 +147,8 @@ public class OperatorComboBox extends JComboBox {
             return;
         }
         
-        //if perfect match found, select it
-        if (Operators.matchesWithOperatorPrefix(operator, number)) {
-            setSelectedOperator(operator.getName());
-            return;
-        }
-        
-        //return if already selected operator with matching country prefix
-        //and is not international
-        Operator selectedOperator = getSelectedOperator();
-        if (Operators.matchesWithCountryPrefix(selectedOperator, number, false)) {
-            return;
-        }
-        
         //select suggested
         setSelectedOperator(operator.getName());
-        
     }
 
     /** Renderer for items in OperatorComboBox */

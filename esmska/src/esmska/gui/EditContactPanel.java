@@ -8,10 +8,10 @@ package esmska.gui;
 
 import esmska.data.Config;
 import esmska.data.Contact;
-import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
 import esmska.data.Links;
 import esmska.data.Operator;
+import esmska.data.Operators;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import java.awt.Color;
@@ -282,8 +282,8 @@ public class EditContactPanel extends javax.swing.JPanel {
         suggestOperatorAction.setEnabled(!multiMode);
     }
 
-    /** Show warning if user selected gateway which does not send
-     * messages to country from which is the number
+    /** Show warning if user selected gateway can't send messages to a recipient
+     * number (based on supported prefixes list)
      */
     private void updateCountryInfoLabel() {
         countryInfoLabel.setVisible(false);
@@ -294,21 +294,11 @@ public class EditContactPanel extends javax.swing.JPanel {
         if (operator == null || !Contact.isValidNumber(number)) {
             return;
         }
-        String prefix = CountryPrefix.extractCountryPrefix(number);
-        String numberCountryCode = CountryPrefix.getCountryCode(prefix);
-        if (StringUtils.isEmpty(numberCountryCode)) {
-            return;
-        }
-        
-        //skip on INT gateways
-        String gwCountryCode = CountryPrefix.extractCountryCode(operator.getName());
-        if (gwCountryCode == null || CountryPrefix.INTERNATIONAL_CODE.equals(gwCountryCode)) {
-            return;
-        }
 
-        if (!numberCountryCode.equals(gwCountryCode)) {
+        boolean supported = Operators.isNumberSupported(operator, number);
+        if (!supported) {
             String text = MessageFormat.format(l10n.getString("EditContactPanel.countryInfoLabel.text"),
-                    gwCountryCode, numberCountryCode);
+                    StringUtils.join(operator.getSupportedPrefixes(), ','));
             countryInfoLabel.setText(text);
             countryInfoLabel.setVisible(true);
         }
