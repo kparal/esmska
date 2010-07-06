@@ -92,16 +92,16 @@
     
     <!-- build java webstart files -->
     <target name="javaws" depends="jar" description="Build Java WebStart files.">
-        <!-- create operators.jar file -->
-        <copy todir="dist/tmp/esmska/operators/scripts">
-            <fileset dir="dist/operators"/>
+        <!-- create gateways.jar file -->
+        <copy todir="dist/tmp/esmska/gateways/scripts">
+            <fileset dir="dist/gateways"/>
         </copy>
-        <jar destfile="dist/lib/operators.jar" basedir="dist/tmp"/>
+        <jar destfile="dist/lib/gateways.jar" basedir="dist/tmp"/>
         <delete dir="dist/tmp"/>
-        <!-- add "operators.jar" to the Class-Path in jar manifest -->
+        <!-- add "gateways.jar" to the Class-Path in jar manifest -->
         <jar destfile="${dist.jar}" update="true">
             <manifest>
-                <attribute name="Class-Path" value="${jar.classpath} lib/operators.jar"/>
+                <attribute name="Class-Path" value="${jar.classpath} gateways.jar"/>
             </manifest>
         </jar>
         <!-- add esmska.ico -->
@@ -125,10 +125,10 @@
         <delete file="dist/lib/mac-ui.jar"/>
         <!-- copy additional files to dist -->
         <copy todir="dist">
-            <!-- operators -->
+            <!-- gateways -->
             <fileset dir=".">
-                <include name="operators/**"/>
-                <exclude name="operators/*]fake*"/>
+                <include name="gateways/**"/>
+                <exclude name="gateways/*]fake*"/>
             </fileset>
             <!-- other included files -->
             <fileset dir="include"/>

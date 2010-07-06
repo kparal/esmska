@@ -18,7 +18,7 @@ installjammer/  - Configuration files for InstallJammer.
 launch4j/       - Configuration files for Launch4J.
 lib/            - Program compilation and runtime libraries.
 nbproject/      - Project files for the NetBeans IDE.
-operators/      - Script files for using operator gateways.
+gateways/       - Script files for using operator gateways.
 po/             - Localization files.
 resources/      - Different resource files.
 scripts/        - Various scripts for managing building process.
@@ -122,7 +122,7 @@ package maintainers not willing to use Apple library), use command:
 
 All the sources should be compiled in the build/ directory. In the dist/
 directory the resulting esmska.jar should be created, together with all needed
-libraries, available operators and some additional files copied from include/ 
+libraries, available gateways and some additional files copied from include/ 
 directory.
 
 
@@ -150,7 +150,7 @@ You can run command:
 to obtain binary program packages inside the program root directory.
 
 When creating custom packages it may be good to note that the only important
-files for the program are esmska.jar, esmska.conf, lib/ and operators/ 
+files for the program are esmska.jar, esmska.conf, lib/ and gateways/ 
 directory. All other files are intended only for the end-user and the program
 does not use them.
 
