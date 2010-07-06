@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.ObjectUtils;
 
-/** Storage for logins and passwords to operators.
+/** Storage for logins and passwords to gateways.
  * Also offers password encryption and decryption.
  * @author ripper
  */
@@ -51,7 +51,7 @@ public class Keyring {
         52, -14, 112, 112, 97, 12, -76, -96,
         -101, 103, -59, 38, -24, -10, -85, -119
     };
-    /** map of [operator, [login, password]] */
+    /** map of [gateway, [login, password]] */
     private final Map<String, Tuple<String, String>> keyring = Collections.synchronizedMap(
             new HashMap<String, Tuple<String, String>>());
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
@@ -75,24 +75,24 @@ public class Keyring {
         return instance;
     }
 
-    /** Get key for chosen operator.
-     * @param operatorName Name of the operator.
-     * @return tuple in the form [login, password] if key for this operator
+    /** Get key for chosen gateway.
+     * @param gatewayName Name of the gateway.
+     * @return tuple in the form [login, password] if key for this gateway
      *         exists. Null otherwise.
      */
-    public Tuple<String, String> getKey(String operatorName) {
-        return keyring.get(operatorName);
+    public Tuple<String, String> getKey(String gatewayName) {
+        return keyring.get(gatewayName);
     }
 
-    /** Put key for chosen operator. If a key for this operator already exists,
+    /** Put key for chosen gateway. If a key for this gateway already exists,
      * overwrite previous one.
-     * @param operatorName Name of the operator.
+     * @param gatewayName Name of the gateway.
      * @param key tuple in the form [login, password].
-     * @throws IllegalArgumentException If operatorName or key is null.
+     * @throws IllegalArgumentException If gatewayName or key is null.
      */
-    public void putKey(String operatorName, Tuple<String, String> key) {
-        if (putKeyImpl(operatorName, key)) {
-            logger.finer("New keyring key added: [operatorName=" + operatorName + "]");
+    public void putKey(String gatewayName, Tuple<String, String> key) {
+        if (putKeyImpl(gatewayName, key)) {
+            logger.finer("New keyring key added: [gatewayName=" + gatewayName + "]");
             actionSupport.fireActionPerformed(ACTION_ADD_KEY, null);
         }
     }
@@ -101,22 +101,22 @@ public class Keyring {
      * @return true if keyring was updated (key was not present or was modified
      * by the update); false if nothing has changed
      */
-    private boolean putKeyImpl(String operatorName, Tuple<String, String> key) {
-        if (operatorName == null) {
-            throw new IllegalArgumentException("operatorName");
+    private boolean putKeyImpl(String gatewayName, Tuple<String, String> key) {
+        if (gatewayName == null) {
+            throw new IllegalArgumentException("gatewayName");
         }
         if (key == null) {
             throw new IllegalArgumentException("key");
         }
-        Tuple<String, String> previous = keyring.put(operatorName, key);
+        Tuple<String, String> previous = keyring.put(gatewayName, key);
         return previous == null || !ObjectUtils.equals(previous, key);
     }
 
-    /** Put keys for more operators. If a key for particular operator already exists,
+    /** Put keys for more gateways. If a key for particular gateway already exists,
      * overwrite previous one.
-     * @param keys Map in the form [operatorName, Key], where Key is in the
+     * @param keys Map in the form [gatewayName, Key], where Key is in the
      *             form [login, password].
-     * @throws IllegalArgumentException If some operatorName or some key is null.
+     * @throws IllegalArgumentException If some gatewayName or some key is null.
      */
     public void putKeys(Map<String, Tuple<String, String>> keys) {
         int changed = 0;
@@ -129,24 +129,24 @@ public class Keyring {
         }
     }
 
-    /** Remove chosen operator from the keyring.
-     * @param operatorName Name of the operator.
+    /** Remove chosen gateway from the keyring.
+     * @param gatewayName Name of the gateway.
      */
-    public void removeKey(String operatorName) {
-        if (keyring.remove(operatorName) != null) {
-            logger.finer("A keyring key removed: [operatorName=" + operatorName + "]");
+    public void removeKey(String gatewayName) {
+        if (keyring.remove(gatewayName) != null) {
+            logger.finer("A keyring key removed: [gatewayName=" + gatewayName + "]");
             actionSupport.fireActionPerformed(ACTION_REMOVE_KEY, null);
         }
     }
 
-    /** Get set of all operator names, which are in the keyring.
-     * @return Unmodifiable set of all operator names, which are in the keyring.
+    /** Get set of all gateway names, which are in the keyring.
+     * @return Unmodifiable set of all gateway names, which are in the keyring.
      */
-    public Set<String> getOperatorNames() {
+    public Set<String> getGatewayNames() {
         return Collections.unmodifiableSet(keyring.keySet());
     }
 
-    /** Clear all operator names and corresponding keys from the keyring. 
+    /** Clear all gateway names and corresponding keys from the keyring.
      * The keyring will be empty after this.
      */
     public void clearKeys() {

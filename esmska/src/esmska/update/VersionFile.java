@@ -7,8 +7,8 @@ package esmska.update;
 import esmska.Context;
 import esmska.data.Config;
 import esmska.data.Icons;
-import esmska.data.Operator;
-import esmska.data.Operators;
+import esmska.data.Gateway;
+import esmska.data.Gateways;
 import esmska.persistence.PersistenceManager;
 import java.io.File;
 import java.io.OutputStream;
@@ -34,7 +34,7 @@ public class VersionFile {
     public static final String TAG_ROOT = "esmska";
     public static final String TAG_LAST_VERSION = "latestStableVersion";
     public static final String TAG_LAST_UNSTABLE_VERSION = "latestUnstableVersion";
-    public static final String TAG_OPERATOR = "operator";
+    public static final String TAG_GATEWAY = "gateway";
     public static final String TAG_NAME = "name";
     public static final String TAG_FILENAME = "fileName";
     public static final String TAG_VERSION = "version";
@@ -42,13 +42,13 @@ public class VersionFile {
     public static final String TAG_DOWNLOAD = "downloadURL";
     public static final String TAG_ICON = "iconURL";
 
-    //deprecated operators
-    public static final String TAG_DEPRECATED_OPERATOR = "deprecatedOperator";
+    //deprecated gateways
+    public static final String TAG_DEPRECATED_GATEWAY = "deprecatedGateway";
     public static final String TAG_REASON = "reason";
 
     private static final String downloadProtocol = "http";
     private static final String downloadHost = "ripper.profitux.cz";
-    private static final String downloadPath = "/esmska/operators/";
+    private static final String downloadPath = "/esmska/gateways/";
 
     private static String stableProgramVersion = Config.getLatestVersion();
     private static String unstableProgramVersion = stableProgramVersion;
@@ -67,17 +67,17 @@ public class VersionFile {
         }
 
         PersistenceManager.instantiate();
-        Context.persistenceManager.loadOperators();
+        Context.persistenceManager.loadGateways();
 
-        // remove fake operators from the list
-        Operators operators = Operators.getInstance();
-        HashSet<Operator> fakeOperators = new HashSet<Operator>();
-        for (Operator operator : operators.getAll()) {
-            if (Operators.isFakeOperator(operator.getName())) {
-                fakeOperators.add(operator);
+        // remove fake gateways from the list
+        Gateways gateways = Gateways.getInstance();
+        HashSet<Gateway> fakeGateways = new HashSet<Gateway>();
+        for (Gateway gateway : gateways.getAll()) {
+            if (Gateways.isFakeGateway(gateway.getName())) {
+                fakeGateways.add(gateway);
             }
         }
-        operators.removeAll(fakeOperators);
+        gateways.removeAll(fakeGateways);
 
         create(System.out, null, null);
     }
@@ -122,13 +122,13 @@ public class VersionFile {
         lastUnstableVersion.setTextContent(unstableProgramVersion);
         root.appendChild(lastUnstableVersion);
 
-        //operators
-        for (Operator op : Operators.getInstance().getAll()) {
-            Node operator = doc.createElement(TAG_OPERATOR);
+        //gateways
+        for (Gateway op : Gateways.getInstance().getAll()) {
+            Node gateway = doc.createElement(TAG_GATEWAY);
             Node name = doc.createElement(TAG_NAME);
             name.setTextContent(op.getName());
             String opFileName = new File(op.getScript().toURI()).
-                    getName().replaceFirst("\\.operator$", "");
+                    getName().replaceFirst("\\.gateway$", "");
             Node fileName = doc.createElement(TAG_FILENAME);
             fileName.setTextContent(opFileName);
             Node version = doc.createElement(TAG_VERSION);
@@ -137,23 +137,23 @@ public class VersionFile {
             minVersion.setTextContent(op.getMinProgramVersion());
             Node download = doc.createElement(TAG_DOWNLOAD);
             URI dlUri = new URI(downloadProtocol, downloadHost,
-                    downloadPath + opFileName + ".operator", null);
+                    downloadPath + opFileName + ".gateway", null);
             download.setTextContent(dlUri.toASCIIString());
             Node icon = doc.createElement(TAG_ICON);
-            if (op.getIcon() != Icons.OPERATOR_DEFAULT) {
+            if (op.getIcon() != Icons.GATEWAY_DEFAULT) {
                 URI iconUri = new URI(downloadProtocol, downloadHost,
                         downloadPath + opFileName + ".png", null);
                 icon.setTextContent(iconUri.toASCIIString());
             }
 
-            operator.appendChild(name);
-            operator.appendChild(fileName);
-            operator.appendChild(version);
-            operator.appendChild(minVersion);
-            operator.appendChild(download);
-            operator.appendChild(icon);
+            gateway.appendChild(name);
+            gateway.appendChild(fileName);
+            gateway.appendChild(version);
+            gateway.appendChild(minVersion);
+            gateway.appendChild(download);
+            gateway.appendChild(icon);
 
-            root.appendChild(operator);
+            root.appendChild(gateway);
         }
 
         return doc;

@@ -21,8 +21,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import javax.swing.SwingWorker;
 import esmska.data.Contact;
-import esmska.data.Operators;
-import esmska.data.Operator;
+import esmska.data.Gateways;
+import esmska.data.Gateway;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -102,20 +102,20 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
             while (reader.readRecord()) {
                 String name = "";
                 String number = "";
-                String operator = "";
+                String gateway = "";
 
                 //read record items
                 switch (type) {
                     case KUBIK_DREAMCOM_FILE:
                         name = reader.get(5);
                         number = reader.get(6);
-                        operator = reader.get(20).equals("") ? reader.get(21) : reader.get(20);
+                        gateway = reader.get(20).equals("") ? reader.get(21) : reader.get(20);
                         break;
                     case DREAMCOM_SE_FILE:
                     case ESMSKA_FILE:
                         name = reader.get(0);
                         number = reader.get(1);
-                        operator = reader.get(2);
+                        gateway = reader.get(2);
                 }
 
                 if (StringUtils.isEmpty(name)) {
@@ -125,36 +125,36 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     continue;
                 }
 
-                //convert known operators to our operators
+                //convert known gateways to our gateways
                 switch (type) {
                     case KUBIK_DREAMCOM_FILE:
-                        if (operator.startsWith("Oskar") || operator.startsWith("Vodafone")) {
-                            operator = "[CZ]Vodafone";
-                        } else if (operator.startsWith("Eurotel") || operator.startsWith("O2")) {
-                            operator = "[CZ]O2";
-                        } else if (operator.startsWith("T-Mobile")) {
-                            operator = "[CZ]t-zones";
+                        if (gateway.startsWith("Oskar") || gateway.startsWith("Vodafone")) {
+                            gateway = "[CZ]Vodafone";
+                        } else if (gateway.startsWith("Eurotel") || gateway.startsWith("O2")) {
+                            gateway = "[CZ]O2";
+                        } else if (gateway.startsWith("T-Mobile")) {
+                            gateway = "[CZ]t-zones";
                         }
                         break;
                     case DREAMCOM_SE_FILE:
-                        if (operator.startsWith("O2")) {
-                            operator = "[CZ]O2";
-                        } else if (operator.startsWith("Vodafone")) {
-                            operator = "[CZ]Vodafone";
-                        } else if (operator.startsWith("T-Zones")) {
-                            operator = "[CZ]t-zones";
+                        if (gateway.startsWith("O2")) {
+                            gateway = "[CZ]O2";
+                        } else if (gateway.startsWith("Vodafone")) {
+                            gateway = "[CZ]Vodafone";
+                        } else if (gateway.startsWith("T-Zones")) {
+                            gateway = "[CZ]t-zones";
                         }
                         break;
                     case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
-                        if ("Vodafone".equals(operator)) {
-                            operator = "[CZ]Vodafone";
-                        } else if ("O2".equals(operator)) {
-                            operator = "[CZ]O2";
+                        if ("Vodafone".equals(gateway)) {
+                            gateway = "[CZ]Vodafone";
+                        } else if ("O2".equals(gateway)) {
+                            gateway = "[CZ]O2";
                         }
                         break;
                 }
 
-                contacts.add(new Contact(name, number, operator));
+                contacts.add(new Contact(name, number, gateway));
             }
         } finally {
             if (reader != null) {
@@ -249,12 +249,12 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                 continue;
             }
 
-            //guess operator
-            Operator operator = Operators.suggestOperator(number, null);
-            String operatorName = operator != null ? operator.getName() : null;
+            //guess gateway
+            Gateway gateway = Gateways.suggestGateway(number, null);
+            String gatewayName = gateway != null ? gateway.getName() : null;
 
             //create contact
-            contacts.add(new Contact(name, number, operatorName));
+            contacts.add(new Contact(name, number, gatewayName));
         }
 
         logger.finer("Parsed " + contacts.size() + " contacts");

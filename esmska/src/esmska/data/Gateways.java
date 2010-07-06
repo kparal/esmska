@@ -31,194 +31,194 @@ import javax.script.ScriptException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
-/** Class managing all operators
+/** Class managing all gateways
  * @author ripper
  */
-public class Operators {
+public class Gateways {
 
     public static enum Events {
-        ADDED_OPERATOR,
-        ADDED_OPERATORS,
-        REMOVED_OPERATOR,
-        REMOVED_OPERATORS,
-        CLEARED_OPERATORS
+        ADDED_GATEWAY,
+        ADDED_GATEWAYS,
+        REMOVED_GATEWAY,
+        REMOVED_GATEWAYS,
+        CLEARED_GATEWAYS
     }
 
     /** shared instance */
-    private static final Operators instance = new Operators();
-    private static final Logger logger = Logger.getLogger(Operators.class.getName());
+    private static final Gateways instance = new Gateways();
+    private static final Logger logger = Logger.getLogger(Gateways.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final SortedSet<Operator> operators = Collections.synchronizedSortedSet(new TreeSet<Operator>());
-    private static final HashSet<DeprecatedOperator> deprecatedOperators = new HashSet<DeprecatedOperator>();
+    private static final SortedSet<Gateway> gateways = Collections.synchronizedSortedSet(new TreeSet<Gateway>());
+    private static final HashSet<DeprecatedGateway> deprecatedGateways = new HashSet<DeprecatedGateway>();
     private static final Keyring keyring = Keyring.getInstance();
     private static final ScriptEngineManager manager = new ScriptEngineManager();
 
     // <editor-fold defaultstate="collapsed" desc="ValuedEvent support">
-    private ValuedEventSupport<Events, Operator> valuedSupport = new ValuedEventSupport<Events, Operator>(this);
-    public void addValuedListener(ValuedListener<Events, Operator> valuedListener) {
+    private ValuedEventSupport<Events, Gateway> valuedSupport = new ValuedEventSupport<Events, Gateway>(this);
+    public void addValuedListener(ValuedListener<Events, Gateway> valuedListener) {
         valuedSupport.addValuedListener(valuedListener);
     }
-    public void removeValuedListener(ValuedListener<Events, Operator> valuedListener) {
+    public void removeValuedListener(ValuedListener<Events, Gateway> valuedListener) {
         valuedSupport.removeValuedListener(valuedListener);
     }
     // </editor-fold>
 
     /** Disabled contructor */
-    private Operators() {
+    private Gateways() {
     }
 
     /** Get shared instance */
-    public static Operators getInstance() {
+    public static Gateways getInstance() {
         return instance;
     }
 
-    /** Get unmodifiable collection of all operators sorted by name */
-    public SortedSet<Operator> getAll() {
-        return Collections.unmodifiableSortedSet(operators);
+    /** Get unmodifiable collection of all gateways sorted by name */
+    public SortedSet<Gateway> getAll() {
+        return Collections.unmodifiableSortedSet(gateways);
     }
 
-    /** Add new operator
-     * @param operator new operator, not null
+    /** Add new gateway
+     * @param gateway new gateway, not null
      * @return See {@link Collection#add}
      */
-    public boolean add(Operator operator) {
-        Validate.notNull(operator);
+    public boolean add(Gateway gateway) {
+        Validate.notNull(gateway);
 
-        logger.log(Level.FINE, "Adding new operator: {0}", operator);
-        boolean added = operators.add(operator);
+        logger.log(Level.FINE, "Adding new gateway: {0}", gateway);
+        boolean added = gateways.add(gateway);
 
         if (added) {
-            valuedSupport.fireEventOccured(Events.ADDED_OPERATOR, operator);
+            valuedSupport.fireEventOccured(Events.ADDED_GATEWAY, gateway);
         }
         return added;
     }
 
-    /** Add new operators
-     * @param operators collection of operators, not null, no null element
+    /** Add new gateways
+     * @param gateways collection of gateways, not null, no null element
      * @return See {@link Collection#addAll}
      */
-    public boolean addAll(Collection<Operator> operators) {
-        Validate.notNull(operators);
-        Validate.noNullElements(operators);
+    public boolean addAll(Collection<Gateway> gateways) {
+        Validate.notNull(gateways);
+        Validate.noNullElements(gateways);
 
-        logger.log(Level.FINE, "Adding {0} operators: {1}",
-                new Object[]{operators.size(), operators});
-        boolean changed = Operators.operators.addAll(operators);
+        logger.log(Level.FINE, "Adding {0} gateways: {1}",
+                new Object[]{gateways.size(), gateways});
+        boolean changed = Gateways.gateways.addAll(gateways);
 
         if (changed) {
-            valuedSupport.fireEventOccured(Events.ADDED_OPERATORS, null);
+            valuedSupport.fireEventOccured(Events.ADDED_GATEWAYS, null);
         }
         return changed;
     }
 
-    /** Remove existing operator
-     * @param operator operator to be removed, not null
+    /** Remove existing gateway
+     * @param gateway gateway to be removed, not null
      * @return See {@link Collection#remove}
      */
-    public boolean remove(Operator operator) {
-        Validate.notNull(operator);
+    public boolean remove(Gateway gateway) {
+        Validate.notNull(gateway);
 
-        logger.log(Level.FINE, "Removing operator: {0}", operator);
-        boolean removed = operators.remove(operator);
+        logger.log(Level.FINE, "Removing gateway: {0}", gateway);
+        boolean removed = gateways.remove(gateway);
 
         if (removed) {
-            valuedSupport.fireEventOccured(Events.REMOVED_OPERATOR, operator);
+            valuedSupport.fireEventOccured(Events.REMOVED_GATEWAY, gateway);
         }
         return removed;
     }
 
-    /** Remove existing operators
-     * @param operators collection of operators to be removed, not null, no null element
+    /** Remove existing gateways
+     * @param gateways collection of gateways to be removed, not null, no null element
      * @return See {@link Collection#removeAll}
      */
-    public boolean removeAll(Collection<Operator> operators) {
-        Validate.notNull(operators);
-        Validate.noNullElements(operators);
+    public boolean removeAll(Collection<Gateway> gateways) {
+        Validate.notNull(gateways);
+        Validate.noNullElements(gateways);
 
-        logger.log(Level.FINE, "Removing {0} operators: {1}",
-                new Object[]{operators.size(), operators});
-        boolean changed = Operators.operators.removeAll(operators);
+        logger.log(Level.FINE, "Removing {0} gateways: {1}",
+                new Object[]{gateways.size(), gateways});
+        boolean changed = Gateways.gateways.removeAll(gateways);
 
         if (changed) {
-            valuedSupport.fireEventOccured(Events.REMOVED_OPERATORS, null);
+            valuedSupport.fireEventOccured(Events.REMOVED_GATEWAYS, null);
         }
         return changed;
     }
 
-    /** Remove all operators */
+    /** Remove all gateways */
     public void clear() {
-        logger.fine("Removing all operators");
-        operators.clear();
+        logger.fine("Removing all gateways");
+        gateways.clear();
 
-        valuedSupport.fireEventOccured(Events.CLEARED_OPERATORS, null);
+        valuedSupport.fireEventOccured(Events.CLEARED_GATEWAYS, null);
     }
 
-    /** Search for an existing operator
-     * @param operator operator to be searched, not null
+    /** Search for an existing gateway
+     * @param gateway gateway to be searched, not null
      * @return See {@link Collection#contains}
      */
-    public boolean contains(Operator operator) {
-        Validate.notNull(operator);
-        return operators.contains(operator);
+    public boolean contains(Gateway gateway) {
+        Validate.notNull(gateway);
+        return gateways.contains(gateway);
     }
 
-    /** Return number of operators
+    /** Return number of gateways
      * @return See {@link Collection#size}
      */
     public int size() {
-        return operators.size();
+        return gateways.size();
     }
 
-    /** Return if there are no operators
+    /** Return if there are no gateways
      * @return See {@link Collection#isEmpty}
      */
     public boolean isEmpty() {
-        return operators.isEmpty();
+        return gateways.isEmpty();
     }
 
-    /** Get set of currently deprecated operators */
-    public HashSet<DeprecatedOperator> getDeprecatedOperators() {
-        return deprecatedOperators;
+    /** Get set of currently deprecated gateways */
+    public HashSet<DeprecatedGateway> getDeprecatedGateways() {
+        return deprecatedGateways;
     }
 
-    /** Set currently deprecated operators. May be null to clear them. */
-    public void setDeprecatedOperators(Set<DeprecatedOperator> deprecatedOperators) {
-        Operators.deprecatedOperators.clear();
-        if (deprecatedOperators != null) {
-            Operators.deprecatedOperators.addAll(deprecatedOperators);
+    /** Set currently deprecated gateways. May be null to clear them. */
+    public void setDeprecatedGateways(Set<DeprecatedGateway> deprecatedGateways) {
+        Gateways.deprecatedGateways.clear();
+        if (deprecatedGateways != null) {
+            Gateways.deprecatedGateways.addAll(deprecatedGateways);
         }
     }
 
-    /** Find operator by name.
-     * @param operatorName Name of the operator. Search is case sensitive. May be null.
-     * @return Operator implementation, when an operator with such name is found.
-     *         If multiple such operators are found, returns the first one found.
-     *         Returns null if no operator is found or provided name was null.
+    /** Find gateway by name.
+     * @param gatewayName Name of the gateway. Search is case sensitive. May be null.
+     * @return Gateway implementation, when a gateway with such name is found.
+     *         If multiple such gateways are found, returns the first one found.
+     *         Returns null if no gateway is found or provided name was null.
      */
-    public static Operator getOperator(String operatorName) {
-        if (operatorName == null) {
+    public static Gateway getGateway(String gatewayName) {
+        if (gatewayName == null) {
             return null;
         }
 
-        synchronized(operators) {
-            for (Operator operator : operators) {
-                if (operator.getName().equals(operatorName)) {
-                    return operator;
+        synchronized(gateways) {
+            for (Gateway gateway : gateways) {
+                if (gateway.getName().equals(gatewayName)) {
+                    return gateway;
                 }
             }
         }
         return null;
     }
 
-    /** Returns whether the operator is a fake one (used just for development
+    /** Returns whether the gateway is a fake one (used just for development
      * purposes).
      */
-    public static boolean isFakeOperator(String operatorName) {
-        return StringUtils.contains(operatorName, "]fake");
+    public static boolean isFakeGateway(String gatewayName) {
+        return StringUtils.contains(gatewayName, "]fake");
     }
 
-    /** Guess operator according to phone number or phone number prefix.
-     * Searches through operators and finds the best suited one one
+    /** Guess gateway according to phone number or phone number prefix.
+     * Searches through gateways and finds the best suited one one
      * supporting this phone number. <br/><br/>
      *
      * Algorithm:
@@ -249,27 +249,27 @@ public class Operators {
      *
      * @param number phone number or it's prefix. The minimum length is two characters,
      *  for shorter input (or null) the method does nothing.
-     * @param customOperators collection of operators in which to search.
-     *  Use null for searching in all currently available operators.
-     * @return the suggested operator or null if none found
+     * @param customGateways collection of gateways in which to search.
+     *  Use null for searching in all currently available gateways.
+     * @return the suggested gateway or null if none found
      */
-    public static Operator suggestOperator(String number, Collection<Operator> customOperators) {
+    public static Gateway suggestGateway(String number, Collection<Gateway> customGateways) {
         if (number == null || number.length() < 2) {
             return null;
         }
 
-        Collection<Operator> selectedOperators =
-                (customOperators != null ? customOperators : operators);
+        Collection<Gateway> selectedGateways =
+                (customGateways != null ? customGateways : gateways);
 
-        synchronized(selectedOperators) {
-            // map of operator -> tuple(login credentials value, summary value)
-            TreeMap<Operator, Tuple<Integer, Integer>> all = new TreeMap<Operator, Tuple<Integer, Integer>>();
+        synchronized(selectedGateways) {
+            // map of gateway -> tuple(login credentials value, summary value)
+            TreeMap<Gateway, Tuple<Integer, Integer>> all = new TreeMap<Gateway, Tuple<Integer, Integer>>();
 
-            // select only those operators that support this number and are not fake
-            for (Operator operator : selectedOperators) {
-                if (!Operators.isFakeOperator(operator.getName()) &&
-                        Operators.isNumberSupported(operator, number)) {
-                    all.put(operator, new Tuple<Integer, Integer>(0, 0));
+            // select only those gateways that support this number and are not fake
+            for (Gateway gateway : selectedGateways) {
+                if (!Gateways.isFakeGateway(gateway.getName()) &&
+                        Gateways.isNumberSupported(gateway, number)) {
+                    all.put(gateway, new Tuple<Integer, Integer>(0, 0));
                 }
             }
 
@@ -279,12 +279,12 @@ public class Operators {
             }
 
             // rank them according to login requirements
-            for (Entry<Operator, Tuple<Integer,Integer>> entry : all.entrySet()) {
-                Operator operator = entry.getKey();
+            for (Entry<Gateway, Tuple<Integer,Integer>> entry : all.entrySet()) {
+                Gateway gateway = entry.getKey();
                 Tuple<Integer, Integer> tuple = entry.getValue();
                 int rank = 0;
-                if (operator.isLoginRequired()) {
-                    if (keyring.getKey(operator.getName()) == null) {
+                if (gateway.isLoginRequired()) {
+                    if (keyring.getKey(gateway.getName()) == null) {
                         // credentials not filled in
                         rank = 0;
                     } else {
@@ -299,14 +299,14 @@ public class Operators {
             }
 
             // rank them according to preferred prefixes
-            for (Entry<Operator, Tuple<Integer,Integer>> entry : all.entrySet()) {
-                Operator operator = entry.getKey();
+            for (Entry<Gateway, Tuple<Integer,Integer>> entry : all.entrySet()) {
+                Gateway gateway = entry.getKey();
                 Tuple<Integer, Integer> tuple = entry.getValue();
                 int rank = 0;
-                if (operator.getPreferredPrefixes().length == 0) {
+                if (gateway.getPreferredPrefixes().length == 0) {
                     // no preferred prefixes
                     rank = 1;
-                } else if (Operators.isNumberPreferred(operator, number)) {
+                } else if (Gateways.isNumberPreferred(gateway, number)) {
                     // preferred prefixes match
                     rank = 0;
                 } else {
@@ -317,17 +317,17 @@ public class Operators {
             }
 
             // get highest summary ranks
-            TreeMap<Operator, Tuple<Integer, Integer>> winners = new TreeMap<Operator, Tuple<Integer, Integer>>();
+            TreeMap<Gateway, Tuple<Integer, Integer>> winners = new TreeMap<Gateway, Tuple<Integer, Integer>>();
             int max = Integer.MIN_VALUE;
-            for (Entry<Operator, Tuple<Integer,Integer>> entry : all.entrySet()) {
-                Operator operator = entry.getKey();
+            for (Entry<Gateway, Tuple<Integer,Integer>> entry : all.entrySet()) {
+                Gateway gateway = entry.getKey();
                 Tuple<Integer, Integer> tuple = entry.getValue();
                 if (tuple.get2() > max) {
                     max = tuple.get2();
                     winners.clear();
                 }
                 if (tuple.get2() == max) {
-                    winners.put(operator, tuple);
+                    winners.put(gateway, tuple);
                 }
             }
 
@@ -338,17 +338,17 @@ public class Operators {
 
             // we have a draw
             // let's compute highest login requirement rank
-            TreeMap<Operator, Tuple<Integer, Integer>> winnersLogin = new TreeMap<Operator, Tuple<Integer, Integer>>();
+            TreeMap<Gateway, Tuple<Integer, Integer>> winnersLogin = new TreeMap<Gateway, Tuple<Integer, Integer>>();
             max = Integer.MIN_VALUE;
-            for (Entry<Operator, Tuple<Integer,Integer>> entry : winners.entrySet()) {
-                Operator operator = entry.getKey();
+            for (Entry<Gateway, Tuple<Integer,Integer>> entry : winners.entrySet()) {
+                Gateway gateway = entry.getKey();
                 Tuple<Integer, Integer> tuple = entry.getValue();
                 if (tuple.get1() > max) {
                     max = tuple.get1();
                     winnersLogin.clear();
                 }
                 if (tuple.get1() == max) {
-                    winnersLogin.put(operator, tuple);
+                    winnersLogin.put(gateway, tuple);
                 }
             }
 
@@ -361,22 +361,22 @@ public class Operators {
             // let's compare by gateway country
             String userCountry = CountryPrefix.getCountryCode(Config.getInstance().getCountryPrefix());
             // find same country as user country
-            for (Operator operator : winnersLogin.keySet()) {
-                String country = CountryPrefix.extractCountryCode(operator.getName());
+            for (Gateway gateway : winnersLogin.keySet()) {
+                String country = CountryPrefix.extractCountryCode(gateway.getName());
                 if (StringUtils.equals(country, userCountry)) {
-                    return operator;
+                    return gateway;
                 }
             }
-            // find international operator
-            for (Operator operator : winnersLogin.keySet()) {
-                String country = CountryPrefix.extractCountryCode(operator.getName());
+            // find international gateway
+            for (Gateway gateway : winnersLogin.keySet()) {
+                String country = CountryPrefix.extractCountryCode(gateway.getName());
                 if (StringUtils.equals(country, CountryPrefix.INTERNATIONAL_CODE)) {
-                    return operator;
+                    return gateway;
                 }
             }
 
             // we haven't found a winner
-            // there should be at least one operator left, otherwise there is an error somewhere
+            // there should be at least one gateway left, otherwise there is an error somewhere
             if (winnersLogin.isEmpty()) {
                 logger.log(Level.WARNING, "No gateways left for comparison when " +
                     "suggesting the best one, there must be an error somewhere.");
@@ -388,15 +388,15 @@ public class Operators {
         }
     }
 
-    /** Returns whether operator matches the number with its supported prefixes.
+    /** Returns whether gateway matches the number with its supported prefixes.
      * 
-     * @param operator operator
+     * @param gateway gateway
      * @param number phone number
      * @return true if at least one of supported prefixes matches the number or
-     * if the operator does not have any supported prefixes; false otherwise
+     * if the gateway does not have any supported prefixes; false otherwise
      */
-    public static boolean isNumberSupported(Operator operator, String number) {
-        String[] supportedPrefixes = operator.getSupportedPrefixes();
+    public static boolean isNumberSupported(Gateway gateway, String number) {
+        String[] supportedPrefixes = gateway.getSupportedPrefixes();
         if (supportedPrefixes.length == 0) {
             // no supported prefixes -> gateway sends anywhere
             return true;
@@ -413,20 +413,20 @@ public class Operators {
         return matched;
     }
 
-    /** Returns whether operator matches the number with its preferred prefixes.
+    /** Returns whether gateway matches the number with its preferred prefixes.
      *
-     * @param operator operator
+     * @param gateway gateway
      * @param number phone number
      * @return true if at least one of preferred prefixes matches the number of
-     * if the operator does not have any preferred prefixes; false otherwise
-     * (or when operator or number is null, or if number is shorter then 2 characters)
+     * if the gateway does not have any preferred prefixes; false otherwise
+     * (or when gateway or number is null, or if number is shorter then 2 characters)
      */
-    public static boolean isNumberPreferred(Operator operator, String number) {
-        if (operator == null || number == null || number.length() < 2) {
+    public static boolean isNumberPreferred(Gateway gateway, String number) {
+        if (gateway == null || number == null || number.length() < 2) {
             return false;
         }
 
-        String[] preferredPrefixes = operator.getPreferredPrefixes();
+        String[] preferredPrefixes = gateway.getPreferredPrefixes();
         if (preferredPrefixes.length == 0) {
             // no preferred prefixes -> gateway sends anywhere in supported prefixes
             return true;
@@ -472,14 +472,14 @@ public class Operators {
         return builder.toString();
     }
 
-    /** Parse OperatorInfo implementation from the provided URL.
-     * @param script URL (file or jar) of operator script
-     * @return OperatorInfo implementation
+    /** Parse GatewayInfo implementation from the provided URL.
+     * @param script URL (file or jar) of gateway script
+     * @return GatewayInfo implementation
      * @throws IOException when there is problem accessing the script file
      * @throws ScriptException when the script is not valid
      * @throws IntrospectionException when current JRE does not support JavaScript execution
      */
-    public static OperatorInfo parseInfo(URL script) throws IOException, ScriptException, IntrospectionException {
+    public static GatewayInfo parseInfo(URL script) throws IOException, ScriptException, IntrospectionException {
         logger.log(Level.FINER, "Parsing info of script: {0}", script.toExternalForm());
         ScriptEngine jsEngine = manager.getEngineByName("js");
         if (jsEngine == null) {
@@ -491,8 +491,8 @@ public class Operators {
             reader = new InputStreamReader(script.openStream(), "UTF-8");
             //the script must be evaluated before extracting the interface
             jsEngine.eval(reader);
-            OperatorInfo operatorInfo = invocable.getInterface(OperatorInfo.class);
-            return operatorInfo;
+            GatewayInfo gatewayInfo = invocable.getInterface(GatewayInfo.class);
+            return gatewayInfo;
         } finally {
             try {
                 reader.close();

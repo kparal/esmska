@@ -29,10 +29,10 @@ public class SMS {
     private ImageIcon image; //security image
     private String imageCode = ""; //security image code
     private String imageHint; //hint from gateway where to find security image (eg. sent to cell)
-    private String operator;
+    private String gateway;
     private Status status = Status.NEW; //sms status
     private String errMsg; //potential error
-    private String operatorMsg = ""; //additional message from operator
+    private String gatewayMsg = ""; //additional message from gateway
     
     /** Status of SMS */
     public static enum Status {
@@ -48,24 +48,24 @@ public class SMS {
         SENT; 
     }
 
-    /** Shortcut for SMS(number, text, operator, null, null, null). */
-    public SMS(String number, String text, String operator) {
-        this(number, text, operator, null, null, null);
+    /** Shortcut for SMS(number, text, gateway, null, null, null). */
+    public SMS(String number, String text, String gateway) {
+        this(number, text, gateway, null, null, null);
     }
 
     /** Constructs new SMS. For detailed parameters restrictions see individual setter methods.
      * @param number not null nor empty
      * @param text not null
-     * @param operator not null nor empty
+     * @param gateway not null nor empty
      * @param name
      * @param senderNumber
      * @param senderName
      */
-    public SMS(String number, String text, String operator, String name,
+    public SMS(String number, String text, String gateway, String name,
             String senderNumber, String senderName) {
         setNumber(number);
         setText(text);
-        setOperator(operator);
+        setGateway(gateway);
         setName(name);
         setSenderNumber(senderNumber);
         setSenderName(senderName);
@@ -121,9 +121,9 @@ public class SMS {
         return imageHint;
     }
 
-    /** Operator of the message. Never null nor empty. */
-    public String getOperator() {
-        return operator;
+    /** Gateway of the message. Never null nor empty. */
+    public String getGateway() {
+        return gateway;
     }
 
     /** Status of the message. Never null. */
@@ -141,9 +141,9 @@ public class SMS {
         return name;
     }
 
-    /** Message from operator. Never null. */
-    public String getOperatorMsg() {
-        return operatorMsg;
+    /** Message from gateway. Never null. */
+    public String getGatewayMsg() {
+        return gatewayMsg;
     }
     // </editor-fold>
     
@@ -189,10 +189,10 @@ public class SMS {
         this.imageHint = imageHint;
     }
 
-    /** Operator of the message. May not be null nor empty. */
-    public void setOperator(String operator) {
-        Validate.notEmpty(operator);
-        this.operator = operator;
+    /** Gateway of the message. May not be null nor empty. */
+    public void setGateway(String gateway) {
+        Validate.notEmpty(gateway);
+        this.gateway = gateway;
     }
 
     /** Status of the message. May not be null. */
@@ -213,17 +213,17 @@ public class SMS {
         this.name = StringUtils.defaultString(name);
     }
 
-    /** Message from operator. Null value is changed to empty string. */
-    public void setOperatorMsg(String operatorMsg) {
-        this.operatorMsg = StringUtils.defaultString(operatorMsg);
-        logger.finer("SMS " + this + " has a new operator message: " + this.operatorMsg);
+    /** Message from gateway. Null value is changed to empty string. */
+    public void setGatewayMsg(String gatewayMsg) {
+        this.gatewayMsg = StringUtils.defaultString(gatewayMsg);
+        logger.finer("SMS " + this + " has a new gateway message: " + this.gatewayMsg);
     }
     // </editor-fold>
     
     @Override
     public String toString() {
         return "[recipient=" + StringUtils.defaultIfEmpty(name, Contact.anonymizeNumber(number)) +
-               ", operator=" + operator + "]";
+               ", gateway=" + gateway + "]";
     }
 
     /** Return very detailed description of the instance, used mainly for
@@ -231,7 +231,7 @@ public class SMS {
      */
     public String toDebugString() {
         return "[name=" + name + ", number=" + Contact.anonymizeNumber(number) +
-                ", operator=" + operator + ", status=" + status + ", operatorMsg=" +
-                operatorMsg + ", errMsg=" + errMsg + "]";
+                ", gateway=" + gateway + ", status=" + status + ", gatewayMsg=" +
+                gatewayMsg + ", errMsg=" + errMsg + "]";
     }
 }

@@ -16,7 +16,7 @@ import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.Tuple3;
 import esmska.update.HttpDownloader;
-import esmska.update.OperatorUpdateInfo;
+import esmska.update.GatewayUpdateInfo;
 import esmska.update.UpdateChecker;
 import esmska.utils.L10N;
 import esmska.data.Links;
@@ -63,7 +63,7 @@ import javax.swing.border.EmptyBorder;
 import org.apache.commons.lang.ObjectUtils;
 import org.openide.awt.Mnemonics;
 
-/** Dialog for downloading and installing operator updates.
+/** Dialog for downloading and installing gateway updates.
  *
  * @author ripper
  */
@@ -77,7 +77,7 @@ public class UpdateDialog extends javax.swing.JDialog {
     /** listener for update checker */
     private UpdateListener listener = new UpdateListener();
     /** list of available updates */
-    private ArrayList<OperatorUpdateInfo> updates = new ArrayList<OperatorUpdateInfo>();
+    private ArrayList<GatewayUpdateInfo> updates = new ArrayList<GatewayUpdateInfo>();
     private Border gwScrollPaneBorder; //borders to look better
     private Border emptyBorder = new EmptyBorder(1, 1, 1, 1);
     /** current update downloader */
@@ -144,7 +144,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         }
 
         //set appropriate state
-        if (updateChecker.isOperatorUpdateAvailable()) {
+        if (updateChecker.isGatewayUpdateAvailable()) {
             listener.extractUpdates();
             setFormState(FormState.READY_TO_UPDATE);
         } else {
@@ -327,7 +327,7 @@ public class UpdateDialog extends javax.swing.JDialog {
     private void populateGwList() {
         gwPanel.removeAll();
 
-        for (OperatorUpdateInfo info : updates) {
+        for (GatewayUpdateInfo info : updates) {
             JCheckBox checkbox = new JCheckBox();
             if (info.canBeUsed()) {
                 checkbox.setText(info.getName());
@@ -374,9 +374,9 @@ public class UpdateDialog extends javax.swing.JDialog {
         setFormState(FormState.DOWNLOADING);
 
         //compute which updates to download
-        ArrayList<OperatorUpdateInfo> infos = new ArrayList<OperatorUpdateInfo>();
+        ArrayList<GatewayUpdateInfo> infos = new ArrayList<GatewayUpdateInfo>();
         for (int i = 0; i < updates.size(); i++) {
-            OperatorUpdateInfo info = updates.get(i);
+            GatewayUpdateInfo info = updates.get(i);
             JCheckBox checkbox = (JCheckBox) gwPanel.getComponents()[i];
             if (checkbox.isSelected()) {
                 infos.add(info);
@@ -419,8 +419,8 @@ public class UpdateDialog extends javax.swing.JDialog {
             return;
         }
 
-        ArrayList<Tuple3<OperatorUpdateInfo, String, byte[]>> scripts =
-                new ArrayList<Tuple3<OperatorUpdateInfo, String, byte[]>>();
+        ArrayList<Tuple3<GatewayUpdateInfo, String, byte[]>> scripts =
+                new ArrayList<Tuple3<GatewayUpdateInfo, String, byte[]>>();
 
         //retrieve downloaded data
         try {
@@ -436,9 +436,9 @@ public class UpdateDialog extends javax.swing.JDialog {
 
         //save the data to harddisk
         logger.finer("Saving " + scripts.size() + " updates to disk");
-        for (Tuple3<OperatorUpdateInfo, String, byte[]> script : scripts) {
+        for (Tuple3<GatewayUpdateInfo, String, byte[]> script : scripts) {
             try {
-                Context.persistenceManager.saveOperator(
+                Context.persistenceManager.saveGateway(
                         script.get1().getFileName(), script.get2(), script.get3());
                 //don't forget to remove it from downloaded updates
                 updates.remove(script.get1());
@@ -446,17 +446,17 @@ public class UpdateDialog extends javax.swing.JDialog {
                         MessageFormat.format(l10n.getString("Update.gwUpdated"), script.get1().getName()),
                         null, Icons.STATUS_UPDATE));
             } catch (Exception ex) {
-                logger.log(Level.WARNING, "Could not save operator", ex);
+                logger.log(Level.WARNING, "Could not save gateway", ex);
                 installOk = false;
             }
         }
 
-        //reload all operators
-        logger.finer("Reloading operators...");
+        //reload all gateways
+        logger.finer("Reloading gateways...");
         try {
-            Context.persistenceManager.loadOperators();
+            Context.persistenceManager.loadGateways();
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, "Could not reload operators", ex);
+            logger.log(Level.SEVERE, "Could not reload gateways", ex);
             installOk = false;
         }
 
@@ -482,7 +482,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         }
 
         //don't leave old entries in update checker
-        updateChecker.refreshUpdatedOperators();
+        updateChecker.refreshUpdatedGateways();
     }
 
     /** set relevant info in the info label */
@@ -495,7 +495,7 @@ public class UpdateDialog extends javax.swing.JDialog {
 
         boolean programUpdate = updateChecker.isProgramUpdateAvailable();
         boolean insufficientVersion = false;
-        for (OperatorUpdateInfo info : updates) {
+        for (GatewayUpdateInfo info : updates) {
             insufficientVersion = insufficientVersion || !info.canBeUsed();
         }
 
@@ -518,8 +518,8 @@ public class UpdateDialog extends javax.swing.JDialog {
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
-                case UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE:
-                case UpdateChecker.ACTION_OPERATOR_UPDATE_AVAILABLE:
+                case UpdateChecker.ACTION_PROGRAM_AND_GATEWAY_UPDATE_AVAILABLE:
+                case UpdateChecker.ACTION_GATEWAY_UPDATE_AVAILABLE:
                     //gateway updates available
                     extractUpdates();
                     setFormState(FormState.READY_TO_UPDATE);
@@ -539,14 +539,14 @@ public class UpdateDialog extends javax.swing.JDialog {
                     break;
             }
         }
-        /** take downloaded info, retrieve updates information, sort it by operator name */
+        /** take downloaded info, retrieve updates information, sort it by gateway name */
         public void extractUpdates() {
-            updates = new ArrayList<OperatorUpdateInfo>(updateChecker.getOperatorUpdates());
+            updates = new ArrayList<GatewayUpdateInfo>(updateChecker.getGatewayUpdates());
             //sort by name
-            Collections.sort(updates, new Comparator<OperatorUpdateInfo>() {
+            Collections.sort(updates, new Comparator<GatewayUpdateInfo>() {
                 private final Collator collator = Collator.getInstance();
                 @Override
-                public int compare(OperatorUpdateInfo o1, OperatorUpdateInfo o2) {
+                public int compare(GatewayUpdateInfo o1, GatewayUpdateInfo o2) {
                     return collator.compare(o1.getName(), o2.getName());
                 }
             });
@@ -555,22 +555,22 @@ public class UpdateDialog extends javax.swing.JDialog {
 
     /** Download all requested updates.
      * Returns collection of [update info;script contents;icon]. */
-    private class Downloader extends SwingWorker<ArrayList<Tuple3<OperatorUpdateInfo,String,byte[]>>, Integer> {
+    private class Downloader extends SwingWorker<ArrayList<Tuple3<GatewayUpdateInfo,String,byte[]>>, Integer> {
         private boolean finishedOk;
-        private Collection<OperatorUpdateInfo> infos;
-        private ArrayList<Tuple3<OperatorUpdateInfo,String,byte[]>> scripts = new ArrayList<Tuple3<OperatorUpdateInfo,String, byte[]>>();
+        private Collection<GatewayUpdateInfo> infos;
+        private ArrayList<Tuple3<GatewayUpdateInfo,String,byte[]>> scripts = new ArrayList<Tuple3<GatewayUpdateInfo,String, byte[]>>();
         int downloaded = 0;
 
         /** Constructor.
          * @param infos collection of infos for which to retrieve files
          */
-        public Downloader(Collection<OperatorUpdateInfo> infos) {
+        public Downloader(Collection<GatewayUpdateInfo> infos) {
             this.infos = infos;
         }
         @Override
-        protected ArrayList<Tuple3<OperatorUpdateInfo,String,byte[]>> doInBackground() throws Exception {
+        protected ArrayList<Tuple3<GatewayUpdateInfo,String,byte[]>> doInBackground() throws Exception {
             logger.finer("Downloading " + infos.size() + " updates");
-            for (OperatorUpdateInfo info : infos) {
+            for (GatewayUpdateInfo info : infos) {
                 try {
                     //download script
                     HttpDownloader dl = new HttpDownloader(info.getDownloadUrl().toString(), false);
@@ -590,8 +590,8 @@ public class UpdateDialog extends javax.swing.JDialog {
                             continue;
                         }
                     }
-                    Tuple3<OperatorUpdateInfo,String,byte[]> tuple =
-                            new Tuple3<OperatorUpdateInfo,String,byte[]>(info, script, icon);
+                    Tuple3<GatewayUpdateInfo,String,byte[]> tuple =
+                            new Tuple3<GatewayUpdateInfo,String,byte[]>(info, script, icon);
                     scripts.add(tuple);
                 } finally {
                     //publish how many updates are downloaded up to now
@@ -605,7 +605,7 @@ public class UpdateDialog extends javax.swing.JDialog {
             }
             finishedOk = (infos.size() == scripts.size());
             if (!finishedOk) {
-                logger.warning("Could not download all operator updates");
+                logger.warning("Could not download all gateway updates");
             }
             return scripts;
         }

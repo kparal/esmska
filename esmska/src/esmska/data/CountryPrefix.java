@@ -23,7 +23,7 @@ public class CountryPrefix {
 
     private static final Config config = Config.getInstance();
     private static final HashMap<String, String> map = new HashMap<String, String>();
-    private static final Pattern operatorNamePattern = 
+    private static final Pattern gatewayNamePattern =
             Pattern.compile("^\\[(\\w\\w|" + INTERNATIONAL_CODE + ")\\].*");
     static {
         map.put("AC", "+247");
@@ -372,15 +372,15 @@ public class CountryPrefix {
         return map.values().contains(prefix);
     }
 
-    /** Extract country code from operator name
-     * @param operatorName operator name; may be invalid or null
-     * @return country code CC or INT; or null when <code>operatorName</code>
+    /** Extract country code from gateway name
+     * @param gatewayName gateway name; may be invalid or null
+     * @return country code CC or INT; or null when <code>gatewayName</code>
      * invalid or null
      */
-    public static String extractCountryCode(String operatorName) {
-        Matcher matcher = operatorNamePattern.matcher(StringUtils.defaultString(operatorName));
-        if (operatorName == null || !matcher.matches()) {
-            assert false : "There always should be some country in operator name";
+    public static String extractCountryCode(String gatewayName) {
+        Matcher matcher = gatewayNamePattern.matcher(StringUtils.defaultString(gatewayName));
+        if (gatewayName == null || !matcher.matches()) {
+            assert false : "There always should be some country in gateway name";
             return null;
         }
         return matcher.group(1);

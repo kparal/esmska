@@ -5,9 +5,9 @@
 package esmska.update;
 
 import esmska.data.Config;
-import esmska.data.DeprecatedOperator;
-import esmska.data.Operator;
-import esmska.data.Operators;
+import esmska.data.DeprecatedGateway;
+import esmska.data.Gateway;
+import esmska.data.Gateways;
 import esmska.data.event.ActionEventSupport;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -30,7 +30,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/** Checks for newer program or operator version on program's website
+/** Checks for newer program or gateway version on program's website
  *
  * First of all you must run the {@link #checkForUpdates()} method, only after it
  * has finished the other methods will give you correct answer about updates
@@ -42,10 +42,10 @@ public class UpdateChecker {
 
     /** new program version is available */
     public static final int ACTION_PROGRAM_UPDATE_AVAILABLE = 0;
-    /** new or updated operator script is available */
-    public static final int ACTION_OPERATOR_UPDATE_AVAILABLE = 1;
-    /** new program version and operator script is available */
-    public static final int ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE = 2;
+    /** new or updated gateway script is available */
+    public static final int ACTION_GATEWAY_UPDATE_AVAILABLE = 1;
+    /** new program version and gateway script is available */
+    public static final int ACTION_PROGRAM_AND_GATEWAY_UPDATE_AVAILABLE = 2;
     /** no updates found */
     public static final int ACTION_NO_UPDATE_AVAILABLE = 3;
     /** could not check updates - network error? */
@@ -58,7 +58,7 @@ public class UpdateChecker {
 
     private String onlineVersion = "0.0.0";
     private String onlineUnstableVersion = "0.0.0";
-    private HashSet<OperatorUpdateInfo> operatorUpdates = new HashSet<OperatorUpdateInfo>();
+    private HashSet<GatewayUpdateInfo> gatewayUpdates = new HashSet<GatewayUpdateInfo>();
     private AtomicBoolean running = new AtomicBoolean();
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
@@ -99,17 +99,17 @@ public class UpdateChecker {
                         boolean updateAvailable = isProgramUpdateAvailable();
                         logger.fine("Found program update: " + (updateAvailable ?
                             getLatestProgramVersion() : "false"));
-                        boolean operatorUpdateAvailable = !getOperatorUpdates().isEmpty();
-                        logger.fine("Found operator update: " + operatorUpdateAvailable);
+                        boolean gatewayUpdateAvailable = !getGatewayUpdates().isEmpty();
+                        logger.fine("Found gateway update: " + gatewayUpdateAvailable);
                         //send events
                         if (updateAvailable) {
-                            if (operatorUpdateAvailable) {
-                                actionSupport.fireActionPerformed(ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE, null);
+                            if (gatewayUpdateAvailable) {
+                                actionSupport.fireActionPerformed(ACTION_PROGRAM_AND_GATEWAY_UPDATE_AVAILABLE, null);
                             } else {
                                 actionSupport.fireActionPerformed(ACTION_PROGRAM_UPDATE_AVAILABLE, null);
                             }
-                        } else if (operatorUpdateAvailable) {
-                            actionSupport.fireActionPerformed(ACTION_OPERATOR_UPDATE_AVAILABLE, null);
+                        } else if (gatewayUpdateAvailable) {
+                            actionSupport.fireActionPerformed(ACTION_GATEWAY_UPDATE_AVAILABLE, null);
                         } else {
                             actionSupport.fireActionPerformed(ACTION_NO_UPDATE_AVAILABLE, null);
                         }
@@ -141,41 +141,41 @@ public class UpdateChecker {
         onlineUnstableVersion = doc.getElementsByTagName(VersionFile.TAG_LAST_UNSTABLE_VERSION).
                 item(0).getTextContent();
 
-        operatorUpdates.clear();
-        NodeList operators = doc.getElementsByTagName(VersionFile.TAG_OPERATOR);
-        for (int i = 0; i < operators.getLength(); i++) {
-            Node operator = operators.item(i);
-            String name = xpath.evaluate(VersionFile.TAG_NAME + "/text()", operator);
-            String fileName = xpath.evaluate(VersionFile.TAG_FILENAME + "/text()", operator);
-            String version = xpath.evaluate(VersionFile.TAG_VERSION + "/text()", operator);
-            String minVersion = xpath.evaluate(VersionFile.TAG_MIN_VERSION + "/text()", operator);
-            String url = xpath.evaluate(VersionFile.TAG_DOWNLOAD + "/text()", operator);
-            String iconUrl = xpath.evaluate(VersionFile.TAG_ICON + "/text()", operator);
+        gatewayUpdates.clear();
+        NodeList gateways = doc.getElementsByTagName(VersionFile.TAG_GATEWAY);
+        for (int i = 0; i < gateways.getLength(); i++) {
+            Node gateway = gateways.item(i);
+            String name = xpath.evaluate(VersionFile.TAG_NAME + "/text()", gateway);
+            String fileName = xpath.evaluate(VersionFile.TAG_FILENAME + "/text()", gateway);
+            String version = xpath.evaluate(VersionFile.TAG_VERSION + "/text()", gateway);
+            String minVersion = xpath.evaluate(VersionFile.TAG_MIN_VERSION + "/text()", gateway);
+            String url = xpath.evaluate(VersionFile.TAG_DOWNLOAD + "/text()", gateway);
+            String iconUrl = xpath.evaluate(VersionFile.TAG_ICON + "/text()", gateway);
 
-            OperatorUpdateInfo info = new OperatorUpdateInfo(name, fileName,
+            GatewayUpdateInfo info = new GatewayUpdateInfo(name, fileName,
                     version, minVersion, url, iconUrl);
-            operatorUpdates.add(info);
+            gatewayUpdates.add(info);
         }
 
-        //only add new or updated operators
-        refreshUpdatedOperators();
+        //only add new or updated gateways
+        refreshUpdatedGateways();
     }
 
-    /** Go through all downloaded update information and only leave those operators
+    /** Go through all downloaded update information and only leave those gateways
      * which are new or updated compared to current ones. This can be used to reload
-     * update info after partial update. Also removes operators requiring more recent
+     * update info after partial update. Also removes gateways requiring more recent
      * program version than available online (stable/unstable depending on config
-     * settings), operators hidden by the user (operator filter) and deprecated
-     * operators.
+     * settings), gateways hidden by the user (gateway filter) and deprecated
+     * gateways.
      */
-    public void refreshUpdatedOperators() {
-        String[] patterns = config.getOperatorFilter().split(",");
+    public void refreshUpdatedGateways() {
+        String[] patterns = config.getGatewayFilter().split(",");
 
-        for (Iterator<OperatorUpdateInfo> it = operatorUpdates.iterator(); it.hasNext(); ) {
-            OperatorUpdateInfo info = it.next();
-            Operator op = Operators.getOperator(info.getName());
+        for (Iterator<GatewayUpdateInfo> it = gatewayUpdates.iterator(); it.hasNext(); ) {
+            GatewayUpdateInfo info = it.next();
+            Gateway op = Gateways.getGateway(info.getName());
             if (op != null && info.getVersion().compareTo(op.getVersion()) <= 0) {
-                //operator is same or older, remove it
+                //gateway is same or older, remove it
                 it.remove();
                 continue;
             }
@@ -185,7 +185,7 @@ public class UpdateChecker {
                 it.remove();
                 continue;
             }
-            //compare operator name against operator filter
+            //compare gateway name against gateway filter
             boolean filtered = true;
             for (String pattern : patterns) {
                 if (info.getName().contains(pattern)) {
@@ -198,11 +198,11 @@ public class UpdateChecker {
                 it.remove();
                 continue;
             }
-            //check for deprecated operators
-            for (DeprecatedOperator depr : Operators.getInstance().getDeprecatedOperators()) {
+            //check for deprecated gateways
+            for (DeprecatedGateway depr : Gateways.getInstance().getDeprecatedGateways()) {
                 if (info.getName().equals(depr.getName()) &&
                         info.getVersion().compareTo(depr.getVersion()) <= 0) {
-                    //operator has been deprecated
+                    //gateway has been deprecated
                     it.remove();
                     continue;
                 }
@@ -230,16 +230,16 @@ public class UpdateChecker {
         return config.isCheckForUnstableUpdates() ? onlineUnstableVersion : onlineVersion;
     }
 
-    /** Whether an operator update is available */
-    public synchronized boolean isOperatorUpdateAvailable() {
-            return !operatorUpdates.isEmpty();
+    /** Whether an gateway update is available */
+    public synchronized boolean isGatewayUpdateAvailable() {
+            return !gatewayUpdates.isEmpty();
     }
 
-    /** Get info about operator updates 
-     * @return unmodifiable set of operator updates info
+    /** Get info about gateway updates
+     * @return unmodifiable set of gateway updates info
      */
-    public synchronized Set<OperatorUpdateInfo> getOperatorUpdates() {
-        return Collections.unmodifiableSet(operatorUpdates);
+    public synchronized Set<GatewayUpdateInfo> getGatewayUpdates() {
+        return Collections.unmodifiableSet(gatewayUpdates);
     }
 
 }

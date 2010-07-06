@@ -12,8 +12,8 @@
 package esmska.gui;
 
 import esmska.data.Icons;
-import esmska.data.Operator;
-import esmska.data.Operators;
+import esmska.data.Gateway;
+import esmska.data.Gateways;
 import esmska.data.SMS;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
@@ -384,9 +384,9 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
 
             //set text
             label.setText(sms.getRecipient());
-            //add operator logo
-            Operator operator = Operators.getOperator(sms.getOperator());
-            label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
+            //add gateway logo
+            Gateway gateway = Gateways.getGateway(sms.getGateway());
+            label.setIcon(gateway != null ? gateway.getIcon() : Icons.GATEWAY_BLANK);
 
             return label;
         }

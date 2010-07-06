@@ -34,7 +34,7 @@ public class SMSSender {
     private static final Queue queue = Queue.getInstance();
     private static final String NO_REASON_ERROR = l10n.getString("SMSSender.NO_REASON_ERROR");
     
-    /** map of <operator,worker>; it shows whether some operator has currently assigned
+    /** map of <gateway,worker>; it shows whether some gateway has currently assigned
     a background worker (therefore is sending at the moment) */
     private HashMap<String,SMSWorker> workers = new HashMap<String, SMSWorker>();
 
@@ -51,20 +51,20 @@ public class SMSSender {
     }
     
     /** Send new ready SMS
-     * @param operatorName operator for which to look for new ready sms;
-     * use null for any operator
+     * @param gatewayName gateway for which to look for new ready sms;
+     * use null for any gateway
      */
-    private void sendNew(String operatorName) {
+    private void sendNew(String gatewayName) {
         if (queue.isPaused()) {
             //don't send anything while queue is paused
             return;
         }
-        List<SMS> readySMS = queue.getAllWithStatus(SMS.Status.READY, operatorName);
+        List<SMS> readySMS = queue.getAllWithStatus(SMS.Status.READY, gatewayName);
 
         for (SMS sms : readySMS) {
-            String operator = sms.getOperator();
-            if (workers.containsKey(operator)) {
-                //there's already some message from this operator being sent,
+            String gateway = sms.getGateway();
+            if (workers.containsKey(gateway)) {
+                //there's already some message from this gateway being sent,
                 //skip this message
                 continue;
             }
@@ -73,7 +73,7 @@ public class SMSSender {
             queue.setSMSSending(sms);
             
             SMSWorker worker = new SMSWorker(sms);
-            workers.put(operator, worker);
+            workers.put(gateway, worker);
             
             //send in worker thread
             worker.execute();
@@ -83,14 +83,14 @@ public class SMSSender {
     /** Handle processed SMS */
     private void finishedSending(SMS sms, boolean success) {
         logger.fine("Finished sending SMS: " + sms.toDebugString());
-        workers.remove(sms.getOperator());
+        workers.remove(sms.getGateway());
         if (success) {
             queue.setSMSSent(sms);
         } else {
             queue.setSMSFailed(sms);
         }
         //look for another sms to send
-        sendNew(sms.getOperator());
+        sendNew(sms.getGateway());
     }
     
     /** send sms over internet */
@@ -115,9 +115,9 @@ public class SMSSender {
         protected Boolean doInBackground() {
             boolean success = false;
             try {
-                OperatorInterpreter interpreter = new OperatorInterpreter();
+                GatewayInterpreter interpreter = new GatewayInterpreter();
                 success = interpreter.sendMessage(sms);
-                sms.setOperatorMsg(interpreter.getOperatorMessage());
+                sms.setGatewayMsg(interpreter.getGatewayMessage());
                 sms.setErrMsg(null);
                 if (!success) {
                     sms.setErrMsg(interpreter.getErrorMessage() != null ?

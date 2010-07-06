@@ -17,14 +17,14 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import org.apache.commons.lang.StringUtils;
 
-/** Default implementation of the Operator interface.
- * This implementation caches all information retrieved from operator script
+/** Default implementation of the Gateway interface.
+ * This implementation caches all information retrieved from gateway script
  * in order to reduce the performance impact caused by javascript invocations.
  * @author ripper
  */
-public class DefaultOperator implements Operator {
+public class DefaultGateway implements Gateway {
 
-    private static final Logger logger = Logger.getLogger(DefaultOperator.class.getName());
+    private static final Logger logger = Logger.getLogger(DefaultGateway.class.getName());
     private URL script;
     private String name, version, maintainer, website, description, minProgramVersion;
     private String[] supportedPrefixes, preferredPrefixes, supportedLanguages;
@@ -35,29 +35,29 @@ public class DefaultOperator implements Operator {
     private static final Pattern namePattern = 
             Pattern.compile("^\\[(\\w\\w|" + CountryPrefix.INTERNATIONAL_CODE + ")\\].+");
 
-    /** Creates new DefaultOperator.
+    /** Creates new DefaultGateway.
      * 
-     * @param script system resource containing operator script
+     * @param script system resource containing gateway script
      * @throws IOException When there are problem accessing the script file
-     * @throws ScriptException When operator script is invalid
-     * @throws PrivilegedActionException When operator script is invalid
+     * @throws ScriptException When gateway script is invalid
+     * @throws PrivilegedActionException When gateway script is invalid
      * @throws IntrospectionException When current JRE does not support JavaScript execution
-     * @throws IllegalArgumentException When operator name is not valid
+     * @throws IllegalArgumentException When gateway name is not valid
      */
-    public DefaultOperator(URL script) throws IOException, ScriptException,
+    public DefaultGateway(URL script) throws IOException, ScriptException,
             PrivilegedActionException, IntrospectionException {
         this.script = script;
         
-        OperatorInfo info = Operators.parseInfo(script);
-        //check operator name is valid
+        GatewayInfo info = Gateways.parseInfo(script);
+        //check gateway name is valid
         if (info == null || StringUtils.isEmpty(info.getName())) {
-            throw new ScriptException("Not a valid operator script", script.toExternalForm(), 0);
+            throw new ScriptException("Not a valid gateway script", script.toExternalForm(), 0);
         }
         if (!namePattern.matcher(info.getName()).matches()) {
-            throw new IllegalArgumentException("Operator name not valid: " + info.getName());
+            throw new IllegalArgumentException("Gateway name not valid: " + info.getName());
         }
         
-        //remember all the values from OperatorInfo interface internally in order
+        //remember all the values from GatewayInfo interface internally in order
         //to increase speed (Java code vs JavaScript execution for every method access).
         name = info.getName();
         version = info.getVersion();
@@ -75,19 +75,19 @@ public class DefaultOperator implements Operator {
         loginRequired = info.isLoginRequired();
         supportedLanguages = info.getSupportedLanguages();
 
-        //find icon - for "[xx]abc.operator" look for "[xx]abc.png"
-        String iconName = script.toExternalForm().replaceFirst("\\.operator$", ".png");
+        //find icon - for "[xx]abc.gateway" look for "[xx]abc.png"
+        String iconName = script.toExternalForm().replaceFirst("\\.gateway$", ".png");
         URL iconURL = new URL(iconName);
         icon = new ImageIcon(iconURL);
         if (icon.getIconWidth() <= 0) { //non-existing icon, zero-sized image
-            icon = Icons.OPERATOR_DEFAULT;
+            icon = Icons.GATEWAY_DEFAULT;
         }
 
-        logger.log(Level.FINER, "Created new operator: {0}", toString());
+        logger.log(Level.FINER, "Created new gateway: {0}", toString());
     }
 
     @Override
-    public int compareTo(Operator o) {
+    public int compareTo(Gateway o) {
         Collator collator = Collator.getInstance();
         return collator.compare(this.getName(), o.getName());
     }
@@ -102,10 +102,10 @@ public class DefaultOperator implements Operator {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof Operator)) {
+        if (!(obj instanceof Gateway)) {
             return false;
         }
-        Operator o = (Operator) obj;
+        Gateway o = (Gateway) obj;
         return this.compareTo(o) == 0;
     }
 

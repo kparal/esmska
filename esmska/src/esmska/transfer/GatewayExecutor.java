@@ -4,10 +4,10 @@
  */
 package esmska.transfer;
 
-import esmska.data.Operator;
+import esmska.data.Gateway;
 import esmska.utils.L10N;
 import esmska.data.Links;
-import esmska.data.Operators;
+import esmska.data.Gateways;
 import esmska.data.SMS;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -19,77 +19,77 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import org.apache.commons.lang.StringUtils;
 
-/** Class containing methods, which can be called from operator scripts.
- *  For each operator script a separate class should be created.
+/** Class containing methods, which can be called from gateway scripts.
+ *  For each gateway script a separate class should be created.
  * @author ripper
  */
-public class OperatorExecutor {
+public class GatewayExecutor {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     
-    private static final Logger logger = Logger.getLogger(OperatorExecutor.class.getName());
+    private static final Logger logger = Logger.getLogger(GatewayExecutor.class.getName());
     /** Message that recepient number was wrong. */
     public static final String ERROR_WRONG_NUMBER =
-            l10n.getString("OperatorExecutor.ERROR_WRONG_NUMBER");
+            l10n.getString("GatewayExecutor.ERROR_WRONG_NUMBER");
     /** Message that security code was wrong. */
     public static final String ERROR_WRONG_CODE =
-            l10n.getString("OperatorExecutor.ERROR_WRONG_CODE");
+            l10n.getString("GatewayExecutor.ERROR_WRONG_CODE");
     /** Message that message text was too long. */
     public static final String ERROR_LONG_TEXT =
-            l10n.getString("OperatorExecutor.ERROR_LONG_TEXT");
+            l10n.getString("GatewayExecutor.ERROR_LONG_TEXT");
     /** Message that sender signature was wrong. */
     public static final String ERROR_WRONG_SIGNATURE =
-            l10n.getString("OperatorExecutor.ERROR_WRONG_SIGNATURE");
+            l10n.getString("GatewayExecutor.ERROR_WRONG_SIGNATURE");
     /** Message that sender signature was wrong. */
     public static final String ERROR_SIGNATURE_NEEDED =
-            l10n.getString("OperatorExecutor.ERROR_SIGNATURE_NEEDED");
+            l10n.getString("GatewayExecutor.ERROR_SIGNATURE_NEEDED");
     /** Message that login or password was wrong. */
     public static String ERROR_WRONG_AUTH =
-            l10n.getString("OperatorExecutor.ERROR_WRONG_AUTH");
+            l10n.getString("GatewayExecutor.ERROR_WRONG_AUTH");
     /** Message that user has not waited long enough to send another message
      * or message quota has been reached. */
     public static final String ERROR_LIMIT_REACHED =
-            l10n.getString("OperatorExecutor.ERROR_LIMIT_REACHED");
+            l10n.getString("GatewayExecutor.ERROR_LIMIT_REACHED");
     /** Message that user does not have sufficient credit. */
     public static final String ERROR_NO_CREDIT =
-            l10n.getString("OperatorExecutor.ERROR_NO_CREDIT");
-    /** Message that sending failed but operator hasn't provided any reason for it. */
+            l10n.getString("GatewayExecutor.ERROR_NO_CREDIT");
+    /** Message that sending failed but gateway hasn't provided any reason for it. */
     public static final String ERROR_NO_REASON =
-            l10n.getString("OperatorExecutor.ERROR_NO_REASON");
-    /** Message preceding operator provided error message. */
-    public static final String ERROR_OPERATOR_MESSAGE =
-            l10n.getString("OperatorExecutor.ERROR_OPERATOR_MESSAGE");
+            l10n.getString("GatewayExecutor.ERROR_NO_REASON");
+    /** Message preceding gateway provided error message. */
+    public static final String ERROR_GATEWAY_MESSAGE =
+            l10n.getString("GatewayExecutor.ERROR_GATEWAY_MESSAGE");
     /** Message that uknown error happened, maybe error in the script. */
     public static String ERROR_UKNOWN =
-            l10n.getString("OperatorExecutor.ERROR_UKNOWN");
+            l10n.getString("GatewayExecutor.ERROR_UKNOWN");
     public static String ERROR_FIX_IN_PROGRESS =
-            l10n.getString("OperatorExecutor.ERROR_FIX_IN_PROGRESS");
+            l10n.getString("GatewayExecutor.ERROR_FIX_IN_PROGRESS");
     /** Message saying how many free SMS are remaining. */
     public static final String INFO_FREE_SMS_REMAINING = 
-            l10n.getString("OperatorExecutor.INFO_FREE_SMS_REMAINING") + " ";
+            l10n.getString("GatewayExecutor.INFO_FREE_SMS_REMAINING") + " ";
     /** Message saying how much credit is remaining. */
     public static final String INFO_CREDIT_REMAINING = 
-            l10n.getString("OperatorExecutor.INFO_CREDIT_REMAINING") + " ";
-    /** Message used when operator provides no info whether message was successfuly sent or not. */
+            l10n.getString("GatewayExecutor.INFO_CREDIT_REMAINING") + " ";
+    /** Message used when gateway provides no info whether message was successfuly sent or not. */
     public static final String INFO_STATUS_NOT_PROVIDED = 
-            l10n.getString("OperatorExecutor.INFO_STATUS_NOT_PROVIDED");
+            l10n.getString("GatewayExecutor.INFO_STATUS_NOT_PROVIDED");
     
-    private OperatorConnector connector = new OperatorConnector();
+    private GatewayConnector connector = new GatewayConnector();
     private String errorMessage;
-    private String operatorMessage;
+    private String gatewayMessage;
     private String referer;
     private SMS sms;
 
-    public OperatorExecutor(SMS sms) {
+    public GatewayExecutor(SMS sms) {
         this.sms = sms;
-        Operator operator = Operators.getOperator(sms.getOperator());
-        if (operator != null) {
-            ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, operator.getWebsite());
+        Gateway gateway = Gateways.getGateway(sms.getGateway());
+        if (gateway != null) {
+            ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, gateway.getWebsite());
             ERROR_UKNOWN = MessageFormat.format(ERROR_UKNOWN, Links.RUN_UPDATER,
-                    operator.getWebsite(), Links.ISSUES);
+                    gateway.getWebsite(), Links.ISSUES);
         }
     }
 
-    /** For description see {@link OperatorConnector#forgetCookie(
+    /** For description see {@link GatewayConnector#forgetCookie(
      * java.lang.String, java.lang.String, java.lang.String)}
      */
     public void forgetCookie(String name, String domain, String path) {
@@ -218,9 +218,9 @@ public class OperatorExecutor {
         setErrorMessage(errorMessage, null);
     }
 
-    /** Additional optional message from operator that is shown after message sending. */
-    public void setOperatorMessage(String operatorMessage) {
-        this.operatorMessage = operatorMessage;
+    /** Additional optional message from gateway that is shown after message sending. */
+    public void setGatewayMessage(String gatewayMessage) {
+        this.gatewayMessage = gatewayMessage;
     }
     
     /** Referer (HTTP 'Referer' header) used for all following requests.
@@ -245,9 +245,9 @@ public class OperatorExecutor {
         return errorMessage;
     }
     
-    /** Additional optional message from operator. */
-    String getOperatorMessage() {
-        return operatorMessage;
+    /** Additional optional message from gateway. */
+    String getGatewayMessage() {
+        return gatewayMessage;
     }
     
     /** Set preferred language to retrieve web content.

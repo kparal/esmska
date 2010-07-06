@@ -8,18 +8,18 @@ import esmska.utils.L10N;
 import java.net.URL;
 import javax.swing.Icon;
 
-/** Interface for telephone operator.
+/** Interface for web SMS gateway.
  *
  * @author ripper
  */
-public interface Operator extends OperatorInfo, Comparable<Operator> {
+public interface Gateway extends GatewayInfo, Comparable<Gateway> {
 
-    public static final String UNKNOWN = L10N.l10nBundle.getString("Operator.unknown");
+    public static final String UNKNOWN = L10N.l10nBundle.getString("Gateway.unknown");
 
-    /** URL of operator script (file or jar URL). */
+    /** URL of gateway script (file or jar URL). */
     URL getScript();
 
-    /** Operator logo icon.
+    /** Gateway logo icon.
      * Should be a 16x16px PNG with transparent background.
      */
     Icon getIcon();

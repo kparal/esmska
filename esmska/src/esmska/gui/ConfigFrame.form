@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
@@ -502,15 +502,15 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="operatorPanel">
+        <Container class="javax.swing.JPanel" name="gatewayPanel">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="&amp;Gateways">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.operatorPanel.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.gatewayPanel.TabConstraints.tabTitle" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/esmska/resources/operator-16.png"/>
+                  <Image iconType="3" name="/esmska/resources/gateway-16.png"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>
@@ -524,9 +524,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="useSenderIDCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="operatorFilterLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="gatewayFilterLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="operatorFilterTextField" min="-2" max="-2" attributes="0"/>
+                              <Component id="gatewayFilterTextField" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -558,8 +558,8 @@
                       <Component id="countryPrefixPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="operatorFilterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="operatorFilterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="gatewayFilterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="gatewayFilterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="useSenderIDCheckBox" min="-2" max="-2" attributes="0"/>
@@ -648,29 +648,29 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="operatorFilterTextField">
+            <Component class="javax.swing.JTextField" name="gatewayFilterTextField">
               <Properties>
                 <Property name="columns" type="int" value="13"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.operatorFilterTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.gatewayFilterTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <BindingProperties>
-                <BindingProperty name="text" source="config" sourcePath="${operatorFilter}" target="operatorFilterTextField" targetPath="text" updateStrategy="0" immediately="false">
+                <BindingProperty name="text" source="config" sourcePath="${gatewayFilter}" target="gatewayFilterTextField" targetPath="text" updateStrategy="0" immediately="false">
                   <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
                 </BindingProperty>
               </BindingProperties>
             </Component>
-            <Component class="javax.swing.JLabel" name="operatorFilterLabel">
+            <Component class="javax.swing.JLabel" name="gatewayFilterLabel">
               <Properties>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="operatorFilterTextField"/>
+                  <ComponentRef name="gatewayFilterTextField"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.operatorFilterLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.gatewayFilterLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection component="operatorFilterTextField" name="toolTipText" type="property"/>
+                  <Connection component="gatewayFilterTextField" name="toolTipText" type="property"/>
                 </Property>
               </Properties>
             </Component>
@@ -717,7 +717,7 @@
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="jLabel10" linkSize="4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="operatorComboBox" linkSize="7" max="32767" attributes="0"/>
+                                  <Component id="gatewayComboBox" linkSize="7" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel11" linkSize="4" min="-2" max="-2" attributes="0"/>
@@ -748,7 +748,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="operatorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="gatewayComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -764,7 +764,7 @@
                       <Component id="showPasswordCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="139" max="32767" attributes="0"/>
+                      <EmptySpace pref="124" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -772,12 +772,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
+            <Component class="esmska.gui.GatewayComboBox" name="gatewayComboBox">
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="operatorComboBoxItemStateChanged"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="gatewayComboBoxItemStateChanged"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="//find first operator for which we have key and select it&#xa;SortedSet&lt;String&gt; operators = new TreeSet&lt;String&gt;(Collator.getInstance());&#xa;operators.addAll(keyring.getOperatorNames());&#xa;for (String operator : operators) {&#xa;    Operator op = Operators.getOperator(operator);&#xa;    if (op != null) {&#xa;        operatorComboBox.setSelectedOperator(operator);&#xa;        break;&#xa;    }&#xa;}&#xa;operatorComboBoxItemStateChanged(null);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="//find first gateway for which we have key and select it&#xa;SortedSet&lt;String&gt; gateways = new TreeSet&lt;String&gt;(Collator.getInstance());&#xa;gateways.addAll(keyring.getGatewayNames());&#xa;for (String gateway : gateways) {&#xa;    esmska.data.Gateway op = esmska.data.Gateways.getGateway(gateway);&#xa;    if (op != null) {&#xa;        gatewayComboBox.setSelectedGateway(gateway);&#xa;        break;&#xa;    }&#xa;}&#xa;gatewayComboBoxItemStateChanged(null);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
@@ -790,13 +790,13 @@
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="operatorComboBox"/>
+                  <ComponentRef name="gatewayComboBox"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel10.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection component="operatorComboBox" name="toolTipText" type="property"/>
+                  <Connection component="gatewayComboBox" name="toolTipText" type="property"/>
                 </Property>
               </Properties>
             </Component>

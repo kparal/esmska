@@ -56,7 +56,7 @@ public class Config extends Object implements Serializable {
     private boolean startCentered = false;
     private boolean toolbarVisible = true;
     private String countryPrefix = "";
-    private String operatorFilter = "";
+    private String gatewayFilter = "";
     private boolean useProxy = false;
     private boolean sameProxy = true;
     private String httpProxy = "";
@@ -247,8 +247,8 @@ public class Config extends Object implements Serializable {
         return countryPrefix;
     }
 
-    public String getOperatorFilter() {
-        return operatorFilter;
+    public String getGatewayFilter() {
+        return gatewayFilter;
     }
 
     public boolean isUseProxy() {
@@ -425,10 +425,10 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("countryPrefix", old, countryPrefix);
     }
     
-    public void setOperatorFilter(String operatorFilter) {
-        String old = this.operatorFilter;
-        this.operatorFilter = operatorFilter;
-        changeSupport.firePropertyChange("operatorFilter", old, operatorFilter);
+    public void setGatewayFilter(String gatewayFilter) {
+        String old = this.gatewayFilter;
+        this.gatewayFilter = gatewayFilter;
+        changeSupport.firePropertyChange("gatewayFilter", old, gatewayFilter);
     }
 
     public void setUseProxy(boolean useProxy) {

@@ -42,7 +42,7 @@ import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.Icons;
 import esmska.data.Log;
-import esmska.data.Operators;
+import esmska.data.Gateways;
 import esmska.data.event.AbstractListDataListener;
 import esmska.utils.L10N;
 import java.awt.Image;
@@ -192,14 +192,14 @@ public class ImportFrame extends javax.swing.JFrame {
         }
     }
     
-    /** remove contacts without known operator */
-    private void removeInvalidOperators() {
+    /** remove contacts without known gateway */
+    private void removeInvalidGateways() {
         DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
         Object[] imported = contactListModel.toArray();
         ArrayList<Object> skipped = new ArrayList<Object>();
         for (Object impor : imported) {
             Contact c = (Contact) impor;
-            if (Operators.getOperator(c.getOperator()) == null) {
+            if (Gateways.getGateway(c.getGateway()) == null) {
                 skipped.add(c);
             }
         }
@@ -262,7 +262,7 @@ public class ImportFrame extends javax.swing.JFrame {
         jScrollPane1 = new JScrollPane();
         contactList = new JList();
         doImportLabel = new JLabel();
-        validOperatorCheckBox = new JCheckBox();
+        validGatewayCheckBox = new JCheckBox();
         forwardButton = new JButton();
         progressBar = new JProgressBar();
         backButton = new JButton();
@@ -393,7 +393,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(encodingLabel)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(problemLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         cardPanel.add(browsePanel, "browsePanel");
@@ -406,12 +406,12 @@ public class ImportFrame extends javax.swing.JFrame {
         doImportLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
         Mnemonics.setLocalizedText(doImportLabel, l10n.getString("ImportFrame.doImportLabel.text")); // NOI18N
 
-        validOperatorCheckBox.setSelected(true);
-        Mnemonics.setLocalizedText(validOperatorCheckBox, l10n.getString("ImportFrame.validOperatorCheckBox.text"));
-        validOperatorCheckBox.setToolTipText(l10n.getString("ImportFrame.validOperatorCheckBox.toolTipText")); // NOI18N
-        validOperatorCheckBox.addChangeListener(new ChangeListener() {
+        validGatewayCheckBox.setSelected(true);
+        Mnemonics.setLocalizedText(validGatewayCheckBox, l10n.getString("ImportFrame.validGatewayCheckBox.text"));
+        validGatewayCheckBox.setToolTipText(l10n.getString("ImportFrame.validGatewayCheckBox.toolTipText")); // NOI18N
+        validGatewayCheckBox.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
-                validOperatorCheckBoxStateChanged(evt);
+                validGatewayCheckBoxStateChanged(evt);
             }
         });
 
@@ -422,7 +422,7 @@ public class ImportFrame extends javax.swing.JFrame {
             .addGroup(resultsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(resultsPanelLayout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(validOperatorCheckBox)
+                    .addComponent(validGatewayCheckBox)
                     .addComponent(foundContactsLabel, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(doImportLabel))
@@ -436,7 +436,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(validOperatorCheckBox)
+                .addComponent(validGatewayCheckBox)
                 .addGap(18, 18, 18)
                 .addComponent(doImportLabel)
                 .addContainerGap())
@@ -583,9 +583,9 @@ public class ImportFrame extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_forwardButtonActionPerformed
                 
-    private void validOperatorCheckBoxStateChanged(ChangeEvent evt) {//GEN-FIRST:event_validOperatorCheckBoxStateChanged
-        if (validOperatorCheckBox.isSelected()) {
-            removeInvalidOperators();
+    private void validGatewayCheckBoxStateChanged(ChangeEvent evt) {//GEN-FIRST:event_validGatewayCheckBoxStateChanged
+        if (validGatewayCheckBox.isSelected()) {
+            removeInvalidGateways();
         } else {
             DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
             contactListModel.clear();
@@ -598,7 +598,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 logger.log(Level.SEVERE, "Problem getting new contacts", ex);
             }
         }
-    }//GEN-LAST:event_validOperatorCheckBoxStateChanged
+    }//GEN-LAST:event_validGatewayCheckBoxStateChanged
 
 private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         String file = doBrowseButton();
@@ -626,7 +626,7 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
                     contactListModel.addElement(c);
                 }
                 removeExistingContacts();
-                validOperatorCheckBoxStateChanged(null);
+                validGatewayCheckBoxStateChanged(null);
 
                 Mnemonics.setLocalizedText(forwardButton, l10n.getString("Import_"));
                 forwardButton.setIcon(new ImageIcon(
@@ -658,8 +658,8 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
             JLabel label = (JLabel) comp;
             Contact c = (Contact) value;
             String number = (c.getNumber() != null ? c.getNumber() : "");
-            String operator = (c.getOperator() != null ? c.getOperator() : "");
-            label.setText(c.getName() + " (" + number + ", " + operator + ")");
+            String gateway = (c.getGateway() != null ? c.getGateway() : "");
+            label.setText(c.getName() + " (" + number + ", " + gateway + ")");
             return label;
         }
     
@@ -691,7 +691,7 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
     private JLabel problemLabel;
     private JProgressBar progressBar;
     private JPanel resultsPanel;
-    private JCheckBox validOperatorCheckBox;
+    private JCheckBox validGatewayCheckBox;
     private JRadioButton vcardRadioButton;
     // End of variables declaration//GEN-END:variables
     

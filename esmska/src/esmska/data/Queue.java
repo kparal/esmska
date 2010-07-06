@@ -73,11 +73,11 @@ public class Queue {
     private static final Logger logger = Logger.getLogger(Queue.class.getName());
     private static final History history = History.getInstance();
 
-    /** map of [operator name;SMS[*]] */
+    /** map of [gateway name;SMS[*]] */
     private final SortedMap<String,List<SMS>> queue = Collections.synchronizedSortedMap(new TreeMap<String,List<SMS>>());
     private final AtomicBoolean paused = new AtomicBoolean();
-    //map of <operator name, current delay in seconds>
-    private final Map<String, Long> operatorDelay = Collections.synchronizedMap(new HashMap<String, Long>());
+    //map of <gateway name, current delay in seconds>
+    private final Map<String, Long> gatewayDelay = Collections.synchronizedMap(new HashMap<String, Long>());
     //every second check the queue
     private final Timer timer = new Timer(TIMER_TICK, new TimerListener());
 
@@ -106,23 +106,23 @@ public class Queue {
         return getAll(null);
     }
 
-    /** Get all SMS in the queue for specified operator.
-     * The queue is always sorted by the operator name, the messages are not sorted.
-     * @param operatorName name of the operator. May be null for any operator.
-     * @return unmodifiable list of SMS for specified operator.
+    /** Get all SMS in the queue for specified gateway.
+     * The queue is always sorted by the gateway name, the messages are not sorted.
+     * @param gatewayName name of the gateway. May be null for any gateway.
+     * @return unmodifiable list of SMS for specified gateway.
      */
-    public List<SMS> getAll(String operatorName) {
+    public List<SMS> getAll(String gatewayName) {
         List<SMS> list = new ArrayList<SMS>();
 
         synchronized(queue) {
-            if (operatorName == null) { //take all messages
+            if (gatewayName == null) { //take all messages
                 for (Collection<SMS> col : queue.values()) {
                     list.addAll(col);
                 }
-            } else if (queue.containsKey(operatorName)) { //take messages of that operator
-                list = queue.get(operatorName);
+            } else if (queue.containsKey(gatewayName)) { //take messages of that gateway
+                list = queue.get(gatewayName);
             } else {
-                //operator not found, therefore empty list
+                //gateway not found, therefore empty list
             }
         }
 
@@ -136,19 +136,19 @@ public class Queue {
         return getAllWithStatus(status, null);
     }
 
-    /** Get a collection of SMS with particular status and operator.
-     * The queue is always sorted by the operator name, the messages are not sorted.
+    /** Get a collection of SMS with particular status and gateway.
+     * The queue is always sorted by the gateway name, the messages are not sorted.
      * @param status SMS status, not null
-     * @param operatorName name of the operator of the SMS, may be null for any operator
+     * @param gatewayName name of the gateway of the SMS, may be null for any gateway
      * @return unmodifiable list of SMS with that status in the queue
      */
-    public List<SMS> getAllWithStatus(SMS.Status status, String operatorName) {
+    public List<SMS> getAllWithStatus(SMS.Status status, String gatewayName) {
         Validate.notNull(status, "status is null");
 
         List<SMS> list = new ArrayList<SMS>();
 
         synchronized(queue) {
-            if (operatorName == null) { //take every operator
+            if (gatewayName == null) { //take every gateway
                 for (Collection<SMS> col : queue.values()) {
                     for (SMS sms : col) {
                         if (sms.getStatus() == status) {
@@ -156,14 +156,14 @@ public class Queue {
                         }
                     }
                 }
-            } else if (queue.containsKey(operatorName)) { //only one operator
-                for (SMS sms : queue.get(operatorName)) {
+            } else if (queue.containsKey(gatewayName)) { //only one gateway
+                for (SMS sms : queue.get(gatewayName)) {
                     if (sms.getStatus() == status) {
                         list.add(sms);
                     }
                 }
             } else {
-                //operator not found, therefore empty list
+                //gateway not found, therefore empty list
             }
         }
 
@@ -177,18 +177,18 @@ public class Queue {
         Validate.notNull(sms);
 
         sms.setStatus(SMS.Status.WAITING);
-        String operator = sms.getOperator();
+        String gateway = sms.getGateway();
         boolean added = false;
 
         synchronized(queue) {
-            if (queue.containsKey(operator)) { //this operator was already in the queue
-                if (!queue.get(operator).contains(sms)) { //sms not already present
-                    added = queue.get(operator).add(sms);
+            if (queue.containsKey(gateway)) { //this gateway was already in the queue
+                if (!queue.get(gateway).contains(sms)) { //sms not already present
+                    added = queue.get(gateway).add(sms);
                 }
-            } else { //new operator
+            } else { //new gateway
                 List<SMS> list = new ArrayList<SMS>();
                 list.add(sms);
-                queue.put(operator, list);
+                queue.put(gateway, list);
                 added = true;
             }
         }
@@ -227,17 +227,17 @@ public class Queue {
     public boolean remove(SMS sms) {
         Validate.notNull(sms);
 
-        String operator = sms.getOperator();
+        String gateway = sms.getGateway();
         boolean removed = false;
 
         synchronized(queue) {
-            if (queue.containsKey(operator)) { //only if we have this operator
-                removed = queue.get(operator).remove(sms);
+            if (queue.containsKey(gateway)) { //only if we have this gateway
+                removed = queue.get(gateway).remove(sms);
             }
-            if (removed && queue.get(operator).size() == 0) {
-                //if there are no more sms from that operator, delete it from map
-                queue.remove(operator);
-                operatorDelay.remove(operator);
+            if (removed && queue.get(gateway).size() == 0) {
+                //if there are no more sms from that gateway, delete it from map
+                queue.remove(gateway);
+                gatewayDelay.remove(gateway);
             }
         }
 
@@ -255,7 +255,7 @@ public class Queue {
 
         synchronized(queue) {
             queue.clear();
-            operatorDelay.clear();
+            gatewayDelay.clear();
         }
 
         valuedSupport.fireEventOccured(Events.QUEUE_CLEARED, null);
@@ -268,11 +268,11 @@ public class Queue {
     public boolean contains(SMS sms) {
         Validate.notNull(sms);
 
-        String operator = sms.getOperator();
+        String gateway = sms.getGateway();
 
         synchronized(queue) {
-            if (queue.containsKey(operator)) {
-                return queue.get(operator).contains(sms);
+            if (queue.containsKey(gateway)) {
+                return queue.get(gateway).contains(sms);
             } else {
                 //nowhere in the queue
                 return false;
@@ -324,8 +324,8 @@ public class Queue {
     }
 
     /** Move SMS in the queue to another position.
-     * Queue is always sorted by operator, therefore SMS may be moved only within
-     * section of its operator.
+     * Queue is always sorted by gateway, therefore SMS may be moved only within
+     * section of its gateway.
      * @param sms sms to be moved, not null
      * @param positionDelta direction and amount of movement. Positive number moves
      * to the back of the queue, negative number moves to the front of the queue.
@@ -336,17 +336,17 @@ public class Queue {
     public void movePosition(SMS sms, int positionDelta) {
         Validate.notNull(sms, "sms is null");
 
-        String operator = sms.getOperator();
+        String gateway = sms.getGateway();
 
         synchronized(queue) {
-            if (positionDelta == 0 || !queue.containsKey(operator) ||
-                    !queue.get(operator).contains(sms)) {
+            if (positionDelta == 0 || !queue.containsKey(gateway) ||
+                    !queue.get(gateway).contains(sms)) {
                 //nothing to move
                 return;
             }
             logger.fine("Moving sms " + sms + "with delta " + positionDelta);
 
-            List<SMS> list = queue.get(operator);
+            List<SMS> list = queue.get(gateway);
             int currentPos = list.indexOf(sms);
             int newPos = currentPos + positionDelta;
 
@@ -375,27 +375,27 @@ public class Queue {
         }
     }
 
-    /** Return current delay for specified operator.
-     * @param operatorName name of the operator. May be null.
-     * @return number of milliseconds next message from the operator must wait.
-     *  If no such operator found, return 0.
+    /** Return current delay for specified gateway.
+     * @param gatewayName name of the gateway. May be null.
+     * @return number of milliseconds next message from the gateway must wait.
+     *  If no such gateway found, return 0.
      */
-    public long getOperatorDelay(String operatorName) {
+    public long getGatewayDelay(String gatewayName) {
 
-        Long del = operatorDelay.get(operatorName);
+        Long del = gatewayDelay.get(gatewayName);
         if (del != null) {
             return del;
         }
 
-        Operator operator = Operators.getOperator(operatorName);
+        Gateway gateway = Gateways.getGateway(gatewayName);
         long delay = 0;
 
-        if (operator == null) { //unknown operator
+        if (gateway == null) { //unknown gateway
             delay = 0;
-        } else if (operator.getDelayBetweenMessages() <= 0) { //operator without delay
+        } else if (gateway.getDelayBetweenMessages() <= 0) { //gateway without delay
             delay = 0;
         } else { //search in history
-            History.Record record = history.findLastRecord(operatorName);
+            History.Record record = history.findLastRecord(gatewayName);
             if (record == null) { //no previous record
                 delay = 0;
             } else { //compute the delay
@@ -409,17 +409,17 @@ public class Queue {
                     delay = 0;
                 } else {
                     //let's compute the real remaining delay
-                    delay = Math.max(operator.getDelayBetweenMessages() * 1000 - difference, 0);
+                    delay = Math.max(gateway.getDelayBetweenMessages() * 1000 - difference, 0);
                 }
             }
         }
 
-        operatorDelay.put(operatorName, delay);
+        gatewayDelay.put(gatewayName, delay);
         return delay;
     }
 
     /** Return current delay for specified sms.
-     * The delay is taking into account all previous messages from the same operator
+     * The delay is taking into account all previous messages from the same gateway
      * which are waiting to be sent. If sms is not found in the queue, it is
      * considered to be at the end of the queue.
      * @param sms sms, not null
@@ -428,15 +428,15 @@ public class Queue {
     public long getSMSDelay(SMS sms) {
         Validate.notNull(sms);
 
-        String operatorName = sms.getOperator();
-        long delay = getOperatorDelay(operatorName);
-        List<SMS> list = queue.get(operatorName);
-        if (list == null) { //no such operator in the queue
-            return delay; //therefore operator delay is sms delay
+        String gatewayName = sms.getGateway();
+        long delay = getGatewayDelay(gatewayName);
+        List<SMS> list = queue.get(gatewayName);
+        if (list == null) { //no such gateway in the queue
+            return delay; //therefore gateway delay is sms delay
         }
         int index = list.indexOf(sms);
-        Operator operator = Operators.getOperator(operatorName);
-        int opDelay = operator != null ? operator.getDelayBetweenMessages() * 1000 : 0;
+        Gateway gateway = Gateways.getGateway(gatewayName);
+        int opDelay = gateway != null ? gateway.getDelayBetweenMessages() * 1000 : 0;
         if (index >= 0) { //in the queue
             delay = delay + (index * opDelay);
         } else { //not in the queue, therefore after all sms's in the queue
@@ -455,7 +455,7 @@ public class Queue {
         sms.setStatus(SMS.Status.SENT);
         valuedSupport.fireEventOccured(Events.SMS_SENT, sms);
 
-        updateOperatorDelay(sms.getOperator());
+        updateGatewayDelay(sms.getGateway());
         remove(sms); //remove it from the queue
         timer.start();
     }
@@ -484,7 +484,7 @@ public class Queue {
         sms.setStatus(SMS.Status.WAITING);
         valuedSupport.fireEventOccured(Events.SMS_SENDING_FAILED, sms);
         
-        updateOperatorDelay(sms.getOperator());
+        updateGatewayDelay(sms.getGateway());
         timer.start();
         markIfReady(sms);
     }
@@ -506,12 +506,12 @@ public class Queue {
         ArrayList<SMS> ready = new ArrayList<SMS>();
 
         synchronized(queue) {
-            for (String operator : queue.keySet()) {
-                long delay = getOperatorDelay(operator);
+            for (String gateway : queue.keySet()) {
+                long delay = getGatewayDelay(gateway);
                 if (delay > 0) { //any new sms can't be ready
                     continue;
                 }
-                for (SMS sms : queue.get(operator)) {
+                for (SMS sms : queue.get(gateway)) {
                     long smsDelay = getSMSDelay(sms);
                     if (smsDelay > 0) {
                         break;
@@ -530,12 +530,12 @@ public class Queue {
         }
     }
 
-    /** Remove operator from delay cache and compute its delay again */
-    private void updateOperatorDelay(String operatorName) {
-        Validate.notEmpty(operatorName);
+    /** Remove gateway from delay cache and compute its delay again */
+    private void updateGatewayDelay(String gatewayName) {
+        Validate.notEmpty(gatewayName);
 
-        operatorDelay.remove(operatorName);
-        getOperatorDelay(operatorName);
+        gatewayDelay.remove(gatewayName);
+        getGatewayDelay(gatewayName);
     }
 
     /** Update the information about current message delays */
@@ -545,12 +545,12 @@ public class Queue {
             boolean timerNeeded = false;
             boolean checkSMSReady = false;
 
-            synchronized(operatorDelay) {
+            synchronized(gatewayDelay) {
             //for every delay substract one second
-                for (Iterator<Entry<String, Long>> iter = operatorDelay.entrySet().iterator(); iter.hasNext(); ) {
+                for (Iterator<Entry<String, Long>> iter = gatewayDelay.entrySet().iterator(); iter.hasNext(); ) {
                     Entry<String, Long> delay = iter.next();
                     if (!queue.containsKey(delay.getKey())) {
-                        //if there is some operator which is no longer in the queue, we don't need it anymore
+                        //if there is some gateway which is no longer in the queue, we don't need it anymore
                         iter.remove();
                         continue;
                     }
@@ -559,7 +559,7 @@ public class Queue {
                         delay.setValue(newDelay);
                         timerNeeded = true; //stil counting down for someone
                         if (delay.getValue() <= 0) {
-                            //new operator delay just dropped to 0
+                            //new gateway delay just dropped to 0
                             checkSMSReady = true;
                         }
                     }

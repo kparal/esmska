@@ -42,7 +42,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="gatewayLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="operatorComboBox" pref="311" max="32767" attributes="0"/>
+                              <Component id="gatewayComboBox" pref="311" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -81,7 +81,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="gatewayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="operatorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="gatewayComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -109,12 +109,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="esmska.gui.OperatorComboBox" name="operatorComboBox">
+    <Component class="esmska.gui.GatewayComboBox" name="gatewayComboBox">
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="operatorComboBoxItemStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="gatewayComboBoxItemStateChanged"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="operatorComboBox.addActionListener(new OperatorComboBoxActionListener());"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="gatewayComboBox.addActionListener(new GatewayComboBoxActionListener());"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JProgressBar" name="fullProgressBar">
@@ -174,13 +174,13 @@
     <Component class="javax.swing.JLabel" name="gatewayLabel">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="operatorComboBox"/>
+          <ComponentRef name="gatewayComboBox"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="esmska/resources/l10n.properties" key="SMSPanel.gatewayLabel.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection component="operatorComboBox" name="toolTipText" type="property"/>
+          <Connection component="gatewayComboBox" name="toolTipText" type="property"/>
         </Property>
       </Properties>
     </Component>

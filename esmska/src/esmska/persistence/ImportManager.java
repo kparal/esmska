@@ -19,8 +19,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import esmska.data.Contact;
 import esmska.data.SMS;
-import esmska.data.DefaultOperator;
-import esmska.data.Operator;
+import esmska.data.DefaultGateway;
+import esmska.data.Gateway;
 import esmska.data.Tuple;
 import esmska.update.VersionFile;
 import java.beans.IntrospectionException;
@@ -88,12 +88,12 @@ public class ImportManager {
             while (reader.readRecord()) {
                 String name = reader.get(0);
                 String number = reader.get(1);
-                String operator = reader.get(2);
+                String gateway = reader.get(2);
                 String text = reader.get(3);
                 String senderName = reader.get(4);
                 String senderNumber = reader.get(5);
 
-                SMS sms = new SMS(number, text, operator, name, senderNumber,
+                SMS sms = new SMS(number, text, gateway, name, senderNumber,
                         senderName);
                 queue.add(sms);
             }
@@ -122,7 +122,7 @@ public class ImportManager {
                 String dateString = reader.get(0);
                 String name = reader.get(1);
                 String number = reader.get(2);
-                String operator = reader.get(3);
+                String gateway = reader.get(3);
                 String text = reader.get(4);
                 String senderName = reader.get(5);
                 String senderNumber = reader.get(6);
@@ -131,7 +131,7 @@ public class ImportManager {
                         DateFormat.LONG, Locale.ROOT);
                 Date date = df.parse(dateString);
 
-                History.Record record = new History.Record(number, text, operator,
+                History.Record record = new History.Record(number, text, gateway,
                         name, senderNumber, senderName, date);
                 history.add(record);
             }
@@ -145,124 +145,124 @@ public class ImportManager {
         return history;
     }
 
-    /** Import all operators from jar resource
-     * @param resource jar absolute resource path where to look for operators
-     * @throws IOException When there is problem accessing operator directory or files
+    /** Import all gateways from jar resource
+     * @param resource jar absolute resource path where to look for gateways
+     * @throws IOException When there is problem accessing gateway directory or files
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
-    public static TreeSet<Operator> importOperators(String resource) throws
+    public static TreeSet<Gateway> importGateways(String resource) throws
             IOException, IntrospectionException {
-        logger.finer("Importing operators from resource: " + resource);
-        URL operatorBase = ImportManager.class.getResource(resource);
-        if (operatorBase == null || //resource doesn't exist
-                !operatorBase.getProtocol().equals("jar")) { //resource not packed in jar
-            throw new IOException("Could not find jar operator resource: " + resource);
+        logger.finer("Importing gateways from resource: " + resource);
+        URL gatewayBase = ImportManager.class.getResource(resource);
+        if (gatewayBase == null || //resource doesn't exist
+                !gatewayBase.getProtocol().equals("jar")) { //resource not packed in jar
+            throw new IOException("Could not find jar gateway resource: " + resource);
         }
-        HashSet<URL> operatorURLs = new HashSet<URL>();
+        HashSet<URL> gatewayURLs = new HashSet<URL>();
         
-        JarURLConnection con = (JarURLConnection) operatorBase.openConnection();
+        JarURLConnection con = (JarURLConnection) gatewayBase.openConnection();
         for (Enumeration entries = con.getJarFile().entries(); entries.hasMoreElements();) {
             JarEntry entry = (JarEntry) entries.nextElement();
             String name = entry.getName();
             String absoluteName = name.startsWith("/") ? name : ("/" + name);
-            if (absoluteName.startsWith(resource) && absoluteName.endsWith(".operator")) {
-                operatorURLs.add(new URL("jar:" + con.getJarFileURL() + "!/" + name));
+            if (absoluteName.startsWith(resource) && absoluteName.endsWith(".gateway")) {
+                gatewayURLs.add(new URL("jar:" + con.getJarFileURL() + "!/" + name));
             }
         }
 
-        return importOperators(operatorURLs);
+        return importGateways(gatewayURLs);
     }
 
-    /** Import all operators from directory
-     * @param directory directory where to look for operators
-     * @throws IOException When there is problem accessing operator directory or files
+    /** Import all gateways from directory
+     * @param directory directory where to look for gateways
+     * @throws IOException When there is problem accessing gateway directory or files
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
-    public static TreeSet<Operator> importOperators(File directory) throws
+    public static TreeSet<Gateway> importGateways(File directory) throws
             IOException, IntrospectionException {
-        logger.finer("Importing operators from directory: " + directory.getAbsolutePath());
+        logger.finer("Importing gateways from directory: " + directory.getAbsolutePath());
         if (!directory.canRead() || !directory.isDirectory()) {
-            throw new IOException("Invalid operator directory: " + directory.getAbsolutePath());
+            throw new IOException("Invalid gateway directory: " + directory.getAbsolutePath());
         }
-        HashSet<URL> operatorURLs = new HashSet<URL>();
+        HashSet<URL> gatewayURLs = new HashSet<URL>();
         
         File[] files = directory.listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {
-                return pathname.getAbsolutePath().endsWith(".operator") && pathname.canRead();
+                return pathname.getAbsolutePath().endsWith(".gateway") && pathname.canRead();
             }
         });
 
         for (File f : files) {
-            operatorURLs.add(f.toURI().toURL());
+            gatewayURLs.add(f.toURI().toURL());
         }
 
-        return importOperators(operatorURLs);
+        return importGateways(gatewayURLs);
     }
 
-    /** Get set of operators from set of operator URLs
-     * @param operatorURLs set of operator URLs (file or jar URLs)
-     * @return set of operators
+    /** Get set of gateways from set of gateway URLs
+     * @param gatewayURLs set of gateway URLs (file or jar URLs)
+     * @return set of gateways
      * @throws java.beans.IntrospectionException When current JRE does not support JavaScript execution
      */
-    private static TreeSet<Operator> importOperators(Set<URL> operatorURLs) throws
+    private static TreeSet<Gateway> importGateways(Set<URL> gatewayURLs) throws
             IntrospectionException {
-        logger.finer("Importing operators from set of " + operatorURLs.size() + " URLs");
-        TreeSet<Operator> operators = new TreeSet<Operator>();
+        logger.finer("Importing gateways from set of " + gatewayURLs.size() + " URLs");
+        TreeSet<Gateway> gateways = new TreeSet<Gateway>();
 
-        for (URL operatorURL : operatorURLs) {
+        for (URL gatewayURL : gatewayURLs) {
             try {
-                DefaultOperator operator = new DefaultOperator(operatorURL);
-                //check that this operator can be used in this program
+                DefaultGateway gateway = new DefaultGateway(gatewayURL);
+                //check that this gateway can be used in this program
                 if (Config.compareProgramVersions(Config.getLatestVersion(),
-                        operator.getMinProgramVersion()) < 0) {
-                    logger.info("Operator " + operator.getName() +
+                        gateway.getMinProgramVersion()) < 0) {
+                    logger.info("Gateway " + gateway.getName() +
                             " requires program of version at least " +
-                            operator.getMinProgramVersion() + ", skipping.");
+                            gateway.getMinProgramVersion() + ", skipping.");
                     continue;
                 }
-                //check that some older version of the same operator is not
-                //already present (can happen when renaming operator file,
+                //check that some older version of the same gateway is not
+                //already present (can happen when renaming gateway file,
                 //see http://code.google.com/p/esmska/issues/detail?id=235)
-                if (operators.contains(operator)) {
-                    for (Iterator<Operator> it = operators.iterator(); it.hasNext(); ) {
-                        Operator op = it.next();
-                        if (op.equals(operator) && 
-                                op.getVersion().compareTo(operator.getVersion()) < 0) {
+                if (gateways.contains(gateway)) {
+                    for (Iterator<Gateway> it = gateways.iterator(); it.hasNext(); ) {
+                        Gateway op = it.next();
+                        if (op.equals(gateway) &&
+                                op.getVersion().compareTo(gateway.getVersion()) < 0) {
                             it.remove();
                         }
                     }
                 }
-                operators.add(operator);
+                gateways.add(gateway);
             } catch (IOException ex) {
-                logger.log(Level.WARNING, "Problem accessing operator resource: " +
-                        operatorURL.toExternalForm(), ex);
+                logger.log(Level.WARNING, "Problem accessing gateway resource: " +
+                        gatewayURL.toExternalForm(), ex);
             } catch (IntrospectionException ex) {
                 throw ex;
             } catch (Exception ex) {
-                logger.log(Level.WARNING, "Ivalid operator resource: " +
-                        operatorURL.toExternalForm(), ex);
+                logger.log(Level.WARNING, "Ivalid gateway resource: " +
+                        gatewayURL.toExternalForm(), ex);
             }
         }
 
-        logger.finer("Imported " + operators.size() + " operators");
-        return operators;
+        logger.finer("Imported " + gateways.size() + " gateways");
+        return gateways;
     }
 
-    /** Get set of deprecated operators from a file
-     * @param file xml containing description of deprecated operators
-     * @return set of deprecated operators
+    /** Get set of deprecated gateways from a file
+     * @param file xml containing description of deprecated gateways
+     * @return set of deprecated gateways
      * @throws IOException problem accessing the file
      * @throws SAXException problem parsing the file
      */
-    public static HashSet<DeprecatedOperator> importDeprecatedOperators(File file)
+    public static HashSet<DeprecatedGateway> importDeprecatedGateways(File file)
             throws IOException, SAXException {
-        logger.finer("Importing deprecated operators from file: " + file.getAbsolutePath());
+        logger.finer("Importing deprecated gateways from file: " + file.getAbsolutePath());
         if (!file.canRead() || !file.isFile()) {
-            throw new IOException("Invalid deprecated operator file: " + file.getAbsolutePath());
+            throw new IOException("Invalid deprecated gateway file: " + file.getAbsolutePath());
         }
 
-        HashSet<DeprecatedOperator> deprecated = new HashSet<DeprecatedOperator>();
+        HashSet<DeprecatedGateway> deprecated = new HashSet<DeprecatedGateway>();
 
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -272,14 +272,14 @@ public class ImportManager {
 
             Document doc = db.parse(file);
 
-            NodeList operators = doc.getElementsByTagName(VersionFile.TAG_DEPRECATED_OPERATOR);
-            for (int i = 0; i < operators.getLength(); i++) {
-                Node operator = operators.item(i);
-                String name = xpath.evaluate(VersionFile.TAG_NAME + "/text()", operator);
-                String version = xpath.evaluate(VersionFile.TAG_VERSION + "/text()", operator);
-                String reason = xpath.evaluate(VersionFile.TAG_REASON + "/text()", operator);
+            NodeList gateways = doc.getElementsByTagName(VersionFile.TAG_DEPRECATED_GATEWAY);
+            for (int i = 0; i < gateways.getLength(); i++) {
+                Node gateway = gateways.item(i);
+                String name = xpath.evaluate(VersionFile.TAG_NAME + "/text()", gateway);
+                String version = xpath.evaluate(VersionFile.TAG_VERSION + "/text()", gateway);
+                String reason = xpath.evaluate(VersionFile.TAG_REASON + "/text()", gateway);
 
-                DeprecatedOperator depr = new DeprecatedOperator(name, version, reason);
+                DeprecatedGateway depr = new DeprecatedGateway(name, version, reason);
                 deprecated.add(depr);
             }
         } catch (ParserConfigurationException ex) {
@@ -307,12 +307,12 @@ public class ImportManager {
             reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
             reader.setUseComments(true);
             while (reader.readRecord()) {
-                String operatorName = reader.get(0);
+                String gatewayName = reader.get(0);
                 String login = reader.get(1);
                 String password = Keyring.decrypt(reader.get(2));
 
                 Tuple<String, String> key = new Tuple<String, String>(login, password);
-                keyring.putKey(operatorName, key);
+                keyring.putKey(gatewayName, key);
             }
         } finally {
             if (reader != null) {

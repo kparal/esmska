@@ -128,16 +128,16 @@ public class Actions {
         return new QueuePauseAction(showName);
     }
 
-    /** Get action to automatically select best suitable operator in this list
+    /** Get action to automatically select best suitable gateway in this list
      * according to number filled in specified text component.
      *
-     * @param operatorComboBox Operator combobox which to adjust to suggested operator
+     * @param gatewayComboBox Gateway combobox which to adjust to suggested gateway
      * @param numberComponent Text component containing phone number
-     * @return action to automatically select best suitable operator in this list
+     * @return action to automatically select best suitable gateway in this list
      * according to number filled in specified text component
      */
-    public static Action getSuggestOperatorAction(OperatorComboBox operatorComboBox, JTextComponent numberComponent) {
-        return new SuggestOperatorAction(operatorComboBox, numberComponent);
+    public static Action getSuggestGatewayAction(GatewayComboBox gatewayComboBox, JTextComponent numberComponent) {
+        return new SuggestGatewayAction(gatewayComboBox, numberComponent);
     }
 
     /** Browse specific URL with a web browser */
@@ -297,7 +297,7 @@ public class Actions {
                         return;
                     }
 
-                    SMS sms = new SMS(record.getNumber(), record.getText(), record.getOperator());
+                    SMS sms = new SMS(record.getNumber(), record.getText(), record.getGateway());
                     sms.setName(record.getName());
 
                     Context.mainFrame.getContactPanel().clearSelection();
@@ -406,28 +406,28 @@ public class Actions {
         }
     }
 
-    /** Select suggested operator in the combobox */
-    private static class SuggestOperatorAction extends AbstractAction {
-        private OperatorComboBox operatorComboBox;
+    /** Select suggested gateway in the combobox */
+    private static class SuggestGatewayAction extends AbstractAction {
+        private GatewayComboBox gatewayComboBox;
         private JTextComponent numberComponent;
 
-        public SuggestOperatorAction(OperatorComboBox operatorComboBox, JTextComponent numberComponent) {
+        public SuggestGatewayAction(GatewayComboBox gatewayComboBox, JTextComponent numberComponent) {
             L10N.setLocalizedText(this, l10n.getString("Suggest_"));
-            this.putValue(SHORT_DESCRIPTION, l10n.getString("OperatorComboBox.Choose_suitable_gateway_for_provided_number"));
+            this.putValue(SHORT_DESCRIPTION, l10n.getString("GatewayComboBox.Choose_suitable_gateway_for_provided_number"));
 
-            if (operatorComboBox == null || numberComponent == null) {
+            if (gatewayComboBox == null || numberComponent == null) {
                 throw new IllegalArgumentException("Arguments cant be null");
             }
 
-            this.operatorComboBox = operatorComboBox;
+            this.gatewayComboBox = gatewayComboBox;
             this.numberComponent = numberComponent;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             String number = numberComponent.getText();
-            operatorComboBox.selectSuggestedOperator(number);
-            operatorComboBox.requestFocusInWindow();
+            gatewayComboBox.selectSuggestedGateway(number);
+            gatewayComboBox.requestFocusInWindow();
         }
     }
 

@@ -6,8 +6,8 @@ package esmska.transfer;
 
 import esmska.data.Config;
 import esmska.data.Keyring;
-import esmska.data.Operator;
-import esmska.data.Operators;
+import esmska.data.Gateway;
+import esmska.data.Gateways;
 import esmska.data.SMS;
 import esmska.data.Tuple;
 import esmska.utils.L10N;
@@ -26,20 +26,20 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-/** Class that takes care of parsing operator script files for extracting 
- * operator info and sending messages.
+/** Class that takes care of parsing gateway script files for extracting
+ * gateway info and sending messages.
  * 
  * @author ripper
  */
-public class OperatorInterpreter {
+public class GatewayInterpreter {
 
-    private static final Logger logger = Logger.getLogger(OperatorInterpreter.class.getName());
+    private static final Logger logger = Logger.getLogger(GatewayInterpreter.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final ScriptEngineManager manager = new ScriptEngineManager();
     private static final Keyring keyring = Keyring.getInstance();
     private static final Config config = Config.getInstance();
-    private Map<OperatorVariable, String> variables;
-    private OperatorExecutor executor;
+    private Map<GatewayVariable, String> variables;
+    private GatewayExecutor executor;
     private ScriptEngine engine;
     private Invocable invocable;
     
@@ -53,7 +53,7 @@ public class OperatorInterpreter {
             throw new IllegalStateException("JavaScript execution not supported");
         }
         if (variables == null) {
-             variables = new HashMap<OperatorVariable, String>();
+             variables = new HashMap<GatewayVariable, String>();
         }
     }
     
@@ -62,25 +62,25 @@ public class OperatorInterpreter {
      * @return whether the message was sent successfully
      */
     public boolean sendMessage(SMS sms) {
-        Operator operator = Operators.getOperator(sms.getOperator());
+        Gateway gateway = Gateways.getGateway(sms.getGateway());
         this.variables = extractVariables(sms);
 
-        logger.fine("Sending SMS to: " + operator);
+        logger.fine("Sending SMS to: " + gateway);
         init();
-        executor = new OperatorExecutor(sms);
+        executor = new GatewayExecutor(sms);
         
-        if (operator == null) {
-            executor.setErrorMessage(l10n.getString("OperatorInterpreter.unknown_operator"));
+        if (gateway == null) {
+            executor.setErrorMessage(l10n.getString("GatewayInterpreter.unknown_gateway"));
             return false;
         }
         
         Reader reader = null;
         boolean sentOk = false;
         try {
-            reader = new InputStreamReader(operator.getScript().openStream(), "UTF-8");
+            reader = new InputStreamReader(gateway.getScript().openStream(), "UTF-8");
             
             //set preferred language
-            String language = getPreferredLanguage(operator);
+            String language = getPreferredLanguage(gateway);
             executor.setPreferredLanguage(language);
             
             //forward variables to the script and evaluate it
@@ -91,14 +91,14 @@ public class OperatorInterpreter {
             sentOk = (Boolean) invocable.invokeFunction("send", new Object[0]);
             logger.fine("SMS sent ok: " + sentOk);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, "Error executing operator script file " + operator, ex);
-            executor.setErrorMessage(OperatorExecutor.ERROR_UKNOWN);
+            logger.log(Level.SEVERE, "Error executing gateway script file " + gateway, ex);
+            executor.setErrorMessage(GatewayExecutor.ERROR_UKNOWN);
             return false;
         } finally {
             try {
                 reader.close();
             } catch (IOException ex) {
-                logger.log(Level.SEVERE, "Error closing operator script file " + operator, ex);
+                logger.log(Level.SEVERE, "Error closing gateway script file " + gateway, ex);
             }
         }
 
@@ -106,21 +106,21 @@ public class OperatorInterpreter {
     }
 
     /** Extract variables from SMS to a map */
-    private static HashMap<OperatorVariable,String> extractVariables(SMS sms) {
-        HashMap<OperatorVariable,String> map = new HashMap<OperatorVariable, String>();
-        map.put(OperatorVariable.NUMBER, sms.getNumber());
-        map.put(OperatorVariable.MESSAGE, sms.getText());
-        map.put(OperatorVariable.SENDERNAME, sms.getSenderName());
-        map.put(OperatorVariable.SENDERNUMBER, sms.getSenderNumber());
+    private static HashMap<GatewayVariable,String> extractVariables(SMS sms) {
+        HashMap<GatewayVariable,String> map = new HashMap<GatewayVariable, String>();
+        map.put(GatewayVariable.NUMBER, sms.getNumber());
+        map.put(GatewayVariable.MESSAGE, sms.getText());
+        map.put(GatewayVariable.SENDERNAME, sms.getSenderName());
+        map.put(GatewayVariable.SENDERNUMBER, sms.getSenderNumber());
 
-        Tuple<String, String> key = keyring.getKey(sms.getOperator());
+        Tuple<String, String> key = keyring.getKey(sms.getGateway());
         if (key != null) {
-            map.put(OperatorVariable.LOGIN, key.get1());
-            map.put(OperatorVariable.PASSWORD, key.get2());
+            map.put(GatewayVariable.LOGIN, key.get1());
+            map.put(GatewayVariable.PASSWORD, key.get2());
         }
 
         if (config.isDemandDeliveryReport()) {
-            map.put(OperatorVariable.DELIVERY_REPORT, "true");
+            map.put(GatewayVariable.DELIVERY_REPORT, "true");
         }
 
         return map;
@@ -130,7 +130,7 @@ public class OperatorInterpreter {
      * All variable values are transformed to the x-www-form-urlencoded format.
      */
     private void forwardVariables() {
-        for (OperatorVariable var : OperatorVariable.values()) {
+        for (GatewayVariable var : GatewayVariable.values()) {
             String value = variables.get(var);
             engine.put(var.toString(), value != null ? value : "");
         }
@@ -139,11 +139,11 @@ public class OperatorInterpreter {
     }
     
     /** Compute preffered language to retrieve web content based on user default
-     * language and set of supported languages by operator script.
+     * language and set of supported languages by gateway script.
      * @return two-letter language code as defined in ISO 639-1
      */
-    private String getPreferredLanguage(Operator operator) {
-        List<String> languages = Arrays.asList(operator.getSupportedLanguages());
+    private String getPreferredLanguage(Gateway gateway) {
+        List<String> languages = Arrays.asList(gateway.getSupportedLanguages());
         String defLang = Locale.getDefault().getLanguage();
         if (languages.isEmpty() || languages.contains(defLang)) {
             return defLang;
@@ -162,13 +162,13 @@ public class OperatorInterpreter {
         return executor.getErrorMessage();
     }
     
-    /** Get additional message from operator. May be null.
+    /** Get additional message from gateway. May be null.
      * @throws IllegalStateException when called before sending any sms
      */
-    public String getOperatorMessage() {
+    public String getGatewayMessage() {
         if (executor == null) {
-            throw new IllegalStateException("Getting operator message before even sending the very sms");
+            throw new IllegalStateException("Getting gateway message before even sending the very sms");
         }
-        return executor.getOperatorMessage();
+        return executor.getGatewayMessage();
     }
 }

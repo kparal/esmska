@@ -34,10 +34,10 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import esmska.data.Icons;
-import esmska.data.Operators;
+import esmska.data.Gateways;
 import esmska.data.Queue;
 import esmska.data.SMS;
-import esmska.data.Operator;
+import esmska.data.Gateway;
 import esmska.data.event.AbstractListDataListener;
 import esmska.data.event.ValuedEventSupport;
 import esmska.utils.L10N;
@@ -249,7 +249,7 @@ public class QueuePanel extends javax.swing.JPanel {
         
         SMS sms = (SMS) queueList.getSelectedValue();
         if (sms != null && size == 1) {
-            List<SMS> list = queue.getAll(sms.getOperator());
+            List<SMS> list = queue.getAll(sms.getGateway());
             int index = list.indexOf(sms);
             smsUpAction.setEnabled(index != 0);
             smsDownAction.setEnabled(index < list.size() - 1);
@@ -466,9 +466,9 @@ public class QueuePanel extends javax.swing.JPanel {
             delayLabel.setForeground(label.getForeground());
             delayLabel.setBackground(label.getBackground());
             panel.setBackground(label.getBackground());
-            //add operator logo
-            Operator operator = Operators.getOperator(sms.getOperator());
-            label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
+            //add gateway logo
+            Gateway gateway = Gateways.getGateway(sms.getGateway());
+            label.setIcon(gateway != null ? gateway.getIcon() : Icons.GATEWAY_BLANK);
             //set tooltip
             String text = WordUtils.wrap(sms.getText(), 50, null, true);
             text = MiscUtils.escapeHtml(text);
@@ -476,7 +476,7 @@ public class QueuePanel extends javax.swing.JPanel {
             String tooltip = "<html><table><tr><td><img src=\"" + messageIconURI +
                     "\"></td><td valign=top><b>" + label.getText() + "</b><br>" +
                     (StringUtils.isEmpty(sms.getName())?"":CountryPrefix.stripCountryPrefix(sms.getNumber())+", ") +
-                    sms.getOperator() + "<br><br>" + text +
+                    sms.getGateway() + "<br><br>" + text +
                     "</td></tr></table></html>";
             panel.setToolTipText(tooltip);
             //set delay label
@@ -486,7 +486,7 @@ public class QueuePanel extends javax.swing.JPanel {
             } else {
                 delayLabel.setIcon(null);
                 long delay = queue.getSMSDelay(sms);
-                delayLabel.setText(Operators.convertDelayToHumanString(delay, true));
+                delayLabel.setText(Gateways.convertDelayToHumanString(delay, true));
             }
             //add to panel
             panel.add(label, BorderLayout.CENTER);

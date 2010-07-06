@@ -64,7 +64,7 @@ public class ExportManager {
             writer.writeRecord(new String[] {
                 contact.getName(),
                 contact.getNumber(),
-                contact.getOperator()
+                contact.getGateway()
             });
         }
         writer.flush();
@@ -115,7 +115,7 @@ public class ExportManager {
             writer.writeRecord(new String[] {
                 sms.getName(),
                 sms.getNumber(),
-                sms.getOperator(),
+                sms.getGateway(),
                 sms.getText(),
                 sms.getSenderName(),
                 sms.getSenderNumber()
@@ -143,7 +143,7 @@ public class ExportManager {
                 df.format(record.getDate()),
                 record.getName(),
                 record.getNumber(),
-                record.getOperator(),
+                record.getGateway(),
                 record.getText(),
                 record.getSenderName(),
                 record.getSenderNumber()
@@ -168,12 +168,12 @@ public class ExportManager {
         CsvWriter writer = new CsvWriter(out, ',', Charset.forName("UTF-8"));
 
         writer.writeComment(l10n.getString("ExportManager.login"));
-        for (String operatorName : keyring.getOperatorNames()) {
-            Tuple<String, String> key = keyring.getKey(operatorName);
+        for (String gatewayName : keyring.getGatewayNames()) {
+            Tuple<String, String> key = keyring.getKey(gatewayName);
             String login = key.get1();
             String password = Keyring.encrypt(key.get2());
             writer.writeRecord(new String[] {
-                operatorName,
+                gatewayName,
                 login,
                 password
             });
@@ -181,16 +181,16 @@ public class ExportManager {
         writer.flush();
     }
 
-    /** Export operator script and icon
+    /** Export gateway script and icon
      *
-     * @param scriptContents operator script contents, not null nor empty
-     * @param icon operator icon, may be null
-     * @param scriptOut output stream for operator script, not null
-     * @param iconOut output stream for operator icon, mustn't be null
+     * @param scriptContents gateway script contents, not null nor empty
+     * @param icon gateway icon, may be null
+     * @param scriptOut output stream for gateway script, not null
+     * @param iconOut output stream for gateway icon, mustn't be null
      * if <code>icon</code> is not null
      * @throws java.io.IOException if there was some problem with saving data
      */
-    public static void exportOperator(String scriptContents, byte[] icon, OutputStream scriptOut, OutputStream iconOut)
+    public static void exportGateway(String scriptContents, byte[] icon, OutputStream scriptOut, OutputStream iconOut)
             throws IOException {
         Validate.notEmpty(scriptContents);
         Validate.notNull(scriptOut);
@@ -198,7 +198,7 @@ public class ExportManager {
             Validate.notNull(iconOut);
         }
 
-        logger.finer("Exporting operator");
+        logger.finer("Exporting gateway");
 
         IOUtils.write(scriptContents, scriptOut, "UTF-8");
         scriptOut.flush();

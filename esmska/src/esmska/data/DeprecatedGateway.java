@@ -5,24 +5,24 @@ import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-/** Class describing deprecated operator gateway.
+/** Class describing deprecated gateway.
  *
  * @author ripper
  */
-public class DeprecatedOperator {
+public class DeprecatedGateway {
     private final String name;
     private final String version;
     private final String reason;
 
-    /** Create new description of deprecated operator.
+    /** Create new description of deprecated gateway.
      *
-     * @param name name of the deprecated operator. May not be null nor empty.
-     * @param version version of the deprecated operator.
-     * This means all operators of the same or older version are deprecated.
+     * @param name name of the deprecated gateway. May not be null nor empty.
+     * @param version version of the deprecated gateway.
+     * This means all gateways of the same or older version are deprecated.
      * Newer ones are not deprecated. May not be null nor empty.
-     * @param reason reason why this operator was deprecated. May be null.
+     * @param reason reason why this gateway was deprecated. May be null.
      */
-    public DeprecatedOperator(String name, String version, String reason) {
+    public DeprecatedGateway(String name, String version, String reason) {
         Validate.notEmpty(name);
         Validate.notEmpty(version);
         this.name = name;
@@ -30,12 +30,12 @@ public class DeprecatedOperator {
         this.reason = reason;
     }
 
-    /** Name of the deprecated operator. Never null nor empty. */
+    /** Name of the deprecated gateway. Never null nor empty. */
     public String getName() {
         return name;
     }
 
-    /** Version of the deprecated operator. This means all operators of the same
+    /** Version of the deprecated gateway. This means all gateways of the same
      * or older version are deprecated. Newer ones are not deprecated. Never
      * null nor empty.
      */
@@ -43,7 +43,7 @@ public class DeprecatedOperator {
         return version;
     }
 
-    /** Reason why this operator was deprecated. May be null. */
+    /** Reason why this gateway was deprecated. May be null. */
     public String getReason() {
         return reason;
     }
@@ -53,10 +53,10 @@ public class DeprecatedOperator {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof DeprecatedOperator)) {
+        if (!(obj instanceof DeprecatedGateway)) {
             return false;
         }
-        DeprecatedOperator d = (DeprecatedOperator) obj;
+        DeprecatedGateway d = (DeprecatedGateway) obj;
 
         return new EqualsBuilder().append(name, d.name).append(version, d.version).
                 append(reason, d.reason).isEquals();

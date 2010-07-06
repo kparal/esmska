@@ -31,13 +31,13 @@ import org.apache.commons.io.FileUtils;
 import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Contacts;
-import esmska.data.DeprecatedOperator;
+import esmska.data.DeprecatedGateway;
 import esmska.data.History;
 import esmska.data.Keyring;
-import esmska.data.Operators;
+import esmska.data.Gateways;
 import esmska.data.Queue;
 import esmska.data.SMS;
-import esmska.data.Operator;
+import esmska.data.Gateway;
 import esmska.integration.IntegrationAdapter;
 import esmska.utils.RuntimeUtils;
 import java.io.FilenameFilter;
@@ -58,7 +58,7 @@ public class PersistenceManager {
     private static PersistenceManager instance;
     
     private static final String PROGRAM_DIRNAME = "esmska";
-    private static final String OPERATOR_DIRNAME = "operators";
+    private static final String GATEWAY_DIRNAME = "gateways";
     private static final String BACKUP_DIRNAME = "backups";
     private static final String CONFIG_FILENAME = "settings.xml";
     private static final String GLOBAL_CONFIG_FILENAME = "esmska.conf";
@@ -69,7 +69,7 @@ public class PersistenceManager {
     private static final String LOCK_FILENAME = "running.lock";
     private static final String LOG_FILENAME = "console.log";
     private static final String DEPRECATED_GWS_FILENAME = "deprecated.xml";
-    private static final String OPERATOR_RESOURCE = "/esmska/operators/scripts";
+    private static final String GATEWAY_RESOURCE = "/esmska/gateways/scripts";
     
     private static File configDir =
             new File(System.getProperty("user.home") + File.separator + ".config",
@@ -78,8 +78,8 @@ public class PersistenceManager {
             new File(System.getProperty("user.home") + File.separator + ".local" +
             File.separator + "share", PROGRAM_DIRNAME);
 
-    private static File globalOperatorDir = new File(OPERATOR_DIRNAME);
-    private static File localOperatorDir = new File(dataDir, OPERATOR_DIRNAME);
+    private static File globalGatewayDir = new File(GATEWAY_DIRNAME);
+    private static File localGatewayDir = new File(dataDir, GATEWAY_DIRNAME);
     private static File backupDir = new File(configDir, BACKUP_DIRNAME);
     private static File configFile = new File(configDir, CONFIG_FILENAME);
     private static File globalConfigFile = new File(GLOBAL_CONFIG_FILENAME);
@@ -89,7 +89,7 @@ public class PersistenceManager {
     private static File keyringFile = new File(configDir, KEYRING_FILENAME);
     private static File lockFile = new File(configDir, LOCK_FILENAME);
     private static File logFile = new File(configDir, LOG_FILENAME);
-    private static File deprecatedGWsFile = new File(globalOperatorDir, DEPRECATED_GWS_FILENAME);
+    private static File deprecatedGWsFile = new File(globalGatewayDir, DEPRECATED_GWS_FILENAME);
     
     private static boolean customPathSet;
     private FileLock lock;
@@ -127,9 +127,9 @@ public class PersistenceManager {
         if (!(canWrite(dataDir) && dataDir.canExecute())) {
             throw new IOException("Can't write or execute the data dir '" + dataDir.getAbsolutePath() + "'");
         }
-        //create local operators dir
-        if (!localOperatorDir.exists() && !localOperatorDir.mkdirs()) {
-            throw new IOException("Can't create local operator dir '" + localOperatorDir.getAbsolutePath() + "'");
+        //create local gateways dir
+        if (!localGatewayDir.exists() && !localGatewayDir.mkdirs()) {
+            throw new IOException("Can't create local gateway dir '" + localGatewayDir.getAbsolutePath() + "'");
         }
         //create backup dir
         if (!backupDir.exists() && !backupDir.mkdirs()) {
@@ -168,7 +168,7 @@ public class PersistenceManager {
         logger.fine("Setting new data dir path: " + path);
 
         dataDir = new File(path);
-        localOperatorDir = new File(dataDir, OPERATOR_DIRNAME);
+        localGatewayDir = new File(dataDir, GATEWAY_DIRNAME);
     }
 
     /** Get data directory */
@@ -357,113 +357,113 @@ public class PersistenceManager {
         }
     }
     
-    /** Load operators
-     * @throws IOException When there is problem accessing operator directory or files
+    /** Load gateways
+     * @throws IOException When there is problem accessing gateway directory or files
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      * @throws SAXException When related XML files are not valid
      */
-    public void loadOperators() throws IOException, IntrospectionException, SAXException {
-        logger.fine("Loading operators...");
-        ArrayList<Operator> globalOperators = new ArrayList<Operator>();
-        TreeSet<Operator> localOperators = new TreeSet<Operator>();
-        HashSet<DeprecatedOperator> deprecatedOperators = new HashSet<DeprecatedOperator>();
-        //global operators
-        if (globalOperatorDir.exists()) {
-            globalOperators = new ArrayList<Operator>(ImportManager.importOperators(globalOperatorDir));
-        } else if (PersistenceManager.class.getResource(OPERATOR_RESOURCE) != null) {
-            globalOperators = new ArrayList<Operator>(ImportManager.importOperators(OPERATOR_RESOURCE));
+    public void loadGateways() throws IOException, IntrospectionException, SAXException {
+        logger.fine("Loading gateways...");
+        ArrayList<Gateway> globalGateways = new ArrayList<Gateway>();
+        TreeSet<Gateway> localGateways = new TreeSet<Gateway>();
+        HashSet<DeprecatedGateway> deprecatedGateways = new HashSet<DeprecatedGateway>();
+        //global gateways
+        if (globalGatewayDir.exists()) {
+            globalGateways = new ArrayList<Gateway>(ImportManager.importGateways(globalGatewayDir));
+        } else if (PersistenceManager.class.getResource(GATEWAY_RESOURCE) != null) {
+            globalGateways = new ArrayList<Gateway>(ImportManager.importGateways(GATEWAY_RESOURCE));
         } else {
-            throw new IOException("Could not find operator directory '" +
-                    globalOperatorDir.getAbsolutePath() + "' nor jar operator resource '" +
-                    OPERATOR_RESOURCE + "'");
+            throw new IOException("Could not find gateway directory '" +
+                    globalGatewayDir.getAbsolutePath() + "' nor jar gateway resource '" +
+                    GATEWAY_RESOURCE + "'");
         }
-        //local operators
-        if (localOperatorDir.exists()) {
-            localOperators = ImportManager.importOperators(localOperatorDir);
+        //local gateways
+        if (localGatewayDir.exists()) {
+            localGateways = ImportManager.importGateways(localGatewayDir);
         }
-        //deprecated operators
+        //deprecated gateways
         if (deprecatedGWsFile.canRead()) {
-            deprecatedOperators = ImportManager.importDeprecatedOperators(deprecatedGWsFile);
+            deprecatedGateways = ImportManager.importDeprecatedGateways(deprecatedGWsFile);
         } else if (!RuntimeUtils.isRunAsWebStart()) {
             logger.warning("Can't find list of deprecated gateways: " +
                     deprecatedGWsFile.getAbsolutePath());
         }
-        //filter out deprecated operators
-        for (DeprecatedOperator deprecated : deprecatedOperators) {
-            for (Iterator<Operator> it = globalOperators.iterator(); it.hasNext(); ) {
-                Operator op = it.next();
+        //filter out deprecated gateways
+        for (DeprecatedGateway deprecated : deprecatedGateways) {
+            for (Iterator<Gateway> it = globalGateways.iterator(); it.hasNext(); ) {
+                Gateway op = it.next();
                 if (deprecated.getName().equals(op.getName()) &&
                         deprecated.getVersion().compareTo(op.getVersion()) >= 0) {
-                    logger.finer("Global operator " + op.getName() + " is deprecated, skipping.");
+                    logger.finer("Global gateway " + op.getName() + " is deprecated, skipping.");
                     it.remove();
                 }
             }
-            for (Iterator<Operator> it = localOperators.iterator(); it.hasNext(); ) {
-                Operator op = it.next();
+            for (Iterator<Gateway> it = localGateways.iterator(); it.hasNext(); ) {
+                Gateway op = it.next();
                 if (deprecated.getName().equals(op.getName()) &&
                         deprecated.getVersion().compareTo(op.getVersion()) >= 0) {
-                    //delete deprecated local operator
-                    logger.finer("Local operator " + op.getName() + " is deprecated, deleting...");
+                    //delete deprecated local gateway
+                    logger.finer("Local gateway " + op.getName() + " is deprecated, deleting...");
                     it.remove();
                     File opFile = null;
                     try {
                         opFile = new File(op.getScript().toURI());
-                        File opIcon = new File(opFile.getAbsolutePath().replaceFirst("\\.operator$", ".png"));
+                        File opIcon = new File(opFile.getAbsolutePath().replaceFirst("\\.gateway$", ".png"));
                         opFile.delete();
                         FileUtils.deleteQuietly(opIcon); //icon may not be present
                     } catch (Exception ex) {
-                        logger.log(Level.WARNING, "Failed to delete deprecated local operator " +
+                        logger.log(Level.WARNING, "Failed to delete deprecated local gateway " +
                                 op.getName() + " (" + opFile + ")", ex);
                     }
                 }
             }
         }
         //replace old global versions with new local ones
-        for (Operator localOp : localOperators) {
-            int index = globalOperators.indexOf(localOp);
+        for (Gateway localOp : localGateways) {
+            int index = globalGateways.indexOf(localOp);
             if (index >= 0) {
-                Operator globalOp = globalOperators.get(index);
+                Gateway globalOp = globalGateways.get(index);
                 if (localOp.getVersion().compareTo(globalOp.getVersion()) > 0) {
-                    globalOperators.set(index, localOp);
-                    logger.finer("Local operator " + localOp.getName() + " is newer, replacing global one.");
+                    globalGateways.set(index, localOp);
+                    logger.finer("Local gateway " + localOp.getName() + " is newer, replacing global one.");
                 } else {
-                    //delete legacy local operators
-                    logger.finer("Local operator " + localOp.getName() + " is same or older than global one, deleting...");
+                    //delete legacy local gateways
+                    logger.finer("Local gateway " + localOp.getName() + " is same or older than global one, deleting...");
                     File opFile = null;
                     try {
                         opFile = new File(localOp.getScript().toURI());
-                        File opIcon = new File(opFile.getAbsolutePath().replaceFirst("\\.operator$", ".png"));
+                        File opIcon = new File(opFile.getAbsolutePath().replaceFirst("\\.gateway$", ".png"));
                         opFile.delete();
                         FileUtils.deleteQuietly(opIcon); //icon may not be present
                     } catch (Exception ex) {
-                        logger.log(Level.WARNING, "Failed to delete old local operator " +
+                        logger.log(Level.WARNING, "Failed to delete old local gateway " +
                                 localOp.getName() + " (" + opFile + ")", ex);
                     }
                 }
             } else {
-                globalOperators.add(localOp);
-                logger.finer("Local operator " + localOp.getName() + " is additional to global ones, adding to operator list.");
+                globalGateways.add(localOp);
+                logger.finer("Local gateway " + localOp.getName() + " is additional to global ones, adding to gateway list.");
             }
         }
         //load it
-        Operators.getInstance().clear();
-        Operators.getInstance().addAll(globalOperators);
-        Operators.getInstance().setDeprecatedOperators(deprecatedOperators);
+        Gateways.getInstance().clear();
+        Gateways.getInstance().addAll(globalGateways);
+        Gateways.getInstance().setDeprecatedGateways(deprecatedGateways);
     }
 
-    /** Save new operator to file. New or updated operator is saved in global operator
-     * directory (if there are sufficient permissions), otherwise in local operator
+    /** Save new gateway to file. New or updated gateway is saved in global gateway
+     * directory (if there are sufficient permissions), otherwise in local gateway
      * directory.
      *
-     * @param scriptName name of the operator/script (without suffix), not null nor empty
-     * @param scriptContents contents of the operator script file, not null nor empty
-     * @param icon operator icon, may be null
+     * @param scriptName name of the gateway/script (without suffix), not null nor empty
+     * @param scriptContents contents of the gateway script file, not null nor empty
+     * @param icon gateway icon, may be null
      */
-    public void saveOperator(String scriptName, String scriptContents, byte[] icon) throws IOException {
+    public void saveGateway(String scriptName, String scriptContents, byte[] icon) throws IOException {
         Validate.notEmpty(scriptName);
         Validate.notEmpty(scriptContents);
 
-        logger.fine("Saving operator...");
+        logger.fine("Saving gateway...");
 
         File temp = createTempFile();
         FileOutputStream out = new FileOutputStream(temp);
@@ -475,8 +475,8 @@ public class PersistenceManager {
             iconOut = new FileOutputStream(iconTemp);
         }
 
-        //export the operator
-        ExportManager.exportOperator(scriptContents, icon, out, iconOut);
+        //export the gateway
+        ExportManager.exportGateway(scriptContents, icon, out, iconOut);
 
         out.flush();
         out.getChannel().force(false);
@@ -489,40 +489,40 @@ public class PersistenceManager {
         }
 
         //move script file to correct location
-        File scriptFileGlobal = new File(globalOperatorDir, scriptName + ".operator");
-        File scriptFileLocal = new File(localOperatorDir, scriptName + ".operator");
-        if (canWrite(globalOperatorDir) && (!scriptFileGlobal.exists() || canWrite(scriptFileGlobal))) {
+        File scriptFileGlobal = new File(globalGatewayDir, scriptName + ".gateway");
+        File scriptFileLocal = new File(localGatewayDir, scriptName + ".gateway");
+        if (canWrite(globalGatewayDir) && (!scriptFileGlobal.exists() || canWrite(scriptFileGlobal))) {
             //first try global dir
             moveFileSafely(temp, scriptFileGlobal);
             //set readable for everyone
             scriptFileGlobal.setReadable(true, false);
-            logger.finer("Saved operator script into file: " + scriptFileGlobal.getAbsolutePath());
-        } else if (canWrite(localOperatorDir) && (!scriptFileLocal.exists() || canWrite(scriptFileLocal))) {
+            logger.finer("Saved gateway script into file: " + scriptFileGlobal.getAbsolutePath());
+        } else if (canWrite(localGatewayDir) && (!scriptFileLocal.exists() || canWrite(scriptFileLocal))) {
             //second try local dir
             moveFileSafely(temp, scriptFileLocal);
-            logger.finer("Saved operator script into file: " + scriptFileLocal.getAbsolutePath());
+            logger.finer("Saved gateway script into file: " + scriptFileLocal.getAbsolutePath());
         } else {
             //report error
-            throw new IOException(MessageFormat.format("Could not save operator " +
+            throw new IOException(MessageFormat.format("Could not save gateway " +
                     "{0} to ''{1}'' nor to ''{2}'' - no write permissions?", scriptName,
                     scriptFileGlobal, scriptFileLocal));
         }
 
         //move icon file to correct location
         if (icon != null) {
-            File iconFileGlobal = new File(globalOperatorDir, scriptName + ".png");
-            File iconFileLocal = new File(localOperatorDir, scriptName + ".png");
-            if (canWrite(globalOperatorDir) && (!iconFileGlobal.exists() || canWrite(iconFileGlobal))) {
+            File iconFileGlobal = new File(globalGatewayDir, scriptName + ".png");
+            File iconFileLocal = new File(localGatewayDir, scriptName + ".png");
+            if (canWrite(globalGatewayDir) && (!iconFileGlobal.exists() || canWrite(iconFileGlobal))) {
                 //first try global dir
                 moveFileSafely(iconTemp, iconFileGlobal);
-                logger.finer("Saved operator icon into file: " + iconFileGlobal.getAbsolutePath());
-            } else if (canWrite(localOperatorDir) && (!iconFileLocal.exists() || canWrite(iconFileLocal))) {
+                logger.finer("Saved gateway icon into file: " + iconFileGlobal.getAbsolutePath());
+            } else if (canWrite(localGatewayDir) && (!iconFileLocal.exists() || canWrite(iconFileLocal))) {
                 //second try local dir
                 moveFileSafely(iconTemp, iconFileLocal);
-                logger.finer("Saved operator icon into file: " + iconFileLocal.getAbsolutePath());
+                logger.finer("Saved gateway icon into file: " + iconFileLocal.getAbsolutePath());
             } else {
                 //report error
-                throw new IOException(MessageFormat.format("Could not save operator icon " +
+                throw new IOException(MessageFormat.format("Could not save gateway icon " +
                         "{0} to '{1}' nor to '{2}' - no write permissions?", scriptName,
                         iconFileGlobal, iconFileLocal));
             }

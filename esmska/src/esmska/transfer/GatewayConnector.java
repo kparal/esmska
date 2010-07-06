@@ -36,9 +36,9 @@ import org.apache.commons.lang.Validate;
  *  For each SMS there should be a separate instance.
  * @author ripper
  */
-public class OperatorConnector {
+public class GatewayConnector {
 
-    private static final Logger logger = Logger.getLogger(OperatorConnector.class.getName());
+    private static final Logger logger = Logger.getLogger(GatewayConnector.class.getName());
     private static final String USER_AGENT = "Mozilla/5.0 (X11; U; Linux x86_64; cs-CZ; rv:1.9.1.9) " +
             "Gecko/20100402 Ubuntu/9.10 (karmic) Firefox/3.5.9";
     private static final Pattern metaRedirPattern = Pattern.compile(
@@ -61,8 +61,8 @@ public class OperatorConnector {
     // remembers last redirect and number of requests to that URL
     private Tuple<String, Integer> lastRedirect = new Tuple<String, Integer>(null,0);
 
-    /** Constructor for OperatorConnector. */
-    public OperatorConnector() {
+    /** Constructor for GatewayConnector. */
+    public GatewayConnector() {
         //set cookie compatibility mode
         client.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
         client.getParams().setParameter(HttpMethodParams.SINGLE_COOKIE_HEADER, true);

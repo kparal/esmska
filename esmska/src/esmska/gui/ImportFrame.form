@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.6" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
@@ -226,7 +226,7 @@
                       <Component id="encodingLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="problemLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="134" max="32767" attributes="0"/>
+                      <EmptySpace pref="149" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -310,7 +310,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="validOperatorCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="validGatewayCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="foundContactsLabel" alignment="0" pref="526" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" pref="526" max="32767" attributes="0"/>
                           <Component id="doImportLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -327,7 +327,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="238" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="validOperatorCheckBox" min="-2" max="-2" attributes="0"/>
+                      <Component id="validGatewayCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="doImportLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -372,18 +372,18 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="validOperatorCheckBox">
+            <Component class="javax.swing.JCheckBox" name="validGatewayCheckBox">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.validOperatorCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.validGatewayCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.validOperatorCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ImportFrame.validGatewayCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="validOperatorCheckBoxStateChanged"/>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="validGatewayCheckBoxStateChanged"/>
               </Events>
             </Component>
           </SubComponents>

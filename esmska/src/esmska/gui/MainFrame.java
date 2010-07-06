@@ -61,7 +61,7 @@ import esmska.data.Config.CheckUpdatePolicy;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.data.Log;
-import esmska.data.Operators;
+import esmska.data.Gateways;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
@@ -192,11 +192,11 @@ public class MainFrame extends javax.swing.JFrame {
         queue.addValuedListener(new QueueListener());
         ImageCodeManager.setResolver(new ImageCodeDialog(this, true));
         
-        //check for valid operators
-        if (Operators.getInstance().size() <= 0 && !Beans.isDesignTime()) {
-            logger.warning("No usable operators found");
+        //check for valid gateways
+        if (Gateways.getInstance().size() <= 0 && !Beans.isDesignTime()) {
+            logger.warning("No usable gateways found");
             JOptionPane.showMessageDialog(this,
-                    new JLabel(l10n.getString("MainFrame.no_operators")),
+                    new JLabel(l10n.getString("MainFrame.no_gateways")),
                     null, JOptionPane.ERROR_MESSAGE);
         }
         
@@ -621,7 +621,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** Saves history of sent sms */
     private void createHistory(SMS sms) {
         History.Record record = new History.Record(sms.getNumber(), sms.getText(),
-                sms.getOperator(), sms.getName(), sms.getSenderNumber(),
+                sms.getGateway(), sms.getName(), sms.getSenderNumber(),
                 sms.getSenderName(), null);
         history.addRecord(record);
     }
@@ -765,11 +765,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
         private void sendingSMS(SMS sms) {
-            String operator = sms.getOperator();
+            String gateway = sms.getGateway();
             statusPanel.setTaskRunning(true);
             log.addRecord(new Log.Record(
                     MessageFormat.format(l10n.getString("SMSSender.sending_message"),
-                    sms.getRecipient(), (operator == null ? l10n.getString("SMSSender.no_operator") : operator)),
+                    sms.getRecipient(), (gateway == null ? l10n.getString("SMSSender.no_gateway") : gateway)),
                     null, Icons.STATUS_INFO));
         }
         private void smsSent(SMS sms) {
@@ -835,9 +835,9 @@ public class MainFrame extends javax.swing.JFrame {
                     queuePanel.requestFocusInWindow();
                 }
             }
-            //show operator message if present
-            if (StringUtils.isNotEmpty(sms.getOperatorMsg())) {
-                log.addRecord(new Log.Record(sms.getOperator() + ": " + sms.getOperatorMsg(),
+            //show gateway message if present
+            if (StringUtils.isNotEmpty(sms.getGatewayMsg())) {
+                log.addRecord(new Log.Record(sms.getGateway() + ": " + sms.getGatewayMsg(),
                         null, Icons.STATUS_MESSAGE));
             }
             //disable task indicator
@@ -905,11 +905,11 @@ public class MainFrame extends javax.swing.JFrame {
 
             //if many updates found and should check only for some of them, announce
             //only the requested
-            if (event == UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE) {
+            if (event == UpdateChecker.ACTION_PROGRAM_AND_GATEWAY_UPDATE_AVAILABLE) {
                 if (policy == CheckUpdatePolicy.CHECK_PROGRAM) {
                     event = UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE;
                 } else if (policy == CheckUpdatePolicy.CHECK_GATEWAYS) {
-                    event = UpdateChecker.ACTION_OPERATOR_UPDATE_AVAILABLE;
+                    event = UpdateChecker.ACTION_GATEWAY_UPDATE_AVAILABLE;
                 }
             }
 
@@ -933,15 +933,15 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                     }, l10n.getString("Update.browseDownloads"));
                     break;
-                case UpdateChecker.ACTION_OPERATOR_UPDATE_AVAILABLE:
+                case UpdateChecker.ACTION_GATEWAY_UPDATE_AVAILABLE:
                     if (policy != CheckUpdatePolicy.CHECK_ALL &&
                             policy != CheckUpdatePolicy.CHECK_GATEWAYS) {
                         //user doesn't want to know
                         break;
                     }
-                    //otherwise do same as for program and operator update
-                case UpdateChecker.ACTION_PROGRAM_AND_OPERATOR_UPDATE_AVAILABLE:
-                    message = l10n.getString("MainFrame.newOperatorUpdate");
+                    //otherwise do same as for program and gateway update
+                case UpdateChecker.ACTION_PROGRAM_AND_GATEWAY_UPDATE_AVAILABLE:
+                    message = l10n.getString("MainFrame.newGatewayUpdate");
                     log.addRecord(new Log.Record(MiscUtils.stripHtml(message), null, Icons.STATUS_UPDATE));
                     statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE, true);
                     //on click open update dialog

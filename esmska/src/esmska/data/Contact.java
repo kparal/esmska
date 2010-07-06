@@ -21,7 +21,7 @@ public class Contact extends Object implements Comparable<Contact> {
     private String name;
     /** full phone number including the country code (starting with "+") */
     private String number;
-    private String operator;
+    private String gateway;
     
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -37,21 +37,21 @@ public class Contact extends Object implements Comparable<Contact> {
 
     /** Create new contact with properties copied from provided contact */
     public Contact(Contact c) {
-        this(c.getName(), c.getNumber(), c.getOperator());
+        this(c.getName(), c.getNumber(), c.getGateway());
     }
 
     /** Create new contact. For detailed parameters restrictions see individual setter methods. */
-    public Contact(String name, String number, String operator) {
+    public Contact(String name, String number, String gateway) {
         setName(name);
         setNumber(number);
-        setOperator(operator);
+        setGateway(gateway);
     }
 
     /** Copy all contact properties from provided contact to current contact */
     public void copyFrom(Contact c) {
         setName(c.getName());
         setNumber(c.getNumber());
-        setOperator(c.getOperator());
+        setGateway(c.getGateway());
     }
     
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
@@ -66,9 +66,9 @@ public class Contact extends Object implements Comparable<Contact> {
         return this.number;
     }
 
-    /** Get operator. Never null. */
-    public String getOperator() {
-        return this.operator;
+    /** Get gateway. Never null. */
+    public String getGateway() {
+        return this.gateway;
     }
     // </editor-fold>
     
@@ -103,17 +103,17 @@ public class Contact extends Object implements Comparable<Contact> {
         changeSupport.firePropertyChange("number", oldNumber, number);
     }
 
-    /** Set contact operator
-     * @param operator new operator. Null value is changed to "unknown" operator.
+    /** Set contact gateway
+     * @param gateway new gateway. Null value is changed to "unknown" gateway.
      */
-    public void setOperator(String operator) {
-        if (operator == null) {
-            operator = Operator.UNKNOWN;
+    public void setGateway(String gateway) {
+        if (gateway == null) {
+            gateway = Gateway.UNKNOWN;
         }
 
-        String oldOperator = this.operator;
-        this.operator = operator;
-        changeSupport.firePropertyChange("operator", oldOperator, operator);
+        String oldGateway = this.gateway;
+        this.gateway = gateway;
+        changeSupport.firePropertyChange("gateway", oldGateway, gateway);
     }
     // </editor-fold>
 
@@ -183,7 +183,7 @@ public class Contact extends Object implements Comparable<Contact> {
 
         return new CompareToBuilder().append(name, c.name, collator).
                 append(number, c.number, collator).
-                append(operator, c.operator, collator).toComparison();
+                append(gateway, c.gateway, collator).toComparison();
     }
     
     @Override
@@ -202,13 +202,13 @@ public class Contact extends Object implements Comparable<Contact> {
         Contact c = (Contact) obj;
 
         return new EqualsBuilder().append(name, c.name).append(number, c.number).
-                append(operator, c.operator).isEquals();
+                append(gateway, c.gateway).isEquals();
     }
     
     @Override
     public int hashCode() {
         return new HashCodeBuilder(337, 139).append(name).append(number).
-                append(operator).toHashCode();
+                append(gateway).toHashCode();
     }
     
 }

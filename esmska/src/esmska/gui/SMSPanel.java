@@ -14,8 +14,8 @@ import esmska.data.CountryPrefix;
 import esmska.data.Envelope;
 import esmska.data.Keyring;
 import esmska.data.Links;
-import esmska.data.Operator;
-import esmska.data.Operators;
+import esmska.data.Gateway;
+import esmska.data.Gateways;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.event.AbstractDocumentListener;
@@ -157,28 +157,28 @@ public class SMSPanel extends javax.swing.JPanel {
         return true;
     }
     
-    /** Find contact according to filled name/number and operator
-     * @param onlyFullMatch whether to look only for full match (name/number and operator)
+    /** Find contact according to filled name/number and gateway
+     * @param onlyFullMatch whether to look only for full match (name/number and gateway)
      *  or even partial match (name/number only)
      * @return found contact or null if none found
      */
     private Contact lookupContact(boolean onlyFullMatch) {
         String number = recipientField.getNumber();
         String id = recipientTextField.getText(); //name or number
-        String operatorName = operatorComboBox.getSelectedOperatorName();
+        String gatewayName = gatewayComboBox.getSelectedGatewayName();
         
         if (StringUtils.isEmpty(id)) {
             return null;
         }
         
         Contact contact = null; //match on id
-        Contact fullContact = null; //match on id and operator
+        Contact fullContact = null; //match on id and gateway
         
         //search in contact numbers
         if (number != null) {
             for (Contact c : contacts) {
                 if (ObjectUtils.equals(c.getNumber(), number)) {
-                    if (ObjectUtils.equals(c.getOperator(), operatorName)) {
+                    if (ObjectUtils.equals(c.getGateway(), gatewayName)) {
                         fullContact = c;
                         break;
                     }
@@ -191,7 +191,7 @@ public class SMSPanel extends javax.swing.JPanel {
             //search in contact names if not number
             for (Contact c : contacts) {
                 if (id.equalsIgnoreCase(c.getName())) {
-                    if (ObjectUtils.equals(c.getOperator(), operatorName)) {
+                    if (ObjectUtils.equals(c.getGateway(), gatewayName)) {
                         fullContact = c;
                         break;
                     }
@@ -226,7 +226,7 @@ public class SMSPanel extends javax.swing.JPanel {
         if (count == 1) {
             Contact c = contacts.iterator().next();
             recipientField.setContact(c);
-            operatorComboBox.setSelectedOperator(c.getOperator());
+            gatewayComboBox.setSelectedGateway(c.getGateway());
         }
         
         boolean multiSendMode = (count > 1);
@@ -234,7 +234,7 @@ public class SMSPanel extends javax.swing.JPanel {
             recipientTextField.setText(l10n.getString("Multiple_sending"));
         }
         recipientTextField.setEnabled(! multiSendMode);
-        operatorComboBox.setEnabled(! multiSendMode);
+        gatewayComboBox.setEnabled(! multiSendMode);
         
         //update envelope
         Set<Contact> set = new HashSet<Contact>();
@@ -243,7 +243,7 @@ public class SMSPanel extends javax.swing.JPanel {
             Contact contact = recipientField.getContact();
             set.add(new Contact(contact != null ? contact.getName() : null,
                     recipientField.getNumber(),
-                    operatorComboBox.getSelectedOperatorName()));
+                    gatewayComboBox.getSelectedGatewayName()));
         }
         envelope.setContacts(set);
         
@@ -259,11 +259,11 @@ public class SMSPanel extends javax.swing.JPanel {
         smsTextPane.setText(sms.getText());
         smsTextUndoManager.discardAllEdits();
 
-        //recipient textfield will change operator, must wait and change operator back
+        //recipient textfield will change gateway, must wait and change gateway back
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                operatorComboBox.setSelectedOperator(sms.getOperator());
+                gatewayComboBox.setSelectedGateway(sms.getGateway());
                 smsTextPane.requestFocusInWindow();
             }
         });
@@ -365,16 +365,16 @@ public class SMSPanel extends javax.swing.JPanel {
         }
 
         //ensure that fields are sufficiently filled in
-        Operator operator = operatorComboBox.getSelectedOperator();
+        Gateway gateway = gatewayComboBox.getSelectedGateway();
         String number = recipientField.getNumber();
-        if (operator == null || !Contact.isValidNumber(number)) {
+        if (gateway == null || !Contact.isValidNumber(number)) {
             return;
         }
 
-        boolean supported = Operators.isNumberSupported(operator, number);
+        boolean supported = Gateways.isNumberSupported(gateway, number);
         if (!supported) {
             String text = MessageFormat.format(l10n.getString("SMSPanel.countryInfoLabel.text"),
-                    StringUtils.join(operator.getSupportedPrefixes(), ','));
+                    StringUtils.join(gateway.getSupportedPrefixes(), ','));
             countryInfoLabel.setText(text);
             countryInfoLabel.setVisible(true);
         }
@@ -388,7 +388,7 @@ public class SMSPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        operatorComboBox = new OperatorComboBox();
+        gatewayComboBox = new GatewayComboBox();
         fullProgressBar = new JProgressBar();
         jScrollPane1 = new JScrollPane();
         smsTextPane = new JTextPane();
@@ -411,10 +411,10 @@ public class SMSPanel extends javax.swing.JPanel {
             }
         });
 
-        operatorComboBox.addActionListener(new OperatorComboBoxActionListener());
-        operatorComboBox.addItemListener(new ItemListener() {
+        gatewayComboBox.addActionListener(new GatewayComboBoxActionListener());
+        gatewayComboBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent evt) {
-                operatorComboBoxItemStateChanged(evt);
+                gatewayComboBoxItemStateChanged(evt);
             }
         });
 
@@ -460,9 +460,9 @@ public class SMSPanel extends javax.swing.JPanel {
 
     singleProgressBar.setMaximum(1000);
 
-    gatewayLabel.setLabelFor(operatorComboBox);
+    gatewayLabel.setLabelFor(gatewayComboBox);
         Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("SMSPanel.gatewayLabel.text")); // NOI18N
-    gatewayLabel.setToolTipText(operatorComboBox.getToolTipText());
+    gatewayLabel.setToolTipText(gatewayComboBox.getToolTipText());
 
     recipientLabel.setLabelFor(recipientTextField);
         Mnemonics.setLocalizedText(recipientLabel, l10n.getString("SMSPanel.recipientLabel.text")); // NOI18N
@@ -513,7 +513,7 @@ jPanel1Layout.setHorizontalGroup(
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(gatewayLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                                 .addComponent(textLabel)
@@ -545,11 +545,11 @@ jPanel1Layout.setHorizontalGroup(
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(gatewayLabel)
-                .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(gatewayComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
@@ -573,12 +573,12 @@ jPanel1Layout.setHorizontalGroup(
         smsTextPane.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
 
-    private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
+    private void gatewayComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_gatewayComboBoxItemStateChanged
         //show warning if user selected gateway requiring registration
         //and no credentials are filled in
-        Operator operator = operatorComboBox.getSelectedOperator();
-        if (operator != null && operator.isLoginRequired() &&
-                keyring.getKey(operator.getName()) == null) {
+        Gateway gateway = gatewayComboBox.getSelectedGateway();
+        if (gateway != null && gateway.isLoginRequired() &&
+                keyring.getKey(gateway.getName()) == null) {
             credentialsInfoLabel.setVisible(true);
         } else {
             credentialsInfoLabel.setVisible(false);
@@ -586,7 +586,7 @@ jPanel1Layout.setHorizontalGroup(
 
         //also update other info labels
         updateCountryInfoLabel();
-    }//GEN-LAST:event_operatorComboBoxItemStateChanged
+    }//GEN-LAST:event_gatewayComboBoxItemStateChanged
     
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
@@ -733,8 +733,8 @@ jPanel1Layout.setHorizontalGroup(
         }
     }
 
-    /** Another operator selected */
-    private class OperatorComboBoxActionListener implements ActionListener {
+    /** Another gateway selected */
+    private class GatewayComboBoxActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (disableContactListeners) {
@@ -778,7 +778,7 @@ jPanel1Layout.setHorizontalGroup(
             Contact c = recipientField.getContact();
             set.add(new Contact(c != null ? c.getName() : null,
                     recipientField.getNumber(),
-                    operatorComboBox.getSelectedOperatorName()));
+                    gatewayComboBox.getSelectedGatewayName()));
             envelope.setContacts(set);
             
             //update components
@@ -1093,9 +1093,9 @@ jPanel1Layout.setHorizontalGroup(
                 requestSelectContact(null);    //ensure contact selection will fire
                 requestSelectContact(contact); //event even if the same contact
 
-                //if not found and is number, guess operator
+                //if not found and is number, guess gateway
                 if (contact == null && getNumber() != null) {
-                    operatorComboBox.selectSuggestedOperator(getNumber());
+                    gatewayComboBox.selectSuggestedGateway(getNumber());
                 }
                 
                 //if not found, update numberInfoLabel
@@ -1106,7 +1106,7 @@ jPanel1Layout.setHorizontalGroup(
                 //update envelope
                 Set<Contact> set = new HashSet<Contact>();
                 set.add(new Contact(contact != null ? contact.getName() : null,
-                        getNumber(), operatorComboBox.getSelectedOperatorName()));
+                        getNumber(), gatewayComboBox.getSelectedGatewayName()));
                 envelope.setContacts(set);
 
                 //update components
@@ -1120,11 +1120,11 @@ jPanel1Layout.setHorizontalGroup(
     private InfoLabel countryInfoLabel;
     private InfoLabel credentialsInfoLabel;
     private JProgressBar fullProgressBar;
+    private GatewayComboBox gatewayComboBox;
     private JLabel gatewayLabel;
     private JPanel jPanel1;
     private JScrollPane jScrollPane1;
     private InfoLabel numberInfoLabel;
-    private OperatorComboBox operatorComboBox;
     private JLabel recipientLabel;
     private JTextField recipientTextField;
     private JButton sendButton;

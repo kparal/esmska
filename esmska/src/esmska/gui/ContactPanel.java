@@ -13,8 +13,8 @@ import esmska.data.Contacts;
 import esmska.data.CountryPrefix;
 import esmska.data.Icons;
 import esmska.data.Log;
-import esmska.data.Operators;
-import esmska.data.Operator;
+import esmska.data.Gateways;
+import esmska.data.Gateway;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
 import esmska.utils.MiscUtils;
@@ -482,8 +482,8 @@ public class ContactPanel extends javax.swing.JPanel {
                 }
                 int[] selection = contactList.getSelectedIndices();
                 for (Contact contact : list) {
-                    //only operator is common for all contacts
-                    contact.setOperator(c.getOperator());
+                    //only gateway is common for all contacts
+                    contact.setGateway(c.getGateway());
                 }
                 contactList.setSelectedIndices(selection);
                 log.addRecord(new Log.Record(
@@ -891,14 +891,14 @@ public class ContactPanel extends javax.swing.JPanel {
                     index, isSelected, cellHasFocus);
             Contact contact = (Contact)value;
             JLabel label = ((JLabel)c);
-            //add operator logo
-            Operator operator = Operators.getOperator(contact.getOperator());
-            label.setIcon(operator != null ? operator.getIcon() : Icons.OPERATOR_BLANK);
+            //add gateway logo
+            Gateway gateway = Gateways.getGateway(contact.getGateway());
+            label.setIcon(gateway != null ? gateway.getIcon() : Icons.GATEWAY_BLANK);
             //set tooltip
             String tooltip = "<html><table><tr><td><img src=\"" + contactIconURI +
                     "\"></td><td valign=top><b>" + MiscUtils.escapeHtml(contact.getName()) +
                     "</b><br>" + CountryPrefix.stripCountryPrefix(contact.getNumber()) +
-                    "<br>" + MiscUtils.escapeHtml(contact.getOperator()) +
+                    "<br>" + MiscUtils.escapeHtml(contact.getGateway()) +
                     "</td></tr></table></html>";
             label.setToolTipText(tooltip);
             //set background on non-matching contacts when searching

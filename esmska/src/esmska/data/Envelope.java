@@ -69,11 +69,11 @@ public class Envelope {
     public int getMaxTextLength() {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Operator operator = Operators.getOperator(c.getOperator());
-            if (operator == null) {
+            Gateway gateway = Gateways.getGateway(c.getGateway());
+            if (gateway == null) {
                 continue;
             }
-            int value = operator.getMaxChars() * operator.getMaxParts();
+            int value = gateway.getMaxChars() * gateway.getMaxParts();
             value -= getSignatureLength(c); //subtract signature length
             min = Math.min(min,value);
         }
@@ -86,11 +86,11 @@ public class Envelope {
     public int getSMSLength() {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Operator operator = Operators.getOperator(c.getOperator());
-            if (operator == null) {
+            Gateway gateway = Gateways.getGateway(c.getGateway());
+            if (gateway == null) {
                 continue;
             }
-            min = Math.min(min, operator.getSMSLength());
+            min = Math.min(min, gateway.getSMSLength());
         }
         if (min <= 0) {
             //sms length is unspecified
@@ -103,30 +103,30 @@ public class Envelope {
      * @return resulting number of sms or -1 when length of sms is unspecified
      */
     public int getSMSCount(int chars) {
-        int worstOperator = Integer.MAX_VALUE;
+        int worstGateway = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Operator operator = Operators.getOperator(c.getOperator());
-            if (operator == null) {
+            Gateway gateway = Gateways.getGateway(c.getGateway());
+            if (gateway == null) {
                 continue;
             }
-            worstOperator = Math.min(worstOperator,
-                    operator.getSMSLength());
+            worstGateway = Math.min(worstGateway,
+                    gateway.getSMSLength());
         }
 
-        if (worstOperator <= 0) {
+        if (worstGateway <= 0) {
             //sms length is unspecified
             return -1;
         }
 
         chars += getSignatureLength();
-        int count = chars / worstOperator;
-        if (chars % worstOperator != 0) {
+        int count = chars / worstGateway;
+        if (chars % worstGateway != 0) {
             count++;
         }
         return count;
     }
     
-    /** Get maximum signature length of the contact operators in the envelope */
+    /** Get maximum signature length of the contact gateways in the envelope */
     public int getSignatureLength() {
         String senderName = config.getSenderName();
         //user has no signature
@@ -137,15 +137,15 @@ public class Envelope {
         int worstSignature = 0;
         //find maximum signature length
         for (Contact c : contacts) {
-            Operator operator = Operators.getOperator(c.getOperator());
-            if (operator == null) {
+            Gateway gateway = Gateways.getGateway(c.getGateway());
+            if (gateway == null) {
                 continue;
             }
             worstSignature = Math.max(worstSignature, 
-                    operator.getSignatureExtraLength());
+                    gateway.getSignatureExtraLength());
         }
         
-        //no operator supports signature
+        //no gateway supports signature
         if (worstSignature == 0) {
             return 0;
         } else {
@@ -158,11 +158,11 @@ public class Envelope {
     public ArrayList<SMS> generate() {
         ArrayList<SMS> list = new ArrayList<SMS>();
         for (Contact c : contacts) {
-            Operator operator = Operators.getOperator(c.getOperator());
-            int limit = (operator != null ? operator.getMaxChars() : Integer.MAX_VALUE);
+            Gateway gateway = Gateways.getGateway(c.getGateway());
+            int limit = (gateway != null ? gateway.getMaxChars() : Integer.MAX_VALUE);
             for (int i=0;i<text.length();i+=limit) {
                 String cutText = text.substring(i,Math.min(i+limit,text.length()));
-                SMS sms = new SMS(c.getNumber(), cutText, c.getOperator());
+                SMS sms = new SMS(c.getNumber(), cutText, c.getGateway());
                 sms.setName(c.getName());
                 if (config.isUseSenderID()) { //append signature if requested
                     sms.setSenderNumber(config.getSenderNumber());
@@ -178,11 +178,11 @@ public class Envelope {
     
     /** get length of signature needed to be substracted from message length */
     private int getSignatureLength(Contact c) {
-        Operator operator = Operators.getOperator(c.getOperator());
-        if (operator != null && config.isUseSenderID() &&
+        Gateway gateway = Gateways.getGateway(c.getGateway());
+        if (gateway != null && config.isUseSenderID() &&
                 config.getSenderName() != null &&
                 config.getSenderName().length() > 0) {
-            return operator.getSignatureExtraLength() + config.getSenderName().length();
+            return gateway.getSignatureExtraLength() + config.getSenderName().length();
         } else {
             return 0;
         }

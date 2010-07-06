@@ -9,7 +9,7 @@ package esmska.data;
  * All gateway scripts must implement this interface in order to be used in the program.
  * @author ripper
  */
-public interface OperatorInfo {
+public interface GatewayInfo {
 
     /** Gateway name.
      * This name will be visible in the list od available gateways.

@@ -160,7 +160,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         dateLabel = new JLabel();
         nameLabel = new JLabel();
         numberLabel = new JLabel();
-        operatorLabel = new JLabel();
+        gatewayLabel = new JLabel();
         senderNumberLabel = new JLabel();
         senderNameLabel = new JLabel();
         jScrollPane2 = new JScrollPane();
@@ -293,7 +293,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         nameLabel.setFont(nameLabel.getFont().deriveFont(nameLabel.getFont().getStyle() | Font.BOLD));
         Mnemonics.setLocalizedText(nameLabel, "    ");
         Mnemonics.setLocalizedText(numberLabel, "    ");
-        Mnemonics.setLocalizedText(operatorLabel, "    ");
+        Mnemonics.setLocalizedText(gatewayLabel, "    ");
         Mnemonics.setLocalizedText(senderNumberLabel, "    ");
         Mnemonics.setLocalizedText(senderNameLabel, "    ");
 
@@ -310,7 +310,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(operatorLabel))
+                        .addComponent(gatewayLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(ComponentPlacement.RELATED)
@@ -337,7 +337,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         jPanel1Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6});
 
-        jPanel1Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {dateLabel, nameLabel, numberLabel, operatorLabel, senderNameLabel, senderNumberLabel});
+        jPanel1Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {dateLabel, gatewayLabel, nameLabel, numberLabel, senderNameLabel, senderNumberLabel});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
@@ -356,7 +356,7 @@ public class HistoryFrame extends javax.swing.JFrame {
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(operatorLabel))
+                    .addComponent(gatewayLabel))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -644,7 +644,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             dateLabel.setText(df.format(record.getDate()));
             nameLabel.setText(record.getName());
             numberLabel.setText(record.getNumber());
-            operatorLabel.setText(record.getOperator());
+            gatewayLabel.setText(record.getGateway());
             senderNameLabel.setText(record.getSenderName());
             senderNumberLabel.setText(record.getSenderNumber());
             textArea.setText(record.getText());
@@ -713,6 +713,7 @@ public class HistoryFrame extends javax.swing.JFrame {
     private JButton closeButton;
     private JLabel dateLabel;
     private JButton deleteButton;
+    private JLabel gatewayLabel;
     private JTable historyTable;
     private JLabel jLabel1;
     private JLabel jLabel2;
@@ -726,7 +727,6 @@ public class HistoryFrame extends javax.swing.JFrame {
     private JSplitPane jSplitPane1;
     private JLabel nameLabel;
     private JLabel numberLabel;
-    private JLabel operatorLabel;
     private JButton resendButton;
     private JTextField searchField;
     private JLabel searchLabel;

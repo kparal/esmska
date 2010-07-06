@@ -166,7 +166,7 @@ public class Main {
             logger.log(Level.WARNING, "Could not load config file", ex);
         }
         try {
-            pm.loadOperators();
+            pm.loadGateways();
         } catch (IntrospectionException ex) { //it seems there is not JavaScript support
             logger.log(Level.SEVERE, "Current JRE doesn't support JavaScript execution", ex);
             try {
@@ -182,7 +182,7 @@ public class Main {
             }
             System.exit(2);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, "Could not load operators", ex);
+            logger.log(Level.SEVERE, "Could not load gateways", ex);
         }
         try {
             pm.loadContacts();

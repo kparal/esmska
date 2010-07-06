@@ -127,16 +127,16 @@ public class History {
         logger.finer("All history records removed");
     }
     
-    /** Find last (as in time) record sent to specified operator.
-     * @param operatorName name of the operator
-     * @return the last (the most recent) record sent to specified operator.
+    /** Find last (as in time) record sent to specified gateway.
+     * @param gatewayName name of the gateway
+     * @return the last (the most recent) record sent to specified gateway.
      *  Null when none found.
      */
-    public synchronized Record findLastRecord(String operatorName) {
+    public synchronized Record findLastRecord(String gatewayName) {
         ListIterator<Record> iter = records.listIterator(records.size());
         while (iter.hasPrevious()) {
             Record record = iter.previous();
-            if (ObjectUtils.equals(record.getOperator(), operatorName)) {
+            if (ObjectUtils.equals(record.getGateway(), gatewayName)) {
                 return record;
             }
         }
@@ -151,26 +151,26 @@ public class History {
         private String text; //message text
         private String senderNumber;
         private String senderName;
-        private String operator;
+        private String gateway;
         private Date date;
 
         /** Create new Record. For detailed parameters restrictions see individual setter methods.
          * @param number not null nor empty
          * @param text not null
-         * @param operator not null nor empty
+         * @param gateway not null nor empty
          * @param name
          * @param senderNumber
          * @param senderName
          * @param date null for current time
          */
-        public Record(String number, String text, String operator,
+        public Record(String number, String text, String gateway,
                 String name, String senderNumber, String senderName, Date date) {
             setName(name);
             setNumber(number);
             setText(text);
             setSenderNumber(senderNumber);
             setSenderName(senderName);
-            setOperator(operator);
+            setGateway(gateway);
             setDate(date);
         }
 
@@ -201,9 +201,9 @@ public class History {
             return senderName;
         }
 
-         /** Operator of the message. Never null nor empty. */
-        public String getOperator() {
-            return operator;
+         /** Gateway of the message. Never null nor empty. */
+        public String getGateway() {
+            return gateway;
         }
 
         /** Date of the sending. Never null. */
@@ -245,10 +245,10 @@ public class History {
             this.senderName = StringUtils.defaultString(senderName);
         }
 
-        /** Operator of the message. May not be null nor empty. */
-        public void setOperator(String operator) {
-            Validate.notEmpty(operator);
-            this.operator = operator;
+        /** Gateway of the message. May not be null nor empty. */
+        public void setGateway(String gateway) {
+            Validate.notEmpty(gateway);
+            this.gateway = gateway;
         }
 
         /** Date of the sending. Null value is inicialized with current time. */

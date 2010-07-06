@@ -10,8 +10,8 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Keyring;
 import esmska.data.Links;
-import esmska.data.Operator;
-import esmska.data.Operators;
+import esmska.data.Gateway;
+import esmska.data.Gateways;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import java.awt.Color;
@@ -53,9 +53,9 @@ public class EditContactPanel extends javax.swing.JPanel {
     private Config config = Config.getInstance();
     private Keyring keyring = Keyring.getInstance();
     private boolean multiMode; //edit multiple contacts
-    private boolean userSet; //whether operator was set by user or by program
+    private boolean userSet; //whether gateway was set by user or by program
 
-    private Action suggestOperatorAction;
+    private Action suggestGatewayAction;
 
     /**
      * Creates new form EditContactPanel
@@ -68,16 +68,16 @@ public class EditContactPanel extends javax.swing.JPanel {
             ClipboardPopupMenu.register(numberTextField);
         }
         
-        //set up button for suggesting operator
-        suggestOperatorAction = Actions.getSuggestOperatorAction(operatorComboBox, numberTextField);
-        suggestOperatorButton.setAction(suggestOperatorAction);
+        //set up button for suggesting gateway
+        suggestGatewayAction = Actions.getSuggestGatewayAction(gatewayComboBox, numberTextField);
+        suggestGatewayButton.setAction(suggestGatewayAction);
 
-        //listen for changes in number and guess operator
+        //listen for changes in number and guess gateway
         numberTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
                 if (!userSet) {
-                    operatorComboBox.selectSuggestedOperator(numberTextField.getText());
+                    gatewayComboBox.selectSuggestedGateway(numberTextField.getText());
                     userSet = false;
                 }
                 updateCountryInfoLabel();
@@ -85,7 +85,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         });
 
         //update components
-        operatorComboBoxItemStateChanged(null);
+        gatewayComboBoxItemStateChanged(null);
     }
     
     /** This method is called from within the constructor to
@@ -108,11 +108,11 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         }
         ;
-        operatorComboBox = new OperatorComboBox();
+        gatewayComboBox = new GatewayComboBox();
         nameLabel = new JLabel();
         numberLabel = new JLabel();
         gatewayLabel = new JLabel();
-        suggestOperatorButton = new JButton();
+        suggestGatewayButton = new JButton();
         jPanel1 = new JPanel();
         countryInfoLabel = new InfoLabel();
         credentialsInfoLabel = new InfoLabel();
@@ -132,9 +132,9 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
-        operatorComboBox.addItemListener(new ItemListener() {
+        gatewayComboBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent evt) {
-                operatorComboBoxItemStateChanged(evt);
+                gatewayComboBoxItemStateChanged(evt);
             }
         });
 
@@ -146,13 +146,13 @@ public class EditContactPanel extends javax.swing.JPanel {
         Mnemonics.setLocalizedText(numberLabel, l10n.getString("EditContactPanel.numberLabel.text")); // NOI18N
         numberLabel.setToolTipText(numberTextField.getToolTipText());
 
-        gatewayLabel.setLabelFor(operatorComboBox);
+        gatewayLabel.setLabelFor(gatewayComboBox);
         Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("EditContactPanel.gatewayLabel.text")); // NOI18N
-        gatewayLabel.setToolTipText(operatorComboBox.getToolTipText());
+        gatewayLabel.setToolTipText(gatewayComboBox.getToolTipText());
 
-        suggestOperatorButton.addActionListener(new ActionListener() {
+        suggestGatewayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                suggestOperatorButtonActionPerformed(evt);
+                suggestGatewayButtonActionPerformed(evt);
             }
         });
 
@@ -168,7 +168,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
         .addComponent(countryInfoLabel)
     );
     jPanel1Layout.setVerticalGroup(
@@ -195,11 +195,11 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(suggestOperatorButton))
-                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))))
+                            .addComponent(suggestGatewayButton))
+                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE))))
             .addContainerGap())
     );
 
@@ -220,8 +220,8 @@ public class EditContactPanel extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                 .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(gatewayLabel)
-                    .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addComponent(suggestOperatorButton))
+                    .addComponent(gatewayComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(suggestGatewayButton))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap(74, Short.MAX_VALUE))
@@ -279,7 +279,7 @@ public class EditContactPanel extends javax.swing.JPanel {
 
         nameTextField.setEnabled(!multiMode);
         numberTextField.setEnabled(!multiMode);
-        suggestOperatorAction.setEnabled(!multiMode);
+        suggestGatewayAction.setEnabled(!multiMode);
     }
 
     /** Show warning if user selected gateway can't send messages to a recipient
@@ -289,16 +289,16 @@ public class EditContactPanel extends javax.swing.JPanel {
         countryInfoLabel.setVisible(false);
 
         //ensure that fields are sufficiently filled in
-        Operator operator = operatorComboBox.getSelectedOperator();
+        Gateway gateway = gatewayComboBox.getSelectedGateway();
         String number = numberTextField.getText();
-        if (operator == null || !Contact.isValidNumber(number)) {
+        if (gateway == null || !Contact.isValidNumber(number)) {
             return;
         }
 
-        boolean supported = Operators.isNumberSupported(operator, number);
+        boolean supported = Gateways.isNumberSupported(gateway, number);
         if (!supported) {
             String text = MessageFormat.format(l10n.getString("EditContactPanel.countryInfoLabel.text"),
-                    StringUtils.join(operator.getSupportedPrefixes(), ','));
+                    StringUtils.join(gateway.getSupportedPrefixes(), ','));
             countryInfoLabel.setText(text);
             countryInfoLabel.setVisible(true);
         }
@@ -312,18 +312,18 @@ public class EditContactPanel extends javax.swing.JPanel {
         checkValid(numberTextField);
     }//GEN-LAST:event_numberTextFieldFocusLost
 
-    private void suggestOperatorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_suggestOperatorButtonActionPerformed
+    private void suggestGatewayButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_suggestGatewayButtonActionPerformed
         userSet = false;
-    }//GEN-LAST:event_suggestOperatorButtonActionPerformed
+    }//GEN-LAST:event_suggestGatewayButtonActionPerformed
 
-    private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
+    private void gatewayComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_gatewayComboBoxItemStateChanged
         userSet = true;
 
         //show warning if user selected gateway requiring registration
         //and no credentials are filled in
-        Operator operator = operatorComboBox.getSelectedOperator();
-        if (operator != null && operator.isLoginRequired() &&
-                keyring.getKey(operator.getName()) == null) {
+        Gateway gateway = gatewayComboBox.getSelectedGateway();
+        if (gateway != null && gateway.isLoginRequired() &&
+                keyring.getKey(gateway.getName()) == null) {
             credentialsInfoLabel.setVisible(true);
         } else {
             credentialsInfoLabel.setVisible(false);
@@ -331,7 +331,7 @@ public class EditContactPanel extends javax.swing.JPanel {
 
         //also update countryInfoLabel
         updateCountryInfoLabel();
-    }//GEN-LAST:event_operatorComboBoxItemStateChanged
+    }//GEN-LAST:event_gatewayComboBoxItemStateChanged
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
@@ -339,11 +339,11 @@ public class EditContactPanel extends javax.swing.JPanel {
         if (contact == null) {
             nameTextField.setText(null);
             numberTextField.setText(config.getCountryPrefix());
-            operatorComboBox.selectSuggestedOperator(numberTextField.getText());
+            gatewayComboBox.selectSuggestedGateway(numberTextField.getText());
         } else {
             nameTextField.setText(contact.getName());
             numberTextField.setText(contact.getNumber());
-            operatorComboBox.setSelectedOperator(contact.getOperator());
+            gatewayComboBox.setSelectedGateway(contact.getGateway());
         }
         userSet = false;
     }
@@ -355,33 +355,33 @@ public class EditContactPanel extends javax.swing.JPanel {
             return;
         }
         setMultiMode(true);
-        operatorComboBox.setSelectedOperator(contacts.iterator().next().getOperator());
+        gatewayComboBox.setSelectedGateway(contacts.iterator().next().getGateway());
     }
     
     /** Get currently edited contact */
     public Contact getContact() {
         String name = nameTextField.getText();
         String number = numberTextField.getText();
-        String operator = operatorComboBox.getSelectedOperatorName();
+        String gateway = gatewayComboBox.getSelectedGatewayName();
         
         if (!multiMode && (StringUtils.isEmpty(name) || StringUtils.isEmpty(number) ||
-                StringUtils.isEmpty(operator))) {
+                StringUtils.isEmpty(gateway))) {
             return null;
         } else {
-            return new Contact(name, number, operator);
+            return new Contact(name, number, gateway);
         }
     }
 
     /** Improve focus etc. before displaying panel */
     public void prepareForShow() {
-        //no operator, try to suggest one
-        if (operatorComboBox.getSelectedOperator() == null) {
-            suggestOperatorAction.actionPerformed(null);
+        //no gateway, try to suggest one
+        if (gatewayComboBox.getSelectedGateway() == null) {
+            suggestGatewayAction.actionPerformed(null);
         }
 
         //give focus
         if (multiMode) {
-            operatorComboBox.requestFocusInWindow();
+            gatewayComboBox.requestFocusInWindow();
         } else {
             nameTextField.requestFocusInWindow();
             nameTextField.selectAll();
@@ -391,14 +391,14 @@ public class EditContactPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private InfoLabel countryInfoLabel;
     private InfoLabel credentialsInfoLabel;
+    private GatewayComboBox gatewayComboBox;
     private JLabel gatewayLabel;
     private JPanel jPanel1;
     private JLabel nameLabel;
     private JTextField nameTextField;
     private JLabel numberLabel;
     private JTextField numberTextField;
-    private OperatorComboBox operatorComboBox;
-    private JButton suggestOperatorButton;
+    private JButton suggestGatewayButton;
     // End of variables declaration//GEN-END:variables
     
 }

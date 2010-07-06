@@ -78,7 +78,7 @@ public class LegacyUpdater {
                 CsvReader reader = new CsvReader(keyringFile.getPath(), ',', Charset.forName("UTF-8"));
                 reader.setUseComments(true);
                 while (reader.readRecord()) {
-                    String operatorName = reader.get(0);
+                    String gatewayName = reader.get(0);
                     String login = reader.get(1);
                     String password = reader.get(2);
 
@@ -87,7 +87,7 @@ public class LegacyUpdater {
                     password = new String(cleartext, "UTF-8");
 
                     Tuple<String, String> key = new Tuple<String, String>(login, password);
-                    keyring.putKey(operatorName, key);
+                    keyring.putKey(gatewayName, key);
                 }
                 reader.close();
 

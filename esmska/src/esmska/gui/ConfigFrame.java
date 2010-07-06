@@ -13,8 +13,8 @@ import esmska.data.Config.CheckUpdatePolicy;
 import esmska.gui.ThemeManager.LAF;
 import esmska.data.Config;
 import esmska.data.Keyring;
-import esmska.data.Operator;
-import esmska.data.Operators;
+import esmska.data.Gateway;
+import esmska.data.Gateways;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -193,7 +193,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 comp = appearancePanel;
                 break;
             case GATEWAYS:
-                comp = operatorPanel;
+                comp = gatewayPanel;
                 break;
             case CREDENTIALS:
                 comp = loginPanel;
@@ -247,13 +247,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         fullyInicialized = temp;
     }
     
-    /** Reaction for operator key (login, password) change */
+    /** Reaction for gateway key (login, password) change */
     private void updateKeyring() {
         if (!fullyInicialized) {
             return;
         }
-        Operator operator = operatorComboBox.getSelectedOperator();
-        if (operator == null) {
+        Gateway gateway = gatewayComboBox.getSelectedGateway();
+        if (gateway == null) {
             return;
         }
         
@@ -262,10 +262,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         if (StringUtils.isEmpty(key.get1()) && StringUtils.isEmpty(key.get2())) {
             //if both empty, remove the key
-            keyring.removeKey(operator.getName());
+            keyring.removeKey(gateway.getName());
         } else {
             //else update/set the key
-            keyring.putKey(operator.getName(), key);
+            keyring.putKey(gateway.getName(), key);
         }
     }
     
@@ -329,18 +329,18 @@ public class ConfigFrame extends javax.swing.JFrame {
         tipsCheckBox = new JCheckBox();
         startMinimizedCheckBox = new JCheckBox();
         advancedControlsCheckBox = new JCheckBox();
-        operatorPanel = new JPanel();
+        gatewayPanel = new JPanel();
         useSenderIDCheckBox = new JCheckBox();
         senderNumberTextField = new JTextField();
         jLabel1 = new JLabel();
         senderNameTextField = new JTextField();
         jLabel3 = new JLabel();
-        operatorFilterTextField = new JTextField();
-        operatorFilterLabel = new JLabel();
+        gatewayFilterTextField = new JTextField();
+        gatewayFilterLabel = new JLabel();
         demandDeliveryReportCheckBox = new JCheckBox();
         countryPrefixPanel = new CountryPrefixPanel();
         loginPanel = new JPanel();
-        operatorComboBox = new OperatorComboBox();
+        gatewayComboBox = new GatewayComboBox();
         jLabel9 = new JLabel();
         jLabel10 = new JLabel();
         loginTextField = new JTextField();
@@ -662,15 +662,15 @@ public class ConfigFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(jLabel3, l10n.getString("ConfigFrame.jLabel3.text")); // NOI18N
     jLabel3.setToolTipText(senderNameTextField.getToolTipText());
 
-    operatorFilterTextField.setColumns(13);
+    gatewayFilterTextField.setColumns(13);
 
-    operatorFilterTextField.setToolTipText(l10n.getString("ConfigFrame.operatorFilterTextField.toolTipText")); // NOI18N
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${operatorFilter}"), operatorFilterTextField, BeanProperty.create("text"));
+    gatewayFilterTextField.setToolTipText(l10n.getString("ConfigFrame.gatewayFilterTextField.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${gatewayFilter}"), gatewayFilterTextField, BeanProperty.create("text"));
     bindingGroup.addBinding(binding);
 
-    operatorFilterLabel.setLabelFor(operatorFilterTextField);
-        Mnemonics.setLocalizedText(operatorFilterLabel, l10n.getString("ConfigFrame.operatorFilterLabel.text")); // NOI18N
-    operatorFilterLabel.setToolTipText(operatorFilterTextField.getToolTipText());
+    gatewayFilterLabel.setLabelFor(gatewayFilterTextField);
+        Mnemonics.setLocalizedText(gatewayFilterLabel, l10n.getString("ConfigFrame.gatewayFilterLabel.text")); // NOI18N
+    gatewayFilterLabel.setToolTipText(gatewayFilterTextField.getToolTipText());
 
         Mnemonics.setLocalizedText(demandDeliveryReportCheckBox, l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.text"));
     demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
@@ -679,28 +679,28 @@ public class ConfigFrame extends javax.swing.JFrame {
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, useSenderIDCheckBox, ELProperty.create("${selected}"), demandDeliveryReportCheckBox, BeanProperty.create("enabled"));
     bindingGroup.addBinding(binding);
 
-        GroupLayout operatorPanelLayout = new GroupLayout(operatorPanel);
-    operatorPanel.setLayout(operatorPanelLayout);
+        GroupLayout gatewayPanelLayout = new GroupLayout(gatewayPanel);
+    gatewayPanel.setLayout(gatewayPanelLayout);
 
-    operatorPanelLayout.setHorizontalGroup(
-        operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(operatorPanelLayout.createSequentialGroup()
+    gatewayPanelLayout.setHorizontalGroup(
+        gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(gatewayPanelLayout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
+            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
                 .addComponent(useSenderIDCheckBox)
-                .addGroup(operatorPanelLayout.createSequentialGroup()
-                    .addComponent(operatorFilterLabel)
+                .addGroup(gatewayPanelLayout.createSequentialGroup()
+                    .addComponent(gatewayFilterLabel)
                     .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(operatorFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGroup(operatorPanelLayout.createSequentialGroup()
+                    .addComponent(gatewayFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gatewayPanelLayout.createSequentialGroup()
                     .addGap(17, 17, 17)
-                    .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(operatorPanelLayout.createSequentialGroup()
-                            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
+                    .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gatewayPanelLayout.createSequentialGroup()
+                            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel1))
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.LEADING)
+                            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
                                 .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                         .addComponent(demandDeliveryReportCheckBox)))
@@ -708,25 +708,25 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addContainerGap(287, Short.MAX_VALUE))
     );
 
-    operatorPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
+    gatewayPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
 
-    operatorPanelLayout.setVerticalGroup(
-        operatorPanelLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(operatorPanelLayout.createSequentialGroup()
+    gatewayPanelLayout.setVerticalGroup(
+        gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(gatewayPanelLayout.createSequentialGroup()
             .addContainerGap()
             .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(operatorFilterLabel)
-                .addComponent(operatorFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(gatewayFilterLabel)
+                .addComponent(gatewayFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(useSenderIDCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
+            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel1)
                 .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(operatorPanelLayout.createParallelGroup(Alignment.BASELINE)
+            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel3)
                 .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
@@ -734,28 +734,28 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addContainerGap(180, Short.MAX_VALUE))
     );
 
-    tabbedPane.addTab(l10n.getString("ConfigFrame.operatorPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/operator-16.png")), operatorPanel); // NOI18N
-        SortedSet<String> operators = new TreeSet<String>(Collator.getInstance());
-    operators.addAll(keyring.getOperatorNames());
-    for (String operator : operators) {
-        Operator op = Operators.getOperator(operator);
+    tabbedPane.addTab(l10n.getString("ConfigFrame.gatewayPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/gateway-16.png")), gatewayPanel); // NOI18N
+        SortedSet<String> gateways = new TreeSet<String>(Collator.getInstance());
+    gateways.addAll(keyring.getGatewayNames());
+    for (String gateway : gateways) {
+            Gateway op = Gateways.getGateway(gateway);
         if (op != null) {
-            operatorComboBox.setSelectedOperator(operator);
+            gatewayComboBox.setSelectedGateway(gateway);
             break;
         }
     }
-    operatorComboBoxItemStateChanged(null);
-    operatorComboBox.addItemListener(new ItemListener() {
+    gatewayComboBoxItemStateChanged(null);
+    gatewayComboBox.addItemListener(new ItemListener() {
         public void itemStateChanged(ItemEvent evt) {
-            operatorComboBoxItemStateChanged(evt);
+            gatewayComboBoxItemStateChanged(evt);
         }
     });
 
         Mnemonics.setLocalizedText(jLabel9, l10n.getString("ConfigFrame.jLabel9.text")); // NOI18N
 
-    jLabel10.setLabelFor(operatorComboBox);
+    jLabel10.setLabelFor(gatewayComboBox);
         Mnemonics.setLocalizedText(jLabel10, l10n.getString("ConfigFrame.jLabel10.text")); // NOI18N
-    jLabel10.setToolTipText(operatorComboBox.getToolTipText());
+    jLabel10.setToolTipText(gatewayComboBox.getToolTipText());
 
     loginTextField.setColumns(15);
     loginTextField.setToolTipText(l10n.getString("ConfigFrame.loginTextField.toolTipText")); // NOI18N
@@ -815,7 +815,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
                     .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(operatorComboBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(ComponentPlacement.RELATED)
@@ -833,7 +833,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
 
     loginPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel10, jLabel11, jLabel12});
 
-    loginPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {loginTextField, operatorComboBox, passwordField});
+    loginPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {gatewayComboBox, loginTextField, passwordField});
 
     loginPanelLayout.setVerticalGroup(
         loginPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -843,7 +843,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
             .addPreferredGap(ComponentPlacement.UNRELATED)
             .addGroup(loginPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel10)
-                .addComponent(operatorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(gatewayComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(loginPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel11)
@@ -856,7 +856,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
             .addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
@@ -1154,11 +1154,11 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void operatorComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_operatorComboBoxItemStateChanged
+    private void gatewayComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_gatewayComboBoxItemStateChanged
         boolean temp = fullyInicialized;
         fullyInicialized = false;
-        Operator operator = operatorComboBox.getSelectedOperator();
-        Tuple<String, String> key = keyring.getKey(operator != null ? operator.getName() : null);
+        Gateway gateway = gatewayComboBox.getSelectedGateway();
+        Tuple<String, String> key = keyring.getKey(gateway != null ? gateway.getName() : null);
         if (key == null) {
             loginTextField.setText(null);
             passwordField.setText(null);
@@ -1167,7 +1167,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
             passwordField.setText(key.get2());
         }
         fullyInicialized = temp;
-    }//GEN-LAST:event_operatorComboBoxItemStateChanged
+    }//GEN-LAST:event_gatewayComboBoxItemStateChanged
 
     private void clearKeyringButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
         String deleteOption = l10n.getString("Delete");
@@ -1190,7 +1190,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
         }
         
         keyring.clearKeys();
-        operatorComboBoxItemStateChanged(null);
+        gatewayComboBoxItemStateChanged(null);
     }//GEN-LAST:event_clearKeyringButtonActionPerformed
 
     private void useProxyCheckBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_useProxyCheckBoxItemStateChanged
@@ -1218,8 +1218,8 @@ private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event
     windowCenteredCheckBox.setVisible(showAdvanced);
     startMinimizedCheckBox.setVisible(showAdvanced);
     tipsCheckBox.setVisible(showAdvanced);
-    operatorFilterLabel.setVisible(showAdvanced);
-    operatorFilterTextField.setVisible(showAdvanced);
+    gatewayFilterLabel.setVisible(showAdvanced);
+    gatewayFilterTextField.setVisible(showAdvanced);
     debugCheckBox.setVisible(showAdvanced);
     advancedControlsCheckBox.setVisible(showAdvanced);
     
@@ -1429,6 +1429,10 @@ private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
     private JLabel develLabel;
     private JPanel develPanel;
     private JCheckBox forgetLayoutCheckBox;
+    private GatewayComboBox gatewayComboBox;
+    private JLabel gatewayFilterLabel;
+    private JTextField gatewayFilterTextField;
+    private JPanel gatewayPanel;
     private JPanel generalPanel;
     private JTextField httpProxyTextField;
     private JTextField httpsProxyTextField;
@@ -1450,10 +1454,6 @@ private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
     private JTextField loginTextField;
     private JLabel lookLabel;
     private JCheckBox notificationAreaCheckBox;
-    private OperatorComboBox operatorComboBox;
-    private JLabel operatorFilterLabel;
-    private JTextField operatorFilterTextField;
-    private JPanel operatorPanel;
     private JPasswordField passwordField;
     private JPanel privacyPanel;
     private JCheckBox reducedHistoryCheckBox;
