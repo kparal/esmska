@@ -2,7 +2,7 @@
 
 # Imports PO files exported from Launchpad to a Bazaar branch
 
-# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii, bzr
+# Dependencies: translate-toolkit, gettext, tofrodos, native2ascii, bzr
 
 # trap and exit on error
 set -e

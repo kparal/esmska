@@ -2,7 +2,7 @@
 
 # Exports all translations to a bazaar branch to be used by Launchpad
 
-# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii, bzr
+# Dependencies: translate-toolkit, gettext, tofrodos, native2ascii, bzr
 
 # trap and exit on error
 set -e

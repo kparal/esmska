@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Create version file used to announce program and operator updates
+# Create version file used to announce program and gateway updates
 # The file contents is saved to "version.xml" in program root directory.
 
 # trap and exit on error

@@ -4,7 +4,7 @@
 # updates PO files to be up to date,
 # updates properties files from PO files.
 
-# Dependencies: translate-toolkit, gettext, dos2unix, native2ascii
+# Dependencies: translate-toolkit, gettext, tofrodos, native2ascii
 
 # trap and exit on error 
 set -e
@@ -26,7 +26,7 @@ if ls *.po >/dev/null; then
         # remove CR linefeeds which may be present even though they should not be
         if od -c "$PO" | grep -q '\\r'; then
             echo "$PO contains forbidden CR linefeeds, removing..."
-            dos2unix -a "$PO"
+            fromdos -a "$PO"
         fi
         # merge
         msgmerge -U -q --backup=none "$PO" esmska.pot
