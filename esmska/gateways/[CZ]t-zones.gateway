@@ -1,0 +1,170 @@
+
+function getName() {
+    return "[CZ]t-zones"
+}
+
+function getVersion() {
+    return "2010-07-06"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "0.19.0.99"
+}
+
+function getWebsite() {
+    return "http://sms.t-zones.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána T-mobile určená pro registrované zákazníky."
+}
+
+function getSupportedPrefixes() {
+    return []
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 153
+}
+
+function getMaxChars() {
+    return 765
+}
+
+function getMaxParts() {
+    return 1
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function send() {
+    var re, match, content, params, postData
+
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+
+    // not logged in yet
+    var logged = false
+
+    // start page
+    content = EXEC.getURL("https://sms.client.tmo.cz/sms.jsp", [])
+
+    // search if we are already logged in (previous logout failed or something)
+    re = /\/.gang\/logout\/tzones/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+            // we are already logged in
+            logged = true
+    }
+
+    // if not logged in, do it
+    if (!logged) {
+        // post credentials
+        postData = ["nextURL", "checkStatus.jsp", "errURL", "clickError.jsp",
+                    "username", LOGIN, "password", PASSWORD,
+                    "submit", "Přihlásit"]
+        // it just doesn't work if you send it only once, don't ask me why,
+        // cookie issues maybe
+        // so send it twice
+        content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
+        content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
+        content = EXEC.getURL("https://www.t-mobile.cz/.gang/mdh/http://login.client.tmo.cz/.gang/login", [])
+
+        // seach for errors
+        re = /<div class="error_box">([^]*?)<\/div>/
+        match = re.exec(content)
+        if (undefined != match) { // if found
+            re = /Uživatel je již přihlášen/
+            match2 = re.exec(content)
+            if (undefined == match2) { // if not found
+                // login was not successfull
+                EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+                logout()
+                return false
+            }
+            // we are already logged in
+        }
+        // no error message, we are logged in now
+        logged = true
+    }
+
+    // sms sending page
+    content = EXEC.getURL("https://sms.client.tmo.cz/", [])
+
+    // seach for errors, sometimes overload errors are displayed here
+    re = /<div class="error_box">([^]*?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        logout()
+        return false
+    }
+
+    // find counter
+    re = /<input type="hidden" name="counter" value="(.*)" \/>/
+    match = re.exec(content);
+    var counter = match[1]
+
+    // send sms
+    postData = ["counter", counter,
+                "recipients", NUMBER, "text", MESSAGE,
+                "send", "Odeslat", "mtype", "0",
+                "confirmation", DELIVERY_REPORT?"1":"0",
+                "history", "on"]
+    content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
+
+    // check if message was successfully sent
+    re = /SMS zpr.v. byl. odeslán./
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // all ok
+        logout()
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<div id="gt-errorWindow">([^]*?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // gateway told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        logout()
+        return false
+    }
+    
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    logout()
+    return false
+}
+
+// custom function for logging out
+function logout() {
+    // visit logout page
+    EXEC.getURL("https://login.client.tmo.cz/um/cs/logout.jsp", []);
+}

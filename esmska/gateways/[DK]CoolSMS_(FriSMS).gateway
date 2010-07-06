@@ -1,0 +1,149 @@
+
+function getName() {
+    return "[DK]CoolSMS (FriSMS)"
+}
+
+function getVersion() {
+    return "2010-07-06"
+}
+
+function getMaintainer() {
+    return "Julius Bartkus <sourness@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "0.19.0.99"
+}
+
+function getWebsite() {
+    return "http://www.coolsms.dk"
+}
+
+function getDescription() {
+    return "Paid gateway to all operators in Denmark, Sweden and Norway."
+}
+
+function getSupportedPrefixes() {
+    return ["+45", "+46", "+47"]
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 160
+}
+
+function getMaxParts() {
+    return 5
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function getSupportedLanguages() {
+    return ["dk"]
+}
+
+function send() {
+    var re, match, match2, content, content2, params, postData, state, tries, test
+
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+
+    // logout just to be sure
+    logout()
+
+    // login
+    postData = ["username", LOGIN, "password", PASSWORD, "autologon", "no", "logon", "true"]
+    content = EXEC.postURL("http://www.coolsms.dk/Logon.html", [], postData)
+
+    // check login
+    re = /<form name="freesender" method="post" action="\/FriSMS.html" id="freeform">/
+    match = re.exec(content)    
+    if(undefined == match) {
+    	 EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+         return false
+    }
+
+    // send message    
+    EXEC.setReferer("http://www.coolsms.dk/FriSMS.html")
+    postData = ["recipient", NUMBER, "msg", MESSAGE]
+    content = EXEC.postURL("http://www.coolsms.dk/ajax/sendFriSMS.php", [], postData)
+
+    // check sending message
+    re = /"succes"/
+    match2 = re.exec(content)
+    if (undefined != match2) {
+      
+    	re = /"msgid":([0-9]+)}/
+    	match = re.exec(content)
+    	
+    	state = "queued"
+    	tries = 10
+
+    	while(state == "queued" && tries != 0) {
+    		EXEC.sleep(2000);
+    		state = checkStatus(match[1])
+    		tries--
+    	}
+    	
+    	// received, rejected
+    	if(state == "rejected") {
+    		EXEC.setErrorMessage(EXEC.ERROR_NO_REASON)
+    		return false
+    	} else if (state == "false") {
+    		EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
+    		return false
+    	} else if (state == "queued") {
+    		EXEC.setGatewayMessage("Mobile phone is turned off or out of coverage. Message will be delivered later.")
+    		return true
+    	} else if (state == "received") {
+    		return true
+    	}
+
+    }
+
+	// if neither success nor error message was found
+	EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
+	return false
+
+}
+
+// check current status for message
+function checkStatus(msgid){
+  
+	var content, state
+	
+	postData = ["msgid",msgid]
+	content = EXEC.postURL("http://www.coolsms.dk/ajax/checkStatus.php", [], postData)
+	
+	re = /"state":"([a-zA-Z]+)"/
+	match = re.exec(content)
+	state = match[1]
+  
+	return state 
+}
+
+function logout() {
+	EXEC.getURL("http://www.coolsms.dk/Logaf.html", [])
+}
+
+

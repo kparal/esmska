@@ -1,0 +1,213 @@
+
+function getName() {
+    return "[CZ]Vodafone samoobsluha"
+}
+
+function getVersion() {
+    return "2010-07-06"
+}
+
+function getMaintainer() {
+    return "Martin Jansa <Martin.Jansa@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "0.19.0.99"
+}
+
+function getWebsite() {
+    return "https://samoobsluha.vodafone.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána Vodafone určená pro registrované zákazníky."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 152
+}
+
+function getMaxChars() {
+    return 775
+}
+
+function getMaxParts() {
+    return 1
+}
+
+function getSignatureExtraLength() {
+    return 1
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function send() {
+    var re, match, content, params, postData
+    
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+
+    // not logged in yet
+    var logged = false
+
+    // start page
+    try {
+        content = EXEC.getURL("https://samoobsluha.vodafone.cz/", [])
+    } catch (e) {
+        // With Sun Java 6 Update 19 and higher this throws SSLHandshakeException
+        // "MD2withRSA is disabled". Read more at:
+        // http://code.google.com/p/esmska/issues/detail?id=271
+        // We have to catch this exception and announce it to the user in that case.
+        if (e.message.indexOf("MD2withRSA is disabled") >= 0) {
+            EXEC.setErrorMessage("Stránky Vodafone Samoobsluhy kvůli zastaralému " +
+            "bezpečnostnímu certifikátu<br>bohužel nadále nefungují pod Java 6 Update 19 " +
+            "a vyšší. Buď nainstalujte<br>starší verzi platformy Java, nebo použijte jinou bránu.<br><br>Více " +
+            "informací v <a href=\"http://code.google.com/p/esmska/issues/detail?id=271\">" +
+            "hlášení 271</a>.")
+        } else {
+            // this was a different exception, just rethrow it and let the 
+            // script fail
+            throw e
+        }
+        return false
+    }
+
+    // search if we are not already logged in (previous logout failed or something)
+    re = /<a href="logout.php"/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // we are already logged in
+        logged = true
+    }
+
+    // if not logged in, do it
+    if (!logged) {
+        // post credentials
+        postData = ["lang", "cs", "redirect", "", 
+                    "msisdn", LOGIN, "passwd", PASSWORD,
+                    "submit", "Přihlásit"]
+        content = EXEC.postURL("https://samoobsluha.vodafone.cz/login.php", [], postData)
+        
+        // search for errors
+        re = /<div class="warning">/
+        match = re.exec(content)
+        if (undefined != match) { // if found
+            // login was not successfull
+            EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+            logout()
+            return false
+        }
+        // no error message, we are logged in now
+        logged = true
+    }
+
+    // sms sending page
+    content = EXEC.getURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [])
+ 
+    //search if the sms service is activated
+    re = /Službu Skupinové web SMS nemáte aktivní/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        EXEC.setErrorMessage("Pro možnost posílání SMS je ve Vodafone samoobsluze nejprve<br>" +
+        'nutné aktivovat službu "Skupinové web SMS"')
+        logout()
+        return false
+    }
+ 
+    // add receiver
+    postData = ["action", "", "receiver", NUMBER, "pushed_button[add_msisdn]", "Přidat"]
+    content = EXEC.postURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [], postData)
+
+    // check if receiver added successfully
+    re = /<div class="warning">(.+?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // gateway told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        logout()
+        return false
+    }
+
+    // preview sms
+    postData = ["action", "", "split", "1", "sms_count", "5",
+                "sender_name", SENDERNAME, "message", MESSAGE, 
+                "pushed_button[preview]", "Odeslat"]
+    content = EXEC.postURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [], postData)
+
+    // apparently gateway does not report any error here but unfortunately silently ignores it
+    // anyway, let's try to detect possible error
+    re = /<div class="warning">(.+?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // gateway told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        logout()
+        return false
+    }
+
+    // send sms
+    postData = ["message_id", "", "pushed_button[send]", "Ano"]
+    content = EXEC.postURL("https://samoobsluha.vodafone.cz/smsgw_composer.php", [], postData)
+
+    // check if message was successfully sent
+    re = /zpráva byla úspěšně odeslána/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // all ok, lets find remaining free sms
+        content = EXEC.getURL("https://samoobsluha.vodafone.cz/smsgw_main.php", []);
+        re = /<td>Do Vodafonu: - \d+<\/td><td>(\d+)<\/td><\/tr><\/table>/
+        match = re.exec(content)
+        if (undefined != match) { // if found
+            var freeSms = match[1]
+            EXEC.setGatewayMessage(EXEC.INFO_FREE_SMS_REMAINING + freeSms)
+        }
+        logout()
+        return true
+    }
+    
+    // error was never achieved here, but try to find it
+    re = /<div class="warning">(.+?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // gateway told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        logout()
+        return false
+    }
+    
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    logout()
+    return false
+}
+
+// custom function for logging out
+function logout() {
+    // visit logout page
+    EXEC.getURL("https://samoobsluha.vodafone.cz/logout.php", []);
+}

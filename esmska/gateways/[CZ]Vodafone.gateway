@@ -1,0 +1,118 @@
+
+function getName() {
+    return "[CZ]Vodafone"
+}
+
+function getVersion() {
+    return "2010-07-06"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "0.19.0.99"
+}
+
+function getWebsite() {
+    return "http://www.vodafonesms.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána Vodafone určená pro veřejnost."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return ["+420608","+420773","+420774","+420775","+420776","+420777"]
+}
+
+function getSMSLength() {
+    return 152
+}
+
+function getMaxChars() {
+    return 760
+}
+
+function getMaxParts() {
+    return 1
+}
+
+function getSignatureExtraLength() {
+    return 5
+}
+
+function getDelayBetweenMessages() {
+    return 15
+}
+
+function isLoginRequired() {
+    return false
+}
+
+function getSupportedLanguages() {
+    return []
+}
+
+function send() {
+    var re, match, content, params, postData
+
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+    if (SENDERNUMBER.indexOf("+420") == 0) {
+        SENDERNUMBER = SENDERNUMBER.substring(4)
+    }
+
+    // start page
+    content = EXEC.getURL("http://www.vodafonesms.cz/", [])
+    
+    // get imageid and ppp values
+    re = /<input type="hidden" name="imgid" value="(.*)" \/>/
+    match = re.exec(content);
+    var imgid = match[1]
+    
+    re = /<input type="hidden" name="ppp" value="(.*)" \/>/
+    match = re.exec(content);
+    var ppp = match[1]
+    
+    // download image
+    params = ["id", imgid]
+    content = EXEC.getURL("http://www.vodafonesms.cz/imgcode.php", params)
+    
+    // show image
+    var pictogram = EXEC.recognizeImage(content, "")
+
+    // send message
+    postData = ["message", MESSAGE, "number", NUMBER, 
+        "mynumber", SENDERNUMBER, "sender", SENDERNAME,
+        "imgid", imgid, "ppp", ppp, "pictogram", pictogram]
+    content = EXEC.postURL("http://www.vodafonesms.cz/send.php", [], postData)
+
+    // check if message was successfully sent
+    re = /<div id="thanks">/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // all ok
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<div id="errmsg">\r?\n<p>(.+?)<\/p>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // gateway told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        return false
+    }
+    
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    return false
+}

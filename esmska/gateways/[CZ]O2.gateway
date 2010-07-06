@@ -1,0 +1,125 @@
+
+function getName() {
+    return "[CZ]O2"
+}
+
+function getVersion() {
+    return "2010-07-06"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "0.19.0.99"
+}
+
+function getWebsite() {
+    return "http://sms.1188.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána O2."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return ["+420601","+420602","+420606","+420607","+420720","+420721",
+            "+420722","+420723","+420724","+420725","+420726","+420727",
+            "+420728","+420729"]
+}
+
+function getSMSLength() {
+    return 60
+}
+
+function getMaxChars() {
+    return 60
+}
+
+function getMaxParts() {
+    return 5
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return false
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function send() {
+    var re, match, content, params, postData
+
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+
+    // start page
+    EXEC.setReferer("http://katalog.1188.cz")
+    content = EXEC.getURL("http://sms.1188.cz", [])
+
+    // get hidden field
+    // they have very ugly hack - two hidden fields, one is removed by 
+    // javascript, one is left
+    re = /\/\*\nvar el = document.getElementById\('(.*?)'\);/
+    match = re.exec(content);
+    var hidden = match[1]
+
+    // get image id
+    re = /<img class="codeImage" src="(.+?)"/
+    match = re.exec(content);
+    var image = match[1]
+    
+    // download image
+    EXEC.setReferer("http://sms.1188.cz")
+    content = EXEC.getURL("http://sms.1188.cz" + image, [])
+    
+    // show image
+    var code = EXEC.recognizeImage(content, "")
+
+    // request for the security image set a cookie which causes troubles, 
+    // let's discard it
+    EXEC.forgetCookie("PHPSESSID", "sms.1188.cz", null)
+    
+    // send message
+    postData = ["adress", NUMBER, "code", code, 
+                "text", MESSAGE, "send", "ODESLAT",
+                hidden, "1"]
+    content = EXEC.postURL("http://sms.1188.cz/", [], postData)
+
+    // check if message was successfully sent
+    re = /Zpráva byla úspěšně odeslána\./
+    match = re.exec(content)
+    if (undefined != match) { //if found
+        // all ok
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<div class="messages">([\s\S]*?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // gateway told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        return false
+    }
+
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    return false
+}

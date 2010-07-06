@@ -1,0 +1,122 @@
+
+function getName() {
+    return "[CZ]T-mobile"
+}
+
+function getVersion() {
+    return "2010-07-06"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "0.19.0.99"
+}
+
+function getWebsite() {
+    return "http://sms.t-zones.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána T-mobile určená pro veřejnost."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return ["+420603","+420604","+420605","+420730","+420731","+420732",
+            "+420733","+420734","+420735","+420736","+420737","+420738",
+            "+420739"]
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 160
+}
+
+function getMaxParts() {
+    return 5
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    // the delay is 30s, but the second 15s is forced during sending
+    return 15
+}
+
+function isLoginRequired() {
+    return false
+}
+
+function getSupportedLanguages() {
+    return ["en", "cs"]
+}
+
+function send() {
+    var re, match, content, params, postData
+
+    // logout just to be sure
+    EXEC.getURL("https://login.client.tmo.cz/um/cs/logout.jsp", []);
+
+    // sms sending page
+    content = EXEC.getURL("http://sms.t-zones.cz/open.jsp", [])
+    var time = new Date().getTime()
+   
+    // find counter
+    re = /<input type="hidden" name="counter" value="(.*)" \/>/
+    match = re.exec(content);
+    var counter = match[1]
+
+    // download image
+    content = EXEC.getURL("http://sms.t-zones.cz/open/captcha.jpg", [])
+    
+    // show image
+    var captcha = EXEC.recognizeImage(content, "")
+
+    // gateway forces us to sleep 15s before sending (add +1s to be sure)
+    //exact 15s delay maybe causes exception by server refusing connection
+    var now = new Date().getTime()
+    if (time + 16000 > now) {
+        EXEC.sleep(time + 16000 - now)
+    }
+
+    // send sms
+    postData = ["counter", counter,
+                "recipient", NUMBER, "text", MESSAGE,
+                "send", "Odeslat", "mtype", "0",
+                "captcha", captcha]
+    content = EXEC.postURL("http://sms.t-zones.cz/open.jsp?site=1", [], postData)
+
+    // check if message was successfully sent
+    re = /(SMS zpr.va byl. odeslán.|SMS was sent)/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // all ok
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<div id="gt-errorWindow">([^]*?)<\/div>/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // gateway told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        return false
+    }
+    
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    return false
+}
+
+
