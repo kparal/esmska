@@ -262,7 +262,6 @@ public class ImportFrame extends javax.swing.JFrame {
         jScrollPane1 = new JScrollPane();
         contactList = new JList();
         doImportLabel = new JLabel();
-        validGatewayCheckBox = new JCheckBox();
         forwardButton = new JButton();
         progressBar = new JProgressBar();
         backButton = new JButton();
@@ -393,7 +392,7 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addComponent(encodingLabel)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(problemLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         cardPanel.add(browsePanel, "browsePanel");
@@ -403,29 +402,19 @@ public class ImportFrame extends javax.swing.JFrame {
         contactList.setCellRenderer(new ContactsListRenderer());
         jScrollPane1.setViewportView(contactList);
 
+
         doImportLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/contact-48.png"))); // NOI18N
-        Mnemonics.setLocalizedText(doImportLabel, l10n.getString("ImportFrame.doImportLabel.text")); // NOI18N
-
-        validGatewayCheckBox.setSelected(true);
-        Mnemonics.setLocalizedText(validGatewayCheckBox, l10n.getString("ImportFrame.validGatewayCheckBox.text"));
-        validGatewayCheckBox.setToolTipText(l10n.getString("ImportFrame.validGatewayCheckBox.toolTipText")); // NOI18N
-        validGatewayCheckBox.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent evt) {
-                validGatewayCheckBoxStateChanged(evt);
-            }
-        });
-
+        Mnemonics.setLocalizedText(doImportLabel, l10n.getString("ImportFrame.doImportLabel.text"));
         GroupLayout resultsPanelLayout = new GroupLayout(resultsPanel);
         resultsPanel.setLayout(resultsPanelLayout);
         resultsPanelLayout.setHorizontalGroup(
             resultsPanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(resultsPanelLayout.createSequentialGroup()
+            .addGroup(Alignment.TRAILING, resultsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(resultsPanelLayout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(validGatewayCheckBox)
-                    .addComponent(foundContactsLabel, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
-                    .addComponent(doImportLabel))
+                .addGroup(resultsPanelLayout.createParallelGroup(Alignment.TRAILING)
+                    .addComponent(jScrollPane1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(foundContactsLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(doImportLabel, Alignment.LEADING))
                 .addContainerGap())
         );
         resultsPanelLayout.setVerticalGroup(
@@ -434,10 +423,8 @@ public class ImportFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(foundContactsLabel)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(validGatewayCheckBox)
-                .addGap(18, 18, 18)
                 .addComponent(doImportLabel)
                 .addContainerGap())
         );
@@ -583,23 +570,6 @@ public class ImportFrame extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_forwardButtonActionPerformed
                 
-    private void validGatewayCheckBoxStateChanged(ChangeEvent evt) {//GEN-FIRST:event_validGatewayCheckBoxStateChanged
-        if (validGatewayCheckBox.isSelected()) {
-            removeInvalidGateways();
-        } else {
-            DefaultListModel contactListModel = (DefaultListModel) contactList.getModel();
-            contactListModel.clear();
-            try {
-                for (Contact c : worker.get()) {
-                    contactListModel.addElement(c);
-                }
-                removeExistingContacts();
-            } catch (Exception ex) {
-                logger.log(Level.SEVERE, "Problem getting new contacts", ex);
-            }
-        }
-    }//GEN-LAST:event_validGatewayCheckBoxStateChanged
-
 private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         String file = doBrowseButton();
         if (file != null) {
@@ -626,7 +596,6 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
                     contactListModel.addElement(c);
                 }
                 removeExistingContacts();
-                validGatewayCheckBoxStateChanged(null);
 
                 Mnemonics.setLocalizedText(forwardButton, l10n.getString("Import_"));
                 forwardButton.setIcon(new ImageIcon(
@@ -691,7 +660,6 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
     private JLabel problemLabel;
     private JProgressBar progressBar;
     private JPanel resultsPanel;
-    private JCheckBox validGatewayCheckBox;
     private JRadioButton vcardRadioButton;
     // End of variables declaration//GEN-END:variables
     
