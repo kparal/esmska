@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-05 22:52+0200\n"
-"PO-Revision-Date: 2010-07-05 22:51+0100\n"
+"POT-Creation-Date: 2010-07-06 18:35+0200\n"
+"PO-Revision-Date: 2010-07-06 18:35+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -312,6 +312,31 @@ msgstr ""
 "spuštění programu opět obnoví výchozí rozvržení\n"
 "</html>"
 
+#: ConfigFrame.gatewayFilterLabel.text
+msgid "Show &only gateways with names containing:"
+msgstr "Zobrazova&t pouze brány mající v názvu:"
+
+#: ConfigFrame.gatewayFilterTextField.toolTipText
+msgid ""
+"<html>\n"
+"In the gateway list only those will be displayed, which contains<br>\n"
+"a pattern in their name provided in this field. This way you can easily<br>\n"
+"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
+"You can enter more patterns separated by comma. Patterns are case "
+"sensitive.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"V seznamu bran budou zobrazeny pouze ty, které ve svém<br>\n"
+"názvu obsahují vzor zadaný v tomto poli. Jednoduše tak lze<br>\n"
+"například zobrazit pouze brány pro zemi XX zadáním vzoru [XX].<br>\n"
+"Lze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n"
+"</html>"
+
+#: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
+msgid "&Gateways"
+msgstr "&Brány"
+
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&Obecné"
@@ -461,31 +486,6 @@ msgstr ""
 "Pozor, u moderních kompozitních správců oken (Compiz, Beryl, ...) je<br>\n"
 "tato funkce dostupná až od Java 6 Update 10.\n"
 "</html>"
-
-#: ConfigFrame.operatorFilterLabel.text
-msgid "Show &only gateways with names containing:"
-msgstr "Zobrazova&t pouze brány mající v názvu:"
-
-#: ConfigFrame.operatorFilterTextField.toolTipText
-msgid ""
-"<html>\n"
-"In the gateway list only those will be displayed, which contains<br>\n"
-"a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-"You can enter more patterns separated by comma. Patterns are case "
-"sensitive.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"V seznamu bran budou zobrazeny pouze ty, které ve svém<br>\n"
-"názvu obsahují vzor zadaný v tomto poli. Jednoduše tak lze<br>\n"
-"například zobrazit pouze brány pro zemi XX zadáním vzoru [XX].<br>\n"
-"Lze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n"
-"</html>"
-
-#: ConfigFrame.operatorPanel.TabConstraints.tabTitle
-msgid "&Gateways"
-msgstr "&Brány"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
@@ -1114,6 +1114,192 @@ msgctxt "Forward_"
 msgid "&Forward"
 msgstr "Přepo&slat"
 
+#: Gateway.unknown
+msgctxt "Gateway.unknown"
+msgid "Unknown gateway"
+msgstr "Neznámá brána"
+
+#: GatewayComboBox.Choose_suitable_gateway_for_provided_number
+msgid "Guess a suitable gateway for the provided number"
+msgstr "Odhadnout vhodnou bránu pro zadané číslo"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayComboBox.gatewayTooltip
+msgid ""
+"<html>\n"
+"<b>{0}</b><br>\n"
+"Website: <a href=\"{1}\">{1}</a><br>\n"
+"Description: {2}<br><br>\n"
+"{3}<br>\n"
+"Delay between messages: {4}<br>\n"
+"{5}<br>\n"
+"Gateway version: {6}\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"<b>{0}</b><br>\n"
+"Webová stránka: <a href=\"{1}\">{1}</a><br>\n"
+"Popis: {2}<br><br>\n"
+"{3}<br>\n"
+"Prodleva mezi zprávami: {4}<br>\n"
+"{5}<br>\n"
+"Verze brány: {6}\n"
+"</html>"
+
+#: GatewayComboBox.international
+msgid "Can be used internationally."
+msgstr "Lze použít mezinárodně."
+
+#: GatewayComboBox.needRegistration
+msgid "Requires registration on the website."
+msgstr "Vyžaduje registraci na webové stránce."
+
+#: GatewayComboBox.noRegistration
+msgid "Does not require registration."
+msgstr "Nevyžaduje registraci."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayComboBox.onlyCountry
+msgid "Mainly usable for country: {0}"
+msgstr "Lze použít zejména pro zemi: {0}"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayExecutor.ERROR_FIX_IN_PROGRESS
+msgid ""
+"The gateway maintainers have modified their webpage and it can''t be used "
+"from Esmska<br>\n"
+"at the moment. The fix is being worked on, you can track <a href=\"{0}\">its "
+"status</a>.<br>\n"
+"<br>\n"
+"In the meantime you can send requests to gateway maintainers to create "
+"stable and<br>\n"
+"immutable machine-readable interface for their gateway. That would eliminate "
+"these problems."
+msgstr ""
+"Správci brány pozměnili své webové stránky a ty teď aktuálně nelze z Esmsky "
+"použít.<br>\n"
+"Na opravě se pracuje, můžete sledovat <a href=\"{0}\">její průběh</a>.<br>\n"
+"<br>\n"
+"Zatím můžete posílat požadavky na správce stránek, aby vytvořili stabilní a "
+"neměnné<br>\n"
+"strojově čitelné rozhraní pro svoji bránu. To by zabránilo problémům tohoto "
+"typu."
+
+#: GatewayExecutor.ERROR_GATEWAY_MESSAGE
+msgid "A message from the gateway:<br>"
+msgstr "Zpráva od brány:<br>"
+
+#: GatewayExecutor.ERROR_LIMIT_REACHED
+msgid ""
+"You are sending the message too early. The gateway either requires a certain "
+"interval<br>you have to wait before sending another message or it "
+"limits<br>the maximum number of possible messages in some time period. Try "
+"it later."
+msgstr ""
+"Odesíláte zprávu příliš brzy. Brána buď vyžaduje určitý interval,<br>který "
+"je nutný vyčkat před odesláním další zprávy, nebo omezuje<br>maximální možný "
+"počet zpráv za jistý časový úsek. Zkuste to později."
+
+#: GatewayExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+"Zadali jste příliš dlouhý text zprávy.<br>\n"
+"<br>\n"
+"Rada: Pokud je to ve vašem jazyce možné, zkuste nepoužívat národní znaky "
+"(odlišné od standardní<br>\n"
+"anglické znakové sady), jinak to může podstatně zkrátit maximální povolenou "
+"délku zprávy."
+
+#: GatewayExecutor.ERROR_NO_CREDIT
+msgid "You don't have sufficient credit to send this message."
+msgstr "Pro odeslání této zprávy nemáte dostatečný kredit."
+
+#: GatewayExecutor.ERROR_NO_REASON
+msgid "The gateway hasn't specified any reason why the message sending failed."
+msgstr ""
+"Brána blíže neupřesnila žádný důvod, proč odeslání této zprávy selhalo."
+
+#: GatewayExecutor.ERROR_SIGNATURE_NEEDED
+msgid ""
+"This gateway requires that you supply a sender signature. Correct it in the "
+"program settings and try again."
+msgstr ""
+"Tato brána vyžaduje vyplněný podpis odesilatele. Zadejte jej v nastavení "
+"programu a zkuste to znovu."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayExecutor.ERROR_UKNOWN
+msgid ""
+"An unknown error has occured. The gateway provider has probably "
+"changed<br>its webpages or has a problem with them currently.<br>Try again "
+"later.<br><br>Also make sure that you have working connection to the "
+"Internet<br>and that you are using the <a href=\"{0}\">latest program and "
+"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
+"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
+"homepage</a>."
+msgstr ""
+"Došlo k neznámé chybě. Poskytovatel brány zřejmě změnil<br>své webové "
+"stránky, nebo s nimi má aktuálně potíže.<br>Zkuste to později.<br><br>Taktéž "
+"se ujistěte, že máte funkční připojení k Internetu<br>a že používáte <a href="
+"\"{0}\">nejnovější verzi programu a brány</a>.<br><br>Pokud potíže přetrvají "
+"a <a href=\"{1}\">webová brána</a> funguje,<br>nahlaste problém na <a href="
+"\"{2}\">domovských stránkách programu</a>."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayExecutor.ERROR_WRONG_AUTH
+msgid ""
+"You have entered incorrect login credentials.<br>This gateway requires "
+"registration and you can''t send messages throught it without one.<br>Visit "
+"the <a href=\"{0}\">website of this gateway</a> and find out how to register "
+"or log in.<br>Then enter the login credentials in program preferences."
+"<br><br>If you have entered your login credentials correctly, visit the "
+"website<br>of the gateway and check that logging in works."
+msgstr ""
+"Zadali jste nesprávné přihlašovací údaje.<br>Tato brána vyžaduje registraci, "
+"bez ní přes ni nelze zprávy posílat.<br>Navštivte <a href=\"{0}\">webovou "
+"stránku</a> této brány a zjistěte, jak se zaregistrovat či přihlásit."
+"<br>Poté vyplňte přihlašovací údaje v nastavení programu.<br><br>Pokud máte "
+"přihlašovací údaje zadány správně, navštivte webovou stránku brány<br>a "
+"ujistěte se, že přihlašování funguje."
+
+#: GatewayExecutor.ERROR_WRONG_CODE
+msgid "You have entered the wrong security code."
+msgstr "Špatně jste opsali bezpečnostní kód."
+
+#: GatewayExecutor.ERROR_WRONG_NUMBER
+msgid "You have entered incorrect recipient number."
+msgstr "Zadali jste nesprávné číslo příjemce."
+
+#: GatewayExecutor.ERROR_WRONG_SIGNATURE
+msgid "You have entered incorrent sender signature (number or name)."
+msgstr "Zadali jste nesprávný podpis odesilatele (číslo či jméno)."
+
+#: GatewayExecutor.INFO_CREDIT_REMAINING
+msgid "Remaining credit:"
+msgstr "Zbývající kredit:"
+
+#: GatewayExecutor.INFO_FREE_SMS_REMAINING
+msgid "Free SMS remaining:"
+msgstr "Zbývá volných SMS:"
+
+#: GatewayExecutor.INFO_STATUS_NOT_PROVIDED
+msgid ""
+"The gateway doesn't provide any information about successful sending. The "
+"message might be and <b>might not be</b> delivered."
+msgstr ""
+"Brána neposkytuje žádné informace o úspěšném odeslání. Zpráva mohla a "
+"<b>nemusela</b> být doručena."
+
+#: GatewayInterpreter.unknown_gateway
+msgid "Unknown gateway!"
+msgstr "Neznámá brána!"
+
 #: Hide_program
 msgid "Hide program"
 msgstr "Skrýt program"
@@ -1364,21 +1550,21 @@ msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "vCard soubory (*.vcard, *.vcf)"
 
-#: ImportFrame.validOperatorCheckBox.text
-msgid "Import only contacts with known operator"
-msgstr "Importovat pouze kontakty se známým operátorem"
+#: ImportFrame.validGatewayCheckBox.text
+msgid "Import only contacts with known gateway"
+msgstr "Importovat pouze kontakty se známou branou"
 
-#: ImportFrame.validOperatorCheckBox.toolTipText
+#: ImportFrame.validGatewayCheckBox.toolTipText
 msgid ""
 "<html>\n"
 "If checked then contacts will be shown in the list and will be imported only "
 "when<br>\n"
-"they have operator this program can work with\n"
+"they have gateway this program can work with\n"
 "</html>"
 msgstr ""
 "<html>\n"
 "Pokud je pole zatrhnuto, zobrazí se v seznamu a budou importovány<br>\n"
-"pouze ty kontakty, s jejichž operátory umí tento program pracovat\n"
+"pouze ty kontakty, s jejichž branou umí tento program pracovat\n"
 "</html>"
 
 #: Import_
@@ -1547,7 +1733,7 @@ msgstr "Importovat kontakty z jiných aplikací"
 msgid "&Message"
 msgstr "&Zpráva"
 
-#: MainFrame.newOperatorUpdate
+#: MainFrame.newGatewayUpdate
 msgid "<a href=\"\">Gateway updates</a> are available!"
 msgstr "Jsou dostupné <a href=\"\">aktualizované brány</a>!"
 
@@ -1556,7 +1742,7 @@ msgstr "Jsou dostupné <a href=\"\">aktualizované brány</a>!"
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
 msgstr "Byla vydána <a href=\"\">nová verze programu</a> ({0})!"
 
-#: MainFrame.no_operators
+#: MainFrame.no_gateways
 msgid ""
 "<html>\n"
 "<h2>No gateways can be found!</h2>\n"
@@ -1672,192 +1858,6 @@ msgstr "Pozastavit/spustit odesílání"
 #: OK_
 msgid "&OK"
 msgstr "&OK"
-
-#: Operator.unknown
-msgctxt "Operator.unknown"
-msgid "Unknown gateway"
-msgstr "Neznámá brána"
-
-#: OperatorComboBox.Choose_suitable_gateway_for_provided_number
-msgid "Guess a suitable gateway for the provided number"
-msgstr "Odhadnout vhodnou bránu pro zadané číslo"
-
-#: OperatorComboBox.international
-msgid "Can be used internationally."
-msgstr "Lze použít mezinárodně."
-
-#: OperatorComboBox.needRegistration
-msgid "Requires registration on the website."
-msgstr "Vyžaduje registraci na webové stránce."
-
-#: OperatorComboBox.noRegistration
-msgid "Does not require registration."
-msgstr "Nevyžaduje registraci."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorComboBox.onlyCountry
-msgid "Mainly usable for country: {0}"
-msgstr "Lze použít zejména pro zemi: {0}"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorComboBox.operatorTooltip
-msgid ""
-"<html>\n"
-"<b>{0}</b><br>\n"
-"Website: <a href=\"{1}\">{1}</a><br>\n"
-"Description: {2}<br><br>\n"
-"{3}<br>\n"
-"Delay between messages: {4}<br>\n"
-"{5}<br>\n"
-"Gateway version: {6}\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<b>{0}</b><br>\n"
-"Webová stránka: <a href=\"{1}\">{1}</a><br>\n"
-"Popis: {2}<br><br>\n"
-"{3}<br>\n"
-"Prodleva mezi zprávami: {4}<br>\n"
-"{5}<br>\n"
-"Verze brány: {6}\n"
-"</html>"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorExecutor.ERROR_FIX_IN_PROGRESS
-msgid ""
-"The gateway maintainers have modified their webpage and it can''t be used "
-"from Esmska<br>\n"
-"at the moment. The fix is being worked on, you can track <a href=\"{0}\">its "
-"status</a>.<br>\n"
-"<br>\n"
-"In the meantime you can send requests to gateway maintainers to create "
-"stable and<br>\n"
-"immutable machine-readable interface for their gateway. That would eliminate "
-"these problems."
-msgstr ""
-"Správci brány pozměnili své webové stránky a ty teď aktuálně nelze z Esmsky "
-"použít.<br>\n"
-"Na opravě se pracuje, můžete sledovat <a href=\"{0}\">její průběh</a>.<br>\n"
-"<br>\n"
-"Zatím můžete posílat požadavky na správce stránek, aby vytvořili stabilní a "
-"neměnné<br>\n"
-"strojově čitelné rozhraní pro svoji bránu. To by zabránilo problémům tohoto "
-"typu."
-
-#: OperatorExecutor.ERROR_LIMIT_REACHED
-msgid ""
-"You are sending the message too early. The gateway either requires a certain "
-"interval<br>you have to wait before sending another message or it "
-"limits<br>the maximum number of possible messages in some time period. Try "
-"it later."
-msgstr ""
-"Odesíláte zprávu příliš brzy. Brána buď vyžaduje určitý interval,<br>který "
-"je nutný vyčkat před odesláním další zprávy, nebo omezuje<br>maximální možný "
-"počet zpráv za jistý časový úsek. Zkuste to později."
-
-#: OperatorExecutor.ERROR_LONG_TEXT
-msgid ""
-"You have entered too long message text.<br>\n"
-"<br>\n"
-"Hint: If it is for your language possible, try to avoid using national "
-"characters (different from standard<br>\n"
-"english character set), otherwise it may reduce the maximum allowed message "
-"length substantially."
-msgstr ""
-"Zadali jste příliš dlouhý text zprávy.<br>\n"
-"<br>\n"
-"Rada: Pokud je to ve vašem jazyce možné, zkuste nepoužívat národní znaky "
-"(odlišné od standardní<br>\n"
-"anglické znakové sady), jinak to může podstatně zkrátit maximální povolenou "
-"délku zprávy."
-
-#: OperatorExecutor.ERROR_NO_CREDIT
-msgid "You don't have sufficient credit to send this message."
-msgstr "Pro odeslání této zprávy nemáte dostatečný kredit."
-
-#: OperatorExecutor.ERROR_NO_REASON
-msgid "The gateway hasn't specified any reason why the message sending failed."
-msgstr ""
-"Brána blíže neupřesnila žádný důvod, proč odeslání této zprávy selhalo."
-
-#: OperatorExecutor.ERROR_OPERATOR_MESSAGE
-msgid "A message from the gateway:<br>"
-msgstr "Zpráva od brány:<br>"
-
-#: OperatorExecutor.ERROR_SIGNATURE_NEEDED
-msgid ""
-"This gateway requires that you supply a sender signature. Correct it in the "
-"program settings and try again."
-msgstr ""
-"Tato brána vyžaduje vyplněný podpis odesilatele. Zadejte jej v nastavení "
-"programu a zkuste to znovu."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorExecutor.ERROR_UKNOWN
-msgid ""
-"An unknown error has occured. The gateway provider has probably "
-"changed<br>its webpages or has a problem with them currently.<br>Try again "
-"later.<br><br>Also make sure that you have working connection to the "
-"Internet<br>and that you are using the <a href=\"{0}\">latest program and "
-"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
-"homepage</a>."
-msgstr ""
-"Došlo k neznámé chybě. Poskytovatel brány zřejmě změnil<br>své webové "
-"stránky, nebo s nimi má aktuálně potíže.<br>Zkuste to později.<br><br>Taktéž "
-"se ujistěte, že máte funkční připojení k Internetu<br>a že používáte <a href="
-"\"{0}\">nejnovější verzi programu a brány</a>.<br><br>Pokud potíže přetrvají "
-"a <a href=\"{1}\">webová brána</a> funguje,<br>nahlaste problém na <a href="
-"\"{2}\">domovských stránkách programu</a>."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorExecutor.ERROR_WRONG_AUTH
-msgid ""
-"You have entered incorrect login credentials.<br>This gateway requires "
-"registration and you can''t send messages throught it without one.<br>Visit "
-"the <a href=\"{0}\">website of this gateway</a> and find out how to register "
-"or log in.<br>Then enter the login credentials in program preferences."
-"<br><br>If you have entered your login credentials correctly, visit the "
-"website<br>of the gateway and check that logging in works."
-msgstr ""
-"Zadali jste nesprávné přihlašovací údaje.<br>Tato brána vyžaduje registraci, "
-"bez ní přes ni nelze zprávy posílat.<br>Navštivte <a href=\"{0}\">webovou "
-"stránku</a> této brány a zjistěte, jak se zaregistrovat či přihlásit."
-"<br>Poté vyplňte přihlašovací údaje v nastavení programu.<br><br>Pokud máte "
-"přihlašovací údaje zadány správně, navštivte webovou stránku brány<br>a "
-"ujistěte se, že přihlašování funguje."
-
-#: OperatorExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
-msgstr "Špatně jste opsali bezpečnostní kód."
-
-#: OperatorExecutor.ERROR_WRONG_NUMBER
-msgid "You have entered incorrect recipient number."
-msgstr "Zadali jste nesprávné číslo příjemce."
-
-#: OperatorExecutor.ERROR_WRONG_SIGNATURE
-msgid "You have entered incorrent sender signature (number or name)."
-msgstr "Zadali jste nesprávný podpis odesilatele (číslo či jméno)."
-
-#: OperatorExecutor.INFO_CREDIT_REMAINING
-msgid "Remaining credit:"
-msgstr "Zbývající kredit:"
-
-#: OperatorExecutor.INFO_FREE_SMS_REMAINING
-msgid "Free SMS remaining:"
-msgstr "Zbývá volných SMS:"
-
-#: OperatorExecutor.INFO_STATUS_NOT_PROVIDED
-msgid ""
-"The gateway doesn't provide any information about successful sending. The "
-"message might be and <b>might not be</b> delivered."
-msgstr ""
-"Brána neposkytuje žádné informace o úspěšném odeslání. Zpráva mohla a "
-"<b>nemusela</b> být doručena."
-
-#: OperatorInterpreter.unknown_operator
-msgid "Unknown gateway!"
-msgstr "Neznámá brána!"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -2085,7 +2085,7 @@ msgstr ""
 "Autor skriptu pro použitou webovou bránu neposkytl<br>žádné další informace "
 "o příčině selhání."
 
-#: SMSSender.no_operator
+#: SMSSender.no_gateway
 msgid "no gateway"
 msgstr "žádná brána"
 

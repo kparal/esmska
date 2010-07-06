@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-05 22:41+0200\n"
+"POT-Creation-Date: 2010-07-06 18:31+0200\n"
 "PO-Revision-Date: 2010-06-04 12:06+0000\n"
 "Last-Translator: Jonay <jonay.santana@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -325,6 +325,33 @@ msgstr ""
 "predeterminada será restaurada la próxima vez que inicie el programa.\n"
 "</html>"
 
+#: ConfigFrame.gatewayFilterLabel.text
+msgid "Show &only gateways with names containing:"
+msgstr "Mostrar sol&o los operadores cuyos nombres contienen:"
+
+#: ConfigFrame.gatewayFilterTextField.toolTipText
+msgid ""
+"<html>\n"
+"In the gateway list only those will be displayed, which contains<br>\n"
+"a pattern in their name provided in this field. This way you can easily<br>\n"
+"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
+"You can enter more patterns separated by comma. Patterns are case "
+"sensitive.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"En la lista de operadores aparecerán solo aquellos que contienen<br>\n"
+"en sus nombres el patrón especificado en este campo. De esta manera puedes "
+"fácilmente<br>\n"
+"ver por ej. los operadores del país XX escribiendo el patrón [XX].<br>\n"
+"Puedes ingresar mas patrones separándolos por coma. Los patrones son "
+"sensibles a mayúsculas y minúsculas.\n"
+"</html>"
+
+#: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
+msgid "&Gateways"
+msgstr "&Operadores"
+
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&General"
@@ -477,33 +504,6 @@ msgstr ""
 "esta<br>\n"
 "característica está solo disponible con Java 6 Update 10.\n"
 "</html>"
-
-#: ConfigFrame.operatorFilterLabel.text
-msgid "Show &only gateways with names containing:"
-msgstr "Mostrar sol&o los operadores cuyos nombres contienen:"
-
-#: ConfigFrame.operatorFilterTextField.toolTipText
-msgid ""
-"<html>\n"
-"In the gateway list only those will be displayed, which contains<br>\n"
-"a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-"You can enter more patterns separated by comma. Patterns are case "
-"sensitive.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"En la lista de operadores aparecerán solo aquellos que contienen<br>\n"
-"en sus nombres el patrón especificado en este campo. De esta manera puedes "
-"fácilmente<br>\n"
-"ver por ej. los operadores del país XX escribiendo el patrón [XX].<br>\n"
-"Puedes ingresar mas patrones separándolos por coma. Los patrones son "
-"sensibles a mayúsculas y minúsculas.\n"
-"</html>"
-
-#: ConfigFrame.operatorPanel.TabConstraints.tabTitle
-msgid "&Gateways"
-msgstr "&Operadores"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
@@ -1148,6 +1148,199 @@ msgctxt "Forward_"
 msgid "&Forward"
 msgstr "Si&guiente"
 
+#: Gateway.unknown
+#, fuzzy
+msgctxt "Gateway.unknown"
+msgid "Unknown gateway"
+msgstr "Compuerta desconocida"
+
+#: GatewayComboBox.Choose_suitable_gateway_for_provided_number
+msgid "Guess a suitable gateway for the provided number"
+msgstr "Sugerir una compuerta concordante con el número provehido"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayComboBox.gatewayTooltip
+msgid ""
+"<html>\n"
+"<b>{0}</b><br>\n"
+"Website: <a href=\"{1}\">{1}</a><br>\n"
+"Description: {2}<br><br>\n"
+"{3}<br>\n"
+"Delay between messages: {4}<br>\n"
+"{5}<br>\n"
+"Gateway version: {6}\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"<b>{0}</b><br>\n"
+"Sitio web: <a href=\"{1}\">{1}</a><br>\n"
+"Descripción: {2}<br><br>\n"
+"{3}<br>\n"
+"Retardo entre mensajes: {4}<br>\n"
+"{5}<br>\n"
+"Versión de compuerta: {6}\n"
+"</html>"
+
+#: GatewayComboBox.international
+msgid "Can be used internationally."
+msgstr "Puede ser usado internacionalmente"
+
+#: GatewayComboBox.needRegistration
+msgid "Requires registration on the website."
+msgstr "Requiere de registro en el sitio web"
+
+#: GatewayComboBox.noRegistration
+msgid "Does not require registration."
+msgstr "No requiere de registro"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayComboBox.onlyCountry
+#, fuzzy
+msgid "Mainly usable for country: {0}"
+msgstr "Solamente se puede usar para el país: {0}"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayExecutor.ERROR_FIX_IN_PROGRESS
+msgid ""
+"The gateway maintainers have modified their webpage and it can''t be used "
+"from Esmska<br>\n"
+"at the moment. The fix is being worked on, you can track <a href=\"{0}\">its "
+"status</a>.<br>\n"
+"<br>\n"
+"In the meantime you can send requests to gateway maintainers to create "
+"stable and<br>\n"
+"immutable machine-readable interface for their gateway. That would eliminate "
+"these problems."
+msgstr ""
+"Los responsables de la compuerta han modificado su página web y no puede ser "
+"usada desde Esmska<br>\n"
+"por el momento. Se está trabajando en la corrección, puede dar seguimiento "
+"<a href=\"{0}\">su estado</a>.<br>\n"
+"<br>\n"
+"Mientras tanto usted puede enviar peticiones a los responsables para crear "
+"una interfaz para su compuerta estable e<br>inalterable legible para el "
+"equipo. Eso eliminaría estos problemas<br>"
+
+#: GatewayExecutor.ERROR_GATEWAY_MESSAGE
+msgid "A message from the gateway:<br>"
+msgstr "Un mensaje desde la compuerta:<br>"
+
+#: GatewayExecutor.ERROR_LIMIT_REACHED
+msgid ""
+"You are sending the message too early. The gateway either requires a certain "
+"interval<br>you have to wait before sending another message or it "
+"limits<br>the maximum number of possible messages in some time period. Try "
+"it later."
+msgstr ""
+"Usted está enviando el mensaje muy pronto. Cualquier compuerta requiere un "
+"cierto intervalo de tiempo<br>usted debe esperar antes de enviar otro "
+"mensaje o le limitará<br>el máximo número de mensajes posibles en un período "
+"de tiempo. Inténtelo más tarde."
+
+#: GatewayExecutor.ERROR_LONG_TEXT
+msgid ""
+"You have entered too long message text.<br>\n"
+"<br>\n"
+"Hint: If it is for your language possible, try to avoid using national "
+"characters (different from standard<br>\n"
+"english character set), otherwise it may reduce the maximum allowed message "
+"length substantially."
+msgstr ""
+"Usted ha introducido un texto demasiado largo.<br>\n"
+"<br>\n"
+"Consejo: Si es posible para su lenguaje, intente evitar el uso de caracteres "
+"nacionales (diferentes al paquete estándar<br>de caracteres inglés), de otra "
+"forma se podría reducir substancialmente el tamaño máximo permitido para el "
+"mensaje."
+
+#: GatewayExecutor.ERROR_NO_CREDIT
+msgid "You don't have sufficient credit to send this message."
+msgstr "Usted no cuenta con suficiente crédito para enviar este mensaje."
+
+#: GatewayExecutor.ERROR_NO_REASON
+msgid "The gateway hasn't specified any reason why the message sending failed."
+msgstr ""
+"La compuerta no ha especificado razón alguna del por qué falló el mensaje "
+"enviado."
+
+#: GatewayExecutor.ERROR_SIGNATURE_NEEDED
+msgid ""
+"This gateway requires that you supply a sender signature. Correct it in the "
+"program settings and try again."
+msgstr ""
+"Esta puerta de enlace requiere que proporcione una firma de remitente. "
+"Corrija esto en los ajustes del programa e inténtelo de nuevo."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayExecutor.ERROR_UKNOWN
+msgid ""
+"An unknown error has occured. The gateway provider has probably "
+"changed<br>its webpages or has a problem with them currently.<br>Try again "
+"later.<br><br>Also make sure that you have working connection to the "
+"Internet<br>and that you are using the <a href=\"{0}\">latest program and "
+"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
+"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
+"homepage</a>."
+msgstr ""
+"Ha ocurrido un error desconocido. El proveedor de la compuerta probablemente "
+"ha cambiado<br>sus páginas web o tiene un problema con ellas actualmente ."
+"<br>Vuelva a intentarlo más tarde.<br><br>También asegúrese que su conexión "
+"de internet se encuentra trabajando<br>y que usted está usando<a href=\"{0}"
+"\">la versión más reciente del programa de la compuerta</a>.<br><br>Si el "
+"problema persiste y la <a href=\"{1}\">página web de la compuerta</a> "
+"trabaja bien,<br>reporte el problema a <a href=\"{2}\">la página de inicio "
+"del programa</a>."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayExecutor.ERROR_WRONG_AUTH
+msgid ""
+"You have entered incorrect login credentials.<br>This gateway requires "
+"registration and you can''t send messages throught it without one.<br>Visit "
+"the <a href=\"{0}\">website of this gateway</a> and find out how to register "
+"or log in.<br>Then enter the login credentials in program preferences."
+"<br><br>If you have entered your login credentials correctly, visit the "
+"website<br>of the gateway and check that logging in works."
+msgstr ""
+"Usted ha ingresado credenciales de registro incorrectas.<br>Esta compuerta "
+"requiere de registro y no puede enviar mensajes por ésta vía sin el mismo."
+"<br>Visite la<a href=\"{0}\">página web de la compuerta</a> y encuentre como "
+"registrarse y acceder.<br>Después ingrese las credenciales de registro en "
+"las preferencias del programa.<br><br>Si usted ha ingresado correctamente "
+"sus credenciales de registro, visite la página web<br>de la compuerta y "
+"revise que funcione bien el registro."
+
+#: GatewayExecutor.ERROR_WRONG_CODE
+msgid "You have entered the wrong security code."
+msgstr "Ha ingresado un codigo de seguridad incorrecto."
+
+#: GatewayExecutor.ERROR_WRONG_NUMBER
+msgid "You have entered incorrect recipient number."
+msgstr "Ha ingresado un número de recipiente incorrecto."
+
+#: GatewayExecutor.ERROR_WRONG_SIGNATURE
+msgid "You have entered incorrent sender signature (number or name)."
+msgstr "Ha ingresado un número o nombre de remitente incorrecto"
+
+#: GatewayExecutor.INFO_CREDIT_REMAINING
+msgid "Remaining credit:"
+msgstr "Credito restante:"
+
+#: GatewayExecutor.INFO_FREE_SMS_REMAINING
+msgid "Free SMS remaining:"
+msgstr "SMS gratis restantes:"
+
+#: GatewayExecutor.INFO_STATUS_NOT_PROVIDED
+msgid ""
+"The gateway doesn't provide any information about successful sending. The "
+"message might be and <b>might not be</b> delivered."
+msgstr ""
+"La compuerta no provee información alguna acerca del envío exitoso. El "
+"mensaje podría y <b>no podría</b> haber sido entregado."
+
+#: GatewayInterpreter.unknown_gateway
+msgid "Unknown gateway!"
+msgstr "¡Compuerta desconocida!"
+
 #: Hide_program
 msgid "Hide program"
 msgstr "Esconder programa"
@@ -1405,16 +1598,18 @@ msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "Archivos Vcard (*.vcard, *.vcf)"
 
-#: ImportFrame.validOperatorCheckBox.text
-msgid "Import only contacts with known operator"
+#: ImportFrame.validGatewayCheckBox.text
+#, fuzzy
+msgid "Import only contacts with known gateway"
 msgstr "Importar solamente contactos con un operador conocido"
 
-#: ImportFrame.validOperatorCheckBox.toolTipText
+#: ImportFrame.validGatewayCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "If checked then contacts will be shown in the list and will be imported only "
 "when<br>\n"
-"they have operator this program can work with\n"
+"they have gateway this program can work with\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -1592,7 +1787,7 @@ msgstr "Importar contactos desde otra aplicación"
 msgid "&Message"
 msgstr "&Mensaje"
 
-#: MainFrame.newOperatorUpdate
+#: MainFrame.newGatewayUpdate
 msgid "<a href=\"\">Gateway updates</a> are available!"
 msgstr "<a href=\"\">¡Actualizaciones de compuerta</a> disponibles!"
 
@@ -1601,7 +1796,7 @@ msgstr "<a href=\"\">¡Actualizaciones de compuerta</a> disponibles!"
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
 msgstr "A <a href=\"\">¡Nueva versión del programa</a> ({0}) se ha liberado!"
 
-#: MainFrame.no_operators
+#: MainFrame.no_gateways
 msgid ""
 "<html>\n"
 "<h2>No gateways can be found!</h2>\n"
@@ -1718,198 +1913,6 @@ msgstr "Pausar/despausar envío"
 #: OK_
 msgid "&OK"
 msgstr "&OK"
-
-#: Operator.unknown
-msgctxt "Operator.unknown"
-msgid "Unknown gateway"
-msgstr "Compuerta desconocida"
-
-#: OperatorComboBox.Choose_suitable_gateway_for_provided_number
-msgid "Guess a suitable gateway for the provided number"
-msgstr "Sugerir una compuerta concordante con el número provehido"
-
-#: OperatorComboBox.international
-msgid "Can be used internationally."
-msgstr "Puede ser usado internacionalmente"
-
-#: OperatorComboBox.needRegistration
-msgid "Requires registration on the website."
-msgstr "Requiere de registro en el sitio web"
-
-#: OperatorComboBox.noRegistration
-msgid "Does not require registration."
-msgstr "No requiere de registro"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorComboBox.onlyCountry
-#, fuzzy
-msgid "Mainly usable for country: {0}"
-msgstr "Solamente se puede usar para el país: {0}"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorComboBox.operatorTooltip
-msgid ""
-"<html>\n"
-"<b>{0}</b><br>\n"
-"Website: <a href=\"{1}\">{1}</a><br>\n"
-"Description: {2}<br><br>\n"
-"{3}<br>\n"
-"Delay between messages: {4}<br>\n"
-"{5}<br>\n"
-"Gateway version: {6}\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<b>{0}</b><br>\n"
-"Sitio web: <a href=\"{1}\">{1}</a><br>\n"
-"Descripción: {2}<br><br>\n"
-"{3}<br>\n"
-"Retardo entre mensajes: {4}<br>\n"
-"{5}<br>\n"
-"Versión de compuerta: {6}\n"
-"</html>"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorExecutor.ERROR_FIX_IN_PROGRESS
-msgid ""
-"The gateway maintainers have modified their webpage and it can''t be used "
-"from Esmska<br>\n"
-"at the moment. The fix is being worked on, you can track <a href=\"{0}\">its "
-"status</a>.<br>\n"
-"<br>\n"
-"In the meantime you can send requests to gateway maintainers to create "
-"stable and<br>\n"
-"immutable machine-readable interface for their gateway. That would eliminate "
-"these problems."
-msgstr ""
-"Los responsables de la compuerta han modificado su página web y no puede ser "
-"usada desde Esmska<br>\n"
-"por el momento. Se está trabajando en la corrección, puede dar seguimiento "
-"<a href=\"{0}\">su estado</a>.<br>\n"
-"<br>\n"
-"Mientras tanto usted puede enviar peticiones a los responsables para crear "
-"una interfaz para su compuerta estable e<br>inalterable legible para el "
-"equipo. Eso eliminaría estos problemas<br>"
-
-#: OperatorExecutor.ERROR_LIMIT_REACHED
-msgid ""
-"You are sending the message too early. The gateway either requires a certain "
-"interval<br>you have to wait before sending another message or it "
-"limits<br>the maximum number of possible messages in some time period. Try "
-"it later."
-msgstr ""
-"Usted está enviando el mensaje muy pronto. Cualquier compuerta requiere un "
-"cierto intervalo de tiempo<br>usted debe esperar antes de enviar otro "
-"mensaje o le limitará<br>el máximo número de mensajes posibles en un período "
-"de tiempo. Inténtelo más tarde."
-
-#: OperatorExecutor.ERROR_LONG_TEXT
-msgid ""
-"You have entered too long message text.<br>\n"
-"<br>\n"
-"Hint: If it is for your language possible, try to avoid using national "
-"characters (different from standard<br>\n"
-"english character set), otherwise it may reduce the maximum allowed message "
-"length substantially."
-msgstr ""
-"Usted ha introducido un texto demasiado largo.<br>\n"
-"<br>\n"
-"Consejo: Si es posible para su lenguaje, intente evitar el uso de caracteres "
-"nacionales (diferentes al paquete estándar<br>de caracteres inglés), de otra "
-"forma se podría reducir substancialmente el tamaño máximo permitido para el "
-"mensaje."
-
-#: OperatorExecutor.ERROR_NO_CREDIT
-msgid "You don't have sufficient credit to send this message."
-msgstr "Usted no cuenta con suficiente crédito para enviar este mensaje."
-
-#: OperatorExecutor.ERROR_NO_REASON
-msgid "The gateway hasn't specified any reason why the message sending failed."
-msgstr ""
-"La compuerta no ha especificado razón alguna del por qué falló el mensaje "
-"enviado."
-
-#: OperatorExecutor.ERROR_OPERATOR_MESSAGE
-msgid "A message from the gateway:<br>"
-msgstr "Un mensaje desde la compuerta:<br>"
-
-#: OperatorExecutor.ERROR_SIGNATURE_NEEDED
-msgid ""
-"This gateway requires that you supply a sender signature. Correct it in the "
-"program settings and try again."
-msgstr ""
-"Esta puerta de enlace requiere que proporcione una firma de remitente. "
-"Corrija esto en los ajustes del programa e inténtelo de nuevo."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorExecutor.ERROR_UKNOWN
-msgid ""
-"An unknown error has occured. The gateway provider has probably "
-"changed<br>its webpages or has a problem with them currently.<br>Try again "
-"later.<br><br>Also make sure that you have working connection to the "
-"Internet<br>and that you are using the <a href=\"{0}\">latest program and "
-"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
-"homepage</a>."
-msgstr ""
-"Ha ocurrido un error desconocido. El proveedor de la compuerta probablemente "
-"ha cambiado<br>sus páginas web o tiene un problema con ellas actualmente ."
-"<br>Vuelva a intentarlo más tarde.<br><br>También asegúrese que su conexión "
-"de internet se encuentra trabajando<br>y que usted está usando<a href=\"{0}"
-"\">la versión más reciente del programa de la compuerta</a>.<br><br>Si el "
-"problema persiste y la <a href=\"{1}\">página web de la compuerta</a> "
-"trabaja bien,<br>reporte el problema a <a href=\"{2}\">la página de inicio "
-"del programa</a>."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: OperatorExecutor.ERROR_WRONG_AUTH
-msgid ""
-"You have entered incorrect login credentials.<br>This gateway requires "
-"registration and you can''t send messages throught it without one.<br>Visit "
-"the <a href=\"{0}\">website of this gateway</a> and find out how to register "
-"or log in.<br>Then enter the login credentials in program preferences."
-"<br><br>If you have entered your login credentials correctly, visit the "
-"website<br>of the gateway and check that logging in works."
-msgstr ""
-"Usted ha ingresado credenciales de registro incorrectas.<br>Esta compuerta "
-"requiere de registro y no puede enviar mensajes por ésta vía sin el mismo."
-"<br>Visite la<a href=\"{0}\">página web de la compuerta</a> y encuentre como "
-"registrarse y acceder.<br>Después ingrese las credenciales de registro en "
-"las preferencias del programa.<br><br>Si usted ha ingresado correctamente "
-"sus credenciales de registro, visite la página web<br>de la compuerta y "
-"revise que funcione bien el registro."
-
-#: OperatorExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
-msgstr "Ha ingresado un codigo de seguridad incorrecto."
-
-#: OperatorExecutor.ERROR_WRONG_NUMBER
-msgid "You have entered incorrect recipient number."
-msgstr "Ha ingresado un número de recipiente incorrecto."
-
-#: OperatorExecutor.ERROR_WRONG_SIGNATURE
-msgid "You have entered incorrent sender signature (number or name)."
-msgstr "Ha ingresado un número o nombre de remitente incorrecto"
-
-#: OperatorExecutor.INFO_CREDIT_REMAINING
-msgid "Remaining credit:"
-msgstr "Credito restante:"
-
-#: OperatorExecutor.INFO_FREE_SMS_REMAINING
-msgid "Free SMS remaining:"
-msgstr "SMS gratis restantes:"
-
-#: OperatorExecutor.INFO_STATUS_NOT_PROVIDED
-msgid ""
-"The gateway doesn't provide any information about successful sending. The "
-"message might be and <b>might not be</b> delivered."
-msgstr ""
-"La compuerta no provee información alguna acerca del envío exitoso. El "
-"mensaje podría y <b>no podría</b> haber sido entregado."
-
-#: OperatorInterpreter.unknown_operator
-msgid "Unknown gateway!"
-msgstr "¡Compuerta desconocida!"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -2141,7 +2144,7 @@ msgstr ""
 "El autor del script no proveyó información adicional<br>referente a la causa "
 "de la falla para la página compuerta usada."
 
-#: SMSSender.no_operator
+#: SMSSender.no_gateway
 msgid "no gateway"
 msgstr "sin compuerta"
 
