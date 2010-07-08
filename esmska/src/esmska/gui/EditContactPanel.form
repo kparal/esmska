@@ -30,12 +30,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="gatewayComboBox" pref="588" max="32767" attributes="0"/>
+                              <Component id="gatewayComboBox" pref="325" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="nameTextField" alignment="0" pref="622" max="32767" attributes="0"/>
-                          <Component id="numberTextField" alignment="1" pref="622" max="32767" attributes="0"/>
+                          <Component id="nameTextField" alignment="0" pref="359" max="32767" attributes="0"/>
+                          <Component id="numberTextField" alignment="1" pref="359" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -66,7 +66,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="74" max="32767" attributes="0"/>
+              <EmptySpace pref="84" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,8 +153,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="credentialsInfoLabel" alignment="1" pref="733" max="32767" attributes="0"/>
-              <Component id="countryInfoLabel" alignment="0" max="32767" attributes="0"/>
+              <Component id="credentialsInfoLabel" alignment="1" pref="470" max="32767" attributes="0"/>
+              <Component id="countryInfoLabel" alignment="0" pref="470" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

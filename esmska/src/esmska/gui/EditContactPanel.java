@@ -168,8 +168,8 @@ public class EditContactPanel extends javax.swing.JPanel {
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
-        .addComponent(countryInfoLabel)
+        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+        .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(Alignment.LEADING)
@@ -195,11 +195,11 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(suggestGatewayButton))
-                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
-                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE))))
+                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))))
             .addContainerGap())
     );
 
@@ -224,7 +224,7 @@ public class EditContactPanel extends javax.swing.JPanel {
                 .addComponent(suggestGatewayButton))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(74, Short.MAX_VALUE))
+            .addContainerGap(84, Short.MAX_VALUE))
     );
 
     layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, numberTextField});
