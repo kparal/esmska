@@ -84,10 +84,10 @@ function send() {
         // http://code.google.com/p/esmska/issues/detail?id=271
         // We have to catch this exception and announce it to the user in that case.
         if (e.message.indexOf("MD2withRSA is disabled") >= 0) {
-            EXEC.setErrorMessage("Stránky Vodafone Samoobsluhy kvůli zastaralému " +
-            "bezpečnostnímu certifikátu<br>bohužel nadále nefungují pod Java 6 Update 19 " +
-            "a vyšší. Buď nainstalujte<br>starší verzi platformy Java, nebo použijte jinou bránu.<br><br>Více " +
-            "informací v <a href=\"http://code.google.com/p/esmska/issues/detail?id=271\">" +
+            EXEC.setErrorMessage("Pro použití této brány je nutné mít nainstalovanou " +
+            "Java 6 Update 21<br>nebo novější, jinak brána nefunguje. Zřejmě máte starou verzi Javy,<br>" +
+            "prosím aktualizujte.<br><br>" +
+            "Více informací v <a href=\"http://code.google.com/p/esmska/issues/detail?id=271\">" +
             "hlášení 271</a>.")
         } else {
             // this was a different exception, just rethrow it and let the 
