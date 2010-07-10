@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-06"
+    return "2010-07-10"
 }
 
 function getMaintainer() {
@@ -114,7 +114,7 @@ function send() {
         content = EXEC.postURL("https://samoobsluha.vodafone.cz/login.php", [], postData)
         
         // search for errors
-        re = /<div class="warning">/
+        re = /<div class="warningmsg">/
         match = re.exec(content)
         if (undefined != match) { // if found
             // login was not successfull
