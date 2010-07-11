@@ -350,7 +350,7 @@ public class Queue {
             List<SMS> list = queue.get(gateway);
             int currentPos = list.indexOf(sms);
             int newPos = currentPos + positionDelta;
-
+            
             //check the boundaries of the queue
             if (newPos < 0) {
                 newPos = 0;
@@ -368,12 +368,10 @@ public class Queue {
 
         valuedSupport.fireEventOccured(Events.SMS_POSITION_CHANGED, sms);
 
-        //if sms is currently ready, reset it to waiting and do another search
+        //reset this sms to waiting and do another search for ready sms
         //(now different sms may be ready instead of this)
-        if (sms.getStatus() == SMS.Status.READY) {
-            sms.setStatus(SMS.Status.WAITING);
-            markAllIfReady();
-        }
+        sms.setStatus(SMS.Status.WAITING);
+        markAllIfReady();
     }
 
     /** Return current delay for specified gateway.
