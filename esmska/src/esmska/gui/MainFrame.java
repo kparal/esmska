@@ -312,7 +312,7 @@ public class MainFrame extends javax.swing.JFrame {
                     null, JOptionPane.WARNING_MESSAGE);
         }
         int returnCode = saveOk ? 0 : 3;
-        logger.fine("Exiting program with return code: " + returnCode);
+        logger.log(Level.FINE, "Exiting program with return code: {0}", returnCode);
         System.exit(returnCode);
     }
 
@@ -779,7 +779,7 @@ public class MainFrame extends javax.swing.JFrame {
             finish(sms);
         }
         private void smsFailed(SMS sms) {
-            logger.info("Message could not be sent: " + sms);
+            logger.log(Level.INFO, "Message could not be sent: {0}", sms);
             log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms.getRecipient()),
                     null, Icons.STATUS_WARNING));
 

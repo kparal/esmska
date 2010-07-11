@@ -21,6 +21,7 @@ import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
 import org.apache.commons.lang.Validate;
@@ -194,7 +195,7 @@ public class Queue {
         }
 
         if (added) {
-            logger.fine("Added new SMS to queue: " + sms);
+            logger.log(Level.FINE, "Added new SMS to queue: {0}", sms);
             valuedSupport.fireEventOccured(Events.SMS_ADDED, sms);
             markIfReady(sms);
             timer.start();
@@ -210,7 +211,7 @@ public class Queue {
         Validate.notNull(collection, "collection is null");
         Validate.noNullElements(collection);
 
-        logger.fine("Adding " + collection.size() + " new SMS to the queue");
+        logger.log(Level.FINE, "Adding {0} new SMS to the queue", collection.size());
         boolean added = false;
         for (SMS sms : collection) {
             if (add(sms)) {
@@ -234,7 +235,7 @@ public class Queue {
             if (queue.containsKey(gateway)) { //only if we have this gateway
                 removed = queue.get(gateway).remove(sms);
             }
-            if (removed && queue.get(gateway).size() == 0) {
+            if (removed && queue.get(gateway).isEmpty()) {
                 //if there are no more sms from that gateway, delete it from map
                 queue.remove(gateway);
                 gatewayDelay.remove(gateway);
@@ -242,7 +243,7 @@ public class Queue {
         }
 
         if (removed) {
-            logger.fine("Removed SMS from queue: " + sms);
+            logger.log(Level.FINE, "Removed SMS from queue: {0}", sms);
             valuedSupport.fireEventOccured(Events.SMS_REMOVED, sms);
             markAllIfReady();
         }
@@ -344,7 +345,7 @@ public class Queue {
                 //nothing to move
                 return;
             }
-            logger.fine("Moving sms " + sms + "with delta " + positionDelta);
+            logger.log(Level.FINE, "Moving sms {0} with delta {1}", new Object[]{sms, positionDelta});
 
             List<SMS> list = queue.get(gateway);
             int currentPos = list.indexOf(sms);
@@ -451,7 +452,7 @@ public class Queue {
     public void setSMSSent(SMS sms) {
         Validate.notNull(sms);
 
-        logger.fine("Marking sms as successfully sent: " + sms);
+        logger.log(Level.FINE, "Marking sms as successfully sent: {0}", sms);
         sms.setStatus(SMS.Status.SENT);
         valuedSupport.fireEventOccured(Events.SMS_SENT, sms);
 
@@ -466,7 +467,7 @@ public class Queue {
     public void setSMSSending(SMS sms) {
         Validate.notNull(sms);
 
-        logger.fine("Marking SMS as currently being sent: " + sms);
+        logger.log(Level.FINE, "Marking SMS as currently being sent: {0}", sms);
         sms.setStatus(SMS.Status.SENDING);
         valuedSupport.fireEventOccured(Events.SENDING_SMS, sms);
     }
@@ -477,7 +478,7 @@ public class Queue {
     public void setSMSFailed(SMS sms) {
         Validate.notNull(sms);
 
-        logger.fine("Marking SMS as failed during sending: " + sms);
+        logger.log(Level.FINE, "Marking SMS as failed during sending: {0}", sms);
         //pause the queue when sms fail
         setPaused(true);
         //set sms to be waiting again
@@ -495,7 +496,7 @@ public class Queue {
 
         long delay = getSMSDelay(sms);
         if (sms.getStatus() == SMS.Status.WAITING && delay <= 0) {
-            logger.finer("Marking SMS as ready: " + sms);
+            logger.log(Level.FINER, "Marking SMS as ready: {0}", sms);
             sms.setStatus(SMS.Status.READY);
             valuedSupport.fireEventOccured(Events.NEW_SMS_READY, sms);
         }
@@ -517,7 +518,7 @@ public class Queue {
                         break;
                     }
                     if (sms.getStatus() == SMS.Status.WAITING) {
-                        logger.finer("Marking SMS as ready: " + sms);
+                        logger.log(Level.FINER, "Marking SMS as ready: {0}", sms);
                         sms.setStatus(SMS.Status.READY);
                         ready.add(sms);
                     }

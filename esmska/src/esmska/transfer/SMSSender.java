@@ -23,6 +23,8 @@ import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /** Sender of SMS
  *
@@ -37,6 +39,12 @@ public class SMSSender {
     /** map of <gateway,worker>; it shows whether some gateway has currently assigned
     a background worker (therefore is sending at the moment) */
     private HashMap<String,SMSWorker> workers = new HashMap<String, SMSWorker>();
+
+    /** Custom executor for executing SwingWorkers. Needed because of bug in Java 6u18:
+     * http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6880336
+     * http://forums.sun.com/thread.jspa?threadID=5424356
+     */
+    private static final ExecutorService executor = Executors.newCachedThreadPool();
 
     /** Creates a new instance of SMSSender */
     public SMSSender() {
@@ -69,20 +77,20 @@ public class SMSSender {
                 continue;
             }
             
-            logger.fine("Sending new SMS: " + sms.toDebugString());
+            logger.log(Level.FINE, "Sending new SMS: {0}", sms.toDebugString());
             queue.setSMSSending(sms);
             
             SMSWorker worker = new SMSWorker(sms);
             workers.put(gateway, worker);
             
             //send in worker thread
-            worker.execute();
+            executor.execute(worker);
         }
     }
     
     /** Handle processed SMS */
     private void finishedSending(SMS sms, boolean success) {
-        logger.fine("Finished sending SMS: " + sms.toDebugString());
+        logger.log(Level.FINE, "Finished sending SMS: {0}", sms.toDebugString());
         workers.remove(sms.getGateway());
         if (success) {
             queue.setSMSSent(sms);

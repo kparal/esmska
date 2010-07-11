@@ -297,7 +297,7 @@ public class UpdateDialog extends javax.swing.JDialog {
                 progressBar.setString(l10n.getString("Update.checking"));
                 break;
             case READY_TO_UPDATE:
-                logger.finer(updates.size() + " updates found");
+                logger.log(Level.FINER, "{0} updates found", updates.size());
                 Mnemonics.setLocalizedText(checkButton, l10n.getString("Update.update_"));
                 topLabel.setText(l10n.getString("Update.updatesFound"));
                 populateGwList();
@@ -435,7 +435,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         }
 
         //save the data to harddisk
-        logger.finer("Saving " + scripts.size() + " updates to disk");
+        logger.log(Level.FINER, "Saving {0} updates to disk", scripts.size());
         for (Tuple3<GatewayUpdateInfo, String, byte[]> script : scripts) {
             try {
                 Context.persistenceManager.saveGateway(
@@ -569,7 +569,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         }
         @Override
         protected ArrayList<Tuple3<GatewayUpdateInfo,String,byte[]>> doInBackground() throws Exception {
-            logger.finer("Downloading " + infos.size() + " updates");
+            logger.log(Level.FINER, "Downloading {0} updates", infos.size());
             for (GatewayUpdateInfo info : infos) {
                 try {
                     //download script
