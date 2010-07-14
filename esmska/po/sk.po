@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-06 18:31+0200\n"
+"POT-Creation-Date: 2010-07-14 19:19+0200\n"
 "PO-Revision-Date: 2010-05-20 17:48+0000\n"
 "Last-Translator: TomasKovacik <nail@nodomain.sk>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -1552,25 +1552,6 @@ msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "Súbory vCard (*.vcard, *.vcf)"
 
-#: ImportFrame.validGatewayCheckBox.text
-#, fuzzy
-msgid "Import only contacts with known gateway"
-msgstr "Importovať iba kontakty so známym operátorom"
-
-#: ImportFrame.validGatewayCheckBox.toolTipText
-#, fuzzy
-msgid ""
-"<html>\n"
-"If checked then contacts will be shown in the list and will be imported only "
-"when<br>\n"
-"they have gateway this program can work with\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Ak zvolíte túto možnosť, v zozname sa zobrazia a budú importované<br>\n"
-"len tie kontakty, s ktorých operátormi vie tento program pracovať.\n"
-"</html>"
-
 #: Import_
 msgid "Im&port"
 msgstr "Im&portovať"
@@ -2490,6 +2471,21 @@ msgstr ""
 "<h2>Skontrolovať aktualizácie brán</h2>\n"
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
+
+#~ msgid "Import only contacts with known operator"
+#~ msgstr "Importovať iba kontakty so známym operátorom"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "If checked then contacts will be shown in the list and will be imported "
+#~ "only when<br>\n"
+#~ "they have operator this program can work with\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Ak zvolíte túto možnosť, v zozname sa zobrazia a budú importované<br>\n"
+#~ "len tie kontakty, s ktorých operátormi vie tento program pracovať.\n"
+#~ "</html>"
 
 #~ msgid ""
 #~ "Omit whitespace from current message and rewrite it to \"CamelCase\" "

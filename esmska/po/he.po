@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-06 18:31+0200\n"
-"PO-Revision-Date: 2010-05-22 12:55+0000\n"
+"POT-Creation-Date: 2010-07-14 19:19+0200\n"
+"PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-23 03:58+0000\n"
+"X-Launchpad-Export-Date: 2010-07-06 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -186,9 +186,8 @@ msgid "Print program version and exit."
 msgstr "הצג את גרסת התוכנה וצא."
 
 #: CompressText_
-#, fuzzy
 msgid "&Compress text"
-msgstr "&דחס"
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
@@ -1434,25 +1433,6 @@ msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "קבצי vCard (*.vcard, *.vcf)"
 
-#: ImportFrame.validGatewayCheckBox.text
-#, fuzzy
-msgid "Import only contacts with known gateway"
-msgstr "ייבא אנשי קשר ממפעילים מוכרים בלבד"
-
-#: ImportFrame.validGatewayCheckBox.toolTipText
-#, fuzzy
-msgid ""
-"<html>\n"
-"If checked then contacts will be shown in the list and will be imported only "
-"when<br>\n"
-"they have gateway this program can work with\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"במידה וסומן אנשי הקשר יוצגו ברשימה וייובאו רק כאשר<br>\n"
-"המפעיל שלהם נתמך על ידי התוכנה\n"
-"</html>"
-
 #: Import_
 msgid "Im&port"
 msgstr ""
@@ -1815,9 +1795,8 @@ msgid "Message"
 msgstr "הודעה"
 
 #: SMSPanel.compress
-#, fuzzy
 msgid "Compress the message or currently selected text (Ctrl+K)"
-msgstr "דחוס את ההודעה (Ctrl+K)"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
@@ -2280,11 +2259,20 @@ msgid ""
 "</html>"
 msgstr ""
 
+#~ msgid "Import only contacts with known operator"
+#~ msgstr "ייבא אנשי קשר ממפעילים מוכרים בלבד"
+
 #~ msgid ""
-#~ "Omit whitespace from current message and rewrite it to \"CamelCase\" "
-#~ "format"
+#~ "<html>\n"
+#~ "If checked then contacts will be shown in the list and will be imported "
+#~ "only when<br>\n"
+#~ "they have operator this program can work with\n"
+#~ "</html>"
 #~ msgstr ""
-#~ "השמט רווחים מההודעה ושנה אותה למבנה \"רישיות־מוקפצות\" (לא תקף בעברית)"
+#~ "<html>\n"
+#~ "במידה וסומן אנשי הקשר יוצגו ברשימה וייובאו רק כאשר<br>\n"
+#~ "המפעיל שלהם נתמך על ידי התוכנה\n"
+#~ "</html>"
 
 #~ msgid "O&perators"
 #~ msgstr "מ&פעילים"
@@ -2326,6 +2314,12 @@ msgstr ""
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "אנא הזן את הקוד שבתמונה:"
+
+#~ msgid ""
+#~ "Omit whitespace from current message and rewrite it to \"CamelCase\" "
+#~ "format"
+#~ msgstr ""
+#~ "השמט רווחים מההודעה ושנה אותה למבנה \"רישיות־מוקפצות\" (לא תקף בעברית)"
 
 #~ msgid "no operator"
 #~ msgstr "אין מפעיל"

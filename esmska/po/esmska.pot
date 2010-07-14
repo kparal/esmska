@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-06 18:35+0200\n"
+"POT-Creation-Date: 2010-07-14 19:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1306,19 +1306,6 @@ msgstr ""
 #: ImportFrame.vCard_filter
 msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
-
-#: ImportFrame.validGatewayCheckBox.text
-msgid "Import only contacts with known gateway"
-msgstr ""
-
-#: ImportFrame.validGatewayCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"If checked then contacts will be shown in the list and will be imported only "
-"when<br>\n"
-"they have gateway this program can work with\n"
-"</html>"
 msgstr ""
 
 #: Import_

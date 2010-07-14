@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-06 18:31+0200\n"
-"PO-Revision-Date: 2010-05-31 21:46+0000\n"
-"Last-Translator: Merarom <Unknown>\n"
+"POT-Creation-Date: 2010-07-14 19:19+0200\n"
+"PO-Revision-Date: 2010-07-05 21:18+0000\n"
+"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-02 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-07-06 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -188,9 +188,8 @@ msgid "Print program version and exit."
 msgstr "Skriv programversion och avsluta."
 
 #: CompressText_
-#, fuzzy
 msgid "&Compress text"
-msgstr "&Komprimera"
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
@@ -1330,20 +1329,6 @@ msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr ""
 
-#: ImportFrame.validGatewayCheckBox.text
-#, fuzzy
-msgid "Import only contacts with known gateway"
-msgstr "Importera endast kontakter med känd operatör"
-
-#: ImportFrame.validGatewayCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"If checked then contacts will be shown in the list and will be imported only "
-"when<br>\n"
-"they have gateway this program can work with\n"
-"</html>"
-msgstr ""
-
 #: Import_
 msgid "Im&port"
 msgstr "Im&portera"
@@ -2148,6 +2133,9 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "Import only contacts with known operator"
+#~ msgstr "Importera endast kontakter med känd operatör"
 
 #~ msgid "Sent messages history"
 #~ msgstr "Skickade medelande historik"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-06 18:31+0200\n"
+"POT-Creation-Date: 2010-07-14 19:19+0200\n"
 "PO-Revision-Date: 2009-11-24 22:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1326,20 +1326,6 @@ msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
 msgstr "File vCard (*.vcard, *.vcf)"
 
-#: ImportFrame.validGatewayCheckBox.text
-#, fuzzy
-msgid "Import only contacts with known gateway"
-msgstr "Importa solo contatti con operatore conosciuto"
-
-#: ImportFrame.validGatewayCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"If checked then contacts will be shown in the list and will be imported only "
-"when<br>\n"
-"they have gateway this program can work with\n"
-"</html>"
-msgstr ""
-
 #: Import_
 msgid "Im&port"
 msgstr ""
@@ -2159,6 +2145,9 @@ msgstr ""
 
 #~ msgid "Sent messages history"
 #~ msgstr "Cronologia messaggi inviati"
+
+#~ msgid "Import only contacts with known operator"
+#~ msgstr "Importa solo contatti con operatore conosciuto"
 
 #~ msgid "O&perators"
 #~ msgstr "O&peratori"
