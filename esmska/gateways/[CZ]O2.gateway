@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-06"
+    return "2010-07-16"
 }
 
 function getMaintainer() {
@@ -70,7 +70,6 @@ function send() {
     }
 
     // start page
-    EXEC.setReferer("http://katalog.1188.cz")
     content = EXEC.getURL("http://sms.1188.cz", [])
 
     // get hidden field
@@ -80,22 +79,12 @@ function send() {
     match = re.exec(content);
     var hidden = match[1]
 
-    // get image id
-    re = /<img class="codeImage" src="(.+?)"/
-    match = re.exec(content);
-    var image = match[1]
-    
     // download image
-    EXEC.setReferer("http://sms.1188.cz")
-    content = EXEC.getURL("http://sms.1188.cz" + image, [])
+    content = EXEC.getURL("http://sms.1188.cz/public/captchaImage.php", [])
     
     // show image
     var code = EXEC.recognizeImage(content, "")
 
-    // request for the security image set a cookie which causes troubles, 
-    // let's discard it
-    EXEC.forgetCookie("PHPSESSID", "sms.1188.cz", null)
-    
     // send message
     postData = ["adress", NUMBER, "code", code, 
                 "text", MESSAGE, "send", "ODESLAT",
@@ -103,7 +92,7 @@ function send() {
     content = EXEC.postURL("http://sms.1188.cz/", [], postData)
 
     // check if message was successfully sent
-    re = /Zpráva byla úspěšně odeslána\./
+    re = /Zpráva byla zařazena do fronty/
     match = re.exec(content)
     if (undefined != match) { //if found
         // all ok
@@ -111,7 +100,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<div class="messages">([\s\S]*?)<\/div>/
+    re = /<div class="smsError">([\s\S]*?)<\/div>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // gateway told us what's wrong
