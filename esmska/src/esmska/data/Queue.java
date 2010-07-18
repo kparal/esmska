@@ -368,9 +368,16 @@ public class Queue {
 
         valuedSupport.fireEventOccured(Events.SMS_POSITION_CHANGED, sms);
 
-        //reset this sms to waiting and do another search for ready sms
-        //(now different sms may be ready instead of this)
-        sms.setStatus(SMS.Status.WAITING);
+        // we have moved an sms in the queue, that may have changed which sms
+        // should be waiting and which should be ready now
+        // mark all ready sms from this gateway as waiting and then compute
+        // a new ready one
+        List<SMS> messages = getAll(sms.getGateway());
+        for (SMS message : messages) {
+            if (message.getStatus() == SMS.Status.READY) {
+                message.setStatus(SMS.Status.WAITING);
+            }
+        }
         markAllIfReady();
     }
 
