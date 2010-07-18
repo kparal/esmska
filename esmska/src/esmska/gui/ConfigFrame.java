@@ -1328,7 +1328,7 @@ private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
                     name = LAF_SUBSTANCE;
                     break;
                 default: 
-                    logger.severe("Uknown LaF: " + laf);
+                    logger.severe("Unknown LaF: " + laf);
                     break;
             }
             label.setText(name);

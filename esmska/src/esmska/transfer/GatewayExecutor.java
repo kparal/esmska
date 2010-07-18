@@ -58,9 +58,9 @@ public class GatewayExecutor {
     /** Message preceding gateway provided error message. */
     public static final String ERROR_GATEWAY_MESSAGE =
             l10n.getString("GatewayExecutor.ERROR_GATEWAY_MESSAGE");
-    /** Message that uknown error happened, maybe error in the script. */
-    public static String ERROR_UKNOWN =
-            l10n.getString("GatewayExecutor.ERROR_UKNOWN");
+    /** Message that unknown error happened, maybe error in the script. */
+    public static String ERROR_UNKNOWN =
+            l10n.getString("GatewayExecutor.ERROR_UNKNOWN");
     public static String ERROR_FIX_IN_PROGRESS =
             l10n.getString("GatewayExecutor.ERROR_FIX_IN_PROGRESS");
     /** Message saying how many free SMS are remaining. */
@@ -84,7 +84,7 @@ public class GatewayExecutor {
         Gateway gateway = Gateways.getGateway(sms.getGateway());
         if (gateway != null) {
             ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, gateway.getWebsite());
-            ERROR_UKNOWN = MessageFormat.format(ERROR_UKNOWN, Links.RUN_UPDATER,
+            ERROR_UNKNOWN = MessageFormat.format(ERROR_UNKNOWN, Links.RUN_UPDATER,
                     gateway.getWebsite(), Links.ISSUES);
         }
     }

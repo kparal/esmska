@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-18"
+    return "2010-07-18_02"
 }
 
 function getMaintainer() {
@@ -158,7 +158,7 @@ function send() {
     }
     
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     logout()
     return false
 }

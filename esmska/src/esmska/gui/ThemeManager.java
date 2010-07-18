@@ -213,7 +213,7 @@ public class ThemeManager {
                 //always supported
                 return true;
             default: 
-                throw new IllegalArgumentException("Uknown LAF: " + laf);
+                throw new IllegalArgumentException("Unknown LAF: " + laf);
         }
     }
     

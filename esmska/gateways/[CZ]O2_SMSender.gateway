@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-06"
+    return "2010-07-18_02"
 }
 
 function getMaintainer() {
@@ -124,7 +124,7 @@ na váš mobil.</b><br><br> Poznámka: Tuto bezpečnostní kontrolu lze vypnout 
     }
 
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
+    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     logout(content)
     return false
 }
