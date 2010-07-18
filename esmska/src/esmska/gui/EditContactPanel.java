@@ -84,6 +84,14 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
+        // on keyring update update credentialsInfoLabel
+        keyring.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateCredentialsInfoLabel();
+            }
+        });
+
         //update components
         gatewayComboBoxItemStateChanged(null);
     }
@@ -303,6 +311,19 @@ public class EditContactPanel extends javax.swing.JPanel {
             countryInfoLabel.setVisible(true);
         }
     }
+
+    /** Show warning if user selected gateway requiring registration
+     * and no credentials are filled in
+     */
+    private void updateCredentialsInfoLabel() {
+        Gateway gateway = gatewayComboBox.getSelectedGateway();
+        if (gateway != null && gateway.isLoginRequired() &&
+                keyring.getKey(gateway.getName()) == null) {
+            credentialsInfoLabel.setVisible(true);
+        } else {
+            credentialsInfoLabel.setVisible(false);
+        }
+    }
     
     private void nameTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusLost
         checkValid(nameTextField);
@@ -319,17 +340,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     private void gatewayComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_gatewayComboBoxItemStateChanged
         userSet = true;
 
-        //show warning if user selected gateway requiring registration
-        //and no credentials are filled in
-        Gateway gateway = gatewayComboBox.getSelectedGateway();
-        if (gateway != null && gateway.isLoginRequired() &&
-                keyring.getKey(gateway.getName()) == null) {
-            credentialsInfoLabel.setVisible(true);
-        } else {
-            credentialsInfoLabel.setVisible(false);
-        }
-
-        //also update countryInfoLabel
+        updateCredentialsInfoLabel();
         updateCountryInfoLabel();
     }//GEN-LAST:event_gatewayComboBoxItemStateChanged
     

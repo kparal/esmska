@@ -124,6 +124,14 @@ public class SMSPanel extends javax.swing.JPanel {
             ClipboardPopupMenu.register(smsTextPane);
             ClipboardPopupMenu.register(recipientTextField);
         }
+
+        // on keyring update update credentialsInfoLabel
+        keyring.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateCredentialsInfoLabel();
+            }
+        });
     }
     
     /** validates sms form and returns status */
@@ -379,6 +387,19 @@ public class SMSPanel extends javax.swing.JPanel {
             countryInfoLabel.setVisible(true);
         }
     }
+
+    /** Show warning if user selected gateway requiring registration
+     * and no credentials are filled in
+     */
+    private void updateCredentialsInfoLabel() {
+        Gateway gateway = gatewayComboBox.getSelectedGateway();
+        if (gateway != null && gateway.isLoginRequired() &&
+                keyring.getKey(gateway.getName()) == null) {
+            credentialsInfoLabel.setVisible(true);
+        } else {
+            credentialsInfoLabel.setVisible(false);
+        }
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -574,17 +595,7 @@ jPanel1Layout.setHorizontalGroup(
     }//GEN-LAST:event_formFocusGained
 
     private void gatewayComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_gatewayComboBoxItemStateChanged
-        //show warning if user selected gateway requiring registration
-        //and no credentials are filled in
-        Gateway gateway = gatewayComboBox.getSelectedGateway();
-        if (gateway != null && gateway.isLoginRequired() &&
-                keyring.getKey(gateway.getName()) == null) {
-            credentialsInfoLabel.setVisible(true);
-        } else {
-            credentialsInfoLabel.setVisible(false);
-        }
-
-        //also update other info labels
+        updateCredentialsInfoLabel();
         updateCountryInfoLabel();
     }//GEN-LAST:event_gatewayComboBoxItemStateChanged
     
