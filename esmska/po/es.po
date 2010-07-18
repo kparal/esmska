@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-14 19:19+0200\n"
-"PO-Revision-Date: 2010-07-07 15:54+0000\n"
+"POT-Creation-Date: 2010-07-18 14:58+0200\n"
+"PO-Revision-Date: 2010-07-14 18:23+0000\n"
 "Last-Translator: Jonay <jonay.santana@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-08 03:51+0000\n"
+"X-Launchpad-Export-Date: 2010-07-15 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -1143,10 +1143,9 @@ msgid "&Forward"
 msgstr "Si&guiente"
 
 #: Gateway.unknown
-#, fuzzy
 msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
-msgstr "Compuerta desconocida"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1265,15 +1264,16 @@ msgstr ""
 "Corrija esto en los ajustes del programa e inténtelo de nuevo."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_UKNOWN
+#: GatewayExecutor.ERROR_UNKNOWN
+#, fuzzy
 msgid ""
 "An unknown error has occured. The gateway provider has probably "
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
 "gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
-"homepage</a>."
+"\">web gateway</a> works in a web browser,<br>report the problem on <a href="
+"\"{2}\">program homepage</a>."
 msgstr ""
 "Ha ocurrido un error desconocido. El proveedor de la compuerta probablemente "
 "ha cambiado<br>sus páginas web o tiene un problema con ellas actualmente ."
@@ -2539,8 +2539,17 @@ msgstr ""
 "envío de mensajes.\n"
 "</html>"
 
-#~ msgid "Import only contacts with known operator"
-#~ msgstr "Importar solamente contactos con un operador conocido"
+#~ msgid "SMS queue to be sent"
+#~ msgstr "SMS en cola para ser enviado"
+
+#~ msgid "Sent messages history"
+#~ msgstr "Historial de mensajes enviados"
+
+#~ msgid "&Image code:"
+#~ msgstr "Código &Image"
+
+#~ msgid "Contact list"
+#~ msgstr "Lista de contactos"
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2555,17 +2564,8 @@ msgstr ""
 #~ "tienen un operador este programa puede trabajar con ellos\n"
 #~ "</html>"
 
-#~ msgid "SMS queue to be sent"
-#~ msgstr "SMS en cola para ser enviado"
-
-#~ msgid "Sent messages history"
-#~ msgstr "Historial de mensajes enviados"
-
-#~ msgid "&Image code:"
-#~ msgstr "Código &Image"
-
-#~ msgid "Contact list"
-#~ msgstr "Lista de contactos"
+#~ msgid "Import only contacts with known operator"
+#~ msgstr "Importar solamente contactos con un operador conocido"
 
 #~ msgid ""
 #~ "<html>\n"

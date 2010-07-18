@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-14 19:19+0200\n"
-"PO-Revision-Date: 2010-07-06 18:35+0100\n"
+"POT-Creation-Date: 2010-07-18 15:01+0200\n"
+"PO-Revision-Date: 2010-07-18 15:01+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1234,22 +1234,22 @@ msgstr ""
 "programu a zkuste to znovu."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_UKNOWN
+#: GatewayExecutor.ERROR_UNKNOWN
 msgid ""
 "An unknown error has occured. The gateway provider has probably "
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
 "gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
-"homepage</a>."
+"\">web gateway</a> works in a web browser,<br>report the problem on <a href="
+"\"{2}\">program homepage</a>."
 msgstr ""
 "Došlo k neznámé chybě. Poskytovatel brány zřejmě změnil<br>své webové "
 "stránky, nebo s nimi má aktuálně potíže.<br>Zkuste to později.<br><br>Taktéž "
 "se ujistěte, že máte funkční připojení k Internetu<br>a že používáte <a href="
 "\"{0}\">nejnovější verzi programu a brány</a>.<br><br>Pokud potíže přetrvají "
-"a <a href=\"{1}\">webová brána</a> funguje,<br>nahlaste problém na <a href="
-"\"{2}\">domovských stránkách programu</a>."
+"a <a href=\"{1}\">webová brána</a> ve webovém prohlížeči funguje,"
+"<br>nahlaste problém na <a href=\"{2}\">domovských stránkách programu</a>."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_WRONG_AUTH

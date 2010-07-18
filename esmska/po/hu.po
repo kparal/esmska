@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-14 19:19+0200\n"
+"POT-Creation-Date: 2010-07-18 14:58+0200\n"
 "PO-Revision-Date: 2010-03-12 18:48+0000\n"
 "Last-Translator: Gergely Szarka <szarka.honved@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -1058,15 +1058,15 @@ msgid ""
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_UKNOWN
+#: GatewayExecutor.ERROR_UNKNOWN
 msgid ""
 "An unknown error has occured. The gateway provider has probably "
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
 "gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works,<br>report the problem on <a href=\"{2}\">program "
-"homepage</a>."
+"\">web gateway</a> works in a web browser,<br>report the problem on <a href="
+"\"{2}\">program homepage</a>."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
