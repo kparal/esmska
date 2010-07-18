@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-06"
+    return "2010-07-18"
 }
 
 function getMaintainer() {
@@ -20,7 +20,7 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Oficiální brána T-mobile určená pro registrované zákazníky."
+    return "Oficiální brána T-mobile určená pro registrované zákazníky. Zdarma odesílá zprávy do sítě T-mobile, zprávy do ostatních sítí jsou zpoplatněny dle vašeho tarifu. Nevyžaduje opsání bezpečnostního kódu."
 }
 
 function getSupportedPrefixes() {

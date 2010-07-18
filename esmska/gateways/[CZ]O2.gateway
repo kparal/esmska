@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-17"
+    return "2010-07-18"
 }
 
 function getMaintainer() {
@@ -20,7 +20,7 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Oficiální brána O2 pro neregistrované uživatele."
+    return "Oficiální brána O2 pro neregistrované uživatele. Zdarma odesílá velmi krátké zprávy do sítě O2, vyžaduje však opsání bezpečnostního kódu."
 }
 
 function getSupportedPrefixes() {

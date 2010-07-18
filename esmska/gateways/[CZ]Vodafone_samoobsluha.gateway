@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-10"
+    return "2010-07-18"
 }
 
 function getMaintainer() {
@@ -20,7 +20,7 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Oficiální brána Vodafone určená pro registrované zákazníky."
+    return "Oficiální brána Vodafone určená pro registrované zákazníky. Obsahuje měsíční limit zpráv zdarma odeslaných do sítě Vodafone, do ostatních sítí se platí poplatek dle vašeho tarifu."
 }
 
 function getSupportedPrefixes() {

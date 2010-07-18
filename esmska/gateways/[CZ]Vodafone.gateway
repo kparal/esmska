@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-06"
+    return "2010-07-18"
 }
 
 function getMaintainer() {
@@ -20,7 +20,7 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Oficiální brána Vodafone určená pro veřejnost."
+    return "Oficiální brána Vodafone určená pro veřejnost. Zdarma odesílá zprávy do sítě Vodafone, vyžaduje však opsání bezpečnostního kódu."
 }
 
 function getSupportedPrefixes() {
