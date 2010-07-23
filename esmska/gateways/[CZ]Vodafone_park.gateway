@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-18_02"
+    return "2010-07-23"
 }
 
 function getMaintainer() {
@@ -110,7 +110,7 @@ function send() {
     content = EXEC.getURL("https://park.vodafone.cz/gateway", [])
     
     // parse url token of sending form
-    re = /name="gatewayPanel:gateway:messagePanel:sendButton"[^>]+?'\?x=(.+?)',/
+    re = /name="sendButton"[^>]+?'\?x=(.+?)',/
     match = re.exec(content)
     token = match[1]
 
