@@ -23,7 +23,6 @@ po/             - Localization files.
 resources/      - Different resource files.
 scripts/        - Various scripts for managing building process.
 src/            - Program sources.
-test/           - Program test sources.
 
 Program license can be found in include/license/.
 
