@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-18 14:58+0200\n"
-"PO-Revision-Date: 2010-07-14 14:54+0000\n"
-"Last-Translator: quesh <Unknown>\n"
+"POT-Creation-Date: 2010-07-24 11:00+0200\n"
+"PO-Revision-Date: 2010-07-18 13:52+0000\n"
+"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-15 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-07-19 03:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -444,7 +444,8 @@ msgstr "C&onfidentialité"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."
-msgstr "&Restreindre l''historique des messages envoyés aux {0} derniers jours."
+msgstr ""
+"&Restreindre l''historique des messages envoyés aux {0} derniers jours."
 
 #: ConfigFrame.reducedHistoryCheckBox.toolTipText
 msgid ""
