@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-24"
+    return "2010-08-10"
 }
 
 function getMaintainer() {
@@ -71,7 +71,7 @@ function send() {
     }
 
     // start page
-    content = EXEC.getURL("http://www.vodafonesms.cz/", [])
+    content = EXEC.getURL("http://www.vodafonesms.cz/start.php?locale=cz", [])
     
     // get imageid and ppp values
     re = /<input type="hidden" name="imgid" value="(.*)" \/>/
