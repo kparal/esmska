@@ -595,7 +595,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         //work around bug http://code.google.com/p/esmska/issues/detail?id=182
-        this.setVisible(true);
+        if (!RuntimeUtils.isMac()) {
+            this.setVisible(true);
+        }
     }//GEN-LAST:event_formWindowGainedFocus
 
     /** Save all user data
