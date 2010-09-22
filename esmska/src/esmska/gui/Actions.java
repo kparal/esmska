@@ -540,7 +540,7 @@ public class Actions {
             logger.fine("Showing Update dialog...");
             UpdateDialog dialog = new UpdateDialog(Context.mainFrame, true, updateChecker);
             dialog.setLocationRelativeTo(Context.mainFrame);
-            RuntimeUtils.setDocumentModalDialog(dialog);
+            
             dialog.setVisible(true);
         }
     }

@@ -20,6 +20,7 @@ import esmska.update.GatewayUpdateInfo;
 import esmska.update.UpdateChecker;
 import esmska.utils.L10N;
 import esmska.data.Links;
+import esmska.utils.RuntimeUtils;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -112,6 +113,7 @@ public class UpdateDialog extends javax.swing.JDialog {
      */
     public UpdateDialog(java.awt.Frame parent, boolean modal, UpdateChecker checker) {
         super(parent, modal);
+        RuntimeUtils.setDocumentModalDialog(this);
         updateChecker = (UpdateChecker) ObjectUtils.defaultIfNull(checker, new UpdateChecker());
         initComponents();
         gwScrollPaneBorder = gwScrollPane.getBorder();

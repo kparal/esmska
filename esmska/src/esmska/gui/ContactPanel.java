@@ -779,10 +779,11 @@ public class ContactPanel extends javax.swing.JPanel {
         public ContactDialog() {
             super((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, ContactPanel.this),
                     l10n.getString("Contact"), true);
+            //integrate modal window better on Mac, must be called before initialization
+            RuntimeUtils.setDocumentModalDialog(this);
+
             init();
             setDefaultCloseOperation(HIDE_ON_CLOSE);
-            //integrate modal window better on Mac
-            RuntimeUtils.setDocumentModalDialog(this);
 
             //handle closing by user
             this.addWindowListener(new WindowAdapter() {
