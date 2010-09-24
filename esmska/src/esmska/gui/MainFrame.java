@@ -782,7 +782,8 @@ public class MainFrame extends javax.swing.JFrame {
             finish(sms);
         }
         private void smsFailed(SMS sms) {
-            logger.log(Level.INFO, "Message could not be sent: {0}", sms);
+            logger.log(Level.INFO, "Message could not be sent: {0}\nError message: {1}",
+                    new Object[]{sms, sms.getErrMsg()});
             log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms.getRecipient()),
                     null, Icons.STATUS_WARNING));
 
