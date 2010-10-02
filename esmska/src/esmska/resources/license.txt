@@ -44,8 +44,9 @@
        * Substance: BSD License
        * Substance Extras: BSD License
        * Trident: BSD License
-     o Source files which state a specific license at their beginning are
-       following that particular license.
+     o Source files which state a specific license at their beginning follow
+       that particular license.
+     o Program logo: CC-BY-SA License
      o Icons used inside the program were taken over from various free software
        projects.
      o Some of the icons used for depicting individual operator gateways may
