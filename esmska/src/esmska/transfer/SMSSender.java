@@ -9,6 +9,7 @@
 
 package esmska.transfer;
 
+import esmska.data.Links;
 import esmska.data.Queue.Events;
 import esmska.data.event.ValuedEvent;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
@@ -35,6 +37,8 @@ public class SMSSender {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Queue queue = Queue.getInstance();
     private static final String NO_REASON_ERROR = l10n.getString("SMSSender.NO_REASON_ERROR");
+    private static final String SENDING_CRASHED_ERROR = 
+            MessageFormat.format(l10n.getString("SMSSender.SENDING_CRASHED_ERROR"), Links.ISSUES);
     
     /** map of <gateway,worker>; it shows whether some gateway has currently assigned
     a background worker (therefore is sending at the moment) */
@@ -114,8 +118,9 @@ public class SMSSender {
             boolean success = false;
             try {
                 success = get();
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, "Can't get result of sending sms", ex);
+            } catch (Throwable t) {
+                logger.log(Level.SEVERE, "Sending of SMS crashed", t);
+                sms.setErrMsg(SENDING_CRASHED_ERROR);
             }
             finishedSending(sms, success);
         }
