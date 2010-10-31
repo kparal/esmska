@@ -432,9 +432,10 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.add(jSeparator2);
 
         historyButton.setAction(Actions.getHistoryAction());
-        historyButton.setToolTipText(Actions.getHistoryAction().getValue(Action.NAME).toString() + " (Ctrl+T)");
         historyButton.setFocusable(false);
         historyButton.setHideActionText(true);
+        Mnemonics.setLocalizedText(historyButton, l10n.getString("History"));
+        historyButton.setToolTipText(historyButton.getToolTipText() + " (Ctrl+T)");
         toolBar.add(historyButton);
         toolBar.add(jSeparator3);
 
@@ -452,10 +453,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         donateButton.setAction(Actions.getBrowseAction(Links.DONATE));
         donateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/donate-32.png"))); // NOI18N
+        Mnemonics.setLocalizedText(donateButton,l10n.getString("MainFrame.donateButton.text")); // NOI18N
         donateButton.setToolTipText(l10n.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
         donateButton.setFocusable(false);
-        donateButton.setHorizontalTextPosition(SwingConstants.CENTER);
-        donateButton.setVerticalTextPosition(SwingConstants.BOTTOM);
         toolBar.add(Box.createHorizontalGlue());
         toolBar.add(donateButton);
 

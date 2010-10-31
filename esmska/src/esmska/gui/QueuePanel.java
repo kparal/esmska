@@ -184,7 +184,6 @@ public class QueuePanel extends javax.swing.JPanel {
 
         pauseButton.setAction(Actions.getQueuePauseAction(false));
         pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        pauseButton.setText(null);
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -200,32 +199,30 @@ public class QueuePanel extends javax.swing.JPanel {
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(deleteButton)
+                        .addComponent(editButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(pauseButton))
-                    .addComponent(editButton))
+                        .addComponent(deleteButton))
+                    .addComponent(pauseButton, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
+        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {deleteButton, editButton, smsDownButton, smsUpButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pauseButton))
                     .addGroup(Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(smsUpButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(smsDownButton))
+                    .addComponent(jScrollPane2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addGroup(Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(editButton)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                            .addComponent(editButton)
+                            .addComponent(deleteButton))
+                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pauseButton)))
                 .addContainerGap())
         );
 

@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 11:00+0200\n"
+"POT-Creation-Date: 2010-10-31 14:32+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -87,6 +88,10 @@ msgstr "אודות Esmska"
 #: About_
 msgid "&About"
 msgstr "&אודות"
+
+#: Add
+msgid "Add"
+msgstr ""
 
 #: Add_contact
 msgid "Add contact"
@@ -267,29 +272,6 @@ msgid ""
 "gateways.\n"
 "</html>"
 msgstr ""
-
-#: ConfigFrame.develLabel.text
-msgid ""
-"This tab is for developing purposes only. It will not be visible in the "
-"final release."
-msgstr ""
-"לשונית זו הינה למטרות פיתוח בלבד. הלשונית לא תהיה גלויה במהדורה הסופית."
-
-#: ConfigFrame.forgetLayoutCheckBox.text
-msgid "Use default form &layout"
-msgstr "השתמש במבנה &ברירת המחדל של הטופס"
-
-#: ConfigFrame.forgetLayoutCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"Current program dimension will be ignored and the default<br>\n"
-"layout will be restored on the next program startup\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"מימדי התוכנה הנוכחיים יאופסו ומבנה ברירת המחדל יחול עם ההפעלה<br>\n"
-"הבאה של התוכנית\n"
-"</html>"
 
 #: ConfigFrame.gatewayFilterLabel.text
 msgid "Show &only gateways with names containing:"
@@ -1142,9 +1124,9 @@ msgid ""
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
-"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works in a web browser,<br>report the problem on <a href="
-"\"{2}\">program homepage</a>."
+"gateway version</a>.<br><br>If the problem persists and the <a href="
+"\"{1}\">web gateway</a> works in a web browser,<br>report the problem on <a "
+"href=\"{2}\">program homepage</a>."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1383,8 +1365,8 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"ייבוא אנשי הקשר יאפשר לך לקרוא את אנשי הקשר מיישום אחר ולהעתיק אותם "
-"ל־Esmska. אנשי הקשר יוותרו ביישום הקודם ללא שינוי.\n"
+"ייבוא אנשי הקשר יאפשר לך לקרוא את אנשי הקשר מיישום אחר ולהעתיק אותם ל־"
+"Esmska. אנשי הקשר יוותרו ביישום הקודם ללא שינוי.\n"
 "</html>"
 
 #: ImportFrame.jLabel22.text
@@ -1540,6 +1522,10 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 msgid "Configure program behaviour"
 msgstr "הגדרת התנהגות התוכנה"
 
+#: MainFrame.donateButton.text
+msgid "Donate"
+msgstr ""
+
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
 msgstr ""
@@ -1692,6 +1678,11 @@ msgstr "השהה/המשך את השליחה"
 #: OK_
 msgid "&OK"
 msgstr ""
+
+#: Pause
+#, fuzzy
+msgid "Pause"
+msgstr "השהיית התור"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1905,6 +1896,14 @@ msgid ""
 msgstr ""
 "יוצר הסקריפט לא סיפק נתונים נוספים<br>אודות גורם השגיאה עבור שער הגישה ברשת "
 "בו השתמשת."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSSender.SENDING_CRASHED_ERROR
+msgid ""
+"Some serious circumstances prevented Esmska from sending the message."
+"<br>More information is available in the program log.<br>Please report this "
+"problem on <a href=\"{0}\">program homepage</a>."
+msgstr ""
 
 #: SMSSender.no_gateway
 msgid "no gateway"
@@ -2154,6 +2153,11 @@ msgctxt "UnknownGateway"
 msgid "Unknown gateway"
 msgstr ""
 
+#: Unpause
+#, fuzzy
+msgid "Unpause"
+msgstr "המשך בתור"
+
 #: Unpause_queue
 msgid "Unpause queue"
 msgstr "המשך בתור"
@@ -2221,8 +2225,8 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.programUpdateAvailable
 msgid ""
-"<html>There is a new program version ({0}) available on the <a href=\"{1}"
-"\">program homepage</a>.</html>"
+"<html>There is a new program version ({0}) available on the <a href="
+"\"{1}\">program homepage</a>.</html>"
 msgstr ""
 
 #: Update.queueRunning
@@ -2258,6 +2262,26 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid ""
+#~ "This tab is for developing purposes only. It will not be visible in the "
+#~ "final release."
+#~ msgstr ""
+#~ "לשונית זו הינה למטרות פיתוח בלבד. הלשונית לא תהיה גלויה במהדורה הסופית."
+
+#~ msgid "Use default form &layout"
+#~ msgstr "השתמש במבנה &ברירת המחדל של הטופס"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Current program dimension will be ignored and the default<br>\n"
+#~ "layout will be restored on the next program startup\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "מימדי התוכנה הנוכחיים יאופסו ומבנה ברירת המחדל יחול עם ההפעלה<br>\n"
+#~ "הבאה של התוכנית\n"
+#~ "</html>"
 
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "ייבא אנשי קשר ממפעילים מוכרים בלבד"

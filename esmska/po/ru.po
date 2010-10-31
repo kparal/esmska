@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 11:00+0200\n"
+"POT-Creation-Date: 2010-10-31 14:32+0200\n"
 "PO-Revision-Date: 2010-07-05 21:18+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -87,6 +88,10 @@ msgstr "Об Esmska"
 #: About_
 msgid "&About"
 msgstr "&О программе"
+
+#: Add
+msgid "Add"
+msgstr ""
 
 #: Add_contact
 msgid "Add contact"
@@ -267,26 +272,6 @@ msgid ""
 "come<br>\n"
 "to the phone number of the sender. This function is supported only by some "
 "gateways.\n"
-"</html>"
-msgstr ""
-
-#: ConfigFrame.develLabel.text
-msgid ""
-"This tab is for developing purposes only. It will not be visible in the "
-"final release."
-msgstr ""
-"Эта закладка только для разработчиков. Она будет недоступна в финальном "
-"релизе."
-
-#: ConfigFrame.forgetLayoutCheckBox.text
-msgid "Use default form &layout"
-msgstr "Использовать раскладку по умолчанию"
-
-#: ConfigFrame.forgetLayoutCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"Current program dimension will be ignored and the default<br>\n"
-"layout will be restored on the next program startup\n"
 "</html>"
 msgstr ""
 
@@ -1076,9 +1061,9 @@ msgid ""
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
-"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works in a web browser,<br>report the problem on <a href="
-"\"{2}\">program homepage</a>."
+"gateway version</a>.<br><br>If the problem persists and the <a href="
+"\"{1}\">web gateway</a> works in a web browser,<br>report the problem on <a "
+"href=\"{2}\">program homepage</a>."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1441,6 +1426,10 @@ msgstr ""
 msgid "Configure program behaviour"
 msgstr "Настроить поведение программы"
 
+#: MainFrame.donateButton.text
+msgid "Donate"
+msgstr ""
+
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
 msgstr "&Поддержать этот проект!"
@@ -1593,6 +1582,10 @@ msgstr ""
 #: OK_
 msgid "&OK"
 msgstr "&ОК"
+
+#: Pause
+msgid "Pause"
+msgstr ""
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1794,6 +1787,14 @@ msgstr ""
 msgid ""
 "Author of the script has not provided any additional information<br>about "
 "cause of the failure for the web gateway used."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSSender.SENDING_CRASHED_ERROR
+msgid ""
+"Some serious circumstances prevented Esmska from sending the message."
+"<br>More information is available in the program log.<br>Please report this "
+"problem on <a href=\"{0}\">program homepage</a>."
 msgstr ""
 
 #: SMSSender.no_gateway
@@ -2050,6 +2051,11 @@ msgctxt "UnknownGateway"
 msgid "Unknown gateway"
 msgstr "Неизвестный шлюз"
 
+#: Unpause
+#, fuzzy
+msgid "Unpause"
+msgstr "Возобновить очереди"
+
 #: Unpause_queue
 msgid "Unpause queue"
 msgstr "Возобновить очереди"
@@ -2119,8 +2125,8 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.programUpdateAvailable
 msgid ""
-"<html>There is a new program version ({0}) available on the <a href=\"{1}"
-"\">program homepage</a>.</html>"
+"<html>There is a new program version ({0}) available on the <a href="
+"\"{1}\">program homepage</a>.</html>"
 msgstr ""
 "<html>Обнаружена новая версия программы ({0}), которая доступна на <a href="
 "\"{1}\">домашней странице</a>.</html>"
@@ -2160,6 +2166,16 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid ""
+#~ "This tab is for developing purposes only. It will not be visible in the "
+#~ "final release."
+#~ msgstr ""
+#~ "Эта закладка только для разработчиков. Она будет недоступна в финальном "
+#~ "релизе."
+
+#~ msgid "Use default form &layout"
+#~ msgstr "Использовать раскладку по умолчанию"
 
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "Импортировать контакты только с известным оператором"

@@ -1,17 +1,16 @@
 #. extracted from ../src/esmska/resources/l10n.properties
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 11:01+0200\n"
+"POT-Creation-Date: 2010-10-31 14:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.5.3\n"
+"X-Generator: Translate Toolkit 1.7.0\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -74,6 +73,10 @@ msgstr ""
 
 #: About_
 msgid "&About"
+msgstr ""
+
+#: Add
+msgid "Add"
 msgstr ""
 
 #: Add_contact
@@ -251,24 +254,6 @@ msgid ""
 "come<br>\n"
 "to the phone number of the sender. This function is supported only by some "
 "gateways.\n"
-"</html>"
-msgstr ""
-
-#: ConfigFrame.develLabel.text
-msgid ""
-"This tab is for developing purposes only. It will not be visible in the "
-"final release."
-msgstr ""
-
-#: ConfigFrame.forgetLayoutCheckBox.text
-msgid "Use default form &layout"
-msgstr ""
-
-#: ConfigFrame.forgetLayoutCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"Current program dimension will be ignored and the default<br>\n"
-"layout will be restored on the next program startup\n"
 "</html>"
 msgstr ""
 
@@ -1045,9 +1030,9 @@ msgid ""
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
-"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works in a web browser,<br>report the problem on <a href="
-"\"{2}\">program homepage</a>."
+"gateway version</a>.<br><br>If the problem persists and the <a href="
+"\"{1}\">web gateway</a> works in a web browser,<br>report the problem on <a "
+"href=\"{2}\">program homepage</a>."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1406,6 +1391,10 @@ msgstr ""
 msgid "Configure program behaviour"
 msgstr ""
 
+#: MainFrame.donateButton.text
+msgid "Donate"
+msgstr ""
+
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
 msgstr ""
@@ -1557,6 +1546,10 @@ msgstr ""
 
 #: OK_
 msgid "&OK"
+msgstr ""
+
+#: Pause
+msgid "Pause"
 msgstr ""
 
 #: Pause_queue
@@ -1759,6 +1752,14 @@ msgstr ""
 msgid ""
 "Author of the script has not provided any additional information<br>about "
 "cause of the failure for the web gateway used."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSSender.SENDING_CRASHED_ERROR
+msgid ""
+"Some serious circumstances prevented Esmska from sending the message."
+"<br>More information is available in the program log.<br>Please report this "
+"problem on <a href=\"{0}\">program homepage</a>."
 msgstr ""
 
 #: SMSSender.no_gateway
@@ -2002,6 +2003,10 @@ msgctxt "UnknownGateway"
 msgid "Unknown gateway"
 msgstr ""
 
+#: Unpause
+msgid "Unpause"
+msgstr ""
+
 #: Unpause_queue
 msgid "Unpause queue"
 msgstr ""
@@ -2069,8 +2074,8 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.programUpdateAvailable
 msgid ""
-"<html>There is a new program version ({0}) available on the <a href=\"{1}"
-"\">program homepage</a>.</html>"
+"<html>There is a new program version ({0}) available on the <a href="
+"\"{1}\">program homepage</a>.</html>"
 msgstr ""
 
 #: Update.queueRunning

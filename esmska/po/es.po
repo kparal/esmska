@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 11:00+0200\n"
+"POT-Creation-Date: 2010-10-31 14:32+0200\n"
 "PO-Revision-Date: 2010-07-14 18:23+0000\n"
 "Last-Translator: Jonay <jonay.santana@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -87,6 +88,10 @@ msgstr "Sobre Esmska"
 #: About_
 msgid "&About"
 msgstr "&Acerca de"
+
+#: Add
+msgid "Add"
+msgstr ""
 
 #: Add_contact
 msgid "Add contact"
@@ -298,30 +303,6 @@ msgstr ""
 "llegará<br>\n"
 "al número de teléfono del remitente. Esta función es soportada solo por "
 "algunos operadores.\n"
-"</html>"
-
-#: ConfigFrame.develLabel.text
-msgid ""
-"This tab is for developing purposes only. It will not be visible in the "
-"final release."
-msgstr ""
-"El contenido de esta pestaña es para propósitos de desarrollo solamente. No "
-"estará visible en la final release."
-
-#: ConfigFrame.forgetLayoutCheckBox.text
-msgid "Use default form &layout"
-msgstr "Usar &plantilla predeterminada"
-
-#: ConfigFrame.forgetLayoutCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"Current program dimension will be ignored and the default<br>\n"
-"layout will be restored on the next program startup\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Las dimensiones actuales del programa serán ignoradas y la plantilla<br>\n"
-"predeterminada será restaurada la próxima vez que inicie el programa.\n"
 "</html>"
 
 #: ConfigFrame.gatewayFilterLabel.text
@@ -1271,16 +1252,16 @@ msgid ""
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
 "later.<br><br>Also make sure that you have working connection to the "
 "Internet<br>and that you are using the <a href=\"{0}\">latest program and "
-"gateway version</a>.<br><br>If the problem persists and the <a href=\"{1}"
-"\">web gateway</a> works in a web browser,<br>report the problem on <a href="
-"\"{2}\">program homepage</a>."
+"gateway version</a>.<br><br>If the problem persists and the <a href="
+"\"{1}\">web gateway</a> works in a web browser,<br>report the problem on <a "
+"href=\"{2}\">program homepage</a>."
 msgstr ""
 "Ha ocurrido un error desconocido. El proveedor de la compuerta probablemente "
 "ha cambiado<br>sus páginas web o tiene un problema con ellas actualmente ."
 "<br>Vuelva a intentarlo más tarde.<br><br>También asegúrese que su conexión "
-"de internet se encuentra trabajando<br>y que usted está usando<a href=\"{0}"
-"\">la versión más reciente del programa de la compuerta</a>.<br><br>Si el "
-"problema persiste y la <a href=\"{1}\">página web de la compuerta</a> "
+"de internet se encuentra trabajando<br>y que usted está usando<a href="
+"\"{0}\">la versión más reciente del programa de la compuerta</a>.<br><br>Si "
+"el problema persiste y la <a href=\"{1}\">página web de la compuerta</a> "
 "trabaja bien,<br>reporte el problema a <a href=\"{2}\">la página de inicio "
 "del programa</a>."
 
@@ -1720,6 +1701,10 @@ msgstr "¡Algunos de los archivos de configuración no pudieron ser guardados!"
 msgid "Configure program behaviour"
 msgstr "Configurar el comportamiento del programa"
 
+#: MainFrame.donateButton.text
+msgid "Donate"
+msgstr ""
+
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
 msgstr "¡Apoya e&ste proyecto!"
@@ -1886,6 +1871,11 @@ msgstr "Pausar/despausar envío"
 #: OK_
 msgid "&OK"
 msgstr "&OK"
+
+#: Pause
+#, fuzzy
+msgid "Pause"
+msgstr "Pausar cola"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -2115,6 +2105,14 @@ msgid ""
 msgstr ""
 "El autor del script no proveyó información adicional<br>referente a la causa "
 "de la falla para la página compuerta usada."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: SMSSender.SENDING_CRASHED_ERROR
+msgid ""
+"Some serious circumstances prevented Esmska from sending the message."
+"<br>More information is available in the program log.<br>Please report this "
+"problem on <a href=\"{0}\">program homepage</a>."
+msgstr ""
 
 #: SMSSender.no_gateway
 msgid "no gateway"
@@ -2415,6 +2413,11 @@ msgctxt "UnknownGateway"
 msgid "Unknown gateway"
 msgstr "Compuerta desconocida"
 
+#: Unpause
+#, fuzzy
+msgid "Unpause"
+msgstr "Despausar cola"
+
 #: Unpause_queue
 msgid "Unpause queue"
 msgstr "Despausar cola"
@@ -2487,11 +2490,11 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.programUpdateAvailable
 msgid ""
-"<html>There is a new program version ({0}) available on the <a href=\"{1}"
-"\">program homepage</a>.</html>"
+"<html>There is a new program version ({0}) available on the <a href="
+"\"{1}\">program homepage</a>.</html>"
 msgstr ""
-"<html>Hay una nueva versión del programa ({0}) disponible en la <a href=\"{1}"
-"\">página principal del programa</a>.</html>"
+"<html>Hay una nueva versión del programa ({0}) disponible en la <a href="
+"\"{1}\">página principal del programa</a>.</html>"
 
 #: Update.queueRunning
 msgid ""
@@ -2538,6 +2541,27 @@ msgstr ""
 "Las compuertas actualizadas pueden auydarlo a solucionar problemas con el "
 "envío de mensajes.\n"
 "</html>"
+
+#~ msgid ""
+#~ "This tab is for developing purposes only. It will not be visible in the "
+#~ "final release."
+#~ msgstr ""
+#~ "El contenido de esta pestaña es para propósitos de desarrollo solamente. "
+#~ "No estará visible en la final release."
+
+#~ msgid "Use default form &layout"
+#~ msgstr "Usar &plantilla predeterminada"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Current program dimension will be ignored and the default<br>\n"
+#~ "layout will be restored on the next program startup\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Las dimensiones actuales del programa serán ignoradas y la plantilla<br>\n"
+#~ "predeterminada será restaurada la próxima vez que inicie el programa.\n"
+#~ "</html>"
 
 #~ msgid "SMS queue to be sent"
 #~ msgstr "SMS en cola para ser enviado"

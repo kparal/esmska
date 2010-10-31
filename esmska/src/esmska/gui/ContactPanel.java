@@ -230,8 +230,9 @@ public class ContactPanel extends javax.swing.JPanel {
         });
 
         addContactButton.setAction(addContactAction);
+        addContactButton.setHideActionText(true);
         addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        addContactButton.setText("");
+        addContactButton.setText(l10n.getString("Add"));
 
         removeContactButton.setAction(removeContactAction);
         removeContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);

@@ -456,8 +456,10 @@ public class Actions {
 
     /** Pause/unpause the sms queue */
     private static class QueuePauseAction extends AbstractAction {
-        private final String nameRunning = l10n.getString("Pause_queue");
-        private final String nameStopped = l10n.getString("Unpause_queue");
+        private final String nameRunning = l10n.getString("Pause");
+        private final String nameRunningLong = l10n.getString("Pause_queue");
+        private final String nameStopped = l10n.getString("Unpause");
+        private final String nameStoppedLong = l10n.getString("Unpause_queue");
         private final String descRunning = l10n.getString("QueuePanel.Pause_sending_of_sms_in_the_queue");
         private final String descStopped = l10n.getString("QueuePanel.Unpause_sending_of_sms_in_the_queue");
         private final ImageIcon pauseIcon = new ImageIcon(QueuePanel.class.getResource(RES + "pause-22.png"));
@@ -465,13 +467,13 @@ public class Actions {
         private final ImageIcon startIcon = new ImageIcon(QueuePanel.class.getResource(RES + "start-22.png"));
         private final ImageIcon startIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "start-16.png"));
         private static final Queue queue = Queue.getInstance();
-        private boolean showName;
+        private boolean longName;
         public QueuePauseAction() {
             this(true);
         }
-        public QueuePauseAction(boolean showName) {
+        public QueuePauseAction(boolean longName) {
             super();
-            this.showName = showName;
+            this.longName = longName;
             setPaused(queue.isPaused());
             putValue(MNEMONIC_KEY, KeyEvent.VK_P);
             queue.addValuedListener(new ValuedListener<Queue.Events, SMS>() {
@@ -494,7 +496,9 @@ public class Actions {
         }
         private void setPaused(boolean paused) {
             if (paused) {
-                if (showName) {
+                if (longName) {
+                    putValue(NAME, nameStoppedLong);
+                } else {
                     putValue(NAME, nameStopped);
                 }
                 putValue(SMALL_ICON, startIconSmall);
@@ -502,7 +506,9 @@ public class Actions {
                 putValue(SHORT_DESCRIPTION, descStopped);
                 putValue(SELECTED_KEY, true);
             } else {
-                if (showName) {
+                if (longName) {
+                    putValue(NAME, nameRunningLong);
+                } else {
                     putValue(NAME, nameRunning);
                 }
                 putValue(SMALL_ICON, pauseIconSmall);
