@@ -214,7 +214,7 @@ public class QueuePanel extends javax.swing.JPanel {
                         .addComponent(editButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(deleteButton))
-                    .addComponent(pauseButton, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
+                    .addComponent(pauseButton))
                 .addContainerGap())
         );
 

@@ -44,7 +44,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="deleteButton" linkSize="1" min="-2" max="-2" attributes="1"/>
                   </Group>
-                  <Component id="pauseButton" pref="62" max="32767" attributes="1"/>
+                  <Component id="pauseButton" min="-2" max="-2" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
