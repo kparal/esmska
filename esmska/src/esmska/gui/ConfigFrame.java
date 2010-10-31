@@ -527,12 +527,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showAdvancedControls}"), advancedControlsCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
-    advancedControlsCheckBox.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-            advancedControlsCheckBoxActionPerformed(evt);
-        }
-    });
-
         GroupLayout appearancePanelLayout = new GroupLayout(appearancePanel);
     appearancePanel.setLayout(appearancePanelLayout);
 
@@ -1243,14 +1237,6 @@ private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClo
 private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
     closeButton.requestFocusInWindow();
 }//GEN-LAST:event_formWindowGainedFocus
-
-private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_advancedControlsCheckBoxActionPerformed
-    if (!fullyInicialized) {
-        return;
-    }
-    
-    Context.mainFrame.getQueuePanel().showAdvancedControls(config.isShowAdvancedControls());
-}//GEN-LAST:event_advancedControlsCheckBoxActionPerformed
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();

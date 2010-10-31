@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.beans.PropertyChangeEvent;
 import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
@@ -47,7 +48,9 @@ import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeListener;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
@@ -125,12 +128,21 @@ public class QueuePanel extends javax.swing.JPanel {
 
         //set visibility of advanced controls
         showAdvancedControls(config.isShowAdvancedControls());
+        config.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("showAdvancedControls".equals(evt.getPropertyName())) {
+                    showAdvancedControls((Boolean)evt.getNewValue());
+                }
+            }
+        });
     }
 
     /** Show or hide advanced controls (buttons, etc) */
-    public void showAdvancedControls(boolean show) {
+    private void showAdvancedControls(boolean show) {
         smsUpButton.setVisible(show);
         smsDownButton.setVisible(show);
+        popup.showAdvancedControls(show);
     }
     
     /** This method is called from within the constructor to
@@ -530,6 +542,7 @@ public class QueuePanel extends javax.swing.JPanel {
 
     /** Popup menu in the queue list */
     private class QueuePopupMenu extends JPopupMenu {
+        private ArrayList<JMenuItem> advancedItems = new ArrayList<JMenuItem>();
 
         public QueuePopupMenu() {
             JMenuItem menuItem = null;
@@ -545,16 +558,24 @@ public class QueuePanel extends javax.swing.JPanel {
             //move sms up action
             menuItem = new JMenuItem(smsUpAction);
             this.add(menuItem);
+            advancedItems.add(menuItem);
 
             //move sms down action
             menuItem = new JMenuItem(smsDownAction);
             this.add(menuItem);
+            advancedItems.add(menuItem);
 
             this.addSeparator();
 
             //queue pause action
             menuItem = new JMenuItem(Actions.getQueuePauseAction(true));
             this.add(menuItem);
+        }
+
+        public void showAdvancedControls(boolean show) {
+            for (JMenuItem item : advancedItems) {
+                item.setVisible(show);
+            }
         }
     }
     
