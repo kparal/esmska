@@ -16,7 +16,6 @@ import esmska.data.Keyring;
 import esmska.data.Gateway;
 import esmska.data.Gateways;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -127,12 +126,6 @@ public class ConfigFrame extends javax.swing.JFrame {
                 closeButtonActionPerformed(e);
             }
         });
-        
-        //add development panel in development versions
-        if (!Config.isStableVersion()) {
-            logger.finer("Development version, showing development tab");
-            tabbedPane.addTab("Devel", develPanel);
-        }
         
         //set tab mnemonics
         for (int i = 0; i < tabbedPane.getTabCount(); i++) {
@@ -307,9 +300,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         bindingGroup = new BindingGroup();
 
         config = Config.getInstance();
-        develPanel = new JPanel();
-        forgetLayoutCheckBox = new JCheckBox();
-        develLabel = new JLabel();
         tabbedPane = new JTabbedPane();
         generalPanel = new JPanel();
         removeAccentsCheckBox = new JCheckBox();
@@ -367,35 +357,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         closeButton = new JButton();
         advancedCheckBox = new JCheckBox();
         restartLabel = new InfoLabel();
-        Mnemonics.setLocalizedText(forgetLayoutCheckBox, l10n.getString("ConfigFrame.forgetLayoutCheckBox.text"));
-        forgetLayoutCheckBox.setToolTipText(l10n.getString("ConfigFrame.forgetLayoutCheckBox.toolTipText")); // NOI18N
-        Binding binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${forgetLayout}"), forgetLayoutCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
-
-        develLabel.setFont(develLabel.getFont().deriveFont((develLabel.getFont().getStyle() | Font.ITALIC)));
-        Mnemonics.setLocalizedText(develLabel, l10n.getString("ConfigFrame.develLabel.text"));
-        GroupLayout develPanelLayout = new GroupLayout(develPanel);
-        develPanel.setLayout(develPanelLayout);
-
-        develPanelLayout.setHorizontalGroup(
-            develPanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(develPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(develPanelLayout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(forgetLayoutCheckBox)
-                    .addComponent(develLabel))
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        develPanelLayout.setVerticalGroup(
-            develPanelLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(develPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(develLabel)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(forgetLayoutCheckBox)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("ConfigFrame.title")); // NOI18N
@@ -413,7 +374,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         });
         Mnemonics.setLocalizedText(removeAccentsCheckBox, l10n.getString("ConfigFrame.removeAccentsCheckBox.text"));
         removeAccentsCheckBox.setToolTipText(l10n.getString("ConfigFrame.removeAccentsCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${removeAccents}"), removeAccentsCheckBox, BeanProperty.create("selected"));
+        Binding binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${removeAccents}"), removeAccentsCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(checkUpdatesCheckBox, l10n.getString("ConfigFrame.checkUpdatesCheckBox.text"));
@@ -856,7 +817,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
             .addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
@@ -1426,9 +1387,6 @@ private void advancedControlsCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
     private CountryPrefixPanel countryPrefixPanel;
     private JCheckBox debugCheckBox;
     private JCheckBox demandDeliveryReportCheckBox;
-    private JLabel develLabel;
-    private JPanel develPanel;
-    private JCheckBox forgetLayoutCheckBox;
     private GatewayComboBox gatewayComboBox;
     private JLabel gatewayFilterLabel;
     private JTextField gatewayFilterTextField;

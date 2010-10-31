@@ -10,6 +10,7 @@ import esmska.utils.AlphanumComparator;
 import java.awt.Dimension;
 import java.beans.*;
 import java.io.Serializable;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
@@ -154,8 +155,8 @@ public class Config extends Object implements Serializable {
                 oldValue = Contact.anonymizeNumber((String)oldValue);
             }
             //log change
-            logger.config("Config changed - property: " + evt.getPropertyName() +
-                    ", old: " + oldValue + ", new: " + newValue);
+            logger.log(Level.CONFIG, "Config changed - property: {0}, old: {1}, new: {2}",
+                    new Object[]{evt.getPropertyName(), oldValue, newValue});
             //fire change
             super.firePropertyChange(evt);
         }
