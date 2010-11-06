@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.Context;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.utils.L10N;
@@ -186,6 +187,10 @@ public class LogFrame extends javax.swing.JFrame {
 
     private void clearButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         log.clearRecords();
+        //the last record is also shown in mainframe's status bar
+        //if someone wants to remove all records, he also probably wants to
+        //delete that one too (privacy concerns)
+        Context.mainFrame.getStatusPanel().setStatusMessage(null, null, null, false);
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void copyButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed

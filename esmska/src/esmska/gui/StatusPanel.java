@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.Timer;
+import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
 
 /** Status bar panel
@@ -56,9 +57,9 @@ public class StatusPanel extends javax.swing.JPanel {
      * the text should not contain &lt;html&gt; start and end tags.
      */
     public void setStatusMessage(String message, Date time, ImageIcon icon, boolean html) {
-        String messageEsc = message;
+        String messageEsc = StringUtils.defaultString(message);
         if (!html) {
-            messageEsc = MiscUtils.escapeHtml(message);
+            messageEsc = MiscUtils.escapeHtml(messageEsc);
         }
         if (time != null) {
             String timestamp = shortTimeFormat.format(time);
