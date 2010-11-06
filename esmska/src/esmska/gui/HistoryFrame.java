@@ -635,19 +635,20 @@ public class HistoryFrame extends javax.swing.JFrame {
             boolean selected = (index >= 0);
             deleteAction.setEnabled(selected);
             resendAction.setEnabled(selected);
-            if (!selected) {
-                return;
-            }
-            index = historyTable.getRowSorter().convertRowIndexToModel(index);
 
-            History.Record record = history.getRecord(index);
-            dateLabel.setText(df.format(record.getDate()));
-            nameLabel.setText(record.getName());
-            numberLabel.setText(record.getNumber());
-            gatewayLabel.setText(record.getGateway());
-            senderNameLabel.setText(record.getSenderName());
-            senderNumberLabel.setText(record.getSenderNumber());
-            textArea.setText(record.getText());
+            History.Record record = null;
+            if (selected) {
+                index = historyTable.getRowSorter().convertRowIndexToModel(index);
+                record = history.getRecord(index);
+            }
+
+            dateLabel.setText(selected ? df.format(record.getDate()) : null);
+            nameLabel.setText(selected ? record.getName() : null);
+            numberLabel.setText(selected ? record.getNumber() : null);
+            gatewayLabel.setText(selected ? record.getGateway() : null);
+            senderNameLabel.setText(selected ? record.getSenderName() : null);
+            senderNumberLabel.setText(selected ? record.getSenderNumber() : null);
+            textArea.setText(selected ? record.getText() : null);
             textArea.setCaretPosition(0);
 
             selectedHistory = record;
