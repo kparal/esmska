@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-08-10"
+    return "2010-11-07"
 }
 
 function getMaintainer() {
@@ -68,6 +68,13 @@ function send() {
     }
     if (SENDERNUMBER.indexOf("+420") == 0) {
         SENDERNUMBER = SENDERNUMBER.substring(4)
+    }
+    // Vodafone allows only Czech sender number, let's ignore if there is some other
+    // see http://code.google.com/p/esmska/issues/detail?id=306 for more details
+    if (SENDERNUMBER.indexOf("+") == 0) {
+        // if it still starts with '+', it can't be Czech number (the prefix would
+        // have been stripped already)
+        SENDERNUMBER = ""
     }
 
     // start page
