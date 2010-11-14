@@ -19,12 +19,16 @@ import esmska.data.Gateways;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.event.AbstractDocumentListener;
+import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
+import esmska.utils.MiscUtils;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -112,6 +116,17 @@ public class SMSPanel extends javax.swing.JPanel {
     private RecipientTextField recipientField;
     
     private boolean disableContactListeners;
+
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
     
     /** Creates new form SMSPanel */
     public SMSPanel() {
@@ -415,7 +430,7 @@ public class SMSPanel extends javax.swing.JPanel {
         gatewayLabel = new JLabel();
         recipientTextField = new SMSPanel.RecipientTextField();
         recipientLabel = new JLabel();
-        jPanel1 = new JPanel();
+        infoPanel = new JPanel();
         credentialsInfoLabel = new InfoLabel();
         numberInfoLabel = new InfoLabel();
         countryInfoLabel = new InfoLabel();
@@ -483,6 +498,12 @@ public class SMSPanel extends javax.swing.JPanel {
     recipientLabel.setLabelFor(recipientTextField);
         Mnemonics.setLocalizedText(recipientLabel, l10n.getString("SMSPanel.recipientLabel.text")); // NOI18N
     recipientLabel.setToolTipText(recipientTextField.getToolTipText());
+
+    infoPanel.addComponentListener(new ComponentAdapter() {
+        public void componentResized(ComponentEvent evt) {
+            infoPanelComponentResized(evt);
+        }
+    });
     Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
         "SMSPanel.credentialsInfoLabel.text"));
     credentialsInfoLabel.setText(MessageFormat.format(
@@ -495,17 +516,17 @@ numberInfoLabel.setVisible(false);
         Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("SMSPanel.countryInfoLabel.text")); // NOI18N
 countryInfoLabel.setVisible(false);
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-jPanel1.setLayout(jPanel1Layout);
-jPanel1Layout.setHorizontalGroup(
-    jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        GroupLayout infoPanelLayout = new GroupLayout(infoPanel);
+infoPanel.setLayout(infoPanelLayout);
+infoPanelLayout.setHorizontalGroup(
+    infoPanelLayout.createParallelGroup(Alignment.LEADING)
     .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
     .addComponent(numberInfoLabel, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
     .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
     );
-    jPanel1Layout.setVerticalGroup(
-        jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+    infoPanelLayout.setVerticalGroup(
+        infoPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(Alignment.TRAILING, infoPanelLayout.createSequentialGroup()
             .addComponent(numberInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(countryInfoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -544,7 +565,7 @@ jPanel1Layout.setHorizontalGroup(
                                 .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))))
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(74, 74, 74)
-                    .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(infoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addContainerGap())
     );
 
@@ -567,7 +588,7 @@ jPanel1Layout.setHorizontalGroup(
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                     .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING, false)
                         .addComponent(sendButton)
@@ -593,6 +614,12 @@ jPanel1Layout.setHorizontalGroup(
         updateCredentialsInfoLabel();
         updateCountryInfoLabel();
     }//GEN-LAST:event_gatewayComboBoxItemStateChanged
+
+    private void infoPanelComponentResized(ComponentEvent evt) {//GEN-FIRST:event_infoPanelComponentResized
+        if (MiscUtils.needsResize(this, MiscUtils.Direction.HEIGHT)) {
+            actionSupport.fireActionPerformed(ActionEventSupport.ACTION_NEED_RESIZE, null);
+        }
+    }//GEN-LAST:event_infoPanelComponentResized
     
     /** Send sms to queue */
     private class SendAction extends AbstractAction {
@@ -1128,7 +1155,7 @@ jPanel1Layout.setHorizontalGroup(
     private JProgressBar fullProgressBar;
     private GatewayComboBox gatewayComboBox;
     private JLabel gatewayLabel;
-    private JPanel jPanel1;
+    private JPanel infoPanel;
     private JScrollPane jScrollPane1;
     private InfoLabel numberInfoLabel;
     private JLabel recipientLabel;

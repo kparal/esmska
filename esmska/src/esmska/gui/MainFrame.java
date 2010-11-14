@@ -70,6 +70,7 @@ import esmska.transfer.SMSSender;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
 import esmska.data.Links;
+import esmska.data.event.ActionEventSupport;
 import esmska.transfer.ImageCodeManager;
 import esmska.utils.MiscUtils;
 import esmska.utils.RuntimeUtils;
@@ -221,6 +222,25 @@ public class MainFrame extends javax.swing.JFrame {
             //add shutdown handler, when program is closed externally (logout, SIGTERM, etc)
             Runtime.getRuntime().addShutdownHook(shutdownThread);
         }
+
+        // listen for changed sizes of smsPanel and queuePanel and adjust splitPane if required
+        ActionListener verticalSplitListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getID() == ActionEventSupport.ACTION_NEED_RESIZE) {
+                    JComponent comp = (JComponent) e.getSource();
+                    int prefHeight = comp.getPreferredSize().height;
+                    int dividerLocation = prefHeight;
+                    if (verticalSplitPane.getBottomComponent() == comp) {
+                        //for bottom component we have to substract the number from full height
+                        dividerLocation = verticalSplitPane.getHeight() - prefHeight - verticalSplitPane.getDividerSize();
+                    }
+                    verticalSplitPane.setDividerLocation(dividerLocation);
+                }
+            }
+        };
+        smsPanel.addActionListener(verticalSplitListener);
+        queuePanel.addActionListener(verticalSplitListener);
     }
     
     /** Create an instance of MainFrame. Should be called only for the first

@@ -13,11 +13,15 @@ import esmska.data.Links;
 import esmska.data.Gateway;
 import esmska.data.Gateways;
 import esmska.data.event.AbstractDocumentListener;
+import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
+import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
@@ -56,6 +60,17 @@ public class EditContactPanel extends javax.swing.JPanel {
     private boolean userSet; //whether gateway was set by user or by program
 
     private Action suggestGatewayAction;
+
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
 
     /**
      * Creates new form EditContactPanel
@@ -121,7 +136,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         numberLabel = new JLabel();
         gatewayLabel = new JLabel();
         suggestGatewayButton = new JButton();
-        jPanel1 = new JPanel();
+        infoPanel = new JPanel();
         countryInfoLabel = new InfoLabel();
         credentialsInfoLabel = new InfoLabel();
 
@@ -164,6 +179,12 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
+        infoPanel.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent evt) {
+                infoPanelComponentResized(evt);
+            }
+        });
+
         Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("EditContactPanel.countryInfoLabel.text")); // NOI18N
         countryInfoLabel.setVisible(false);
         Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
@@ -172,16 +193,16 @@ public class EditContactPanel extends javax.swing.JPanel {
             l10n.getString("EditContactPanel.credentialsInfoLabel.text"), Links.CONFIG_CREDENTIALS));
     credentialsInfoLabel.setVisible(false);
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-        jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-        .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+        GroupLayout infoPanelLayout = new GroupLayout(infoPanel);
+    infoPanel.setLayout(infoPanelLayout);
+    infoPanelLayout.setHorizontalGroup(
+        infoPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addComponent(credentialsInfoLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+        .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
     );
-    jPanel1Layout.setVerticalGroup(
-        jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        .addGroup(jPanel1Layout.createSequentialGroup()
+    infoPanelLayout.setVerticalGroup(
+        infoPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(infoPanelLayout.createSequentialGroup()
             .addComponent(credentialsInfoLabel)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(countryInfoLabel))
@@ -194,7 +215,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(infoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addComponent(numberLabel)
@@ -203,11 +224,11 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(suggestGatewayButton))
-                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))))
+                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))))
             .addContainerGap())
     );
 
@@ -231,8 +252,8 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(gatewayComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addComponent(suggestGatewayButton))
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(84, Short.MAX_VALUE))
+            .addComponent(infoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, numberTextField});
@@ -343,6 +364,10 @@ public class EditContactPanel extends javax.swing.JPanel {
         updateCredentialsInfoLabel();
         updateCountryInfoLabel();
     }//GEN-LAST:event_gatewayComboBoxItemStateChanged
+
+    private void infoPanelComponentResized(ComponentEvent evt) {//GEN-FIRST:event_infoPanelComponentResized
+        actionSupport.fireActionPerformed(ActionEventSupport.ACTION_NEED_RESIZE, null);
+    }//GEN-LAST:event_infoPanelComponentResized
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
@@ -404,7 +429,7 @@ public class EditContactPanel extends javax.swing.JPanel {
     private InfoLabel credentialsInfoLabel;
     private GatewayComboBox gatewayComboBox;
     private JLabel gatewayLabel;
-    private JPanel jPanel1;
+    private JPanel infoPanel;
     private JLabel nameLabel;
     private JTextField nameTextField;
     private JLabel numberLabel;

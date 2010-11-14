@@ -801,6 +801,14 @@ public class ContactPanel extends javax.swing.JPanel {
             optionPane.addPropertyChangeListener(this);
             setContentPane(optionPane);
             pack();
+            panel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getID() == ActionEventSupport.ACTION_NEED_RESIZE) {
+                        ContactDialog.this.pack();
+                    }
+                }
+            });
         }
         /** Set options to display as buttons
          * @param options possible options

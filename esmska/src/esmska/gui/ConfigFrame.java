@@ -16,6 +16,7 @@ import esmska.data.Keyring;
 import esmska.data.Gateway;
 import esmska.data.Gateways;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -59,6 +60,7 @@ import esmska.transfer.ProxyManager;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
+import esmska.utils.MiscUtils;
 import esmska.utils.RuntimeUtils;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -206,7 +208,18 @@ public class ConfigFrame extends javax.swing.JFrame {
 
     /** Show or hide infoPanel according to requests in restartRequests */
     private void updateInfoLabel() {
+        boolean wasVisible = restartLabel.isVisible();
         restartLabel.setVisible(!restartRequests.isEmpty());
+
+        if (!fullyInicialized) {
+            return;
+        }
+        if (!wasVisible && restartLabel.isVisible()) {
+            this.validate();
+            if (MiscUtils.isCropped(closeButton)) {
+                this.pack();
+            }
+        }
     }
     
     /** Update theme according to L&F */
@@ -441,7 +454,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addComponent(unstableUpdatesCheckBox)
                         .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                 .addComponent(debugCheckBox))
-            .addContainerGap(310, Short.MAX_VALUE))
+            .addContainerGap(322, Short.MAX_VALUE))
     );
     generalPanelLayout.setVerticalGroup(
         generalPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -458,7 +471,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(debugCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(logLocationLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(236, Short.MAX_VALUE))
+            .addContainerGap(171, Short.MAX_VALUE))
     );
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
@@ -552,7 +565,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(notificationAreaCheckBox)
                 .addComponent(toolbarVisibleCheckBox)
                 .addComponent(advancedControlsCheckBox))
-            .addContainerGap(459, Short.MAX_VALUE))
+            .addContainerGap(471, Short.MAX_VALUE))
     );
 
     appearancePanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lafComboBox, themeComboBox});
@@ -582,7 +595,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(tipsCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(advancedControlsCheckBox)
-            .addContainerGap(154, Short.MAX_VALUE))
+            .addContainerGap(89, Short.MAX_VALUE))
     );
 
     appearancePanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {lafComboBox, themeComboBox});
@@ -660,7 +673,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                                 .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                         .addComponent(demandDeliveryReportCheckBox)))
                 .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(287, Short.MAX_VALUE))
+            .addContainerGap(299, Short.MAX_VALUE))
     );
 
     gatewayPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
@@ -686,7 +699,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(demandDeliveryReportCheckBox)
-            .addContainerGap(180, Short.MAX_VALUE))
+            .addContainerGap(115, Short.MAX_VALUE))
     );
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.gatewayPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/gateway-16.png")), gatewayPanel); // NOI18N
@@ -765,7 +778,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
         .addGroup(loginPanelLayout.createSequentialGroup()
             .addContainerGap()
             .addGroup(loginPanelLayout.createParallelGroup(Alignment.LEADING)
-                .addComponent(jLabel9, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+                .addComponent(jLabel9, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
                 .addGroup(loginPanelLayout.createParallelGroup(Alignment.TRAILING, false)
                     .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
                         .addComponent(jLabel10)
@@ -781,7 +794,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
                         .addGroup(loginPanelLayout.createParallelGroup(Alignment.LEADING)
                             .addComponent(showPasswordCheckBox)
                             .addComponent(passwordField))))
-                .addComponent(jLabel13, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+                .addComponent(jLabel13, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
                 .addComponent(clearKeyringButton))
             .addContainerGap())
     );
@@ -811,7 +824,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
             .addComponent(showPasswordCheckBox)
             .addGap(18, 18, 18)
             .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
             .addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
@@ -849,7 +862,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
             .addComponent(reducedHistorySpinner, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(jLabel18)
-            .addContainerGap(200, Short.MAX_VALUE))
+            .addContainerGap(212, Short.MAX_VALUE))
     );
     privacyPanelLayout.setVerticalGroup(
         privacyPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -974,7 +987,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
                         .addGroup(connectionPanelLayout.createSequentialGroup()
                             .addGap(6, 6, 6)
                             .addComponent(sameProxyCheckBox))))
-                .addComponent(jLabel17, GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
+                .addComponent(jLabel17, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
             .addContainerGap())
     );
 
@@ -1001,7 +1014,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
             .addComponent(jLabel17, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
@@ -1037,19 +1050,19 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                .addComponent(tabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+                .addComponent(tabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(advancedCheckBox)
-                    .addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
+                    .addPreferredGap(ComponentPlacement.RELATED, 514, Short.MAX_VALUE)
                     .addComponent(closeButton))
-                .addComponent(restartLabel, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
+                .addComponent(restartLabel, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
             .addContainerGap())
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(Alignment.LEADING)
         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(restartLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)

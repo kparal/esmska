@@ -40,13 +40,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="tabbedPane" alignment="1" pref="728" max="32767" attributes="0"/>
+                  <Component id="tabbedPane" alignment="1" pref="740" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="advancedCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="502" max="32767" attributes="0"/>
+                      <EmptySpace pref="514" max="32767" attributes="0"/>
                       <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="restartLabel" alignment="0" pref="728" max="32767" attributes="0"/>
+                  <Component id="restartLabel" alignment="0" pref="740" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -56,7 +56,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabbedPane" pref="390" max="32767" attributes="0"/>
+              <Component id="tabbedPane" pref="325" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="restartLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -109,7 +109,7 @@
                           </Group>
                           <Component id="debugCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="310" max="32767" attributes="0"/>
+                      <EmptySpace pref="322" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -129,7 +129,7 @@
                       <Component id="debugCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="logLocationLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="236" max="32767" attributes="0"/>
+                      <EmptySpace pref="171" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -270,7 +270,7 @@
                           <Component id="toolbarVisibleCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="advancedControlsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="459" max="32767" attributes="0"/>
+                      <EmptySpace pref="471" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -299,7 +299,7 @@
                       <Component id="tipsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="advancedControlsCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="154" max="32767" attributes="0"/>
+                      <EmptySpace pref="89" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -489,7 +489,7 @@
                           </Group>
                           <Component id="countryPrefixPanel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="287" max="32767" attributes="0"/>
+                      <EmptySpace pref="299" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -517,7 +517,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="demandDeliveryReportCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="180" max="32767" attributes="0"/>
+                      <EmptySpace pref="115" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -654,7 +654,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel9" alignment="0" pref="716" max="32767" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" pref="728" max="32767" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="jLabel10" linkSize="4" min="-2" max="-2" attributes="0"/>
@@ -675,7 +675,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel13" alignment="0" pref="716" max="32767" attributes="0"/>
+                          <Component id="jLabel13" alignment="0" pref="728" max="32767" attributes="0"/>
                           <Component id="clearKeyringButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -706,7 +706,7 @@
                       <Component id="showPasswordCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="139" max="32767" attributes="0"/>
+                      <EmptySpace pref="59" max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -858,7 +858,7 @@
                       <Component id="reducedHistorySpinner" min="-2" pref="65" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="200" max="32767" attributes="0"/>
+                      <EmptySpace pref="212" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -965,7 +965,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel17" alignment="0" pref="716" max="32767" attributes="0"/>
+                          <Component id="jLabel17" alignment="0" pref="728" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -993,7 +993,7 @@
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="socksProxyTextField" linkSize="9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="192" max="32767" attributes="0"/>
+                      <EmptySpace pref="127" max="32767" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

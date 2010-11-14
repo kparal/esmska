@@ -40,6 +40,7 @@ import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.Gateway;
 import esmska.data.event.AbstractListDataListener;
+import esmska.data.event.ActionEventSupport;
 import esmska.data.event.ValuedEventSupport;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
@@ -63,6 +64,7 @@ import javax.swing.Timer;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
+import org.openide.awt.Mnemonics;
 import org.pushingpixels.substance.api.ColorSchemeAssociationKind;
 import org.pushingpixels.substance.api.ComponentState;
 import org.pushingpixels.substance.api.SubstanceColorScheme;
@@ -110,6 +112,17 @@ public class QueuePanel extends javax.swing.JPanel {
     }
     // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
+    private ActionEventSupport actionSupport = new ActionEventSupport(this);
+    public void addActionListener(ActionListener actionListener) {
+        actionSupport.addActionListener(actionListener);
+    }
+
+    public void removeActionListener(ActionListener actionListener) {
+        actionSupport.removeActionListener(actionListener);
+    }
+    // </editor-fold>
+
     /** Creates new form QueuePanel */
     public QueuePanel() {
         initComponents();
@@ -136,6 +149,24 @@ public class QueuePanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        queue.addValuedListener(new ValuedListener<Queue.Events, SMS>() {
+            @Override
+            public void eventOccured(ValuedEvent<Queue.Events, SMS> e) {
+                switch (e.getEvent()) {
+                    case QUEUE_PAUSED:
+                        pausedLabel.setVisible(true);
+                        break;
+                    case QUEUE_RESUMED:
+                        pausedLabel.setVisible(false);
+                        break;
+                }
+                if (MiscUtils.needsResize(QueuePanel.this, MiscUtils.Direction.HEIGHT)) {
+                    actionSupport.fireActionPerformed(ActionEventSupport.ACTION_NEED_RESIZE, null);
+                }
+                QueuePanel.this.revalidate(); //fixes problem with cropped PauseButton
+            }
+        });
     }
 
     /** Show or hide advanced controls (buttons, etc) */
@@ -160,6 +191,7 @@ public class QueuePanel extends javax.swing.JPanel {
         editButton = new JButton();
         deleteButton = new JButton();
         pauseButton = new JToggleButton();
+        pausedLabel = new InfoLabel();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("QueuePanel.border.title"))); // NOI18N
         addFocusListener(new FocusAdapter() {
@@ -196,18 +228,22 @@ public class QueuePanel extends javax.swing.JPanel {
 
         pauseButton.setAction(Actions.getQueuePauseAction(false));
         pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        Mnemonics.setLocalizedText(pausedLabel, l10n.getString("QueuePanel.pausedLabel.text"));
+        pausedLabel.setVisible(queue.isPaused());
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(Alignment.CENTER)
                     .addComponent(smsDownButton)
                     .addComponent(smsUpButton))
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                    .addComponent(pausedLabel, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -222,20 +258,20 @@ public class QueuePanel extends javax.swing.JPanel {
 
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addGroup(Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(editButton)
+                .addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(pauseButton))
+            .addComponent(deleteButton)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(smsUpButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(smsDownButton))
-                    .addComponent(jScrollPane2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addGroup(Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                            .addComponent(editButton)
-                            .addComponent(deleteButton))
-                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pauseButton)))
-                .addContainerGap())
+                        .addComponent(smsDownButton)))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(pausedLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(SwingConstants.VERTICAL, new Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
@@ -600,6 +636,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private JButton editButton;
     private JScrollPane jScrollPane2;
     private JToggleButton pauseButton;
+    private InfoLabel pausedLabel;
     private JList queueList;
     private JButton smsDownButton;
     private JButton smsUpButton;

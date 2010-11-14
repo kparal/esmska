@@ -19,6 +19,9 @@ import java.util.ListIterator;
  * @author ripper
  */
 public class ActionEventSupport {
+    /** A container wants to be resized, possibly by frame.pack() */
+    public static final int ACTION_NEED_RESIZE = 0;
+
     Object source;
     private ArrayList<ActionListener> listeners = new ArrayList<ActionListener>();
     
