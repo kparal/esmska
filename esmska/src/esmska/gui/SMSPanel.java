@@ -367,11 +367,6 @@ public class SMSPanel extends javax.swing.JPanel {
     private void updateCountryInfoLabel() {
         countryInfoLabel.setVisible(false);
 
-        if (recipientField.getContact() != null) {
-            //only handle custom numbers, not contacts
-            return;
-        }
-
         //ensure that fields are sufficiently filled in
         Gateway gateway = gatewayComboBox.getSelectedGateway();
         String number = recipientField.getNumber();
