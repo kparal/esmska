@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-31 14:32+0200\n"
-"PO-Revision-Date: 2010-07-05 21:18+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2010-11-14 21:51+0200\n"
+"PO-Revision-Date: 2010-10-21 11:18+0000\n"
+"Last-Translator: Vitaliy Starostin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-06 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-10-22 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -156,6 +156,8 @@ msgid ""
 "Enable the portable mode - ask for location of the user configuration "
 "directory. Can't be used with -c."
 msgstr ""
+"Включить портативном режиме - спросит о  каталоге конфигурации пользователя. "
+"Не может использоваться с опцией -с."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
@@ -175,6 +177,8 @@ msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
+"Установите путь к каталогу конфигурации пользователя. Укажите абсолютный "
+"путь. Не может использоваться с опцией -р."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
@@ -190,7 +194,7 @@ msgstr "Показать версию программы и выйти."
 
 #: CompressText_
 msgid "&Compress text"
-msgstr ""
+msgstr "&Сжать текст"
 
 #: Compress_
 msgid "&Compress"
@@ -277,7 +281,7 @@ msgstr ""
 
 #: ConfigFrame.gatewayFilterLabel.text
 msgid "Show &only gateways with names containing:"
-msgstr ""
+msgstr "Показывать &только шлюзы с именами, содержащими:"
 
 #: ConfigFrame.gatewayFilterTextField.toolTipText
 msgid ""
@@ -437,6 +441,7 @@ msgstr "Б&езопасность"
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."
 msgstr ""
+"&Ограничить историю отправленных сообщений только за последние {0} дней."
 
 #: ConfigFrame.reducedHistoryCheckBox.toolTipText
 msgid ""
@@ -448,7 +453,7 @@ msgstr ""
 
 #: ConfigFrame.removeAccentsCheckBox.text
 msgid "Remove &diacritics from messages"
-msgstr ""
+msgstr "Удалить &диакритические символы из сообщений"
 
 #: ConfigFrame.removeAccentsCheckBox.toolTipText
 msgid ""
@@ -597,7 +602,7 @@ msgstr "Использовать п&рокси сервер"
 
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
-msgstr ""
+msgstr "Должен ли быть использован прокси-сервер для подключения"
 
 #: ConfigFrame.useSenderIDCheckBox.text
 msgid "Add a sender &signature to the message"
@@ -615,7 +620,7 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.user_directory
 msgid "<html>User configuration directory:<br>{0}</html>"
-msgstr ""
+msgstr "<html>Каталог конфигурации пользователя:<br>{0}</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -702,7 +707,7 @@ msgstr ""
 
 #: CountryPrefixPanel.countryCodeLabel.text
 msgid "(c&ountry:"
-msgstr ""
+msgstr "(С&трана:"
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -734,7 +739,7 @@ msgstr "Автор:"
 
 #: Credits.contributors
 msgid "Contributions from:"
-msgstr ""
+msgstr "Пожертвования:"
 
 #: Credits.emailWarn
 msgid ""
@@ -875,7 +880,7 @@ msgstr "Править выбранное сообщение"
 
 #: ExceptionDialog.copyButton.toolTipText
 msgid "Copy the detailed exception message to the system clipboard"
-msgstr ""
+msgstr "Копировать подробное сообщение об ошибке в системный буфер"
 
 #: ExceptionDialog.detailsLabel.text
 msgid "Details:"
@@ -884,15 +889,15 @@ msgstr "Подробности:"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
-msgstr ""
+msgstr "Файл ''{0}'' не может быть записан!"
 
 #: ExportManager.choose_export_file
 msgid "Choose location and type of exported file"
-msgstr ""
+msgstr "Выберите местоположение и тип экспортируемого файла"
 
 #: ExportManager.contact_export
 msgid "Contact export"
-msgstr ""
+msgstr "Экспорт контакта"
 
 #: ExportManager.contact_list
 msgid "Contact list (contact name, telephone number, default gateway)"
@@ -905,7 +910,7 @@ msgstr "CSV файлы (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
-msgstr ""
+msgstr "Экспорт контакта не удался!"
 
 #: ExportManager.export_info
 msgid ""
@@ -924,29 +929,35 @@ msgstr ""
 
 #: ExportManager.export_ok
 msgid "Contact export finished successfully"
-msgstr ""
+msgstr "Экспорт контакта успешно завершился"
 
 #: ExportManager.export_ok!
 msgid "Contact export finished successfully!"
-msgstr ""
+msgstr "Экспорт контакта успешно завершился"
 
 #: ExportManager.history
 msgid ""
 "Sent messages history (date, recipient name, recipient number, gateway, "
 "message text, sender name, sender number)"
 msgstr ""
+"История отправленных сообщений (дата, имя получателя, номер получателя, "
+"шлюз, текст сообщения, имя отправителя, номер отправителя)"
 
 #: ExportManager.login
 msgid ""
 "Usernames and password to individual gateways (gateway name, user login, "
 "user password)"
 msgstr ""
+"Имя пользователя и пароль для отдельных шлюзов (имя шлюза, логин "
+"пользователя, пароль пользователя)"
 
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
 "text, sender name, sender number)"
 msgstr ""
+"SMS очередь отправки (имя получателя, номер получателя, шлюз, текст "
+"сообщения, имя отправителя, номер отправителя)"
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
@@ -955,7 +966,7 @@ msgstr "vCard файлы (*.vcard, *.vcf)"
 
 #: Finish_
 msgid "&Finish"
-msgstr ""
+msgstr "&Завершить"
 
 #. #Action to resend message
 #: Forward_
@@ -964,7 +975,6 @@ msgid "&Forward"
 msgstr "&Вперёд"
 
 #: Gateway.unknown
-#, fuzzy
 msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
 msgstr "Неизвестный шлюз"
@@ -989,20 +999,20 @@ msgstr ""
 
 #: GatewayComboBox.international
 msgid "Can be used internationally."
-msgstr ""
+msgstr "Может использоваться на интернационально."
 
 #: GatewayComboBox.needRegistration
 msgid "Requires registration on the website."
-msgstr ""
+msgstr "Требуется регистрация на сайте."
 
 #: GatewayComboBox.noRegistration
 msgid "Does not require registration."
-msgstr ""
+msgstr "Не требует регистрации."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayComboBox.onlyCountry
 msgid "Mainly usable for country: {0}"
-msgstr ""
+msgstr "D основном используется в странах: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1020,7 +1030,7 @@ msgstr ""
 
 #: GatewayExecutor.ERROR_GATEWAY_MESSAGE
 msgid "A message from the gateway:<br>"
-msgstr ""
+msgstr "Сообщение из шлюза: <br>"
 
 #: GatewayExecutor.ERROR_LIMIT_REACHED
 msgid ""
@@ -1637,6 +1647,10 @@ msgstr ""
 msgid "m"
 msgstr ""
 
+#: QueuePanel.pausedLabel.text
+msgid "The queue is now PAUSED."
+msgstr ""
+
 #: QueuePanel.replaceSms
 msgid ""
 "<html>\n"
@@ -2023,6 +2037,7 @@ msgstr ""
 "  Novichkov Alexander https://launchpad.net/~berkut\n"
 "  Pasha Vovk https://launchpad.net/~madwolfa\n"
 "  Sergey Sedov https://launchpad.net/~serg-sedov\n"
+"  Vitaliy Starostin https://launchpad.net/~vvs\n"
 "  shaxter https://launchpad.net/~morskov"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2177,9 +2192,6 @@ msgstr ""
 #~ msgid "Use default form &layout"
 #~ msgstr "Использовать раскладку по умолчанию"
 
-#~ msgid "Import only contacts with known operator"
-#~ msgstr "Импортировать контакты только с известным оператором"
-
 #~ msgid "O&perators"
 #~ msgstr "О&ператоры"
 
@@ -2192,3 +2204,6 @@ msgstr ""
 
 #~ msgid "Sent messages history"
 #~ msgstr "Архив отправленных сообщений"
+
+#~ msgid "Import only contacts with known operator"
+#~ msgstr "Импортировать контакты только с известным оператором"

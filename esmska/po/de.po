@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-31 14:32+0200\n"
+"POT-Creation-Date: 2010-11-14 21:51+0200\n"
 "PO-Revision-Date: 2009-12-24 12:09+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -767,9 +767,8 @@ msgid "&Delete"
 msgstr ""
 
 #: Delete_contacts
-#, fuzzy
 msgid "Delete contacts"
-msgstr "Kontakt hinzufügen"
+msgstr ""
 
 #: Delete_messages
 msgid "Delete messages"
@@ -850,9 +849,8 @@ msgid "Edit contact"
 msgstr ""
 
 #: Edit_contacts
-#, fuzzy
 msgid "Edit contacts"
-msgstr "Kontakt hinzufügen"
+msgstr ""
 
 #: Edit_contacts_collectively
 msgid "Edit contacts collectively"
@@ -1627,6 +1625,10 @@ msgstr ""
 #. #Shortcut for "minute"
 #: QueuePanel.minute_shortcut
 msgid "m"
+msgstr ""
+
+#: QueuePanel.pausedLabel.text
+msgid "The queue is now PAUSED."
 msgstr ""
 
 #: QueuePanel.replaceSms

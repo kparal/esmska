@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-31 14:32+0200\n"
-"PO-Revision-Date: 2010-07-14 18:23+0000\n"
-"Last-Translator: Jonay <jonay.santana@gmail.com>\n"
+"POT-Creation-Date: 2010-11-14 21:51+0200\n"
+"PO-Revision-Date: 2010-07-26 18:25+0000\n"
+"Last-Translator: Juan Miguel Boyero Corral <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-15 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-07-27 03:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -940,6 +940,10 @@ msgid ""
 "phone numbers with prefixes: {0}.<br>\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"La puerta de enlace seleccionada no soporta su receptor. Envía mensajes "
+"solamente a los números de teléfono con prefijos: {0}.<br>\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: EditContactPanel.credentialsInfoLabel.text
@@ -1126,7 +1130,7 @@ msgstr "Si&guiente"
 #: Gateway.unknown
 msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Puerta de enlace desconocida"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1170,7 +1174,7 @@ msgstr "No requiere de registro"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayComboBox.onlyCountry
 msgid "Mainly usable for country: {0}"
-msgstr ""
+msgstr "Usable principalmente por el país: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1246,7 +1250,6 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_UNKNOWN
-#, fuzzy
 msgid ""
 "An unknown error has occured. The gateway provider has probably "
 "changed<br>its webpages or has a problem with them currently.<br>Try again "
@@ -1256,14 +1259,14 @@ msgid ""
 "\"{1}\">web gateway</a> works in a web browser,<br>report the problem on <a "
 "href=\"{2}\">program homepage</a>."
 msgstr ""
-"Ha ocurrido un error desconocido. El proveedor de la compuerta probablemente "
-"ha cambiado<br>sus páginas web o tiene un problema con ellas actualmente ."
-"<br>Vuelva a intentarlo más tarde.<br><br>También asegúrese que su conexión "
-"de internet se encuentra trabajando<br>y que usted está usando<a href="
-"\"{0}\">la versión más reciente del programa de la compuerta</a>.<br><br>Si "
-"el problema persiste y la <a href=\"{1}\">página web de la compuerta</a> "
-"trabaja bien,<br>reporte el problema a <a href=\"{2}\">la página de inicio "
-"del programa</a>."
+"Ha ocurrido un error desconocido. El proveedor de la puerta de enlace puede "
+"haber cambiado<br>sus páginas web o tiene problemas con ellas actualmente."
+"<br>Inténtelo de nuevo más tarde.<br><br>Asegúrese también de que su "
+"conexión a Internet funciona<br>y de que está usando <a href=\"{0}\">la "
+"última versión del programa y de la puerta de enlace</a>.<br><br>Si el "
+"problema persiste y le <a href=\"{1}\">web de la puerta de enlace</a> "
+"funciona en un navegador web,<br>informe del problema en <a href=\"{2}\">la "
+"página web del programa</a>."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_WRONG_AUTH
@@ -1927,6 +1930,10 @@ msgstr "h"
 msgid "m"
 msgstr "m"
 
+#: QueuePanel.pausedLabel.text
+msgid "The queue is now PAUSED."
+msgstr ""
+
 #: QueuePanel.replaceSms
 msgid ""
 "<html>\n"
@@ -1995,6 +2002,9 @@ msgid ""
 "Recipient not supported by this gateway. Allowed number prefixes: {0}\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Receptor no soportado por esta puerta de enlace. Prefijos permitidos: {0}\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.credentialsInfoLabel.text
@@ -2369,6 +2379,7 @@ msgstr ""
 "  Federico Vera https://launchpad.net/~fedevera\n"
 "  Javier Acuña Ditzel https://launchpad.net/~santoposmoderno\n"
 "  Jonay https://launchpad.net/~jonay-santana\n"
+"  Juan Miguel Boyero Corral https://launchpad.net/~juanmi1982\n"
 "  Kamus https://launchpad.net/~kamus\n"
 "  Luis Arturo https://launchpad.net/~uisart\n"
 "  Miguel Zilli https://launchpad.net/~miguelzilli\n"

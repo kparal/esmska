@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-31 14:32+0200\n"
+"POT-Creation-Date: 2010-11-14 21:51+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1733,6 +1733,10 @@ msgstr "שע'"
 #: QueuePanel.minute_shortcut
 msgid "m"
 msgstr "ד'"
+
+#: QueuePanel.pausedLabel.text
+msgid "The queue is now PAUSED."
+msgstr ""
 
 #: QueuePanel.replaceSms
 msgid ""

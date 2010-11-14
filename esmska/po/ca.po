@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-31 14:32+0200\n"
+"POT-Creation-Date: 2010-11-14 21:51+0200\n"
 "PO-Revision-Date: 2010-07-05 21:21+0000\n"
 "Last-Translator: el_libre - http://www.catmidia.cat  "
 "XDDDDDDDDDDDDDDDDDDDDDDDDDDD <el.libre@gmail.com>\n"
@@ -750,9 +750,8 @@ msgid "&Delete"
 msgstr "Es&borra"
 
 #: Delete_contacts
-#, fuzzy
 msgid "Delete contacts"
-msgstr "Suprimeix els contactes seleccionats"
+msgstr ""
 
 #: Delete_messages
 msgid "Delete messages"
@@ -833,9 +832,8 @@ msgid "Edit contact"
 msgstr "Edita el contacte"
 
 #: Edit_contacts
-#, fuzzy
 msgid "Edit contacts"
-msgstr "Edita el contacte"
+msgstr ""
 
 #: Edit_contacts_collectively
 msgid "Edit contacts collectively"
@@ -1612,6 +1610,10 @@ msgstr "h"
 #: QueuePanel.minute_shortcut
 msgid "m"
 msgstr "m"
+
+#: QueuePanel.pausedLabel.text
+msgid "The queue is now PAUSED."
+msgstr ""
 
 #: QueuePanel.replaceSms
 msgid ""

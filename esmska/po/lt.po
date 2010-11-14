@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-31 14:32+0200\n"
+"POT-Creation-Date: 2010-11-14 21:51+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -1622,6 +1622,10 @@ msgstr "h"
 #: QueuePanel.minute_shortcut
 msgid "m"
 msgstr "m"
+
+#: QueuePanel.pausedLabel.text
+msgid "The queue is now PAUSED."
+msgstr ""
 
 #: QueuePanel.replaceSms
 msgid ""

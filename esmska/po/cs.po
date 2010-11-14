@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-31 14:32+0200\n"
-"PO-Revision-Date: 2010-10-31 14:25+0100\n"
+"POT-Creation-Date: 2010-11-14 21:49+0200\n"
+"PO-Revision-Date: 2010-11-14 21:48+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -1881,6 +1881,10 @@ msgstr "h"
 msgid "m"
 msgstr "m"
 
+#: QueuePanel.pausedLabel.text
+msgid "The queue is now PAUSED."
+msgstr "Fronta je nyní POZASTAVENA."
+
 #: QueuePanel.replaceSms
 msgid ""
 "<html>\n"
@@ -2064,6 +2068,9 @@ msgid ""
 "<br>More information is available in the program log.<br>Please report this "
 "problem on <a href=\"{0}\">program homepage</a>."
 msgstr ""
+"Závažné okolnosti zabránily Esmsce odeslat zprávu.<br>Bližší podrobnosti "
+"jsou dostupné v ladícím záznamu aplikace.<br>Prosím nahlaste tento problém "
+"na <a href=\"{0}\">domovské stránce programu</a>."
 
 #: SMSSender.no_gateway
 msgid "no gateway"
