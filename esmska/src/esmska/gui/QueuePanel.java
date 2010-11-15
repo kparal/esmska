@@ -282,17 +282,24 @@ public class QueuePanel extends javax.swing.JPanel {
         if (evt != null && evt.getValueIsAdjusting()) {
             return;
         }
-        if (queueList.getSelectedIndex() >= queueListModel.getSize()) {
+        if (queueList.getMaxSelectionIndex() >= queueListModel.getSize()) {
             //selection model has not yet been updated
             return;
         }
 
         //update form components
         int size = queueList.getSelectedIndices().length;
-        deleteSMSAction.setEnabled(size > 0);
-        editSMSAction.setEnabled(size == 1);
-        
         SMS sms = (SMS) queueList.getSelectedValue();
+        Object[] smses = queueList.getSelectedValues();
+
+        editSMSAction.setEnabled(size == 1 && sms.getStatus() != SMS.Status.SENDING);
+        deleteSMSAction.setEnabled(size > 0);
+        for (Object s : smses) {
+            if (((SMS)s).getStatus() == SMS.Status.SENDING) {
+                deleteSMSAction.setEnabled(false);
+            }
+        }
+        
         if (sms != null && size == 1) {
             List<SMS> list = queue.getAll(sms.getGateway());
             int index = list.indexOf(sms);
