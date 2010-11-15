@@ -273,6 +273,7 @@ public class SMSPanel extends javax.swing.JPanel {
         // update components
         sendAction.updateStatus();
         smsTextPaneDocumentFilter.requestUpdate();
+        updateNumberInfoLabel();
         disableContactListeners = false;
     }
     
@@ -376,7 +377,7 @@ public class SMSPanel extends javax.swing.JPanel {
         }
     }
 
-    /** Show warning if user selected gateway which does not send
+    /** Show warning if user selected gateway that does not send
      * messages to numbers with specified prefix
      */
     private void updateCountryInfoLabel() {
@@ -408,6 +409,17 @@ public class SMSPanel extends javax.swing.JPanel {
             credentialsInfoLabel.setVisible(true);
         } else {
             credentialsInfoLabel.setVisible(false);
+        }
+    }
+
+    /** Show warning if the recipient number is not in a valid international
+     * format.
+     */
+    private void updateNumberInfoLabel() {
+        numberInfoLabel.setVisible(false);
+        Contact contact = lookupContact(false);
+        if (contact == null && StringUtils.isNotEmpty(recipientField.getText())) {
+            numberInfoLabel.setVisible(!Contact.isValidNumber(recipientField.getNumber()));
         }
     }
     
@@ -1117,9 +1129,6 @@ infoPanelLayout.setHorizontalGroup(
         private class RecipientDocumentChange implements Runnable {
             @Override
             public void run() {
-                //reset components
-                numberInfoLabel.setVisible(false);
-
                 //search for contact
                 contact = null;
                 contact = lookupContact(false);
@@ -1131,10 +1140,8 @@ infoPanelLayout.setHorizontalGroup(
                     gatewayComboBox.selectSuggestedGateway(getNumber());
                 }
                 
-                //if not found, update numberInfoLabel
-                if (contact == null && StringUtils.isNotEmpty(getText())) {
-                    numberInfoLabel.setVisible(!Contact.isValidNumber(getNumber()));
-                }
+                //update numberInfoLabel
+                updateNumberInfoLabel();
 
                 //update envelope
                 Set<Contact> set = new HashSet<Contact>();
