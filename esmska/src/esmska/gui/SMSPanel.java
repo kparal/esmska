@@ -417,9 +417,13 @@ public class SMSPanel extends javax.swing.JPanel {
      */
     private void updateNumberInfoLabel() {
         numberInfoLabel.setVisible(false);
-        Contact contact = lookupContact(false);
-        if (contact == null && StringUtils.isNotEmpty(recipientField.getText())) {
-            numberInfoLabel.setVisible(!Contact.isValidNumber(recipientField.getNumber()));
+        if (envelope.getContacts().size() != 1) {
+            //multisend mode or no contact selected
+            return;
+        }
+        Contact contact = envelope.getContacts().iterator().next();
+        if (StringUtils.isNotEmpty(recipientField.getText())) {
+            numberInfoLabel.setVisible(!Contact.isValidNumber(contact.getNumber()));
         }
     }
     
@@ -1140,9 +1144,6 @@ infoPanelLayout.setHorizontalGroup(
                     gatewayComboBox.selectSuggestedGateway(getNumber());
                 }
                 
-                //update numberInfoLabel
-                updateNumberInfoLabel();
-
                 //update envelope
                 Set<Contact> set = new HashSet<Contact>();
                 set.add(new Contact(contact != null ? contact.getName() : null,
@@ -1152,6 +1153,7 @@ infoPanelLayout.setHorizontalGroup(
                 //update components
                 sendAction.updateStatus();
                 updateCountryInfoLabel();
+                updateNumberInfoLabel();
             }
         }
     }
