@@ -126,7 +126,7 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Creates new form QueuePanel */
     public QueuePanel() {
         initComponents();
-        
+
         //add mouse listeners to the queue list
         mouseListener = new QueueMouseListener(queueList, popup);
         queueList.addMouseListener(mouseListener);
@@ -184,14 +184,19 @@ public class QueuePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        smsUpButton = new JButton();
-        smsDownButton = new JButton();
+        jPanel1 = new JPanel();
         jScrollPane2 = new JScrollPane();
         queueList = new JList();
+        pausedLabel = new InfoLabel();
+        jPanel2 = new JPanel();
+        jPanel3 = new JPanel();
         editButton = new JButton();
         deleteButton = new JButton();
+        jPanel4 = new JPanel();
         pauseButton = new JToggleButton();
-        pausedLabel = new InfoLabel();
+        jPanel5 = new JPanel();
+        smsUpButton = new JButton();
+        smsDownButton = new JButton();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("QueuePanel.border.title"))); // NOI18N
         addFocusListener(new FocusAdapter() {
@@ -200,23 +205,39 @@ public class QueuePanel extends javax.swing.JPanel {
             }
         });
 
-        smsUpButton.setAction(smsUpAction);
-        smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        smsUpButton.setText("");
-
-        smsDownButton.setAction(smsDownAction);
-        smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        smsDownButton.setText("");
+        jPanel1.setBorder(null);
 
         queueList.setModel(queueListModel);
         queueList.setCellRenderer(new SMSQueueListRenderer(queueList));
-        queueList.setVisibleRowCount(4);
+        queueList.setVisibleRowCount(1);
         queueList.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent evt) {
                 queueListValueChanged(evt);
             }
         });
         jScrollPane2.setViewportView(queueList);
+        Mnemonics.setLocalizedText(pausedLabel, l10n.getString("QueuePanel.pausedLabel.text"));
+        pausedLabel.setVisible(queue.isPaused());
+
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(jScrollPane2, Alignment.TRAILING)
+            .addComponent(pausedLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane2)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(pausedLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.setBorder(null);
+        jPanel2.setLayout(new BorderLayout());
+
+        jPanel3.setBorder(null);
 
         editButton.setAction(editSMSAction);
         editButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
@@ -226,56 +247,87 @@ public class QueuePanel extends javax.swing.JPanel {
         deleteButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         deleteButton.setText("");
 
+        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(editButton, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(deleteButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(editButton)
+            .addComponent(deleteButton)
+        );
+
+        jPanel2.add(jPanel3, BorderLayout.PAGE_START);
+
+        jPanel4.setBorder(null);
+
         pauseButton.setAction(Actions.getQueuePauseAction(false));
         pauseButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-        Mnemonics.setLocalizedText(pausedLabel, l10n.getString("QueuePanel.pausedLabel.text"));
-        pausedLabel.setVisible(queue.isPaused());
+
+        GroupLayout jPanel4Layout = new GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(pauseButton)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(pauseButton)
+        );
+
+        jPanel2.add(jPanel4, BorderLayout.PAGE_END);
+
+        smsUpButton.setAction(smsUpAction);
+        smsUpButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        smsUpButton.setText("");
+
+        smsDownButton.setAction(smsDownAction);
+        smsDownButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        smsDownButton.setText("");
+
+        GroupLayout jPanel5Layout = new GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(smsUpButton)
+            .addComponent(smsDownButton)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(smsUpButton)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(smsDownButton))
+        );
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(Alignment.CENTER)
-                    .addComponent(smsDownButton)
-                    .addComponent(smsUpButton))
+                .addComponent(jPanel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(pausedLabel, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
+                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(editButton)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(deleteButton))
-                    .addComponent(pauseButton))
+                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {deleteButton, editButton, smsDownButton, smsUpButton});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(editButton)
-                .addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(pauseButton))
-            .addComponent(deleteButton)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(smsUpButton)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(smsDownButton)))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(pausedLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                    .addComponent(jPanel1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(jPanel2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-
-        layout.linkSize(SwingConstants.VERTICAL, new Component[] {deleteButton, editButton, pauseButton, smsDownButton, smsUpButton});
-
     }// </editor-fold>//GEN-END:initComponents
     
     private void queueListValueChanged(ListSelectionEvent evt) {//GEN-FIRST:event_queueListValueChanged
@@ -641,6 +693,11 @@ public class QueuePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton deleteButton;
     private JButton editButton;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JPanel jPanel3;
+    private JPanel jPanel4;
+    private JPanel jPanel5;
     private JScrollPane jScrollPane2;
     private JToggleButton pauseButton;
     private InfoLabel pausedLabel;
