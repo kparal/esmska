@@ -255,6 +255,7 @@ public class SMSPanel extends javax.swing.JPanel {
         boolean multiSendMode = (count > 1);
         if (multiSendMode) {
             recipientTextField.setText(l10n.getString("Multiple_sending"));
+            gatewayComboBox.setSelectedGateway(null);
         }
         recipientTextField.setEnabled(! multiSendMode);
         gatewayComboBox.setEnabled(! multiSendMode);
