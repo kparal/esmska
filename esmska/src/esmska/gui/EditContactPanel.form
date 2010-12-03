@@ -149,9 +149,6 @@
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="infoPanel">
-      <Events>
-        <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="infoPanelComponentResized"/>
-      </Events>
 
       <Layout>
         <DimensionLayout dim="0">

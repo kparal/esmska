@@ -15,13 +15,13 @@ import esmska.data.Gateways;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
-import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
@@ -107,6 +107,24 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
+        // when some info label is shown or hidden, update the frame size
+        ComponentListener resizeListener = new ComponentAdapter() {
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                askForResize();
+            }
+            @Override
+            public void componentShown(ComponentEvent e) {
+                askForResize();
+            }
+            private void askForResize() {
+                actionSupport.fireActionPerformed(ActionEventSupport.ACTION_NEED_RESIZE, null);
+            }
+        };
+        for (Component comp : infoPanel.getComponents()) {
+            comp.addComponentListener(resizeListener);
+        }
+
         //update components
         gatewayComboBoxItemStateChanged(null);
     }
@@ -176,12 +194,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         suggestGatewayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 suggestGatewayButtonActionPerformed(evt);
-            }
-        });
-
-        infoPanel.addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent evt) {
-                infoPanelComponentResized(evt);
             }
         });
 
@@ -364,10 +376,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         updateCredentialsInfoLabel();
         updateCountryInfoLabel();
     }//GEN-LAST:event_gatewayComboBoxItemStateChanged
-
-    private void infoPanelComponentResized(ComponentEvent evt) {//GEN-FIRST:event_infoPanelComponentResized
-        actionSupport.fireActionPerformed(ActionEventSupport.ACTION_NEED_RESIZE, null);
-    }//GEN-LAST:event_infoPanelComponentResized
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
