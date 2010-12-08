@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-24"
+    return "2010-12-08"
 }
 
 function getMaintainer() {
@@ -80,7 +80,7 @@ function send() {
 
     // find if we are logged in
     logged = false
-    re = /<div class="userInfo">/
+    re = /<div id="smsLogout"/
     match = re.exec(content)
     if (undefined != match) { //if found
         logged = true
@@ -88,11 +88,11 @@ function send() {
 
     // log in if needed
     if (!logged) {
-        postData = ["login", LOGIN, "password", PASSWORD]
-        content = EXEC.postURL("http://sms.1188.cz/public/sms/smslogin.php", [], postData)
+        postData = ["username", LOGIN, "password", PASSWORD]
+        content = EXEC.postURL("http://sms.1188.cz/sms/login", [], postData)
         
         // check log in errors
-        re = /<div class="smsError">/
+        re = /<span class="message wrong">/
         match = re.exec(content)
         if (undefined != match) { // if found
             // login was not successfull
@@ -105,27 +105,21 @@ function send() {
     }
 
     // send message
-    postData = ["adress", NUMBER, "text", MESSAGE, "send", "Odeslat SMS"]
-    content = EXEC.postURL("http://sms.1188.cz/", [], postData)
+    postData = ["receiver_phone", NUMBER, "text", MESSAGE, 
+                "smsSubmit", "Odeslat SMS"]
+    content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
 
     // check if message was successfully sent
-    re = /Zpráva byla zařazena do fronty/
+    re = /Vaši zprávu jsme přijali, bude odeslána co nejdříve./
     match = re.exec(content)
     if (undefined != match) { //if found
-        // all ok, lets find remaining free sms this hour
-        re = /Zbývá .* zpráv ze .* za hodinu\./
-        match = re.exec(content)
-        if (undefined != match) { // if found
-            // strip html tags
-            message = match[0].replace(/<.+?>/g,"")
-            EXEC.setGatewayMessage(message)
-        }
+        // all ok
         logout()
         return true
     }
     
     // look for possible error messages
-    re = /<div class="smsError">([\s\S]*?)<\/div>/
+    re = /<span class="message wrong">([\s\S]*?)<\/span>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // gateway told us what's wrong
@@ -142,6 +136,6 @@ function send() {
 
 // custom function for logging out
 function logout() {
-    EXEC.getURL("http://sms.1188.cz/public/sms/smslogout.php", [])
+    EXEC.getURL("http://sms.1188.cz/sms/logout", [])
 }
 

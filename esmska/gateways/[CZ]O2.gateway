@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-24"
+    return "2010-12-08"
 }
 
 function getMaintainer() {
@@ -72,27 +72,19 @@ function send() {
     // start page
     content = EXEC.getURL("http://sms.1188.cz", [])
 
-    // get hidden field
-    // they have very ugly hack - two hidden fields, one is removed by 
-    // javascript, one is left
-    re = /\/\*\nvar el = document.getElementById\('(.*?)'\);/
-    match = re.exec(content);
-    var hidden = match[1]
-
     // download image
-    content = EXEC.getURL("http://sms.1188.cz/public/captchaImage.php", [])
+    content = EXEC.getURL("http://sms.1188.cz/captcha/show.png", [])
     
     // show image
     var code = EXEC.recognizeImage(content, "")
 
     // send message
-    postData = ["adress", NUMBER, "code", code, 
-                "text", MESSAGE, "send", "ODESLAT",
-                hidden, "1"]
-    content = EXEC.postURL("http://sms.1188.cz/", [], postData)
+    postData = ["receiver_phone", NUMBER, "captcha", code, 
+                "text", MESSAGE, "smsSubmit", "Odeslat SMS"]
+    content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
 
     // check if message was successfully sent
-    re = /Zpráva byla zařazena do fronty/
+    re = /Vaši zprávu jsme přijali, bude odeslána co nejdříve./
     match = re.exec(content)
     if (undefined != match) { //if found
         // all ok
@@ -100,7 +92,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<div class="smsError">([\s\S]*?)<\/div>/
+    re = /<span class="message wrong">([\s\S]*?)<\/span>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // gateway told us what's wrong
