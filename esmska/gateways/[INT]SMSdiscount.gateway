@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-24"
+    return "2010-12-11"
 }
 
 function getMaintainer() {
@@ -113,6 +113,14 @@ function send() {
         EXEC.setErrorMessage(EXEC.ERROR_LONG_TEXT)
         return false
     }    
+
+    //insufficient credit
+    re=/<description>Sorry, you do not have enough credit to send this sms. Go to your accountpage to buy credit!<\/description>/
+    match = re.exec(content)
+    if (undefined != match) {
+        EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
+        return false
+    }
 
     // check if message was successfully sent
     re = /<resultstring>success<\/resultstring>/
