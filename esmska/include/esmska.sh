@@ -26,5 +26,11 @@ if [ "$JAVA_HOME" ]; then
     JAVA_HOME="$JAVA_HOME/bin/"
 fi
 
+# check that java is present
+if ! which ${JAVA_HOME}java &>/dev/null; then
+    echo "Java executable not found, exiting. Please install Java first." 1>&2
+    exit 1
+fi
+
 # run program
 exec "$JAVA_HOME"java $OPTS -jar esmska.jar $*
