@@ -18,7 +18,7 @@
     <windowTitle>Esmska</windowTitle>
   </singleInstance>
   <jre>
-    <path></path>
+    <path>jre</path>
     <minVersion>1.6.0</minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>preferJre</jdkPreference>

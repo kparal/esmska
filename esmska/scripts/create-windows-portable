@@ -17,8 +17,7 @@ JRE="../portable/jre-win.7z"
 # check dependency
 JRE=`readlink -f "$JRE"`
 if [ ! -f "$JRE" ]; then
-    echo "JRE not found in $JRE. MS Windows portable package will \
-not be created."
+    echo "JRE not found in $JRE. MS Windows portable package will not be created."
     exit 0
 fi
 
@@ -39,7 +38,7 @@ TMPDIR=`mktemp -d -t esmska-packaging.XXXX`
 BUILD_DIR="$TMPDIR/$ROOTDIR"
 mkdir "$BUILD_DIR"
 
-# copy dist directory to dist-win directory
+# copy dist directory to temp directory
 cp -r ../dist/* ../portable/esmska-portable.exe "$BUILD_DIR"
 # and convert text files to CRLF
 todos "$BUILD_DIR"/*.txt "$BUILD_DIR"/license/*.txt "$BUILD_DIR"/*.conf

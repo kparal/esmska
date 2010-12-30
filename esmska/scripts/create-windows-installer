@@ -9,15 +9,21 @@
 set -e
 trap "echo Creating installer failed." ERR
 
-# check dependency
-if [ ! `which installjammer` ]; then
-    echo "'installjammer' command not found. \
-MS Windows installer will not be created."
-    exit 0
-fi
-
 # go to the program directory
 cd "`dirname "$0"`"
+
+JRE="../portable/jre-win.7z"
+
+# check dependency
+if [ ! `which installjammer` ]; then
+    echo "'installjammer' command not found. MS Windows installer will not be created."
+    exit 0
+fi
+JRE=`readlink -f "$JRE"`
+if [ ! -f "$JRE" ]; then
+    echo "JRE not found in $JRE. MS Windows installer will not be created."
+    exit 0
+fi
 
 # usage
 if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
@@ -41,6 +47,8 @@ cp -r ../dist "$DIST_DIR"
 todos "$DIST_DIR"/*.txt "$DIST_DIR"/license/*.txt "$DIST_DIR"/*.conf
 # delete unnecessary files
 rm "$DIST_DIR"/esmska.sh
+# extract JRE
+7z x -o"$DIST_DIR" "$JRE" >/dev/null
 
 # build installer
 installjammer --build-for-release --quiet --build-dir "$BUILD_DIR" \
