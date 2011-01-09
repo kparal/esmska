@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-14 21:51+0200\n"
+"POT-Creation-Date: 2011-01-09 22:09+0200\n"
 "PO-Revision-Date: 2010-10-21 11:18+0000\n"
 "Last-Translator: Vitaliy Starostin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1117,6 +1117,17 @@ msgstr ""
 msgid "Unknown gateway!"
 msgstr "Неизвестный шлюз!"
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayMessage.smsFailed
+#, fuzzy
+msgid "<html>Sending failed: {0}</html>"
+msgstr "<html><i>Лог файл доступен по следующему пути: {0}</i></html>"
+
+#: GatewayMessageDialog.title
+#, fuzzy
+msgid "Sending process - Esmska"
+msgstr "Опции - Esmska"
+
 #: Hide_program
 msgid "Hide program"
 msgstr "Скрыть программу"
@@ -1533,11 +1544,6 @@ msgstr "Показать информацию о программе"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: MainFrame.sms_failed2
-msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!

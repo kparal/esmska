@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-14 21:51+0200\n"
+"POT-Creation-Date: 2011-01-09 22:09+0200\n"
 "PO-Revision-Date: 2010-07-26 18:25+0000\n"
 "Last-Translator: Juan Miguel Boyero Corral <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1318,6 +1318,17 @@ msgstr ""
 msgid "Unknown gateway!"
 msgstr "¡Compuerta desconocida!"
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayMessage.smsFailed
+#, fuzzy
+msgid "<html>Sending failed: {0}</html>"
+msgstr "<html><i>El fichero de registro está guardado en: {0}</i></html>"
+
+#: GatewayMessageDialog.title
+#, fuzzy
+msgid "Sending process - Esmska"
+msgstr "Preferencias - Esmska"
+
 #: Hide_program
 msgid "Hide program"
 msgstr "Esconder programa"
@@ -1816,11 +1827,6 @@ msgstr "Mostrar ingormación del programa"
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
 msgstr "¡El mensaje para {0} no se pudo enviar!"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: MainFrame.sms_failed2
-msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-msgstr "<html><h2>¡El mensaje para ''{0}''  no se pudo enviar!</h2>{1}</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
@@ -2552,6 +2558,10 @@ msgstr ""
 "Las compuertas actualizadas pueden auydarlo a solucionar problemas con el "
 "envío de mensajes.\n"
 "</html>"
+
+#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
+#~ msgstr ""
+#~ "<html><h2>¡El mensaje para ''{0}''  no se pudo enviar!</h2>{1}</html>"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "

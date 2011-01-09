@@ -25,15 +25,5 @@ public class InfoLabel extends JHtmlLabel {
         this.setFont(this.getFont().deriveFont((this.getFont().getStyle() | Font.ITALIC)));
         this.setBorder(BorderFactory.createLineBorder(new Color(255, 164, 0)));
         this.setOpaque(true);
-
-        this.addValuedListener(new ValuedListener<JHtmlLabel.Events, String>() {
-            @Override
-            public void eventOccured(ValuedEvent<JHtmlLabel.Events, String> e) {
-                switch (e.getEvent()) {
-                    case LINK_CLICKED:
-                        Actions.getBrowseAction(e.getValue()).actionPerformed(null);
-                }
-            }
-        });
     }
 }

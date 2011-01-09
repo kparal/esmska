@@ -42,6 +42,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
@@ -180,6 +181,7 @@ public class Actions {
             }
 
             if (!Desktop.isDesktopSupported()) {
+                logger.warning("Running browser not supported, can't browse URL: " + url);
                 return;
             }
             //start browser

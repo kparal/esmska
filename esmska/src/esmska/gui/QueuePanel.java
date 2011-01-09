@@ -561,7 +561,7 @@ public class QueuePanel extends javax.swing.JPanel {
             
             //set text
             label.setText(StringUtils.defaultIfEmpty(sms.getName(),
-                    CountryPrefix.stripCountryPrefix(sms.getNumber())));
+                    CountryPrefix.stripCountryPrefix(sms.getNumber(), true)));
             //problematic sms colored
             if ((sms.isProblematic()) && !isSelected) {
                 label.setBackground(Color.RED);
@@ -579,7 +579,7 @@ public class QueuePanel extends javax.swing.JPanel {
             text = text.replaceAll("\n", "<br>");
             String tooltip = "<html><table><tr><td><img src=\"" + messageIconURI +
                     "\"></td><td valign=top><b>" + label.getText() + "</b><br>" +
-                    (StringUtils.isEmpty(sms.getName())?"":CountryPrefix.stripCountryPrefix(sms.getNumber())+", ") +
+                    (StringUtils.isEmpty(sms.getName())?"":CountryPrefix.stripCountryPrefix(sms.getNumber(), true)+", ") +
                     sms.getGateway() + "<br><br>" + text +
                     "</td></tr></table></html>";
             panel.setToolTipText(tooltip);

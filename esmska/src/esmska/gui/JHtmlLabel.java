@@ -28,6 +28,7 @@ public class JHtmlLabel extends JLabel implements MouseListener, MouseMotionList
         LINK_CLICKED
     }
 
+    private boolean autoHyperlinkHandling = true;
     private AccessibleJLabel acc = null;
 
     // <editor-fold defaultstate="collapsed" desc="ValuedEvent support">
@@ -51,6 +52,20 @@ public class JHtmlLabel extends JLabel implements MouseListener, MouseMotionList
         addMouseMotionListener(this);
     }
 
+    /** Set whether this JLabel should automatically open browser on hyperlink
+     * click (an event will still be sent). By default true.
+     */
+    public void setAutoHyperlinkHandling(boolean autoHyperlinkHandling) {
+        this.autoHyperlinkHandling = autoHyperlinkHandling;
+    }
+
+     /** Get whether this JLabel should automatically open browser on hyperlink
+     * click (an event will still be sent). By default true.
+     */
+    public boolean isAutoHyperlinkHandling() {
+        return this.autoHyperlinkHandling;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         AttributeSet charAttr = acc.getCharacterAttribute(acc.getIndexAtPoint(e.getPoint()));
@@ -64,6 +79,9 @@ public class JHtmlLabel extends JLabel implements MouseListener, MouseMotionList
         String url = (String) attr.getAttribute(HTML.Attribute.HREF);
         if (url != null) {
             valuedSupport.fireEventOccured(Events.LINK_CLICKED, url);
+            if (autoHyperlinkHandling) {
+                Actions.getBrowseAction(url).actionPerformed(null);
+            }
         }
     }
 

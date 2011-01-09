@@ -331,12 +331,21 @@ public class CountryPrefix {
     /** Strip current country prefix from number if possible
      *
      * @param number number, can be null
+     * @param onlyCurrent strip only currently set country prefix (in user
+     * preferences), do not touch numbers with other prefixes
      * @return number with stripped country prefix from start if possible 
      * (valid prefix); otherwise non-modified number
      */
-    public static String stripCountryPrefix(String number) {
+    public static String stripCountryPrefix(String number, boolean onlyCurrent) {
         if (number == null) {
             return number;
+        }
+        if (onlyCurrent) {
+            if (number.startsWith(config.getCountryPrefix())) {
+                return number.substring(config.getCountryPrefix().length());
+            } else {
+                return number;
+            }
         }
         for (String prefix : map.values()) {
             if (number.startsWith(prefix)) {

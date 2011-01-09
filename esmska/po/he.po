@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-14 21:51+0200\n"
+"POT-Creation-Date: 2011-01-09 22:09+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1172,6 +1172,16 @@ msgstr ""
 msgid "Unknown gateway!"
 msgstr ""
 
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayMessage.smsFailed
+msgid "<html>Sending failed: {0}</html>"
+msgstr ""
+
+#: GatewayMessageDialog.title
+#, fuzzy
+msgid "Sending process - Esmska"
+msgstr "העדפות - Esmska"
+
 #: Hide_program
 msgid "Hide program"
 msgstr "הסתר תוכנית"
@@ -1620,11 +1630,6 @@ msgstr "הצג את נתוני התוכנה"
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
 msgstr "לא ניתן לשלוח את ההודעה עבור {0}!"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: MainFrame.sms_failed2
-msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-msgstr "<html><h2>לא ניתן לשלוח את ההודעה עבור ''{0}''!</h2>{1}</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
@@ -2266,6 +2271,9 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
+#~ msgstr "<html><h2>לא ניתן לשלוח את ההודעה עבור ''{0}''!</h2>{1}</html>"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "

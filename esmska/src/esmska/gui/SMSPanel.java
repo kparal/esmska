@@ -1127,7 +1127,7 @@ infoPanelLayout.setHorizontalGroup(
                 setText("");
             }
             
-            setText(CountryPrefix.stripCountryPrefix(number));
+            setText(CountryPrefix.stripCountryPrefix(number,true));
         }
         
         /** Listener for changes in the recipient field */

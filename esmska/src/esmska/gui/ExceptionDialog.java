@@ -138,7 +138,6 @@ public class ExceptionDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-
         jLabel1 = new JLabel();
         closeButton = new JButton();
         jPanel1 = new JPanel();
@@ -161,6 +160,7 @@ public class ExceptionDialog extends javax.swing.JDialog {
 
         detailsLabel.setFont(detailsLabel.getFont().deriveFont(detailsLabel.getFont().getStyle() | Font.BOLD));
         Mnemonics.setLocalizedText(detailsLabel, l10n.getString("ExceptionDialog.detailsLabel.text"));
+
         detailsTextArea.setEditable(false);
         detailsTextArea.setLineWrap(true);
         detailsTextArea.setTabSize(2);
@@ -196,14 +196,6 @@ public class ExceptionDialog extends javax.swing.JDialog {
         Mnemonics.setLocalizedText(errorLabel, MessageFormat.format(l10n.getString("UncaughtExceptionDialog.errorLabel"), Links.ISSUES, logFilePath));
     errorLabel.setVerticalAlignment(SwingConstants.TOP);
     errorLabel.setVerticalTextPosition(SwingConstants.TOP);
-    errorLabel.addValuedListener(new ValuedListener<JHtmlLabel.Events, String>() {
-        @Override
-        public void eventOccured(ValuedEvent<Events, String> e) {
-            if (e.getEvent() == Events.LINK_CLICKED) {
-                Actions.getBrowseAction(e.getValue()).actionPerformed(null);
-            }
-        }
-    });
 
         GroupLayout layout = new GroupLayout(getContentPane());
     getContentPane().setLayout(layout);

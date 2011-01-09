@@ -255,7 +255,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(codeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -263,16 +263,6 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
                 .addPreferredGap(ComponentPlacement.UNRELATED)
                 .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
-
-        imageLabel.addValuedListener(new ValuedListener<JHtmlLabel.Events, String>() {
-            @Override
-            public void eventOccured(ValuedEvent<JHtmlLabel.Events, String> e) {
-                switch (e.getEvent()) {
-                    case LINK_CLICKED:
-                    Actions.getBrowseAction(e.getValue()).actionPerformed(null);
-                }
-            }
-        });
 
         introLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/keyring-48.png"))); // NOI18N
         Mnemonics.setLocalizedText(introLabel, l10n.getString("ImageCodeDialog.introLabel.text"));
@@ -297,7 +287,7 @@ public class ImageCodeDialog extends JDialog implements ImageCodeResolver {
                 .addComponent(introLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(queueScrollPane, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                     .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

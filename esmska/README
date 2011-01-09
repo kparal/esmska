@@ -13,13 +13,14 @@ Source code . . . . . . . . http://code.google.com/p/esmska/source/checkout
 
 Program files:
 README          - This file.
+gateways/       - Script files for using operator gateways.
 include/        - Files included in the binary distribution.
 installjammer/  - Configuration files for InstallJammer.
 launch4j/       - Configuration files for Launch4J.
 lib/            - Program compilation and runtime libraries.
 nbproject/      - Project files for the NetBeans IDE.
-gateways/       - Script files for using operator gateways.
 po/             - Localization files.
+portable/       - Files for creating portable package.
 resources/      - Different resource files.
 scripts/        - Various scripts for managing building process.
 src/            - Program sources.
@@ -98,6 +99,8 @@ Provided by lib/ directory:
    o https://substance.dev.java.net/
  * Substance Extras 6.0
    o https://substance-extras.dev.java.net/
+ * Substance SwingX 6.0
+   o https://substance-swingx.dev.java.net/
  * Trident 1.3
    o http://kenai.com/projects/trident/
 

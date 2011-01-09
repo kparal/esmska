@@ -907,7 +907,7 @@ public class ContactPanel extends javax.swing.JPanel {
             //set tooltip
             String tooltip = "<html><table><tr><td><img src=\"" + contactIconURI +
                     "\"></td><td valign=top><b>" + MiscUtils.escapeHtml(contact.getName()) +
-                    "</b><br>" + CountryPrefix.stripCountryPrefix(contact.getNumber()) +
+                    "</b><br>" + CountryPrefix.stripCountryPrefix(contact.getNumber(), true) +
                     "<br>" + MiscUtils.escapeHtml(contact.getGateway()) +
                     "</td></tr></table></html>";
             label.setToolTipText(tooltip);

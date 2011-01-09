@@ -9,7 +9,6 @@ package esmska.gui;
 import esmska.Context;
 import esmska.data.Queue.Events;
 import esmska.data.event.ValuedEvent;
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -31,20 +30,17 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.JToolBar.Separator;
 import javax.swing.KeyStroke;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 import javax.swing.ToolTipManager;
 
 import javax.swing.WindowConstants;
@@ -112,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** shutdown handler thread */
     private Thread shutdownThread = new ShutdownThread();
     private UpdateChecker updateChecker = new UpdateChecker();
-    
+
     /**
      * Creates new form MainFrame
      */
@@ -807,58 +803,14 @@ public class MainFrame extends javax.swing.JFrame {
             log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms.getRecipient()),
                     null, Icons.STATUS_WARNING));
 
-            //prepare dialog
-            String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
-            JHtmlLabel label = new JHtmlLabel(
-                    MessageFormat.format(l10n.getString("MainFrame.sms_failed2"),
-                    sms.getRecipient(), cause));
-            label.addValuedListener(new ValuedListener<JHtmlLabel.Events, String>() {
-                @Override
-                public void eventOccured(ValuedEvent<JHtmlLabel.Events, String> e) {
-                    switch (e.getEvent()) {
-                        case LINK_CLICKED:
-                            Actions.getBrowseAction(e.getValue()).actionPerformed(null);
-                    }
-                }
-            });
-            label.setVerticalAlignment(SwingConstants.TOP);
-            JPanel panel = new JPanel(new BorderLayout());
-            panel.add(label, BorderLayout.CENTER);
-            JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE);
-            JDialog dialog = pane.createDialog(MainFrame.this, null);
-
-            //check if the dialog is not wider than screen
-            //(very ugly, but it seems there is no clean solution in Swing for this)
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int width = panel.getWidth();
-            int height = panel.getHeight();
-            if (dialog.getWidth() > screenSize.getWidth()) { //wider than screen
-                width = (int) screenSize.getWidth() * 2/3;
-                height = height * (panel.getWidth() / width);
-                panel.setPreferredSize(new Dimension(width, height));
-                dialog = pane.createDialog(MainFrame.this, null); //create dialog again
-            }
-
             //show the dialog
             logger.fine("Showing reason why SMS sending failed...");
-            RuntimeUtils.setDocumentModalDialog(dialog);
-            dialog.setResizable(true);
-            dialog.pack(); //always pack after setting resizable, Windows LaF crops dialog otherwise
-            dialog.setVisible(true);
+            GatewayMessageDialog gatewayMessageDialog = GatewayMessageDialog.getInstance();
+            gatewayMessageDialog.addErrorMsg(sms);
 
             finish(sms);
         }
         private void finish(SMS sms) {
-            //transfer focus
-            if (smsPanel.getText().length() > 0) {
-                smsPanel.requestFocusInWindow();
-            } else {
-                if (sms.getStatus() == SMS.Status.SENT) {
-                    contactPanel.requestFocusInWindow();
-                } else {
-                    queuePanel.requestFocusInWindow();
-                }
-            }
             //show gateway message if present
             if (StringUtils.isNotEmpty(sms.getGatewayMsg())) {
                 log.addRecord(new Log.Record(sms.getGateway() + ": " + sms.getGatewayMsg(),
