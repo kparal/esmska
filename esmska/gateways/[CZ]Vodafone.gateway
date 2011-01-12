@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-12-06"
+    return "2011-01-12"
 }
 
 function getMaintainer() {
@@ -56,7 +56,7 @@ function isLoginRequired() {
 }
 
 function getSupportedLanguages() {
-    return []
+    return ['cs']
 }
 
 function send() {
@@ -78,7 +78,13 @@ function send() {
     }
 
     // start page
-    content = EXEC.getURL("http://www.vodafonesms.cz/start.php?locale=cz", [])
+    content = EXEC.getURL("https://park.vodafone.cz/", [])
+    
+    // go to the link "Poslat SMS"
+    re = /\?x=([^']*?)'.*Poslat SMS/
+    match = re.exec(content)
+    var urlid = match[1]
+    content = EXEC.getURL("https://park.vodafone.cz/", ['x', urlid])
     
     // get imageid and ppp values
     re = /<input type="hidden" name="imgid" value="(.*)" \/>/
