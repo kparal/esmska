@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 22:10+0200\n"
+"POT-Creation-Date: 2011-01-22 23:19+0200\n"
 "PO-Revision-Date: 2011-01-09 22:10+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -39,7 +39,8 @@ msgid "Sending SMS over Internet."
 msgstr "Posílání SMS přes Internet."
 
 #: AboutFrame.jLabel5.text
-msgid "2007-2010 Kamil Páral"
+#, fuzzy
+msgid "2007-2011 Kamil Páral"
 msgstr "2007-2010 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
