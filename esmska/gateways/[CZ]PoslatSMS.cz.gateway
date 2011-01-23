@@ -1,0 +1,108 @@
+
+function getName() {
+    return "[CZ]PoslatSMS.cz"
+}
+
+function getVersion() {
+    return "2011-01-17"
+}
+
+function getMaintainer() {
+    return "Filip Oščádal <filip@mxd.cz>"
+}
+
+function getMinProgramVersion() {
+    return "0.20.0"
+}
+
+function getWebsite() {
+    return "http://poslatsms.cz"
+}
+
+function getDescription() {
+    return "Odesílání SMS zpráv zdarma bez opisování kódů do českých mobilních sítí."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return -1
+}
+
+function getMaxChars() {
+    return 160
+}
+
+function getMaxParts() {
+    return 3
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return false
+}
+
+function getSupportedLanguages() {
+    return ["en", "cs"]
+}
+
+function send() {
+    var re, match, content, params, postData
+
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+    if (SENDERNUMBER.indexOf("+420") == 0) {
+        SENDERNUMBER = SENDERNUMBER.substring(4)
+    }
+    if (SENDERNUMBER.indexOf("+") == 0) {
+        SENDERNUMBER = ""
+    }
+
+    // start page
+    content = EXEC.getURL("http://m.poslatsms.cz/", [])
+
+    // send message
+    postData = ["textsms", MESSAGE,
+      "cislo-prijemce", NUMBER,
+      "cislo-odesilatele", SENDERNUMBER,
+      "gateID", "1",
+      "operatorID", "0"]
+
+    content = EXEC.postURL("http://m.poslatsms.cz/?action=Send", [], postData)
+
+    // check if message was successfully sent
+    re = /SMS odesl.n.!/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // all ok
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<h1>\s*(.+)\s*/
+    match = re.exec(content)
+    if (undefined != match) { // if found
+        // gateway told us what's wrong
+        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        return false
+    }
+
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
+    return false
+}
