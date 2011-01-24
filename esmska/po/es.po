@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 23:19+0200\n"
+"POT-Creation-Date: 2011-01-24 22:07+0200\n"
 "PO-Revision-Date: 2010-07-26 18:25+0000\n"
 "Last-Translator: Juan Miguel Boyero Corral <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1315,6 +1315,16 @@ msgstr ""
 "La compuerta no provee información alguna acerca del envío exitoso. El "
 "mensaje podría y <b>no podría</b> haber sido entregado."
 
+#: GatewayImageCodeMessage.jLabel2.text
+msgid "Security &code:"
+msgstr "&Código de seguridad:"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayImageCodeMessage.securityImage
+#, fuzzy
+msgid "<html>Security code required: {0}</html>"
+msgstr "<html><i>El fichero de registro está guardado en: {0}</i></html>"
+
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
 msgstr "¡Compuerta desconocida!"
@@ -1388,23 +1398,6 @@ msgstr "&Buscar:"
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
 msgstr "Historial de mensajes enviados  - Esmska"
-
-#: ImageCodeDialog.introLabel.text
-msgid ""
-"<html>\n"
-"<h2>Security code required</h2>\n"
-"The chosen gateway requires you to enter the security code displayed below:\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<h2>Se requiere código de seguridad</h2>\n"
-"La compuerta elegida requiere que ingrese el código de seguridad que se "
-"muestra abajo:\n"
-"</html>"
-
-#: ImageCodeDialog.jLabel2.text
-msgid "Security &code:"
-msgstr "&Código de seguridad:"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
@@ -2559,6 +2552,19 @@ msgstr ""
 "Las compuertas actualizadas pueden auydarlo a solucionar problemas con el "
 "envío de mensajes.\n"
 "</html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Security code required</h2>\n"
+#~ "The chosen gateway requires you to enter the security code displayed "
+#~ "below:\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Se requiere código de seguridad</h2>\n"
+#~ "La compuerta elegida requiere que ingrese el código de seguridad que se "
+#~ "muestra abajo:\n"
+#~ "</html>"
 
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr ""

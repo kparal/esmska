@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 23:19+0200\n"
-"PO-Revision-Date: 2011-01-09 22:10+0100\n"
+"POT-Creation-Date: 2011-01-24 22:08+0200\n"
+"PO-Revision-Date: 2011-01-24 22:08+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -39,9 +39,8 @@ msgid "Sending SMS over Internet."
 msgstr "Posílání SMS přes Internet."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2010 Kamil Páral"
+msgstr "2007-2011 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -1278,6 +1277,15 @@ msgstr ""
 "Brána neposkytuje žádné informace o úspěšném odeslání. Zpráva mohla a "
 "<b>nemusela</b> být doručena."
 
+#: GatewayImageCodeMessage.jLabel2.text
+msgid "Security &code:"
+msgstr "Bezpečnostní &kód:"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayImageCodeMessage.securityImage
+msgid "<html>Security code required: {0}</html>"
+msgstr "<html>Vyžadován bezpečnostní kód: {0}</html>"
+
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
 msgstr "Neznámá brána!"
@@ -1348,22 +1356,6 @@ msgstr "&Hledat:"
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
 msgstr "Historie odeslaných zpráv - Esmska"
-
-#: ImageCodeDialog.introLabel.text
-msgid ""
-"<html>\n"
-"<h2>Security code required</h2>\n"
-"The chosen gateway requires you to enter the security code displayed below:\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<h2>Vyžadován bezpečnostní kód</h2>\n"
-"Zvolená brána požaduje, abyste zadali bezpečnostní kód zobrazený níže:\n"
-"</html>"
-
-#: ImageCodeDialog.jLabel2.text
-msgid "Security &code:"
-msgstr "Bezpečnostní &kód:"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
@@ -2476,6 +2468,18 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Security code required</h2>\n"
+#~ "The chosen gateway requires you to enter the security code displayed "
+#~ "below:\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Vyžadován bezpečnostní kód</h2>\n"
+#~ "Zvolená brána požaduje, abyste zadali bezpečnostní kód zobrazený níže:\n"
+#~ "</html>"
 
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr "<html><h2>Zprávu pro \"{0}\" se nepovedlo odeslat!</h2>{1}</html>"

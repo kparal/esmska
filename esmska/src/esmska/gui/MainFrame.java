@@ -187,7 +187,7 @@ public class MainFrame extends javax.swing.JFrame {
         contactPanel.requestFocusInWindow();
         contactPanel.ensureContactSelected();
         queue.addValuedListener(new QueueListener());
-        ImageCodeManager.setResolver(new ImageCodeDialog(this, true));
+        ImageCodeManager.setResolver(new GUIImageCodeResolver());
         
         //check for valid gateways
         if (Gateways.getInstance().size() <= 0 && !Beans.isDesignTime()) {

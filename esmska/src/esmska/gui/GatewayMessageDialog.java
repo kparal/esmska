@@ -13,15 +13,17 @@ package esmska.gui;
 
 import esmska.Context;
 import esmska.data.SMS;
-import esmska.gui.GatewayMessage.TaskPane;
 import esmska.utils.L10N;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -37,6 +39,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
 
 /** Dialog for various alerts from gateways
@@ -110,26 +113,51 @@ public class GatewayMessageDialog extends JDialog {
      */
     public void addErrorMsg(SMS sms) {
         logger.log(Level.FINER, "Adding error message: {0}", sms);
-        GatewayMessage gm = new GatewayMessage();
-        final TaskPane taskPane = gm.showErrorMsg(sms);
-        gm.addActionListener(new ActionListener() {
+        GatewayErrorMessage gem = new GatewayErrorMessage();
+        final TaskPane taskPane = gem.showErrorMsg(sms);
+        gem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // remove the TaskPane when it wants to be removed
                 if (e.getID() == GatewayMessage.CLOSE_ME) {
-                    // remember the index of the lastly removed TaskPane
-                    lastPaneRemovedIndex = 0;
-                    Component[] comps = taskContainer.getComponents();
-                    for (int i = 0; i < comps.length; i++) {
-                        if (comps[i] == taskPane) {
-                            lastPaneRemovedIndex = i;
-                        }
-                    }
-                    taskContainer.remove(taskPane);
+                    removeTaskPane(taskPane);
                 }
             }
         });
         taskContainer.add(taskPane);
+    }
+
+    /** Add a message with a security image that needs to be recognized
+     * @param sms sms with security image that needs to be recognized
+     */
+    public void addImageCodeMsg(SMS sms, final ActionListener callback) {
+        logger.log(Level.FINER, "Adding image code message: {0}", sms);
+        GatewayImageCodeMessage gicm = new GatewayImageCodeMessage();
+        final TaskPane taskPane = gicm.showImageCodeMsg(sms);
+        gicm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // remove the TaskPane when it wants to be removed
+                if (e.getID() == GatewayMessage.CLOSE_ME) {
+                    removeTaskPane(taskPane);
+                    callback.actionPerformed(e);
+                }
+            }
+        });
+        taskContainer.add(taskPane);
+    }
+
+    /** Remove a taskPane from the container */
+    private void removeTaskPane(TaskPane taskPane) {
+        // find the index of this taskPane to remember it
+        lastPaneRemovedIndex = 0;
+        Component[] comps = taskContainer.getComponents();
+        for (int i = 0; i < comps.length; i++) {
+            if (comps[i] == taskPane) {
+                lastPaneRemovedIndex = i;
+            }
+        }
+        //and remove it
+        taskContainer.remove(taskPane);
     }
 
     /** Expand the next TaskPane.
@@ -192,11 +220,11 @@ public class GatewayMessageDialog extends JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
         );
 
         pack();
@@ -210,6 +238,60 @@ public class GatewayMessageDialog extends JDialog {
             taskPane.getGatewayMessage().cancel();
         }
     }//GEN-LAST:event_formWindowClosing
+
+    /** A JXTaskPane override that allows easy interaction with included GatewayMessage */
+    public static class TaskPane extends JXTaskPane {
+        private GatewayMessage gm;
+
+        /** Create new TaskPane containing GatewayMessage */
+        public TaskPane(GatewayMessage gm) {
+            this.gm = gm;
+            this.add(gm);
+
+            //cancel on Escape
+            String command = "cancel";
+            this.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
+                    KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), command);
+            this.getActionMap().put(command, new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    getGatewayMessage().cancel();
+                }
+            });
+
+            // workaround bug where collapsible state is not toggled by keyboard
+            // (will be fixed in more recent release of swingx)
+            // https://substance-swingx.dev.java.net/issues/show_bug.cgi?id=17
+            command = "toggle-collapse";
+            this.getInputMap(JComponent.WHEN_FOCUSED).put(
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), command);
+            this.getInputMap(JComponent.WHEN_FOCUSED).put(
+                    KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), command);
+            this.getActionMap().put(command, new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setCollapsed(!isCollapsed());
+                }
+            });
+
+            // when this TaskPane is focused, scroll the scrollpane to have it visible
+            this.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    if (e.isTemporary()) {
+                        return;
+                    }
+                    TaskPane.this.scrollRectToVisible(new Rectangle(
+                            TaskPane.this.getX(), TaskPane.this.getY(), 1, 1));
+                }
+            });
+        }
+
+        /** Get the GatewayMessage included in this TaskPane */
+        public GatewayMessage getGatewayMessage() {
+            return gm;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JScrollPane jScrollPane1;

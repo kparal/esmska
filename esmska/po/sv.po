@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 23:19+0200\n"
+"POT-Creation-Date: 2011-01-24 22:07+0200\n"
 "PO-Revision-Date: 2010-11-07 21:59+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1178,6 +1178,16 @@ msgid ""
 "message might be and <b>might not be</b> delivered."
 msgstr ""
 
+#: GatewayImageCodeMessage.jLabel2.text
+msgid "Security &code:"
+msgstr "Säkerhets&kod:"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayImageCodeMessage.securityImage
+#, fuzzy
+msgid "<html>Security code required: {0}</html>"
+msgstr "<html><i>Loggfilen är lagrad i: {0}</i></html>"
+
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
 msgstr "Okänd gateway!"
@@ -1250,22 +1260,6 @@ msgstr "&Sök:"
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
 msgstr "Skickat medelande historik - Esmska"
-
-#: ImageCodeDialog.introLabel.text
-msgid ""
-"<html>\n"
-"<h2>Security code required</h2>\n"
-"The chosen gateway requires you to enter the security code displayed below:\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<h2>Säkerhetskod krävs</h2>\n"
-"Vald gateway kräver att du anger säkerhetskoden som visas nedan:\n"
-"</html>"
-
-#: ImageCodeDialog.jLabel2.text
-msgid "Security &code:"
-msgstr "Säkerhets&kod:"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
@@ -2294,6 +2288,18 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Security code required</h2>\n"
+#~ "The chosen gateway requires you to enter the security code displayed "
+#~ "below:\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Säkerhetskod krävs</h2>\n"
+#~ "Vald gateway kräver att du anger säkerhetskoden som visas nedan:\n"
+#~ "</html>"
 
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr "<html><h2>Meddelande för ''{0}'' kunde inte skickas!</h2>{1}</html>"

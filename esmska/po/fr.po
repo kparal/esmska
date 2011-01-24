@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 23:19+0200\n"
+"POT-Creation-Date: 2011-01-24 22:07+0200\n"
 "PO-Revision-Date: 2010-07-18 13:52+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -1113,6 +1113,15 @@ msgid ""
 "message might be and <b>might not be</b> delivered."
 msgstr ""
 
+#: GatewayImageCodeMessage.jLabel2.text
+msgid "Security &code:"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayImageCodeMessage.securityImage
+msgid "<html>Security code required: {0}</html>"
+msgstr ""
+
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
 msgstr ""
@@ -1186,18 +1195,6 @@ msgstr "&Rechercher:"
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
 msgstr "Historique des messages envoyés - Esmska"
-
-#: ImageCodeDialog.introLabel.text
-msgid ""
-"<html>\n"
-"<h2>Security code required</h2>\n"
-"The chosen gateway requires you to enter the security code displayed below:\n"
-"</html>"
-msgstr ""
-
-#: ImageCodeDialog.jLabel2.text
-msgid "Security &code:"
-msgstr ""
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
