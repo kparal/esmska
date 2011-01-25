@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-24 22:07+0200\n"
+"POT-Creation-Date: 2011-01-25 22:11+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1069,6 +1069,11 @@ msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayErrorMessage.smsFailed
+msgid "Sending failed: {0}"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
 msgid ""
 "The gateway maintainers have modified their webpage and it can''t be used "
@@ -1176,16 +1181,11 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
 #, fuzzy
-msgid "<html>Security code required: {0}</html>"
+msgid "Security code required: {0}"
 msgstr "<html>תיקיית תצורת המשתמש:<br>{0}</html>"
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayMessage.smsFailed
-msgid "<html>Sending failed: {0}</html>"
 msgstr ""
 
 #: GatewayMessageDialog.title

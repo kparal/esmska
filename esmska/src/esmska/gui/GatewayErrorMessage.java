@@ -38,7 +38,7 @@ public class GatewayErrorMessage extends GatewayMessage {
     public TaskPane showErrorMsg(SMS sms) {
         String cause = (sms.getErrMsg() != null ? sms.getErrMsg().trim() : "");
         String recipient = extractRecipient(sms);
-        String title = MessageFormat.format(l10n.getString("GatewayMessage.smsFailed"), recipient);
+        String title = MessageFormat.format(l10n.getString("GatewayErrorMessage.smsFailed"), recipient);
         Icon icon = Icons.STATUS_WARNING;
 
         msgLabel.setText("<html>" + cause + "</html>");

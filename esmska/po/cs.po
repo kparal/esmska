@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-24 22:08+0200\n"
-"PO-Revision-Date: 2011-01-24 22:08+0100\n"
+"POT-Creation-Date: 2011-01-25 22:12+0200\n"
+"PO-Revision-Date: 2011-01-25 22:12+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -1145,6 +1145,11 @@ msgid "Mainly usable for country: {0}"
 msgstr "Lze použít zejména pro zemi: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayErrorMessage.smsFailed
+msgid "Sending failed: {0}"
+msgstr "Odesílání selhalo: {0}"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
 msgid ""
 "The gateway maintainers have modified their webpage and it can''t be used "
@@ -1283,17 +1288,12 @@ msgstr "Bezpečnostní &kód:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
-msgid "<html>Security code required: {0}</html>"
-msgstr "<html>Vyžadován bezpečnostní kód: {0}</html>"
+msgid "Security code required: {0}"
+msgstr "Vyžadován bezpečnostní kód: {0}"
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
 msgstr "Neznámá brána!"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayMessage.smsFailed
-msgid "<html>Sending failed: {0}</html>"
-msgstr "<html>Odesílání selhalo: {0}</html>"
 
 #: GatewayMessageDialog.title
 msgid "Sending process - Esmska"
