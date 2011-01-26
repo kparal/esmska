@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 22:11+0200\n"
+"POT-Creation-Date: 2011-01-26 23:00+0200\n"
 "PO-Revision-Date: 2010-07-05 21:21+0000\n"
 "Last-Translator: el_libre - http://www.catmidia.cat  "
 "XDDDDDDDDDDDDDDDDDDDDDDDDDDD <el.libre@gmail.com>\n"
@@ -40,6 +40,17 @@ msgstr "Gràcies"
 msgid "C&redits"
 msgstr "C&rèdits"
 
+#: AboutFrame.homeHyperlink.text
+msgid "Homepage"
+msgstr ""
+
+#: AboutFrame.homeHyperlink.toolTipText
+msgid ""
+"<html>\n"
+"Show program home page\n"
+"</html>"
+msgstr ""
+
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
 msgstr ""
@@ -53,22 +64,11 @@ msgstr "2007-2010 Kamil Páral"
 msgid "&License"
 msgstr "&Llicència"
 
-#: AboutFrame.linkButton.text
-msgid "<html><a href=\"\">Homepage</a></html>"
+#: AboutFrame.supportHyperlink.text
+msgid "Support project"
 msgstr ""
 
-#: AboutFrame.linkButton.toolTipText
-msgid ""
-"<html>\n"
-"Show program home page\n"
-"</html>"
-msgstr ""
-
-#: AboutFrame.supportButton.text
-msgid "<html><a href=\"\">Support project</a></html>"
-msgstr ""
-
-#: AboutFrame.supportButton.toolTipText
+#: AboutFrame.supportHyperlink.toolTipText
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"

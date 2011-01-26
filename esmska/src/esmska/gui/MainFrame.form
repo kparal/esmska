@@ -189,7 +189,7 @@
                   <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.donateMenuItem.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportHyperlink.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -436,7 +436,7 @@
               <ResourceString bundle="esmska/resources/l10n.properties" key="MainFrame.donateButton.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="esmska/resources/l10n.properties" key="AboutFrame.supportHyperlink.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>

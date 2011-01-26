@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 22:11+0200\n"
+"POT-Creation-Date: 2011-01-26 23:00+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -39,6 +39,20 @@ msgstr "תודה לך"
 msgid "C&redits"
 msgstr "&תודות"
 
+#: AboutFrame.homeHyperlink.text
+msgid "Homepage"
+msgstr ""
+
+#: AboutFrame.homeHyperlink.toolTipText
+msgid ""
+"<html>\n"
+"Show program home page\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"הצג את דף הבית של התוכנה\n"
+"</html>"
+
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
 msgstr "שליחת SMS דרך האינטרנט."
@@ -52,25 +66,11 @@ msgstr "2007-2010 Kamil Páral"
 msgid "&License"
 msgstr "&רשיון"
 
-#: AboutFrame.linkButton.text
-msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr "<html><a href=\"\">דף הבית</a></html>"
-
-#: AboutFrame.linkButton.toolTipText
-msgid ""
-"<html>\n"
-"Show program home page\n"
-"</html>"
+#: AboutFrame.supportHyperlink.text
+msgid "Support project"
 msgstr ""
-"<html>\n"
-"הצג את דף הבית של התוכנה\n"
-"</html>"
 
-#: AboutFrame.supportButton.text
-msgid "<html><a href=\"\">Support project</a></html>"
-msgstr "<html><a href=\"\">הבעת תמיכה במיזם</a></html>"
-
-#: AboutFrame.supportButton.toolTipText
+#: AboutFrame.supportHyperlink.toolTipText
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
@@ -2270,6 +2270,12 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">דף הבית</a></html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">הבעת תמיכה במיזם</a></html>"
 
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr "<html><h2>לא ניתן לשלוח את ההודעה עבור ''{0}''!</h2>{1}</html>"

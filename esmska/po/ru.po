@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 22:11+0200\n"
+"POT-Creation-Date: 2011-01-26 23:00+0200\n"
 "PO-Revision-Date: 2010-10-21 11:18+0000\n"
 "Last-Translator: Vitaliy Starostin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -39,6 +39,20 @@ msgstr "Спасибо"
 msgid "C&redits"
 msgstr "&Благодарности"
 
+#: AboutFrame.homeHyperlink.text
+msgid "Homepage"
+msgstr ""
+
+#: AboutFrame.homeHyperlink.toolTipText
+msgid ""
+"<html>\n"
+"Show program home page\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Перейти на домашнюю страницу\n"
+"</html>"
+
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
 msgstr "Отправка СМС через Интернет"
@@ -52,25 +66,12 @@ msgstr "2007-2010 Kamil Páral"
 msgid "&License"
 msgstr "&Лицензия"
 
-#: AboutFrame.linkButton.text
-msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr "<html><a href=\"\">Домашняя страница</a></html>"
+#: AboutFrame.supportHyperlink.text
+#, fuzzy
+msgid "Support project"
+msgstr "&Поддержать этот проект!"
 
-#: AboutFrame.linkButton.toolTipText
-msgid ""
-"<html>\n"
-"Show program home page\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Перейти на домашнюю страницу\n"
-"</html>"
-
-#: AboutFrame.supportButton.text
-msgid "<html><a href=\"\">Support project</a></html>"
-msgstr "<html><a href=\"\">Поддержать проект</a></html>"
-
-#: AboutFrame.supportButton.toolTipText
+#: AboutFrame.supportHyperlink.toolTipText
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
@@ -2186,6 +2187,12 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Домашняя страница</a></html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Поддержать проект</a></html>"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "

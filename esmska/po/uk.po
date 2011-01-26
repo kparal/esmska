@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 22:11+0200\n"
+"POT-Creation-Date: 2011-01-26 23:00+0200\n"
 "PO-Revision-Date: 2010-08-11 14:43+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -40,6 +40,20 @@ msgstr "Дякуємо"
 msgid "C&redits"
 msgstr "По&дяки"
 
+#: AboutFrame.homeHyperlink.text
+msgid "Homepage"
+msgstr ""
+
+#: AboutFrame.homeHyperlink.toolTipText
+msgid ""
+"<html>\n"
+"Show program home page\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Показати домашню сторінку програми\n"
+"</html>"
+
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
 msgstr "Відсилання SMS через інтернет."
@@ -53,25 +67,11 @@ msgstr "2007-2010 Kamil Páral"
 msgid "&License"
 msgstr "&Ліцензія"
 
-#: AboutFrame.linkButton.text
-msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr "<html><a href=\"\">Домашня сторінка</a></html>"
-
-#: AboutFrame.linkButton.toolTipText
-msgid ""
-"<html>\n"
-"Show program home page\n"
-"</html>"
+#: AboutFrame.supportHyperlink.text
+msgid "Support project"
 msgstr ""
-"<html>\n"
-"Показати домашню сторінку програми\n"
-"</html>"
 
-#: AboutFrame.supportButton.text
-msgid "<html><a href=\"\">Support project</a></html>"
-msgstr "<html><a href=\"\">Підтримка проекту</a></html>"
-
-#: AboutFrame.supportButton.toolTipText
+#: AboutFrame.supportHyperlink.toolTipText
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
@@ -2270,6 +2270,12 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Домашня сторінка</a></html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Підтримка проекту</a></html>"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "

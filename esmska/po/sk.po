@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 22:11+0200\n"
+"POT-Creation-Date: 2011-01-26 23:00+0200\n"
 "PO-Revision-Date: 2010-10-03 20:43+0000\n"
 "Last-Translator: milboy <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -39,6 +39,20 @@ msgstr "Ďakujem"
 msgid "C&redits"
 msgstr "&Prispeli"
 
+#: AboutFrame.homeHyperlink.text
+msgid "Homepage"
+msgstr ""
+
+#: AboutFrame.homeHyperlink.toolTipText
+msgid ""
+"<html>\n"
+"Show program home page\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Zobraziť domovskú stránku programu\n"
+"</html>"
+
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
 msgstr "Posielanie SMS cez internet."
@@ -52,25 +66,12 @@ msgstr "2007-2010 Kamil Páral"
 msgid "&License"
 msgstr "&Licencia"
 
-#: AboutFrame.linkButton.text
-msgid "<html><a href=\"\">Homepage</a></html>"
-msgstr "<html><a href=\"\">Domovská stránka</a></html>"
+#: AboutFrame.supportHyperlink.text
+#, fuzzy
+msgid "Support project"
+msgstr "&Podporte tento projekt!"
 
-#: AboutFrame.linkButton.toolTipText
-msgid ""
-"<html>\n"
-"Show program home page\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Zobraziť domovskú stránku programu\n"
-"</html>"
-
-#: AboutFrame.supportButton.text
-msgid "<html><a href=\"\">Support project</a></html>"
-msgstr "<html><a href=\"\">Podporiť projekt</a></html>"
-
-#: AboutFrame.supportButton.toolTipText
+#: AboutFrame.supportHyperlink.toolTipText
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
@@ -2487,6 +2488,12 @@ msgstr ""
 "<h2>Skontrolovať aktualizácie brán</h2>\n"
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
+
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Domovská stránka</a></html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Podporiť projekt</a></html>"
 
 #~ msgid ""
 #~ "<html>\n"

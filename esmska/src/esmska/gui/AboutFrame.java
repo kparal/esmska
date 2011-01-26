@@ -11,7 +11,6 @@ import esmska.utils.L10N;
 import esmska.data.Links;
 import esmska.utils.MiscUtils;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -44,8 +43,8 @@ import javax.swing.WindowConstants;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import org.apache.commons.io.IOUtils;
+import org.jdesktop.swingx.JXHyperlink;
 import org.openide.awt.Mnemonics;
-import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 
 /** About form
  *
@@ -98,12 +97,12 @@ public class AboutFrame extends javax.swing.JFrame {
         closeButton = new JButton();
         licenseButton = new JButton();
         jLabel5 = new JLabel();
-        linkButton = new JButton();
         jLabel4 = new JLabel();
         jLabel6 = new JLabel();
-        supportButton = new JButton();
         jLabel7 = new JLabel();
         jLabel8 = new JLabel();
+        homeHyperlink = new JXHyperlink();
+        supportHyperlink = new JXHyperlink();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         ResourceBundle bundle = ResourceBundle.getBundle("esmska/resources/l10n"); // NOI18N
@@ -151,18 +150,14 @@ public class AboutFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(jLabel5, bundle.getString("AboutFrame.jLabel5.text")); // NOI18N
         jLabel5.setFocusable(false);
 
-        linkButton.setAction(Actions.getBrowseAction(Links.HOMEPAGE));
-        Mnemonics.setLocalizedText(linkButton, bundle.getString("AboutFrame.linkButton.text")); // NOI18N
-        linkButton.setToolTipText(bundle.getString("AboutFrame.linkButton.toolTipText")); // NOI18N
-        linkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        linkButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
-        supportButton.setAction(Actions.getBrowseAction(Links.DONATE));
-        Mnemonics.setLocalizedText(supportButton, l10n.getString("AboutFrame.supportButton.text")); // NOI18N
-        supportButton.setToolTipText(bundle.getString("AboutFrame.supportButton.toolTipText")); // NOI18N
-        supportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        supportButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
+        homeHyperlink.setURI(Links.getURI(Links.HOMEPAGE));
+        Mnemonics.setLocalizedText(homeHyperlink, l10n.getString("AboutFrame.homeHyperlink.text"));
+        homeHyperlink.setToolTipText(l10n.getString("AboutFrame.homeHyperlink.toolTipText")); // NOI18N
+        supportHyperlink.setURI(Links.getURI(Links.DONATE));
+        Mnemonics.setLocalizedText(supportHyperlink, l10n.getString("AboutFrame.supportHyperlink.text"));
+        supportHyperlink.setToolTipText(l10n.getString("AboutFrame.supportHyperlink.toolTipText")); // NOI18N
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,6 +166,8 @@ public class AboutFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
                     .addComponent(jLabel5, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addComponent(homeHyperlink, Alignment.CENTER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(supportHyperlink, Alignment.CENTER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                     .addComponent(jLabel2, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                     .addComponent(jLabel1, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
@@ -182,15 +179,11 @@ public class AboutFrame extends javax.swing.JFrame {
                         .addComponent(closeButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(linkButton, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addGap(108, 108, 108)
                         .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(supportButton, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addGap(138, 138, 138)
                         .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -208,17 +201,20 @@ public class AboutFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)))
+                    .addComponent(homeHyperlink, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(linkButton, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(supportButton, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addGap(18, 36, Short.MAX_VALUE)
+                .addComponent(supportHyperlink, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(creditsButton)
                     .addComponent(closeButton)
@@ -345,6 +341,7 @@ public class AboutFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton closeButton;
     private JButton creditsButton;
+    private JXHyperlink homeHyperlink;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
@@ -354,8 +351,7 @@ public class AboutFrame extends javax.swing.JFrame {
     private JLabel jLabel7;
     private JLabel jLabel8;
     private JButton licenseButton;
-    private JButton linkButton;
-    private JButton supportButton;
+    private JXHyperlink supportHyperlink;
     // End of variables declaration//GEN-END:variables
     
 }
