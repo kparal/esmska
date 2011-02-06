@@ -6,6 +6,7 @@ import esmska.data.SMS;
 import esmska.data.event.ActionEventSupport;
 import esmska.gui.GatewayMessageDialog.TaskPane;
 import esmska.utils.L10N;
+import esmska.utils.RuntimeUtils;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -44,6 +45,11 @@ public abstract class GatewayMessage extends JPanel {
         pane.setTitle(title);
         pane.setIcon(icon);
         pane.setScrollOnExpand(true);
+        if (RuntimeUtils.isLinux()) {
+            // There's some bug in JXTaskPane causing cropping of JLabels with
+            // html on Linux. Disabling animation helps.
+            pane.setAnimated(false);
+        }
         pane.setCollapsed(true);
         return pane;
     }

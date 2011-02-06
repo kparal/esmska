@@ -28,4 +28,9 @@ public class Icons {
     public static final ImageIcon ERROR_SMALL = new ImageIcon(Icons.class.getResource(RES + "error-22.png"));
     public static final ImageIcon UPDATE_SMALL = new ImageIcon(Icons.class.getResource(RES + "update-22.png"));
     public static final ImageIcon UPDATE_IMPORTANT_SMALL = new ImageIcon(Icons.class.getResource(RES + "updateImportant-22.png"));
+
+    /** Return an ImageIcon of a requested name */
+    public static ImageIcon get(String name) {
+        return new ImageIcon(Icons.class.getResource(RES + name));
+    }
 }
