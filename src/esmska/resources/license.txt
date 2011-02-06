@@ -43,6 +43,8 @@
        * OpenIDE: GNU GPL 2
        * Substance: BSD License
        * Substance Extras: BSD License
+       * Substance SwingX: GNU LGPL
+       * SwingX: GNU LGPL 2.1
        * Trident: BSD License
      o Source files which state a specific license at their beginning follow
        that particular license.
