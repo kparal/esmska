@@ -33,13 +33,13 @@ Project root directory can be opened by NetBeans IDE as its project.
 Getting program
 ===============
 
-You can check-out any version of Esmska from its subversion repository by using:
+You can checkout any version of Esmska from its subversion repository by using:
 
- $ svn checkout http://esmska.googlecode.com/svn/tags/esmska-VERSION
+ $ hg clone -r vVERSION https://esmska.googlecode.com/hg/ esmska-VERSION
 
 You can also checkout the current development branch by using:
 
- $ svn checkout http://esmska.googlecode.com/svn/trunk
+ $ hg clone https://esmska.googlecode.com/hg/ esmska
 
 
 Compilation requirements
