@@ -12,6 +12,7 @@
 package esmska.gui;
 
 import esmska.Context;
+import esmska.data.Icons;
 import esmska.data.SMS;
 import esmska.utils.L10N;
 import java.awt.Component;
@@ -34,7 +35,6 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
@@ -49,7 +49,6 @@ import org.jdesktop.swingx.JXTaskPaneContainer;
 public class GatewayMessageDialog extends JDialog {
     private static GatewayMessageDialog instance;
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(GatewayMessageDialog.class.getName());
 
     /** index of the last TaskPane removed from the taskContainer */
@@ -65,10 +64,10 @@ public class GatewayMessageDialog extends JDialog {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "message-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "message-22.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "message-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "message-48.png")).getImage());
+        images.add(Icons.get("message-16.png").getImage());
+        images.add(Icons.get("message-22.png").getImage());
+        images.add(Icons.get("message-32.png").getImage());
+        images.add(Icons.get("message-48.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W

@@ -15,8 +15,8 @@ import esmska.data.Config;
 import esmska.data.Keyring;
 import esmska.data.Gateway;
 import esmska.data.Gateways;
+import esmska.data.Icons;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -93,7 +93,6 @@ import org.pushingpixels.substance.api.skin.SkinInfo;
  */
 public class ConfigFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(ConfigFrame.class.getName());
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Keyring keyring = Keyring.getInstance();
     /** when to take updates seriously */
@@ -113,9 +112,9 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "config-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "config-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "config-48.png")).getImage());
+        images.add(Icons.get("config-16.png").getImage());
+        images.add(Icons.get("config-32.png").getImage());
+        images.add(Icons.get("config-48.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W

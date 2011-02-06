@@ -49,7 +49,6 @@ import org.openide.awt.Mnemonics;
  * @author  ripper
  */
 public class LogFrame extends javax.swing.JFrame {
-    private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(LogFrame.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.MEDIUM);
@@ -64,9 +63,9 @@ public class LogFrame extends javax.swing.JFrame {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "log-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "log-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "log-48.png")).getImage());
+        images.add(Icons.get("log-16.png").getImage());
+        images.add(Icons.get("log-32.png").getImage());
+        images.add(Icons.get("log-48.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W

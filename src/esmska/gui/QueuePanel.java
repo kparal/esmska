@@ -370,11 +370,9 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
         public DeleteSMSAction() {
-            super(l10n.getString("Delete_messages"), 
-                    new ImageIcon(QueuePanel.class.getResource(RES + "delete-16.png")));
+            super(l10n.getString("Delete_messages"), Icons.get("delete-16.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Delete_selected_messages"));
-            this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(QueuePanel.class.getResource(RES + "delete-22.png")));
+            this.putValue(LARGE_ICON_KEY, Icons.get("delete-22.png"));
             this.setEnabled(false);
         }
         @Override
@@ -397,11 +395,9 @@ public class QueuePanel extends javax.swing.JPanel {
     /** Edit sms from queue */
     private class EditSMSAction extends AbstractAction {
         public EditSMSAction() {
-            super(l10n.getString("Edit_message"),
-                    new ImageIcon(QueuePanel.class.getResource(RES + "edit-16.png")));
+            super(l10n.getString("Edit_message"), Icons.get("edit-16.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Edit_selected_message"));
-            this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(QueuePanel.class.getResource(RES + "edit-22.png")));
+            this.putValue(LARGE_ICON_KEY, Icons.get("edit-22.png"));
             this.setEnabled(false);
         }
         @Override
@@ -419,11 +415,9 @@ public class QueuePanel extends javax.swing.JPanel {
     /** move sms up in sms queue */
     private class SMSUpAction extends AbstractAction {
         public SMSUpAction() {
-            super(l10n.getString("Move_up"),
-                    new ImageIcon(QueuePanel.class.getResource(RES + "up-16.png")));
+            super(l10n.getString("Move_up"), Icons.get("up-16.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("QueuePanel.Move_sms_up_in_the_queue"));
-            this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(QueuePanel.class.getResource(RES + "up-22.png")));
+            this.putValue(LARGE_ICON_KEY, Icons.get("up-22.png"));
             this.setEnabled(false);
         }
         @Override
@@ -442,11 +436,9 @@ public class QueuePanel extends javax.swing.JPanel {
     /** move sms down in sms queue */
     private class SMSDownAction extends AbstractAction {
         public SMSDownAction() {
-            super(l10n.getString("Move_down"),
-                    new ImageIcon(QueuePanel.class.getResource(RES + "down-16.png")));
+            super(l10n.getString("Move_down"), Icons.get("down-16.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("QueuePanel.Move_sms_down_in_the_queue"));
-            this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(QueuePanel.class.getResource(RES + "down-22.png")));
+            this.putValue(LARGE_ICON_KEY, Icons.get("down-22.png"));
             this.setEnabled(false);
         }
         @Override
@@ -510,7 +502,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private class SMSQueueListRenderer extends SubstanceDefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
         private final JLabel delayLabel = new JLabel("", SwingConstants.TRAILING);
-        private final ImageIcon sendIcon = new ImageIcon(getClass().getResource(RES + "send-16.png"));
+        private final ImageIcon sendIcon = Icons.get("send-16.png");
         private final URL messageIconURI = getClass().getResource(RES + "message-32.png");
         private final boolean isSubstance = ThemeManager.isSubstanceCurrentLaF();
         private boolean selected = false; //whether current item is selected

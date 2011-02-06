@@ -13,6 +13,7 @@ package esmska.gui;
 
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
+import esmska.data.Icons;
 import esmska.utils.L10N;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -38,7 +39,6 @@ import org.openide.awt.Mnemonics;
  */
 public class InitWizardDialog extends javax.swing.JDialog {
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final String RES = "/esmska/resources/";
     private static final Config config = Config.getInstance();
 
     /** Creates new form InitWizardDialog */
@@ -53,10 +53,10 @@ public class InitWizardDialog extends javax.swing.JDialog {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "esmska-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "esmska-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "esmska-64.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
+        images.add(Icons.get("esmska-16.png").getImage());
+        images.add(Icons.get("esmska-32.png").getImage());
+        images.add(Icons.get("esmska-64.png").getImage());
+        images.add(Icons.get("esmska.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W

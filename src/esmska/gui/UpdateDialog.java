@@ -70,7 +70,6 @@ import org.openide.awt.Mnemonics;
  */
 public class UpdateDialog extends javax.swing.JDialog {
 
-    private static final String RES = "/esmska/resources/";
     private static final Logger logger = Logger.getLogger(ContactPanel.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Log log = Log.getInstance();
@@ -91,8 +90,8 @@ public class UpdateDialog extends javax.swing.JDialog {
      */
     private static final ExecutorService executor = Executors.newCachedThreadPool();
 
-    private final ImageIcon updateIcon = new ImageIcon(getClass().getResource(RES + "update-22.png"));
-    private final ImageIcon updateManagerIcon = new ImageIcon(getClass().getResource(RES + "updateManager-22.png"));
+    private final ImageIcon updateIcon = Icons.get("update-22.png");
+    private final ImageIcon updateManagerIcon = Icons.get("updateManager-22.png");
 
     /** Set of possible form states */
     private enum FormState {
@@ -120,10 +119,10 @@ public class UpdateDialog extends javax.swing.JDialog {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "updateManager-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "updateManager-22.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "updateManager-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "updateManager-48.png")).getImage());
+        images.add(Icons.get("updateManager-16.png").getImage());
+        images.add(Icons.get("updateManager-22.png").getImage());
+        images.add(Icons.get("updateManager-32.png").getImage());
+        images.add(Icons.get("updateManager-48.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W

@@ -126,10 +126,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "esmska-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "esmska-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "esmska-64.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "esmska.png")).getImage());
+        images.add(Icons.get("esmska-16.png").getImage());
+        images.add(Icons.get("esmska-32.png").getImage());
+        images.add(Icons.get("esmska-64.png").getImage());
+        images.add(Icons.get("esmska.png").getImage());
         setIconImages(images);
         
         //hide on Ctrl+W

@@ -400,11 +400,9 @@ public class ContactPanel extends javax.swing.JPanel {
          * @param skeleton skeleton of contact to show as default values; may be null
          */
         public AddContactAction(Contact skeleton) {
-            super(l10n.getString("Add_contact"),
-                    new ImageIcon(ContactPanel.class.getResource(RES + "add-16.png")));
+            super(l10n.getString("Add_contact"), Icons.get("add-16.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Add_new_contact"));
-            this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(ContactPanel.class.getResource(RES + "add-22.png")));
+            this.putValue(LARGE_ICON_KEY, Icons.get("add-22.png"));
             this.putValue(MNEMONIC_KEY, KeyEvent.VK_A);
             this.skeleton = skeleton;
         }
@@ -435,11 +433,9 @@ public class ContactPanel extends javax.swing.JPanel {
                 cancelOption, saveOption);
         
         public EditContactAction() {
-            super(l10n.getString("Edit_contacts"),
-                    new ImageIcon(ContactPanel.class.getResource(RES + "edit-16.png")));
+            super(l10n.getString("Edit_contacts"), Icons.get("edit-16.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Edit_selected_contacts"));
-            this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(ContactPanel.class.getResource(RES + "edit-22.png")));
+            this.putValue(LARGE_ICON_KEY, Icons.get("edit-22.png"));
             this.setEnabled(false);
         }
         @Override
@@ -503,11 +499,9 @@ public class ContactPanel extends javax.swing.JPanel {
                 cancelOption, deleteOption);
         
         public RemoveContactAction() {
-            super(l10n.getString("Delete_contacts"),
-                    new ImageIcon(ContactPanel.class.getResource(RES + "delete-16.png")));
+            super(l10n.getString("Delete_contacts"), Icons.get("delete-16.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Delete_selected_contacts"));
-            this.putValue(LARGE_ICON_KEY,
-                    new ImageIcon(ContactPanel.class.getResource(RES + "delete-22.png")));
+            this.putValue(LARGE_ICON_KEY, Icons.get("delete-22.png"));
             this.setEnabled(false);
         }
         @Override
@@ -771,7 +765,7 @@ public class ContactPanel extends javax.swing.JPanel {
     
     /** dialog for creating and editing contact */
     private class ContactDialog extends JDialog implements PropertyChangeListener {
-        private final ImageIcon contactIcon = new ImageIcon(ContactPanel.class.getResource(RES + "contact-48.png"));
+        private final ImageIcon contactIcon = Icons.get("contact-48.png");
         private EditContactPanel panel;
         private JOptionPane optionPane;
         private Contact contact;

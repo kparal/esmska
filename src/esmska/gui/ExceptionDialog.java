@@ -12,10 +12,8 @@ package esmska.gui;
 
 import esmska.Context;
 import esmska.data.Config;
+import esmska.data.Icons;
 import esmska.data.Links;
-import esmska.data.event.ValuedEvent;
-import esmska.data.event.ValuedListener;
-import esmska.gui.JHtmlLabel.Events;
 import esmska.utils.L10N;
 import java.awt.Font;
 import java.awt.Image;
@@ -58,7 +56,6 @@ import org.openide.awt.Mnemonics;
 public class ExceptionDialog extends javax.swing.JDialog {
 
     private static final Logger logger = Logger.getLogger(ExceptionDialog.class.getName());
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final EsmskaExceptionHandler exceptionHandler = new EsmskaExceptionHandler();
     private static ExceptionDialog instance;
@@ -83,10 +80,10 @@ public class ExceptionDialog extends javax.swing.JDialog {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "error-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "error-22.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "error-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "error-48.png")).getImage());
+        images.add(Icons.get("error-16.png").getImage());
+        images.add(Icons.get("error-22.png").getImage());
+        images.add(Icons.get("error-32.png").getImage());
+        images.add(Icons.get("error-48.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W

@@ -5,6 +5,7 @@
 package esmska.gui;
 
 import esmska.Context;
+import esmska.data.Icons;
 import esmska.data.Queue;
 import esmska.data.Queue.Events;
 import esmska.data.SMS;
@@ -145,8 +146,8 @@ public class NotificationIcon {
         }
         
         // construct a TrayIcon
-        trayImageDefault = new ImageIcon(getClass().getResource(RES + logo)).getImage();
-        trayImageSending = new ImageIcon(getClass().getResource(RES + logoSending)).getImage();
+        trayImageDefault = Icons.get(logo).getImage();
+        trayImageSending = Icons.get(logoSending).getImage();
         updateTrayImage();
         trayIcon = new TrayIcon(trayImageCurrent, "Esmska", popup);
         trayIcon.setImageAutoSize(true);

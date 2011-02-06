@@ -21,7 +21,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -34,8 +33,6 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.ListDataEvent;
 import javax.swing.filechooser.FileFilter;
 import esmska.data.Contact;
@@ -69,7 +66,6 @@ import org.openide.awt.Mnemonics;
  */
 public class ImportFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(ImportFrame.class.getName());
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final String infoEsmska = l10n.getString("ImportFrame.infoEsmska");
     private static final String infoKubik = l10n.getString("ImportFrame.infoKubik");
@@ -89,10 +85,10 @@ public class ImportFrame extends javax.swing.JFrame {
         
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "contact-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "contact-22.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "contact-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "contact-48.png")).getImage());
+        images.add(Icons.get("contact-16.png").getImage());
+        images.add(Icons.get("contact-22.png").getImage());
+        images.add(Icons.get("contact-32.png").getImage());
+        images.add(Icons.get("contact-48.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W
@@ -499,8 +495,7 @@ public class ImportFrame extends javax.swing.JFrame {
         if (actualCard.equals("resultsPanel")) {
             String nextCard = "browsePanel";
             Mnemonics.setLocalizedText(forwardButton, l10n.getString("ImportFrame.forwardButton.text"));
-            forwardButton.setIcon(new ImageIcon(
-                        ImportFrame.class.getResource(RES + "next-22.png")));
+            forwardButton.setIcon(Icons.get("next-22.png"));
             forwardButton.setHorizontalTextPosition(SwingConstants.LEADING);
             forwardButton.setEnabled(true);
             updateBrowsePanel();
@@ -598,8 +593,7 @@ private void browseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bro
                 removeExistingContacts();
 
                 Mnemonics.setLocalizedText(forwardButton, l10n.getString("Import_"));
-                forwardButton.setIcon(new ImageIcon(
-                        ImportFrame.class.getResource(RES + "contact-22.png")));
+                forwardButton.setIcon(Icons.get("contact-22.png"));
                 forwardButton.setHorizontalTextPosition(SwingConstants.TRAILING);
                 forwardButton.setEnabled(contactList.getModel().getSize() > 0);
                 cardLayout.show(cardPanel, "resultsPanel");

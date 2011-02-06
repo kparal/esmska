@@ -5,6 +5,7 @@
  */
 package esmska.gui;
 
+import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.utils.L10N;
 import esmska.utils.MiscUtils;
@@ -32,7 +33,6 @@ import org.openide.awt.Mnemonics;
  */
 public class StatusPanel extends javax.swing.JPanel {
 
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final DateFormat shortTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
     private Log log = Log.getInstance();
@@ -99,9 +99,9 @@ public class StatusPanel extends javax.swing.JPanel {
     /** Tells main form whether it should display task busy icon */
     public void setTaskRunning(boolean b) {
         if (b == false) {
-            statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource(RES + "task-idle.png")));
+            statusAnimationLabel.setIcon(Icons.get("task-idle.png"));
         } else {
-            statusAnimationLabel.setIcon(new ImageIcon(getClass().getResource(RES + "task-busy.gif")));
+            statusAnimationLabel.setIcon(Icons.get("task-busy.gif"));
         }
     }
 

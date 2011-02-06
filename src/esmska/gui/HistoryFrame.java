@@ -50,6 +50,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
 import esmska.data.Config;
 import esmska.data.History;
+import esmska.data.Icons;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
@@ -75,7 +76,6 @@ public class HistoryFrame extends javax.swing.JFrame {
         /** A message is requested to be resent. Event value: History record to resend. */
         RESEND_SMS;
     }
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Logger logger = Logger.getLogger(HistoryFrame.class.getName());
     private static final Config config = Config.getInstance();
@@ -104,9 +104,9 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "history-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "history-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "history-48.png")).getImage());
+        images.add(Icons.get("history-16.png").getImage());
+        images.add(Icons.get("history-32.png").getImage());
+        images.add(Icons.get("history-48.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W
@@ -476,7 +476,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         
         public DeleteAction() {
             L10N.setLocalizedText(this, l10n.getString("Delete_"));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "delete-22.png")));
+            putValue(LARGE_ICON_KEY, Icons.get("delete-22.png"));
             putValue(SHORT_DESCRIPTION, l10n.getString("Delete_selected_messages_from_history"));
             this.setEnabled(false);
         }
@@ -522,7 +522,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         public ResendAction() {
             L10N.setLocalizedText(this, l10n.getString("Forward_"));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "send-22.png")));
+            putValue(LARGE_ICON_KEY, Icons.get("send-22.png"));
             putValue(SHORT_DESCRIPTION, l10n.getString("HistoryFrame.resend_message"));
             this.setEnabled(false);
         }
@@ -657,7 +657,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
     /** Renderer for date columns in history table */
     private class TableDateRenderer extends SubstanceDefaultTableCellRenderer {
-        private final ImageIcon icon = new ImageIcon(HistoryFrame.class.getResource(RES + "message-16.png"));
+        private final ImageIcon icon = Icons.get("message-16.png");
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

@@ -4,12 +4,12 @@
  */
 package esmska.gui;
 
+import esmska.data.Icons;
 import esmska.utils.L10N;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ResourceBundle;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -21,7 +21,6 @@ import javax.swing.text.DefaultEditorKit;
  */
 public class ClipboardPopupMenu extends JPopupMenu {
 
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static ClipboardPopupMenu instance;
     private static PopupListener popupListener;
@@ -32,19 +31,19 @@ public class ClipboardPopupMenu extends JPopupMenu {
         //cut action
         menuItem = new JMenuItem(new DefaultEditorKit.CutAction());
         menuItem.setText(l10n.getString("ClipboardPopupMenu.Cut"));
-        menuItem.setIcon(new ImageIcon(getClass().getResource(RES + "cut-16.png")));
+        menuItem.setIcon(Icons.get("cut-16.png"));
         this.add(menuItem);
 
         //copy action
         menuItem = new JMenuItem(new DefaultEditorKit.CopyAction());
         menuItem.setText(l10n.getString("ClipboardPopupMenu.Copy"));
-        menuItem.setIcon(new ImageIcon(getClass().getResource(RES + "copy-16.png")));
+        menuItem.setIcon(Icons.get("copy-16.png"));
         this.add(menuItem);
 
         //paste action
         menuItem = new JMenuItem(new DefaultEditorKit.PasteAction());
         menuItem.setText(l10n.getString("ClipboardPopupMenu.Paste"));
-        menuItem.setIcon(new ImageIcon(getClass().getResource(RES + "paste-16.png")));
+        menuItem.setIcon(Icons.get("paste-16.png"));
         this.add(menuItem);
         
         //mouse listener

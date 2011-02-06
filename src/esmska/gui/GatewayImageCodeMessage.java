@@ -35,8 +35,7 @@ import org.openide.awt.Mnemonics;
  * @author ripper
  */
 public class GatewayImageCodeMessage extends GatewayMessage {
-    private static final String RES = "/esmska/resources/";
-    private static final ImageIcon ICON = new ImageIcon(Icons.class.getResource(RES + "keyring-16.png"));
+    private static final ImageIcon ICON = Icons.get("keyring-16.png");
     /** Remember the SMS we received */
     private SMS sms;
 

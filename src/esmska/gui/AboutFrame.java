@@ -7,6 +7,7 @@
 package esmska.gui;
 
 import esmska.data.Config;
+import esmska.data.Icons;
 import esmska.utils.L10N;
 import esmska.data.Links;
 import esmska.utils.MiscUtils;
@@ -64,10 +65,10 @@ public class AboutFrame extends javax.swing.JFrame {
 
         //set window images
         ArrayList<Image> images = new ArrayList<Image>();
-        images.add(new ImageIcon(getClass().getResource(RES + "about-16.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "about-22.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "about-32.png")).getImage());
-        images.add(new ImageIcon(getClass().getResource(RES + "about-48.png")).getImage());
+        images.add(Icons.get("about-16.png").getImage());
+        images.add(Icons.get("about-22.png").getImage());
+        images.add(Icons.get("about-32.png").getImage());
+        images.add(Icons.get("about-48.png").getImage());
         setIconImages(images);
 
         //close on Ctrl+W

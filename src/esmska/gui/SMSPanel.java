@@ -16,6 +16,7 @@ import esmska.data.Keyring;
 import esmska.data.Links;
 import esmska.data.Gateway;
 import esmska.data.Gateways;
+import esmska.data.Icons;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.event.AbstractDocumentListener;
@@ -53,7 +54,6 @@ import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -96,7 +96,6 @@ import org.pushingpixels.substance.api.skin.SkinChangeListener;
  */
 public class SMSPanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(SMSPanel.class.getName());
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     
     /** box for messages */
@@ -642,8 +641,8 @@ infoPanelLayout.setHorizontalGroup(
     private class SendAction extends AbstractAction {
         public SendAction() {
             L10N.setLocalizedText(this, l10n.getString("Send_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "send-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "send-22.png")));
+            putValue(SMALL_ICON, Icons.get("send-16.png"));
+            putValue(LARGE_ICON_KEY, Icons.get("send-22.png"));
             putValue(SHORT_DESCRIPTION,l10n.getString("Send_message"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -671,8 +670,8 @@ infoPanelLayout.setHorizontalGroup(
     private class UndoAction extends AbstractAction {
         public UndoAction() {
             L10N.setLocalizedText(this, l10n.getString("Undo_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "undo-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "undo-32.png")));
+            putValue(SMALL_ICON, Icons.get("undo-16.png"));
+            putValue(LARGE_ICON_KEY, Icons.get("undo-32.png"));
             putValue(SHORT_DESCRIPTION, l10n.getString("SMSPanel.Undo_change_in_message_text"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -694,8 +693,8 @@ infoPanelLayout.setHorizontalGroup(
     private class RedoAction extends AbstractAction {
         public RedoAction() {
             L10N.setLocalizedText(this, l10n.getString("Redo_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "redo-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "redo-32.png")));
+            putValue(SMALL_ICON, Icons.get("redo-16.png"));
+            putValue(LARGE_ICON_KEY, Icons.get("redo-32.png"));
             putValue(SHORT_DESCRIPTION, l10n.getString("SMSPanel.Redo_change_in_message_text"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Y,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -720,7 +719,7 @@ infoPanelLayout.setHorizontalGroup(
         public CompressAction() {
             updateLabels();
             putValue(SHORT_DESCRIPTION,l10n.getString("SMSPanel.compress"));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "compress-32.png")));
+            putValue(LARGE_ICON_KEY, Icons.get("compress-32.png"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 

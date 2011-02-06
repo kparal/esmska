@@ -22,7 +22,6 @@ import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.update.UpdateChecker;
 import esmska.data.Links;
-import esmska.utils.RuntimeUtils;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -42,7 +41,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
@@ -54,7 +52,6 @@ import org.apache.commons.lang.StringUtils;
  */
 public class Actions {
     private static final Logger logger = Logger.getLogger(Actions.class.getName());
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
 
     private static Action aboutAction;
@@ -221,8 +218,8 @@ public class Actions {
         private ConfigFrame configFrame;
         public ConfigAction() {
             L10N.setLocalizedText(this, l10n.getString("Preferences_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "config-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "config-32.png")));
+            putValue(SMALL_ICON, Icons.get("config-16.png"));
+            putValue(LARGE_ICON_KEY, Icons.get("config-32.png"));
             putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.configure_program_behaviour"));
         }
         @Override
@@ -248,8 +245,8 @@ public class Actions {
     private static class QuitAction extends AbstractAction {
         public QuitAction() {
             L10N.setLocalizedText(this, l10n.getString("Quit_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "exit-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "exit-32.png")));
+            putValue(SMALL_ICON, Icons.get("exit-16.png"));
+            putValue(LARGE_ICON_KEY, Icons.get("exit-32.png"));
             putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.Quit_program"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -266,8 +263,8 @@ public class Actions {
         private HistoryFrame historyFrame;
         public HistoryAction() {
             L10N.setLocalizedText(this, l10n.getString("Message_history_"));
-            putValue(SMALL_ICON, new ImageIcon(getClass().getResource(RES + "history-16.png")));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "history-32.png")));
+            putValue(SMALL_ICON, Icons.get("history-16.png"));
+            putValue(LARGE_ICON_KEY, Icons.get("history-32.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("MainFrame.show_history_of_sent_messages"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -351,7 +348,7 @@ public class Actions {
             String message = l10n.getString("ExportManager.export_info");
             JOptionPane.showMessageDialog(Context.mainFrame, new JLabel(message), l10n.getString("ExportManager.contact_export"),
                     JOptionPane.INFORMATION_MESSAGE,
-                    new ImageIcon(getClass().getResource(RES + "contact-48.png")));
+                    Icons.get("contact-48.png"));
 
             //choose file
             if (chooser == null) {
@@ -438,7 +435,7 @@ public class Actions {
         private LogFrame logFrame;
         public LogAction() {
             L10N.setLocalizedText(this, l10n.getString("Log_"));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "log-48.png")));
+            putValue(LARGE_ICON_KEY, Icons.get("log-48.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Show_application_log"));
         }
         @Override
@@ -464,10 +461,10 @@ public class Actions {
         private final String nameStoppedLong = l10n.getString("Unpause_queue");
         private final String descRunning = l10n.getString("QueuePanel.Pause_sending_of_sms_in_the_queue");
         private final String descStopped = l10n.getString("QueuePanel.Unpause_sending_of_sms_in_the_queue");
-        private final ImageIcon pauseIcon = new ImageIcon(QueuePanel.class.getResource(RES + "pause-22.png"));
-        private final ImageIcon pauseIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "pause-16.png"));
-        private final ImageIcon startIcon = new ImageIcon(QueuePanel.class.getResource(RES + "start-22.png"));
-        private final ImageIcon startIconSmall = new ImageIcon(QueuePanel.class.getResource(RES + "start-16.png"));
+        private final ImageIcon pauseIcon = Icons.get("pause-22.png");
+        private final ImageIcon pauseIconSmall = Icons.get("pause-16.png");
+        private final ImageIcon startIcon = Icons.get("start-22.png");
+        private final ImageIcon startIconSmall = Icons.get("start-16.png");
         private static final Queue queue = Queue.getInstance();
         private boolean longName;
         public QueuePauseAction() {
@@ -527,7 +524,7 @@ public class Actions {
         public UpdateAction(UpdateChecker updateChecker) {
             this.updateChecker = updateChecker;
             L10N.setLocalizedText(this, l10n.getString("CheckUpdates_"));
-            putValue(LARGE_ICON_KEY, new ImageIcon(getClass().getResource(RES + "updateManager-48.png")));
+            putValue(LARGE_ICON_KEY, Icons.get("updateManager-48.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("CheckUpdatesTooltip"));
         }
         @Override
