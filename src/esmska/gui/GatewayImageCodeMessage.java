@@ -6,6 +6,7 @@
  */
 package esmska.gui;
 
+import esmska.data.Config;
 import esmska.data.Icons;
 import esmska.data.SMS;
 import esmska.gui.GatewayMessageDialog.TaskPane;
@@ -35,6 +36,7 @@ import org.openide.awt.Mnemonics;
  * @author ripper
  */
 public class GatewayImageCodeMessage extends GatewayMessage {
+    private static final Config config = Config.getInstance();
     private static final ImageIcon ICON = Icons.get("keyring-16.png");
     /** Remember the SMS we received */
     private SMS sms;
@@ -48,6 +50,11 @@ public class GatewayImageCodeMessage extends GatewayMessage {
         buttonPanel.removeAll();
         buttonPanel.add((Component)buttons[0]);
         buttonPanel.add((Component)buttons[1]);
+
+        //if not Substance LaF, add clipboard popup menu to text components
+        if (!config.getLookAndFeel().equals(ThemeManager.LAF.SUBSTANCE)) {
+            ClipboardPopupMenu.register(codeTextField);
+        }
     }
 
     /** Initialize this message to show an image code request message

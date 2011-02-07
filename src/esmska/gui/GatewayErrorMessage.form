@@ -20,7 +20,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="msgLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="msgLabel" alignment="0" pref="238" max="32767" attributes="0"/>
                   <Component id="smsTextScrollPane" alignment="1" max="32767" attributes="0"/>
                   <Component id="okButton" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="smsTextLabel" alignment="0" min="-2" max="-2" attributes="0"/>

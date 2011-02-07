@@ -7,15 +7,13 @@
 
 package esmska.gui;
 
+import esmska.data.Config;
 import esmska.data.Icons;
 import esmska.data.SMS;
 import esmska.gui.GatewayMessageDialog.TaskPane;
-import esmska.utils.MiscUtils;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.MessageFormat;
@@ -29,8 +27,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import org.jdesktop.swingx.JXLabel;
 import org.openide.awt.Mnemonics;
 
 /** Error message from gateway displayed to a user
@@ -38,10 +34,16 @@ import org.openide.awt.Mnemonics;
  * @author ripper
  */
 public class GatewayErrorMessage extends GatewayMessage {
+    private static final Config config = Config.getInstance();
 
     /** Creates new form GatewayErrorMessage */
     public GatewayErrorMessage() {
         initComponents();
+
+        //if not Substance LaF, add clipboard popup menu to text components
+        if (!config.getLookAndFeel().equals(ThemeManager.LAF.SUBSTANCE)) {
+            ClipboardPopupMenu.register(smsTextArea);
+        }
     }
 
     /** Initialize this message to show an SMS error
