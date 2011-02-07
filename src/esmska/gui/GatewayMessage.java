@@ -45,11 +45,10 @@ public abstract class GatewayMessage extends JPanel {
         pane.setTitle(title);
         pane.setIcon(icon);
         pane.setScrollOnExpand(true);
-        if (RuntimeUtils.isLinux()) {
-            // There's some bug in JXTaskPane causing cropping of JLabels with
-            // html on Linux. Disabling animation helps.
-            pane.setAnimated(false);
-        }
+        // There's some bug in JXTaskPane causing cropping of JLabels with
+        // html on Linux. Disabling animation helps. Let's do it on all systems
+        // just to be sure.
+        pane.setAnimated(false);
         pane.setCollapsed(true);
         return pane;
     }
