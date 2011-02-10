@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-24"
+    return "2011-02-10"
 }
 
 function getMaintainer() {
@@ -87,7 +87,7 @@ function send() {
     re = /[^\u0001-\u007f]/
     match = re.exec(MESSAGE)
     if (undefined != match) {
-        EXEC.setErrorMessage("This gateway does not support national characters at the moment.<br>" +
+        EXEC.setErrorMessage("This gateway does not support national characters at the moment. " +
         "Please enter English alphabet characters only.")
         return false
     }
