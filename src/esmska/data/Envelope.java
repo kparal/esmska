@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 public class Envelope {
     private static final Config config = Config.getInstance();
     private static final Logger logger = Logger.getLogger(Envelope.class.getName());
+    private static final Gateways gateways = Gateways.getInstance();
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
 
@@ -69,7 +70,7 @@ public class Envelope {
     public int getMaxTextLength() {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Gateway gateway = Gateways.getGateway(c.getGateway());
+            Gateway gateway = gateways.get(c.getGateway());
             if (gateway == null) {
                 continue;
             }
@@ -86,7 +87,7 @@ public class Envelope {
     public int getSMSLength() {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Gateway gateway = Gateways.getGateway(c.getGateway());
+            Gateway gateway = gateways.get(c.getGateway());
             if (gateway == null) {
                 continue;
             }
@@ -105,7 +106,7 @@ public class Envelope {
     public int getSMSCount(int chars) {
         int worstGateway = Integer.MAX_VALUE;
         for (Contact c : contacts) {
-            Gateway gateway = Gateways.getGateway(c.getGateway());
+            Gateway gateway = gateways.get(c.getGateway());
             if (gateway == null) {
                 continue;
             }
@@ -137,7 +138,7 @@ public class Envelope {
         int worstSignature = 0;
         //find maximum signature length
         for (Contact c : contacts) {
-            Gateway gateway = Gateways.getGateway(c.getGateway());
+            Gateway gateway = gateways.get(c.getGateway());
             if (gateway == null) {
                 continue;
             }
@@ -158,7 +159,7 @@ public class Envelope {
     public ArrayList<SMS> generate() {
         ArrayList<SMS> list = new ArrayList<SMS>();
         for (Contact c : contacts) {
-            Gateway gateway = Gateways.getGateway(c.getGateway());
+            Gateway gateway = gateways.get(c.getGateway());
             int limit = (gateway != null ? gateway.getMaxChars() : Integer.MAX_VALUE);
             for (int i=0;i<text.length();i+=limit) {
                 String cutText = text.substring(i,Math.min(i+limit,text.length()));
@@ -176,9 +177,9 @@ public class Envelope {
         return list;
     }
     
-    /** get length of signature needed to be substracted from message length */
+    /** get length of signature needed to be subtracted from message length */
     private int getSignatureLength(Contact c) {
-        Gateway gateway = Gateways.getGateway(c.getGateway());
+        Gateway gateway = gateways.get(c.getGateway());
         if (gateway != null && config.isUseSenderID() &&
                 config.getSenderName() != null &&
                 config.getSenderName().length() > 0) {

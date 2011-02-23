@@ -29,6 +29,7 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.math.RandomUtils;
 
 /** Parse contacts from csv file of different programs. Works in background thread.
  * Returns collection of parsed contacts.
@@ -250,8 +251,9 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
             }
 
             //guess gateway
-            Gateway gateway = Gateways.suggestGateway(number, null);
-            String gatewayName = gateway != null ? gateway.getName() : null;
+            ArrayList<Gateway> gateways = Gateways.getInstance().suggestGateway(number).get1();
+            String gatewayName = gateways.isEmpty() ? null :
+                gateways.get(RandomUtils.nextInt(gateways.size())).getName();
 
             //create contact
             contacts.add(new Contact(name, number, gatewayName));

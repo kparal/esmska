@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 22:58+0200\n"
-"PO-Revision-Date: 2011-02-06 22:58+0100\n"
+"POT-Creation-Date: 2011-02-23 20:39+0200\n"
+"PO-Revision-Date: 2011-02-23 20:39+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -200,6 +200,18 @@ msgstr "Z&komprimovat text"
 msgid "&Compress"
 msgstr "Z&komprimovat"
 
+#: ConfigFrame.Favorite
+msgid "Favorite"
+msgstr "Oblíbená"
+
+#: ConfigFrame.Gateway
+msgid "Gateway"
+msgstr "Brána"
+
+#: ConfigFrame.Show
+msgid "Show"
+msgstr "Zobrazit"
+
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
 msgstr "Po&kročilá nastavení"
@@ -293,27 +305,6 @@ msgstr ""
 "na telefonní číslo odesilatele. Tuto funkci podporují pouze některé brány.\n"
 "</html>"
 
-#: ConfigFrame.gatewayFilterLabel.text
-msgid "Show &only gateways with names containing:"
-msgstr "Zobrazova&t pouze brány mající v názvu:"
-
-#: ConfigFrame.gatewayFilterTextField.toolTipText
-msgid ""
-"<html>\n"
-"In the gateway list only those will be displayed, which contains<br>\n"
-"a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-"You can enter more patterns separated by comma. Patterns are case "
-"sensitive.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"V seznamu bran budou zobrazeny pouze ty, které ve svém<br>\n"
-"názvu obsahují vzor zadaný v tomto poli. Jednoduše tak lze<br>\n"
-"například zobrazit pouze brány pro zemi XX zadáním vzoru [XX].<br>\n"
-"Lze zadat více vzorů oddělených čárkou. Bere se ohled na velikost písmen.\n"
-"</html>"
-
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "&Gateways"
 msgstr "&Brány"
@@ -321,6 +312,22 @@ msgstr "&Brány"
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&Obecné"
+
+#: ConfigFrame.gwDetailsPanel.border.title
+msgid "Gateway properties"
+msgstr "Vlastnosti brány"
+
+#: ConfigFrame.gwTipLabel.text
+msgid ""
+"<html>\n"
+"Hidden gateways won't show up in the drop-down menus. \n"
+"Favorite gateways will be preferred for recipient gateway suggestions.\n"
+"</html>"
+msgstr ""
+"<html>\n"
+"Skryté brány se nezobrazí v rozbalovacích seznamech. \n"
+"Oblíbené brány budou upřednostňovány při návrhu brány příjemce.\n"
+"</html>"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -350,11 +357,6 @@ msgstr ""
 msgid "&Number:"
 msgstr "Čís&lo:"
 
-#: ConfigFrame.jLabel10.text
-msgctxt "ConfigFrame.jLabel10.text"
-msgid "&Gateway:"
-msgstr "&Brána:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&Uživatelské jméno:"
@@ -362,20 +364,6 @@ msgstr "&Uživatelské jméno:"
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
 msgstr "He&slo:"
-
-#: ConfigFrame.jLabel13.text
-msgid ""
-"<html><i>\n"
-"Although the passwords are stored encrypted the original content may be "
-"retrieved. We strongly suggest to set the access rights in such manner that "
-"no other user has the access to the <u>program configuration directory</u>.\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"Ačkoliv se hesla ukládají šifrovaně, lze se k původnímu obsahu dostat. "
-"Důrazně doporučujeme nastavit si přístupová práva tak, aby k <u>adresáři s "
-"konfiguračními soubory programu</u> neměl přístup žádný jiný uživatel.\n"
-"</i></html>"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -404,16 +392,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "J&méno:"
 
-#: ConfigFrame.jLabel9.text
-msgid ""
-"<html>\n"
-"Here you can set your login credentials for gateways which require it.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Zde si můžete nastavit své přihlašovací údaje pro brány, které to vyžadují.\n"
-"</html>"
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
@@ -429,11 +407,7 @@ msgstr ""
 msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr "<html><i>Záznam je ukládán do souboru: {0}</i></html>"
 
-#: ConfigFrame.loginPanel.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr "Při&hlašovací údaje"
-
-#: ConfigFrame.loginTextField.toolTipText
+#: ConfigFrame.loginField.toolTipText
 msgid "Username needed for logging in to the gateway"
 msgstr "Uživatelské jméno potřebné pro přihlášení k webové bráně"
 
@@ -511,8 +485,11 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.remove_credentials
-msgid "Do you really like to remove all entered login credentials?"
-msgstr "Opravdu chcete odstranit všechny vyplněné přihlašovací údaje?"
+msgid ""
+"Do you really want to remove all login credentials for all available "
+"gateways?"
+msgstr ""
+"Opravdu chcete odstranit všechny přihlašovací údaje od všech dostupných bran?"
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
@@ -697,11 +674,6 @@ msgstr ""
 "Při připojení podpisu přijde SMS adresátovi ze zadaného čísla<br>\n"
 "a podepsaná daným jménem. Tuto funkci podporují pouze některé brány.\n"
 "</html>"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: ConfigFrame.user_directory
-msgid "<html>User configuration directory:<br>{0}</html>"
-msgstr "<html>Uživatelský adresář programu:<br>{0}</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -1979,7 +1951,6 @@ msgid ""
 msgstr "<html>Znaků v celé zprávě: <b>{0}/{1}</b> (zbývá <b>{2}</b>)</html>"
 
 #: SMSPanel.gatewayLabel.text
-msgctxt "SMSPanel.gatewayLabel.text"
 msgid "&Gateway:"
 msgstr "&Brána:"
 
@@ -2475,6 +2446,61 @@ msgstr ""
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
 
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "Ačkoliv se hesla ukládají šifrovaně, lze se k původnímu obsahu dostat. "
+#~ "Důrazně doporučujeme nastavit si přístupová práva tak, aby k <u>adresáři "
+#~ "s konfiguračními soubory programu</u> neměl přístup žádný jiný uživatel.\n"
+#~ "</i></html>"
+
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>Uživatelský adresář programu:<br>{0}</html>"
+
+#~ msgid "Show &only gateways with names containing:"
+#~ msgstr "Zobrazova&t pouze brány mající v názvu:"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "In the gateway list only those will be displayed, which contains<br>\n"
+#~ "a pattern in their name provided in this field. This way you can "
+#~ "easily<br>\n"
+#~ "show eg. only gateways for country XX by entering pattern [XX].<br>\n"
+#~ "You can enter more patterns separated by comma. Patterns are case "
+#~ "sensitive.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "V seznamu bran budou zobrazeny pouze ty, které ve svém<br>\n"
+#~ "názvu obsahují vzor zadaný v tomto poli. Jednoduše tak lze<br>\n"
+#~ "například zobrazit pouze brány pro zemi XX zadáním vzoru [XX].<br>\n"
+#~ "Lze zadat více vzorů oddělených čárkou. Bere se ohled na velikost "
+#~ "písmen.\n"
+#~ "</html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Here you can set your login credentials for gateways which require it.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Zde si můžete nastavit své přihlašovací údaje pro brány, které to "
+#~ "vyžadují.\n"
+#~ "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "Při&hlašovací údaje"
+
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Brána:"
+
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Domovská stránka</a></html>"
 
@@ -2737,6 +2763,3 @@ msgstr ""
 
 #~ msgid "Print debugging output."
 #~ msgstr "Vypisovat ladící výstup."
-
-#~ msgid "Show"
-#~ msgstr "Zobrazit"

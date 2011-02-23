@@ -165,16 +165,13 @@ public class UpdateChecker {
      * which are new or updated compared to current ones. This can be used to reload
      * update info after partial update. Also removes gateways requiring more recent
      * program version than available online (stable/unstable depending on config
-     * settings), gateways hidden by the user (gateway filter) and deprecated
-     * gateways.
+     * settings), gateways hidden by the user and deprecated gateways.
      */
     public void refreshUpdatedGateways() {
-        String[] patterns = config.getGatewayFilter().split(",");
-
         for (Iterator<GatewayUpdateInfo> it = gatewayUpdates.iterator(); it.hasNext(); ) {
             GatewayUpdateInfo info = it.next();
-            Gateway op = Gateways.getGateway(info.getName());
-            if (op != null && info.getVersion().compareTo(op.getVersion()) <= 0) {
+            Gateway gw = Gateways.getInstance().get(info.getName());
+            if (gw != null && info.getVersion().compareTo(gw.getVersion()) <= 0) {
                 //gateway is same or older, remove it
                 it.remove();
                 continue;
@@ -185,16 +182,8 @@ public class UpdateChecker {
                 it.remove();
                 continue;
             }
-            //compare gateway name against gateway filter
-            boolean filtered = true;
-            for (String pattern : patterns) {
-                if (info.getName().contains(pattern)) {
-                    filtered = false;
-                    continue;
-                }
-            }
-            if (filtered) {
-                //there has been no match against filter, remove it
+            //remove hidden gateways
+            if (gw != null && gw.isHidden()) {
                 it.remove();
                 continue;
             }

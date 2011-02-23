@@ -606,21 +606,6 @@ public class HistoryFrame extends javax.swing.JFrame {
                     return Object.class;
             }
         }
-
-        @Override
-        public void fireTableDataChanged() {
-            super.fireTableDataChanged();
-        }
-
-        @Override
-        public void fireTableRowsDeleted(int firstRow, int lastRow) {
-            super.fireTableRowsDeleted(firstRow, lastRow);
-        }
-
-        @Override
-        public void fireTableRowsInserted(int firstRow, int lastRow) {
-            super.fireTableRowsInserted(firstRow, lastRow);
-        }
     }
 
     /** Listener for changes in history table */

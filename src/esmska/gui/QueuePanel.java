@@ -89,6 +89,7 @@ public class QueuePanel extends javax.swing.JPanel {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Queue queue = Queue.getInstance();
     private static final Config config = Config.getInstance();
+    private static final Gateways gateways = Gateways.getInstance();
     
     private Action deleteSMSAction = new DeleteSMSAction();
     private Action editSMSAction = new EditSMSAction();
@@ -223,8 +224,8 @@ public class QueuePanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
-            .addComponent(jScrollPane2, Alignment.TRAILING)
-            .addComponent(pausedLabel, GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+            .addComponent(pausedLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(Alignment.LEADING)
@@ -563,7 +564,7 @@ public class QueuePanel extends javax.swing.JPanel {
             delayLabel.setBackground(label.getBackground());
             panel.setBackground(label.getBackground());
             //add gateway logo
-            Gateway gateway = Gateways.getGateway(sms.getGateway());
+            Gateway gateway = gateways.get(sms.getGateway());
             label.setIcon(gateway != null ? gateway.getIcon() : Icons.GATEWAY_BLANK);
             //set tooltip
             String text = WordUtils.wrap(sms.getText(), 50, null, true);

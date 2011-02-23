@@ -36,6 +36,8 @@ public class Config extends Object implements Serializable {
     private static GlobalConfig globalConfig = GlobalConfig.getInstance();
     /** shared instance */
     private static Config instance = new Config();
+    /** mutex whether config already loaded from disk */
+    private static boolean loaded = false;
     
     private static final String LATEST_VERSION = "0.20.0.99";
     private static final Logger logger = Logger.getLogger(Config.class.getName());
@@ -57,7 +59,6 @@ public class Config extends Object implements Serializable {
     private boolean startCentered = false;
     private boolean toolbarVisible = true;
     private String countryPrefix = "";
-    private String gatewayFilter = "";
     private boolean useProxy = false;
     private boolean sameProxy = true;
     private String httpProxy = "";
@@ -72,14 +73,22 @@ public class Config extends Object implements Serializable {
     private boolean showAdvancedSettings = false;
     private boolean debugMode = false;
     private boolean showAdvancedControls = false;
+    private String[] favoriteGateways = new String[]{};
+    private String[] hiddenGateways = new String[]{};
 
-    /** Get shared instance */
+    /** Get shared instance 
+     * @throws IllegalStateException until config is loaded from disk
+     */
     public static Config getInstance() {
+        if (!loaded && !Beans.isDesignTime()) {
+            throw new IllegalStateException("Config not yet loaded!");
+        }
         return instance;
     }
 
     /** Set shared instance */
     public static void setSharedInstance(Config config) {
+        loaded = true;
         Config.instance = config;
     }
     
@@ -248,10 +257,6 @@ public class Config extends Object implements Serializable {
         return countryPrefix;
     }
 
-    public String getGatewayFilter() {
-        return gatewayFilter;
-    }
-
     public boolean isUseProxy() {
         return useProxy;
     }
@@ -302,6 +307,14 @@ public class Config extends Object implements Serializable {
 
     public boolean isDebugMode() {
         return debugMode;
+    }
+
+    public String[] getFavoriteGateways() {
+        return favoriteGateways;
+    }
+
+    public String[] getHiddenGateways() {
+        return hiddenGateways;
     }
     // </editor-fold>
     
@@ -426,12 +439,6 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("countryPrefix", old, countryPrefix);
     }
     
-    public void setGatewayFilter(String gatewayFilter) {
-        String old = this.gatewayFilter;
-        this.gatewayFilter = gatewayFilter;
-        changeSupport.firePropertyChange("gatewayFilter", old, gatewayFilter);
-    }
-
     public void setUseProxy(boolean useProxy) {
         boolean old = this.useProxy;
         this.useProxy = useProxy;
@@ -514,6 +521,18 @@ public class Config extends Object implements Serializable {
         boolean old = this.showAdvancedControls;
         this.showAdvancedControls = showAdvancedControls;
         changeSupport.firePropertyChange("showAdvancedControls", old, showAdvancedControls);
+    }
+
+    public void setFavoriteGateways(String[] favoriteGateways) {
+        String[] old = this.favoriteGateways;
+        this.favoriteGateways = favoriteGateways;
+        changeSupport.firePropertyChange("favoriteGateways", old, favoriteGateways);
+    }
+
+    public void setHiddenGateways(String[] hiddenGateways) {
+        String[] old = this.hiddenGateways;
+        this.hiddenGateways = hiddenGateways;
+        changeSupport.firePropertyChange("hiddenGateways", old, hiddenGateways);
     }
     // </editor-fold>
 

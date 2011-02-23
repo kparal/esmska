@@ -10,8 +10,11 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import esmska.Context;
 import esmska.data.Config.CheckUpdatePolicy;
+import esmska.data.Gateways.Events;
+import esmska.data.event.ValuedEvent;
 import esmska.gui.ThemeManager.LAF;
 import esmska.data.Config;
+import esmska.data.Contact;
 import esmska.data.Keyring;
 import esmska.data.Gateway;
 import esmska.data.Gateways;
@@ -19,11 +22,10 @@ import esmska.data.Icons;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
@@ -31,6 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -42,35 +45,43 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableModelEvent;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ELProperty;
-import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
+import esmska.data.event.ValuedListener;
+import esmska.gui.InfoLabel.Type;
 import esmska.utils.MiscUtils;
 import esmska.utils.RuntimeUtils;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
-import java.text.Collator;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JDialog;
@@ -80,11 +91,18 @@ import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jdesktop.beansbinding.Converter;
 import org.openide.awt.Mnemonics;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.renderers.SubstanceDefaultTableCellRenderer;
 import org.pushingpixels.substance.api.skin.SkinInfo;
 
 /** Configure settings form
@@ -95,15 +113,18 @@ public class ConfigFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(ConfigFrame.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Keyring keyring = Keyring.getInstance();
+    private static final Gateways gateways = Gateways.getInstance();
     /** when to take updates seriously */
     private boolean fullyInicialized;
     private DefaultComboBoxModel lafModel = new DefaultComboBoxModel();
     private Character passwordEchoChar;
     private static final HashSet<String> restartRequests = new HashSet<String>();
     private static final HashMap<String, Object> originalSettings = new HashMap<String, Object>();
+    private final GatewayTableModel gwTableModel =  new GatewayTableModel();
+    private final GatewaySelectionListener gwSelectionListener = new GatewaySelectionListener();
 
     public enum Tabs {
-        GENERAL, APPEARANCE, GATEWAYS, CREDENTIALS, PRIVACY, CONNECTION
+        GENERAL, APPEARANCE, GATEWAYS, PRIVACY, CONNECTION
     }
 
     /** Creates new form ConfigFrame */
@@ -164,6 +185,47 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
         updateInfoLabel();
         countryPrefixPanel.setCountryPrefix(config.getCountryPrefix());
+
+        //adjust columns widths for gatewayTable
+        TableCellRenderer headerRenderer = gatewayTable.getTableHeader().getDefaultRenderer();
+        TableColumnModel columnModel = gatewayTable.getColumnModel();
+        int colsWidth = 0;
+        for (int i = 0; i <= 1; i++) {
+            //first two columns should be as narrow as possible
+            TableColumn column = columnModel.getColumn(i);
+            Component comp = headerRenderer.getTableCellRendererComponent(
+                    null, column.getHeaderValue(),
+                    false, false, 0, 0);
+            int headerWidth = comp.getPreferredSize().width + 10; //add some pixels, otherwise it's cropped under Substance
+            column.setPreferredWidth(headerWidth);
+            colsWidth += headerWidth;
+        }
+        //the last column should use all the rest of the space
+        columnModel.getColumn(2).setPreferredWidth(gatewayTable.getWidth() - colsWidth);
+
+        //set gatewayTable listeners and renderers
+        columnModel.getColumn(1).setCellRenderer(new FavoriteGwRenderer());
+        columnModel.getColumn(2).setCellRenderer(new GatewayRenderer());
+        FavoriteGwListener favoriteGwListener = new FavoriteGwListener();
+        gatewayTable.addMouseListener(favoriteGwListener);
+        gatewayTable.addKeyListener(favoriteGwListener.keyListener);
+        gatewayTable.getSelectionModel().addListSelectionListener(gwSelectionListener);
+
+        //add more listeners
+        senderNumberTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                updateSenderNumberWarnLabel();
+            }
+        });
+        DocumentListener keyringListener = new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                updateKeyring();
+            }
+        };
+        loginField.getDocument().addDocumentListener(keyringListener);
+        passwordField.getDocument().addDocumentListener(keyringListener);
         
         //show simple or advanced settings
         advancedCheckBoxActionPerformed(null);
@@ -175,6 +237,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         //end of init
         fullyInicialized = true;
+        if (gwTableModel.getRowCount() > 0) {
+            gatewayTable.getSelectionModel().setSelectionInterval(0, 0);
+        }
     }
 
     public void switchToTab(Tabs tab) {
@@ -188,9 +253,6 @@ public class ConfigFrame extends javax.swing.JFrame {
                 break;
             case GATEWAYS:
                 comp = gatewayPanel;
-                break;
-            case CREDENTIALS:
-                comp = loginPanel;
                 break;
             case PRIVACY:
                 comp = privacyPanel;
@@ -214,9 +276,10 @@ public class ConfigFrame extends javax.swing.JFrame {
             return;
         }
         if (!wasVisible && restartLabel.isVisible()) {
-            this.validate();
+            invalidate();
+            validate();
             if (MiscUtils.isCropped(closeButton)) {
-                this.pack();
+                pack();
             }
         }
     }
@@ -257,12 +320,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         if (!fullyInicialized) {
             return;
         }
-        Gateway gateway = gatewayComboBox.getSelectedGateway();
+        int row = gatewayTable.getSelectedRow();
+        Gateway gateway = row >= 0 ? gwTableModel.getGateway(row) : null;
         if (gateway == null) {
             return;
         }
         
-        Tuple<String, String> key = new Tuple<String, String>(loginTextField.getText(),
+        Tuple<String, String> key = new Tuple<String, String>(loginField.getText(),
             new String(passwordField.getPassword()));
         
         if (StringUtils.isEmpty(key.get1()) && StringUtils.isEmpty(key.get2())) {
@@ -299,6 +363,16 @@ public class ConfigFrame extends javax.swing.JFrame {
             unstableUpdatesCheckBox.setEnabled(checkUpdatesCheckBox.isSelected());
         }
     }
+
+    /** Update visibility of senderNumberWarnLabel */
+    private void updateSenderNumberWarnLabel() {
+        String number = senderNumberTextField.getText();
+        if (StringUtils.isEmpty(number) || Contact.isValidNumber(number)) {
+            senderNumberWarnLabel.setVisible(false);
+        } else {
+            senderNumberWarnLabel.setVisible(true);
+        }
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -320,6 +394,14 @@ public class ConfigFrame extends javax.swing.JFrame {
         updatePolicyComboBox = new JComboBox();
         debugCheckBox = new JCheckBox();
         logLocationLabel = new JLabel();
+        countryPrefixPanel = new CountryPrefixPanel();
+        useSenderIDCheckBox = new JCheckBox();
+        jLabel1 = new JLabel();
+        senderNumberTextField = new JTextField();
+        senderNameTextField = new JTextField();
+        demandDeliveryReportCheckBox = new JCheckBox();
+        jLabel3 = new JLabel();
+        senderNumberWarnLabel = new JLabel();
         appearancePanel = new JPanel();
         lafComboBox = new JComboBox();
         lookLabel = new JLabel();
@@ -332,26 +414,24 @@ public class ConfigFrame extends javax.swing.JFrame {
         startMinimizedCheckBox = new JCheckBox();
         advancedControlsCheckBox = new JCheckBox();
         gatewayPanel = new JPanel();
-        useSenderIDCheckBox = new JCheckBox();
-        senderNumberTextField = new JTextField();
-        jLabel1 = new JLabel();
-        senderNameTextField = new JTextField();
-        jLabel3 = new JLabel();
-        gatewayFilterTextField = new JTextField();
-        gatewayFilterLabel = new JLabel();
-        demandDeliveryReportCheckBox = new JCheckBox();
-        countryPrefixPanel = new CountryPrefixPanel();
-        loginPanel = new JPanel();
-        gatewayComboBox = new GatewayComboBox();
-        jLabel9 = new JLabel();
-        jLabel10 = new JLabel();
-        loginTextField = new JTextField();
-        jLabel11 = new JLabel();
+        clearKeyringButton = new JButton();
+        jScrollPane1 = new JScrollPane();
+        gatewayTable = new JTable() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int row = getSelectedRow();
+                int column = getSelectedColumn();
+                super.tableChanged(e);
+                changeSelection(row, column, false, false);
+            }
+        };
+        gwTipLabel = new InfoLabel(Type.TIP);
+        gwDetailsPanel = new JPanel();
         passwordField = new JPasswordField();
         jLabel12 = new JLabel();
-        clearKeyringButton = new JButton();
-        jLabel13 = new JLabel();
+        loginField = new JTextField();
         showPasswordCheckBox = new JCheckBox();
+        jLabel11 = new JLabel();
         privacyPanel = new JPanel();
         reducedHistoryCheckBox = new JCheckBox();
         reducedHistorySpinner = new JSpinner();
@@ -435,6 +515,46 @@ public class ConfigFrame extends javax.swing.JFrame {
         BeanProperty.create("selected"), logLocationLabel, BeanProperty.create("visible"));
     bindingGroup.addBinding(binding);
 
+        Mnemonics.setLocalizedText(useSenderIDCheckBox, l10n.getString("ConfigFrame.useSenderIDCheckBox.text"));
+    useSenderIDCheckBox.setToolTipText(l10n.getString("ConfigFrame.useSenderIDCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${useSenderID}"), useSenderIDCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
+
+    jLabel1.setLabelFor(senderNumberTextField);
+        Mnemonics.setLocalizedText(jLabel1, l10n.getString("ConfigFrame.jLabel1.text")); // NOI18N
+    jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
+
+    senderNumberTextField.setColumns(13);
+
+    senderNumberTextField.setToolTipText(l10n.getString("ConfigFrame.senderNumberTextField.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${senderNumber}"), senderNumberTextField, BeanProperty.create("text"));
+    bindingGroup.addBinding(binding);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, useSenderIDCheckBox, ELProperty.create("${selected}"), senderNumberTextField, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
+
+    senderNameTextField.setColumns(13);
+
+    senderNameTextField.setToolTipText(l10n.getString("ConfigFrame.senderNameTextField.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${senderName}"), senderNameTextField, BeanProperty.create("text_ON_ACTION_OR_FOCUS_LOST"));
+    bindingGroup.addBinding(binding);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, useSenderIDCheckBox, ELProperty.create("${selected}"), senderNameTextField, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
+
+        Mnemonics.setLocalizedText(demandDeliveryReportCheckBox, l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.text"));
+    demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${demandDeliveryReport}"), demandDeliveryReportCheckBox, BeanProperty.create("selected"));
+    bindingGroup.addBinding(binding);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, useSenderIDCheckBox, ELProperty.create("${selected}"), demandDeliveryReportCheckBox, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
+
+    jLabel3.setLabelFor(senderNameTextField);
+        Mnemonics.setLocalizedText(jLabel3, l10n.getString("ConfigFrame.jLabel3.text")); // NOI18N
+    jLabel3.setToolTipText(senderNameTextField.getToolTipText());
+
+    senderNumberWarnLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/warning-16.png"))); // NOI18N
+    senderNumberWarnLabel.setToolTipText(senderNumberTextField.getToolTipText());
+    senderNumberWarnLabel.setVisible(false);
+
         GroupLayout generalPanelLayout = new GroupLayout(generalPanel);
     generalPanel.setLayout(generalPanelLayout);
     generalPanelLayout.setHorizontalGroup(
@@ -442,6 +562,23 @@ public class ConfigFrame extends javax.swing.JFrame {
         .addGroup(generalPanelLayout.createSequentialGroup()
             .addContainerGap()
             .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(useSenderIDCheckBox)
+                .addGroup(generalPanelLayout.createSequentialGroup()
+                    .addGap(17, 17, 17)
+                    .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(generalPanelLayout.createSequentialGroup()
+                            .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1))
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
+                                .addGroup(generalPanelLayout.createSequentialGroup()
+                                    .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(ComponentPlacement.RELATED)
+                                    .addComponent(senderNumberWarnLabel))
+                                .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(demandDeliveryReportCheckBox)))
                 .addGroup(generalPanelLayout.createSequentialGroup()
                     .addGap(22, 22, 22)
                     .addComponent(logLocationLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -455,10 +592,28 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(debugCheckBox))
             .addContainerGap(322, Short.MAX_VALUE))
     );
+
+    generalPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
+
     generalPanelLayout.setVerticalGroup(
         generalPanelLayout.createParallelGroup(Alignment.LEADING)
         .addGroup(generalPanelLayout.createSequentialGroup()
             .addContainerGap()
+            .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(useSenderIDCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING, false)
+                .addComponent(senderNumberWarnLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(senderNumberTextField)
+                .addComponent(jLabel1))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(generalPanelLayout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(jLabel3)
+                .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(demandDeliveryReportCheckBox)
+            .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(removeAccentsCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(generalPanelLayout.createParallelGroup(Alignment.BASELINE)
@@ -470,7 +625,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(debugCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(logLocationLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(171, Short.MAX_VALUE))
+            .addContainerGap(50, Short.MAX_VALUE))
     );
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
@@ -542,7 +697,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         GroupLayout appearancePanelLayout = new GroupLayout(appearancePanel);
     appearancePanel.setLayout(appearancePanelLayout);
 
-
     appearancePanelLayout.setHorizontalGroup(
         appearancePanelLayout.createParallelGroup(Alignment.LEADING)
         .addGroup(appearancePanelLayout.createSequentialGroup()
@@ -594,241 +748,126 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(tipsCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(advancedControlsCheckBox)
-            .addContainerGap(89, Short.MAX_VALUE))
+            .addContainerGap(115, Short.MAX_VALUE))
     );
 
     appearancePanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {lafComboBox, themeComboBox});
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.appearancePanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/appearance-16.png")), appearancePanel); // NOI18N
-        Mnemonics.setLocalizedText(useSenderIDCheckBox, l10n.getString("ConfigFrame.useSenderIDCheckBox.text"));
-    useSenderIDCheckBox.setToolTipText(l10n.getString("ConfigFrame.useSenderIDCheckBox.toolTipText")); // NOI18N
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${useSenderID}"), useSenderIDCheckBox, BeanProperty.create("selected"));
-    bindingGroup.addBinding(binding);
-
-    senderNumberTextField.setColumns(13);
-
-    senderNumberTextField.setToolTipText(l10n.getString("ConfigFrame.senderNumberTextField.toolTipText")); // NOI18N
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${senderNumber}"), senderNumberTextField, BeanProperty.create("text"));
-    bindingGroup.addBinding(binding);
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ, useSenderIDCheckBox, ELProperty.create("${selected}"), senderNumberTextField, BeanProperty.create("enabled"));
-    bindingGroup.addBinding(binding);
-
-    jLabel1.setLabelFor(senderNumberTextField);
-        Mnemonics.setLocalizedText(jLabel1, l10n.getString("ConfigFrame.jLabel1.text")); // NOI18N
-    jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
-
-    senderNameTextField.setColumns(13);
-
-    senderNameTextField.setToolTipText(l10n.getString("ConfigFrame.senderNameTextField.toolTipText")); // NOI18N
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${senderName}"), senderNameTextField, BeanProperty.create("text_ON_ACTION_OR_FOCUS_LOST"));
-    bindingGroup.addBinding(binding);
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ, useSenderIDCheckBox, ELProperty.create("${selected}"), senderNameTextField, BeanProperty.create("enabled"));
-    bindingGroup.addBinding(binding);
-
-    jLabel3.setLabelFor(senderNameTextField);
-        Mnemonics.setLocalizedText(jLabel3, l10n.getString("ConfigFrame.jLabel3.text")); // NOI18N
-    jLabel3.setToolTipText(senderNameTextField.getToolTipText());
-
-    gatewayFilterTextField.setColumns(13);
-
-    gatewayFilterTextField.setToolTipText(l10n.getString("ConfigFrame.gatewayFilterTextField.toolTipText")); // NOI18N
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${gatewayFilter}"), gatewayFilterTextField, BeanProperty.create("text"));
-    bindingGroup.addBinding(binding);
-
-    gatewayFilterLabel.setLabelFor(gatewayFilterTextField);
-        Mnemonics.setLocalizedText(gatewayFilterLabel, l10n.getString("ConfigFrame.gatewayFilterLabel.text")); // NOI18N
-    gatewayFilterLabel.setToolTipText(gatewayFilterTextField.getToolTipText());
-
-        Mnemonics.setLocalizedText(demandDeliveryReportCheckBox, l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.text"));
-    demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${demandDeliveryReport}"), demandDeliveryReportCheckBox, BeanProperty.create("selected"));
-    bindingGroup.addBinding(binding);
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, useSenderIDCheckBox, ELProperty.create("${selected}"), demandDeliveryReportCheckBox, BeanProperty.create("enabled"));
-    bindingGroup.addBinding(binding);
-
-        GroupLayout gatewayPanelLayout = new GroupLayout(gatewayPanel);
-    gatewayPanel.setLayout(gatewayPanelLayout);
-
-    gatewayPanelLayout.setHorizontalGroup(
-        gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(gatewayPanelLayout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
-                .addComponent(useSenderIDCheckBox)
-                .addGroup(gatewayPanelLayout.createSequentialGroup()
-                    .addComponent(gatewayFilterLabel)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(gatewayFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gatewayPanelLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gatewayPanelLayout.createSequentialGroup()
-                            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel1))
-                            .addPreferredGap(ComponentPlacement.RELATED)
-                            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
-                                .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(demandDeliveryReportCheckBox)))
-                .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(299, Short.MAX_VALUE))
-    );
-
-    gatewayPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
-
-    gatewayPanelLayout.setVerticalGroup(
-        gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(gatewayPanelLayout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(gatewayFilterLabel)
-                .addComponent(gatewayFilterTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(useSenderIDCheckBox)
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(jLabel1)
-                .addComponent(senderNumberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(jLabel3)
-                .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(demandDeliveryReportCheckBox)
-            .addContainerGap(115, Short.MAX_VALUE))
-    );
-
-    tabbedPane.addTab(l10n.getString("ConfigFrame.gatewayPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/gateway-16.png")), gatewayPanel); // NOI18N
-        SortedSet<String> gateways = new TreeSet<String>(Collator.getInstance());
-    gateways.addAll(keyring.getGatewayNames());
-    for (String gateway : gateways) {
-            Gateway op = Gateways.getGateway(gateway);
-        if (op != null) {
-            gatewayComboBox.setSelectedGateway(gateway);
-            break;
-        }
-    }
-    gatewayComboBoxItemStateChanged(null);
-    gatewayComboBox.addItemListener(new ItemListener() {
-        public void itemStateChanged(ItemEvent evt) {
-            gatewayComboBoxItemStateChanged(evt);
-        }
-    });
-
-        Mnemonics.setLocalizedText(jLabel9, l10n.getString("ConfigFrame.jLabel9.text")); // NOI18N
-
-    jLabel10.setLabelFor(gatewayComboBox);
-        Mnemonics.setLocalizedText(jLabel10, l10n.getString("ConfigFrame.jLabel10.text")); // NOI18N
-    jLabel10.setToolTipText(gatewayComboBox.getToolTipText());
-
-    loginTextField.setColumns(15);
-    loginTextField.setToolTipText(l10n.getString("ConfigFrame.loginTextField.toolTipText")); // NOI18N
-    loginTextField.addFocusListener(new FocusAdapter() {
-        public void focusLost(FocusEvent evt) {
-            loginTextFieldFocusLost(evt);
-        }
-    });
-
-    jLabel11.setLabelFor(loginTextField);
-        Mnemonics.setLocalizedText(jLabel11, l10n.getString("ConfigFrame.jLabel11.text")); // NOI18N
-    jLabel11.setToolTipText(loginTextField.getToolTipText());
-
-    passwordField.setColumns(15);
-    passwordField.setToolTipText(l10n.getString("ConfigFrame.passwordField.toolTipText")); // NOI18N
-    passwordField.enableInputMethods(true);
-    passwordField.addFocusListener(new FocusAdapter() {
-        public void focusLost(FocusEvent evt) {
-            passwordFieldFocusLost(evt);
-        }
-    });
-
-    jLabel12.setLabelFor(passwordField);
-        Mnemonics.setLocalizedText(jLabel12, l10n.getString("ConfigFrame.jLabel12.text")); // NOI18N
-    jLabel12.setToolTipText(passwordField.getToolTipText());
-
     clearKeyringButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
-        Mnemonics.setLocalizedText(clearKeyringButton, l10n.getString("ConfigFrame.clearKeyringButton.text"));
+    Mnemonics.setLocalizedText(clearKeyringButton, l10n.getString("ConfigFrame.clearKeyringButton.text"));
     clearKeyringButton.setToolTipText(l10n.getString("ConfigFrame.clearKeyringButton.toolTipText")); // NOI18N
     clearKeyringButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             clearKeyringButtonActionPerformed(evt);
         }
     });
-        Mnemonics.setLocalizedText(jLabel13, l10n.getString("ConfigFrame.jLabel13.text"));
-    jLabel13.setToolTipText(MessageFormat.format(l10n.getString("ConfigFrame.user_directory"),
-        PersistenceManager.getConfigDir().getAbsolutePath()));
-        Mnemonics.setLocalizedText(showPasswordCheckBox, l10n.getString("ConfigFrame.showPasswordCheckBox.text"));
-showPasswordCheckBox.setToolTipText(l10n.getString("ConfigFrame.showPasswordCheckBox.toolTipText")); // NOI18N
-showPasswordCheckBox.addActionListener(new ActionListener() {
-    public void actionPerformed(ActionEvent evt) {
-        showPasswordCheckBoxActionPerformed(evt);
-    }
+
+    gatewayTable.setModel(gwTableModel);
+    gatewayTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    gatewayTable.getTableHeader().setReorderingAllowed(false);
+    jScrollPane1.setViewportView(gatewayTable);
+
+    Mnemonics.setLocalizedText(gwTipLabel,l10n.getString("ConfigFrame.gwTipLabel.text")); // NOI18N
+    gwDetailsPanel.setBorder(BorderFactory.createTitledBorder(l10n.getString("ConfigFrame.gwDetailsPanel.border.title"))); // NOI18N
+
+    passwordField.setColumns(12);
+    passwordField.setToolTipText(l10n.getString("ConfigFrame.passwordField.toolTipText")); // NOI18N
+    passwordField.enableInputMethods(true);
+
+    jLabel12.setLabelFor(passwordField);
+        Mnemonics.setLocalizedText(jLabel12, l10n.getString("ConfigFrame.jLabel12.text")); // NOI18N
+    jLabel12.setToolTipText(passwordField.getToolTipText());
+
+    loginField.setColumns(12);
+
+    loginField.setToolTipText(l10n.getString("ConfigFrame.loginField.toolTipText")); // NOI18N
+    Mnemonics.setLocalizedText(showPasswordCheckBox, l10n.getString("ConfigFrame.showPasswordCheckBox.text"));
+    showPasswordCheckBox.setToolTipText(l10n.getString("ConfigFrame.showPasswordCheckBox.toolTipText")); // NOI18N
+    showPasswordCheckBox.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            showPasswordCheckBoxActionPerformed(evt);
+        }
     });
 
-        GroupLayout loginPanelLayout = new GroupLayout(loginPanel);
-    loginPanel.setLayout(loginPanelLayout);
+    jLabel11.setLabelFor(loginField);
+        Mnemonics.setLocalizedText(jLabel11, l10n.getString("ConfigFrame.jLabel11.text")); // NOI18N
+    jLabel11.setToolTipText(loginField.getToolTipText());
 
-
-    loginPanelLayout.setHorizontalGroup(
-        loginPanelLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(loginPanelLayout.createSequentialGroup()
+        GroupLayout gwDetailsPanelLayout = new GroupLayout(gwDetailsPanel);
+    gwDetailsPanel.setLayout(gwDetailsPanelLayout);
+    gwDetailsPanelLayout.setHorizontalGroup(
+        gwDetailsPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(gwDetailsPanelLayout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(loginPanelLayout.createParallelGroup(Alignment.LEADING)
-                .addComponent(jLabel9, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                .addGroup(loginPanelLayout.createParallelGroup(Alignment.TRAILING, false)
-                    .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(loginTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Alignment.LEADING, loginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addGroup(loginPanelLayout.createParallelGroup(Alignment.LEADING)
+            .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(gwDetailsPanelLayout.createSequentialGroup()
+                    .addComponent(jLabel11)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addComponent(loginField))
+                .addGroup(gwDetailsPanelLayout.createSequentialGroup()
+                    .addComponent(jLabel12)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gwDetailsPanelLayout.createSequentialGroup()
                             .addComponent(showPasswordCheckBox)
-                            .addComponent(passwordField))))
-                .addComponent(jLabel13, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                .addComponent(clearKeyringButton))
-            .addContainerGap())
+                            .addPreferredGap(ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
+                        .addComponent(passwordField))))
+            .addGap(0, 0, 0))
     );
 
-    loginPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel10, jLabel11, jLabel12});
+    gwDetailsPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel11, jLabel12});
 
-    loginPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {gatewayComboBox, loginTextField, passwordField});
-
-    loginPanelLayout.setVerticalGroup(
-        loginPanelLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(loginPanelLayout.createSequentialGroup()
+    gwDetailsPanelLayout.setVerticalGroup(
+        gwDetailsPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(gwDetailsPanelLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabel9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(ComponentPlacement.UNRELATED)
-            .addGroup(loginPanelLayout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(jLabel10)
-                .addComponent(gatewayComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(loginPanelLayout.createParallelGroup(Alignment.BASELINE)
+            .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel11)
-                .addComponent(loginTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(loginField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(loginPanelLayout.createParallelGroup(Alignment.BASELINE)
+            .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel12)
                 .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(showPasswordCheckBox)
-            .addGap(18, 18, 18)
-            .addComponent(clearKeyringButton)
-            .addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-            .addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
 
-    tabbedPane.addTab(l10n.getString("ConfigFrame.loginPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/keyring-16.png")), loginPanel); // NOI18N
+        GroupLayout gatewayPanelLayout = new GroupLayout(gatewayPanel);
+    gatewayPanel.setLayout(gatewayPanelLayout);
+
+
+    gatewayPanelLayout.setHorizontalGroup(
+        gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(gatewayPanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addComponent(gwTipLabel, GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+                .addGroup(Alignment.TRAILING, gatewayPanelLayout.createSequentialGroup()
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addComponent(clearKeyringButton)
+                        .addComponent(gwDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+            .addGap(0, 0, 0))
+    );
+    gatewayPanelLayout.setVerticalGroup(
+        gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
+        .addGroup(gatewayPanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(gatewayPanelLayout.createSequentialGroup()
+                    .addComponent(gwDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                    .addComponent(clearKeyringButton))
+                .addComponent(jScrollPane1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
+            .addPreferredGap(ComponentPlacement.UNRELATED)
+            .addComponent(gwTipLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
+    );
+
+    tabbedPane.addTab(l10n.getString("ConfigFrame.gatewayPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/gateway-16.png")), gatewayPanel); // NOI18N
         Mnemonics.setLocalizedText(reducedHistoryCheckBox, l10n.getString("ConfigFrame.reducedHistoryCheckBox.text"));
     reducedHistoryCheckBox.setToolTipText(l10n.getString("ConfigFrame.reducedHistoryCheckBox.toolTipText")); // NOI18N
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${reducedHistory}"), reducedHistoryCheckBox, BeanProperty.create("selected"));
@@ -1013,7 +1052,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
             .addGroup(connectionPanelLayout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(jLabel16)
                 .addComponent(socksProxyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+            .addPreferredGap(ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
             .addComponent(jLabel17, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
@@ -1061,7 +1100,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
         layout.createParallelGroup(Alignment.LEADING)
         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(restartLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)
@@ -1121,21 +1160,6 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void gatewayComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_gatewayComboBoxItemStateChanged
-        boolean temp = fullyInicialized;
-        fullyInicialized = false;
-        Gateway gateway = gatewayComboBox.getSelectedGateway();
-        Tuple<String, String> key = keyring.getKey(gateway != null ? gateway.getName() : null);
-        if (key == null) {
-            loginTextField.setText(null);
-            passwordField.setText(null);
-        } else {
-            loginTextField.setText(key.get1());
-            passwordField.setText(key.get2());
-        }
-        fullyInicialized = temp;
-    }//GEN-LAST:event_gatewayComboBoxItemStateChanged
-
     private void clearKeyringButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_clearKeyringButtonActionPerformed
         String deleteOption = l10n.getString("Delete");
         String cancelOption = l10n.getString("Cancel");
@@ -1157,7 +1181,7 @@ showPasswordCheckBox.addActionListener(new ActionListener() {
         }
         
         keyring.clearKeys();
-        gatewayComboBoxItemStateChanged(null);
+        gwSelectionListener.valueChanged(new ListSelectionEvent(gatewayTable, 0, 0, false));
     }//GEN-LAST:event_clearKeyringButtonActionPerformed
 
     private void useProxyCheckBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_useProxyCheckBoxItemStateChanged
@@ -1185,22 +1209,16 @@ private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event
     windowCenteredCheckBox.setVisible(showAdvanced);
     startMinimizedCheckBox.setVisible(showAdvanced);
     tipsCheckBox.setVisible(showAdvanced);
-    gatewayFilterLabel.setVisible(showAdvanced);
-    gatewayFilterTextField.setVisible(showAdvanced);
     debugCheckBox.setVisible(showAdvanced);
     advancedControlsCheckBox.setVisible(showAdvanced);
+    toolbarVisibleCheckBox.setVisible(showAdvanced);
     
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(privacyPanel), showAdvanced);
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(connectionPanel), showAdvanced);
+
+    invalidate();
+    validate();
 }//GEN-LAST:event_advancedCheckBoxActionPerformed
-
-private void loginTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_loginTextFieldFocusLost
-    updateKeyring();
-}//GEN-LAST:event_loginTextFieldFocusLost
-
-private void passwordFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusLost
-    updateKeyring();
-}//GEN-LAST:event_passwordFieldFocusLost
 
 private void showPasswordCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_showPasswordCheckBoxActionPerformed
     if (showPasswordCheckBox.isSelected()) {
@@ -1373,6 +1391,222 @@ private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindo
         }
     }
 
+    /** Table model for gatewayTable */
+    private class GatewayTableModel extends AbstractTableModel {
+        private ArrayList<Gateway> gws = new ArrayList<Gateway>(gateways.getAll());
+
+        public GatewayTableModel() {
+            super();
+            gateways.addValuedListener(new ValuedListener<Gateways.Events, Gateway>() {
+                @Override
+                public void eventOccured(ValuedEvent<Events, Gateway> e) {
+                    refreshGws();
+                }
+            });
+        }
+
+        /** Reload all displayed gateways */
+        private void refreshGws() {
+            gws = new ArrayList<Gateway>(gateways.getAll());
+            fireTableDataChanged();
+        }
+
+        /** Get gateway showing at given row index */
+        public Gateway getGateway(int rowIndex) {
+            return gws.get(rowIndex);
+        }
+
+        @Override
+        public int getRowCount() {
+            return gws.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 3;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            Gateway gw = gws.get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    return !gw.isHidden();
+                case 1:
+                    return gw.isFavorite();
+                case 2:
+                    return gw;
+                default:
+                    logger.warning("Index out of bounds!");
+                    return null;
+            }
+        }
+
+        @Override
+        public String getColumnName(int column) {
+            switch (column) {
+                case 0:
+                    return l10n.getString("ConfigFrame.Show");
+                case 1:
+                    return l10n.getString("ConfigFrame.Favorite");
+                case 2:
+                    return l10n.getString("ConfigFrame.Gateway");
+                default:
+                    logger.warning("Index out of bounds!");
+                    return null;
+            }
+        }
+
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            switch (columnIndex) {
+                case 0:
+                case 1:
+                    return Boolean.class;
+                case 2:
+                    return Gateway.class;
+                default:
+                    logger.warning("Index out of bounds!");
+                    return Object.class;
+            }
+        }
+
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            switch (columnIndex) {
+                case 0:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+            Gateway gw = gws.get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    HashSet<String> hidden = new HashSet<String>(Arrays.asList(config.getHiddenGateways()));
+                    if ((Boolean)aValue) {
+                        hidden.remove(gw.getName());
+                    } else {
+                        hidden.add(gw.getName());
+                    }
+                    config.setHiddenGateways(hidden.toArray(new String[]{}));
+                    return;
+                case 1:
+                    HashSet<String> favorite = new HashSet<String>(Arrays.asList(config.getFavoriteGateways()));
+                    if ((Boolean)aValue) {
+                        favorite.add(gw.getName());
+                    } else {
+                        favorite.remove(gw.getName());
+                    }
+                    config.setFavoriteGateways(favorite.toArray(new String[]{}));
+                    return;
+                case 2:
+                    logger.warning("Assignment not supported!");
+                default:
+                    logger.warning("Index out of bounds!");
+                    return;
+            }
+        }
+    }
+
+    /** Render "favorite" column at gatewayTable */
+    private class FavoriteGwRenderer extends SubstanceDefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            label.setText(null);
+            label.setHorizontalAlignment(JLabel.CENTER);
+            if ((Boolean)value) {
+                label.setIcon(Icons.get("star-full-16.png"));
+            } else {
+                label.setIcon(Icons.get("star-empty-16.png"));
+            }
+            return label;
+        }
+    }
+
+    /** Render "gateway" column at gatewayTable */
+    private class GatewayRenderer extends SubstanceDefaultTableCellRenderer {
+        private GatewayComboBox.GatewayComboBoxRenderer renderer = new GatewayComboBox.GatewayComboBoxRenderer();
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            renderer.adjustLabel(label, (Gateway)value);
+            return label;
+        }
+    }
+
+    /** Listen for mouse or key events at "favorite" column at gateway table and change value if requested */
+    private class FavoriteGwListener extends MouseAdapter {
+        private KeyListener keyListener = new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getModifiers() != 0 || e.getKeyCode() != KeyEvent.VK_SPACE) {
+                    return;
+                }
+                int row = gatewayTable.getSelectedRow();
+                int column = gatewayTable.getSelectedColumn();
+                if (changeValue(row, column)) {
+                    e.consume();
+                }
+            }
+        };
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            Point p = e.getPoint();
+            int row = gatewayTable.rowAtPoint(p);
+            int column = gatewayTable.columnAtPoint(p);
+            changeValue(row, column);
+        }
+
+        /** Switch values if coordinates correct */
+        private boolean changeValue(int row, int column) {
+            if (!(column == 1 && row >= 0)) {
+                //respond only to Favorite cells
+                return false;
+            }
+            Boolean favorite = (Boolean) gwTableModel.getValueAt(row, column);
+            favorite = !favorite;
+            gwTableModel.setValueAt(favorite, row, column);
+            return true;
+        }
+    }
+
+    /** Update components if gateway selection changes */
+    private class GatewaySelectionListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
+            int row = gatewayTable.getSelectedRow();
+            boolean selected = (row >= 0);
+            loginField.setEnabled(selected);
+            passwordField.setEnabled(selected);
+            if (!selected) {
+                return;
+            }
+
+            boolean temp = fullyInicialized;
+            fullyInicialized = false;
+            Gateway gateway = gwTableModel.getGateway(row);
+            Tuple<String, String> key = keyring.getKey(gateway != null ? gateway.getName() : null);
+            if (key == null) {
+                loginField.setText(null);
+                passwordField.setText(null);
+            } else {
+                loginField.setText(key.get1());
+                loginField.setCaretPosition(0);
+                passwordField.setText(key.get2());
+                passwordField.setCaretPosition(0);
+            }
+            fullyInicialized = temp;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JCheckBox advancedCheckBox;
     private JCheckBox advancedControlsCheckBox;
@@ -1385,29 +1619,26 @@ private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindo
     private CountryPrefixPanel countryPrefixPanel;
     private JCheckBox debugCheckBox;
     private JCheckBox demandDeliveryReportCheckBox;
-    private GatewayComboBox gatewayComboBox;
-    private JLabel gatewayFilterLabel;
-    private JTextField gatewayFilterTextField;
     private JPanel gatewayPanel;
+    private JTable gatewayTable;
     private JPanel generalPanel;
+    private JPanel gwDetailsPanel;
+    private InfoLabel gwTipLabel;
     private JTextField httpProxyTextField;
     private JTextField httpsProxyTextField;
     private JLabel jLabel1;
-    private JLabel jLabel10;
     private JLabel jLabel11;
     private JLabel jLabel12;
-    private JLabel jLabel13;
     private JLabel jLabel14;
     private JLabel jLabel15;
     private JLabel jLabel16;
     private JLabel jLabel17;
     private JLabel jLabel18;
     private JLabel jLabel3;
-    private JLabel jLabel9;
+    private JScrollPane jScrollPane1;
     private JComboBox lafComboBox;
     private JLabel logLocationLabel;
-    private JPanel loginPanel;
-    private JTextField loginTextField;
+    private JTextField loginField;
     private JLabel lookLabel;
     private JCheckBox notificationAreaCheckBox;
     private JPasswordField passwordField;
@@ -1419,6 +1650,7 @@ private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindo
     private JCheckBox sameProxyCheckBox;
     private JTextField senderNameTextField;
     private JTextField senderNumberTextField;
+    private JLabel senderNumberWarnLabel;
     private JCheckBox showPasswordCheckBox;
     private JTextField socksProxyTextField;
     private JCheckBox startMinimizedCheckBox;

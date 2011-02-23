@@ -38,9 +38,6 @@ public class Links {
     /** internal program link telling to run the update dialog */
     public static final String RUN_UPDATER = "esmska://run-updater";
     /** internal program link telling to open the config dialog on the
-     * gateway credentials tab */
-    public static final String CONFIG_CREDENTIALS = "esmska://config-credentials";
-    /** internal program link telling to open the config dialog on the
      * gateways tab */
     public static final String CONFIG_GATEWAYS = "esmska://config-gateways";
 

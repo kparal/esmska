@@ -23,5 +23,16 @@ public interface Gateway extends GatewayInfo, Comparable<Gateway> {
      * Should be a 16x16px PNG with transparent background.
      */
     Icon getIcon();
-    
+
+    /** Return whether this gateway has been marked as user favorite */
+    boolean isFavorite();
+
+    /** Set this gateway as user favorite */
+    void setFavorite(boolean favorite);
+
+    /** Return whether this gateway has been marked as hidden from the user interface */
+    boolean isHidden();
+
+    /** Set this gateway as hidden from user interface */
+    void setHidden(boolean hidden);
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 22:53+0200\n"
+"POT-Creation-Date: 2011-02-23 20:39+0200\n"
 "PO-Revision-Date: 2010-11-07 21:59+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -202,6 +202,19 @@ msgstr "&Komprimera text"
 msgid "&Compress"
 msgstr "&Komprimera"
 
+#: ConfigFrame.Favorite
+msgid "Favorite"
+msgstr ""
+
+#: ConfigFrame.Gateway
+#, fuzzy
+msgid "Gateway"
+msgstr "Gateway:"
+
+#: ConfigFrame.Show
+msgid "Show"
+msgstr ""
+
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
 msgstr "A&vancerade inställningar"
@@ -285,21 +298,6 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.gatewayFilterLabel.text
-msgid "Show &only gateways with names containing:"
-msgstr "Visa &endast gateways vars namn innehåller:"
-
-#: ConfigFrame.gatewayFilterTextField.toolTipText
-msgid ""
-"<html>\n"
-"In the gateway list only those will be displayed, which contains<br>\n"
-"a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-"You can enter more patterns separated by comma. Patterns are case "
-"sensitive.\n"
-"</html>"
-msgstr ""
-
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "&Gateways"
 msgstr "&Gateways"
@@ -307,6 +305,18 @@ msgstr "&Gateways"
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&Allmänt"
+
+#: ConfigFrame.gwDetailsPanel.border.title
+msgid "Gateway properties"
+msgstr ""
+
+#: ConfigFrame.gwTipLabel.text
+msgid ""
+"<html>\n"
+"Hidden gateways won't show up in the drop-down menus. \n"
+"Favorite gateways will be preferred for recipient gateway suggestions.\n"
+"</html>"
+msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -336,11 +346,6 @@ msgstr ""
 msgid "&Number:"
 msgstr "&Nummer:"
 
-#: ConfigFrame.jLabel10.text
-msgctxt "ConfigFrame.jLabel10.text"
-msgid "&Gateway:"
-msgstr "&Gateway:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&Användarnamn:"
@@ -348,15 +353,6 @@ msgstr "&Användarnamn:"
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
 msgstr "Lö&senord:"
-
-#: ConfigFrame.jLabel13.text
-msgid ""
-"<html><i>\n"
-"Although the passwords are stored encrypted the original content may be "
-"retrieved. We strongly suggest to set the access rights in such manner that "
-"no other user has the access to the <u>program configuration directory</u>.\n"
-"</i></html>"
-msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -382,16 +378,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "&Namn:"
 
-#: ConfigFrame.jLabel9.text
-msgid ""
-"<html>\n"
-"Here you can set your login credentials for gateways which require it.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Här kan du ange dina inloggningskreditiv för gateways som kräver det.\n"
-"</html>"
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
@@ -407,11 +393,7 @@ msgstr ""
 msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr "<html><i>Loggfilen är lagrad i: {0}</i></html>"
 
-#: ConfigFrame.loginPanel.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr "&Inloggningskreditiv"
-
-#: ConfigFrame.loginTextField.toolTipText
+#: ConfigFrame.loginField.toolTipText
 msgid "Username needed for logging in to the gateway"
 msgstr "Användarnamn krävs för att logga in på denna gateway"
 
@@ -487,7 +469,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.remove_credentials
-msgid "Do you really like to remove all entered login credentials?"
+#, fuzzy
+msgid ""
+"Do you really want to remove all login credentials for all available "
+"gateways?"
 msgstr "Vill du verkligen ta bort alla angivna inloggningskreditiv?"
 
 #: ConfigFrame.restartLabel.text
@@ -656,11 +641,6 @@ msgid ""
 "and signed with entered name. Only some gateways support this feature.\n"
 "</html>"
 msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: ConfigFrame.user_directory
-msgid "<html>User configuration directory:<br>{0}</html>"
-msgstr "<html>Sökväg för användarkonfiguration:<br>{0}</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -1820,7 +1800,7 @@ msgstr ""
 "<html>Tecken i hela meddelandet: <b>{0}/{1}</b> (<b>{2}</b> återstår)</html>"
 
 #: SMSPanel.gatewayLabel.text
-msgctxt "SMSPanel.gatewayLabel.text"
+#, fuzzy
 msgid "&Gateway:"
 msgstr "&Gateway:"
 
@@ -2294,6 +2274,28 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>Sökväg för användarkonfiguration:<br>{0}</html>"
+
+#~ msgid "Show &only gateways with names containing:"
+#~ msgstr "Visa &endast gateways vars namn innehåller:"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Here you can set your login credentials for gateways which require it.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Här kan du ange dina inloggningskreditiv för gateways som kräver det.\n"
+#~ "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "&Inloggningskreditiv"
+
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Gateway:"
 
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Hemsida</a></html>"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 22:53+0200\n"
+"POT-Creation-Date: 2011-02-23 20:39+0200\n"
 "PO-Revision-Date: 2010-08-11 14:43+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -208,6 +208,19 @@ msgstr "&Стиснути текст"
 msgid "&Compress"
 msgstr "&Стиснення"
 
+#: ConfigFrame.Favorite
+msgid "Favorite"
+msgstr ""
+
+#: ConfigFrame.Gateway
+#, fuzzy
+msgid "Gateway"
+msgstr "Шлюз:"
+
+#: ConfigFrame.Show
+msgid "Show"
+msgstr ""
+
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
 msgstr "Д&одаткові налаштування"
@@ -301,28 +314,6 @@ msgstr ""
 "шлюзах.\n"
 "</html>"
 
-#: ConfigFrame.gatewayFilterLabel.text
-msgid "Show &only gateways with names containing:"
-msgstr "Показувати &лише шлюзи, що містять назви:"
-
-#: ConfigFrame.gatewayFilterTextField.toolTipText
-msgid ""
-"<html>\n"
-"In the gateway list only those will be displayed, which contains<br>\n"
-"a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-"You can enter more patterns separated by comma. Patterns are case "
-"sensitive.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"В списку шлюзів будуть показані лише ті, що містять<br>\n"
-"шаблони з іменами вказаними в цьому полі. Так ви можете легко<br>\n"
-"показати шлюзи лише для країни XX, шляхом введення шаблону [XX].<br>\n"
-"Можна вводити кілька шаблонів через коми. Назви шаблонів чутливі до "
-"регістру.\n"
-"</html>"
-
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "&Gateways"
 msgstr "&Шлюзи"
@@ -330,6 +321,18 @@ msgstr "&Шлюзи"
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&Загальне"
+
+#: ConfigFrame.gwDetailsPanel.border.title
+msgid "Gateway properties"
+msgstr ""
+
+#: ConfigFrame.gwTipLabel.text
+msgid ""
+"<html>\n"
+"Hidden gateways won't show up in the drop-down menus. \n"
+"Favorite gateways will be preferred for recipient gateway suggestions.\n"
+"</html>"
+msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -359,11 +362,6 @@ msgstr ""
 msgid "&Number:"
 msgstr "&Номер:"
 
-#: ConfigFrame.jLabel10.text
-msgctxt "ConfigFrame.jLabel10.text"
-msgid "&Gateway:"
-msgstr "&Шлюз:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&Ім’я користувача:"
@@ -371,20 +369,6 @@ msgstr "&Ім’я користувача:"
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
 msgstr "Па&роль:"
-
-#: ConfigFrame.jLabel13.text
-msgid ""
-"<html><i>\n"
-"Although the passwords are stored encrypted the original content may be "
-"retrieved. We strongly suggest to set the access rights in such manner that "
-"no other user has the access to the <u>program configuration directory</u>.\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"Хоч паролі і зберігаються в зашифрованому вигляді, їхній ориґінальний вміст "
-"може бути вилучений. Настійно рекомендуємо встановити права доступу так, щоб "
-"інший користувач не мав доступу до <u>каталогу конфігурації програми</u>.\n"
-"</i></html>"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -413,16 +397,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "&Ім’я:"
 
-#: ConfigFrame.jLabel9.text
-msgid ""
-"<html>\n"
-"Here you can set your login credentials for gateways which require it.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Вкажіть тут дані реєстрації для шлюзів, які цього вимагають.\n"
-"</html>"
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
@@ -438,11 +412,7 @@ msgstr ""
 msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr "<html><i>Системний журнал зберігається за адресою: {0}</i></html>"
 
-#: ConfigFrame.loginPanel.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr "&Дані реєстрації"
-
-#: ConfigFrame.loginTextField.toolTipText
+#: ConfigFrame.loginField.toolTipText
 msgid "Username needed for logging in to the gateway"
 msgstr "Ім’я користувача потрібне для реєстрації входження до шлюзу"
 
@@ -522,7 +492,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.remove_credentials
-msgid "Do you really like to remove all entered login credentials?"
+#, fuzzy
+msgid ""
+"Do you really want to remove all login credentials for all available "
+"gateways?"
 msgstr "Ви дійсно хочете вилучити всі введені дані реєстрації?"
 
 #: ConfigFrame.restartLabel.text
@@ -703,11 +676,6 @@ msgstr ""
 "Одержувач з веденим тут номером отримуватиме SMS підписане<br>\n"
 "вказаним іменем. Цю можливість підтримують лише деякі шлюзи.\n"
 "</html>"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: ConfigFrame.user_directory
-msgid "<html>User configuration directory:<br>{0}</html>"
-msgstr "<html>Каталог конфігурації користувача:<br>{0}</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -1842,9 +1810,9 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.gatewayLabel.text
-msgctxt "SMSPanel.gatewayLabel.text"
+#, fuzzy
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Шлюз:"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2274,6 +2242,57 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "Хоч паролі і зберігаються в зашифрованому вигляді, їхній ориґінальний "
+#~ "вміст може бути вилучений. Настійно рекомендуємо встановити права доступу "
+#~ "так, щоб інший користувач не мав доступу до <u>каталогу конфігурації "
+#~ "програми</u>.\n"
+#~ "</i></html>"
+
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>Каталог конфігурації користувача:<br>{0}</html>"
+
+#~ msgid "Show &only gateways with names containing:"
+#~ msgstr "Показувати &лише шлюзи, що містять назви:"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "In the gateway list only those will be displayed, which contains<br>\n"
+#~ "a pattern in their name provided in this field. This way you can "
+#~ "easily<br>\n"
+#~ "show eg. only gateways for country XX by entering pattern [XX].<br>\n"
+#~ "You can enter more patterns separated by comma. Patterns are case "
+#~ "sensitive.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "В списку шлюзів будуть показані лише ті, що містять<br>\n"
+#~ "шаблони з іменами вказаними в цьому полі. Так ви можете легко<br>\n"
+#~ "показати шлюзи лише для країни XX, шляхом введення шаблону [XX].<br>\n"
+#~ "Можна вводити кілька шаблонів через коми. Назви шаблонів чутливі до "
+#~ "регістру.\n"
+#~ "</html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Here you can set your login credentials for gateways which require it.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Вкажіть тут дані реєстрації для шлюзів, які цього вимагають.\n"
+#~ "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "&Дані реєстрації"
 
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Домашня сторінка</a></html>"

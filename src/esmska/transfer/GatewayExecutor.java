@@ -81,7 +81,7 @@ public class GatewayExecutor {
 
     public GatewayExecutor(SMS sms) {
         this.sms = sms;
-        Gateway gateway = Gateways.getGateway(sms.getGateway());
+        Gateway gateway = Gateways.getInstance().get(sms.getGateway());
         if (gateway != null) {
             ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, gateway.getWebsite());
             ERROR_UNKNOWN = MessageFormat.format(ERROR_UNKNOWN, Links.RUN_UPDATER,

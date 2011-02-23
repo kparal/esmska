@@ -86,6 +86,7 @@ public class ContactPanel extends javax.swing.JPanel {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Contacts contacts = Contacts.getInstance();
     private static final Log log = Log.getInstance();
+    private static final Gateways gateways = Gateways.getInstance();
 
     private Action addContactAction = new AddContactAction(null);
     private Action editContactAction = new EditContactAction();
@@ -285,7 +286,7 @@ public class ContactPanel extends javax.swing.JPanel {
                         .addComponent(editContactButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(removeContactButton))
-                    .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -896,7 +897,7 @@ public class ContactPanel extends javax.swing.JPanel {
             Contact contact = (Contact)value;
             JLabel label = ((JLabel)c);
             //add gateway logo
-            Gateway gateway = Gateways.getGateway(contact.getGateway());
+            Gateway gateway = gateways.get(contact.getGateway());
             label.setIcon(gateway != null ? gateway.getIcon() : Icons.GATEWAY_BLANK);
             //set tooltip
             String tooltip = "<html><table><tr><td><img src=\"" + contactIconURI +

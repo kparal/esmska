@@ -5,32 +5,30 @@
 
 package esmska.gui;
 
-import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Gateways;
 import esmska.data.Gateway;
 import esmska.data.Gateways.Events;
+import esmska.data.Tuple;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang.math.RandomUtils;
 
 /** JComboBox showing available gateways.
  *
@@ -39,35 +37,22 @@ import org.apache.commons.lang.WordUtils;
 public class GatewayComboBox extends JComboBox {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final String RES = "/esmska/resources/";
-    private static final Config config = Config.getInstance();
     private static final GatewayComboBoxRenderer cellRenderer = new GatewayComboBoxRenderer();
-    private static SortedSet<Gateway> gateways = Gateways.getInstance().getAll();
-    private DefaultComboBoxModel model = new DefaultComboBoxModel(gateways.toArray());
+    private static final Gateways gateways = Gateways.getInstance();
+    private DefaultComboBoxModel model = new DefaultComboBoxModel();
     /** used only for non-existing gateways */
     private String gatewayName;
+    /** Current phone number filter */
+    private String filter;
     
     public GatewayComboBox() {
-        filterGateways();
+        updateGateways();
         setModel(model);
         setRenderer(cellRenderer);
         if (model.getSize() > 0) {
             setSelectedIndex(0);
         }
         
-        //add listener to gateway filter patterns
-        config.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (!"gatewayFilter".equals(evt.getPropertyName())) {
-                    return;
-                }
-                filterGateways();
-                if (model.getSize() > 0) {
-                    setSelectedIndex(0);
-                }
-            }
-        });
-
         //add listener to gateway updates
         Gateways.getInstance().addValuedListener(new ValuedListener<Gateways.Events, Gateway>() {
             @Override
@@ -78,6 +63,8 @@ public class GatewayComboBox extends JComboBox {
                     case CLEARED_GATEWAYS:
                     case REMOVED_GATEWAY:
                     case REMOVED_GATEWAYS:
+                    case FAVORITES_UPDATED:
+                    case HIDDEN_UPDATED:
                         updateGateways();
                 }
             }
@@ -98,7 +85,7 @@ public class GatewayComboBox extends JComboBox {
             }
         });
     }
-    
+
     /** Get selected gateway in list or null if none selected. */
     public Gateway getSelectedGateway() {
         return (Gateway) getSelectedItem();
@@ -117,7 +104,7 @@ public class GatewayComboBox extends JComboBox {
      */
     public void setSelectedGateway(String gatewayName) {
         this.gatewayName = gatewayName;
-        Gateway gateway = Gateways.getGateway(gatewayName);
+        Gateway gateway = gateways.get(gatewayName);
         if (model.getIndexOf(gateway) < 0) {
             setSelectedItem(null);
         } else {
@@ -127,32 +114,78 @@ public class GatewayComboBox extends JComboBox {
     
     /** Select gateway according to phone number or phone number prefix.
      * Searches through available (displayed) gateways and selects the best
-     * suited on supporting this phone number. Doesn't change selection if no 
-     * such gateway is found.
+     * suited on supporting this phone number. Clear selection if no
+     * such gateway is found or just non-recommended gateways are suggested.
      *
      * @param number phone number or it's prefix. The minimum length is two characters,
      *               for shorter input (or null) the method does nothing.
+     * @return boolean whether there were more than 1 options for the suggested gateway
+     *         (and therefore some choice was done)
      */
-    public void selectSuggestedGateway(String number) {
-        TreeSet<Gateway> visibleGateways = new TreeSet<Gateway>();
-        for (int i = 0; i < model.getSize(); i++) {
-            Gateway op = (Gateway) model.getElementAt(i);
-            visibleGateways.add(op);
+    public boolean selectSuggestedGateway(String number) {
+        Tuple<ArrayList<Gateway>, Boolean> tuple = gateways.suggestGateway(number);
+        ArrayList<Gateway> gws = tuple.get1();
+        boolean recommended = tuple.get2();
+        if (gws.isEmpty()) {
+            setSelectedGateway(null);
+        } else if (gws.contains(getSelectedGateway())) {
+            //suggested gateway already selected, do nothing
+        } else {
+            if (recommended) {
+                //recommended, select random one
+                setSelectedGateway(gws.get(RandomUtils.nextInt(gws.size())).getName());
+            } else {
+                //not recommended, leave selection empty and let user click
+                //on "Suggest" button if he wants
+                setSelectedGateway(null);
+            }
         }
-        
-        Gateway gateway = Gateways.suggestGateway(number, visibleGateways);
-        
-        //none suitable gateway found, do nothing
-        if (gateway == null) {
-            return;
+        return gws.size() > 1;
+    }
+
+    /** If there are more than 1 suggested gateways for this phone number,
+     * this method will select the next one.
+     */
+    public void selectNextSuggestedGateway(String number) {
+        ArrayList<Gateway> gws = gateways.suggestGateway(number).get1();
+        if (!gws.isEmpty()) {
+            int index = gws.indexOf(getSelectedGateway());
+            if (index >= 0) {
+                //traverse to next gateway
+                index = (index + 1) % gws.size();
+            } else {
+                index = RandomUtils.nextInt(gws.size());
+            }
+            setSelectedGateway(gws.get(index).getName());
+        } else {
+            setSelectedGateway(null);
         }
-        
-        //select suggested
-        setSelectedGateway(gateway.getName());
+    }
+
+    /** Filter available gateways to display only those that are capable
+     * of sending defined phone number or phone number prefix.
+     *
+     * @param number phone number or its prefix; use null to clear filter
+     */
+    public void setFilter(String number) {
+        this.filter = number;
+        updateGateways();
+    }
+
+    /** Update model when gateways are updated or when filter is changed */
+    private void updateGateways() {
+        String opName = getSelectedGatewayName();
+        model.removeAllElements();
+        for (Gateway gw : gateways.getVisible()) {
+            if (StringUtils.isEmpty(filter) || Gateways.isNumberSupported(gw, filter)) {
+                model.addElement(gw);
+            }
+        }
+        setSelectedGateway(opName);
     }
 
     /** Renderer for items in GatewayComboBox */
-    private static class GatewayComboBoxRenderer extends DefaultListCellRenderer {
+    public static class GatewayComboBoxRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
         private final URL keyringIconURI = getClass().getResource(RES + "keyring-16.png");
         private final String pattern = l10n.getString("GatewayComboBox.gatewayTooltip");
@@ -170,11 +203,15 @@ public class GatewayComboBox extends JComboBox {
             }
             JLabel label = (JLabel) c;
             Gateway gateway = (Gateway)value;
+            adjustLabel(label, gateway);
+            return label;
+        }
+
+        /** Do all the adjustments to a JLabel needed to render this item properly */
+        public void adjustLabel(JLabel label, Gateway gateway) {
             label.setText(gateway.getName());
             label.setIcon(gateway.getIcon());
-
             label.setToolTipText(generateTooltip(gateway));
-            return label;
         }
 
         /** Generate tooltip with gateway info */
@@ -196,35 +233,4 @@ public class GatewayComboBox extends JComboBox {
         }
     }
     
-    /** Iterates through all gateways and leaves in the model only those which
-     * matches the user configured patterns
-     */
-    private void filterGateways() {
-        model.removeAllElements();
-        String[] patterns = config.getGatewayFilter().split(",");
-        ArrayList<Gateway> filtered = new ArrayList<Gateway>();
-        oper: for (Gateway gateway : gateways.toArray(new Gateway[0])) {
-            for (String pattern : patterns) {
-                if (gateway.getName().contains(pattern)) {
-                    filtered.add(gateway);
-                    continue oper;
-                }
-            }
-        }
-        for (Gateway gateway : filtered) {
-            model.addElement(gateway);
-        }
-    }
-
-    /** Update model when gateways are updated */
-    private void updateGateways() {
-        String opName = getSelectedGatewayName();
-        gateways = Gateways.getInstance().getAll();
-        model.removeAllElements();
-        for (Gateway op : gateways) {
-            model.addElement(op);
-        }
-        filterGateways();
-        setSelectedGateway(opName);
-    }
 }

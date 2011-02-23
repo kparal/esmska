@@ -62,7 +62,7 @@ public class GatewayInterpreter {
      * @return whether the message was sent successfully
      */
     public boolean sendMessage(SMS sms) {
-        Gateway gateway = Gateways.getGateway(sms.getGateway());
+        Gateway gateway = Gateways.getInstance().get(sms.getGateway());
         this.variables = extractVariables(sms);
 
         logger.fine("Sending SMS to: " + gateway);

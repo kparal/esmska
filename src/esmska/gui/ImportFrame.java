@@ -67,6 +67,7 @@ import org.openide.awt.Mnemonics;
 public class ImportFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(ImportFrame.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
+    private static final Gateways gateways = Gateways.getInstance();
     private static final String infoEsmska = l10n.getString("ImportFrame.infoEsmska");
     private static final String infoKubik = l10n.getString("ImportFrame.infoKubik");
     private static final String infoDreamComSE = l10n.getString("ImportFrame.infoDreamComSE");
@@ -195,7 +196,7 @@ public class ImportFrame extends javax.swing.JFrame {
         ArrayList<Object> skipped = new ArrayList<Object>();
         for (Object impor : imported) {
             Contact c = (Contact) impor;
-            if (Gateways.getGateway(c.getGateway()) == null) {
+            if (gateways.get(c.getGateway()) == null) {
                 skipped.add(c);
             }
         }

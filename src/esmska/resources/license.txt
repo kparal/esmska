@@ -32,6 +32,7 @@
        * Android vCard: Apache License 2.0
        * Apache Commons CLI: Apache License 2.0
        * Apache Commons Codec: Apache License 2.0
+       * Apache Commons Collections: Apache License 2.0
        * Apache Commons HttpClient: Apache License 2.0
        * Apache Commons IO: Apache License 2.0
        * Apache Commons Lang: Apache License 2.0

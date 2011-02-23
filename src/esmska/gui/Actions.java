@@ -166,8 +166,6 @@ public class Actions {
                 //internal program action link
                 if (Links.RUN_UPDATER.equals(url)) {
                     getUpdateAction(null).actionPerformed(null);
-                } else if (Links.CONFIG_CREDENTIALS.equals(url)) {
-                    ((ConfigAction)getConfigAction()).showTab(ConfigFrame.Tabs.CREDENTIALS);
                 } else if (Links.CONFIG_GATEWAYS.equals(url)) {
                     ((ConfigAction)getConfigAction()).showTab(ConfigFrame.Tabs.GATEWAYS);
                 } else {
@@ -425,8 +423,7 @@ public class Actions {
         @Override
         public void actionPerformed(ActionEvent e) {
             String number = numberComponent.getText();
-            gatewayComboBox.selectSuggestedGateway(number);
-            gatewayComboBox.requestFocusInWindow();
+            gatewayComboBox.selectNextSuggestedGateway(number);
         }
     }
 

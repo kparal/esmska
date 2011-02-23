@@ -92,7 +92,7 @@ public class Queue {
     }
     // </editor-fold>
 
-    /** Disabled contructor */
+    /** Disabled constructor */
     private Queue() {
     }
 
@@ -393,7 +393,7 @@ public class Queue {
             return del;
         }
 
-        Gateway gateway = Gateways.getGateway(gatewayName);
+        Gateway gateway = Gateways.getInstance().get(gatewayName);
         long delay = 0;
 
         if (gateway == null) { //unknown gateway
@@ -441,7 +441,7 @@ public class Queue {
             return delay; //therefore gateway delay is sms delay
         }
         int index = list.indexOf(sms);
-        Gateway gateway = Gateways.getGateway(gatewayName);
+        Gateway gateway = Gateways.getInstance().get(gatewayName);
         int opDelay = gateway != null ? gateway.getDelayBetweenMessages() * 1000 : 0;
         if (index >= 0) { //in the queue
             delay = delay + (index * opDelay);

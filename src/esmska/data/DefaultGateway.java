@@ -31,7 +31,7 @@ public class DefaultGateway implements Gateway {
     private int smsLength,  maxParts,  maxChars,  signatureExtraLength, 
             delayBetweenMessages;
     private Icon icon;
-    private boolean loginRequired;
+    private boolean loginRequired, favorite, hidden;
     private static final Pattern namePattern = 
             Pattern.compile("^\\[(\\w\\w|" + CountryPrefix.INTERNATIONAL_CODE + ")\\].+");
 
@@ -197,5 +197,25 @@ public class DefaultGateway implements Gateway {
     @Override
     public String[] getSupportedLanguages() {
         return supportedLanguages;
+    }
+
+    @Override
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    @Override
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    @Override
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    @Override
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 }

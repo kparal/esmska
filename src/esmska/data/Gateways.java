@@ -9,18 +9,22 @@ import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
 import java.beans.IntrospectionException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map.Entry;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +32,7 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
@@ -41,10 +46,13 @@ public class Gateways {
         ADDED_GATEWAYS,
         REMOVED_GATEWAY,
         REMOVED_GATEWAYS,
-        CLEARED_GATEWAYS
+        CLEARED_GATEWAYS,
+        FAVORITES_UPDATED,
+        HIDDEN_UPDATED,
     }
 
     /** shared instance */
+    private static final Config config = Config.getInstance();
     private static final Gateways instance = new Gateways();
     private static final Logger logger = Logger.getLogger(Gateways.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
@@ -63,8 +71,21 @@ public class Gateways {
     }
     // </editor-fold>
 
-    /** Disabled contructor */
+    /** Disabled constructor */
     private Gateways() {
+        config.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                // update favorite gateways on change
+                if ("favoriteGateways".equals(evt.getPropertyName())) {
+                    updateFavorites();
+                }
+                // update hidden gateways on change
+                if ("hiddenGateways".equals(evt.getPropertyName())) {
+                    updateHidden();
+                }
+            }
+        });
     }
 
     /** Get shared instance */
@@ -88,6 +109,8 @@ public class Gateways {
         boolean added = gateways.add(gateway);
 
         if (added) {
+            updateFavorites();
+            updateHidden();
             valuedSupport.fireEventOccured(Events.ADDED_GATEWAY, gateway);
         }
         return added;
@@ -106,6 +129,8 @@ public class Gateways {
         boolean changed = Gateways.gateways.addAll(gateways);
 
         if (changed) {
+            updateFavorites();
+            updateHidden();
             valuedSupport.fireEventOccured(Events.ADDED_GATEWAYS, null);
         }
         return changed;
@@ -195,7 +220,7 @@ public class Gateways {
      *         If multiple such gateways are found, returns the first one found.
      *         Returns null if no gateway is found or provided name was null.
      */
-    public static Gateway getGateway(String gatewayName) {
+    public Gateway get(String gatewayName) {
         if (gatewayName == null) {
             return null;
         }
@@ -218,174 +243,152 @@ public class Gateways {
     }
 
     /** Guess gateway according to phone number or phone number prefix.
-     * Searches through gateways and finds the best suited one one
-     * supporting this phone number. <br/><br/>
+     * Searches through all visible (non-hidden) gateways and finds the best
+     * suited ones (one or many) supporting this phone number. <br/><br/>
      *
      * Algorithm:
      * <ol>
      * <li>Any fake gateway is disqualified.</li>
      * <li>Any gateway that has some supported prefixes listed and yet is not matching
      * the number is disqualified.</li>
-     * <li>Gateways are rated by login requirements:
-     *  <ol>
-     *  <li>Login required, credentials not filled in: 0 points</li>
-     *  <li>Login required, credentials filled in: 1 point</li>
-     *  <li>No login required: 2 points</li>
+     * <li>If some gateways are marked as favorite:
+     *  <ol type=a>
+     *   <li>Discard gateways that have the number outside their preferred prefixes.</li>
+     *   <li>Return the one that is assigned to most contacts.</li>
+     *   <li>If multiple gateways have the same (highest) score, return all of them.</li>
+     *   <li>Selection ends here.</li>
      *  </ol>
      * </li>
-     * <li>Gateways are rated by preferred prefixes:
-     *  <ol>
-     *  <li>Gateway has preferred prefixes and they don't match the number: -2 points</li>
-     *  <li>Gateway has preferred prefixes and they match the number: 0 points</li>
-     *  <li>Gateway has no preferred prefixes: 1 point</li>
+     * <li>If user has some contacts defined, count their numbers for each gateway:
+     *  <ol type=a>
+     *   <li>Discard gateways that have the number outside their preferred prefixes.</li>
+     *   <li>Gateway with the highest number of contacts win.</li>
+     *   <li>If multiple gateways have the same (highest) score, return all of them.</li>
+     *   <li>Selection ends here.</li>
      *  </ol>
      * </li>
-     * <li>Gateway with highest value wins.</li>
-     * <li>In case of draw, higher value from login requirements wins.</li>
-     * <li>In case of draw, the gateways are preferred by the country for which
-     * they are defined: country of the user > international > any other country</li>
-     * <li>In case of draw, the first one is picked.</li>
+     * <li>Do the last-resort algorithm:
+     *  <ol type=a>
+     *   <li>All gateways have 0 points by default.</li>
+     *   <li>If a gateway requires login, but no credentials are filled in, subtract 1 point.</li>
+     *   <li>If a gateway has preferred prefixes defined and they don't match the number, subtract 1 point.</li>
+     *   <li>Return all gateways with the highest score. Selection ends here.</li>
+     *  </ol>
+     * </li>
      * </ol>
      *
-     * @param number phone number or it's prefix. The minimum length is two characters,
+     * @param number phone number or its prefix. The minimum length is two characters,
      *  for shorter input (or null) the method does nothing.
-     * @param customGateways collection of gateways in which to search.
-     *  Use null for searching in all currently available gateways.
-     * @return the suggested gateway or null if none found
+     * @return tuple consisting of: 1. list of suggested gateways (may be empty); 2. boolean whether this suggestion
+     * is recommended (the decision was based on favorite gateways or the number of gateways users)
+     * or completely arbitrary (the last-resort algorithm was used).
      */
-    public static Gateway suggestGateway(String number, Collection<Gateway> customGateways) {
+    public Tuple<ArrayList<Gateway>, Boolean> suggestGateway(String number) {
         if (number == null || number.length() < 2) {
-            return null;
+            return new Tuple<ArrayList<Gateway>, Boolean>(new ArrayList<Gateway>(), false);
+        }
+        
+        SortedSet<Gateway> selectedGateways = getVisible();
+        ArrayList<Gateway> result = new ArrayList<Gateway>();
+        HashMap<String,Integer> usage = computeGatewayUsage();
+
+        // select only those gateways that support this number and are not fake
+        for (Iterator<Gateway> it = selectedGateways.iterator(); it.hasNext(); ) {
+            Gateway gw = it.next();
+            if (isFakeGateway(gw.getName())) {
+                it.remove();
+            } else if (!isNumberSupported(gw, number)) {
+                it.remove();
+            } else {
+                // keep it in
+            }
         }
 
-        Collection<Gateway> selectedGateways =
-                (customGateways != null ? customGateways : gateways);
-
-        synchronized(selectedGateways) {
-            // map of gateway -> tuple(login credentials value, summary value)
-            TreeMap<Gateway, Tuple<Integer, Integer>> all = new TreeMap<Gateway, Tuple<Integer, Integer>>();
-
-            // select only those gateways that support this number and are not fake
-            for (Gateway gateway : selectedGateways) {
-                if (!Gateways.isFakeGateway(gateway.getName()) &&
-                        Gateways.isNumberSupported(gateway, number)) {
-                    all.put(gateway, new Tuple<Integer, Integer>(0, 0));
-                }
+        //search through favorite gateways
+        int max = 0; //popular gateways may have even zero contacts
+        for (Gateway gw : selectedGateways) {
+            if (!gw.isFavorite()) {
+                continue;
             }
-
-            if (all.isEmpty()) {
-                // very improbable, at least international gateways should support it always
-                return null;
+            if (!isNumberPreferred(gw, number)) {
+                continue;
             }
-
-            // rank them according to login requirements
-            for (Entry<Gateway, Tuple<Integer,Integer>> entry : all.entrySet()) {
-                Gateway gateway = entry.getKey();
-                Tuple<Integer, Integer> tuple = entry.getValue();
-                int rank = 0;
-                if (gateway.isLoginRequired()) {
-                    if (keyring.getKey(gateway.getName()) == null) {
-                        // credentials not filled in
-                        rank = 0;
-                    } else {
-                        // credentials filled in
-                        rank = 1;
-                    }
-                } else {
-                    rank = 2;
-                }
-                tuple.set1(rank);
-                tuple.set2(tuple.get2() + rank);
+            int popularity = usage.get(gw.getName());
+            if (popularity > max) {
+                max = popularity;
+                result.clear();
+                result.add(gw);
+            } else if (popularity == max) {
+                result.add(gw);
             }
-
-            // rank them according to preferred prefixes
-            for (Entry<Gateway, Tuple<Integer,Integer>> entry : all.entrySet()) {
-                Gateway gateway = entry.getKey();
-                Tuple<Integer, Integer> tuple = entry.getValue();
-                int rank = 0;
-                if (gateway.getPreferredPrefixes().length == 0) {
-                    // no preferred prefixes
-                    rank = 1;
-                } else if (Gateways.isNumberPreferred(gateway, number)) {
-                    // preferred prefixes match
-                    rank = 0;
-                } else {
-                    // preferred prefixes don't match
-                    rank = -2;
-                }
-                tuple.set2(tuple.get2() + rank);
-            }
-
-            // get highest summary ranks
-            TreeMap<Gateway, Tuple<Integer, Integer>> winners = new TreeMap<Gateway, Tuple<Integer, Integer>>();
-            int max = Integer.MIN_VALUE;
-            for (Entry<Gateway, Tuple<Integer,Integer>> entry : all.entrySet()) {
-                Gateway gateway = entry.getKey();
-                Tuple<Integer, Integer> tuple = entry.getValue();
-                if (tuple.get2() > max) {
-                    max = tuple.get2();
-                    winners.clear();
-                }
-                if (tuple.get2() == max) {
-                    winners.put(gateway, tuple);
-                }
-            }
-
-            // do we have a winner?
-            if (winners.size() == 1) {
-                return winners.keySet().iterator().next();
-            }
-
-            // we have a draw
-            // let's compute highest login requirement rank
-            TreeMap<Gateway, Tuple<Integer, Integer>> winnersLogin = new TreeMap<Gateway, Tuple<Integer, Integer>>();
-            max = Integer.MIN_VALUE;
-            for (Entry<Gateway, Tuple<Integer,Integer>> entry : winners.entrySet()) {
-                Gateway gateway = entry.getKey();
-                Tuple<Integer, Integer> tuple = entry.getValue();
-                if (tuple.get1() > max) {
-                    max = tuple.get1();
-                    winnersLogin.clear();
-                }
-                if (tuple.get1() == max) {
-                    winnersLogin.put(gateway, tuple);
-                }
-            }
-
-            // do we have a winner?
-            if (winnersLogin.size() == 1) {
-                return winnersLogin.keySet().iterator().next();
-            }
-
-            // we have a draw
-            // let's compare by gateway country
-            String userCountry = CountryPrefix.getCountryCode(Config.getInstance().getCountryPrefix());
-            // find same country as user country
-            for (Gateway gateway : winnersLogin.keySet()) {
-                String country = CountryPrefix.extractCountryCode(gateway.getName());
-                if (StringUtils.equals(country, userCountry)) {
-                    return gateway;
-                }
-            }
-            // find international gateway
-            for (Gateway gateway : winnersLogin.keySet()) {
-                String country = CountryPrefix.extractCountryCode(gateway.getName());
-                if (StringUtils.equals(country, CountryPrefix.INTERNATIONAL_CODE)) {
-                    return gateway;
-                }
-            }
-
-            // we haven't found a winner
-            // there should be at least one gateway left, otherwise there is an error somewhere
-            if (winnersLogin.isEmpty()) {
-                logger.log(Level.WARNING, "No gateways left for comparison when " +
-                    "suggesting the best one, there must be an error somewhere.");
-                return null;
-            }
-            // ah well, let's pick the first one available
-            return winnersLogin.keySet().iterator().next();
-
         }
+        if (!result.isEmpty()) {
+            return new Tuple<ArrayList<Gateway>, Boolean>(result, true);
+        }
+
+        //search through just popularity
+        max = 1; //gateways must have at least one contact
+        for (Gateway gw : selectedGateways) {
+            if (!isNumberPreferred(gw, number)) {
+                continue;
+            }
+            int popularity = usage.get(gw.getName());
+            if (popularity > max) {
+                max = popularity;
+                result.clear();
+                result.add(gw);
+            } else if (popularity == max) {
+                result.add(gw);
+            }
+        }
+        if (!result.isEmpty()) {
+            return new Tuple<ArrayList<Gateway>, Boolean>(result, true);
+        }
+
+        //use last-resort algorithm
+        // map of gateway -> score
+        HashMap<Gateway, Integer> scores = new HashMap<Gateway, Integer>();
+        for (Gateway gw : selectedGateways) {
+            scores.put(gw, 0);
+            if (gw.isLoginRequired() && keyring.getKey(gw.getName()) == null) {
+                scores.put(gw, scores.get(gw) - 1);
+            }
+            if (!isNumberPreferred(gw, number)) {
+                scores.put(gw, scores.get(gw) - 1);
+            }
+        }
+        max = Integer.MIN_VALUE;
+        for (Gateway gw : selectedGateways) {
+            int score = scores.get(gw);
+            if (score > max) {
+                max = score;
+                result.clear();
+                result.add(gw);
+            } else if (score == max) {
+                result.add(gw);
+            }
+        }
+        return new Tuple<ArrayList<Gateway>, Boolean>(result, false);
+    }
+
+    /** Compute how many contacts use which gateway and return it as map <gw name; # of contacts>
+     */
+    private HashMap<String, Integer> computeGatewayUsage() {
+        HashMap<String, Integer> result = new HashMap<String, Integer>();
+        for (Contact contact : Contacts.getInstance().getAll()) {
+            String gw = contact.getGateway();
+            if (result.containsKey(gw)) {
+                result.put(gw, result.get(gw) + 1);
+            } else {
+                result.put(gw, 1);
+            }
+        }
+        for (Gateway gw : getAll()) {
+            if (!result.containsKey(gw.getName())) {
+                result.put(gw.getName(), 0);
+            }
+        }
+        return result;
     }
 
     /** Returns whether gateway matches the number with its supported prefixes.
@@ -417,7 +420,7 @@ public class Gateways {
      *
      * @param gateway gateway
      * @param number phone number
-     * @return true if at least one of preferred prefixes matches the number of
+     * @return true if at least one of preferred prefixes matches the number or
      * if the gateway does not have any preferred prefixes; false otherwise
      * (or when gateway or number is null, or if number is shorter then 2 characters)
      */
@@ -499,6 +502,100 @@ public class Gateways {
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Error closing script: " + script.toExternalForm(), ex);
             }
+        }
+    }
+
+    /** Get gateways marked as favorites */
+    public TreeSet<Gateway> getFavorites() {
+        TreeSet<Gateway> favorites = new TreeSet<Gateway>();
+        for (Gateway gw : getAll()) {
+            if (gw.isFavorite()) {
+                favorites.add(gw);
+            }
+        }
+        return favorites;
+    }
+
+    /** Get gateways marked as hidden */
+    public TreeSet<Gateway> getHidden() {
+        TreeSet<Gateway> hidden = new TreeSet<Gateway>();
+        for (Gateway gw : getAll()) {
+            if (gw.isHidden()) {
+                hidden.add(gw);
+            }
+        }
+        return hidden;
+    }
+
+    /** Get just the visible (non-hidden) gateways */
+    public TreeSet<Gateway> getVisible() {
+        TreeSet<Gateway> visible = new TreeSet<Gateway>();
+        for (Gateway gw : getAll()) {
+            if (!gw.isHidden()) {
+                visible.add(gw);
+            }
+        }
+        return visible;
+    }
+
+    /** Reload favorite gateways (after some change) */
+    private void updateFavorites() {
+        Set<Gateway> oldFavorites = new HashSet<Gateway>(getFavorites());
+        for (Gateway gw : oldFavorites) {
+            gw.setFavorite(false);
+        }
+        HashSet<String> favorites = new HashSet<String>(Arrays.asList(config.getFavoriteGateways()));
+        HashSet<String> nonexistent = new HashSet<String>();
+        for (String gw : favorites)  {
+            Gateway gateway = get(gw);
+            if (gateway == null) {
+                nonexistent.add(gw);
+            } else {
+                gateway.setFavorite(true);
+            }
+        }
+        Set<Gateway> newFavorites = getFavorites();
+
+        if (!nonexistent.isEmpty()) {
+            logger.log(Level.FINE, "Found non-existent favorite gateways, removing from favorites: {0}", nonexistent);
+            favorites = new HashSet<String>(favorites);
+            favorites.removeAll(nonexistent);
+            config.setFavoriteGateways(favorites.toArray(new String[]{}));
+        }
+
+        if (!CollectionUtils.isEqualCollection(oldFavorites, newFavorites)) {
+            valuedSupport.fireEventOccured(Events.FAVORITES_UPDATED, null);
+        }
+    }
+
+    /** Reload hidden gateways (after some change) */
+    private void updateHidden() {
+        Set<Gateway> oldHidden = new HashSet<Gateway>(getHidden());
+        for (Gateway gw : oldHidden) {
+            gw.setHidden(false);
+        }
+
+        Set<String> hidden = new HashSet<String>(Arrays.asList(config.getHiddenGateways()));
+        HashSet<String> nonexistent = new HashSet<String>();
+        for (String gw : hidden)  {
+            Gateway gateway = get(gw);
+            if (gateway == null) {
+                nonexistent.add(gw);
+            } else {
+                gateway.setHidden(true);
+            }
+        }
+        Set<Gateway> newHidden = getHidden();
+
+        if (!nonexistent.isEmpty()) {
+            logger.log(Level.FINE, "Found non-existent hidden gateways, removing from hiddens: {0}", nonexistent);
+            hidden = new HashSet<String>(hidden);
+            hidden.removeAll(nonexistent);
+            config.setHiddenGateways(hidden.toArray(new String[]{}));
+        }
+
+        if (!CollectionUtils.isEqualCollection(oldHidden, newHidden)) {
+            valuedSupport.fireEventOccured(Events.HIDDEN_UPDATED, null);
         }
     }
 }

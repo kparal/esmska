@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 22:53+0200\n"
+"POT-Creation-Date: 2011-02-23 20:39+0200\n"
 "PO-Revision-Date: 2010-07-26 18:25+0000\n"
 "Last-Translator: Juan Miguel Boyero Corral <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -209,6 +209,19 @@ msgstr "&Comprimir texto"
 msgid "&Compress"
 msgstr "&Comprimir"
 
+#: ConfigFrame.Favorite
+msgid "Favorite"
+msgstr ""
+
+#: ConfigFrame.Gateway
+#, fuzzy
+msgid "Gateway"
+msgstr "Puerta de enlace:"
+
+#: ConfigFrame.Show
+msgid "Show"
+msgstr ""
+
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
 msgstr "Configuraciones avanza&das"
@@ -307,29 +320,6 @@ msgstr ""
 "algunos operadores.\n"
 "</html>"
 
-#: ConfigFrame.gatewayFilterLabel.text
-msgid "Show &only gateways with names containing:"
-msgstr "Mostrar sol&o los operadores cuyos nombres contienen:"
-
-#: ConfigFrame.gatewayFilterTextField.toolTipText
-msgid ""
-"<html>\n"
-"In the gateway list only those will be displayed, which contains<br>\n"
-"a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-"You can enter more patterns separated by comma. Patterns are case "
-"sensitive.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"En la lista de operadores aparecerán solo aquellos que contienen<br>\n"
-"en sus nombres el patrón especificado en este campo. De esta manera puedes "
-"fácilmente<br>\n"
-"ver por ej. los operadores del país XX escribiendo el patrón [XX].<br>\n"
-"Puedes ingresar mas patrones separándolos por coma. Los patrones son "
-"sensibles a mayúsculas y minúsculas.\n"
-"</html>"
-
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "&Gateways"
 msgstr "&Operadores"
@@ -337,6 +327,18 @@ msgstr "&Operadores"
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&General"
+
+#: ConfigFrame.gwDetailsPanel.border.title
+msgid "Gateway properties"
+msgstr ""
+
+#: ConfigFrame.gwTipLabel.text
+msgid ""
+"<html>\n"
+"Hidden gateways won't show up in the drop-down menus. \n"
+"Favorite gateways will be preferred for recipient gateway suggestions.\n"
+"</html>"
+msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -366,11 +368,6 @@ msgstr ""
 msgid "&Number:"
 msgstr "&Número:"
 
-#: ConfigFrame.jLabel10.text
-msgctxt "ConfigFrame.jLabel10.text"
-msgid "&Gateway:"
-msgstr "&Operador:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "Nombre de &usuario:"
@@ -378,21 +375,6 @@ msgstr "Nombre de &usuario:"
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
 msgstr "Contra&seña:"
-
-#: ConfigFrame.jLabel13.text
-msgid ""
-"<html><i>\n"
-"Although the passwords are stored encrypted the original content may be "
-"retrieved. We strongly suggest to set the access rights in such manner that "
-"no other user has the access to the <u>program configuration directory</u>.\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"Aunque las contraseñas guardadas son encriptadas su contenido aún puede ser "
-"recuperado. Recomendamos que configure los permisos de acceso de tal manera "
-"que ningún otro usuario pueda acceder al <u>directorio de configuracion del "
-"programa</u>.\n"
-"</i></html>"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -421,17 +403,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "&Nombre:"
 
-#: ConfigFrame.jLabel9.text
-msgid ""
-"<html>\n"
-"Here you can set your login credentials for gateways which require it.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Aquí puede configurar sus credenciales de acceso para los operadores que así "
-"lo requieran.\n"
-"</html>"
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
@@ -447,11 +418,7 @@ msgstr ""
 msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr "<html><i>El fichero de registro está guardado en: {0}</i></html>"
 
-#: ConfigFrame.loginPanel.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr "&Credenciales de acceso"
-
-#: ConfigFrame.loginTextField.toolTipText
+#: ConfigFrame.loginField.toolTipText
 msgid "Username needed for logging in to the gateway"
 msgstr "Nombre de usuario requerido para poder acceder al operador"
 
@@ -532,7 +499,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.remove_credentials
-msgid "Do you really like to remove all entered login credentials?"
+#, fuzzy
+msgid ""
+"Do you really want to remove all login credentials for all available "
+"gateways?"
 msgstr "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
 
 #: ConfigFrame.restartLabel.text
@@ -721,11 +691,6 @@ msgstr ""
 "y  firmado con el nombre. Solamente algunas puertas de enlace soportan esta "
 "característica.\n"
 "</html>"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: ConfigFrame.user_directory
-msgid "<html>User configuration directory:<br>{0}</html>"
-msgstr "<html> Directorio de configuración de usuario:<br>{0}</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -2038,9 +2003,9 @@ msgstr ""
 "</html>"
 
 #: SMSPanel.gatewayLabel.text
-msgctxt "SMSPanel.gatewayLabel.text"
+#, fuzzy
 msgid "&Gateway:"
-msgstr "Co&mpuerta:"
+msgstr "&Operador:"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2562,6 +2527,63 @@ msgstr ""
 "Las compuertas actualizadas pueden auydarlo a solucionar problemas con el "
 "envío de mensajes.\n"
 "</html>"
+
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "Aunque las contraseñas guardadas son encriptadas su contenido aún puede "
+#~ "ser recuperado. Recomendamos que configure los permisos de acceso de tal "
+#~ "manera que ningún otro usuario pueda acceder al <u>directorio de "
+#~ "configuracion del programa</u>.\n"
+#~ "</i></html>"
+
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html> Directorio de configuración de usuario:<br>{0}</html>"
+
+#~ msgid "Show &only gateways with names containing:"
+#~ msgstr "Mostrar sol&o los operadores cuyos nombres contienen:"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "In the gateway list only those will be displayed, which contains<br>\n"
+#~ "a pattern in their name provided in this field. This way you can "
+#~ "easily<br>\n"
+#~ "show eg. only gateways for country XX by entering pattern [XX].<br>\n"
+#~ "You can enter more patterns separated by comma. Patterns are case "
+#~ "sensitive.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "En la lista de operadores aparecerán solo aquellos que contienen<br>\n"
+#~ "en sus nombres el patrón especificado en este campo. De esta manera "
+#~ "puedes fácilmente<br>\n"
+#~ "ver por ej. los operadores del país XX escribiendo el patrón [XX].<br>\n"
+#~ "Puedes ingresar mas patrones separándolos por coma. Los patrones son "
+#~ "sensibles a mayúsculas y minúsculas.\n"
+#~ "</html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Here you can set your login credentials for gateways which require it.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Aquí puede configurar sus credenciales de acceso para los operadores que "
+#~ "así lo requieran.\n"
+#~ "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "&Credenciales de acceso"
+
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "Co&mpuerta:"
 
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Página de inicio</a></html>"

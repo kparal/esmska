@@ -228,7 +228,7 @@ public class MainFrame extends javax.swing.JFrame {
                     int prefHeight = comp.getPreferredSize().height;
                     int dividerLocation = prefHeight;
                     if (verticalSplitPane.getBottomComponent() == comp) {
-                        //for bottom component we have to substract the number from full height
+                    //for bottom component we have to substract the number from full height
                         dividerLocation = verticalSplitPane.getHeight() - prefHeight - verticalSplitPane.getDividerSize();
                     }
                     verticalSplitPane.setDividerLocation(dividerLocation);
@@ -240,7 +240,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     /** Create an instance of MainFrame. Should be called only for the first
-     * inicialization, after that the instance is available in the Context.
+     * initialization, after that the instance is available in the Context.
      */
     public static void instantiate() {
         if (instance == null) {
@@ -570,13 +570,13 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addComponent(statusPanel, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-            .addComponent(jSeparator1, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addComponent(statusPanel, GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+            .addComponent(jSeparator1, GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)

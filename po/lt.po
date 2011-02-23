@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 22:53+0200\n"
+"POT-Creation-Date: 2011-02-23 20:39+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -199,6 +199,19 @@ msgstr "&Suspausti"
 msgid "&Compress"
 msgstr "&Suspausti"
 
+#: ConfigFrame.Favorite
+msgid "Favorite"
+msgstr ""
+
+#: ConfigFrame.Gateway
+#, fuzzy
+msgid "Gateway"
+msgstr "&Operatoriai:"
+
+#: ConfigFrame.Show
+msgid "Show"
+msgstr ""
+
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
 msgstr "Iš&plėstinės parinktys"
@@ -274,21 +287,6 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.gatewayFilterLabel.text
-msgid "Show &only gateways with names containing:"
-msgstr ""
-
-#: ConfigFrame.gatewayFilterTextField.toolTipText
-msgid ""
-"<html>\n"
-"In the gateway list only those will be displayed, which contains<br>\n"
-"a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-"You can enter more patterns separated by comma. Patterns are case "
-"sensitive.\n"
-"</html>"
-msgstr ""
-
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "&Gateways"
 msgstr ""
@@ -296,6 +294,18 @@ msgstr ""
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&Pagrindiniai"
+
+#: ConfigFrame.gwDetailsPanel.border.title
+msgid "Gateway properties"
+msgstr ""
+
+#: ConfigFrame.gwTipLabel.text
+msgid ""
+"<html>\n"
+"Hidden gateways won't show up in the drop-down menus. \n"
+"Favorite gateways will be preferred for recipient gateway suggestions.\n"
+"</html>"
+msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -317,11 +327,6 @@ msgstr ""
 msgid "&Number:"
 msgstr "Numeris:"
 
-#: ConfigFrame.jLabel10.text
-msgctxt "ConfigFrame.jLabel10.text"
-msgid "&Gateway:"
-msgstr "&Operatoriai:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "Prisijungimo vardas:"
@@ -329,15 +334,6 @@ msgstr "Prisijungimo vardas:"
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
 msgstr "Slaptažodis:"
-
-#: ConfigFrame.jLabel13.text
-msgid ""
-"<html><i>\n"
-"Although the passwords are stored encrypted the original content may be "
-"retrieved. We strongly suggest to set the access rights in such manner that "
-"no other user has the access to the <u>program configuration directory</u>.\n"
-"</i></html>"
-msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -363,13 +359,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "Vardas:"
 
-#: ConfigFrame.jLabel9.text
-msgid ""
-"<html>\n"
-"Here you can set your login credentials for gateways which require it.\n"
-"</html>"
-msgstr ""
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
@@ -382,11 +371,7 @@ msgstr ""
 msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr ""
 
-#: ConfigFrame.loginPanel.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr "Prisijungimo duomenys"
-
-#: ConfigFrame.loginTextField.toolTipText
+#: ConfigFrame.loginField.toolTipText
 msgid "Username needed for logging in to the gateway"
 msgstr ""
 
@@ -449,7 +434,10 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.remove_credentials
-msgid "Do you really like to remove all entered login credentials?"
+#, fuzzy
+msgid ""
+"Do you really want to remove all login credentials for all available "
+"gateways?"
 msgstr "Ar tikrai norite pašalinti visus įvestus prisijungimo duomenis?"
 
 #: ConfigFrame.restartLabel.text
@@ -599,11 +587,6 @@ msgid ""
 "number<br>\n"
 "and signed with entered name. Only some gateways support this feature.\n"
 "</html>"
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: ConfigFrame.user_directory
-msgid "<html>User configuration directory:<br>{0}</html>"
 msgstr ""
 
 #: ConfigFrame.windowCenteredCheckBox.text
@@ -1714,9 +1697,9 @@ msgid ""
 msgstr "<html>Simbolių žinutėje: <b>{0}/{1}</b> (<b>{2}</b> liko)</html>"
 
 #: SMSPanel.gatewayLabel.text
-msgctxt "SMSPanel.gatewayLabel.text"
+#, fuzzy
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Operatoriai:"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2164,6 +2147,9 @@ msgstr ""
 "<h2>Ieškoti atnaujintų operatorių</h2>\n"
 "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
 "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "Prisijungimo duomenys"
 
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Pagrindinis puslapis</a></html>"

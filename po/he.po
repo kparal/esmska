@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 22:53+0200\n"
+"POT-Creation-Date: 2011-02-23 20:39+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -199,6 +199,19 @@ msgstr ""
 msgid "&Compress"
 msgstr "&דחס"
 
+#: ConfigFrame.Favorite
+msgid "Favorite"
+msgstr ""
+
+#: ConfigFrame.Gateway
+#, fuzzy
+msgid "Gateway"
+msgstr "שער גישה:"
+
+#: ConfigFrame.Show
+msgid "Show"
+msgstr ""
+
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
 msgstr "הגדרות מ&תקדמות"
@@ -274,21 +287,6 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.gatewayFilterLabel.text
-msgid "Show &only gateways with names containing:"
-msgstr ""
-
-#: ConfigFrame.gatewayFilterTextField.toolTipText
-msgid ""
-"<html>\n"
-"In the gateway list only those will be displayed, which contains<br>\n"
-"a pattern in their name provided in this field. This way you can easily<br>\n"
-"show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-"You can enter more patterns separated by comma. Patterns are case "
-"sensitive.\n"
-"</html>"
-msgstr ""
-
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "&Gateways"
 msgstr ""
@@ -296,6 +294,18 @@ msgstr ""
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&כללי"
+
+#: ConfigFrame.gwDetailsPanel.border.title
+msgid "Gateway properties"
+msgstr ""
+
+#: ConfigFrame.gwTipLabel.text
+msgid ""
+"<html>\n"
+"Hidden gateways won't show up in the drop-down menus. \n"
+"Favorite gateways will be preferred for recipient gateway suggestions.\n"
+"</html>"
+msgstr ""
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -325,11 +335,6 @@ msgstr ""
 msgid "&Number:"
 msgstr "&מספר:"
 
-#: ConfigFrame.jLabel10.text
-msgctxt "ConfigFrame.jLabel10.text"
-msgid "&Gateway:"
-msgstr "שער &גישה:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&שם משתמש:"
@@ -337,20 +342,6 @@ msgstr "&שם משתמש:"
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
 msgstr "&סיסמה:"
-
-#: ConfigFrame.jLabel13.text
-msgid ""
-"<html><i>\n"
-"Although the passwords are stored encrypted the original content may be "
-"retrieved. We strongly suggest to set the access rights in such manner that "
-"no other user has the access to the <u>program configuration directory</u>.\n"
-"</i></html>"
-msgstr ""
-"<html><i>\n"
-"למרות כי הסיסמאות נשמרות מוצפנות ניתן לאחזר את התוכן המקורי. אנו ממליצים "
-"בחום להגדיר את הרשאות הגישה\n"
-"באופן שאף משתמש אחר לא יוכל לגשת אל <u>תיקיית תצורת התוכנה</u>.\n"
-"</i></html>"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -376,16 +367,6 @@ msgctxt "ConfigFrame.jLabel3.text"
 msgid "&Name:"
 msgstr "&שם:"
 
-#: ConfigFrame.jLabel9.text
-msgid ""
-"<html>\n"
-"Here you can set your login credentials for gateways which require it.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"כאן ניתן להגדיר את פרטי ההתחברות לשערי גישה הדורשים זאת.\n"
-"</html>"
-
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
 "<html>\n"
@@ -401,11 +382,7 @@ msgstr ""
 msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr ""
 
-#: ConfigFrame.loginPanel.TabConstraints.tabTitle
-msgid "&Login credentials"
-msgstr "&פרטי התחברות"
-
-#: ConfigFrame.loginTextField.toolTipText
+#: ConfigFrame.loginField.toolTipText
 msgid "Username needed for logging in to the gateway"
 msgstr ""
 
@@ -482,7 +459,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.remove_credentials
-msgid "Do you really like to remove all entered login credentials?"
+#, fuzzy
+msgid ""
+"Do you really want to remove all login credentials for all available "
+"gateways?"
 msgstr "האם אתה בטוח שברצונך להסיר את כל פרטי ההתחברות שהוזנו?"
 
 #: ConfigFrame.restartLabel.text
@@ -654,11 +634,6 @@ msgid ""
 "and signed with entered name. Only some gateways support this feature.\n"
 "</html>"
 msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: ConfigFrame.user_directory
-msgid "<html>User configuration directory:<br>{0}</html>"
-msgstr "<html>תיקיית תצורת המשתמש:<br>{0}</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -1825,7 +1800,7 @@ msgid ""
 msgstr "<html>תווים בהודעה כולה: <b>{0}/{1}</b> (נותרו <b>{2}</b>)</html>"
 
 #: SMSPanel.gatewayLabel.text
-msgctxt "SMSPanel.gatewayLabel.text"
+#, fuzzy
 msgid "&Gateway:"
 msgstr "שער &גישה:"
 
@@ -2274,6 +2249,39 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "למרות כי הסיסמאות נשמרות מוצפנות ניתן לאחזר את התוכן המקורי. אנו ממליצים "
+#~ "בחום להגדיר את הרשאות הגישה\n"
+#~ "באופן שאף משתמש אחר לא יוכל לגשת אל <u>תיקיית תצורת התוכנה</u>.\n"
+#~ "</i></html>"
+
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>תיקיית תצורת המשתמש:<br>{0}</html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Here you can set your login credentials for gateways which require it.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "כאן ניתן להגדיר את פרטי ההתחברות לשערי גישה הדורשים זאת.\n"
+#~ "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "&פרטי התחברות"
+
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "שער &גישה:"
 
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">דף הבית</a></html>"

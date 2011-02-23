@@ -15,7 +15,6 @@ import esmska.data.Gateways;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,12 +26,12 @@ import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -40,7 +39,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
@@ -51,15 +49,11 @@ import org.openide.awt.Mnemonics;
  */
 public class EditContactPanel extends javax.swing.JPanel {
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    private static final Border fieldBorder = new JTextField().getBorder();
-    private static final Border lineRedBorder = BorderFactory.createLineBorder(Color.RED);
     
     private Config config = Config.getInstance();
     private Keyring keyring = Keyring.getInstance();
     private boolean multiMode; //edit multiple contacts
     private boolean userSet; //whether gateway was set by user or by program
-
-    private Action suggestGatewayAction;
 
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
@@ -83,19 +77,19 @@ public class EditContactPanel extends javax.swing.JPanel {
             ClipboardPopupMenu.register(numberTextField);
         }
         
-        //set up button for suggesting gateway
-        suggestGatewayAction = Actions.getSuggestGatewayAction(gatewayComboBox, numberTextField);
-        suggestGatewayButton.setAction(suggestGatewayAction);
-
         //listen for changes in number and guess gateway
         numberTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
             @Override
             public void onUpdate(DocumentEvent e) {
+                boolean usrSet = userSet;
                 if (!userSet) {
                     gatewayComboBox.selectSuggestedGateway(numberTextField.getText());
-                    userSet = false;
                 }
+                gatewayComboBox.setFilter(numberTextField.getText());
+                userSet = usrSet;
                 updateCountryInfoLabel();
+                updateSuggestGatewayButton();
+                EditContactPanel.this.revalidate();
             }
         });
 
@@ -104,6 +98,7 @@ public class EditContactPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateCredentialsInfoLabel();
+                EditContactPanel.this.revalidate();
             }
         });
 
@@ -128,7 +123,20 @@ public class EditContactPanel extends javax.swing.JPanel {
         //update components
         gatewayComboBoxItemStateChanged(null);
     }
-    
+
+    /** Show or hide suggest gateway button */
+    private void updateSuggestGatewayButton() {
+        ArrayList<Gateway> gws = Gateways.getInstance().suggestGateway(numberTextField.getText()).get1();
+        boolean visible = false;
+        if (gws.size() > 1) {
+            visible = true;
+        }
+        if (gws.size() == 1 && gatewayComboBox.getSelectedGateway() != gws.get(0)) {
+            visible = true;
+        }
+        suggestGatewayButton.setVisible(visible);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -157,6 +165,8 @@ public class EditContactPanel extends javax.swing.JPanel {
         infoPanel = new JPanel();
         countryInfoLabel = new InfoLabel();
         credentialsInfoLabel = new InfoLabel();
+        nameWarnLabel = new JLabel();
+        numberWarnLabel = new JLabel();
 
         nameTextField.setToolTipText(l10n.getString("EditContactPanel.nameTextField.toolTipText")); // NOI18N
         nameTextField.addFocusListener(new FocusAdapter() {
@@ -191,6 +201,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("EditContactPanel.gatewayLabel.text")); // NOI18N
         gatewayLabel.setToolTipText(gatewayComboBox.getToolTipText());
 
+        suggestGatewayButton.setAction(Actions.getSuggestGatewayAction(gatewayComboBox, numberTextField));
         suggestGatewayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 suggestGatewayButtonActionPerformed(evt);
@@ -202,7 +213,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
             "EditContactPanel.credentialsInfoLabel.text"));
         credentialsInfoLabel.setText(MessageFormat.format(
-            l10n.getString("EditContactPanel.credentialsInfoLabel.text"), Links.CONFIG_CREDENTIALS));
+            l10n.getString("EditContactPanel.credentialsInfoLabel.text"), Links.CONFIG_GATEWAYS));
     credentialsInfoLabel.setVisible(false);
 
         GroupLayout infoPanelLayout = new GroupLayout(infoPanel);
@@ -219,6 +230,14 @@ public class EditContactPanel extends javax.swing.JPanel {
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(countryInfoLabel))
     );
+
+    nameWarnLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/warning-16.png"))); // NOI18N
+    nameWarnLabel.setToolTipText(nameTextField.getToolTipText());
+    nameWarnLabel.setVisible(false);
+
+    numberWarnLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/warning-16.png"))); // NOI18N
+    numberWarnLabel.setToolTipText(numberTextField.getToolTipText());
+    numberWarnLabel.setVisible(false);
 
         GroupLayout layout = new GroupLayout(this);
     this.setLayout(layout);
@@ -239,8 +258,14 @@ public class EditContactPanel extends javax.swing.JPanel {
                             .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(suggestGatewayButton))
-                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                        .addComponent(numberTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))))
+                        .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                                .addComponent(numberTextField, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(nameTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                                .addComponent(nameWarnLabel, Alignment.TRAILING)
+                                .addComponent(numberWarnLabel, Alignment.TRAILING))))))
             .addContainerGap())
     );
 
@@ -250,13 +275,17 @@ public class EditContactPanel extends javax.swing.JPanel {
         layout.createParallelGroup(Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(nameLabel)
-                .addComponent(nameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(nameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(nameWarnLabel))
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(numberLabel)
-                .addComponent(numberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                    .addComponent(numberLabel)
+                    .addComponent(numberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(numberWarnLabel))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                 .addGroup(layout.createParallelGroup(Alignment.BASELINE)
@@ -268,7 +297,7 @@ public class EditContactPanel extends javax.swing.JPanel {
             .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
-    layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, numberTextField});
+    layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, nameWarnLabel, numberTextField, numberWarnLabel});
 
     }// </editor-fold>//GEN-END:initComponents
     
@@ -289,6 +318,7 @@ public class EditContactPanel extends javax.swing.JPanel {
                 focusTransfered = true;
             }
         }
+        revalidate();
         return valid;
     }
     
@@ -297,30 +327,21 @@ public class EditContactPanel extends javax.swing.JPanel {
         boolean valid = true;
         if (c == nameTextField) {
             valid = StringUtils.isNotEmpty(nameTextField.getText());
-            updateBorder(c, valid);
+            nameWarnLabel.setVisible(!valid);
         } else if (c == numberTextField) {
             valid = Contact.isValidNumber(numberTextField.getText());
-            updateBorder(c, valid);
+            numberWarnLabel.setVisible(!valid);
         }
         return valid;
     }
     
-    /** sets highlighted border on non-valid components and regular border on valid ones */
-    private void updateBorder(JComponent c, boolean valid) {
-        if (valid) {
-            c.setBorder(fieldBorder);
-        } else {
-            c.setBorder(lineRedBorder);
-        }
-    }
-
     /** Enable or disable multi-editing mode */
     private void setMultiMode(boolean multiMode) {
         this.multiMode = multiMode;
-
         nameTextField.setEnabled(!multiMode);
         numberTextField.setEnabled(!multiMode);
-        suggestGatewayAction.setEnabled(!multiMode);
+        suggestGatewayButton.setVisible(!multiMode);
+        revalidate();
     }
 
     /** Show warning if user selected gateway can't send messages to a recipient
@@ -371,10 +392,12 @@ public class EditContactPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_suggestGatewayButtonActionPerformed
 
     private void gatewayComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_gatewayComboBoxItemStateChanged
-        userSet = true;
+        userSet = (evt != null);
 
         updateCredentialsInfoLabel();
         updateCountryInfoLabel();
+        updateSuggestGatewayButton();
+        revalidate();
     }//GEN-LAST:event_gatewayComboBoxItemStateChanged
     
     /** Set contact to be edited or use null for new one */
@@ -383,7 +406,6 @@ public class EditContactPanel extends javax.swing.JPanel {
         if (contact == null) {
             nameTextField.setText(null);
             numberTextField.setText(config.getCountryPrefix());
-            gatewayComboBox.selectSuggestedGateway(numberTextField.getText());
         } else {
             nameTextField.setText(contact.getName());
             numberTextField.setText(contact.getNumber());
@@ -418,11 +440,6 @@ public class EditContactPanel extends javax.swing.JPanel {
 
     /** Improve focus etc. before displaying panel */
     public void prepareForShow() {
-        //no gateway, try to suggest one
-        if (gatewayComboBox.getSelectedGateway() == null) {
-            suggestGatewayAction.actionPerformed(null);
-        }
-
         //give focus
         if (multiMode) {
             gatewayComboBox.requestFocusInWindow();
@@ -440,8 +457,10 @@ public class EditContactPanel extends javax.swing.JPanel {
     private JPanel infoPanel;
     private JLabel nameLabel;
     private JTextField nameTextField;
+    private JLabel nameWarnLabel;
     private JLabel numberLabel;
     private JTextField numberTextField;
+    private JLabel numberWarnLabel;
     private JButton suggestGatewayButton;
     // End of variables declaration//GEN-END:variables
     

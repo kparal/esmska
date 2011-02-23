@@ -236,14 +236,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="statusPanel" alignment="0" pref="608" max="32767" attributes="0"/>
-          <Component id="jSeparator1" alignment="0" pref="608" max="32767" attributes="0"/>
+          <Component id="statusPanel" alignment="0" pref="659" max="32767" attributes="0"/>
+          <Component id="jSeparator1" alignment="0" pref="659" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="horizontalSplitPane" pref="596" max="32767" attributes="0"/>
+              <Component id="horizontalSplitPane" pref="647" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="toolBar" alignment="0" pref="608" max="32767" attributes="0"/>
+          <Component id="toolBar" alignment="0" pref="659" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
