@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -254,9 +255,8 @@ public class Gateways {
      * <li>If some gateways are marked as favorite:
      *  <ol type=a>
      *   <li>Discard gateways that have the number outside their preferred prefixes.</li>
-     *   <li>Return the one that is assigned to most contacts.</li>
-     *   <li>If multiple gateways have the same (highest) score, return all of them.</li>
-     *   <li>Selection ends here.</li>
+     *   <li>If there are some remaining, return all of them, sorted by the number of contacts assigned.
+     *       Selection ends here.</li>
      *  </ol>
      * </li>
      * <li>If user has some contacts defined, count their numbers for each gateway:
@@ -290,7 +290,7 @@ public class Gateways {
         
         SortedSet<Gateway> selectedGateways = getVisible();
         ArrayList<Gateway> result = new ArrayList<Gateway>();
-        HashMap<String,Integer> usage = computeGatewayUsage();
+        final HashMap<String,Integer> usage = computeGatewayUsage();
 
         // select only those gateways that support this number and are not fake
         for (Iterator<Gateway> it = selectedGateways.iterator(); it.hasNext(); ) {
@@ -305,7 +305,6 @@ public class Gateways {
         }
 
         //search through favorite gateways
-        int max = 0; //popular gateways may have even zero contacts
         for (Gateway gw : selectedGateways) {
             if (!gw.isFavorite()) {
                 continue;
@@ -313,21 +312,23 @@ public class Gateways {
             if (!isNumberPreferred(gw, number)) {
                 continue;
             }
-            int popularity = usage.get(gw.getName());
-            if (popularity > max) {
-                max = popularity;
-                result.clear();
-                result.add(gw);
-            } else if (popularity == max) {
-                result.add(gw);
-            }
+            result.add(gw);
         }
         if (!result.isEmpty()) {
+            //sort by number of contacts
+            Collections.sort(result, new Comparator<Gateway>() {
+                @Override
+                public int compare(Gateway o1, Gateway o2) {
+                    Integer popularity1 = usage.get(o1.getName());
+                    Integer popularity2 = usage.get(o2.getName());
+                    return popularity1.compareTo(popularity2);
+                }
+            });
             return new Tuple<ArrayList<Gateway>, Boolean>(result, true);
         }
 
         //search through just popularity
-        max = 1; //gateways must have at least one contact
+        int max = 1; //gateways must have at least one contact
         for (Gateway gw : selectedGateways) {
             if (!isNumberPreferred(gw, number)) {
                 continue;
