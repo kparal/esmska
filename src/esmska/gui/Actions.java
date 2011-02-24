@@ -404,7 +404,7 @@ public class Actions {
     }
 
     /** Select suggested gateway in the combobox */
-    private static class SuggestGatewayAction extends AbstractAction {
+    public static class SuggestGatewayAction extends AbstractAction {
         private GatewayComboBox gatewayComboBox;
         private JTextComponent numberComponent;
 

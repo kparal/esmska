@@ -23,8 +23,6 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -121,7 +119,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         }
 
         //update components
-        gatewayComboBoxItemStateChanged(null);
+        gatewayComboBoxActionPerformed(null);
     }
 
     /** Show or hide suggest gateway button */
@@ -183,9 +181,9 @@ public class EditContactPanel extends javax.swing.JPanel {
             }
         });
 
-        gatewayComboBox.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent evt) {
-                gatewayComboBoxItemStateChanged(evt);
+        gatewayComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                gatewayComboBoxActionPerformed(evt);
             }
         });
 
@@ -201,12 +199,7 @@ public class EditContactPanel extends javax.swing.JPanel {
         Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("EditContactPanel.gatewayLabel.text")); // NOI18N
         gatewayLabel.setToolTipText(gatewayComboBox.getToolTipText());
 
-        suggestGatewayButton.setAction(Actions.getSuggestGatewayAction(gatewayComboBox, numberTextField));
-        suggestGatewayButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                suggestGatewayButtonActionPerformed(evt);
-            }
-        });
+        suggestGatewayButton.setAction(new SuggestGatewayAction());
 
         Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("EditContactPanel.countryInfoLabel.text")); // NOI18N
         countryInfoLabel.setVisible(false);
@@ -387,18 +380,14 @@ public class EditContactPanel extends javax.swing.JPanel {
         checkValid(numberTextField);
     }//GEN-LAST:event_numberTextFieldFocusLost
 
-    private void suggestGatewayButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_suggestGatewayButtonActionPerformed
-        userSet = false;
-    }//GEN-LAST:event_suggestGatewayButtonActionPerformed
-
-    private void gatewayComboBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_gatewayComboBoxItemStateChanged
+    private void gatewayComboBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_gatewayComboBoxActionPerformed
         userSet = (evt != null);
 
         updateCredentialsInfoLabel();
         updateCountryInfoLabel();
         updateSuggestGatewayButton();
         revalidate();
-    }//GEN-LAST:event_gatewayComboBoxItemStateChanged
+    }//GEN-LAST:event_gatewayComboBoxActionPerformed
     
     /** Set contact to be edited or use null for new one */
     public void setContact(Contact contact) {
@@ -446,6 +435,20 @@ public class EditContactPanel extends javax.swing.JPanel {
         } else {
             nameTextField.requestFocusInWindow();
             nameTextField.selectAll();
+        }
+    }
+
+    /** Action for suggesting new gateway */
+    private class SuggestGatewayAction extends Actions.SuggestGatewayAction {
+
+        public SuggestGatewayAction() {
+            super(gatewayComboBox, numberTextField);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            super.actionPerformed(e);
+            userSet = false;
         }
     }
     

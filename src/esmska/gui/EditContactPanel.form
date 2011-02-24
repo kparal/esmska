@@ -116,7 +116,7 @@
     </Component>
     <Component class="esmska.gui.GatewayComboBox" name="gatewayComboBox">
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="gatewayComboBoxItemStateChanged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gatewayComboBoxActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nameLabel">
@@ -161,12 +161,9 @@
     <Component class="javax.swing.JButton" name="suggestGatewayButton">
       <Properties>
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="Actions.getSuggestGatewayAction(gatewayComboBox, numberTextField)" type="code"/>
+          <Connection code="new SuggestGatewayAction()" type="code"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="suggestGatewayButtonActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="infoPanel">
 
