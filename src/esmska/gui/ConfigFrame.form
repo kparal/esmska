@@ -621,10 +621,10 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="gwDetailsPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="90" max="32767" attributes="0"/>
+                              <EmptySpace pref="98" max="32767" attributes="0"/>
                               <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" pref="265" max="32767" attributes="2"/>
+                          <Component id="jScrollPane1" alignment="0" pref="273" max="32767" attributes="2"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="gwTipLabel" min="-2" max="-2" attributes="0"/>
