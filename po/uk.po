@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
-"PO-Revision-Date: 2010-08-11 14:43+0000\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"PO-Revision-Date: 2010-11-15 00:11+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-12 04:09+0000\n"
+"X-Launchpad-Export-Date: 2010-11-16 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -1092,9 +1092,8 @@ msgstr "Головно прийнятний для країни: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
-#, fuzzy
 msgid "Sending failed: {0}"
-msgstr "<html><i>Системний журнал зберігається за адресою: {0}</i></html>"
+msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
 #, fuzzy
@@ -1205,9 +1204,8 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
-#, fuzzy
 msgid "Security code required: {0}"
-msgstr "<html><i>Системний журнал зберігається за адресою: {0}</i></html>"
+msgstr ""
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
@@ -2243,23 +2241,11 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "Although the passwords are stored encrypted the original content may be "
-#~ "retrieved. We strongly suggest to set the access rights in such manner "
-#~ "that no other user has the access to the <u>program configuration "
-#~ "directory</u>.\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "Хоч паролі і зберігаються в зашифрованому вигляді, їхній ориґінальний "
-#~ "вміст може бути вилучений. Настійно рекомендуємо встановити права доступу "
-#~ "так, щоб інший користувач не мав доступу до <u>каталогу конфігурації "
-#~ "програми</u>.\n"
-#~ "</i></html>"
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Домашня сторінка</a></html>"
 
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>Каталог конфігурації користувача:<br>{0}</html>"
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Підтримка проекту</a></html>"
 
 #~ msgid "Show &only gateways with names containing:"
 #~ msgstr "Показувати &лише шлюзи, що містять назви:"
@@ -2283,6 +2269,21 @@ msgstr ""
 #~ "</html>"
 
 #~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "Хоч паролі і зберігаються в зашифрованому вигляді, їхній ориґінальний "
+#~ "вміст може бути вилучений. Настійно рекомендуємо встановити права доступу "
+#~ "так, щоб інший користувач не мав доступу до <u>каталогу конфігурації "
+#~ "програми</u>.\n"
+#~ "</i></html>"
+
+#~ msgid ""
 #~ "<html>\n"
 #~ "Here you can set your login credentials for gateways which require it.\n"
 #~ "</html>"
@@ -2294,11 +2295,8 @@ msgstr ""
 #~ msgid "&Login credentials"
 #~ msgstr "&Дані реєстрації"
 
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Домашня сторінка</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Підтримка проекту</a></html>"
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>Каталог конфігурації користувача:<br>{0}</html>"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "

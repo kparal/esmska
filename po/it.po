@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
-"PO-Revision-Date: 2010-10-28 11:46+0000\n"
-"Last-Translator: marco lucato <Unknown>\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"PO-Revision-Date: 2010-11-19 23:12+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-29 05:30+0000\n"
+"X-Launchpad-Export-Date: 2010-11-21 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -92,7 +92,7 @@ msgstr "&Informazioni su"
 
 #: Add
 msgid "Add"
-msgstr ""
+msgstr "Aggiungi"
 
 #: Add_contact
 msgid "Add contact"
@@ -108,7 +108,7 @@ msgstr "Annulla"
 
 #: Cancel_
 msgid "&Cancel"
-msgstr ""
+msgstr "&Annulla"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
@@ -147,6 +147,12 @@ msgid ""
 "* {2} - {0} and {1} modes combined. Also prints webpage contents (lots of "
 "output)."
 msgstr ""
+"* {0} - Debug del programma in corso. Scelta predefinita se non è "
+"specificata nessuna modalità.\n"
+"* {1} - Debug della rete in corso. Stampa intestazioni HTTP, tutti i "
+"ridirezionamenti, ecc.\n"
+"* {2} - Modalità {1} e modalità {2} combinate. Visualizza anche i contenuti "
+"della pagina web (output lungo)."
 
 #: CommandLineParser.debugMode
 msgid "debug mode"
@@ -157,11 +163,13 @@ msgid ""
 "Enable the portable mode - ask for location of the user configuration "
 "directory. Can't be used with -c."
 msgstr ""
+"Attiva la modalità portatile - chiede la posizione della cartella di "
+"configurazione utente. Non può essere usato con -c."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr ""
+msgstr "Opzione non valida sulla linea di comando (\"\"{0}\"\"}"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
@@ -204,8 +212,9 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
+#, fuzzy
 msgid "Gateway"
-msgstr ""
+msgstr "&Gateway:"
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -213,15 +222,15 @@ msgstr ""
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
-msgstr ""
+msgstr "Impostazioni a&vanzate"
 
 #: ConfigFrame.advancedCheckBox.toolTipText
 msgid "Show items with more advanced settings"
-msgstr ""
+msgstr "Mostra oggetti con più impostazioni avanzate."
 
 #: ConfigFrame.advancedControlsCheckBox.text
 msgid "Show a&dvanced controls"
-msgstr ""
+msgstr "Mostra contrilli a&vanzati"
 
 #: ConfigFrame.advancedControlsCheckBox.toolTipText
 msgid ""
@@ -257,7 +266,7 @@ msgstr "&Cancella tutte le credenziali del login"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
-msgstr ""
+msgstr "Elimina tutti i nomi utente e le password per tutti i gateway"
 
 #: ConfigFrame.connectionPanel.TabConstraints.tabTitle
 msgid "&Connection"
@@ -1697,8 +1706,9 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.gatewayLabel.text
+#, fuzzy
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Gateway:"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2142,21 +2152,14 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "&Login credentials"
-#~ msgstr "&Credenziali login"
-
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Homepage</a></html>"
 
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Supporta il progetto</a></html>"
 
-#~ msgid ""
-#~ "This tab is for developing purposes only. It will not be visible in the "
-#~ "final release."
-#~ msgstr ""
-#~ "Questa scheda p solo per scopi di sviluppo. Non sarà visibile nella "
-#~ "release finale"
+#~ msgid "&Login credentials"
+#~ msgstr "&Credenziali login"
 
 #~ msgid "O&perators"
 #~ msgstr "O&peratori"
@@ -2172,3 +2175,10 @@ msgstr ""
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Per favore inserisci il codice dalla figura:"
+
+#~ msgid ""
+#~ "This tab is for developing purposes only. It will not be visible in the "
+#~ "final release."
+#~ msgstr ""
+#~ "Questa scheda p solo per scopi di sviluppo. Non sarà visibile nella "
+#~ "release finale"

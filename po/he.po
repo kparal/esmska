@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1159,9 +1159,8 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
-#, fuzzy
 msgid "Security code required: {0}"
-msgstr "<html>תיקיית תצורת המשתמש:<br>{0}</html>"
+msgstr ""
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
@@ -2250,47 +2249,11 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "Although the passwords are stored encrypted the original content may be "
-#~ "retrieved. We strongly suggest to set the access rights in such manner "
-#~ "that no other user has the access to the <u>program configuration "
-#~ "directory</u>.\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "למרות כי הסיסמאות נשמרות מוצפנות ניתן לאחזר את התוכן המקורי. אנו ממליצים "
-#~ "בחום להגדיר את הרשאות הגישה\n"
-#~ "באופן שאף משתמש אחר לא יוכל לגשת אל <u>תיקיית תצורת התוכנה</u>.\n"
-#~ "</i></html>"
-
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>תיקיית תצורת המשתמש:<br>{0}</html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Here you can set your login credentials for gateways which require it.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "כאן ניתן להגדיר את פרטי ההתחברות לשערי גישה הדורשים זאת.\n"
-#~ "</html>"
-
-#~ msgid "&Login credentials"
-#~ msgstr "&פרטי התחברות"
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "שער &גישה:"
-
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">דף הבית</a></html>"
 
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">הבעת תמיכה במיזם</a></html>"
-
-#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-#~ msgstr "<html><h2>לא ניתן לשלוח את ההודעה עבור ''{0}''!</h2>{1}</html>"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "
@@ -2312,6 +2275,35 @@ msgstr ""
 #~ "הבאה של התוכנית\n"
 #~ "</html>"
 
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "למרות כי הסיסמאות נשמרות מוצפנות ניתן לאחזר את התוכן המקורי. אנו ממליצים "
+#~ "בחום להגדיר את הרשאות הגישה\n"
+#~ "באופן שאף משתמש אחר לא יוכל לגשת אל <u>תיקיית תצורת התוכנה</u>.\n"
+#~ "</i></html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Here you can set your login credentials for gateways which require it.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "כאן ניתן להגדיר את פרטי ההתחברות לשערי גישה הדורשים זאת.\n"
+#~ "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "&פרטי התחברות"
+
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>תיקיית תצורת המשתמש:<br>{0}</html>"
+
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "ייבא אנשי קשר ממפעילים מוכרים בלבד"
 
@@ -2326,6 +2318,13 @@ msgstr ""
 #~ "במידה וסומן אנשי הקשר יוצגו ברשימה וייובאו רק כאשר<br>\n"
 #~ "המפעיל שלהם נתמך על ידי התוכנה\n"
 #~ "</html>"
+
+#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
+#~ msgstr "<html><h2>לא ניתן לשלוח את ההודעה עבור ''{0}''!</h2>{1}</html>"
+
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "שער &גישה:"
 
 #~ msgid "O&perators"
 #~ msgstr "מ&פעילים"

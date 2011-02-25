@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
-"PO-Revision-Date: 2010-10-03 20:43+0000\n"
-"Last-Translator: milboy <Unknown>\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"PO-Revision-Date: 2010-11-15 00:23+0000\n"
+"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-04 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-11-16 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -1119,9 +1119,8 @@ msgstr "Použiteľné hlavne pre krajinu: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
-#, fuzzy
 msgid "Sending failed: {0}"
-msgstr "<html><i>Súbor záznamu je uložený tu: {0}</i></html>"
+msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
 #, fuzzy
@@ -1273,7 +1272,7 @@ msgstr "bezpečnostný &kód:"
 #: GatewayImageCodeMessage.securityImage
 #, fuzzy
 msgid "Security code required: {0}"
-msgstr "<html><i>Súbor záznamu je uložený tu: {0}</i></html>"
+msgstr "bezpečnostný &kód:"
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
@@ -1812,9 +1811,8 @@ msgid "&OK"
 msgstr "&OK"
 
 #: Pause
-#, fuzzy
 msgid "Pause"
-msgstr "Pozastaviť front"
+msgstr ""
 
 #: Pause_queue
 msgid "Pause queue"
@@ -2341,9 +2339,8 @@ msgid "Unknown gateway"
 msgstr "Neznáma brána"
 
 #: Unpause
-#, fuzzy
 msgid "Unpause"
-msgstr "Spustiť front"
+msgstr ""
 
 #: Unpause_queue
 msgid "Unpause queue"
@@ -2465,23 +2462,11 @@ msgstr ""
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
 
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "Although the passwords are stored encrypted the original content may be "
-#~ "retrieved. We strongly suggest to set the access rights in such manner "
-#~ "that no other user has the access to the <u>program configuration "
-#~ "directory</u>.\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "Napriek faktu, že sú uložené heslá zašifrované, je možné dostať sa k "
-#~ "pôvodnému obsahu. Dôrazne odporúčame nastaviť prístupové práva tak, aby "
-#~ "iní používatelia nemali prístup k <u>adresáru s konfiguračnými súbormi "
-#~ "programu</u>.\n"
-#~ "</i></html>"
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Domovská stránka</a></html>"
 
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>Používateľský adresár programu:<br>{0}</html>"
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Podporiť projekt</a></html>"
 
 #~ msgid "Show &only gateways with names containing:"
 #~ msgstr "Z&obraziť iba brány, ktorých názov obsahuje:"
@@ -2505,6 +2490,21 @@ msgstr ""
 #~ "</html>"
 
 #~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "Napriek faktu, že sú uložené heslá zašifrované, je možné dostať sa k "
+#~ "pôvodnému obsahu. Dôrazne odporúčame nastaviť prístupové práva tak, aby "
+#~ "iní používatelia nemali prístup k <u>adresáru s konfiguračnými súbormi "
+#~ "programu</u>.\n"
+#~ "</i></html>"
+
+#~ msgid ""
 #~ "<html>\n"
 #~ "Here you can set your login credentials for gateways which require it.\n"
 #~ "</html>"
@@ -2517,15 +2517,8 @@ msgstr ""
 #~ msgid "&Login credentials"
 #~ msgstr "Prih&lasovacie údaje"
 
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Brána"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Domovská stránka</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Podporiť projekt</a></html>"
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>Používateľský adresár programu:<br>{0}</html>"
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2543,26 +2536,9 @@ msgstr ""
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr "<html><h2>Správu pre „{0}“ sa nepodarilo odoslať!</h2>{1}</html>"
 
-#~ msgid ""
-#~ "This tab is for developing purposes only. It will not be visible in the "
-#~ "final release."
-#~ msgstr ""
-#~ "Táto záložka je len na potreby vývoja. V konečnej verzii programu nebude "
-#~ "prítomná."
-
-#~ msgid "Use default form &layout"
-#~ msgstr "Používať predvolené roz&loženie formulára"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Current program dimension will be ignored and the default<br>\n"
-#~ "layout will be restored on the next program startup\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Aktuálne rozmery programu budú ignorované a pri nasledujúcom<br>\n"
-#~ "štarte programu sa použijú predvolené hodnoty\n"
-#~ "</html>"
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Brána"
 
 #~ msgid "O&perators"
 #~ msgstr "O&perátori"
@@ -2618,6 +2594,27 @@ msgstr ""
 
 #~ msgid "Guess a suitable gateway"
 #~ msgstr "Odhadnúť vhodnú bránu"
+
+#~ msgid ""
+#~ "This tab is for developing purposes only. It will not be visible in the "
+#~ "final release."
+#~ msgstr ""
+#~ "Táto záložka je len na potreby vývoja. V konečnej verzii programu nebude "
+#~ "prítomná."
+
+#~ msgid "Use default form &layout"
+#~ msgstr "Používať predvolené roz&loženie formulára"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Current program dimension will be ignored and the default<br>\n"
+#~ "layout will be restored on the next program startup\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Aktuálne rozmery programu budú ignorované a pri nasledujúcom<br>\n"
+#~ "štarte programu sa použijú predvolené hodnoty\n"
+#~ "</html>"
 
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"

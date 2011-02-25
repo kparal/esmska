@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
-"PO-Revision-Date: 2010-07-26 18:25+0000\n"
-"Last-Translator: Juan Miguel Boyero Corral <Unknown>\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"PO-Revision-Date: 2011-01-09 05:21+0000\n"
+"Last-Translator: Fitoschido <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-27 03:59+0000\n"
+"X-Launchpad-Export-Date: 2011-01-10 05:26+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: AboutFrame.Acknowledge
@@ -50,7 +50,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Mostrar página principal de programa\n"
+"Mostrar la página principal del programa\n"
 "</html>"
 
 #: AboutFrame.jLabel3.text
@@ -60,7 +60,7 @@ msgstr "Enviar SMS por internet."
 #: AboutFrame.jLabel5.text
 #, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "Kamil Páral 2007-2010"
+msgstr "2007-2010 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -69,7 +69,7 @@ msgstr "&Licencia"
 #: AboutFrame.supportHyperlink.text
 #, fuzzy
 msgid "Support project"
-msgstr "¡Apoya e&ste proyecto!"
+msgstr "¡Apoye e&ste proyecto!"
 
 #: AboutFrame.supportHyperlink.toolTipText
 msgid ""
@@ -85,7 +85,7 @@ msgstr ""
 
 #: AboutFrame.title
 msgid "About Esmska"
-msgstr "Sobre Esmska"
+msgstr "Acerca de Esmska"
 
 #: About_
 msgid "&About"
@@ -93,7 +93,7 @@ msgstr "&Acerca de"
 
 #: Add
 msgid "Add"
-msgstr ""
+msgstr "Añadir"
 
 #: Add_contact
 msgid "Add contact"
@@ -113,11 +113,11 @@ msgstr "&Cancelar"
 
 #: CheckUpdatesTooltip
 msgid "Check for program and gateway updates"
-msgstr "Buscar actualizaciones del programa y de la compuerta"
+msgstr "Buscar actualizaciones del programa y de operadores"
 
 #: CheckUpdates_
 msgid "&Updates checker"
-msgstr "&Buscador de actualizaciones"
+msgstr "Buscador de act&ualizaciones"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -165,13 +165,13 @@ msgid ""
 "Enable the portable mode - ask for location of the user configuration "
 "directory. Can't be used with -c."
 msgstr ""
-"Activar modo transportable - pregunta por la ubicación del directorio de "
+"Activar modo portable, que pregunta por la ubicación del directorio de "
 "configuración del usuario. No se puede usar con la opción -c."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr "¡Opción no válida en la línea de comandos! (\"{0}\")"
+msgstr "Opción no válida en la línea de comandos. («{0}»)"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
@@ -199,7 +199,7 @@ msgstr "Uso:"
 
 #: CommandLineParser.version
 msgid "Print program version and exit."
-msgstr "Imprime la version del programa y sale."
+msgstr "Imprimir la version del programa y salir."
 
 #: CompressText_
 msgid "&Compress text"
@@ -232,7 +232,7 @@ msgstr "Mostrar elementos con configuraciones más avanzadas"
 
 #: ConfigFrame.advancedControlsCheckBox.text
 msgid "Show a&dvanced controls"
-msgstr "Maostrar controles avanza&dos"
+msgstr "Mostrar controles avanza&dos"
 
 #: ConfigFrame.advancedControlsCheckBox.toolTipText
 msgid ""
@@ -270,7 +270,7 @@ msgstr ""
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
-msgstr "&Eliminar todos los credenciales de login"
+msgstr "&Eliminar todos los credenciales de inicio de sesión"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
@@ -283,7 +283,7 @@ msgstr "&Conexión"
 
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
-msgstr "Crear un log con información de de&bug"
+msgstr "Crear un registro con información de de&puración"
 
 #: ConfigFrame.debugCheckBox.toolTipText
 msgid ""
@@ -294,10 +294,9 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Está opción es solamente requerida cuando se trabaja con "
-"desarrolladores<br>\n"
-"en orden para resolver algún problema. En otros casos es recomendado<br>\n"
-"mantenerlo apagado.\n"
+"Está opción solamente se requiere cuando se trabaja con desarrolladores<br>\n"
+"para resolver algún problema. En otros casos es recomendado<br>\n"
+"mantener esta opción deshabilitada.\n"
 "</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
@@ -370,7 +369,7 @@ msgstr "&Número:"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
-msgstr "Nombre de &usuario:"
+msgstr "&Usuario:"
 
 #: ConfigFrame.jLabel12.text
 msgid "Pa&ssword:"
@@ -395,7 +394,7 @@ msgid ""
 "</i></html>"
 msgstr ""
 "<html><i>\n"
-"* Autenticación de usuario/contraseña no está actualmente soportado.\n"
+"* La autenticación de usuario/contraseña no está actualmente soportada.\n"
 "</i></html>"
 
 #: ConfigFrame.jLabel3.text
@@ -424,7 +423,7 @@ msgstr "Nombre de usuario requerido para poder acceder al operador"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
-msgstr "Apariencia"
+msgstr "Apa&riencia"
 
 #: ConfigFrame.multiplatform_look
 msgid "Multiplatform"
@@ -446,10 +445,10 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Mostrar icono en el área del administrador de ventana (tambien llamado "
-"<i>área de notificación</i>).<br>\n"
+"Mostrar icono en el área de notificación del administrador de ventana "
+"(también llamada <i>bandeja del sistema</i>).<br>\n"
 "<br>\n"
-"Precaución, si usas los modernos gestores de ventanas (Compiz, Beryl, ...) "
+"Sin embarogo, si utiliza gestores de ventanas modernos (Compiz, Beryl, ...) "
 "esta<br>\n"
 "característica está solo disponible con Java 6 Update 10.\n"
 "</html>"
@@ -495,7 +494,7 @@ msgstr ""
 "<html>\n"
 "Todos los diacríticos serán eliminados del mensaje antes de ser enviado."
 "<br>\n"
-"Nota: esto puede que no funcione para todos los lenguajes.\n"
+"Nota: esto puede que no funcione para todos los idiomas.\n"
 "</html>"
 
 #: ConfigFrame.remove_credentials
@@ -507,7 +506,7 @@ msgstr "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
-msgstr "Es necesario reiniciar el programa para aplicar los cambios"
+msgstr "Es necesario reiniciar el programa para aplicar los cambios."
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
@@ -539,8 +538,7 @@ msgstr ""
 #: ConfigFrame.senderNumberTextField.toolTipText
 msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
-"Número del remitente en el formato internacional (comenzando con el signo "
-"'+')"
+"Número del remitente en formato internacional (comenzando con el signo '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Show &password"
@@ -564,7 +562,7 @@ msgstr ""
 
 #: ConfigFrame.startMinimizedCheckBox.text
 msgid "Hide program to &icon on startup"
-msgstr "Minimizar en el &icono al inicio"
+msgstr "Minimizar al &icono de la bandeja al inicio"
 
 #: ConfigFrame.startMinimizedCheckBox.toolTipText
 msgid ""
@@ -574,7 +572,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Inmediatamente despues de inciar el programa se minimiza<br>\n"
+"Inmediatamente después de iniciar el programa se minimizará<br>\n"
 "en el icono situado en el área de notificación\n"
 "</html>"
 
@@ -605,17 +603,17 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Mostrar consejos aleatorios a cerca del programa<br>\n"
-"en la barra de tareas al inicio\n"
+"Mostrar consejos aleatorios acerca del programa<br>\n"
+"en la barra de estado al inicio\n"
 "</html>"
 
 #: ConfigFrame.title
 msgid "Preferences - Esmska"
-msgstr "Preferencias - Esmska"
+msgstr "Preferencias de Esmska"
 
 #: ConfigFrame.toolbarVisibleCheckBox.text
 msgid "Show the &toolbar"
-msgstr "Mostra la barra de &tareas"
+msgstr "Mostra la barra de herramien&tas"
 
 #: ConfigFrame.toolbarVisibleCheckBox.toolTipText
 msgid ""
@@ -624,8 +622,8 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Muestra la barra de tareas que facilita el acceso a algunas funciones "
-"fácilmente con el mouse\n"
+"Muestra la barra de herramientas que facilita el acceso a algunas funciones "
+"fácilmente con el ratón\n"
 "</html>"
 
 #: ConfigFrame.unknown_look
@@ -650,7 +648,7 @@ msgstr ""
 "<br>\n"
 "<b>Precaución: versiones inestables son solo recomendables para usuarios con "
 "experiencia<br>\n"
-"no temerosos a la potencial perdida de datos.</b>\n"
+"no temerosos a la potencial pérdida de datos.</b>\n"
 "</html>"
 
 #: ConfigFrame.updateCheckAll
@@ -671,7 +669,7 @@ msgstr "Usar servidor pro&xy"
 
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
-msgstr "Cuándo se debe usar un servidor promiscuo (proxy) para conexiones"
+msgstr "Cuándo se debe usar un servidor proxy para conexiones"
 
 #: ConfigFrame.useSenderIDCheckBox.text
 msgid "Add a sender &signature to the message"
@@ -694,7 +692,7 @@ msgstr ""
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
-msgstr "Iniciar el programa en el &centered de la pantalla"
+msgstr "Iniciar el programa en el &centro de la pantalla"
 
 #: ConfigFrame.windowCenteredCheckBox.toolTipText
 msgid ""
@@ -704,7 +702,7 @@ msgid ""
 msgstr ""
 "<html>Si la ventana del programa debe ser ubicada de acuerdo al sistema "
 "operativo<br>\n"
-"o centrado en la pantalla.</html>"
+"o centrada en la pantalla.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfirmingFileChooser.sure_to_replace
@@ -724,7 +722,7 @@ msgstr "Contacto"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
 msgid "Added new contact: {0}"
-msgstr "Añadido nuevo contacto: {0}"
+msgstr "Nuevo contacto añadido: {0}"
 
 #: ContactPanel.border.title
 msgid "Contacts"
@@ -781,11 +779,11 @@ msgstr "Co&piar a portapapeles"
 
 #: CountryPrefixPanel.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
-msgstr "El código del pais para el cual se ha llenado el número prefijo"
+msgstr "El código del país para el cual se ha llenado el número prefijo"
 
 #: CountryPrefixPanel.countryCodeLabel.text
 msgid "(c&ountry:"
-msgstr "&País"
+msgstr "(&país:"
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -799,15 +797,15 @@ msgid ""
 msgstr ""
 "<html>\n"
 "El código internacional de país comenzando con el signo '+'.<br>\n"
-"Cuando es especificado éste código aparecerá en todos los número escritos "
-"sin el<br>\n"
+"Cuando se especifique este código aparecerá en todos los número escritos sin "
+"el<br>\n"
 "formato internacional. La apariencia de éste código será mucho mas corta en "
 "muchas etiquetas.\n"
 "</html>"
 
 #: CountryPrefixPanel.jLabel2.text
 msgid "The &default country prefix number:"
-msgstr "El código de país &predeterminado"
+msgstr "El código de país pre&determinado"
 
 #. #meaning "unknown country"
 #: CountryPrefixPanel.unknown_state
@@ -834,7 +832,7 @@ msgid ""
 msgstr ""
 "Las direcciones de correo de los autores no sirven para informar de errores, "
 "resolver problemas o hacer preguntas. No recibirá respuesta a ningún correo "
-"de ese tipo. Use el menú de ayuda en su lugar. Gracias."
+"de ese tipo. Use el menú Ayuda en su lugar. Gracias."
 
 #: Credits.graphics
 msgid "Graphics:"
@@ -842,7 +840,7 @@ msgstr "Gráficos:"
 
 #: Credits.moreDonators
 msgid "and others..."
-msgstr "Y otros..."
+msgstr "y otros..."
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -908,8 +906,8 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"La puerta de enlace seleccionada no soporta su receptor. Envía mensajes "
-"solamente a los números de teléfono con prefijos: {0}.<br>\n"
+"El operador seleccionado no soporta su receptor. Solamente puede enviar "
+"mensajes a los números de teléfono con prefijos: {0}.<br>\n"
 "</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -921,14 +919,14 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Usted ha seleccionado una compuerta que requiere de registro.<br>\n"
-"Por favor registre sus credenciales en la <a href=\"{0}\">opciones de "
-"dialogo</a>.\n"
+"Usted ha seleccionado un operador que requiere de registro.<br>\n"
+"Por favor registre sus credenciales en el <a href=\"{0}\">diálogo de "
+"opciones</a>.\n"
 "</html>"
 
 #: EditContactPanel.gatewayLabel.text
 msgid "Default &gateway:"
-msgstr "&Pasarela por defecto:"
+msgstr "&Operador predeterminado:"
 
 #: EditContactPanel.nameLabel.text
 msgctxt "EditContactPanel.nameLabel.text"
@@ -991,7 +989,7 @@ msgstr "Detalles:"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
 msgid "The file ''{0}'' can''t be written!"
-msgstr "¡El archivo \"{0}\" no puede escribirse!"
+msgstr "¡El archivo «{0}» no puede escribirse!"
 
 #: ExportManager.choose_export_file
 msgid "Choose location and type of exported file"
@@ -1014,7 +1012,7 @@ msgstr "Archivos CSV (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
-msgstr "Fallo al exportar el contacto!"
+msgstr "¡Error al exportar el contacto!"
 
 #: ExportManager.export_info
 msgid ""
@@ -1030,8 +1028,8 @@ msgid ""
 "eg. freely available OpenOffice Calc (www.openoffice.org).<br><br>\n"
 "The file will be saved in the UTF-8 encoding.</html>"
 msgstr ""
-"<html>Usted puede exportar sus contactos al tipo de archivo CSV o vCard. "
-"Estos son<br>\n"
+"<html>Puede exportar sus contactos al tipo de archivo CSV o vCard. Estos "
+"son<br>\n"
 "archivos de texto con todos los datos claramente visibles y legibles.<br>\n"
 "Usando la función de importar usted puede más tarde cargar estos datos de "
 "regreso a Esmska<br>\n"
@@ -1052,7 +1050,7 @@ msgstr "La exportación del contacto ha finalizado exitosamente"
 
 #: ExportManager.export_ok!
 msgid "Contact export finished successfully!"
-msgstr "Exportación de contactos finalizada exitosamente!"
+msgstr "Exportación de contactos finalizada exitosamente."
 
 #: ExportManager.history
 msgid ""
@@ -1082,7 +1080,7 @@ msgstr ""
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr "Archivos Vcard (*.vcard, *.vcf)"
+msgstr "Archivos vCard (*.vcard, *.vcf)"
 
 #: Finish_
 msgid "&Finish"
@@ -1092,7 +1090,7 @@ msgstr "&Finalizar"
 #: Forward_
 msgctxt "Forward_"
 msgid "&Forward"
-msgstr "Si&guiente"
+msgstr "&Reenviar"
 
 #: Gateway.unknown
 msgctxt "Gateway.unknown"
@@ -1101,7 +1099,7 @@ msgstr "Puerta de enlace desconocida"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
-msgstr "Sugerir una compuerta concordante con el número provehido"
+msgstr "Sugerir un operador concordante con el número proveído"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayComboBox.gatewayTooltip
@@ -1123,7 +1121,7 @@ msgstr ""
 "{3}<br>\n"
 "Retardo entre mensajes: {4}<br>\n"
 "{5}<br>\n"
-"Versión de compuerta: {6}\n"
+"Versión de operador: {6}\n"
 "</html>"
 
 #: GatewayComboBox.international
@@ -1145,9 +1143,8 @@ msgstr "Usable principalmente por el país: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
-#, fuzzy
 msgid "Sending failed: {0}"
-msgstr "<html><i>El fichero de registro está guardado en: {0}</i></html>"
+msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
 #, fuzzy
@@ -1166,14 +1163,14 @@ msgid ""
 "stable and immutable machine-readable interface for their gateway. That "
 "would eliminate these problems."
 msgstr ""
-"Los responsables de la compuerta han modificado su página web y no puede ser "
+"Los responsables del operador han modificado su página web y no puede ser "
 "usada desde Esmska<br>\n"
 "por el momento. Se está trabajando en la corrección, puede dar seguimiento "
 "<a href=\"{0}\">su estado</a>.<br>\n"
 "<br>\n"
 "Mientras tanto usted puede enviar peticiones a los responsables para crear "
 "una interfaz para su compuerta estable e<br>inalterable legible para el "
-"equipo. Eso eliminaría estos problemas<br>"
+"equipo. Eso eliminaría estos problemas.<br>"
 
 #: GatewayExecutor.ERROR_GATEWAY_MESSAGE
 msgid "A message from the gateway:<br>"
@@ -1186,10 +1183,10 @@ msgid ""
 "interval you have to wait before sending another message or it limits the "
 "maximum number of possible messages in some time period. Try it later."
 msgstr ""
-"Usted está enviando el mensaje muy pronto. Cualquier compuerta requiere un "
-"cierto intervalo de tiempo<br>usted debe esperar antes de enviar otro "
-"mensaje o le limitará<br>el máximo número de mensajes posibles en un período "
-"de tiempo. Inténtelo más tarde."
+"Está enviando el mensaje demasiado pronto. Cualquier operador requiere un "
+"cierto intervalo de tiempo<br>que debe esperar antes de enviar otro mensaje "
+"o le limitará<br>el máximo número de mensajes posibles en un período de "
+"tiempo. Inténtelo más tarde."
 
 #: GatewayExecutor.ERROR_LONG_TEXT
 #, fuzzy
@@ -1200,9 +1197,9 @@ msgid ""
 "characters (different from standard english character set), otherwise it may "
 "reduce the maximum allowed message length substantially."
 msgstr ""
-"Usted ha introducido un texto demasiado largo.<br>\n"
+"Ha introducido un texto demasiado largo.<br>\n"
 "<br>\n"
-"Consejo: Si es posible para su lenguaje, intente evitar el uso de caracteres "
+"Consejo: Si es posible para su idioma, intente evitar el uso de caracteres "
 "nacionales (diferentes al paquete estándar<br>de caracteres inglés), de otra "
 "forma se podría reducir substancialmente el tamaño máximo permitido para el "
 "mensaje."
@@ -1214,7 +1211,7 @@ msgstr "Usted no cuenta con suficiente crédito para enviar este mensaje."
 #: GatewayExecutor.ERROR_NO_REASON
 msgid "The gateway hasn't specified any reason why the message sending failed."
 msgstr ""
-"La compuerta no ha especificado razón alguna del por qué falló el mensaje "
+"El operador no ha especificado razón alguna del por qué falló el mensaje "
 "enviado."
 
 #: GatewayExecutor.ERROR_SIGNATURE_NEEDED
@@ -1222,8 +1219,8 @@ msgid ""
 "This gateway requires that you supply a sender signature. Correct it in the "
 "program settings and try again."
 msgstr ""
-"Esta puerta de enlace requiere que proporcione una firma de remitente. "
-"Corrija esto en los ajustes del programa e inténtelo de nuevo."
+"Este operador requiere que proporcione una firma de remitente. Corrija esto "
+"en los ajustes del programa e inténtelo de nuevo."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_UNKNOWN
@@ -1270,11 +1267,11 @@ msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_CODE
 msgid "You have entered the wrong security code."
-msgstr "Ha ingresado un codigo de seguridad incorrecto."
+msgstr "Ha ingresado un código de seguridad incorrecto."
 
 #: GatewayExecutor.ERROR_WRONG_NUMBER
 msgid "You have entered incorrect recipient number."
-msgstr "Ha ingresado un número de recipiente incorrecto."
+msgstr "Ha ingresado un número de receptor incorrecto."
 
 #: GatewayExecutor.ERROR_WRONG_SIGNATURE
 msgid "You have entered incorrent sender signature (number or name)."
@@ -1282,18 +1279,18 @@ msgstr "Ha ingresado un número o nombre de remitente incorrecto"
 
 #: GatewayExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
-msgstr "Credito restante:"
+msgstr "Crédito restante:"
 
 #: GatewayExecutor.INFO_FREE_SMS_REMAINING
 msgid "Free SMS remaining:"
-msgstr "SMS gratis restantes:"
+msgstr "SMS gratuitos restantes:"
 
 #: GatewayExecutor.INFO_STATUS_NOT_PROVIDED
 msgid ""
 "The gateway doesn't provide any information about successful sending. The "
 "message might be and <b>might not be</b> delivered."
 msgstr ""
-"La compuerta no provee información alguna acerca del envío exitoso. El "
+"El operador no provee información alguna acerca del envío exitoso. El "
 "mensaje podría y <b>no podría</b> haber sido entregado."
 
 #: GatewayImageCodeMessage.jLabel2.text
@@ -1304,16 +1301,16 @@ msgstr "&Código de seguridad:"
 #: GatewayImageCodeMessage.securityImage
 #, fuzzy
 msgid "Security code required: {0}"
-msgstr "<html><i>El fichero de registro está guardado en: {0}</i></html>"
+msgstr "&Código de seguridad:"
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
-msgstr "¡Compuerta desconocida!"
+msgstr "¡Operador desconocido!"
 
 #: GatewayMessageDialog.title
 #, fuzzy
 msgid "Sending process - Esmska"
-msgstr "Preferencias - Esmska"
+msgstr "Preferencias de Esmska"
 
 #: Hide_program
 msgid "Hide program"
@@ -1325,7 +1322,7 @@ msgstr "Historial"
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
-msgstr "Limpiar termino de búsqueda (Alt+R,Escape)"
+msgstr "Limpiar términos de búsqueda (Alt+R,Escape)"
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
@@ -1356,15 +1353,15 @@ msgstr "Nombre remitente:"
 #: HistoryFrame.remove_selected
 msgid "Really remove all selected messages from history?"
 msgstr ""
-"Realmente desea remover todos los mensajes seleccionados del historial?"
+"¿En verdad desea eliminar todos los mensajes seleccionados del historial?"
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
-msgstr "Vuelva a enviar mensaje a otra persona"
+msgstr "Volver a enviar mensaje a otra persona"
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
-msgstr "Ingrese el termino a buscar en el historial de mensajes"
+msgstr "Ingrese el término a buscar en el historial de mensajes"
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
@@ -1402,7 +1399,7 @@ msgstr "Elija el archivo de contactos exportados"
 
 #: ImportFrame.doImportLabel.text
 msgid "If you want to import these contacts press Import."
-msgstr "Si quiere importar estos contactos presione Importar."
+msgstr "Si desea importar estos contactos presione Importar."
 
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
@@ -1415,8 +1412,8 @@ msgid ""
 "<html>The program expects the file to be in the windows-1250 encoding (the "
 "default file encoding for czech MS Windows).</html>"
 msgstr ""
-"<html>El programa espera que el archivo esté en la codificación windows-1250 "
-"(la codificación predeterminada para czech MS Windows).</html>"
+"<html>El programa espera que el archivo esté en la codificación Windows-1250 "
+"(la codificación predeterminada para checo de MS Windows).</html>"
 
 #: ImportFrame.fileLabel.text
 msgid "Choose input file:"
@@ -1544,7 +1541,7 @@ msgstr ""
 #: ImportFrame.progressBar.string
 msgctxt "ImportFrame.progressBar.string"
 msgid "Please wait..."
-msgstr "Espere por favor"
+msgstr "Espere un momento..."
 
 #: ImportFrame.title
 msgid "Contact import - Esmska"
@@ -1553,11 +1550,11 @@ msgstr "Importar contactos - Esmska"
 #: ImportFrame.vCard_filter
 msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr "Archivos Vcard (*.vcard, *.vcf)"
+msgstr "Archivos vCard (*.vcard, *.vcf)"
 
 #: Import_
 msgid "Im&port"
-msgstr "Im&potar"
+msgstr "Im&portar"
 
 #: InitWizardDialog.jLabel1.text
 msgid ""
@@ -1581,8 +1578,7 @@ msgstr "Borra el registro actual"
 
 #: LogFrame.copyButton.toolTipText
 msgid "Copy the whole log contents to the system clipboard"
-msgstr ""
-"Copiar el total del contenido de los registros al portapapeles del sistema"
+msgstr "Copiar todo el contenido de los registros al portapapeles del sistema"
 
 #: LogFrame.title
 msgid "Log - Esmska"
@@ -1598,9 +1594,9 @@ msgid ""
 "strongly discourage you from starting another<br>instances of the program "
 "because it may cause a user data loss.</html>"
 msgstr ""
-"<html><h2>¡Esmska ya se está ejecutando!</h2>Esmska ya fue iniciado. "
-"Decididamente no recomendamos iniciar otra<br>vez porque podría causar una "
-"perdida de datos del usuario.</html>"
+"<html><h2>¡Esmska ya se está ejecutando!</h2>Esmska ya fue iniciado. No "
+"recomendamos iniciar otra<br>vez porque podría causar una pérdida de datos "
+"del usuario.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
@@ -1643,7 +1639,7 @@ msgstr ""
 "<html><h2>¡El programa es obsoleto!</h2>Sus archivos actuales fueron "
 "escritos por una versión más reciente del programa ({0})<br>que la que "
 "actualmente está usando ({1}). Tal vez usted instaló una versión más "
-"antigua<br>de Esmska por accidente. Usted puede repararlo descargando e "
+"antigua<br>de Esmska por accidente. Puede reparar esto descargando e "
 "instalando la última<br>version de Esmska.<br><br><i>¡No se recomienda "
 "continuar, podría perder sus datos!</i>"
 
@@ -1653,10 +1649,9 @@ msgid ""
 "files<br>which is necessary for the program to work properly. It is "
 "recommended to use <br>Java from Sun. The program will now exit.</html>"
 msgstr ""
-"<html>Su actual Java no soporta la ejecución de los archivos "
+"<html>Su Java actual no soporta la ejecución de los archivos "
 "JavaScript<br>necesarios para que el programa trabaje de forma apropiada. Se "
-"recomienda usar <br>Java del desarrollador Sun. El programa finalizará ahora."
-"</html>"
+"recomienda usar <br>Java de Oracle. El programa finalizará ahora.</html>"
 
 #: Main.run_anyway
 msgid "Run anyway"
@@ -1670,7 +1665,7 @@ msgid ""
 msgstr ""
 "¡Usted está probablemente ejecutando el programa en una versión Java no "
 "soportada! ¡Con la cual el programa podría no trabajar de forma correcta! "
-"Las versiones probadas de Java son: Sun Java 6, OpenJDK 6, Apple Java 6."
+"Las versiones probadas de Java son: Oracle Java 6, OpenJDK 6, Apple Java 6."
 
 #: MainFrame.Quit_program
 msgid "Quit program"
@@ -1686,11 +1681,11 @@ msgstr "Configurar el comportamiento del programa"
 
 #: MainFrame.donateButton.text
 msgid "Donate"
-msgstr ""
+msgstr "Donar"
 
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
-msgstr "¡Apoya e&ste proyecto!"
+msgstr "¡Apoye e&ste proyecto!"
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
@@ -1702,7 +1697,7 @@ msgstr "Preguntas frecuentes (FAQ's)"
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
-msgstr "Ver las preguntas frecuentes FAQ's (en línea)"
+msgstr "Ver las preguntas frecuentes (en línea)"
 
 #: MainFrame.getHelpMenuItem.text
 msgid "&Ask the authors..."
@@ -1710,11 +1705,11 @@ msgstr "Pregunte a los &autores..."
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
-msgstr "Haga una pregunta en un foro de apoyo"
+msgstr "Haga una pregunta en un foro de soporte"
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr "A&yuda"
+msgstr "Ay&uda"
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
@@ -1730,12 +1725,13 @@ msgstr "&Mensaje"
 
 #: MainFrame.newGatewayUpdate
 msgid "<a href=\"\">Gateway updates</a> are available!"
-msgstr "<a href=\"\">¡Actualizaciones de compuerta</a> disponibles!"
+msgstr "<a href=\"\">¡Actualizaciones de operador</a> disponibles!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
-msgstr "A <a href=\"\">¡Nueva versión del programa</a> ({0}) se ha liberado!"
+msgstr ""
+"A <a href=\"\">¡Hay una nueva versión del programa</a> ({0}) disponible!"
 
 #: MainFrame.no_gateways
 msgid ""
@@ -1754,8 +1750,8 @@ msgid ""
 "</ul></html>"
 msgstr ""
 "<html>\n"
-"<h2>¡No se encontraron compuertas!</h2>\n"
-"Son compuertas el programa no es utilizable. La causa del problema puede ser:"
+"<h2>¡No se encontraron operadores!</h2>\n"
+"Sin compuertas el programa no es utilizable. La causa del problema puede ser:"
 "<br>\n"
 "<ul>\n"
 "<li>Su programa fue instalado incorrectamente y algunos de los archivos<br>\n"
@@ -1770,7 +1766,7 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &problem or an idea..."
-msgstr "Reportar un &problema o una idea..."
+msgstr "Enviar un &problema o una idea..."
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1782,7 +1778,7 @@ msgstr "P&rograma"
 
 #: MainFrame.redoButton.toolTipText
 msgid "Redo (Ctrl+Y)"
-msgstr "Rahacer (Ctrl+Y)"
+msgstr "Rehacer (Ctrl+Y)"
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
@@ -1790,7 +1786,7 @@ msgstr "Mostrar historial de mensajes enviados"
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr "Mostrar ingormación del programa"
+msgstr "Mostrar información del programa"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
@@ -1800,7 +1796,7 @@ msgstr "¡El mensaje para {0} no se pudo enviar!"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
-msgstr "El mensaje para {0} enviado."
+msgstr "Mensaje para {0} enviado."
 
 #: MainFrame.tip
 msgid "Tip:"
@@ -1812,7 +1808,7 @@ msgstr "Herramien&tas"
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate this application..."
-msgstr "&Traducir esta aplicación"
+msgstr "&Traducir esta aplicación..."
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
@@ -1844,16 +1840,15 @@ msgstr "Nuevo contacto"
 
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
-msgstr "Pausar/despausar envío"
+msgstr "Pausar/continuar envío"
 
 #: OK_
 msgid "&OK"
-msgstr "&OK"
+msgstr "&Aceptar"
 
 #: Pause
-#, fuzzy
 msgid "Pause"
-msgstr "Pausar cola"
+msgstr "Pausa"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1861,7 +1856,7 @@ msgstr "Pausar cola"
 
 #: Pause_sms_queue
 msgid "Pause sms queue"
-msgstr "Pausar cola de sms"
+msgstr "Pausar cola de SMS"
 
 #: Preferences
 msgid "Preferences"
@@ -1869,27 +1864,27 @@ msgstr "Preferencias"
 
 #: Preferences_
 msgid "&Preferences"
-msgstr "Preferencias"
+msgstr "&Preferencias"
 
 #: Program_start
 msgid "Program start"
-msgstr "Iniciar programa"
+msgstr "Inicio del programa"
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
-msgstr "Mover sms abajo en la cola"
+msgstr "Mover SMS abajo en la cola"
 
 #: QueuePanel.Move_sms_up_in_the_queue
 msgid "Move sms up in the queue"
-msgstr "Mover sms arriba en la cola"
+msgstr "Mover SMS arriba en la cola"
 
 #: QueuePanel.Pause_sending_of_sms_in_the_queue
 msgid "Pause sending of sms in the queue (Alt+P)"
-msgstr "Pausar el envío de sms en la cola (Alt+P)"
+msgstr "Pausar el envío de SMS en la cola (Alt+P)"
 
 #: QueuePanel.Unpause_sending_of_sms_in_the_queue
 msgid "Unpause sending of sms in the queue (Alt+P)"
-msgstr "Despausar el envío de sms en la cola (Alt+P)"
+msgstr "Continuar el envío de SMS en la cola (Alt+P)"
 
 #: QueuePanel.border.title
 msgid "Queue"
@@ -1907,7 +1902,7 @@ msgstr "m"
 
 #: QueuePanel.pausedLabel.text
 msgid "The queue is now PAUSED."
-msgstr ""
+msgstr "La cola ahora está pausada."
 
 #: QueuePanel.replaceSms
 msgid ""
@@ -1920,7 +1915,7 @@ msgid ""
 msgstr ""
 "<html>\n"
 "<h2>¿Reemplazar el texto?</h2>\n"
-"Usted está actualmente escribiendo un nuevo mensaje. ¿Desea descartar el "
+"Está actualmente escribiendo un nuevo mensaje. ¿Desea descartar el "
 "texto<br>\n"
 "y reemplazarlo con el seleccionado desde la cola?\n"
 "</html>"
@@ -1932,7 +1927,7 @@ msgstr "s"
 
 #: Quit
 msgid "Quit"
-msgstr "Abandonar"
+msgstr "Salir"
 
 #: Quit_
 msgid "&Quit"
@@ -1978,7 +1973,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Receptor no soportado por esta puerta de enlace. Prefijos permitidos: {0}\n"
+"Receptor no soportado por este operador. Prefijos permitidos: {0}\n"
 "</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1990,8 +1985,8 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"La compuerta seleccionada requiere de registro. Ingrese sus credenciales en "
-"las <a href=\"{0}\">opciones de dialogo</a>.\n"
+"El operador seleccionado requiere de registro. Ingrese sus credenciales en "
+"el <a href=\"{0}\">diálogo de opciones</a>.\n"
 "</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -1999,8 +1994,8 @@ msgstr ""
 msgid ""
 "<html>Chars in whole message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
 msgstr ""
-"<html>Caracteres en el total del mensaje: <b>{0}/{1}</b> (<b>{2}</b> restan)"
-"</html>"
+"<html>Caracteres en todo el mensaje: <b>{0}/{1}</b> (restan <b>{2}</b>)</"
+"html>"
 
 #: SMSPanel.gatewayLabel.text
 #, fuzzy
@@ -2009,7 +2004,7 @@ msgstr "&Operador:"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
-msgstr "<html>El número no está en un formato internacional valido.</html>"
+msgstr "<html>El número no está en un formato internacional válido.</html>"
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"
@@ -2023,9 +2018,9 @@ msgid ""
 "when selecting contacts in the list."
 msgstr ""
 "<html>\n"
-"Nombre del contacto o número de teléfono.<br><br>\n"
+"El nombre del contacto o número de teléfono.<br><br>\n"
 "Para enviar el mensaje a múltiples contactos mantenga presionada la tecla "
-"Shift ó Ctrl<br>\n"
+"Mayús ó Ctrl<br>\n"
 "cuando seleccione contactos en la lista."
 
 #: SMSPanel.recipientTextField.tooltip.tip
@@ -2040,20 +2035,20 @@ msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Ctrl+Enter)"
-msgstr "Enviar mensaje (Ctrl+Enter)"
+msgstr "Enviar mensaje (Ctrl+Entrar)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.singleProgressBar
 msgid ""
 "<html>Chars in current message: <b>{0}/{1}</b> (<b>{2}</b> remaining)</html>"
 msgstr ""
-"<html>Caracteres en el mensaje actual: <b>{0}/{1}</b> (<b>{2}</b> restan)</"
+"<html>Caracteres en el mensaje actual: <b>{0}/{1}</b> (restan <b>{2}</b>)</"
 "html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
-msgstr "{0} caracteres ({1} sms)"
+msgstr "{0} caracteres ({1} SMS)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.2
@@ -2089,7 +2084,7 @@ msgid ""
 "cause of the failure for the web gateway used."
 msgstr ""
 "El autor del script no proveyó información adicional<br>referente a la causa "
-"de la falla para la página compuerta usada."
+"de la falla para el operador web usado."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.SENDING_CRASHED_ERROR
@@ -2098,10 +2093,13 @@ msgid ""
 "<br>More information is available in the program log.<br>Please report this "
 "problem on <a href=\"{0}\">program homepage</a>."
 msgstr ""
+"Algunas circunstancias serias evitaron que Esmska pudiera enviar el mensaje."
+"<br>En el registro del programa se puede encontrar más información.<br>Por "
+"favor reporte este problema en <a href=\"{0}\">program homepage</a>."
 
 #: SMSSender.no_gateway
 msgid "no gateway"
-msgstr "sin compuerta"
+msgstr "sin operador"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.sending_message
@@ -2148,7 +2146,7 @@ msgstr "Bienvenido/a"
 
 #: StatusPanel.statusMessageLabel.toolTipText
 msgid "Click to show application log"
-msgstr "Haga clik para mostrar el registro de la aplcación"
+msgstr "Haga clic para mostrar el registro de la aplicación"
 
 #: Suggest_
 msgid "&Suggest"
@@ -2169,26 +2167,26 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.10
 msgid "Program appearance can be modified according to your taste."
-msgstr "Puede modificar la apariencia del programa a su gusto"
+msgstr "Puede modificar la apariencia del programa a su gusto."
 
 #. #Write the tip as short as possible
 #: Tip.11
 msgid "In preferences you can restrict the list of available web gateways."
 msgstr ""
-"En las preferencias usted puede restringir la lista de compuertas web "
-"disponibles."
+"En las preferencias puede restringir la lista de operadores web disponibles."
 
 #. #Write the tip as short as possible
 #: Tip.12
 msgid "Many gateways support adding a custom signature. See preferences."
 msgstr ""
-"Muchas compuertas soportan añadir una firma personal. Vea en preferencias."
+"Muchos operadores soportan añadir una firma personal. Vea en Preferencias."
 
 #. #Write the tip as short as possible
 #: Tip.13
 msgid ""
 "Your contacts can be exported as text and therefore can be used elsewhere."
-msgstr "Sus contactos podrán exportarse y después usarse en cualquier lugar."
+msgstr ""
+"Sus contactos pueden ser exportados y después usarse en cualquier lugar."
 
 #. #Write the tip as short as possible
 #: Tip.14
@@ -2208,7 +2206,7 @@ msgid ""
 "Are you a programmer? Write support for a new gateway, little JavaScript is "
 "enough."
 msgstr ""
-"¿Es usted programador? Escriba apoyo para una nueva compuerta, un pequeño "
+"¿Es usted programador? Escriba soporte para un nuevo operador, un pequeño "
 "JavaScript es suficiente."
 
 #. #Write the tip as short as possible
@@ -2221,14 +2219,14 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.18
 msgid "Program is open and free. Join in and help us improve it!"
-msgstr "El programa es abierto y gratis. ¡Unase y ayúdenos a mejorar!"
+msgstr "El programa es abierto y libre. ¡Únase y ayúdenos a mejorarlo!"
 
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
 "Integrated gateway updater will help you solve problems with message sending."
 msgstr ""
-"El actualizador de compuertas integrado le ayudará a resolver problemas con "
+"El actualizador de operadores integrado le ayudará a resolver problemas con "
 "el envío de mensajes."
 
 #. #Write the tip as short as possible
@@ -2253,8 +2251,8 @@ msgstr ""
 msgid ""
 "4 of 5 zoologist recommend using the operating system with a penguin logo."
 msgstr ""
-"4 de 5 zoólogos recomiendan usar el sistema operativo con un pingüino en su "
-"logotipo."
+"4 de 5 zoólogos recomiendan usar el sistema operativo con logotipo de "
+"pingüino."
 
 #. #Write the tip as short as possible
 #: Tip.22
@@ -2263,38 +2261,37 @@ msgid ""
 "list."
 msgstr ""
 "Los mensajes se pueden enviar usando una compuerta diferente a la "
-"predeterminada - sólo seleccionela de la lista."
+"predeterminada, solo selecciónela de la lista."
 
 #. #Write the tip as short as possible
 #: Tip.23
 msgid "Program can be minimized to a notification area icon. See preferences."
 msgstr ""
-"El programa se puede minimizar al área de notificaciones. Vea en "
-"preferencias."
+"El programa se puede minimizar al área de notificaciones. Vea Preferencias."
 
 #. #Write the tip as short as possible
 #: Tip.24
 msgid "Bothered by these tips? You can turn them off in preferences."
-msgstr "¿Cansado de estos consejos? Usted los puede apagar en preferencias."
+msgstr "¿Cansado de estos consejos? Puede deshabilitarlos en Preferencias."
 
 #. #Write the tip as short as possible
 #: Tip.25
 msgid "Use Help menu to ask a question or report a problem."
-msgstr "Use el menú de ayuda para pregunar o reportar un problema."
+msgstr "Use el menú Ayuda para preguntar o reportar un problema."
 
 #: Tip.26
 msgid ""
 "Esmska is constantly looking for new developers. Help us make the program "
 "better."
 msgstr ""
-"Esmsk siempre está buscando nuevos desarrolladores. Ayúdenos a mejorar el "
+"Esmska siempre está buscando nuevos desarrolladores. Ayúdenos a mejorar el "
 "programa."
 
 #. #Write the tip as short as possible
 #: Tip.3
 msgid "Your contacts can be imported from many other programs or formats."
 msgstr ""
-"Sus contactos pueden ser importados desde muchos otros programas o formatos."
+"Sus contactos pueden importarse desde muchos otros programas o formatos."
 
 #. #Write the tip as short as possible
 #: Tip.4
@@ -2340,18 +2337,21 @@ msgid ""
 "A small donation is one of the options how to support future program "
 "development."
 msgstr ""
-"Una pequeña donación es una de las opciones para apoyar el desarrollo de "
-"futuros programas."
+"Una pequeña donación es una de las opciones para apoyar el desarrollo futuro "
+"de la aplicación."
 
 #. #Provide names and contacts to translators
 #: Translators
 msgid "translator-credits"
 msgstr ""
+"This is a dummy translation so that the credits are counted as translated.\n"
+"\n"
 "Launchpad Contributions:\n"
 "  Alfonso E. Romero https://launchpad.net/~alfonsoeromero\n"
 "  Carlos Alberto Ospina https://launchpad.net/~atah\n"
 "  DiegoJ https://launchpad.net/~diegojromerolopez\n"
-"  Federico Vera https://launchpad.net/~fedevera\n"
+"  Fido https://launchpad.net/~fedevera\n"
+"  Fitoschido https://launchpad.net/~fitoschido\n"
 "  Javier Acuña Ditzel https://launchpad.net/~santoposmoderno\n"
 "  Jonay https://launchpad.net/~jonay-santana\n"
 "  Juan Miguel Boyero Corral https://launchpad.net/~juanmi1982\n"
@@ -2377,7 +2377,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"<h2>¡Ooops! Ocurrió un error!</h2>\n"
+"<h2>¡Ups! ¡Ocurrió un error!</h2>\n"
 "Se ha detectado un error del programa. Por favor visite nuestra página "
 "principal:<br>\n"
 "<br>\n"
@@ -2397,32 +2397,31 @@ msgstr "&Deshacer"
 #: UnknownGateway
 msgctxt "UnknownGateway"
 msgid "Unknown gateway"
-msgstr "Compuerta desconocida"
+msgstr "Operador desconocido"
 
 #: Unpause
-#, fuzzy
 msgid "Unpause"
-msgstr "Despausar cola"
+msgstr "Continuar"
 
 #: Unpause_queue
 msgid "Unpause queue"
-msgstr "Despausar cola"
+msgstr "Continuar cola"
 
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
-msgstr "Despausar cola sms"
+msgstr "Continuar con la cola de SMS"
 
 #: Update.allUpdated
 msgid "All gateways have been successfully updated."
-msgstr "Todas las compuertas se han actualizado exitosamente."
+msgstr "Todos los operadores se han actualizado exitosamente."
 
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
-msgstr "Clic para abrir el programa de descargas"
+msgstr "Haga clic para abrir la página de descargas de la aplicación"
 
 #: Update.checkFailed
 msgid "Retrieving update information failed!"
-msgstr "¡La recuperación de la información de actualización falló!"
+msgstr "¡La obtención de información de actualización falló!"
 
 #: Update.checking
 msgid "Checking..."
@@ -2430,7 +2429,7 @@ msgstr "Verificando..."
 
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
-msgstr "¡Falló la descarga de algunas compuertas!"
+msgstr "¡Falló la descarga de algunos operadores!"
 
 #: Update.downloading
 msgid "Downloading..."
@@ -2439,30 +2438,30 @@ msgstr "Descargando..."
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwTooltip
 msgid "gateway version: {0}"
-msgstr "versión de compuerta:"
+msgstr "versión de operador: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
 msgid "Gateway updated: {0}"
-msgstr "Comperta actualizada: {0}"
+msgstr "Operador actualizado: {0}"
 
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
-msgstr "¡Falló la instalación de algunas compuertas!"
+msgstr "¡Falló la instalación de algunos operadores!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.invalidGw
 msgid "{0} (needs program version: {1})"
-msgstr "{0} (Neceesita la version del programa: {1})"
+msgstr "{0} (necesita la versión del programa: {1})"
 
 #: Update.noUpdates
 msgid ""
 "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
 "latest versions of all the available gateways.</html>"
 msgstr ""
-"<html><h2>Todas las compuertas están actualizadas</h2>. Al momento usted "
-"está utilizando las versiones más recientes de todas las compuertas "
-"disponibles.</html>"
+"<html><h2>Todos los operadores están actualizados</h2>. En este momento está "
+"utilizando las versiones más recientes de todos los operadores disponibles.</"
+"html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.notLatest
@@ -2470,7 +2469,7 @@ msgid ""
 "<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
 "than you currently use.</html>"
 msgstr ""
-"<html>Algunas compuertas requieren <a href=\"{0}\">una versión más reciente "
+"<html>Algunos operadores requieren <a href=\"{0}\">una versión más reciente "
 "del programa</a> que la que actualmente está usando.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2497,7 +2496,7 @@ msgstr ""
 
 #: Update.showDialog
 msgid "Click to open an update manager"
-msgstr "Clic para abrir un administrador de actualizaciones"
+msgstr "Clic para abrir un gestor de actualizaciones"
 
 #: Update.update_
 msgid "&Update"
@@ -2508,8 +2507,8 @@ msgid ""
 "<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
 "found. It is recommended to update them now.</html>"
 msgstr ""
-"<html><h2>Se encontraron compuertas actualizadas</h2>Se encontraron algunas "
-"compuertas nuevas o actualizadas. Es recomendable actualizarlas ahora</html>"
+"<html><h2>Se encontraron operadores actualizados</h2>Se encontraron algunos "
+"operadores nuevos o actualizados. Es recomendable actualizarlos ahora.</html>"
 
 #: UpdateDialog.checkButton.text
 msgid "Check for &updates"
@@ -2524,27 +2523,15 @@ msgid ""
 msgstr ""
 "<html>\n"
 "<h2>Buscar compuertas actualizadas</h2>\n"
-"Las compuertas actualizadas pueden auydarlo a solucionar problemas con el "
+"Los operadores actualizados pueden ayudarlo a solucionar problemas con el "
 "envío de mensajes.\n"
 "</html>"
 
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "Although the passwords are stored encrypted the original content may be "
-#~ "retrieved. We strongly suggest to set the access rights in such manner "
-#~ "that no other user has the access to the <u>program configuration "
-#~ "directory</u>.\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "Aunque las contraseñas guardadas son encriptadas su contenido aún puede "
-#~ "ser recuperado. Recomendamos que configure los permisos de acceso de tal "
-#~ "manera que ningún otro usuario pueda acceder al <u>directorio de "
-#~ "configuracion del programa</u>.\n"
-#~ "</i></html>"
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Sitio web</a></html>"
 
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html> Directorio de configuración de usuario:<br>{0}</html>"
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Apoyar el proyecto</a></html>"
 
 #~ msgid "Show &only gateways with names containing:"
 #~ msgstr "Mostrar sol&o los operadores cuyos nombres contienen:"
@@ -2569,6 +2556,21 @@ msgstr ""
 #~ "</html>"
 
 #~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "Aunque las contraseñas guardadas son encriptadas su contenido aún puede "
+#~ "ser recuperado. Recomendamos que configure los permisos de acceso de tal "
+#~ "manera que ningún otro usuario pueda acceder al <u>directorio de "
+#~ "configuracion del programa</u>.\n"
+#~ "</i></html>"
+
+#~ msgid ""
 #~ "<html>\n"
 #~ "Here you can set your login credentials for gateways which require it.\n"
 #~ "</html>"
@@ -2581,15 +2583,8 @@ msgstr ""
 #~ msgid "&Login credentials"
 #~ msgstr "&Credenciales de acceso"
 
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "Co&mpuerta:"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Página de inicio</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Apoyar el proyecto</a></html>"
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html> Directorio de configuración de usuario:<br>{0}</html>"
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2600,13 +2595,35 @@ msgstr ""
 #~ msgstr ""
 #~ "<html>\n"
 #~ "<h2>Se requiere código de seguridad</h2>\n"
-#~ "La compuerta elegida requiere que ingrese el código de seguridad que se "
+#~ "El operador elegido requiere que ingrese el código de seguridad que se "
 #~ "muestra abajo:\n"
 #~ "</html>"
 
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr ""
 #~ "<html><h2>¡El mensaje para ''{0}''  no se pudo enviar!</h2>{1}</html>"
+
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Operador:"
+
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009 Kamil Páral"
+
+#~ msgid "Add new contact"
+#~ msgstr "Añadir nuevo contacto"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Do you like this project? Help to keep it running...\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "¿Le gusta este proyecto? Ayude a que continúe existiendo...\n"
+#~ "</html>"
+
+#~ msgid "(country:"
+#~ msgstr "(país:"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "
@@ -2629,11 +2646,39 @@ msgstr ""
 #~ "predeterminada será restaurada la próxima vez que inicie el programa.\n"
 #~ "</html>"
 
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "* A program restart is neccessary to apply the changes!\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "* ¡Es necesario reiniciar para que los cambios surtan efecto!\n"
+#~ "</i></html>"
+
+#~ msgid "Show password"
+#~ msgstr "Mostrar contraseña"
+
+#~ msgid "Usernames and password to individual gateways"
+#~ msgstr "Usuarios y contraseñas a puertas de enlaces individuales"
+
 #~ msgid "SMS queue to be sent"
 #~ msgstr "SMS en cola para ser enviado"
 
 #~ msgid "Sent messages history"
 #~ msgstr "Historial de mensajes enviados"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Security code required</h2>\n"
+#~ "The chosen gateway requires you to enter the security code from the "
+#~ "picture below:\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Requiere Código de Seguridad</h2>\n"
+#~ "La puerta de enlace requiere que ingrese el código de seguridad en la "
+#~ "siguiente imagen:\n"
+#~ "</html>"
 
 #~ msgid "&Image code:"
 #~ msgstr "Código &Image"
@@ -2657,6 +2702,34 @@ msgstr ""
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "Importar solamente contactos con un operador conocido"
 
+#~ msgid "Compress message (Ctrl+K)"
+#~ msgstr "Comprimir mensaje (Ctrl+K)"
+
+#~ msgctxt "Operator.unknown"
+#~ msgid "Unknown gateway"
+#~ msgstr "Compuerta desconocida"
+
+#~ msgid "Only usable for the country: {0}"
+#~ msgstr "Solamente se puede usar para el país: {0}"
+
+#~ msgid ""
+#~ "An unknown error has occured. The gateway provider has probably "
+#~ "changed<br>its webpages or has a problem with them currently.<br>Try "
+#~ "again later.<br><br>Also make sure that you have working connection to "
+#~ "the Internet<br>and that you are using the <a href=\"{0}\">latest program "
+#~ "and gateway version</a>.<br><br>If the problem persists and the <a href="
+#~ "\"{1}\">web gateway</a> works,<br>report the problem on <a href="
+#~ "\"{2}\">program homepage</a>."
+#~ msgstr ""
+#~ "Ha ocurrido un error desconocido. El proveedor de la compuerta "
+#~ "probablemente ha cambiado<br>sus páginas web o tiene un problema con "
+#~ "ellas actualmente .<br>Vuelva a intentarlo más tarde.<br><br>También "
+#~ "asegúrese que su conexión de internet se encuentra trabajando<br>y que "
+#~ "usted está usando<a href=\"{0}\">la versión más reciente del programa de "
+#~ "la compuerta</a>.<br><br>Si el problema persiste y la <a href="
+#~ "\"{1}\">página web de la compuerta</a> trabaja bien,<br>reporte el "
+#~ "problema a <a href=\"{2}\">la página de inicio del programa</a>."
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Number is from country {0}, but this gateway sends only to {1}.\n"
@@ -2672,3 +2745,14 @@ msgstr ""
 #~ msgstr ""
 #~ "Omitir los \"espacios blancos\" del mensaje actual y reescribirlo al "
 #~ "formato \"CamelCase\""
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Selected gateway probably sends messages only to country: {0}.<br>\n"
+#~ "(and the number seems to be located in: {1})\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>La compuerta seleccionada probablemente envíe mensajes sólo al "
+#~ "país: {0}.<br>\n"
+#~ "(y el número parece estar localizado en: {1})\n"
+#~ "</html>"

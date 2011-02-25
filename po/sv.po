@@ -8,20 +8,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
-"PO-Revision-Date: 2010-11-07 21:59+0000\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"PO-Revision-Date: 2011-01-22 12:26+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-08 05:14+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-23 05:00+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
-msgstr "Jag erkänner att"
+msgstr "Jag godkänner att"
 
 #: AboutFrame.Credits
 msgid "Credits"
@@ -50,7 +50,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Visa program hemsida\n"
+"Visa programmets hemsida\n"
 "</html>"
 
 #: AboutFrame.jLabel3.text
@@ -93,7 +93,7 @@ msgstr "&Om"
 
 #: Add
 msgid "Add"
-msgstr ""
+msgstr "Lägg till"
 
 #: Add_contact
 msgid "Add contact"
@@ -372,6 +372,9 @@ msgid ""
 "* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
+"<html><i>\n"
+"* Användarnamns-/lösenordsautentisering stöds för närvarande inte.\n"
+"</i></html>"
 
 #: ConfigFrame.jLabel3.text
 msgctxt "ConfigFrame.jLabel3.text"
@@ -522,7 +525,7 @@ msgstr ""
 
 #: ConfigFrame.startMinimizedCheckBox.text
 msgid "Hide program to &icon on startup"
-msgstr ""
+msgstr "Göm programmet till &ikon vid uppstart"
 
 #: ConfigFrame.startMinimizedCheckBox.toolTipText
 msgid ""
@@ -531,6 +534,10 @@ msgid ""
 "to the icon in the notification area\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Direkt när programmet startar upp kommer det att minimeras<br>\n"
+"till ikonen i meddelandefältet\n"
+"</html>"
 
 #: ConfigFrame.system_look
 msgid "System"
@@ -568,7 +575,7 @@ msgstr ""
 
 #: ConfigFrame.title
 msgid "Preferences - Esmska"
-msgstr "Egenskaper - Esmska"
+msgstr "Inställningar - Esmska"
 
 #: ConfigFrame.toolbarVisibleCheckBox.text
 msgid "Show the &toolbar"
@@ -746,7 +753,7 @@ msgstr ""
 
 #: CountryPrefixPanel.jLabel2.text
 msgid "The &default country prefix number:"
-msgstr ""
+msgstr "Standardnumret för landsprefix:"
 
 #. #meaning "unknown country"
 #: CountryPrefixPanel.unknown_state
@@ -1007,7 +1014,7 @@ msgstr "Okänd gateway"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
-msgstr ""
+msgstr "Gissa en passande gateway för det försedda numret"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayComboBox.gatewayTooltip
@@ -1051,9 +1058,8 @@ msgstr "Främst användbar för land: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
-#, fuzzy
 msgid "Sending failed: {0}"
-msgstr "<html><i>Loggfilen är lagrad i: {0}</i></html>"
+msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
 #, fuzzy
@@ -1084,6 +1090,7 @@ msgid ""
 msgstr ""
 
 #: GatewayExecutor.ERROR_LONG_TEXT
+#, fuzzy
 msgid ""
 "You have entered too long message text.<br>\n"
 "<br>\n"
@@ -1091,6 +1098,12 @@ msgid ""
 "characters (different from standard english character set), otherwise it may "
 "reduce the maximum allowed message length substantially."
 msgstr ""
+"Du har skrivit ett för lång meddelandetext.<br>\n"
+"<br>\n"
+"Tips: Om det är möjligt för ditt språk kan du försöka att undvika nationella "
+"tecken (skiljer sig från standard-<br>\n"
+"engelskans teckenuppsättningen), annars kan det minska den maximala tillåtna "
+"meddelandelängden avsevärt."
 
 #: GatewayExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
@@ -1169,6 +1182,8 @@ msgid ""
 "The gateway doesn't provide any information about successful sending. The "
 "message might be and <b>might not be</b> delivered."
 msgstr ""
+"Denna gateway gav ingen information om sändningen lyckades. Meddelandet "
+"kanske eller <b>kanske inte</b> levererades."
 
 #: GatewayImageCodeMessage.jLabel2.text
 msgid "Security &code:"
@@ -1178,7 +1193,7 @@ msgstr "Säkerhets&kod:"
 #: GatewayImageCodeMessage.securityImage
 #, fuzzy
 msgid "Security code required: {0}"
-msgstr "<html><i>Loggfilen är lagrad i: {0}</i></html>"
+msgstr "Säkerhets&kod:"
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
@@ -1187,7 +1202,7 @@ msgstr "Okänd gateway!"
 #: GatewayMessageDialog.title
 #, fuzzy
 msgid "Sending process - Esmska"
-msgstr "Egenskaper - Esmska"
+msgstr "Inställningar - Esmska"
 
 #: Hide_program
 msgid "Hide program"
@@ -1286,6 +1301,8 @@ msgid ""
 "<html>The program expects the file to be in the windows-1250 encoding (the "
 "default file encoding for czech MS Windows).</html>"
 msgstr ""
+"<html>Programmet förväntar sig att filen ska vara i kodningen windows-1250 "
+"(standardfilkodning för tjeckiska MS Windows).</html>"
 
 #: ImportFrame.fileLabel.text
 msgid "Choose input file:"
@@ -1320,6 +1337,9 @@ msgid ""
 "go to the contact list and by using right mouse button export all your "
 "contacts to CSV file. Select that file here.</html>"
 msgstr ""
+"<html>Först måste du exportera kontakterna från DreamCom SE. Kör programmet, "
+"gå till kontaktlistan och exportera alla dina kontakter till en CSV-fil "
+"genom att högerklicka. Välj den filen här.</html>"
 
 #: ImportFrame.infoEsmska
 msgid ""
@@ -1334,6 +1354,9 @@ msgid ""
 "program, go to the contact list and by using right mouse button export all "
 "your contacts to CSV file. Select that file here.</html>"
 msgstr ""
+"<html>Först måste du exportera kontakterna från Kubík SMS DreamCom. Kör "
+"programmet, gå till kontaktlistan och exportera alla dina kontakter till en "
+"CSV-fil genom att högerklicka. Välj den filen här.</html>"
 
 #: ImportFrame.infoVcard
 msgid ""
@@ -1442,6 +1465,9 @@ msgid ""
 "strongly discourage you from starting another<br>instances of the program "
 "because it may cause a user data loss.</html>"
 msgstr ""
+"<html><h2>Esmska körs redan!</h2>Esmska har redan startats upp en gång. Vi "
+"rekommenderar inte att du startar upp<br>programmet igen när programmet "
+"redan körs, eftersom det kan förorsaka förluster av användardata.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
@@ -1507,7 +1533,7 @@ msgstr "Konfigurera program betende"
 
 #: MainFrame.donateButton.text
 msgid "Donate"
-msgstr ""
+msgstr "Donera"
 
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
@@ -1658,9 +1684,8 @@ msgid "&OK"
 msgstr "&OK"
 
 #: Pause
-#, fuzzy
 msgid "Pause"
-msgstr "Pausa kö"
+msgstr "Pausa"
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1680,7 +1705,7 @@ msgstr "&Inställningar"
 
 #: Program_start
 msgid "Program start"
-msgstr ""
+msgstr "Programstart"
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
@@ -1714,7 +1739,7 @@ msgstr "m"
 
 #: QueuePanel.pausedLabel.text
 msgid "The queue is now PAUSED."
-msgstr ""
+msgstr "Kön är PAUSAD"
 
 #: QueuePanel.replaceSms
 msgid ""
@@ -1725,6 +1750,12 @@ msgid ""
 "and replace it with the selected message from the queue?\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Vill du ersätta texten?</h2>\n"
+"Du håller för tillfället på med att skriva ett nytt meddelande. Vill du ta "
+"bort texten<br>\n"
+"och ersätta den med den valda meddelandet från kön?\n"
+"</html>"
 
 #. #Shortcut for "second"
 #: QueuePanel.second_shortcut
@@ -1778,6 +1809,9 @@ msgid ""
 "Recipient not supported by this gateway. Allowed number prefixes: {0}\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Mottagare stödjs inte av denna gateway. Tillåtet antal prefix: {0}\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.credentialsInfoLabel.text
@@ -1806,7 +1840,7 @@ msgstr "&Gateway:"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
-msgstr ""
+msgstr "<html>Numret är inte ett giltigt internationellt format.</html>"
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"
@@ -1819,6 +1853,11 @@ msgid ""
 "To send message to multiple contacts hold Shift or Ctrl<br>\n"
 "when selecting contacts in the list."
 msgstr ""
+"<html>\n"
+"Kontaktens namn eller telefonnummer.<br><br>\n"
+"För att skicka meddelanden till flera kontakter håller du in Shift eller "
+"Ctrl<br>\n"
+"när du väljer kontakter i listan."
 
 #: SMSPanel.recipientTextField.tooltip.tip
 msgid ""
@@ -1826,6 +1865,8 @@ msgid ""
 "and<br>\n"
 "you won't have to always fill it in with the phone number."
 msgstr ""
+"<br><br>TIPS: Fyll i standardnumret för landsprefix i Inställningar så<br>\n"
+"slipper du fylla i det tillsammans med telefonnumret varje gång."
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Ctrl+Enter)"
@@ -1961,29 +2002,32 @@ msgstr "Programutseendet kan ändras efter din smak."
 #. #Write the tip as short as possible
 #: Tip.11
 msgid "In preferences you can restrict the list of available web gateways."
-msgstr ""
+msgstr "I Inställningar kan du begränsa antalet tillgängliga webbgateways."
 
 #. #Write the tip as short as possible
 #: Tip.12
 msgid "Many gateways support adding a custom signature. See preferences."
-msgstr ""
+msgstr "Många gateways stödjer en anpassad signatur. Se Inställningar."
 
 #. #Write the tip as short as possible
 #: Tip.13
 msgid ""
 "Your contacts can be exported as text and therefore can be used elsewhere."
-msgstr ""
+msgstr "Dina kontakter kan exporteras som text och därefter användas överallt."
 
 #. #Write the tip as short as possible
 #: Tip.14
 msgid "If the written message is too long use the compress function."
 msgstr ""
+"Om den skrivna texten är för lång kan du använda komprimeringsfunktionen."
 
 #. #Write the tip as short as possible
 #: Tip.15
 msgid ""
 "We recommend you to use Linux packages, you'll obtain an auto-update feature."
 msgstr ""
+"Vi rekommenderar att du använder Linux-paket, du kommer att få en auto-"
+"uppdateringsfunktion."
 
 #. #Write the tip as short as possible
 #: Tip.16
@@ -2039,6 +2083,8 @@ msgid ""
 "Message can be sent using other than default gateway - just pick it from the "
 "list."
 msgstr ""
+"Meddelanden kan skickas via andra gateways än den som är standard - plocka "
+"från listan."
 
 #. #Write the tip as short as possible
 #: Tip.23
@@ -2072,7 +2118,7 @@ msgstr "Din kontakter kan importeras från många andra program eller format."
 #. #Write the tip as short as possible
 #: Tip.4
 msgid "You can see the application protocol by clicking on the status bar."
-msgstr ""
+msgstr "Du kan se applikationsprotokollet genom att klicka på statusfältet."
 
 #. #Write the tip as short as possible
 #: Tip.5
@@ -2096,11 +2142,13 @@ msgstr ""
 #: Tip.8
 msgid "When searching in contact list use arrows to move to other matches."
 msgstr ""
+"När du söker bland kontakterna kan du använda pilarna för att navigera till "
+"andra träffar."
 
 #. #Write the tip as short as possible
 #: Tip.9
 msgid "Don't forget to provide your country prefix number in the preferences."
-msgstr ""
+msgstr "Glöm inte att ange ditt landsprefix-nummer i Inställningar."
 
 #. #Write the tip as short as possible
 #: Tip.donation
@@ -2162,9 +2210,8 @@ msgid "Unknown gateway"
 msgstr "Okänd gateway"
 
 #: Unpause
-#, fuzzy
 msgid "Unpause"
-msgstr "Återuppta kö"
+msgstr "Fortsätt"
 
 #: Unpause_queue
 msgid "Unpause queue"
@@ -2184,7 +2231,7 @@ msgstr "Klicka för att öppna nedladdningssidan för program"
 
 #: Update.checkFailed
 msgid "Retrieving update information failed!"
-msgstr ""
+msgstr "Misslyckades att hämta uppdateringsinformation!"
 
 #: Update.checking
 msgid "Checking..."
@@ -2274,9 +2321,17 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Kolla efter uppdaterade gateways</h2>\n"
+"Uppdaterade gateways kan hjälpa dig att lösa problemet med att skicka "
+"meddelanden.\n"
+"</html>"
 
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>Sökväg för användarkonfiguration:<br>{0}</html>"
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Hemsida</a></html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html> <a href=\"\"> Stödprojekt </ a> </ html>"
 
 #~ msgid "Show &only gateways with names containing:"
 #~ msgstr "Visa &endast gateways vars namn innehåller:"
@@ -2293,15 +2348,8 @@ msgstr ""
 #~ msgid "&Login credentials"
 #~ msgstr "&Inloggningskreditiv"
 
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Gateway:"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Hemsida</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html> <a href=\"\"> Stödprojekt </ a> </ html>"
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>Sökväg för användarkonfiguration:<br>{0}</html>"
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2318,6 +2366,13 @@ msgstr ""
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr "<html><h2>Meddelande för ''{0}'' kunde inte skickas!</h2>{1}</html>"
 
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Gateway:"
+
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009 Kamil Páral"
+
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "
 #~ "final release."
@@ -2325,11 +2380,17 @@ msgstr ""
 #~ "Den här fliken är enbart för utveckling. Den kommer inte vara synlig i "
 #~ "den slutgiltiga utgivningen."
 
-#~ msgid "Use default form &layout"
-#~ msgstr "Använd standardforms&utseendet"
+#~ msgid "(country:"
+#~ msgstr "(land:"
+
+#~ msgid "Show password"
+#~ msgstr "Visa lösenord"
 
 #~ msgid "Sent messages history"
 #~ msgstr "Skickade medelande historik"
+
+#~ msgid "Usernames and password to individual operators"
+#~ msgstr "Användarnamn och lösenord för indivduela operatörer"
 
 #~ msgid "Contact list"
 #~ msgstr "Kontakt lista"
@@ -2339,3 +2400,21 @@ msgstr ""
 
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "Importera endast kontakter med känd operatör"
+
+#~ msgid "Report a &Problem..."
+#~ msgstr "Raportera ett &Problem..."
+
+#~ msgid "A message from operator:<br>"
+#~ msgstr "Ett medelande fån operatören:<br>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Do you like this project? Help to keep it running...\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Gillar du det här projektet? Bidra till att hålla det igång ...\n"
+#~ "</ html>"
+
+#~ msgid "Use default form &layout"
+#~ msgstr "Använd standardforms&utseendet"

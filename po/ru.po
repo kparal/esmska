@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
-"PO-Revision-Date: 2010-10-21 11:18+0000\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"PO-Revision-Date: 2011-02-05 21:03+0000\n"
 "Last-Translator: Vitaliy Starostin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-22 04:42+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 04:56+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -93,7 +93,7 @@ msgstr "&О программе"
 
 #: Add
 msgid "Add"
-msgstr ""
+msgstr "Добавить"
 
 #: Add_contact
 msgid "Add contact"
@@ -998,9 +998,8 @@ msgstr "D основном используется в странах: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
-#, fuzzy
 msgid "Sending failed: {0}"
-msgstr "<html><i>Лог файл доступен по следующему пути: {0}</i></html>"
+msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
 #, fuzzy
@@ -1111,9 +1110,8 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
-#, fuzzy
 msgid "Security code required: {0}"
-msgstr "<html><i>Лог файл доступен по следующему пути: {0}</i></html>"
+msgstr ""
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
@@ -2057,9 +2055,8 @@ msgid "Unknown gateway"
 msgstr "Неизвестный шлюз"
 
 #: Unpause
-#, fuzzy
 msgid "Unpause"
-msgstr "Возобновить очереди"
+msgstr ""
 
 #: Unpause_queue
 msgid "Unpause queue"
@@ -2172,8 +2169,11 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>Каталог конфигурации пользователя:<br>{0}</html>"
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Домашняя страница</a></html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Поддержать проект</a></html>"
 
 #~ msgid "Show &only gateways with names containing:"
 #~ msgstr "Показывать &только шлюзы с именами, содержащими:"
@@ -2190,25 +2190,15 @@ msgstr ""
 #~ msgid "&Login credentials"
 #~ msgstr "&Логин"
 
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>Каталог конфигурации пользователя:<br>{0}</html>"
+
 #~ msgctxt "SMSPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Шлюз:"
 
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Домашняя страница</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Поддержать проект</a></html>"
-
-#~ msgid ""
-#~ "This tab is for developing purposes only. It will not be visible in the "
-#~ "final release."
-#~ msgstr ""
-#~ "Эта закладка только для разработчиков. Она будет недоступна в финальном "
-#~ "релизе."
-
-#~ msgid "Use default form &layout"
-#~ msgstr "Использовать раскладку по умолчанию"
+#~ msgid "Add new contact"
+#~ msgstr "Добавить новый контакт"
 
 #~ msgid "O&perators"
 #~ msgstr "О&ператоры"
@@ -2220,8 +2210,55 @@ msgstr ""
 #~ msgid "Contact list"
 #~ msgstr "Список контактов"
 
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009 Kamil Páral"
+
+#~ msgid "Delete all usernames and passwords for all operators"
+#~ msgstr "Удалить все имена пользователей и их пароли для всех операторов"
+
+#~ msgid "(country:"
+#~ msgstr "(страна:"
+
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "* A program restart is neccessary to apply the changes!\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "* Необходимо перезапустить программу, чтобы применить изменения!\n"
+#~ "</i></html>"
+
+#~ msgid "Username needed for logging in to the operator web gateway"
+#~ msgstr ""
+#~ "Имя пользователя, которое необходимо для входа на интернет-шлюз оператора"
+
+#~ msgid "Show &only operator gateways with names containing:"
+#~ msgstr "Показывать &только шлюзы оператора с именами содержащими:"
+
+#~ msgid "Show password"
+#~ msgstr "Показать пароль"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Do you like this project? Help to keep it running...\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Вам нравится этот проект? Помогите своим участием...\n"
+#~ "</html>"
+
 #~ msgid "Sent messages history"
 #~ msgstr "Архив отправленных сообщений"
+
+#~ msgid "Use default form &layout"
+#~ msgstr "Использовать раскладку по умолчанию"
+
+#~ msgid ""
+#~ "This tab is for developing purposes only. It will not be visible in the "
+#~ "final release."
+#~ msgstr ""
+#~ "Эта закладка только для разработчиков. Она будет недоступна в финальном "
+#~ "релизе."
 
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "Импортировать контакты только с известным оператором"

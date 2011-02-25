@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
 "PO-Revision-Date: 2010-06-26 16:22+0000\n"
 "Last-Translator: leffort <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -2124,21 +2124,21 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Brama:"
-
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Strona domowa</a></html>"
 
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Wspomóż projekt</a></html>"
 
+#~ msgid "Import only contacts with known operator"
+#~ msgstr "Importuj tylko kontakty ze znanego operatora"
+
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr "<html><h2>Nie można wysłać wiadomości do {0}!</h2>{1}</html>"
 
-#~ msgid "Import only contacts with known operator"
-#~ msgstr "Importuj tylko kontakty ze znanego operatora"
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Brama:"
 
 #~ msgid "O&perators"
 #~ msgstr "O&peratorzy"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
+"POT-Creation-Date: 2011-02-25 19:44+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -2148,14 +2148,14 @@ msgstr ""
 "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
 "</html>"
 
-#~ msgid "&Login credentials"
-#~ msgstr "Prisijungimo duomenys"
-
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Pagrindinis puslapis</a></html>"
 
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Paremkite projektą</a></html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "Prisijungimo duomenys"
 
 #~ msgid "Contact list"
 #~ msgstr "Kontaktų sąrašas"
