@@ -19,7 +19,7 @@ if [ $# != 0 -o "$1" = "-h" -o "$1" = "--help" ]; then
 fi
 
 PODIR="$PWD/../po"
-BZRDIR="$PWD/../../../translations/import"
+BZRDIR="$PWD/../../translations/import"
 
 # update bazaar branch
 echo "Updating bazaar checkout..."
