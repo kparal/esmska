@@ -201,7 +201,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="homeHyperlink.setURI(Links.getURI(Links.HOMEPAGE));"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="setURI(homeHyperlink, Links.getURI(Links.HOMEPAGE));"/>
       </AuxValues>
     </Component>
     <Component class="org.jdesktop.swingx.JXHyperlink" name="supportHyperlink">
@@ -214,7 +214,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="supportHyperlink.setURI(Links.getURI(Links.DONATE));"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="setURI(supportHyperlink, Links.getURI(Links.DONATE));"/>
       </AuxValues>
     </Component>
   </SubComponents>

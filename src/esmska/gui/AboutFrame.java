@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URI;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -81,6 +82,15 @@ public class AboutFrame extends javax.swing.JFrame {
                 closeButtonActionPerformed(e);
             }
         });
+    }
+
+    /** Same as JXHyperlink.setURI(), but don't throw exception */
+    private void setURI(JXHyperlink jXHyperlink, URI uri) {
+        try {
+            jXHyperlink.setURI(uri);
+        } catch (UnsupportedOperationException ex) {
+            logger.log(Level.WARNING, "System does not support Desktop API, this URI won't work: " + uri, ex);
+        }
     }
     
     /** This method is called from within the constructor to
@@ -153,10 +163,10 @@ public class AboutFrame extends javax.swing.JFrame {
 
 
 
-        homeHyperlink.setURI(Links.getURI(Links.HOMEPAGE));
+        setURI(homeHyperlink, Links.getURI(Links.HOMEPAGE));
         Mnemonics.setLocalizedText(homeHyperlink, l10n.getString("AboutFrame.homeHyperlink.text"));
         homeHyperlink.setToolTipText(l10n.getString("AboutFrame.homeHyperlink.toolTipText")); // NOI18N
-        supportHyperlink.setURI(Links.getURI(Links.DONATE));
+        setURI(supportHyperlink, Links.getURI(Links.DONATE));
         Mnemonics.setLocalizedText(supportHyperlink, l10n.getString("AboutFrame.supportHyperlink.text"));
         supportHyperlink.setToolTipText(l10n.getString("AboutFrame.supportHyperlink.toolTipText")); // NOI18N
         GroupLayout layout = new GroupLayout(getContentPane());
