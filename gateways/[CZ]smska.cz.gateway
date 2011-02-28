@@ -1,0 +1,106 @@
+function getName() {
+    return "[CZ]smska.cz"
+}
+
+function getVersion() {
+    return "2011-02-28"
+}
+
+function getMaintainer() {
+    return "Miloslav Semler <miloslav.semler@hosting90.cz>"
+}
+
+function getMinProgramVersion() {
+    return "0.20.0"
+}
+
+function getWebsite() {
+    return "http://www.smska.cz"
+}
+
+function getDescription() {
+    return "Placená SMS brána umožňující garantované odesílání zpráv na české mobilní operátory."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 800
+}
+
+function getMaxParts() {
+    return 1
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function send() {
+
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        return false
+    }
+
+    // strip "+" from telephone numbers, gateway doesn't like it
+    if (NUMBER.indexOf("+") == 0) {
+        NUMBER = NUMBER.substring(1)
+    }
+
+    // send SMS message to gateway
+    EXEC.setReferer('http://www.hosting90.cz/cz/esmska')
+    getData = ['number', NUMBER,
+               'text', MESSAGE,
+               'max_length', '5']
+    postData = ['uid', LOGIN,
+               'password', PASSWORD ]
+    content = EXEC.postURL("http://sms.hosting90.cz", getData, postData)
+
+    // get state and error message
+    re_state = /state="([a-zA-Z]+)"/
+    re_txt = /text="([^"]+)"/
+    match = re_state.exec(content)
+    if(undefined != match) {
+        if(match[1] == "ok") {
+            // message sent
+            return true
+        } else {
+            // an error occured        
+            match = re_txt.exec(content);
+            if (undefined == match) {
+                EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
+            } else {
+                EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+            }
+            return false
+        }
+    }
+    
+    // if neither success nor error message was found
+    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
+    return false
+}
