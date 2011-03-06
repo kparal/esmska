@@ -66,6 +66,7 @@ public class VersionFile {
             unstableProgramVersion = args[1];
         }
 
+        Config.setSharedInstance(new Config());
         PersistenceManager.instantiate();
         Context.persistenceManager.loadGateways();
 
