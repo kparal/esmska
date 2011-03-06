@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2010-11-15 00:26+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-16 05:09+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:02+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -55,9 +55,8 @@ msgid "Sending SMS over Internet."
 msgstr ""
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2010 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -2109,6 +2108,9 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Páral"
 
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">මුල් පිටුව</a><html>"

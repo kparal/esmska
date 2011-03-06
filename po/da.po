@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2010-01-31 18:22+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-01 04:46+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:01+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -58,30 +58,24 @@ msgid "Sending SMS over Internet."
 msgstr "Sender SMS over internettet."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2009 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
 msgstr "&Licens"
 
 #: AboutFrame.supportHyperlink.text
-#, fuzzy
 msgid "Support project"
-msgstr "&Støt dette projekt!"
+msgstr ""
 
 #: AboutFrame.supportHyperlink.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Kan du lide dette projektt? Hjælp med at holde det i luften...\n"
-"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -191,9 +185,8 @@ msgid "Print program version and exit."
 msgstr "Udskriv program version og afslut."
 
 #: CompressText_
-#, fuzzy
 msgid "&Compress text"
-msgstr "&Komprimér"
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
@@ -204,9 +197,8 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "Gateway:"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -469,9 +461,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Show &password"
-msgstr "Vis adgangskode"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -936,10 +927,9 @@ msgid "&Forward"
 msgstr "&Videresend"
 
 #: Gateway.unknown
-#, fuzzy
 msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
-msgstr "Ukendt gateway"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -982,9 +972,8 @@ msgid "Sending failed: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
-#, fuzzy
 msgid "Original message:"
-msgstr "Redigér besked"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1090,9 +1079,8 @@ msgstr "Sikkerheds &kode:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
-#, fuzzy
 msgid "Security code required: {0}"
-msgstr "Sikkerheds &kode:"
+msgstr ""
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
@@ -1476,9 +1464,8 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem or an idea..."
-msgstr "Rapportér et &problem..."
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a problem or request a feature"
@@ -1519,9 +1506,8 @@ msgid "&Tools"
 msgstr "&Værktøjer"
 
 #: MainFrame.translateMenuItem.text
-#, fuzzy
 msgid "&Translate this application..."
-msgstr "&Oversæt dette program..."
+msgstr ""
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
@@ -1696,9 +1682,8 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "&Gateway:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2141,14 +2126,49 @@ msgid ""
 "</html>"
 msgstr ""
 
+#~ msgid "Add new contact"
+#~ msgstr "Tilføj ny kontakt"
+
+#~ msgid "Unknown operator"
+#~ msgstr "Ukendt operator"
+
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Hjemmeside</a></html>"
+
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009 Kamil Páral"
+
+#~ msgid "Get &Help Online..."
+#~ msgstr "Få &hjælp online..."
+
+#~ msgid "Report a &Problem..."
+#~ msgstr "Rapportér et &problem..."
+
+#~ msgid "&Translate This Application..."
+#~ msgstr "&Oversæt dette program..."
+
+#~ msgctxt "Operator.unknown"
+#~ msgid "Unknown gateway"
+#~ msgstr "Ukendt gateway"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Do you like this project? Help to keep it running...\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Kan du lide dette projektt? Hjælp med at holde det i luften...\n"
+#~ "</html>"
 
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Støt projekt</a></html>"
 
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Gateway:"
+
+#~ msgid "Show password"
+#~ msgstr "Vis adgangskode"
+
 #~ msgid "Contact list"
 #~ msgstr "Kontaktliste"
-
-#~ msgid "Get &Help Online..."
-#~ msgstr "Få &hjælp online..."

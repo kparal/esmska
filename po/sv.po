@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2011-01-22 12:26+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-23 05:00+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:02+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -58,18 +58,16 @@ msgid "Sending SMS over Internet."
 msgstr "Sänder SMS över Internet"
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2010 Kamil Paral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
 msgstr "&Licens"
 
 #: AboutFrame.supportHyperlink.text
-#, fuzzy
 msgid "Support project"
-msgstr "&Stöd detta projekt!"
+msgstr ""
 
 #: AboutFrame.supportHyperlink.toolTipText
 msgid ""
@@ -207,9 +205,8 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "Gateway:"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -472,11 +469,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.remove_credentials
-#, fuzzy
 msgid ""
 "Do you really want to remove all login credentials for all available "
 "gateways?"
-msgstr "Vill du verkligen ta bort alla angivna inloggningskreditiv?"
+msgstr ""
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
@@ -1062,9 +1058,8 @@ msgid "Sending failed: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
-#, fuzzy
 msgid "Original message:"
-msgstr "Redigera medelande"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1090,7 +1085,6 @@ msgid ""
 msgstr ""
 
 #: GatewayExecutor.ERROR_LONG_TEXT
-#, fuzzy
 msgid ""
 "You have entered too long message text.<br>\n"
 "<br>\n"
@@ -1098,12 +1092,6 @@ msgid ""
 "characters (different from standard english character set), otherwise it may "
 "reduce the maximum allowed message length substantially."
 msgstr ""
-"Du har skrivit ett för lång meddelandetext.<br>\n"
-"<br>\n"
-"Tips: Om det är möjligt för ditt språk kan du försöka att undvika nationella "
-"tecken (skiljer sig från standard-<br>\n"
-"engelskans teckenuppsättningen), annars kan det minska den maximala tillåtna "
-"meddelandelängden avsevärt."
 
 #: GatewayExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
@@ -1138,7 +1126,6 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_WRONG_AUTH
-#, fuzzy
 msgid ""
 "You have entered incorrect login credentials.<br>\n"
 "This gateway requires registration and you can''t send messages throught it "
@@ -1149,13 +1136,6 @@ msgid ""
 "If you have entered your login credentials correctly, visit the website of "
 "the gateway and check that logging in works."
 msgstr ""
-"Du har angivit ogiltiga inloggningskreditiver.<br>Denna gateway kräver "
-"registrering och du kan inte skicka meddelanden via den utan det.<br>Besök "
-"<a href=\"{0}\">webbsidan för denna gateway</a> och ta reda på hur du "
-"registrerar eller<br> loggar in dig. Ange sedan inloggningskreditiven i "
-"programinställningarna.<br><br>Om du har angivit dina inloggningskreditiver "
-"korrekt, besök webbsidan<br>för denna gateway och kolla så att inloggningen "
-"fungerar."
 
 #: GatewayExecutor.ERROR_WRONG_CODE
 msgid "You have entered the wrong security code."
@@ -1191,18 +1171,16 @@ msgstr "Säkerhets&kod:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
-#, fuzzy
 msgid "Security code required: {0}"
-msgstr "Säkerhets&kod:"
+msgstr ""
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
 msgstr "Okänd gateway!"
 
 #: GatewayMessageDialog.title
-#, fuzzy
 msgid "Sending process - Esmska"
-msgstr "Inställningar - Esmska"
+msgstr ""
 
 #: Hide_program
 msgid "Hide program"
@@ -1834,9 +1812,8 @@ msgstr ""
 "<html>Tecken i hela meddelandet: <b>{0}/{1}</b> (<b>{2}</b> återstår)</html>"
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "&Gateway:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2327,49 +2304,6 @@ msgstr ""
 "meddelanden.\n"
 "</html>"
 
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Hemsida</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html> <a href=\"\"> Stödprojekt </ a> </ html>"
-
-#~ msgid "Show &only gateways with names containing:"
-#~ msgstr "Visa &endast gateways vars namn innehåller:"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Here you can set your login credentials for gateways which require it.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Här kan du ange dina inloggningskreditiv för gateways som kräver det.\n"
-#~ "</html>"
-
-#~ msgid "&Login credentials"
-#~ msgstr "&Inloggningskreditiv"
-
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>Sökväg för användarkonfiguration:<br>{0}</html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "<h2>Security code required</h2>\n"
-#~ "The chosen gateway requires you to enter the security code displayed "
-#~ "below:\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "<h2>Säkerhetskod krävs</h2>\n"
-#~ "Vald gateway kräver att du anger säkerhetskoden som visas nedan:\n"
-#~ "</html>"
-
-#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-#~ msgstr "<html><h2>Meddelande för ''{0}'' kunde inte skickas!</h2>{1}</html>"
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Gateway:"
-
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"
 
@@ -2407,6 +2341,9 @@ msgstr ""
 #~ msgid "A message from operator:<br>"
 #~ msgstr "Ett medelande fån operatören:<br>"
 
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Hemsida</a></html>"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Do you like this project? Help to keep it running...\n"
@@ -2416,5 +2353,86 @@ msgstr ""
 #~ "Gillar du det här projektet? Bidra till att hålla det igång ...\n"
 #~ "</ html>"
 
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html> <a href=\"\"> Stödprojekt </ a> </ html>"
+
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Paral"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Gateway:"
+
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Gateway:"
+
+#~ msgid "Show &only gateways with names containing:"
+#~ msgstr "Visa &endast gateways vars namn innehåller:"
+
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html>Sökväg för användarkonfiguration:<br>{0}</html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Here you can set your login credentials for gateways which require it.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Här kan du ange dina inloggningskreditiv för gateways som kräver det.\n"
+#~ "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "&Inloggningskreditiv"
+
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr "Vill du verkligen ta bort alla angivna inloggningskreditiv?"
+
+#~ msgid ""
+#~ "You have entered incorrect login credentials.<br>This gateway requires "
+#~ "registration and you can''t send messages throught it without one."
+#~ "<br>Visit the <a href=\"{0}\">website of this gateway</a> and find out "
+#~ "how to register or log in.<br>Then enter the login credentials in program "
+#~ "preferences.<br><br>If you have entered your login credentials correctly, "
+#~ "visit the website<br>of the gateway and check that logging in works."
+#~ msgstr ""
+#~ "Du har angivit ogiltiga inloggningskreditiver.<br>Denna gateway kräver "
+#~ "registrering och du kan inte skicka meddelanden via den utan det."
+#~ "<br>Besök <a href=\"{0}\">webbsidan för denna gateway</a> och ta reda på "
+#~ "hur du registrerar eller<br> loggar in dig. Ange sedan "
+#~ "inloggningskreditiven i programinställningarna.<br><br>Om du har angivit "
+#~ "dina inloggningskreditiver korrekt, besök webbsidan<br>för denna gateway "
+#~ "och kolla så att inloggningen fungerar."
+
 #~ msgid "Use default form &layout"
 #~ msgstr "Använd standardforms&utseendet"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Security code required</h2>\n"
+#~ "The chosen gateway requires you to enter the security code displayed "
+#~ "below:\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Säkerhetskod krävs</h2>\n"
+#~ "Vald gateway kräver att du anger säkerhetskoden som visas nedan:\n"
+#~ "</html>"
+
+#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
+#~ msgstr "<html><h2>Meddelande för ''{0}'' kunde inte skickas!</h2>{1}</html>"
+
+#~ msgid ""
+#~ "You have entered too long message text.<br>\n"
+#~ "<br>\n"
+#~ "Hint: If it is for your language possible, try to avoid using national "
+#~ "characters (different from standard<br>\n"
+#~ "english character set), otherwise it may reduce the maximum allowed "
+#~ "message length substantially."
+#~ msgstr ""
+#~ "Du har skrivit ett för lång meddelandetext.<br>\n"
+#~ "<br>\n"
+#~ "Tips: Om det är möjligt för ditt språk kan du försöka att undvika "
+#~ "nationella tecken (skiljer sig från standard-<br>\n"
+#~ "engelskans teckenuppsättningen), annars kan det minska den maximala "
+#~ "tillåtna meddelandelängden avsevärt."

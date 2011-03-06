@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
-"PO-Revision-Date: 2010-06-26 16:22+0000\n"
-"Last-Translator: leffort <Unknown>\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
+"PO-Revision-Date: 2011-02-26 12:41+0000\n"
+"Last-Translator: Daniel Sokołowski <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-27 03:47+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-27 04:40+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: AboutFrame.homeHyperlink.text
 msgid "Homepage"
-msgstr ""
+msgstr "Witryna programu"
 
 #: AboutFrame.homeHyperlink.toolTipText
 msgid ""
@@ -59,16 +59,15 @@ msgstr "Wysyłanie SMS przez Internet."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2011 Kamil Páral"
-msgstr ""
+msgstr "2007-2011 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
 msgstr "&Licencja"
 
 #: AboutFrame.supportHyperlink.text
-#, fuzzy
 msgid "Support project"
-msgstr "&Wspomoż ten projekt!"
+msgstr ""
 
 #: AboutFrame.supportHyperlink.toolTipText
 msgid ""
@@ -77,6 +76,10 @@ msgid ""
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Podoba ci się ten projekt?<br>\n"
+"Wspomóż jego kontynuację małym datkiem pieniężnym...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -88,7 +91,7 @@ msgstr "&O programie"
 
 #: Add
 msgid "Add"
-msgstr ""
+msgstr "Dodaj"
 
 #: Add_contact
 msgid "Add contact"
@@ -112,7 +115,7 @@ msgstr "Sprawdź aktualizacje programu i bramek"
 
 #: CheckUpdates_
 msgid "&Updates checker"
-msgstr ""
+msgstr "&Monitor aktualizacji"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -157,7 +160,7 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: CommandLineParser.invalid_option
 msgid "Invalid option on the command line! (''{0}'')"
-msgstr ""
+msgstr "Nieprawidłowa opcja w linii poleceń! (''{0}'')"
 
 #: CommandLineParser.options
 msgid "OPTIONS"
@@ -172,6 +175,8 @@ msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
+"Wskaż ścieżkę do katalogu konfiguracji użytkownika. Określ ścieżkę jako "
+"absolutną. Nie może być użyte z opcją -p."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
@@ -186,9 +191,8 @@ msgid "Print program version and exit."
 msgstr "Drukuj wesję programu i wyjdź."
 
 #: CompressText_
-#, fuzzy
 msgid "&Compress text"
-msgstr "&Kompresuj"
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
@@ -196,16 +200,15 @@ msgstr "&Kompresuj"
 
 #: ConfigFrame.Favorite
 msgid "Favorite"
-msgstr ""
+msgstr "Ulubione"
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "Brama:"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
-msgstr ""
+msgstr "Pokaż"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -226,6 +229,10 @@ msgid ""
 "advanced controls in the main program window\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Pokaż lub ukryj niektóre dodatkowe przyciski i inne <br>\n"
+"zaawansowane kontrolki w głównym oknie programu.\n"
+"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -928,10 +935,9 @@ msgid "&Forward"
 msgstr "&Przekaż"
 
 #: Gateway.unknown
-#, fuzzy
 msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
-msgstr "Nieznana brama"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -974,9 +980,8 @@ msgid "Sending failed: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
-#, fuzzy
 msgid "Original message:"
-msgstr "Edytuj wiadomość"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1090,9 +1095,8 @@ msgid "Unknown gateway!"
 msgstr "Nieznana brama!"
 
 #: GatewayMessageDialog.title
-#, fuzzy
 msgid "Sending process - Esmska"
-msgstr "Ustawienia -Esmska"
+msgstr ""
 
 #: Hide_program
 msgid "Hide program"
@@ -1550,9 +1554,8 @@ msgid "&OK"
 msgstr "&OK"
 
 #: Pause
-#, fuzzy
 msgid "Pause"
-msgstr "Wstrzymaj kolejkę"
+msgstr ""
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1660,9 +1663,8 @@ msgid "Message"
 msgstr "Wiadomość"
 
 #: SMSPanel.compress
-#, fuzzy
 msgid "Compress the message or currently selected text (Ctrl+K)"
-msgstr "Kompresuj wiadomość (Ctrl+K)"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
@@ -1688,9 +1690,8 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "&Brama:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -1985,6 +1986,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Daniel Sokołowski https://launchpad.net/~sokoolx\n"
 "  leffort https://launchpad.net/~leffort\n"
 "  skrzat https://launchpad.net/~radek-floraland"
 
@@ -2015,9 +2017,8 @@ msgid "Unknown gateway"
 msgstr "Nieznana brama"
 
 #: Unpause
-#, fuzzy
 msgid "Unpause"
-msgstr "Wznów kolejkę"
+msgstr ""
 
 #: Unpause_queue
 msgid "Unpause queue"
@@ -2124,24 +2125,21 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Strona domowa</a></html>"
+#~ msgid "Add new contact"
+#~ msgstr "Dodaj nowy kontakt"
 
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Wspomóż projekt</a></html>"
+#~ msgid "(country:"
+#~ msgstr "(kraj:"
 
-#~ msgid "Import only contacts with known operator"
-#~ msgstr "Importuj tylko kontakty ze znanego operatora"
-
-#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-#~ msgstr "<html><h2>Nie można wysłać wiadomości do {0}!</h2>{1}</html>"
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgctxt "ConfigFrame.jLabel10.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Brama:"
 
 #~ msgid "O&perators"
 #~ msgstr "O&peratorzy"
+
+#~ msgid "Show password"
+#~ msgstr "Pokaż hasło"
 
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
@@ -2153,14 +2151,40 @@ msgstr ""
 #~ msgid "Sent messages history"
 #~ msgstr "Historia wysłanych wiadomości"
 
+#~ msgid "Compress message (Ctrl+K)"
+#~ msgstr "Kompresuj wiadomość (Ctrl+K)"
+
+#~ msgid "&Translate This Application..."
+#~ msgstr "&Przetłumacz tę aplikację..."
+
+#~ msgid "Unknown gateway"
+#~ msgstr "Nieznana brama"
+
+#~ msgid "A message from operator:<br>"
+#~ msgstr "Wiadomość od operatora:<br>"
+
 #~ msgid "Unknown operator!"
 #~ msgstr "Nieznany operator!"
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Wprowadź kod z obrazka:"
 
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Brama:"
+
 #~ msgid "Unknown operator"
 #~ msgstr "Nieznany operator"
+
+#~ msgid "Delete all usernames and passwords for all operators"
+#~ msgstr ""
+#~ "Skasuj wszystkie nazwy użytkowników i hasła dla wszystkich operatorów"
+
+#~ msgid "Import only contacts with known operator"
+#~ msgstr "Importuj tylko kontakty ze znanego operatora"
+
+#~ msgid "Choose from which application you want to import contacts:"
+#~ msgstr "Wskaż, z której aplikacji chcesz zaimportować kontakty:"
 
 #~ msgid "Directory with program settings can't be created!"
 #~ msgstr "Katalog z ustawieniami programu nie może zostać utworzony!"
@@ -2168,11 +2192,54 @@ msgstr ""
 #~ msgid "Get &Help Online..."
 #~ msgstr "Otwórz &pomoc online..."
 
+#~ msgid "Report a &Problem..."
+#~ msgstr "Zgłoś &problem..."
+
+#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
+#~ msgstr "<html><h2>Nie można wysłać wiadomości do {0}!</h2>{1}</html>"
+
 #~ msgid "You have entered incorrect message text. Empty or too long?"
 #~ msgstr "Wpisałeś niepoprawny tekst wiadomości. Pusty lub zbyt długi?"
+
+#~ msgid "Pause sending of sms in the queue"
+#~ msgstr "Wstrzymaj wysyłanie SMS w kolejce"
 
 #~ msgid "no operator"
 #~ msgstr "brak operatora"
 
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Strona domowa</a></html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Do you like this project? Help to keep it running...\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Podoba Ci się ten projekt? Pomóż nam go udoskonalać...\n"
+#~ "</html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Wspomóż projekt</a></html>"
+
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009 Kamil Páral"
+
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "* A program restart is neccessary to apply the changes!\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "* Aby zmiany odniosły skutek, wymagany jest restart programu!\n"
+#~ "</i></html>"
+
 #~ msgid "Contact list"
 #~ msgstr "Lista kontaktów"
+
+#~ msgid "Unpause sending of sms in the queue"
+#~ msgstr "Wznów wysyłanie wiadomości w kolejce"
+
+#~ msgctxt "Operator.unknown"
+#~ msgid "Unknown gateway"
+#~ msgstr "Nieznana brama"

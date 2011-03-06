@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2010-11-15 00:11+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-16 05:09+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:02+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -59,9 +59,8 @@ msgid "Sending SMS over Internet."
 msgstr "Відсилання SMS через інтернет."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2010 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -213,9 +212,8 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "Шлюз:"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -492,11 +490,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.remove_credentials
-#, fuzzy
 msgid ""
 "Do you really want to remove all login credentials for all available "
 "gateways?"
-msgstr "Ви дійсно хочете вилучити всі введені дані реєстрації?"
+msgstr ""
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
@@ -1096,9 +1093,8 @@ msgid "Sending failed: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
-#, fuzzy
 msgid "Original message:"
-msgstr "Редагувати повідомлення"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1212,9 +1208,8 @@ msgid "Unknown gateway!"
 msgstr ""
 
 #: GatewayMessageDialog.title
-#, fuzzy
 msgid "Sending process - Esmska"
-msgstr "Параметри - Esmska"
+msgstr ""
 
 #: Hide_program
 msgid "Hide program"
@@ -1808,9 +1803,8 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "&Шлюз:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2241,32 +2235,39 @@ msgid ""
 "</html>"
 msgstr ""
 
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Páral"
+
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Домашня сторінка</a></html>"
 
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Підтримка проекту</a></html>"
 
-#~ msgid "Show &only gateways with names containing:"
-#~ msgstr "Показувати &лише шлюзи, що містять назви:"
+#~ msgid ""
+#~ "This tab is for developing purposes only. It will not be visible in the "
+#~ "final release."
+#~ msgstr ""
+#~ "Ця вкладка використовується лише для розробки. У фінальному випуску вона "
+#~ "буде недоступна."
+
+#~ msgid "Use default form &layout"
+#~ msgstr "Використовувати типове &компонування"
 
 #~ msgid ""
 #~ "<html>\n"
-#~ "In the gateway list only those will be displayed, which contains<br>\n"
-#~ "a pattern in their name provided in this field. This way you can "
-#~ "easily<br>\n"
-#~ "show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-#~ "You can enter more patterns separated by comma. Patterns are case "
-#~ "sensitive.\n"
+#~ "Current program dimension will be ignored and the default<br>\n"
+#~ "layout will be restored on the next program startup\n"
 #~ "</html>"
 #~ msgstr ""
 #~ "<html>\n"
-#~ "В списку шлюзів будуть показані лише ті, що містять<br>\n"
-#~ "шаблони з іменами вказаними в цьому полі. Так ви можете легко<br>\n"
-#~ "показати шлюзи лише для країни XX, шляхом введення шаблону [XX].<br>\n"
-#~ "Можна вводити кілька шаблонів через коми. Назви шаблонів чутливі до "
-#~ "регістру.\n"
+#~ "Чинна розмірність програми буде ігноруватись, а під час<br>\n"
+#~ "наступного запуску буде відновлене типове компонування\n"
 #~ "</html>"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Шлюз:"
 
 #~ msgid ""
 #~ "<html><i>\n"
@@ -2295,26 +2296,29 @@ msgstr ""
 #~ msgid "&Login credentials"
 #~ msgstr "&Дані реєстрації"
 
+#~ msgid ""
+#~ "<html>\n"
+#~ "In the gateway list only those will be displayed, which contains<br>\n"
+#~ "a pattern in their name provided in this field. This way you can "
+#~ "easily<br>\n"
+#~ "show eg. only gateways for country XX by entering pattern [XX].<br>\n"
+#~ "You can enter more patterns separated by comma. Patterns are case "
+#~ "sensitive.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "В списку шлюзів будуть показані лише ті, що містять<br>\n"
+#~ "шаблони з іменами вказаними в цьому полі. Так ви можете легко<br>\n"
+#~ "показати шлюзи лише для країни XX, шляхом введення шаблону [XX].<br>\n"
+#~ "Можна вводити кілька шаблонів через коми. Назви шаблонів чутливі до "
+#~ "регістру.\n"
+#~ "</html>"
+
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr "Ви дійсно хочете вилучити всі введені дані реєстрації?"
+
 #~ msgid "<html>User configuration directory:<br>{0}</html>"
 #~ msgstr "<html>Каталог конфігурації користувача:<br>{0}</html>"
 
-#~ msgid ""
-#~ "This tab is for developing purposes only. It will not be visible in the "
-#~ "final release."
-#~ msgstr ""
-#~ "Ця вкладка використовується лише для розробки. У фінальному випуску вона "
-#~ "буде недоступна."
-
-#~ msgid "Use default form &layout"
-#~ msgstr "Використовувати типове &компонування"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Current program dimension will be ignored and the default<br>\n"
-#~ "layout will be restored on the next program startup\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Чинна розмірність програми буде ігноруватись, а під час<br>\n"
-#~ "наступного запуску буде відновлене типове компонування\n"
-#~ "</html>"
+#~ msgid "Show &only gateways with names containing:"
+#~ msgstr "Показувати &лише шлюзи, що містять назви:"

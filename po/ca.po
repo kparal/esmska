@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2010-07-05 21:21+0000\n"
 "Last-Translator: el_libre - http://www.catmidia.cat  "
 "XDDDDDDDDDDDDDDDDDDDDDDDDDDD <el.libre@gmail.com>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-06 03:38+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:01+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -56,9 +56,8 @@ msgid "Sending SMS over Internet."
 msgstr ""
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2010 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -196,9 +195,8 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "Passarel·la:"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -925,10 +923,9 @@ msgid "&Forward"
 msgstr "Reen&via"
 
 #: Gateway.unknown
-#, fuzzy
 msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
-msgstr "Es desconeix"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -971,9 +968,8 @@ msgid "Sending failed: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
-#, fuzzy
 msgid "Original message:"
-msgstr "Envia missatge"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1682,9 +1678,8 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "Passarel·la:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2115,3 +2110,6 @@ msgid ""
 "Updated gateways may help you fix problems with sending messages.\n"
 "</html>"
 msgstr ""
+
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Páral"

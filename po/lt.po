@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-13 04:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:02+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -58,30 +58,24 @@ msgid "Sending SMS over Internet."
 msgstr "SMS siuntimas internetu."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2010 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
 msgstr "&Licencija"
 
 #: AboutFrame.supportHyperlink.text
-#, fuzzy
 msgid "Support project"
-msgstr "Paremti šį projektą!"
+msgstr ""
 
 #: AboutFrame.supportHyperlink.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Patinka projektas? Padėkite vystyti ...\n"
-"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -191,9 +185,8 @@ msgid "Print program version and exit."
 msgstr "Spausdinti programos versiją ir išeiti"
 
 #: CompressText_
-#, fuzzy
 msgid "&Compress text"
-msgstr "&Suspausti"
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
@@ -204,9 +197,8 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "&Operatoriai:"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -434,11 +426,10 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.remove_credentials
-#, fuzzy
 msgid ""
 "Do you really want to remove all login credentials for all available "
 "gateways?"
-msgstr "Ar tikrai norite pašalinti visus įvestus prisijungimo duomenis?"
+msgstr ""
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
@@ -468,9 +459,8 @@ msgid "Sender number in international format (starting with '+' sign)"
 msgstr "Siuntėjo numeris tarptautiniu formatu (prasideda ženklu '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Show &password"
-msgstr "Rodyti slaptažodį"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -937,10 +927,9 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-#, fuzzy
 msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
-msgstr "Nežinomas"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -974,9 +963,8 @@ msgstr "Nereikalauja registracijos."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayComboBox.onlyCountry
-#, fuzzy
 msgid "Mainly usable for country: {0}"
-msgstr "Tinkamas naudoti tik šioje šalyje:"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
@@ -984,9 +972,8 @@ msgid "Sending failed: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
-#, fuzzy
 msgid "Original message:"
-msgstr "Tvarkyti žinutę"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1559,9 +1546,8 @@ msgid "&OK"
 msgstr ""
 
 #: Pause
-#, fuzzy
 msgid "Pause"
-msgstr "Pristabdyti eilę"
+msgstr ""
 
 #: Pause_queue
 msgid "Pause queue"
@@ -1669,9 +1655,8 @@ msgid "Message"
 msgstr "Žinutė"
 
 #: SMSPanel.compress
-#, fuzzy
 msgid "Compress the message or currently selected text (Ctrl+K)"
-msgstr "Suspausti žinutę (Ctrl+K)"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
@@ -1697,9 +1682,8 @@ msgid ""
 msgstr "<html>Simbolių žinutėje: <b>{0}/{1}</b> (<b>{2}</b> liko)</html>"
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "&Operatoriai:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2031,9 +2015,8 @@ msgid "Unknown gateway"
 msgstr ""
 
 #: Unpause
-#, fuzzy
 msgid "Unpause"
-msgstr "Paleisti eilę"
+msgstr ""
 
 #: Unpause_queue
 msgid "Unpause queue"
@@ -2148,17 +2131,56 @@ msgstr ""
 "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
 "</html>"
 
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Pagrindinis puslapis</a></html>"
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009"
 
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Paremkite projektą</a></html>"
+#~ msgid "Add new contact"
+#~ msgstr "Pridėti naują kontaktą"
+
+#~ msgid "Delete all usernames and passwords for all operators"
+#~ msgstr "Ištrinti visų operatorių prisijungimo vardus ir slaptažodžius"
 
 #~ msgid "&Login credentials"
 #~ msgstr "Prisijungimo duomenys"
 
+#~ msgid "O&perators"
+#~ msgstr "Operatoriai"
+
+#~ msgid "Show password"
+#~ msgstr "Rodyti slaptažodį"
+
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr "Ar tikrai norite pašalinti visus įvestus prisijungimo duomenis?"
+
 #~ msgid "Contact list"
 #~ msgstr "Kontaktų sąrašas"
+
+#~ msgid "Compress message (Ctrl+K)"
+#~ msgstr "Suspausti žinutę (Ctrl+K)"
+
+#~ msgid "Unknown operator!"
+#~ msgstr "Nežinomas operatorius!"
+
+#~ msgid "Please enter the code from the picture:"
+#~ msgstr "Įveskite kodą iš paveiklėlio."
+
+#~ msgid "Unknown operator"
+#~ msgstr "Nežinomas operatorius"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Do you like this project? Help to keep it running...\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Patinka projektas? Padėkite vystyti ...\n"
+#~ "</html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Paremkite projektą</a></html>"
+
+#~ msgid "(country:"
+#~ msgstr "(šalis:"
 
 #~ msgid "Sent messages history"
 #~ msgstr "Išsiųstų žinučių istorija"
@@ -2166,14 +2188,40 @@ msgstr ""
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "Importuoti kontaktus tik su žinomais operatoriais"
 
-#~ msgid "O&perators"
-#~ msgstr "Operatoriai"
-
-#~ msgid "Please enter the code from the picture:"
-#~ msgstr "Įveskite kodą iš paveiklėlio."
-
 #~ msgid "Get &Help Online..."
 #~ msgstr "&Pagalba internete..."
 
+#~ msgid "Report a &Problem..."
+#~ msgstr "Pranešti apie &problemą..."
+
+#~ msgid "&Translate This Application..."
+#~ msgstr "&Išversti šią programą..."
+
+#~ msgid "Only usable for the country: {0}"
+#~ msgstr "Tinkamas naudoti tik šioje šalyje:"
+
+#~ msgid "A message from operator:<br>"
+#~ msgstr "Žinutė nuo operatoriaus:<br>"
+
 #~ msgid "You have entered incorrect message text. Empty or too long?"
 #~ msgstr "Įvedėte neteisingą tekstą. Tekstas tuščias arba per ilgas."
+
+#~ msgid "Pause sending of sms in the queue"
+#~ msgstr "Pristabdyti sms siuntimą eilėje"
+
+#~ msgid "Unpause sending of sms in the queue"
+#~ msgstr "Paleisti sms siuntimą eilėje"
+
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Pagrindinis puslapis</a></html>"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Operatoriai:"
+
+#~ msgid "Username needed for logging in to the operator web gateway"
+#~ msgstr ""
+#~ "Norint prisijungti prie web operatoriaus - nurodykite vartotojo duomenis"
+
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Páral"

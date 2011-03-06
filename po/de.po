@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2009-12-24 12:09+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-25 04:42+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:01+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -58,9 +58,8 @@ msgid "Sending SMS over Internet."
 msgstr "SMS senden über www"
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2009 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -71,16 +70,12 @@ msgid "Support project"
 msgstr ""
 
 #: AboutFrame.supportHyperlink.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Do you like this project?<br>\n"
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Dir gefällt dieses Projekt? Deine Hilfe ist uns willkommen...\n"
-"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -198,9 +193,8 @@ msgid "Print program version and exit."
 msgstr "Drucken der Programmversion und Exit"
 
 #: CompressText_
-#, fuzzy
 msgid "&Compress text"
-msgstr "&Komprimieren"
+msgstr ""
 
 #: Compress_
 msgid "&Compress"
@@ -211,9 +205,8 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "&Gateways"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -677,9 +670,8 @@ msgid "The country code for which you have filled out the prefix number"
 msgstr ""
 
 #: CountryPrefixPanel.countryCodeLabel.text
-#, fuzzy
 msgid "(c&ountry:"
-msgstr "(Land:"
+msgstr ""
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -1696,9 +1688,8 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "&Gateway:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2135,5 +2126,42 @@ msgstr ""
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Homepage</a></html>"
 
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009 Kamil Páral"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Do you like this project? Help to keep it running...\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Dir gefällt dieses Projekt? Deine Hilfe ist uns willkommen...\n"
+#~ "</html>"
+
+#~ msgid "Add new contact"
+#~ msgstr "Neuen Kontakt hinzufügen"
+
+#~ msgid ""
+#~ "Print debugging output. Possible modes are:\n"
+#~ "* {0} - program and web content debugging. Default choice when no mode "
+#~ "specified.\n"
+#~ "* {1} - network only debugging (but with more detail). Prints HTTP "
+#~ "headers, all redirects, web content, etc.\n"
+#~ "* {2} - {0} and {1} modes combined."
+#~ msgstr ""
+#~ "Drucken der Debug-Informationen. Mögliche Modi sind: \n"
+#~ "* (0) - Programm und Web-Content-Debugging. Dies ist die Standard-Wahl, "
+#~ "wenn kein Modus angegeben ist. \n"
+#~ "* (1) - Nur Netzwerk Debugging (aber mit mehr Details). Druckt HTTP-"
+#~ "Header, alle Umleitungen, Web-Inhalte, etc. \n"
+#~ "* (2) - (0) und (1) Modi sind kombiniert."
+
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Unterstütze das Projekt</a></html>"
+
+#~ msgid "(country:"
+#~ msgstr "(Land:"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Gateway:"

@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2011-01-09 05:21+0000\n"
-"Last-Translator: Fitoschido <Unknown>\n"
+"Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-10 05:26+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:02+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -58,18 +58,16 @@ msgid "Sending SMS over Internet."
 msgstr "Enviar SMS por internet."
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2010 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
 msgstr "&Licencia"
 
 #: AboutFrame.supportHyperlink.text
-#, fuzzy
 msgid "Support project"
-msgstr "¡Apoye e&ste proyecto!"
+msgstr ""
 
 #: AboutFrame.supportHyperlink.toolTipText
 msgid ""
@@ -214,9 +212,8 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "Puerta de enlace:"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -498,11 +495,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.remove_credentials
-#, fuzzy
 msgid ""
 "Do you really want to remove all login credentials for all available "
 "gateways?"
-msgstr "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
+msgstr ""
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
@@ -1147,13 +1143,11 @@ msgid "Sending failed: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
-#, fuzzy
 msgid "Original message:"
-msgstr "Editar mensaje"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
-#, fuzzy
 msgid ""
 "The gateway maintainers have modified their webpage and it can''t be used "
 "from Esmska at the moment. The fix is being worked on, you can track <a href="
@@ -1163,33 +1157,19 @@ msgid ""
 "stable and immutable machine-readable interface for their gateway. That "
 "would eliminate these problems."
 msgstr ""
-"Los responsables del operador han modificado su página web y no puede ser "
-"usada desde Esmska<br>\n"
-"por el momento. Se está trabajando en la corrección, puede dar seguimiento "
-"<a href=\"{0}\">su estado</a>.<br>\n"
-"<br>\n"
-"Mientras tanto usted puede enviar peticiones a los responsables para crear "
-"una interfaz para su compuerta estable e<br>inalterable legible para el "
-"equipo. Eso eliminaría estos problemas.<br>"
 
 #: GatewayExecutor.ERROR_GATEWAY_MESSAGE
 msgid "A message from the gateway:<br>"
 msgstr "Un mensaje desde la compuerta:<br>"
 
 #: GatewayExecutor.ERROR_LIMIT_REACHED
-#, fuzzy
 msgid ""
 "You are sending the message too early. The gateway either requires a certain "
 "interval you have to wait before sending another message or it limits the "
 "maximum number of possible messages in some time period. Try it later."
 msgstr ""
-"Está enviando el mensaje demasiado pronto. Cualquier operador requiere un "
-"cierto intervalo de tiempo<br>que debe esperar antes de enviar otro mensaje "
-"o le limitará<br>el máximo número de mensajes posibles en un período de "
-"tiempo. Inténtelo más tarde."
 
 #: GatewayExecutor.ERROR_LONG_TEXT
-#, fuzzy
 msgid ""
 "You have entered too long message text.<br>\n"
 "<br>\n"
@@ -1197,12 +1177,6 @@ msgid ""
 "characters (different from standard english character set), otherwise it may "
 "reduce the maximum allowed message length substantially."
 msgstr ""
-"Ha introducido un texto demasiado largo.<br>\n"
-"<br>\n"
-"Consejo: Si es posible para su idioma, intente evitar el uso de caracteres "
-"nacionales (diferentes al paquete estándar<br>de caracteres inglés), de otra "
-"forma se podría reducir substancialmente el tamaño máximo permitido para el "
-"mensaje."
 
 #: GatewayExecutor.ERROR_NO_CREDIT
 msgid "You don't have sufficient credit to send this message."
@@ -1224,7 +1198,6 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_UNKNOWN
-#, fuzzy
 msgid ""
 "An unknown error has occured. The gateway provider has probably changed its "
 "webpages or has a problem with them currently. Try again later.<br>\n"
@@ -1235,18 +1208,9 @@ msgid ""
 "If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
 "web browser, report the problem on <a href=\"{2}\">program homepage</a>."
 msgstr ""
-"Ha ocurrido un error desconocido. El proveedor de la puerta de enlace puede "
-"haber cambiado<br>sus páginas web o tiene problemas con ellas actualmente."
-"<br>Inténtelo de nuevo más tarde.<br><br>Asegúrese también de que su "
-"conexión a Internet funciona<br>y de que está usando <a href=\"{0}\">la "
-"última versión del programa y de la puerta de enlace</a>.<br><br>Si el "
-"problema persiste y le <a href=\"{1}\">web de la puerta de enlace</a> "
-"funciona en un navegador web,<br>informe del problema en <a href=\"{2}\">la "
-"página web del programa</a>."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_WRONG_AUTH
-#, fuzzy
 msgid ""
 "You have entered incorrect login credentials.<br>\n"
 "This gateway requires registration and you can''t send messages throught it "
@@ -1257,13 +1221,6 @@ msgid ""
 "If you have entered your login credentials correctly, visit the website of "
 "the gateway and check that logging in works."
 msgstr ""
-"Usted ha ingresado credenciales de registro incorrectas.<br>Esta compuerta "
-"requiere de registro y no puede enviar mensajes por ésta vía sin el mismo."
-"<br>Visite la<a href=\"{0}\">página web de la compuerta</a> y encuentre como "
-"registrarse y acceder.<br>Después ingrese las credenciales de registro en "
-"las preferencias del programa.<br><br>Si usted ha ingresado correctamente "
-"sus credenciales de registro, visite la página web<br>de la compuerta y "
-"revise que funcione bien el registro."
 
 #: GatewayExecutor.ERROR_WRONG_CODE
 msgid "You have entered the wrong security code."
@@ -1299,18 +1256,16 @@ msgstr "&Código de seguridad:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
-#, fuzzy
 msgid "Security code required: {0}"
-msgstr "&Código de seguridad:"
+msgstr ""
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
 msgstr "¡Operador desconocido!"
 
 #: GatewayMessageDialog.title
-#, fuzzy
 msgid "Sending process - Esmska"
-msgstr "Preferencias de Esmska"
+msgstr ""
 
 #: Hide_program
 msgid "Hide program"
@@ -1998,9 +1953,8 @@ msgstr ""
 "html>"
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "&Operador:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2344,8 +2298,6 @@ msgstr ""
 #: Translators
 msgid "translator-credits"
 msgstr ""
-"This is a dummy translation so that the credits are counted as translated.\n"
-"\n"
 "Launchpad Contributions:\n"
 "  Alfonso E. Romero https://launchpad.net/~alfonsoeromero\n"
 "  Carlos Alberto Ospina https://launchpad.net/~atah\n"
@@ -2527,86 +2479,6 @@ msgstr ""
 "envío de mensajes.\n"
 "</html>"
 
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Sitio web</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Apoyar el proyecto</a></html>"
-
-#~ msgid "Show &only gateways with names containing:"
-#~ msgstr "Mostrar sol&o los operadores cuyos nombres contienen:"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "In the gateway list only those will be displayed, which contains<br>\n"
-#~ "a pattern in their name provided in this field. This way you can "
-#~ "easily<br>\n"
-#~ "show eg. only gateways for country XX by entering pattern [XX].<br>\n"
-#~ "You can enter more patterns separated by comma. Patterns are case "
-#~ "sensitive.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "En la lista de operadores aparecerán solo aquellos que contienen<br>\n"
-#~ "en sus nombres el patrón especificado en este campo. De esta manera "
-#~ "puedes fácilmente<br>\n"
-#~ "ver por ej. los operadores del país XX escribiendo el patrón [XX].<br>\n"
-#~ "Puedes ingresar mas patrones separándolos por coma. Los patrones son "
-#~ "sensibles a mayúsculas y minúsculas.\n"
-#~ "</html>"
-
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "Although the passwords are stored encrypted the original content may be "
-#~ "retrieved. We strongly suggest to set the access rights in such manner "
-#~ "that no other user has the access to the <u>program configuration "
-#~ "directory</u>.\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "Aunque las contraseñas guardadas son encriptadas su contenido aún puede "
-#~ "ser recuperado. Recomendamos que configure los permisos de acceso de tal "
-#~ "manera que ningún otro usuario pueda acceder al <u>directorio de "
-#~ "configuracion del programa</u>.\n"
-#~ "</i></html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Here you can set your login credentials for gateways which require it.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Aquí puede configurar sus credenciales de acceso para los operadores que "
-#~ "así lo requieran.\n"
-#~ "</html>"
-
-#~ msgid "&Login credentials"
-#~ msgstr "&Credenciales de acceso"
-
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html> Directorio de configuración de usuario:<br>{0}</html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "<h2>Security code required</h2>\n"
-#~ "The chosen gateway requires you to enter the security code displayed "
-#~ "below:\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "<h2>Se requiere código de seguridad</h2>\n"
-#~ "El operador elegido requiere que ingrese el código de seguridad que se "
-#~ "muestra abajo:\n"
-#~ "</html>"
-
-#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-#~ msgstr ""
-#~ "<html><h2>¡El mensaje para ''{0}''  no se pudo enviar!</h2>{1}</html>"
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Operador:"
-
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"
 
@@ -2632,6 +2504,25 @@ msgstr ""
 #~ "El contenido de esta pestaña es para propósitos de desarrollo solamente. "
 #~ "No estará visible en la final release."
 
+#~ msgid ""
+#~ "<html><i>\n"
+#~ "Although the passwords are stored encrypted the original content may be "
+#~ "retrieved. We strongly suggest to set the access rights in such manner "
+#~ "that no other user has the access to the <u>program configuration "
+#~ "directory</u>.\n"
+#~ "</i></html>"
+#~ msgstr ""
+#~ "<html><i>\n"
+#~ "Aunque las contraseñas guardadas son encriptadas su contenido aún puede "
+#~ "ser recuperado. Recomendamos que configure los permisos de acceso de tal "
+#~ "manera que ningún otro usuario pueda acceder al <u>directorio de "
+#~ "configuracion del programa</u>.\n"
+#~ "</i></html>"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Operador:"
+
 #~ msgid "Use default form &layout"
 #~ msgstr "Usar &plantilla predeterminada"
 
@@ -2647,6 +2538,19 @@ msgstr ""
 #~ "</html>"
 
 #~ msgid ""
+#~ "<html>\n"
+#~ "Here you can set your login credentials for gateways which require it.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Aquí puede configurar sus credenciales de acceso para los operadores que "
+#~ "así lo requieran.\n"
+#~ "</html>"
+
+#~ msgid "&Login credentials"
+#~ msgstr "&Credenciales de acceso"
+
+#~ msgid ""
 #~ "<html><i>\n"
 #~ "* A program restart is neccessary to apply the changes!\n"
 #~ "</i></html>"
@@ -2655,8 +2559,37 @@ msgstr ""
 #~ "* ¡Es necesario reiniciar para que los cambios surtan efecto!\n"
 #~ "</i></html>"
 
+#~ msgid "Show &only gateways with names containing:"
+#~ msgstr "Mostrar sol&o los operadores cuyos nombres contienen:"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "In the gateway list only those will be displayed, which contains<br>\n"
+#~ "a pattern in their name provided in this field. This way you can "
+#~ "easily<br>\n"
+#~ "show eg. only gateways for country XX by entering pattern [XX].<br>\n"
+#~ "You can enter more patterns separated by comma. Patterns are case "
+#~ "sensitive.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "En la lista de operadores aparecerán solo aquellos que contienen<br>\n"
+#~ "en sus nombres el patrón especificado en este campo. De esta manera "
+#~ "puedes fácilmente<br>\n"
+#~ "ver por ej. los operadores del país XX escribiendo el patrón [XX].<br>\n"
+#~ "Puedes ingresar mas patrones separándolos por coma. Los patrones son "
+#~ "sensibles a mayúsculas y minúsculas.\n"
+#~ "</html>"
+
 #~ msgid "Show password"
 #~ msgstr "Mostrar contraseña"
+
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr ""
+#~ "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
+
+#~ msgid "<html>User configuration directory:<br>{0}</html>"
+#~ msgstr "<html> Directorio de configuración de usuario:<br>{0}</html>"
 
 #~ msgid "Usernames and password to individual gateways"
 #~ msgstr "Usuarios y contraseñas a puertas de enlaces individuales"
@@ -2705,6 +2638,10 @@ msgstr ""
 #~ msgid "Compress message (Ctrl+K)"
 #~ msgstr "Comprimir mensaje (Ctrl+K)"
 
+#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
+#~ msgstr ""
+#~ "<html><h2>¡El mensaje para ''{0}''  no se pudo enviar!</h2>{1}</html>"
+
 #~ msgctxt "Operator.unknown"
 #~ msgid "Unknown gateway"
 #~ msgstr "Compuerta desconocida"
@@ -2729,6 +2666,22 @@ msgstr ""
 #~ "la compuerta</a>.<br><br>Si el problema persiste y la <a href="
 #~ "\"{1}\">página web de la compuerta</a> trabaja bien,<br>reporte el "
 #~ "problema a <a href=\"{2}\">la página de inicio del programa</a>."
+
+#~ msgid ""
+#~ "You have entered incorrect login credentials.<br>This gateway requires "
+#~ "registration and you can''t send messages throught it without one."
+#~ "<br>Visit the <a href=\"{0}\">website of this gateway</a> and find out "
+#~ "how to register or log in.<br>Then enter the login credentials in program "
+#~ "preferences.<br><br>If you have entered your login credentials correctly, "
+#~ "visit the website<br>of the gateway and check that logging in works."
+#~ msgstr ""
+#~ "Usted ha ingresado credenciales de registro incorrectas.<br>Esta "
+#~ "compuerta requiere de registro y no puede enviar mensajes por ésta vía "
+#~ "sin el mismo.<br>Visite la<a href=\"{0}\">página web de la compuerta</a> "
+#~ "y encuentre como registrarse y acceder.<br>Después ingrese las "
+#~ "credenciales de registro en las preferencias del programa.<br><br>Si "
+#~ "usted ha ingresado correctamente sus credenciales de registro, visite la "
+#~ "página web<br>de la compuerta y revise que funcione bien el registro."
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2756,3 +2709,93 @@ msgstr ""
 #~ "país: {0}.<br>\n"
 #~ "(y el número parece estar localizado en: {1})\n"
 #~ "</html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Apoyar el proyecto</a></html>"
+
+#~ msgid ""
+#~ "An unknown error has occured. The gateway provider has probably "
+#~ "changed<br>its webpages or has a problem with them currently.<br>Try "
+#~ "again later.<br><br>Also make sure that you have working connection to "
+#~ "the Internet<br>and that you are using the <a href=\"{0}\">latest program "
+#~ "and gateway version</a>.<br><br>If the problem persists and the <a href="
+#~ "\"{1}\">web gateway</a> works in a web browser,<br>report the problem on "
+#~ "<a href=\"{2}\">program homepage</a>."
+#~ msgstr ""
+#~ "Ha ocurrido un error desconocido. El proveedor de la puerta de enlace "
+#~ "puede haber cambiado<br>sus páginas web o tiene problemas con ellas "
+#~ "actualmente.<br>Inténtelo de nuevo más tarde.<br><br>Asegúrese también de "
+#~ "que su conexión a Internet funciona<br>y de que está usando <a href="
+#~ "\"{0}\">la última versión del programa y de la puerta de enlace</a>."
+#~ "<br><br>Si el problema persiste y le <a href=\"{1}\">web de la puerta de "
+#~ "enlace</a> funciona en un navegador web,<br>informe del problema en <a "
+#~ "href=\"{2}\">la página web del programa</a>."
+
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Páral"
+
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Sitio web</a></html>"
+
+#~ msgid ""
+#~ "You are sending the message too early. The gateway either requires a "
+#~ "certain interval<br>you have to wait before sending another message or it "
+#~ "limits<br>the maximum number of possible messages in some time period. "
+#~ "Try it later."
+#~ msgstr ""
+#~ "Está enviando el mensaje demasiado pronto. Cualquier operador requiere un "
+#~ "cierto intervalo de tiempo<br>que debe esperar antes de enviar otro "
+#~ "mensaje o le limitará<br>el máximo número de mensajes posibles en un "
+#~ "período de tiempo. Inténtelo más tarde."
+
+#~ msgid ""
+#~ "You have entered too long message text.<br>\n"
+#~ "<br>\n"
+#~ "Hint: If it is for your language possible, try to avoid using national "
+#~ "characters (different from standard<br>\n"
+#~ "english character set), otherwise it may reduce the maximum allowed "
+#~ "message length substantially."
+#~ msgstr ""
+#~ "Ha introducido un texto demasiado largo.<br>\n"
+#~ "<br>\n"
+#~ "Consejo: Si es posible para su idioma, intente evitar el uso de "
+#~ "caracteres nacionales (diferentes al paquete estándar<br>de caracteres "
+#~ "inglés), de otra forma se podría reducir substancialmente el tamaño "
+#~ "máximo permitido para el mensaje."
+
+#~ msgid ""
+#~ "The gateway maintainers have modified their webpage and it can''t be used "
+#~ "from Esmska<br>\n"
+#~ "at the moment. The fix is being worked on, you can track <a href="
+#~ "\"{0}\">its status</a>.<br>\n"
+#~ "<br>\n"
+#~ "In the meantime you can send requests to gateway maintainers to create "
+#~ "stable and<br>\n"
+#~ "immutable machine-readable interface for their gateway. That would "
+#~ "eliminate these problems."
+#~ msgstr ""
+#~ "Los responsables del operador han modificado su página web y no puede ser "
+#~ "usada desde Esmska<br>\n"
+#~ "por el momento. Se está trabajando en la corrección, puede dar "
+#~ "seguimiento <a href=\"{0}\">su estado</a>.<br>\n"
+#~ "<br>\n"
+#~ "Mientras tanto usted puede enviar peticiones a los responsables para "
+#~ "crear una interfaz para su compuerta estable e<br>inalterable legible "
+#~ "para el equipo. Eso eliminaría estos problemas.<br>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Security code required</h2>\n"
+#~ "The chosen gateway requires you to enter the security code displayed "
+#~ "below:\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Se requiere código de seguridad</h2>\n"
+#~ "El operador elegido requiere que ingrese el código de seguridad que se "
+#~ "muestra abajo:\n"
+#~ "</html>"
+
+#~ msgctxt "SMSPanel.gatewayLabel.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Operador:"

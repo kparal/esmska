@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-25 19:44+0200\n"
+"POT-Creation-Date: 2011-03-06 14:14+0200\n"
 "PO-Revision-Date: 2010-11-19 23:12+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-21 04:51+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-26 05:02+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -58,9 +58,8 @@ msgid "Sending SMS over Internet."
 msgstr "Inviando SMS attraverso Internet"
 
 #: AboutFrame.jLabel5.text
-#, fuzzy
 msgid "2007-2011 Kamil Páral"
-msgstr "2007-2010 Kamil Páral"
+msgstr ""
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -212,9 +211,8 @@ msgid "Favorite"
 msgstr ""
 
 #: ConfigFrame.Gateway
-#, fuzzy
 msgid "Gateway"
-msgstr "&Gateway:"
+msgstr ""
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -993,9 +991,8 @@ msgid "Sending failed: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.smsTextLabel.text
-#, fuzzy
 msgid "Original message:"
-msgstr "Modifica messaggio"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_FIX_IN_PROGRESS
@@ -1109,9 +1106,8 @@ msgid "Unknown gateway!"
 msgstr ""
 
 #: GatewayMessageDialog.title
-#, fuzzy
 msgid "Sending process - Esmska"
-msgstr "Preferenze - Esmska"
+msgstr ""
 
 #: Hide_program
 msgid "Hide program"
@@ -1706,9 +1702,8 @@ msgid ""
 msgstr ""
 
 #: SMSPanel.gatewayLabel.text
-#, fuzzy
 msgid "&Gateway:"
-msgstr "&Gateway:"
+msgstr ""
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -2152,11 +2147,8 @@ msgid ""
 "</html>"
 msgstr ""
 
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Homepage</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Supporta il progetto</a></html>"
+#~ msgid "Add new contact"
+#~ msgstr "Aggiungi nuovo contatto"
 
 #~ msgid "&Login credentials"
 #~ msgstr "&Credenziali login"
@@ -2173,8 +2165,50 @@ msgstr ""
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "Importa solo contatti con operatore conosciuto"
 
+#~ msgid "Choose from which application you want to import contacts:"
+#~ msgstr "Scegli da quale applicazione vuoi importare i contatti:"
+
+#~ msgid "Compress message (Ctrl+K)"
+#~ msgstr "Comprimi messaggio (Ctrl+K)"
+
+#~ msgid "Report a &Problem..."
+#~ msgstr "Riporta un &Problema..."
+
+#~ msgid "&Translate This Application..."
+#~ msgstr "&Traduci Questa Applicazione..."
+
+#~ msgid "Unknown operator!"
+#~ msgstr "Operatore sconosciuto!"
+
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Per favore inserisci il codice dalla figura:"
+
+#~ msgid "Unknown operator"
+#~ msgstr "Operatore sconosciuto"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Do you like this project? Help to keep it running...\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Ti piace questo progetto? Aiutalo a rimanere in funzione...\n"
+#~ "</html>"
+
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009 Kamil Páral"
+
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Homepage</a></html>"
+
+#~ msgid "Show password"
+#~ msgstr "Mostra password"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Supporta il progetto</a></html>"
+
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Páral"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "
@@ -2182,3 +2216,7 @@ msgstr ""
 #~ msgstr ""
 #~ "Questa scheda p solo per scopi di sviluppo. Non sarà visibile nella "
 #~ "release finale"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Gateway:"
