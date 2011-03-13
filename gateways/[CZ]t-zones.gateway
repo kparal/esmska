@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-24"
+    return "2011-03-13"
 }
 
 function getMaintainer() {
@@ -72,7 +72,7 @@ function send() {
     var logged = false
 
     // start page
-    content = EXEC.getURL("https://sms.client.tmo.cz/sms.jsp", [])
+    content = EXEC.getURL("https://sms.client.tmo.cz/closed.jsp", [])
 
     // search if we are already logged in (previous logout failed or something)
     re = /\/.gang\/logout\/tzones/
@@ -93,7 +93,6 @@ function send() {
         // so send it twice
         content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
         content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
-        content = EXEC.getURL("https://www.t-mobile.cz/.gang/mdh/http://login.client.tmo.cz/.gang/login", [])
 
         // seach for errors
         re = /<div class="error_box">([^]*?)<\/div>/
@@ -114,7 +113,7 @@ function send() {
     }
 
     // sms sending page
-    content = EXEC.getURL("https://sms.client.tmo.cz/", [])
+    content = EXEC.getURL("https://sms.client.tmo.cz/closed.jsp", [])
 
     // seach for errors, sometimes overload errors are displayed here
     re = /<div class="error_box">([^]*?)<\/div>/
