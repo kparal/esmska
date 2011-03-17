@@ -4,6 +4,7 @@
  */
 package esmska.transfer;
 
+import esmska.data.CountryPrefix;
 import esmska.data.Gateway;
 import esmska.utils.L10N;
 import esmska.data.Links;
@@ -239,6 +240,16 @@ public class GatewayExecutor {
         }
         Thread.sleep(milliseconds);
     }
+
+    /** Extract country prefix from phone number.
+     * @param phoneNumber Phone number in fully international format. May be null or
+     * incomplete.
+     * @return Country prefix if valid one is found in the number.
+     * Empty string otherwise.
+     */
+    public String extractCountryPrefix(String phoneNumber) {
+        return StringUtils.defaultString(CountryPrefix.extractCountryPrefix(phoneNumber));
+    }   
 
     /** Error message displayed when sending was unsuccessful. */
     String getErrorMessage() {
