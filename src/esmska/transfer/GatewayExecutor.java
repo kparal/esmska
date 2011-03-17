@@ -62,6 +62,7 @@ public class GatewayExecutor {
     /** Message that unknown error happened, maybe error in the script. */
     public static String ERROR_UNKNOWN =
             l10n.getString("GatewayExecutor.ERROR_UNKNOWN");
+    /** Message saying that a fix for this gateway is being worked on. */
     public static String ERROR_FIX_IN_PROGRESS =
             l10n.getString("GatewayExecutor.ERROR_FIX_IN_PROGRESS");
     /** Message saying how many free SMS are remaining. */
