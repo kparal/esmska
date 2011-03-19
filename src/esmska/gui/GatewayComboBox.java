@@ -14,6 +14,7 @@ import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
 import java.awt.Component;
+import java.awt.SystemColor;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.net.URL;
@@ -212,6 +213,9 @@ public class GatewayComboBox extends JComboBox {
             label.setText(gateway.getName());
             label.setIcon(gateway.getIcon());
             label.setToolTipText(generateTooltip(gateway));
+            if (gateway.isHidden()) {
+                label.setForeground(SystemColor.textInactiveText);
+            }
         }
 
         /** Generate tooltip with gateway info */
