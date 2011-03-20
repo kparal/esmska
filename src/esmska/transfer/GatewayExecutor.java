@@ -10,6 +10,7 @@ import esmska.utils.L10N;
 import esmska.data.Links;
 import esmska.data.Gateways;
 import esmska.data.SMS;
+import esmska.utils.LogSupport;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
@@ -59,7 +60,10 @@ public class GatewayExecutor {
     /** Message preceding gateway provided error message. */
     public static final String ERROR_GATEWAY_MESSAGE =
             l10n.getString("GatewayExecutor.ERROR_GATEWAY_MESSAGE");
-    /** Message that unknown error happened, maybe error in the script. */
+    /** Message that unknown error happened, maybe error in the script.
+     * Make sure you set this message before making any other HTTP requests
+     * (logging out, etc), because the last web content will get logged
+     * automatically. */
     public static String ERROR_UNKNOWN =
             l10n.getString("GatewayExecutor.ERROR_UNKNOWN");
     /** Message saying that a fix for this gateway is being worked on. */
@@ -71,7 +75,7 @@ public class GatewayExecutor {
     /** Message saying how much credit is remaining. */
     public static final String INFO_CREDIT_REMAINING = 
             l10n.getString("GatewayExecutor.INFO_CREDIT_REMAINING") + " ";
-    /** Message used when gateway provides no info whether message was successfuly sent or not. */
+    /** Message used when gateway provides no info whether message was successfully sent or not. */
     public static final String INFO_STATUS_NOT_PROVIDED = 
             l10n.getString("GatewayExecutor.INFO_STATUS_NOT_PROVIDED");
     
@@ -80,6 +84,7 @@ public class GatewayExecutor {
     private String gatewayMessage;
     private String referer;
     private SMS sms;
+    private String lastTextContent;
 
     public GatewayExecutor(SMS sms) {
         this.sms = sms;
@@ -119,8 +124,11 @@ public class GatewayExecutor {
             }
 
             if (connector.isTextContent()) {
+                lastTextContent = connector.getTextContent();
                 return connector.getTextContent();
             } else {
+                // we don't log binary content
+                lastTextContent = null;
                 return connector.getBinaryContent();
             }
         } catch (IOException ex) {
@@ -155,8 +163,11 @@ public class GatewayExecutor {
             }
 
             if (connector.isTextContent()) {
+                lastTextContent = connector.getTextContent();
                 return connector.getTextContent();
             } else {
+                // we don't log binary content
+                lastTextContent = null;
                 return connector.getBinaryContent();
             }
         } catch (IOException ex) {
@@ -211,6 +222,10 @@ public class GatewayExecutor {
             }
             errorMessage = MessageFormat.format(errorMessage, params[0]);
         }
+        // log if ERROR_UNKNOWN (bad content or crash)
+        if (ERROR_UNKNOWN.equals(errorMessage)) {
+            logCrash();
+        }
         this.errorMessage = errorMessage;
     }
 
@@ -250,7 +265,7 @@ public class GatewayExecutor {
      */
     public String extractCountryPrefix(String phoneNumber) {
         return StringUtils.defaultString(CountryPrefix.extractCountryPrefix(phoneNumber));
-    }   
+    }
 
     /** Error message displayed when sending was unsuccessful. */
     String getErrorMessage() {
@@ -267,5 +282,24 @@ public class GatewayExecutor {
      */
     void setPreferredLanguage(String language) {
         connector.setLanguage(language);
+    }
+
+    /** Log last webpage content preceding crash.
+     * Doesn't get logged twice if webpage debugging already enabled.
+     * @param content web page content, may be null
+     */
+    private void logCrash() {
+        if (lastTextContent == null) {
+            //nothing to log
+            return;
+        }
+        Level level = LogSupport.getEsmskaLogger().getLevel();
+        if (level.equals(Level.ALL)) {
+            //this content was already logged
+            return;
+        }
+        LogSupport.getEsmskaLogger().setLevel(Level.ALL);
+        logger.finest("#### WEB CONTENT START ####\n" + lastTextContent + "\n#### WEB CONTENT END ####");
+        LogSupport.getEsmskaLogger().setLevel(level);
     }
 }

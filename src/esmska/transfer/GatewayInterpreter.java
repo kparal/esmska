@@ -92,6 +92,7 @@ public class GatewayInterpreter {
             logger.fine("SMS sent ok: " + sentOk);
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Error executing gateway script file " + gateway, ex);
+            // setting ERROR_UNKNOWN will also log last webpage content
             executor.setErrorMessage(GatewayExecutor.ERROR_UNKNOWN);
             return false;
         } finally {
