@@ -39,6 +39,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+import javax.swing.WindowConstants;
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
 
@@ -81,8 +82,7 @@ public class GatewayMessageFrame extends JFrame {
         getRootPane().getActionMap().put(command, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                formWindowClosing(null);
-                GatewayMessageFrame.this.setVisible(false);
+                close();
             }
         });
 
@@ -149,6 +149,15 @@ public class GatewayMessageFrame extends JFrame {
         taskContainer.add(taskPane);
     }
 
+    /** Hide and dispose this frame, but clean up first */
+    private void close() {
+        formWindowClosing(null);
+        setVisible(false);
+        dispose();
+        //when window shown next time, expand the first task pane
+        lastPaneRemovedIndex = 0;
+    }
+
     /** Remove a taskPane from the container */
     private void removeTaskPane(TaskPane taskPane) {
         // find the index of this taskPane to remember it
@@ -184,13 +193,28 @@ public class GatewayMessageFrame extends JFrame {
         taskPane.getGatewayMessage().setBestFocus();
     }
 
+    /** Transfer focus to the first expanded pane */
+    private void focusPane() {
+        for (Component comp : taskContainer.getComponents()) {
+            TaskPane taskPane = (TaskPane) comp;
+            if (!taskPane.isCollapsed()) {
+                taskPane.getGatewayMessage().setBestFocus();
+                break;
+            }
+        }
+    }
+
     /** Update visibility of this dialog - show when having some TaskPanes,
      hide otherwise.*/
     private void updateVisibility() {
         boolean wasVisible = isVisible();
         setVisible(taskContainer.getComponentCount() > 0);
+        if (wasVisible && !isVisible()) {
+            close();
+        }
         if (!wasVisible && isVisible()) {
-            logger.finer("Showing GatewayMessageDialog");
+            logger.finer("Showing GatewayMessageFrame");
+            focusPane();
             toFront();
         }
     }
@@ -207,6 +231,7 @@ public class GatewayMessageFrame extends JFrame {
         jScrollPane1 = new JScrollPane();
         taskContainer = new JXTaskPaneContainer();
 
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("GatewayMessageFrame.title")); // NOI18N
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
