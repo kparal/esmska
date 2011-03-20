@@ -31,7 +31,7 @@ public class SMS {
     private String imageHint; //hint from gateway where to find security image (eg. sent to cell)
     private String gateway;
     private Status status = Status.NEW; //sms status
-    private String errMsg; //potential error
+    private String errMsg = ""; //potential error
     private String gatewayMsg = ""; //additional message from gateway
     
     /** Status of SMS */
@@ -198,25 +198,33 @@ public class SMS {
     /** Status of the message. May not be null. */
     void setStatus(Status status) {
         Validate.notNull(status);
+        if (this.status != status) {
+            logger.finer("SMS " + this + " has a new status: " + status);
+        }
         this.status = status;
-        logger.finer("SMS " + this + " has a new status: " + this.status);
     }
 
     /** Error message from sending. Null value is changed to empty string. */
     public void setErrMsg(String errMsg) {
-        this.errMsg = StringUtils.defaultString(errMsg);
-        logger.finer("SMS " + this + " has a new error message: " + this.errMsg);
+        errMsg = StringUtils.defaultString(errMsg);
+        if (!StringUtils.equals(errMsg, this.errMsg)) {
+            logger.finer("SMS " + this + " has a new error message: " + errMsg);
+        }
+        this.errMsg = errMsg;
     }
 
-    /** Name of the recepient. Null value is changed to empty string. */
+    /** Name of the recipient. Null value is changed to empty string. */
     public void setName(String name) {
         this.name = StringUtils.defaultString(name);
     }
 
     /** Message from gateway. Null value is changed to empty string. */
     public void setGatewayMsg(String gatewayMsg) {
-        this.gatewayMsg = StringUtils.defaultString(gatewayMsg);
-        logger.finer("SMS " + this + " has a new gateway message: " + this.gatewayMsg);
+        gatewayMsg = StringUtils.defaultString(gatewayMsg);
+        if (!StringUtils.equals(gatewayMsg, this.gatewayMsg)) {
+            logger.finer("SMS " + this + " has a new gateway message: " + gatewayMsg);
+        }
+        this.gatewayMsg = gatewayMsg;
     }
     // </editor-fold>
     
