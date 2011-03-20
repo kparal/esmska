@@ -805,8 +805,8 @@ public class MainFrame extends javax.swing.JFrame {
 
             //show the dialog
             logger.fine("Showing reason why SMS sending failed...");
-            GatewayMessageDialog gatewayMessageDialog = GatewayMessageDialog.getInstance();
-            gatewayMessageDialog.addErrorMsg(sms);
+            GatewayMessageFrame gatewayMessageFrame = GatewayMessageFrame.getInstance();
+            gatewayMessageFrame.addErrorMsg(sms);
 
             finish(sms);
         }

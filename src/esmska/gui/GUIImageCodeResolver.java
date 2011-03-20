@@ -43,8 +43,8 @@ public class GUIImageCodeResolver implements ImageCodeResolver {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    GatewayMessageDialog gmd = GatewayMessageDialog.getInstance();
-                    gmd.addImageCodeMsg(sms, new ActionListener() {
+                    GatewayMessageFrame gmf = GatewayMessageFrame.getInstance();
+                    gmf.addImageCodeMsg(sms, new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             semaphore.release();

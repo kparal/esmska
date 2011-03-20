@@ -4,7 +4,7 @@ package esmska.gui;
 import esmska.data.CountryPrefix;
 import esmska.data.SMS;
 import esmska.data.event.ActionEventSupport;
-import esmska.gui.GatewayMessageDialog.TaskPane;
+import esmska.gui.GatewayMessageFrame.TaskPane;
 import esmska.utils.L10N;
 import esmska.utils.RuntimeUtils;
 import java.awt.event.ActionListener;

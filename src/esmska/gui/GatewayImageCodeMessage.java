@@ -9,7 +9,7 @@ package esmska.gui;
 import esmska.data.Config;
 import esmska.data.Icons;
 import esmska.data.SMS;
-import esmska.gui.GatewayMessageDialog.TaskPane;
+import esmska.gui.GatewayMessageFrame.TaskPane;
 import esmska.utils.RuntimeUtils;
 import java.awt.Component;
 import java.awt.GridLayout;
