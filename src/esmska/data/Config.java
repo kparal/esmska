@@ -10,6 +10,7 @@ import esmska.utils.AlphanumComparator;
 import java.awt.Dimension;
 import java.beans.*;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.ObjectUtils;
@@ -162,6 +163,11 @@ public class Config extends Object implements Serializable {
             if (ObjectUtils.equals("senderNumber",evt.getPropertyName())) {
                 newValue = Contact.anonymizeNumber((String)newValue);
                 oldValue = Contact.anonymizeNumber((String)oldValue);
+            }
+            //improve log display for arrays
+            if (oldValue instanceof Object[]) {
+                oldValue = Arrays.toString((Object[])oldValue);
+                newValue = Arrays.toString((Object[])newValue);
             }
             //log change
             logger.log(Level.CONFIG, "Config changed - property: {0}, old: {1}, new: {2}",
