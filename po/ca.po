@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 22:36+0200\n"
+"POT-Creation-Date: 2011-03-21 23:30+0200\n"
 "PO-Revision-Date: 2010-07-05 21:21+0000\n"
 "Last-Translator: el_libre - http://www.catmidia.cat  "
 "XDDDDDDDDDDDDDDDDDDDDDDDDDDD <el.libre@gmail.com>\n"
@@ -1582,6 +1582,10 @@ msgstr ""
 #: QueuePanel.border.title
 msgid "Queue"
 msgstr "Encua"
+
+#: QueuePanel.confirmDelete
+msgid "Really remove all selected messages from the queue?"
+msgstr ""
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut

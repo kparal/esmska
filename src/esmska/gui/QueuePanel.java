@@ -6,6 +6,7 @@
 
 package esmska.gui;
 
+import esmska.Context;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.event.ValuedEvent;
@@ -45,6 +46,7 @@ import esmska.data.event.ValuedEventSupport;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedListener;
 import esmska.utils.MiscUtils;
+import esmska.utils.RuntimeUtils;
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -54,7 +56,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.ListCellRenderer;
@@ -370,6 +374,12 @@ public class QueuePanel extends javax.swing.JPanel {
     
     /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
+        private final String deleteOption = l10n.getString("Delete");
+        private final String cancelOption = l10n.getString("Cancel");
+        private final Object[] options = RuntimeUtils.sortDialogOptions(
+                cancelOption, deleteOption);
+        private final String message = l10n.getString("QueuePanel.confirmDelete");
+
         public DeleteSMSAction() {
             super(l10n.getString("Delete_messages"), Icons.get("delete-16.png"));
             this.putValue(SHORT_DESCRIPTION,l10n.getString("Delete_selected_messages"));
@@ -378,10 +388,23 @@ public class QueuePanel extends javax.swing.JPanel {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            Object[] smsArray = queueList.getSelectedValues();
-            for (Object o : smsArray) {
-                SMS sms = (SMS) o;
-                queue.remove(sms);
+            Object[] toRemove = queueList.getSelectedValues();
+
+            //confirm
+            JOptionPane pane = new JOptionPane(message, JOptionPane.WARNING_MESSAGE,
+                    JOptionPane.DEFAULT_OPTION, null, options, deleteOption);
+            JDialog dialog = pane.createDialog(Context.mainFrame, null);
+            dialog.setResizable(true);
+            RuntimeUtils.setDocumentModalDialog(dialog);
+            dialog.pack();
+            dialog.setVisible(true);
+
+            //delete
+            if (deleteOption.equals(pane.getValue())) {
+                for (Object o : toRemove) {
+                    SMS sms = (SMS) o;
+                    queue.remove(sms);
+                }
             }
 
             //transfer focus

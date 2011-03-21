@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 22:36+0200\n"
+"POT-Creation-Date: 2011-03-21 23:30+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1696,6 +1696,11 @@ msgstr ""
 #: QueuePanel.border.title
 msgid "Queue"
 msgstr "תור"
+
+#: QueuePanel.confirmDelete
+#, fuzzy
+msgid "Really remove all selected messages from the queue?"
+msgstr "באמת להסיר את כל ההודעות הנבחרות מההיסטוריה?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut

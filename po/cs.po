@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 22:37+0200\n"
-"PO-Revision-Date: 2011-03-21 22:37+0100\n"
+"POT-Creation-Date: 2011-03-21 23:31+0200\n"
+"PO-Revision-Date: 2011-03-21 23:31+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -1842,6 +1842,10 @@ msgstr "Pokračovat v odesílání sms ve frontě (Alt+P)"
 #: QueuePanel.border.title
 msgid "Queue"
 msgstr "Fronta"
+
+#: QueuePanel.confirmDelete
+msgid "Really remove all selected messages from the queue?"
+msgstr "Opravdu z fronty odstranit všechny označené zprávy?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut

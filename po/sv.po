@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 22:36+0200\n"
+"POT-Creation-Date: 2011-03-21 23:30+0200\n"
 "PO-Revision-Date: 2011-01-22 12:26+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1702,6 +1702,11 @@ msgstr "Återuppta sändningen för SMS:et i kön (Alt+P)"
 #: QueuePanel.border.title
 msgid "Queue"
 msgstr "Kö"
+
+#: QueuePanel.confirmDelete
+#, fuzzy
+msgid "Really remove all selected messages from the queue?"
+msgstr "Vill du verkligen ta bort alla valda medelanden från historiken?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut

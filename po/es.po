@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 22:36+0200\n"
+"POT-Creation-Date: 2011-03-21 23:30+0200\n"
 "PO-Revision-Date: 2011-01-09 05:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1839,6 +1839,12 @@ msgstr "Continuar el envío de SMS en la cola (Alt+P)"
 #: QueuePanel.border.title
 msgid "Queue"
 msgstr "Cola"
+
+#: QueuePanel.confirmDelete
+#, fuzzy
+msgid "Really remove all selected messages from the queue?"
+msgstr ""
+"¿En verdad desea eliminar todos los mensajes seleccionados del historial?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut

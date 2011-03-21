@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 22:36+0200\n"
+"POT-Creation-Date: 2011-03-21 23:30+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -1586,6 +1586,11 @@ msgstr ""
 #: QueuePanel.border.title
 msgid "Queue"
 msgstr "Eilė"
+
+#: QueuePanel.confirmDelete
+#, fuzzy
+msgid "Really remove all selected messages from the queue?"
+msgstr "Ar tikrai pašalinti visas pažymėtas žinutes iš istorijos?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
