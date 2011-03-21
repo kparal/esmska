@@ -496,7 +496,7 @@ public class HistoryFrame extends javax.swing.JFrame {
             
             //show dialog
             JOptionPane pane = new JOptionPane(message, JOptionPane.WARNING_MESSAGE, 
-                    JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
+                    JOptionPane.DEFAULT_OPTION, null, options, deleteOption);
             JDialog dialog = pane.createDialog(HistoryFrame.this, null);
             dialog.setResizable(true);
             RuntimeUtils.setDocumentModalDialog(dialog);

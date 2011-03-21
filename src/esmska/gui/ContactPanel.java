@@ -527,7 +527,7 @@ public class ContactPanel extends javax.swing.JPanel {
             
             //confirm
             JOptionPane pane = new JOptionPane(panel, JOptionPane.WARNING_MESSAGE, 
-                    JOptionPane.DEFAULT_OPTION, null, options, cancelOption);
+                    JOptionPane.DEFAULT_OPTION, null, options, deleteOption);
             JDialog dialog = pane.createDialog(Context.mainFrame, null);
             dialog.setResizable(true);
             RuntimeUtils.setDocumentModalDialog(dialog);
