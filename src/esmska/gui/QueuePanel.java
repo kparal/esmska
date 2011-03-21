@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.List;
 import javax.swing.AbstractAction;
@@ -220,6 +222,11 @@ public class QueuePanel extends javax.swing.JPanel {
                 queueListValueChanged(evt);
             }
         });
+        queueList.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent evt) {
+                queueListKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(queueList);
         Mnemonics.setLocalizedText(pausedLabel, l10n.getString("QueuePanel.pausedLabel.text"));
         pausedLabel.setVisible(queue.isPaused());
@@ -371,6 +378,14 @@ public class QueuePanel extends javax.swing.JPanel {
     private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         pauseButton.requestFocusInWindow();
     }//GEN-LAST:event_formFocusGained
+
+    private void queueListKeyPressed(KeyEvent evt) {//GEN-FIRST:event_queueListKeyPressed
+        //delete sms on delete
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            deleteButton.doClick(0);
+            return;
+        }
+    }//GEN-LAST:event_queueListKeyPressed
     
     /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {

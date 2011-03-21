@@ -342,7 +342,7 @@ public class ContactPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_contactListKeyTyped
 
     private void contactListKeyPressed(KeyEvent evt) {//GEN-FIRST:event_contactListKeyPressed
-        //process backspace
+        //delete last letter in search string on backspace
         if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
             String searchString = searchContactAction.getSearchString();
             if (searchString.length() > 0) {
@@ -353,7 +353,7 @@ public class ContactPanel extends javax.swing.JPanel {
             return;
         }
         
-        //process escape
+        //cancel search string on escape
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             searchContactAction.setSearchString("");
             searchContactAction.actionPerformed(null);
@@ -386,6 +386,12 @@ public class ContactPanel extends javax.swing.JPanel {
             evt.consume();
             searchContactAction.restartTimer();
             ((ContactList)contactList).repaintSearchField();
+        }
+
+        //delete contact on delete
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            removeContactButton.doClick(0);
+            return;
         }
     }//GEN-LAST:event_contactListKeyPressed
     
