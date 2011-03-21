@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-06 14:15+0200\n"
+"POT-Creation-Date: 2011-03-21 22:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -687,19 +687,17 @@ msgstr ""
 msgid "Contributions from:"
 msgstr ""
 
-#: Credits.emailWarn
-msgid ""
-"Personal authors' emails do not serve the purpose of bug reporting, problem "
-"solving and question asking. You won't get any reply to messages of these "
-"kinds. Use Help menu instead. Thanks."
-msgstr ""
-
 #: Credits.graphics
 msgid "Graphics:"
 msgstr ""
 
 #: Credits.moreDonators
 msgid "and others..."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Credits.packagers
+msgid "...and all the packagers linked at <a href=\"{0}\">downloads</a> page"
 msgstr ""
 
 #: Credits.sponsors
@@ -1074,7 +1072,7 @@ msgstr ""
 msgid "Unknown gateway!"
 msgstr ""
 
-#: GatewayMessageDialog.title
+#: GatewayMessageFrame.title
 msgid "Sending process - Esmska"
 msgstr ""
 

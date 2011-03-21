@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-06 14:14+0200\n"
+"POT-Creation-Date: 2011-03-21 22:36+0200\n"
 "PO-Revision-Date: 2011-01-09 05:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -820,16 +820,6 @@ msgstr "Escrito por:"
 msgid "Contributions from:"
 msgstr "Contribuciones de:"
 
-#: Credits.emailWarn
-msgid ""
-"Personal authors' emails do not serve the purpose of bug reporting, problem "
-"solving and question asking. You won't get any reply to messages of these "
-"kinds. Use Help menu instead. Thanks."
-msgstr ""
-"Las direcciones de correo de los autores no sirven para informar de errores, "
-"resolver problemas o hacer preguntas. No recibirá respuesta a ningún correo "
-"de ese tipo. Use el menú Ayuda en su lugar. Gracias."
-
 #: Credits.graphics
 msgid "Graphics:"
 msgstr "Gráficos:"
@@ -837,6 +827,11 @@ msgstr "Gráficos:"
 #: Credits.moreDonators
 msgid "and others..."
 msgstr "y otros..."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Credits.packagers
+msgid "...and all the packagers linked at <a href=\"{0}\">downloads</a> page"
+msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -1263,7 +1258,7 @@ msgstr ""
 msgid "Unknown gateway!"
 msgstr "¡Operador desconocido!"
 
-#: GatewayMessageDialog.title
+#: GatewayMessageFrame.title
 msgid "Sending process - Esmska"
 msgstr ""
 
@@ -2478,6 +2473,15 @@ msgstr ""
 "Los operadores actualizados pueden ayudarlo a solucionar problemas con el "
 "envío de mensajes.\n"
 "</html>"
+
+#~ msgid ""
+#~ "Personal authors' emails do not serve the purpose of bug reporting, "
+#~ "problem solving and question asking. You won't get any reply to messages "
+#~ "of these kinds. Use Help menu instead. Thanks."
+#~ msgstr ""
+#~ "Las direcciones de correo de los autores no sirven para informar de "
+#~ "errores, resolver problemas o hacer preguntas. No recibirá respuesta a "
+#~ "ningún correo de ese tipo. Use el menú Ayuda en su lugar. Gracias."
 
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"

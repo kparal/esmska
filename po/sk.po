@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-06 14:14+0200\n"
+"POT-Creation-Date: 2011-03-21 22:36+0200\n"
 "PO-Revision-Date: 2010-11-15 00:23+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -805,16 +805,6 @@ msgstr "Napísali:"
 msgid "Contributions from:"
 msgstr "Prispeli:"
 
-#: Credits.emailWarn
-msgid ""
-"Personal authors' emails do not serve the purpose of bug reporting, problem "
-"solving and question asking. You won't get any reply to messages of these "
-"kinds. Use Help menu instead. Thanks."
-msgstr ""
-"Osobné e-maily autorov neslúžia pre nahlasovanie chýb, riešenie problémov a "
-"otázky. Nedostanete nejakú odpoveď na správy tohto druhu. Použite menu "
-"Pomocník. Vďaka."
-
 #: Credits.graphics
 msgid "Graphics:"
 msgstr "Grafika:"
@@ -822,6 +812,11 @@ msgstr "Grafika:"
 #: Credits.moreDonators
 msgid "and others..."
 msgstr "a ďaľší..."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Credits.packagers
+msgid "...and all the packagers linked at <a href=\"{0}\">downloads</a> page"
+msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -1237,7 +1232,7 @@ msgstr ""
 msgid "Unknown gateway!"
 msgstr "Neznáma brána!"
 
-#: GatewayMessageDialog.title
+#: GatewayMessageFrame.title
 msgid "Sending process - Esmska"
 msgstr ""
 
@@ -2418,6 +2413,15 @@ msgstr ""
 "<h2>Skontrolovať aktualizácie brán</h2>\n"
 "Aktualizácie brán vám môžu pomôcť pri problémoch s posielaním správ.\n"
 "</html>"
+
+#~ msgid ""
+#~ "Personal authors' emails do not serve the purpose of bug reporting, "
+#~ "problem solving and question asking. You won't get any reply to messages "
+#~ "of these kinds. Use Help menu instead. Thanks."
+#~ msgstr ""
+#~ "Osobné e-maily autorov neslúžia pre nahlasovanie chýb, riešenie problémov "
+#~ "a otázky. Nedostanete nejakú odpoveď na správy tohto druhu. Použite menu "
+#~ "Pomocník. Vďaka."
 
 #~ msgid "Add new contact"
 #~ msgstr "Pridať nový kontakt"

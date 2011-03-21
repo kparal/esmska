@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-06 14:14+0200\n"
+"POT-Creation-Date: 2011-03-21 22:36+0200\n"
 "PO-Revision-Date: 2010-11-15 00:11+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -799,13 +799,6 @@ msgstr "Автор:"
 msgid "Contributions from:"
 msgstr "У співпраці з:"
 
-#: Credits.emailWarn
-msgid ""
-"Personal authors' emails do not serve the purpose of bug reporting, problem "
-"solving and question asking. You won't get any reply to messages of these "
-"kinds. Use Help menu instead. Thanks."
-msgstr ""
-
 #: Credits.graphics
 msgid "Graphics:"
 msgstr "Графіка:"
@@ -813,6 +806,11 @@ msgstr "Графіка:"
 #: Credits.moreDonators
 msgid "and others..."
 msgstr "та інші..."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Credits.packagers
+msgid "...and all the packagers linked at <a href=\"{0}\">downloads</a> page"
+msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -1207,7 +1205,7 @@ msgstr ""
 msgid "Unknown gateway!"
 msgstr ""
 
-#: GatewayMessageDialog.title
+#: GatewayMessageFrame.title
 msgid "Sending process - Esmska"
 msgstr ""
 

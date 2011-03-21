@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 23:07+0200\n"
-"PO-Revision-Date: 2011-02-24 23:07+0100\n"
+"POT-Creation-Date: 2011-03-21 22:37+0200\n"
+"PO-Revision-Date: 2011-03-21 22:37+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -807,16 +807,6 @@ msgstr "Napsali:"
 msgid "Contributions from:"
 msgstr "Podíleli se:"
 
-#: Credits.emailWarn
-msgid ""
-"Personal authors' emails do not serve the purpose of bug reporting, problem "
-"solving and question asking. You won't get any reply to messages of these "
-"kinds. Use Help menu instead. Thanks."
-msgstr ""
-"Osobní e-maily autorů neslouží k hlášení chyb, řešení problémů či kladení "
-"dotazů. Na takové zprávy odpověď nedostanete. Použijte místo toho nabídku "
-"Nápověda. Děkujeme."
-
 #: Credits.graphics
 msgid "Graphics:"
 msgstr "Grafika:"
@@ -824,6 +814,13 @@ msgstr "Grafika:"
 #: Credits.moreDonators
 msgid "and others..."
 msgstr "a další..."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: Credits.packagers
+msgid "...and all the packagers linked at <a href=\"{0}\">downloads</a> page"
+msgstr ""
+"...a všichni správci balíků odkazovaní na stránce se <a href="
+"\"{0}\">stažením programu</a>"
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -1273,7 +1270,7 @@ msgstr "Vyžadován bezpečnostní kód: {0}"
 msgid "Unknown gateway!"
 msgstr "Neznámá brána!"
 
-#: GatewayMessageDialog.title
+#: GatewayMessageFrame.title
 msgid "Sending process - Esmska"
 msgstr "Průběh odesílání - Esmska"
 
@@ -2445,6 +2442,15 @@ msgstr ""
 "<h2>Zkontrolovat aktualizace bran</h2>\n"
 "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
 "</html>"
+
+#~ msgid ""
+#~ "Personal authors' emails do not serve the purpose of bug reporting, "
+#~ "problem solving and question asking. You won't get any reply to messages "
+#~ "of these kinds. Use Help menu instead. Thanks."
+#~ msgstr ""
+#~ "Osobní e-maily autorů neslouží k hlášení chyb, řešení problémů či kladení "
+#~ "dotazů. Na takové zprávy odpověď nedostanete. Použijte místo toho nabídku "
+#~ "Nápověda. Děkujeme."
 
 #~ msgid ""
 #~ "<html><i>\n"
