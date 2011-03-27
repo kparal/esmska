@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2010-11-15 00:11+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1020,7 +1020,7 @@ msgid "&Forward"
 msgstr "&Вперед"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
 msgstr "Невідомий шлюз"
 
@@ -2101,11 +2101,6 @@ msgstr ""
 
 #: Undo_
 msgid "&Undo"
-msgstr ""
-
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
 msgstr ""
 
 #: Unpause

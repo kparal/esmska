@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2011-01-09 04:54+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -900,7 +900,6 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
 msgstr ""
 
@@ -1996,11 +1995,6 @@ msgstr ""
 
 #: Undo_
 msgid "&Undo"
-msgstr ""
-
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
 msgstr ""
 
 #: Unpause

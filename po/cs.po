@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:52+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2011-03-26 23:52+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -1045,7 +1045,7 @@ msgid "&Forward"
 msgstr "Přepo&slat"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
 msgstr "Neznámá brána"
 
@@ -2294,11 +2294,6 @@ msgstr ""
 msgid "&Undo"
 msgstr "&Zpět"
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr "Neznámá brána"
-
 #: Unpause
 msgid "Unpause"
 msgstr "Spustit"
@@ -2327,6 +2322,10 @@ msgstr "Brána aktualizována: {0}"
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
 msgstr "Instalace některých bran selhala!"
+
+#~ msgctxt "UnknownGateway"
+#~ msgid "Unknown gateway"
+#~ msgstr "Neznámá brána"
 
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Zkontrolovat aktualizace programu a bran"

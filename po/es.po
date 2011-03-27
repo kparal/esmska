@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2011-01-09 05:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1067,7 +1067,7 @@ msgid "&Forward"
 msgstr "&Reenviar"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
 msgstr "Puerta de enlace desconocida"
 
@@ -2335,11 +2335,6 @@ msgstr ""
 msgid "&Undo"
 msgstr "&Deshacer"
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr "Operador desconocido"
-
 #: Unpause
 msgid "Unpause"
 msgstr "Continuar"
@@ -2368,6 +2363,10 @@ msgstr "Operador actualizado: {0}"
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
 msgstr "¡Falló la instalación de algunos operadores!"
+
+#~ msgctxt "UnknownGateway"
+#~ msgid "Unknown gateway"
+#~ msgstr "Operador desconocido"
 
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Buscar actualizaciones del programa y de operadores"

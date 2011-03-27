@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -978,9 +978,9 @@ msgid "&Forward"
 msgstr "ה&עבר"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
-msgstr ""
+msgstr "מפעיל לא ידוע"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -2105,11 +2105,6 @@ msgstr ""
 msgid "&Undo"
 msgstr "&בטל"
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr ""
-
 #: Unpause
 msgid "Unpause"
 msgstr ""
@@ -2365,9 +2360,6 @@ msgstr ""
 #~ "Many operator gateways support adding of custom signature. See "
 #~ "preferences."
 #~ msgstr "שערי גישה של מפעילים רבים מוסיף חתימה אישית. עיין בהעדפות."
-
-#~ msgid "Unknown operator"
-#~ msgstr "מפעיל לא ידוע"
 
 #~ msgid ""
 #~ "<html>\n"

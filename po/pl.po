@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2011-02-26 12:41+0000\n"
 "Last-Translator: Daniel Sokołowski <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -914,9 +914,8 @@ msgid "&Forward"
 msgstr "&Przekaż"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Nieznana brama"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1991,11 +1990,6 @@ msgstr ""
 msgid "&Undo"
 msgstr "&Cofnij"
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr "Nieznana brama"
-
 #: Unpause
 msgid "Unpause"
 msgstr ""
@@ -2024,6 +2018,10 @@ msgstr ""
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
 msgstr ""
+
+#~ msgctxt "UnknownGateway"
+#~ msgid "Unknown gateway"
+#~ msgstr "Nieznana brama"
 
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Sprawdź aktualizacje programu i bramek"
@@ -2077,9 +2075,6 @@ msgstr ""
 
 #~ msgid "&Translate This Application..."
 #~ msgstr "&Przetłumacz tę aplikację..."
-
-#~ msgid "Unknown gateway"
-#~ msgstr "Nieznana brama"
 
 #~ msgid "A message from operator:<br>"
 #~ msgstr "Wiadomość od operatora:<br>"

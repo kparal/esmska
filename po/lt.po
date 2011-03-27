@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -905,9 +905,9 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Nežinomas operatorius"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1988,11 +1988,6 @@ msgstr ""
 msgid "&Undo"
 msgstr ""
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr ""
-
 #: Unpause
 msgid "Unpause"
 msgstr ""
@@ -2101,9 +2096,6 @@ msgstr ""
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Įveskite kodą iš paveiklėlio."
-
-#~ msgid "Unknown operator"
-#~ msgstr "Nežinomas operatorius"
 
 #~ msgid ""
 #~ "<html>\n"

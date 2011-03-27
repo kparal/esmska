@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2009-09-28 17:17+0000\n"
 "Last-Translator: Ævar Arnfjörð Bjarmason <avarab@gmail.com>\n"
 "Language-Team: Icelandic <is@li.org>\n"
@@ -900,7 +900,6 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
 msgid "Unknown gateway"
 msgstr ""
 
@@ -1971,11 +1970,6 @@ msgstr ""
 
 #: Undo_
 msgid "&Undo"
-msgstr ""
-
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
 msgstr ""
 
 #: Unpause

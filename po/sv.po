@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2011-01-22 12:26+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -985,7 +985,7 @@ msgid "&Forward"
 msgstr "&Framåt"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
 msgstr "Okänd gateway"
 
@@ -2163,11 +2163,6 @@ msgstr ""
 msgid "&Undo"
 msgstr "Å&ngra"
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr "Okänd gateway"
-
 #: Unpause
 msgid "Unpause"
 msgstr "Fortsätt"
@@ -2196,6 +2191,10 @@ msgstr "Gateway uppdaterad: {0}"
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
 msgstr "Installationen för några gateways misslyckades!"
+
+#~ msgctxt "UnknownGateway"
+#~ msgid "Unknown gateway"
+#~ msgstr "Okänd gateway"
 
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Leta efter program och gateway uppdateringar"

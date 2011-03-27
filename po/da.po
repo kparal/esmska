@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2010-01-31 18:22+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -905,9 +905,9 @@ msgid "&Forward"
 msgstr "&Videresend"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Ukendt gateway"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1986,11 +1986,6 @@ msgstr ""
 msgid "&Undo"
 msgstr "&Fortryd"
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr ""
-
 #: Unpause
 msgid "Unpause"
 msgstr ""
@@ -2090,10 +2085,6 @@ msgstr "Installation af nogle gateways mislykkedes!"
 
 #~ msgid "&Translate This Application..."
 #~ msgstr "&Oversæt dette program..."
-
-#~ msgctxt "Operator.unknown"
-#~ msgid "Unknown gateway"
-#~ msgstr "Ukendt gateway"
 
 #~ msgid ""
 #~ "<html>\n"

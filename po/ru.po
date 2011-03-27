@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2011-02-05 21:03+0000\n"
 "Last-Translator: Vitaliy Starostin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -932,7 +932,7 @@ msgid "&Forward"
 msgstr "&Вперёд"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
 msgstr "Неизвестный шлюз"
 
@@ -2022,11 +2022,6 @@ msgstr ""
 msgid "&Undo"
 msgstr ""
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr "Неизвестный шлюз"
-
 #: Unpause
 msgid "Unpause"
 msgstr ""
@@ -2055,6 +2050,10 @@ msgstr "Шлюз обновлен: {0}"
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
 msgstr ""
+
+#~ msgctxt "UnknownGateway"
+#~ msgid "Unknown gateway"
+#~ msgstr "Неизвестный шлюз"
 
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Проверить обновления программы и шлюза"

@@ -2,6 +2,7 @@
 
 # Check translations for bad strings (MessageFormat rules).
 # Currently checks for single apostrophes in MessageFormat translations.
+# Also warns about unused translations.
 
 WARNING_MESSAGE="#If you want to use single quotes"
 
@@ -24,3 +25,21 @@ if ls l10n*.properties >/dev/null; then
     	fi
     done
 fi
+
+echo "Checking for unused translations..."
+
+cat l10n.properties | grep -v '^#' | sed -n -r 's/^([^=]+)=.*$/\1/p' | while read KEY; do
+    # exceptions
+    SKIP=''
+    for EXC in 'Tip.' 'DesktopFile.'; do
+        if [[ $KEY = $EXC* ]]; then
+            SKIP=1
+        fi
+    done
+    if [ -n "$SKIP" ]; then
+        continue
+    fi
+
+    grep -rq "\"$KEY\"" ../ || echo "WARNING: Unused translation: $KEY"
+done
+

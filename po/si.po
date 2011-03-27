@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2010-11-15 00:26+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
@@ -900,9 +900,9 @@ msgid "&Forward"
 msgstr "ඉදිරියට (&F)"
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
-msgstr ""
+msgstr "නොදනී"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1972,11 +1972,6 @@ msgstr ""
 #: Undo_
 msgid "&Undo"
 msgstr "අහෝසි කරන්න (&U)"
-
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr ""
 
 #: Unpause
 msgid "Unpause"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-26 23:51+0200\n"
+"POT-Creation-Date: 2011-03-27 01:59+0200\n"
 "PO-Revision-Date: 2010-11-19 23:12+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -924,9 +924,9 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-msgctxt "Gateway.unknown"
+#, fuzzy
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Operatore sconosciuto"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -2013,11 +2013,6 @@ msgstr ""
 msgid "&Undo"
 msgstr "&Ripristina"
 
-#: UnknownGateway
-msgctxt "UnknownGateway"
-msgid "Unknown gateway"
-msgstr ""
-
 #: Unpause
 msgid "Unpause"
 msgstr ""
@@ -2091,9 +2086,6 @@ msgstr ""
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Per favore inserisci il codice dalla figura:"
-
-#~ msgid "Unknown operator"
-#~ msgstr "Operatore sconosciuto"
 
 #~ msgid ""
 #~ "<html>\n"
