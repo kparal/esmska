@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 01:59+0200\n"
+"POT-Creation-Date: 2011-03-27 09:59+0200\n"
 "PO-Revision-Date: 2011-01-09 05:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -2114,7 +2114,8 @@ msgstr "Puede modificar la apariencia del programa a su gusto."
 
 #. #Write the tip as short as possible
 #: Tip.11
-msgid "In preferences you can restrict the list of available web gateways."
+#, fuzzy
+msgid "In preferences you can restrict the list of displayed web gateways."
 msgstr ""
 "En las preferencias puede restringir la lista de operadores web disponibles."
 
@@ -2138,8 +2139,10 @@ msgstr "Si el mensaje escrito es demasiado largo use la función de comprimir."
 
 #. #Write the tip as short as possible
 #: Tip.15
+#, fuzzy
 msgid ""
-"We recommend you to use Linux packages, you'll obtain an auto-update feature."
+"We recommend you to use Linux packages, you'll obtain a program auto-update "
+"feature."
 msgstr ""
 "Le recomendamos usar paquetes Linux, obtendrá actualizaciones automáticas."
 
@@ -2167,10 +2170,8 @@ msgstr "El programa es abierto y libre. ¡Únase y ayúdenos a mejorarlo!"
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
+"Gateways are automatically updated to their latest version on program start."
 msgstr ""
-"El actualizador de operadores integrado le ayudará a resolver problemas con "
-"el envío de mensajes."
 
 #. #Write the tip as short as possible
 #: Tip.2
@@ -2183,8 +2184,10 @@ msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.20
+#, fuzzy
 msgid ""
-"By using commandline options you can use program even in café or school."
+"By using commandline options or the special portable version you can use "
+"program even in café or school."
 msgstr ""
 "Usando las opciones de la línea de comandos usted puede usar el programa "
 "hasta en un café o la escuela."
@@ -2352,8 +2355,8 @@ msgid "Click to open program downloads page"
 msgstr "Haga clic para abrir la página de descargas de la aplicación"
 
 #: Update.downloadFailed
-msgid "Downloading of some gateways failed!"
-msgstr "¡Falló la descarga de algunos operadores!"
+msgid "It wasn't possible to download all gateway updates."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2361,8 +2364,22 @@ msgid "Gateway updated: {0}"
 msgstr "Operador actualizado: {0}"
 
 #: Update.installFailed
-msgid "Installation of some gateways failed!"
-msgstr "¡Falló la instalación de algunos operadores!"
+#, fuzzy
+msgid "Some of gateway updates couldn't be installed."
+msgstr "¡Algunos de los archivos de configuración no pudieron ser guardados!"
+
+#~ msgid ""
+#~ "Integrated gateway updater will help you solve problems with message "
+#~ "sending."
+#~ msgstr ""
+#~ "El actualizador de operadores integrado le ayudará a resolver problemas "
+#~ "con el envío de mensajes."
+
+#~ msgid "Downloading of some gateways failed!"
+#~ msgstr "¡Falló la descarga de algunos operadores!"
+
+#~ msgid "Installation of some gateways failed!"
+#~ msgstr "¡Falló la instalación de algunos operadores!"
 
 #~ msgctxt "UnknownGateway"
 #~ msgid "Unknown gateway"

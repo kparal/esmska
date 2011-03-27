@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 01:59+0200\n"
+"POT-Creation-Date: 2011-03-27 09:59+0200\n"
 "PO-Revision-Date: 2011-01-22 12:26+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1960,7 +1960,8 @@ msgstr "Programutseendet kan ändras efter din smak."
 
 #. #Write the tip as short as possible
 #: Tip.11
-msgid "In preferences you can restrict the list of available web gateways."
+#, fuzzy
+msgid "In preferences you can restrict the list of displayed web gateways."
 msgstr "I Inställningar kan du begränsa antalet tillgängliga webbgateways."
 
 #. #Write the tip as short as possible
@@ -1982,8 +1983,10 @@ msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.15
+#, fuzzy
 msgid ""
-"We recommend you to use Linux packages, you'll obtain an auto-update feature."
+"We recommend you to use Linux packages, you'll obtain a program auto-update "
+"feature."
 msgstr ""
 "Vi rekommenderar att du använder Linux-paket, du kommer att få en auto-"
 "uppdateringsfunktion."
@@ -2010,7 +2013,7 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
+"Gateways are automatically updated to their latest version on program start."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -2024,8 +2027,10 @@ msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.20
+#, fuzzy
 msgid ""
-"By using commandline options you can use program even in café or school."
+"By using commandline options or the special portable version you can use "
+"program even in café or school."
 msgstr ""
 "Genom att använda Kommandolinje-alternativen kan du t.o.m. använda "
 "programmet på caféet eller skolan."
@@ -2180,8 +2185,8 @@ msgid "Click to open program downloads page"
 msgstr "Klicka för att öppna nedladdningssidan för program"
 
 #: Update.downloadFailed
-msgid "Downloading of some gateways failed!"
-msgstr "Nedladdningen för några gateways misslyckades!"
+msgid "It wasn't possible to download all gateway updates."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2189,8 +2194,15 @@ msgid "Gateway updated: {0}"
 msgstr "Gateway uppdaterad: {0}"
 
 #: Update.installFailed
-msgid "Installation of some gateways failed!"
-msgstr "Installationen för några gateways misslyckades!"
+#, fuzzy
+msgid "Some of gateway updates couldn't be installed."
+msgstr "En del av konfigurationsfilerna kunde inte sparas!"
+
+#~ msgid "Downloading of some gateways failed!"
+#~ msgstr "Nedladdningen för några gateways misslyckades!"
+
+#~ msgid "Installation of some gateways failed!"
+#~ msgstr "Installationen för några gateways misslyckades!"
 
 #~ msgctxt "UnknownGateway"
 #~ msgid "Unknown gateway"

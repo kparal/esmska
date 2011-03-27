@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 01:59+0200\n"
+"POT-Creation-Date: 2011-03-27 09:59+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1934,7 +1934,8 @@ msgstr "ניתן לשנות את חזות התוכנה בהתאם להחלטתך
 
 #. #Write the tip as short as possible
 #: Tip.11
-msgid "In preferences you can restrict the list of available web gateways."
+#, fuzzy
+msgid "In preferences you can restrict the list of displayed web gateways."
 msgstr "בהעדפות תוכל להגביל את רשימת שערי הגישה הזמינים."
 
 #. #Write the tip as short as possible
@@ -1955,8 +1956,10 @@ msgstr "אם ההודעה הנכתבת ארוכה מדי השתמשו בפונק
 
 #. #Write the tip as short as possible
 #: Tip.15
+#, fuzzy
 msgid ""
-"We recommend you to use Linux packages, you'll obtain an auto-update feature."
+"We recommend you to use Linux packages, you'll obtain a program auto-update "
+"feature."
 msgstr ""
 "אנו ממליצים לך להשתמש בחבילות לינוקס, כך תתאפשר לך תכונת העדכון האוטומטי."
 
@@ -1981,7 +1984,7 @@ msgstr "התוכנה פתוחה וחופשית. הצטרף אלינו ועזור
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
+"Gateways are automatically updated to their latest version on program start."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -1993,8 +1996,10 @@ msgstr "ניתן לשלוט בתוכנה באמצעות המקלדת בקלות.
 
 #. #Write the tip as short as possible
 #: Tip.20
+#, fuzzy
 msgid ""
-"By using commandline options you can use program even in café or school."
+"By using commandline options or the special portable version you can use "
+"program even in café or school."
 msgstr ""
 "על ידי שימוש באפשרויות שורת הפקודה תוכלו להשתמש בתוכנה אפילו בבתי קפה או "
 "בבית הספר."
@@ -2122,7 +2127,7 @@ msgid "Click to open program downloads page"
 msgstr ""
 
 #: Update.downloadFailed
-msgid "Downloading of some gateways failed!"
+msgid "It wasn't possible to download all gateway updates."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2131,8 +2136,9 @@ msgid "Gateway updated: {0}"
 msgstr ""
 
 #: Update.installFailed
-msgid "Installation of some gateways failed!"
-msgstr ""
+#, fuzzy
+msgid "Some of gateway updates couldn't be installed."
+msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "בדיקת עדכוני תוכנה ושערי גישה"

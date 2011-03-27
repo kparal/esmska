@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 01:59+0200\n"
+"POT-Creation-Date: 2011-03-27 09:59+0200\n"
 "PO-Revision-Date: 2010-11-15 00:23+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -2069,7 +2069,8 @@ msgstr "Vzhľad programu je možné doladiť podľa vášho vkusu."
 
 #. #Write the tip as short as possible
 #: Tip.11
-msgid "In preferences you can restrict the list of available web gateways."
+#, fuzzy
+msgid "In preferences you can restrict the list of displayed web gateways."
 msgstr "V nastaveniach možné obmedziť zoznam dostupných webových brán."
 
 #. #Write the tip as short as possible
@@ -2091,8 +2092,10 @@ msgstr "Ak je napísaná správa príliš dlhá použite funkciu skomprimovať."
 
 #. #Write the tip as short as possible
 #: Tip.15
+#, fuzzy
 msgid ""
-"We recommend you to use Linux packages, you'll obtain an auto-update feature."
+"We recommend you to use Linux packages, you'll obtain a program auto-update "
+"feature."
 msgstr ""
 "Odporúčame inštalovať z linuxových balíčkov, získate tak autom. aktualizáciu."
 
@@ -2120,10 +2123,8 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
+"Gateways are automatically updated to their latest version on program start."
 msgstr ""
-"Zabudovaný mechanizmus aktualizácií brán vám pomôže s problémami pri "
-"odosielaní správ."
 
 #. #Write the tip as short as possible
 #: Tip.2
@@ -2136,8 +2137,10 @@ msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.20
+#, fuzzy
 msgid ""
-"By using commandline options you can use program even in café or school."
+"By using commandline options or the special portable version you can use "
+"program even in café or school."
 msgstr ""
 "Pomocou volieb príkazového riadka môžete program použiť aj v kaviarni alebo "
 "škole."
@@ -2292,8 +2295,8 @@ msgid "Click to open program downloads page"
 msgstr "Kliknutím otvoríte stránku s možnosťou stiahnutia programu"
 
 #: Update.downloadFailed
-msgid "Downloading of some gateways failed!"
-msgstr "Stiahnutie niektorých brán zlyhalo!"
+msgid "It wasn't possible to download all gateway updates."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2301,8 +2304,22 @@ msgid "Gateway updated: {0}"
 msgstr "Aktualizovaná brána: {0}"
 
 #: Update.installFailed
-msgid "Installation of some gateways failed!"
-msgstr "Inštalácia niektorých brán zlyhala!"
+#, fuzzy
+msgid "Some of gateway updates couldn't be installed."
+msgstr "Niektoré konfiguračné súbory nebolo možné ukončiť!"
+
+#~ msgid ""
+#~ "Integrated gateway updater will help you solve problems with message "
+#~ "sending."
+#~ msgstr ""
+#~ "Zabudovaný mechanizmus aktualizácií brán vám pomôže s problémami pri "
+#~ "odosielaní správ."
+
+#~ msgid "Downloading of some gateways failed!"
+#~ msgstr "Stiahnutie niektorých brán zlyhalo!"
+
+#~ msgid "Installation of some gateways failed!"
+#~ msgstr "Inštalácia niektorých brán zlyhala!"
 
 #~ msgctxt "Gateway.unknown"
 #~ msgid "Unknown gateway"

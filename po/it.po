@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 01:59+0200\n"
+"POT-Creation-Date: 2011-03-27 09:59+0200\n"
 "PO-Revision-Date: 2010-11-19 23:12+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1834,7 +1834,7 @@ msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.11
-msgid "In preferences you can restrict the list of available web gateways."
+msgid "In preferences you can restrict the list of displayed web gateways."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -1856,7 +1856,8 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.15
 msgid ""
-"We recommend you to use Linux packages, you'll obtain an auto-update feature."
+"We recommend you to use Linux packages, you'll obtain a program auto-update "
+"feature."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -1879,7 +1880,7 @@ msgstr "Il programma è aperto e gratis. Unisciti e aiutaci a migliorarlo!"
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
+"Gateways are automatically updated to their latest version on program start."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -1892,7 +1893,8 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.20
 msgid ""
-"By using commandline options you can use program even in café or school."
+"By using commandline options or the special portable version you can use "
+"program even in café or school."
 msgstr ""
 
 #. #Write the tip as short as possible
@@ -2030,7 +2032,7 @@ msgid "Click to open program downloads page"
 msgstr ""
 
 #: Update.downloadFailed
-msgid "Downloading of some gateways failed!"
+msgid "It wasn't possible to download all gateway updates."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2039,7 +2041,7 @@ msgid "Gateway updated: {0}"
 msgstr ""
 
 #: Update.installFailed
-msgid "Installation of some gateways failed!"
+msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
 #~ msgid "Check for program and gateway updates"

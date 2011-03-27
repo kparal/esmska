@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 01:59+0200\n"
-"PO-Revision-Date: 2011-03-26 23:52+0100\n"
+"POT-Creation-Date: 2011-03-27 10:02+0200\n"
+"PO-Revision-Date: 2011-03-27 10:02+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -1045,7 +1045,6 @@ msgid "&Forward"
 msgstr "Přepo&slat"
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
 msgstr "Neznámá brána"
 
@@ -2097,8 +2096,8 @@ msgstr "Vzhled programu lze změnit, přesně podle vašeho vkusu."
 
 #. #Write the tip as short as possible
 #: Tip.11
-msgid "In preferences you can restrict the list of available web gateways."
-msgstr "Dostupný seznam webových bran lze v nastavení omezit jen na vybrané."
+msgid "In preferences you can restrict the list of displayed web gateways."
+msgstr "V nastavení lze omezit seznam zobrazovaných bran."
 
 #. #Write the tip as short as possible
 #: Tip.12
@@ -2120,10 +2119,11 @@ msgstr "Pokud je napsaná zpráva příliš dlouhá, využijte funkce komprimace
 #. #Write the tip as short as possible
 #: Tip.15
 msgid ""
-"We recommend you to use Linux packages, you'll obtain an auto-update feature."
+"We recommend you to use Linux packages, you'll obtain a program auto-update "
+"feature."
 msgstr ""
 "Doporučujeme instalovat z linuxových balíčků, získáte tak automatickou "
-"aktualizaci."
+"aktualizaci programu."
 
 #. #Write the tip as short as possible
 #: Tip.16
@@ -2149,9 +2149,9 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.19
 msgid ""
-"Integrated gateway updater will help you solve problems with message sending."
+"Gateways are automatically updated to their latest version on program start."
 msgstr ""
-"Začleněná možnost aktualizace bran vám pomůže s problémy při odesílání zpráv."
+"Brány jsou automaticky aktualizovány na nejnovější verzi při startu programu."
 
 #. #Write the tip as short as possible
 #: Tip.2
@@ -2164,10 +2164,11 @@ msgstr ""
 #. #Write the tip as short as possible
 #: Tip.20
 msgid ""
-"By using commandline options you can use program even in café or school."
+"By using commandline options or the special portable version you can use "
+"program even in café or school."
 msgstr ""
-"Za pomoci voleb přík. řádky můžete program použít třeba i v kavárně nebo "
-"škole."
+"Za pomoci voleb přík. řádky nebo speciální přenosné verze můžete program "
+"použít třeba i v kavárně nebo škole."
 
 #. #Write the tip as short as possible
 #: Tip.21
@@ -2311,8 +2312,8 @@ msgid "Click to open program downloads page"
 msgstr "Klikněte pro otevření stránky s možností stažení programu"
 
 #: Update.downloadFailed
-msgid "Downloading of some gateways failed!"
-msgstr "Stahování některých bran selhalo!"
+msgid "It wasn't possible to download all gateway updates."
+msgstr "Nebylo možné stáhnout všechny aktualizace bran."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2320,8 +2321,21 @@ msgid "Gateway updated: {0}"
 msgstr "Brána aktualizována: {0}"
 
 #: Update.installFailed
-msgid "Installation of some gateways failed!"
-msgstr "Instalace některých bran selhala!"
+msgid "Some of gateway updates couldn't be installed."
+msgstr "Některé aktualizace bran se nepodařilo nainstalovat."
+
+#~ msgid ""
+#~ "Integrated gateway updater will help you solve problems with message "
+#~ "sending."
+#~ msgstr ""
+#~ "Začleněná možnost aktualizace bran vám pomůže s problémy při odesílání "
+#~ "zpráv."
+
+#~ msgid "Downloading of some gateways failed!"
+#~ msgstr "Stahování některých bran selhalo!"
+
+#~ msgid "Installation of some gateways failed!"
+#~ msgstr "Instalace některých bran selhala!"
 
 #~ msgctxt "UnknownGateway"
 #~ msgid "Unknown gateway"
