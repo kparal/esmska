@@ -91,9 +91,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="22" pref="22" max="22" attributes="0"/>
+                              <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="countryPrefixPanel" min="-2" max="-2" attributes="0"/>
                           <Component id="useSenderIDCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -122,17 +126,10 @@
                               <Component id="logLocationLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="checkUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="unstableUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="updatePolicyComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="announceProgramUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="debugCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="322" max="32767" attributes="0"/>
+                      <EmptySpace pref="379" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -159,17 +156,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="checkUpdatesCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="updatePolicyComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="announceProgramUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="debugCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="logLocationLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="50" max="32767" attributes="0"/>
+                      <EmptySpace pref="57" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -188,24 +182,20 @@
                 <BindingProperty name="selected" source="config" sourcePath="${removeAccents}" target="removeAccentsCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="checkUpdatesCheckBox">
+            <Component class="javax.swing.JCheckBox" name="announceProgramUpdatesCheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.checkUpdatesCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.announceProgramUpdatesCheckBox.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.checkUpdatesCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.announceProgramUpdatesCheckBox.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <BindingProperties>
-                <BindingProperty name="selected" source="config" sourcePath="${checkUpdatePolicy}" target="checkUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false">
-                  <Property name="converter" type="org.jdesktop.beansbinding.Converter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                    <Connection code="new CheckUpdateConverter()" type="code"/>
-                  </Property>
-                </BindingProperty>
+                <BindingProperty name="selected" source="config" sourcePath="${announceProgramUpdates}" target="announceProgramUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkUpdatesCheckBoxActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="announceProgramUpdatesCheckBoxActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="unstableUpdatesCheckBox">
@@ -219,27 +209,6 @@
               </Properties>
               <BindingProperties>
                 <BindingProperty name="selected" source="config" sourcePath="${checkForUnstableUpdates}" target="unstableUpdatesCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
-              </BindingProperties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="updatePolicyComboBox">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new DefaultComboBoxModel(new CheckUpdatePolicy[]{CheckUpdatePolicy.CHECK_PROGRAM, CheckUpdatePolicy.CHECK_GATEWAYS, CheckUpdatePolicy.CHECK_ALL})" type="code"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection component="checkUpdatesCheckBox" name="toolTipText" type="property"/>
-                </Property>
-                <Property name="renderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new UpdatePolicyComboRenderer()" type="code"/>
-                </Property>
-              </Properties>
-              <BindingProperties>
-                <BindingProperty name="selectedItem" source="config" sourcePath="${checkUpdatePolicy}" target="updatePolicyComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false">
-                  <Property name="converter" type="org.jdesktop.beansbinding.Converter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                    <Connection code="new UpdatePolicyConverter()" type="code"/>
-                  </Property>
-                </BindingProperty>
-                <BindingProperty name="enabled" source="checkUpdatesCheckBox" sourcePath="${selected}" target="updatePolicyComboBox" targetPath="enabled" updateStrategy="1" immediately="false"/>
               </BindingProperties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="debugCheckBox">
@@ -621,10 +590,10 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="gwDetailsPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="98" max="32767" attributes="0"/>
+                              <EmptySpace pref="90" max="32767" attributes="0"/>
                               <Component id="clearKeyringButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" pref="273" max="32767" attributes="2"/>
+                          <Component id="jScrollPane1" alignment="0" pref="265" max="32767" attributes="2"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="gwTipLabel" min="-2" max="-2" attributes="0"/>
@@ -670,7 +639,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;    @Override&#xa;    public void tableChanged(TableModelEvent e) {&#xa;        int row = getSelectedRow();&#xa;        int column = getSelectedColumn();&#xa;        super.tableChanged(e);&#xa;        changeSelection(row, column, false, false);&#xa;    }&#xa;}"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;    @Override&#xa;    public void tableChanged(TableModelEvent e) {&#xa;        int row = getSelectedRow();&#xa;        int column = getSelectedColumn();&#xa;        super.tableChanged(e);&#xa;        if (row &lt; getRowCount() &amp;&amp; column &lt; getColumnCount()) {&#xa;            changeSelection(row, column, false, false);&#xa;        }&#xa;    }&#xa;}"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

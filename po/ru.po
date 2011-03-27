@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 23:30+0200\n"
+"POT-Creation-Date: 2011-03-26 23:51+0200\n"
 "PO-Revision-Date: 2011-02-05 21:03+0000\n"
 "Last-Translator: Vitaliy Starostin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -108,14 +108,6 @@ msgstr "Отмена"
 #: Cancel_
 msgid "&Cancel"
 msgstr "&Отмена"
-
-#: CheckUpdatesTooltip
-msgid "Check for program and gateway updates"
-msgstr "Проверить обновления программы и шлюза"
-
-#: CheckUpdates_
-msgid "&Updates checker"
-msgstr "&Проверка обновлений"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -236,21 +228,21 @@ msgstr ""
 "расширенные возможности управления в главном окне программы\n"
 "</html>"
 
-#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
-msgid "&Appearance"
-msgstr "&Внешний вид"
+#: ConfigFrame.announceProgramUpdatesCheckBox.text
+msgid "Announce new program &updates"
+msgstr ""
 
-#: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates of:"
-msgstr "Автоматическая проверка &обновлений:"
-
-#: ConfigFrame.checkUpdatesCheckBox.toolTipText
+#: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
-"or gateway updates were released and eventually notify the user\n"
+"was released and eventually notify the user\n"
 "</html>"
 msgstr ""
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr "&Внешний вид"
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
@@ -554,30 +546,19 @@ msgid "Unknown"
 msgstr "Неизвестно"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "also u&nstable versions"
+#, fuzzy
+msgid "Also u&nstable versions"
 msgstr "также &нестабильные версии"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
-"Notify also also about unstable versions.<br>\n"
+"Notify also also about unstable program versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
-"not afraid of potentially losing their program data.</b>\n"
+"who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
-
-#: ConfigFrame.updateCheckAll
-msgid "program and gateways"
-msgstr "программа и шлюзы"
-
-#: ConfigFrame.updateCheckGateway
-msgid "gateways only"
-msgstr "только шлюзы"
-
-#: ConfigFrame.updateCheckProgram
-msgid "program only"
-msgstr "только программа"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -1052,7 +1033,7 @@ msgid ""
 "webpages or has a problem with them currently. Try again later.<br>\n"
 "<br>\n"
 "Also make sure that you have working connection to the Internet and that you "
-"are using the <a href=\"{0}\">latest program and gateway version</a>.<br>\n"
+"are using the <a href=\"{0}\">latest program version</a>.<br>\n"
 "<br>\n"
 "If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
 "web browser, report the problem on <a href=\"{2}\">program homepage</a>."
@@ -1463,10 +1444,6 @@ msgstr "Импортировать контакты из других прило
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr ""
-
-#: MainFrame.newGatewayUpdate
-msgid "<a href=\"\">Gateway updates</a> are available!"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2062,34 +2039,13 @@ msgstr "Возобновить очереди"
 msgid "Unpause sms queue"
 msgstr "Возобновить смс очереди"
 
-#: Update.allUpdated
-msgid "All gateways have been successfully updated."
-msgstr "Все шлюзы были успешно обновлены."
-
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr ""
 
-#: Update.checkFailed
-msgid "Retrieving update information failed!"
-msgstr ""
-
-#: Update.checking
-msgid "Checking..."
-msgstr "Проверка..."
-
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
 msgstr ""
-
-#: Update.downloading
-msgid "Downloading..."
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.gwTooltip
-msgid "gateway version: {0}"
-msgstr "версия шлюза: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2100,70 +2056,62 @@ msgstr "Шлюз обновлен: {0}"
 msgid "Installation of some gateways failed!"
 msgstr ""
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.invalidGw
-msgid "{0} (needs program version: {1})"
-msgstr ""
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Проверить обновления программы и шлюза"
 
-#: Update.noUpdates
-msgid ""
-"<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-"latest versions of all the available gateways.</html>"
-msgstr ""
-"<html><h2>Все шлюзы актуальны.</h2>В данный момент вы используете самые "
-"последние версии возможных шлюзов.</html>"
+#~ msgid "&Updates checker"
+#~ msgstr "&Проверка обновлений"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.notLatest
-msgid ""
-"<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
-"than you currently use.</html>"
-msgstr ""
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Автоматическая проверка &обновлений:"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.programUpdateAvailable
-msgid ""
-"<html>There is a new program version ({0}) available on the <a href="
-"\"{1}\">program homepage</a>.</html>"
-msgstr ""
-"<html>Обнаружена новая версия программы ({0}), которая доступна на <a href="
-"\"{1}\">домашней странице</a>.</html>"
+#~ msgid "program and gateways"
+#~ msgstr "программа и шлюзы"
 
-#: Update.queueRunning
-msgid ""
-"<html><h2>You are currently sending messages</h2>\n"
-"No messages may be sent during program update. Please wait until<br>\n"
-"messages currently being sent are finished and then open this dialog again.</"
-"html>"
-msgstr ""
+#~ msgid "gateways only"
+#~ msgstr "только шлюзы"
 
-#: Update.showDialog
-msgid "Click to open an update manager"
-msgstr "Нажмите для того, чтобы открыть менеджер обновлений"
+#~ msgid "program only"
+#~ msgstr "только программа"
 
-#: Update.update_
-msgid "&Update"
-msgstr "&Обновить"
+#~ msgid "All gateways have been successfully updated."
+#~ msgstr "Все шлюзы были успешно обновлены."
 
-#: Update.updatesFound
-msgid ""
-"<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
-"found. It is recommended to update them now.</html>"
-msgstr ""
-"<html><h2>Обновленные шлюзы найдены.</h2>Некоторые новые или обновленные "
-"шлюзы были найдены. Рекомендуется обновить их сейчас.</html>"
+#~ msgid "Checking..."
+#~ msgstr "Проверка..."
 
-#: UpdateDialog.checkButton.text
-msgid "Check for &updates"
-msgstr "Проверить на &обновления"
+#~ msgid "gateway version: {0}"
+#~ msgstr "версия шлюза: {0}"
 
-#: UpdateDialog.topLabel.text
-msgid ""
-"<html>\n"
-"<h2>Check for updated gateways</h2>\n"
-"Updated gateways may help you fix problems with sending messages.\n"
-"</html>"
-msgstr ""
+#~ msgid ""
+#~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
+#~ "latest versions of all the available gateways.</html>"
+#~ msgstr ""
+#~ "<html><h2>Все шлюзы актуальны.</h2>В данный момент вы используете самые "
+#~ "последние версии возможных шлюзов.</html>"
+
+#~ msgid ""
+#~ "<html>There is a new program version ({0}) available on the <a href="
+#~ "\"{1}\">program homepage</a>.</html>"
+#~ msgstr ""
+#~ "<html>Обнаружена новая версия программы ({0}), которая доступна на <a "
+#~ "href=\"{1}\">домашней странице</a>.</html>"
+
+#~ msgid "Click to open an update manager"
+#~ msgstr "Нажмите для того, чтобы открыть менеджер обновлений"
+
+#~ msgid "&Update"
+#~ msgstr "&Обновить"
+
+#~ msgid ""
+#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
+#~ "been found. It is recommended to update them now.</html>"
+#~ msgstr ""
+#~ "<html><h2>Обновленные шлюзы найдены.</h2>Некоторые новые или обновленные "
+#~ "шлюзы были найдены. Рекомендуется обновить их сейчас.</html>"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Проверить на &обновления"
 
 #~ msgid "Add new contact"
 #~ msgstr "Добавить новый контакт"

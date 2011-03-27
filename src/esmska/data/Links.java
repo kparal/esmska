@@ -9,7 +9,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.openide.util.Exceptions;
 
 /** Class containing links to program websites or other program actions
  *
@@ -35,8 +34,6 @@ public class Links {
     /** list of program donators */
     public static final String DONATORS = "http://code.google.com/p/esmska/wiki/Donators";
 
-    /** internal program link telling to run the update dialog */
-    public static final String RUN_UPDATER = "esmska://run-updater";
     /** internal program link telling to open the config dialog on the
      * gateways tab */
     public static final String CONFIG_GATEWAYS = "esmska://config-gateways";

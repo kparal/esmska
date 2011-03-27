@@ -53,7 +53,6 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
-import esmska.data.Config.CheckUpdatePolicy;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.data.Log;
@@ -68,6 +67,7 @@ import esmska.data.event.ValuedListener;
 import esmska.data.Links;
 import esmska.data.event.ActionEventSupport;
 import esmska.transfer.ImageCodeManager;
+import esmska.update.UpdateInstaller;
 import esmska.utils.MiscUtils;
 import esmska.utils.RuntimeUtils;
 import java.awt.Image;
@@ -80,6 +80,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import javax.swing.JComponent;
+import javax.swing.Timer;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
@@ -107,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
     private static final Queue queue = Queue.getInstance();
     /** shutdown handler thread */
     private Thread shutdownThread = new ShutdownThread();
-    private UpdateChecker updateChecker = new UpdateChecker();
+    private UpdateChecker updateChecker = UpdateChecker.getInstance();
 
     /**
      * Creates new form MainFrame
@@ -206,13 +207,6 @@ public class MainFrame extends javax.swing.JFrame {
         bindGroup.addBinding(bind2);
         bindGroup.bind();
         
-        //check for updates
-        if (config.getCheckUpdatePolicy() != CheckUpdatePolicy.CHECK_NONE &&
-                !RuntimeUtils.isRunAsWebStart()) {
-            updateChecker.addActionListener(new UpdateListener());
-            updateChecker.checkForUpdates();
-        }
-
         //only if really running, NetBeans has a bug to execute this in design mode
         if (!Beans.isDesignTime()) {
             //add shutdown handler, when program is closed externally (logout, SIGTERM, etc)
@@ -237,6 +231,9 @@ public class MainFrame extends javax.swing.JFrame {
         };
         smsPanel.addActionListener(verticalSplitListener);
         queuePanel.addActionListener(verticalSplitListener);
+
+        updateChecker.addActionListener(new UpdateListener());
+        updateChecker.checkForUpdates();
     }
     
     /** Create an instance of MainFrame. Should be called only for the first
@@ -370,7 +367,6 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu = new JMenu();
         historyMenuItem = new JMenuItem();
         logMenuItem = new JMenuItem();
-        updateMenuItem = new JMenuItem();
         jSeparator4 = new JSeparator();
         importMenuItem = new JMenuItem();
         exportMenuItem = new JMenuItem();
@@ -514,12 +510,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         logMenuItem.setAction(Actions.getLogAction());
         toolsMenu.add(logMenuItem);
-
-        updateMenuItem.setAction(Actions.getUpdateAction(updateChecker));
-        if (RuntimeUtils.isRunAsWebStart()) {
-            updateMenuItem.setVisible(false);
-        }
-        toolsMenu.add(updateMenuItem);
         toolsMenu.add(jSeparator4);
 
         importMenuItem.setAction(Actions.getImportAction());
@@ -876,62 +866,51 @@ public class MainFrame extends javax.swing.JFrame {
     private class UpdateListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            CheckUpdatePolicy policy = config.getCheckUpdatePolicy();
             int event = e.getID();
-
-            //if many updates found and should check only for some of them, announce
-            //only the requested
-            if (event == UpdateChecker.ACTION_PROGRAM_AND_GATEWAY_UPDATE_AVAILABLE) {
-                if (policy == CheckUpdatePolicy.CHECK_PROGRAM) {
-                    event = UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE;
-                } else if (policy == CheckUpdatePolicy.CHECK_GATEWAYS) {
-                    event = UpdateChecker.ACTION_GATEWAY_UPDATE_AVAILABLE;
-                }
-            }
-
+            
             switch (event) {
                 case UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE:
-                    if (policy != CheckUpdatePolicy.CHECK_ALL &&
-                            policy != CheckUpdatePolicy.CHECK_PROGRAM) {
-                        //user doesn't want to know
-                        break;
-                    }
-                    String message = MessageFormat.format(l10n.getString("MainFrame.new_program_version"),
-                            updateChecker.getLatestProgramVersion());
-                    log.addRecord(new Log.Record(MiscUtils.stripHtml(message), null, Icons.STATUS_UPDATE_IMPORTANT));
-                    statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE_IMPORTANT, true);
-                    //on click open program homepage in browser
-                    statusPanel.installClickHandler(new Runnable() {
-                        @Override
-                        public void run() {
-                            Action browseAction = Actions.getBrowseAction(Links.DOWNLOAD);
-                            browseAction.actionPerformed(null);
-                        }
-                    }, l10n.getString("Update.browseDownloads"));
+                    announceProgram();
                     break;
                 case UpdateChecker.ACTION_GATEWAY_UPDATE_AVAILABLE:
-                    if (policy != CheckUpdatePolicy.CHECK_ALL &&
-                            policy != CheckUpdatePolicy.CHECK_GATEWAYS) {
-                        //user doesn't want to know
-                        break;
-                    }
-                    //otherwise do same as for program and gateway update
+                    updateGateways();
+                    break;
                 case UpdateChecker.ACTION_PROGRAM_AND_GATEWAY_UPDATE_AVAILABLE:
-                    message = l10n.getString("MainFrame.newGatewayUpdate");
-                    log.addRecord(new Log.Record(MiscUtils.stripHtml(message), null, Icons.STATUS_UPDATE));
-                    statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE, true);
-                    //on click open update dialog
-                    statusPanel.installClickHandler(new Runnable() {
-                        @Override
-                        public void run() {
-                            Action updateAction = updateMenuItem.getAction();
-                            updateAction.actionPerformed(null);
-                        }
-                    }, l10n.getString("Update.showDialog"));
+                    announceProgram();
+                    updateGateways();
                     break;
             }
-            //don't respond to further checks
-            updateChecker.removeActionListener(this);
+
+            //schedule next check
+            Timer timer = new Timer(UpdateChecker.AUTO_CHECK_INTERVAL * 1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updateChecker.checkForUpdates();
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+        }
+
+        /** Announce program updates available */
+        private void announceProgram() {
+            String message = MessageFormat.format(l10n.getString("MainFrame.new_program_version"),
+                    updateChecker.getLatestProgramVersion());
+            log.addRecord(new Log.Record(MiscUtils.stripHtml(message), null, Icons.STATUS_UPDATE_IMPORTANT));
+            statusPanel.setStatusMessage(message, null, Icons.STATUS_UPDATE_IMPORTANT, true);
+            //on click open program homepage in browser
+            statusPanel.installClickHandler(new Runnable() {
+                @Override
+                public void run() {
+                    Action browseAction = Actions.getBrowseAction(Links.DOWNLOAD);
+                    browseAction.actionPerformed(null);
+                }
+            }, l10n.getString("Update.browseDownloads"));
+        }
+
+        /** perform gateway update */
+        private void updateGateways() {
+            UpdateInstaller.getInstance().installNewGateways();
         }
     }
 
@@ -985,7 +964,6 @@ public class MainFrame extends javax.swing.JFrame {
     private JMenuItem translateMenuItem;
     private JButton undoButton;
     private JMenuItem undoMenuItem;
-    private JMenuItem updateMenuItem;
     private JSplitPane verticalSplitPane;
     // End of variables declaration//GEN-END:variables
 }

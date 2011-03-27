@@ -39,6 +39,7 @@ import org.w3c.dom.NodeList;
  * @author ripper
  */
 public class UpdateChecker {
+    private static UpdateChecker instance;
 
     /** new program version is available */
     public static final int ACTION_PROGRAM_UPDATE_AVAILABLE = 0;
@@ -50,6 +51,9 @@ public class UpdateChecker {
     public static final int ACTION_NO_UPDATE_AVAILABLE = 3;
     /** could not check updates - network error? */
     public static final int ACTION_CHECK_FAILED = 4;
+
+    /** The interval in seconds how often to check for updates automatically */
+    public static final int AUTO_CHECK_INTERVAL = 2 * 60 * 60; // 2 hours
 
     private static final Logger logger = Logger.getLogger(UpdateChecker.class.getName());
     private static final String UPDATE_FILE_URL = 
@@ -71,7 +75,19 @@ public class UpdateChecker {
         actionSupport.removeActionListener(actionListener);
     }
     // </editor-fold>
-    
+
+    /** Disabled constructor */
+    private UpdateChecker() {
+    }
+
+    /** Get program instance */
+    public static UpdateChecker getInstance() {
+        if (instance == null) {
+            instance = new UpdateChecker();
+        }
+        return instance;
+    }
+
     /** Checks for updates asynchronously and notify all added listeners after being finished.
      * Does nothing if already running.
      */
@@ -99,7 +115,7 @@ public class UpdateChecker {
                         boolean updateAvailable = isProgramUpdateAvailable();
                         logger.fine("Found program update: " + (updateAvailable ?
                             getLatestProgramVersion() : "false"));
-                        boolean gatewayUpdateAvailable = !getGatewayUpdates().isEmpty();
+                        boolean gatewayUpdateAvailable = isGatewayUpdateAvailable(true);
                         logger.fine("Found gateway update: " + gatewayUpdateAvailable);
                         //send events
                         if (updateAvailable) {
@@ -165,9 +181,9 @@ public class UpdateChecker {
      * which are new or updated compared to current ones. This can be used to reload
      * update info after partial update. Also removes gateways requiring more recent
      * program version than available online (stable/unstable depending on config
-     * settings), gateways hidden by the user and deprecated gateways.
+     * settings) and deprecated gateways.
      */
-    public void refreshUpdatedGateways() {
+    private void refreshUpdatedGateways() {
         for (Iterator<GatewayUpdateInfo> it = gatewayUpdates.iterator(); it.hasNext(); ) {
             GatewayUpdateInfo info = it.next();
             Gateway gw = Gateways.getInstance().get(info.getName());
@@ -179,11 +195,6 @@ public class UpdateChecker {
             if (Config.compareProgramVersions(info.getMinProgramVersion(),
                     getLatestProgramVersion()) > 0) {
                 //required program version is newer than available online, remove it
-                it.remove();
-                continue;
-            }
-            //remove hidden gateways
-            if (gw != null && gw.isHidden()) {
                 it.remove();
                 continue;
             }
@@ -199,6 +210,20 @@ public class UpdateChecker {
         }
     }
 
+    /** Return only visible gateways updates from all of the available gateway updates. */
+    private Set<GatewayUpdateInfo> filterVisibleGateways() {
+        HashSet<GatewayUpdateInfo> visible = new HashSet<GatewayUpdateInfo>();
+        for (Iterator<GatewayUpdateInfo> it = gatewayUpdates.iterator(); it.hasNext(); ) {
+            GatewayUpdateInfo info = it.next();
+            Gateway gw = Gateways.getInstance().get(info.getName());
+            //add just visible gateways
+            if (gw != null && !gw.isHidden()) {
+                visible.add(info);
+            }
+        }
+        return visible;
+    }
+
     /** Whether checking for updates is (still) running */
     public boolean isRunning() {
         return running.get();
@@ -207,7 +232,7 @@ public class UpdateChecker {
     /** Whether a new program update is available. According to user preference
      it checks against latest stable or unstable program version. */
     public synchronized boolean isProgramUpdateAvailable() {
-        if (config.isCheckForUnstableUpdates()) {
+        if (config.isAnnounceUnstableUpdates()) {
             return Config.compareProgramVersions(onlineUnstableVersion, Config.getLatestVersion()) > 0;
         } else {
             return Config.compareProgramVersions(onlineVersion, Config.getLatestVersion()) > 0;
@@ -216,19 +241,29 @@ public class UpdateChecker {
 
     /** Get latest program version available online */
     public synchronized String getLatestProgramVersion() {
-        return config.isCheckForUnstableUpdates() ? onlineUnstableVersion : onlineVersion;
+        return config.isAnnounceUnstableUpdates() ? onlineUnstableVersion : onlineVersion;
     }
 
     /** Whether an gateway update is available */
-    public synchronized boolean isGatewayUpdateAvailable() {
+    public synchronized boolean isGatewayUpdateAvailable(boolean includeHidden) {
+        refreshUpdatedGateways();
+        if (includeHidden) {
             return !gatewayUpdates.isEmpty();
+        } else {
+            return !filterVisibleGateways().isEmpty();
+        }
     }
 
     /** Get info about gateway updates
      * @return unmodifiable set of gateway updates info
      */
-    public synchronized Set<GatewayUpdateInfo> getGatewayUpdates() {
-        return Collections.unmodifiableSet(gatewayUpdates);
+    public synchronized Set<GatewayUpdateInfo> getGatewayUpdates(boolean includeHidden) {
+        refreshUpdatedGateways();
+        if (includeHidden) {
+            return Collections.unmodifiableSet(gatewayUpdates);
+        } else {
+            return filterVisibleGateways();
+        }
     }
 
 }

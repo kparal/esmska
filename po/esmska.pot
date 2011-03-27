@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 23:31+0200\n"
+"POT-Creation-Date: 2011-03-26 23:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,14 +93,6 @@ msgstr ""
 
 #: Cancel_
 msgid "&Cancel"
-msgstr ""
-
-#: CheckUpdatesTooltip
-msgid "Check for program and gateway updates"
-msgstr ""
-
-#: CheckUpdates_
-msgid "&Updates checker"
 msgstr ""
 
 #: ClipboardPopupMenu.Copy
@@ -214,20 +206,20 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
-msgid "&Appearance"
+#: ConfigFrame.announceProgramUpdatesCheckBox.text
+msgid "Announce new program &updates"
 msgstr ""
 
-#: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates of:"
-msgstr ""
-
-#: ConfigFrame.checkUpdatesCheckBox.toolTipText
+#: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
-"or gateway updates were released and eventually notify the user\n"
+"was released and eventually notify the user\n"
 "</html>"
+msgstr ""
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
 msgstr ""
 
 #: ConfigFrame.clearKeyringButton.text
@@ -523,29 +515,17 @@ msgid "Unknown"
 msgstr ""
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "also u&nstable versions"
+msgid "Also u&nstable versions"
 msgstr ""
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
-"Notify also also about unstable versions.<br>\n"
+"Notify also also about unstable program versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
-"not afraid of potentially losing their program data.</b>\n"
+"who are willing to report encountered problems.</b>\n"
 "</html>"
-msgstr ""
-
-#: ConfigFrame.updateCheckAll
-msgid "program and gateways"
-msgstr ""
-
-#: ConfigFrame.updateCheckGateway
-msgid "gateways only"
-msgstr ""
-
-#: ConfigFrame.updateCheckProgram
-msgid "program only"
 msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.text
@@ -1014,7 +994,7 @@ msgid ""
 "webpages or has a problem with them currently. Try again later.<br>\n"
 "<br>\n"
 "Also make sure that you have working connection to the Internet and that you "
-"are using the <a href=\"{0}\">latest program and gateway version</a>.<br>\n"
+"are using the <a href=\"{0}\">latest program version</a>.<br>\n"
 "<br>\n"
 "If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
 "web browser, report the problem on <a href=\"{2}\">program homepage</a>."
@@ -1421,10 +1401,6 @@ msgstr ""
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr ""
-
-#: MainFrame.newGatewayUpdate
-msgid "<a href=\"\">Gateway updates</a> are available!"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2005,33 +1981,12 @@ msgstr ""
 msgid "Unpause sms queue"
 msgstr ""
 
-#: Update.allUpdated
-msgid "All gateways have been successfully updated."
-msgstr ""
-
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr ""
 
-#: Update.checkFailed
-msgid "Retrieving update information failed!"
-msgstr ""
-
-#: Update.checking
-msgid "Checking..."
-msgstr ""
-
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
-msgstr ""
-
-#: Update.downloading
-msgid "Downloading..."
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.gwTooltip
-msgid "gateway version: {0}"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2041,63 +1996,4 @@ msgstr ""
 
 #: Update.installFailed
 msgid "Installation of some gateways failed!"
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.invalidGw
-msgid "{0} (needs program version: {1})"
-msgstr ""
-
-#: Update.noUpdates
-msgid ""
-"<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-"latest versions of all the available gateways.</html>"
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.notLatest
-msgid ""
-"<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
-"than you currently use.</html>"
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.programUpdateAvailable
-msgid ""
-"<html>There is a new program version ({0}) available on the <a href="
-"\"{1}\">program homepage</a>.</html>"
-msgstr ""
-
-#: Update.queueRunning
-msgid ""
-"<html><h2>You are currently sending messages</h2>\n"
-"No messages may be sent during program update. Please wait until<br>\n"
-"messages currently being sent are finished and then open this dialog again.</"
-"html>"
-msgstr ""
-
-#: Update.showDialog
-msgid "Click to open an update manager"
-msgstr ""
-
-#: Update.update_
-msgid "&Update"
-msgstr ""
-
-#: Update.updatesFound
-msgid ""
-"<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
-"found. It is recommended to update them now.</html>"
-msgstr ""
-
-#: UpdateDialog.checkButton.text
-msgid "Check for &updates"
-msgstr ""
-
-#: UpdateDialog.topLabel.text
-msgid ""
-"<html>\n"
-"<h2>Check for updated gateways</h2>\n"
-"Updated gateways may help you fix problems with sending messages.\n"
-"</html>"
 msgstr ""

@@ -9,7 +9,6 @@ package esmska.gui;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import esmska.Context;
-import esmska.data.Config.CheckUpdatePolicy;
 import esmska.data.Gateways.Events;
 import esmska.data.event.ValuedEvent;
 import esmska.gui.ThemeManager.LAF;
@@ -99,7 +98,6 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
-import org.jdesktop.beansbinding.Converter;
 import org.openide.awt.Mnemonics;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 import org.pushingpixels.substance.api.renderers.SubstanceDefaultTableCellRenderer;
@@ -168,13 +166,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         } else {
             logger.warning("Chosen LaF '" + laf + "' not present in " +
                     "the list of available LaFs!");
-        }
-
-        //disable some stuff on java webstart
-        if (RuntimeUtils.isRunAsWebStart()) {
-            checkUpdatesCheckBox.setEnabled(false);
-            updatePolicyComboBox.setEnabled(false);
-            unstableUpdatesCheckBox.setEnabled(false);
         }
 
         //update other components
@@ -360,7 +351,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             //non-editable in unstable versions
             unstableUpdatesCheckBox.setEnabled(false);
         } else {
-            unstableUpdatesCheckBox.setEnabled(checkUpdatesCheckBox.isSelected());
+            unstableUpdatesCheckBox.setEnabled(announceProgramUpdatesCheckBox.isSelected());
         }
     }
 
@@ -389,9 +380,8 @@ public class ConfigFrame extends javax.swing.JFrame {
         tabbedPane = new JTabbedPane();
         generalPanel = new JPanel();
         removeAccentsCheckBox = new JCheckBox();
-        checkUpdatesCheckBox = new JCheckBox();
+        announceProgramUpdatesCheckBox = new JCheckBox();
         unstableUpdatesCheckBox = new JCheckBox();
-        updatePolicyComboBox = new JComboBox();
         debugCheckBox = new JCheckBox();
         logLocationLabel = new JLabel();
         countryPrefixPanel = new CountryPrefixPanel();
@@ -422,7 +412,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 int row = getSelectedRow();
                 int column = getSelectedColumn();
                 super.tableChanged(e);
-                changeSelection(row, column, false, false);
+                if (row < getRowCount() && column < getColumnCount()) {
+                    changeSelection(row, column, false, false);
+                }
             }
         };
         gwTipLabel = new InfoLabel(Type.TIP);
@@ -469,31 +461,20 @@ public class ConfigFrame extends javax.swing.JFrame {
         Binding binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${removeAccents}"), removeAccentsCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
-        Mnemonics.setLocalizedText(checkUpdatesCheckBox, l10n.getString("ConfigFrame.checkUpdatesCheckBox.text"));
-        checkUpdatesCheckBox.setToolTipText(l10n.getString("ConfigFrame.checkUpdatesCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${checkUpdatePolicy}"), checkUpdatesCheckBox, BeanProperty.create("selected"));
-        binding.setConverter(new CheckUpdateConverter());
+        Mnemonics.setLocalizedText(announceProgramUpdatesCheckBox, l10n.getString("ConfigFrame.announceProgramUpdatesCheckBox.text"));
+        announceProgramUpdatesCheckBox.setToolTipText(l10n.getString("ConfigFrame.announceProgramUpdatesCheckBox.toolTipText")); // NOI18N
+        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${announceProgramUpdates}"), announceProgramUpdatesCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
 
-        checkUpdatesCheckBox.addActionListener(new ActionListener() {
+        announceProgramUpdatesCheckBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                checkUpdatesCheckBoxActionPerformed(evt);
+                announceProgramUpdatesCheckBoxActionPerformed(evt);
             }
         });
         Mnemonics.setLocalizedText(unstableUpdatesCheckBox, l10n.getString("ConfigFrame.unstableUpdatesCheckBox.text"));
         unstableUpdatesCheckBox.setToolTipText(l10n.getString("ConfigFrame.unstableUpdatesCheckBox.toolTipText")); // NOI18N
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${checkForUnstableUpdates}"), unstableUpdatesCheckBox, BeanProperty.create("selected"));
-        bindingGroup.addBinding(binding);
-
-        updatePolicyComboBox.setModel(new DefaultComboBoxModel(new CheckUpdatePolicy[]{CheckUpdatePolicy.CHECK_PROGRAM, CheckUpdatePolicy.CHECK_GATEWAYS, CheckUpdatePolicy.CHECK_ALL}));
-        updatePolicyComboBox.setToolTipText(checkUpdatesCheckBox.getToolTipText());
-        updatePolicyComboBox.setRenderer(new UpdatePolicyComboRenderer());
-
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${checkUpdatePolicy}"), updatePolicyComboBox, BeanProperty.create("selectedItem"));
-        binding.setConverter(new UpdatePolicyConverter());
-        bindingGroup.addBinding(binding);
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ, checkUpdatesCheckBox, ELProperty.create("${selected}"), updatePolicyComboBox, BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(debugCheckBox, l10n.getString("ConfigFrame.debugCheckBox.text"));
@@ -562,6 +543,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         .addGroup(generalPanelLayout.createSequentialGroup()
             .addContainerGap()
             .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(generalPanelLayout.createSequentialGroup()
+                    .addGap(22, 22, 22)
+                    .addComponent(unstableUpdatesCheckBox))
                 .addComponent(countryPrefixPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addComponent(useSenderIDCheckBox)
                 .addGroup(generalPanelLayout.createSequentialGroup()
@@ -583,14 +567,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addGap(22, 22, 22)
                     .addComponent(logLocationLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addComponent(removeAccentsCheckBox)
-                .addGroup(generalPanelLayout.createSequentialGroup()
-                    .addComponent(checkUpdatesCheckBox)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(generalPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addComponent(unstableUpdatesCheckBox)
-                        .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addComponent(announceProgramUpdatesCheckBox)
                 .addComponent(debugCheckBox))
-            .addContainerGap(322, Short.MAX_VALUE))
+            .addContainerGap(379, Short.MAX_VALUE))
     );
 
     generalPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
@@ -616,16 +595,14 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(removeAccentsCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(generalPanelLayout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(checkUpdatesCheckBox)
-                .addComponent(updatePolicyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addComponent(announceProgramUpdatesCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(unstableUpdatesCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(debugCheckBox)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(logLocationLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(50, Short.MAX_VALUE))
+            .addContainerGap(57, Short.MAX_VALUE))
     );
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.generalPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/config-16.png")), generalPanel); // NOI18N
@@ -859,9 +836,9 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.TRAILING)
                 .addGroup(gatewayPanelLayout.createSequentialGroup()
                     .addComponent(gwDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                    .addPreferredGap(ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                     .addComponent(clearKeyringButton))
-                .addComponent(jScrollPane1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
             .addPreferredGap(ComponentPlacement.UNRELATED)
             .addComponent(gwTipLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
@@ -1203,8 +1180,7 @@ private void notificationAreaCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIR
 private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_advancedCheckBoxActionPerformed
     boolean showAdvanced = advancedCheckBox.isSelected();
 
-    checkUpdatesCheckBox.setVisible(showAdvanced);
-    updatePolicyComboBox.setVisible(showAdvanced);
+    announceProgramUpdatesCheckBox.setVisible(showAdvanced);
     unstableUpdatesCheckBox.setVisible(showAdvanced);
     windowCenteredCheckBox.setVisible(showAdvanced);
     startMinimizedCheckBox.setVisible(showAdvanced);
@@ -1231,9 +1207,9 @@ private void showPasswordCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:e
     }
 }//GEN-LAST:event_showPasswordCheckBoxActionPerformed
 
-private void checkUpdatesCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_checkUpdatesCheckBoxActionPerformed
+private void announceProgramUpdatesCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_announceProgramUpdatesCheckBoxActionPerformed
     updateUnstableUpdateCheckbox();
-}//GEN-LAST:event_checkUpdatesCheckBoxActionPerformed
+}//GEN-LAST:event_announceProgramUpdatesCheckBoxActionPerformed
 
 private void debugCheckBoxItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_debugCheckBoxItemStateChanged
     if (!fullyInicialized) {
@@ -1311,83 +1287,6 @@ private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindo
             label.setText(name);
             
             return label;
-        }
-    }
-
-    /** Renderer for updatePolicyComboBox */
-    private class UpdatePolicyComboRenderer extends DefaultListCellRenderer {
-        private final ListCellRenderer updateRenderer = new JList().getCellRenderer();
-        private final String CHECK_PROGRAM = l10n.getString("ConfigFrame.updateCheckProgram");
-        private final String CHECK_GW = l10n.getString("ConfigFrame.updateCheckGateway");
-        private final String CHECK_ALL = l10n.getString("ConfigFrame.updateCheckAll");
-
-        @Override
-        public Component getListCellRendererComponent(JList list, Object value,
-                int index, boolean isSelected, boolean cellHasFocus) {
-            JLabel label = (JLabel) updateRenderer.getListCellRendererComponent(
-                    list, value, index, isSelected, cellHasFocus);
-
-            if (!(value instanceof CheckUpdatePolicy)) {
-                return label;
-            }
-
-            CheckUpdatePolicy policy = (CheckUpdatePolicy) value;
-            String name = null;
-            switch (policy) {
-                case CHECK_PROGRAM:
-                    name = CHECK_PROGRAM;
-                    break;
-                case CHECK_GATEWAYS:
-                    name = CHECK_GW;
-                    break;
-                case CHECK_ALL:
-                    name = CHECK_ALL;
-                    break;
-                case CHECK_NONE:
-                default:
-                    assert false : "Unknown or forbidden update policy: " + policy;
-                    logger.severe("Unknown or forbidden update policy: " + policy);
-                    break;
-            }
-            label.setText(name);
-
-            return label;
-        }
-    }
-
-    /** Converter for updatePolicyComboBox */
-    private class UpdatePolicyConverter extends Converter<CheckUpdatePolicy, CheckUpdatePolicy> {
-        @Override
-        public CheckUpdatePolicy convertForward(CheckUpdatePolicy value) {
-            if (value == CheckUpdatePolicy.CHECK_NONE) {
-                return null;
-            }
-            return value;
-        }
-
-        @Override
-        public CheckUpdatePolicy convertReverse(CheckUpdatePolicy value) {
-            if (value == null) {
-                return CheckUpdatePolicy.CHECK_NONE;
-            }
-            return value;
-        }
-    }
-
-    /** Converter for checkUpdatesCheckBox */
-    private class CheckUpdateConverter extends Converter<CheckUpdatePolicy, Boolean> {
-        @Override
-        public Boolean convertForward(CheckUpdatePolicy value) {
-            return value != CheckUpdatePolicy.CHECK_NONE;
-        }
-
-        @Override
-        public CheckUpdatePolicy convertReverse(Boolean value) {
-            if (!value) {
-                return CheckUpdatePolicy.CHECK_NONE;
-            } else {
-                return (CheckUpdatePolicy) updatePolicyComboBox.getSelectedItem();
-            }
         }
     }
 
@@ -1610,8 +1509,8 @@ private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindo
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JCheckBox advancedCheckBox;
     private JCheckBox advancedControlsCheckBox;
+    private JCheckBox announceProgramUpdatesCheckBox;
     private JPanel appearancePanel;
-    private JCheckBox checkUpdatesCheckBox;
     private JButton clearKeyringButton;
     private JButton closeButton;
     private Config config;
@@ -1660,7 +1559,6 @@ private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindo
     private JCheckBox tipsCheckBox;
     private JCheckBox toolbarVisibleCheckBox;
     private JCheckBox unstableUpdatesCheckBox;
-    private JComboBox updatePolicyComboBox;
     private JCheckBox useProxyCheckBox;
     private JCheckBox useSenderIDCheckBox;
     private JCheckBox windowCenteredCheckBox;

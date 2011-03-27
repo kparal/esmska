@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 23:30+0200\n"
+"POT-Creation-Date: 2011-03-26 23:51+0200\n"
 "PO-Revision-Date: 2011-01-09 05:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -108,14 +108,6 @@ msgstr "Cancelar"
 #: Cancel_
 msgid "&Cancel"
 msgstr "&Cancelar"
-
-#: CheckUpdatesTooltip
-msgid "Check for program and gateway updates"
-msgstr "Buscar actualizaciones del programa y de operadores"
-
-#: CheckUpdates_
-msgid "&Updates checker"
-msgstr "Buscador de act&ualizaciones"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -243,19 +235,16 @@ msgstr ""
 "controles avanzados en la ventana principal del programa\n"
 "</html>"
 
-#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
-msgid "&Appearance"
-msgstr "&Apariencia"
+#: ConfigFrame.announceProgramUpdatesCheckBox.text
+msgid "Announce new program &updates"
+msgstr ""
 
-#: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates of:"
-msgstr "B&uscar automáticamente actualizaciones de:"
-
-#: ConfigFrame.checkUpdatesCheckBox.toolTipText
+#: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
-"or gateway updates were released and eventually notify the user\n"
+"was released and eventually notify the user\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -264,6 +253,10 @@ msgstr ""
 "o actualizaciones de operadores y en caso positivo se le notifica al "
 "usuario\n"
 "</html>"
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr "&Apariencia"
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
@@ -627,16 +620,18 @@ msgid "Unknown"
 msgstr "Desconocido"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "also u&nstable versions"
+#, fuzzy
+msgid "Also u&nstable versions"
 msgstr "también versiones i&nestables"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Notify also also about unstable versions.<br>\n"
+"Notify also also about unstable program versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
-"not afraid of potentially losing their program data.</b>\n"
+"who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -646,18 +641,6 @@ msgstr ""
 "experiencia<br>\n"
 "no temerosos a la potencial pérdida de datos.</b>\n"
 "</html>"
-
-#: ConfigFrame.updateCheckAll
-msgid "program and gateways"
-msgstr "programa y operadores"
-
-#: ConfigFrame.updateCheckGateway
-msgid "gateways only"
-msgstr "operadores solamente"
-
-#: ConfigFrame.updateCheckProgram
-msgid "program only"
-msgstr "programa solamente"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -1193,16 +1176,25 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_UNKNOWN
+#, fuzzy
 msgid ""
 "An unknown error has occured. The gateway provider has probably changed its "
 "webpages or has a problem with them currently. Try again later.<br>\n"
 "<br>\n"
 "Also make sure that you have working connection to the Internet and that you "
-"are using the <a href=\"{0}\">latest program and gateway version</a>.<br>\n"
+"are using the <a href=\"{0}\">latest program version</a>.<br>\n"
 "<br>\n"
 "If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
 "web browser, report the problem on <a href=\"{2}\">program homepage</a>."
 msgstr ""
+"Ha ocurrido un error desconocido. El proveedor de la puerta de enlace puede "
+"haber cambiado<br>sus páginas web o tiene problemas con ellas actualmente."
+"<br>Inténtelo de nuevo más tarde.<br><br>Asegúrese también de que su "
+"conexión a Internet funciona<br>y de que está usando <a href=\"{0}\">la "
+"última versión del programa y de la puerta de enlace</a>.<br><br>Si el "
+"problema persiste y le <a href=\"{1}\">web de la puerta de enlace</a> "
+"funciona en un navegador web,<br>informe del problema en <a href=\"{2}\">la "
+"página web del programa</a>."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayExecutor.ERROR_WRONG_AUTH
@@ -1672,10 +1664,6 @@ msgstr "Importar contactos desde otra aplicación"
 #: MainFrame.messageMenu.text
 msgid "&Message"
 msgstr "&Mensaje"
-
-#: MainFrame.newGatewayUpdate
-msgid "<a href=\"\">Gateway updates</a> are available!"
-msgstr "<a href=\"\">¡Actualizaciones de operador</a> disponibles!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
@@ -2364,34 +2352,13 @@ msgstr "Continuar cola"
 msgid "Unpause sms queue"
 msgstr "Continuar con la cola de SMS"
 
-#: Update.allUpdated
-msgid "All gateways have been successfully updated."
-msgstr "Todos los operadores se han actualizado exitosamente."
-
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Haga clic para abrir la página de descargas de la aplicación"
 
-#: Update.checkFailed
-msgid "Retrieving update information failed!"
-msgstr "¡La obtención de información de actualización falló!"
-
-#: Update.checking
-msgid "Checking..."
-msgstr "Verificando..."
-
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
 msgstr "¡Falló la descarga de algunos operadores!"
-
-#: Update.downloading
-msgid "Downloading..."
-msgstr "Descargando..."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.gwTooltip
-msgid "gateway version: {0}"
-msgstr "versión de operador: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2402,83 +2369,107 @@ msgstr "Operador actualizado: {0}"
 msgid "Installation of some gateways failed!"
 msgstr "¡Falló la instalación de algunos operadores!"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.invalidGw
-msgid "{0} (needs program version: {1})"
-msgstr "{0} (necesita la versión del programa: {1})"
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Buscar actualizaciones del programa y de operadores"
 
-#: Update.noUpdates
-msgid ""
-"<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-"latest versions of all the available gateways.</html>"
-msgstr ""
-"<html><h2>Todos los operadores están actualizados</h2>. En este momento está "
-"utilizando las versiones más recientes de todos los operadores disponibles.</"
-"html>"
+#~ msgid "&Updates checker"
+#~ msgstr "Buscador de act&ualizaciones"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.notLatest
-msgid ""
-"<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
-"than you currently use.</html>"
-msgstr ""
-"<html>Algunos operadores requieren <a href=\"{0}\">una versión más reciente "
-"del programa</a> que la que actualmente está usando.</html>"
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "B&uscar automáticamente actualizaciones de:"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.programUpdateAvailable
-msgid ""
-"<html>There is a new program version ({0}) available on the <a href="
-"\"{1}\">program homepage</a>.</html>"
-msgstr ""
-"<html>Hay una nueva versión del programa ({0}) disponible en la <a href="
-"\"{1}\">página principal del programa</a>.</html>"
+#~ msgid "program and gateways"
+#~ msgstr "programa y operadores"
 
-#: Update.queueRunning
-msgid ""
-"<html><h2>You are currently sending messages</h2>\n"
-"No messages may be sent during program update. Please wait until<br>\n"
-"messages currently being sent are finished and then open this dialog again.</"
-"html>"
-msgstr ""
-"<html><h2>Actualmente está usted enviando mensajes</h2>\n"
-"No es posible enviar mensajes mientras se actualiza el programa. Por favor "
-"espere hasta<br>\n"
-"que los mensajes terminen de ser enviados y después vuelva a abrir este "
-"dialogo.</html>"
+#~ msgid "gateways only"
+#~ msgstr "operadores solamente"
 
-#: Update.showDialog
-msgid "Click to open an update manager"
-msgstr "Clic para abrir un gestor de actualizaciones"
+#~ msgid "program only"
+#~ msgstr "programa solamente"
 
-#: Update.update_
-msgid "&Update"
-msgstr "Actualizar"
+#~ msgid "<a href=\"\">Gateway updates</a> are available!"
+#~ msgstr "<a href=\"\">¡Actualizaciones de operador</a> disponibles!"
 
-#: Update.updatesFound
-msgid ""
-"<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
-"found. It is recommended to update them now.</html>"
-msgstr ""
-"<html><h2>Se encontraron operadores actualizados</h2>Se encontraron algunos "
-"operadores nuevos o actualizados. Es recomendable actualizarlos ahora.</html>"
+#~ msgid "All gateways have been successfully updated."
+#~ msgstr "Todos los operadores se han actualizado exitosamente."
 
-#: UpdateDialog.checkButton.text
-msgid "Check for &updates"
-msgstr "Buscar act&ualizaciones"
+#~ msgid "Retrieving update information failed!"
+#~ msgstr "¡La obtención de información de actualización falló!"
 
-#: UpdateDialog.topLabel.text
-msgid ""
-"<html>\n"
-"<h2>Check for updated gateways</h2>\n"
-"Updated gateways may help you fix problems with sending messages.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<h2>Buscar compuertas actualizadas</h2>\n"
-"Los operadores actualizados pueden ayudarlo a solucionar problemas con el "
-"envío de mensajes.\n"
-"</html>"
+#~ msgid "Checking..."
+#~ msgstr "Verificando..."
+
+#~ msgid "Downloading..."
+#~ msgstr "Descargando..."
+
+#~ msgid "gateway version: {0}"
+#~ msgstr "versión de operador: {0}"
+
+#~ msgid "{0} (needs program version: {1})"
+#~ msgstr "{0} (necesita la versión del programa: {1})"
+
+#~ msgid ""
+#~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
+#~ "latest versions of all the available gateways.</html>"
+#~ msgstr ""
+#~ "<html><h2>Todos los operadores están actualizados</h2>. En este momento "
+#~ "está utilizando las versiones más recientes de todos los operadores "
+#~ "disponibles.</html>"
+
+#~ msgid ""
+#~ "<html>Some gateways require <a href=\"{0}\">more recent program version</"
+#~ "a> than you currently use.</html>"
+#~ msgstr ""
+#~ "<html>Algunos operadores requieren <a href=\"{0}\">una versión más "
+#~ "reciente del programa</a> que la que actualmente está usando.</html>"
+
+#~ msgid ""
+#~ "<html>There is a new program version ({0}) available on the <a href="
+#~ "\"{1}\">program homepage</a>.</html>"
+#~ msgstr ""
+#~ "<html>Hay una nueva versión del programa ({0}) disponible en la <a href="
+#~ "\"{1}\">página principal del programa</a>.</html>"
+
+#~ msgid ""
+#~ "<html><h2>You are currently sending messages</h2>\n"
+#~ "No messages may be sent during program update. Please wait until<br>\n"
+#~ "messages currently being sent are finished and then open this dialog "
+#~ "again.</html>"
+#~ msgstr ""
+#~ "<html><h2>Actualmente está usted enviando mensajes</h2>\n"
+#~ "No es posible enviar mensajes mientras se actualiza el programa. Por "
+#~ "favor espere hasta<br>\n"
+#~ "que los mensajes terminen de ser enviados y después vuelva a abrir este "
+#~ "dialogo.</html>"
+
+#~ msgid "Click to open an update manager"
+#~ msgstr "Clic para abrir un gestor de actualizaciones"
+
+#~ msgid "&Update"
+#~ msgstr "Actualizar"
+
+#~ msgid ""
+#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
+#~ "been found. It is recommended to update them now.</html>"
+#~ msgstr ""
+#~ "<html><h2>Se encontraron operadores actualizados</h2>Se encontraron "
+#~ "algunos operadores nuevos o actualizados. Es recomendable actualizarlos "
+#~ "ahora.</html>"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Buscar act&ualizaciones"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Check for updated gateways</h2>\n"
+#~ "Updated gateways may help you fix problems with sending messages.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Buscar compuertas actualizadas</h2>\n"
+#~ "Los operadores actualizados pueden ayudarlo a solucionar problemas con el "
+#~ "envío de mensajes.\n"
+#~ "</html>"
 
 #~ msgid ""
 #~ "Personal authors' emails do not serve the purpose of bug reporting, "
@@ -2722,24 +2713,6 @@ msgstr ""
 
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Apoyar el proyecto</a></html>"
-
-#~ msgid ""
-#~ "An unknown error has occured. The gateway provider has probably "
-#~ "changed<br>its webpages or has a problem with them currently.<br>Try "
-#~ "again later.<br><br>Also make sure that you have working connection to "
-#~ "the Internet<br>and that you are using the <a href=\"{0}\">latest program "
-#~ "and gateway version</a>.<br><br>If the problem persists and the <a href="
-#~ "\"{1}\">web gateway</a> works in a web browser,<br>report the problem on "
-#~ "<a href=\"{2}\">program homepage</a>."
-#~ msgstr ""
-#~ "Ha ocurrido un error desconocido. El proveedor de la puerta de enlace "
-#~ "puede haber cambiado<br>sus páginas web o tiene problemas con ellas "
-#~ "actualmente.<br>Inténtelo de nuevo más tarde.<br><br>Asegúrese también de "
-#~ "que su conexión a Internet funciona<br>y de que está usando <a href="
-#~ "\"{0}\">la última versión del programa y de la puerta de enlace</a>."
-#~ "<br><br>Si el problema persiste y le <a href=\"{1}\">web de la puerta de "
-#~ "enlace</a> funciona en un navegador web,<br>informe del problema en <a "
-#~ "href=\"{2}\">la página web del programa</a>."
 
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"

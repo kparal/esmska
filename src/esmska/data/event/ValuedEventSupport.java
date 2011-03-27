@@ -6,7 +6,6 @@
 package esmska.data.event;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 /** Support for firing ValuedEvents in classes.
  * @author ripper
@@ -28,12 +27,12 @@ public class ValuedEventSupport<E extends Enum<E>, V> {
     }
 
     /** Add new ActionListener */
-    public void addValuedListener(ValuedListener<E,V> valuedListener) {
+    public synchronized void addValuedListener(ValuedListener<E,V> valuedListener) {
         listeners.add(valuedListener);
     }
 
     /** Remove existing ActionListener */
-    public void removeValuedListener(ValuedListener<E,V> valuedListener) {
+    public synchronized void removeValuedListener(ValuedListener<E,V> valuedListener) {
         listeners.remove(valuedListener);
     }
 
@@ -43,8 +42,11 @@ public class ValuedEventSupport<E extends Enum<E>, V> {
      */
     public void fireEventOccured(E event, V value) {
         ValuedEvent<E,V> ve = new ValuedEvent<E,V>(source, event, value);
-        for (ListIterator<ValuedListener<E, V>> it = listeners.listIterator(listeners.size()); it.hasPrevious(); ) {
-            it.previous().eventOccured(ve);
+        // clone the list of the listeners to allow the original list to be modified
+        // while firing up events
+        ArrayList<ValuedListener<E,V>> list = new ArrayList<ValuedListener<E, V>>(listeners);
+        for (ValuedListener<E,V> listener : list) {
+            listener.eventOccured(ve);
         }
     }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 23:30+0200\n"
+"POT-Creation-Date: 2011-03-26 23:51+0200\n"
 "PO-Revision-Date: 2011-01-22 12:26+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -108,14 +108,6 @@ msgstr "Avbryt"
 #: Cancel_
 msgid "&Cancel"
 msgstr "&Avbryt"
-
-#: CheckUpdatesTooltip
-msgid "Check for program and gateway updates"
-msgstr "Leta efter program och gateway uppdateringar"
-
-#: CheckUpdates_
-msgid "&Updates checker"
-msgstr "&Uppdateringkontrollant"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -236,25 +228,26 @@ msgstr ""
 "avancerade kontroller i programmets huvudfönster\n"
 "</html>"
 
-#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
-msgid "&Appearance"
-msgstr "&Utseende"
+#: ConfigFrame.announceProgramUpdatesCheckBox.text
+msgid "Announce new program &updates"
+msgstr ""
 
-#: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates of:"
-msgstr "Kolla automatiskt efter uppdateringar för:"
-
-#: ConfigFrame.checkUpdatesCheckBox.toolTipText
+#: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
-"or gateway updates were released and eventually notify the user\n"
+"was released and eventually notify the user\n"
 "</html>"
 msgstr ""
 "<html>\n"
 "Kontrollera om en nyare programversion eller gateway-uppdateringar\n"
 "har släppts och meddela eventuellt användaren\n"
 "</html>"
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr "&Utseende"
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
@@ -593,16 +586,18 @@ msgid "Unknown"
 msgstr "Okänd"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "also u&nstable versions"
+#, fuzzy
+msgid "Also u&nstable versions"
 msgstr "även &ostabila versioner"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Notify also also about unstable versions.<br>\n"
+"Notify also also about unstable program versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
-"not afraid of potentially losing their program data.</b>\n"
+"who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -611,18 +606,6 @@ msgstr ""
 "<b>Varning: Instabila versioner är endast avsedda för erfarna användare<br>\n"
 "som inte är rädd för risken att förlora programdata.</b>\n"
 "</html>"
-
-#: ConfigFrame.updateCheckAll
-msgid "program and gateways"
-msgstr "program and gateways"
-
-#: ConfigFrame.updateCheckGateway
-msgid "gateways only"
-msgstr "endast gateways"
-
-#: ConfigFrame.updateCheckProgram
-msgid "program only"
-msgstr "Endast program"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -1116,7 +1099,7 @@ msgid ""
 "webpages or has a problem with them currently. Try again later.<br>\n"
 "<br>\n"
 "Also make sure that you have working connection to the Internet and that you "
-"are using the <a href=\"{0}\">latest program and gateway version</a>.<br>\n"
+"are using the <a href=\"{0}\">latest program version</a>.<br>\n"
 "<br>\n"
 "If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
 "web browser, report the problem on <a href=\"{2}\">program homepage</a>."
@@ -1550,10 +1533,6 @@ msgstr "Importera kontakter från andra applikationer"
 #: MainFrame.messageMenu.text
 msgid "&Message"
 msgstr "&Medelande"
-
-#: MainFrame.newGatewayUpdate
-msgid "<a href=\"\">Gateway updates</a> are available!"
-msgstr "<a href=\"\">Gateway-uppdateringar</a> finns tillgängliga!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
@@ -2201,34 +2180,13 @@ msgstr "Återuppta kö"
 msgid "Unpause sms queue"
 msgstr "Återuppta SMS-kö"
 
-#: Update.allUpdated
-msgid "All gateways have been successfully updated."
-msgstr "Alla gateways har uppdaterats."
-
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Klicka för att öppna nedladdningssidan för program"
 
-#: Update.checkFailed
-msgid "Retrieving update information failed!"
-msgstr "Misslyckades att hämta uppdateringsinformation!"
-
-#: Update.checking
-msgid "Checking..."
-msgstr "Kontrollerar..."
-
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
 msgstr "Nedladdningen för några gateways misslyckades!"
-
-#: Update.downloading
-msgid "Downloading..."
-msgstr "Laddar ned..."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.gwTooltip
-msgid "gateway version: {0}"
-msgstr "gateway-version: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2239,73 +2197,79 @@ msgstr "Gateway uppdaterad: {0}"
 msgid "Installation of some gateways failed!"
 msgstr "Installationen för några gateways misslyckades!"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.invalidGw
-msgid "{0} (needs program version: {1})"
-msgstr "{0} (kräver programversion: {1})"
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Leta efter program och gateway uppdateringar"
 
-#: Update.noUpdates
-msgid ""
-"<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-"latest versions of all the available gateways.</html>"
-msgstr ""
+#~ msgid "&Updates checker"
+#~ msgstr "&Uppdateringkontrollant"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.notLatest
-msgid ""
-"<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
-"than you currently use.</html>"
-msgstr ""
-"<html>Några gateways kräver <a href=\"{0}\">en nyare version av programmet</"
-"a> än den du för tillfället använder.</html>"
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Kolla automatiskt efter uppdateringar för:"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.programUpdateAvailable
-msgid ""
-"<html>There is a new program version ({0}) available on the <a href="
-"\"{1}\">program homepage</a>.</html>"
-msgstr ""
-"<html>Det finns en ny programversion ({0}) tillgänlig på <a href="
-"\"{1}\">programhemsidan</a>.</html>"
+#~ msgid "program and gateways"
+#~ msgstr "program and gateways"
 
-#: Update.queueRunning
-msgid ""
-"<html><h2>You are currently sending messages</h2>\n"
-"No messages may be sent during program update. Please wait until<br>\n"
-"messages currently being sent are finished and then open this dialog again.</"
-"html>"
-msgstr ""
+#~ msgid "gateways only"
+#~ msgstr "endast gateways"
 
-#: Update.showDialog
-msgid "Click to open an update manager"
-msgstr "Klicka för att öppna en uppdateringshanterare"
+#~ msgid "program only"
+#~ msgstr "Endast program"
 
-#: Update.update_
-msgid "&Update"
-msgstr "&Uppdatera"
+#~ msgid "<a href=\"\">Gateway updates</a> are available!"
+#~ msgstr "<a href=\"\">Gateway-uppdateringar</a> finns tillgängliga!"
 
-#: Update.updatesFound
-msgid ""
-"<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
-"found. It is recommended to update them now.</html>"
-msgstr ""
+#~ msgid "All gateways have been successfully updated."
+#~ msgstr "Alla gateways har uppdaterats."
 
-#: UpdateDialog.checkButton.text
-msgid "Check for &updates"
-msgstr "Kolla efter &uppdateringar"
+#~ msgid "Retrieving update information failed!"
+#~ msgstr "Misslyckades att hämta uppdateringsinformation!"
 
-#: UpdateDialog.topLabel.text
-msgid ""
-"<html>\n"
-"<h2>Check for updated gateways</h2>\n"
-"Updated gateways may help you fix problems with sending messages.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<h2>Kolla efter uppdaterade gateways</h2>\n"
-"Uppdaterade gateways kan hjälpa dig att lösa problemet med att skicka "
-"meddelanden.\n"
-"</html>"
+#~ msgid "Checking..."
+#~ msgstr "Kontrollerar..."
+
+#~ msgid "Downloading..."
+#~ msgstr "Laddar ned..."
+
+#~ msgid "gateway version: {0}"
+#~ msgstr "gateway-version: {0}"
+
+#~ msgid "{0} (needs program version: {1})"
+#~ msgstr "{0} (kräver programversion: {1})"
+
+#~ msgid ""
+#~ "<html>Some gateways require <a href=\"{0}\">more recent program version</"
+#~ "a> than you currently use.</html>"
+#~ msgstr ""
+#~ "<html>Några gateways kräver <a href=\"{0}\">en nyare version av "
+#~ "programmet</a> än den du för tillfället använder.</html>"
+
+#~ msgid ""
+#~ "<html>There is a new program version ({0}) available on the <a href="
+#~ "\"{1}\">program homepage</a>.</html>"
+#~ msgstr ""
+#~ "<html>Det finns en ny programversion ({0}) tillgänlig på <a href="
+#~ "\"{1}\">programhemsidan</a>.</html>"
+
+#~ msgid "Click to open an update manager"
+#~ msgstr "Klicka för att öppna en uppdateringshanterare"
+
+#~ msgid "&Update"
+#~ msgstr "&Uppdatera"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Kolla efter &uppdateringar"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Check for updated gateways</h2>\n"
+#~ "Updated gateways may help you fix problems with sending messages.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Kolla efter uppdaterade gateways</h2>\n"
+#~ "Uppdaterade gateways kan hjälpa dig att lösa problemet med att skicka "
+#~ "meddelanden.\n"
+#~ "</html>"
 
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"

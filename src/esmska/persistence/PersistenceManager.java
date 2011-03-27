@@ -70,6 +70,7 @@ public class PersistenceManager {
     private static final String LOG_FILENAME = "console.log";
     private static final String DEPRECATED_GWS_FILENAME = "deprecated.xml";
     private static final String GATEWAY_RESOURCE = "/esmska/gateways/scripts";
+    private static final String DEPRECATED_GWS_RESOURCE = GATEWAY_RESOURCE + "/" + DEPRECATED_GWS_FILENAME;
     
     private static File configDir =
             new File(System.getProperty("user.home") + File.separator + ".config",
@@ -368,13 +369,13 @@ public class PersistenceManager {
         TreeSet<Gateway> localGateways = new TreeSet<Gateway>();
         HashSet<DeprecatedGateway> deprecatedGateways = new HashSet<DeprecatedGateway>();
         //global gateways
-        if (globalGatewayDir.exists()) {
+        if (!RuntimeUtils.isRunAsWebStart() && globalGatewayDir.exists()) {
             globalGateways = new ArrayList<Gateway>(ImportManager.importGateways(globalGatewayDir));
-        } else if (PersistenceManager.class.getResource(GATEWAY_RESOURCE) != null) {
+        } else if (RuntimeUtils.isRunAsWebStart()) {
             globalGateways = new ArrayList<Gateway>(ImportManager.importGateways(GATEWAY_RESOURCE));
         } else {
-            throw new IOException("Could not find gateway directory '" +
-                    globalGatewayDir.getAbsolutePath() + "' nor jar gateway resource '" +
+            throw new IOException("Could not find gateways directory '" +
+                    globalGatewayDir.getAbsolutePath() + "' nor jar gateways resource '" +
                     GATEWAY_RESOURCE + "'");
         }
         //local gateways
@@ -382,11 +383,14 @@ public class PersistenceManager {
             localGateways = ImportManager.importGateways(localGatewayDir);
         }
         //deprecated gateways
-        if (deprecatedGWsFile.canRead()) {
+        if (!RuntimeUtils.isRunAsWebStart() && deprecatedGWsFile.canRead()) {
             deprecatedGateways = ImportManager.importDeprecatedGateways(deprecatedGWsFile);
-        } else if (!RuntimeUtils.isRunAsWebStart()) {
-            logger.warning("Can't find list of deprecated gateways: " +
-                    deprecatedGWsFile.getAbsolutePath());
+        } else if (RuntimeUtils.isRunAsWebStart()) {
+            deprecatedGateways = ImportManager.importDeprecatedGateways(DEPRECATED_GWS_RESOURCE);
+        } else {
+            logger.warning("Could not find deprecated gateways file: '" +
+                    deprecatedGWsFile.getAbsolutePath() + "' nor jar resource '" +
+                    DEPRECATED_GWS_RESOURCE + "'");
         }
         //filter out deprecated gateways
         for (DeprecatedGateway deprecated : deprecatedGateways) {
@@ -491,7 +495,8 @@ public class PersistenceManager {
         //move script file to correct location
         File scriptFileGlobal = new File(globalGatewayDir, scriptName + ".gateway");
         File scriptFileLocal = new File(localGatewayDir, scriptName + ".gateway");
-        if (canWrite(globalGatewayDir) && (!scriptFileGlobal.exists() || canWrite(scriptFileGlobal))) {
+        if (!RuntimeUtils.isRunAsWebStart() && canWrite(globalGatewayDir)
+                && (!scriptFileGlobal.exists() || canWrite(scriptFileGlobal))) {
             //first try global dir
             moveFileSafely(temp, scriptFileGlobal);
             //set readable for everyone
@@ -512,7 +517,8 @@ public class PersistenceManager {
         if (icon != null) {
             File iconFileGlobal = new File(globalGatewayDir, scriptName + ".png");
             File iconFileLocal = new File(localGatewayDir, scriptName + ".png");
-            if (canWrite(globalGatewayDir) && (!iconFileGlobal.exists() || canWrite(iconFileGlobal))) {
+            if (!RuntimeUtils.isRunAsWebStart() && canWrite(globalGatewayDir)
+                    && (!iconFileGlobal.exists() || canWrite(iconFileGlobal))) {
                 //first try global dir
                 moveFileSafely(iconTemp, iconFileGlobal);
                 logger.finer("Saved gateway icon into file: " + iconFileGlobal.getAbsolutePath());

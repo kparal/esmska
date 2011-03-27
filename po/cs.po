@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 23:31+0200\n"
-"PO-Revision-Date: 2011-03-21 23:31+0100\n"
+"POT-Creation-Date: 2011-03-26 23:52+0200\n"
+"PO-Revision-Date: 2011-03-26 23:52+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -103,14 +103,6 @@ msgstr "Zrušit"
 #: Cancel_
 msgid "&Cancel"
 msgstr "&Zrušit"
-
-#: CheckUpdatesTooltip
-msgid "Check for program and gateway updates"
-msgstr "Zkontrolovat aktualizace programu a bran"
-
-#: CheckUpdates_
-msgid "&Updates checker"
-msgstr "Kontrola akt&ualizací"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -236,25 +228,25 @@ msgstr ""
 "pokročilé ovládací prvky v hlavním okně programu\n"
 "</html>"
 
-#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
-msgid "&Appearance"
-msgstr "&Vzhled"
+#: ConfigFrame.announceProgramUpdatesCheckBox.text
+msgid "Announce new program &updates"
+msgstr "&Upozorňovat na nové verze programu"
 
-#: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates of:"
-msgstr "Automaticky kontrolovat akt&ualizace:"
-
-#: ConfigFrame.checkUpdatesCheckBox.toolTipText
+#: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
-"or gateway updates were released and eventually notify the user\n"
+"was released and eventually notify the user\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"Po spuštění programu zkontrolovat, zda nevyšla novější verze programu<br>\n"
-"či aktualizace bran, a případně upozornit uživatele\n"
+"Po spuštění programu zkontrolovat, zda nevyšla novější verze programu,<br>\n"
+"a případně upozornit uživatele\n"
 "</html>"
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr "&Vzhled"
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
@@ -619,36 +611,24 @@ msgid "Unknown"
 msgstr "Neznámý"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "also u&nstable versions"
-msgstr "včetně &nestabilních verzí"
+msgid "Also u&nstable versions"
+msgstr "Včetně &nestabilních verzí"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
-"Notify also also about unstable versions.<br>\n"
+"Notify also also about unstable program versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
-"not afraid of potentially losing their program data.</b>\n"
+"who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"Taktéž upozorňovat na nestabilní verze.<br>\n"
+"Taktéž upozorňovat na nestabilní verze programu.<br>\n"
 "<br>\n"
 "<b>Varování: Nestabilní verze jsou určeny pouze zkušeným uživatelům,<br>\n"
-"kteří se nebojí možné ztráty dat z programu.</b>\n"
+"kteří jsou ochotni nalezené problémy nahlásit.</b>\n"
 "</html>"
-
-#: ConfigFrame.updateCheckAll
-msgid "program and gateways"
-msgstr "programu a bran"
-
-#: ConfigFrame.updateCheckGateway
-msgid "gateways only"
-msgstr "pouze bran"
-
-#: ConfigFrame.updateCheckProgram
-msgid "program only"
-msgstr "pouze programu"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -1193,7 +1173,7 @@ msgid ""
 "webpages or has a problem with them currently. Try again later.<br>\n"
 "<br>\n"
 "Also make sure that you have working connection to the Internet and that you "
-"are using the <a href=\"{0}\">latest program and gateway version</a>.<br>\n"
+"are using the <a href=\"{0}\">latest program version</a>.<br>\n"
 "<br>\n"
 "If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
 "web browser, report the problem on <a href=\"{2}\">program homepage</a>."
@@ -1202,7 +1182,7 @@ msgstr ""
 "nebo s nimi má aktuálně potíže. Zkuste to později.<br>\n"
 "<br>\n"
 "Taktéž se ujistěte, že máte funkční připojení k Internetu a že používáte <a "
-"href=\"{0}\">nejnovější verzi programu a brány</a>.<br>\n"
+"href=\"{0}\">nejnovější verzi programu</a>.<br>\n"
 "<br>\n"
 "Pokud potíže přetrvají a <a href=\"{1}\">webová brána</a> ve webovém "
 "prohlížeči funguje, nahlaste problém na <a href=\"{2}\">domovských stránkách "
@@ -1677,10 +1657,6 @@ msgstr "Importovat kontakty z jiných aplikací"
 #: MainFrame.messageMenu.text
 msgid "&Message"
 msgstr "&Zpráva"
-
-#: MainFrame.newGatewayUpdate
-msgid "<a href=\"\">Gateway updates</a> are available!"
-msgstr "Jsou dostupné <a href=\"\">aktualizované brány</a>!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
@@ -2335,34 +2311,13 @@ msgstr "Spustit frontu"
 msgid "Unpause sms queue"
 msgstr "Znovu spustit frontu sms"
 
-#: Update.allUpdated
-msgid "All gateways have been successfully updated."
-msgstr "Všechny brány byly úspěšně aktualizovány."
-
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr "Klikněte pro otevření stránky s možností stažení programu"
 
-#: Update.checkFailed
-msgid "Retrieving update information failed!"
-msgstr "Nepodařilo se získat informace o aktualizacích!"
-
-#: Update.checking
-msgid "Checking..."
-msgstr "Probíhá kontrola..."
-
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
 msgstr "Stahování některých bran selhalo!"
-
-#: Update.downloading
-msgid "Downloading..."
-msgstr "Probíhá stahování..."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.gwTooltip
-msgid "gateway version: {0}"
-msgstr "verze brány: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2373,79 +2328,102 @@ msgstr "Brána aktualizována: {0}"
 msgid "Installation of some gateways failed!"
 msgstr "Instalace některých bran selhala!"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.invalidGw
-msgid "{0} (needs program version: {1})"
-msgstr "{0} (vyžaduje verzi programu: {1})"
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Zkontrolovat aktualizace programu a bran"
 
-#: Update.noUpdates
-msgid ""
-"<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-"latest versions of all the available gateways.</html>"
-msgstr ""
-"<html><h2>Všechny brány jsou aktuální</h2>V dané chvíli používáte nejnovější "
-"verze u všech dostupných bran.</html>"
+#~ msgid "&Updates checker"
+#~ msgstr "Kontrola akt&ualizací"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.notLatest
-msgid ""
-"<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
-"than you currently use.</html>"
-msgstr ""
-"<html>Některé brány vyžadují <a href=\"{0}\">novější verzi programu</a>, než "
-"aktuálně používáte.</html>"
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Automaticky kontrolovat akt&ualizace:"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.programUpdateAvailable
-msgid ""
-"<html>There is a new program version ({0}) available on the <a href="
-"\"{1}\">program homepage</a>.</html>"
-msgstr ""
-"<html>Na <a href=\"{1}\">domovské stránce</a> je dostupná nová verze "
-"programu ({0}).</html>"
+#~ msgid "program and gateways"
+#~ msgstr "programu a bran"
 
-#: Update.queueRunning
-msgid ""
-"<html><h2>You are currently sending messages</h2>\n"
-"No messages may be sent during program update. Please wait until<br>\n"
-"messages currently being sent are finished and then open this dialog again.</"
-"html>"
-msgstr ""
-"<html><h2>Momentálně odesíláte zprávy</h2>\n"
-"Během aktualizace nelze odesílat zprávy. Prosím vyčkejte, než<br>\n"
-"se zprávy odešlou a poté otevřete tento dialog znovu.</html>"
+#~ msgid "gateways only"
+#~ msgstr "pouze bran"
 
-#: Update.showDialog
-msgid "Click to open an update manager"
-msgstr "Klikněte pro otevření správce aktualizací"
+#~ msgid "program only"
+#~ msgstr "pouze programu"
 
-#: Update.update_
-msgid "&Update"
-msgstr "Ak&ualizovat"
+#~ msgid "<a href=\"\">Gateway updates</a> are available!"
+#~ msgstr "Jsou dostupné <a href=\"\">aktualizované brány</a>!"
 
-#: Update.updatesFound
-msgid ""
-"<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
-"found. It is recommended to update them now.</html>"
-msgstr ""
-"<html><h2>Nalezeny aktualizované brány</h2>Byly nalezeny některé nové či "
-"aktualizované brány. Je doporučeno je nyní aktualizovat.</html>"
+#~ msgid "All gateways have been successfully updated."
+#~ msgstr "Všechny brány byly úspěšně aktualizovány."
 
-#: UpdateDialog.checkButton.text
-msgid "Check for &updates"
-msgstr "Zkontrolovat akt&ualizace"
+#~ msgid "Retrieving update information failed!"
+#~ msgstr "Nepodařilo se získat informace o aktualizacích!"
 
-#: UpdateDialog.topLabel.text
-msgid ""
-"<html>\n"
-"<h2>Check for updated gateways</h2>\n"
-"Updated gateways may help you fix problems with sending messages.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<h2>Zkontrolovat aktualizace bran</h2>\n"
-"Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
-"</html>"
+#~ msgid "Checking..."
+#~ msgstr "Probíhá kontrola..."
+
+#~ msgid "Downloading..."
+#~ msgstr "Probíhá stahování..."
+
+#~ msgid "gateway version: {0}"
+#~ msgstr "verze brány: {0}"
+
+#~ msgid "{0} (needs program version: {1})"
+#~ msgstr "{0} (vyžaduje verzi programu: {1})"
+
+#~ msgid ""
+#~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
+#~ "latest versions of all the available gateways.</html>"
+#~ msgstr ""
+#~ "<html><h2>Všechny brány jsou aktuální</h2>V dané chvíli používáte "
+#~ "nejnovější verze u všech dostupných bran.</html>"
+
+#~ msgid ""
+#~ "<html>Some gateways require <a href=\"{0}\">more recent program version</"
+#~ "a> than you currently use.</html>"
+#~ msgstr ""
+#~ "<html>Některé brány vyžadují <a href=\"{0}\">novější verzi programu</a>, "
+#~ "než aktuálně používáte.</html>"
+
+#~ msgid ""
+#~ "<html>There is a new program version ({0}) available on the <a href="
+#~ "\"{1}\">program homepage</a>.</html>"
+#~ msgstr ""
+#~ "<html>Na <a href=\"{1}\">domovské stránce</a> je dostupná nová verze "
+#~ "programu ({0}).</html>"
+
+#~ msgid ""
+#~ "<html><h2>You are currently sending messages</h2>\n"
+#~ "No messages may be sent during program update. Please wait until<br>\n"
+#~ "messages currently being sent are finished and then open this dialog "
+#~ "again.</html>"
+#~ msgstr ""
+#~ "<html><h2>Momentálně odesíláte zprávy</h2>\n"
+#~ "Během aktualizace nelze odesílat zprávy. Prosím vyčkejte, než<br>\n"
+#~ "se zprávy odešlou a poté otevřete tento dialog znovu.</html>"
+
+#~ msgid "Click to open an update manager"
+#~ msgstr "Klikněte pro otevření správce aktualizací"
+
+#~ msgid "&Update"
+#~ msgstr "Ak&ualizovat"
+
+#~ msgid ""
+#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
+#~ "been found. It is recommended to update them now.</html>"
+#~ msgstr ""
+#~ "<html><h2>Nalezeny aktualizované brány</h2>Byly nalezeny některé nové či "
+#~ "aktualizované brány. Je doporučeno je nyní aktualizovat.</html>"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Zkontrolovat akt&ualizace"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Check for updated gateways</h2>\n"
+#~ "Updated gateways may help you fix problems with sending messages.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Zkontrolovat aktualizace bran</h2>\n"
+#~ "Aktualizované brány vám mohou pomoci s problémy při odesílání zpráv.\n"
+#~ "</html>"
 
 #~ msgid ""
 #~ "Personal authors' emails do not serve the purpose of bug reporting, "

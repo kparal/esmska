@@ -276,11 +276,6 @@ public class Main {
                     CountryPrefix.getCountryPrefix(Locale.getDefault().getCountry()));
             //set suggested LaF for this platform
             config.setLookAndFeel(ThemeManager.suggestBestLAF());
-            //set update policy if run as java webstart
-            if (RuntimeUtils.isRunAsWebStart()) {
-                //run as webstart, disable updates checking
-                config.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_NONE);
-            }
             //show first run wizard
             InitWizardDialog dialog = new InitWizardDialog(null, true);
             dialog.setVisible(true);
@@ -315,7 +310,7 @@ public class Main {
 
         //do some changes for unstable version
         if (!Config.isStableVersion()) {
-            config.setCheckForUnstableUpdates(true);
+            config.setAnnounceUnstableUpdates(true);
         }
         
         //start main frame

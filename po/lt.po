@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 23:30+0200\n"
+"POT-Creation-Date: 2011-03-26 23:51+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -104,14 +104,6 @@ msgstr "Atšaukti"
 #: Cancel_
 msgid "&Cancel"
 msgstr "&Atšaukti"
-
-#: CheckUpdatesTooltip
-msgid "Check for program and gateway updates"
-msgstr "Tikrinti programos ir operatorių atnaujinimus"
-
-#: CheckUpdates_
-msgid "&Updates checker"
-msgstr "Atna&ujinimų tikrinimas"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -224,21 +216,21 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
-msgid "&Appearance"
-msgstr "&Išvaizda"
+#: ConfigFrame.announceProgramUpdatesCheckBox.text
+msgid "Announce new program &updates"
+msgstr ""
 
-#: ConfigFrame.checkUpdatesCheckBox.text
-msgid "Automatically check for &updates of:"
-msgstr "Automatiškai tikrinti atnaujinimus:"
-
-#: ConfigFrame.checkUpdatesCheckBox.toolTipText
+#: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
-"or gateway updates were released and eventually notify the user\n"
+"was released and eventually notify the user\n"
 "</html>"
 msgstr ""
+
+#: ConfigFrame.appearancePanel.TabConstraints.tabTitle
+msgid "&Appearance"
+msgstr "&Išvaizda"
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
@@ -533,29 +525,17 @@ msgid "Unknown"
 msgstr "Nežinomas"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-msgid "also u&nstable versions"
+msgid "Also u&nstable versions"
 msgstr ""
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
 "<html>\n"
-"Notify also also about unstable versions.<br>\n"
+"Notify also also about unstable program versions.<br>\n"
 "<br>\n"
 "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
-"not afraid of potentially losing their program data.</b>\n"
+"who are willing to report encountered problems.</b>\n"
 "</html>"
-msgstr ""
-
-#: ConfigFrame.updateCheckAll
-msgid "program and gateways"
-msgstr ""
-
-#: ConfigFrame.updateCheckGateway
-msgid "gateways only"
-msgstr ""
-
-#: ConfigFrame.updateCheckProgram
-msgid "program only"
 msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.text
@@ -1026,7 +1006,7 @@ msgid ""
 "webpages or has a problem with them currently. Try again later.<br>\n"
 "<br>\n"
 "Also make sure that you have working connection to the Internet and that you "
-"are using the <a href=\"{0}\">latest program and gateway version</a>.<br>\n"
+"are using the <a href=\"{0}\">latest program version</a>.<br>\n"
 "<br>\n"
 "If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
 "web browser, report the problem on <a href=\"{2}\">program homepage</a>."
@@ -1434,10 +1414,6 @@ msgstr "Importuoti kontaktus iš kitų programų"
 #: MainFrame.messageMenu.text
 msgid "&Message"
 msgstr "&Žinutė"
-
-#: MainFrame.newGatewayUpdate
-msgid "<a href=\"\">Gateway updates</a> are available!"
-msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
@@ -2029,33 +2005,12 @@ msgstr "Paleisti eilę"
 msgid "Unpause sms queue"
 msgstr "Paleisti sms eilę"
 
-#: Update.allUpdated
-msgid "All gateways have been successfully updated."
-msgstr ""
-
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
 msgstr ""
 
-#: Update.checkFailed
-msgid "Retrieving update information failed!"
-msgstr ""
-
-#: Update.checking
-msgid "Checking..."
-msgstr "Tikrinama..."
-
 #: Update.downloadFailed
 msgid "Downloading of some gateways failed!"
-msgstr ""
-
-#: Update.downloading
-msgid "Downloading..."
-msgstr "Siunčiama..."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.gwTooltip
-msgid "gateway version: {0}"
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2067,72 +2022,52 @@ msgstr ""
 msgid "Installation of some gateways failed!"
 msgstr ""
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.invalidGw
-msgid "{0} (needs program version: {1})"
-msgstr ""
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Tikrinti programos ir operatorių atnaujinimus"
 
-#: Update.noUpdates
-msgid ""
-"<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-"latest versions of all the available gateways.</html>"
-msgstr ""
+#~ msgid "&Updates checker"
+#~ msgstr "Atna&ujinimų tikrinimas"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.notLatest
-msgid ""
-"<html>Some gateways require <a href=\"{0}\">more recent program version</a> "
-"than you currently use.</html>"
-msgstr ""
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Automatiškai tikrinti atnaujinimus:"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: Update.programUpdateAvailable
-msgid ""
-"<html>There is a new program version ({0}) available on the <a href="
-"\"{1}\">program homepage</a>.</html>"
-msgstr ""
-"<html>Nauja programos versija ({0}) pasiekiama <a href=\"{1}\">programos "
-"puslapyje</a>.</html>"
+#~ msgid "Checking..."
+#~ msgstr "Tikrinama..."
 
-#: Update.queueRunning
-msgid ""
-"<html><h2>You are currently sending messages</h2>\n"
-"No messages may be sent during program update. Please wait until<br>\n"
-"messages currently being sent are finished and then open this dialog again.</"
-"html>"
-msgstr ""
+#~ msgid "Downloading..."
+#~ msgstr "Siunčiama..."
 
-#: Update.showDialog
-msgid "Click to open an update manager"
-msgstr ""
+#~ msgid ""
+#~ "<html>There is a new program version ({0}) available on the <a href="
+#~ "\"{1}\">program homepage</a>.</html>"
+#~ msgstr ""
+#~ "<html>Nauja programos versija ({0}) pasiekiama <a href=\"{1}\">programos "
+#~ "puslapyje</a>.</html>"
 
-#: Update.update_
-msgid "&Update"
-msgstr "Atna&ujinti"
+#~ msgid "&Update"
+#~ msgstr "Atna&ujinti"
 
-#: Update.updatesFound
-msgid ""
-"<html><h2>Updated gateways found</h2>Some new or updated gateways have been "
-"found. It is recommended to update them now.</html>"
-msgstr ""
-"<html><h2>Rasti atnaujinti operatoriai</h2>Rasti nauji arba atnaujinti "
-"operatoriai. Rekomenduojame atsinaujinti juos dabar.</html>"
+#~ msgid ""
+#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
+#~ "been found. It is recommended to update them now.</html>"
+#~ msgstr ""
+#~ "<html><h2>Rasti atnaujinti operatoriai</h2>Rasti nauji arba atnaujinti "
+#~ "operatoriai. Rekomenduojame atsinaujinti juos dabar.</html>"
 
-#: UpdateDialog.checkButton.text
-msgid "Check for &updates"
-msgstr "Ieškoti atna&ujinimų"
+#~ msgid "Check for &updates"
+#~ msgstr "Ieškoti atna&ujinimų"
 
-#: UpdateDialog.topLabel.text
-msgid ""
-"<html>\n"
-"<h2>Check for updated gateways</h2>\n"
-"Updated gateways may help you fix problems with sending messages.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"<h2>Ieškoti atnaujintų operatorių</h2>\n"
-"Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo problemas.\n"
-"</html>"
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Check for updated gateways</h2>\n"
+#~ "Updated gateways may help you fix problems with sending messages.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Ieškoti atnaujintų operatorių</h2>\n"
+#~ "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo "
+#~ "problemas.\n"
+#~ "</html>"
 
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009"

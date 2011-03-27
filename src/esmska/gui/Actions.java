@@ -20,7 +20,6 @@ import esmska.utils.ConfirmingFileChooser;
 import esmska.utils.L10N;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
-import esmska.update.UpdateChecker;
 import esmska.data.Links;
 import java.awt.Desktop;
 import java.awt.Toolkit;
@@ -143,16 +142,6 @@ public class Actions {
         return new BrowseAction(url);
     }
 
-    /** Show the update dialog
-     * @param updateChecker update checker, may be null
-     */
-    public static Action getUpdateAction(UpdateChecker updateChecker) {
-        if (updateAction == null) {
-            updateAction = new UpdateAction(updateChecker);
-        }
-        return updateAction;
-    }
-
     /** Browse specific URL with a web browser */
     private static class BrowseAction extends AbstractAction {
         private final String url;
@@ -164,9 +153,7 @@ public class Actions {
         public void actionPerformed(ActionEvent e) {
             if (StringUtils.startsWith(url, "esmska://")) {
                 //internal program action link
-                if (Links.RUN_UPDATER.equals(url)) {
-                    getUpdateAction(null).actionPerformed(null);
-                } else if (Links.CONFIG_GATEWAYS.equals(url)) {
+                if (Links.CONFIG_GATEWAYS.equals(url)) {
                     ((ConfigAction)getConfigAction()).showTab(ConfigFrame.Tabs.GATEWAYS);
                 } else {
                     assert false : "Unknown internal action link: " + url;
@@ -512,38 +499,6 @@ public class Actions {
                 putValue(SHORT_DESCRIPTION, descRunning);
                 putValue(SELECTED_KEY, false);
             }
-        }
-    }
-
-    /** Show the update dialog */
-    private static class UpdateAction extends AbstractAction {
-        private UpdateChecker updateChecker;
-        public UpdateAction(UpdateChecker updateChecker) {
-            this.updateChecker = updateChecker;
-            L10N.setLocalizedText(this, l10n.getString("CheckUpdates_"));
-            putValue(LARGE_ICON_KEY, Icons.get("updateManager-48.png"));
-            this.putValue(SHORT_DESCRIPTION,l10n.getString("CheckUpdatesTooltip"));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //pause the queue so no further messages are sent
-            Queue queue = Queue.getInstance();
-            if (!queue.isEmpty()) {
-                queue.setPaused(true);
-            }
-            //don't allow to send messages during update process
-            if (Context.mainFrame.getSMSSender().isRunning()) {
-                JOptionPane.showMessageDialog(Context.mainFrame,
-                    new JLabel(l10n.getString("Update.queueRunning")),
-                    null, JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            logger.fine("Showing Update dialog...");
-            UpdateDialog dialog = new UpdateDialog(Context.mainFrame, true, updateChecker);
-            dialog.setLocationRelativeTo(Context.mainFrame);
-            
-            dialog.setVisible(true);
         }
     }
 }

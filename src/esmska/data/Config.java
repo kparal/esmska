@@ -21,18 +21,6 @@ import org.apache.commons.lang.StringUtils;
  */
 public class Config extends Object implements Serializable {
 
-    /** How the update checks should be performed */
-    public static enum CheckUpdatePolicy {
-        /** never check for anything */
-        CHECK_NONE,
-        /** check only for program updates */
-        CHECK_PROGRAM,
-        /** check only for gateway updates */
-        CHECK_GATEWAYS,
-        /** check for program and gateway updates */
-        CHECK_ALL
-    }
-
     /** system-wide config */
     private static GlobalConfig globalConfig = GlobalConfig.getInstance();
     /** shared instance */
@@ -55,8 +43,8 @@ public class Config extends Object implements Serializable {
     private String lafJGoodiesTheme = "Experience Blue";
     private String lafSubstanceSkin = "Business Black Steel";
     private boolean removeAccents = true;
-    private CheckUpdatePolicy checkUpdatePolicy = globalConfig.checkUpdatePolicy;
-    private boolean checkForUnstableUpdates = false;
+    private boolean announceProgramUpdates = globalConfig.announceProgramUpdates;
+    private boolean announceUnstableUpdates = false;
     private boolean startCentered = false;
     private boolean toolbarVisible = true;
     private String countryPrefix = "";
@@ -239,16 +227,12 @@ public class Config extends Object implements Serializable {
         return showAdvancedControls;
     }
 
-
-    /**
-     * @return never null
-     */
-    public CheckUpdatePolicy getCheckUpdatePolicy() {
-        return checkUpdatePolicy;
+    public boolean isAnnounceProgramUpdates() {
+        return announceProgramUpdates;
     }
 
-    public boolean isCheckForUnstableUpdates() {
-        return checkForUnstableUpdates;
+    public boolean isAnnounceUnstableUpdates() {
+        return announceUnstableUpdates;
     }
 
     public boolean isStartCentered() {
@@ -404,27 +388,21 @@ public class Config extends Object implements Serializable {
         changeSupport.firePropertyChange("removeAccents", oldRemoveAccents, removeAccents);
     }
 
-    /** Set check update policy
-     * @param checkUpdatePolicy null is converted to default value
-     */
-    public void setCheckUpdatePolicy(CheckUpdatePolicy checkUpdatePolicy) {
-        if (checkUpdatePolicy == null) {
-            checkUpdatePolicy = CheckUpdatePolicy.CHECK_ALL;
-        }
-        CheckUpdatePolicy old = this.checkUpdatePolicy;
-        this.checkUpdatePolicy = checkUpdatePolicy;
-        changeSupport.firePropertyChange("checkUpdatePolicy", old, checkUpdatePolicy);
+    public void setAnnounceProgramUpdates(boolean announceProgramUpdates) {
+        boolean old = this.announceProgramUpdates;
+        this.announceProgramUpdates = announceProgramUpdates;
+        changeSupport.firePropertyChange("announceProgramUpdates", old, announceProgramUpdates);
     }
 
-    /** Set if should check for unstable versions. If currently using unstable
+    /** Set if should announce unstable versions. If currently using unstable
      version this is always set to true, regardless of the input. */
-    public void setCheckForUnstableUpdates(boolean checkForUnstableUpdates) {
+    public void setAnnounceUnstableUpdates(boolean announceUnstableUpdates) {
         if (!isStableVersion()) {
-            checkForUnstableUpdates = true;
+            announceUnstableUpdates = true;
         }
-        boolean old = this.checkForUnstableUpdates;
-        this.checkForUnstableUpdates = checkForUnstableUpdates;
-        changeSupport.firePropertyChange("checkForUnstableUpdates", old, checkForUnstableUpdates);
+        boolean old = this.announceUnstableUpdates;
+        this.announceUnstableUpdates = announceUnstableUpdates;
+        changeSupport.firePropertyChange("announceUnstableUpdates", old, announceUnstableUpdates);
     }
 
     public void setStartCentered(boolean startCentered) {
@@ -549,7 +527,7 @@ public class Config extends Object implements Serializable {
     public static class GlobalConfig {
         private static final GlobalConfig instance = new GlobalConfig();
 
-        private CheckUpdatePolicy checkUpdatePolicy = CheckUpdatePolicy.CHECK_ALL;
+        private boolean announceProgramUpdates = true;
 
         private GlobalConfig() {
         }
@@ -559,12 +537,9 @@ public class Config extends Object implements Serializable {
             return instance;
         }
 
-        /** @see Config#setCheckUpdatePolicy */
-        public void setCheckUpdatePolicy(CheckUpdatePolicy checkUpdatePolicy) {
-            if (checkUpdatePolicy == null) {
-                checkUpdatePolicy = CheckUpdatePolicy.CHECK_ALL;
-            }
-            this.checkUpdatePolicy = checkUpdatePolicy;
+        /** @see Config#setCheckProgramUpdates(boolean) */
+        public void setAnnounceProgramUpdates(boolean announceProgramUpdates) {
+            this.announceProgramUpdates = announceProgramUpdates;
         }
 
     }

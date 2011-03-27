@@ -249,18 +249,47 @@ public class ImportManager {
         return gateways;
     }
 
+    /** Get set of deprecated gateways from jar resource
+     * @param resource jar absolute resource path with xml file
+     * @see #importDeprecatedGateways(java.net.URL)
+     */
+    public static HashSet<DeprecatedGateway> importDeprecatedGateways(String resource) throws
+            IOException, SAXException {
+        logger.finer("Importing deprecated gateways from resource: " + resource);
+        URL deprecFile = ImportManager.class.getResource(resource);
+        if (deprecFile == null || //resource doesn't exist
+                !deprecFile.getProtocol().equals("jar")) { //resource not packed in jar
+            throw new IOException("Could not find jar gateway resource: " + resource);
+        }
+
+        return importDeprecatedGateways(deprecFile);
+    }
+
     /** Get set of deprecated gateways from a file
      * @param file xml containing description of deprecated gateways
-     * @return set of deprecated gateways
-     * @throws IOException problem accessing the file
-     * @throws SAXException problem parsing the file
+     * @see #importDeprecatedGateways(java.net.URL) 
      */
     public static HashSet<DeprecatedGateway> importDeprecatedGateways(File file)
             throws IOException, SAXException {
         logger.finer("Importing deprecated gateways from file: " + file.getAbsolutePath());
+
         if (!file.canRead() || !file.isFile()) {
             throw new IOException("Invalid deprecated gateway file: " + file.getAbsolutePath());
         }
+        
+        return importDeprecatedGateways(file.toURI().toURL());
+    }
+
+    /** Get set of deprecated gateways from URL
+     * @param url url to xml file (file or jar url) containing description
+     * of deprecated gateways
+     * @return set of deprecated gateways
+     * @throws IOException problem accessing jar resource
+     * @throws SAXException problem parsing the file
+     */
+    public static HashSet<DeprecatedGateway> importDeprecatedGateways(URL url) throws
+            IOException, SAXException {
+        logger.finer("Importing deprecated gateways from URL: " + url);
 
         HashSet<DeprecatedGateway> deprecated = new HashSet<DeprecatedGateway>();
 
@@ -270,7 +299,7 @@ public class ImportManager {
             XPathFactory xpf = XPathFactory.newInstance();
             XPath xpath = xpf.newXPath();
 
-            Document doc = db.parse(file);
+            Document doc = db.parse(url.openStream());
 
             NodeList gateways = doc.getElementsByTagName(VersionFile.TAG_DEPRECATED_GATEWAY);
             for (int i = 0; i < gateways.getLength(); i++) {
@@ -335,17 +364,14 @@ public class ImportManager {
             Properties props = new Properties();
             props.load(reader);
 
-            //checkUpdatePolicy
-            String prop = props.getProperty("checkUpdatePolicy");
-            if ("none".equals(prop)) {
-                globalConfig.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_NONE);
-            } else if ("program".equals(prop)) {
-                globalConfig.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_PROGRAM);
-            } else if ("gateways".equals(prop)) {
-                globalConfig.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_GATEWAYS);
-            } else if ("all".equals(prop)) {
-                globalConfig.setCheckUpdatePolicy(Config.CheckUpdatePolicy.CHECK_ALL);
+            //checkProgramUpdates
+            String prop = props.getProperty("announceProgramUpdates");
+            if ("yes".equals(prop)) {
+                globalConfig.setAnnounceProgramUpdates(true);
+            } else if ("no".equals(prop)) {
+                globalConfig.setAnnounceProgramUpdates(false);
             }
+            // else config default will aply
 
         } finally {
             if (reader != null) {

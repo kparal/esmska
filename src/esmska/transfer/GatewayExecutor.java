@@ -91,7 +91,7 @@ public class GatewayExecutor {
         Gateway gateway = Gateways.getInstance().get(sms.getGateway());
         if (gateway != null) {
             ERROR_WRONG_AUTH = MessageFormat.format(ERROR_WRONG_AUTH, gateway.getWebsite());
-            ERROR_UNKNOWN = MessageFormat.format(ERROR_UNKNOWN, Links.RUN_UPDATER,
+            ERROR_UNKNOWN = MessageFormat.format(ERROR_UNKNOWN, Links.DOWNLOAD,
                     gateway.getWebsite(), Links.ISSUES);
         }
     }
