@@ -145,7 +145,7 @@ public class Main {
         try {
             pm.backupConfigFiles();
         } catch (IOException ex) {
-            logger.log(Level.WARNING, "Could not back up configuration", ex);
+            logger.log(Level.SEVERE, "Could not back up configuration", ex);
         }
 
         //initialize file logging
@@ -153,7 +153,7 @@ public class Main {
         try {
             LogSupport.initFileHandler(logFile);
         } catch (IOException ex) {
-            logger.log(Level.WARNING, "Could not start logging into " + logFile.getAbsolutePath(), ex);
+            logger.log(Level.SEVERE, "Could not start logging into " + logFile.getAbsolutePath(), ex);
         } finally {
             //no need to store records anymore
             LogSupport.storeRecords(false);
@@ -163,7 +163,7 @@ public class Main {
         try {
             pm.loadConfig();
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "Could not load config file", ex);
+            logger.log(Level.SEVERE, "Could not load config file", ex);
         }
         try {
             pm.loadGateways();
@@ -187,22 +187,22 @@ public class Main {
         try {
             pm.loadContacts();
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "Could not load contacts file", ex);
+            logger.log(Level.SEVERE, "Could not load contacts file", ex);
         }
         try {
             pm.loadQueue();
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "Could not load queue file", ex);
+            logger.log(Level.SEVERE, "Could not load queue file", ex);
         }
         try {
             pm.loadHistory();
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "Could not load history file", ex);
+            logger.log(Level.SEVERE, "Could not load history file", ex);
         }
         try {
             pm.loadKeyring();
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "Could not load keyring file", ex);
+            logger.log(Level.SEVERE, "Could not load keyring file", ex);
         }
 
         //initialize logging if set from Config

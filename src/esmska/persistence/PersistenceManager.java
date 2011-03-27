@@ -294,7 +294,7 @@ public class PersistenceManager {
     }
     
     /** Load sms queue */
-    public void loadQueue() throws IOException {
+    public void loadQueue() throws Exception {
         logger.fine("Loading queue");
         if (queueFile.exists()) {
             ArrayList<SMS> newQueue = ImportManager.importQueue(queueFile);

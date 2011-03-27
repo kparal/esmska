@@ -77,7 +77,7 @@ public class ImportManager {
     }
 
     /** Import sms queue from file */
-    public static ArrayList<SMS> importQueue(File file) throws IOException {
+    public static ArrayList<SMS> importQueue(File file) throws Exception {
         logger.finer("Importing queue from file: " + file.getAbsolutePath());
         ArrayList<SMS> queue = new ArrayList<SMS>();
         CsvReader reader = null;
@@ -86,16 +86,21 @@ public class ImportManager {
             reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
             reader.setUseComments(true);
             while (reader.readRecord()) {
-                String name = reader.get(0);
-                String number = reader.get(1);
-                String gateway = reader.get(2);
-                String text = reader.get(3);
-                String senderName = reader.get(4);
-                String senderNumber = reader.get(5);
+                try {
+                    String name = reader.get(0);
+                    String number = reader.get(1);
+                    String gateway = reader.get(2);
+                    String text = reader.get(3);
+                    String senderName = reader.get(4);
+                    String senderNumber = reader.get(5);
 
-                SMS sms = new SMS(number, text, gateway, name, senderNumber,
-                        senderName);
-                queue.add(sms);
+                    SMS sms = new SMS(number, text, gateway, name, senderNumber,
+                            senderName);
+                    queue.add(sms);
+                } catch (Exception e) {
+                    logger.severe("Invalid queue record: " + reader.getRawRecord());
+                    throw e;
+                }
             }
         } finally {
             if (reader != null) {
@@ -109,7 +114,7 @@ public class ImportManager {
 
     /** Import sms history from file */
     public static ArrayList<History.Record> importHistory(File file)
-            throws IOException, ParseException {
+            throws Exception {
         logger.finer("Importing history from file: " + file.getAbsolutePath());
         ArrayList<History.Record> history = new ArrayList<History.Record>();
         CsvReader reader = null;
@@ -119,21 +124,26 @@ public class ImportManager {
             reader.setUseComments(true);
 
             while (reader.readRecord()) {
-                String dateString = reader.get(0);
-                String name = reader.get(1);
-                String number = reader.get(2);
-                String gateway = reader.get(3);
-                String text = reader.get(4);
-                String senderName = reader.get(5);
-                String senderNumber = reader.get(6);
+                try {
+                    String dateString = reader.get(0);
+                    String name = reader.get(1);
+                    String number = reader.get(2);
+                    String gateway = reader.get(3);
+                    String text = reader.get(4);
+                    String senderName = reader.get(5);
+                    String senderNumber = reader.get(6);
 
-                DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
-                        DateFormat.LONG, Locale.ROOT);
-                Date date = df.parse(dateString);
+                    DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
+                            DateFormat.LONG, Locale.ROOT);
+                    Date date = df.parse(dateString);
 
-                History.Record record = new History.Record(number, text, gateway,
-                        name, senderNumber, senderName, date);
-                history.add(record);
+                    History.Record record = new History.Record(number, text, gateway,
+                            name, senderNumber, senderName, date);
+                    history.add(record);
+                } catch (Exception e) {
+                    logger.severe("Invalid history record: " + reader.getRawRecord());
+                    throw e;
+                }
             }
         } finally {
             if (reader != null) {
@@ -322,12 +332,10 @@ public class ImportManager {
 
     /** Import keyring data from file.
      * @param file File to import from.
-     * @throws java.io.IOException When some error occur during file processing.
-     * @throws java.security.GeneralSecurityException When there is problem with
-     *         key decryption.
+     * @throws Exception When some error occur during file processing.
      */
     public static void importKeyring(File file)
-            throws IOException, GeneralSecurityException {
+            throws Exception {
         logger.finer("Importing keyring from file: " + file.getAbsolutePath());
         Keyring keyring = Keyring.getInstance();
         CsvReader reader = null;
@@ -336,12 +344,17 @@ public class ImportManager {
             reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
             reader.setUseComments(true);
             while (reader.readRecord()) {
-                String gatewayName = reader.get(0);
-                String login = reader.get(1);
-                String password = Keyring.decrypt(reader.get(2));
+                try {
+                    String gatewayName = reader.get(0);
+                    String login = reader.get(1);
+                    String password = Keyring.decrypt(reader.get(2));
 
-                Tuple<String, String> key = new Tuple<String, String>(login, password);
-                keyring.putKey(gatewayName, key);
+                    Tuple<String, String> key = new Tuple<String, String>(login, password);
+                    keyring.putKey(gatewayName, key);
+                } catch (Exception e) {
+                    logger.severe("Invalid keyring record: " + reader.getRawRecord());
+                    throw e;
+                }
             }
         } finally {
             if (reader != null) {

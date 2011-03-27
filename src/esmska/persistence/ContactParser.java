@@ -80,7 +80,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
     }
     
     /** parse csv file and return contacts */
-    private ArrayList<Contact> parseCSV() throws IOException {
+    private ArrayList<Contact> parseCSV() throws Exception {
         logger.finer("Parsing CSV file '" + file + "' as type " + type);
         contacts.clear();
         
@@ -101,61 +101,66 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
 
             //read all the records
             while (reader.readRecord()) {
-                String name = "";
-                String number = "";
-                String gateway = "";
+                try {
+                    String name = "";
+                    String number = "";
+                    String gateway = "";
 
-                //read record items
-                switch (type) {
-                    case KUBIK_DREAMCOM_FILE:
-                        name = reader.get(5);
-                        number = reader.get(6);
-                        gateway = reader.get(20).equals("") ? reader.get(21) : reader.get(20);
-                        break;
-                    case DREAMCOM_SE_FILE:
-                    case ESMSKA_FILE:
-                        name = reader.get(0);
-                        number = reader.get(1);
-                        gateway = reader.get(2);
-                }
+                    //read record items
+                    switch (type) {
+                        case KUBIK_DREAMCOM_FILE:
+                            name = reader.get(5);
+                            number = reader.get(6);
+                            gateway = reader.get(20).equals("") ? reader.get(21) : reader.get(20);
+                            break;
+                        case DREAMCOM_SE_FILE:
+                        case ESMSKA_FILE:
+                            name = reader.get(0);
+                            number = reader.get(1);
+                            gateway = reader.get(2);
+                    }
 
-                if (StringUtils.isEmpty(name)) {
-                    continue;
-                }
-                if (!Contact.isValidNumber(number)) {
-                    continue;
-                }
+                    if (StringUtils.isEmpty(name)) {
+                        continue;
+                    }
+                    if (!Contact.isValidNumber(number)) {
+                        continue;
+                    }
 
-                //convert known gateways to our gateways
-                switch (type) {
-                    case KUBIK_DREAMCOM_FILE:
-                        if (gateway.startsWith("Oskar") || gateway.startsWith("Vodafone")) {
-                            gateway = "[CZ]Vodafone";
-                        } else if (gateway.startsWith("Eurotel") || gateway.startsWith("O2")) {
-                            gateway = "[CZ]O2";
-                        } else if (gateway.startsWith("T-Mobile")) {
-                            gateway = "[CZ]t-zones";
-                        }
-                        break;
-                    case DREAMCOM_SE_FILE:
-                        if (gateway.startsWith("O2")) {
-                            gateway = "[CZ]O2";
-                        } else if (gateway.startsWith("Vodafone")) {
-                            gateway = "[CZ]Vodafone";
-                        } else if (gateway.startsWith("T-Zones")) {
-                            gateway = "[CZ]t-zones";
-                        }
-                        break;
-                    case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
-                        if ("Vodafone".equals(gateway)) {
-                            gateway = "[CZ]Vodafone";
-                        } else if ("O2".equals(gateway)) {
-                            gateway = "[CZ]O2";
-                        }
-                        break;
-                }
+                    //convert known gateways to our gateways
+                    switch (type) {
+                        case KUBIK_DREAMCOM_FILE:
+                            if (gateway.startsWith("Oskar") || gateway.startsWith("Vodafone")) {
+                                gateway = "[CZ]Vodafone";
+                            } else if (gateway.startsWith("Eurotel") || gateway.startsWith("O2")) {
+                                gateway = "[CZ]O2";
+                            } else if (gateway.startsWith("T-Mobile")) {
+                                gateway = "[CZ]t-zones";
+                            }
+                            break;
+                        case DREAMCOM_SE_FILE:
+                            if (gateway.startsWith("O2")) {
+                                gateway = "[CZ]O2";
+                            } else if (gateway.startsWith("Vodafone")) {
+                                gateway = "[CZ]Vodafone";
+                            } else if (gateway.startsWith("T-Zones")) {
+                                gateway = "[CZ]t-zones";
+                            }
+                            break;
+                        case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
+                            if ("Vodafone".equals(gateway)) {
+                                gateway = "[CZ]Vodafone";
+                            } else if ("O2".equals(gateway)) {
+                                gateway = "[CZ]O2";
+                            }
+                            break;
+                    }
 
-                contacts.add(new Contact(name, number, gateway));
+                    contacts.add(new Contact(name, number, gateway));
+                } catch (Exception e) {
+                    logger.severe("Invalid contact record: " + reader.getRawRecord());
+                    throw e;
+                }
             }
         } finally {
             if (reader != null) {
