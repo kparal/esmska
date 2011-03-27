@@ -135,7 +135,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                             } else if (gateway.startsWith("Eurotel") || gateway.startsWith("O2")) {
                                 gateway = "[CZ]O2";
                             } else if (gateway.startsWith("T-Mobile")) {
-                                gateway = "[CZ]t-zones";
+                                gateway = "[CZ]T-mobile";
                             }
                             break;
                         case DREAMCOM_SE_FILE:
@@ -145,13 +145,6 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                                 gateway = "[CZ]Vodafone";
                             } else if (gateway.startsWith("T-Zones")) {
                                 gateway = "[CZ]t-zones";
-                            }
-                            break;
-                        case ESMSKA_FILE: //LEGACY: be compatible with Esmska 0.7.0 and older
-                            if ("Vodafone".equals(gateway)) {
-                                gateway = "[CZ]Vodafone";
-                            } else if ("O2".equals(gateway)) {
-                                gateway = "[CZ]O2";
                             }
                             break;
                     }
