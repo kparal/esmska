@@ -8,6 +8,7 @@ package esmska.data;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
+import esmska.data.Gateway.Feature;
 import java.beans.IntrospectionException;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -351,7 +352,7 @@ public class Gateways {
         HashMap<Gateway, Integer> scores = new HashMap<Gateway, Integer>();
         for (Gateway gw : selectedGateways) {
             scores.put(gw, 0);
-            if (gw.isLoginRequired() && keyring.getKey(gw.getName()) == null) {
+            if (gw.hasFeature(Feature.LOGIN_ONLY) && keyring.getKey(gw.getName()) == null) {
                 scores.put(gw, scores.get(gw) - 1);
             }
             if (!isNumberPreferred(gw, number)) {

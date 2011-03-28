@@ -121,7 +121,7 @@ public class GatewayInterpreter {
         }
 
         if (config.isDemandDeliveryReport()) {
-            map.put(GatewayVariable.DELIVERY_REPORT, "true");
+            map.put(GatewayVariable.RECEIPT, "true");
         }
 
         return map;

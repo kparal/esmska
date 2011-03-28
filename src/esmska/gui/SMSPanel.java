@@ -15,6 +15,7 @@ import esmska.data.Envelope;
 import esmska.data.Keyring;
 import esmska.data.Links;
 import esmska.data.Gateway;
+import esmska.data.Gateway.Feature;
 import esmska.data.Gateways;
 import esmska.data.Icons;
 import esmska.data.Queue;
@@ -409,7 +410,7 @@ public class SMSPanel extends javax.swing.JPanel {
      */
     private void updateCredentialsInfoLabel() {
         Gateway gateway = gatewayComboBox.getSelectedGateway();
-        if (gateway != null && gateway.isLoginRequired() &&
+        if (gateway != null && gateway.hasFeature(Feature.LOGIN_ONLY) &&
                 keyring.getKey(gateway.getName()) == null) {
             credentialsInfoLabel.setVisible(true);
         } else {

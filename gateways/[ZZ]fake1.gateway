@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2010-07-24"
+    return "2011-03-28"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.20.0"
+    return "0.21.99"
 }
 
 function getWebsite() {
@@ -51,12 +51,16 @@ function getDelayBetweenMessages() {
     return 10
 }
 
-function isLoginRequired() {
-    return false
-}
-
 function getSupportedLanguages() {
     return []
+}
+
+function getFeatures() {
+    return ["LOGIN",
+            "SENDER_NUMBER",
+            "SENDER_NAME",
+            "RECEIPT",
+            "CAPTCHA"]
 }
 
 function send() {

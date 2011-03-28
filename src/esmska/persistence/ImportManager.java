@@ -14,12 +14,9 @@ import esmska.data.Config.GlobalConfig;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.security.GeneralSecurityException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import esmska.data.Contact;
 import esmska.data.SMS;
-import esmska.data.DefaultGateway;
 import esmska.data.Gateway;
 import esmska.data.Tuple;
 import esmska.update.VersionFile;
@@ -222,7 +219,7 @@ public class ImportManager {
 
         for (URL gatewayURL : gatewayURLs) {
             try {
-                DefaultGateway gateway = new DefaultGateway(gatewayURL);
+                Gateway gateway = new Gateway(gatewayURL);
                 //check that this gateway can be used in this program
                 if (Config.compareProgramVersions(Config.getLatestVersion(),
                         gateway.getMinProgramVersion()) < 0) {

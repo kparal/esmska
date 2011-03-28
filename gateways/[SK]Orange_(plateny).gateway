@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-02-10"
+    return "2011-03-28"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.20.0"
+    return "0.21.99"
 }
 
 function getWebsite() {
@@ -51,12 +51,13 @@ function getDelayBetweenMessages() {
     return 0
 }
 
-function isLoginRequired() {
-    return true
-}
-
 function getSupportedLanguages() {
     return ["sk"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY",
+            "RECEIPT"]
 }
 
 function send() {
@@ -102,7 +103,7 @@ function send() {
 		"text", MESSAGE,
 		"what", "0",
 		"whut", "1",
-		"confirm", DELIVERY_REPORT?"1":"0",
+		"confirm", RECEIPT?"1":"0",
 		"action", "send",
 		"fromDraft", "",
 		"idsms", "",

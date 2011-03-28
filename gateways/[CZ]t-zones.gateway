@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-13"
+    return "2011-03-28"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.20.0"
+    return "0.21.99"
 }
 
 function getWebsite() {
@@ -51,12 +51,13 @@ function getDelayBetweenMessages() {
     return 0
 }
 
-function isLoginRequired() {
-    return true
-}
-
 function getSupportedLanguages() {
     return ["cs"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY",
+            "RECEIPT"]
 }
 
 function send() {
@@ -133,7 +134,7 @@ function send() {
     postData = ["counter", counter,
                 "recipients", NUMBER, "text", MESSAGE,
                 "send", "Odeslat", "mtype", "0",
-                "confirmation", DELIVERY_REPORT?"1":"0",
+                "confirmation", RECEIPT?"1":"0",
                 "history", "on"]
     content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
 

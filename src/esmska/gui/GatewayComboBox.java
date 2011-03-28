@@ -8,6 +8,7 @@ package esmska.gui;
 import esmska.data.CountryPrefix;
 import esmska.data.Gateways;
 import esmska.data.Gateway;
+import esmska.data.Gateway.Feature;
 import esmska.data.Gateways.Events;
 import esmska.data.Tuple;
 import esmska.data.event.ValuedEvent;
@@ -229,7 +230,7 @@ public class GatewayComboBox extends JComboBox {
 
             String tooltip = MessageFormat.format(pattern,
                     gateway.getName(), gateway.getWebsite(), description,
-                    gateway.isLoginRequired() ? registration : noReg,
+                    gateway.hasFeature(Feature.LOGIN_ONLY) ? registration : noReg,
                     Gateways.convertDelayToHumanString(gateway.getDelayBetweenMessages(), false),
                     country.equals(CountryPrefix.INTERNATIONAL_CODE) ? international : local,
                     gateway.getVersion());

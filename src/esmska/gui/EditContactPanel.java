@@ -11,6 +11,7 @@ import esmska.data.Contact;
 import esmska.data.Keyring;
 import esmska.data.Links;
 import esmska.data.Gateway;
+import esmska.data.Gateway.Feature;
 import esmska.data.Gateways;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.data.event.ActionEventSupport;
@@ -364,7 +365,7 @@ public class EditContactPanel extends javax.swing.JPanel {
      */
     private void updateCredentialsInfoLabel() {
         Gateway gateway = gatewayComboBox.getSelectedGateway();
-        if (gateway != null && gateway.isLoginRequired() &&
+        if (gateway != null && gateway.hasFeature(Feature.LOGIN_ONLY) &&
                 keyring.getKey(gateway.getName()) == null) {
             credentialsInfoLabel.setVisible(true);
         } else {

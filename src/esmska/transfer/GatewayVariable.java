@@ -25,5 +25,5 @@ public enum GatewayVariable {
     /** Password to the gateway website */
     PASSWORD,
     /** This string is non-empty if a delivery report should be sent */
-    DELIVERY_REPORT
+    RECEIPT
 }

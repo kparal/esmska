@@ -127,13 +127,6 @@ public interface GatewayInfo {
      */
     int getDelayBetweenMessages();
     
-    /** Indicates whether this gateway requires login with username and
-     * password. If this is true, it means that user must have some credentials
-     * assigned from the operator or must register at gateway website prior to
-     * using this gateway in program.
-     */
-    boolean isLoginRequired();
-    
     /** Indicates for which website languages the script is working.
      * This method is included because gateways may have their website translated
      * into many languages and therefore the response may come somehow localized.<br>
@@ -149,5 +142,9 @@ public interface GatewayInfo {
      *  or empty array if the script works independently of language
      */
     String[] getSupportedLanguages();
-    
+
+    /** The list of all supported features by this gateway.
+     * It is a list of strings matching the {@link Gateway.Feature} attributes.
+     */
+    String[] getFeatures();
 }
