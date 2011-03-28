@@ -1,8 +1,3 @@
-/*
- * Config.java
- *
- * Created on 19. červenec 2007, 20:56
- */
 package esmska.data;
 
 import esmska.gui.ThemeManager;

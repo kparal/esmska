@@ -1,10 +1,3 @@
-/*
- * Envelope.java
- *
- * Created on 14. srpen 2007, 20:18
- *
- */
-
 package esmska.data;
 
 import java.util.ArrayList;

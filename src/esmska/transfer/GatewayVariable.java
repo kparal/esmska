@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package esmska.transfer;
 
 /** Enum of gateway variables applicable in the gateway script.

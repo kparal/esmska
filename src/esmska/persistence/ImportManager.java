@@ -1,11 +1,3 @@
-/*
- * ImportManager.java
- *
- * Created on 15. září 2007, 13:02
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
 package esmska.persistence;
 
 import com.csvreader.CsvReader;

@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * CountryPrefixPanel.java
- *
- * Created on 25.12.2009, 23:43:54
- */
-
 package esmska.gui;
 
 import esmska.data.Config;

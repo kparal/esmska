@@ -1,12 +1,3 @@
-/*
- * PersistenceManager.java
- *
- * Created on 19. červenec 2007, 20:55
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package esmska.persistence;
 
 import esmska.Context;

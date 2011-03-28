@@ -1,12 +1,3 @@
-/*
- * ActionEventSupport.java
- *
- * Created on 3. říjen 2007, 17:45
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package esmska.data.event;
 
 import java.awt.event.ActionEvent;

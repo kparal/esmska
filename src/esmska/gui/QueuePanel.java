@@ -1,9 +1,3 @@
-/*
- * QueuePanel.java
- *
- * Created on 3. říjen 2007, 22:05
- */
-
 package esmska.gui;
 
 import esmska.Context;

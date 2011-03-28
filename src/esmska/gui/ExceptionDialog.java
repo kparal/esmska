@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ExceptionDialog.java
- *
- * Created on 8.9.2009, 23:06:43
- */
 package esmska.gui;
 
 import esmska.Context;

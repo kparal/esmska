@@ -1,12 +1,3 @@
-/*
- * SMS.java
- *
- * Created on 6. červenec 2007, 17:15
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package esmska.data;
 
 import java.util.logging.Logger;

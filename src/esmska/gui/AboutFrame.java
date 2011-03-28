@@ -1,9 +1,3 @@
-/*
- * AboutFrame.java
- *
- * Created on 8. červenec 2007, 13:18
- */
-
 package esmska.gui;
 
 import esmska.data.Config;

@@ -1,12 +1,3 @@
-/*
- * ExportManager.java
- *
- * Created on 22. srpen 2007, 23:09
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package esmska.persistence;
 
 import a_vcard.android.provider.Contacts;

@@ -1,9 +1,3 @@
-/*
- * EditContactPanel.java
- *
- * Created on 26. červenec 2007, 11:50
- */
-
 package esmska.gui;
 
 import esmska.data.Config;

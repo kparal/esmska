@@ -1,10 +1,3 @@
-
-/*
- * GatewayErrorMessage.java
- *
- * Created on 8.1.2011, 16:01:32
- */
-
 package esmska.gui;
 
 import esmska.data.Config;

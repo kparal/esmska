@@ -1,12 +1,3 @@
-/*
- * ContactParser.java
- *
- * Created on 11. září 2007, 21:35
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package esmska.persistence;
 
 import a_vcard.android.syncml.pim.PropertyNode;

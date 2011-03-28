@@ -1,12 +1,3 @@
-/*
- * Main.java
- *
- * Created on 24. srpen 2007, 22:20
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package esmska;
 
 import esmska.gui.ThemeManager;

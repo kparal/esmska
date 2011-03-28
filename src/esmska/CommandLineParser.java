@@ -1,11 +1,3 @@
-/*
- * CommandLineParser.java
- *
- * Created on 23. září 2007, 14:21
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
 package esmska;
 
 import esmska.data.Config;

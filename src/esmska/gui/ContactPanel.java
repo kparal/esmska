@@ -1,9 +1,3 @@
-/*
- * ContactPanel.java
- *
- * Created on 3. říjen 2007, 18:48
- */
-
 package esmska.gui;
 
 import esmska.Context;

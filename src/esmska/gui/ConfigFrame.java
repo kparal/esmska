@@ -1,9 +1,3 @@
-/*
- * ConfigFrame.java
- *
- * Created on 20. červenec 2007, 18:59
- */
-
 package esmska.gui;
 
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;

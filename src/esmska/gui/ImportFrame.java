@@ -1,9 +1,3 @@
-/*
- * ImportFrame.java
- *
- * Created on 18. srpen 2007, 23:11
- */
-
 package esmska.gui;
 
 import esmska.persistence.ContactParser;

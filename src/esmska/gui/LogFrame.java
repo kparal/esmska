@@ -1,9 +1,3 @@
-/*
- * LogFrame.java
- *
- * Created on 25. leden 2008, 21:43
- */
-
 package esmska.gui;
 
 import esmska.Context;

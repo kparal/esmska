@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * InitWizardDialog.java
- *
- * Created on 26.12.2009, 0:06:45
- */
-
 package esmska.gui;
 
 import esmska.data.Config;

@@ -1,8 +1,3 @@
-/*
- * StatusPanel.java
- *
- * Created on 4. leden 2008, 23:27
- */
 package esmska.gui;
 
 import esmska.data.Icons;

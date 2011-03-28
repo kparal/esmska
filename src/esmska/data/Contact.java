@@ -1,9 +1,3 @@
-/*
- * Contact.java
- *
- * Created on 21. červenec 2007, 0:57
- */
-
 package esmska.data;
 
 import java.beans.*;

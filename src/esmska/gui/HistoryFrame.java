@@ -1,8 +1,3 @@
-/*
- * HistoryFrame.java
- *
- * Created on 27. prosinec 2007, 12:22
- */
 package esmska.gui;
 
 import java.awt.Component;

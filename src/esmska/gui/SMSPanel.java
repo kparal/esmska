@@ -1,9 +1,3 @@
-/*
- * SMSPanel.java
- *
- * Created on 8. říjen 2007, 16:19
- */
-
 package esmska.gui;
 
 import esmska.Context;

@@ -1,9 +1,3 @@
-/*
- * MainFrame.java
- *
- * Created on 6. červenec 2007, 15:37
- */
-
 package esmska.gui;
 
 import esmska.Context;

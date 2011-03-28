@@ -1,9 +1,3 @@
-
-/*
- * GatewayImageCodeMessage.java
- *
- * Created on 23.1.2011, 21:58:39
- */
 package esmska.gui;
 
 import esmska.data.Config;
