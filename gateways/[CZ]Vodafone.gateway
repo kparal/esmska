@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-03-30"
 }
 
 function getMaintainer() {
@@ -32,23 +32,23 @@ function getPreferredPrefixes() {
 }
 
 function getSMSLength() {
-    return 152
+    return 160
 }
 
 function getMaxChars() {
-    return 760
+    return 160
 }
 
 function getMaxParts() {
-    return 1
-}
-
-function getSignatureExtraLength() {
     return 5
 }
 
+function getSignatureExtraLength() {
+    return 0
+}
+
 function getDelayBetweenMessages() {
-    return 15
+    return 30
 }
 
 function getSupportedLanguages() {
@@ -57,26 +57,22 @@ function getSupportedLanguages() {
 
 function getFeatures() {
     return ["CAPTCHA",
-            "SENDER_NUMBER",
-            "SENDER_NAME"]
+            "SENDER_NUMBER"]
 }
 
 function send() {
     var re, match, content, params, postData
 
-    // change variables to correct form
-    if (NUMBER.indexOf("+420") == 0) {
-        NUMBER = NUMBER.substring(4)
+    // check whether there is a supplied sender number
+    if (SENDERNUMBER.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_SIGNATURE_NEEDED)
+        return false
     }
-    if (SENDERNUMBER.indexOf("+420") == 0) {
-        SENDERNUMBER = SENDERNUMBER.substring(4)
-    }
-    // Vodafone allows only Czech sender number, let's ignore if there is some other
-    // see http://code.google.com/p/esmska/issues/detail?id=306 for more details
-    if (SENDERNUMBER.indexOf("+") == 0) {
-        // if it still starts with '+', it can't be Czech number (the prefix would
-        // have been stripped already)
-        SENDERNUMBER = ""
+    // sender number must start with +420
+    if (SENDERNUMBER.indexOf("+420") != 0) {
+        EXEC.setErrorMessage("Číslo odesilatele musí pocházet z České republiky \
+(začínat na +420). Aktuální číslo odesilatele: " + SENDERNUMBER)
+        return false
     }
 
     // start page
@@ -87,32 +83,46 @@ function send() {
     match = re.exec(content)
     var urlid = match[1]
     content = EXEC.getURL("https://park.vodafone.cz/", ['x', urlid])
+        
+    // extract important variables
+    re = /<img alt="" id="id15" src="\.\.\/\?x=(.+)&amp;random=(.+)" title/
+    match = re.exec(content)
+    captcha_par1 = match[1]
+    captcha_par2 = match[2]
     
-    // get imageid and ppp values
-    re = /<input type="hidden" name="imgid" value="(.*)" \/>/
-    match = re.exec(content);
-    var imgid = match[1]
-    
-    re = /<input type="hidden" name="ppp" value="(.*)" \/>/
-    match = re.exec(content);
-    var ppp = match[1]
+    re = /'\.\.\/\?x=(.+?)', 'sendButton'/
+    match = re.exec(content)
+    form_par1 = match[1]
     
     // download image
-    EXEC.setReferer("http://www.vodafonesms.cz/")
-    params = ["id", imgid]
-    content = EXEC.getURL("http://www.vodafonesms.cz/imgcode.php", params)
-    
+    EXEC.setReferer("https://park.vodafone.cz/egw/.0")
+    getData = ["x", captcha_par1, "random", captcha_par2]
+    content = EXEC.getURL("https://park.vodafone.cz/", getData)
+
     // show image
-    var pictogram = EXEC.recognizeImage(content, "")
+    var captcha = EXEC.recognizeImage(content, "")
+    
+    // server returns HTTP 500 Server error if we send empty captcha
+    // if user cancelled captcha resolving (and returned us empty catpcha code),
+    // let's inform him right away
+    if (captcha.length() == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_WRONG_CODE)
+        return false
+    }
 
     // send message
-    postData = ["message", MESSAGE, "number", NUMBER, 
-        "mynumber", SENDERNUMBER, "sender", SENDERNAME,
-        "imgid", imgid, "ppp", ppp, "pictogram", pictogram]
-    content = EXEC.postURL("http://www.vodafonesms.cz/send.php", [], postData)
+    getData = ["x", form_par1]
+    postData = ["recipients:recipientInput", NUMBER,
+                "senderMsisdn", SENDERNUMBER,
+                "text", MESSAGE,
+                "captcha:password", captcha,
+                "id7_hf_0", "",
+                "proof:field", "vf-park",
+                "sendButton", "1"]    
+    content = EXEC.postURL("https://park.vodafone.cz/", getData, postData)
 
     // check if message was successfully sent
-    re = /<div id="thanks">/
+    re = /Zpráva byla úspěšně odeslána/
     match = re.exec(content)
     if (undefined != match) { // if found
         // all ok
@@ -120,7 +130,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<div id="errmsg">\s*<p>(.+?)<\/p>/
+    re = /<label class="errorlevel error".*?>(.+)<\/label>/
     match = re.exec(content)
     if (undefined != match) { // if found
         // gateway told us what's wrong
