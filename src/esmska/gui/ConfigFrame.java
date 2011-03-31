@@ -10,6 +10,7 @@ import esmska.data.Config;
 import esmska.data.Contact;
 import esmska.data.Keyring;
 import esmska.data.Gateway;
+import esmska.data.Gateway.Feature;
 import esmska.data.Gateways;
 import esmska.data.Icons;
 import java.awt.Component;
@@ -469,7 +470,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         });
         Mnemonics.setLocalizedText(unstableUpdatesCheckBox, l10n.getString("ConfigFrame.unstableUpdatesCheckBox.text"));
         unstableUpdatesCheckBox.setToolTipText(l10n.getString("ConfigFrame.unstableUpdatesCheckBox.toolTipText")); // NOI18N
-        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${checkForUnstableUpdates}"), unstableUpdatesCheckBox, BeanProperty.create("selected"));
+        binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${announceUnstableUpdates}"), unstableUpdatesCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(debugCheckBox, l10n.getString("ConfigFrame.debugCheckBox.text"));
@@ -564,7 +565,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(removeAccentsCheckBox)
                 .addComponent(announceProgramUpdatesCheckBox)
                 .addComponent(debugCheckBox))
-            .addContainerGap(379, Short.MAX_VALUE))
+            .addContainerGap(363, Short.MAX_VALUE))
     );
 
     generalPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel3});
@@ -690,7 +691,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addComponent(notificationAreaCheckBox)
                 .addComponent(toolbarVisibleCheckBox)
                 .addComponent(advancedControlsCheckBox))
-            .addContainerGap(471, Short.MAX_VALUE))
+            .addContainerGap(455, Short.MAX_VALUE))
     );
 
     appearancePanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lafComboBox, themeComboBox});
@@ -770,14 +771,14 @@ public class ConfigFrame extends javax.swing.JFrame {
     gwDetailsPanel.setLayout(gwDetailsPanelLayout);
     gwDetailsPanelLayout.setHorizontalGroup(
         gwDetailsPanelLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(gwDetailsPanelLayout.createSequentialGroup()
+        .addGroup(Alignment.TRAILING, gwDetailsPanelLayout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(gwDetailsPanelLayout.createSequentialGroup()
+            .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(Alignment.LEADING, gwDetailsPanelLayout.createSequentialGroup()
                     .addComponent(jLabel11)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(loginField))
-                .addGroup(gwDetailsPanelLayout.createSequentialGroup()
+                .addGroup(Alignment.LEADING, gwDetailsPanelLayout.createSequentialGroup()
                     .addComponent(jLabel12)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -785,7 +786,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                             .addComponent(showPasswordCheckBox)
                             .addPreferredGap(ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
                         .addComponent(passwordField))))
-            .addGap(0, 0, 0))
+            .addContainerGap())
     );
 
     gwDetailsPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel11, jLabel12});
@@ -815,14 +816,16 @@ public class ConfigFrame extends javax.swing.JFrame {
         .addGroup(gatewayPanelLayout.createSequentialGroup()
             .addContainerGap()
             .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
-                .addComponent(gwTipLabel, GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
-                .addGroup(Alignment.TRAILING, gatewayPanelLayout.createSequentialGroup()
-                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addGroup(gatewayPanelLayout.createSequentialGroup()
+                    .addComponent(gwTipLabel, GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
+                    .addContainerGap())
+                .addGroup(gatewayPanelLayout.createSequentialGroup()
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
                         .addComponent(clearKeyringButton)
-                        .addComponent(gwDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-            .addGap(0, 0, 0))
+                        .addComponent(gwDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, 0))))
     );
     gatewayPanelLayout.setVerticalGroup(
         gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -872,7 +875,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addComponent(reducedHistorySpinner, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(jLabel18)
-            .addContainerGap(212, Short.MAX_VALUE))
+            .addContainerGap(196, Short.MAX_VALUE))
     );
     privacyPanelLayout.setVerticalGroup(
         privacyPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -997,7 +1000,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addGroup(connectionPanelLayout.createSequentialGroup()
                             .addGap(6, 6, 6)
                             .addComponent(sameProxyCheckBox))))
-                .addComponent(jLabel17, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
+                .addComponent(jLabel17, GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE))
             .addContainerGap())
     );
 
@@ -1060,12 +1063,12 @@ public class ConfigFrame extends javax.swing.JFrame {
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                .addComponent(tabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+                .addComponent(tabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(advancedCheckBox)
-                    .addPreferredGap(ComponentPlacement.RELATED, 514, Short.MAX_VALUE)
+                    .addPreferredGap(ComponentPlacement.RELATED, 498, Short.MAX_VALUE)
                     .addComponent(closeButton))
-                .addComponent(restartLabel, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
+                .addComponent(restartLabel, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
             .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -1479,15 +1482,19 @@ private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindo
             }
             int row = gatewayTable.getSelectedRow();
             boolean selected = (row >= 0);
-            loginField.setEnabled(selected);
-            passwordField.setEnabled(selected);
+            gwDetailsPanel.setVisible(selected);
             if (!selected) {
                 return;
             }
+            Gateway gateway = gwTableModel.getGateway(row);
+
+            boolean login = gateway.hasFeature(Feature.LOGIN) || gateway.hasFeature(Feature.LOGIN_ONLY);
+            loginField.setEnabled(login);
+            passwordField.setEnabled(login);
+            showPasswordCheckBox.setEnabled(login);
 
             boolean temp = fullyInicialized;
             fullyInicialized = false;
-            Gateway gateway = gwTableModel.getGateway(row);
             Tuple<String, String> key = keyring.getKey(gateway != null ? gateway.getName() : null);
             if (key == null) {
                 loginField.setText(null);
