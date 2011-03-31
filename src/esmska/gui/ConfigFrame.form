@@ -252,19 +252,6 @@
                 <BindingProperty name="selected" source="config" sourcePath="${useSenderID}" target="useSenderIDCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="senderNumberTextField"/>
-                </Property>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel1.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection component="senderNumberTextField" name="toolTipText" type="property"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="senderNumberTextField">
               <Properties>
                 <Property name="columns" type="int" value="13"/>
@@ -306,6 +293,19 @@
                 <BindingProperty name="selected" source="config" sourcePath="${demandDeliveryReport}" target="demandDeliveryReportCheckBox" targetPath="selected" updateStrategy="0" immediately="false"/>
                 <BindingProperty name="enabled" source="useSenderIDCheckBox" sourcePath="${selected}" target="demandDeliveryReportCheckBox" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="senderNumberTextField"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.jLabel1.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection component="senderNumberTextField" name="toolTipText" type="property"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>

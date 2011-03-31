@@ -165,10 +165,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         //update other components
         updateThemeComboBox();
         updateUnstableUpdateCheckbox();
+        updateInfoLabel();
+        updateSenderNumberWarnLabel();
         if (!NotificationIcon.isSupported()) {
             notificationAreaCheckBox.setSelected(false);
         }
-        updateInfoLabel();
         countryPrefixPanel.setCountryPrefix(config.getCountryPrefix());
 
         //adjust columns widths for gatewayTable
@@ -380,10 +381,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         logLocationLabel = new JLabel();
         countryPrefixPanel = new CountryPrefixPanel();
         useSenderIDCheckBox = new JCheckBox();
-        jLabel1 = new JLabel();
         senderNumberTextField = new JTextField();
         senderNameTextField = new JTextField();
         demandDeliveryReportCheckBox = new JCheckBox();
+        jLabel1 = new JLabel();
         jLabel3 = new JLabel();
         senderNumberWarnLabel = new JLabel();
         appearancePanel = new JPanel();
@@ -495,10 +496,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${useSenderID}"), useSenderIDCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
-    jLabel1.setLabelFor(senderNumberTextField);
-        Mnemonics.setLocalizedText(jLabel1, l10n.getString("ConfigFrame.jLabel1.text")); // NOI18N
-    jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
-
     senderNumberTextField.setColumns(13);
 
     senderNumberTextField.setToolTipText(l10n.getString("ConfigFrame.senderNumberTextField.toolTipText")); // NOI18N
@@ -521,6 +518,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     bindingGroup.addBinding(binding);
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, useSenderIDCheckBox, ELProperty.create("${selected}"), demandDeliveryReportCheckBox, BeanProperty.create("enabled"));
     bindingGroup.addBinding(binding);
+
+    jLabel1.setLabelFor(senderNumberTextField);
+        Mnemonics.setLocalizedText(jLabel1, l10n.getString("ConfigFrame.jLabel1.text")); // NOI18N
+    jLabel1.setToolTipText(senderNumberTextField.getToolTipText());
 
     jLabel3.setLabelFor(senderNameTextField);
         Mnemonics.setLocalizedText(jLabel3, l10n.getString("ConfigFrame.jLabel3.text")); // NOI18N
