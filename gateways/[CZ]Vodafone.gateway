@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-30"
+    return "2011-03-31"
 }
 
 function getMaintainer() {
@@ -102,7 +102,7 @@ function send() {
     // show image
     var captcha = EXEC.recognizeImage(content, "")
     
-    // server returns HTTP 500 Server error if we send empty captcha
+    // server returns HTTP 500 Internal Server Error if we send empty captcha
     // if user cancelled captcha resolving (and returned us empty catpcha code),
     // let's inform him right away
     if (captcha.length() == 0) {
@@ -118,8 +118,18 @@ function send() {
                 "captcha:password", captcha,
                 "id7_hf_0", "",
                 "proof:field", "vf-park",
-                "sendButton", "1"]    
-    content = EXEC.postURL("https://park.vodafone.cz/", getData, postData)
+                "sendButton", "1"]
+    try {
+        content = EXEC.postURL("https://park.vodafone.cz/", getData, postData)
+    } catch(exc) {
+        // Vodafone server with throw HTTP 500 Internal Server Error on invalid
+        // data (like invalid sender number, invalid recipient number, empty text).
+        // If we receive an exception, it almost certainly means some invalid input,
+        // but we don't know which one. We probably don't have better solution 
+        // than to tell this to the user.
+        EXEC.setErrorMessage(EXEC.ERROR_NO_REASON)
+        return false
+    }
 
     // check if message was successfully sent
     re = /Zpráva byla úspěšně odeslána/
