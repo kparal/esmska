@@ -63,8 +63,6 @@ function getFeatures() {
 }
 
 function send() {
-    var re, match, content, params, postData
-
     // logout just to be sure
     EXEC.getURL("https://login.client.tmo.cz/um/cs/logout.jsp", []);
 
@@ -100,7 +98,7 @@ function send() {
     // check if message was successfully sent
     re = /(SMS zpr.va byl. odeslán.|SMS was sent)/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) {
         // all ok
         return true
     }
@@ -108,7 +106,7 @@ function send() {
     // look for possible error messages
     re = /<div id="gt-errorWindow">([^]*?)<\/div>/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) {
         // gateway told us what's wrong
         EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
         return false

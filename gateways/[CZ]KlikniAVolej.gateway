@@ -98,7 +98,7 @@ function send() {
     content = EXEC.getURL("http://www.klikniavolej.cz/sms.asp", [])
     re = /<input\stype="radio"\sname="number-from"\sid="volba1"\svalue="(\d+)"/
     match = re.exec(content)
-    if (match == undefined) {
+    if (!match) {
         EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + "Není zaregistrováno číslo!")
         logout()
         return false
@@ -107,7 +107,7 @@ function send() {
 
     // Zkontrolovani kreditu
     kredit = get_credit(content)
-    if (kredit === null) {
+    if (!kredit) {
         EXEC.setErrorMessage("Nepodařilo se načíst kredit")
         logout()
         return false
@@ -126,10 +126,10 @@ function send() {
     // Podarilo se
     re = /SMS\sbyla\sodesl.{1,6}na/
     match = re.exec(content);
-    if (match != undefined) {
+    if (match) {
         // Urceni kreditu
         kredit = get_credit(content)
-        if (kredit === null) {
+        if (!kredit) {
             EXEC.setGatewayMessage("Nepodařilo se načíst kredit, ale zpráva byla odeslána")
         } else {
             EXEC.setGatewayMessage(EXEC.INFO_CREDIT_REMAINING + kredit.toFixed(2) +' Kč')
@@ -141,7 +141,7 @@ function send() {
     // Zjisteni chybove hlasky
     re = /class="infopanelerror"><ul>(.[^<]+)</
     match = re.exec(content)
-    if (match != undefined) {
+    if (match) {
         EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
         logout()
         return false
@@ -165,7 +165,7 @@ function check_login(content) {
 function get_credit(content) {
     re = /<span\sclass="kredit">(\d+,\d{2}).+<\/span>/
     match = re.exec(content)
-    if (match == undefined) {
+    if (!match) {
         return null
     }
     credit = parseFloat(match[1].replace(',','.'))

@@ -80,7 +80,7 @@ function send() {
     // is SMS code verification needed?
     re = /<input name="txtSmsCode"/
     match = re.exec(content)
-    if (undefined != match) { //if found
+    if (match) {
         // SMS code verification is needed
         code = EXEC.recognizeImage(null, "<b>Opište kontrolní kód, který vám dojde \
 na váš mobil.</b><br><br> Poznámka: Tuto bezpečnostní kontrolu lze vypnout v \
@@ -106,7 +106,7 @@ na váš mobil.</b><br><br> Poznámka: Tuto bezpečnostní kontrolu lze vypnout 
     // user can see czech or english messages, depending on his account settings
     re = /Zpráva byla úspěšně odeslána|Message was successfully sent/
     match = re.exec(content)
-    if (undefined != match) { //if found
+    if (match) {
         // all ok
         logout(content)
         return true
@@ -117,7 +117,7 @@ na váš mobil.</b><br><br> Poznámka: Tuto bezpečnostní kontrolu lze vypnout 
     // caught by the previous check
     re = /<div id="ctl00_data_pnlResult" class="formdata">([\s\S]*?)<\/div>/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) {
         // gateway told us what's wrong
         EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
         logout(content)

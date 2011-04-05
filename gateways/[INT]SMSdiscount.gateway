@@ -61,8 +61,6 @@ function getFeatures() {
 }
 
 function send() {
-    var re, match, content, params, postData, freeSMS
-
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
@@ -76,25 +74,25 @@ function send() {
     // wrong username/password/nousername/nopassword 
     re = /<description>error<\/description>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
 	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
         return false
     }
     re = /<description>The parameter password is missing<\/description>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
 	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
         return false
     }
     re = /<description>The parameter username is missing<\/description>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
 	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
         return false
     }
     re = /<description>Wrong Username\/password combination<\/description>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
 	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
         return false
     }
@@ -102,7 +100,7 @@ function send() {
     // invalid number   
     re=/<description>(Invalid Number)<\/description>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
         return false
     }
@@ -110,7 +108,7 @@ function send() {
     // too long text
     re=/<description>The text message you are trying to send is larger than 160 characters, please shorten your message.<\/description>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
         EXEC.setErrorMessage(EXEC.ERROR_LONG_TEXT)
         return false
     }    
@@ -118,7 +116,7 @@ function send() {
     //insufficient credit
     re=/<description>Sorry, you do not have enough credit to send this sms. Go to your accountpage to buy credit!<\/description>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
         EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
         return false
     }
@@ -126,13 +124,13 @@ function send() {
     // check if message was successfully sent
     re = /<resultstring>success<\/resultstring>/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
     	//get remanining credit and display it
 	    postData = ["user", LOGIN, "pass", PASSWORD]
     	content = EXEC.postURL("https://www.smsdiscount.com/myaccount/index.php?part=tplogin", [], postData)
     	re = /<span id="balanceid">[\s\S]*?<b>[\s\S]*?&euro;&nbsp;([0-9\.]*)[\s\S]*?<\/b>/
     	match = re.exec(content);
-    	if (undefined != match) { // if found
+    	if (match) { // if found
     		EXEC.setGatewayMessage(EXEC.INFO_CREDIT_REMAINING + "€" + match[1])
     	}
         return true
@@ -143,7 +141,7 @@ function send() {
     re2 = /<description>(.*)<\/description>/
     match = re.exec(content)
     match2 =re.exec(content)
-    if (undefined != match && undefined != match2) {
+    if (match && match2) {
         EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match2[1])
         return false
     }

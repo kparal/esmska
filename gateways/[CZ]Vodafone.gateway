@@ -61,8 +61,6 @@ function getFeatures() {
 }
 
 function send() {
-    var re, match, content, params, postData
-
     // check whether there is a supplied sender number
     if (SENDERNUMBER.length == 0) {
         EXEC.setErrorMessage(EXEC.ERROR_SIGNATURE_NEEDED)
@@ -134,7 +132,7 @@ function send() {
     // check if message was successfully sent
     re = /Zpráva byla úspěšně odeslána/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) {
         // all ok
         return true
     }
@@ -142,7 +140,7 @@ function send() {
     // look for possible error messages
     re = /<label class="errorlevel error".*?>(.+)<\/label>/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) {
         // gateway told us what's wrong
         EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
         return false

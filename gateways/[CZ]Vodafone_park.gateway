@@ -82,7 +82,7 @@ function send() {
     logged = false
     re = /<a class="logout"/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) {
         // we are already logged in
         logged = true
     }
@@ -96,7 +96,7 @@ function send() {
         // search if we are logged in
         re = /<a class="logout"/
         match = re.exec(content)
-        if (undefined == match) { // if not found
+        if (!match) {
             // login was not successfull
             EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
             logout()
@@ -122,7 +122,7 @@ function send() {
     // search for errors
     re = /<ul class="feedbackul">[\s\S]*?error[\s\S]*?<\/ul>/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) {
         // gateway told us what's wrong
         EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[0])
         logout()
@@ -132,7 +132,7 @@ function send() {
     // check if message was successfully sent
     re = /Zpráva byla úspěšně odeslána/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) {
         // all ok
         logout()
         return true

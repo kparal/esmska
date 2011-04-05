@@ -62,8 +62,6 @@ function getFeatures() {
 }
 
 function send() {
-    var re, match, content, postData
-
     // change variables to correct form
     if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)
@@ -78,7 +76,7 @@ function send() {
     // check if message was successfully sent
     re = /Zpráva byla odeslána\./
     match = re.exec(content)
-    if (undefined != match) { //if found
+    if (match) { //if found
         // all ok
         return true
     }
@@ -86,7 +84,7 @@ function send() {
     // look for possible error messages
     re = /<span class="sms_informace_cervena">(.*?)<\/span>/
     match = re.exec(content)
-    if (undefined != match) { // if found
+    if (match) { // if found
         // gateway told us what's wrong
         EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
         return false

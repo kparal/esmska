@@ -60,8 +60,6 @@ function getFeatures() {
 }
 
 function send() {
-    var postData, key, str_ret
-    
     // change variables to correct form
     if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)

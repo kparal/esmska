@@ -87,7 +87,7 @@ function send() {
     // of them correctly, but doesn't send some other ones at all
     re = /[^\u0001-\u007f]/
     match = re.exec(MESSAGE)
-    if (undefined != match) {
+    if (match) {
         EXEC.setErrorMessage("This gateway does not support national characters at the moment. " +
         "Please enter English alphabet characters only.")
         return false
@@ -104,7 +104,7 @@ function send() {
     // wrong username/password
     re = /ERROR: 402|ERROR: 14/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
         return false
     }
@@ -112,7 +112,7 @@ function send() {
     // invalid number
     re = /ERROR: 11|ERROR: 102/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
         return false
     }
@@ -120,7 +120,7 @@ function send() {
     // invalid signature
     re = /ERROR: 10$/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_SIGNATURE)
         return false
     }
@@ -128,10 +128,10 @@ function send() {
     // insufficient credit
     re = /ERROR: 88/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
         EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
         var credit = check_credit()
-        if (undefined != credit) {
+        if (credit) {
             EXEC.setGatewayMessage(EXEC.INFO_CREDIT_REMAINING + credit)
         }
         return false
@@ -140,10 +140,10 @@ function send() {
     // check if message was successfully sent
     re = /OK: 0/
     match = re.exec(content)
-    if (undefined != match) {
+    if (match) {
         //all ok, get remanining balance and display it
         var credit = check_credit()
-        if (undefined != credit) {
+        if (credit) {
             EXEC.setGatewayMessage(EXEC.INFO_CREDIT_REMAINING + credit)
         }
         return true
@@ -159,10 +159,10 @@ function check_credit() {
     content = EXEC.postURL("http://www.smsglobal.com/http-api.php", [], postData)
 	var re = /BALANCE: (.*);/
 	balance_match = re.exec(content)
-	if (undefined != match) {
+	if (balance_match) {
 	    return balance_match[1]
 	} else {
-	    return undefined
+	    return null
 	}
 }
 

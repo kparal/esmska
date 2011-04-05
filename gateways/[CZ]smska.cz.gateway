@@ -84,17 +84,17 @@ function send() {
     re_state = /state="([a-zA-Z]+)"/
     re_txt = /text="([^"]+)"/
     match = re_state.exec(content)
-    if(undefined != match) {
-        if(match[1] == "ok") {
+    if (match) {
+        if (match[1] == "ok") {
             // message sent
             return true
         } else {
             // an error occured        
             match = re_txt.exec(content);
-            if (undefined == match) {
-                EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
-            } else {
+            if (match) {
                 EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+            } else {
+                EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
             }
             return false
         }

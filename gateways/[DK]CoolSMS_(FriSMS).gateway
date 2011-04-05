@@ -60,8 +60,6 @@ function getFeatures() {
 }
 
 function send() {
-    var re, match, match2, content, content2, params, postData, state, tries, test
-
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
@@ -78,7 +76,7 @@ function send() {
     // check login
     re = /<form name="freesender" method="post" action="\/FriSMS.html" id="freeform">/
     match = re.exec(content)    
-    if(undefined == match) {
+    if(!match) {
     	 EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
          return false
     }
@@ -91,7 +89,7 @@ function send() {
     // check sending message
     re = /"succes"/
     match2 = re.exec(content)
-    if (undefined != match2) {
+    if (match2) {
       
     	re = /"msgid":([0-9]+)}/
     	match = re.exec(content)
@@ -129,9 +127,6 @@ function send() {
 
 // check current status for message
 function checkStatus(msgid){
-  
-	var content, state
-	
 	postData = ["msgid",msgid]
 	content = EXEC.postURL("http://www.coolsms.dk/ajax/checkStatus.php", [], postData)
 	
