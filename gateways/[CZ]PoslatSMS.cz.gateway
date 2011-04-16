@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-04-16_2"
 }
 
 function getMaintainer() {
@@ -64,11 +64,17 @@ function send() {
     if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)
     }
-    if (SENDERNUMBER.indexOf("+420") == 0) {
-        SENDERNUMBER = SENDERNUMBER.substring(4)
+
+    // check whether there is a supplied sender number
+    if (SENDERNUMBER.length == 0) {
+        EXEC.setErrorMessage(EXEC.ERROR_SIGNATURE_NEEDED)
+        return false
     }
-    if (SENDERNUMBER.indexOf("+") == 0) {
-        SENDERNUMBER = ""
+    // sender number must start with +420
+    if (SENDERNUMBER.indexOf("+420") != 0) {
+        EXEC.setErrorMessage("Číslo odesilatele musí pocházet z České republiky \
+(začínat na +420). Aktuální číslo odesilatele: " + SENDERNUMBER)
+        return false
     }
 
     // start page
