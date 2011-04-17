@@ -58,7 +58,18 @@ public class Main {
 
         //detect JVM and warn if not not supported
         if (!RuntimeUtils.isSupportedJava()) {
-            logger.severe(l10n.getString("Main.unsupported_java"));
+            logger.warning("You are probably running the program on an unsupported "
+                    + "Java version! Program might not work correctly with it! "
+                    + "The tested Java versions are: Sun Java 6, OpenJDK 6, Apple Java 6.");
+        }
+
+        // halt for Webstart on OpenJDK, it currently doesn't work
+        // see http://code.google.com/p/esmska/issues/detail?id=357
+        // see http://code.google.com/p/esmska/issues/detail?id=358
+        if (RuntimeUtils.isOpenJDK() && RuntimeUtils.isRunAsWebStart()) {
+            logger.severe("Running as Java WebStart on OpenJDK, that's currently unsupported! Quitting.");
+            JOptionPane.showMessageDialog(null, l10n.getString("Main.brokenWebstart"), "Esmska", JOptionPane.ERROR_MESSAGE);
+            System.exit(99);
         }
 
         //parse commandline arguments

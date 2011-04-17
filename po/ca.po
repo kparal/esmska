@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-17 19:10+0200\n"
+"POT-Creation-Date: 2011-04-17 21:43+0200\n"
 "PO-Revision-Date: 2010-07-05 21:21+0000\n"
 "Last-Translator: el_libre - http://www.catmidia.cat  "
 "XDDDDDDDDDDDDDDDDDDDDDDDDDDD <el.libre@gmail.com>\n"
@@ -1305,6 +1305,17 @@ msgid ""
 "because it may cause a user data loss.</html>"
 msgstr ""
 
+#: Main.brokenWebstart
+msgid ""
+"You're currently running Esmska using OpenJDK and Java WebStart.\n"
+"Unfortunatelly this combination is currently broken and doesn't work.\n"
+"Either install Sun Java and use Java WebStart, or download Esmska to your "
+"computer\n"
+"and run it the common way.\n"
+"\n"
+"Esmska will now quit."
+msgstr ""
+
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
@@ -1343,13 +1354,6 @@ msgstr ""
 
 #: Main.run_anyway
 msgid "Run anyway"
-msgstr ""
-
-#: Main.unsupported_java
-msgid ""
-"You are probably running the program on an unsupported Java version! Program "
-"might not work correctly with it! The tested Java versions are: Sun Java 6, "
-"OpenJDK 6, Apple Java 6."
 msgstr ""
 
 #: MainFrame.Quit_program

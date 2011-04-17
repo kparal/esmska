@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-17 19:10+0200\n"
+"POT-Creation-Date: 2011-04-17 21:43+0200\n"
 "PO-Revision-Date: 2011-01-22 12:26+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1421,6 +1421,17 @@ msgstr ""
 "rekommenderar inte att du startar upp<br>programmet igen när programmet "
 "redan körs, eftersom det kan förorsaka förluster av användardata.</html>"
 
+#: Main.brokenWebstart
+msgid ""
+"You're currently running Esmska using OpenJDK and Java WebStart.\n"
+"Unfortunatelly this combination is currently broken and doesn't work.\n"
+"Either install Sun Java and use Java WebStart, or download Esmska to your "
+"computer\n"
+"and run it the common way.\n"
+"\n"
+"Esmska will now quit."
+msgstr ""
+
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
@@ -1460,16 +1471,6 @@ msgstr ""
 #: Main.run_anyway
 msgid "Run anyway"
 msgstr "Kör ändå"
-
-#: Main.unsupported_java
-msgid ""
-"You are probably running the program on an unsupported Java version! Program "
-"might not work correctly with it! The tested Java versions are: Sun Java 6, "
-"OpenJDK 6, Apple Java 6."
-msgstr ""
-"Du kör förmodligen programmet från en ostödjande version av Java! Programmet "
-"fungerar kanske inte korrekt med det! Testade Java-versioner är: Sun Java 6, "
-"OpenJDK 6, Apple Java 6."
 
 #: MainFrame.Quit_program
 msgid "Quit program"
@@ -2216,6 +2217,15 @@ msgstr "Gateway uppdaterad: {0}"
 #, fuzzy
 msgid "Some of gateway updates couldn't be installed."
 msgstr "En del av konfigurationsfilerna kunde inte sparas!"
+
+#~ msgid ""
+#~ "You are probably running the program on an unsupported Java version! "
+#~ "Program might not work correctly with it! The tested Java versions are: "
+#~ "Sun Java 6, OpenJDK 6, Apple Java 6."
+#~ msgstr ""
+#~ "Du kör förmodligen programmet från en ostödjande version av Java! "
+#~ "Programmet fungerar kanske inte korrekt med det! Testade Java-versioner "
+#~ "är: Sun Java 6, OpenJDK 6, Apple Java 6."
 
 #~ msgid "Show &password"
 #~ msgstr "Visa &lösenord"

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-17 19:12+0200\n"
-"PO-Revision-Date: 2011-04-17 19:12+0100\n"
+"POT-Creation-Date: 2011-04-17 21:44+0200\n"
+"PO-Revision-Date: 2011-04-17 21:44+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -1523,6 +1523,24 @@ msgstr ""
 "nedoporučujeme spouštět další<br>instance programu, neboť může dojít ke "
 "ztrátě uživatelských dat.</html>"
 
+#: Main.brokenWebstart
+msgid ""
+"You're currently running Esmska using OpenJDK and Java WebStart.\n"
+"Unfortunatelly this combination is currently broken and doesn't work.\n"
+"Either install Sun Java and use Java WebStart, or download Esmska to your "
+"computer\n"
+"and run it the common way.\n"
+"\n"
+"Esmska will now quit."
+msgstr ""
+"Aktuálně spouštíte Esmsku pomocí OpenJDK a Java WebStart.\n"
+"Bohužel tato kombinace je aktuálně rozbitá a nefunguje správně.\n"
+"Buď si nainstalujte Sun Java a použijte Java WebStart, nebo si stáhněte "
+"Esmsku\n"
+"do svého počítače a spusťte ji standardním způsobem.\n"
+"\n"
+"Esmska se nyní ukončí."
+
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
@@ -1580,16 +1598,6 @@ msgstr ""
 #: Main.run_anyway
 msgid "Run anyway"
 msgstr "Přesto spustit"
-
-#: Main.unsupported_java
-msgid ""
-"You are probably running the program on an unsupported Java version! Program "
-"might not work correctly with it! The tested Java versions are: Sun Java 6, "
-"OpenJDK 6, Apple Java 6."
-msgstr ""
-"Zřejmě program spouštíte na nepodporované verzi Javy! Program s ní nemusí "
-"pracovat správně! Ozkoušené verze Javy jsou: Sun Java 6, OpenJDK 6, Apple "
-"Java 6."
 
 #: MainFrame.Quit_program
 msgid "Quit program"
@@ -2337,6 +2345,15 @@ msgstr "Brána aktualizována: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Některé aktualizace bran se nepodařilo nainstalovat."
+
+#~ msgid ""
+#~ "You are probably running the program on an unsupported Java version! "
+#~ "Program might not work correctly with it! The tested Java versions are: "
+#~ "Sun Java 6, OpenJDK 6, Apple Java 6."
+#~ msgstr ""
+#~ "Zřejmě program spouštíte na nepodporované verzi Javy! Program s ní nemusí "
+#~ "pracovat správně! Ozkoušené verze Javy jsou: Sun Java 6, OpenJDK 6, Apple "
+#~ "Java 6."
 
 #~ msgid "Add a sender &signature to the message"
 #~ msgstr "Připojovat ke zprávě po&dpis odesilatele"
