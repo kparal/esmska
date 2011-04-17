@@ -137,14 +137,9 @@ public class Config extends Object implements Serializable {
             if (ObjectUtils.equals(evt.getOldValue(), evt.getNewValue())) {
                 return;
             }
-            //ensure privacy on sensitive values
+            //improve log display for arrays
             Object newValue = evt.getNewValue();
             Object oldValue = evt.getOldValue();
-            if (ObjectUtils.equals("senderNumber",evt.getPropertyName())) {
-                newValue = Contact.anonymizeNumber((String)newValue);
-                oldValue = Contact.anonymizeNumber((String)oldValue);
-            }
-            //improve log display for arrays
             if (oldValue instanceof Object[]) {
                 oldValue = Arrays.toString((Object[])oldValue);
                 newValue = Arrays.toString((Object[])newValue);
