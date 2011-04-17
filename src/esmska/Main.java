@@ -64,6 +64,7 @@ public class Main {
         }
 
         // halt for Webstart on OpenJDK, it currently doesn't work
+        // see http://code.google.com/p/esmska/issues/detail?id=335
         // see http://code.google.com/p/esmska/issues/detail?id=357
         // see http://code.google.com/p/esmska/issues/detail?id=358
         if (RuntimeUtils.isOpenJDK() && RuntimeUtils.isRunAsWebStart()) {
