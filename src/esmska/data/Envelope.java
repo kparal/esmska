@@ -8,6 +8,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.text.Normalizer;
 import java.util.logging.Logger;
+import org.apache.commons.lang.StringUtils;
 
 /** Class for preparing attributes of sms (single or multiple)
  *
@@ -17,6 +18,7 @@ public class Envelope {
     private static final Config config = Config.getInstance();
     private static final Logger logger = Logger.getLogger(Envelope.class.getName());
     private static final Gateways gateways = Gateways.getInstance();
+    private static final Signatures signatures = Signatures.getInstance();
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
 
@@ -122,12 +124,6 @@ public class Envelope {
     
     /** Get maximum signature length of the contact gateways in the envelope */
     public int getSignatureLength() {
-        String senderName = config.getSenderName();
-        //user has no signature
-        if (!config.isUseSenderID() || senderName == null || senderName.length() <= 0) {
-            return 0;
-        }
-        
         int worstSignature = 0;
         //find maximum signature length
         for (Contact c : contacts) {
@@ -135,17 +131,15 @@ public class Envelope {
             if (gateway == null) {
                 continue;
             }
+            Signature signature = signatures.get(gateway.getConfig().getSignature());
+            if (signature == null) {
+                continue;
+            }
             worstSignature = Math.max(worstSignature, 
-                    gateway.getSignatureExtraLength());
+                    gateway.getSignatureExtraLength() + StringUtils.length(signature.getUserName()));
         }
         
-        //no gateway supports signature
-        if (worstSignature == 0) {
-            return 0;
-        } else {
-            //add the signature length itself
-            return worstSignature + senderName.length();
-        }
+        return worstSignature;
     }
     
     /** generate list of sms's to send */
@@ -158,10 +152,6 @@ public class Envelope {
                 String cutText = text.substring(i,Math.min(i+limit,text.length()));
                 SMS sms = new SMS(c.getNumber(), cutText, c.getGateway());
                 sms.setName(c.getName());
-                if (config.isUseSenderID()) { //append signature if requested
-                    sms.setSenderNumber(config.getSenderNumber());
-                    sms.setSenderName(config.getSenderName());
-                }
                 list.add(sms);
             }
         }
@@ -173,13 +163,13 @@ public class Envelope {
     /** get length of signature needed to be subtracted from message length */
     private int getSignatureLength(Contact c) {
         Gateway gateway = gateways.get(c.getGateway());
-        if (gateway != null && config.isUseSenderID() &&
-                config.getSenderName() != null &&
-                config.getSenderName().length() > 0) {
-            return gateway.getSignatureExtraLength() + config.getSenderName().length();
-        } else {
-            return 0;
+        if (gateway != null) {
+             Signature signature = signatures.get(gateway.getConfig().getSignature());
+             if (signature != null && StringUtils.length(signature.getUserName()) > 0) {
+                 return gateway.getSignatureExtraLength() + signature.getUserName().length();
+             }
         }
+        return 0;
     }
     
     /** remove diacritical marks from text */

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 14:11+0200\n"
+"POT-Creation-Date: 2011-04-17 19:10+0200\n"
 "PO-Revision-Date: 2010-11-15 00:11+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -287,16 +287,17 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-msgid "Request the &delivery report"
+#, fuzzy
+msgid "Request a &delivery report"
 msgstr "Запит &звіту про доставку"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
-"to the phone number of the sender. This function is supported only by some "
-"gateways.\n"
+"to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -306,7 +307,8 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-msgid "&Gateways"
+#, fuzzy
+msgid "Gateway&s"
 msgstr "&Шлюзи"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
@@ -349,16 +351,13 @@ msgstr ""
 "Наприклад: proxy.company.com:443\n"
 "</html>"
 
-#: ConfigFrame.jLabel1.text
-msgid "&Number:"
-msgstr "&Номер:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&Ім’я користувача:"
 
 #: ConfigFrame.jLabel12.text
-msgid "Pa&ssword:"
+#, fuzzy
+msgid "&Password:"
 msgstr "Па&роль:"
 
 #: ConfigFrame.jLabel14.text
@@ -383,10 +382,9 @@ msgstr ""
 "* Автентифікація за іменем та паролем на цей час не підтримується.\n"
 "</i></html>"
 
-#: ConfigFrame.jLabel3.text
-msgctxt "ConfigFrame.jLabel3.text"
-msgid "&Name:"
-msgstr "&Ім’я:"
+#: ConfigFrame.jLabel2.text
+msgid "&Signature:"
+msgstr ""
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -491,26 +489,46 @@ msgid ""
 msgstr ""
 "Адреса в полі «HTTP проксі» буде використовуватись також для «HTTPS проксі»"
 
+#: ConfigFrame.senderNameLabel.text
+#, fuzzy
+msgid "N&ame:"
+msgstr "Назва:"
+
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
 "<html>\n"
-"Filled in name occupies space in the message but is not visible,<br>\n"
+"Sender name to append to the message.<br>\n"
+"Not all gateways support this feature.<br>\n"
+"The name occupies space in the message but is not visible,<br>\n"
 "therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match\n"
+"may seem not to match.\n"
 "</html>"
 msgstr ""
 
+#: ConfigFrame.senderNumberLabel.text
+msgid "&Number:"
+msgstr "&Номер:"
+
 #: ConfigFrame.senderNumberTextField.toolTipText
-msgid "Sender number in international format (starting with '+' sign)"
+#, fuzzy
+msgid ""
+"<html>Sender number in an international format (starting with '+' sign)."
+"<br>\n"
+"Not all gateways support this feature.</html>"
 msgstr "Номер відправника в міжнародному форматі (починається зі знака '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show &password"
+#, fuzzy
+msgid "Sho&w password"
 msgstr "Показувати &пароль"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
 msgstr "Показувати чи приховувати пароль"
+
+#: ConfigFrame.sigDelButton.toolTipText
+msgid "Remove the signature"
+msgstr ""
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -627,23 +645,6 @@ msgstr "Використовувати пр&оксі сервер *"
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
 msgstr "Чи використовувати проксі-сервер для з'єднання"
-
-#: ConfigFrame.useSenderIDCheckBox.text
-msgid "Add a sender &signature to the message"
-msgstr "Додавати п&ідпис відправника до повідомлення"
-
-#: ConfigFrame.useSenderIDCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"With signature added the SMS will come to the recipient from the entered "
-"number<br>\n"
-"and signed with entered name. Only some gateways support this feature.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Одержувач з веденим тут номером отримуватиме SMS підписане<br>\n"
-"вказаним іменем. Цю можливість підтримують лише деякі шлюзи.\n"
-"</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -869,9 +870,9 @@ msgid "Default &gateway:"
 msgstr "Типовий &шлюз:"
 
 #: EditContactPanel.nameLabel.text
-msgctxt "EditContactPanel.nameLabel.text"
+#, fuzzy
 msgid "&Name:"
-msgstr "&Назва:"
+msgstr "&Ім’я:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -1138,7 +1139,7 @@ msgid ""
 msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
+msgid "You have entered a wrong security code."
 msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_NUMBER
@@ -1891,6 +1892,32 @@ msgstr ""
 msgid "Show program"
 msgstr ""
 
+#: Signature.confirmRemove
+#, fuzzy
+msgid "Do you want to remove selected signature?"
+msgstr "Ви дійсно хочете вилучити всі введені дані реєстрації?"
+
+#: Signature.default
+msgid "Default"
+msgstr ""
+
+#: Signature.new
+#, fuzzy
+msgid "<html><i>New signature...</i></html>"
+msgstr "<html><i>Системний журнал зберігається за адресою: {0}</i></html>"
+
+#: Signature.new.desc
+msgid "Name of the new signature:"
+msgstr ""
+
+#: Signature.none
+msgid "None"
+msgstr ""
+
+#: SignatureComboBox.tooltip
+msgid "The signature to append to the message (sender number and name)."
+msgstr ""
+
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
@@ -2122,6 +2149,25 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "Додавати п&ідпис відправника до повідомлення"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "With signature added the SMS will come to the recipient from the entered "
+#~ "number<br>\n"
+#~ "and signed with entered name. Only some gateways support this feature.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Одержувач з веденим тут номером отримуватиме SMS підписане<br>\n"
+#~ "вказаним іменем. Цю можливість підтримують лише деякі шлюзи.\n"
+#~ "</html>"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Назва:"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Show icon in the notification area of the window manager (so-called "
@@ -2237,9 +2283,6 @@ msgstr ""
 #~ "Можна вводити кілька шаблонів через коми. Назви шаблонів чутливі до "
 #~ "регістру.\n"
 #~ "</html>"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr "Ви дійсно хочете вилучити всі введені дані реєстрації?"
 
 #~ msgid "<html>User configuration directory:<br>{0}</html>"
 #~ msgstr "<html>Каталог конфігурації користувача:<br>{0}</html>"

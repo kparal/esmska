@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 14:11+0200\n"
+"POT-Creation-Date: 2011-04-17 19:10+0200\n"
 "PO-Revision-Date: 2011-01-09 05:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -290,16 +290,17 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-msgid "Request the &delivery report"
+#, fuzzy
+msgid "Request a &delivery report"
 msgstr "Solicitar reporte de &entrega"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
-"to the phone number of the sender. This function is supported only by some "
-"gateways.\n"
+"to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -310,7 +311,8 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-msgid "&Gateways"
+#, fuzzy
+msgid "Gateway&s"
 msgstr "&Operadores"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
@@ -353,16 +355,13 @@ msgstr ""
 "Ejemplo: proxy.empresa.com:443\n"
 "</html>"
 
-#: ConfigFrame.jLabel1.text
-msgid "&Number:"
-msgstr "&Número:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&Usuario:"
 
 #: ConfigFrame.jLabel12.text
-msgid "Pa&ssword:"
+#, fuzzy
+msgid "&Password:"
 msgstr "Contra&seña:"
 
 #: ConfigFrame.jLabel14.text
@@ -387,10 +386,9 @@ msgstr ""
 "* La autenticación de usuario/contraseña no está actualmente soportada.\n"
 "</i></html>"
 
-#: ConfigFrame.jLabel3.text
-msgctxt "ConfigFrame.jLabel3.text"
-msgid "&Name:"
-msgstr "&Nombre:"
+#: ConfigFrame.jLabel2.text
+msgid "&Signature:"
+msgstr ""
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -497,12 +495,20 @@ msgstr ""
 "Una dirección en el campo 'proxy HTTP' será usado también para el campo "
 "'proxy HTTPS'"
 
+#: ConfigFrame.senderNameLabel.text
+#, fuzzy
+msgid "N&ame:"
+msgstr "Nombre:"
+
 #: ConfigFrame.senderNameTextField.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Filled in name occupies space in the message but is not visible,<br>\n"
+"Sender name to append to the message.<br>\n"
+"Not all gateways support this feature.<br>\n"
+"The name occupies space in the message but is not visible,<br>\n"
 "therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match\n"
+"may seem not to match.\n"
 "</html>"
 msgstr ""
 "<html>Los datos del nombre ocupan espacio en el mensaje que no es visible,"
@@ -512,18 +518,31 @@ msgstr ""
 "puede parecer no coincidir\n"
 "</html>"
 
+#: ConfigFrame.senderNumberLabel.text
+msgid "&Number:"
+msgstr "&Número:"
+
 #: ConfigFrame.senderNumberTextField.toolTipText
-msgid "Sender number in international format (starting with '+' sign)"
+#, fuzzy
+msgid ""
+"<html>Sender number in an international format (starting with '+' sign)."
+"<br>\n"
+"Not all gateways support this feature.</html>"
 msgstr ""
 "Número del remitente en formato internacional (comenzando con el signo '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show &password"
-msgstr "Mostrar &contraseña"
+#, fuzzy
+msgid "Sho&w password"
+msgstr "Mostrar contraseña"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
 msgstr "Mostrar u ocultar la contraseña"
+
+#: ConfigFrame.sigDelButton.toolTipText
+msgid "Remove the signature"
+msgstr ""
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -637,25 +656,6 @@ msgstr "Usar servidor pro&xy"
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
 msgstr "Cuándo se debe usar un servidor proxy para conexiones"
-
-#: ConfigFrame.useSenderIDCheckBox.text
-msgid "Add a sender &signature to the message"
-msgstr "Añadir una &firma de remitente al mensaje"
-
-#: ConfigFrame.useSenderIDCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"With signature added the SMS will come to the recipient from the entered "
-"number<br>\n"
-"and signed with entered name. Only some gateways support this feature.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Con la firma agregada el SMS vendrá al recipiente desde el numero "
-"ingresado<br>\n"
-"y  firmado con el nombre. Solamente algunas puertas de enlace soportan esta "
-"característica.\n"
-"</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -891,7 +891,7 @@ msgid "Default &gateway:"
 msgstr "&Operador predeterminado:"
 
 #: EditContactPanel.nameLabel.text
-msgctxt "EditContactPanel.nameLabel.text"
+#, fuzzy
 msgid "&Name:"
 msgstr "&Nombre:"
 
@@ -1198,7 +1198,8 @@ msgid ""
 msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
+#, fuzzy
+msgid "You have entered a wrong security code."
 msgstr "Ha ingresado un código de seguridad incorrecto."
 
 #: GatewayExecutor.ERROR_WRONG_NUMBER
@@ -2066,6 +2067,32 @@ msgstr "Mostrar registro de la aplicación"
 msgid "Show program"
 msgstr "Mostrar programa"
 
+#: Signature.confirmRemove
+#, fuzzy
+msgid "Do you want to remove selected signature?"
+msgstr "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
+
+#: Signature.default
+msgid "Default"
+msgstr ""
+
+#: Signature.new
+#, fuzzy
+msgid "<html><i>New signature...</i></html>"
+msgstr "<html><i>El fichero de registro está guardado en: {0}</i></html>"
+
+#: Signature.new.desc
+msgid "Name of the new signature:"
+msgstr ""
+
+#: Signature.none
+msgid "None"
+msgstr ""
+
+#: SignatureComboBox.tooltip
+msgid "The signature to append to the message (sender number and name)."
+msgstr ""
+
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
@@ -2356,6 +2383,30 @@ msgstr "Operador actualizado: {0}"
 msgid "Some of gateway updates couldn't be installed."
 msgstr "¡Algunos de los archivos de configuración no pudieron ser guardados!"
 
+#~ msgid "Show &password"
+#~ msgstr "Mostrar &contraseña"
+
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "Añadir una &firma de remitente al mensaje"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "With signature added the SMS will come to the recipient from the entered "
+#~ "number<br>\n"
+#~ "and signed with entered name. Only some gateways support this feature.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Con la firma agregada el SMS vendrá al recipiente desde el numero "
+#~ "ingresado<br>\n"
+#~ "y  firmado con el nombre. Solamente algunas puertas de enlace soportan "
+#~ "esta característica.\n"
+#~ "</html>"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Nombre:"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Show icon in the notification area of the window manager (so-called "
@@ -2604,13 +2655,6 @@ msgstr "¡Algunos de los archivos de configuración no pudieron ser guardados!"
 #~ "Puedes ingresar mas patrones separándolos por coma. Los patrones son "
 #~ "sensibles a mayúsculas y minúsculas.\n"
 #~ "</html>"
-
-#~ msgid "Show password"
-#~ msgstr "Mostrar contraseña"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr ""
-#~ "¿Realmente desea eliminar todas la credenciales de acceso ingresadas?"
 
 #~ msgid "<html>User configuration directory:<br>{0}</html>"
 #~ msgstr "<html> Directorio de configuración de usuario:<br>{0}</html>"

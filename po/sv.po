@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 14:11+0200\n"
+"POT-Creation-Date: 2011-04-17 19:10+0200\n"
 "PO-Revision-Date: 2011-01-22 12:26+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -275,7 +275,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-msgid "Request the &delivery report"
+#, fuzzy
+msgid "Request a &delivery report"
 msgstr "Begär leveransrapporten"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
@@ -283,13 +284,13 @@ msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
-"to the phone number of the sender. This function is supported only by some "
-"gateways.\n"
+"to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-msgid "&Gateways"
+#, fuzzy
+msgid "Gateway&s"
 msgstr "&Gateways"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
@@ -332,16 +333,13 @@ msgstr ""
 "Exempel: proxy.företag.com:443\n"
 "</html>"
 
-#: ConfigFrame.jLabel1.text
-msgid "&Number:"
-msgstr "&Nummer:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&Användarnamn:"
 
 #: ConfigFrame.jLabel12.text
-msgid "Pa&ssword:"
+#, fuzzy
+msgid "&Password:"
 msgstr "Lö&senord:"
 
 #: ConfigFrame.jLabel14.text
@@ -366,10 +364,9 @@ msgstr ""
 "* Användarnamns-/lösenordsautentisering stöds för närvarande inte.\n"
 "</i></html>"
 
-#: ConfigFrame.jLabel3.text
-msgctxt "ConfigFrame.jLabel3.text"
-msgid "&Name:"
-msgstr "&Namn:"
+#: ConfigFrame.jLabel2.text
+msgid "&Signature:"
+msgstr ""
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -471,26 +468,46 @@ msgstr ""
 "En adress i 'HTTP proxy'-fältet kommer också att användas för 'HTTPS proxy'-"
 "fält"
 
+#: ConfigFrame.senderNameLabel.text
+#, fuzzy
+msgid "N&ame:"
+msgstr "Namn:"
+
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
 "<html>\n"
-"Filled in name occupies space in the message but is not visible,<br>\n"
+"Sender name to append to the message.<br>\n"
+"Not all gateways support this feature.<br>\n"
+"The name occupies space in the message but is not visible,<br>\n"
 "therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match\n"
+"may seem not to match.\n"
 "</html>"
 msgstr ""
 
+#: ConfigFrame.senderNumberLabel.text
+msgid "&Number:"
+msgstr "&Nummer:"
+
 #: ConfigFrame.senderNumberTextField.toolTipText
-msgid "Sender number in international format (starting with '+' sign)"
+#, fuzzy
+msgid ""
+"<html>Sender number in an international format (starting with '+' sign)."
+"<br>\n"
+"Not all gateways support this feature.</html>"
 msgstr "Avsändarnummer i internationellt format (börjar med ett '+'-tecken)"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show &password"
-msgstr "Visa &lösenord"
+#, fuzzy
+msgid "Sho&w password"
+msgstr "Visa lösenord"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
 msgstr "Ange om lösenordet ska visas eller gömmas"
+
+#: ConfigFrame.sigDelButton.toolTipText
+msgid "Remove the signature"
+msgstr ""
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -602,19 +619,6 @@ msgstr "Använd pro&xyserver *"
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
 msgstr "Oavsett om en proxyserver ska användas för anslutningar"
-
-#: ConfigFrame.useSenderIDCheckBox.text
-msgid "Add a sender &signature to the message"
-msgstr "Lägg till en avsändar&signatur till meddelandet"
-
-#: ConfigFrame.useSenderIDCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"With signature added the SMS will come to the recipient from the entered "
-"number<br>\n"
-"and signed with entered name. Only some gateways support this feature.\n"
-"</html>"
-msgstr ""
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -834,7 +838,7 @@ msgid "Default &gateway:"
 msgstr "Standard&gateway"
 
 #: EditContactPanel.nameLabel.text
-msgctxt "EditContactPanel.nameLabel.text"
+#, fuzzy
 msgid "&Name:"
 msgstr "&Namn:"
 
@@ -1107,7 +1111,8 @@ msgid ""
 msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
+#, fuzzy
+msgid "You have entered a wrong security code."
 msgstr "Du har fylt i fel säkerhets kod."
 
 #: GatewayExecutor.ERROR_WRONG_NUMBER
@@ -1912,6 +1917,32 @@ msgstr "Visa applikationslogg"
 msgid "Show program"
 msgstr "Visa program"
 
+#: Signature.confirmRemove
+#, fuzzy
+msgid "Do you want to remove selected signature?"
+msgstr "Vill du verkligen ta bort alla angivna inloggningskreditiv?"
+
+#: Signature.default
+msgid "Default"
+msgstr ""
+
+#: Signature.new
+#, fuzzy
+msgid "<html><i>New signature...</i></html>"
+msgstr "<html><i>Loggfilen är lagrad i: {0}</i></html>"
+
+#: Signature.new.desc
+msgid "Name of the new signature:"
+msgstr ""
+
+#: Signature.none
+msgid "None"
+msgstr ""
+
+#: SignatureComboBox.tooltip
+msgid "The signature to append to the message (sender number and name)."
+msgstr ""
+
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
@@ -2186,6 +2217,16 @@ msgstr "Gateway uppdaterad: {0}"
 msgid "Some of gateway updates couldn't be installed."
 msgstr "En del av konfigurationsfilerna kunde inte sparas!"
 
+#~ msgid "Show &password"
+#~ msgstr "Visa &lösenord"
+
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "Lägg till en avsändar&signatur till meddelandet"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Namn:"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Show icon in the notification area of the window manager (so-called "
@@ -2302,9 +2343,6 @@ msgstr "En del av konfigurationsfilerna kunde inte sparas!"
 #~ msgid "(country:"
 #~ msgstr "(land:"
 
-#~ msgid "Show password"
-#~ msgstr "Visa lösenord"
-
 #~ msgid "Sent messages history"
 #~ msgstr "Skickade medelande historik"
 
@@ -2369,9 +2407,6 @@ msgstr "En del av konfigurationsfilerna kunde inte sparas!"
 
 #~ msgid "&Login credentials"
 #~ msgstr "&Inloggningskreditiv"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr "Vill du verkligen ta bort alla angivna inloggningskreditiv?"
 
 #~ msgid ""
 #~ "You have entered incorrect login credentials.<br>This gateway requires "

@@ -30,6 +30,7 @@
     Some parts of the program have their own licenses:
      o Libraries:
        * Android vCard: Apache License 2.0
+       * Apache Commons BeanUtils: Apache License 2.0
        * Apache Commons CLI: Apache License 2.0
        * Apache Commons Codec: Apache License 2.0
        * Apache Commons Collections: Apache License 2.0
@@ -38,9 +39,11 @@
        * Apache Commons Lang: Apache License 2.0
        * Apache Commons Logging: Apache License 2.0
        * Beans Binding: GNU LGPL
+       * EZMorph: Apache License 2.0
        * JavaCSV: GNU LGPL       
        * Java Scripting: BSD License
        * JGoodies Looks: BSD License
+       * JSON-lib: Apache License 2.0
        * OpenIDE: GNU GPL 2
        * Substance: BSD License
        * Substance Extras: BSD License

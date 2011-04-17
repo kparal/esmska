@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 14:11+0200\n"
+"POT-Creation-Date: 2011-04-17 19:10+0200\n"
 "PO-Revision-Date: 2010-11-15 00:23+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -284,25 +284,28 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-msgid "Request the &delivery report"
+#, fuzzy
+msgid "Request a &delivery report"
 msgstr "Požadovať poslanie &doručenky"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
-"to the phone number of the sender. This function is supported only by some "
-"gateways.\n"
+"to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
 "<html>\n"
-"Vyžiada si zaslanie potvrdenia o doručení správy. Doručenka príde<br>\n"
-"na číslo odosielateľa. Táto funkcia je podporována iba niektorými bránami.\n"
+"Vyžiada si poslanie potvrdenia o doručení správy. Potvrdenie príde na<br>\n"
+"telefónne číslo odesielateľa. Túto funkciu podporujú iba niektorí "
+"operátori.\n"
 "</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-msgid "&Gateways"
+#, fuzzy
+msgid "Gateway&s"
 msgstr "&Brány"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
@@ -345,16 +348,13 @@ msgstr ""
 "Napríklad: proxy.firma.com:443\n"
 "</html>"
 
-#: ConfigFrame.jLabel1.text
-msgid "&Number:"
-msgstr "Čís&lo:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "Po&užívateľské meno:"
 
 #: ConfigFrame.jLabel12.text
-msgid "Pa&ssword:"
+#, fuzzy
+msgid "&Password:"
 msgstr "He&slo:"
 
 #: ConfigFrame.jLabel14.text
@@ -379,10 +379,9 @@ msgstr ""
 "* Overenie pomocou mena a hesla nie je zatiaľ podporované.\n"
 "</i></html>"
 
-#: ConfigFrame.jLabel3.text
-msgctxt "ConfigFrame.jLabel3.text"
-msgid "&Name:"
-msgstr "Me&no:"
+#: ConfigFrame.jLabel2.text
+msgid "&Signature:"
+msgstr ""
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -485,12 +484,20 @@ msgid ""
 "field"
 msgstr "Adresa v poli „HTTP proxy“ sa použije aj v poli „HTTPS proxy“"
 
+#: ConfigFrame.senderNameLabel.text
+#, fuzzy
+msgid "N&ame:"
+msgstr "Meno:"
+
 #: ConfigFrame.senderNameTextField.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Filled in name occupies space in the message but is not visible,<br>\n"
+"Sender name to append to the message.<br>\n"
+"Not all gateways support this feature.<br>\n"
+"The name occupies space in the message but is not visible,<br>\n"
 "therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match\n"
+"may seem not to match.\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -499,17 +506,30 @@ msgstr ""
 "nebudú zdanlivo súhlasiť.\n"
 "</html>"
 
+#: ConfigFrame.senderNumberLabel.text
+msgid "&Number:"
+msgstr "Čís&lo:"
+
 #: ConfigFrame.senderNumberTextField.toolTipText
-msgid "Sender number in international format (starting with '+' sign)"
+#, fuzzy
+msgid ""
+"<html>Sender number in an international format (starting with '+' sign)."
+"<br>\n"
+"Not all gateways support this feature.</html>"
 msgstr "Číslo odosielateľa v medzinárodnom formáte (začínajúce znakom „+“)"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show &password"
-msgstr "Zobraziť &heslo"
+#, fuzzy
+msgid "Sho&w password"
+msgstr "Zobraziť heslo"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
 msgstr "Zobrazí alebo nezobrazí písanie hesla"
+
+#: ConfigFrame.sigDelButton.toolTipText
+msgid "Remove the signature"
+msgstr ""
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -626,24 +646,6 @@ msgstr "Používať proxy server *"
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
 msgstr "Či na pripojenie používať proxy server"
-
-#: ConfigFrame.useSenderIDCheckBox.text
-msgid "Add a sender &signature to the message"
-msgstr "Pripájať k správe podpi&s odosielateľa"
-
-#: ConfigFrame.useSenderIDCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"With signature added the SMS will come to the recipient from the entered "
-"number<br>\n"
-"and signed with entered name. Only some gateways support this feature.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Pri pripojení podpisu príde správa adresátovi z daného čísla a "
-"podpísaná<br>\n"
-"zadaným menom. Táto funkcia je podporována iba niektorými bránami.\n"
-"</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -875,7 +877,7 @@ msgid "Default &gateway:"
 msgstr "Východzia &brána:"
 
 #: EditContactPanel.nameLabel.text
-msgctxt "EditContactPanel.nameLabel.text"
+#, fuzzy
 msgid "&Name:"
 msgstr "Me&no:"
 
@@ -1169,7 +1171,8 @@ msgid ""
 msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
+#, fuzzy
+msgid "You have entered a wrong security code."
 msgstr "Nesprávne ste opísali bezpečnostný kód."
 
 #: GatewayExecutor.ERROR_WRONG_NUMBER
@@ -2021,6 +2024,32 @@ msgstr "Zobraziť protokol aplikácie"
 msgid "Show program"
 msgstr "Zobraziť program"
 
+#: Signature.confirmRemove
+#, fuzzy
+msgid "Do you want to remove selected signature?"
+msgstr "Naozaj si želáte odstrániť všetky vyplnené prihlasovacie údaje?"
+
+#: Signature.default
+msgid "Default"
+msgstr ""
+
+#: Signature.new
+#, fuzzy
+msgid "<html><i>New signature...</i></html>"
+msgstr "<html><i>Súbor záznamu je uložený tu: {0}</i></html>"
+
+#: Signature.new.desc
+msgid "Name of the new signature:"
+msgstr ""
+
+#: Signature.none
+msgid "None"
+msgstr ""
+
+#: SignatureComboBox.tooltip
+msgid "The signature to append to the message (sender number and name)."
+msgstr ""
+
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
@@ -2295,6 +2324,43 @@ msgstr "Aktualizovaná brána: {0}"
 #, fuzzy
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Niektoré konfiguračné súbory nebolo možné ukončiť!"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Will request sending of a delivery report of the message. The report will "
+#~ "come<br>\n"
+#~ "to the phone number of the sender. This function is supported only by "
+#~ "some gateways.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Vyžiada si zaslanie potvrdenia o doručení správy. Doručenka príde<br>\n"
+#~ "na číslo odosielateľa. Táto funkcia je podporována iba niektorými "
+#~ "bránami.\n"
+#~ "</html>"
+
+#~ msgid "Show &password"
+#~ msgstr "Zobraziť &heslo"
+
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "Pripájať k správe podpi&s odosielateľa"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "With signature added the SMS will come to the recipient from the entered "
+#~ "number<br>\n"
+#~ "and signed with entered name. Only some gateways support this feature.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Pri pripojení podpisu príde správa adresátovi z daného čísla a "
+#~ "podpísaná<br>\n"
+#~ "zadaným menom. Táto funkcia je podporována iba niektorými bránami.\n"
+#~ "</html>"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "Me&no:"
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2618,21 +2684,6 @@ msgstr "Niektoré konfiguračné súbory nebolo možné ukončiť!"
 #~ "prítomná."
 
 #~ msgid ""
-#~ "<html>\n"
-#~ "Will request sending of a delivery report of the message. The report will "
-#~ "come<br>\n"
-#~ "to the phone number of the sender. This function is supported only by "
-#~ "some operators.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Vyžiada si poslanie potvrdenia o doručení správy. Potvrdenie príde "
-#~ "na<br>\n"
-#~ "telefónne číslo odesielateľa. Túto funkciu podporujú iba niektorí "
-#~ "operátori.\n"
-#~ "</html>"
-
-#~ msgid ""
 #~ "<html><i>\n"
 #~ "Although the passwords are stored encrypted the original content may be "
 #~ "retrieved. We strongly suggest to set the access rights in such manner "
@@ -2700,12 +2751,6 @@ msgstr "Niektoré konfiguračné súbory nebolo možné ukončiť!"
 #~ "zobraziť iba operátorov krajiny XX zadaním vzoru [XX]. Je možné<br>\n"
 #~ "zadať viac vzorov oddelených čiarkou. Berie sa ohľad na velkosť písmen.\n"
 #~ "</html>"
-
-#~ msgid "Show password"
-#~ msgstr "Zobraziť heslo"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr "Naozaj si želáte odstrániť všetky vyplnené prihlasovacie údaje?"
 
 #~ msgid "Compress message (Ctrl+K)"
 #~ msgstr "Skomprimovať správu (Ctrl+K)"

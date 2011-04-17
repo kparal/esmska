@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 14:11+0200\n"
+"POT-Creation-Date: 2011-04-17 19:10+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -264,22 +264,28 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-msgid "Request the &delivery report"
+#, fuzzy
+msgid "Request a &delivery report"
 msgstr "מבקש את דוח &ההעברה"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
-"to the phone number of the sender. This function is supported only by some "
-"gateways.\n"
+"to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"יבקש את שליחת דוח ההעברה של ההודעה. הדוח יגיע אל מספר הטלפון של השולח.<br>\n"
+"פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
+"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-msgid "&Gateways"
-msgstr ""
+#, fuzzy
+msgid "Gateway&s"
+msgstr "שער גישה:"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -321,16 +327,13 @@ msgstr ""
 "לדוגמה: proxy.company.com:443\n"
 "</html>"
 
-#: ConfigFrame.jLabel1.text
-msgid "&Number:"
-msgstr "&מספר:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&שם משתמש:"
 
 #: ConfigFrame.jLabel12.text
-msgid "Pa&ssword:"
+#, fuzzy
+msgid "&Password:"
 msgstr "&סיסמה:"
 
 #: ConfigFrame.jLabel14.text
@@ -352,10 +355,9 @@ msgid ""
 "</i></html>"
 msgstr ""
 
-#: ConfigFrame.jLabel3.text
-msgctxt "ConfigFrame.jLabel3.text"
-msgid "&Name:"
-msgstr "&שם:"
+#: ConfigFrame.jLabel2.text
+msgid "&Signature:"
+msgstr ""
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -458,12 +460,20 @@ msgid ""
 "field"
 msgstr ""
 
+#: ConfigFrame.senderNameLabel.text
+#, fuzzy
+msgid "N&ame:"
+msgstr "שם:"
+
 #: ConfigFrame.senderNameTextField.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Filled in name occupies space in the message but is not visible,<br>\n"
+"Sender name to append to the message.<br>\n"
+"Not all gateways support this feature.<br>\n"
+"The name occupies space in the message but is not visible,<br>\n"
 "therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match\n"
+"may seem not to match.\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -471,16 +481,29 @@ msgstr ""
 "לכן צביעת הודעת הטקסט אינה נראית זהה למחוון הספירה<br>\n"
 "</html>"
 
+#: ConfigFrame.senderNumberLabel.text
+msgid "&Number:"
+msgstr "&מספר:"
+
 #: ConfigFrame.senderNumberTextField.toolTipText
-msgid "Sender number in international format (starting with '+' sign)"
+#, fuzzy
+msgid ""
+"<html>Sender number in an international format (starting with '+' sign)."
+"<br>\n"
+"Not all gateways support this feature.</html>"
 msgstr "מספר השולח במבנה בינלאומי (מתחיל בסימן '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show &password"
-msgstr ""
+#, fuzzy
+msgid "Sho&w password"
+msgstr "הצגת סיסמה"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
+msgstr ""
+
+#: ConfigFrame.sigDelButton.toolTipText
+msgid "Remove the signature"
 msgstr ""
 
 #: ConfigFrame.socksProxyTextField.toolTipText
@@ -588,19 +611,6 @@ msgstr "השתמש בשרת מ&תווך *"
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
 msgstr "האם להשתמש בשרת מתווך עבור ההתחברות"
-
-#: ConfigFrame.useSenderIDCheckBox.text
-msgid "Add a sender &signature to the message"
-msgstr "הוסף חתימת &שולח להודעה"
-
-#: ConfigFrame.useSenderIDCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"With signature added the SMS will come to the recipient from the entered "
-"number<br>\n"
-"and signed with entered name. Only some gateways support this feature.\n"
-"</html>"
-msgstr ""
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -822,7 +832,7 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-msgctxt "EditContactPanel.nameLabel.text"
+#, fuzzy
 msgid "&Name:"
 msgstr "&שם:"
 
@@ -1089,7 +1099,8 @@ msgid ""
 msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
+#, fuzzy
+msgid "You have entered a wrong security code."
 msgstr "הזנת קוד אבטחה שגוי."
 
 #: GatewayExecutor.ERROR_WRONG_NUMBER
@@ -1890,6 +1901,31 @@ msgstr "הצג את רישום התוכנה"
 msgid "Show program"
 msgstr "הצג את התוכנה"
 
+#: Signature.confirmRemove
+#, fuzzy
+msgid "Do you want to remove selected signature?"
+msgstr "האם אתה בטוח שברצונך להסיר את כל פרטי ההתחברות שהוזנו?"
+
+#: Signature.default
+msgid "Default"
+msgstr ""
+
+#: Signature.new
+msgid "<html><i>New signature...</i></html>"
+msgstr ""
+
+#: Signature.new.desc
+msgid "Name of the new signature:"
+msgstr ""
+
+#: Signature.none
+msgid "None"
+msgstr ""
+
+#: SignatureComboBox.tooltip
+msgid "The signature to append to the message (sender number and name)."
+msgstr ""
+
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
@@ -2130,6 +2166,13 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "הוסף חתימת &שולח להודעה"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&שם:"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Show icon in the notification area of the window manager (so-called "
@@ -2167,20 +2210,6 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
 #~ msgid "Use default form &layout"
 #~ msgstr "השתמש במבנה &ברירת המחדל של הטופס"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Will request sending of a delivery report of the message. The report will "
-#~ "come<br>\n"
-#~ "to the phone number of the sender. This function is supported only by "
-#~ "some operators.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "יבקש את שליחת דוח ההעברה של ההודעה. הדוח יגיע אל מספר הטלפון של השולח."
-#~ "<br>\n"
-#~ "פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
-#~ "</html>"
 
 #~ msgid ""
 #~ "<html><i>\n"
@@ -2227,9 +2256,6 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
 #~ msgid "&Login credentials"
 #~ msgstr "&פרטי התחברות"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr "האם אתה בטוח שברצונך להסיר את כל פרטי ההתחברות שהוזנו?"
 
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
@@ -2407,9 +2433,6 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
 #~ msgid "Delete all usernames and passwords for all operators"
 #~ msgstr "מחיקת שם המשתמש והסיסמה עבור כל המפעילות"
-
-#~ msgid "Show password"
-#~ msgstr "הצגת סיסמה"
 
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"

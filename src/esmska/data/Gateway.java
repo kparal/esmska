@@ -52,6 +52,7 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
             delayBetweenMessages;
     private Icon icon;
     private boolean favorite, hidden;
+    private GatewayConfig config = new GatewayConfig();
     private static final Pattern namePattern =
             Pattern.compile("^\\[(\\w\\w|" + CountryPrefix.INTERNATIONAL_CODE + ")\\].+");
 
@@ -147,6 +148,14 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
             }
         }
         return false;
+    }
+
+    public GatewayConfig getConfig() {
+        return config;
+    }
+
+    public void setConfig(GatewayConfig config) {
+        this.config = config;
     }
 
     @Override

@@ -27,9 +27,6 @@ public class Config extends Object implements Serializable {
     private static final Logger logger = Logger.getLogger(Config.class.getName());
 
     private String version = "";
-    private String senderName = "";
-    private String senderNumber = "";
-    private boolean useSenderID = false;
     private boolean forgetLayout = false;
     private Dimension mainDimension;
     private Integer horizontalSplitPaneLocation;
@@ -170,18 +167,6 @@ public class Config extends Object implements Serializable {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
-    public String getSenderName() {
-        return senderName;
-    }
-
-    public String getSenderNumber() {
-        return senderNumber;
-    }
-
-    public boolean isUseSenderID() {
-        return this.useSenderID;
-    }
-
     public boolean isForgetLayout() {
         return this.forgetLayout;
     }
@@ -304,24 +289,6 @@ public class Config extends Object implements Serializable {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
-    public void setSenderName(String senderName) {
-        String old = this.senderName;
-        this.senderName = senderName;
-        changeSupport.firePropertyChange("senderName", old, senderName);
-    }
-
-    public void setSenderNumber(String senderNumber) {
-        String old = this.senderNumber;
-        this.senderNumber = senderNumber;
-        changeSupport.firePropertyChange("senderNumber", old, senderNumber);
-    }
-
-    public void setUseSenderID(boolean useSenderID) {
-        boolean oldUseSenderID = this.useSenderID;
-        this.useSenderID = useSenderID;
-        changeSupport.firePropertyChange("useSenderID", oldUseSenderID, useSenderID);
-    }
-
     public void setForgetLayout(boolean forgetLayout) {
         boolean oldForgetLayout = this.forgetLayout;
         this.forgetLayout = forgetLayout;

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 14:13+0200\n"
-"PO-Revision-Date: 2011-03-27 14:13+0100\n"
+"POT-Creation-Date: 2011-04-17 19:12+0200\n"
+"PO-Revision-Date: 2011-04-17 19:12+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -280,7 +280,7 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-msgid "Request the &delivery report"
+msgid "Request a &delivery report"
 msgstr "Požadovat poslání doručen&ky"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
@@ -288,8 +288,7 @@ msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
-"to the phone number of the sender. This function is supported only by some "
-"gateways.\n"
+"to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -298,7 +297,7 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-msgid "&Gateways"
+msgid "Gateway&s"
 msgstr "&Brány"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
@@ -345,17 +344,13 @@ msgstr ""
 "Například: proxy.firma.com:443\n"
 "</html>"
 
-#: ConfigFrame.jLabel1.text
-msgid "&Number:"
-msgstr "Čís&lo:"
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr "&Uživatelské jméno:"
 
 #: ConfigFrame.jLabel12.text
-msgid "Pa&ssword:"
-msgstr "He&slo:"
+msgid "&Password:"
+msgstr "&Heslo:"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -379,10 +374,9 @@ msgstr ""
 "* Ověření jménem a heslem není v současné době podporováno.\n"
 "</i></html>"
 
-#: ConfigFrame.jLabel3.text
-msgctxt "ConfigFrame.jLabel3.text"
-msgid "&Name:"
-msgstr "J&méno:"
+#: ConfigFrame.jLabel2.text
+msgid "&Signature:"
+msgstr "Podpi&s:"
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -491,31 +485,53 @@ msgstr ""
 "Adresa zadaná v poli \"HTTP proxy\" se použije taktéž pro pole \"HTTPS proxy"
 "\""
 
+#: ConfigFrame.senderNameLabel.text
+msgid "N&ame:"
+msgstr "Jmén&o:"
+
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
 "<html>\n"
-"Filled in name occupies space in the message but is not visible,<br>\n"
+"Sender name to append to the message.<br>\n"
+"Not all gateways support this feature.<br>\n"
+"The name occupies space in the message but is not visible,<br>\n"
 "therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match\n"
+"may seem not to match.\n"
 "</html>"
 msgstr ""
 "<html>\n"
+"Jméno odesilatele, které se připojí ke zprávě.<br>\n"
+"Tuto funkci podporují pouze některé brány.<br>\n"
 "Vyplněné jméno zabírá ve zprávě místo, avšak není vidět,<br>\n"
 "takže obarvování textu zprávy a ukazatel počtu sms<br>\n"
-"nebudou zdánlivě spolu souhlasit\n"
+"nebudou zdánlivě spolu souhlasit.\n"
 "</html>"
 
+#: ConfigFrame.senderNumberLabel.text
+msgid "&Number:"
+msgstr "Čís&lo:"
+
 #: ConfigFrame.senderNumberTextField.toolTipText
-msgid "Sender number in international format (starting with '+' sign)"
-msgstr "Číslo odesilatele v mezinárodním formátu (začínající na znak \"+\")"
+msgid ""
+"<html>Sender number in an international format (starting with '+' sign)."
+"<br>\n"
+"Not all gateways support this feature.</html>"
+msgstr ""
+"<html>Číslo odesilatele v mezinárodním formátu (začínající na znak \"+\")."
+"<br>\n"
+"Tuto funkci podporují pouze některé brány.</html>"
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show &password"
+msgid "Sho&w password"
 msgstr "Zobrazit h&eslo"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
 msgstr "Zviditelnit nebo zneviditelnit psaní hesla"
+
+#: ConfigFrame.sigDelButton.toolTipText
+msgid "Remove the signature"
+msgstr "Odstranit podpis"
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -629,23 +645,6 @@ msgstr "Používat pro&xy server *"
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
 msgstr "Zda pro připojení používat proxy server"
-
-#: ConfigFrame.useSenderIDCheckBox.text
-msgid "Add a sender &signature to the message"
-msgstr "Připojovat ke zprávě po&dpis odesilatele"
-
-#: ConfigFrame.useSenderIDCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"With signature added the SMS will come to the recipient from the entered "
-"number<br>\n"
-"and signed with entered name. Only some gateways support this feature.\n"
-"</html>"
-msgstr ""
-"<html>\n"
-"Při připojení podpisu přijde SMS adresátovi ze zadaného čísla<br>\n"
-"a podepsaná daným jménem. Tuto funkci podporují pouze některé brány.\n"
-"</html>"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
@@ -881,9 +880,8 @@ msgid "Default &gateway:"
 msgstr "Výchozí &brána:"
 
 #: EditContactPanel.nameLabel.text
-msgctxt "EditContactPanel.nameLabel.text"
 msgid "&Name:"
-msgstr "J&méno:"
+msgstr "Jmé&no:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -1201,7 +1199,7 @@ msgstr ""
 "brány a ujistěte se, že přihlašování funguje."
 
 #: GatewayExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
+msgid "You have entered a wrong security code."
 msgstr "Špatně jste opsali bezpečnostní kód."
 
 #: GatewayExecutor.ERROR_WRONG_NUMBER
@@ -2052,6 +2050,30 @@ msgstr "Zobrazit aplikační protokol"
 msgid "Show program"
 msgstr "Zobrazit program"
 
+#: Signature.confirmRemove
+msgid "Do you want to remove selected signature?"
+msgstr "Chcete odstranit vybraný podpis?"
+
+#: Signature.default
+msgid "Default"
+msgstr "Výchozí"
+
+#: Signature.new
+msgid "<html><i>New signature...</i></html>"
+msgstr "<html><i>Nový podpis...</i></html>"
+
+#: Signature.new.desc
+msgid "Name of the new signature:"
+msgstr "Název nového podpisu:"
+
+#: Signature.none
+msgid "None"
+msgstr "Žádný"
+
+#: SignatureComboBox.tooltip
+msgid "The signature to append to the message (sender number and name)."
+msgstr "Podpis, který bude připojen ke zprávě (číslo a jméno odesilatele)."
+
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
@@ -2315,6 +2337,25 @@ msgstr "Brána aktualizována: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Některé aktualizace bran se nepodařilo nainstalovat."
+
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "Připojovat ke zprávě po&dpis odesilatele"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "With signature added the SMS will come to the recipient from the entered "
+#~ "number<br>\n"
+#~ "and signed with entered name. Only some gateways support this feature.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Při připojení podpisu přijde SMS adresátovi ze zadaného čísla<br>\n"
+#~ "a podepsaná daným jménem. Tuto funkci podporují pouze některé brány.\n"
+#~ "</html>"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "J&méno:"
 
 #~ msgid ""
 #~ "<html>\n"

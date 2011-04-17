@@ -614,6 +614,7 @@ public class MainFrame extends javax.swing.JFrame {
             saveOk = saveQueue() && saveOk;
             saveOk = saveHistory() && saveOk;
             saveOk = saveKeyring() && saveOk;
+            saveOk = saveGatewayProperties() && saveOk;
             return saveOk;
         } catch (Throwable t) {
             logger.log(Level.SEVERE, "Serious error during saving user data", t);
@@ -747,6 +748,19 @@ public class MainFrame extends javax.swing.JFrame {
             return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save keyring", ex);
+            return false;
+        }
+    }
+
+    /** Save gateway properties.
+     * @return true if saved ok; false otherwise
+     */
+    private boolean saveGatewayProperties() {
+        try {
+            Context.persistenceManager.saveGatewayProperties();
+            return true;
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, "Could not save gateway properties", ex);
             return false;
         }
     }

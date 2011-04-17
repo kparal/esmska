@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-27 14:11+0200\n"
+"POT-Creation-Date: 2011-04-17 19:10+0200\n"
 "PO-Revision-Date: 2009-09-28 17:17+0000\n"
 "Last-Translator: Ævar Arnfjörð Bjarmason <avarab@gmail.com>\n"
 "Language-Team: Icelandic <is@li.org>\n"
@@ -255,7 +255,7 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-msgid "Request the &delivery report"
+msgid "Request a &delivery report"
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
@@ -263,14 +263,14 @@ msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
 "come<br>\n"
-"to the phone number of the sender. This function is supported only by some "
-"gateways.\n"
+"to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-msgid "&Gateways"
-msgstr ""
+#, fuzzy
+msgid "Gateway&s"
+msgstr "Net&gátt:"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -304,16 +304,12 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: ConfigFrame.jLabel1.text
-msgid "&Number:"
-msgstr ""
-
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
 msgstr ""
 
 #: ConfigFrame.jLabel12.text
-msgid "Pa&ssword:"
+msgid "&Password:"
 msgstr ""
 
 #: ConfigFrame.jLabel14.text
@@ -335,9 +331,8 @@ msgid ""
 "</i></html>"
 msgstr ""
 
-#: ConfigFrame.jLabel3.text
-msgctxt "ConfigFrame.jLabel3.text"
-msgid "&Name:"
+#: ConfigFrame.jLabel2.text
+msgid "&Signature:"
 msgstr ""
 
 #: ConfigFrame.lafComboBox.toolTipText
@@ -430,25 +425,42 @@ msgid ""
 "field"
 msgstr ""
 
+#: ConfigFrame.senderNameLabel.text
+msgid "N&ame:"
+msgstr ""
+
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
 "<html>\n"
-"Filled in name occupies space in the message but is not visible,<br>\n"
+"Sender name to append to the message.<br>\n"
+"Not all gateways support this feature.<br>\n"
+"The name occupies space in the message but is not visible,<br>\n"
 "therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match\n"
+"may seem not to match.\n"
 "</html>"
 msgstr ""
 
+#: ConfigFrame.senderNumberLabel.text
+msgid "&Number:"
+msgstr ""
+
 #: ConfigFrame.senderNumberTextField.toolTipText
-msgid "Sender number in international format (starting with '+' sign)"
+msgid ""
+"<html>Sender number in an international format (starting with '+' sign)."
+"<br>\n"
+"Not all gateways support this feature.</html>"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-msgid "Show &password"
+msgid "Sho&w password"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
+msgstr ""
+
+#: ConfigFrame.sigDelButton.toolTipText
+msgid "Remove the signature"
 msgstr ""
 
 #: ConfigFrame.socksProxyTextField.toolTipText
@@ -537,19 +549,6 @@ msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
-msgstr ""
-
-#: ConfigFrame.useSenderIDCheckBox.text
-msgid "Add a sender &signature to the message"
-msgstr ""
-
-#: ConfigFrame.useSenderIDCheckBox.toolTipText
-msgid ""
-"<html>\n"
-"With signature added the SMS will come to the recipient from the entered "
-"number<br>\n"
-"and signed with entered name. Only some gateways support this feature.\n"
-"</html>"
 msgstr ""
 
 #: ConfigFrame.windowCenteredCheckBox.text
@@ -761,7 +760,6 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-msgctxt "EditContactPanel.nameLabel.text"
 msgid "&Name:"
 msgstr ""
 
@@ -1016,7 +1014,7 @@ msgid ""
 msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_CODE
-msgid "You have entered the wrong security code."
+msgid "You have entered a wrong security code."
 msgstr ""
 
 #: GatewayExecutor.ERROR_WRONG_NUMBER
@@ -1768,6 +1766,30 @@ msgstr ""
 msgid "Show program"
 msgstr ""
 
+#: Signature.confirmRemove
+msgid "Do you want to remove selected signature?"
+msgstr ""
+
+#: Signature.default
+msgid "Default"
+msgstr ""
+
+#: Signature.new
+msgid "<html><i>New signature...</i></html>"
+msgstr ""
+
+#: Signature.new.desc
+msgid "Name of the new signature:"
+msgstr ""
+
+#: Signature.none
+msgid "None"
+msgstr ""
+
+#: SignatureComboBox.tooltip
+msgid "The signature to append to the message (sender number and name)."
+msgstr ""
+
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
@@ -1998,7 +2020,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "Net&gátt:"

@@ -195,6 +195,11 @@ public class Main {
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not load keyring file", ex);
         }
+        try {
+            pm.loadGatewayProperties();
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Could not load gateway properties file", ex);
+        }
 
         //initialize logging if set from Config
         if (Config.getInstance().isDebugMode()) {

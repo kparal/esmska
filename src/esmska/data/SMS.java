@@ -15,8 +15,6 @@ public class SMS {
     private String number; //recipient number
     private String name; //recipient name
     private String text; //message text
-    private String senderNumber;
-    private String senderName;
     private ImageIcon image; //security image
     private String imageCode = ""; //security image code
     private String imageHint; //hint from gateway where to find security image (eg. sent to cell)
@@ -39,9 +37,9 @@ public class SMS {
         SENT; 
     }
 
-    /** Shortcut for SMS(number, text, gateway, null, null, null). */
+    /** Shortcut for SMS(number, text, gateway, null). */
     public SMS(String number, String text, String gateway) {
-        this(number, text, gateway, null, null, null);
+        this(number, text, gateway, null);
     }
 
     /** Constructs new SMS. For detailed parameters restrictions see individual setter methods.
@@ -49,17 +47,23 @@ public class SMS {
      * @param text not null
      * @param gateway not null nor empty
      * @param name
-     * @param senderNumber
-     * @param senderName
      */
-    public SMS(String number, String text, String gateway, String name,
-            String senderNumber, String senderName) {
+    public SMS(String number, String text, String gateway, String name) {
         setNumber(number);
         setText(text);
         setGateway(gateway);
         setName(name);
-        setSenderNumber(senderNumber);
-        setSenderName(senderName);
+    }
+
+    /** Get signature matching current gateway or null if no such found. */
+    private Signature getSignature() {
+        Gateway gw = Gateways.getInstance().get(gateway);
+        if (gw == null) {
+            return null;
+        }
+        String sigName = gw.getConfig().getSignature();
+        Signature signature = Signatures.getInstance().get(sigName);
+        return signature;
     }
 
     /** Return whether some error occured during sending.
@@ -89,12 +93,12 @@ public class SMS {
 
     /** Sender number. Never null. */
     public String getSenderNumber() {
-        return senderNumber;
+        return getSignature() == null ? "" : getSignature().getUserNumber();
     }
 
     /** Sender name. Never null. */
     public String getSenderName() {
-        return senderName;
+        return getSignature() == null ? "" : getSignature().getUserName();
     }
 
     /** Security image. May be null. */
@@ -153,16 +157,6 @@ public class SMS {
     public void setText(String text) {
         Validate.notNull(text);
         this.text = text;
-    }
-
-    /** Sender number. Null value is changed to empty string. */
-    public void setSenderNumber(String senderNumber) {
-        this.senderNumber = StringUtils.defaultString(senderNumber);
-    }
-
-    /** Sender name. Null value is changed to empty string. */
-    public void setSenderName(String senderName) {
-        this.senderName = StringUtils.defaultString(senderName);
     }
 
     /** Security image. May be null. */

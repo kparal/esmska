@@ -29,11 +29,16 @@ import esmska.data.Gateways;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.Gateway;
+import esmska.data.GatewayConfig;
+import esmska.data.Signature;
+import esmska.data.Signatures;
 import esmska.integration.IntegrationAdapter;
 import esmska.utils.RuntimeUtils;
 import java.io.FilenameFilter;
 import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.regex.Pattern;
@@ -62,6 +67,7 @@ public class PersistenceManager {
     private static final String DEPRECATED_GWS_FILENAME = "deprecated.xml";
     private static final String GATEWAY_RESOURCE = "/esmska/gateways/scripts";
     private static final String DEPRECATED_GWS_RESOURCE = GATEWAY_RESOURCE + "/" + DEPRECATED_GWS_FILENAME;
+    private static final String GATEWAY_PROPS_FILENAME = "gateways.json";
     
     private static File configDir =
             new File(System.getProperty("user.home") + File.separator + ".config",
@@ -82,6 +88,7 @@ public class PersistenceManager {
     private static File lockFile = new File(configDir, LOCK_FILENAME);
     private static File logFile = new File(configDir, LOG_FILENAME);
     private static File deprecatedGWsFile = new File(globalGatewayDir, DEPRECATED_GWS_FILENAME);
+    private static File gatewayPropsFile = new File(configDir, GATEWAY_PROPS_FILENAME);
     
     private static boolean customPathSet;
     private FileLock lock;
@@ -145,6 +152,7 @@ public class PersistenceManager {
         keyringFile = new File(configDir, KEYRING_FILENAME);
         lockFile = new File(configDir, LOCK_FILENAME);
         logFile = new File(configDir, LOG_FILENAME);
+        gatewayPropsFile = new File(configDir, GATEWAY_PROPS_FILENAME);
     }
     
     /** Get configuration directory */
@@ -524,6 +532,30 @@ public class PersistenceManager {
                         iconFileGlobal, iconFileLocal));
             }
         }
+    }
+
+    /** Load gateway properties. */
+    public void loadGatewayProperties() throws Exception {
+        logger.fine("Loading gateway config...");
+        if (gatewayPropsFile.exists()) {
+            ImportManager.importGatewayProperties(gatewayPropsFile);
+        }
+    }
+
+    /** Save gateway properties. */
+    public void saveGatewayProperties() throws Exception {
+        logger.fine("Saving gateway properties...");
+
+        File temp = createTempFile();
+        FileOutputStream out = new FileOutputStream(temp);
+        ExportManager.exportGatewayProperties(Gateways.getInstance().getAll(), 
+                Signatures.getInstance().getAll(), Signature.DEFAULT, out);
+        out.flush();
+        out.getChannel().force(false);
+        out.close();
+
+        moveFileSafely(temp, gatewayPropsFile);
+        logger.log(Level.FINER, "Saved gateway config into file: {0}", gatewayPropsFile.getAbsolutePath());
     }
     
     /** Checks if this is the first instance of the program.

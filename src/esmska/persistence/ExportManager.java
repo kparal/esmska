@@ -17,12 +17,19 @@ import java.util.logging.Logger;
 import com.csvreader.CsvWriter;
 
 import esmska.data.Contact;
+import esmska.data.Gateway;
+import esmska.data.GatewayConfig;
 import esmska.data.History;
 import esmska.data.Keyring;
 import esmska.data.SMS;
+import esmska.data.Signature;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.Validate;
 
@@ -33,7 +40,7 @@ import org.apache.commons.lang.Validate;
 public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
-    
+
     /** Disabled constructor */
     private ExportManager() {
     }
@@ -108,8 +115,6 @@ public class ExportManager {
                 sms.getNumber(),
                 sms.getGateway(),
                 sms.getText(),
-                sms.getSenderName(),
-                sms.getSenderNumber()
             });
         }
         writer.flush();
@@ -198,5 +203,37 @@ public class ExportManager {
             IOUtils.write(icon, iconOut);
             iconOut.flush();
         }
+    }
+
+    /** Export gateway properties
+     *
+     * @param gateways all gateways for which the properties to save
+     * @param signatures all available signatures, not null
+     * @param defaultSignature the default signature, not null
+     * @param out output stream, not null
+     * @throws IOException
+     */
+    public static void exportGatewayProperties(Collection<Gateway> gateways,
+            Collection<Signature> signatures, Signature defaultSignature, OutputStream out) throws IOException {
+        Validate.notNull(gateways);
+        Validate.notNull(signatures);
+        Validate.notNull(out);
+
+        HashMap<String,GatewayConfig> gwConfigs = new HashMap<String, GatewayConfig>();
+        for (Gateway gateway : gateways) {
+            gwConfigs.put(gateway.getName(), gateway.getConfig());
+        }
+
+        logger.finer("Exporting gateway properties");
+        JSONObject obj = new JSONObject();
+        JSONObject jsonGwConfigs = JSONObject.fromObject(gwConfigs);
+        JSONArray jsonSignatures = JSONArray.fromObject(signatures);
+
+        obj.put("configs", jsonGwConfigs);
+        obj.put("signatures", jsonSignatures);
+        obj.put("default signature", defaultSignature);
+
+        String jsonString = obj.toString(2);
+        IOUtils.write(jsonString, out, "UTF-8");
     }
 }

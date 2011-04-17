@@ -20,11 +20,13 @@ import java.io.Reader;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -37,6 +39,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -80,11 +85,8 @@ public class ImportManager {
                     String number = reader.get(1);
                     String gateway = reader.get(2);
                     String text = reader.get(3);
-                    String senderName = reader.get(4);
-                    String senderNumber = reader.get(5);
 
-                    SMS sms = new SMS(number, text, gateway, name, senderNumber,
-                            senderName);
+                    SMS sms = new SMS(number, text, gateway, name);
                     queue.add(sms);
                 } catch (Exception e) {
                     logger.severe("Invalid queue record: " + reader.getRawRecord());
@@ -102,8 +104,7 @@ public class ImportManager {
     }
 
     /** Import sms history from file */
-    public static ArrayList<History.Record> importHistory(File file)
-            throws Exception {
+    public static ArrayList<History.Record> importHistory(File file) throws Exception {
         logger.finer("Importing history from file: " + file.getAbsolutePath());
         ArrayList<History.Record> history = new ArrayList<History.Record>();
         CsvReader reader = null;
@@ -323,8 +324,7 @@ public class ImportManager {
      * @param file File to import from.
      * @throws Exception When some error occur during file processing.
      */
-    public static void importKeyring(File file)
-            throws Exception {
+    public static void importKeyring(File file) throws Exception {
         logger.finer("Importing keyring from file: " + file.getAbsolutePath());
         Keyring keyring = Keyring.getInstance();
         CsvReader reader = null;
@@ -382,5 +382,61 @@ public class ImportManager {
         }
 
         logger.finer("Imported global configuration");
+    }
+
+    /** Import all gateway properties from file. */
+    public static void importGatewayProperties(File file) throws IOException {
+        logger.log(Level.FINER, "Importing gateway properties from file: {0}", file.getAbsolutePath());
+
+        String jsonString = FileUtils.readFileToString(file, "UTF-8");
+        JSONObject obj = JSONObject.fromObject(jsonString);
+
+        // default signature
+        JSONObject jsonDefSig = (JSONObject) obj.get("default signature");
+        if (jsonDefSig != null) {
+            try {
+                Signature defSig = (Signature) JSONObject.toBean(jsonDefSig, Signature.class);
+                Signature.DEFAULT.setUserName(defSig.getUserName());
+                Signature.DEFAULT.setUserNumber(defSig.getUserNumber());
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Could not load default signature", ex);
+            }
+        }
+
+        // custom signatures
+        JSONArray jsonSignatures = (JSONArray) obj.get("signatures");
+        if (jsonSignatures != null) {
+            try {
+                for (int i = 0; i < jsonSignatures.size(); i++) {
+                    JSONObject sigObj = jsonSignatures.getJSONObject(i);
+                    Signature signature = (Signature) JSONObject.toBean(sigObj, Signature.class);
+                    if (!Signatures.getInstance().add(signature)) {
+                        logger.log(Level.WARNING, "Couldn''t add signature: {0}", signature.getProfileName());
+                    }
+                }
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Could not load user signatures", ex);
+            }
+        }
+
+        // GatewayConfig objects
+        JSONObject jsonGwConfigs = (JSONObject) obj.get("configs");
+        if (jsonGwConfigs != null) {
+            try {
+                for (Iterator it = jsonGwConfigs.keys(); it.hasNext(); ) {
+                    String gwName = (String) it.next();
+                    GatewayConfig gwConfig = (GatewayConfig) JSONObject.toBean(jsonGwConfigs.getJSONObject(gwName), GatewayConfig.class);
+
+                    Gateway gateway = Gateways.getInstance().get(gwName);
+                    if (gateway != null) {
+                        gateway.setConfig(gwConfig);
+                    }
+                }
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Could not load gateway configs", ex);
+            }
+        }
+
+        logger.finer("Imported gateway properties");
     }
 }
