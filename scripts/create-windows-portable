@@ -39,7 +39,7 @@ BUILD_DIR="$TMPDIR/$ROOTDIR"
 mkdir "$BUILD_DIR"
 
 # copy dist directory to temp directory
-cp -r ../dist/* ../portable/esmska-portable.exe "$BUILD_DIR"
+cp -r ../dist/* ../portable/esmska-portable.exe ../portable/readme-portable.txt "$BUILD_DIR"
 # and convert text files to CRLF
 todos "$BUILD_DIR"/*.txt "$BUILD_DIR"/license/*.txt "$BUILD_DIR"/*.conf
 # delete unnecessary files
