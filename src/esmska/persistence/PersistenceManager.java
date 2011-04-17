@@ -220,7 +220,7 @@ public class PersistenceManager {
     }
     
     /** Load program configuration */
-    public void loadConfig() throws IOException {
+    public void loadConfig() throws Exception {
         //system-wide config
         if (globalConfigFile.exists()) {
             logger.fine("Loading global config...");
@@ -235,16 +235,20 @@ public class PersistenceManager {
 
         //per-user config
         if (configFile.exists()) {
-            logger.fine("Loading local config...");
-            XMLDecoder xmlDecoder = new XMLDecoder(
-                    new BufferedInputStream(new FileInputStream(configFile)));
-            Config newConfig = (Config) xmlDecoder.readObject();
-            xmlDecoder.close();
-            if (newConfig != null) {
+            try {
+                logger.fine("Loading local config...");
+                XMLDecoder xmlDecoder = new XMLDecoder(
+                        new BufferedInputStream(new FileInputStream(configFile)));
+                Config newConfig = (Config) xmlDecoder.readObject();
+                xmlDecoder.close();
                 Config.setSharedInstance(newConfig);
+            } catch (Exception ex) {
+                //set default config
+                Config.setSharedInstance(new Config());
+                throw ex;
             }
         } else {
-            //set new config, to apply changes made through global config
+            //set default config
             Config.setSharedInstance(new Config());
         }
     }
