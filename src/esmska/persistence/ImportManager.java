@@ -170,15 +170,16 @@ public class ImportManager {
             }
         }
 
-        return importGateways(gatewayURLs);
+        return importGateways(gatewayURLs, false);
     }
 
     /** Import all gateways from directory
      * @param directory directory where to look for gateways
+     * @param deleteOnFail whether to delete gateway files that fail to be loaded
      * @throws IOException When there is problem accessing gateway directory or files
      * @throws IntrospectionException When current JRE does not support JavaScript execution
      */
-    public static TreeSet<Gateway> importGateways(File directory) throws
+    public static TreeSet<Gateway> importGateways(File directory, boolean deleteOnFail) throws
             IOException, IntrospectionException {
         logger.finer("Importing gateways from directory: " + directory.getAbsolutePath());
         if (!directory.canRead() || !directory.isDirectory()) {
@@ -197,17 +198,18 @@ public class ImportManager {
             gatewayURLs.add(f.toURI().toURL());
         }
 
-        return importGateways(gatewayURLs);
+        return importGateways(gatewayURLs, deleteOnFail);
     }
 
     /** Get set of gateways from set of gateway URLs
      * @param gatewayURLs set of gateway URLs (file or jar URLs)
+     * @param deleteOnFail whether to delete gateway files that fail to be loaded
      * @return set of gateways
      * @throws java.beans.IntrospectionException When current JRE does not support JavaScript execution
      */
-    private static TreeSet<Gateway> importGateways(Set<URL> gatewayURLs) throws
+    private static TreeSet<Gateway> importGateways(Set<URL> gatewayURLs, boolean deleteOnFail) throws
             IntrospectionException {
-        logger.finer("Importing gateways from set of " + gatewayURLs.size() + " URLs");
+        logger.log(Level.FINER, "Importing gateways from set of {0} URLs", gatewayURLs.size());
         TreeSet<Gateway> gateways = new TreeSet<Gateway>();
 
         for (URL gatewayURL : gatewayURLs) {
@@ -216,9 +218,8 @@ public class ImportManager {
                 //check that this gateway can be used in this program
                 if (Config.compareProgramVersions(Config.getLatestVersion(),
                         gateway.getMinProgramVersion()) < 0) {
-                    logger.info("Gateway " + gateway.getName() +
-                            " requires program of version at least " +
-                            gateway.getMinProgramVersion() + ", skipping.");
+                    logger.log(Level.INFO, "Gateway {0} requires program of version at least {1}, skipping.",
+                            new Object[]{gateway.getName(), gateway.getMinProgramVersion()});
                     continue;
                 }
                 //check that some older version of the same gateway is not
@@ -242,10 +243,19 @@ public class ImportManager {
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Ivalid gateway resource: " +
                         gatewayURL.toExternalForm(), ex);
+                if (deleteOnFail) {
+                    try {
+                        logger.log(Level.FINE, "Deleting invalid gateway file: {0}", gatewayURL);
+                        File gwFile = new File(gatewayURL.toURI());
+                        gwFile.delete();
+                    } catch (Exception exc) {
+                        logger.log(Level.WARNING, "Can't delete gateway: " + gatewayURL, exc);
+                    }
+                }
             }
         }
 
-        logger.finer("Imported " + gateways.size() + " gateways");
+        logger.log(Level.FINER, "Imported {0} gateways", gateways.size());
         return gateways;
     }
 

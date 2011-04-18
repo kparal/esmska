@@ -373,7 +373,7 @@ public class PersistenceManager {
         HashSet<DeprecatedGateway> deprecatedGateways = new HashSet<DeprecatedGateway>();
         //global gateways
         if (!RuntimeUtils.isRunAsWebStart() && globalGatewayDir.exists()) {
-            globalGateways = new ArrayList<Gateway>(ImportManager.importGateways(globalGatewayDir));
+            globalGateways = new ArrayList<Gateway>(ImportManager.importGateways(globalGatewayDir, false));
         } else if (RuntimeUtils.isRunAsWebStart()) {
             globalGateways = new ArrayList<Gateway>(ImportManager.importGateways(GATEWAY_RESOURCE));
         } else {
@@ -383,7 +383,7 @@ public class PersistenceManager {
         }
         //local gateways
         if (localGatewayDir.exists()) {
-            localGateways = ImportManager.importGateways(localGatewayDir);
+            localGateways = ImportManager.importGateways(localGatewayDir, true);
         }
         //deprecated gateways
         if (!RuntimeUtils.isRunAsWebStart() && deprecatedGWsFile.canRead()) {
@@ -401,7 +401,7 @@ public class PersistenceManager {
                 Gateway op = it.next();
                 if (deprecated.getName().equals(op.getName()) &&
                         deprecated.getVersion().compareTo(op.getVersion()) >= 0) {
-                    logger.finer("Global gateway " + op.getName() + " is deprecated, skipping.");
+                    logger.log(Level.FINER, "Global gateway {0} is deprecated, skipping.", op.getName());
                     it.remove();
                 }
             }
@@ -410,7 +410,7 @@ public class PersistenceManager {
                 if (deprecated.getName().equals(op.getName()) &&
                         deprecated.getVersion().compareTo(op.getVersion()) >= 0) {
                     //delete deprecated local gateway
-                    logger.finer("Local gateway " + op.getName() + " is deprecated, deleting...");
+                    logger.log(Level.FINER, "Local gateway {0} is deprecated, deleting...", op.getName());
                     it.remove();
                     File opFile = null;
                     try {
@@ -432,10 +432,10 @@ public class PersistenceManager {
                 Gateway globalOp = globalGateways.get(index);
                 if (localOp.getVersion().compareTo(globalOp.getVersion()) > 0) {
                     globalGateways.set(index, localOp);
-                    logger.finer("Local gateway " + localOp.getName() + " is newer, replacing global one.");
+                    logger.log(Level.FINER, "Local gateway {0} is newer, replacing global one.", localOp.getName());
                 } else {
                     //delete legacy local gateways
-                    logger.finer("Local gateway " + localOp.getName() + " is same or older than global one, deleting...");
+                    logger.log(Level.FINER, "Local gateway {0} is same or older than global one, deleting...", localOp.getName());
                     File opFile = null;
                     try {
                         opFile = new File(localOp.getScript().toURI());
@@ -449,7 +449,7 @@ public class PersistenceManager {
                 }
             } else {
                 globalGateways.add(localOp);
-                logger.finer("Local gateway " + localOp.getName() + " is additional to global ones, adding to gateway list.");
+                logger.log(Level.FINER, "Local gateway {0} is additional to global ones, adding to gateway list.", localOp.getName());
             }
         }
         //load it
@@ -670,7 +670,7 @@ public class PersistenceManager {
      * It doesn't have to exist. This method is available because of Java bug
      * on Windows which does not check permissions in File.canWrite() but only
      * read-only bit (<a href="http://www.velocityreviews.com/forums/t303199-java-reporting-incorrect-directory-permission-under-windows-xp.html">reference1</a>,
-     * <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4939819>referece2</a>).
+     * <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4939819">reference2</a>).
      * @param file File, existing or not existing; not null
      * @return true if file can be written, false if not
      */
