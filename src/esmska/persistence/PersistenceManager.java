@@ -29,7 +29,6 @@ import esmska.data.Gateways;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.Gateway;
-import esmska.data.GatewayConfig;
 import esmska.data.Signature;
 import esmska.data.Signatures;
 import esmska.integration.IntegrationAdapter;
@@ -37,8 +36,6 @@ import esmska.utils.RuntimeUtils;
 import java.io.FilenameFilter;
 import java.text.MessageFormat;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.regex.Pattern;
@@ -91,7 +88,6 @@ public class PersistenceManager {
     private static File gatewayPropsFile = new File(configDir, GATEWAY_PROPS_FILENAME);
     
     private static boolean customPathSet;
-    private FileLock lock;
     
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
@@ -568,18 +564,27 @@ public class PersistenceManager {
      */
     public boolean isFirstInstance() {
         try {
-            FileOutputStream out = new FileOutputStream(lockFile);
-            FileChannel channel = out.getChannel();
-            lock = channel.tryLock();
-            if (lock == null) {
-                return false;
-            }
+            lock(lockFile);
             lockFile.deleteOnExit();
-        } catch (Throwable t) {
-            logger.log(Level.INFO, "Program lock could not be obtained", t);
+        } catch (Exception ex) {
+            logger.log(Level.INFO, "Program lock could not be obtained", ex);
             return false;
         }
         return true;
+    }
+
+    /** Try to obtain an exclusive lock on a File.
+     * @throws if lock can't be obtained
+     */
+    private void lock(File file) throws IOException {
+        Validate.notNull(file);
+
+        FileOutputStream out = new FileOutputStream(file);
+        FileChannel channel = out.getChannel();
+        FileLock lock = channel.tryLock();
+        if (lock == null) {
+            throw new IOException("Could not lock file: " + file.getAbsolutePath());
+        }
     }
 
     /** Proceed with a backup. Backs up today's configuration (if not backed up

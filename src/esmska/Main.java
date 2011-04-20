@@ -220,27 +220,24 @@ public class Main {
             LogSupport.getEsmskaLogger().setLevel(Level.ALL);
         }
         
-        //warn if other program instance is already running
+        //quit if other program instance is already running
         if (!pm.isFirstInstance()) {
-            logger.warning("Some other instance of the program is already running");
+            logger.warning("Esmska is already running. Quitting.");
             try {
                 SwingUtilities.invokeAndWait(new Runnable() {
                     @Override
                     public void run() {
-                        String runOption = l10n.getString("Main.run_anyway");
                         String quitOption = l10n.getString("Quit");
-                        String[] options = new String[]{runOption, quitOption};
-                        options = RuntimeUtils.sortDialogOptions(options);
-                        int result = JOptionPane.showOptionDialog(null, l10n.getString("Main.already_running"),
-                                null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
-                                options, quitOption);
-                        if (result != ArrayUtils.indexOf(options, runOption)) {
-                            System.exit(0);
-                        }
+                        String[] options = new String[]{quitOption};
+                        JOptionPane.showOptionDialog(null, l10n.getString("Main.already_running"),
+                            null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+                            options, quitOption);
                     }
                 });
             } catch (Exception e) {
                 logger.log(Level.SEVERE, "Can't display error message", e);
+            } finally {
+                System.exit(15);
             }
         }
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-17 21:43+0200\n"
+"POT-Creation-Date: 2011-04-20 19:38+0200\n"
 "PO-Revision-Date: 2010-11-15 00:11+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1420,9 +1420,8 @@ msgstr ""
 
 #: Main.already_running
 msgid ""
-"<html><h2>Esmska is already running!</h2>Esmska is already once started. We "
-"strongly discourage you from starting another<br>instances of the program "
-"because it may cause a user data loss.</html>"
+"<html><h2>Esmska is already running!</h2>Esmska is already once started. You "
+"can't run multiple program instances.<br>This one will now quit.</html>"
 msgstr ""
 
 #: Main.brokenWebstart
