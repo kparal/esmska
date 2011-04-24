@@ -763,10 +763,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
     });
 
-    senderNumberTextField.setColumns(10);
+    senderNumberTextField.setColumns(12);
     senderNumberTextField.setToolTipText(l10n.getString("ConfigFrame.senderNumberTextField.toolTipText")); // NOI18N
 
-    senderNameTextField.setColumns(10);
+    senderNameTextField.setColumns(12);
     senderNameTextField.setToolTipText(l10n.getString("ConfigFrame.senderNameTextField.toolTipText")); // NOI18N
     Mnemonics.setLocalizedText(demandDeliveryReportCheckBox, l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.text"));
     demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
