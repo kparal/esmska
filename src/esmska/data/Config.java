@@ -50,7 +50,6 @@ public class Config extends Object implements Serializable {
     private boolean reducedHistory = false;
     private int reducedHistoryCount = 30;
     private boolean startMinimized = false;
-    private boolean demandDeliveryReport = false;
     private boolean showAdvancedSettings = false;
     private boolean debugMode = false;
     private boolean showAdvancedControls = false;
@@ -262,10 +261,6 @@ public class Config extends Object implements Serializable {
         return startMinimized;
     }
     
-    public boolean isDemandDeliveryReport() {
-        return demandDeliveryReport;
-    }
-    
     public boolean isShowAdvancedSettings() {
         return showAdvancedSettings;
     }
@@ -438,12 +433,6 @@ public class Config extends Object implements Serializable {
         boolean old = this.startMinimized;
         this.startMinimized = startMinimized;
         changeSupport.firePropertyChange("startMinimized", old, startMinimized);
-    }
-    
-    public void setDemandDeliveryReport(boolean demandDeliveryReport) {
-        boolean oldDemandDeliveryReport = this.demandDeliveryReport;
-        this.demandDeliveryReport = demandDeliveryReport;
-        changeSupport.firePropertyChange("demandDeliveryReport", oldDemandDeliveryReport, demandDeliveryReport);
     }
     
     public void setShowAdvancedSettings(boolean showAdvancedSettings) {

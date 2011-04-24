@@ -59,16 +59,16 @@ public class GatewayInterpreter {
      */
     public boolean sendMessage(SMS sms) {
         Gateway gateway = Gateways.getInstance().get(sms.getGateway());
-        this.variables = extractVariables(sms);
-
-        logger.fine("Sending SMS to: " + gateway);
+        logger.log(Level.FINE, "Sending SMS to: {0}", gateway);
+        
         init();
         executor = new GatewayExecutor(sms);
-        
         if (gateway == null) {
             executor.setErrorMessage(l10n.getString("GatewayInterpreter.unknown_gateway"));
             return false;
         }
+
+        this.variables = extractVariables(sms, gateway);
         
         Reader reader = null;
         boolean sentOk = false;
@@ -103,7 +103,7 @@ public class GatewayInterpreter {
     }
 
     /** Extract variables from SMS to a map */
-    private static HashMap<GatewayVariable,String> extractVariables(SMS sms) {
+    private static HashMap<GatewayVariable,String> extractVariables(SMS sms, Gateway gateway) {
         HashMap<GatewayVariable,String> map = new HashMap<GatewayVariable, String>();
         map.put(GatewayVariable.NUMBER, sms.getNumber());
         map.put(GatewayVariable.MESSAGE, sms.getText());
@@ -116,7 +116,7 @@ public class GatewayInterpreter {
             map.put(GatewayVariable.PASSWORD, key.get2());
         }
 
-        if (config.isDemandDeliveryReport()) {
+        if (gateway.getConfig().isReceipt()) {
             map.put(GatewayVariable.RECEIPT, "true");
         }
 
