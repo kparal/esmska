@@ -288,7 +288,11 @@ public class Main {
         
         //update from older versions
         if (!config.isFirstRun()) {
-            LegacyUpdater.update();
+            try {
+                LegacyUpdater.update();
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Updating to a newer version failed", ex);
+            }
         }
         
         //set L&F

@@ -4,6 +4,8 @@ import com.csvreader.CsvReader;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
+import esmska.data.Signature;
+import esmska.data.Signatures;
 import esmska.data.Tuple;
 import esmska.persistence.ContinuousSaveManager;
 import esmska.persistence.PersistenceManager;
@@ -15,9 +17,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Document;
 
 /** Class for updating from older to newer versions of the program.
  * Makes the needed changes when user updates his version.
@@ -28,7 +35,7 @@ public class LegacyUpdater {
     private static final Logger logger = Logger.getLogger(LegacyUpdater.class.getName());
 
     /** Checks if some update is needed to be done and executes it if neccessary */
-    public static void update() {
+    public static void update() throws Exception {
         String version = Config.getInstance().getVersion();
         if (StringUtils.isEmpty(version)) {
             //program is started for the first time, no update neccessary
@@ -37,8 +44,8 @@ public class LegacyUpdater {
         if (ObjectUtils.equals(version, Config.getLatestVersion())) { //already updated
             return;
         }
-        logger.info("Updating from legacy version " + version + " to current version " +
-                Config.getLatestVersion());
+        logger.log(Level.INFO, "Updating from legacy version {0} to current version {1}", 
+                new Object[]{version, Config.getLatestVersion()});
 
         //changes to 0.8.0
         if (Config.compareProgramVersions(version, "0.8.0") < 0) {
@@ -90,6 +97,32 @@ public class LegacyUpdater {
                 ContinuousSaveManager.enableKeyring();
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Updating keyring file failed", ex);
+            }
+        }
+        
+        //changes to 0.22.0
+        if (Config.compareProgramVersions(version, "0.21") <= 0) {
+            //transfer senderName and senderNumber settings
+            
+            Field configFileField = PersistenceManager.class.getDeclaredField("configFile");
+            configFileField.setAccessible(true);
+            File configFile = (File) configFileField.get(null);
+            
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            XPathFactory xpf = XPathFactory.newInstance();
+            XPath xpath = xpf.newXPath();
+            
+            Document doc = db.parse(configFile);
+            String senderNumber = xpath.evaluate("//void[@property='senderNumber']/string", doc);
+            String senderName = xpath.evaluate("//void[@property='senderName']/string", doc);
+            
+            Signature defaultSig = Signatures.getInstance().get(Signature.DEFAULT.getProfileName());
+            if (StringUtils.isNotEmpty(senderName)) {
+                defaultSig.setUserName(senderName);
+            }
+            if (StringUtils.isNotEmpty(senderNumber)) {
+                defaultSig.setUserNumber(senderNumber);
             }
         }
     }
