@@ -394,7 +394,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         bindingGroup = new BindingGroup();
 
         config = Config.getInstance();
@@ -481,27 +480,31 @@ public class ConfigFrame extends javax.swing.JFrame {
         });
         Mnemonics.setLocalizedText(removeAccentsCheckBox, l10n.getString("ConfigFrame.removeAccentsCheckBox.text"));
         removeAccentsCheckBox.setToolTipText(l10n.getString("ConfigFrame.removeAccentsCheckBox.toolTipText")); // NOI18N
+
         Binding binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${removeAccents}"), removeAccentsCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(announceProgramUpdatesCheckBox, l10n.getString("ConfigFrame.announceProgramUpdatesCheckBox.text"));
         announceProgramUpdatesCheckBox.setToolTipText(l10n.getString("ConfigFrame.announceProgramUpdatesCheckBox.toolTipText")); // NOI18N
+
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${announceProgramUpdates}"), announceProgramUpdatesCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
-
 
         announceProgramUpdatesCheckBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 announceProgramUpdatesCheckBoxActionPerformed(evt);
             }
         });
+
         Mnemonics.setLocalizedText(unstableUpdatesCheckBox, l10n.getString("ConfigFrame.unstableUpdatesCheckBox.text"));
         unstableUpdatesCheckBox.setToolTipText(l10n.getString("ConfigFrame.unstableUpdatesCheckBox.toolTipText")); // NOI18N
+
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${announceUnstableUpdates}"), unstableUpdatesCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(debugCheckBox, l10n.getString("ConfigFrame.debugCheckBox.text"));
         debugCheckBox.setToolTipText(l10n.getString("ConfigFrame.debugCheckBox.toolTipText")); // NOI18N
+
         binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${debugMode}"), debugCheckBox, BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
@@ -584,11 +587,13 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         Mnemonics.setLocalizedText(windowCenteredCheckBox, l10n.getString("ConfigFrame.windowCenteredCheckBox.text"));
     windowCenteredCheckBox.setToolTipText(l10n.getString("ConfigFrame.windowCenteredCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${startCentered}"), windowCenteredCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(toolbarVisibleCheckBox, l10n.getString("ConfigFrame.toolbarVisibleCheckBox.text"));
     toolbarVisibleCheckBox.setToolTipText(l10n.getString("ConfigFrame.toolbarVisibleCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${toolbarVisible}"), toolbarVisibleCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
@@ -599,19 +604,21 @@ public class ConfigFrame extends javax.swing.JFrame {
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${notificationIconVisible}"), notificationAreaCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
-
     notificationAreaCheckBox.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             notificationAreaCheckBoxActionPerformed(evt);
         }
     });
+
         Mnemonics.setLocalizedText(tipsCheckBox, l10n.getString("ConfigFrame.tipsCheckBox.text"));
     tipsCheckBox.setToolTipText(l10n.getString("ConfigFrame.tipsCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showTips}"), tipsCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
         Mnemonics.setLocalizedText(startMinimizedCheckBox, l10n.getString("ConfigFrame.startMinimizedCheckBox.text"));
     startMinimizedCheckBox.setToolTipText(l10n.getString("ConfigFrame.startMinimizedCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${startMinimized}"), startMinimizedCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, notificationAreaCheckBox, ELProperty.create("${selected && enabled}"), startMinimizedCheckBox, BeanProperty.create("enabled"));
@@ -619,12 +626,12 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         Mnemonics.setLocalizedText(advancedControlsCheckBox, l10n.getString("ConfigFrame.advancedControlsCheckBox.text"));
     advancedControlsCheckBox.setToolTipText(l10n.getString("ConfigFrame.advancedControlsCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showAdvancedControls}"), advancedControlsCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
         GroupLayout appearancePanelLayout = new GroupLayout(appearancePanel);
     appearancePanel.setLayout(appearancePanelLayout);
-
     appearancePanelLayout.setHorizontalGroup(
         appearancePanelLayout.createParallelGroup(Alignment.LEADING)
         .addGroup(appearancePanelLayout.createSequentialGroup()
@@ -682,6 +689,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     appearancePanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {lafComboBox, themeComboBox});
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.appearancePanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/appearance-16.png")), appearancePanel); // NOI18N
+
     clearKeyringButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/clear-22.png"))); // NOI18N
     Mnemonics.setLocalizedText(clearKeyringButton, l10n.getString("ConfigFrame.clearKeyringButton.text"));
     clearKeyringButton.setToolTipText(l10n.getString("ConfigFrame.clearKeyringButton.toolTipText")); // NOI18N
@@ -697,6 +705,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     jScrollPane1.setViewportView(gatewayTable);
 
     Mnemonics.setLocalizedText(gwTipLabel,l10n.getString("ConfigFrame.gwTipLabel.text")); // NOI18N
+
     gwDetailsPanel.setBorder(BorderFactory.createTitledBorder(l10n.getString("ConfigFrame.gwDetailsPanel.border.title"))); // NOI18N
 
     passwordField.setColumns(12);
@@ -707,11 +716,18 @@ public class ConfigFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(jLabel12, l10n.getString("ConfigFrame.jLabel12.text")); // NOI18N
     jLabel12.setToolTipText(passwordField.getToolTipText());
 
-    loginField.setColumns(12);
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, passwordField, ELProperty.create("${enabled}"), jLabel12, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
+    loginField.setColumns(12);
     loginField.setToolTipText(l10n.getString("ConfigFrame.loginField.toolTipText")); // NOI18N
-    Mnemonics.setLocalizedText(showPasswordCheckBox, l10n.getString("ConfigFrame.showPasswordCheckBox.text"));
+
+        Mnemonics.setLocalizedText(showPasswordCheckBox, l10n.getString("ConfigFrame.showPasswordCheckBox.text"));
     showPasswordCheckBox.setToolTipText(l10n.getString("ConfigFrame.showPasswordCheckBox.toolTipText")); // NOI18N
+
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, passwordField, ELProperty.create("${enabled}"), showPasswordCheckBox, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
+
     showPasswordCheckBox.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             showPasswordCheckBoxActionPerformed(evt);
@@ -722,6 +738,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(jLabel11, l10n.getString("ConfigFrame.jLabel11.text")); // NOI18N
     jLabel11.setToolTipText(loginField.getToolTipText());
 
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, loginField, ELProperty.create("${enabled}"), jLabel11, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
+
     signatureComboBox.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             signatureComboBoxActionPerformed(evt);
@@ -731,6 +750,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     jLabel2.setLabelFor(signatureComboBox);
         Mnemonics.setLocalizedText(jLabel2, l10n.getString("ConfigFrame.jLabel2.text")); // NOI18N
     jLabel2.setToolTipText(signatureComboBox.getToolTipText());
+
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, signatureComboBox, ELProperty.create("${enabled}"), jLabel2, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
     sigDelButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/delete-16.png"))); // NOI18N
     sigDelButton.setToolTipText(l10n.getString("ConfigFrame.sigDelButton.toolTipText")); // NOI18N
@@ -745,7 +767,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     senderNumberTextField.setToolTipText(l10n.getString("ConfigFrame.senderNumberTextField.toolTipText")); // NOI18N
 
     senderNameTextField.setColumns(10);
-
     senderNameTextField.setToolTipText(l10n.getString("ConfigFrame.senderNameTextField.toolTipText")); // NOI18N
     Mnemonics.setLocalizedText(demandDeliveryReportCheckBox, l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.text"));
     demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
@@ -759,9 +780,15 @@ public class ConfigFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(senderNumberLabel, l10n.getString("ConfigFrame.senderNumberLabel.text")); // NOI18N
     senderNumberLabel.setToolTipText(senderNumberTextField.getToolTipText());
 
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, senderNumberTextField, ELProperty.create("${enabled}"), senderNumberLabel, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
+
     senderNameLabel.setLabelFor(senderNameTextField);
         Mnemonics.setLocalizedText(senderNameLabel, l10n.getString("ConfigFrame.senderNameLabel.text")); // NOI18N
     senderNameLabel.setToolTipText(senderNameTextField.getToolTipText());
+
+    binding = Bindings.createAutoBinding(UpdateStrategy.READ, senderNameTextField, ELProperty.create("${enabled}"), senderNameLabel, BeanProperty.create("enabled"));
+    bindingGroup.addBinding(binding);
 
     senderNumberWarnLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/warning-16.png"))); // NOI18N
     senderNumberWarnLabel.setToolTipText(senderNumberTextField.getToolTipText());
@@ -844,8 +871,6 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         GroupLayout gatewayPanelLayout = new GroupLayout(gatewayPanel);
     gatewayPanel.setLayout(gatewayPanelLayout);
-
-
     gatewayPanelLayout.setHorizontalGroup(
         gatewayPanelLayout.createParallelGroup(Alignment.LEADING)
         .addGroup(gatewayPanelLayout.createSequentialGroup()
@@ -876,8 +901,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     );
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.gatewayPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/gateway-16.png")), gatewayPanel); // NOI18N
+
         Mnemonics.setLocalizedText(reducedHistoryCheckBox, l10n.getString("ConfigFrame.reducedHistoryCheckBox.text"));
     reducedHistoryCheckBox.setToolTipText(l10n.getString("ConfigFrame.reducedHistoryCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${reducedHistory}"), reducedHistoryCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
@@ -897,8 +924,6 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         GroupLayout privacyPanelLayout = new GroupLayout(privacyPanel);
     privacyPanel.setLayout(privacyPanelLayout);
-
-
     privacyPanelLayout.setHorizontalGroup(
         privacyPanelLayout.createParallelGroup(Alignment.LEADING)
         .addGroup(privacyPanelLayout.createSequentialGroup()
@@ -922,8 +947,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     );
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.privacyPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/lock-16.png")), privacyPanel); // NOI18N
+
         Mnemonics.setLocalizedText(useProxyCheckBox, l10n.getString("ConfigFrame.useProxyCheckBox.text"));
     useProxyCheckBox.setToolTipText(l10n.getString("ConfigFrame.useProxyCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${useProxy}"), useProxyCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
@@ -934,13 +961,12 @@ public class ConfigFrame extends javax.swing.JFrame {
     });
 
     httpProxyTextField.setColumns(20);
-
     httpProxyTextField.setToolTipText(l10n.getString("ConfigFrame.httpProxyTextField.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${httpProxy}"), httpProxyTextField, BeanProperty.create("text"));
     bindingGroup.addBinding(binding);
     binding = Bindings.createAutoBinding(UpdateStrategy.READ, useProxyCheckBox, ELProperty.create("${selected}"), httpProxyTextField, BeanProperty.create("enabled"));
     bindingGroup.addBinding(binding);
-
 
     httpProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
         @Override
@@ -951,13 +977,14 @@ public class ConfigFrame extends javax.swing.JFrame {
             updateProxy();
         }
     });
+
         Mnemonics.setLocalizedText(sameProxyCheckBox, l10n.getString("ConfigFrame.sameProxyCheckBox.text"));
     sameProxyCheckBox.setToolTipText(l10n.getString("ConfigFrame.sameProxyCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${sameProxy}"), sameProxyCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
     binding = Bindings.createAutoBinding(UpdateStrategy.READ, useProxyCheckBox, ELProperty.create("${selected}"), sameProxyCheckBox, BeanProperty.create("enabled"));
     bindingGroup.addBinding(binding);
-
 
     sameProxyCheckBox.addItemListener(new ItemListener() {
         public void itemStateChanged(ItemEvent evt) {
@@ -966,11 +993,11 @@ public class ConfigFrame extends javax.swing.JFrame {
     });
 
     httpsProxyTextField.setToolTipText(l10n.getString("ConfigFrame.httpsProxyTextField.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${httpsProxy}"), httpsProxyTextField, BeanProperty.create("text"));
     bindingGroup.addBinding(binding);
     binding = Bindings.createAutoBinding(UpdateStrategy.READ, sameProxyCheckBox, ELProperty.create("${enabled && !selected}"), httpsProxyTextField, BeanProperty.create("enabled"));
     bindingGroup.addBinding(binding);
-
 
     httpsProxyTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
         @Override
@@ -980,6 +1007,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     });
 
     socksProxyTextField.setToolTipText(l10n.getString("ConfigFrame.socksProxyTextField.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${socksProxy}"), socksProxyTextField, BeanProperty.create("text"));
     bindingGroup.addBinding(binding);
     binding = Bindings.createAutoBinding(UpdateStrategy.READ, sameProxyCheckBox, ELProperty.create("${enabled}"), socksProxyTextField, BeanProperty.create("enabled"));
@@ -1003,12 +1031,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     jLabel16.setLabelFor(socksProxyTextField);
         Mnemonics.setLocalizedText(jLabel16, l10n.getString("ConfigFrame.jLabel16.text")); // NOI18N
     jLabel16.setToolTipText(socksProxyTextField.getToolTipText());
-
         Mnemonics.setLocalizedText(jLabel17, l10n.getString("ConfigFrame.jLabel17.text"));
+
         GroupLayout connectionPanelLayout = new GroupLayout(connectionPanel);
     connectionPanel.setLayout(connectionPanelLayout);
-
-
     connectionPanelLayout.setHorizontalGroup(
         connectionPanelLayout.createParallelGroup(Alignment.LEADING)
         .addGroup(connectionPanelLayout.createSequentialGroup()
@@ -1068,7 +1094,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     connectionPanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {httpProxyTextField, httpsProxyTextField, socksProxyTextField});
 
     tabbedPane.addTab(l10n.getString("ConfigFrame.connectionPanel.TabConstraints.tabTitle"), new ImageIcon(getClass().getResource("/esmska/resources/connection-16.png")), connectionPanel); // NOI18N
+
     closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
+
         Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_"));
     closeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
@@ -1077,6 +1105,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     });
         Mnemonics.setLocalizedText(advancedCheckBox, l10n.getString("ConfigFrame.advancedCheckBox.text"));
     advancedCheckBox.setToolTipText(l10n.getString("ConfigFrame.advancedCheckBox.toolTipText")); // NOI18N
+
     binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${showAdvancedSettings}"), advancedCheckBox, BeanProperty.create("selected"));
     bindingGroup.addBinding(binding);
 
@@ -1607,7 +1636,6 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
             boolean login = gateway.hasFeature(Feature.LOGIN) || gateway.hasFeature(Feature.LOGIN_ONLY);
             loginField.setEnabled(login);
             passwordField.setEnabled(login);
-            showPasswordCheckBox.setEnabled(login);
 
             boolean sig = gateway.hasFeature(Feature.SENDER_NAME) || gateway.hasFeature(Feature.SENDER_NUMBER);
             signatureComboBox.setEnabled(sig);
