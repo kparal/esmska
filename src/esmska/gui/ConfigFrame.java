@@ -751,9 +751,6 @@ public class ConfigFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(jLabel2, l10n.getString("ConfigFrame.jLabel2.text")); // NOI18N
     jLabel2.setToolTipText(signatureComboBox.getToolTipText());
 
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ, signatureComboBox, ELProperty.create("${enabled}"), jLabel2, BeanProperty.create("enabled"));
-    bindingGroup.addBinding(binding);
-
     sigDelButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/delete-16.png"))); // NOI18N
     sigDelButton.setToolTipText(l10n.getString("ConfigFrame.sigDelButton.toolTipText")); // NOI18N
     sigDelButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
@@ -786,9 +783,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     senderNameLabel.setLabelFor(senderNameTextField);
         Mnemonics.setLocalizedText(senderNameLabel, l10n.getString("ConfigFrame.senderNameLabel.text")); // NOI18N
     senderNameLabel.setToolTipText(senderNameTextField.getToolTipText());
-
-    binding = Bindings.createAutoBinding(UpdateStrategy.READ, senderNameTextField, ELProperty.create("${enabled}"), senderNameLabel, BeanProperty.create("enabled"));
-    bindingGroup.addBinding(binding);
 
     senderNumberWarnLabel.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/warning-16.png"))); // NOI18N
     senderNumberWarnLabel.setToolTipText(senderNumberTextField.getToolTipText());
@@ -1637,15 +1631,8 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
             loginField.setEnabled(login);
             passwordField.setEnabled(login);
 
-            boolean sig = gateway.hasFeature(Feature.SENDER_NAME) || gateway.hasFeature(Feature.SENDER_NUMBER);
-            signatureComboBox.setEnabled(sig);
             senderNumberTextField.setEnabled(gateway.hasFeature(Feature.SENDER_NUMBER));
-            senderNameTextField.setEnabled(gateway.hasFeature(Feature.SENDER_NAME));
-            if (sig) {
-                signatureComboBox.setSelectedSignature(gateway.getConfig().getSignature());
-            } else {
-                signatureComboBox.setSelectedSignature(Signature.NONE.getProfileName());
-            }
+            signatureComboBox.setSelectedSignature(gateway.getConfig().getSignature());
 
             boolean receipt = gateway.hasFeature(Feature.RECEIPT);
             demandDeliveryReportCheckBox.setEnabled(receipt);

@@ -7,6 +7,7 @@ import java.util.Set;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.text.Normalizer;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.StringUtils;
 
@@ -127,18 +128,9 @@ public class Envelope {
         int worstSignature = 0;
         //find maximum signature length
         for (Contact c : contacts) {
-            Gateway gateway = gateways.get(c.getGateway());
-            if (gateway == null) {
-                continue;
-            }
-            Signature signature = signatures.get(gateway.getConfig().getSignature());
-            if (signature == null) {
-                continue;
-            }
-            worstSignature = Math.max(worstSignature, 
-                    gateway.getSignatureExtraLength() + StringUtils.length(signature.getUserName()));
+            int length = getSignatureLength(c);
+            worstSignature = Math.max(worstSignature, length);
         }
-        
         return worstSignature;
     }
     
@@ -155,8 +147,8 @@ public class Envelope {
                 list.add(sms);
             }
         }
-        logger.fine("Envelope specified for " + contacts.size() + 
-                " contact(s) generated " + list.size() + " SMS(s)");
+        logger.log(Level.FINE, "Envelope specified for {0} contact(s) generated {1} SMS(s)", 
+                new Object[]{contacts.size(), list.size()});
         return list;
     }
     
@@ -173,7 +165,7 @@ public class Envelope {
     }
     
     /** remove diacritical marks from text */
-    private static String removeAccents(String text) {
+    public static String removeAccents(String text) {
         return Normalizer.normalize(text, Normalizer.Form.NFD).
                 replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }

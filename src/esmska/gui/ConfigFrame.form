@@ -706,9 +706,6 @@
                       <Connection component="signatureComboBox" name="getToolTipText" type="method"/>
                     </Property>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="enabled" source="signatureComboBox" sourcePath="${enabled}" target="jLabel2" targetPath="enabled" updateStrategy="1" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JButton" name="sigDelButton">
                   <Properties>
@@ -783,9 +780,6 @@
                       <Connection component="senderNameTextField" name="toolTipText" type="property"/>
                     </Property>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="enabled" source="senderNameTextField" sourcePath="${enabled}" target="senderNameLabel" targetPath="enabled" updateStrategy="1" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="senderNumberWarnLabel">
                   <Properties>
