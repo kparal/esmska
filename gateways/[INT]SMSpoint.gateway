@@ -1,14 +1,14 @@
 
 function getName() {
-    return "[INT]sms4you"
+    return "[INT]SMSpoint"
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-05-02_2"
 }
 
 function getMaintainer() {
-    return "Julius Bartkus <sourness@gmail.com>"
+    return "Julius Bartkus <julius.bartkus@smspoint.co.uk>"
 }
 
 function getMinProgramVersion() {
@@ -16,7 +16,7 @@ function getMinProgramVersion() {
 }
 
 function getWebsite() {
-    return "http://www.sms4you.lt"
+    return "http://www.smspoint.co.uk"
 }
 
 function getDescription() {
@@ -52,7 +52,7 @@ function getDelayBetweenMessages() {
 }
 
 function getSupportedLanguages() {
-    return ["en","lt"]
+    return ["en","lt","ru","dk"]
 }
 
 function getFeatures() {

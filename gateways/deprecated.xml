@@ -3,11 +3,16 @@
   <deprecatedGateway>
     <name>[LT]sms4you</name>
     <version>2010-02-21</version>
-    <reason>The gateway became international and was renamed to [INT]sms4you.</reason>
+    <reason>The gateway became international and was renamed to "[INT]sms4you".</reason>
   </deprecatedGateway>
   <deprecatedGateway>
     <name>[CZ]Vodafone samoobsluha</name>
     <version>2010-07-24</version>
     <reason>Vodafone abolished this gateway in favor of "[CZ]Vodafone park".</reason>
+  </deprecatedGateway>
+  <deprecatedGateway>
+    <name>[INT]sms4you</name>
+    <version>2010-07-24</version>
+    <reason>This gateway has been moved to http://www.smspoint.co.uk and the script was renamed to "[INT]SMSpoint".</reason>
   </deprecatedGateway>
 </esmska>
