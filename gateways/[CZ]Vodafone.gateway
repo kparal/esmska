@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-31"
+    return "2011-05-05"
 }
 
 function getMaintainer() {
@@ -83,7 +83,7 @@ function send() {
     content = EXEC.getURL("https://park.vodafone.cz/", ['x', urlid])
         
     // extract important variables
-    re = /<img alt="" id="id15" src="\.\.\/\?x=(.+)&amp;random=(.+)" title/
+    re = /<img alt="" id="id\d+" src="\.\.\/\?x=(.+)&amp;random=(.+)" title/
     match = re.exec(content)
     captcha_par1 = match[1]
     captcha_par2 = match[2]
