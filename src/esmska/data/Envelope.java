@@ -140,8 +140,18 @@ public class Envelope {
         for (Contact c : contacts) {
             Gateway gateway = gateways.get(c.getGateway());
             int limit = (gateway != null ? gateway.getMaxChars() : Integer.MAX_VALUE);
-            for (int i=0;i<text.length();i+=limit) {
-                String cutText = text.substring(i,Math.min(i+limit,text.length()));
+            String msgText = text;
+            // add user signature to the message
+            if (gateway != null) {
+                String signature = gateway.getSenderNameSuffix();
+                // only if signature is not already added
+                if (!msgText.trim().toLowerCase().endsWith(signature.trim().toLowerCase())) {
+                    msgText += signature;
+                }
+            }
+            // cut out the messages
+            for (int i=0;i<msgText.length();i+=limit) {
+                String cutText = msgText.substring(i,Math.min(i+limit,msgText.length()));
                 SMS sms = new SMS(c.getNumber(), cutText, c.getGateway());
                 sms.setName(c.getName());
                 list.add(sms);

@@ -106,13 +106,10 @@ public class GatewayInterpreter {
     private static HashMap<GatewayVariable,String> extractVariables(SMS sms, Gateway gateway) {
         HashMap<GatewayVariable,String> map = new HashMap<GatewayVariable, String>();
         map.put(GatewayVariable.NUMBER, sms.getNumber());
+        map.put(GatewayVariable.MESSAGE, sms.getText());
         map.put(GatewayVariable.SENDERNAME, sms.getSenderName());
         map.put(GatewayVariable.SENDERNUMBER, sms.getSenderNumber());
         
-        // append sender name signature to the message if applicable
-        String text = sms.getText() + gateway.getSenderNameSuffix();
-        map.put(GatewayVariable.MESSAGE, text);
-
         Tuple<String, String> key = keyring.getKey(sms.getGateway());
         if (key != null) {
             map.put(GatewayVariable.LOGIN, key.get1());
