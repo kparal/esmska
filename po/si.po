@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-29 21:16+0200\n"
+"POT-Creation-Date: 2011-05-13 22:33+0200\n"
 "PO-Revision-Date: 2010-11-15 00:26+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
@@ -948,11 +948,7 @@ msgstr ""
 msgid ""
 "The gateway maintainers have modified their webpage and it can''t be used "
 "from Esmska at the moment. The fix is being worked on, you can track <a href="
-"\"{0}\">its status</a>.<br>\n"
-"<br>\n"
-"In the meantime you can send requests to gateway maintainers to create "
-"stable and immutable machine-readable interface for their gateway. That "
-"would eliminate these problems."
+"\"{0}\">its status</a>."
 msgstr ""
 
 #: GatewayExecutor.ERROR_GATEWAY_MESSAGE
@@ -1000,6 +996,13 @@ msgid ""
 "<br>\n"
 "If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
 "web browser, report the problem on <a href=\"{2}\">program homepage</a>."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayExecutor.ERROR_UNUSABLE
+msgid ""
+"Sadly this gateway is currently unusable. You can read more about <a href="
+"\"{0}\">the reason why</a>."
 msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!

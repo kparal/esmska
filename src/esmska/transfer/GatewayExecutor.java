@@ -65,6 +65,9 @@ public class GatewayExecutor {
     /** Message saying that a fix for this gateway is being worked on. */
     public static String ERROR_FIX_IN_PROGRESS =
             l10n.getString("GatewayExecutor.ERROR_FIX_IN_PROGRESS");
+    /** Message saying that this gateway is from some reason currently unusable. */
+    public static String ERROR_UNUSABLE =
+            l10n.getString("GatewayExecutor.ERROR_UNUSABLE");
     /** Message saying how many free SMS are remaining. */
     public static final String INFO_FREE_SMS_REMAINING = 
             l10n.getString("GatewayExecutor.INFO_FREE_SMS_REMAINING") + " ";
@@ -211,7 +214,7 @@ public class GatewayExecutor {
      */
     public void setErrorMessage(String errorMessage, String[] params) {
         //process additional params
-        if (ERROR_FIX_IN_PROGRESS.equals(errorMessage)) {
+        if (ERROR_FIX_IN_PROGRESS.equals(errorMessage) || ERROR_UNUSABLE.equals(errorMessage)) {
             if (params == null || params.length <= 0) {
                 throw new IllegalArgumentException("Missing additional parameters " +
                         "for selected error message");

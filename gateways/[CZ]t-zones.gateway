@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-05-13_2"
 }
 
 function getMaintainer() {
@@ -61,6 +61,10 @@ function getFeatures() {
 }
 
 function send() {
+    // this gateway is currently unusable because of invalid HTTPS certificate
+    EXEC.setErrorMessage(EXEC.ERROR_UNUSABLE, ["http://code.google.com/p/esmska/issues/detail?id=367"])
+    return false
+
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
         EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
