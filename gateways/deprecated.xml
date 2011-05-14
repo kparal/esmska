@@ -15,4 +15,9 @@
     <version>2010-07-24</version>
     <reason>This gateway has been moved to http://www.smspoint.co.uk and the script was renamed to "[INT]SMSpoint".</reason>
   </deprecatedGateway>
+  <deprecatedGateway>
+    <name>[CZ]SMSmánia (O2)</name>
+    <version>2011-05-14</version>
+    <reason>This gateway became unsupported by its maintainer and was broken anyway.</reason>
+  </deprecatedGateway>
 </esmska>
