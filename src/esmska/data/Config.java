@@ -27,7 +27,6 @@ public class Config extends Object implements Serializable {
     private static final Logger logger = Logger.getLogger(Config.class.getName());
 
     private String version = "";
-    private boolean forgetLayout = false;
     private Dimension mainDimension;
     private Integer horizontalSplitPaneLocation;
     private Integer verticalSplitPaneLocation;
@@ -55,6 +54,8 @@ public class Config extends Object implements Serializable {
     private boolean showAdvancedControls = false;
     private String[] favoriteGateways = new String[]{};
     private String[] hiddenGateways = new String[]{};
+    private String uuid = null;
+    private int uuidMonth = -1;
 
     /** Get shared instance 
      * @throws IllegalStateException until config is loaded from disk
@@ -161,10 +162,6 @@ public class Config extends Object implements Serializable {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
-    public boolean isForgetLayout() {
-        return this.forgetLayout;
-    }
-
     public Dimension getMainDimension() {
         return this.mainDimension;
     }
@@ -276,15 +273,17 @@ public class Config extends Object implements Serializable {
     public String[] getHiddenGateways() {
         return hiddenGateways;
     }
+    
+    public String getUUID() {
+        return uuid;
+    }
+
+    public int getUUIDMonth() {
+        return uuidMonth;
+    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
-    public void setForgetLayout(boolean forgetLayout) {
-        boolean oldForgetLayout = this.forgetLayout;
-        this.forgetLayout = forgetLayout;
-        changeSupport.firePropertyChange("forgetLayout", oldForgetLayout, forgetLayout);
-    }
-
     public void setMainDimension(Dimension mainDimension) {
         Dimension oldMainDimension = this.mainDimension;
         this.mainDimension = mainDimension;
@@ -463,6 +462,18 @@ public class Config extends Object implements Serializable {
         String[] old = this.hiddenGateways;
         this.hiddenGateways = hiddenGateways;
         changeSupport.firePropertyChange("hiddenGateways", old, hiddenGateways);
+    }
+    
+    public void setUUID(String uuid) {
+        String old = this.uuid;
+        this.uuid = uuid;
+        changeSupport.firePropertyChange("uuid", old, uuid);
+    }
+
+    public void setUUIDMonth(int uuidMonth) {
+        int old = this.uuidMonth;
+        this.uuidMonth = uuidMonth;
+        changeSupport.firePropertyChange("uuidMonth", old, uuidMonth);
     }
     // </editor-fold>
 

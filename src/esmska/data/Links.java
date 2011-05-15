@@ -32,7 +32,12 @@ public class Links {
     /** internal program link telling to open the config dialog on the
      * gateways tab */
     public static final String CONFIG_GATEWAYS = "esmska://config-gateways";
-
+    /** get the update file */
+    public static final String CHECK_UPDATE = 
+            "http://ripper.profitux.cz/esmska/update/version.php?ref=" + Config.getLatestVersion();
+    /** link to send usage statistics to */
+    public static final String SEND_STATS = "http://ripper.profitux.cz/esmska/stats/receive.php";
+    
     /** Covert string URL to URI. Returns null if conversion fails. */
     public static URI getURI(String url) {
         try {

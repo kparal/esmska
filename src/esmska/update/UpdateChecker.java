@@ -4,6 +4,7 @@ import esmska.data.Config;
 import esmska.data.DeprecatedGateway;
 import esmska.data.Gateway;
 import esmska.data.Gateways;
+import esmska.data.Links;
 import esmska.data.event.ActionEventSupport;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -52,8 +53,6 @@ public class UpdateChecker {
     public static final int AUTO_CHECK_INTERVAL = 2 * 60 * 60; // 2 hours
 
     private static final Logger logger = Logger.getLogger(UpdateChecker.class.getName());
-    private static final String UPDATE_FILE_URL = 
-            "http://ripper.profitux.cz/esmska/update/version.php?ref=" + Config.getLatestVersion();
     private static final Config config = Config.getInstance();
 
     private String onlineVersion = "0.0.0";
@@ -96,7 +95,7 @@ public class UpdateChecker {
         running.set(true);
         logger.fine("Checking for program updates...");
 
-        final HttpDownloader downloader = new HttpDownloader(UPDATE_FILE_URL, false);
+        final HttpDownloader downloader = new HttpDownloader(Links.CHECK_UPDATE, false);
         downloader.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {

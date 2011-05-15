@@ -19,6 +19,7 @@ import esmska.gui.ExceptionDialog;
 import esmska.gui.InitWizardDialog;
 import esmska.persistence.PersistenceManager;
 import esmska.transfer.ProxyManager;
+import esmska.update.Statistics;
 import esmska.utils.L10N;
 import esmska.utils.LogSupport;
 import esmska.utils.RuntimeUtils;
@@ -321,6 +322,12 @@ public class Main {
         if (!Config.isStableVersion()) {
             config.setAnnounceUnstableUpdates(true);
         }
+        
+        // refresh UUID if needed
+        Statistics.refreshUUID();
+        
+        // send statistics
+        Statistics.sendUsageInfo();
         
         //start main frame
         EventQueue.invokeLater(new Runnable() {

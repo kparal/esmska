@@ -201,9 +201,9 @@ public class MainFrame extends javax.swing.JFrame {
         bindGroup.addBinding(bind2);
         bindGroup.bind();
         
-        //only if really running, NetBeans has a bug to execute this in design mode
+        //add shutdown handler, when program is closed externally (logout, SIGTERM, etc)
+        //only if really running, not in design mode
         if (!Beans.isDesignTime()) {
-            //add shutdown handler, when program is closed externally (logout, SIGTERM, etc)
             Runtime.getRuntime().addShutdownHook(shutdownThread);
         }
 
@@ -652,19 +652,17 @@ public class MainFrame extends javax.swing.JFrame {
     private void loadConfig() {
         logger.finer("Initializing according to config...");
         //set frame layout
-        if (!config.isForgetLayout()) {
-            Dimension mainDimension = config.getMainDimension();
-            Integer horizontalSplitPaneLocation = config.getHorizontalSplitPaneLocation();
-            Integer verticalSplitPaneLocation = config.getVerticalSplitPaneLocation();
-            if (mainDimension != null) {
-                this.setSize(mainDimension);
-            }
-            if (horizontalSplitPaneLocation != null) {
-                horizontalSplitPane.setDividerLocation(horizontalSplitPaneLocation);
-            }
-            if (verticalSplitPaneLocation != null) {
-                verticalSplitPane.setDividerLocation(verticalSplitPaneLocation);
-            }
+        Dimension mainDimension = config.getMainDimension();
+        Integer horizontalSplitPaneLocation = config.getHorizontalSplitPaneLocation();
+        Integer verticalSplitPaneLocation = config.getVerticalSplitPaneLocation();
+        if (mainDimension != null) {
+            this.setSize(mainDimension);
+        }
+        if (horizontalSplitPaneLocation != null) {
+            horizontalSplitPane.setDividerLocation(horizontalSplitPaneLocation);
+        }
+        if (verticalSplitPaneLocation != null) {
+            verticalSplitPane.setDividerLocation(verticalSplitPaneLocation);
         }
         
         //set window centered

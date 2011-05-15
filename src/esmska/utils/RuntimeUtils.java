@@ -72,23 +72,6 @@ public class RuntimeUtils {
         return System.getenv("KDE_FULL_SESSION") != null;
     }
 
-    /** Get version of current KDE desktop environment
-     * @return KDE version if running under KDE; null otherwise
-     */
-    public static String getKDEDesktopVersion() {
-        if (!isKDEDesktop()) {
-            return null;
-        }
-        String version = System.getenv("KDE_SESSION_VERSION");
-        if (version != null) {
-            return version;
-        } else {
-            //KDE_SESSION_VERSION is introduced only in KDE4. If it is not
-            //present it is most probably KDE3.
-            return "3";
-        }
-    }
-
     /** Checks whether the current Java implementation is Sun Java */
     public static boolean isSunJava() {
         return vendor.toLowerCase().contains("sun microsystems") && !isOpenJDK();
@@ -138,7 +121,7 @@ public class RuntimeUtils {
         if (isGnomeDesktop()) {
             builder.append("desktop=GNOME");
         } else if (isKDEDesktop()) {
-            builder.append("desktop=KDE (version " + getKDEDesktopVersion() + ")");
+            builder.append("desktop=KDE");
         } else {
             // delete the trailing semicolon
             builder.delete(builder.length()-2, builder.length());
