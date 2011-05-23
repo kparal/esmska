@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-05-14_2"
+    return "2011-05-23_2"
 }
 
 function getMaintainer() {
@@ -21,7 +21,7 @@ function getWebsite() {
 
 function getDescription() {
     return "Odesílání SMS zpráv zdarma bez opisování kódů do českých mobilních \
-sítí (dočasně mimo Vodafone)."
+sítí mimo Vodafone."
 }
 
 function getSupportedPrefixes() {
@@ -85,8 +85,15 @@ function send() {
     // start page
     content = EXEC.getURL("http://m.poslatsms.cz/", [])
 
+    // timestamp
+    ts = 0
+    re = /name="timestamp" value="(.*)"/
+    match = re.exec(content)
+    ts = match[1]
+
     // send message
-    postData = ["textsms", MESSAGE,
+    postData = ["timestamp", ts,
+      "textsms", MESSAGE,
       "cislo-prijemce", NUMBER,
       "cislo-odesilatele", SENDERNUMBER,
       "gateID", "1",
@@ -101,7 +108,7 @@ function send() {
         // all ok
         return true
     }
-    
+
     // look for possible error messages
     re = /<h1>\s*(.+)\s*/
     match = re.exec(content)
