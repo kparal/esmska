@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-05-02_2"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -63,7 +63,7 @@ function getFeatures() {
 function send() {
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
     
@@ -75,7 +75,7 @@ function send() {
     re = /err:1/
     match = re.exec(content)
     if (match) {
-	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+	    EXEC.setProblem("WRONG_AUTH")
         return false
     }
    
@@ -83,7 +83,7 @@ function send() {
     re=/err:2/
     match = re.exec(content)
     if (match) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
+        EXEC.setProblem("WRONG_NUMBER")
         return false
     }
 
@@ -91,7 +91,7 @@ function send() {
     re=/err:3/
     match = re.exec(content)
     if (match) {
-        EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
+        EXEC.setProblem("NO_CREDIT")
         return false
     }
 
@@ -99,7 +99,7 @@ function send() {
     re=/err:4/
     match = re.exec(content)
     if (match) {
-        EXEC.setErrorMessage(EXEC.ERROR_LONG_TEXT)
+        EXEC.setProblem("LONG_TEXT")
         return false
     }
 
@@ -111,7 +111,6 @@ function send() {
     }
 
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     return false
 }
 

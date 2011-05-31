@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-05-17_2"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -108,12 +108,11 @@ function send() {
     match = re.exec(content)
     if (match) {
         // gateway told us what's wrong
-        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
         return false
     }
     
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     return false
 }
 

@@ -47,7 +47,6 @@ public class GatewayConnector {
             "<\\?xml[^>]*encoding=(\"|')([^>]*)(\"|')[^>]*\\?>",
             Pattern.CASE_INSENSITIVE);
     private final HttpClient client = new HttpClient();
-    private String url;
     private String[] postData;
     private boolean doPost;
     private String textContent;
@@ -113,7 +112,7 @@ public class GatewayConnector {
         Header languageHeader = new Header("Accept-Language", languageCode);
         headerSet.add(languageHeader);
         client.getHostConfiguration().getParams().setParameter("http.default-headers", headerSet);
-        logger.finer("Preferred language set: " + languageCode);
+        logger.log(Level.FINER, "Preferred language set: {0}", languageCode);
     }
     
     /** Sets binary content, clears text content. */
@@ -171,7 +170,6 @@ public class GatewayConnector {
         if (url == null) {
             throw new IllegalArgumentException("url");
         }
-        this.url = url;
         this.doPost = doPost;
         this.postData = postData;
 
@@ -246,7 +244,7 @@ public class GatewayConnector {
      * @throws java.io.IOException When there is some problem with connection
      */
     private boolean doGet(String url) throws IOException {
-        logger.fine("Getting url: " + url);
+        logger.log(Level.FINE, "Getting url: {0}", url);
         GetMethod method = new GetMethod(url);
 
         //set referer
@@ -258,8 +256,8 @@ public class GatewayConnector {
 
         //only HTTP 200 OK status code is correct
         if (statusCode != HttpStatus.SC_OK) {
-            logger.warning("Problem connecting to \"" + url +
-                    "\". Response: " + method.getStatusLine());
+            logger.log(Level.WARNING, "Problem connecting to \"{0}\". Response: {1}", 
+                    new Object[]{url, method.getStatusLine()});
             return false;
         }
 
@@ -283,11 +281,12 @@ public class GatewayConnector {
             String charset = findContentCharset(response);
             setTextContent(new String(response, 
                     StringUtils.defaultIfEmpty(charset, method.getResponseCharSet())));
-            logger.finest("Retrieved text web content: " + contentType + "\n" +
-                    "#### WEB CONTENT START ####\n" + getTextContent() + "\n#### WEB CONTENT END ####");
+            logger.log(Level.FINEST,"Retrieved text web content: {0}\n" +
+                    "#### WEB CONTENT START ####\n{1}\n#### WEB CONTENT END ####", 
+                    new Object[]{contentType, getTextContent()});
         } else { //binary content
             setBinaryContent(response);
-            logger.finest("Retrieved binary web content: " + contentType);
+            logger.log(Level.FINEST, "Retrieved binary web content: {0}", contentType);
         }
 
         //if text response, check for meta redirects
@@ -295,7 +294,7 @@ public class GatewayConnector {
             String redirect = checkMetaRedirect(textContent);
             if (redirect != null) {
                 //redirect to new url
-                logger.fine("Following web redirect to: " + redirect);
+                logger.log(Level.FINE, "Following web redirect to: {0}", redirect);
                 String redir = computeRedirect(redirect, method.getURI());
                 return doGet(redir);
             }
@@ -311,7 +310,7 @@ public class GatewayConnector {
      * @throws java.io.IOException When there is some problem with connection
      */
     private boolean doPost(String url, String[] postData) throws IOException {
-        logger.fine("Posting data to url: " + url);
+        logger.log(Level.FINE, "Posting data to url: {0}", url);
         PostMethod method = new PostMethod(url);
 
         //set referer
@@ -329,8 +328,8 @@ public class GatewayConnector {
 
         //check for error (4xx or 5xx) HTTP status codes
         if (statuscode >= 400) {
-            logger.warning("Problem connecting to \"" + url +
-                    "\". Response: " + method.getStatusLine());
+            logger.log(Level.WARNING, "Problem connecting to \"{0}\". Response: {1}", 
+                    new Object[]{url, method.getStatusLine()});
             return false;
         }
 
@@ -354,11 +353,12 @@ public class GatewayConnector {
             String charset = findContentCharset(response);
             setTextContent(new String(response,
                     StringUtils.defaultIfEmpty(charset, method.getResponseCharSet())));
-            logger.finest("Retrieved text web content: " + contentType + "\n" +
-                    "#### WEB CONTENT START ####\n" + getTextContent() + "\n#### WEB CONTENT END ####");
+            logger.log(Level.FINEST,"Retrieved text web content: {0}\n" +
+                    "#### WEB CONTENT START ####\n{1}\n#### WEB CONTENT END ####", 
+                    new Object[]{contentType, getTextContent()});
         } else { //binary content
             setBinaryContent(response);
-            logger.finest("Retrieved binary web content: " + contentType);
+            logger.log(Level.FINEST, "Retrieved binary web content: {0}", contentType);
         }
 
         //check for HTTP redirection
@@ -375,7 +375,7 @@ public class GatewayConnector {
                 newURL = computeRedirect(newURL, method.getURI());
             }
             //redirect to new url
-            logger.fine("Following http redirect to: " + newURL);
+            logger.log(Level.FINE, "Following http redirect to: {0}", newURL);
             return doGet(newURL);
         }
 
@@ -384,7 +384,7 @@ public class GatewayConnector {
             String redirect = checkMetaRedirect(textContent);
             if (redirect != null) {
                 //redirect to new url
-                logger.fine("Following web redirect to: " + redirect);
+                logger.log(Level.FINE, "Following web redirect to: {0}", redirect);
                 String redir = computeRedirect(redirect, method.getURI());
                 return doGet(redir);
             }
@@ -514,8 +514,8 @@ public class GatewayConnector {
             URI uri = new URI(redirectURL, true);
         } catch (URIException ex) {
             //the URL is bad, we have to fix it
-            logger.log(Level.FINER, "The computed redirect URL has invalid syntax (" +
-                    ex.getMessage() + "): " + redirectURL);
+            logger.log(Level.FINER, "The computed redirect URL has invalid syntax ({0}): {1}", 
+                    new Object[]{ex.getMessage(), redirectURL});
             try {
                 URI uri = new URI(redirectURL, false);
                 redirectURL = uri.getEscapedURI();
@@ -538,7 +538,7 @@ public class GatewayConnector {
             throw new IOException("HTTP meta redirection endless loop detected");
         }
 
-        logger.fine("Computed new redirect full URL is: " + redirectURL);
+        logger.log(Level.FINE, "Computed new redirect full URL is: {0}", redirectURL);
         return redirectURL;
     }
     

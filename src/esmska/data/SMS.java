@@ -1,7 +1,10 @@
 package esmska.data;
 
+import esmska.transfer.GatewayExecutor.Problem;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
@@ -20,8 +23,8 @@ public class SMS {
     private String imageHint; //hint from gateway where to find security image (eg. sent to cell)
     private String gateway;
     private Status status = Status.NEW; //sms status
-    private String errMsg = ""; //potential error
-    private String gatewayMsg = ""; //additional message from gateway
+    private String supplMsg = ""; //supplemental message from gateway about remaining credit, etc
+    private Tuple<Problem, String> problem; //problem enum, string param
     
     /** Status of SMS */
     public static enum Status {
@@ -67,10 +70,10 @@ public class SMS {
     }
 
     /** Return whether some error occured during sending.
-     * SMS is problematic if there is some error message stored.
+     * SMS is problematic if there is some problem stored.
      */
     public boolean isProblematic() {
-        return StringUtils.isNotEmpty(getErrMsg());
+        return problem != null;
     }
 
     /** Return name of the recipient, or if that's empty, his number
@@ -126,19 +129,19 @@ public class SMS {
         return status;
     }
 
-    /** Error message from sending. Never null. */
-    public String getErrMsg() {
-        return errMsg;
-    }
-
     /** Name of the recepient. Never null. */
     public String getName() {
         return name;
     }
 
-    /** Message from gateway. Never null. */
-    public String getGatewayMsg() {
-        return gatewayMsg;
+    /** Supplemental message from gateway. Never null. */
+    public String getSupplMsg() {
+        return supplMsg;
+    }
+
+    /** Get the current problem this SMS has. May be null. */
+    public Tuple<Problem, String> getProblem() {
+        return problem;
     }
     // </editor-fold>
     
@@ -184,18 +187,10 @@ public class SMS {
     void setStatus(Status status) {
         Validate.notNull(status);
         if (this.status != status) {
-            logger.finer("SMS " + this + " has a new status: " + status);
+            logger.log(Level.FINER, "SMS {0} has a new status: {1}", 
+                    new Object[]{this, status});
         }
         this.status = status;
-    }
-
-    /** Error message from sending. Null value is changed to empty string. */
-    public void setErrMsg(String errMsg) {
-        errMsg = StringUtils.defaultString(errMsg);
-        if (!StringUtils.equals(errMsg, this.errMsg)) {
-            logger.finer("SMS " + this + " has a new error message: " + errMsg);
-        }
-        this.errMsg = errMsg;
     }
 
     /** Name of the recipient. Null value is changed to empty string. */
@@ -204,12 +199,22 @@ public class SMS {
     }
 
     /** Message from gateway. Null value is changed to empty string. */
-    public void setGatewayMsg(String gatewayMsg) {
-        gatewayMsg = StringUtils.defaultString(gatewayMsg);
-        if (!StringUtils.equals(gatewayMsg, this.gatewayMsg)) {
-            logger.finer("SMS " + this + " has a new gateway message: " + gatewayMsg);
+    public void setSupplMsg(String supplMsg) {
+        supplMsg = StringUtils.defaultString(supplMsg);
+        if (!StringUtils.equals(supplMsg, this.supplMsg)) {
+            logger.log(Level.FINER, "SMS {0} has a new supplemental message: {1}", 
+                    new Object[]{this, supplMsg});
         }
-        this.gatewayMsg = gatewayMsg;
+        this.supplMsg = supplMsg;
+    }
+
+    /** Set the current problem this SMS has. */
+    public void setProblem(Tuple<Problem, String> problem) {
+        if (!ObjectUtils.equals(problem, this.problem) && problem != null) {
+            logger.log(Level.FINER, "SMS {0} has a new problem: {1}", 
+                    new Object[]{this, problem});
+        }
+        this.problem = problem;
     }
     // </editor-fold>
     
@@ -224,7 +229,7 @@ public class SMS {
      */
     public String toDebugString() {
         return "[name=" + name + ", number=" + Contact.anonymizeNumber(number) +
-                ", gateway=" + gateway + ", status=" + status + ", gatewayMsg=" +
-                gatewayMsg + ", errMsg=" + errMsg + "]";
+                ", gateway=" + gateway + ", status=" + status + ", supplMsg=" +
+                supplMsg + ", problem=" + problem + "]";
     }
 }

@@ -23,6 +23,7 @@ public abstract class GatewayMessage extends JPanel {
     public static final int CLOSE_ME = 0;
 
     protected static final ResourceBundle l10n = L10N.l10nBundle;
+    
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     protected ActionEventSupport actionSupport = new ActionEventSupport(this);
     public void addActionListener(ActionListener actionListener) {

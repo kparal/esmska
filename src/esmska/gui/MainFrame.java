@@ -794,8 +794,8 @@ public class MainFrame extends javax.swing.JFrame {
             finish(sms);
         }
         private void smsFailed(SMS sms) {
-            logger.log(Level.INFO, "Message could not be sent: {0}\nError message: {1}",
-                    new Object[]{sms, sms.getErrMsg()});
+            logger.log(Level.INFO, "Message could not be sent: {0}\nProblem: {1}",
+                    new Object[]{sms, sms.getProblem()});
             log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_failed"), sms.getRecipient()),
                     null, Icons.STATUS_WARNING));
 
@@ -808,8 +808,8 @@ public class MainFrame extends javax.swing.JFrame {
         }
         private void finish(SMS sms) {
             //show gateway message if present
-            if (StringUtils.isNotEmpty(sms.getGatewayMsg())) {
-                log.addRecord(new Log.Record(sms.getGateway() + ": " + sms.getGatewayMsg(),
+            if (StringUtils.isNotEmpty(sms.getSupplMsg())) {
+                log.addRecord(new Log.Record(sms.getGateway() + ": " + sms.getSupplMsg(),
                         null, Icons.STATUS_MESSAGE));
             }
             //disable task indicator

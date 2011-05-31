@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-05-23_2"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -72,12 +72,12 @@ function send() {
 
     // check whether there is a supplied sender number
     if (SENDERNUMBER.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_SIGNATURE_NEEDED)
+        EXEC.setProblem("SIGNATURE_NEEDED")
         return false
     }
     // sender number must start with +420
     if (SENDERNUMBER.indexOf("+420") != 0) {
-        EXEC.setErrorMessage("Číslo odesilatele musí pocházet z České republiky \
+        EXEC.setProblem("CUSTOM_MESSAGE", "Číslo odesilatele musí pocházet z České republiky \
 (začínat na +420). Aktuální číslo odesilatele: " + SENDERNUMBER)
         return false
     }
@@ -114,11 +114,10 @@ function send() {
     match = re.exec(content)
     if (match) {
         // gateway told us what's wrong
-        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
         return false
     }
 
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     return false
 }

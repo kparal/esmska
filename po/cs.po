@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-13 22:35+0200\n"
-"PO-Revision-Date: 2011-05-13 22:35+0100\n"
+"POT-Creation-Date: 2011-05-31 21:44+0200\n"
+"PO-Revision-Date: 2011-05-31 21:44+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -1082,6 +1082,22 @@ msgstr "Nevyžaduje registraci."
 msgid "Mainly usable for country: {0}"
 msgstr "Lze použít zejména pro zemi: {0}"
 
+#: GatewayErrorMessage.helpLabel.text
+msgid "Help:"
+msgstr "Nápověda:"
+
+#: GatewayErrorMessage.retryButton.text
+msgid "&Send again"
+msgstr "Po&slat znovu"
+
+#: GatewayErrorMessage.retryButton.toolTipText
+msgid ""
+"<html>Please note that this button will unpause your SMS queue.<br>\n"
+"That means that more messages might be re-sent, not just this one.</html>"
+msgstr ""
+"<html>Toto tlačítko znovu spustí vaši frontu SMS.<br>\n"
+"To znamená, že znovu odesláno může být více zpráv, nejen tato jedna.</html>"
+
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
 msgid "Sending failed: {0}"
@@ -1090,126 +1106,6 @@ msgstr "Odesílání selhalo: {0}"
 #: GatewayErrorMessage.smsTextLabel.text
 msgid "Original message:"
 msgstr "Původní zpráva:"
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_FIX_IN_PROGRESS
-msgid ""
-"The gateway maintainers have modified their webpage and it can''t be used "
-"from Esmska at the moment. The fix is being worked on, you can track <a href="
-"\"{0}\">its status</a>."
-msgstr ""
-"Správci brány pozměnili své webové stránky a ty teď aktuálně nelze z Esmsky "
-"použít. Na opravě se pracuje, můžete sledovat <a href=\"{0}\">její průběh</"
-"a>."
-
-#: GatewayExecutor.ERROR_GATEWAY_MESSAGE
-msgid "A message from the gateway:<br>"
-msgstr "Zpráva od brány:<br>"
-
-#: GatewayExecutor.ERROR_LIMIT_REACHED
-msgid ""
-"You are sending the message too early. The gateway either requires a certain "
-"interval you have to wait before sending another message or it limits the "
-"maximum number of possible messages in some time period. Try it later."
-msgstr ""
-"Odesíláte zprávu příliš brzy. Brána buď vyžaduje určitý interval, který je "
-"nutný vyčkat před odesláním další zprávy, nebo omezuje maximální možný počet "
-"zpráv za jistý časový úsek. Zkuste to později."
-
-#: GatewayExecutor.ERROR_LONG_TEXT
-msgid ""
-"You have entered too long message text.<br>\n"
-"<br>\n"
-"Hint: If it is for your language possible, try to avoid using national "
-"characters (different from standard english character set), otherwise it may "
-"reduce the maximum allowed message length substantially."
-msgstr ""
-"Zadali jste příliš dlouhý text zprávy.<br>\n"
-"<br>\n"
-"Rada: Pokud je to ve vašem jazyce možné, zkuste nepoužívat národní znaky "
-"(odlišné od standardní anglické znakové sady), jinak to může podstatně "
-"zkrátit maximální povolenou délku zprávy."
-
-#: GatewayExecutor.ERROR_NO_CREDIT
-msgid "You don't have sufficient credit to send this message."
-msgstr "Pro odeslání této zprávy nemáte dostatečný kredit."
-
-#: GatewayExecutor.ERROR_NO_REASON
-msgid "The gateway hasn't specified any reason why the message sending failed."
-msgstr ""
-"Brána blíže neupřesnila žádný důvod, proč odeslání této zprávy selhalo."
-
-#: GatewayExecutor.ERROR_SIGNATURE_NEEDED
-msgid ""
-"This gateway requires that you supply a sender signature. Correct it in the "
-"program settings and try again."
-msgstr ""
-"Tato brána vyžaduje vyplněný podpis odesilatele. Zadejte jej v nastavení "
-"programu a zkuste to znovu."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_UNKNOWN
-msgid ""
-"An unknown error has occured. The gateway provider has probably changed its "
-"webpages or has a problem with them currently. Try again later.<br>\n"
-"<br>\n"
-"Also make sure that you have working connection to the Internet and that you "
-"are using the <a href=\"{0}\">latest program version</a>.<br>\n"
-"<br>\n"
-"If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
-"web browser, report the problem on <a href=\"{2}\">program homepage</a>."
-msgstr ""
-"Došlo k neznámé chybě. Poskytovatel brány zřejmě změnil své webové stránky, "
-"nebo s nimi má aktuálně potíže. Zkuste to později.<br>\n"
-"<br>\n"
-"Taktéž se ujistěte, že máte funkční připojení k Internetu a že používáte <a "
-"href=\"{0}\">nejnovější verzi programu</a>.<br>\n"
-"<br>\n"
-"Pokud potíže přetrvají a <a href=\"{1}\">webová brána</a> ve webovém "
-"prohlížeči funguje, nahlaste problém na <a href=\"{2}\">domovských stránkách "
-"programu</a>."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_UNUSABLE
-msgid ""
-"Sadly this gateway is currently unusable. You can read more about <a href="
-"\"{0}\">the reason why</a>."
-msgstr ""
-"Tato brána je nyní bohužel nepoužitelná. Můžete si přečíst více o <a href="
-"\"{0}\">důvodech proč</a>."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_WRONG_AUTH
-msgid ""
-"You have entered incorrect login credentials.<br>\n"
-"This gateway requires registration and you can''t send messages throught it "
-"without one. Visit the <a href=\"{0}\">website of this gateway</a> and find "
-"out how to register or log in. Then enter the login credentials in program "
-"preferences.<br>\n"
-"<br>\n"
-"If you have entered your login credentials correctly, visit the website of "
-"the gateway and check that logging in works."
-msgstr ""
-"Zadali jste nesprávné přihlašovací údaje.<br>\n"
-"Tato brána vyžaduje registraci, bez ní přes ni nelze zprávy posílat. "
-"Navštivte <a href=\"{0}\">webovou stránku</a> této brány a zjistěte, jak se "
-"zaregistrovat či přihlásit. Poté vyplňte přihlašovací údaje v nastavení "
-"programu.<br>\n"
-"<br>\n"
-"Pokud máte přihlašovací údaje zadány správně, navštivte webovou stránku "
-"brány a ujistěte se, že přihlašování funguje."
-
-#: GatewayExecutor.ERROR_WRONG_CODE
-msgid "You have entered a wrong security code."
-msgstr "Špatně jste opsali bezpečnostní kód."
-
-#: GatewayExecutor.ERROR_WRONG_NUMBER
-msgid "You have entered incorrect recipient number."
-msgstr "Zadali jste nesprávné číslo příjemce."
-
-#: GatewayExecutor.ERROR_WRONG_SIGNATURE
-msgid "You have entered incorrent sender signature (number or name)."
-msgstr "Zadali jste nesprávný podpis odesilatele (číslo či jméno)."
 
 #: GatewayExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
@@ -1243,6 +1139,253 @@ msgstr "Neznámá brána!"
 #: GatewayMessageFrame.title
 msgid "Sending process - Esmska"
 msgstr "Průběh odesílání - Esmska"
+
+#: GatewayProblem.CUSTOM_MESSAGE
+msgid "The gateway maintainer provided following explanation:"
+msgstr "Správce brány poskytl následující vysvětlení:"
+
+#: GatewayProblem.CUSTOM_MESSAGE.help
+msgid ""
+"Fix the problem described by the gateway maintainer and send the message "
+"again."
+msgstr ""
+"Opravte problém zmíněný ve zprávě od správce brány a pošlete zprávu znovu."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.FIX_IN_PROGRESS
+msgid ""
+"Unfortunately this gateway can''t be used at the moment. The fix is being "
+"worked on. In the meantime please use some other gateway or visit <a href="
+"\"{0}\">{0}</a> and send the message manually."
+msgstr ""
+"Tuto bránu aktuálně bohužel nelze používat. Na opravě se pracuje, zatím "
+"využijte jinou bránu, nebo zprávu odešlete ručně ze stránky <a href=\"{0}\">"
+"{0}</a>."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.FIX_IN_PROGRESS.help
+msgid ""
+"There is a certain problem that makes it impossible for this program to use "
+"that gateway. You can find more information at <a href=\"{0}\">this page</a>."
+msgstr ""
+"Existuje určitý problém, který zabraňuje tuto bránu z programu používat. "
+"Více informací se lze dočíst <a href=\"{0}\">na této stránce</a>."
+
+#: GatewayProblem.GATEWAY_MESSAGE
+msgid "The gateway provided following explanation:"
+msgstr "Brána poskytla následující vysvětlení:"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.GATEWAY_MESSAGE.help
+msgid ""
+"Fix the problem mentioned in the gateway report and send the message again. "
+"You can also visit <a href=\"{0}\">{0}</a> and send the message manually. "
+"It''s possible that you receive a more detailed problem description this way."
+msgstr ""
+"Opravte problém zmíněný ve zprávě od brány a pošlete zprávu znovu. Také "
+"můžete navštívit stránku <a href=\"{0}\">{0}</a> a odeslat zprávu ručně, je "
+"možné, že tak dostanete podrobnější vysvětlení problému."
+
+#: GatewayProblem.LIMIT_REACHED
+msgid "You're sending the message too early. Try again in a short while."
+msgstr "Odesíláte zprávu příliš brzy. Zkuste to o chvíli později."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.LIMIT_REACHED.help
+msgid ""
+"The gateway either requires a certain interval you need to wait before "
+"sending subsequent message, or it limits the number of messages that can be "
+"sent in a certain timeperiod. The rules are probably described on the "
+"gateway website <a href=\"{0}\">{0}</a>."
+msgstr ""
+"Brána buď vyžaduje určitý interval, který je nutný vyčkat před odesláním "
+"další zprávy, nebo omezuje maximální možný počet zpráv za jistý časový úsek. "
+"Pravidla budou zřejmě popsána na stránkách brány <a href=\"{0}\">{0}</a>."
+
+#: GatewayProblem.LONG_TEXT
+msgid ""
+"You have entered a too long message text. Shorten the message and try to "
+"send it again."
+msgstr ""
+"Zadali jste příliš dlouhý text zprávy. Zkraťte text zprávy a zkuste ji "
+"odeslat znovu."
+
+#: GatewayProblem.LONG_TEXT.help
+msgid ""
+"For standard-sized SMS (circa 160 characters) you need touse only basic "
+"characters primarily from the English alphabet. Using national characters "
+"(with diacritical marks, etc.) from other languages shortens the maximum SMS "
+"length to about 70 characters. This error message may be related to this "
+"problem.<br>\n"
+"If it is possible in your language try not to use national characters and "
+"use pure English alphabet instead. In the program settings you can also "
+"enable/disable automatic message text conversion into this character set "
+"(works only for some languages)."
+msgstr ""
+"Pro SMS standardní délky kolem 160 znaků je nutné používat pouze základní "
+"znaky odpovídající zejm. anglické abecedě. Při použití národních znaků "
+"(diakritická znaménka aj.) z jiných jazyků se délka SMS zkracuje na max. cca "
+"70 znaků. Tato chybová hláška s tím může souviset.<br>\n"
+"Pokud je to ve vašem jazyce možné, zkuste nepoužívat národní znaky a použít "
+"čistě anglickou abecedu. V nastavení programu lze také zapnout/vypnout "
+"automatickou konverzi zprávy na tuto znakovou sadu (funguje pouze u určitých "
+"jazyků)."
+
+#: GatewayProblem.NO_CREDIT
+msgid "You don't have enough credit to send this message."
+msgstr "Pro odeslání této zprávy nemáte dostatečný kredit."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.NO_CREDIT.help
+msgid ""
+"Visit <a href=\"{0}\">{0}</a> website and charge your credit, then you "
+"should be able to send your messages again."
+msgstr ""
+"Navštivte stránku <a href=\"{0}\">{0}</a> a dobijte si svůj kredit, poté by "
+"měly jít zprávy opět odeslat."
+
+#: GatewayProblem.NO_REASON
+msgid ""
+"The gateway didn't specify any particular reason why this message could not "
+"be sent."
+msgstr ""
+"Brána blíže neupřesnila žádný důvod, proč odeslání této zprávy selhalo."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.NO_REASON.help
+msgid ""
+"This gateway unfortunately hasn''t provided any explanation why your message "
+"was rejected. That means the problem can be caused by anything (unsupported "
+"recipient number, too long message text, etc.). You can visit <a href="
+"\"{0}\">{0}</a> and try to send your message manually, maybe you''ll learn "
+"more information."
+msgstr ""
+"Daná brána bohužel neposkytla bližší vysvětlení, proč byla vaše zpráva "
+"odmítnuta. Problém tedy může být téměř v čemkoliv (nepodporované číslo "
+"příjemce, příliš dlouhý text zprávy atd). Můžete navštívit stránku <a href="
+"\"{0}\">{0}</a> a vyzkoušet ruční odeslání vaší zprávy, třeba se dozvíte "
+"více informací."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.SIGNATURE_NEEDED
+msgid ""
+"This gateway requires a sender signature filled in (a name, a number or "
+"both). Please enter it in <a href=\"{0}\">the given gateway settings</a> and "
+"try to send the message again."
+msgstr ""
+"Tato brána vyžaduje vyplněný podpis odesilatele (jméno, číslo, či oboje). "
+"Zadejte jej v <a href=\"{0}\">nastavení dané brány</a> a zkuste odeslat "
+"zprávu znovu."
+
+#: GatewayProblem.UNKNOWN
+msgid ""
+"An unknown error has occured. The gateway may be experiencing some problems "
+"at the moment. Please try to send the message again in a short while or use "
+"some other gateway temporarily."
+msgstr ""
+"Došlo k neznámé chybě. Brána má možná aktuálně nějaké problémy. Zkuste "
+"zprávu odeslat znovu za chvíli, nebo použijte dočasně jinou bránu."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.UNKNOWN.help
+msgid ""
+"It was not possible to detect the cause of error. The gateway provider may "
+"be experiencing some problems at the moment. Visit <a href=\"{0}\">{0}</a> "
+"and make sure that the gateway works.<br>\n"
+"If this problem persists for a longer time and you can send your messages "
+"through the gateway''s webpage, please <a href=\"{1}\">report it</a>."
+msgstr ""
+"Nebylo možné přesně určit příčinu chyby. Provozovatel brány může mít "
+"aktuálně problémy. Navštivte stránku <a href=\"{0}\">{0}</a> a ověřte, zda "
+"brána funguje.<br>\n"
+"Pokud problém přetrvává déle a odesílání zpráv přes webové stránky brány "
+"funguje, pak prosím tuto situaci <a href=\"{1}\">nahlaste</a>."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.UNUSABLE
+msgid ""
+"Unfortunately this gateway can''t be used at the moment. That can change in "
+"the future, but currently use some other gateway instead or visit <a href="
+"\"{0}\">{0}</a> and send the message manually."
+msgstr ""
+"Tuto bránu aktuálně bohužel nelze používat. To se může v budoucnu změnit, "
+"zatím však využijte jinou bránu, nebo zprávu odešlete ručně ze stránky <a "
+"href=\"{0}\">{0}</a>."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_AUTH
+msgid ""
+"You have entered a wrong login credentials.<br>\n"
+"Your login: {0}<br>\n"
+"Your password: {1}"
+msgstr ""
+"Zadali jste nesprávné přihlašovací údaje.<br>\n"
+"Přihlašovací jméno: {0}<br>\n"
+"Heslo: {1}"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_AUTH.help
+msgid ""
+"This gateway requires registration, otherwise you can''t send messages "
+"through it. Visit <a href=\"{0}\">{0}</a> and find out how to register or "
+"log in. Make sure logging in works. Then fill in the login credentials in <a "
+"href=\"{1}\">the gateway preferences</a>."
+msgstr ""
+"Tato brána vyžaduje registraci, bez ní přes ni nelze zprávy posílat. "
+"Navštivte stránku <a href=\"{0}\">{0}</a> a zjistěte, jak se zaregistrovat "
+"či přihlásit. Ověřte, že přihlašování funguje. Poté vyplňte přihlašovací "
+"údaje v <a href=\"{1}\">nastavení dané brány</a>."
+
+#: GatewayProblem.WRONG_CODE
+msgid ""
+"You have entered a wrong security code. Please try to send the message again."
+msgstr ""
+"Špatně jste opsali bezpečnostní kód. Zkuste prosím odeslat zprávu znovu."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_NUMBER
+msgid "You have entered a wrong recipient number: {0}"
+msgstr "Zadali jste nesprávné číslo příjemce: {0}"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_NUMBER.help
+msgid ""
+"The recipient number is either not supported by this gateway or it is "
+"wrongly formatted (maybe it''s not written in an international format?). Fix "
+"the recipient and then try to send the message again. If problems persist, "
+"visit <a href=\"{0}\">{0}</a> and find out why the gateway keeps rejecting "
+"the recipient number."
+msgstr ""
+"Číslo příjemce buď není branou podporované nebo je zapsáno ve špatném "
+"formátu (možná není zapsáno v mezinárodním formátu?). Opravte číslo příjemce "
+"a poté zkuste odeslat zprávu znovu. Při potížích navštivte stránku <a href="
+"\"{0}\">{0}</a> a zjistěte, co dané bráně v číslu příjemce nevyhovuje."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_SIGNATURE
+msgid ""
+"You have entered a wrong sender signature (a number or a name).<br>\n"
+"Your sender number: {0}<br>\n"
+"Your sender name: {1}"
+msgstr ""
+"Zadali jste nesprávný podpis odesilatele (číslo či jméno).<br>\n"
+"Vaše číslo odesilatele: {0}<br>\n"
+"Vaše jméno odesilatele: {1}"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_SIGNATURE.help
+msgid ""
+"The sender number or the sender name is in wrong format (maybe the number is "
+"not in an international format?). Visit <a href=\"{0}\">the gateway "
+"configuration</a> and fix the problem, then try to send the message again. "
+"If problems persist, visit <a href=\"{1}\">{1}</a> and find out why the "
+"gateway keeps rejecting your signature."
+msgstr ""
+"Číslo či jméno odesilatele je v nesprávném tvaru (možná není číslo zapsáno v "
+"mezinárodním formátu?). Otevřete <a href=\"{0}\">nastavení dané brány</a> a "
+"problém opravte, poté zkuste odeslat zprávu znovu. Při potížích navštivte "
+"stránku <a href=\"{1}\">{1}</a> a zjistěte, co dané bráně v podpisu "
+"nevyhovuje."
 
 #: Hide_program
 msgid "Hide program"
@@ -2000,14 +2143,6 @@ msgstr ""
 "Vlastní text zprávy\n"
 "</html>"
 
-#: SMSSender.NO_REASON_ERROR
-msgid ""
-"Author of the script has not provided any additional information<br>about "
-"cause of the failure for the web gateway used."
-msgstr ""
-"Autor skriptu pro použitou webovou bránu neposkytl<br>žádné další informace "
-"o příčině selhání."
-
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.SENDING_CRASHED_ERROR
 msgid ""
@@ -2344,6 +2479,118 @@ msgstr "Brána aktualizována: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Některé aktualizace bran se nepodařilo nainstalovat."
+
+#~ msgid ""
+#~ "The gateway maintainers have modified their webpage and it can''t be used "
+#~ "from Esmska at the moment. The fix is being worked on, you can track <a "
+#~ "href=\"{0}\">its status</a>."
+#~ msgstr ""
+#~ "Správci brány pozměnili své webové stránky a ty teď aktuálně nelze z "
+#~ "Esmsky použít. Na opravě se pracuje, můžete sledovat <a href=\"{0}\">její "
+#~ "průběh</a>."
+
+#~ msgid "A message from the gateway:<br>"
+#~ msgstr "Zpráva od brány:<br>"
+
+#~ msgid ""
+#~ "You are sending the message too early. The gateway either requires a "
+#~ "certain interval you have to wait before sending another message or it "
+#~ "limits the maximum number of possible messages in some time period. Try "
+#~ "it later."
+#~ msgstr ""
+#~ "Odesíláte zprávu příliš brzy. Brána buď vyžaduje určitý interval, který "
+#~ "je nutný vyčkat před odesláním další zprávy, nebo omezuje maximální možný "
+#~ "počet zpráv za jistý časový úsek. Zkuste to později."
+
+#~ msgid ""
+#~ "You have entered too long message text.<br>\n"
+#~ "<br>\n"
+#~ "Hint: If it is for your language possible, try to avoid using national "
+#~ "characters (different from standard english character set), otherwise it "
+#~ "may reduce the maximum allowed message length substantially."
+#~ msgstr ""
+#~ "Zadali jste příliš dlouhý text zprávy.<br>\n"
+#~ "<br>\n"
+#~ "Rada: Pokud je to ve vašem jazyce možné, zkuste nepoužívat národní znaky "
+#~ "(odlišné od standardní anglické znakové sady), jinak to může podstatně "
+#~ "zkrátit maximální povolenou délku zprávy."
+
+#~ msgid "You don't have sufficient credit to send this message."
+#~ msgstr "Pro odeslání této zprávy nemáte dostatečný kredit."
+
+#~ msgid ""
+#~ "The gateway hasn't specified any reason why the message sending failed."
+#~ msgstr ""
+#~ "Brána blíže neupřesnila žádný důvod, proč odeslání této zprávy selhalo."
+
+#~ msgid ""
+#~ "This gateway requires that you supply a sender signature. Correct it in "
+#~ "the program settings and try again."
+#~ msgstr ""
+#~ "Tato brána vyžaduje vyplněný podpis odesilatele. Zadejte jej v nastavení "
+#~ "programu a zkuste to znovu."
+
+#~ msgid ""
+#~ "An unknown error has occured. The gateway provider has probably changed "
+#~ "its webpages or has a problem with them currently. Try again later.<br>\n"
+#~ "<br>\n"
+#~ "Also make sure that you have working connection to the Internet and that "
+#~ "you are using the <a href=\"{0}\">latest program version</a>.<br>\n"
+#~ "<br>\n"
+#~ "If the problem persists and the <a href=\"{1}\">web gateway</a> works in "
+#~ "a web browser, report the problem on <a href=\"{2}\">program homepage</a>."
+#~ msgstr ""
+#~ "Došlo k neznámé chybě. Poskytovatel brány zřejmě změnil své webové "
+#~ "stránky, nebo s nimi má aktuálně potíže. Zkuste to později.<br>\n"
+#~ "<br>\n"
+#~ "Taktéž se ujistěte, že máte funkční připojení k Internetu a že používáte "
+#~ "<a href=\"{0}\">nejnovější verzi programu</a>.<br>\n"
+#~ "<br>\n"
+#~ "Pokud potíže přetrvají a <a href=\"{1}\">webová brána</a> ve webovém "
+#~ "prohlížeči funguje, nahlaste problém na <a href=\"{2}\">domovských "
+#~ "stránkách programu</a>."
+
+#~ msgid ""
+#~ "Sadly this gateway is currently unusable. You can read more about <a href="
+#~ "\"{0}\">the reason why</a>."
+#~ msgstr ""
+#~ "Tato brána je nyní bohužel nepoužitelná. Můžete si přečíst více o <a href="
+#~ "\"{0}\">důvodech proč</a>."
+
+#~ msgid ""
+#~ "You have entered incorrect login credentials.<br>\n"
+#~ "This gateway requires registration and you can''t send messages throught "
+#~ "it without one. Visit the <a href=\"{0}\">website of this gateway</a> and "
+#~ "find out how to register or log in. Then enter the login credentials in "
+#~ "program preferences.<br>\n"
+#~ "<br>\n"
+#~ "If you have entered your login credentials correctly, visit the website "
+#~ "of the gateway and check that logging in works."
+#~ msgstr ""
+#~ "Zadali jste nesprávné přihlašovací údaje.<br>\n"
+#~ "Tato brána vyžaduje registraci, bez ní přes ni nelze zprávy posílat. "
+#~ "Navštivte <a href=\"{0}\">webovou stránku</a> této brány a zjistěte, jak "
+#~ "se zaregistrovat či přihlásit. Poté vyplňte přihlašovací údaje v "
+#~ "nastavení programu.<br>\n"
+#~ "<br>\n"
+#~ "Pokud máte přihlašovací údaje zadány správně, navštivte webovou stránku "
+#~ "brány a ujistěte se, že přihlašování funguje."
+
+#~ msgid "You have entered a wrong security code."
+#~ msgstr "Špatně jste opsali bezpečnostní kód."
+
+#~ msgid "You have entered incorrect recipient number."
+#~ msgstr "Zadali jste nesprávné číslo příjemce."
+
+#~ msgid "You have entered incorrent sender signature (number or name)."
+#~ msgstr "Zadali jste nesprávný podpis odesilatele (číslo či jméno)."
+
+#~ msgid ""
+#~ "Author of the script has not provided any additional information<br>about "
+#~ "cause of the failure for the web gateway used."
+#~ msgstr ""
+#~ "Autor skriptu pro použitou webovou bránu neposkytl<br>žádné další "
+#~ "informace o příčině selhání."
 
 #~ msgid ""
 #~ "You are probably running the program on an unsupported Java version! "

@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -62,7 +62,7 @@ function getFeatures() {
 function send() {
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
 
@@ -77,7 +77,7 @@ function send() {
     re = /<form name="freesender" method="post" action="\/FriSMS.html" id="freeform">/
     match = re.exec(content)    
     if(!match) {
-    	 EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+    	 EXEC.setProblem("WRONG_AUTH")
          return false
     }
 
@@ -105,13 +105,13 @@ function send() {
     	
     	// received, rejected
     	if(state == "rejected") {
-    		EXEC.setErrorMessage(EXEC.ERROR_NO_REASON)
+    		EXEC.setProblem("NO_REASON")
     		return false
     	} else if (state == "false") {
-    		EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
+    		EXEC.setProblem("WRONG_NUMBER")
     		return false
     	} else if (state == "queued") {
-    		EXEC.setGatewayMessage("Mobile phone is turned off or out of coverage. Message will be delivered later.")
+    		EXEC.setSupplementalMessage("Mobile phone is turned off or out of coverage. Message will be delivered later.")
     		return true
     	} else if (state == "received") {
     		return true
@@ -120,7 +120,6 @@ function send() {
     }
 
 	// if neither success nor error message was found
-	EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
 	return false
 
 }

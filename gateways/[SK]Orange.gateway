@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -63,7 +63,7 @@ function getFeatures() {
 function send() {
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
 
@@ -77,7 +77,7 @@ function send() {
     match = re.exec(content)
     if (match) {
         logout()
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
 
@@ -86,7 +86,7 @@ function send() {
     match = re.exec(content)
     if (match) {
         logout()
-        EXEC.setErrorMessage("Vaše konto patrí k platenej službe Môj Asistent, pre posielanie sms použite platenú verziu brány.")
+        EXEC.setProblem("CUSTOM_MESSAGE", "Vaše konto patrí k platenej službe Môj Asistent, pre posielanie sms použite platenú verziu brány.")
     	return false
     }
     
@@ -101,7 +101,7 @@ function send() {
     match = re.exec(content)
     if (match) {
         logout()
-        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[0])
+        EXEC.setProblem("GATEWAY_MESSAGE", match[0])
         return false
     }
 
@@ -110,7 +110,7 @@ function send() {
     match = re.exec(content)
     if (match) {
         logout()
-        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[0])
+        EXEC.setProblem("GATEWAY_MESSAGE", match[0])
         return false
     }
    
@@ -123,7 +123,7 @@ function send() {
     	re = /M..ete odosla. e.te <span class="orange bold">([0-9]+)<\/span> spr.v/
     	match2 = re.exec(content);
     	if (match2) { // if found
-        	EXEC.setGatewayMessage(EXEC.INFO_FREE_SMS_REMAINING + match2[1])
+        	EXEC.setSupplementalMessage(EXEC.INFO_FREE_SMS_REMAINING + match2[1])
     	} 
         logout()
         return true;
@@ -131,7 +131,6 @@ function send() {
 
     // if neither success nor error message was found
     logout()
-    EXEC.setErrorMessage(EXEC.ERROR_UKNOWN)
     return false
 }
 

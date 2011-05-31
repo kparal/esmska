@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-13 22:33+0200\n"
+"POT-Creation-Date: 2011-05-31 21:41+0200\n"
 "PO-Revision-Date: 2011-01-09 05:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1103,6 +1103,22 @@ msgstr "No requiere de registro"
 msgid "Mainly usable for country: {0}"
 msgstr "Usable principalmente por el país: {0}"
 
+#: GatewayErrorMessage.helpLabel.text
+#, fuzzy
+msgid "Help:"
+msgstr "Ay&uda"
+
+#: GatewayErrorMessage.retryButton.text
+#, fuzzy
+msgid "&Send again"
+msgstr "En&viar"
+
+#: GatewayErrorMessage.retryButton.toolTipText
+msgid ""
+"<html>Please note that this button will unpause your SMS queue.<br>\n"
+"That means that more messages might be re-sent, not just this one.</html>"
+msgstr ""
+
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
 msgid "Sending failed: {0}"
@@ -1111,116 +1127,6 @@ msgstr ""
 #: GatewayErrorMessage.smsTextLabel.text
 msgid "Original message:"
 msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_FIX_IN_PROGRESS
-#, fuzzy
-msgid ""
-"The gateway maintainers have modified their webpage and it can''t be used "
-"from Esmska at the moment. The fix is being worked on, you can track <a href="
-"\"{0}\">its status</a>."
-msgstr ""
-"Los responsables del operador han modificado su página web y no puede ser "
-"usada desde Esmska<br>\n"
-"por el momento. Se está trabajando en la corrección, puede dar seguimiento "
-"<a href=\"{0}\">su estado</a>.<br>\n"
-"<br>\n"
-"Mientras tanto usted puede enviar peticiones a los responsables para crear "
-"una interfaz para su compuerta estable e<br>inalterable legible para el "
-"equipo. Eso eliminaría estos problemas.<br>"
-
-#: GatewayExecutor.ERROR_GATEWAY_MESSAGE
-msgid "A message from the gateway:<br>"
-msgstr "Un mensaje desde la compuerta:<br>"
-
-#: GatewayExecutor.ERROR_LIMIT_REACHED
-msgid ""
-"You are sending the message too early. The gateway either requires a certain "
-"interval you have to wait before sending another message or it limits the "
-"maximum number of possible messages in some time period. Try it later."
-msgstr ""
-
-#: GatewayExecutor.ERROR_LONG_TEXT
-msgid ""
-"You have entered too long message text.<br>\n"
-"<br>\n"
-"Hint: If it is for your language possible, try to avoid using national "
-"characters (different from standard english character set), otherwise it may "
-"reduce the maximum allowed message length substantially."
-msgstr ""
-
-#: GatewayExecutor.ERROR_NO_CREDIT
-msgid "You don't have sufficient credit to send this message."
-msgstr "Usted no cuenta con suficiente crédito para enviar este mensaje."
-
-#: GatewayExecutor.ERROR_NO_REASON
-msgid "The gateway hasn't specified any reason why the message sending failed."
-msgstr ""
-"El operador no ha especificado razón alguna del por qué falló el mensaje "
-"enviado."
-
-#: GatewayExecutor.ERROR_SIGNATURE_NEEDED
-msgid ""
-"This gateway requires that you supply a sender signature. Correct it in the "
-"program settings and try again."
-msgstr ""
-"Este operador requiere que proporcione una firma de remitente. Corrija esto "
-"en los ajustes del programa e inténtelo de nuevo."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_UNKNOWN
-#, fuzzy
-msgid ""
-"An unknown error has occured. The gateway provider has probably changed its "
-"webpages or has a problem with them currently. Try again later.<br>\n"
-"<br>\n"
-"Also make sure that you have working connection to the Internet and that you "
-"are using the <a href=\"{0}\">latest program version</a>.<br>\n"
-"<br>\n"
-"If the problem persists and the <a href=\"{1}\">web gateway</a> works in a "
-"web browser, report the problem on <a href=\"{2}\">program homepage</a>."
-msgstr ""
-"Ha ocurrido un error desconocido. El proveedor de la puerta de enlace puede "
-"haber cambiado<br>sus páginas web o tiene problemas con ellas actualmente."
-"<br>Inténtelo de nuevo más tarde.<br><br>Asegúrese también de que su "
-"conexión a Internet funciona<br>y de que está usando <a href=\"{0}\">la "
-"última versión del programa y de la puerta de enlace</a>.<br><br>Si el "
-"problema persiste y le <a href=\"{1}\">web de la puerta de enlace</a> "
-"funciona en un navegador web,<br>informe del problema en <a href=\"{2}\">la "
-"página web del programa</a>."
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_UNUSABLE
-msgid ""
-"Sadly this gateway is currently unusable. You can read more about <a href="
-"\"{0}\">the reason why</a>."
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: GatewayExecutor.ERROR_WRONG_AUTH
-msgid ""
-"You have entered incorrect login credentials.<br>\n"
-"This gateway requires registration and you can''t send messages throught it "
-"without one. Visit the <a href=\"{0}\">website of this gateway</a> and find "
-"out how to register or log in. Then enter the login credentials in program "
-"preferences.<br>\n"
-"<br>\n"
-"If you have entered your login credentials correctly, visit the website of "
-"the gateway and check that logging in works."
-msgstr ""
-
-#: GatewayExecutor.ERROR_WRONG_CODE
-#, fuzzy
-msgid "You have entered a wrong security code."
-msgstr "Ha ingresado un código de seguridad incorrecto."
-
-#: GatewayExecutor.ERROR_WRONG_NUMBER
-msgid "You have entered incorrect recipient number."
-msgstr "Ha ingresado un número de receptor incorrecto."
-
-#: GatewayExecutor.ERROR_WRONG_SIGNATURE
-msgid "You have entered incorrent sender signature (number or name)."
-msgstr "Ha ingresado un número o nombre de remitente incorrecto"
 
 #: GatewayExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
@@ -1253,6 +1159,202 @@ msgstr "¡Operador desconocido!"
 
 #: GatewayMessageFrame.title
 msgid "Sending process - Esmska"
+msgstr ""
+
+#: GatewayProblem.CUSTOM_MESSAGE
+msgid "The gateway maintainer provided following explanation:"
+msgstr ""
+
+#: GatewayProblem.CUSTOM_MESSAGE.help
+msgid ""
+"Fix the problem described by the gateway maintainer and send the message "
+"again."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.FIX_IN_PROGRESS
+msgid ""
+"Unfortunately this gateway can''t be used at the moment. The fix is being "
+"worked on. In the meantime please use some other gateway or visit <a href="
+"\"{0}\">{0}</a> and send the message manually."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.FIX_IN_PROGRESS.help
+msgid ""
+"There is a certain problem that makes it impossible for this program to use "
+"that gateway. You can find more information at <a href=\"{0}\">this page</a>."
+msgstr ""
+
+#: GatewayProblem.GATEWAY_MESSAGE
+msgid "The gateway provided following explanation:"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.GATEWAY_MESSAGE.help
+msgid ""
+"Fix the problem mentioned in the gateway report and send the message again. "
+"You can also visit <a href=\"{0}\">{0}</a> and send the message manually. "
+"It''s possible that you receive a more detailed problem description this way."
+msgstr ""
+
+#: GatewayProblem.LIMIT_REACHED
+msgid "You're sending the message too early. Try again in a short while."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.LIMIT_REACHED.help
+#, fuzzy
+msgid ""
+"The gateway either requires a certain interval you need to wait before "
+"sending subsequent message, or it limits the number of messages that can be "
+"sent in a certain timeperiod. The rules are probably described on the "
+"gateway website <a href=\"{0}\">{0}</a>."
+msgstr ""
+"Está enviando el mensaje demasiado pronto. Cualquier operador requiere un "
+"cierto intervalo de tiempo<br>que debe esperar antes de enviar otro mensaje "
+"o le limitará<br>el máximo número de mensajes posibles en un período de "
+"tiempo. Inténtelo más tarde."
+
+#: GatewayProblem.LONG_TEXT
+msgid ""
+"You have entered a too long message text. Shorten the message and try to "
+"send it again."
+msgstr ""
+
+#: GatewayProblem.LONG_TEXT.help
+msgid ""
+"For standard-sized SMS (circa 160 characters) you need touse only basic "
+"characters primarily from the English alphabet. Using national characters "
+"(with diacritical marks, etc.) from other languages shortens the maximum SMS "
+"length to about 70 characters. This error message may be related to this "
+"problem.<br>\n"
+"If it is possible in your language try not to use national characters and "
+"use pure English alphabet instead. In the program settings you can also "
+"enable/disable automatic message text conversion into this character set "
+"(works only for some languages)."
+msgstr ""
+
+#: GatewayProblem.NO_CREDIT
+#, fuzzy
+msgid "You don't have enough credit to send this message."
+msgstr "Usted no cuenta con suficiente crédito para enviar este mensaje."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.NO_CREDIT.help
+msgid ""
+"Visit <a href=\"{0}\">{0}</a> website and charge your credit, then you "
+"should be able to send your messages again."
+msgstr ""
+
+#: GatewayProblem.NO_REASON
+#, fuzzy
+msgid ""
+"The gateway didn't specify any particular reason why this message could not "
+"be sent."
+msgstr ""
+"El operador no ha especificado razón alguna del por qué falló el mensaje "
+"enviado."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.NO_REASON.help
+msgid ""
+"This gateway unfortunately hasn''t provided any explanation why your message "
+"was rejected. That means the problem can be caused by anything (unsupported "
+"recipient number, too long message text, etc.). You can visit <a href="
+"\"{0}\">{0}</a> and try to send your message manually, maybe you''ll learn "
+"more information."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.SIGNATURE_NEEDED
+msgid ""
+"This gateway requires a sender signature filled in (a name, a number or "
+"both). Please enter it in <a href=\"{0}\">the given gateway settings</a> and "
+"try to send the message again."
+msgstr ""
+
+#: GatewayProblem.UNKNOWN
+msgid ""
+"An unknown error has occured. The gateway may be experiencing some problems "
+"at the moment. Please try to send the message again in a short while or use "
+"some other gateway temporarily."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.UNKNOWN.help
+msgid ""
+"It was not possible to detect the cause of error. The gateway provider may "
+"be experiencing some problems at the moment. Visit <a href=\"{0}\">{0}</a> "
+"and make sure that the gateway works.<br>\n"
+"If this problem persists for a longer time and you can send your messages "
+"through the gateway''s webpage, please <a href=\"{1}\">report it</a>."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.UNUSABLE
+msgid ""
+"Unfortunately this gateway can''t be used at the moment. That can change in "
+"the future, but currently use some other gateway instead or visit <a href="
+"\"{0}\">{0}</a> and send the message manually."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_AUTH
+msgid ""
+"You have entered a wrong login credentials.<br>\n"
+"Your login: {0}<br>\n"
+"Your password: {1}"
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_AUTH.help
+msgid ""
+"This gateway requires registration, otherwise you can''t send messages "
+"through it. Visit <a href=\"{0}\">{0}</a> and find out how to register or "
+"log in. Make sure logging in works. Then fill in the login credentials in <a "
+"href=\"{1}\">the gateway preferences</a>."
+msgstr ""
+
+#: GatewayProblem.WRONG_CODE
+#, fuzzy
+msgid ""
+"You have entered a wrong security code. Please try to send the message again."
+msgstr "Ha ingresado un código de seguridad incorrecto."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_NUMBER
+#, fuzzy
+msgid "You have entered a wrong recipient number: {0}"
+msgstr "Ha ingresado un número de receptor incorrecto."
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_NUMBER.help
+msgid ""
+"The recipient number is either not supported by this gateway or it is "
+"wrongly formatted (maybe it''s not written in an international format?). Fix "
+"the recipient and then try to send the message again. If problems persist, "
+"visit <a href=\"{0}\">{0}</a> and find out why the gateway keeps rejecting "
+"the recipient number."
+msgstr ""
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_SIGNATURE
+#, fuzzy
+msgid ""
+"You have entered a wrong sender signature (a number or a name).<br>\n"
+"Your sender number: {0}<br>\n"
+"Your sender name: {1}"
+msgstr "Ha ingresado un número o nombre de remitente incorrecto"
+
+#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
+#: GatewayProblem.WRONG_SIGNATURE.help
+msgid ""
+"The sender number or the sender name is in wrong format (maybe the number is "
+"not in an international format?). Visit <a href=\"{0}\">the gateway "
+"configuration</a> and fix the problem, then try to send the message again. "
+"If problems persist, visit <a href=\"{1}\">{1}</a> and find out why the "
+"gateway keeps rejecting your signature."
 msgstr ""
 
 #: Hide_program
@@ -2023,14 +2125,6 @@ msgstr ""
 "El verdadero texto del mensaje\n"
 "</html>"
 
-#: SMSSender.NO_REASON_ERROR
-msgid ""
-"Author of the script has not provided any additional information<br>about "
-"cause of the failure for the web gateway used."
-msgstr ""
-"El autor del script no proveyó información adicional<br>referente a la causa "
-"de la falla para el operador web usado."
-
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.SENDING_CRASHED_ERROR
 msgid ""
@@ -2395,6 +2489,77 @@ msgstr "Operador actualizado: {0}"
 #, fuzzy
 msgid "Some of gateway updates couldn't be installed."
 msgstr "¡Algunos de los archivos de configuración no pudieron ser guardados!"
+
+#, fuzzy
+#~ msgid ""
+#~ "The gateway maintainers have modified their webpage and it can''t be used "
+#~ "from Esmska at the moment. The fix is being worked on, you can track <a "
+#~ "href=\"{0}\">its status</a>."
+#~ msgstr ""
+#~ "Los responsables del operador han modificado su página web y no puede ser "
+#~ "usada desde Esmska<br>\n"
+#~ "por el momento. Se está trabajando en la corrección, puede dar "
+#~ "seguimiento <a href=\"{0}\">su estado</a>.<br>\n"
+#~ "<br>\n"
+#~ "Mientras tanto usted puede enviar peticiones a los responsables para "
+#~ "crear una interfaz para su compuerta estable e<br>inalterable legible "
+#~ "para el equipo. Eso eliminaría estos problemas.<br>"
+
+#~ msgid "A message from the gateway:<br>"
+#~ msgstr "Un mensaje desde la compuerta:<br>"
+
+#~ msgid "You don't have sufficient credit to send this message."
+#~ msgstr "Usted no cuenta con suficiente crédito para enviar este mensaje."
+
+#~ msgid ""
+#~ "The gateway hasn't specified any reason why the message sending failed."
+#~ msgstr ""
+#~ "El operador no ha especificado razón alguna del por qué falló el mensaje "
+#~ "enviado."
+
+#~ msgid ""
+#~ "This gateway requires that you supply a sender signature. Correct it in "
+#~ "the program settings and try again."
+#~ msgstr ""
+#~ "Este operador requiere que proporcione una firma de remitente. Corrija "
+#~ "esto en los ajustes del programa e inténtelo de nuevo."
+
+#, fuzzy
+#~ msgid ""
+#~ "An unknown error has occured. The gateway provider has probably changed "
+#~ "its webpages or has a problem with them currently. Try again later.<br>\n"
+#~ "<br>\n"
+#~ "Also make sure that you have working connection to the Internet and that "
+#~ "you are using the <a href=\"{0}\">latest program version</a>.<br>\n"
+#~ "<br>\n"
+#~ "If the problem persists and the <a href=\"{1}\">web gateway</a> works in "
+#~ "a web browser, report the problem on <a href=\"{2}\">program homepage</a>."
+#~ msgstr ""
+#~ "Ha ocurrido un error desconocido. El proveedor de la puerta de enlace "
+#~ "puede haber cambiado<br>sus páginas web o tiene problemas con ellas "
+#~ "actualmente.<br>Inténtelo de nuevo más tarde.<br><br>Asegúrese también de "
+#~ "que su conexión a Internet funciona<br>y de que está usando <a href="
+#~ "\"{0}\">la última versión del programa y de la puerta de enlace</a>."
+#~ "<br><br>Si el problema persiste y le <a href=\"{1}\">web de la puerta de "
+#~ "enlace</a> funciona en un navegador web,<br>informe del problema en <a "
+#~ "href=\"{2}\">la página web del programa</a>."
+
+#, fuzzy
+#~ msgid "You have entered a wrong security code."
+#~ msgstr "Ha ingresado un código de seguridad incorrecto."
+
+#~ msgid "You have entered incorrect recipient number."
+#~ msgstr "Ha ingresado un número de receptor incorrecto."
+
+#~ msgid "You have entered incorrent sender signature (number or name)."
+#~ msgstr "Ha ingresado un número o nombre de remitente incorrecto"
+
+#~ msgid ""
+#~ "Author of the script has not provided any additional information<br>about "
+#~ "cause of the failure for the web gateway used."
+#~ msgstr ""
+#~ "El autor del script no proveyó información adicional<br>referente a la "
+#~ "causa de la falla para el operador web usado."
 
 #~ msgid ""
 #~ "You are probably running the program on an unsupported Java version! "
@@ -2809,17 +2974,6 @@ msgstr "¡Algunos de los archivos de configuración no pudieron ser guardados!"
 
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Sitio web</a></html>"
-
-#~ msgid ""
-#~ "You are sending the message too early. The gateway either requires a "
-#~ "certain interval<br>you have to wait before sending another message or it "
-#~ "limits<br>the maximum number of possible messages in some time period. "
-#~ "Try it later."
-#~ msgstr ""
-#~ "Está enviando el mensaje demasiado pronto. Cualquier operador requiere un "
-#~ "cierto intervalo de tiempo<br>que debe esperar antes de enviar otro "
-#~ "mensaje o le limitará<br>el máximo número de mensajes posibles en un "
-#~ "período de tiempo. Inténtelo más tarde."
 
 #~ msgid ""
 #~ "You have entered too long message text.<br>\n"

@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -68,7 +68,7 @@ function send() {
     
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
 
@@ -98,7 +98,7 @@ function send() {
         match = re.exec(content)
         if (!match) {
             // login was not successfull
-            EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+            EXEC.setProblem("WRONG_AUTH")
             logout()
             return false
         }
@@ -124,7 +124,7 @@ function send() {
     match = re.exec(content)
     if (match) {
         // gateway told us what's wrong
-        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[0])
+        EXEC.setProblem("GATEWAY_MESSAGE", match[0])
         logout()
         return false
     }
@@ -139,7 +139,6 @@ function send() {
     }
     
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     logout()
     return false
 }

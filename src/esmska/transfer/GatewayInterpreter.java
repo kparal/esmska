@@ -1,13 +1,12 @@
 package esmska.transfer;
 
-import esmska.data.Config;
 import esmska.data.Keyring;
 import esmska.data.Gateway;
 import esmska.data.Gateways;
 import esmska.data.SMS;
 import esmska.data.Tuple;
+import esmska.transfer.GatewayExecutor.Problem;
 import esmska.utils.L10N;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
@@ -21,6 +20,7 @@ import java.util.logging.Logger;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 /** Class that takes care of parsing gateway script files for extracting
  * gateway info and sending messages.
@@ -33,7 +33,6 @@ public class GatewayInterpreter {
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final ScriptEngineManager manager = new ScriptEngineManager();
     private static final Keyring keyring = Keyring.getInstance();
-    private static final Config config = Config.getInstance();
     private Map<GatewayVariable, String> variables;
     private GatewayExecutor executor;
     private ScriptEngine engine;
@@ -57,14 +56,15 @@ public class GatewayInterpreter {
      * @param sms sms to be sent
      * @return whether the message was sent successfully
      */
-    public boolean sendMessage(SMS sms) {
+    public boolean sendMessage(SMS sms) throws Exception {
         Gateway gateway = Gateways.getInstance().get(sms.getGateway());
         logger.log(Level.FINE, "Sending SMS to: {0}", gateway);
         
         init();
         executor = new GatewayExecutor(sms);
         if (gateway == null) {
-            executor.setErrorMessage(l10n.getString("GatewayInterpreter.unknown_gateway"));
+            executor.setProblem(Problem.INTERNAL_MESSAGE, 
+                    l10n.getString("GatewayInterpreter.unknown_gateway"));
             return false;
         }
 
@@ -86,15 +86,14 @@ public class GatewayInterpreter {
             //send the message
             sentOk = (Boolean) invocable.invokeFunction("send", new Object[0]);
             logger.log(Level.FINE, "SMS sent ok: {0}", sentOk);
-        } catch (Exception ex) {
+        } catch (ScriptException ex) {
             logger.log(Level.SEVERE, "Error executing gateway script file " + gateway, ex);
-            // setting ERROR_UNKNOWN will also log last webpage content
-            executor.setErrorMessage(GatewayExecutor.ERROR_UNKNOWN);
+            executor.setProblem(Problem.UNKNOWN, null);
             return false;
         } finally {
             try {
                 reader.close();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Error closing gateway script file " + gateway, ex);
             }
         }
@@ -149,23 +148,4 @@ public class GatewayInterpreter {
         }
     }
 
-    /** Get the error message created when sending of the message failed. May be null.
-     * @throws IllegalStateException when called before sending any sms
-     */
-    public String getErrorMessage() {
-        if (executor == null) {
-            throw new IllegalStateException("Getting error message before even sending the very sms");
-        }
-        return executor.getErrorMessage();
-    }
-    
-    /** Get additional message from gateway. May be null.
-     * @throws IllegalStateException when called before sending any sms
-     */
-    public String getGatewayMessage() {
-        if (executor == null) {
-            throw new IllegalStateException("Getting gateway message before even sending the very sms");
-        }
-        return executor.getGatewayMessage();
-    }
 }

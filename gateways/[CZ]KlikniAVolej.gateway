@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-04-05"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -67,14 +67,14 @@ function send() {
 
     // Kontrola prihlasovacich udaju
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
 
     // Urceni predcisli
     var prefix = EXEC.extractCountryPrefix(NUMBER)
     if (prefix == "") {
-        EXEC.setErrorMessage("Špatné číslo příjemce, nelze určit předčíslí země.")
+        EXEC.setProblem("CUSTOM_MESSAGE", "Špatné číslo příjemce, nelze určit předčíslí země.")
         return false;
     }
     NUMBER = NUMBER.replace(prefix,'');
@@ -88,7 +88,7 @@ function send() {
         postData = ["user-name", LOGIN, "user-pass", PASSWORD]
         content = EXEC.postURL("http://www.klikniavolej.cz/_login.asp", [], postData)
         if (!check_login(content)) {
-            EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+            EXEC.setProblem("WRONG_AUTH")
             logout()
             return false
         }
@@ -99,7 +99,7 @@ function send() {
     re = /<input\stype="radio"\sname="number-from"\sid="volba1"\svalue="(\d+)"/
     match = re.exec(content)
     if (!match) {
-        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + "Není zaregistrováno číslo!")
+        EXEC.setProblem("CUSTOM_MESSAGE", "Není zaregistrováno číslo!")
         logout()
         return false
     }
@@ -108,12 +108,12 @@ function send() {
     // Zkontrolovani kreditu
     kredit = get_credit(content)
     if (!kredit) {
-        EXEC.setErrorMessage("Nepodařilo se načíst kredit")
+        EXEC.setProblem("CUSTOM_MESSAGE", "Nepodařilo se načíst kredit")
         logout()
         return false
     }
     if (kredit<1) {
-        EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
+        EXEC.setProblem("NO_CREDIT")
         logout()
         return false
     }
@@ -130,9 +130,9 @@ function send() {
         // Urceni kreditu
         kredit = get_credit(content)
         if (!kredit) {
-            EXEC.setGatewayMessage("Nepodařilo se načíst kredit, ale zpráva byla odeslána")
+            EXEC.setSupplementalMessage("Nepodařilo se načíst kredit, ale zpráva byla odeslána")
         } else {
-            EXEC.setGatewayMessage(EXEC.INFO_CREDIT_REMAINING + kredit.toFixed(2) +' Kč')
+            EXEC.setSupplementalMessage(EXEC.INFO_CREDIT_REMAINING + kredit.toFixed(2) +' Kč')
         }
         logout()
         return true
@@ -142,13 +142,12 @@ function send() {
     re = /class="infopanelerror"><ul>(.[^<]+)</
     match = re.exec(content)
     if (match) {
-        EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
         logout()
         return false
     }
 
     // Stalo se neco divneho
-    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     return false
 }
 

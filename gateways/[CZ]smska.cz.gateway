@@ -1,9 +1,10 @@
+
 function getName() {
     return "[CZ]smska.cz"
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -62,7 +63,7 @@ function send() {
 
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
 
@@ -92,15 +93,12 @@ function send() {
             // an error occured        
             match = re_txt.exec(content);
             if (match) {
-                EXEC.setErrorMessage(EXEC.ERROR_GATEWAY_MESSAGE + match[1])
-            } else {
-                EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
+                EXEC.setProblem("GATEWAY_MESSAGE", match[1])
             }
             return false
         }
     }
     
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     return false
 }

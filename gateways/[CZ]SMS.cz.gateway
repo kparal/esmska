@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -67,7 +67,7 @@ function send() {
     
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
 
@@ -87,17 +87,17 @@ function send() {
     //check result
     if (str_ret[0].substr(0,3) == "ERR") {
         if (str_ret[0] == "ERR-PASS") {
-            EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+            EXEC.setProblem("WRONG_AUTH")
         } else if (str_ret[0] == "ERR-CREDIT") {
-            EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
+            EXEC.setProblem("NO_CREDIT")
         } else if (str_ret[0] == "ERR-DEST") {
-       	    EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
+       	    EXEC.setProblem("WRONG_NUMBER")
        	} else {
-            EXEC.setErrorMessage(EXEC.ERROR_NO_REASON)
+            EXEC.setProblem("NO_REASON")
         }
         return false
     } else {
-        EXEC.setGatewayMessage(EXEC.INFO_CREDIT_REMAINING + str_ret[1])
+        EXEC.setSupplementalMessage(EXEC.INFO_CREDIT_REMAINING + str_ret[1])
         return true
     }
 }

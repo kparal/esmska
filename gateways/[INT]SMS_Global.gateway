@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-03-28"
+    return "2011-05-31"
 }
 
 function getMaintainer() {
@@ -64,13 +64,13 @@ function send() {
 
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
     
     // check whether there is a supplied sender number
     if (SENDERNUMBER.length==0){
-        EXEC.setErrorMessage(EXEC.ERROR_SIGNATURE_NEEDED)
+        EXEC.setProblem("SIGNATURE_NEEDED")
         return false
     }
 	
@@ -88,8 +88,7 @@ function send() {
     re = /[^\u0001-\u007f]/
     match = re.exec(MESSAGE)
     if (match) {
-        EXEC.setErrorMessage("This gateway does not support national characters at the moment. " +
-        "Please enter English alphabet characters only.")
+        EXEC.setProblem("CUSTOM_MESSAGE", "This gateway does not support national characters at the moment. Please enter English alphabet characters only.")
         return false
     }
 
@@ -105,7 +104,7 @@ function send() {
     re = /ERROR: 402|ERROR: 14/
     match = re.exec(content)
     if (match) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_AUTH)
+        EXEC.setProblem("WRONG_AUTH")
         return false
     }
 	
@@ -113,7 +112,7 @@ function send() {
     re = /ERROR: 11|ERROR: 102/
     match = re.exec(content)
     if (match) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_NUMBER)
+        EXEC.setProblem("WRONG_NUMBER")
         return false
     }
     
@@ -121,7 +120,7 @@ function send() {
     re = /ERROR: 10$/
     match = re.exec(content)
     if (match) {
-        EXEC.setErrorMessage(EXEC.ERROR_WRONG_SIGNATURE)
+        EXEC.setProblem("WRONG_SIGNATURE")
         return false
     }
 	
@@ -129,10 +128,10 @@ function send() {
     re = /ERROR: 88/
     match = re.exec(content)
     if (match) {
-        EXEC.setErrorMessage(EXEC.ERROR_NO_CREDIT)
+        EXEC.setProblem("NO_CREDIT")
         var credit = check_credit()
         if (credit) {
-            EXEC.setGatewayMessage(EXEC.INFO_CREDIT_REMAINING + credit)
+            EXEC.setSupplementalMessage(EXEC.INFO_CREDIT_REMAINING + credit)
         }
         return false
     }
@@ -144,13 +143,12 @@ function send() {
         //all ok, get remanining balance and display it
         var credit = check_credit()
         if (credit) {
-            EXEC.setGatewayMessage(EXEC.INFO_CREDIT_REMAINING + credit)
+            EXEC.setSupplementalMessage(EXEC.INFO_CREDIT_REMAINING + credit)
         }
         return true
     }
 	
     // if neither success nor error message was found
-    EXEC.setErrorMessage(EXEC.ERROR_UNKNOWN)
     return false
 }
 
