@@ -53,8 +53,6 @@ Compilation requirements
    o in Ubuntu packaged as 'ant'
 
 Provided by lib/ directory:
- * CopyLibs
-   o included in NetBeans IDE 6.1
  * Mac UI
    o included in Apple Java
    o optional: see compiling section for information how to build without Mac OS
