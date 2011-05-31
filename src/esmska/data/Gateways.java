@@ -26,9 +26,11 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.script.Invocable;
+import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.script.SimpleScriptContext;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
@@ -57,6 +59,7 @@ public class Gateways {
     private static final HashSet<DeprecatedGateway> deprecatedGateways = new HashSet<DeprecatedGateway>();
     private static final Keyring keyring = Keyring.getInstance();
     private static final ScriptEngineManager manager = new ScriptEngineManager();
+    private static final ScriptEngine jsEngine = manager.getEngineByName("js");
 
     // <editor-fold defaultstate="collapsed" desc="ValuedEvent support">
     private ValuedEventSupport<Events, Gateway> valuedSupport = new ValuedEventSupport<Events, Gateway>(this);
@@ -481,7 +484,6 @@ public class Gateways {
      */
     public static GatewayInfo parseInfo(URL script) throws IOException, ScriptException, IntrospectionException {
         logger.log(Level.FINER, "Parsing info of script: {0}", script.toExternalForm());
-        ScriptEngine jsEngine = manager.getEngineByName("js");
         if (jsEngine == null) {
             throw new IntrospectionException("JavaScript execution not supported");
         }
@@ -490,6 +492,8 @@ public class Gateways {
         try {
             reader = new InputStreamReader(script.openStream(), "UTF-8");
             //the script must be evaluated before extracting the interface
+            SimpleScriptContext context = new SimpleScriptContext();
+            jsEngine.setContext(context);
             jsEngine.eval(reader);
             GatewayInfo gatewayInfo = invocable.getInterface(GatewayInfo.class);
             return gatewayInfo;

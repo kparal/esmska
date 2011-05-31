@@ -55,6 +55,7 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
     private GatewayConfig config = new GatewayConfig();
     private static final Pattern namePattern =
             Pattern.compile("^\\[(\\w\\w|" + CountryPrefix.INTERNATIONAL_CODE + ")\\].+");
+    private static final Collator collator = Collator.getInstance();
 
     /** Creates new Gateway.
      *
@@ -189,7 +190,6 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
 
     @Override
     public int compareTo(Gateway o) {
-        Collator collator = Collator.getInstance();
         return collator.compare(this.getName(), o.getName());
     }
 

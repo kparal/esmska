@@ -108,6 +108,8 @@ public class ImportManager {
         logger.finer("Importing history from file: " + file.getAbsolutePath());
         ArrayList<History.Record> history = new ArrayList<History.Record>();
         CsvReader reader = null;
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
+                            DateFormat.LONG, Locale.ROOT);
         
         try {
             reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
@@ -123,8 +125,6 @@ public class ImportManager {
                     String senderName = reader.get(5);
                     String senderNumber = reader.get(6);
 
-                    DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
-                            DateFormat.LONG, Locale.ROOT);
                     Date date = df.parse(dateString);
 
                     History.Record record = new History.Record(number, text, gateway,
