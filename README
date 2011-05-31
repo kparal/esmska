@@ -54,7 +54,7 @@ Compilation requirements
 
 Provided by lib/ directory:
  * CopyLibs
-   o included in NetBeans IDE 6.1
+   o included in NetBeans IDE 7.0
  * Mac UI
    o included in Apple Java
    o optional: see compiling section for information how to build without Mac OS
