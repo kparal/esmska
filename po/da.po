@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-31 21:41+0200\n"
+"POT-Creation-Date: 2011-06-01 21:12+0200\n"
 "PO-Revision-Date: 2010-01-31 18:22+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-26 05:01+0000\n"
+"X-Launchpad-Export-Date: 2011-03-07 04:50+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
@@ -2155,20 +2155,6 @@ msgstr "Gateway opdateret: {0}"
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 
-#, fuzzy
-#~ msgid "You have entered a wrong security code."
-#~ msgstr "Du har indtastet en forkert sikkerhedskode."
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Navn:"
-
-#~ msgid "Downloading of some gateways failed!"
-#~ msgstr "Downloading af nogle gateways mislykkedes!"
-
-#~ msgid "Installation of some gateways failed!"
-#~ msgstr "Installation af nogle gateways mislykkedes!"
-
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Tjek for program og gateway opdateringer"
 
@@ -2181,6 +2167,10 @@ msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 #~ msgid "program only"
 #~ msgstr "kun program"
 
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Navn:"
+
 #~ msgid "<a href=\"\">Gateway updates</a> are available!"
 #~ msgstr "<a href=\"\">Gateway opdateringer</a> er tilgængelige!"
 
@@ -2190,11 +2180,17 @@ msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 #~ msgid "Checking..."
 #~ msgstr "Tjekker..."
 
+#~ msgid "Downloading of some gateways failed!"
+#~ msgstr "Downloading af nogle gateways mislykkedes!"
+
 #~ msgid "Downloading..."
 #~ msgstr "Downloader..."
 
 #~ msgid "gateway version: {0}"
 #~ msgstr "gateway version: {0}"
+
+#~ msgid "Installation of some gateways failed!"
+#~ msgstr "Installation af nogle gateways mislykkedes!"
 
 #~ msgid "{0} (needs program version: {1})"
 #~ msgstr "{0} (behøver program version: {1})"

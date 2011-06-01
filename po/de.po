@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-31 21:41+0200\n"
-"PO-Revision-Date: 2009-12-24 12:09+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2011-06-01 21:12+0200\n"
+"PO-Revision-Date: 2011-03-09 11:46+0000\n"
+"Last-Translator: Tomas Ruzicka <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-26 05:01+0000\n"
+"X-Launchpad-Export-Date: 2011-03-10 04:48+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
@@ -41,7 +41,7 @@ msgstr "&Mitwirkende"
 
 #: AboutFrame.homeHyperlink.text
 msgid "Homepage"
-msgstr ""
+msgstr "Homepage"
 
 #: AboutFrame.homeHyperlink.toolTipText
 msgid ""
@@ -59,7 +59,7 @@ msgstr "SMS senden über www"
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2011 Kamil Páral"
-msgstr ""
+msgstr "2007-2011 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -67,7 +67,7 @@ msgstr "&Lizenz"
 
 #: AboutFrame.supportHyperlink.text
 msgid "Support project"
-msgstr ""
+msgstr "Projekt unterstützen"
 
 #: AboutFrame.supportHyperlink.toolTipText
 msgid ""
@@ -76,6 +76,10 @@ msgid ""
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Gefählt ihnen dieses Projekt?<br>\n"
+"Helfen sie uns mit einer kleinen Spende...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -83,11 +87,11 @@ msgstr "Über Esmska"
 
 #: About_
 msgid "&About"
-msgstr "&Über"
+msgstr "&Info"
 
 #: Add
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 #: Add_contact
 msgid "Add contact"
@@ -103,7 +107,7 @@ msgstr "Abbrechen"
 
 #: Cancel_
 msgid "&Cancel"
-msgstr "Abre&chen"
+msgstr "&Abbrechen"
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
@@ -186,7 +190,7 @@ msgstr "Drucken der Programmversion und Exit"
 
 #: CompressText_
 msgid "&Compress text"
-msgstr ""
+msgstr "Text &komprimieren"
 
 #: Compress_
 msgid "&Compress"
@@ -194,11 +198,11 @@ msgstr "&Komprimieren"
 
 #: ConfigFrame.Favorite
 msgid "Favorite"
-msgstr ""
+msgstr "Favoriten"
 
 #: ConfigFrame.Gateway
 msgid "Gateway"
-msgstr ""
+msgstr "Gateway"
 
 #: ConfigFrame.Show
 msgid "Show"
@@ -254,7 +258,7 @@ msgstr "Verbindung"
 
 #: ConfigFrame.debugCheckBox.text
 msgid "Create a log with de&bug information"
-msgstr ""
+msgstr "Logdatei mit Debuginformationen erstellen"
 
 #: ConfigFrame.debugCheckBox.toolTipText
 msgid ""
@@ -264,12 +268,20 @@ msgid ""
 "to have it turned off.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Diese option wird benötigt nur wenn sie gemeinsam mit den Entwicklern<br>\n"
+"auf einer Fehlerbehebung arbeiten. In allen anderen Fällen wird "
+"empfohlen<br>\n"
+"diese Option ausgeschaltet zu lassen.\n"
+"</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
+#, fuzzy
 msgid "Request a &delivery report"
-msgstr ""
+msgstr "Zustellungsbericht verlangen"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
@@ -277,6 +289,13 @@ msgid ""
 "to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Senden eines Zustellungsberichtes zu der gesendeten Nachricht wird "
+"angefordert. <br>\n"
+"Der Bericht wird zum Telefon des Senders geschickt. Diese Funktion wird nur "
+"bei einigen <br>\n"
+"Gateways unterstützt.\n"
+"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 #, fuzzy
@@ -289,7 +308,7 @@ msgstr "All&gemein"
 
 #: ConfigFrame.gwDetailsPanel.border.title
 msgid "Gateway properties"
-msgstr ""
+msgstr "Gatewayoptionen"
 
 #: ConfigFrame.gwTipLabel.text
 msgid ""
@@ -298,6 +317,10 @@ msgid ""
 "Favorite gateways will be preferred for recipient gateway suggestions.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Versteckte Gateways werden nicht zur Auswahl stehen. \n"
+"Beliebte Gatewys werden bei Gatewayvorschlägen vorgezogen.\n"
+"</html>"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -306,6 +329,10 @@ msgid ""
 "Example: proxy.company.com:80\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Adresse des HTTP Proxyservers im Format von 'Host' oder 'Host:Port'.\n"
+"zB: proxy.example.com:80\n"
+"</html>"
 
 #: ConfigFrame.httpsProxyTextField.toolTipText
 msgid ""
@@ -314,6 +341,10 @@ msgid ""
 "Example: proxy.company.com:443\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Adresse des HTTPS Proxyservers im Format von 'Host' oder 'Host:Port'.\n"
+"zB: proxy.example.com:443\n"
+"</html>"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
@@ -342,6 +373,10 @@ msgid ""
 "* Username/password authentication is not currently supported.\n"
 "</i></html>"
 msgstr ""
+"<html><i>\n"
+"* Authentifizierung mit Benutzername und Kennwort wird zur Zeit nicht "
+"unterstützt.\n"
+"</i></html>"
 
 #: ConfigFrame.jLabel2.text
 msgid "&Signature:"
@@ -357,11 +392,11 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.logLocationLabel.text
 msgid "<html><i>The log file is stored at: {0}</i></html>"
-msgstr ""
+msgstr "<html><i>Die Logdatei ist abgelegt unter: {0}</i></html>"
 
 #: ConfigFrame.loginField.toolTipText
 msgid "Username needed for logging in to the gateway"
-msgstr ""
+msgstr "Benutzername wird zur Gatewayanmeldung benötigt"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -394,7 +429,7 @@ msgstr "P&rivatsphäre"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.reducedHistoryCheckBox.text
 msgid "&Restrict the sent message history only to last {0} days."
-msgstr ""
+msgstr "&Historie der gesendeten Nachrichten auf letzte {0} Tage beschränken."
 
 #: ConfigFrame.reducedHistoryCheckBox.toolTipText
 msgid ""
@@ -403,10 +438,15 @@ msgid ""
 "last period will be saved\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Beim Beenden der Applikation werden nur Nacrichten gespeichert, welche "
+"nicht<BR>\n"
+"älter als hier definiert sind\n"
+"</html>"
 
 #: ConfigFrame.removeAccentsCheckBox.text
 msgid "Remove &diacritics from messages"
-msgstr ""
+msgstr "Sonderzeichen aus den Nachrichten entfernen"
 
 #: ConfigFrame.removeAccentsCheckBox.toolTipText
 msgid ""
@@ -416,26 +456,31 @@ msgid ""
 "Note: This may not work for all languages.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Alle diakritische Sonderzeichen werden vor dem Senden durch ASCII-Zeichen "
+"ersetzt.<br>\n"
+"Vorsicht: Dies kann bei manchen Sprachen nicht funktionieren.\n"
+"</html>"
 
 #: ConfigFrame.remove_credentials
 msgid ""
 "Do you really want to remove all login credentials for all available "
 "gateways?"
-msgstr ""
+msgstr "Wollen sie wirklich die Anmeldedaten zu jeder Gateway löschen?"
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
-msgstr ""
+msgstr "Programmneustart wird zur Aktivierung der Änderungen notwendig."
 
 #: ConfigFrame.sameProxyCheckBox.text
 msgid "Same as &HTTP proxy"
-msgstr ""
+msgstr "Gleich wie HTTP-Proxy"
 
 #: ConfigFrame.sameProxyCheckBox.toolTipText
 msgid ""
 "An address in the 'HTTP proxy' field will be used also for 'HTTPS proxy' "
 "field"
-msgstr ""
+msgstr "Die Adresse des HTTP-Proxyservers wird auch für HTTPS-Proxy verwendet"
 
 #: ConfigFrame.senderNameLabel.text
 #, fuzzy
@@ -458,15 +503,17 @@ msgid "&Number:"
 msgstr "&Nummer:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
+#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
 "Not all gateways support this feature.</html>"
-msgstr ""
+msgstr "Absendernummer im internationalen Format (beginnend mit '+')"
 
 #: ConfigFrame.showPasswordCheckBox.text
+#, fuzzy
 msgid "Sho&w password"
-msgstr ""
+msgstr "Kennwort anzeigen"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -483,10 +530,14 @@ msgid ""
 "Example: proxy.company.com:1080\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Adresse des SOCKS-Proxyservers im Format von 'Host' oder 'Host:Port'.\n"
+"zB: proxy.example.com:1080\n"
+"</html>"
 
 #: ConfigFrame.startMinimizedCheckBox.text
 msgid "Hide program to &icon on startup"
-msgstr ""
+msgstr "Minimiert starten"
 
 #: ConfigFrame.startMinimizedCheckBox.toolTipText
 msgid ""
@@ -495,10 +546,14 @@ msgid ""
 "to the icon in the notification area\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Unmittelbar nach Start wird das Programm im Infobereich<br>\n"
+"als Symbol versteckt\n"
+"</html>"
 
 #: ConfigFrame.system_look
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: ConfigFrame.themeComboBox.toolTipText
 msgid ""
@@ -506,14 +561,17 @@ msgid ""
 "Color motives for the chosen look\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Farbschema für das ausgewählte Design\n"
+"</html>"
 
 #: ConfigFrame.themeLabel.text
 msgid "The&me:"
-msgstr ""
+msgstr "Farbschema:"
 
 #: ConfigFrame.tipsCheckBox.text
 msgid "Show program &tip on startup"
-msgstr ""
+msgstr "Tipps beim Programmstart anzeigen"
 
 #: ConfigFrame.tipsCheckBox.toolTipText
 msgid ""
@@ -522,14 +580,18 @@ msgid ""
 "in the status bar on program startup\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Zufällig ausgewählten Programmtipp nach dem Start<br>\n"
+"in der Statuszeile anzeigen\n"
+"</html>"
 
 #: ConfigFrame.title
 msgid "Preferences - Esmska"
-msgstr ""
+msgstr "Einstellungen von Esmska"
 
 #: ConfigFrame.toolbarVisibleCheckBox.text
 msgid "Show the &toolbar"
-msgstr ""
+msgstr "Symbolleiste anzeigen"
 
 #: ConfigFrame.toolbarVisibleCheckBox.toolTipText
 msgid ""
@@ -537,16 +599,22 @@ msgid ""
 "Show the toolbar which helps to access some actions with mouse more easily\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Die Symbolleiste ermöglicht Zugriff auf einige Funktionen mit einem "
+"Mausklick\n"
+"</html>"
 
 #: ConfigFrame.unknown_look
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
+#, fuzzy
 msgid "Also u&nstable versions"
-msgstr ""
+msgstr "auch Testversionen"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
 "Notify also also about unstable program versions.<br>\n"
@@ -555,6 +623,12 @@ msgid ""
 "who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Info auch über Testversionverfügbarkeit anzeigen.<br>\n"
+"<br>\n"
+"<b>Warnung: Testversionen sind nur auf erfahrene Benutzer ausgerichtet,<br>\n"
+"welche keine Angst vor Datenverlust haben.</b>\n"
+"</html>"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -908,8 +982,9 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
+#, fuzzy
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Unbekannt"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1900,8 +1975,9 @@ msgid "Default"
 msgstr ""
 
 #: Signature.new
+#, fuzzy
 msgid "<html><i>New signature...</i></html>"
-msgstr ""
+msgstr "<html><i>Die Logdatei ist abgelegt unter: {0}</i></html>"
 
 #: Signature.new.desc
 msgid "Name of the new signature:"
@@ -2097,6 +2173,7 @@ msgstr ""
 "  Fabian Affolter https://launchpad.net/~fab-fedoraproject\n"
 "  Lukas Bögelein https://launchpad.net/~lukas-boegelein\n"
 "  Samuel Creshal https://launchpad.net/~samuel-creshal\n"
+"  Tomas Ruzicka https://launchpad.net/~tr3027\n"
 "  jiri4711 https://launchpad.net/~jwprojekt"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2150,13 +2227,22 @@ msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
 #~ msgid "Check for program and gateway updates"
-#~ msgstr "Update Check des Programms und des Gateway"
+#~ msgstr "Nach Program- und Gatewayaktualisierungen suchen"
 
 #~ msgid "&Updates checker"
-#~ msgstr "&Updates checker"
+#~ msgstr "&Aktualisieren"
 
 #~ msgid "Automatically check for &updates of:"
 #~ msgstr "Automatische Update-Überprüfung"
+
+#~ msgid "program and gateways"
+#~ msgstr "Programm und Gateways"
+
+#~ msgid "gateways only"
+#~ msgstr "Nur Gateways"
+
+#~ msgid "program only"
+#~ msgstr "Nur Programm"
 
 #~ msgid "Check for &updates"
 #~ msgstr "Auf Aktualisierungen prüfen"

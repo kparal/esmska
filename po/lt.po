@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-31 21:41+0200\n"
+"POT-Creation-Date: 2011-06-01 21:12+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-26 05:02+0000\n"
+"X-Launchpad-Export-Date: 2011-03-07 04:51+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: AboutFrame.Acknowledge
@@ -2161,23 +2161,6 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
-#~ msgid "You don't have sufficient credit to send this message."
-#~ msgstr "Jūs neturite pakankamai kreditų išsiųsti šiai žinutei."
-
-#, fuzzy
-#~ msgid "You have entered a wrong security code."
-#~ msgstr "Įvedėte klaidingą apsaugos kodą."
-
-#~ msgid "You have entered incorrect recipient number."
-#~ msgstr "Ivedėte klaidingą gavėjo numerį."
-
-#~ msgid "You have entered incorrent sender signature (number or name)."
-#~ msgstr "Įvedėte klaidingą siuntėjo parašą (numerį arba vardą)."
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Vardas:"
-
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Tikrinti programos ir operatorių atnaujinimus"
 
@@ -2186,6 +2169,10 @@ msgstr ""
 
 #~ msgid "Automatically check for &updates of:"
 #~ msgstr "Automatiškai tikrinti atnaujinimus:"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Vardas:"
 
 #~ msgid "Checking..."
 #~ msgstr "Tikrinama..."

@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-31 21:41+0200\n"
-"PO-Revision-Date: 2010-11-19 23:12+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"POT-Creation-Date: 2011-06-01 21:12+0200\n"
+"PO-Revision-Date: 2011-04-23 08:42+0000\n"
+"Last-Translator: simone.sandri <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-26 05:02+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-04-24 04:39+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -41,7 +41,7 @@ msgstr "&Riconoscimenti"
 
 #: AboutFrame.homeHyperlink.text
 msgid "Homepage"
-msgstr ""
+msgstr "Pagina iniziale"
 
 #: AboutFrame.homeHyperlink.toolTipText
 msgid ""
@@ -59,7 +59,7 @@ msgstr "Inviando SMS attraverso Internet"
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2011 Kamil Páral"
-msgstr ""
+msgstr "2007-2011 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -200,15 +200,15 @@ msgstr "&Comprimi"
 
 #: ConfigFrame.Favorite
 msgid "Favorite"
-msgstr ""
+msgstr "Preferito"
 
 #: ConfigFrame.Gateway
 msgid "Gateway"
-msgstr ""
+msgstr "Gateway"
 
 #: ConfigFrame.Show
 msgid "Show"
-msgstr ""
+msgstr "Visualizza"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -292,7 +292,7 @@ msgstr ""
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 #, fuzzy
 msgid "Gateway&s"
-msgstr "&Gateway:"
+msgstr "Gateway"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -2128,7 +2128,8 @@ msgstr ""
 "  Kamil Páral https://launchpad.net/~kamil.paral\n"
 "  Luca Livraghi https://launchpad.net/~luca91\n"
 "  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
-"  marco lucato https://launchpad.net/~hotswingred"
+"  marco lucato https://launchpad.net/~hotswingred\n"
+"  simone.sandri https://launchpad.net/~lexluxsox"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2180,10 +2181,6 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Nome:"
-
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Contraolla aggiornamenti del programma e del gateway"
 
@@ -2192,6 +2189,19 @@ msgstr ""
 
 #~ msgid "Automatically check for &updates of:"
 #~ msgstr "Verifica automatica per &aggiornamenti di:"
+
+#~ msgid "Show &password"
+#~ msgstr "Mostra &password"
+
+#~ msgid "program only"
+#~ msgstr "solo programmi"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Nome:"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Ricerca &aggiornamenti"
 
 #~ msgid "Add new contact"
 #~ msgstr "Aggiungi nuovo contatto"
@@ -2256,3 +2266,7 @@ msgstr ""
 #~ msgstr ""
 #~ "Questa scheda p solo per scopi di sviluppo. Non sarà visibile nella "
 #~ "release finale"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Gateway:"
