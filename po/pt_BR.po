@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2011-03-23 18:33+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-24 04:54+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:41+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -308,9 +308,8 @@ msgid "&Username:"
 msgstr "Nome do &usuário:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "&Senha:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -426,9 +425,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "&Nome:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -761,9 +759,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Nome:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -2166,3 +2163,10 @@ msgstr ""
 
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"
+
+#~ msgid "Pa&ssword:"
+#~ msgstr "&Senha:"
+
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&Nome:"

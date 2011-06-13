@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2011-04-26 04:24+0000\n"
 "Last-Translator: AngorSTV <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-27 04:43+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:41+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -233,17 +233,12 @@ msgid "Announce new program &updates"
 msgstr ""
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
 "was released and eventually notify the user\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"После запуска, программа проверит наличие новых версий<br>\n"
-"или порталы которые напомнят об этом пользователю\n"
-"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -275,9 +270,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-#, fuzzy
 msgid "Request a &delivery report"
-msgstr "Запрос &сообщения о доставке"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -289,9 +283,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "&Шлюзы"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -330,9 +323,8 @@ msgid "&Username:"
 msgstr "&Имя пользователя:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "Па&роль:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -457,9 +449,8 @@ msgstr ""
 "Адрес в поле «HTTP прокси» будет использоваться также для поля «HTTPS прокси»"
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "Имя:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -477,17 +468,15 @@ msgid "&Number:"
 msgstr "&Номер:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
 "Not all gateways support this feature.</html>"
-msgstr "Номер получателя в международном формате (начинаяется со знака '+')"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Sho&w password"
-msgstr "Показать пароль"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -571,9 +560,8 @@ msgid "Unknown"
 msgstr "Неизвестно"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-#, fuzzy
 msgid "Also u&nstable versions"
-msgstr "также &нестабильные версии"
+msgstr ""
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
@@ -803,9 +791,8 @@ msgid "Default &gateway:"
 msgstr "&Шлюз по умолчанию:"
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Имя:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -944,9 +931,8 @@ msgid "&Forward"
 msgstr "&Вперёд"
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Неизвестный шлюз"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -984,14 +970,12 @@ msgid "Mainly usable for country: {0}"
 msgstr "D основном используется в странах: {0}"
 
 #: GatewayErrorMessage.helpLabel.text
-#, fuzzy
 msgid "Help:"
-msgstr "Справка"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.text
-#, fuzzy
 msgid "&Send again"
-msgstr "&Отправить"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
@@ -1192,9 +1176,8 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER
-#, fuzzy
 msgid "You have entered a wrong recipient number: {0}"
-msgstr "Вы ввели неверный номер получателя"
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER.help
@@ -1729,9 +1712,8 @@ msgid "Queue"
 msgstr "Очередь"
 
 #: QueuePanel.confirmDelete
-#, fuzzy
 msgid "Really remove all selected messages from the queue?"
-msgstr "Удалить все выбранные сообщения из журнала?"
+msgstr ""
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -1939,18 +1921,16 @@ msgid "Show program"
 msgstr "Показать программу"
 
 #: Signature.confirmRemove
-#, fuzzy
 msgid "Do you want to remove selected signature?"
-msgstr "Вы действительно хотите удалить все ранее введённые логины?"
+msgstr ""
 
 #: Signature.default
 msgid "Default"
 msgstr ""
 
 #: Signature.new
-#, fuzzy
 msgid "<html><i>New signature...</i></html>"
-msgstr "<html><i>Лог файл доступен по следующему пути: {0}</i></html>"
+msgstr ""
 
 #: Signature.new.desc
 msgid "Name of the new signature:"
@@ -2208,89 +2188,26 @@ msgstr "Шлюз обновлен: {0}"
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Проверить обновления программы и шлюза"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Проверка обновлений"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Автоматическая проверка &обновлений:"
-
-#~ msgid "Show &password"
-#~ msgstr "Показать &пароль"
-
-#~ msgid "program and gateways"
-#~ msgstr "программа и шлюзы"
-
-#~ msgid "gateways only"
-#~ msgstr "только шлюзы"
-
-#~ msgid "program only"
-#~ msgstr "только программа"
-
-#~ msgid "Add a sender &signature to the message"
-#~ msgstr "Добавить &подпись отправителя в сообщение"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Имя:"
-
-#~ msgid "A message from the gateway:<br>"
-#~ msgstr "Сообщение из шлюза: <br>"
-
-#~ msgctxt "UnknownGateway"
-#~ msgid "Unknown gateway"
-#~ msgstr "Неизвестный шлюз"
-
-#~ msgid "All gateways have been successfully updated."
-#~ msgstr "Все шлюзы были успешно обновлены."
-
-#~ msgid "Checking..."
-#~ msgstr "Проверка..."
-
-#~ msgid "gateway version: {0}"
-#~ msgstr "версия шлюза: {0}"
-
-#~ msgid ""
-#~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-#~ "latest versions of all the available gateways.</html>"
-#~ msgstr ""
-#~ "<html><h2>Все шлюзы актуальны.</h2>В данный момент вы используете самые "
-#~ "последние версии возможных шлюзов.</html>"
-
-#~ msgid ""
-#~ "<html>There is a new program version ({0}) available on the <a href="
-#~ "\"{1}\">program homepage</a>.</html>"
-#~ msgstr ""
-#~ "<html>Обнаружена новая версия программы ({0}), которая доступна на <a "
-#~ "href=\"{1}\">домашней странице</a>.</html>"
-
-#~ msgid "Click to open an update manager"
-#~ msgstr "Нажмите для того, чтобы открыть менеджер обновлений"
-
-#~ msgid "&Update"
-#~ msgstr "&Обновить"
-
-#~ msgid ""
-#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
-#~ "been found. It is recommended to update them now.</html>"
-#~ msgstr ""
-#~ "<html><h2>Обновленные шлюзы найдены.</h2>Некоторые новые или обновленные "
-#~ "шлюзы были найдены. Рекомендуется обновить их сейчас.</html>"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Проверить на &обновления"
-
 #~ msgid "Add new contact"
 #~ msgstr "Добавить новый контакт"
+
+#~ msgid "Pa&ssword:"
+#~ msgstr "Па&роль:"
 
 #~ msgctxt "ConfigFrame.jLabel10.text"
 #~ msgid "&Gateway:"
 #~ msgstr "Ш&люз:"
 
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&Имя:"
+
 #~ msgid "O&perators"
 #~ msgstr "О&ператоры"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Имя:"
 
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
@@ -2307,6 +2224,32 @@ msgstr ""
 
 #~ msgid "Delete all usernames and passwords for all operators"
 #~ msgstr "Удалить все имена пользователей и их пароли для всех операторов"
+
+#~ msgid "Request the &delivery report"
+#~ msgstr "Запрос &сообщения о доставке"
+
+#~ msgid "Click to open an update manager"
+#~ msgstr "Нажмите для того, чтобы открыть менеджер обновлений"
+
+#~ msgid "&Update"
+#~ msgstr "&Обновить"
+
+#~ msgid ""
+#~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
+#~ "latest versions of all the available gateways.</html>"
+#~ msgstr ""
+#~ "<html><h2>Все шлюзы актуальны.</h2>В данный момент вы используете самые "
+#~ "последние версии возможных шлюзов.</html>"
+
+#~ msgid ""
+#~ "<html>There is a new program version ({0}) available on the <a href="
+#~ "\"{1}\">program homepage</a>.</html>"
+#~ msgstr ""
+#~ "<html>Обнаружена новая версия программы ({0}), которая доступна на <a "
+#~ "href=\"{1}\">домашней странице</a>.</html>"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Проверить на &обновления"
 
 #~ msgid "(country:"
 #~ msgstr "(страна:"
@@ -2339,6 +2282,15 @@ msgstr ""
 #~ msgid "Show &only operator gateways with names containing:"
 #~ msgstr "Показывать &только шлюзы оператора с именами содержащими:"
 
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr "Вы действительно хотите удалить все ранее введённые логины?"
+
+#~ msgid "Sender number in international format (starting with '+' sign)"
+#~ msgstr "Номер получателя в международном формате (начинаяется со знака '+')"
+
+#~ msgid "Show password"
+#~ msgstr "Показать пароль"
+
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Поддержать проект</a></html>"
 
@@ -2351,8 +2303,32 @@ msgstr ""
 #~ "Вам нравится этот проект? Помогите своим участием...\n"
 #~ "</html>"
 
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Проверить обновления программы и шлюза"
+
+#~ msgid "&Gateways"
+#~ msgstr "&Шлюзы"
+
+#~ msgid "program and gateways"
+#~ msgstr "программа и шлюзы"
+
+#~ msgid "gateways only"
+#~ msgstr "только шлюзы"
+
+#~ msgid "also u&nstable versions"
+#~ msgstr "также &нестабильные версии"
+
+#~ msgid "program only"
+#~ msgstr "только программа"
+
 #~ msgid "Sent messages history"
 #~ msgstr "Архив отправленных сообщений"
+
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Автоматическая проверка &обновлений:"
+
+#~ msgid "&Updates checker"
+#~ msgstr "&Проверка обновлений"
 
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"
@@ -2361,21 +2337,68 @@ msgstr ""
 #~ msgstr "Использовать раскладку по умолчанию"
 
 #~ msgid ""
+#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
+#~ "been found. It is recommended to update them now.</html>"
+#~ msgstr ""
+#~ "<html><h2>Обновленные шлюзы найдены.</h2>Некоторые новые или обновленные "
+#~ "шлюзы были найдены. Рекомендуется обновить их сейчас.</html>"
+
+#~ msgid "All gateways have been successfully updated."
+#~ msgstr "Все шлюзы были успешно обновлены."
+
+#~ msgid "gateway version: {0}"
+#~ msgstr "версия шлюза: {0}"
+
+#~ msgctxt "UnknownGateway"
+#~ msgid "Unknown gateway"
+#~ msgstr "Неизвестный шлюз"
+
+#~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "
 #~ "final release."
 #~ msgstr ""
 #~ "Эта закладка только для разработчиков. Она будет недоступна в финальном "
 #~ "релизе."
 
+#~ msgid "Show &password"
+#~ msgstr "Показать &пароль"
+
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "Добавить &подпись отправителя в сообщение"
+
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "Импортировать контакты только с известным оператором"
+
+#~ msgid "You have entered incorrect recipient number."
+#~ msgstr "Вы ввели неверный номер получателя"
 
 #~ msgctxt "SMSPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Шлюз:"
+
+#~ msgid "Checking..."
+#~ msgstr "Проверка..."
 
 #~ msgid "Show &only gateways with names containing:"
 #~ msgstr "Показывать &только шлюзы с именами, содержащими:"
 
 #~ msgid "<html>User configuration directory:<br>{0}</html>"
 #~ msgstr "<html>Каталог конфигурации пользователя:<br>{0}</html>"
+
+#~ msgid "A message from the gateway:<br>"
+#~ msgstr "Сообщение из шлюза: <br>"
+
+#~ msgctxt "Gateway.unknown"
+#~ msgid "Unknown gateway"
+#~ msgstr "Неизвестный шлюз"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "After program startup perform a check whether a new program version<br>\n"
+#~ "or gateway updates were released and eventually notify the user\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "После запуска, программа проверит наличие новых версий<br>\n"
+#~ "или порталы которые напомнят об этом пользователю\n"
+#~ "</html>"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2011-03-09 11:46+0000\n"
 "Last-Translator: Tomas Ruzicka <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-10 04:48+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:40+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -276,12 +276,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-#, fuzzy
 msgid "Request a &delivery report"
-msgstr "Zustellungsbericht verlangen"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
@@ -289,18 +287,10 @@ msgid ""
 "to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Senden eines Zustellungsberichtes zu der gesendeten Nachricht wird "
-"angefordert. <br>\n"
-"Der Bericht wird zum Telefon des Senders geschickt. Diese Funktion wird nur "
-"bei einigen <br>\n"
-"Gateways unterstützt.\n"
-"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "&Gateways"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -351,9 +341,8 @@ msgid "&Username:"
 msgstr "Ben&utzername:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "Pa&sswort:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -483,9 +472,8 @@ msgid ""
 msgstr "Die Adresse des HTTP-Proxyservers wird auch für HTTPS-Proxy verwendet"
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "&Name:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -503,17 +491,15 @@ msgid "&Number:"
 msgstr "&Nummer:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
 "Not all gateways support this feature.</html>"
-msgstr "Absendernummer im internationalen Format (beginnend mit '+')"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Sho&w password"
-msgstr "Kennwort anzeigen"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -609,12 +595,10 @@ msgid "Unknown"
 msgstr "Unbekannt"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-#, fuzzy
 msgid "Also u&nstable versions"
-msgstr "auch Testversionen"
+msgstr ""
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Notify also also about unstable program versions.<br>\n"
@@ -623,12 +607,6 @@ msgid ""
 "who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Info auch über Testversionverfügbarkeit anzeigen.<br>\n"
-"<br>\n"
-"<b>Warnung: Testversionen sind nur auf erfahrene Benutzer ausgerichtet,<br>\n"
-"welche keine Angst vor Datenverlust haben.</b>\n"
-"</html>"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -847,9 +825,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Name:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -982,9 +959,8 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Unbekannt"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1977,9 +1953,8 @@ msgid "Default"
 msgstr ""
 
 #: Signature.new
-#, fuzzy
 msgid "<html><i>New signature...</i></html>"
-msgstr "<html><i>Die Logdatei ist abgelegt unter: {0}</i></html>"
+msgstr ""
 
 #: Signature.new.desc
 msgid "Name of the new signature:"
@@ -2228,27 +2203,6 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Nach Program- und Gatewayaktualisierungen suchen"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Aktualisieren"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Automatische Update-Überprüfung"
-
-#~ msgid "program and gateways"
-#~ msgstr "Programm und Gateways"
-
-#~ msgid "gateways only"
-#~ msgstr "Nur Gateways"
-
-#~ msgid "program only"
-#~ msgstr "Nur Programm"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Auf Aktualisierungen prüfen"
-
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Homepage</a></html>"
 
@@ -2282,12 +2236,87 @@ msgstr ""
 #~ "Header, alle Umleitungen, Web-Inhalte, etc. \n"
 #~ "* (2) - (0) und (1) Modi sind kombiniert."
 
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Automatische Update-Überprüfung"
+
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Unterstütze das Projekt</a></html>"
 
 #~ msgid "(country:"
 #~ msgstr "(Land:"
 
+#~ msgid "Pa&ssword:"
+#~ msgstr "Pa&sswort:"
+
 #~ msgctxt "ConfigFrame.jLabel10.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Gateway:"
+
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&Name:"
+
+#~ msgid "&Gateways"
+#~ msgstr "&Gateways"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Auf Aktualisierungen prüfen"
+
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Nach Program- und Gatewayaktualisierungen suchen"
+
+#~ msgid "&Updates checker"
+#~ msgstr "&Aktualisieren"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Will request sending of a delivery report of the message. The report will "
+#~ "come<br>\n"
+#~ "to the phone number of the sender. This function is supported only by "
+#~ "some gateways.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Senden eines Zustellungsberichtes zu der gesendeten Nachricht wird "
+#~ "angefordert. <br>\n"
+#~ "Der Bericht wird zum Telefon des Senders geschickt. Diese Funktion wird "
+#~ "nur bei einigen <br>\n"
+#~ "Gateways unterstützt.\n"
+#~ "</html>"
+
+#~ msgid "Request the &delivery report"
+#~ msgstr "Zustellungsbericht verlangen"
+
+#~ msgid "Show &password"
+#~ msgstr "Kennwort anzeigen"
+
+#~ msgid "Sender number in international format (starting with '+' sign)"
+#~ msgstr "Absendernummer im internationalen Format (beginnend mit '+')"
+
+#~ msgid "gateways only"
+#~ msgstr "Nur Gateways"
+
+#~ msgid "program and gateways"
+#~ msgstr "Programm und Gateways"
+
+#~ msgid "also u&nstable versions"
+#~ msgstr "auch Testversionen"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Notify also also about unstable versions.<br>\n"
+#~ "<br>\n"
+#~ "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
+#~ "not afraid of potentially losing their program data.</b>\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Info auch über Testversionverfügbarkeit anzeigen.<br>\n"
+#~ "<br>\n"
+#~ "<b>Warnung: Testversionen sind nur auf erfahrene Benutzer ausgerichtet,"
+#~ "<br>\n"
+#~ "welche keine Angst vor Datenverlust haben.</b>\n"
+#~ "</html>"
+
+#~ msgid "program only"
+#~ msgstr "Nur Programm"

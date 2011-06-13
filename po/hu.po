@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2010-03-12 18:48+0000\n"
 "Last-Translator: Gergely Szarka <szarka.honved@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-07 04:51+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:41+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -273,9 +273,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "&Átjáró:"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -314,9 +313,8 @@ msgid "&Username:"
 msgstr "&Felhasználónév:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "&Jelszó:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -435,9 +433,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "&Név:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -770,9 +767,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Név:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -905,9 +901,8 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Ismeretlen átjáró!"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1683,9 +1678,8 @@ msgid "Queue"
 msgstr ""
 
 #: QueuePanel.confirmDelete
-#, fuzzy
 msgid "Really remove all selected messages from the queue?"
-msgstr "Biztosan törli az összes kiválasztott üzeneteket az előzményekből?"
+msgstr ""
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -2147,18 +2141,8 @@ msgid "Gateway updated: {0}"
 msgstr ""
 
 #: Update.installFailed
-#, fuzzy
 msgid "Some of gateway updates couldn't be installed."
-msgstr "Néhány konfigurációs fájl nem lett mentve!"
-
-#~ msgid "program and gateways"
-#~ msgstr "program és átjárók"
-
-#~ msgid "gateways only"
-#~ msgstr "csak átjárók"
-
-#~ msgid "program only"
-#~ msgstr "csak program"
+msgstr ""
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2175,5 +2159,25 @@ msgstr "Néhány konfigurációs fájl nem lett mentve!"
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Honlap</a></html>"
 
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Átjáró:"
+
+#~ msgid "gateways only"
+#~ msgstr "csak átjárók"
+
+#~ msgid "program and gateways"
+#~ msgstr "program és átjárók"
+
+#~ msgid "program only"
+#~ msgstr "csak program"
+
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"
+
+#~ msgid "Pa&ssword:"
+#~ msgstr "&Jelszó:"
+
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&Név:"

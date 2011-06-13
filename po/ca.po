@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2010-07-05 21:21+0000\n"
 "Last-Translator: el_libre - http://www.catmidia.cat  "
 "XDDDDDDDDDDDDDDDDDDDDDDDDDDD <el.libre@gmail.com>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-07 04:50+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:40+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -269,9 +269,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "Passarel·la:"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -310,9 +309,8 @@ msgid "&Username:"
 msgstr "Nom d'&usuari/a:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "&Contrasenya:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -428,9 +426,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "Nom:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -763,9 +760,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Nom:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -898,9 +894,8 @@ msgid "&Forward"
 msgstr "Reen&via"
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Es desconeix"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -938,14 +933,12 @@ msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.helpLabel.text
-#, fuzzy
 msgid "Help:"
-msgstr "&Ajuda"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.text
-#, fuzzy
 msgid "&Send again"
-msgstr "&Envia"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
@@ -2142,6 +2135,16 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Páral"
+
+#~ msgid "Pa&ssword:"
+#~ msgstr "&Contrasenya:"
+
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&Nom:"
+
 #~ msgctxt "EditContactPanel.nameLabel.text"
 #~ msgid "&Name:"
 #~ msgstr "&Nom:"
@@ -2154,6 +2157,3 @@ msgstr ""
 
 #~ msgid "&Update"
 #~ msgstr "&Actualitza"
-
-#~ msgid "2007-2010 Kamil Páral"
-#~ msgstr "2007-2010 Kamil Páral"

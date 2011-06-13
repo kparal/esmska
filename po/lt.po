@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-07 04:51+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:41+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -258,9 +258,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-#, fuzzy
 msgid "Request a &delivery report"
-msgstr "Pranešti apie pristatytą žinutę"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -272,9 +271,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "&Operatoriai:"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -313,9 +311,8 @@ msgid "&Username:"
 msgstr "Prisijungimo vardas:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "Slaptažodis:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -431,9 +428,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "Vardas:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -451,17 +447,15 @@ msgid "&Number:"
 msgstr "Numeris:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
 "Not all gateways support this feature.</html>"
-msgstr "Siuntėjo numeris tarptautiniu formatu (prasideda ženklu '+')"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Sho&w password"
-msgstr "Rodyti slaptažodį"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -770,9 +764,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "Vardas:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -905,9 +898,8 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Nežinomas operatorius"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -945,14 +937,12 @@ msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.helpLabel.text
-#, fuzzy
 msgid "Help:"
-msgstr "&Pagalba"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.text
-#, fuzzy
 msgid "&Send again"
-msgstr "&Siųsti"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
@@ -1070,9 +1060,8 @@ msgid ""
 msgstr ""
 
 #: GatewayProblem.NO_CREDIT
-#, fuzzy
 msgid "You don't have enough credit to send this message."
-msgstr "Jūs neturite pakankamai kreditų išsiųsti šiai žinutei."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.NO_CREDIT.help
@@ -1148,16 +1137,14 @@ msgid ""
 msgstr ""
 
 #: GatewayProblem.WRONG_CODE
-#, fuzzy
 msgid ""
 "You have entered a wrong security code. Please try to send the message again."
-msgstr "Įvedėte klaidingą apsaugos kodą."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER
-#, fuzzy
 msgid "You have entered a wrong recipient number: {0}"
-msgstr "Ivedėte klaidingą gavėjo numerį."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER.help
@@ -1171,12 +1158,11 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_SIGNATURE
-#, fuzzy
 msgid ""
 "You have entered a wrong sender signature (a number or a name).<br>\n"
 "Your sender number: {0}<br>\n"
 "Your sender name: {1}"
-msgstr "Įvedėte klaidingą siuntėjo parašą (numerį arba vardą)."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_SIGNATURE.help
@@ -1689,9 +1675,8 @@ msgid "Queue"
 msgstr "Eilė"
 
 #: QueuePanel.confirmDelete
-#, fuzzy
 msgid "Really remove all selected messages from the queue?"
-msgstr "Ar tikrai pašalinti visas pažymėtas žinutes iš istorijos?"
+msgstr ""
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -1899,9 +1884,8 @@ msgid "Show program"
 msgstr "Rodyti programą"
 
 #: Signature.confirmRemove
-#, fuzzy
 msgid "Do you want to remove selected signature?"
-msgstr "Ar tikrai norite pašalinti visus įvestus prisijungimo duomenis?"
+msgstr ""
 
 #: Signature.default
 msgid "Default"
@@ -2163,65 +2147,24 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Tikrinti programos ir operatorių atnaujinimus"
-
-#~ msgid "&Updates checker"
-#~ msgstr "Atna&ujinimų tikrinimas"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Automatiškai tikrinti atnaujinimus:"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Vardas:"
-
-#~ msgid "Checking..."
-#~ msgstr "Tikrinama..."
-
-#~ msgid "Downloading..."
-#~ msgstr "Siunčiama..."
-
-#~ msgid ""
-#~ "<html>There is a new program version ({0}) available on the <a href="
-#~ "\"{1}\">program homepage</a>.</html>"
-#~ msgstr ""
-#~ "<html>Nauja programos versija ({0}) pasiekiama <a href=\"{1}\">programos "
-#~ "puslapyje</a>.</html>"
-
-#~ msgid "&Update"
-#~ msgstr "Atna&ujinti"
-
-#~ msgid ""
-#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
-#~ "been found. It is recommended to update them now.</html>"
-#~ msgstr ""
-#~ "<html><h2>Rasti atnaujinti operatoriai</h2>Rasti nauji arba atnaujinti "
-#~ "operatoriai. Rekomenduojame atsinaujinti juos dabar.</html>"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Ieškoti atna&ujinimų"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "<h2>Check for updated gateways</h2>\n"
-#~ "Updated gateways may help you fix problems with sending messages.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "<h2>Ieškoti atnaujintų operatorių</h2>\n"
-#~ "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo "
-#~ "problemas.\n"
-#~ "</html>"
-
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009"
 
 #~ msgid "Add new contact"
 #~ msgstr "Pridėti naują kontaktą"
 
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Automatiškai tikrinti atnaujinimus:"
+
 #~ msgid "Delete all usernames and passwords for all operators"
 #~ msgstr "Ištrinti visų operatorių prisijungimo vardus ir slaptažodžius"
+
+#~ msgid "Pa&ssword:"
+#~ msgstr "Slaptažodis:"
+
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "Vardas:"
 
 #~ msgid "&Login credentials"
 #~ msgstr "Prisijungimo duomenys"
@@ -2229,17 +2172,38 @@ msgstr ""
 #~ msgid "O&perators"
 #~ msgstr "Operatoriai"
 
+#~ msgid "Show password"
+#~ msgstr "Rodyti slaptažodį"
+
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr "Ar tikrai norite pašalinti visus įvestus prisijungimo duomenis?"
+
 #~ msgid "Contact list"
 #~ msgstr "Kontaktų sąrašas"
 
 #~ msgid "Compress message (Ctrl+K)"
 #~ msgstr "Suspausti žinutę (Ctrl+K)"
 
+#~ msgid "You have entered incorrect recipient number."
+#~ msgstr "Ivedėte klaidingą gavėjo numerį."
+
+#~ msgid "You have entered the wrong security code."
+#~ msgstr "Įvedėte klaidingą apsaugos kodą."
+
 #~ msgid "Unknown operator!"
 #~ msgstr "Nežinomas operatorius!"
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Įveskite kodą iš paveiklėlio."
+
+#~ msgid "Unknown operator"
+#~ msgstr "Nežinomas operatorius"
+
+#~ msgid "Checking..."
+#~ msgstr "Tikrinama..."
+
+#~ msgid "Downloading..."
+#~ msgstr "Siunčiama..."
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2253,8 +2217,18 @@ msgstr ""
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Paremkite projektą</a></html>"
 
+#~ msgid "&Updates checker"
+#~ msgstr "Atna&ujinimų tikrinimas"
+
 #~ msgid "(country:"
 #~ msgstr "(šalis:"
+
+#~ msgid "Sender number in international format (starting with '+' sign)"
+#~ msgstr "Siuntėjo numeris tarptautiniu formatu (prasideda ženklu '+')"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Vardas:"
 
 #~ msgid "Sent messages history"
 #~ msgstr "Išsiųstų žinučių istorija"
@@ -2271,11 +2245,17 @@ msgstr ""
 #~ msgid "&Translate This Application..."
 #~ msgstr "&Išversti šią programą..."
 
+#~ msgid "You don't have sufficient credit to send this message."
+#~ msgstr "Jūs neturite pakankamai kreditų išsiųsti šiai žinutei."
+
 #~ msgid "Only usable for the country: {0}"
 #~ msgstr "Tinkamas naudoti tik šioje šalyje:"
 
 #~ msgid "A message from operator:<br>"
 #~ msgstr "Žinutė nuo operatoriaus:<br>"
+
+#~ msgid "You have entered incorrent sender signature (number or name)."
+#~ msgstr "Įvedėte klaidingą siuntėjo parašą (numerį arba vardą)."
 
 #~ msgid "You have entered incorrect message text. Empty or too long?"
 #~ msgstr "Įvedėte neteisingą tekstą. Tekstas tuščias arba per ilgas."
@@ -2286,8 +2266,40 @@ msgstr ""
 #~ msgid "Unpause sending of sms in the queue"
 #~ msgstr "Paleisti sms siuntimą eilėje"
 
+#~ msgid "&Update"
+#~ msgstr "Atna&ujinti"
+
+#~ msgid ""
+#~ "<html>There is a new program version ({0}) available on the <a href="
+#~ "\"{1}\">program homepage</a>.</html>"
+#~ msgstr ""
+#~ "<html>Nauja programos versija ({0}) pasiekiama <a href=\"{1}\">programos "
+#~ "puslapyje</a>.</html>"
+
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Pagrindinis puslapis</a></html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "<h2>Check for updated gateways</h2>\n"
+#~ "Updated gateways may help you fix problems with sending messages.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "<h2>Ieškoti atnaujintų operatorių</h2>\n"
+#~ "Atnaujinus operatorius, greičiausiai išpręsite žinučių siuntimo "
+#~ "problemas.\n"
+#~ "</html>"
+
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Tikrinti programos ir operatorių atnaujinimus"
+
+#~ msgid "Request the &delivery report"
+#~ msgstr "Pranešti apie pristatytą žinutę"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Operatoriai:"
 
 #~ msgid "Username needed for logging in to the operator web gateway"
 #~ msgstr ""
@@ -2295,3 +2307,13 @@ msgstr ""
 
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"
+
+#~ msgid ""
+#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
+#~ "been found. It is recommended to update them now.</html>"
+#~ msgstr ""
+#~ "<html><h2>Rasti atnaujinti operatoriai</h2>Rasti nauji arba atnaujinti "
+#~ "operatoriai. Rekomenduojame atsinaujinti juos dabar.</html>"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Ieškoti atna&ujinimų"

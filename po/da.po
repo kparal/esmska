@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2010-01-31 18:22+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-07 04:50+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:40+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -271,9 +271,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "&Gateways"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -312,9 +311,8 @@ msgid "&Username:"
 msgstr "&Brugernavn:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "Adgang&skode:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -432,9 +430,8 @@ msgstr ""
 "feltet"
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "Navn:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -459,9 +456,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Sho&w password"
-msgstr "Vis adgangskode"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -768,9 +764,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Navn:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -903,9 +898,8 @@ msgid "&Forward"
 msgstr "&Videresend"
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Ukendt gateway"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -943,14 +937,12 @@ msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.helpLabel.text
-#, fuzzy
 msgid "Help:"
-msgstr "&Hjælp"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.text
-#, fuzzy
 msgid "&Send again"
-msgstr "&Send"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
@@ -1145,16 +1137,14 @@ msgid ""
 msgstr ""
 
 #: GatewayProblem.WRONG_CODE
-#, fuzzy
 msgid ""
 "You have entered a wrong security code. Please try to send the message again."
-msgstr "Du har indtastet en forkert sikkerhedskode."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER
-#, fuzzy
 msgid "You have entered a wrong recipient number: {0}"
-msgstr "Du har indtastet en forkert sikkerhedskode."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER.help
@@ -2153,31 +2143,40 @@ msgid "Gateway updated: {0}"
 msgstr "Gateway opdateret: {0}"
 
 #: Update.installFailed
-#, fuzzy
 msgid "Some of gateway updates couldn't be installed."
-msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
+msgstr ""
 
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Tjek for program og gateway opdateringer"
+#~ msgid "Add new contact"
+#~ msgstr "Tilføj ny kontakt"
 
-#~ msgid "program and gateways"
-#~ msgstr "program og gateway"
+#~ msgid "Pa&ssword:"
+#~ msgstr "Adgang&skode:"
 
-#~ msgid "gateways only"
-#~ msgstr "kun gateways"
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&Navn:"
 
-#~ msgid "program only"
-#~ msgstr "kun program"
+#~ msgid "Unknown operator"
+#~ msgstr "Ukendt operator"
 
 #~ msgctxt "EditContactPanel.nameLabel.text"
 #~ msgid "&Name:"
 #~ msgstr "&Navn:"
 
-#~ msgid "<a href=\"\">Gateway updates</a> are available!"
-#~ msgstr "<a href=\"\">Gateway opdateringer</a> er tilgængelige!"
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Hjemmeside</a></html>"
 
-#~ msgid "Retrieving update information failed!"
-#~ msgstr "Modtagelse af opdateringsinfo mislykkedes!"
+#~ msgid "2007-2009 Kamil Páral"
+#~ msgstr "2007-2009 Kamil Páral"
+
+#~ msgid "&Update"
+#~ msgstr "&Opdatér"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Tjek for &opdateringer"
+
+#~ msgid "You have entered the wrong security code."
+#~ msgstr "Du har indtastet en forkert sikkerhedskode."
 
 #~ msgid "Checking..."
 #~ msgstr "Tjekker..."
@@ -2194,8 +2193,8 @@ msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 #~ msgid "Installation of some gateways failed!"
 #~ msgstr "Installation af nogle gateways mislykkedes!"
 
-#~ msgid "{0} (needs program version: {1})"
-#~ msgstr "{0} (behøver program version: {1})"
+#~ msgid "Retrieving update information failed!"
+#~ msgstr "Modtagelse af opdateringsinfo mislykkedes!"
 
 #~ msgid ""
 #~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
@@ -2204,6 +2203,9 @@ msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 #~ "<html><h2>Alle gateways er opdaterede</h2>Du anvender i øjeblikket de "
 #~ "seneste versioner af alle tilgængelige gateways.</html>"
 
+#~ msgid "{0} (needs program version: {1})"
+#~ msgstr "{0} (behøver program version: {1})"
+
 #~ msgid ""
 #~ "<html>There is a new program version ({0}) available on the <a href="
 #~ "\"{1}\">program homepage</a>.</html>"
@@ -2211,23 +2213,8 @@ msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 #~ "<html>Der er en nyere program version ({0}) tilgængelig på <a href="
 #~ "\"{1}\">programmets hjemmeside</a>.</html>"
 
-#~ msgid "&Update"
-#~ msgstr "&Opdatér"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Tjek for &opdateringer"
-
-#~ msgid "Add new contact"
-#~ msgstr "Tilføj ny kontakt"
-
-#~ msgid "Unknown operator"
-#~ msgstr "Ukendt operator"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Hjemmeside</a></html>"
-
-#~ msgid "2007-2009 Kamil Páral"
-#~ msgstr "2007-2009 Kamil Páral"
+#~ msgid "<a href=\"\">Gateway updates</a> are available!"
+#~ msgstr "<a href=\"\">Gateway opdateringer</a> er tilgængelige!"
 
 #~ msgid "Get &Help Online..."
 #~ msgstr "Få &hjælp online..."
@@ -2238,6 +2225,10 @@ msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 #~ msgid "&Translate This Application..."
 #~ msgstr "&Oversæt dette program..."
 
+#~ msgctxt "Operator.unknown"
+#~ msgid "Unknown gateway"
+#~ msgstr "Ukendt gateway"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Do you like this project? Help to keep it running...\n"
@@ -2247,12 +2238,30 @@ msgstr "Nogle af konfigurationsfilerne kunne ikke gemmes!"
 #~ "Kan du lide dette projektt? Hjælp med at holde det i luften...\n"
 #~ "</html>"
 
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Tjek for program og gateway opdateringer"
+
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Støt projekt</a></html>"
 
 #~ msgctxt "ConfigFrame.jLabel10.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Gateway:"
+
+#~ msgid "&Gateways"
+#~ msgstr "&Gateways"
+
+#~ msgid "Show password"
+#~ msgstr "Vis adgangskode"
+
+#~ msgid "gateways only"
+#~ msgstr "kun gateways"
+
+#~ msgid "program and gateways"
+#~ msgstr "program og gateway"
+
+#~ msgid "program only"
+#~ msgstr "kun program"
 
 #~ msgid "Contact list"
 #~ msgstr "Kontaktliste"

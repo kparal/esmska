@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2010-07-18 13:52+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-07 04:51+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:40+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -223,17 +223,12 @@ msgid "Announce new program &updates"
 msgstr ""
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
 "was released and eventually notify the user\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Après démarrage, contrôler si une nouvelle version<br>\n"
-"existe et éventuellement notifier l'utilisateur\n"
-"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -270,9 +265,8 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-#, fuzzy
 msgid "Request a &delivery report"
-msgstr "Demander l'accusé de réception"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -284,9 +278,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "&Passerelle:"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -325,9 +318,8 @@ msgid "&Username:"
 msgstr ""
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "Mot de pa&sse :"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -446,12 +438,10 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "Nom :"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Sender name to append to the message.<br>\n"
@@ -461,13 +451,6 @@ msgid ""
 "may seem not to match.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Le nom renseigné prend de la place dans le message, mais n'y paraît pas."
-"<br>\n"
-"C'est pour cette raison que la couleur du texte du message et le compteur de "
-"messages<br>\n"
-"peuvent laisser croire qu'ils diffèrent\n"
-"</html>"
 
 #: ConfigFrame.senderNumberLabel.text
 msgid "&Number:"
@@ -481,9 +464,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Sho&w password"
-msgstr "Afficher le mot de passe"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -797,9 +779,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Nom :"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -932,9 +913,8 @@ msgid "&Forward"
 msgstr "&Transférer"
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Inconnu"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1713,11 +1693,8 @@ msgid "Queue"
 msgstr ""
 
 #: QueuePanel.confirmDelete
-#, fuzzy
 msgid "Really remove all selected messages from the queue?"
 msgstr ""
-"Voulez-vous vraiment supprimer tous les messages sélectionnés de "
-"l'historique ?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -1925,11 +1902,8 @@ msgid "Show program"
 msgstr ""
 
 #: Signature.confirmRemove
-#, fuzzy
 msgid "Do you want to remove selected signature?"
 msgstr ""
-"Voulez-vous vraiment supprimer toutes les informations de connexion "
-"existantes ?"
 
 #: Signature.default
 msgid "Default"
@@ -2189,15 +2163,6 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Vérifier les mises à jour"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Contrôleur des mises à jour"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Recherche automatique des mises à jour"
-
 #~ msgid "Add new contact"
 #~ msgstr "Ajouter un nouveau contact"
 
@@ -2213,6 +2178,9 @@ msgstr ""
 #~ "Ce projet vous plaît ? Aidez-nous à poursuivre le travail...\n"
 #~ "</html>"
 
+#~ msgid "Request the &delivery report"
+#~ msgstr "Demander l'accusé de réception"
+
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "
 #~ "final release."
@@ -2222,6 +2190,28 @@ msgstr ""
 
 #~ msgid "Use default form &layout"
 #~ msgstr "Utiliser la &mise en page par défaut du formulaire"
+
+#~ msgid "Pa&ssword:"
+#~ msgstr "Mot de pa&sse :"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Filled in name occupies space in the message but is not visible,<br>\n"
+#~ "therefore the message text coloring and message counter indicator<br>\n"
+#~ "may seem not to match\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Le nom renseigné prend de la place dans le message, mais n'y paraît pas."
+#~ "<br>\n"
+#~ "C'est pour cette raison que la couleur du texte du message et le compteur "
+#~ "de messages<br>\n"
+#~ "peuvent laisser croire qu'ils diffèrent\n"
+#~ "</html>"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Nom :"
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2251,5 +2241,37 @@ msgstr ""
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Supporter le projet</a></html>"
 
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Vérifier les mises à jour"
+
+#~ msgid "&Updates checker"
+#~ msgstr "&Contrôleur des mises à jour"
+
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"
+
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Recherche automatique des mises à jour"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "After program startup perform a check whether a new program version<br>\n"
+#~ "or gateway updates were released and eventually notify the user\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Après démarrage, contrôler si une nouvelle version<br>\n"
+#~ "existe et éventuellement notifier l'utilisateur\n"
+#~ "</html>"
+
+#~ msgctxt "ConfigFrame.jLabel10.text"
+#~ msgid "&Gateway:"
+#~ msgstr "&Passerelle:"
+
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr ""
+#~ "Voulez-vous vraiment supprimer toutes les informations de connexion "
+#~ "existantes ?"
+
+#~ msgid "Show &password"
+#~ msgstr "Afficher le mot de passe"

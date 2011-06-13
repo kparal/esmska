@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-07 04:51+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:41+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -264,12 +264,10 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-#, fuzzy
 msgid "Request a &delivery report"
-msgstr "מבקש את דוח &ההעברה"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
@@ -277,15 +275,10 @@ msgid ""
 "to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"יבקש את שליחת דוח ההעברה של ההודעה. הדוח יגיע אל מספר הטלפון של השולח.<br>\n"
-"פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
-"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "שער גישה:"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -332,9 +325,8 @@ msgid "&Username:"
 msgstr "&שם משתמש:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "&סיסמה:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -461,12 +453,10 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "שם:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Sender name to append to the message.<br>\n"
@@ -476,27 +466,21 @@ msgid ""
 "may seem not to match.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"השם שהוזן תופס חלק מההודעה אך אינו גלוי,<br>\n"
-"לכן צביעת הודעת הטקסט אינה נראית זהה למחוון הספירה<br>\n"
-"</html>"
 
 #: ConfigFrame.senderNumberLabel.text
 msgid "&Number:"
 msgstr "&מספר:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
 "Not all gateways support this feature.</html>"
-msgstr "מספר השולח במבנה בינלאומי (מתחיל בסימן '+')"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Sho&w password"
-msgstr "הצגת סיסמה"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -832,9 +816,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&שם:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -978,9 +961,8 @@ msgid "&Forward"
 msgstr "ה&עבר"
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "מפעיל לא ידוע"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1018,14 +1000,12 @@ msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.helpLabel.text
-#, fuzzy
 msgid "Help:"
-msgstr "ע&זרה"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.text
-#, fuzzy
 msgid "&Send again"
-msgstr "&שלח"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
@@ -1145,9 +1125,8 @@ msgid ""
 msgstr ""
 
 #: GatewayProblem.NO_CREDIT
-#, fuzzy
 msgid "You don't have enough credit to send this message."
-msgstr "אין לך די אשראי לשליחת הודעה זו."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.NO_CREDIT.help
@@ -1157,11 +1136,10 @@ msgid ""
 msgstr ""
 
 #: GatewayProblem.NO_REASON
-#, fuzzy
 msgid ""
 "The gateway didn't specify any particular reason why this message could not "
 "be sent."
-msgstr "המפעיל לא ציין סיבה כלשהי לכשל בשליחת ההודעה."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.NO_REASON.help
@@ -1224,16 +1202,14 @@ msgid ""
 msgstr ""
 
 #: GatewayProblem.WRONG_CODE
-#, fuzzy
 msgid ""
 "You have entered a wrong security code. Please try to send the message again."
-msgstr "הזנת קוד אבטחה שגוי."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER
-#, fuzzy
 msgid "You have entered a wrong recipient number: {0}"
-msgstr "הזנת מספר נמען שגוי."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER.help
@@ -1247,12 +1223,11 @@ msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_SIGNATURE
-#, fuzzy
 msgid ""
 "You have entered a wrong sender signature (a number or a name).<br>\n"
 "Your sender number: {0}<br>\n"
 "Your sender name: {1}"
-msgstr "הזנת חתימת שולח שגויה (מספר או שם)."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_SIGNATURE.help
@@ -1528,14 +1503,10 @@ msgid "&Log"
 msgstr "רישו&ם"
 
 #: Main.already_running
-#, fuzzy
 msgid ""
 "<html><h2>Esmska is already running!</h2>Esmska is already once started. You "
 "can't run multiple program instances.<br>This one will now quit.</html>"
 msgstr ""
-"<html><h2>Esmska כבר פעילה!</h2>Esmska כבר הופעלה פעם אחת. אנו לא ממליצים "
-"להפעיל מופעים נוספים של התוכנה<br>כיוון שהם עלולים לגרום לאובדן המידע של "
-"המשתמש.</html>"
 
 #: Main.brokenWebstart
 msgid ""
@@ -1798,9 +1769,8 @@ msgid "Queue"
 msgstr "תור"
 
 #: QueuePanel.confirmDelete
-#, fuzzy
 msgid "Really remove all selected messages from the queue?"
-msgstr "באמת להסיר את כל ההודעות הנבחרות מההיסטוריה?"
+msgstr ""
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -2017,9 +1987,8 @@ msgid "Show program"
 msgstr "הצג את התוכנה"
 
 #: Signature.confirmRemove
-#, fuzzy
 msgid "Do you want to remove selected signature?"
-msgstr "האם אתה בטוח שברצונך להסיר את כל פרטי ההתחברות שהוזנו?"
+msgstr ""
 
 #: Signature.default
 msgid "Default"
@@ -2075,9 +2044,8 @@ msgstr "ניתן לשנות את חזות התוכנה בהתאם להחלטתך
 
 #. #Write the tip as short as possible
 #: Tip.11
-#, fuzzy
 msgid "In preferences you can restrict the list of displayed web gateways."
-msgstr "בהעדפות תוכל להגביל את רשימת שערי הגישה הזמינים."
+msgstr ""
 
 #. #Write the tip as short as possible
 #: Tip.12
@@ -2097,12 +2065,10 @@ msgstr "אם ההודעה הנכתבת ארוכה מדי השתמשו בפונק
 
 #. #Write the tip as short as possible
 #: Tip.15
-#, fuzzy
 msgid ""
 "We recommend you to use Linux packages, you'll obtain a program auto-update "
 "feature."
 msgstr ""
-"אנו ממליצים לך להשתמש בחבילות לינוקס, כך תתאפשר לך תכונת העדכון האוטומטי."
 
 #. #Write the tip as short as possible
 #: Tip.16
@@ -2137,13 +2103,10 @@ msgstr "ניתן לשלוט בתוכנה באמצעות המקלדת בקלות.
 
 #. #Write the tip as short as possible
 #: Tip.20
-#, fuzzy
 msgid ""
 "By using commandline options or the special portable version you can use "
 "program even in café or school."
 msgstr ""
-"על ידי שימוש באפשרויות שורת הפקודה תוכלו להשתמש בתוכנה אפילו בבתי קפה או "
-"בבית הספר."
 
 #. #Write the tip as short as possible
 #: Tip.21
@@ -2277,55 +2240,8 @@ msgid "Gateway updated: {0}"
 msgstr ""
 
 #: Update.installFailed
-#, fuzzy
 msgid "Some of gateway updates couldn't be installed."
-msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
-
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "בדיקת עדכוני תוכנה ושערי גישה"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&בודק העדכונים"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Show icon in the notification area of the window manager (so-called "
-#~ "<i>system tray</i>).<br>\n"
-#~ "<br>\n"
-#~ "Beware, when using modern composite window managers (Compiz, Beryl, ...) "
-#~ "this<br>\n"
-#~ "feature is available only from Java 6 Update 10.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "הצג סמל באזור ההתרעה של מנהל החלונות (ידוע בשם <i>מגשית המערכת</i>).<br>\n"
-#~ "<br>\n"
-#~ "הזהר, בעת שימוש במנהלי חלונות חדישים (Compiz, Beryl, ...) תכונה<br>\n"
-#~ "זו זמינה רק לאחר העדכון העשירי של Java 6.\n"
-#~ "</html>"
-
-#~ msgid "Add a sender &signature to the message"
-#~ msgstr "הוסף חתימת &שולח להודעה"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&שם:"
-
-#~ msgid ""
-#~ "You are probably running the program on an unsupported Java version! "
-#~ "Program might not work correctly with it! The tested Java versions are: "
-#~ "Sun Java 6, OpenJDK 6, Apple Java 6."
-#~ msgstr ""
-#~ "יתכן והנך מריץ את התוכנה על גירסת ג'אווה שאינה נתמכת! התוכנה עלולה לעבוד "
-#~ "שלא כראוי עם גירסת גא'ווה זו! גירסאות הג'אווה שנבדקו הן: ג'אווה 6 של סאן, "
-#~ "OpenJDK 6, Apple ג'אווה 6."
-
-#~ msgid ""
-#~ "Author of the script has not provided any additional information<br>about "
-#~ "cause of the failure for the web gateway used."
-#~ msgstr ""
-#~ "יוצר הסקריפט לא סיפק נתונים נוספים<br>אודות גורם השגיאה עבור שער הגישה "
-#~ "ברשת בו השתמשת."
+msgstr ""
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2339,8 +2255,28 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 #~ msgid "Add new contact"
 #~ msgstr "הוסף איש קשר חדש"
 
+#~ msgid "Request the &delivery report"
+#~ msgstr "מבקש את דוח &ההעברה"
+
 #~ msgid "Use default form &layout"
 #~ msgstr "השתמש במבנה &ברירת המחדל של הטופס"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Will request sending of a delivery report of the message. The report will "
+#~ "come<br>\n"
+#~ "to the phone number of the sender. This function is supported only by "
+#~ "some operators.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "יבקש את שליחת דוח ההעברה של ההודעה. הדוח יגיע אל מספר הטלפון של השולח."
+#~ "<br>\n"
+#~ "פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
+#~ "</html>"
+
+#~ msgid "Pa&ssword:"
+#~ msgstr "&סיסמה:"
 
 #~ msgid ""
 #~ "<html><i>\n"
@@ -2367,6 +2303,10 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 #~ "הבאה של התוכנית\n"
 #~ "</html>"
 
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&שם:"
+
 #~ msgid "O&perators"
 #~ msgstr "מ&פעילים"
 
@@ -2388,6 +2328,19 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 #~ msgid "&Login credentials"
 #~ msgstr "&פרטי התחברות"
 
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr "האם אתה בטוח שברצונך להסיר את כל פרטי ההתחברות שהוזנו?"
+
+#~ msgid "Sender number in international format (starting with '+' sign)"
+#~ msgstr "מספר השולח במבנה בינלאומי (מתחיל בסימן '+')"
+
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "הוסף חתימת &שולח להודעה"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&שם:"
+
 #~ msgctxt "EditContactPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"
 #~ msgstr "שער &גישה:"
@@ -2406,6 +2359,23 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
 #~ msgid ""
 #~ "<html>\n"
+#~ "Show icon in the notification area of the window manager (so-called "
+#~ "<i>system tray</i>).<br>\n"
+#~ "<br>\n"
+#~ "Beware, when using modern composite window managers (Compiz, Beryl, ...) "
+#~ "this<br>\n"
+#~ "feature is available only from Java 6 Update 10.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "הצג סמל באזור ההתרעה של מנהל החלונות (ידוע בשם <i>מגשית המערכת</i>).<br>\n"
+#~ "<br>\n"
+#~ "הזהר, בעת שימוש במנהלי חלונות חדישים (Compiz, Beryl, ...) תכונה<br>\n"
+#~ "זו זמינה רק לאחר העדכון העשירי של Java 6.\n"
+#~ "</html>"
+
+#~ msgid ""
+#~ "<html>\n"
 #~ "In the operator list only those will be displayed, which contains<br>\n"
 #~ "a pattern in their name provided in this field. This way you can "
 #~ "easily<br>\n"
@@ -2419,6 +2389,18 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 #~ "בשדה זה. בדרך זו תוכל להציג מפעילים רק עבור המדינה XX על ידי הזנת התבנית "
 #~ "[XX].<br>\n"
 #~ "תוכל להזין תבניות נוספות המופרדות בפסיקים. התבניות תלויות רישיות.\n"
+#~ "</html>"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Filled in name occupies space in the message but is not visible,<br>\n"
+#~ "therefore the message text coloring and message counter indicator<br>\n"
+#~ "may seem not to match\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "השם שהוזן תופס חלק מההודעה אך אינו גלוי,<br>\n"
+#~ "לכן צביעת הודעת הטקסט אינה נראית זהה למחוון הספירה<br>\n"
 #~ "</html>"
 
 #~ msgid "<html>User configuration directory:<br>{0}</html>"
@@ -2473,8 +2455,26 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "ייבא אנשי קשר ממפעילים מוכרים בלבד"
 
+#~ msgid ""
+#~ "You are probably running the program on an unsupported Java version! "
+#~ "Program might not work correctly with it! The tested Java versions are: "
+#~ "Sun Java 6, OpenJDK 6, Apple Java 6."
+#~ msgstr ""
+#~ "יתכן והנך מריץ את התוכנה על גירסת ג'אווה שאינה נתמכת! התוכנה עלולה לעבוד "
+#~ "שלא כראוי עם גירסת גא'ווה זו! גירסאות הג'אווה שנבדקו הן: ג'אווה 6 של סאן, "
+#~ "OpenJDK 6, Apple ג'אווה 6."
+
 #~ msgid "Directory with program settings can't be created!"
 #~ msgstr "לא ניתן ליצור תיקייה עם הגדרות התוכנה!"
+
+#~ msgid ""
+#~ "<html><h2>Esmska is already running!</h2>Esmska is already once started. "
+#~ "We strongly discourage you from starting another<br>instances of the "
+#~ "program because it may cause a user data loss.</html>"
+#~ msgstr ""
+#~ "<html><h2>Esmska כבר פעילה!</h2>Esmska כבר הופעלה פעם אחת. אנו לא ממליצים "
+#~ "להפעיל מופעים נוספים של התוכנה<br>כיוון שהם עלולים לגרום לאובדן המידע של "
+#~ "המשתמש.</html>"
 
 #~ msgid "Compress message (Ctrl+K)"
 #~ msgstr "דחוס את ההודעה (Ctrl+K)"
@@ -2494,8 +2494,24 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 #~ msgid "A message from operator:<br>"
 #~ msgstr "הודעה מהמפעיל:<br>"
 
+#~ msgid "You don't have sufficient credit to send this message."
+#~ msgstr "אין לך די אשראי לשליחת הודעה זו."
+
+#~ msgid ""
+#~ "The operator hasn't specified any reason why the message sending failed."
+#~ msgstr "המפעיל לא ציין סיבה כלשהי לכשל בשליחת ההודעה."
+
 #~ msgid "You have entered incorrect message text. Empty or too long?"
 #~ msgstr "הזנת טקסט שגוי בהודעה. ריק או ארוך מדי?"
+
+#~ msgid "You have entered incorrent sender signature (number or name)."
+#~ msgstr "הזנת חתימת שולח שגויה (מספר או שם)."
+
+#~ msgid "You have entered incorrect recipient number."
+#~ msgstr "הזנת מספר נמען שגוי."
+
+#~ msgid "You have entered the wrong security code."
+#~ msgstr "הזנת קוד אבטחה שגוי."
 
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "אנא הזן את הקוד שבתמונה:"
@@ -2523,9 +2539,34 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 #~ msgstr "אין מפעיל"
 
 #~ msgid ""
+#~ "Author of the script has not provided any additional information<br>about "
+#~ "cause of the failure for the web gateway used."
+#~ msgstr ""
+#~ "יוצר הסקריפט לא סיפק נתונים נוספים<br>אודות גורם השגיאה עבור שער הגישה "
+#~ "ברשת בו השתמשת."
+
+#~ msgid ""
+#~ "We recommend you to use Linux packages, you'll obtain an auto-update "
+#~ "feature."
+#~ msgstr ""
+#~ "אנו ממליצים לך להשתמש בחבילות לינוקס, כך תתאפשר לך תכונת העדכון האוטומטי."
+
+#~ msgid "In preferences you can restrict the list of available web gateways."
+#~ msgstr "בהעדפות תוכל להגביל את רשימת שערי הגישה הזמינים."
+
+#~ msgid ""
 #~ "Many operator gateways support adding of custom signature. See "
 #~ "preferences."
 #~ msgstr "שערי גישה של מפעילים רבים מוסיף חתימה אישית. עיין בהעדפות."
+
+#~ msgid ""
+#~ "By using commandline options you can use program even in café or school."
+#~ msgstr ""
+#~ "על ידי שימוש באפשרויות שורת הפקודה תוכלו להשתמש בתוכנה אפילו בבתי קפה או "
+#~ "בבית הספר."
+
+#~ msgid "Unknown operator"
+#~ msgstr "מפעיל לא ידוע"
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2549,6 +2590,12 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 #~ msgid "(country:"
 #~ msgstr "(מדינה:"
 
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "בדיקת עדכוני תוכנה ושערי גישה"
+
+#~ msgid "&Updates checker"
+#~ msgstr "&בודק העדכונים"
+
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">דף הבית</a></html>"
 
@@ -2560,6 +2607,9 @@ msgstr "לא ניתן לשמור כמה מקבצי התצורה!"
 
 #~ msgid "Delete all usernames and passwords for all operators"
 #~ msgstr "מחיקת שם המשתמש והסיסמה עבור כל המפעילות"
+
+#~ msgid "Show password"
+#~ msgstr "הצגת סיסמה"
 
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"

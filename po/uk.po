@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2010-11-15 00:11+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-07 04:51+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:41+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -240,17 +240,12 @@ msgid "Announce new program &updates"
 msgstr ""
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "After program startup perform a check whether a new program version<br>\n"
 "was released and eventually notify the user\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Після запуску перевіряти, чи наявна нова версія програми<br>\n"
-"або оновлення шлюзу і в кінці сповіщати користувача\n"
-"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -287,12 +282,10 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-#, fuzzy
 msgid "Request a &delivery report"
-msgstr "Запит &звіту про доставку"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message. The report will "
@@ -300,16 +293,10 @@ msgid ""
 "to the phone number of the sender. Not all gateways support this feature.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Надсилання запиту звіту про доставку повідомлення. Звіт буде приходити<br>\n"
-"на телефонний номер відправника. Ця функція підтримується лише на деяких "
-"шлюзах.\n"
-"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "&Шлюзи"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -356,9 +343,8 @@ msgid "&Username:"
 msgstr "&Ім’я користувача:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "Па&роль:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -490,9 +476,8 @@ msgstr ""
 "Адреса в полі «HTTP проксі» буде використовуватись також для «HTTPS проксі»"
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "Назва:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -510,17 +495,15 @@ msgid "&Number:"
 msgstr "&Номер:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
 "Not all gateways support this feature.</html>"
-msgstr "Номер відправника в міжнародному форматі (починається зі знака '+')"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Sho&w password"
-msgstr "Показувати &пароль"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -616,12 +599,10 @@ msgid "Unknown"
 msgstr "Невідомо"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
-#, fuzzy
 msgid "Also u&nstable versions"
-msgstr "також н&естабільні версії"
+msgstr ""
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Notify also also about unstable program versions.<br>\n"
@@ -630,13 +611,6 @@ msgid ""
 "who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Також повідомляє про нестабільні версії.<br>\n"
-"<br>\n"
-"<b>Застереження: Ці версії призначені лише для досвідчених користувачів,"
-"<br>\n"
-"що не бояться можливості втратити дані програми.</b>\n"
-"</html>"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -870,9 +844,8 @@ msgid "Default &gateway:"
 msgstr "Типовий &шлюз:"
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Ім’я:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -1009,9 +982,8 @@ msgid "&Forward"
 msgstr "&Вперед"
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Невідомий шлюз"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1058,9 +1030,8 @@ msgid "Mainly usable for country: {0}"
 msgstr "Головно прийнятний для країни: {0}"
 
 #: GatewayErrorMessage.helpLabel.text
-#, fuzzy
 msgid "Help:"
-msgstr "&Довідка"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.text
 msgid "&Send again"
@@ -1182,9 +1153,8 @@ msgid ""
 msgstr ""
 
 #: GatewayProblem.NO_CREDIT
-#, fuzzy
 msgid "You don't have enough credit to send this message."
-msgstr "Увас недостатньо коштів, щоб надіслати це повідомлення."
+msgstr ""
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.NO_CREDIT.help
@@ -1798,9 +1768,8 @@ msgid "Queue"
 msgstr ""
 
 #: QueuePanel.confirmDelete
-#, fuzzy
 msgid "Really remove all selected messages from the queue?"
-msgstr "Вилучити вибрані повідомлення з архіву"
+msgstr ""
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -2008,18 +1977,16 @@ msgid "Show program"
 msgstr ""
 
 #: Signature.confirmRemove
-#, fuzzy
 msgid "Do you want to remove selected signature?"
-msgstr "Ви дійсно хочете вилучити всі введені дані реєстрації?"
+msgstr ""
 
 #: Signature.default
 msgid "Default"
 msgstr ""
 
 #: Signature.new
-#, fuzzy
 msgid "<html><i>New signature...</i></html>"
-msgstr "<html><i>Системний журнал зберігається за адресою: {0}</i></html>"
+msgstr ""
 
 #: Signature.new.desc
 msgid "Name of the new signature:"
@@ -2264,6 +2231,15 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "2007-2010 Kamil Páral"
+#~ msgstr "2007-2010 Kamil Páral"
+
+#~ msgid "<html><a href=\"\">Homepage</a></html>"
+#~ msgstr "<html><a href=\"\">Домашня сторінка</a></html>"
+
+#~ msgid "<html><a href=\"\">Support project</a></html>"
+#~ msgstr "<html><a href=\"\">Підтримка проекту</a></html>"
+
 #~ msgid "Check for program and gateway updates"
 #~ msgstr "Перевірити оновлення програми та шлюзу"
 
@@ -2275,62 +2251,32 @@ msgstr ""
 
 #~ msgid ""
 #~ "<html>\n"
-#~ "Show icon in the notification area of the window manager (so-called "
-#~ "<i>system tray</i>).<br>\n"
-#~ "<br>\n"
-#~ "Beware, when using modern composite window managers (Compiz, Beryl, ...) "
-#~ "this<br>\n"
-#~ "feature is available only from Java 6 Update 10.\n"
+#~ "After program startup perform a check whether a new program version<br>\n"
+#~ "or gateway updates were released and eventually notify the user\n"
 #~ "</html>"
 #~ msgstr ""
 #~ "<html>\n"
-#~ "Показує значок в області сповіщення віконного менеджера (так званий "
-#~ "<i>системний лоток</i>).<br>\n"
-#~ "<br>\n"
-#~ "Будьте обережні під час використання новітніх віконних менеджерів "
-#~ "(Compiz, Beryl тощо), ця<br>\n"
-#~ "можливість доступна лише з Java 6 Update 10.\n"
+#~ "Після запуску перевіряти, чи наявна нова версія програми<br>\n"
+#~ "або оновлення шлюзу і в кінці сповіщати користувача\n"
 #~ "</html>"
 
-#~ msgid "program and gateways"
-#~ msgstr "програма та шлюзи"
-
-#~ msgid "gateways only"
-#~ msgstr "лише шлюзи"
-
-#~ msgid "program only"
-#~ msgstr "лише програма"
-
-#~ msgid "Add a sender &signature to the message"
-#~ msgstr "Додавати п&ідпис відправника до повідомлення"
+#~ msgid "Request the &delivery report"
+#~ msgstr "Запит &звіту про доставку"
 
 #~ msgid ""
 #~ "<html>\n"
-#~ "With signature added the SMS will come to the recipient from the entered "
-#~ "number<br>\n"
-#~ "and signed with entered name. Only some gateways support this feature.\n"
+#~ "Will request sending of a delivery report of the message. The report will "
+#~ "come<br>\n"
+#~ "to the phone number of the sender. This function is supported only by "
+#~ "some gateways.\n"
 #~ "</html>"
 #~ msgstr ""
 #~ "<html>\n"
-#~ "Одержувач з веденим тут номером отримуватиме SMS підписане<br>\n"
-#~ "вказаним іменем. Цю можливість підтримують лише деякі шлюзи.\n"
+#~ "Надсилання запиту звіту про доставку повідомлення. Звіт буде "
+#~ "приходити<br>\n"
+#~ "на телефонний номер відправника. Ця функція підтримується лише на деяких "
+#~ "шлюзах.\n"
 #~ "</html>"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Назва:"
-
-#~ msgid "A message from the gateway:<br>"
-#~ msgstr "Повідомлення зі шлюзу:<br>"
-
-#~ msgid "2007-2010 Kamil Páral"
-#~ msgstr "2007-2010 Kamil Páral"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Домашня сторінка</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Підтримка проекту</a></html>"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "
@@ -2357,6 +2303,9 @@ msgstr ""
 #~ msgid "&Gateway:"
 #~ msgstr "&Шлюз:"
 
+#~ msgid "Pa&ssword:"
+#~ msgstr "Па&роль:"
+
 #~ msgid ""
 #~ "<html><i>\n"
 #~ "Although the passwords are stored encrypted the original content may be "
@@ -2372,6 +2321,10 @@ msgstr ""
 #~ "програми</u>.\n"
 #~ "</i></html>"
 
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&Ім’я:"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Here you can set your login credentials for gateways which require it.\n"
@@ -2383,6 +2336,25 @@ msgstr ""
 
 #~ msgid "&Login credentials"
 #~ msgstr "&Дані реєстрації"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Show icon in the notification area of the window manager (so-called "
+#~ "<i>system tray</i>).<br>\n"
+#~ "<br>\n"
+#~ "Beware, when using modern composite window managers (Compiz, Beryl, ...) "
+#~ "this<br>\n"
+#~ "feature is available only from Java 6 Update 10.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Показує значок в області сповіщення віконного менеджера (так званий "
+#~ "<i>системний лоток</i>).<br>\n"
+#~ "<br>\n"
+#~ "Будьте обережні під час використання новітніх віконних менеджерів "
+#~ "(Compiz, Beryl тощо), ця<br>\n"
+#~ "можливість доступна лише з Java 6 Update 10.\n"
+#~ "</html>"
 
 #~ msgid ""
 #~ "<html>\n"
@@ -2402,8 +2374,77 @@ msgstr ""
 #~ "регістру.\n"
 #~ "</html>"
 
+#~ msgid "&Gateways"
+#~ msgstr "&Шлюзи"
+
+#~ msgid "Do you really like to remove all entered login credentials?"
+#~ msgstr "Ви дійсно хочете вилучити всі введені дані реєстрації?"
+
+#~ msgid "Sender number in international format (starting with '+' sign)"
+#~ msgstr "Номер відправника в міжнародному форматі (починається зі знака '+')"
+
+#~ msgid "Show &password"
+#~ msgstr "Показувати &пароль"
+
+#~ msgid "also u&nstable versions"
+#~ msgstr "також н&естабільні версії"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Notify also also about unstable versions.<br>\n"
+#~ "<br>\n"
+#~ "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
+#~ "not afraid of potentially losing their program data.</b>\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Також повідомляє про нестабільні версії.<br>\n"
+#~ "<br>\n"
+#~ "<b>Застереження: Ці версії призначені лише для досвідчених користувачів,"
+#~ "<br>\n"
+#~ "що не бояться можливості втратити дані програми.</b>\n"
+#~ "</html>"
+
+#~ msgid "program and gateways"
+#~ msgstr "програма та шлюзи"
+
+#~ msgid "gateways only"
+#~ msgstr "лише шлюзи"
+
+#~ msgid "program only"
+#~ msgstr "лише програма"
+
+#~ msgid "Add a sender &signature to the message"
+#~ msgstr "Додавати п&ідпис відправника до повідомлення"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "With signature added the SMS will come to the recipient from the entered "
+#~ "number<br>\n"
+#~ "and signed with entered name. Only some gateways support this feature.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ "Одержувач з веденим тут номером отримуватиме SMS підписане<br>\n"
+#~ "вказаним іменем. Цю можливість підтримують лише деякі шлюзи.\n"
+#~ "</html>"
+
 #~ msgid "<html>User configuration directory:<br>{0}</html>"
 #~ msgstr "<html>Каталог конфігурації користувача:<br>{0}</html>"
 
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Назва:"
+
 #~ msgid "Show &only gateways with names containing:"
 #~ msgstr "Показувати &лише шлюзи, що містять назви:"
+
+#~ msgctxt "Gateway.unknown"
+#~ msgid "Unknown gateway"
+#~ msgstr "Невідомий шлюз"
+
+#~ msgid "A message from the gateway:<br>"
+#~ msgstr "Повідомлення зі шлюзу:<br>"
+
+#~ msgid "You don't have sufficient credit to send this message."
+#~ msgstr "Увас недостатньо коштів, щоб надіслати це повідомлення."

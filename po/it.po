@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:39+0200\n"
+"POT-Creation-Date: 2011-06-13 22:12+0200\n"
 "PO-Revision-Date: 2011-04-23 08:42+0000\n"
-"Last-Translator: simone.sandri <Unknown>\n"
+"Last-Translator: simone.sandri <lexluxsox@hotmail.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-24 04:39+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:41+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -276,9 +276,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
-#, fuzzy
 msgid "Request a &delivery report"
-msgstr "Richiedi il rapporto di &consegna"
+msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -290,9 +289,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
-#, fuzzy
 msgid "Gateway&s"
-msgstr "Gateway"
+msgstr ""
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -331,9 +329,8 @@ msgid "&Username:"
 msgstr "&Nome utente:"
 
 #: ConfigFrame.jLabel12.text
-#, fuzzy
 msgid "&Password:"
-msgstr "Pa&ssword:"
+msgstr ""
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -452,9 +449,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.senderNameLabel.text
-#, fuzzy
 msgid "N&ame:"
-msgstr "Nome:"
+msgstr ""
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -479,9 +475,8 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
-#, fuzzy
 msgid "Sho&w password"
-msgstr "Mostra password"
+msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -788,9 +783,8 @@ msgid "Default &gateway:"
 msgstr ""
 
 #: EditContactPanel.nameLabel.text
-#, fuzzy
 msgid "&Name:"
-msgstr "&Nome:"
+msgstr ""
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -923,9 +917,8 @@ msgid "&Forward"
 msgstr ""
 
 #: Gateway.unknown
-#, fuzzy
 msgid "Unknown gateway"
-msgstr "Operatore sconosciuto"
+msgstr ""
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -963,14 +956,12 @@ msgid "Mainly usable for country: {0}"
 msgstr ""
 
 #: GatewayErrorMessage.helpLabel.text
-#, fuzzy
 msgid "Help:"
-msgstr "&Aiuto"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.text
-#, fuzzy
 msgid "&Send again"
-msgstr "&Invia"
+msgstr ""
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
@@ -1704,10 +1695,8 @@ msgid "Queue"
 msgstr ""
 
 #: QueuePanel.confirmDelete
-#, fuzzy
 msgid "Really remove all selected messages from the queue?"
 msgstr ""
-"Vuoi veramente eliminare tutti i messaggi selezionati dalla cronologia?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -2183,36 +2172,25 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Contraolla aggiornamenti del programma e del gateway"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Controlla aggiornamenti"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Verifica automatica per &aggiornamenti di:"
-
-#~ msgid "Show &password"
-#~ msgstr "Mostra &password"
-
-#~ msgid "program only"
-#~ msgstr "solo programmi"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Nome:"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Ricerca &aggiornamenti"
-
 #~ msgid "Add new contact"
 #~ msgstr "Aggiungi nuovo contatto"
+
+#~ msgid "Pa&ssword:"
+#~ msgstr "Pa&ssword:"
+
+#~ msgctxt "ConfigFrame.jLabel3.text"
+#~ msgid "&Name:"
+#~ msgstr "&Nome:"
 
 #~ msgid "&Login credentials"
 #~ msgstr "&Credenziali login"
 
 #~ msgid "O&perators"
 #~ msgstr "O&peratori"
+
+#~ msgctxt "EditContactPanel.nameLabel.text"
+#~ msgid "&Name:"
+#~ msgstr "&Nome:"
 
 #~ msgid "Contact list"
 #~ msgstr "Lista contatti"
@@ -2241,6 +2219,9 @@ msgstr ""
 #~ msgid "Please enter the code from the picture:"
 #~ msgstr "Per favore inserisci il codice dalla figura:"
 
+#~ msgid "Unknown operator"
+#~ msgstr "Operatore sconosciuto"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Do you like this project? Help to keep it running...\n"
@@ -2250,17 +2231,29 @@ msgstr ""
 #~ "Ti piace questo progetto? Aiutalo a rimanere in funzione...\n"
 #~ "</html>"
 
+#~ msgid "Request the &delivery report"
+#~ msgstr "Richiedi il rapporto di &consegna"
+
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"
 
 #~ msgid "<html><a href=\"\">Homepage</a></html>"
 #~ msgstr "<html><a href=\"\">Homepage</a></html>"
 
+#~ msgid "Show password"
+#~ msgstr "Mostra password"
+
 #~ msgid "<html><a href=\"\">Support project</a></html>"
 #~ msgstr "<html><a href=\"\">Supporta il progetto</a></html>"
 
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"
+
+#~ msgid "Check for program and gateway updates"
+#~ msgstr "Contraolla aggiornamenti del programma e del gateway"
+
+#~ msgid "&Updates checker"
+#~ msgstr "&Controlla aggiornamenti"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "
@@ -2269,6 +2262,18 @@ msgstr ""
 #~ "Questa scheda p solo per scopi di sviluppo. Non sarà visibile nella "
 #~ "release finale"
 
+#~ msgid "Automatically check for &updates of:"
+#~ msgstr "Verifica automatica per &aggiornamenti di:"
+
 #~ msgctxt "ConfigFrame.jLabel10.text"
 #~ msgid "&Gateway:"
 #~ msgstr "&Gateway:"
+
+#~ msgid "Check for &updates"
+#~ msgstr "Ricerca &aggiornamenti"
+
+#~ msgid "Show &password"
+#~ msgstr "Mostra &password"
+
+#~ msgid "program only"
+#~ msgstr "solo programmi"
