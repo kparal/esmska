@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingUtilities;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.math.RandomUtils;
@@ -62,7 +63,12 @@ public class GatewayComboBox extends JComboBox {
                     case REMOVED_GATEWAYS:
                     case FAVORITES_UPDATED:
                     case HIDDEN_UPDATED:
-                        updateGateways();
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateGateways();
+                            }
+                        });
                 }
             }
         });

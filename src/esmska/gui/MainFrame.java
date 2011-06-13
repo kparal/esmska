@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -47,10 +48,10 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
 import esmska.update.UpdateChecker;
 import esmska.data.Config;
+import esmska.data.Gateways;
 import esmska.data.History;
 import esmska.data.Icons;
 import esmska.data.Log;
-import esmska.data.Gateways;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.integration.ActionBean;
@@ -61,6 +62,7 @@ import esmska.data.event.ValuedListener;
 import esmska.data.Links;
 import esmska.data.event.ActionEventSupport;
 import esmska.transfer.ImageCodeManager;
+import esmska.update.Statistics;
 import esmska.update.UpdateInstaller;
 import esmska.utils.MiscUtils;
 import esmska.utils.RuntimeUtils;
@@ -69,11 +71,15 @@ import java.awt.SplashScreen;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.beans.Beans;
+import java.beans.IntrospectionException;
+import java.beans.PropertyChangeListener;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -184,14 +190,6 @@ public class MainFrame extends javax.swing.JFrame {
         queue.addValuedListener(new QueueListener());
         ImageCodeManager.setResolver(new GUIImageCodeResolver());
         
-        //check for valid gateways
-        if (Gateways.getInstance().size() <= 0 && !Beans.isDesignTime()) {
-            logger.warning("No usable gateways found");
-            JOptionPane.showMessageDialog(this,
-                    new JLabel(l10n.getString("MainFrame.no_gateways")),
-                    null, JOptionPane.ERROR_MESSAGE);
-        }
-        
         //use bindings
         Binding bind = Bindings.createAutoBinding(UpdateStrategy.READ, config, 
                 BeanProperty.create("toolbarVisible"), toolBar, BeanProperty.create("visible"));
@@ -225,9 +223,92 @@ public class MainFrame extends javax.swing.JFrame {
         };
         smsPanel.addActionListener(verticalSplitListener);
         queuePanel.addActionListener(verticalSplitListener);
-
+        
+        // wait for asynchronous user data loading and then finalize everything
+        final AtomicBoolean calledEverythingLoaded = new AtomicBoolean();
+        Context.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (!StringUtils.equals(evt.getPropertyName(), "everythingLoaded")) {
+                    return;
+                }
+                if (!Context.everythingLoaded()) {
+                    return;
+                }
+                // this may come from non-EDT thread
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (calledEverythingLoaded.compareAndSet(false, true)) {
+                            everythingLoaded();
+                        }
+                    }
+                });
+                Context.removePropertyChangeListener(this);
+            }
+        });
+        // the data could have been loaded before setting the listener, check it
+        if (Context.everythingLoaded() && calledEverythingLoaded.compareAndSet(false, true)) {
+            everythingLoaded();
+        }
+    }
+    
+    /** Performs last operations after all user data has been loaded. */
+    private void everythingLoaded() {
+        //check for valid gateways
+        if (Gateways.getInstance().size() <= 0) {
+            logger.warning("No usable gateways found");
+            JOptionPane.showMessageDialog(this,
+                    new JLabel(l10n.getString("MainFrame.no_gateways")),
+                    null, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        // send statistics
+        Statistics.sendUsageInfo();
+        
+        // check for updates
         updateChecker.addActionListener(new UpdateListener());
         updateChecker.checkForUpdates();
+    }
+    
+    /** Start loading gatewates asynchronously */
+    private void loadGatewaysAsync() {
+        logger.fine("Loading gateways asynchronously...");
+        Thread loadGwsThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // load gateways
+                try {
+                    Context.persistenceManager.loadGateways();
+                } catch (IntrospectionException ex) { //it seems there is no JavaScript support
+                    logger.log(Level.SEVERE, "Current JRE doesn't support JavaScript execution", ex);
+                    try {
+                        SwingUtilities.invokeAndWait(new Runnable() {
+                            @Override
+                            public void run() {
+                                JOptionPane.showMessageDialog(null, l10n.getString("Main.no_javascript"),
+                                        null, JOptionPane.ERROR_MESSAGE);
+                            }
+                        });
+                    } catch (Exception e) {
+                        logger.log(Level.SEVERE, "Can't display error message", e);
+                    }
+                    System.exit(2);
+                } catch (Exception ex) {
+                    logger.log(Level.SEVERE, "Could not load gateways", ex);
+                }
+                // load gateway properties
+                try {
+                    Context.persistenceManager.loadGatewayProperties();
+                } catch (Exception ex) {
+                    logger.log(Level.SEVERE, "Could not load gateway properties file", ex);
+                }
+                // announce
+                Context.setGatewaysLoaded(true);
+            }
+        });
+        loadGwsThread.setDaemon(true);
+        loadGwsThread.start();
     }
     
     /** Create an instance of MainFrame. Should be called only for the first
@@ -257,6 +338,11 @@ public class MainFrame extends javax.swing.JFrame {
             //show the form
             this.setVisible(true);
         }
+        
+        // after all is set, load gateways asynchronously
+        // we delayed it to this point, because even running it in a background
+        // thread slows the startup of the main window
+        loadGatewaysAsync();
     }
 
     /** Display random tip from the collection of tips */

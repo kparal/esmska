@@ -144,6 +144,17 @@ public class SMSPanel extends javax.swing.JPanel {
                 SMSPanel.this.revalidate();
             }
         });
+        
+        // allow to send messages once the program is fully loaded
+        Context.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (!StringUtils.equals(evt.getPropertyName(), "everythingLoaded")) {
+                    return;
+                }
+                sendAction.updateStatus();
+            }
+        });
     }
     
     /** validates sms form and returns status */
@@ -691,7 +702,7 @@ infoPanelLayout.setHorizontalGroup(
         }
         /** update status according to current conditions */
         public void updateStatus() {
-            this.setEnabled(validateForm(false));
+            this.setEnabled(validateForm(false) && Context.everythingLoaded());
         }
     }
     

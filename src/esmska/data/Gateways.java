@@ -26,7 +26,6 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.script.Invocable;
-import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -40,6 +39,9 @@ import org.apache.commons.lang.Validate;
  */
 public class Gateways {
 
+    /** Events fired when gateway collection is changed.
+     * Please note that this events may be fired even from a non-EDT thread.
+     */
     public static enum Events {
         ADDED_GATEWAY,
         ADDED_GATEWAYS,
@@ -56,7 +58,7 @@ public class Gateways {
     private static final Logger logger = Logger.getLogger(Gateways.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final SortedSet<Gateway> gateways = Collections.synchronizedSortedSet(new TreeSet<Gateway>());
-    private static final HashSet<DeprecatedGateway> deprecatedGateways = new HashSet<DeprecatedGateway>();
+    private static final Set<DeprecatedGateway> deprecatedGateways = Collections.synchronizedSet(new HashSet<DeprecatedGateway>());
     private static final Keyring keyring = Keyring.getInstance();
     private static final ScriptEngineManager manager = new ScriptEngineManager();
     private static final ScriptEngine jsEngine = manager.getEngineByName("js");
@@ -93,9 +95,12 @@ public class Gateways {
         return instance;
     }
 
-    /** Get unmodifiable collection of all gateways sorted by name */
-    public SortedSet<Gateway> getAll() {
-        return Collections.unmodifiableSortedSet(gateways);
+    /** Get collection of all gateways sorted by name */
+    public TreeSet<Gateway> getAll() {
+        synchronized(gateways) {
+            TreeSet<Gateway> gws = new TreeSet<Gateway>(gateways);
+            return gws;
+        }
     }
 
     /** Add new gateway
@@ -203,14 +208,19 @@ public class Gateways {
 
     /** Get set of currently deprecated gateways */
     public HashSet<DeprecatedGateway> getDeprecatedGateways() {
-        return deprecatedGateways;
+        synchronized(deprecatedGateways) {
+            HashSet<DeprecatedGateway> gws = new HashSet<DeprecatedGateway>(deprecatedGateways);
+            return gws;
+        }
     }
 
     /** Set currently deprecated gateways. May be null to clear them. */
     public void setDeprecatedGateways(Set<DeprecatedGateway> deprecatedGateways) {
-        Gateways.deprecatedGateways.clear();
-        if (deprecatedGateways != null) {
-            Gateways.deprecatedGateways.addAll(deprecatedGateways);
+        synchronized(deprecatedGateways) {
+            Gateways.deprecatedGateways.clear();
+            if (deprecatedGateways != null) {
+                Gateways.deprecatedGateways.addAll(deprecatedGateways);
+            }
         }
     }
 
@@ -383,9 +393,11 @@ public class Gateways {
                 result.put(gw, 1);
             }
         }
-        for (Gateway gw : getAll()) {
-            if (!result.containsKey(gw.getName())) {
-                result.put(gw.getName(), 0);
+        synchronized(gateways) {
+            for (Gateway gw : gateways) {
+                if (!result.containsKey(gw.getName())) {
+                    result.put(gw.getName(), 0);
+                }
             }
         }
         return result;
@@ -509,9 +521,11 @@ public class Gateways {
     /** Get gateways marked as favorites */
     public TreeSet<Gateway> getFavorites() {
         TreeSet<Gateway> favorites = new TreeSet<Gateway>();
-        for (Gateway gw : getAll()) {
-            if (gw.isFavorite()) {
-                favorites.add(gw);
+        synchronized(gateways) {
+            for (Gateway gw : gateways) {
+                if (gw.isFavorite()) {
+                    favorites.add(gw);
+                }
             }
         }
         return favorites;
@@ -520,9 +534,11 @@ public class Gateways {
     /** Get gateways marked as hidden */
     public TreeSet<Gateway> getHidden() {
         TreeSet<Gateway> hidden = new TreeSet<Gateway>();
-        for (Gateway gw : getAll()) {
-            if (gw.isHidden()) {
-                hidden.add(gw);
+        synchronized(gateways) {
+            for (Gateway gw : gateways) {
+                if (gw.isHidden()) {
+                    hidden.add(gw);
+                }
             }
         }
         return hidden;
@@ -531,9 +547,11 @@ public class Gateways {
     /** Get just the visible (non-hidden) gateways */
     public TreeSet<Gateway> getVisible() {
         TreeSet<Gateway> visible = new TreeSet<Gateway>();
-        for (Gateway gw : getAll()) {
-            if (!gw.isHidden()) {
-                visible.add(gw);
+        synchronized(gateways) {
+            for (Gateway gw : gateways) {
+                if (!gw.isHidden()) {
+                    visible.add(gw);
+                }
             }
         }
         return visible;

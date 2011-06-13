@@ -71,17 +71,18 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         this.script = script;
 
         GatewayInfo info = Gateways.parseInfo(script);
+        
         //check gateway name is valid
-        if (info == null || StringUtils.isEmpty(info.getName())) {
+        name = info != null ? info.getName() : null;
+        if (StringUtils.isEmpty(name)) {
             throw new ScriptException("Not a valid gateway script", script.toExternalForm(), 0);
         }
-        if (!namePattern.matcher(info.getName()).matches()) {
-            throw new IllegalArgumentException("Gateway name not valid: " + info.getName());
+        if (!namePattern.matcher(name).matches()) {
+            throw new IllegalArgumentException("Gateway name not valid: " + name);
         }
 
         //remember all the values from GatewayInfo interface internally in order
         //to increase speed (Java code vs JavaScript execution for every method access).
-        name = info.getName();
         version = info.getVersion();
         maintainer = info.getMaintainer();
         minProgramVersion = info.getMinProgramVersion();

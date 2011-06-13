@@ -2,7 +2,6 @@ package esmska;
 
 import esmska.gui.ThemeManager;
 import esmska.update.LegacyUpdater;
-import java.beans.IntrospectionException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,8 +80,8 @@ public class Main {
         }
 
         //log some basic stuff for debugging
-        logger.fine("Esmska " + Config.getLatestVersion() + " starting...");
-        logger.finer("System info: " + RuntimeUtils.getSystemInfo());
+        logger.log(Level.FINE, "Esmska {0} starting...", Config.getLatestVersion());
+        logger.log(Level.FINER, "System info: {0}", RuntimeUtils.getSystemInfo());
 
         //portable mode
         configPath = clp.getConfigPath();
@@ -106,7 +105,7 @@ public class Main {
                         int result = chooser.showOpenDialog(null);
                         if (result == JFileChooser.APPROVE_OPTION) {
                             configPath = chooser.getSelectedFile().getPath();
-                            logger.config("New config path: " + configPath);
+                            logger.log(Level.CONFIG, "New config path: {0}", configPath);
                         }
                     }
                 });
@@ -116,13 +115,11 @@ public class Main {
         }
 
         //get persistence manager
-        PersistenceManager pm = null;
         try {
             if (configPath != null) {
                 PersistenceManager.setCustomDirs(configPath, configPath);
             }
             PersistenceManager.instantiate();
-            pm = Context.persistenceManager;
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not create program dir or read config files", ex);
             try {
@@ -144,6 +141,7 @@ public class Main {
                 System.exit(5);
             }
         }
+        PersistenceManager pm = Context.persistenceManager;
 
         //backup files
         try {
@@ -163,31 +161,14 @@ public class Main {
             LogSupport.storeRecords(false);
         }
 
-        //load user files
+        //load config file
         try {
             pm.loadConfig();
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not load config file", ex);
         }
-        try {
-            pm.loadGateways();
-        } catch (IntrospectionException ex) { //it seems there is not JavaScript support
-            logger.log(Level.SEVERE, "Current JRE doesn't support JavaScript execution", ex);
-            try {
-                SwingUtilities.invokeAndWait(new Runnable() {
-                    @Override
-                    public void run() {
-                        JOptionPane.showMessageDialog(null, l10n.getString("Main.no_javascript"),
-                                null, JOptionPane.ERROR_MESSAGE);
-                    }
-                });
-            } catch (Exception e) {
-                logger.log(Level.SEVERE, "Can't display error message", e);
-            }
-            System.exit(2);
-        } catch (Exception ex) {
-            logger.log(Level.SEVERE, "Could not load gateways", ex);
-        }
+        
+        //load rest of user files
         try {
             pm.loadContacts();
         } catch (Exception ex) {
@@ -207,11 +188,6 @@ public class Main {
             pm.loadKeyring();
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not load keyring file", ex);
-        }
-        try {
-            pm.loadGatewayProperties();
-        } catch (Exception ex) {
-            logger.log(Level.SEVERE, "Could not load gateway properties file", ex);
         }
 
         //initialize logging if set from Config
@@ -248,9 +224,9 @@ public class Main {
         final String dataVersion = config.getVersion();
         final String programVersion = Config.getLatestVersion();
         if (Config.compareProgramVersions(dataVersion, programVersion) > 0) {
-            logger.warning("Configuration files are newer (" + dataVersion +
-                    ") then current program version (" + programVersion + ")! " +
-                    "Data corruption may occur!");
+            logger.log(Level.WARNING,"Configuration files are newer ({0}) then " +
+                    "current program version ({1})! Data corruption may occur!", 
+                    new Object[]{dataVersion, programVersion});
             try {
                 SwingUtilities.invokeAndWait(new Runnable() {
                     @Override
@@ -325,9 +301,6 @@ public class Main {
         
         // refresh UUID if needed
         Statistics.refreshUUID();
-        
-        // send statistics
-        Statistics.sendUsageInfo();
         
         //start main frame
         EventQueue.invokeLater(new Runnable() {

@@ -20,6 +20,8 @@ import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
@@ -35,6 +37,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
@@ -55,7 +58,6 @@ public class Actions {
     private static Action importAction;
     private static Action exportAction;
     private static Action logAction;
-    private static Action updateAction;
 
     /** Show about frame */
     public static Action getAboutAction() {
@@ -467,6 +469,22 @@ public class Actions {
                     }
                 }
             });
+            // enable this only once the program is fully loaded
+            Context.addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if (!StringUtils.equals(evt.getPropertyName(), "everythingLoaded")) {
+                        return;
+                    }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateStatus();
+                        }
+                    });
+                }
+            });
+            updateStatus();
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -494,6 +512,9 @@ public class Actions {
                 putValue(SHORT_DESCRIPTION, descRunning);
                 putValue(SELECTED_KEY, false);
             }
+        }
+        private void updateStatus() {
+            this.setEnabled(Context.everythingLoaded());
         }
     }
 }

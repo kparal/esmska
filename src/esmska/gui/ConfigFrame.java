@@ -1433,7 +1433,12 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
             gateways.addValuedListener(new ValuedListener<Gateways.Events, Gateway>() {
                 @Override
                 public void eventOccured(ValuedEvent<Events, Gateway> e) {
-                    refreshGws();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshGws();
+                        }
+                    });
                 }
             });
         }
