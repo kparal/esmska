@@ -837,9 +837,16 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     /** Save gateway properties.
-     * @return true if saved ok; false otherwise
+     * Skips saving if the gateways properties wasn't yet already loaded (they
+     * are loaded asynchronously), then there is nothing to save.
+     * @return true if saved ok or not even yet loaded; false otherwise
      */
     private boolean saveGatewayProperties() {
+        if (!Context.gatewaysLoaded()) {
+            logger.log(Level.FINE, "Not saving gateway properties because they " +
+                    "were not yet even loaded.");
+            return true;
+        }
         try {
             Context.persistenceManager.saveGatewayProperties();
             return true;
