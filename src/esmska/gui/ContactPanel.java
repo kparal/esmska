@@ -138,7 +138,7 @@ public class ContactPanel extends javax.swing.JPanel {
                     case CLEARED_GATEWAYS:
                     case REMOVED_GATEWAY:
                     case REMOVED_GATEWAYS:
-                        contactList.revalidate();
+                        contactList.repaint();
                 }
             }
         });

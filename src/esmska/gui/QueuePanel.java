@@ -151,6 +151,7 @@ public class QueuePanel extends javax.swing.JPanel {
             }
         });
 
+        // update pausedLabel on queue changes
         queue.addValuedListener(new ValuedListener<Queue.Events, SMS>() {
             @Override
             public void eventOccured(ValuedEvent<Queue.Events, SMS> e) {
@@ -166,6 +167,21 @@ public class QueuePanel extends javax.swing.JPanel {
                     actionSupport.fireActionPerformed(ActionEventSupport.ACTION_NEED_RESIZE, null);
                 }
                 QueuePanel.this.revalidate(); //fixes problem with cropped PauseButton
+            }
+        });
+        
+        //listen for changes in gateways and repaint queue if necessary
+        gateways.addValuedListener(new ValuedListener<Gateways.Events, Gateway>() {
+            @Override
+            public void eventOccured(ValuedEvent<Gateways.Events, Gateway> e) {
+                switch(e.getEvent()) {
+                    case ADDED_GATEWAY:
+                    case ADDED_GATEWAYS:
+                    case CLEARED_GATEWAYS:
+                    case REMOVED_GATEWAY:
+                    case REMOVED_GATEWAYS:
+                        queueList.repaint();
+                }
             }
         });
     }
