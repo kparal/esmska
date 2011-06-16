@@ -23,7 +23,7 @@ public class Config extends Object implements Serializable {
     /** mutex whether config already loaded from disk */
     private static boolean loaded = false;
     
-    private static final String LATEST_VERSION = "0.22beta2";
+    private static final String LATEST_VERSION = "0.22";
     private static final Logger logger = Logger.getLogger(Config.class.getName());
 
     private String version = "";
