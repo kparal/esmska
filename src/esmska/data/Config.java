@@ -494,7 +494,7 @@ public class Config extends Object implements Serializable {
             return instance;
         }
 
-        /** @see Config#setCheckProgramUpdates(boolean) */
+        /** @see Config#setAnnounceProgramUpdates(boolean) */
         public void setAnnounceProgramUpdates(boolean announceProgramUpdates) {
             this.announceProgramUpdates = announceProgramUpdates;
         }
