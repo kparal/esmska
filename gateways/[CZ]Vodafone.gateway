@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2011-06-18"
 }
 
 function getMaintainer() {
@@ -48,7 +48,9 @@ function getSignatureExtraLength() {
 }
 
 function getDelayBetweenMessages() {
-    return 30
+    // the gateway states 30 sec, but it does not enforce apart from UI 
+    // (some programmers are pigs); let's just ignore them
+    return 0
 }
 
 function getSupportedLanguages() {
@@ -78,7 +80,7 @@ function send() {
     content = EXEC.getURL("https://park.vodafone.cz/", [])
     
     // go to the link "Poslat SMS"
-    re = /\?x=([^']*?)'.*Poslat SMS/
+    re = /onclick="\$.*wicketAjaxGet\('.*\?x=([^']+)'/
     match = re.exec(content)
     var urlid = match[1]
     content = EXEC.getURL("https://park.vodafone.cz/", ['x', urlid])
