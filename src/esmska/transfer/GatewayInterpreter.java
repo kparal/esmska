@@ -86,6 +86,10 @@ public class GatewayInterpreter {
             //send the message
             sentOk = (Boolean) invocable.invokeFunction("send", new Object[0]);
             logger.log(Level.FINE, "SMS sent ok: {0}", sentOk);
+            //if sending failed but no problem provided, set to unknown
+            if (!sentOk && sms.getProblem() == null) {
+                executor.setProblem(Problem.UNKNOWN, null);
+            }
         } catch (ScriptException ex) {
             logger.log(Level.SEVERE, "Error executing gateway script file " + gateway, ex);
             executor.setProblem(Problem.UNKNOWN, null);
