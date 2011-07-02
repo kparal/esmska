@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-16 20:23+0200\n"
-"PO-Revision-Date: 2010-11-15 00:23+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"PO-Revision-Date: 2011-06-20 22:06+0000\n"
+"Last-Translator: Martin Miklanek <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-14 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-06-21 04:38+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: AboutFrame.Acknowledge
@@ -41,7 +41,7 @@ msgstr "&Prispeli"
 
 #: AboutFrame.homeHyperlink.text
 msgid "Homepage"
-msgstr ""
+msgstr "Domovská stránka"
 
 #: AboutFrame.homeHyperlink.toolTipText
 msgid ""
@@ -91,7 +91,7 @@ msgstr "&O programe"
 
 #: Add
 msgid "Add"
-msgstr ""
+msgstr "Pridať"
 
 #: Add_contact
 msgid "Add contact"
@@ -203,11 +203,11 @@ msgstr ""
 
 #: ConfigFrame.Gateway
 msgid "Gateway"
-msgstr ""
+msgstr "Brána"
 
 #: ConfigFrame.Show
 msgid "Show"
-msgstr ""
+msgstr "Zobraziť"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -235,7 +235,7 @@ msgstr ""
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.text
 msgid "Announce new program &updates"
-msgstr ""
+msgstr "Upozorniť na aktualizácie programu"
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
 msgid ""
@@ -244,6 +244,10 @@ msgid ""
 "was released and eventually notify the user\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Vždy po spustení skontrolovať aktuálnosť programu <br>\n"
+"a upozorniť používateľa v prípade dostupnosti novej verzie.\n"
+"<html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -301,7 +305,7 @@ msgstr "Všeo&becné"
 
 #: ConfigFrame.gwDetailsPanel.border.title
 msgid "Gateway properties"
-msgstr ""
+msgstr "Vlastnosti brány"
 
 #: ConfigFrame.gwTipLabel.text
 msgid ""
@@ -310,6 +314,10 @@ msgid ""
 "Favorite gateways will be preferred for recipient gateway suggestions.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Skryté brány nebudú zobrazené vo výbere.\n"
+"Obľúbené brány budú preferované pri výbere doručovacej brány.\n"
+"</html>"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -341,7 +349,7 @@ msgstr "Po&užívateľské meno:"
 
 #: ConfigFrame.jLabel12.text
 msgid "&Password:"
-msgstr ""
+msgstr "&Heslo:"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -367,7 +375,7 @@ msgstr ""
 
 #: ConfigFrame.jLabel2.text
 msgid "&Signature:"
-msgstr ""
+msgstr "&Podpis"
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -455,6 +463,7 @@ msgid ""
 "Do you really want to remove all login credentials for all available "
 "gateways?"
 msgstr ""
+"Naozaj chcete odstrániť prihlasovacie údaje ku všetkým dostupným bránam?"
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
@@ -472,7 +481,7 @@ msgstr "Adresa v poli „HTTP proxy“ sa použije aj v poli „HTTPS proxy“"
 
 #: ConfigFrame.senderNameLabel.text
 msgid "N&ame:"
-msgstr ""
+msgstr "M&eno:"
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -495,10 +504,14 @@ msgid ""
 "<br>\n"
 "Not all gateways support this feature.</html>"
 msgstr ""
+"<html>\n"
+"Čislo odosielateľa v medzinárodnom formáte (začínajúce znamienkom '+').<br>\n"
+"Nie všetky brány podporujú tento formát.\n"
+"</html>"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Sho&w password"
-msgstr ""
+msgstr "Zobraziť heslo"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -506,7 +519,7 @@ msgstr "Zobrazí alebo nezobrazí písanie hesla"
 
 #: ConfigFrame.sigDelButton.toolTipText
 msgid "Remove the signature"
-msgstr ""
+msgstr "Odstrániť podpis"
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -595,7 +608,7 @@ msgstr "Neznámy"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
 msgid "Also u&nstable versions"
-msgstr ""
+msgstr "Aj &nestabilné verzie"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
@@ -606,6 +619,13 @@ msgid ""
 "who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Upozorniť aj na dostupnosť nestabilných verzií.<br>\n"
+"<br>\n"
+"<b>Varovanie: nestabilné verzie sú určené len pre skúsených používateľov,"
+"<br>\n"
+"ktorí sú ochotní ohlásiť pozorované problémy.</b>\n"
+"</html>"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -846,7 +866,7 @@ msgstr "Východzia &brána:"
 
 #: EditContactPanel.nameLabel.text
 msgid "&Name:"
-msgstr ""
+msgstr "Me&no:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -1053,22 +1073,26 @@ msgstr ""
 
 #: GatewayErrorMessage.retryButton.text
 msgid "&Send again"
-msgstr ""
+msgstr "Po&slať znova"
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
 "<html>Please note that this button will unpause your SMS queue.<br>\n"
 "That means that more messages might be re-sent, not just this one.</html>"
 msgstr ""
+"<html>\n"
+"Toto tlačítko odpauzuje frontu správ pre odoslanie,<br>\n"
+"čo spôsobí preposlanie všetkých správ vo fronte, nie len poslednej.\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
 msgid "Sending failed: {0}"
-msgstr ""
+msgstr "Odoslanie neúspešné: {0}"
 
 #: GatewayErrorMessage.smsTextLabel.text
 msgid "Original message:"
-msgstr ""
+msgstr "Pôvodná správa:"
 
 #: GatewayExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
@@ -1093,7 +1117,7 @@ msgstr "bezpečnostný &kód:"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
 msgid "Security code required: {0}"
-msgstr ""
+msgstr "Je potrebné zadať overovací kód: {0}"
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
@@ -1174,7 +1198,7 @@ msgstr ""
 
 #: GatewayProblem.NO_CREDIT
 msgid "You don't have enough credit to send this message."
-msgstr ""
+msgstr "Pre poslanie správy nemáte dostatok kreditu."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.NO_CREDIT.help
@@ -1239,6 +1263,9 @@ msgid ""
 "Your login: {0}<br>\n"
 "Your password: {1}"
 msgstr ""
+"Vložili ste nesprávne prihlasovanie údaje.<br>\n"
+"Zadaný login: {0}<br>\n"
+"Zadané heslo: {1}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_AUTH.help
@@ -1252,12 +1279,12 @@ msgstr ""
 #: GatewayProblem.WRONG_CODE
 msgid ""
 "You have entered a wrong security code. Please try to send the message again."
-msgstr ""
+msgstr "Vložili ste nesprávny bezpečnostný kód. Skúste to prosím znovu."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER
 msgid "You have entered a wrong recipient number: {0}"
-msgstr ""
+msgstr "Vložili ste nesprávne číslo príjemcu: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER.help
@@ -1268,6 +1295,10 @@ msgid ""
 "visit <a href=\"{0}\">{0}</a> and find out why the gateway keeps rejecting "
 "the recipient number."
 msgstr ""
+"Číslo príjemcu nie je podporované touto bránou, alebo je v nesprávnom "
+"formáte (napr. nie je v medzinárodnom formáte). Opravte čislo príjemcu a "
+"skúste poslať správu znova. Ak problémy pretrvajú, navštívte stránku <a href="
+"\"{0}\">{0}</a> a zistite, prečo brána odmieta príjemcove číslo."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_SIGNATURE
@@ -1276,6 +1307,9 @@ msgid ""
 "Your sender number: {0}<br>\n"
 "Your sender name: {1}"
 msgstr ""
+"Vložili ste nesprávny podpis odosielateľa (číslo alebo meno).<br>\n"
+"Zadané číslo odosielateľa: {0}<br>\n"
+"Zadané meno odosielateľa: {1}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_SIGNATURE.help
@@ -1564,6 +1598,8 @@ msgid ""
 "<html><h2>Esmska is already running!</h2>Esmska is already once started. You "
 "can't run multiple program instances.<br>This one will now quit.</html>"
 msgstr ""
+"<html><h2>Program Esmska je už spustený!</h2>Nemôžete spustiť viacero "
+"instancií programu Esmska a táto preto skončí.</html>"
 
 #: Main.brokenWebstart
 msgid ""
@@ -1648,7 +1684,7 @@ msgstr "Nastaviť správanie programu"
 
 #: MainFrame.donateButton.text
 msgid "Donate"
-msgstr ""
+msgstr "Prispieť"
 
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
@@ -1842,7 +1878,7 @@ msgstr "Front"
 
 #: QueuePanel.confirmDelete
 msgid "Really remove all selected messages from the queue?"
-msgstr ""
+msgstr "Naozaj chcete odstrániť všetkz správy vo fronte pre odoslanie?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -1856,7 +1892,7 @@ msgstr "m"
 
 #: QueuePanel.pausedLabel.text
 msgid "The queue is now PAUSED."
-msgstr ""
+msgstr "Odosielanie je zapauzované"
 
 #: QueuePanel.replaceSms
 msgid ""
@@ -2074,7 +2110,7 @@ msgstr "Zobraziť program"
 
 #: Signature.confirmRemove
 msgid "Do you want to remove selected signature?"
-msgstr ""
+msgstr "Chcete odstrániť zvolený podpis?"
 
 #: Signature.default
 msgid "Default"
@@ -2082,19 +2118,19 @@ msgstr ""
 
 #: Signature.new
 msgid "<html><i>New signature...</i></html>"
-msgstr ""
+msgstr "<html><i>Nový podpis...</i></html>"
 
 #: Signature.new.desc
 msgid "Name of the new signature:"
-msgstr ""
+msgstr "Meno pre nový podpis:"
 
 #: Signature.none
 msgid "None"
-msgstr ""
+msgstr "Žiadny"
 
 #: SignatureComboBox.tooltip
 msgid "The signature to append to the message (sender number and name)."
-msgstr ""
+msgstr "Podpis pre pripojenie k správe (meno a číslo odosielateľa)."
 
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
@@ -2133,7 +2169,7 @@ msgstr "Vzhľad programu je možné doladiť podľa vášho vkusu."
 #. #Write the tip as short as possible
 #: Tip.11
 msgid "In preferences you can restrict the list of displayed web gateways."
-msgstr ""
+msgstr "Zoznam zobrazených webových brán môžete obmedziť v nastaveniach."
 
 #. #Write the tip as short as possible
 #: Tip.12
@@ -2184,7 +2220,7 @@ msgstr ""
 #: Tip.19
 msgid ""
 "Gateways are automatically updated to their latest version on program start."
-msgstr ""
+msgstr "Brány sú automaticky aktualizované pri spustení programu."
 
 #. #Write the tip as short as possible
 #: Tip.2
@@ -2297,6 +2333,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Kamil Páral https://launchpad.net/~kamil.paral\n"
+"  Martin Miklanek https://launchpad.net/~m-miklanek\n"
 "  TomasKovacik https://launchpad.net/~nail-nodomain\n"
 "  helix84 https://launchpad.net/~helix84\n"
 "  milboy https://launchpad.net/~milboys\n"
@@ -2353,7 +2390,7 @@ msgstr "Kliknutím otvoríte stránku s možnosťou stiahnutia programu"
 
 #: Update.downloadFailed
 msgid "It wasn't possible to download all gateway updates."
-msgstr ""
+msgstr "Nepodarilo sa stiahnuť všetky aktualizácie brán."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2362,7 +2399,7 @@ msgstr "Aktualizovaná brána: {0}"
 
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
-msgstr ""
+msgstr "Niektoré aktualizácie brán nemohli byť nainštalované"
 
 #~ msgid "Add new contact"
 #~ msgstr "Pridať nový kontakt"

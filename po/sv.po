@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-16 20:23+0200\n"
-"PO-Revision-Date: 2011-05-04 17:47+0000\n"
+"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"PO-Revision-Date: 2011-06-16 17:19+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-14 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-06-17 04:38+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: AboutFrame.Acknowledge
@@ -236,7 +236,7 @@ msgstr ""
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.text
 msgid "Announce new program &updates"
-msgstr ""
+msgstr "Meddela nya program&uppdateringar"
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
 msgid ""
@@ -245,6 +245,10 @@ msgid ""
 "was released and eventually notify the user\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Kolla om en ny programversion har släppts och meddela<br>\n"
+"användaren efter att programmet har startats upp\n"
+"</html>"
 
 #: ConfigFrame.appearancePanel.TabConstraints.tabTitle
 msgid "&Appearance"
@@ -277,7 +281,7 @@ msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request a &delivery report"
-msgstr ""
+msgstr "Begär en &leveransrapport"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -290,7 +294,7 @@ msgstr ""
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "Gateway&s"
-msgstr ""
+msgstr "Gateway&s"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -338,7 +342,7 @@ msgstr "&Användarnamn:"
 
 #: ConfigFrame.jLabel12.text
 msgid "&Password:"
-msgstr ""
+msgstr "&Lösenord:"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -364,7 +368,7 @@ msgstr ""
 
 #: ConfigFrame.jLabel2.text
 msgid "&Signature:"
-msgstr ""
+msgstr "&Signatur:"
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -404,6 +408,10 @@ msgid ""
 "<i>system tray</i>).\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Visar en ikon i meddelandefältet av fönsterhanteraren (så kallad "
+"<i>aktivitetsfältet</i>).\n"
+"</html>"
 
 #: ConfigFrame.passwordField.toolTipText
 msgid "The password belonging to the username"
@@ -470,7 +478,7 @@ msgstr ""
 
 #: ConfigFrame.senderNameLabel.text
 msgid "N&ame:"
-msgstr ""
+msgstr "N&amn:"
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -496,7 +504,7 @@ msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Sho&w password"
-msgstr ""
+msgstr "Vis&a lösenord"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -504,7 +512,7 @@ msgstr "Ange om lösenordet ska visas eller gömmas"
 
 #: ConfigFrame.sigDelButton.toolTipText
 msgid "Remove the signature"
-msgstr ""
+msgstr "Ta bort signaturen"
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -589,7 +597,7 @@ msgstr "Okänd"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
 msgid "Also u&nstable versions"
-msgstr ""
+msgstr "Även i&nstabila versioner"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
@@ -619,6 +627,8 @@ msgid ""
 "system<br>\n"
 "or centered on the screen</html>"
 msgstr ""
+"<html>Om programfönstret borde placeras enligt operativsystemet<br>\n"
+"eller centreras på skärmen</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfirmingFileChooser.sure_to_replace
@@ -744,6 +754,7 @@ msgstr "och andra..."
 #: Credits.packagers
 msgid "...and all the packagers linked at <a href=\"{0}\">downloads</a> page"
 msgstr ""
+"...och alla paketerare länkade till <a href=\"{0}\">nedladdnings</a>sidan"
 
 #: Credits.sponsors
 msgid "Sponsors:"
@@ -832,7 +843,7 @@ msgstr "Standard&gateway"
 
 #: EditContactPanel.nameLabel.text
 msgid "&Name:"
-msgstr ""
+msgstr "&Namn:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
@@ -976,7 +987,7 @@ msgstr "&Framåt"
 
 #: Gateway.unknown
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Okänd gateway"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -1024,17 +1035,21 @@ msgstr "Främst användbar för land: {0}"
 
 #: GatewayErrorMessage.helpLabel.text
 msgid "Help:"
-msgstr ""
+msgstr "Hjälp:"
 
 #: GatewayErrorMessage.retryButton.text
 msgid "&Send again"
-msgstr ""
+msgstr "&Skicka igen"
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
 "<html>Please note that this button will unpause your SMS queue.<br>\n"
 "That means that more messages might be re-sent, not just this one.</html>"
 msgstr ""
+"<html>Var god notera att denna knapp kommer att återuppta dina SMS-köer."
+"<br>\n"
+"Det betyder att fler meddelanden kanske kommer att skickas igen, inte bara "
+"detta.</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
@@ -1080,13 +1095,15 @@ msgstr "Sändningsbehandling - Esmska"
 
 #: GatewayProblem.CUSTOM_MESSAGE
 msgid "The gateway maintainer provided following explanation:"
-msgstr ""
+msgstr "Gateways-upprätthållaren gav följande förklaring:"
 
 #: GatewayProblem.CUSTOM_MESSAGE.help
 msgid ""
 "Fix the problem described by the gateway maintainer and send the message "
 "again."
 msgstr ""
+"Fixa problemet som beskrevs av gateway-upprätthållaren och skicka "
+"meddelandet igen."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.FIX_IN_PROGRESS
@@ -1105,7 +1122,7 @@ msgstr ""
 
 #: GatewayProblem.GATEWAY_MESSAGE
 msgid "The gateway provided following explanation:"
-msgstr ""
+msgstr "Denna gateway gav följande förklaring:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.GATEWAY_MESSAGE.help
@@ -1133,6 +1150,8 @@ msgid ""
 "You have entered a too long message text. Shorten the message and try to "
 "send it again."
 msgstr ""
+"Du har skrivit en för långt textmeddelande. Förkorta meddelandet och försök "
+"skicka det igen."
 
 #: GatewayProblem.LONG_TEXT.help
 msgid ""
@@ -1149,7 +1168,7 @@ msgstr ""
 
 #: GatewayProblem.NO_CREDIT
 msgid "You don't have enough credit to send this message."
-msgstr ""
+msgstr "Du har inte tillräckligt med kredit för att skicka detta meddelande."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.NO_CREDIT.help
@@ -1214,6 +1233,9 @@ msgid ""
 "Your login: {0}<br>\n"
 "Your password: {1}"
 msgstr ""
+"Du har skrivit in felaktiga inloggningsuppgifter.<br>\n"
+"Din inloggning: {0}<br>\n"
+"Ditt lösenord: {1}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_AUTH.help
@@ -1228,11 +1250,13 @@ msgstr ""
 msgid ""
 "You have entered a wrong security code. Please try to send the message again."
 msgstr ""
+"Du har skrivit in en felaktig säkerhetskod. Var god försök skicka "
+"meddelandet igen."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER
 msgid "You have entered a wrong recipient number: {0}"
-msgstr ""
+msgstr "Du har skrivit in ett felaktigt mottagarnummer: {0}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER.help
@@ -1251,6 +1275,9 @@ msgid ""
 "Your sender number: {0}<br>\n"
 "Your sender name: {1}"
 msgstr ""
+"Du har skrivit in en felaktig avsändarsignatur (ett nummer eller namn).<br>\n"
+"Ditt avsändarnummer: {0}<br>\n"
+"Ditt avsändarnamn: {1}"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_SIGNATURE.help
