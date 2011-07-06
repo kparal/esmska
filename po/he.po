@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"POT-Creation-Date: 2011-07-07 00:25+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -1643,12 +1643,14 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
-msgstr ""
+#, fuzzy
+msgid "Report a &problem..."
+msgstr "דווח על &בעיה..."
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
-msgstr "דווח על בעיה או בקש תכונה"
+#, fuzzy
+msgid "Report a broken program behavior"
+msgstr "הגדרת התנהגות התוכנה"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2243,6 +2245,9 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "דווח על בעיה או בקש תכונה"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Do you like this project? Help to keep it running...\n"
@@ -2481,9 +2486,6 @@ msgstr ""
 
 #~ msgid "Get &Help Online..."
 #~ msgstr "קבלת ע&זרה מקוונת..."
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "דווח על &בעיה..."
 
 #~ msgid "&Translate This Application..."
 #~ msgstr "ת&רגם יישום זה..."

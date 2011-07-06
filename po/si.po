@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"POT-Creation-Date: 2011-07-07 00:25+0200\n"
 "PO-Revision-Date: 2010-11-15 00:26+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
@@ -1544,11 +1544,11 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
+msgid "Report a &problem..."
 msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
+msgid "Report a broken program behavior"
 msgstr ""
 
 #: MainFrame.programMenu.text

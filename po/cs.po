@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-13 19:40+0200\n"
-"PO-Revision-Date: 2011-06-13 19:40+0100\n"
+"POT-Creation-Date: 2011-07-07 00:26+0200\n"
+"PO-Revision-Date: 2011-07-07 00:26+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "Language: cs\n"
@@ -1837,12 +1837,12 @@ msgstr ""
 "</html>"
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
-msgstr "Nahlásit p&roblém či nápad..."
+msgid "Report a &problem..."
+msgstr "Nahlásit p&roblém..."
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
-msgstr "Nahlásit problém nebo navrhnout vylepšení"
+msgid "Report a broken program behavior"
+msgstr "Nahlásit vadu v programu"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2483,6 +2483,9 @@ msgstr "Brána aktualizována: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Některé aktualizace bran se nepodařilo nainstalovat."
+
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "Nahlásit problém nebo navrhnout vylepšení"
 
 #~ msgid ""
 #~ "The gateway maintainers have modified their webpage and it can''t be used "

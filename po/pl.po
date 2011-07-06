@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"POT-Creation-Date: 2011-07-07 00:25+0200\n"
 "PO-Revision-Date: 2011-04-04 09:28+0000\n"
 "Last-Translator: leffort <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -1564,12 +1564,14 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
-msgstr ""
+#, fuzzy
+msgid "Report a &problem..."
+msgstr "Zgłoś &problem..."
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
-msgstr "Zgłoś problem lub sugestię"
+#, fuzzy
+msgid "Report a broken program behavior"
+msgstr "Konfiguruj zachowanie programu"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2157,6 +2159,9 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "Zgłoś problem lub sugestię"
+
 #~ msgid "Add new contact"
 #~ msgstr "Dodaj nowy kontakt"
 
@@ -2237,9 +2242,6 @@ msgstr ""
 
 #~ msgid "Get &Help Online..."
 #~ msgstr "Otwórz &pomoc online..."
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "Zgłoś &problem..."
 
 #~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
 #~ msgstr "<html><h2>Nie można wysłać wiadomości do {0}!</h2>{1}</html>"

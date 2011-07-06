@@ -550,7 +550,6 @@ public class MainFrame extends javax.swing.JFrame {
         donateButton.setFocusable(false);
         toolBar.add(Box.createHorizontalGlue());
         toolBar.add(donateButton);
-
         for (Component comp : toolBar.getComponents()) {
             if (comp instanceof JButton) {
                 JButton button = (JButton) comp;
@@ -558,7 +557,9 @@ public class MainFrame extends javax.swing.JFrame {
                 button.putClientProperty("JButton.buttonType", "gradient");
             }
         }
+
         Mnemonics.setLocalizedText(programMenu,l10n.getString("MainFrame.programMenu.text"));
+
         configMenuItem.setAction(Actions.getConfigAction());
         programMenu.add(configMenuItem);
 
@@ -585,6 +586,7 @@ public class MainFrame extends javax.swing.JFrame {
         menuBar.add(messageMenu);
 
         Mnemonics.setLocalizedText(toolsMenu,l10n.getString("MainFrame.toolsMenu.text"));
+
         historyMenuItem.setAction(Actions.getHistoryAction());
         toolsMenu.add(historyMenuItem);
 
@@ -599,8 +601,8 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu.add(exportMenuItem);
 
         menuBar.add(toolsMenu);
-
         Mnemonics.setLocalizedText(helpMenu,l10n.getString("MainFrame.helpMenu.text")); // NOI18N
+
         faqMenuItem.setAction(Actions.getBrowseAction(Links.FAQ));
         Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text"));
         faqMenuItem.setToolTipText(l10n.getString("MainFrame.faqMenuItem.toolTipText")); // NOI18N

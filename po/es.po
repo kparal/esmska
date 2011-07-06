@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"POT-Creation-Date: 2011-07-07 00:25+0200\n"
 "PO-Revision-Date: 2011-06-05 11:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1789,12 +1789,14 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
+#, fuzzy
+msgid "Report a &problem..."
 msgstr "Enviar un &problema o una idea..."
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
-msgstr "Reportar un problema o sugerir alguna característica"
+#, fuzzy
+msgid "Report a broken program behavior"
+msgstr "Configurar el comportamiento del programa"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2464,6 +2466,9 @@ msgstr "Operador actualizado: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "No se pudieron instalar algunas actualizaciones de operadores."
+
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "Reportar un problema o sugerir alguna característica"
 
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"

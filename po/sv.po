@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"POT-Creation-Date: 2011-07-07 00:25+0200\n"
 "PO-Revision-Date: 2011-06-16 17:19+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1686,12 +1686,14 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
-msgstr "Rapportera ett &problem eller en idé..."
+#, fuzzy
+msgid "Report a &problem..."
+msgstr "Raportera ett &Problem..."
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
-msgstr "Rapportera ett problem eller efterfråga en funktion"
+#, fuzzy
+msgid "Report a broken program behavior"
+msgstr "Konfigurera program betende"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2336,6 +2338,12 @@ msgstr "Gateway uppdaterad: {0}"
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "Report a &problem or an idea..."
+#~ msgstr "Rapportera ett &problem eller en idé..."
+
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "Rapportera ett problem eller efterfråga en funktion"
+
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"
 
@@ -2380,9 +2388,6 @@ msgstr ""
 
 #~ msgid "Import only contacts with known operator"
 #~ msgstr "Importera endast kontakter med känd operatör"
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "Raportera ett &Problem..."
 
 #~ msgid "You don't have sufficient credit to send this message."
 #~ msgstr ""

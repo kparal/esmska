@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"POT-Creation-Date: 2011-07-07 00:25+0200\n"
 "PO-Revision-Date: 2010-03-12 18:49+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -1549,12 +1549,14 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
-msgstr ""
+#, fuzzy
+msgid "Report a &problem..."
+msgstr "Pranešti apie &problemą..."
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
-msgstr "Pranešti apie problemą arba reikalauti naujų programos savybių"
+#, fuzzy
+msgid "Report a broken program behavior"
+msgstr "Konfiguruoti programos elgesį"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2147,6 +2149,9 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "Pranešti apie problemą arba reikalauti naujų programos savybių"
+
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009"
 
@@ -2238,9 +2243,6 @@ msgstr ""
 
 #~ msgid "Get &Help Online..."
 #~ msgstr "&Pagalba internete..."
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "Pranešti apie &problemą..."
 
 #~ msgid "&Translate This Application..."
 #~ msgstr "&Išversti šią programą..."

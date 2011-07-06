@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"POT-Creation-Date: 2011-07-07 00:25+0200\n"
 "PO-Revision-Date: 2011-06-20 22:06+0000\n"
 "Last-Translator: Martin Miklanek <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -1751,12 +1751,14 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
-msgstr "Nahlásiť &problém alebo nápad..."
+#, fuzzy
+msgid "Report a &problem..."
+msgstr "Nahlásiť &problém ..."
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
-msgstr "Nahlásiť problém alebo navrhnúť vylepšenie"
+#, fuzzy
+msgid "Report a broken program behavior"
+msgstr "Nastaviť správanie programu"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2401,6 +2403,12 @@ msgstr "Aktualizovaná brána: {0}"
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Niektoré aktualizácie brán nemohli byť nainštalované"
 
+#~ msgid "Report a &problem or an idea..."
+#~ msgstr "Nahlásiť &problém alebo nápad..."
+
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "Nahlásiť problém alebo navrhnúť vylepšenie"
+
 #~ msgid "Add new contact"
 #~ msgstr "Pridať nový kontakt"
 
@@ -2909,9 +2917,6 @@ msgstr "Niektoré aktualizácie brán nemohli byť nainštalované"
 
 #~ msgid "<a href=\"\">Gateway updates</a> are available!"
 #~ msgstr "Sú dostupné <a href=\"\">aktualizácie brán</a>!"
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "Nahlásiť &problém ..."
 
 #~ msgid "&Translate This Application..."
 #~ msgstr "Preložiť &túto aplikáciu..."

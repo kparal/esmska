@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 16:23+0200\n"
+"POT-Creation-Date: 2011-07-07 00:25+0200\n"
 "PO-Revision-Date: 2010-07-18 13:52+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -1567,11 +1567,12 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-msgid "Report a &problem or an idea..."
-msgstr ""
+#, fuzzy
+msgid "Report a &problem..."
+msgstr "Envoyer un compte rendu de &problème"
 
 #: MainFrame.problemMenuItem.toolTipText
-msgid "Report a problem or request a feature"
+msgid "Report a broken program behavior"
 msgstr ""
 
 #: MainFrame.programMenu.text
@@ -2225,9 +2226,6 @@ msgstr ""
 #~ "Le préfixe du pays n'a pas besoin d'être donné si le défaut<br>\n"
 #~ "préfixe du pays figure dans les préférences du programme.\n"
 #~ "</html>"
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "Envoyer un compte rendu de &problème"
 
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"
