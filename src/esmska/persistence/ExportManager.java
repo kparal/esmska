@@ -25,9 +25,9 @@ import esmska.data.SMS;
 import esmska.data.Signature;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.IOUtils;
@@ -219,7 +219,7 @@ public class ExportManager {
         Validate.notNull(signatures);
         Validate.notNull(out);
 
-        HashMap<String,GatewayConfig> gwConfigs = new HashMap<String, GatewayConfig>();
+        TreeMap<String,GatewayConfig> gwConfigs = new TreeMap<String, GatewayConfig>();
         for (Gateway gateway : gateways) {
             gwConfigs.put(gateway.getName(), gateway.getConfig());
         }
@@ -227,7 +227,7 @@ public class ExportManager {
         logger.finer("Exporting gateway properties");
         JSONObject obj = new JSONObject();
         JSONObject jsonGwConfigs = JSONObject.fromObject(gwConfigs);
-        JSONArray jsonSignatures = JSONArray.fromObject(signatures);
+        JSONArray jsonSignatures = JSONArray.fromObject(new TreeSet<Signature>(signatures));
 
         obj.put("configs", jsonGwConfigs);
         obj.put("signatures", jsonSignatures);
