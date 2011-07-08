@@ -1,9 +1,9 @@
 package esmska.update;
 
 import esmska.data.Config;
-import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.History;
+import esmska.data.History.Record;
 import esmska.data.Links;
 import esmska.data.Signature;
 import esmska.data.Signatures;
@@ -13,6 +13,8 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TreeSet;
 import java.util.UUID;
@@ -93,15 +95,32 @@ public class Statistics {
         // user data
         info.put("contacts", Contacts.getInstance().size());
         info.put("history", History.getInstance().getRecords().size());
-        TreeSet<String> gateways = new TreeSet<String>();
-        for (Contact c : Contacts.getInstance().getAll()) {
-            if (StringUtils.isNotEmpty(c.getGateway())) {
-                gateways.add(c.getGateway());
-            }
-        }
-        info.put("usedGateways", JSONArray.fromObject(gateways));
+        info.put("usedGateways", JSONArray.fromObject(getUsedGateways()));
         
         return info;
+    }
+    
+    /** Get set of gateway names that were successfully used in the last
+     *  three months.
+     */
+    private static TreeSet<String> getUsedGateways() {
+        List<Record> records = History.getInstance().getRecords();
+        // take only last 1000 history records
+        records = records.subList(Math.max(0, records.size()-1000), records.size());
+        // take only history records in the last 90 days
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, -90);
+        Date historyLimit = cal.getTime();
+        
+        TreeSet<String> gateways = new TreeSet<String>();
+        for (Record record : records) {
+            if (record.getDate().before(historyLimit)) {
+                continue;
+            }
+            gateways.add(record.getGateway());
+        }
+
+        return gateways;
     }
     
     /** Send program usage info to Esmska server. */
