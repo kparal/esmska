@@ -1184,6 +1184,12 @@ infoPanelLayout.setHorizontalGroup(
                     gatewayComboBox.selectSuggestedGateway(getNumber());
                 }
 
+                //update envelope
+                Set<Contact> set = new HashSet<Contact>();
+                set.add(new Contact(contact != null ? contact.getName() : null,
+                        getNumber(), gatewayComboBox.getSelectedGatewayName()));
+                envelope.setContacts(set);
+                
                 //update components
                 sendAction.updateStatus();
                 updateCountryInfoLabel();
@@ -1191,12 +1197,6 @@ infoPanelLayout.setHorizontalGroup(
                 gatewayComboBox.setFilter(getNumber());
                 updateSuggestGatewayButton();
                 SMSPanel.this.revalidate();
-
-                //update envelope
-                Set<Contact> set = new HashSet<Contact>();
-                set.add(new Contact(contact != null ? contact.getName() : null,
-                        getNumber(), gatewayComboBox.getSelectedGatewayName()));
-                envelope.setContacts(set);
             }
         }
     }
