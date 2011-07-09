@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2011-07-09"
 }
 
 function getMaintainer() {
@@ -20,7 +20,7 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Oficiální portál Vodafone umožňující registrovaným uživatelům odesílat SMS do sítě Vodafone zdarma. Zaregistrovat se může kdokoliv, odesílání nevyžaduje opisování bezpečnostního kódu."
+    return "Oficiální portál Vodafone umožňující registrovaným uživatelům odesílat SMS do sítě Vodafone zdarma. Zaregistrovat se může kdokoliv, odesílání nevyžaduje opisování bezpečnostního kódu a podporovány jsou dlouhé zprávy."
 }
 
 function getSupportedPrefixes() {
