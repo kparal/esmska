@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2011-07-24"
 }
 
 function getMaintainer() {
@@ -52,7 +52,7 @@ function getDelayBetweenMessages() {
 }
 
 function getSupportedLanguages() {
-    return ["cs"]
+    return ["cs", "en"]
 }
 
 function getFeatures() {
@@ -137,7 +137,7 @@ function send() {
     content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
 
     // check if message was successfully sent
-    re = /SMS zpr.v. byl. odeslán./
+    re = /(SMS zpr.v. byl. odeslán.|SMS was sent)/
     match = re.exec(content)
     if (match) {
         // all ok
