@@ -3,6 +3,7 @@ package esmska.utils;
 import esmska.gui.ThemeManager;
 import esmska.integration.IntegrationAdapter;
 import java.awt.Dialog.ModalityType;
+import java.util.Locale;
 import javax.swing.JDialog;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -119,13 +120,15 @@ public class RuntimeUtils {
         }
         
         if (isGnomeDesktop()) {
-            builder.append("desktop=GNOME");
+            builder.append("desktop=GNOME; ");
         } else if (isKDEDesktop()) {
-            builder.append("desktop=KDE");
-        } else {
-            // delete the trailing semicolon
-            builder.delete(builder.length()-2, builder.length());
+            builder.append("desktop=KDE; ");
         }
+        
+        builder.append("language=").append(Locale.getDefault().getLanguage()).append("; ");
+        
+        // delete the trailing semicolon
+        builder.delete(builder.length()-2, builder.length());
 
         return builder.toString();
     }
