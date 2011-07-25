@@ -420,9 +420,7 @@ public class ImportManager {
                 for (int i = 0; i < jsonSignatures.size(); i++) {
                     JSONObject sigObj = jsonSignatures.getJSONObject(i);
                     Signature signature = (Signature) JSONObject.toBean(sigObj, Signature.class);
-                    if (!Signatures.getInstance().add(signature)) {
-                        logger.log(Level.WARNING, "Couldn''t add signature: {0}", signature.getProfileName());
-                    }
+                    Signatures.getInstance().add(signature);
                 }
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Could not load user signatures", ex);

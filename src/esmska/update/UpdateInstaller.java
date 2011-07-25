@@ -116,6 +116,7 @@ public class UpdateInstaller {
         logger.finer("Reloading gateways...");
         try {
             Context.persistenceManager.loadGateways();
+            Context.persistenceManager.loadGatewayProperties();
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not reload gateways", ex);
             installOk = false;
