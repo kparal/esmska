@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-07-24"
+    return "2011-07-31"
 }
 
 function getMaintainer() {
@@ -137,7 +137,7 @@ function send() {
     content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
 
     // check if message was successfully sent
-    re = /(SMS zpr.v. byl. odeslán.|SMS was sent)/
+    re = /(SMS zpr.v. byl. odeslán.|SMS was sent|All SMS messages were sent)/
     match = re.exec(content)
     if (match) {
         // all ok
