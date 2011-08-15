@@ -123,8 +123,15 @@ public class Statistics {
         return gateways;
     }
     
-    /** Send program usage info to Esmska server. */
+    /** Send program usage info to Esmska server.
+     * Doesn't send for first-time program run.
+     */
     public static void sendUsageInfo() {
+        if (config.isFirstRun()) {
+            logger.fine("Not sending usage info, first program run");
+            return;
+        }
+        
         logger.fine("Sending usage info");
         
         JSONObject info = collectUsageInfo();
