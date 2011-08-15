@@ -3,10 +3,6 @@ package esmska.gui;
 import esmska.Context;
 import esmska.data.Icons;
 import esmska.data.Queue;
-import esmska.data.Queue.Events;
-import esmska.data.SMS;
-import esmska.data.event.ValuedEvent;
-import esmska.data.event.ValuedListener;
 import esmska.utils.L10N;
 import esmska.utils.RuntimeUtils;
 import java.awt.AWTException;
@@ -22,7 +18,6 @@ import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -38,7 +33,6 @@ public class NotificationIcon {
     private static NotificationIcon instance;
     private static boolean installed;
     private static final Logger logger = Logger.getLogger(NotificationIcon.class.getName());
-    private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Queue queue = Queue.getInstance();
     private static final String pauseQueue = l10n.getString("Pause_sms_queue");
@@ -46,8 +40,8 @@ public class NotificationIcon {
     private static final String showWindow = l10n.getString("Show_program");
     private static final String hideWindow = l10n.getString("Hide_program");
     
-    /** different tray images for different program states */
-    private static Image trayImageDefault, trayImageSending, trayImageCurrent;
+    /** tray logo image */
+    private static Image trayImageDefault;
 
     private PopupMenu popup = null;
     private TrayIcon trayIcon = null;
@@ -126,41 +120,22 @@ public class NotificationIcon {
 
         //choose best icon size
         String logo = "esmska.png";
-        String logoSending = "esmska-gold.png";
         if (isSupported()) {
             Dimension size = SystemTray.getSystemTray().getTrayIconSize();
             if (size.getWidth() <= 16 && size.getHeight() <= 16) {
                 logo = "esmska-16.png";
-                logoSending = "esmska-gold-16.png";
             } else if (size.getWidth() <= 32 && size.getHeight() <= 32) {
                 logo = "esmska-32.png";
-                logoSending = "esmska-gold-32.png";
             } else if (size.getWidth() <= 64 && size.getHeight() <= 64) {
                 logo = "esmska-64.png";
-                logoSending = "esmska-gold-64.png";
             }
         }
         
         // construct a TrayIcon
         trayImageDefault = Icons.get(logo).getImage();
-        trayImageSending = Icons.get(logoSending).getImage();
-        updateTrayImage();
-        trayIcon = new TrayIcon(trayImageCurrent, "Esmska", popup);
+        trayIcon = new TrayIcon(trayImageDefault, "Esmska", popup);
         trayIcon.setImageAutoSize(true);
         trayIcon.addMouseListener(mouseAdapter);
-
-        //change tray image when queue fullness changes
-        queue.addValuedListener(new ValuedListener<Queue.Events, SMS>() {
-            @Override
-            public void eventOccured(ValuedEvent<Events, SMS> e) {
-                switch (e.getEvent()) {
-                    case QUEUE_CLEARED:
-                    case SMS_ADDED:
-                    case SMS_REMOVED:
-                        updateTrayImage();
-                }
-            }
-        });
     }
 
     /** Get instance of NotificationIcon. This class is singleton.
@@ -204,24 +179,6 @@ public class NotificationIcon {
         //visible if visible and not iconified
         boolean visible = frame.isVisible() && (frame.getExtendedState() & JFrame.ICONIFIED) == 0;
         toggleItem.setLabel(visible ? hideWindow : showWindow);
-    }
-
-    /** Update tray image according to program state */
-    private void updateTrayImage() {
-        int size = queue.size();
-        boolean changed = false;
-
-        if (size > 0) {
-            changed = (trayImageCurrent != trayImageSending);
-            trayImageCurrent = trayImageSending;
-        } else {
-            changed = (trayImageCurrent != trayImageDefault);
-            trayImageCurrent = trayImageDefault;
-        }
-
-        if (trayIcon != null && changed) {
-            trayIcon.setImage(trayImageCurrent);
-        }
     }
 
     /** Install a new icon in the notification area. If an icon is already installed,
