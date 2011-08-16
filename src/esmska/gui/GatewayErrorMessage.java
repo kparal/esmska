@@ -51,8 +51,8 @@ public class GatewayErrorMessage extends GatewayMessage {
         Gateway gw = gateways.get(sms.getGateway());
         String website = gw != null ? gw.getWebsite() : null;
         Tuple<String, String> key = Keyring.getInstance().getKey(sms.getGateway());
-        String login = key != null ? key.get1() : null;
-        String password = key != null ? key.get2() : null;
+        String login = key != null ? key.get1() : "";
+        String password = key != null ? key.get2() : "";
         
         switch (problem) {
             case CUSTOM_MESSAGE:
