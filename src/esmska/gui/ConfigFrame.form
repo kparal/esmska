@@ -527,12 +527,13 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Gateway properties">
-                      <ResourceString PropertyName="titleX" bundle="esmska/resources/l10n.properties" key="ConfigFrame.gwDetailsPanel.border.title" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
-                    </TitledBorder>
+                    <TitledBorder title="&lt;&lt;Gateway name&gt;&gt;"/>
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="gwDetailsPanel.setVisible(false);"/>
+              </AuxValues>
 
               <Layout>
                 <DimensionLayout dim="0">

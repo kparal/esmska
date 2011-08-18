@@ -87,6 +87,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
@@ -706,7 +707,8 @@ public class ConfigFrame extends javax.swing.JFrame {
 
     Mnemonics.setLocalizedText(gwTipLabel,l10n.getString("ConfigFrame.gwTipLabel.text")); // NOI18N
 
-    gwDetailsPanel.setBorder(BorderFactory.createTitledBorder(l10n.getString("ConfigFrame.gwDetailsPanel.border.title"))); // NOI18N
+    gwDetailsPanel.setBorder(BorderFactory.createTitledBorder("<<Gateway name>>")); // NOI18N
+    gwDetailsPanel.setVisible(false);
 
     passwordField.setColumns(12);
     passwordField.setToolTipText(l10n.getString("ConfigFrame.passwordField.toolTipText")); // NOI18N
@@ -1657,6 +1659,10 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
                 passwordField.setText(key.get2());
                 passwordField.setCaretPosition(0);
             }
+            
+            TitledBorder gwDetailsBorder = (TitledBorder) gwDetailsPanel.getBorder();
+            gwDetailsBorder.setTitle(gateway.getName());
+            gwDetailsPanel.repaint();
             
             fullyInicialized = oldInit;
         }
