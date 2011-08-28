@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-07 00:26+0200\n"
+"POT-Creation-Date: 2011-08-28 21:51+0200\n"
 "PO-Revision-Date: 2011-07-07 00:26+0100\n"
 "Last-Translator: Kamil Páral <ripper42@gmail.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -303,10 +303,6 @@ msgstr "&Brány"
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&Obecné"
-
-#: ConfigFrame.gwDetailsPanel.border.title
-msgid "Gateway properties"
-msgstr "Vlastnosti brány"
 
 #: ConfigFrame.gwTipLabel.text
 msgid ""
@@ -2483,6 +2479,9 @@ msgstr "Brána aktualizována: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Některé aktualizace bran se nepodařilo nainstalovat."
+
+#~ msgid "Gateway properties"
+#~ msgstr "Vlastnosti brány"
 
 #~ msgid "Report a problem or request a feature"
 #~ msgstr "Nahlásit problém nebo navrhnout vylepšení"

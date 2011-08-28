@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-28 19:31+0200\n"
+"POT-Creation-Date: 2011-08-28 21:51+0200\n"
 "PO-Revision-Date: 2010-01-31 18:22+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-17 04:38+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-29 04:48+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -277,10 +277,6 @@ msgstr ""
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&Generelt"
-
-#: ConfigFrame.gwDetailsPanel.border.title
-msgid "Gateway properties"
-msgstr ""
 
 #: ConfigFrame.gwTipLabel.text
 msgid ""
@@ -1549,9 +1545,8 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem..."
-msgstr "Rapportér et &problem..."
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a broken program behavior"
@@ -2219,6 +2214,9 @@ msgstr ""
 
 #~ msgid "Get &Help Online..."
 #~ msgstr "Få &hjælp online..."
+
+#~ msgid "Report a &Problem..."
+#~ msgstr "Rapportér et &problem..."
 
 #~ msgid "&Translate This Application..."
 #~ msgstr "&Oversæt dette program..."

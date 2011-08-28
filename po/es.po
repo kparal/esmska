@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-28 19:31+0200\n"
+"POT-Creation-Date: 2011-08-28 21:51+0200\n"
 "PO-Revision-Date: 2011-06-05 11:21+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-17 04:38+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-29 04:49+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -306,10 +306,6 @@ msgstr "Operadore&s"
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&General"
-
-#: ConfigFrame.gwDetailsPanel.border.title
-msgid "Gateway properties"
-msgstr "Propiedades de operador"
 
 #: ConfigFrame.gwTipLabel.text
 msgid ""
@@ -1789,14 +1785,12 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem..."
-msgstr "Enviar un &problema o una idea..."
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
-#, fuzzy
 msgid "Report a broken program behavior"
-msgstr "Configurar el comportamiento del programa"
+msgstr ""
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2467,8 +2461,8 @@ msgstr "Operador actualizado: {0}"
 msgid "Some of gateway updates couldn't be installed."
 msgstr "No se pudieron instalar algunas actualizaciones de operadores."
 
-#~ msgid "Report a problem or request a feature"
-#~ msgstr "Reportar un problema o sugerir alguna característica"
+#~ msgid "Gateway properties"
+#~ msgstr "Propiedades de operador"
 
 #~ msgid "2007-2009 Kamil Páral"
 #~ msgstr "2007-2009 Kamil Páral"
@@ -2820,6 +2814,9 @@ msgstr "No se pudieron instalar algunas actualizaciones de operadores."
 #~ msgid "&Update"
 #~ msgstr "Actualizar"
 
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "Reportar un problema o sugerir alguna característica"
+
 #~ msgid "You don't have sufficient credit to send this message."
 #~ msgstr "Usted no cuenta con suficiente crédito para enviar este mensaje."
 
@@ -3026,6 +3023,9 @@ msgstr "No se pudieron instalar algunas actualizaciones de operadores."
 
 #~ msgid "<a href=\"\">Gateway updates</a> are available!"
 #~ msgstr "<a href=\"\">¡Actualizaciones de operador</a> disponibles!"
+
+#~ msgid "Report a &problem or an idea..."
+#~ msgstr "Enviar un &problema o una idea..."
 
 #~ msgctxt "SMSPanel.gatewayLabel.text"
 #~ msgid "&Gateway:"

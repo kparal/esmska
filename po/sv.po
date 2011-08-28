@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-28 19:31+0200\n"
-"PO-Revision-Date: 2011-06-16 17:19+0000\n"
+"POT-Creation-Date: 2011-08-28 21:51+0200\n"
+"PO-Revision-Date: 2011-08-15 11:38+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-17 04:38+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-08-16 04:38+0000\n"
+"X-Generator: Launchpad (build 13687)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -300,10 +300,6 @@ msgstr "Gateway&s"
 msgid "&General"
 msgstr "&Allmänt"
 
-#: ConfigFrame.gwDetailsPanel.border.title
-msgid "Gateway properties"
-msgstr "Gatewayegenskaper"
-
 #: ConfigFrame.gwTipLabel.text
 msgid ""
 "<html>\n"
@@ -391,7 +387,7 @@ msgstr "Användarnamn krävs för att logga in på denna gateway"
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
-msgstr "Tit&a:"
+msgstr "&Utseende:"
 
 #: ConfigFrame.multiplatform_look
 msgid "Multiplatform"
@@ -409,7 +405,7 @@ msgid ""
 "</html>"
 msgstr ""
 "<html>\n"
-"Visar en ikon i meddelandefältet av fönsterhanteraren (så kallad "
+"Visar en ikon i meddelandefältet av fönsterhanteraren (även kallad "
 "<i>aktivitetsfältet</i>).\n"
 "</html>"
 
@@ -433,6 +429,10 @@ msgid ""
 "last period will be saved\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"När programmet stängs kommer endast meddelandehistoriken för den<BR>\n"
+"valda sista perioden sparas\n"
+"</html>"
 
 #: ConfigFrame.removeAccentsCheckBox.text
 msgid "Remove &diacritics from messages"
@@ -762,7 +762,7 @@ msgstr "Sponsorer:"
 
 #: Credits.translators
 msgid "Translated by:"
-msgstr "Överat av:"
+msgstr "Översatt av:"
 
 #: Date
 msgid "Date"
@@ -782,7 +782,7 @@ msgstr "Ta bort konakter"
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr "Ta bort medelanden"
+msgstr "Ta bort meddelanden"
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
@@ -790,11 +790,11 @@ msgstr "Ta bort valda kontakter"
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr "Ta bort valda medelanden"
+msgstr "Ta bort valda meddelanden"
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
-msgstr "Ta bort valda medelanden från historian"
+msgstr "Ta bort valda meddelanden från historian"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
@@ -879,7 +879,7 @@ msgstr "Redigera kontakter kollektivt"
 
 #: Edit_message
 msgid "Edit message"
-msgstr "Redigera medelande"
+msgstr "Redigera meddelande"
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
@@ -887,7 +887,7 @@ msgstr "Redigera valda kontakter"
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr "Redigera valda medelanden"
+msgstr "Redigera valda meddelanden"
 
 #: ExceptionDialog.copyButton.toolTipText
 msgid "Copy the detailed exception message to the system clipboard"
@@ -1112,6 +1112,9 @@ msgid ""
 "worked on. In the meantime please use some other gateway or visit <a href="
 "\"{0}\">{0}</a> and send the message manually."
 msgstr ""
+"Tyvärr kan inte denna gateway användas för tillfället. Problemet håller på "
+"att åtgärdas. Använd några andra gateways under tiden eller besök <a href="
+"\"{0}\">{0}</a> och skicka meddelandet manuellt."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.FIX_IN_PROGRESS.help
@@ -1119,6 +1122,9 @@ msgid ""
 "There is a certain problem that makes it impossible for this program to use "
 "that gateway. You can find more information at <a href=\"{0}\">this page</a>."
 msgstr ""
+"Det finns ett visst problem som gör det omöjligt för det här program att "
+"använda denna gateway. Du kan hitta mer information på <a href=\"{0}\">denna "
+"sida</a>."
 
 #: GatewayProblem.GATEWAY_MESSAGE
 msgid "The gateway provided following explanation:"
@@ -1131,10 +1137,14 @@ msgid ""
 "You can also visit <a href=\"{0}\">{0}</a> and send the message manually. "
 "It''s possible that you receive a more detailed problem description this way."
 msgstr ""
+"Fixa problemet som nämns i gateway-rapporten och skicka meddelandet igen. Du "
+"kan också besöka <a href=\"{0}\">{0}</a> och skicka meddelandet manuellt. "
+"Det är möjligt att du får en mer detaljerad problembeskrivning på detta sätt."
 
 #: GatewayProblem.LIMIT_REACHED
 msgid "You're sending the message too early. Try again in a short while."
 msgstr ""
+"Du försöker skicka meddelandet för tidigt. Försök igen om en liten stund."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.LIMIT_REACHED.help
@@ -1207,6 +1217,9 @@ msgid ""
 "at the moment. Please try to send the message again in a short while or use "
 "some other gateway temporarily."
 msgstr ""
+"Ett okänt fel har uppstått. Din gateway kan uppleva några problem för "
+"tillfället. Var god skicka meddelandet igen om en liten stund eller använd "
+"några andra gateways för tillfället."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.UNKNOWN.help
@@ -1225,6 +1238,9 @@ msgid ""
 "the future, but currently use some other gateway instead or visit <a href="
 "\"{0}\">{0}</a> and send the message manually."
 msgstr ""
+"Tyvärr kan inte denna gateway användas för tillfället. Det kan ändras i "
+"framtiden, men använd för tillfället några andra gateways istället eller "
+"besök <a href=\"{0}\">{0}</a> och skicka meddelandet manuellt."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_AUTH
@@ -1245,6 +1261,10 @@ msgid ""
 "log in. Make sure logging in works. Then fill in the login credentials in <a "
 "href=\"{1}\">the gateway preferences</a>."
 msgstr ""
+"Denna gateway kräver registrering, annars kan du inte skicka meddelanden med "
+"den. Besök <a href=\"{0}\">{0}</a> och ta reda på hur man registrerar eller "
+"loggar in. Försäkra dig om att det fungerar att logga in sig. Fyll sedan in "
+"inloggningsuppgifterna på <a href=\"{1}\">Gateway-inställningarna</a>."
 
 #: GatewayProblem.WRONG_CODE
 msgid ""
@@ -1329,11 +1349,11 @@ msgstr "Avsändarens namn:"
 
 #: HistoryFrame.remove_selected
 msgid "Really remove all selected messages from history?"
-msgstr "Vill du verkligen ta bort alla valda medelanden från historiken?"
+msgstr "Vill du verkligen ta bort alla valda meddelanden från historiken?"
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
-msgstr "Återsänd medelande till någon annan"
+msgstr "Återsänd meddelande till någon annan"
 
 #: HistoryFrame.searchField.toolTipText
 msgid "Enter term to search in messages history"
@@ -1345,7 +1365,7 @@ msgstr "&Sök:"
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
-msgstr "Skickat medelande historik - Esmska"
+msgstr "Historik för skickade meddelanden - Esmska"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
@@ -1659,7 +1679,7 @@ msgstr "Importera kontakter från andra applikationer"
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr "&Medelande"
+msgstr "&Meddelande"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
@@ -1686,14 +1706,12 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem..."
-msgstr "Raportera ett &Problem..."
+msgstr "Rapportera ett &problem..."
 
 #: MainFrame.problemMenuItem.toolTipText
-#, fuzzy
 msgid "Report a broken program behavior"
-msgstr "Konfigurera program betende"
+msgstr "Rapportera en trasig programfunktion"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -1705,7 +1723,7 @@ msgstr "Gör om (Ctrl+Y)"
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
-msgstr "Visa sändnings historik"
+msgstr "Visa sändningshistorik"
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
@@ -1714,12 +1732,12 @@ msgstr "Visa Program information"
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
-msgstr "Medelande till {0} kunde inte skickas!"
+msgstr "Meddelande till {0} kunde inte skickas!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
-msgstr "Medelande till {0} skickat."
+msgstr "Meddelande till {0} skickat."
 
 #: MainFrame.tip
 msgid "Tip:"
@@ -1743,7 +1761,7 @@ msgstr "Ångra (Ctrl+Z)"
 
 #: Message_history_
 msgid "Message &history"
-msgstr "Medelande historik"
+msgstr "Meddelandehistorik"
 
 #: Move_down
 msgid "Move down"
@@ -1815,7 +1833,7 @@ msgstr "Kö"
 
 #: QueuePanel.confirmDelete
 msgid "Really remove all selected messages from the queue?"
-msgstr ""
+msgstr "Ta bort alla markerade meddelanden från kön?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -2050,23 +2068,23 @@ msgstr "Visa program"
 
 #: Signature.confirmRemove
 msgid "Do you want to remove selected signature?"
-msgstr ""
+msgstr "Vill du ta bort markerad signatur?"
 
 #: Signature.default
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: Signature.new
 msgid "<html><i>New signature...</i></html>"
-msgstr ""
+msgstr "<html><i>Ny signatur...</i></html>"
 
 #: Signature.new.desc
 msgid "Name of the new signature:"
-msgstr ""
+msgstr "Namn för nya signaturen:"
 
 #: Signature.none
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: SignatureComboBox.tooltip
 msgid "The signature to append to the message (sender number and name)."
@@ -2134,6 +2152,8 @@ msgid ""
 "We recommend you to use Linux packages, you'll obtain a program auto-update "
 "feature."
 msgstr ""
+"Vi rekommenderar att du använder Linux-paket, du kommer att få en automatisk "
+"programuppdateringsfunktion."
 
 #. #Write the tip as short as possible
 #: Tip.16
@@ -2159,6 +2179,8 @@ msgstr ""
 msgid ""
 "Gateways are automatically updated to their latest version on program start."
 msgstr ""
+"Gateways uppdateras automatiskt till senaste versionen när programmet "
+"startas."
 
 #. #Write the tip as short as possible
 #: Tip.2
@@ -2327,7 +2349,7 @@ msgstr "Klicka för att öppna nedladdningssidan för program"
 
 #: Update.downloadFailed
 msgid "It wasn't possible to download all gateway updates."
-msgstr ""
+msgstr "Det var inte möjligt att ladda ned alla gateway-uppdateringar."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Update.gwUpdated
@@ -2336,394 +2358,7 @@ msgstr "Gateway uppdaterad: {0}"
 
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
-msgstr ""
+msgstr "En del gateways kunde inte installeras."
 
-#~ msgid "Report a &problem or an idea..."
-#~ msgstr "Rapportera ett &problem eller en idé..."
-
-#~ msgid "Report a problem or request a feature"
-#~ msgstr "Rapportera ett problem eller efterfråga en funktion"
-
-#~ msgid "2007-2009 Kamil Páral"
-#~ msgstr "2007-2009 Kamil Páral"
-
-#~ msgid ""
-#~ "This tab is for developing purposes only. It will not be visible in the "
-#~ "final release."
-#~ msgstr ""
-#~ "Den här fliken är enbart för utveckling. Den kommer inte vara synlig i "
-#~ "den slutgiltiga utgivningen."
-
-#~ msgid "(country:"
-#~ msgstr "(land:"
-
-#~ msgid "Pa&ssword:"
-#~ msgstr "Lö&senord:"
-
-#~ msgctxt "ConfigFrame.jLabel3.text"
-#~ msgid "&Name:"
-#~ msgstr "&Namn:"
-
-#~ msgid "Show password"
-#~ msgstr "Visa lösenord"
-
-#~ msgid "program only"
-#~ msgstr "Endast program"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Namn:"
-
-#~ msgid "Sent messages history"
-#~ msgstr "Skickade medelande historik"
-
-#~ msgid "Usernames and password to individual operators"
-#~ msgstr "Användarnamn och lösenord för indivduela operatörer"
-
-#~ msgid "Contact list"
-#~ msgstr "Kontakt lista"
-
-#~ msgid "&Image code:"
-#~ msgstr "&bild kod:"
-
-#~ msgid "Import only contacts with known operator"
-#~ msgstr "Importera endast kontakter med känd operatör"
-
-#~ msgid "You don't have sufficient credit to send this message."
-#~ msgstr ""
-#~ "Du har inte tillräckligt med krediter för att sända detta medelande."
-
-#~ msgid "A message from operator:<br>"
-#~ msgstr "Ett medelande fån operatören:<br>"
-
-#~ msgid "You have entered the wrong security code."
-#~ msgstr "Du har fylt i fel säkerhets kod."
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Hemsida</a></html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Do you like this project? Help to keep it running...\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Gillar du det här projektet? Bidra till att hålla det igång ...\n"
-#~ "</ html>"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Uppdateringkontrollant"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html> <a href=\"\"> Stödprojekt </ a> </ html>"
-
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Leta efter program och gateway uppdateringar"
-
-#~ msgid "2007-2010 Kamil Páral"
-#~ msgstr "2007-2010 Kamil Paral"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Kolla automatiskt efter uppdateringar för:"
-
-#~ msgid "&Gateways"
-#~ msgstr "&Gateways"
-
-#~ msgid "Show &password"
-#~ msgstr "Visa &lösenord"
-
-#~ msgctxt "ConfigFrame.jLabel10.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Gateway:"
-
-#~ msgid "gateways only"
-#~ msgstr "endast gateways"
-
-#~ msgid ""
-#~ "The gateway hasn't specified any reason why the message sending failed."
-#~ msgstr ""
-#~ "Denna gateway har inte angivit något skäl till varför meddelandet "
-#~ "misslyckades att skickas."
-
-#~ msgid "A message from the gateway:<br>"
-#~ msgstr "Ett meddelande från gateway:<br>"
-
-#~ msgctxt "Gateway.unknown"
-#~ msgid "Unknown gateway"
-#~ msgstr "Okänd gateway"
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Gateway:"
-
-#~ msgid "gateway version: {0}"
-#~ msgstr "gateway-version: {0}"
-
-#~ msgctxt "UnknownGateway"
-#~ msgid "Unknown gateway"
-#~ msgstr "Okänd gateway"
-
-#~ msgid "program and gateways"
-#~ msgstr "program and gateways"
-
-#~ msgid "also u&nstable versions"
-#~ msgstr "även &ostabila versioner"
-
-#~ msgid "Installation of some gateways failed!"
-#~ msgstr "Installationen för några gateways misslyckades!"
-
-#~ msgid "You have entered incorrect recipient number."
-#~ msgstr "Du har angivit fel mottagarnummer."
-
-#~ msgid "All gateways have been successfully updated."
-#~ msgstr "Alla gateways har uppdaterats."
-
-#~ msgid "Checking..."
-#~ msgstr "Kontrollerar..."
-
-#~ msgid "Downloading..."
-#~ msgstr "Laddar ned..."
-
-#~ msgid ""
-#~ "<html>There is a new program version ({0}) available on the <a href="
-#~ "\"{1}\">program homepage</a>.</html>"
-#~ msgstr ""
-#~ "<html>Det finns en ny programversion ({0}) tillgänlig på <a href="
-#~ "\"{1}\">programhemsidan</a>.</html>"
-
-#~ msgid "Click to open an update manager"
-#~ msgstr "Klicka för att öppna en uppdateringshanterare"
-
-#~ msgid "{0} (needs program version: {1})"
-#~ msgstr "{0} (kräver programversion: {1})"
-
-#~ msgid "Request the &delivery report"
-#~ msgstr "Begär leveransrapporten"
-
-#~ msgid "Show &only gateways with names containing:"
-#~ msgstr "Visa &endast gateways vars namn innehåller:"
-
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>Sökväg för användarkonfiguration:<br>{0}</html>"
-
-#~ msgid "You have entered incorrent sender signature (number or name)."
-#~ msgstr "Du har angivit en felaktig avsändarsignatur (nummer eller namn)."
-
-#~ msgid ""
-#~ "You are probably running the program on an unsupported Java version! "
-#~ "Program might not work correctly with it! The tested Java versions are: "
-#~ "Sun Java 6, OpenJDK 6, Apple Java 6."
-#~ msgstr ""
-#~ "Du kör förmodligen programmet från en ostödjande version av Java! "
-#~ "Programmet fungerar kanske inte korrekt med det! Testade Java-versioner "
-#~ "är: Sun Java 6, OpenJDK 6, Apple Java 6."
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Here you can set your login credentials for gateways which require it.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Här kan du ange dina inloggningskreditiv för gateways som kräver det.\n"
-#~ "</html>"
-
-#~ msgid "&Login credentials"
-#~ msgstr "&Inloggningskreditiv"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr "Vill du verkligen ta bort alla angivna inloggningskreditiv?"
-
-#~ msgid ""
-#~ "You have entered incorrect login credentials.<br>This gateway requires "
-#~ "registration and you can''t send messages throught it without one."
-#~ "<br>Visit the <a href=\"{0}\">website of this gateway</a> and find out "
-#~ "how to register or log in.<br>Then enter the login credentials in program "
-#~ "preferences.<br><br>If you have entered your login credentials correctly, "
-#~ "visit the website<br>of the gateway and check that logging in works."
-#~ msgstr ""
-#~ "Du har angivit ogiltiga inloggningskreditiver.<br>Denna gateway kräver "
-#~ "registrering och du kan inte skicka meddelanden via den utan det."
-#~ "<br>Besök <a href=\"{0}\">webbsidan för denna gateway</a> och ta reda på "
-#~ "hur du registrerar eller<br> loggar in dig. Ange sedan "
-#~ "inloggningskreditiven i programinställningarna.<br><br>Om du har angivit "
-#~ "dina inloggningskreditiver korrekt, besök webbsidan<br>för denna gateway "
-#~ "och kolla så att inloggningen fungerar."
-
-#~ msgid "Use default form &layout"
-#~ msgstr "Använd standardforms&utseendet"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Show icon in the notification area of the window manager (so-called "
-#~ "<i>system tray</i>).<br>\n"
-#~ "<br>\n"
-#~ "Beware, when using modern composite window managers (Compiz, Beryl, ...) "
-#~ "this<br>\n"
-#~ "feature is available only from Java 6 Update 10.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Visa ikon i meddelandefältet i fönsterhanteraren (så kallad "
-#~ "<i>Systemfältet</i>).<br>\n"
-#~ "<br>\n"
-#~ "Varning, när du använder moderna komposit-fönsterhanterare (Compiz, "
-#~ "Beryl, ...)<br>\n"
-#~ "är denna funktion tillgänglig från Java 6 Update 10.\n"
-#~ "</html>"
-
-#~ msgid "Sender number in international format (starting with '+' sign)"
-#~ msgstr "Avsändarnummer i internationellt format (börjar med ett '+'-tecken)"
-
-#~ msgid "Add a sender &signature to the message"
-#~ msgstr "Lägg till en avsändar&signatur till meddelandet"
-
-#~ msgid ""
-#~ "This gateway requires that you supply a sender signature. Correct it in "
-#~ "the program settings and try again."
-#~ msgstr ""
-#~ "Denna gateway kräver att du lämnar en avsändarsignatur. Korrigera det i "
-#~ "programinställningarna och försök igen."
-
-#~ msgid "Downloading of some gateways failed!"
-#~ msgstr "Nedladdningen för några gateways misslyckades!"
-
-#~ msgid "&Update"
-#~ msgstr "&Uppdatera"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Kolla efter &uppdateringar"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "<h2>Security code required</h2>\n"
-#~ "The chosen gateway requires you to enter the security code displayed "
-#~ "below:\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "<h2>Säkerhetskod krävs</h2>\n"
-#~ "Vald gateway kräver att du anger säkerhetskoden som visas nedan:\n"
-#~ "</html>"
-
-#~ msgid "<a href=\"\">Gateway updates</a> are available!"
-#~ msgstr "<a href=\"\">Gateway-uppdateringar</a> finns tillgängliga!"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "After program startup perform a check whether a new program version<br>\n"
-#~ "or gateway updates were released and eventually notify the user\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Kontrollera om en nyare programversion eller gateway-uppdateringar\n"
-#~ "har släppts och meddela eventuellt användaren\n"
-#~ "</html>"
-
-#~ msgid ""
-#~ "By using commandline options you can use program even in café or school."
-#~ msgstr ""
-#~ "Genom att använda Kommandolinje-alternativen kan du t.o.m. använda "
-#~ "programmet på caféet eller skolan."
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Notify also also about unstable versions.<br>\n"
-#~ "<br>\n"
-#~ "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
-#~ "not afraid of potentially losing their program data.</b>\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Meddela även om instabila versioner.<br>\n"
-#~ "<br>\n"
-#~ "<b>Varning: Instabila versioner är endast avsedda för erfarna "
-#~ "användare<br>\n"
-#~ "som inte är rädd för risken att förlora programdata.</b>\n"
-#~ "</html>"
-
-#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-#~ msgstr "<html><h2>Meddelande för ''{0}'' kunde inte skickas!</h2>{1}</html>"
-
-#~ msgid ""
-#~ "<html>Some gateways require <a href=\"{0}\">more recent program version</"
-#~ "a> than you currently use.</html>"
-#~ msgstr ""
-#~ "<html>Några gateways kräver <a href=\"{0}\">en nyare version av "
-#~ "programmet</a> än den du för tillfället använder.</html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "<h2>Check for updated gateways</h2>\n"
-#~ "Updated gateways may help you fix problems with sending messages.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "<h2>Kolla efter uppdaterade gateways</h2>\n"
-#~ "Uppdaterade gateways kan hjälpa dig att lösa problemet med att skicka "
-#~ "meddelanden.\n"
-#~ "</html>"
-
-#~ msgid "Retrieving update information failed!"
-#~ msgstr "Misslyckades att hämta uppdateringsinformation!"
-
-#~ msgid "In preferences you can restrict the list of available web gateways."
-#~ msgstr "I Inställningar kan du begränsa antalet tillgängliga webbgateways."
-
-#~ msgid ""
-#~ "We recommend you to use Linux packages, you'll obtain an auto-update "
-#~ "feature."
-#~ msgstr ""
-#~ "Vi rekommenderar att du använder Linux-paket, du kommer att få en auto-"
-#~ "uppdateringsfunktion."
-
-#~ msgid ""
-#~ "<html><h2>Esmska is already running!</h2>Esmska is already once started. "
-#~ "We strongly discourage you from starting another<br>instances of the "
-#~ "program because it may cause a user data loss.</html>"
-#~ msgstr ""
-#~ "<html><h2>Esmska körs redan!</h2>Esmska har redan startats upp en gång. "
-#~ "Vi rekommenderar inte att du startar upp<br>programmet igen när "
-#~ "programmet redan körs, eftersom det kan förorsaka förluster av "
-#~ "användardata.</html>"
-
-#~ msgid ""
-#~ "You have entered too long message text.<br>\n"
-#~ "<br>\n"
-#~ "Hint: If it is for your language possible, try to avoid using national "
-#~ "characters (different from standard<br>\n"
-#~ "english character set), otherwise it may reduce the maximum allowed "
-#~ "message length substantially."
-#~ msgstr ""
-#~ "Du har skrivit ett för lång meddelandetext.<br>\n"
-#~ "<br>\n"
-#~ "Tips: Om det är möjligt för ditt språk kan du försöka att undvika "
-#~ "nationella tecken (skiljer sig från standard-<br>\n"
-#~ "engelskans teckenuppsättningen), annars kan det minska den maximala "
-#~ "tillåtna meddelandelängden avsevärt."
-
-#~ msgid ""
-#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
-#~ "been found. It is recommended to update them now.</html>"
-#~ msgstr ""
-#~ "<html><h2>Uppdaterade gateways hittades</h2>Några nya eller uppdaterade "
-#~ "gateways har hittats. Det rekommenderas att du uppdaterar dem nu.</html>"
-
-#~ msgid ""
-#~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-#~ "latest versions of all the available gateways.</html>"
-#~ msgstr ""
-#~ "<html><h2>Alla gateways är uppdaterade</h2>För tillfället använder du de "
-#~ "senaste versionerna av alla tillgängliga gateways.</html>"
-
-#~ msgid ""
-#~ "You have entered too long message text.<br>\n"
-#~ "<br>\n"
-#~ "Hint: If it is for your language possible, try to avoid using national "
-#~ "characters (different from standard english character set), otherwise it "
-#~ "may reduce the maximum allowed message length substantially."
-#~ msgstr ""
-#~ "Du har skrivit ett för långt textmeddelande.<br>\n"
-#~ "<br>\n"
-#~ "Tips: Om det är möjligt för ditt språk kan du försöka undvika nationella "
-#~ "tecken (som skiljer sig från den engelska standardteckenuppsättningen), "
-#~ "annars kan det reducera det maximala tillåtna meddelandelängden avsevärt."
+#~ msgid "Gateway properties"
+#~ msgstr "Gatewayegenskaper"

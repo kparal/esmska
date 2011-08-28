@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-28 19:31+0200\n"
+"POT-Creation-Date: 2011-08-28 21:51+0200\n"
 "PO-Revision-Date: 2010-07-05 21:20+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-17 04:38+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-29 04:48+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -283,10 +283,6 @@ msgstr ""
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
 msgstr "&כללי"
-
-#: ConfigFrame.gwDetailsPanel.border.title
-msgid "Gateway properties"
-msgstr ""
 
 #: ConfigFrame.gwTipLabel.text
 msgid ""
@@ -1643,14 +1639,12 @@ msgid ""
 msgstr ""
 
 #: MainFrame.problemMenuItem.text
-#, fuzzy
 msgid "Report a &problem..."
-msgstr "דווח על &בעיה..."
+msgstr ""
 
 #: MainFrame.problemMenuItem.toolTipText
-#, fuzzy
 msgid "Report a broken program behavior"
-msgstr "הגדרת התנהגות התוכנה"
+msgstr ""
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2245,9 +2239,6 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
-#~ msgid "Report a problem or request a feature"
-#~ msgstr "דווח על בעיה או בקש תכונה"
-
 #~ msgid ""
 #~ "<html>\n"
 #~ "Do you like this project? Help to keep it running...\n"
@@ -2486,6 +2477,12 @@ msgstr ""
 
 #~ msgid "Get &Help Online..."
 #~ msgstr "קבלת ע&זרה מקוונת..."
+
+#~ msgid "Report a problem or request a feature"
+#~ msgstr "דווח על בעיה או בקש תכונה"
+
+#~ msgid "Report a &Problem..."
+#~ msgstr "דווח על &בעיה..."
 
 #~ msgid "&Translate This Application..."
 #~ msgstr "ת&רגם יישום זה..."
