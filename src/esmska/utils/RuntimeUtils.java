@@ -3,7 +3,10 @@ package esmska.utils;
 import esmska.gui.ThemeManager;
 import esmska.integration.IntegrationAdapter;
 import java.awt.Dialog.ModalityType;
+import java.io.IOException;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -30,6 +33,7 @@ public class RuntimeUtils {
 
     private static String vendor = StringUtils.defaultString(System.getProperty("java.vendor"));
     private static String vm = StringUtils.defaultString(System.getProperty("java.vm.name"));
+    private static final Logger logger = Logger.getLogger(RuntimeUtils.class.getName());
 
     /** Detect type of current OS
      * @return OS type
@@ -71,6 +75,29 @@ public class RuntimeUtils {
     /** Check whether current desktop environment is KDE */
     public static boolean isKDEDesktop() {
         return System.getenv("KDE_FULL_SESSION") != null;
+    }
+
+    /** Check whether current desktop environment is Gnome 3.x */
+    public static boolean isGnome3Desktop() {
+        if (!isGnomeDesktop()) {
+            return false;
+        }
+        // gnome-default-applications-properties is only available in GNOME 2.x,
+        // but not in GNOME 3.x
+        // code taken from: https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=654746
+        try {
+            Process p = Runtime.getRuntime().exec("which gnome-default-applications-properties");
+            p.waitFor();
+            if (p.exitValue() != 0 && p.exitValue() != 1) {
+                logger.log(Level.WARNING, "''which'' returned an unexpected exit code: {0}", p.exitValue());
+            }
+            return p.exitValue() != 0;
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Can't test whether this is Gnome 3", e);
+        } catch (InterruptedException e) {
+            logger.log(Level.WARNING, "Can't test whether this is Gnome 3", e);
+        }
+        return false;
     }
 
     /** Checks whether the current Java implementation is Sun Java */

@@ -39,6 +39,7 @@ public class NotificationIcon {
     private static final String unpauseQueue = l10n.getString("Unpause_sms_queue");
     private static final String showWindow = l10n.getString("Show_program");
     private static final String hideWindow = l10n.getString("Hide_program");
+    private static Boolean supported = null;
     
     /** tray logo image */
     private static Image trayImageDefault;
@@ -225,7 +226,14 @@ public class NotificationIcon {
 
     /** Returns whether notification area is supported on this system. */
     public static boolean isSupported() {
-        return SystemTray.isSupported();
+        if (supported == null) {
+            supported = SystemTray.isSupported();
+            //doesn't work for Gnome 3: http://code.google.com/p/esmska/issues/detail?id=404
+            if (RuntimeUtils.isGnome3Desktop()) {
+                supported = false;
+            }
+        }
+        return supported;
     }
     
     /** Returns whether the notification icon is currently installed */
