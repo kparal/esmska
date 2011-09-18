@@ -627,13 +627,15 @@ public class ContactPanel extends javax.swing.JPanel {
             if (searchString.equals("")) {
                 return true;
             }
-            return (contact.getName().toLowerCase().contains(searchString) ||
-                        contact.getNumber().contains(searchString));
+            String name = contact.getName().toLowerCase();
+            return (name.contains(searchString) ||
+                    MiscUtils.removeAccents(name).contains(searchString) ||
+                    contact.getNumber().contains(searchString));
         }
         
         /** set string to be searched in contact list */
         public void setSearchString(String searchString) {
-            this.searchString = searchString;
+            this.searchString = StringUtils.lowerCase(searchString);
         }
         
         /** get string searched in contact list */

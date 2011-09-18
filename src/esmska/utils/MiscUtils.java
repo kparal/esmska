@@ -1,6 +1,7 @@
 package esmska.utils;
 
 import java.awt.Dimension;
+import java.text.Normalizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -91,5 +92,11 @@ public class MiscUtils {
                 logger.log(Level.SEVERE, message);
                 throw new IllegalStateException(message);
         }
+    }
+    
+    /** remove diacritical marks from text */
+    public static String removeAccents(String text) {
+        return Normalizer.normalize(text, Normalizer.Form.NFD).
+                replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 }

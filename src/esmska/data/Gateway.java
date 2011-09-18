@@ -1,6 +1,7 @@
 package esmska.data;
 
 import esmska.utils.L10N;
+import esmska.utils.MiscUtils;
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.net.URL;
@@ -184,7 +185,7 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         String suffix = "\n" + signature.getUserName();
         // remove accents if required
         if (Config.getInstance().isRemoveAccents()) {
-            suffix = Envelope.removeAccents(suffix);
+            suffix = MiscUtils.removeAccents(suffix);
         }
         return suffix;
     }

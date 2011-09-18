@@ -1,12 +1,12 @@
 package esmska.data;
 
+import esmska.utils.MiscUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.text.Normalizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.StringUtils;
@@ -44,7 +44,7 @@ public class Envelope {
     public void setText(String text) {
         String oldText = this.text;
         if (config.isRemoveAccents()) {
-            text = removeAccents(text);
+            text = MiscUtils.removeAccents(text);
         }
         this.text = text;
         changeSupport.firePropertyChange("text", oldText, text);
@@ -174,9 +174,4 @@ public class Envelope {
         return 0;
     }
     
-    /** remove diacritical marks from text */
-    public static String removeAccents(String text) {
-        return Normalizer.normalize(text, Normalizer.Form.NFD).
-                replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-    }
 }
