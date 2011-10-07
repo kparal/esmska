@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2011-10-07"
 }
 
 function getMaintainer() {
@@ -62,6 +62,7 @@ function getFeatures() {
 }
 
 function send() {
+
     // change variables to correct form
     if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)
@@ -106,6 +107,27 @@ function send() {
     postData = ["receiver_phone", NUMBER, "text", MESSAGE, 
                 "smsSubmit", "Odeslat SMS"]
     content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
+    
+    // check for captcha
+    // that happens if we're sending messages too quickly
+    re = /<div class="captchaTitle">/
+    match = re.exec(content)
+    while (match) {
+        // download image
+        content = EXEC.getURL("http://sms.1188.cz/captcha/show.png", [])
+    
+        // show image
+        var code = EXEC.recognizeImage(content, "")
+        
+        // send code
+        postData = ["receiver_phone", NUMBER, "captcha", code, 
+                    "text", MESSAGE, "smsSubmit", "Odeslat SMS"]
+        content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
+        
+        // check for captcha again
+        // that happens if user provides no value at all
+        match = re.exec(content)
+    }
 
     // check if message was successfully sent
     re = /Vaši zprávu jsme přijali, bude odeslána co nejdříve./
