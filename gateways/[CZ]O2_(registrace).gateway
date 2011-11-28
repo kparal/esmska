@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-10-07"
+    return "2011-11-28"
 }
 
 function getMaintainer() {
@@ -102,10 +102,19 @@ function send() {
         
         // we should be logged in now
     }
+    
+    // work around javascript protection
+    re = /HTMLElement.prototype.y = '([\w]+)';/
+    match = re.exec(content)
+    y = match[1]
+    
+    re = new RegExp("<input type=\"hidden\" name=\"" + y + "[\\w]+\" id=\"([\\w]+)\" />","g");
+    match = re.exec(content)
+    hidden = match[1]
 
     // send message
     postData = ["receiver_phone", NUMBER, "text", MESSAGE, 
-                "smsSubmit", "Odeslat SMS"]
+                "smsSubmit", "Odeslat SMS", hidden, "1"]
     content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
     
     // check for captcha
@@ -139,7 +148,18 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<span class="message wrong">([\s\S]*?)<\/span>/
+    re = /<span class="message wrong">([\s\S]*?)<\/span>/g
+    match = content.match(re)
+    if (match) {
+        // gateway told us what's wrong
+        // the first error is usually about javascript, display the last one
+        EXEC.setProblem("GATEWAY_MESSAGE", match[match.length-1])
+        logout()
+        return false
+    }
+    
+    // other type of error, when no captcha code is provided
+    re = /<div class="captchaTitle">([\s\S]*?)<\/div>/
     match = re.exec(content)
     if (match) {
         // gateway told us what's wrong

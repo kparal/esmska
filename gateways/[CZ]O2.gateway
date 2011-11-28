@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2011-11-28"
 }
 
 function getMaintainer() {
@@ -69,16 +69,26 @@ function send() {
 
     // start page
     content = EXEC.getURL("http://sms.1188.cz", [])
+    
+    // work around javascript protection
+    re = /HTMLElement.prototype.y = '([\w]+)';/
+    match = re.exec(content)
+    y = match[1]
+    
+    re = new RegExp("<input type=\"hidden\" name=\"" + y + "[\\w]+\" id=\"([\\w]+)\" />","g");
+    match = re.exec(content)
+    hidden = match[1]
 
     // download image
     content = EXEC.getURL("http://sms.1188.cz/captcha/show.png", [])
     
     // show image
-    var code = EXEC.recognizeImage(content, "")
+    code = EXEC.recognizeImage(content, "")
 
     // send message
     postData = ["receiver_phone", NUMBER, "captcha", code, 
-                "text", MESSAGE, "smsSubmit", "Odeslat SMS"]
+                "text", MESSAGE, "smsSubmit", "Odeslat SMS",
+                hidden, "1"]
     content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
 
     // check if message was successfully sent
@@ -90,7 +100,17 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<span class="message wrong">([\s\S]*?)<\/span>/
+    re = /<span class="message wrong">([\s\S]*?)<\/span>/g
+    match = content.match(re)
+    if (match) {
+        // gateway told us what's wrong
+        // the first error is usually about javascript, display the last one
+        EXEC.setProblem("GATEWAY_MESSAGE", match[match.length-1])
+        return false
+    }
+    
+    // other type of error, when no captcha code is provided
+    re = /<div class="captchaTitle">([\s\S]*?)<\/div>/
     match = re.exec(content)
     if (match) {
         // gateway told us what's wrong
