@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2011-11-30"
 }
 
 function getMaintainer() {
@@ -157,7 +157,7 @@ function logout() {
 
 // search through webpage content and return whether we are logged in or not
 function check_login(content) {
-    return !/action="_login\.asp">/.test(content)
+    return !/action="\/_login\.asp">/.test(content)
 }
 
 // search through webpage content and return remaining credit (if possible, otherwise null)
