@@ -15,7 +15,7 @@ cd "`dirname "$0"`"
 
 echo "Updating PO translations..."
 # update POT template
-prop2po --progress none -P ../src/esmska/resources/l10n.properties ../po/esmska.pot
+prop2po --progress none --personality java-utf8 -P ../src/esmska/resources/l10n.properties ../po/esmska.pot
 # sort entries by location
 msgattrib -F ../po/esmska.pot -o ../po/esmska.pot
 
