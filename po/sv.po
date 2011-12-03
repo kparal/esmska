@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-28 21:51+0200\n"
-"PO-Revision-Date: 2011-08-15 11:38+0000\n"
+"POT-Creation-Date: 2011-12-03 17:44+0200\n"
+"PO-Revision-Date: 2011-09-13 16:01+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-16 04:38+0000\n"
-"X-Generator: Launchpad (build 13687)\n"
+"X-Launchpad-Export-Date: 2011-09-14 04:41+0000\n"
+"X-Generator: Launchpad (build 13921)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -278,6 +278,12 @@ msgid ""
 "to have it turned off.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Detta alternativ är endast nödvändigt när man arbetar med "
+"programutvecklare<br>\n"
+"för att lösa några problem. I andra fall rekommenderas det<br>\n"
+"att ha det inaktiverat.\n"
+"</html>"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request a &delivery report"
@@ -307,6 +313,10 @@ msgid ""
 "Favorite gateways will be preferred for recipient gateway suggestions.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Dolda gateways visas inte i applikationen. \n"
+"Favoritgateways kommer att föredras för mottagargateway-förslag.\n"
+"</html>"
 
 #: ConfigFrame.httpProxyTextField.toolTipText
 msgid ""
@@ -501,6 +511,9 @@ msgid ""
 "<br>\n"
 "Not all gateways support this feature.</html>"
 msgstr ""
+"<html>Avsändarnummer i ett internationellt format (börjar med tecknet '+')."
+"<br>\n"
+"Alla gateways stödjer inte denna funktion.</html>"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Sho&w password"
@@ -521,6 +534,10 @@ msgid ""
 "Example: proxy.company.com:1080\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Adress till SOCKS-proxyservern i 'host'- eller 'host:port'-format.\n"
+"Exempel: proxy.foretag.se:1080\n"
+"</html>"
 
 #: ConfigFrame.startMinimizedCheckBox.text
 msgid "Hide program to &icon on startup"
@@ -608,6 +625,12 @@ msgid ""
 "who are willing to report encountered problems.</b>\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Meddela även om ostabila programversioner.<br>\n"
+"<br>\n"
+"<b>Varning: Ostabila versioner är endast avsedda för erfarna användare<br>\n"
+"som är villiga för att rapportera påträffande problem.</b>\n"
+"</html>"
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
@@ -704,7 +727,7 @@ msgstr "Ko&piera till urklipp"
 
 #: CountryPrefixPanel.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
-msgstr ""
+msgstr "Landskoden som du fyllde i prefixnummret"
 
 #: CountryPrefixPanel.countryCodeLabel.text
 msgid "(c&ountry:"
@@ -1186,12 +1209,16 @@ msgid ""
 "Visit <a href=\"{0}\">{0}</a> website and charge your credit, then you "
 "should be able to send your messages again."
 msgstr ""
+"Besök webbsidan <a href=\"{0}\">{0}</a> och ladda din kredit, sedan bör du "
+"kunna skicka dina meddelanden igen."
 
 #: GatewayProblem.NO_REASON
 msgid ""
 "The gateway didn't specify any particular reason why this message could not "
 "be sent."
 msgstr ""
+"Denna gateway angav ingen speciell anledning varför detta meddelande inte "
+"kunde skickas."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.NO_REASON.help
@@ -1452,6 +1479,9 @@ msgid ""
 "create it by using \"Export contacts\" function. Select that file here.</"
 "html>"
 msgstr ""
+"<html>För att importera kontakter behöver du ha en CSV-fil i beredskap. Du "
+"kan skapa den genom att använda funktionen \"Exportera kontakter\". Välj den "
+"filen här.</html>"
 
 #: ImportFrame.infoKubik
 msgid ""
@@ -1469,6 +1499,9 @@ msgid ""
 "which can be created by an application containing your contacts. Select that "
 "file here.</html>"
 msgstr ""
+"<html>För att importera kontakter behöver du ha en VCARD- eller VCF-fil i "
+"beredskap, som du kan skapa genom en applikation som innehåller dina "
+"kontakter. Välj den filen här.</html>"
 
 #: ImportFrame.invalid_file
 msgid ""
@@ -1573,6 +1606,8 @@ msgid ""
 "<html><h2>Esmska is already running!</h2>Esmska is already once started. You "
 "can't run multiple program instances.<br>This one will now quit.</html>"
 msgstr ""
+"<html><h2>Esmska körs redan!</h2>Esmska har startats en gång. Du kan inte "
+"köra flera program samtidigt.<br>Detta fönster kommer att avslutas nu.</html>"
 
 #: Main.brokenWebstart
 msgid ""
@@ -1584,6 +1619,13 @@ msgid ""
 "\n"
 "Esmska will now quit."
 msgstr ""
+"Du kör för tillfället Esmska med hjälp av OpenJDK och Java WebStart.\n"
+"Tyvärr är denna kombination trasig och fungerar inte.\n"
+"Antingen installerar du Sun Java och använder Java WebStart, eller laddar "
+"ned Esmska på din dator\n"
+"och kör den på det vanliga sättet.\n"
+"\n"
+"Esmska kommer att avslutas nu."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
@@ -1599,6 +1641,16 @@ msgid ""
 "console.<br>It is not possible to continue, Esmska will now exit.\n"
 "</html>"
 msgstr ""
+"<html><h2>Fel uppstod när information skulle hämtas från användarmapparna</"
+"h2>Det är ett problem med att läsa eller skriva en del av dina "
+"konfigurationsmappar<br>(fel behörighet, kanske?). Dessa mappar är:\n"
+"<ul>\n"
+"<li>Användarkonfigurationsmappar: <i>{0}</i></li>\n"
+"<li>Användardatamappar: <i>{1}</i></li>\n"
+"</ul>\n"
+"Du kan få mer detaljerad information när du kör programmet från konsolen."
+"<br>Det är inte möjligt att fortsätta, Esmska kommer nu att avslutas.\n"
+"</html>"
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
@@ -1613,6 +1665,12 @@ msgid ""
 "fix that by downloading and installing the latest<br>version of Esmska."
 "<br><br><i>It is not recommended to proceed, user data loss may occur!</i>"
 msgstr ""
+"<html><h2>Programmet är för gammalt!</h2>Dina användardatafiler skrevs av en "
+"mycket äldre programversion ({0})<br>än din nuvarande version som är ({1}). "
+"Kanske du har installerat en äldre version<br>av Esmska av olyckshändelse. "
+"Du kan fixa det genom att ladda ned och installera den senaste<br>versionen "
+"av Esmska.<br><br><i>Det rekommenderas inte att du fortsätter, förluster av "
+"användardata kan inträffa!</i>"
 
 #: Main.no_javascript
 msgid ""
@@ -1704,6 +1762,21 @@ msgid ""
 "The program will now attempt to download the gateways from the Internet.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"<h2>Inga gateways kan hittas!</h2>\n"
+"Programmet är oanvändbart utan gateways. Orsaken av problemet kan vara att:"
+"<br>\n"
+"<ul>\n"
+"<li>Dina program är okorrekt installerade och några av filerna<br>\n"
+"saknas eller är korrupta. Försök att ladda ned det igen.</li>\n"
+"<li>Operativsystemet has angivit programsökvägen felaktigt.<br>\n"
+"Istället för att klicka på <i>esmska.jar</i>, försök istället att köra "
+"programmet med hjälp av<br>\n"
+"<i>esmska.sh</i>-filen (i Linux, etc) eller <i>esmska.exe</i> (i Windows).</"
+"li>\n"
+"</ul>\n"
+"Programmet kommer nu försöka att ladda ned gateways från internet.\n"
+"</html>"
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &problem..."
@@ -2127,7 +2200,7 @@ msgstr "Programutseendet kan ändras efter din smak."
 #. #Write the tip as short as possible
 #: Tip.11
 msgid "In preferences you can restrict the list of displayed web gateways."
-msgstr ""
+msgstr "På inställningar kan du begränsa listan över synliga webbgateways."
 
 #. #Write the tip as short as possible
 #: Tip.12
@@ -2197,6 +2270,8 @@ msgid ""
 "By using commandline options or the special portable version you can use "
 "program even in café or school."
 msgstr ""
+"Du kan använda Esmska på caféet eller skolan med hjälp av "
+"kommandoradsinställningar eller den bärbara specialversionen."
 
 #. #Write the tip as short as possible
 #: Tip.21
@@ -2359,6 +2434,3 @@ msgstr "Gateway uppdaterad: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "En del gateways kunde inte installeras."
-
-#~ msgid "Gateway properties"
-#~ msgstr "Gatewayegenskaper"
