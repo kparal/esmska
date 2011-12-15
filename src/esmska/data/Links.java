@@ -33,8 +33,7 @@ public class Links {
      * gateways tab */
     public static final String CONFIG_GATEWAYS = "esmska://config-gateways";
     /** get the update file */
-    public static final String CHECK_UPDATE = 
-            "http://ripper.profitux.cz/esmska/update/version.php?ref=" + Config.getLatestVersion();
+    public static final String CHECK_UPDATE = "http://ripper.profitux.cz/esmska/update/version.xml";
     /** link to send usage statistics to */
     public static final String SEND_STATS = "http://ripper.profitux.cz/esmska/stats/receive.php";
     
