@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,10 +21,12 @@ import java.util.TreeSet;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang.time.DateUtils;
 
 /** Class handling everything needed about collecting and posting program usage statistics.
  */
@@ -123,12 +126,12 @@ public class Statistics {
         return gateways;
     }
     
-    /** Send program usage info to Esmska server.
-     * Doesn't send for first-time program run.
+    /** Send program usage info to Esmska server if appropriate
+     * (check with {@link #shouldSend()})
      */
     public static void sendUsageInfo() {
-        if (config.isFirstRun()) {
-            logger.fine("Not sending usage info, first program run");
+        if (!shouldSend()) {
+            logger.fine("Not sending usage info");
             return;
         }
         
@@ -151,6 +154,15 @@ public class Statistics {
                         out.flush();
                         InputStream in = conn.getInputStream();
                         in.close();
+                        
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                config.setLastStatsSent(new Date());
+                            }
+                        });
+                        
+                        logger.finer("Usage info sent");
                     } catch (Exception ex) {
                         logger.log(Level.WARNING, "Could not send usage info", ex);
                     }
@@ -160,6 +172,69 @@ public class Statistics {
             t.start();
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not execute sending usage info", ex);
+        }
+    }
+    
+    /** Decide whether to send statistics to Esmska server or not. We don't want to
+     * send stats too often so that the server is not overloaded. The current decision
+     * algorithm:
+     * <ul>
+     * <li>If this is the first time Esmska was ever started, don't send anything.</li>
+     * <li>If this is the first time Esmska was started in current month, always send.</li>
+     * <li>If today is 20th or earlier day in the current month, send stats at maximum
+     * once per 5 days (check last submission date and decide).</li>
+     * <li>If today is 21th or later day in the current month, send stats at maximum
+     * once per 3 days (check last submission date and decide).</li>
+     * </ul>
+     * @return whether it is appropriate to send stats now or not
+     */
+    public static boolean shouldSend() {
+        // first run
+        if (config.isFirstRun()) {
+            logger.fine("Shouldn't send usage info, first program run");
+            return false;
+        }
+        
+        // no stored date
+        if (config.getLastStatsSent() == null) {
+            logger.fine("Last usage info submission date unknown, should send usage info");
+            return true;
+        }
+        
+        Calendar last = DateUtils.toCalendar(config.getLastStatsSent());
+        Calendar now = Calendar.getInstance();
+        
+        // compute time difference
+        long diff = now.getTimeInMillis() - last.getTimeInMillis();
+        double diffDays = diff / (24 * 60 * 60 * 1000.0);
+        
+        DateFormat df = DateFormat.getDateTimeInstance();
+        logger.log(Level.FINE, "Last usage info sent on {0} ({1,number} days ago)", 
+                new Object[]{df.format(last.getTime()), diffDays});
+        
+        // first run in current month
+        if (last.get(Calendar.MONTH) != now.get(Calendar.MONTH) ||
+            last.get(Calendar.YEAR) != now.get(Calendar.YEAR)) {
+            logger.fine("Should send usage info, first program run in the current month");
+            return true;
+        }
+        
+        int limit = 0;
+        
+        // today is 20th or earlier day
+        if (now.get(Calendar.DAY_OF_MONTH) <= 20) {
+            limit = 5;
+        } else {
+            // today is 21st or later day
+            limit = 3;
+        }
+        
+        if (diffDays >= limit) {
+            logger.fine("Should send usage info");
+            return true;
+        } else {
+            logger.fine("Shouldn't send usage info");
+            return false;
         }
     }
 }
