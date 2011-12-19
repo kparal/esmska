@@ -520,7 +520,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new esmska.gui.InfoLabel(Type.TIP)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new esmska.gui.InfoLabel(InfoLabel.Type.TIP)"/>
               </AuxValues>
             </Component>
             <Container class="javax.swing.JPanel" name="gwDetailsPanel">

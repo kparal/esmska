@@ -64,7 +64,6 @@ import esmska.data.event.AbstractDocumentListener;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
 import esmska.data.event.ValuedListener;
-import esmska.gui.InfoLabel.Type;
 import esmska.utils.MiscUtils;
 import esmska.utils.RuntimeUtils;
 import java.awt.Image;
@@ -431,7 +430,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 }
             }
         };
-        gwTipLabel = new InfoLabel(Type.TIP);
+        gwTipLabel = new InfoLabel(InfoLabel.Type.TIP);
         gwDetailsPanel = new JPanel();
         passwordField = new JPasswordField();
         jLabel12 = new JLabel();
