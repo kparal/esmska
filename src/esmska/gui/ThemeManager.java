@@ -216,8 +216,8 @@ public class ThemeManager {
         LAF laf = LAF.SYSTEM;
 
         //Windows users are used to fancy and inconsistent looks
-        //On other (Linux) systems Sun Java is very bad in emulating system look
-        if (RuntimeUtils.isWindows() || RuntimeUtils.isSunJava()) {
+        //On other (Linux) systems Oracle Java is very bad in emulating system look
+        if (RuntimeUtils.isWindows() || RuntimeUtils.isOracleJava()) {
             laf = LAF.SUBSTANCE;
         }
 

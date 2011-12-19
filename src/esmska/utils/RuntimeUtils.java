@@ -100,9 +100,11 @@ public class RuntimeUtils {
         return false;
     }
 
-    /** Checks whether the current Java implementation is Sun Java */
-    public static boolean isSunJava() {
-        return vendor.toLowerCase().contains("sun microsystems") && !isOpenJDK();
+    /** Checks whether the current Java implementation is Oracle Java */
+    public static boolean isOracleJava() {
+        return (vendor.toLowerCase().contains("sun microsystems") ||
+                vendor.toLowerCase().contains("oracle corporation")) && 
+                !isOpenJDK();
     }
 
     /** Checks whether the current Java implementation is OpenJDK */
@@ -116,10 +118,10 @@ public class RuntimeUtils {
     }
 
     /** Checks whether the current Java implementation is supported.
-     * Currently supported and tested are: Sun Java, OpenJDK, Apple Java
+     * Currently supported and tested are: Oracle Java, OpenJDK, Apple Java
      */
     public static boolean isSupportedJava() {
-        return isSunJava() || isOpenJDK() || isAppleJava();
+        return isOracleJava() || isOpenJDK() || isAppleJava();
     }
 
     /** Whether the program is run as Java WebStart or not */

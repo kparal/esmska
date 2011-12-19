@@ -72,8 +72,8 @@ public class Statistics {
         }
         info.put("desktop", desktop);
         String java = null;
-        if (RuntimeUtils.isSunJava()) {
-            java = "Sun";
+        if (RuntimeUtils.isOracleJava()) {
+            java = "Oracle";
         } else if (RuntimeUtils.isOpenJDK()) {
             java = "OpenJDK";
         } else if (RuntimeUtils.isAppleJava()) {
