@@ -60,7 +60,7 @@ public class Main {
         if (!RuntimeUtils.isSupportedJava()) {
             logger.warning("You are probably running the program on an unsupported "
                     + "Java version! Program might not work correctly with it! "
-                    + "The tested Java versions are: Oracle Java 6 and 7, OpenJDK 6 and 7, Apple Java 6.");
+                    + "The tested Java versions are: Oracle Java 6 and 7, OpenJDK 6 and 7, Apple Java 6 and 7.");
         }
 
         // halt for Webstart on OpenJDK, it currently doesn't work
