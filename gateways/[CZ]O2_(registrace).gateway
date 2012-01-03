@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-11-28"
+    return "2012-01-03"
 }
 
 function getMaintainer() {
@@ -122,6 +122,14 @@ function send() {
     re = /<div class="captchaTitle">/
     match = re.exec(content)
     while (match) {
+        // work around javascript protection
+        re = /HTMLElement.prototype.y = '([\w]+)';/
+        match = re.exec(content)
+        y = match[1]    
+        re = new RegExp("<input type=\"hidden\" name=\"" + y + "[\\w]+\" id=\"([\\w]+)\" />","g");
+        match = re.exec(content)
+        hidden = match[1]
+    
         // download image
         content = EXEC.getURL("http://sms.1188.cz/captcha/show.png", [])
     
@@ -130,7 +138,8 @@ function send() {
         
         // send code
         postData = ["receiver_phone", NUMBER, "captcha", code, 
-                    "text", MESSAGE, "smsSubmit", "Odeslat SMS"]
+                    "text", MESSAGE, "smsSubmit", "Odeslat SMS",
+                    hidden, "1"]
         content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
         
         // check for captcha again
