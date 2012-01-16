@@ -12,6 +12,14 @@ import javax.swing.Action;
  */
 public class HandlerUtils {
 
+    /**
+     * Perform action with AppEvent and message. AppEvent is converted to standard
+     * ActionEvent object and then it is sent to desired Action.
+     *
+     * @param ae event
+     * @param action action
+     * @param message message
+     */
     public static void performAction(AppEvent ae, Action action, String message) {
         ActionEvent event = createActionEvent(ae, message);
         action.actionPerformed(event);

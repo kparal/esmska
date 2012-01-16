@@ -12,9 +12,16 @@ import javax.swing.JToolBar;
  */
 public class UnifiedToolbarSupport {
 
+    /**
+     * This class is singleton.
+     */
     private UnifiedToolbarSupport() {
     }
 
+    /**
+     * Install support for main frame. It will add unified l&f for toolbar,
+     * drag support for it and removes text from buttons.
+     */
     public static void installSupport() {
         // add custom window listener for setting border
         Context.mainFrame.addWindowFocusListener(new UnifiedToolbarWindowAdapter());
