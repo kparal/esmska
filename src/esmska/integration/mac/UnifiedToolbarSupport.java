@@ -1,6 +1,3 @@
-/*
- * UnifiedToolbarSupport.java
- */
 package esmska.integration.mac;
 
 import esmska.Context;
