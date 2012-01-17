@@ -58,7 +58,10 @@ public class MacIntegration extends IntegrationAdapter {
         app.setPreferencesHandler(new MacPreferencesHandler(bean));
         app.setOpenFileHandler(new MacOpenFilesHandler());
         app.setQuitHandler(new MacQuitHandler(bean));
+
         app.addAppEventListener(new MacAppReOpenedListener());
+        app.addAppEventListener(new MacUserSessionListener());
+        app.addAppEventListener(new MacSystemSleepListener());
 
         // set application menubar
         app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
