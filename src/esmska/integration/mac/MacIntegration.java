@@ -16,8 +16,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.PopupMenu;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
@@ -36,8 +34,17 @@ public class MacIntegration extends IntegrationAdapter {
     private static final String LOG_FILENAME = "Esmska.log";
     private static final Color LEOPARD_PANEL_COLOR = new Color(232, 232, 232);
 
-    private int visibleSheets;
-    private final ModalSheetCounter modalSheetCounter = new ModalSheetCounter();
+    private ModalSheetCounter modalSheetCounter;
+
+    /**
+     * Perform initialization of Mac integration.
+     */
+    @Override
+    protected void initialize() {
+        super.initialize();
+
+        modalSheetCounter = new ModalSheetCounter();
+    }
 
     /**
      * Activates integration.
@@ -204,7 +211,7 @@ public class MacIntegration extends IntegrationAdapter {
 
     @Override
     public boolean isModalSheetVisible() {
-        return visibleSheets > 0;
+        return modalSheetCounter.isModalSheetVisible();
     }
 
     /**
@@ -216,21 +223,6 @@ public class MacIntegration extends IntegrationAdapter {
             Application.getApplication().setDockIconBadge(null);
         } else {
             Application.getApplication().setDockIconBadge(count.toString());
-        }
-    }
-
-    // implementation of app interface ----------------------------------------
-    /** Window listener that counts how many we have opened modal dialogs */
-    private class ModalSheetCounter extends WindowAdapter {
-
-        @Override
-        public void windowOpened(WindowEvent e) {
-            visibleSheets++;
-        }
-
-        @Override
-        public void windowDeactivated(WindowEvent e) {
-            visibleSheets--;
         }
     }
 }
