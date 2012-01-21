@@ -42,9 +42,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="gatewayLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="gatewayComboBox" pref="260" max="32767" attributes="0"/>
+                              <Component id="gatewayComboBox" pref="276" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -55,7 +57,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="smsCounterLabel" pref="276" max="32767" attributes="0"/>
+                                      <Component id="smsCounterLabel" pref="286" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -69,7 +71,7 @@
                       <Component id="infoPanel" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,18 +82,21 @@
                   <Component id="recipientLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="recipientTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="gatewayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="gatewayComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="gatewayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="gatewayComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane1" pref="25" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="24" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="infoPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -215,9 +220,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="credentialsInfoLabel" alignment="0" pref="310" max="32767" attributes="0"/>
-              <Component id="numberInfoLabel" alignment="0" pref="310" max="32767" attributes="0"/>
-              <Component id="countryInfoLabel" alignment="0" pref="310" max="32767" attributes="0"/>
+              <Component id="credentialsInfoLabel" alignment="0" pref="328" max="32767" attributes="0"/>
+              <Component id="numberInfoLabel" alignment="0" pref="328" max="32767" attributes="0"/>
+              <Component id="countryInfoLabel" alignment="0" pref="328" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -277,6 +282,8 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="suggestGatewayButton.setText(null);&#xa;suggestGatewayButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
     </Component>
   </SubComponents>
 </Form>
