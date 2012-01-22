@@ -64,27 +64,12 @@
 
       </jarbundler>
 
-      <!-- add i18n directories, this should correspond to esmska/po/ directory -->
+      <!-- add i18n directories -->
       <property name="app.resources" value="${esmska-dist-dir}/Esmska.app/Contents/Resources/" />
-      <mkdir dir="${app.resources}/ca.lproj" />
-      <mkdir dir="${app.resources}/cs.lproj" />
-      <mkdir dir="${app.resources}/da.lproj" />
-      <mkdir dir="${app.resources}/de.lproj" />
-      <mkdir dir="${app.resources}/es.lproj" />
-      <mkdir dir="${app.resources}/fr.lproj" />
-      <mkdir dir="${app.resources}/he.lproj" />
-      <mkdir dir="${app.resources}/hu.lproj" />
-      <mkdir dir="${app.resources}/is.lproj" />
-      <mkdir dir="${app.resources}/it.lproj" />
-      <mkdir dir="${app.resources}/lt.lproj" />
-      <mkdir dir="${app.resources}/lv.lproj" />
-      <mkdir dir="${app.resources}/pl.lproj" />
-      <mkdir dir="${app.resources}/pt_BR.lproj" />
-      <mkdir dir="${app.resources}/ru.lproj" />
-      <mkdir dir="${app.resources}/si.lproj" />
-      <mkdir dir="${app.resources}/sk.lproj" />
-      <mkdir dir="${app.resources}/tr.lproj" />
-      <mkdir dir="${app.resources}/uk.lproj" />
+      <exec executable="scripts/create-i18n-dir-app" os="Mac OS X" failonerror="true">
+        <arg value="${app.resources}"/>
+      </exec>
+
     </target>
 
     <!--
