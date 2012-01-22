@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# != 1 ] ; then
+	echo Please provide application directory as a first parameter.
+	exit 1;
+fi
+
+for f in $( ls po/ ); do
+	case $f in
+		*.po) mkdir $1/${f/po/lproj};;
+	esac
+done
