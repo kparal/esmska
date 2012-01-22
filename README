@@ -20,8 +20,7 @@ launch4j/       - Configuration files for Launch4J.
 lib/            - Program compilation and runtime libraries.
 nbproject/      - Project files for the NetBeans IDE.
 po/             - Localization files.
-portable/       - Files for creating portable package.
-resources/      - Different resource files.
+resources/      - Various resource files.
 scripts/        - Various scripts for managing building process.
 src/            - Program sources.
 
@@ -158,9 +157,14 @@ Packaging program
 
 You can run command:
 
- $ ./scripts/create-package NAME
+ $ ./scripts/create-package VERSION
 
-to obtain binary program packages inside the program root directory.
+to obtain binary program packages (multiplatform and Windows) inside the program
+root directory.
+
+Mac packages can be created only on Mac OS by running this command:
+
+ $ ant -f build-mac.xml
 
 When creating custom packages it may be good to note that the only important
 files for the program are esmska.jar, esmska.conf, lib/ and gateways/

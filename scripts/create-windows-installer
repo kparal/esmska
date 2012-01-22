@@ -12,7 +12,7 @@ trap "echo Creating installer failed." ERR
 # go to the program directory
 cd "`dirname "$0"`"
 
-JRE="../portable/jre-win.7z"
+JRE="../resources/portable/jre-win.7z"
 
 # check dependency
 if [ ! `which installjammer` ]; then

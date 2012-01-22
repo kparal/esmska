@@ -1,5 +1,5 @@
 /*
- * @(#) IntegrationAdapter.java	May 11, 2008 - 8:49:54 PM 
+ * @(#) IntegrationAdapter.java	May 11, 2008 - 8:49:54 PM
  */
 package esmska.integration;
 
@@ -18,7 +18,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * Integration adapter. Used to integrate program more closely to specific operating system.
- * 
+ *
  * @author  Marian Bouček
  * @version 1.0
  */
@@ -37,7 +37,7 @@ public class IntegrationAdapter {
 
     /**
      * Return instance of singleton.
-     * 
+     *
      * @return instance
      */
     public static IntegrationAdapter getInstance() {
@@ -49,7 +49,7 @@ public class IntegrationAdapter {
             case MAC_OS_X:
                 try {
                     instance = (IntegrationAdapter) Class.forName(
-                            "esmska.integration.MacIntegration").newInstance();
+                            "esmska.integration.mac.MacIntegration").newInstance();
                 } catch (Exception e) {
                     logger.log(Level.WARNING, "Cannot set up integration for Mac OS X. " +
                             "Was the program compiled without Mac support?", e);
@@ -67,7 +67,7 @@ public class IntegrationAdapter {
 
         instance.initialize();
         instance.startUp();
-        
+
         return instance;
     }
 
@@ -80,7 +80,7 @@ public class IntegrationAdapter {
     // public interface ---------------------------------------------------------
     /**
      * Set action bean.
-     * 
+     *
      * @param bean action bean
      */
     public void setActionBean(ActionBean bean) {
@@ -93,7 +93,7 @@ public class IntegrationAdapter {
 
     /**
      * Set SMS count. Location where to display is platform specific.
-     * 
+     *
      * @param count new sms count. Use null to clear text.
      */
     public void setSMSCount(Integer count) {

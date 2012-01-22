@@ -7,7 +7,7 @@ import javax.swing.Action;
 
 /**
  * Bean for action classes. Used with IntegrationAdapter to modify specific actions.
- * 
+ *
  * @author Marian Boucek
  * @version 1.0
  */
@@ -16,7 +16,6 @@ public class ActionBean {
     private Action aboutAction;
     private Action configAction;
 
-    // setters (must be called with non null value) -----------------------------
     /**
      * @param aboutAction
      */
@@ -38,16 +37,15 @@ public class ActionBean {
         this.quitAction = quitAction;
     }
 
-    // package-protected getters ------------------------------------------------
-    Action getAboutAction() {
+    public Action getAboutAction() {
         return aboutAction;
     }
 
-    Action getConfigAction() {
+    public Action getConfigAction() {
         return configAction;
     }
 
-    Action getQuitAction() {
+    public Action getQuitAction() {
         return quitAction;
     }
 }
