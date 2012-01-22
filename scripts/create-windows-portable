@@ -12,7 +12,7 @@ trap "echo Creating portable package failed." ERR
 # go to the program directory
 cd "`dirname "$0"`"
 
-JRE="../portable/jre-win.7z"
+JRE="../resources/portable/jre-win.7z"
 
 # check dependency
 JRE=`readlink -f "$JRE"`
@@ -39,7 +39,7 @@ BUILD_DIR="$TMPDIR/$ROOTDIR"
 mkdir "$BUILD_DIR"
 
 # copy dist directory to temp directory
-cp -r ../dist/* ../portable/esmska-portable.exe ../portable/readme-portable.txt "$BUILD_DIR"
+cp -r ../dist/* ../resources/portable/esmska-portable.exe ../resources/portable/readme-portable.txt "$BUILD_DIR"
 # and convert text files to CRLF
 todos "$BUILD_DIR"/*.txt "$BUILD_DIR"/license/*.txt "$BUILD_DIR"/*.conf
 # delete unnecessary files

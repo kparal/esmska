@@ -73,7 +73,7 @@
     <!-- if 'noMac' property set then exclude Mac source files and libraries from project -->
     <target name="-exclude-mac" if="noMac">
         <!-- overwrite properties that would be otherwise set afterwards by NetBeans project files -->
-        <property name="excludes" value="esmska/integration/MacIntegration.java"/>
+        <property name="excludes" value="esmska/integration/mac/"/>
         <property name="libs.MacUI.classpath" value=""/>
         <echo message="Building without Mac OS support as requested."/>
     </target>

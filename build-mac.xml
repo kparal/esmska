@@ -27,7 +27,7 @@
         dir="${esmska-dist-dir}"
         name="Esmska"
         mainclass="esmska.Main"
-        icon="${basedir}/include/icons/Esmska.icns"
+        icon="${basedir}/resources/icons/esmska.icns"
         workingdirectory="$APP_PACKAGE/Contents/Resources"
         splashfile="$APP_PACKAGE/Contents/Resources/Esmska.png"
         jvmversion="1.6*"
@@ -122,13 +122,13 @@
 
       <!-- Copy the background, the volume icon and DS_Store files -->
       <mkdir dir="${mountdir}/${application.name}/.background"/>
-      <copy file="${basedir}/include/mac/background.png"
+      <copy file="${basedir}/resources/mac/background.png"
           tofile="${mountdir}/${application.name}/.img/desktop.png"
           overwrite="true"/>
       <!--copy file="VolumeIcon.icns"
           tofile="${mountdir}/${application.name}/.VolumeIcon.icns"
           overwrite="true"/ -->
-      <copy file="${basedir}/include/mac/DS_Store"
+      <copy file="${basedir}/resources/mac/DS_Store"
           tofile="${mountdir}/${application.name}/.DS_Store"
           overwrite="true"/>
 
@@ -172,9 +172,4 @@
         <copyfile src="${dmg-product-path}" dest="${dropbox.location}" />
     </target>
 
-    <target name="pokus">
-        <filter filtersfile="po/*.po">
-            
-        </filter>
-    </target>
 </project>

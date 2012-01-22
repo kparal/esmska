@@ -20,8 +20,7 @@ launch4j/       - Configuration files for Launch4J.
 lib/            - Program compilation and runtime libraries.
 nbproject/      - Project files for the NetBeans IDE.
 po/             - Localization files.
-portable/       - Files for creating portable package.
-resources/      - Different resource files.
+resources/      - Various resource files.
 scripts/        - Various scripts for managing building process.
 src/            - Program sources.
 

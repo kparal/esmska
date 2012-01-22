@@ -2,7 +2,7 @@
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
   <jar>esmska.jar</jar>
-  <outfile>../portable/esmska-portable.exe</outfile>
+  <outfile>../resources/portable/esmska-portable.exe</outfile>
   <errTitle>Esmska</errTitle>
   <cmdLine>-c config</cmdLine>
   <chdir>.</chdir>
