@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-03 17:44+0200\n"
+"POT-Creation-Date: 2012-02-01 20:05+0200\n"
 "PO-Revision-Date: 2011-08-28 20:37+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -268,13 +268,20 @@ msgid "Request a &delivery report"
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Will request sending of a delivery report of the message. The report will "
-"come<br>\n"
-"to the phone number of the sender. Not all gateways support this feature.\n"
+"Will request sending of a delivery report of the message.<br>\n"
+"The report will come to the phone number of the sender.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"יבקש את שליחת דוח ההעברה של ההודעה. הדוח יגיע אל מספר הטלפון של השולח.<br>\n"
+"פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
+"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "Gateway&s"
@@ -363,7 +370,11 @@ msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr ""
 
 #: ConfigFrame.loginField.toolTipText
-msgid "Username needed for logging in to the gateway"
+msgid ""
+"<html>Username needed for logging in to the gateway.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
 msgstr ""
 
 #: ConfigFrame.lookLabel.text
@@ -387,8 +398,12 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.passwordField.toolTipText
-msgid "The password belonging to the username"
-msgstr "הסיסמה השייכת לשם המשתמש"
+msgid ""
+"<html>The password belonging to the username.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
+msgstr ""
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
@@ -471,7 +486,9 @@ msgstr "&מספר:"
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
-"Not all gateways support this feature.</html>"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
@@ -2239,6 +2256,9 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "The password belonging to the username"
+#~ msgstr "הסיסמה השייכת לשם המשתמש"
+
 #~ msgid ""
 #~ "<html>\n"
 #~ "Do you like this project? Help to keep it running...\n"
@@ -2256,20 +2276,6 @@ msgstr ""
 
 #~ msgid "Use default form &layout"
 #~ msgstr "השתמש במבנה &ברירת המחדל של הטופס"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Will request sending of a delivery report of the message. The report will "
-#~ "come<br>\n"
-#~ "to the phone number of the sender. This function is supported only by "
-#~ "some operators.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "יבקש את שליחת דוח ההעברה של ההודעה. הדוח יגיע אל מספר הטלפון של השולח."
-#~ "<br>\n"
-#~ "פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
-#~ "</html>"
 
 #~ msgid "Pa&ssword:"
 #~ msgstr "&סיסמה:"

@@ -704,9 +704,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     gatewayTable.getTableHeader().setReorderingAllowed(false);
     jScrollPane1.setViewportView(gatewayTable);
 
-    Mnemonics.setLocalizedText(gwTipLabel,l10n.getString("ConfigFrame.gwTipLabel.text")); // NOI18N
+    Mnemonics.setLocalizedText(gwTipLabel,l10n.getString("ConfigFrame.gwTipLabel.text"));
 
-    gwDetailsPanel.setBorder(BorderFactory.createTitledBorder("<<Gateway name>>")); // NOI18N
+    gwDetailsPanel.setBorder(BorderFactory.createTitledBorder("<<Gateway name>>"));
     gwDetailsPanel.setVisible(false);
 
     passwordField.setColumns(12);

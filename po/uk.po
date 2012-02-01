@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-03 17:44+0200\n"
+"POT-Creation-Date: 2012-02-01 20:05+0200\n"
 "PO-Revision-Date: 2011-08-28 20:39+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -286,13 +286,21 @@ msgid "Request a &delivery report"
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Will request sending of a delivery report of the message. The report will "
-"come<br>\n"
-"to the phone number of the sender. Not all gateways support this feature.\n"
+"Will request sending of a delivery report of the message.<br>\n"
+"The report will come to the phone number of the sender.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Надсилання запиту звіту про доставку повідомлення. Звіт буде приходити<br>\n"
+"на телефонний номер відправника. Ця функція підтримується лише на деяких "
+"шлюзах.\n"
+"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "Gateway&s"
@@ -384,8 +392,12 @@ msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr "<html><i>Системний журнал зберігається за адресою: {0}</i></html>"
 
 #: ConfigFrame.loginField.toolTipText
-msgid "Username needed for logging in to the gateway"
-msgstr "Ім’я користувача потрібне для реєстрації входження до шлюзу"
+msgid ""
+"<html>Username needed for logging in to the gateway.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
+msgstr ""
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -408,8 +420,12 @@ msgid ""
 msgstr ""
 
 #: ConfigFrame.passwordField.toolTipText
-msgid "The password belonging to the username"
-msgstr "Пароль належить до імені користувача"
+msgid ""
+"<html>The password belonging to the username.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
+msgstr ""
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
@@ -494,7 +510,9 @@ msgstr "&Номер:"
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
-"Not all gateways support this feature.</html>"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
 msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
@@ -2227,6 +2245,12 @@ msgstr ""
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
 
+#~ msgid "Username needed for logging in to the gateway"
+#~ msgstr "Ім’я користувача потрібне для реєстрації входження до шлюзу"
+
+#~ msgid "The password belonging to the username"
+#~ msgstr "Пароль належить до імені користувача"
+
 #~ msgid "2007-2010 Kamil Páral"
 #~ msgstr "2007-2010 Kamil Páral"
 
@@ -2258,21 +2282,6 @@ msgstr ""
 
 #~ msgid "Request the &delivery report"
 #~ msgstr "Запит &звіту про доставку"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Will request sending of a delivery report of the message. The report will "
-#~ "come<br>\n"
-#~ "to the phone number of the sender. This function is supported only by "
-#~ "some gateways.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Надсилання запиту звіту про доставку повідомлення. Звіт буде "
-#~ "приходити<br>\n"
-#~ "на телефонний номер відправника. Ця функція підтримується лише на деяких "
-#~ "шлюзах.\n"
-#~ "</html>"
 
 #~ msgid ""
 #~ "This tab is for developing purposes only. It will not be visible in the "

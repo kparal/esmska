@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-03 17:44+0200\n"
+"POT-Creation-Date: 2012-02-01 20:05+0200\n"
 "PO-Revision-Date: 2011-09-05 13:20+0000\n"
 "Last-Translator: Martin Miklanek <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -287,11 +287,14 @@ msgid "Request a &delivery report"
 msgstr "Požiadať o &doručenku"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
+#, fuzzy
 msgid ""
 "<html>\n"
-"Will request sending of a delivery report of the message. The report will "
-"come<br>\n"
-"to the phone number of the sender. Not all gateways support this feature.\n"
+"Will request sending of a delivery report of the message.<br>\n"
+"The report will come to the phone number of the sender.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.\n"
 "</html>"
 msgstr ""
 "<html>\n"
@@ -393,8 +396,12 @@ msgid "<html><i>The log file is stored at: {0}</i></html>"
 msgstr "<html><i>Súbor záznamu je uložený tu: {0}</i></html>"
 
 #: ConfigFrame.loginField.toolTipText
-msgid "Username needed for logging in to the gateway"
-msgstr "Používateľské meno potrebné na prihlásenie k webovej bráne"
+msgid ""
+"<html>Username needed for logging in to the gateway.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
+msgstr ""
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
@@ -421,8 +428,12 @@ msgstr ""
 "</html>"
 
 #: ConfigFrame.passwordField.toolTipText
-msgid "The password belonging to the username"
-msgstr "Heslo patriace k danému používateľskému menu."
+msgid ""
+"<html>The password belonging to the username.<br>\n"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
+msgstr ""
 
 #: ConfigFrame.privacyPanel.TabConstraints.tabTitle
 msgid "P&rivacy"
@@ -510,10 +521,13 @@ msgid "&Number:"
 msgstr "Čís&lo:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
+#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
-"Not all gateways support this feature.</html>"
+"<br>\n"
+"If this field is disabled then this feature is not supported<br>\n"
+"by the selected gateway.</html>"
 msgstr ""
 "<html>\n"
 "Čislo odosielateľa v medzinárodnom formáte (začínajúce znamienkom '+').<br>\n"
@@ -2486,3 +2500,9 @@ msgstr "Aktualizovaná brána: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Niektoré aktualizácie brán nemohli byť nainštalované"
+
+#~ msgid "Username needed for logging in to the gateway"
+#~ msgstr "Používateľské meno potrebné na prihlásenie k webovej bráne"
+
+#~ msgid "The password belonging to the username"
+#~ msgstr "Heslo patriace k danému používateľskému menu."
