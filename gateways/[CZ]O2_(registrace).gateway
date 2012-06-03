@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-01-03"
+    return "2012-06-03"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.22"
+    return "1.2"
 }
 
 function getWebsite() {
@@ -62,6 +62,9 @@ function getFeatures() {
 }
 
 function send() {
+    // currently this gateway doesn't work
+    EXEC.setProblem("FIX_IN_PROGRESS", "http://code.google.com/p/esmska/issues/detail?id=423")
+    return false
 
     // change variables to correct form
     if (NUMBER.indexOf("+420") == 0) {
