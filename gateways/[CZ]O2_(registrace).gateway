@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-03"
+    return "2012-06-03_2"
 }
 
 function getMaintainer() {
@@ -62,9 +62,6 @@ function getFeatures() {
 }
 
 function send() {
-    // currently this gateway doesn't work
-    EXEC.setProblem("FIX_IN_PROGRESS", "http://code.google.com/p/esmska/issues/detail?id=423")
-    return false
 
     // change variables to correct form
     if (NUMBER.indexOf("+420") == 0) {
@@ -82,7 +79,7 @@ function send() {
 
     // find if we are logged in
     logged = false
-    re = /<div id="smsLogout"/
+    re = /<a href="\/log_out">/
     match = re.exec(content)
     if (match) {
         logged = true
@@ -90,11 +87,13 @@ function send() {
 
     // log in if needed
     if (!logged) {
-        postData = ["username", LOGIN, "password", PASSWORD]
-        content = EXEC.postURL("http://sms.1188.cz/sms/login", [], postData)
+        postData = ["user_session[login]", LOGIN, 
+                    "user_session[password]", PASSWORD,
+                    "user_session[remember_me]", "1"]
+        content = EXEC.postURL("http://sms.1188.cz/log_in", [], postData)
         
         // check log in errors
-        re = /<span class="message wrong">/
+        re = /nesprávný login nebo heslo/
         match = re.exec(content)
         if (match) {
             // login was not successfull
@@ -106,52 +105,27 @@ function send() {
         // we should be logged in now
     }
     
-    // work around javascript protection
-    re = /HTMLElement.prototype.y = '([\w]+)';/
-    match = re.exec(content)
-    y = match[1]
+    // download image
+    content = EXEC.getURL("http://www.google.com/recaptcha/api/challenge?k=6LfFmc8SAAAAAKZS7BmYx4cEys7zo1y_LYHgxZ5o&ajax=1&cachestop=0.3157223965972662", [])
+    re = /challenge : '(.+)',/
+    match = content.match(re)
+    challenge = match[1]
+    content = EXEC.getURL("http://www.google.com/recaptcha/api/image", 
+                          ["c", challenge])
     
-    re = new RegExp("<input type=\"hidden\" name=\"" + y + "[\\w]+\" id=\"([\\w]+)\" />","g");
-    match = re.exec(content)
-    hidden = match[1]
+    // show image
+    code = EXEC.recognizeImage(content, "")
 
     // send message
-    postData = ["receiver_phone", NUMBER, "text", MESSAGE, 
-                "smsSubmit", "Odeslat SMS", hidden, "1"]
-    content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
-    
-    // check for captcha
-    // that happens if we're sending messages too quickly
-    re = /<div class="captchaTitle">/
-    match = re.exec(content)
-    while (match) {
-        // work around javascript protection
-        re = /HTMLElement.prototype.y = '([\w]+)';/
-        match = re.exec(content)
-        y = match[1]    
-        re = new RegExp("<input type=\"hidden\" name=\"" + y + "[\\w]+\" id=\"([\\w]+)\" />","g");
-        match = re.exec(content)
-        hidden = match[1]
-    
-        // download image
-        content = EXEC.getURL("http://sms.1188.cz/captcha/show.png", [])
-    
-        // show image
-        var code = EXEC.recognizeImage(content, "")
-        
-        // send code
-        postData = ["receiver_phone", NUMBER, "captcha", code, 
-                    "text", MESSAGE, "smsSubmit", "Odeslat SMS",
-                    hidden, "1"]
-        content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
-        
-        // check for captcha again
-        // that happens if user provides no value at all
-        match = re.exec(content)
-    }
+    postData = ["sms[phone_numbers][]", NUMBER,
+                "sms[text]", MESSAGE,
+                "recaptcha_challenge_field", challenge,
+                "recaptcha_response_field", code,
+               ]
+    content = EXEC.postURL("http://sms.1188.cz/sms", [], postData)
 
     // check if message was successfully sent
-    re = /Vaši zprávu jsme přijali, bude odeslána co nejdříve./
+    re = /SMS odeslána/
     match = re.exec(content)
     if (match) {
         // all ok
@@ -160,26 +134,16 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<span class="message wrong">([\s\S]*?)<\/span>/g
+    re = /<div class="error_message">([\s\S]*?)<\/div>/g
     match = content.match(re)
     if (match) {
-        // gateway told us what's wrong
-        // the first error is usually about javascript, display the last one
-        EXEC.setProblem("GATEWAY_MESSAGE", match[match.length-1])
+        // more messages might be present, display them all
+        errors = match.join("")
+        EXEC.setProblem("GATEWAY_MESSAGE", errors)
         logout()
         return false
     }
     
-    // other type of error, when no captcha code is provided
-    re = /<div class="captchaTitle">([\s\S]*?)<\/div>/
-    match = re.exec(content)
-    if (match) {
-        // gateway told us what's wrong
-        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
-        logout()
-        return false
-    }
-
     // if neither success nor error message was found
     logout()
     return false
@@ -187,6 +151,6 @@ function send() {
 
 // custom function for logging out
 function logout() {
-    EXEC.getURL("http://sms.1188.cz/sms/logout", [])
+    EXEC.getURL("http://sms.1188.cz/log_out", [])
 }
 
