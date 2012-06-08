@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-03_2"
+    return "2012-06-09"
 }
 
 function getMaintainer() {
@@ -79,7 +79,7 @@ function send() {
 
     // find if we are logged in
     logged = false
-    re = /<a href="\/log_out">/
+    re = /<a href="\/logout">/
     match = re.exec(content)
     if (match) {
         logged = true
@@ -90,7 +90,7 @@ function send() {
         postData = ["user_session[login]", LOGIN, 
                     "user_session[password]", PASSWORD,
                     "user_session[remember_me]", "1"]
-        content = EXEC.postURL("http://sms.1188.cz/log_in", [], postData)
+        content = EXEC.postURL("http://sms.1188.cz/signup", [], postData)
         
         // check log in errors
         re = /nesprávný login nebo heslo/
@@ -125,7 +125,7 @@ function send() {
     content = EXEC.postURL("http://sms.1188.cz/sms", [], postData)
 
     // check if message was successfully sent
-    re = /SMS odeslána/
+    re = /SMS přijata/
     match = re.exec(content)
     if (match) {
         // all ok
@@ -151,6 +151,6 @@ function send() {
 
 // custom function for logging out
 function logout() {
-    EXEC.getURL("http://sms.1188.cz/log_out", [])
+    EXEC.getURL("http://sms.1188.cz/logout", [])
 }
 

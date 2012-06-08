@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-03_2"
+    return "2012-06-09"
 }
 
 function getMaintainer() {
@@ -88,7 +88,7 @@ function send() {
     content = EXEC.postURL("http://sms.1188.cz/sms", [], postData)
 
     // check if message was successfully sent
-    re = /SMS odeslána/
+    re = /SMS přijata/
     match = re.exec(content)
     if (match) {
         // all ok
