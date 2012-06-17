@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-07-09"
+    return "2012-06-17"
 }
 
 function getMaintainer() {
@@ -116,7 +116,12 @@ function send() {
 
     // send sms
     urlData = ["x", token]
-    postData = ["recipients:recipientInput", NUMBER, "text", MESSAGE]
+    postData = ["recipients:recipientInput", NUMBER,
+                "text", MESSAGE,
+                //this is computed by CSS selectors, but fortunatelly always the same
+                "proof:field", "460061",
+                "sendButton", "1"
+               ]
     content = EXEC.postURL("https://park.vodafone.cz/gateway", urlData, postData)
     
     // search for errors

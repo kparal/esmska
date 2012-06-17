@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-07-09"
+    return "2012-06-17"
 }
 
 function getMaintainer() {
@@ -118,7 +118,8 @@ function send() {
                 "text", MESSAGE,
                 "captcha:password", captcha,
                 "id7_hf_0", "",
-                "proof:field", "vf-park",
+                //this is computed by CSS selectors, but fortunatelly always the same
+                "proof:field", "721312",
                 "sendButton", "1"]
     try {
         content = EXEC.postURL("https://park.vodafone.cz/", getData, postData)
