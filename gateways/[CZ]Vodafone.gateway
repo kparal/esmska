@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-17"
+    return "2012-06-22"
 }
 
 function getMaintainer() {
@@ -63,6 +63,10 @@ function getFeatures() {
 }
 
 function send() {
+    // currently this gateway doesn't work
+    EXEC.setProblem("FIX_IN_PROGRESS", "http://code.google.com/p/esmska/issues/detail?id=426")
+    return false
+    
     // check whether there is a supplied sender number
     if (SENDERNUMBER.length == 0) {
         EXEC.setProblem("SIGNATURE_NEEDED")
