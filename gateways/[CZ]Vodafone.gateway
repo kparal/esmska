@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-26"
+    return "2012-06-26_2"
 }
 
 function getMaintainer() {
@@ -90,26 +90,18 @@ function send() {
     match = re.exec(content)
     script = match[1]
     eval(script)
-    // 'b' now contains important functions, but we don't want to evaluate anything after them
-    functions = b.substring(0, b.lastIndexOf("}")+1)
+    // 'b' now contains the de-obfuscated code
+    // we need to replace css selectors with color values
+    b = stripCSSselectors(b, content)
+    // we need to evaluate all of 'b' except for the last value assignment
+    separator = b.indexOf("$(\"#")
+    functions = b.substring(0, separator)
     eval(functions)
     // the remnant of 'b' is the assignment we need
-    assignment = b.substring(b.lastIndexOf("}")+1)
+    assignment = b.substring(separator)
     re = /\$\(".+?"\).val\((.*)\);/
     match = re.exec(assignment)
     value = match[1]
-    // we need to replace css selectors with color values
-    re = /\$\("(.+?)"\)\.css\("color"\)/g
-    while ((match = re.exec(value)) != null) {
-        // find out the value
-        name = match[1]
-        re2 = new RegExp(name + "\{color:(#[0-9]{6});")
-        match2 = re2.exec(content)
-        color = match2[1]
-        color = hex2rgb(color)
-        // replace the selector
-        value = value.replace("$(\"" + name + "\").css(\"color\")", "\"" + color + "\"")
-    }
     // now compute the final proof code
     proof = eval(value)
     // =========================
@@ -195,4 +187,21 @@ function hex2rgb(hex) {
     B = hexToB(hex);
 
     return "rgb(" + R + ", " + G + ", " + B + ")"
+}
+
+// in the code (to be evaluated later) replace $(var).css("color") with the
+// real variable color extracted from the page source
+function stripCSSselectors(code, page_source) {
+    re = /\$\("([^\"]+?)"\)\.css\("color"\)/g
+    while ((match = re.exec(code)) != null) {
+        // find out the value
+        name = match[1]
+        re2 = new RegExp(name + "\{color:(#[0-9]{6});")
+        match2 = re2.exec(page_source)
+        color = match2[1]
+        color = hex2rgb(color)
+        // replace the selector
+        code = code.replace("$(\"" + name + "\").css(\"color\")", "\"" + color + "\"")
+    }
+    return code
 }
