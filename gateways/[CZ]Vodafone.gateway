@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-26_2"
+    return "2012-06-28"
 }
 
 function getMaintainer() {
@@ -196,7 +196,7 @@ function stripCSSselectors(code, page_source) {
     while ((match = re.exec(code)) != null) {
         // find out the value
         name = match[1]
-        re2 = new RegExp(name + "\{color:(#[0-9]{6});")
+        re2 = new RegExp(name + "\\{color:(#\\w{6});")
         match2 = re2.exec(page_source)
         color = match2[1]
         color = hex2rgb(color)
