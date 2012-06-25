@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-22"
+    return "2012-06-26"
 }
 
 function getMaintainer() {
@@ -63,10 +63,6 @@ function getFeatures() {
 }
 
 function send() {
-    // currently this gateway doesn't work
-    EXEC.setProblem("FIX_IN_PROGRESS", "http://code.google.com/p/esmska/issues/detail?id=426")
-    return false
-    
     // check whether there is a supplied sender number
     if (SENDERNUMBER.length == 0) {
         EXEC.setProblem("SIGNATURE_NEEDED")
@@ -88,6 +84,35 @@ function send() {
     match = re.exec(content)
     var urlid = match[1]
     content = EXEC.getURL("https://park.vodafone.cz/", ['x', urlid])
+
+    // == compute proof:field ==
+    re = /<script type="text\/javascript">(for\(var a=eval,b=.*?)a\(b\);<\/script>/
+    match = re.exec(content)
+    script = match[1]
+    eval(script)
+    // 'b' now contains important functions, but we don't want to evaluate anything after them
+    functions = b.substring(0, b.lastIndexOf("}")+1)
+    eval(functions)
+    // the remnant of 'b' is the assignment we need
+    assignment = b.substring(b.lastIndexOf("}")+1)
+    re = /\$\(".+?"\).val\((.*)\);/
+    match = re.exec(assignment)
+    value = match[1]
+    // we need to replace css selectors with color values
+    re = /\$\("(.+?)"\)\.css\("color"\)/g
+    while ((match = re.exec(value)) != null) {
+        // find out the value
+        name = match[1]
+        re2 = new RegExp(name + "\{color:(#[0-9]{6});")
+        match2 = re2.exec(content)
+        color = match2[1]
+        color = hex2rgb(color)
+        // replace the selector
+        value = value.replace("$(\"" + name + "\").css(\"color\")", "\"" + color + "\"")
+    }
+    // now compute the final proof code
+    proof = eval(value)
+    // =========================
         
     // extract important variables
     re = /<img alt="" id="id\d+" src="\.\.\/\?x=(.+)&amp;random=(.+)" title/
@@ -123,7 +148,7 @@ function send() {
                 "captcha:password", captcha,
                 "id7_hf_0", "",
                 //this is computed by CSS selectors, but fortunatelly always the same
-                "proof:field", "721312",
+                "proof:field", proof,
                 "sendButton", "1"]
     try {
         content = EXEC.postURL("https://park.vodafone.cz/", getData, postData)
@@ -156,4 +181,18 @@ function send() {
     
     // neither success nor error message was found
     return false
+}
+
+// transform hex color notation to css selectors color output
+function hex2rgb(hex) {
+    function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
+    function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
+    function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
+    function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
+
+    R = hexToR(hex);
+    G = hexToG(hex);
+    B = hexToB(hex);
+
+    return "rgb(" + R + ", " + G + ", " + B + ")"
 }
