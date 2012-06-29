@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2012-06-28"
 }
 
 function getMaintainer() {
@@ -104,7 +104,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<div id="gt-errorWindow">([^]*?)<\/div>/
+    re = /<p class="text-red.*?">(.*?)<\/p>/
     match = re.exec(content)
     if (match) {
         // gateway told us what's wrong
