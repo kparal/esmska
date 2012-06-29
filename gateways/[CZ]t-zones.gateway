@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-07-31"
+    return "2012-06-29"
 }
 
 function getMaintainer() {
@@ -74,7 +74,7 @@ function send() {
     content = EXEC.getURL("https://sms.client.tmo.cz/closed.jsp", [])
 
     // search if we are already logged in (previous logout failed or something)
-    re = /\/.gang\/logout\/tzones/
+    re = /\/.gang\/logout/
     match = re.exec(content)
     if (match) { // if found
             // we are already logged in
@@ -94,7 +94,7 @@ function send() {
         content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
 
         // seach for errors
-        re = /<div class="error_box">([^]*?)<\/div>/
+        re = /<p class="text-orange.*?">([^]*?)<\/p>/
         match = re.exec(content)
         if (match) {
             re = /Uživatel je již přihlášen/
@@ -115,7 +115,7 @@ function send() {
     content = EXEC.getURL("https://sms.client.tmo.cz/closed.jsp", [])
 
     // seach for errors, sometimes overload errors are displayed here
-    re = /<div class="error_box">([^]*?)<\/div>/
+    re = /<p class="text-orange.*?">([^]*?)<\/p>/
     match = re.exec(content)
     if (match) {
         EXEC.setProblem("GATEWAY_MESSAGE", match[1])
@@ -146,7 +146,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<div id="gt-errorWindow">([^]*?)<\/div>/
+    re = /<p class="text-red.*?">([^]*?)<\/p>/
     match = re.exec(content)
     if (match) {
         // gateway told us what's wrong
