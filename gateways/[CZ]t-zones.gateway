@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-29"
+    return "2012-08-04"
 }
 
 function getMaintainer() {
@@ -126,21 +126,46 @@ function send() {
     // find counter
     re = /<input type="hidden" name="counter" value="(.*)" \/>/
     match = re.exec(content);
-    var counter = match[1]
+    counter = match[1]
 
     // send sms
     postData = ["counter", counter,
-                "recipients", NUMBER, "text", MESSAGE,
-                "send", "Odeslat", "mtype", "0",
-                "confirmation", RECEIPT?"1":"0",
-                "history", "on"]
+                "recipients", NUMBER,
+                "text", MESSAGE,
+                "send", "Odeslat",
+                "mtype", "0",
+                "confirmation", RECEIPT ? "1" : "0",
+                "history", "on",
+                "TMCZcheck", "on"]
     content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
 
+    // if some SMS is paid, there will be one more confirmation form
+    re = /Tito adresáti jsou mimo síť T-Mobile|Recipients out of T-Mobile CZ network/
+    paid = re.exec(content)
+    if (paid) {
+        // find counter
+        re = /<input type="hidden" name="counter" value="(.*)" \/>/
+        match = re.exec(content);
+        counter = match[1]
+        // send sms for real
+        postData = ["counter", counter,
+                    "tmcz", "1",
+                    "rcpt1", NUMBER]
+        content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
+    }
+    
     // check if message was successfully sent
-    re = /(SMS zpr.v. byl. odeslán.|SMS was sent|All SMS messages were sent)/
-    match = re.exec(content)
-    if (match) {
+    re_cs = /SMS zpr.v. byl. odeslán./
+    re_en = /SMS was sent|All SMS messages were sent/
+    match_cs = re_cs.exec(content)
+    match_en = re_en.exec(content)
+    if (match_cs || match_en) {
         // all ok
+        if (paid) {
+            // display extra message if message was paid
+            msg = match_cs ? "SMS byla odeslána jako placená" : "You were charged for the message according to your tariff."
+            EXEC.setSupplementalMessage(msg)
+        }
         logout()
         return true
     }
