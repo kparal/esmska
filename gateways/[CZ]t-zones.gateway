@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-08-04"
+    return "2012-08-24"
 }
 
 function getMaintainer() {
@@ -87,10 +87,6 @@ function send() {
         postData = ["nextURL", "checkStatus.jsp", "errURL", "clickError.jsp",
                     "username", LOGIN, "password", PASSWORD,
                     "submit", "Přihlásit"]
-        // it just doesn't work if you send it only once, don't ask me why,
-        // cookie issues maybe
-        // so send it twice
-        content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
         content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
 
         // seach for errors
