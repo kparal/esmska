@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-06-28"
+    return "2012-10-11"
 }
 
 function getMaintainer() {
@@ -107,7 +107,7 @@ function send() {
     // =========================
         
     // extract important variables
-    re = /<img alt="" id="id\d+" src="\.\.\/\?x=(.+)&amp;random=(.+)" title/
+    re = /<img alt="" id="id\w+" src="\.\.\/\?x=(.+)&amp;random=(.+)" title/
     match = re.exec(content)
     captcha_par1 = match[1]
     captcha_par2 = match[2]
