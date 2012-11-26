@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-08-28 20:36+0000\n"
+"POT-Creation-Date: 2012-11-26 22:30+0200\n"
+"PO-Revision-Date: 2011-12-03 18:17+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-29 04:35+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2011-12-04 04:44+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -2100,8 +2100,6 @@ msgstr ""
 #: Translators
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
-"  Kamil Páral https://launchpad.net/~kamil.paral"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2158,123 +2156,3 @@ msgstr ""
 
 #~ msgid "The password belonging to the username"
 #~ msgstr "Adgangskoden som tilhører brugernavnet"
-
-#~ msgid "Add new contact"
-#~ msgstr "Tilføj ny kontakt"
-
-#~ msgid "Pa&ssword:"
-#~ msgstr "Adgang&skode:"
-
-#~ msgctxt "ConfigFrame.jLabel3.text"
-#~ msgid "&Name:"
-#~ msgstr "&Navn:"
-
-#~ msgid "Unknown operator"
-#~ msgstr "Ukendt operator"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Navn:"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Hjemmeside</a></html>"
-
-#~ msgid "2007-2009 Kamil Páral"
-#~ msgstr "2007-2009 Kamil Páral"
-
-#~ msgid "&Update"
-#~ msgstr "&Opdatér"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Tjek for &opdateringer"
-
-#~ msgid "You have entered the wrong security code."
-#~ msgstr "Du har indtastet en forkert sikkerhedskode."
-
-#~ msgid "Checking..."
-#~ msgstr "Tjekker..."
-
-#~ msgid "Downloading of some gateways failed!"
-#~ msgstr "Downloading af nogle gateways mislykkedes!"
-
-#~ msgid "Downloading..."
-#~ msgstr "Downloader..."
-
-#~ msgid "gateway version: {0}"
-#~ msgstr "gateway version: {0}"
-
-#~ msgid "Installation of some gateways failed!"
-#~ msgstr "Installation af nogle gateways mislykkedes!"
-
-#~ msgid "Retrieving update information failed!"
-#~ msgstr "Modtagelse af opdateringsinfo mislykkedes!"
-
-#~ msgid ""
-#~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-#~ "latest versions of all the available gateways.</html>"
-#~ msgstr ""
-#~ "<html><h2>Alle gateways er opdaterede</h2>Du anvender i øjeblikket de "
-#~ "seneste versioner af alle tilgængelige gateways.</html>"
-
-#~ msgid "{0} (needs program version: {1})"
-#~ msgstr "{0} (behøver program version: {1})"
-
-#~ msgid ""
-#~ "<html>There is a new program version ({0}) available on the <a href="
-#~ "\"{1}\">program homepage</a>.</html>"
-#~ msgstr ""
-#~ "<html>Der er en nyere program version ({0}) tilgængelig på <a href="
-#~ "\"{1}\">programmets hjemmeside</a>.</html>"
-
-#~ msgid "<a href=\"\">Gateway updates</a> are available!"
-#~ msgstr "<a href=\"\">Gateway opdateringer</a> er tilgængelige!"
-
-#~ msgid "Get &Help Online..."
-#~ msgstr "Få &hjælp online..."
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "Rapportér et &problem..."
-
-#~ msgid "&Translate This Application..."
-#~ msgstr "&Oversæt dette program..."
-
-#~ msgctxt "Operator.unknown"
-#~ msgid "Unknown gateway"
-#~ msgstr "Ukendt gateway"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Do you like this project? Help to keep it running...\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Kan du lide dette projektt? Hjælp med at holde det i luften...\n"
-#~ "</html>"
-
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Tjek for program og gateway opdateringer"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Støt projekt</a></html>"
-
-#~ msgctxt "ConfigFrame.jLabel10.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Gateway:"
-
-#~ msgid "&Gateways"
-#~ msgstr "&Gateways"
-
-#~ msgid "Show password"
-#~ msgstr "Vis adgangskode"
-
-#~ msgid "gateways only"
-#~ msgstr "kun gateways"
-
-#~ msgid "program and gateways"
-#~ msgstr "program og gateway"
-
-#~ msgid "program only"
-#~ msgstr "kun program"
-
-#~ msgid "Contact list"
-#~ msgstr "Kontaktliste"

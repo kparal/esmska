@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-08-28 20:39+0000\n"
+"POT-Creation-Date: 2012-11-26 22:30+0200\n"
+"PO-Revision-Date: 2011-12-03 18:16+0000\n"
 "Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-29 04:36+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2011-12-04 04:44+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -2088,8 +2088,6 @@ msgstr ""
 #: Translators
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
-"  Kamil Páral https://launchpad.net/~kamil.paral"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2140,20 +2138,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgid "Add new contact"
-#~ msgstr "Yeni bağlantı ekle"
-
-#~ msgid "Pa&ssword:"
-#~ msgstr "&Şifre:"
-
-#~ msgctxt "ConfigFrame.jLabel3.text"
-#~ msgid "&Name:"
-#~ msgstr "&İsim:"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&İsim:"
-
-#~ msgid "Contact list"
-#~ msgstr "Bağlantı listesi"
