@@ -3,7 +3,7 @@
 # Create MS Windows installer from dist directory
 # in the program root
 
-# Dependencies: installjammer, tofrodos
+# Dependencies: installjammer, dos2unix
 
 # trap and exit on error
 set -e
@@ -44,7 +44,7 @@ BUILD_DIR=`mktemp -d -t esmska-packaging.XXXX`
 # copy dist directory to dist-win directory
 cp -r ../dist "$DIST_DIR"
 # and convert text files to CRLF
-todos "$DIST_DIR"/*.txt "$DIST_DIR"/license/*.txt "$DIST_DIR"/*.conf
+unix2dos "$DIST_DIR"/*.txt "$DIST_DIR"/license/*.txt "$DIST_DIR"/*.conf
 # delete unnecessary files
 rm "$DIST_DIR"/esmska.sh
 # extract JRE
