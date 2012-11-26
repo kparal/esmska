@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-11-21"
+    return "2012-11-26"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "1.2"
+    return "1.3beta1"
 }
 
 function getWebsite() {
@@ -62,8 +62,6 @@ function getFeatures() {
 }
 
 function send() {
-    EXEC.setProblem("FIX_IN_PROGRESS", "http://code.google.com/p/esmska/issues/detail?id=436")
-    return false
     
     // change variables to correct form
     if (NUMBER.indexOf("+420") == 0) {
