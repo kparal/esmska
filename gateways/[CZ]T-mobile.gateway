@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-12-06"
+    return "2012-12-06_2"
 }
 
 function getMaintainer() {
@@ -50,8 +50,7 @@ function getSignatureExtraLength() {
 }
 
 function getDelayBetweenMessages() {
-    // the delay is 30s, but the second 15s is forced during sending
-    return 15
+    return 0
 }
 
 function getSupportedLanguages() {
@@ -76,21 +75,26 @@ function send() {
    
     // find counter
     re = /<input type="hidden" name="counter" value="(.*)" \/>/
-    match = re.exec(content);
+    match = re.exec(content)
     var counter = match[1]
-
+    
+    // find send delay
+    re = /\$\("#submit"\)\[0\]\.disabled = 0;[^}]+}, 1000\*(\d+)\);/
+    match = re.exec(content)
+    var delay = match[1]
+    // convert to milliseconds
+    // add 1 extra second, because they complain sometimes that we're too fast
+    delay = (parseInt(delay) + 0) * 1000
+    
     // download image
     content = EXEC.getURL("http://sms.t-zones.cz/open/captcha.jpg", [])
     
     // show image
     var captcha = EXEC.recognizeImage(content, "")
 
-    // gateway forces us to sleep 15s before sending (add +1s to be sure)
-    //exact 15s delay maybe causes exception by server refusing connection
+    // sleep until we're allowed to send the message
     var now = new Date().getTime()
-    if (time + 16000 > now) {
-        EXEC.sleep(time + 16000 - now)
-    }
+    EXEC.sleep(time + delay - now)
 
     // send sms
     postData = ["counter", counter,
