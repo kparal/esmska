@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-12-06_2"
+    return "2012-12-10"
 }
 
 function getMaintainer() {
@@ -82,9 +82,14 @@ function send() {
     re = /\$\("#submit"\)\[0\]\.disabled = 0;[^}]+}, 1000\*(\d+)\);/
     match = re.exec(content)
     var delay = match[1]
+    delay = parseInt(delay)
+    // if web page claims it is shorter than 15 seconds, don't trust it
+    // see http://code.google.com/p/esmska/issues/detail?id=438#c3
+    if (delay < 15) {
+        delay = 15
+    }
     // convert to milliseconds
-    // add 1 extra second, because they complain sometimes that we're too fast
-    delay = (parseInt(delay) + 0) * 1000
+    delay = delay * 1000
     
     // download image
     content = EXEC.getURL("http://sms.t-zones.cz/open/captcha.jpg", [])
