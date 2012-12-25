@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-11-26"
+    return "2012-12-25"
 }
 
 function getMaintainer() {
@@ -93,11 +93,19 @@ function send() {
         content = EXEC.postURL("http://sms.1188.cz/signup", [], postData)
         
         // check log in errors
-        re = /nesprávný login nebo heslo/
+        re = /Nesprávně zadané přihlašovací údaje/
         match = re.exec(content)
         if (match) {
-            // login was not successfull
+            // login credentials are incorrect
             EXEC.setProblem("WRONG_AUTH")
+            logout()
+            return false
+        }
+        re = /<div class="error_message">([^<]*)<\/div>/
+        match = re.exec(content)
+        if (match) {
+            // some other problem
+            EXEC.setProblem("GATEWAY_MESSAGE", match[1])
             logout()
             return false
         }
