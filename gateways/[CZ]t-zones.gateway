@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-12-24"
+    return "2013-03-17"
 }
 
 function getMaintainer() {
@@ -188,5 +188,5 @@ function send() {
 // custom function for logging out
 function logout() {
     // visit logout page
-    EXEC.getURL("https://login.client.tmo.cz/um/cs/logout.jsp", []);
+    EXEC.getURL("https://www.t-mobile.cz/.gang/logout/tzones", []);
 }
