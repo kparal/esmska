@@ -452,6 +452,8 @@ public class QueuePanel extends javax.swing.JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             SMS sms = (SMS) queueList.getSelectedValue();
+            SMS elementAt = queueListModel.getElementAt(0);
+            System.out.println(elementAt);
             if (sms == null) {
                 return;
             }

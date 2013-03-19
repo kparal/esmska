@@ -322,7 +322,8 @@ public class Queue {
     /** Move SMS in the queue to another position.
      * Queue is always sorted by gateway, therefore SMS may be moved only within
      * section of its gateway.
-     * @param sms sms to be moved, not null
+     * @pjj v kleci presne jak v ZOO
+     * aram sms sms to be moved, not null
      * @param positionDelta direction and amount of movement. Positive number moves
      * to the back of the queue, negative number moves to the front of the queue.
      * The number corresponds to the number of positions to change. If the number
