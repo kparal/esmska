@@ -92,21 +92,26 @@ import org.pushingpixels.substance.api.SubstanceLookAndFeel;
  * @author ripper
  */
 public class MainFrame extends javax.swing.JFrame {
+
     private static MainFrame instance;
     private static final Logger logger = Logger.getLogger(MainFrame.class.getName());
     private static final String RES = "/esmska/resources/";
     private static final ResourceBundle l10n = L10N.l10nBundle;
-
-    /** custom beans binding group */
+    /**
+     * custom beans binding group
+     */
     private BindingGroup bindGroup = new BindingGroup();
-    
-    /** sender of sms */
+    /**
+     * sender of sms
+     */
     private static final SMSSender smsSender = new SMSSender();
     private static final Config config = Config.getInstance();
     private static final History history = History.getInstance();
     private static final Log log = Log.getInstance();
     private static final Queue queue = Queue.getInstance();
-    /** shutdown handler thread */
+    /**
+     * shutdown handler thread
+     */
     private Thread shutdownThread = new ShutdownThread();
     private UpdateChecker updateChecker = UpdateChecker.getInstance();
 
@@ -132,7 +137,7 @@ public class MainFrame extends javax.swing.JFrame {
         images.add(Icons.get("esmska-64.png").getImage());
         images.add(Icons.get("esmska.png").getImage());
         setIconImages(images);
-        
+
         //hide on Ctrl+W
         String command = "hide";
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
@@ -146,7 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         //on Mac, move program menu items to system menu
         if (RuntimeUtils.isMac()) {
             logger.fine("Running on Mac OS, hiding some menu items...");
@@ -164,17 +169,16 @@ public class MainFrame extends javax.swing.JFrame {
                 aboutMenuItem.setVisible(false);
                 //should be helpSeparator.setVisible(false); but bug #6365547 in Apple Java precludes it
                 helpMenu.remove(helpSeparator);
-            }
-            catch (Throwable ex) {
-                logger.log(Level.WARNING, "Can't integrate program menu items to " +
-                        "Mac system menu", ex);
+            } catch (Throwable ex) {
+                logger.log(Level.WARNING, "Can't integrate program menu items to "
+                        + "Mac system menu", ex);
             }
         }
-        
+
         //set tooltip delay
         ToolTipManager.sharedInstance().setInitialDelay(750);
         ToolTipManager.sharedInstance().setDismissDelay(60000);
-        
+
         //add first log record
         log.addRecord(new Log.Record(l10n.getString("Program_start")));
 
@@ -183,22 +187,22 @@ public class MainFrame extends javax.swing.JFrame {
         if (queue.size() > 0) {
             queue.setPaused(true);
         }
-        
+
         //setup components
         contactPanel.requestFocusInWindow();
         contactPanel.ensureContactSelected();
         queue.addValuedListener(new QueueListener());
         ImageCodeManager.setResolver(new GUIImageCodeResolver());
-        
+
         //use bindings
-        Binding bind = Bindings.createAutoBinding(UpdateStrategy.READ, config, 
+        Binding bind = Bindings.createAutoBinding(UpdateStrategy.READ, config,
                 BeanProperty.create("toolbarVisible"), toolBar, BeanProperty.create("visible"));
         Binding bind2 = Bindings.createAutoBinding(UpdateStrategy.READ, config,
                 BeanProperty.create("notificationIconVisible"), exitButton, BeanProperty.create("visible"));
         bindGroup.addBinding(bind);
         bindGroup.addBinding(bind2);
         bindGroup.bind();
-        
+
         //add shutdown handler, when program is closed externally (logout, SIGTERM, etc)
         //only if really running, not in design mode
         if (!Beans.isDesignTime()) {
@@ -214,7 +218,7 @@ public class MainFrame extends javax.swing.JFrame {
                     int prefHeight = comp.getPreferredSize().height;
                     int dividerLocation = prefHeight;
                     if (verticalSplitPane.getBottomComponent() == comp) {
-                    //for bottom component we have to substract the number from full height
+                        //for bottom component we have to substract the number from full height
                         dividerLocation = verticalSplitPane.getHeight() - prefHeight - verticalSplitPane.getDividerSize();
                     }
                     verticalSplitPane.setDividerLocation(dividerLocation);
@@ -223,7 +227,7 @@ public class MainFrame extends javax.swing.JFrame {
         };
         smsPanel.addActionListener(verticalSplitListener);
         queuePanel.addActionListener(verticalSplitListener);
-        
+
         // wait for asynchronous user data loading and then finalize everything
         final AtomicBoolean calledEverythingLoaded = new AtomicBoolean();
         Context.addPropertyChangeListener(new PropertyChangeListener() {
@@ -252,8 +256,10 @@ public class MainFrame extends javax.swing.JFrame {
             everythingLoaded();
         }
     }
-    
-    /** Performs last operations after all user data has been loaded. */
+
+    /**
+     * Performs last operations after all user data has been loaded.
+     */
     private void everythingLoaded() {
         //check for valid gateways
         if (Gateways.getInstance().size() <= 0) {
@@ -262,16 +268,18 @@ public class MainFrame extends javax.swing.JFrame {
                     new JLabel(l10n.getString("MainFrame.no_gateways")),
                     null, JOptionPane.ERROR_MESSAGE);
         }
-        
+
         // send statistics
         Statistics.sendUsageInfo();
-        
+
         // check for updates
         updateChecker.addActionListener(new UpdateListener());
         updateChecker.checkForUpdates();
     }
-    
-    /** Start loading gatewates asynchronously */
+
+    /**
+     * Start loading gatewates asynchronously
+     */
     private void loadGatewaysAsync() {
         logger.fine("Loading gateways asynchronously...");
         Thread loadGwsThread = new Thread(new Runnable() {
@@ -310,8 +318,9 @@ public class MainFrame extends javax.swing.JFrame {
         loadGwsThread.setDaemon(true);
         loadGwsThread.start();
     }
-    
-    /** Create an instance of MainFrame. Should be called only for the first
+
+    /**
+     * Create an instance of MainFrame. Should be called only for the first
      * initialization, after that the instance is available in the Context.
      */
     public static void instantiate() {
@@ -322,8 +331,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    /** Start the mainframe and let it be visible according to user preferences
-     * (visible on the screen or hidden to notification area) */
+    /**
+     * Start the mainframe and let it be visible according to user preferences
+     * (visible on the screen or hidden to notification area)
+     */
     public void startAndShow() {
         logger.fine("Showing mainframe...");
         //if the window should be minimized into notification area
@@ -338,21 +349,23 @@ public class MainFrame extends javax.swing.JFrame {
             //show the form
             this.setVisible(true);
         }
-        
+
         // after all is set, load gateways asynchronously
         // we delayed it to this point, because even running it in a background
         // thread slows the startup of the main window
         loadGatewaysAsync();
     }
 
-    /** Display random tip from the collection of tips */
+    /**
+     * Display random tip from the collection of tips
+     */
     public void showTipOfTheDay() {
         try {
             List tips = IOUtils.readLines(
                     getClass().getResourceAsStream(RES + "tips.txt"), "UTF-8");
             int random = new Random().nextInt(tips.size());
-            statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " " +
-                    l10n.getString((String)tips.get(random)), null, null, false);
+            statusPanel.setStatusMessage(l10n.getString("MainFrame.tip") + " "
+                    + l10n.getString((String) tips.get(random)), null, null, false);
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Can't display tip of the day", ex);
         }
@@ -373,7 +386,7 @@ public class MainFrame extends javax.swing.JFrame {
     public SMSSender getSMSSender() {
         return smsSender;
     }
-    
+
     public JToolBar getToolbar() {
         return toolBar;
     }
@@ -390,7 +403,9 @@ public class MainFrame extends javax.swing.JFrame {
         return verticalSplitPane;
     }
 
-    /** Quit the program */
+    /**
+     * Quit the program
+     */
     public void exit() {
         logger.fine("Closing program...");
 
@@ -409,10 +424,10 @@ public class MainFrame extends javax.swing.JFrame {
         System.exit(returnCode);
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -664,7 +679,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //if user clicked on close button (event non-null) and notification icon
         //installed or on mac, just hide the main window
@@ -689,7 +704,9 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
-    /** Save all user data
+    /**
+     * Save all user data
+     *
      * @return true if all saved ok; false otherwise
      */
     private boolean saveAll() {
@@ -709,16 +726,20 @@ public class MainFrame extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    /** Saves history of sent sms */
+
+    /**
+     * Saves history of sent sms
+     */
     private void createHistory(SMS sms) {
         History.Record record = new History.Record(sms.getNumber(), sms.getText(),
                 sms.getGateway(), sms.getName(), sms.getSenderNumber(),
                 sms.getSenderName(), null);
         history.addRecord(record);
     }
-    
-    /** save program configuration
+
+    /**
+     * save program configuration
+     *
      * @return true if saved ok; false otherwise
      */
     private boolean saveConfig() {
@@ -726,7 +747,7 @@ public class MainFrame extends javax.swing.JFrame {
         config.setMainDimension(this.getSize());
         config.setHorizontalSplitPaneLocation(horizontalSplitPane.getDividerLocation());
         config.setVerticalSplitPaneLocation(verticalSplitPane.getDividerLocation());
-        
+
         try {
             Context.persistenceManager.saveConfig();
             return true;
@@ -735,8 +756,10 @@ public class MainFrame extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    /** load program configuration */
+
+    /**
+     * load program configuration
+     */
     private void loadConfig() {
         logger.finer("Initializing according to config...");
         //set frame layout
@@ -752,31 +775,33 @@ public class MainFrame extends javax.swing.JFrame {
         if (verticalSplitPaneLocation != null) {
             verticalSplitPane.setDividerLocation(verticalSplitPaneLocation);
         }
-        
+
         //set window centered
         if (config.isStartCentered()) {
             setLocationRelativeTo(null);
         }
-        
+
         //select last contact
         if (history.getRecords().size() > 0) {
             contactPanel.setSelectedContact(
-                    history.getRecord(history.getRecords().size()-1).getName());
+                    history.getRecord(history.getRecords().size() - 1).getName());
             contactPanel.makeNiceSelection();
         }
-        
+
         //show notification icon
         if (config.isNotificationIconVisible()) {
             NotificationIcon.install();
         }
-        
+
         //show tip of the day
         if (config.isShowTips()) {
             showTipOfTheDay();
         }
     }
-    
-    /** save contacts
+
+    /**
+     * save contacts
+     *
      * @return true if saved ok; false otherwise
      */
     private boolean saveContacts() {
@@ -788,8 +813,10 @@ public class MainFrame extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    /** save sms queue
+
+    /**
+     * save sms queue
+     *
      * @return true if saved ok; false otherwise
      */
     private boolean saveQueue() {
@@ -801,8 +828,10 @@ public class MainFrame extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    /** save sms history
+
+    /**
+     * save sms history
+     *
      * @return true if saved ok; false otherwise
      */
     private boolean saveHistory() {
@@ -815,7 +844,7 @@ public class MainFrame extends javax.swing.JFrame {
             //remove old records
             history.removeRecordsOlderThan(limit);
         }
-        
+
         try {
             Context.persistenceManager.saveHistory();
             return true;
@@ -824,8 +853,10 @@ public class MainFrame extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    /** save keyring 
+
+    /**
+     * save keyring
+     *
      * @return true if saved ok; false otherwise
      */
     private boolean saveKeyring() {
@@ -838,15 +869,17 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    /** Save gateway properties.
-     * Skips saving if the gateways properties wasn't yet already loaded (they
-     * are loaded asynchronously), then there is nothing to save.
+    /**
+     * Save gateway properties. Skips saving if the gateways properties wasn't
+     * yet already loaded (they are loaded asynchronously), then there is
+     * nothing to save.
+     *
      * @return true if saved ok or not even yet loaded; false otherwise
      */
     private boolean saveGatewayProperties() {
         if (!Context.gatewaysLoaded()) {
-            logger.log(Level.FINE, "Not saving gateway properties because they " +
-                    "were not yet even loaded.");
+            logger.log(Level.FINE, "Not saving gateway properties because they "
+                    + "were not yet even loaded.");
             return true;
         }
         try {
@@ -858,8 +891,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    /** Listen for changes in the queue */
+    /**
+     * Listen for changes in the queue
+     */
     private class QueueListener implements ValuedListener<Queue.Events, SMS> {
+
         @Override
         public void eventOccured(ValuedEvent<Events, SMS> e) {
             switch (e.getEvent()) {
@@ -874,6 +910,7 @@ public class MainFrame extends javax.swing.JFrame {
                     break;
             }
         }
+
         private void sendingSMS(SMS sms) {
             String gateway = sms.getGateway();
             statusPanel.setTaskRunning(true);
@@ -882,12 +919,14 @@ public class MainFrame extends javax.swing.JFrame {
                     sms.getRecipient(), (gateway == null ? l10n.getString("SMSSender.no_gateway") : gateway)),
                     null, Icons.STATUS_INFO));
         }
+
         private void smsSent(SMS sms) {
             log.addRecord(new Log.Record(MessageFormat.format(l10n.getString("MainFrame.sms_sent"), sms.getRecipient()),
                     null, Icons.STATUS_MESSAGE));
             createHistory(sms);
             finish(sms);
         }
+
         private void smsFailed(SMS sms) {
             logger.log(Level.INFO, "Message could not be sent: {0}\nProblem: {1}",
                     new Object[]{sms, sms.getProblem()});
@@ -901,6 +940,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             finish(sms);
         }
+
         private void finish(SMS sms) {
             //show gateway message if present
             if (StringUtils.isNotEmpty(sms.getSupplMsg())) {
@@ -914,12 +954,14 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    /** Listens for events from queue panel */
+    /**
+     * Listens for events from queue panel
+     */
     private class QueuePanelListener implements ValuedListener<QueuePanel.Events, SMS> {
+
         @Override
         public void eventOccured(ValuedEvent<QueuePanel.Events, SMS> e) {
             switch (e.getEvent()) {
-                //edit sms in queue
                 case SMS_EDIT_REQUESTED:
                     SMS sms = e.getValue();
                     if (sms == null) {
@@ -931,7 +973,7 @@ public class MainFrame extends javax.swing.JFrame {
                         String cancelOption = l10n.getString("Cancel");
                         String[] options = new String[]{cancelOption, replaceOption};
                         options = RuntimeUtils.sortDialogOptions(options);
-                        int result = JOptionPane.showOptionDialog(MainFrame.this, 
+                        int result = JOptionPane.showOptionDialog(MainFrame.this,
                                 new JLabel(l10n.getString("QueuePanel.replaceSms")),
                                 null, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                                 options, replaceOption);
@@ -940,16 +982,37 @@ public class MainFrame extends javax.swing.JFrame {
                             return;
                         }
                     }
+                    SMS smsToEdit = createSMSFromFragments(sms);
                     //edit the message
-                    smsPanel.setSMS(sms);
-                    queue.remove(sms);
+                    smsPanel.setSMS(smsToEdit);
                     break;
             }
         }
+
+        /**
+         * Remove sms fragments from queue and create one "big" smsFragment from them
+         * @param smsFragment which was chosen to edit
+         * @return sms with same fields as smsFragment, but with all the text for recipient
+         */
+        private SMS createSMSFromFragments(SMS smsFragment) {
+            SMS smsToEdit = new SMS(smsFragment.getNumber(), "", smsFragment.getGateway(), smsFragment.getName());
+            for (int i = 0; i < queue.getAll().size(); i++) {
+                SMS smsTmp = queue.getAll().get(i);
+                if (smsFragment.getRecipient().equals(smsTmp.getRecipient())) {
+                    smsToEdit.setText(smsToEdit.getText() + smsTmp.getText());
+                    queue.remove(smsTmp);
+                    i--;
+                }
+            }
+            return smsToEdit;
+        }
     }
 
-    /** Listens for changes in contact list */
+    /**
+     * Listens for changes in contact list
+     */
     private class ContactListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getID()) {
@@ -962,13 +1025,16 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    
-    /** Listens for events from update checker */
+
+    /**
+     * Listens for events from update checker
+     */
     private class UpdateListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             int event = e.getID();
-            
+
             switch (event) {
                 case UpdateChecker.ACTION_PROGRAM_UPDATE_AVAILABLE:
                     announceProgram();
@@ -993,7 +1059,9 @@ public class MainFrame extends javax.swing.JFrame {
             timer.start();
         }
 
-        /** Announce program updates available */
+        /**
+         * Announce program updates available
+         */
         private void announceProgram() {
             String message = MessageFormat.format(l10n.getString("MainFrame.new_program_version"),
                     updateChecker.getLatestProgramVersion());
@@ -1009,21 +1077,26 @@ public class MainFrame extends javax.swing.JFrame {
             }, l10n.getString("Update.browseDownloads"));
         }
 
-        /** perform gateway update */
+        /**
+         * perform gateway update
+         */
         private void updateGateways() {
             UpdateInstaller.getInstance().installNewGateways();
         }
     }
 
-    /** Thread used when program is externally forced to shut down (logout, SIGTERM, etc) */
+    /**
+     * Thread used when program is externally forced to shut down (logout,
+     * SIGTERM, etc)
+     */
     private class ShutdownThread extends Thread {
+
         @Override
         public void run() {
             logger.fine("Program closing down...");
             saveAll();
         }
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JMenuItem aboutMenuItem;
     private JButton compressButton;
