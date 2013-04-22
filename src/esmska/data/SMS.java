@@ -1,6 +1,9 @@
 package esmska.data;
 
 import esmska.transfer.GatewayExecutor.Problem;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -25,6 +28,7 @@ public class SMS {
     private Status status = Status.NEW; //sms status
     private String supplMsg = ""; //supplemental message from gateway about remaining credit, etc
     private Tuple<Problem, String> problem; //problem enum, string param
+    private final String fragmentID;
     
     /** Status of SMS */
     public static enum Status {
@@ -41,8 +45,8 @@ public class SMS {
     }
 
     /** Shortcut for SMS(number, text, gateway, null). */
-    public SMS(String number, String text, String gateway) {
-        this(number, text, gateway, null);
+    public SMS(String number, String text, String gateway, String fragmentID) {
+        this(number, text, gateway, null, fragmentID);
     }
 
     /** Constructs new SMS. For detailed parameters restrictions see individual setter methods.
@@ -51,11 +55,18 @@ public class SMS {
      * @param gateway not null nor empty
      * @param name
      */
-    public SMS(String number, String text, String gateway, String name) {
+    public SMS(String number, String text, String gateway, String name, String fragmentID) {
         setNumber(number);
         setText(text);
         setGateway(gateway);
         setName(name);
+        this.fragmentID = fragmentID;
+    }
+    
+    public static String generateID(int contactHash) {//yyyyMMddHHmmssSSS
+        DateFormat dateFormat = new SimpleDateFormat("SSSssmmHHddMMyyyy");
+        Date date = new Date();
+        return dateFormat.format(date) + contactHash;
     }
 
     /** Get signature matching current gateway or null if no such found. */
@@ -132,6 +143,10 @@ public class SMS {
     /** Name of the recepient. Never null. */
     public String getName() {
         return name;
+    }
+    
+    public String getFragmentID() {
+        return fragmentID;
     }
 
     /** Supplemental message from gateway. Never null. */

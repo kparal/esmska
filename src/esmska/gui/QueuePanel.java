@@ -397,6 +397,43 @@ public class QueuePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_queueListKeyPressed
     
+    /**
+     * Remove sms fragments from queue and create one "big" smsFragment from them
+     * @param smsFragment which was chosen to edit
+     * @return sms with same fields as smsFragment, but with all the text for recipient
+     */
+    public SMS createSMSFromFragments(SMS smsFragment) {
+        SMS smsToEdit = new SMS(smsFragment.getNumber(), "", smsFragment.getGateway(), smsFragment.getName(), smsFragment.getFragmentID());
+        List<SMS> smsToRemove = getAllSMSFromQueueBy(smsToEdit.getFragmentID());
+        for (SMS sms : smsToRemove) {
+            smsToEdit.setText(smsToEdit.getText() + sms.getText());
+        }
+        removeSmsFragmentsFromQueue(smsToRemove);
+        return smsToEdit;
+    }
+        
+    /**
+     * @return All sms fragments from queue which have fragmentID like parameter.
+     */
+    public List<SMS> getAllSMSFromQueueBy(String fragmentID){
+        List<SMS> sms = new ArrayList<SMS>();
+        for (SMS tmpSms : queue.getAll()) {
+            if(fragmentID.equals(tmpSms.getFragmentID())){
+                sms.add(tmpSms);
+            }
+        }
+        return sms;
+    }
+
+    /**
+     * Removes fragments from queue
+     * @param smsToRemove 
+     */
+    public void removeSmsFragmentsFromQueue(List<SMS> smsToRemove) {
+        for (SMS remove : smsToRemove) {
+            queue.remove(remove);
+        }
+    }
     /** Erase sms from queue list */
     private class DeleteSMSAction extends AbstractAction {
         private final String deleteOption = l10n.getString("Delete");
@@ -428,7 +465,8 @@ public class QueuePanel extends javax.swing.JPanel {
             if (deleteOption.equals(pane.getValue())) {
                 for (Object o : toRemove) {
                     SMS sms = (SMS) o;
-                    queue.remove(sms);
+                    List<SMS> smsToRemove = getAllSMSFromQueueBy(sms.getFragmentID());
+                    removeSmsFragmentsFromQueue(smsToRemove);
                 }
             }
 
