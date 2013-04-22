@@ -149,11 +149,11 @@ public class Envelope {
                     msgText += signature;
                 }
             }
+            String fragmentID = SMS.generateID(c.hashCode());
             // cut out the messages
             for (int i=0;i<msgText.length();i+=limit) {
                 String cutText = msgText.substring(i,Math.min(i+limit,msgText.length()));
-                SMS sms = new SMS(c.getNumber(), cutText, c.getGateway());
-                sms.setName(c.getName());
+                SMS sms = new SMS(c.getNumber(), cutText, c.getGateway(), c.getName(), fragmentID);
                 list.add(sms);
             }
         }
