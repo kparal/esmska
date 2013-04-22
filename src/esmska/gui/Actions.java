@@ -278,7 +278,8 @@ public class Actions {
                         return;
                     }
 
-                    SMS sms = new SMS(record.getNumber(), record.getText(), record.getGateway());
+                    String fragmentID = SMS.generateID(0);
+                    SMS sms = new SMS(record.getNumber(), record.getText(), record.getGateway(), fragmentID);
                     sms.setName(record.getName());
 
                     Context.mainFrame.getContactPanel().clearSelection();
