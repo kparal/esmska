@@ -278,8 +278,8 @@ public class Actions {
                         return;
                     }
 
-                    SMS sms = new SMS(record.getNumber(), record.getText(), record.getGateway());
-                    sms.setName(record.getName());
+                    SMS sms = new SMS(record.getNumber(), record.getText(), 
+                            record.getGateway(), record.getName(), null);
 
                     Context.mainFrame.getContactPanel().clearSelection();
                     Context.mainFrame.getSMSPanel().setSMS(sms);

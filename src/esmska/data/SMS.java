@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
@@ -25,6 +26,7 @@ public class SMS {
     private Status status = Status.NEW; //sms status
     private String supplMsg = ""; //supplemental message from gateway about remaining credit, etc
     private Tuple<Problem, String> problem; //problem enum, string param
+    private String id; //message ID, useful when splitting/joining message parts
     
     /** Status of SMS */
     public static enum Status {
@@ -40,9 +42,9 @@ public class SMS {
         SENT; 
     }
 
-    /** Shortcut for SMS(number, text, gateway, null). */
+    /** Shortcut for SMS(number, text, gateway, null, null). */
     public SMS(String number, String text, String gateway) {
-        this(number, text, gateway, null);
+        this(number, text, gateway, null, null);
     }
 
     /** Constructs new SMS. For detailed parameters restrictions see individual setter methods.
@@ -50,12 +52,21 @@ public class SMS {
      * @param text not null
      * @param gateway not null nor empty
      * @param name
+     * @param id
      */
-    public SMS(String number, String text, String gateway, String name) {
+    public SMS(String number, String text, String gateway, String name, String id) {
         setNumber(number);
         setText(text);
         setGateway(gateway);
         setName(name);
+        setId(id);
+    }
+    
+    /** Generate a new random message ID and return it. */
+    public static String generateID() {
+        String newId = Long.toString(System.currentTimeMillis());
+        newId += "#" + RandomStringUtils.randomAlphanumeric(4);
+        return newId;
     }
 
     /** Get signature matching current gateway or null if no such found. */
@@ -132,6 +143,13 @@ public class SMS {
     /** Name of the recepient. Never null. */
     public String getName() {
         return name;
+    }
+    
+    /** Get the message ID. Never empty. This ID is used to mark different 
+     * parts (fragments) of the same message - they share its ID.
+     */
+    public String getId() {
+        return id;
     }
 
     /** Supplemental message from gateway. Never null. */
@@ -215,6 +233,18 @@ public class SMS {
                     new Object[]{this, problem});
         }
         this.problem = problem;
+    }
+    
+    /** Set the message ID. If empty or null, a random ID is generated. This ID
+     * is used to mark different parts (fragments) of the same message - they
+     * share its ID.
+     */
+    public void setId(String id) {
+        if (StringUtils.isEmpty(id)) {
+            this.id = generateID();
+        } else {
+            this.id = id;
+        }
     }
     // </editor-fold>
     

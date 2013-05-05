@@ -85,8 +85,9 @@ public class ImportManager {
                     String number = reader.get(1);
                     String gateway = reader.get(2);
                     String text = reader.get(3);
-
-                    SMS sms = new SMS(number, text, gateway, name);
+                    String id = reader.get(4);
+                    
+                    SMS sms = new SMS(number, text, gateway, name, id);
                     queue.add(sms);
                 } catch (Exception e) {
                     logger.severe("Invalid queue record: " + reader.getRawRecord());

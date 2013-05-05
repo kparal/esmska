@@ -19,6 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
 /** Class representing queue of SMS
@@ -95,7 +96,7 @@ public class Queue {
     public static Queue getInstance() {
         return instance;
     }
-
+    
     /** Get all SMS in the queue.
      * This is a shortcut for getAll(null). */
     public List<SMS> getAll() {
@@ -166,6 +167,28 @@ public class Queue {
         return Collections.unmodifiableList(list);
     }
 
+    /** Get all SMS (fragments) in the queue with a specified ID.
+     * The queue is always sorted by the gateway name, the messages are not sorted.
+     * @param id message ID. Must not be empty.
+     * @return unmodifiable list of SMS with the specified ID.
+     */
+    public List<SMS> getAllWithId(String id) {
+        Validate.notEmpty(id);
+        List<SMS> list = new ArrayList<SMS>();
+        
+        synchronized(queue) {
+            for (Collection<SMS> col : queue.values()) {
+                for (SMS sms : col) {
+                    if (StringUtils.equals(sms.getId(), id)) {
+                        list.add(sms);
+                    }
+                }
+            }
+        }
+
+        return Collections.unmodifiableList(list);
+    }
+    
     /** Add new SMS to the queue. May not be null.
      * @return See {@link Collection#add}.
      */
@@ -243,6 +266,19 @@ public class Queue {
             markAllIfReady();
         }
         return removed;
+    }
+    
+    /** Remove all SMS with a specified ID from the queue.
+     * @param id SMS to be removed. Not null.
+     */
+    public void remove(String id) {
+        Validate.notEmpty(id);
+
+        synchronized(queue) {
+            for (SMS sms : getAllWithId(id)) {
+                remove(sms);
+            }
+        }
     }
 
     /** Remove all SMS from the queue. */
@@ -488,6 +524,38 @@ public class Queue {
         updateGatewayDelay(sms.getGateway());
         timer.start();
         markIfReady(sms);
+    }
+    
+    /**
+    * Extract all message fragments (according to ID) from the queue and join them
+    * into a full message.
+    * @param id id of all the message fragments; not empty
+    * @param remove whether to remove all the fragments from the queue in the process
+    * @return sms the whole message with concatenated fragments' text; or null if
+    *             no such ID was present
+    */
+    public SMS extractSMS(String id, boolean remove) {
+        Validate.notEmpty(id);
+        SMS sms;
+        
+        synchronized(queue) {
+            List<SMS> fragments = getAllWithId(id);
+            if (fragments.isEmpty()) {
+                return null;
+            }
+
+            SMS head = fragments.get(0);
+            sms = new SMS(head.getNumber(), "", head.getGateway(), head.getName(), null);
+            for (SMS fragment : fragments) {
+                sms.setText(sms.getText() + fragment.getText());
+            }
+
+            if (remove) {
+                remove(id);
+            }
+        }
+        
+        return sms;
     }
 
     /** Check if sms is ready and set status if it is */
