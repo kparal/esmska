@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2012-12-25"
+    return "2013-05-29"
 }
 
 function getMaintainer() {
@@ -112,23 +112,10 @@ function send() {
         
         // we should be logged in now
     }
-    
-    // download image
-    content = EXEC.getURL("http://www.google.com/recaptcha/api/challenge?k=6LfFmc8SAAAAAKZS7BmYx4cEys7zo1y_LYHgxZ5o&ajax=1&cachestop=0.3157223965972662", [])
-    re = /challenge : '(.+)',/
-    match = content.match(re)
-    challenge = match[1]
-    content = EXEC.getURL("http://www.google.com/recaptcha/api/image", 
-                          ["c", challenge])
-    
-    // show image
-    code = EXEC.recognizeImage(content, "")
 
     // send message
     postData = ["sms[phone_numbers][]", NUMBER,
                 "sms[text]", MESSAGE,
-                "recaptcha_challenge_field", challenge,
-                "recaptcha_response_field", code,
                ]
     content = EXEC.postURL("http://sms.1188.cz/sms", [], postData)
 
