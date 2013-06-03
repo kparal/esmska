@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-26 22:30+0200\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
 "PO-Revision-Date: 2012-05-31 09:29+0000\n"
 "Last-Translator: Eugene Marshal <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-01 05:33+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:03+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -288,7 +288,6 @@ msgid "Request a &delivery report"
 msgstr "Запросить сообщение о &доставке"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message.<br>\n"
@@ -298,10 +297,6 @@ msgid ""
 "by the selected gateway.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Будет запрошен отчёт о доставке сообщения. Отчёт придёт на<br>\n"
-"номер телефона отправителя. Эту возможность поддерживают не все шлюзы.\n"
-"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "Gateway&s"
@@ -515,7 +510,6 @@ msgid "&Number:"
 msgstr "&Номер:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
@@ -523,8 +517,6 @@ msgid ""
 "If this field is disabled then this feature is not supported<br>\n"
 "by the selected gateway.</html>"
 msgstr ""
-"<html>Номер отправителя в международном формате (начинается с '+').<br>\n"
-"Эту функцию поддерживают не все шлюзы.</html>"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Sho&w password"
@@ -1001,10 +993,8 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
-"SMS очередь отправки (имя получателя, номер получателя, шлюз, текст "
-"сообщения, имя отправителя, номер отправителя)"
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
@@ -2480,9 +2470,3 @@ msgstr "Шлюз обновлен: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Не удалось установить обновления для некоторых шлюзов."
-
-#~ msgid "Username needed for logging in to the gateway"
-#~ msgstr "Имя пользователя необходимо для авторизации на шлюзе"
-
-#~ msgid "The password belonging to the username"
-#~ msgstr "Пароль, соответствующий имени пользователя"

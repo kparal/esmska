@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-26 22:32+0200\n"
+"POT-Creation-Date: 2013-06-03 20:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -875,7 +875,7 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
 
 #: ExportManager.vcard_filter

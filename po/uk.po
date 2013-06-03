@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-26 22:30+0200\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
 "PO-Revision-Date: 2011-12-03 18:15+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-04 04:44+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:03+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -971,7 +971,7 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
 
 #: ExportManager.vcard_filter
@@ -2186,6 +2186,8 @@ msgstr ""
 #: Translators
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Sergiy Gavrylov https://launchpad.net/~gavro"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2236,9 +2238,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgid "Username needed for logging in to the gateway"
-#~ msgstr "Ім’я користувача потрібне для реєстрації входження до шлюзу"
-
-#~ msgid "The password belonging to the username"
-#~ msgstr "Пароль належить до імені користувача"
