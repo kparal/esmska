@@ -101,11 +101,6 @@ public class MacIntegration extends IntegrationAdapter {
                     i.setIcon(null);
                     i.setMnemonic(-1);
                     i.setToolTipText(null);
-                } else if (c instanceof JMenu) {
-                    JMenu jm = (JMenu) c;
-                    jm.setIcon(null);
-                    jm.setMnemonic(-1);
-                    jm.setToolTipText(null);
                 }
             }
         }
