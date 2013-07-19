@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-08-28 20:37+0000\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
+"PO-Revision-Date: 2011-12-03 18:17+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-29 04:36+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:02+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -268,7 +268,6 @@ msgid "Request a &delivery report"
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message.<br>\n"
@@ -278,10 +277,6 @@ msgid ""
 "by the selected gateway.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"יבקש את שליחת דוח ההעברה של ההודעה. הדוח יגיע אל מספר הטלפון של השולח.<br>\n"
-"פונקציה זו נתמכת רק אצל כמה מהמפעילים הסלולרים.\n"
-"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "Gateway&s"
@@ -955,7 +950,7 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
 
 #: ExportManager.vcard_filter
@@ -2255,366 +2250,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgid "The password belonging to the username"
-#~ msgstr "הסיסמה השייכת לשם המשתמש"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Do you like this project? Help to keep it running...\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "פרוייקט זה אהוד בעיניך? עזור להשאירו פעיל...\n"
-#~ "</html>"
-
-#~ msgid "Add new contact"
-#~ msgstr "הוסף איש קשר חדש"
-
-#~ msgid "Request the &delivery report"
-#~ msgstr "מבקש את דוח &ההעברה"
-
-#~ msgid "Use default form &layout"
-#~ msgstr "השתמש במבנה &ברירת המחדל של הטופס"
-
-#~ msgid "Pa&ssword:"
-#~ msgstr "&סיסמה:"
-
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "Although the passwords are stored encrypted the original content may be "
-#~ "retrieved. We strongly suggest to set the access rights in such manner "
-#~ "that no other user has the access to the <u>program configuration "
-#~ "directory</u>.\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "למרות כי הסיסמאות נשמרות מוצפנות ניתן לאחזר את התוכן המקורי. אנו ממליצים "
-#~ "בחום להגדיר את הרשאות הגישה\n"
-#~ "באופן שאף משתמש אחר לא יוכל לגשת אל <u>תיקיית תצורת התוכנה</u>.\n"
-#~ "</i></html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Current program dimension will be ignored and the default<br>\n"
-#~ "layout will be restored on the next program startup\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "מימדי התוכנה הנוכחיים יאופסו ומבנה ברירת המחדל יחול עם ההפעלה<br>\n"
-#~ "הבאה של התוכנית\n"
-#~ "</html>"
-
-#~ msgctxt "ConfigFrame.jLabel3.text"
-#~ msgid "&Name:"
-#~ msgstr "&שם:"
-
-#~ msgid "O&perators"
-#~ msgstr "מ&פעילים"
-
-#~ msgid "Show &only operator gateways with names containing:"
-#~ msgstr "הצג שערי גישה של מפעילים בעלי שמות המכילים:"
-
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "* A program restart is neccessary to apply the changes!\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "* אתחול התוכנה נדרש כדי להחל את השינויים!\n"
-#~ "</i></html>"
-
-#~ msgid "Username needed for logging in to the operator web gateway"
-#~ msgstr "נדרש שם משתמש לצורך התחברות אל שער הגישה של הספק"
-
-#~ msgid "&Login credentials"
-#~ msgstr "&פרטי התחברות"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr "האם אתה בטוח שברצונך להסיר את כל פרטי ההתחברות שהוזנו?"
-
-#~ msgid "Sender number in international format (starting with '+' sign)"
-#~ msgstr "מספר השולח במבנה בינלאומי (מתחיל בסימן '+')"
-
-#~ msgid "Add a sender &signature to the message"
-#~ msgstr "הוסף חתימת &שולח להודעה"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&שם:"
-
-#~ msgctxt "EditContactPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "שער &גישה:"
-
-#~ msgid "Contact list"
-#~ msgstr "רשימת אנשי הקשר"
-
-#~ msgid "SMS queue to be sent"
-#~ msgstr "תור SMS לשליחה"
-
-#~ msgid "Usernames and password to individual operators"
-#~ msgstr "שמות משתמש וסיסמאות למפעילים מסויימים"
-
-#~ msgid "Sent messages history"
-#~ msgstr "היסטוריית ההודעות שנשלחו"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Show icon in the notification area of the window manager (so-called "
-#~ "<i>system tray</i>).<br>\n"
-#~ "<br>\n"
-#~ "Beware, when using modern composite window managers (Compiz, Beryl, ...) "
-#~ "this<br>\n"
-#~ "feature is available only from Java 6 Update 10.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "הצג סמל באזור ההתרעה של מנהל החלונות (ידוע בשם <i>מגשית המערכת</i>).<br>\n"
-#~ "<br>\n"
-#~ "הזהר, בעת שימוש במנהלי חלונות חדישים (Compiz, Beryl, ...) תכונה<br>\n"
-#~ "זו זמינה רק לאחר העדכון העשירי של Java 6.\n"
-#~ "</html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "In the operator list only those will be displayed, which contains<br>\n"
-#~ "a pattern in their name provided in this field. This way you can "
-#~ "easily<br>\n"
-#~ "show eg. only operators for country XX by entering pattern [XX].<br>\n"
-#~ "You can enter more patterns separated by comma. Patterns are case "
-#~ "sensitive.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "ברשימת המפעילים יופיעו אך ורק מפעילים, המכילים תבנית בשם המסופק<br>\n"
-#~ "בשדה זה. בדרך זו תוכל להציג מפעילים רק עבור המדינה XX על ידי הזנת התבנית "
-#~ "[XX].<br>\n"
-#~ "תוכל להזין תבניות נוספות המופרדות בפסיקים. התבניות תלויות רישיות.\n"
-#~ "</html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Filled in name occupies space in the message but is not visible,<br>\n"
-#~ "therefore the message text coloring and message counter indicator<br>\n"
-#~ "may seem not to match\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "השם שהוזן תופס חלק מההודעה אך אינו גלוי,<br>\n"
-#~ "לכן צביעת הודעת הטקסט אינה נראית זהה למחוון הספירה<br>\n"
-#~ "</html>"
-
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>תיקיית תצורת המשתמש:<br>{0}</html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "With signature added the SMS will come to the recipient from the entered "
-#~ "number<br>\n"
-#~ "and signed with entered name. Only some operators support this feature.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "עם תוספת חתימה, הודעת ה־ SMS תגיע אל הנמען מהמספר שהוזן וחתומה בשם שהוזן."
-#~ "<br>\n"
-#~ "רק כמה מהמפעילים תומכים בתכונה זו.\n"
-#~ "</html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Telephone number of the contact including the country prefix.<br>\n"
-#~ "Country prefix doesn't have to be filled in if the default<br>\n"
-#~ "country prefix is set in the program preferences.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "מספר הטלפון של איש הקשר כולל קידומת המדינה.<br>\n"
-#~ "אין למלא את קידומת המדינה אם קידומת ברירת המחדל<br>\n"
-#~ "מוגדרת בהעדפות התוכנה.\n"
-#~ "</html>"
-
-#~ msgid ""
-#~ "Or choose the type of the standardized file format you have the contacts "
-#~ "in:"
-#~ msgstr "או בחר את סוג הקובץ המתוקנן בו יש לך אנשי קשר:"
-
-#~ msgid "Choose from which application you want to import contacts:"
-#~ msgstr "בחר מאיזה יישום ברצונך לייבא אנשי קשר:"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "If checked then contacts will be shown in the list and will be imported "
-#~ "only when<br>\n"
-#~ "they have operator this program can work with\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "במידה וסומן אנשי הקשר יוצגו ברשימה וייובאו רק כאשר<br>\n"
-#~ "המפעיל שלהם נתמך על ידי התוכנה\n"
-#~ "</html>"
-
-#~ msgid "Import only contacts with known operator"
-#~ msgstr "ייבא אנשי קשר ממפעילים מוכרים בלבד"
-
-#~ msgid ""
-#~ "You are probably running the program on an unsupported Java version! "
-#~ "Program might not work correctly with it! The tested Java versions are: "
-#~ "Sun Java 6, OpenJDK 6, Apple Java 6."
-#~ msgstr ""
-#~ "יתכן והנך מריץ את התוכנה על גירסת ג'אווה שאינה נתמכת! התוכנה עלולה לעבוד "
-#~ "שלא כראוי עם גירסת גא'ווה זו! גירסאות הג'אווה שנבדקו הן: ג'אווה 6 של סאן, "
-#~ "OpenJDK 6, Apple ג'אווה 6."
-
-#~ msgid "Directory with program settings can't be created!"
-#~ msgstr "לא ניתן ליצור תיקייה עם הגדרות התוכנה!"
-
-#~ msgid ""
-#~ "<html><h2>Esmska is already running!</h2>Esmska is already once started. "
-#~ "We strongly discourage you from starting another<br>instances of the "
-#~ "program because it may cause a user data loss.</html>"
-#~ msgstr ""
-#~ "<html><h2>Esmska כבר פעילה!</h2>Esmska כבר הופעלה פעם אחת. אנו לא ממליצים "
-#~ "להפעיל מופעים נוספים של התוכנה<br>כיוון שהם עלולים לגרום לאובדן המידע של "
-#~ "המשתמש.</html>"
-
-#~ msgid "Compress message (Ctrl+K)"
-#~ msgstr "דחוס את ההודעה (Ctrl+K)"
-
-#~ msgid "Get &Help Online..."
-#~ msgstr "קבלת ע&זרה מקוונת..."
-
-#~ msgid "Report a problem or request a feature"
-#~ msgstr "דווח על בעיה או בקש תכונה"
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "דווח על &בעיה..."
-
-#~ msgid "&Translate This Application..."
-#~ msgstr "ת&רגם יישום זה..."
-
-#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-#~ msgstr "<html><h2>לא ניתן לשלוח את ההודעה עבור ''{0}''!</h2>{1}</html>"
-
-#~ msgid "A message from operator:<br>"
-#~ msgstr "הודעה מהמפעיל:<br>"
-
-#~ msgid "You don't have sufficient credit to send this message."
-#~ msgstr "אין לך די אשראי לשליחת הודעה זו."
-
-#~ msgid ""
-#~ "The operator hasn't specified any reason why the message sending failed."
-#~ msgstr "המפעיל לא ציין סיבה כלשהי לכשל בשליחת ההודעה."
-
-#~ msgid "You have entered incorrect message text. Empty or too long?"
-#~ msgstr "הזנת טקסט שגוי בהודעה. ריק או ארוך מדי?"
-
-#~ msgid "You have entered incorrent sender signature (number or name)."
-#~ msgstr "הזנת חתימת שולח שגויה (מספר או שם)."
-
-#~ msgid "You have entered incorrect recipient number."
-#~ msgstr "הזנת מספר נמען שגוי."
-
-#~ msgid "You have entered the wrong security code."
-#~ msgstr "הזנת קוד אבטחה שגוי."
-
-#~ msgid "Please enter the code from the picture:"
-#~ msgstr "אנא הזן את הקוד שבתמונה:"
-
-#~ msgid "Pause sending of sms in the queue"
-#~ msgstr "השהיית שליחת ה־SMS שבתור"
-
-#~ msgid "Unpause sending of sms in the queue"
-#~ msgstr "המשך שליחת ה־SMS שבתור"
-
-#~ msgid "Unknown operator!"
-#~ msgstr "מפעיל לא ידוע!"
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "שער &גישה:"
-
-#~ msgid ""
-#~ "Omit whitespace from current message and rewrite it to \"CamelCase\" "
-#~ "format"
-#~ msgstr ""
-#~ "השמט רווחים מההודעה ושנה אותה למבנה \"רישיות־מוקפצות\" (לא תקף בעברית)"
-
-#~ msgid "no operator"
-#~ msgstr "אין מפעיל"
-
-#~ msgid ""
-#~ "Author of the script has not provided any additional information<br>about "
-#~ "cause of the failure for the web gateway used."
-#~ msgstr ""
-#~ "יוצר הסקריפט לא סיפק נתונים נוספים<br>אודות גורם השגיאה עבור שער הגישה "
-#~ "ברשת בו השתמשת."
-
-#~ msgid ""
-#~ "We recommend you to use Linux packages, you'll obtain an auto-update "
-#~ "feature."
-#~ msgstr ""
-#~ "אנו ממליצים לך להשתמש בחבילות לינוקס, כך תתאפשר לך תכונת העדכון האוטומטי."
-
-#~ msgid "In preferences you can restrict the list of available web gateways."
-#~ msgstr "בהעדפות תוכל להגביל את רשימת שערי הגישה הזמינים."
-
-#~ msgid ""
-#~ "Many operator gateways support adding of custom signature. See "
-#~ "preferences."
-#~ msgstr "שערי גישה של מפעילים רבים מוסיף חתימה אישית. עיין בהעדפות."
-
-#~ msgid ""
-#~ "By using commandline options you can use program even in café or school."
-#~ msgstr ""
-#~ "על ידי שימוש באפשרויות שורת הפקודה תוכלו להשתמש בתוכנה אפילו בבתי קפה או "
-#~ "בבית הספר."
-
-#~ msgid "Unknown operator"
-#~ msgstr "מפעיל לא ידוע"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Here you can set your login credentials for gateways which require it.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "כאן ניתן להגדיר את פרטי ההתחברות לשערי גישה הדורשים זאת.\n"
-#~ "</html>"
-
-#~ msgid ""
-#~ "This tab is for developing purposes only. It will not be visible in the "
-#~ "final release."
-#~ msgstr ""
-#~ "לשונית זו הינה למטרות פיתוח בלבד. הלשונית לא תהיה גלויה במהדורה הסופית."
-
-#~ msgctxt "ConfigFrame.jLabel10.text"
-#~ msgid "&Gateway:"
-#~ msgstr "שער &גישה:"
-
-#~ msgid "(country:"
-#~ msgstr "(מדינה:"
-
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "בדיקת עדכוני תוכנה ושערי גישה"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&בודק העדכונים"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">דף הבית</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">הבעת תמיכה במיזם</a></html>"
-
-#~ msgid "2007-2009 Kamil Páral"
-#~ msgstr "2007-2009 Kamil Páral"
-
-#~ msgid "Delete all usernames and passwords for all operators"
-#~ msgstr "מחיקת שם המשתמש והסיסמה עבור כל המפעילות"
-
-#~ msgid "Show password"
-#~ msgstr "הצגת סיסמה"
-
-#~ msgid "2007-2010 Kamil Páral"
-#~ msgstr "2007-2010 Kamil Páral"

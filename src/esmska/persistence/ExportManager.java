@@ -115,6 +115,7 @@ public class ExportManager {
                 sms.getNumber(),
                 sms.getGateway(),
                 sms.getText(),
+                sms.getId()
             });
         }
         writer.flush();

@@ -175,8 +175,7 @@ public class UpdateChecker {
     /** Go through all downloaded update information and only leave those gateways
      * which are new or updated compared to current ones. This can be used to reload
      * update info after partial update. Also removes gateways requiring more recent
-     * program version than available online (stable/unstable depending on config
-     * settings) and deprecated gateways.
+     * program version than the currently running one and all deprecated gateways.
      */
     private void refreshUpdatedGateways() {
         for (Iterator<GatewayUpdateInfo> it = gatewayUpdates.iterator(); it.hasNext(); ) {
@@ -188,8 +187,8 @@ public class UpdateChecker {
                 continue;
             }
             if (Config.compareProgramVersions(info.getMinProgramVersion(),
-                    getLatestProgramVersion()) > 0) {
-                //required program version is newer than available online, remove it
+                    Config.getLatestVersion()) > 0) {
+                //required program version is newer than the one currently running, remove it
                 it.remove();
                 continue;
             }

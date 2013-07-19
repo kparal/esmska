@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-11-07 21:56+0000\n"
-"Last-Translator: Miguel Valdiri Badillo <catastro1@tutopia.com>\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
+"PO-Revision-Date: 2013-01-09 19:22+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-08 05:50+0000\n"
-"X-Generator: Launchpad (build 14231)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:03+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -519,7 +519,6 @@ msgid "&Number:"
 msgstr "&Número:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
@@ -527,9 +526,6 @@ msgid ""
 "If this field is disabled then this feature is not supported<br>\n"
 "by the selected gateway.</html>"
 msgstr ""
-"<html>Número del emisor en formato internacional (comenzando con el signo "
-"«+»).<br>\n"
-"No todos los operadores soportan esta característica.</html>"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Sho&w password"
@@ -1032,10 +1028,8 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
-"Cola de SMS por enviar (nombre del receptor, número del receptor, "
-"operadores, texto del mensaje, nombre del remitente, número del remitente)"
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
@@ -1681,6 +1675,12 @@ msgid ""
 "\n"
 "Esmska will now quit."
 msgstr ""
+"Está ejecutando Esmska utilizando OpenJDK y Java WebStart.\n"
+"Desafortunadamente, esta combinación no funciona actualmente.\n"
+"Instale Sun Java y use Java WebStart, o bien descargue Esmska a su equipo\n"
+"y ejecútelo de la manera usual.\n"
+"\n"
+"Esmska se cerrará ahora."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
@@ -1824,11 +1824,11 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &problem..."
-msgstr "Informar un &problema"
+msgstr "Informar de un &problema…"
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a broken program behavior"
-msgstr "Informar la ruptura en el comportamiento del programa"
+msgstr "Informar de un comportamiento erróneo en el programa"
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
@@ -2422,14 +2422,19 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Adolfo Jayme Barrientos https://launchpad.net/~fitoschido\n"
 "  Alfonso E. Romero https://launchpad.net/~alfonsoeromero\n"
 "  Carlos Alberto Ospina https://launchpad.net/~atah\n"
+"  DiegoJ https://launchpad.net/~diegojromerolopez\n"
 "  Fido https://launchpad.net/~fedevera\n"
 "  Javier Acuña Ditzel https://launchpad.net/~santoposmoderno\n"
 "  Jonay https://launchpad.net/~jonay-santana\n"
 "  Josué Arce https://launchpad.net/~fjosuear\n"
 "  Juan Miguel Boyero Corral https://launchpad.net/~juanmi1982\n"
-"  Miguel Valdiri Badillo https://launchpad.net/~catastro1\n"
+"  Kamus https://launchpad.net/~kamus\n"
+"  LinuxNerdo https://launchpad.net/~catastro1\n"
+"  Luis Arturo https://launchpad.net/~uisart\n"
+"  Miguel Zilli https://launchpad.net/~miguelzilli\n"
 "  mordorq3 https://launchpad.net/~hackers300"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
@@ -2494,9 +2499,3 @@ msgstr "Operador actualizado: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "No se pudieron instalar algunas actualizaciones de operadores."
-
-#~ msgid "Username needed for logging in to the gateway"
-#~ msgstr "Nombre de usuario requerido para poder acceder al operador"
-
-#~ msgid "The password belonging to the username"
-#~ msgstr "La contraseña perteneciente al nombre de usuario"

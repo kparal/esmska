@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-08-28 20:37+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
+"PO-Revision-Date: 2012-11-26 21:30+0000\n"
+"Last-Translator: Kamil Páral <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-29 04:35+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:02+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -41,7 +41,7 @@ msgstr "C&rédits"
 
 #: AboutFrame.homeHyperlink.text
 msgid "Homepage"
-msgstr ""
+msgstr "Page d’accueil"
 
 #: AboutFrame.homeHyperlink.toolTipText
 msgid ""
@@ -59,7 +59,7 @@ msgstr "Envoi de SMS par Internet."
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2011 Kamil Páral"
-msgstr ""
+msgstr "Copy text \t 2007-2011 Kamil Páral"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
@@ -76,6 +76,10 @@ msgid ""
 "Help to keep it running by a small money donation...\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Ce projet vous plaît ?<br>\n"
+"Aidez à son fonctionnement par une petite donation...\n"
+"</html>"
 
 #: AboutFrame.title
 msgid "About Esmska"
@@ -87,7 +91,7 @@ msgstr "&À propos"
 
 #: Add
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 #: Add_contact
 msgid "Add contact"
@@ -134,6 +138,12 @@ msgid ""
 "* {2} - {0} and {1} modes combined. Also prints webpage contents (lots of "
 "output)."
 msgstr ""
+"Sorties débogage. les options sont :\n"
+"* {0} - débogage. Choix par défaut si rien n''est spécifié.\n"
+"* {1} - débogage réseau. Imprime les headers HTTP, toutes les redirections, "
+"etc.\n"
+"* {2} - {0} et {1} combinés.Imprime aussi le contenu de la page web "
+"(beaucoup de sorties)."
 
 #: CommandLineParser.debugMode
 msgid "debug mode"
@@ -165,6 +175,8 @@ msgid ""
 "Set the path to the user configuration directory. Specify an absolute "
 "pathname. Can't be used with -p."
 msgstr ""
+"Mise en place du répertoire de configuration utilisateur. Spécifier un "
+"chemin absolu. Inutilisable avec -p."
 
 #: CommandLineParser.show_this_help
 msgid "Show this help."
@@ -188,15 +200,15 @@ msgstr "&Compresser"
 
 #: ConfigFrame.Favorite
 msgid "Favorite"
-msgstr ""
+msgstr "Favoris"
 
 #: ConfigFrame.Gateway
 msgid "Gateway"
-msgstr ""
+msgstr "Portail"
 
 #: ConfigFrame.Show
 msgid "Show"
-msgstr ""
+msgstr "Afficher"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -217,6 +229,10 @@ msgid ""
 "advanced controls in the main program window\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Afficher ou cacher les boutons et autres <br>\n"
+"contrôles avancés dans la fenêtre principale\n"
+"</html>"
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.text
 msgid "Announce new program &updates"
@@ -236,7 +252,7 @@ msgstr "&Apparence"
 
 #: ConfigFrame.clearKeyringButton.text
 msgid "&Delete all login credentials"
-msgstr ""
+msgstr "&Supprimer tous les identifiants utilisés"
 
 #: ConfigFrame.clearKeyringButton.toolTipText
 msgid "Delete all usernames and passwords for all gateways"
@@ -266,7 +282,7 @@ msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.text
 msgid "Request a &delivery report"
-msgstr ""
+msgstr "Demandez un &rapport de livraison"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
 msgid ""
@@ -302,6 +318,10 @@ msgid ""
 "Example: proxy.company.com:80\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"L'adresse du serveur proxy HTTP au format 'hôte' ou 'hôte:port'.\n"
+"Par exemple : proxy.company.com:80\n"
+"</html>"
 
 #: ConfigFrame.httpsProxyTextField.toolTipText
 msgid ""
@@ -310,6 +330,10 @@ msgid ""
 "Example: proxy.company.com:443\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"L'adresse du serveur proxy HTTPS au format 'hôte' ou 'hôte:port'.\n"
+"Par exemple : proxy.company.com:443\n"
+"</html>"
 
 #: ConfigFrame.jLabel11.text
 msgid "&Username:"
@@ -325,7 +349,7 @@ msgstr "Proxy H&TTP :"
 
 #: ConfigFrame.jLabel15.text
 msgid "HTTP&S proxy:"
-msgstr ""
+msgstr "Proxy HTTP&S :"
 
 #: ConfigFrame.jLabel16.text
 msgid "SO&CKS proxy:"
@@ -348,6 +372,9 @@ msgid ""
 "Allows you to change the appearance of the program\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Vous permet de modifier l'apparence du programme\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ConfigFrame.logLocationLabel.text
@@ -364,7 +391,7 @@ msgstr ""
 
 #: ConfigFrame.lookLabel.text
 msgid "Loo&k:"
-msgstr ""
+msgstr "Regar&der :"
 
 #: ConfigFrame.multiplatform_look
 msgid "Multiplatform"
@@ -407,6 +434,11 @@ msgid ""
 "last period will be saved\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"A la fermeture du programme, ne sera sauvegardé que l'historique des "
+"messages envoyés\n"
+" pour la dernière période choisie<BR>.\n"
+"</html>"
 
 #: ConfigFrame.removeAccentsCheckBox.text
 msgid "Remove &diacritics from messages"
@@ -420,6 +452,10 @@ msgid ""
 "Note: This may not work for all languages.\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Toute signe diacritique sera enlevée du message avant l'envoi.<br>\n"
+"N.B. Cela ne fonctionnera peut-être pas pour tous les langages.\n"
+"</html>"
 
 #: ConfigFrame.remove_credentials
 msgid ""
@@ -490,6 +526,10 @@ msgid ""
 "Example: proxy.company.com:1080\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"L'adresse du serveur proxy SOCKS au format 'hôte' ou 'hôte:port'.\n"
+"Par exemple : proxycompagnie.com:1080\n"
+"</html>"
 
 #: ConfigFrame.startMinimizedCheckBox.text
 msgid "Hide program to &icon on startup"
@@ -502,6 +542,11 @@ msgid ""
 "to the icon in the notification area\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Tout de suite après le démarrage du programme, il sera réduit<br> à son "
+"icône\n"
+"dans la zone de notification\n"
+"</html>"
 
 #: ConfigFrame.system_look
 msgid "System"
@@ -513,6 +558,9 @@ msgid ""
 "Color motives for the chosen look\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Motifs de couleur pour l'apparence choisie\n"
+"</html>"
 
 #: ConfigFrame.themeLabel.text
 msgid "The&me:"
@@ -529,6 +577,10 @@ msgid ""
 "in the status bar on program startup\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Afficher un conseil au hasard concernant l'utilisation du programme<br>\n"
+"dans la barre d'état, lors du démarrage du logiciel\n"
+"</html>"
 
 #: ConfigFrame.title
 msgid "Preferences - Esmska"
@@ -902,7 +954,7 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
 
 #: ExportManager.vcard_filter
@@ -2112,10 +2164,17 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Anthony Guéchoum https://launchpad.net/~athael\n"
+"  Arnaud Bonatti https://launchpad.net/~arnaud.bonatti\n"
+"  Bonsoir https://launchpad.net/~bonsoir-deactivatedaccount\n"
+"  Elizabeth https://launchpad.net/~dutertre-eliz\n"
 "  Kamil Páral https://launchpad.net/~kamil.paral\n"
 "  Mathieu Pasquet https://launchpad.net/~mathieui\n"
+"  Pierre Slamich https://launchpad.net/~pierre-slamich\n"
+"  SarahSlean https://launchpad.net/~yoda4\n"
 "  dYp https://launchpad.net/~dubois-yaen-pujol\n"
-"  quesh https://launchpad.net/~quesh"
+"  quesh https://launchpad.net/~quesh\n"
+"  verdy_p https://launchpad.net/~verdy-p"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2166,119 +2225,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgid "The password belonging to the username"
-#~ msgstr "Le mot de passe appartenant au nom d'utilisateur"
-
-#~ msgid "Add new contact"
-#~ msgstr "Ajouter un nouveau contact"
-
-#~ msgid "O&perators"
-#~ msgstr "O&pérateurs"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Do you like this project? Help to keep it running...\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Ce projet vous plaît ? Aidez-nous à poursuivre le travail...\n"
-#~ "</html>"
-
-#~ msgid "Request the &delivery report"
-#~ msgstr "Demander l'accusé de réception"
-
-#~ msgid ""
-#~ "This tab is for developing purposes only. It will not be visible in the "
-#~ "final release."
-#~ msgstr ""
-#~ "Cet onglet n'existe que pour les besoins des développeurs. Il "
-#~ "n'apparaîtra pas dans la version finale."
-
-#~ msgid "Use default form &layout"
-#~ msgstr "Utiliser la &mise en page par défaut du formulaire"
-
-#~ msgid "Pa&ssword:"
-#~ msgstr "Mot de pa&sse :"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Filled in name occupies space in the message but is not visible,<br>\n"
-#~ "therefore the message text coloring and message counter indicator<br>\n"
-#~ "may seem not to match\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Le nom renseigné prend de la place dans le message, mais n'y paraît pas."
-#~ "<br>\n"
-#~ "C'est pour cette raison que la couleur du texte du message et le compteur "
-#~ "de messages<br>\n"
-#~ "peuvent laisser croire qu'ils diffèrent\n"
-#~ "</html>"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Nom :"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Telephone number of the contact including the country prefix.<br>\n"
-#~ "Country prefix doesn't have to be filled in if the default<br>\n"
-#~ "country prefix is set in the program preferences.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Numéro de téléphone du contact avec le préfixe du pays.<br>\n"
-#~ "Le préfixe du pays n'a pas besoin d'être donné si le défaut<br>\n"
-#~ "préfixe du pays figure dans les préférences du programme.\n"
-#~ "</html>"
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "Envoyer un compte rendu de &problème"
-
-#~ msgid "2007-2009 Kamil Páral"
-#~ msgstr "2007-2009 Kamil Páral"
-
-#~ msgid "(country:"
-#~ msgstr "(pays:"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Page d'accueil</a></html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Supporter le projet</a></html>"
-
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Vérifier les mises à jour"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Contrôleur des mises à jour"
-
-#~ msgid "2007-2010 Kamil Páral"
-#~ msgstr "2007-2010 Kamil Páral"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Recherche automatique des mises à jour"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "After program startup perform a check whether a new program version<br>\n"
-#~ "or gateway updates were released and eventually notify the user\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Après démarrage, contrôler si une nouvelle version<br>\n"
-#~ "existe et éventuellement notifier l'utilisateur\n"
-#~ "</html>"
-
-#~ msgctxt "ConfigFrame.jLabel10.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Passerelle:"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr ""
-#~ "Voulez-vous vraiment supprimer toutes les informations de connexion "
-#~ "existantes ?"
-
-#~ msgid "Show &password"
-#~ msgstr "Afficher le mot de passe"

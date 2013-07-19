@@ -941,8 +941,8 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                     }
                     //edit the message
-                    smsPanel.setSMS(sms);
-                    queue.remove(sms);
+                    SMS smsToEdit = queue.extractSMS(sms.getId(), true);
+                    smsPanel.setSMS(smsToEdit);
                     break;
             }
         }

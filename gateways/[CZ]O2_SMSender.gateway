@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2012-06-03"
 }
 
 function getMaintainer() {
@@ -16,7 +16,7 @@ function getMinProgramVersion() {
 }
 
 function getWebsite() {
-    return "https://smsender.cz.o2.com"
+    return "https://smsender.o2.cz"
 }
 
 function getDescription() {
@@ -68,14 +68,14 @@ function send() {
     }
 
     // login page
-    content = EXEC.getURL("https://smsender.cz.o2.com/web/default.aspx", ["lang","cs"])
+    content = EXEC.getURL("https://smsender.o2.cz/web/default.aspx", ["lang","cs"])
     
     // log in
     hiddens = extractHiddens(content)
     postData = ["txtUserName", LOGIN, "txtPassword", PASSWORD, 
                 "btnLogon", "Přihlásit"]
     postData = postData.concat(hiddens)
-    content = EXEC.postURL("https://smsender.cz.o2.com/web/Logon.aspx", [], postData)    
+    content = EXEC.postURL("https://smsender.o2.cz/web/Logon.aspx", [], postData)    
 
     // is SMS code verification needed?
     re = /<input name="txtSmsCode"/
@@ -84,23 +84,23 @@ function send() {
         // SMS code verification is needed
         code = EXEC.recognizeImage(null, "<b>Opište kontrolní kód, který vám dojde \
 na váš mobil.</b><br><br> Poznámka: Tuto bezpečnostní kontrolu lze vypnout v \
-<a href=\"https://smsender.cz.o2.com/web/\">nastavení vašeho účtu</a>.")
+<a href=\"https://smsender.o2.cz/web/\">nastavení vašeho účtu</a>.")
         hiddens = extractHiddens(content)
         postData = ["txtUserName", LOGIN, "txtSmsCode", code, 
                     "btnSmsCode", "Přihlásit"]
         postData = postData.concat(hiddens)
-        content = EXEC.postURL("https://smsender.cz.o2.com/web/Logon.aspx", [], postData)
+        content = EXEC.postURL("https://smsender.o2.cz/web/Logon.aspx", [], postData)
     }
     
     // get gateway page
-    content = EXEC.getURL("https://smsender.cz.o2.com/web/Gate.aspx", [])
+    content = EXEC.getURL("https://smsender.o2.cz/web/Gate.aspx", [])
 
     // post sms
     hiddens = extractHiddens(content)
     postData = ["ctl00$data$mobilenum", NUMBER, "ctl00$data$sms_text", MESSAGE,
                 "ctl00$data$submit_sms", "Odeslat"]
     postData = postData.concat(hiddens)
-    content = EXEC.postURL("https://smsender.cz.o2.com/web/Gate.aspx", [], postData)
+    content = EXEC.postURL("https://smsender.o2.cz/web/Gate.aspx", [], postData)
     
     // check if message was successfully sent
     // user can see czech or english messages, depending on his account settings
@@ -156,6 +156,6 @@ function logout(content) {
     hiddens = extractHiddens(content)
     postData = ["__EVENTTARGET", "ctl00$MenuLogOff"]
     postData = postData.concat(hiddens)
-    content = EXEC.postURL("https://smsender.cz.o2.com/web/Gate.aspx", [], postData)
+    content = EXEC.postURL("https://smsender.o2.cz/web/Gate.aspx", [], postData)
 }
 

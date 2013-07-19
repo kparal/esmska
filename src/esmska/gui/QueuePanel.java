@@ -428,7 +428,7 @@ public class QueuePanel extends javax.swing.JPanel {
             if (deleteOption.equals(pane.getValue())) {
                 for (Object o : toRemove) {
                     SMS sms = (SMS) o;
-                    queue.remove(sms);
+                    queue.remove(sms.getId());
                 }
             }
 

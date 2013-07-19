@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-11-28"
+    return "2012-11-26"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.22"
+    return "1.3beta1"
 }
 
 function getWebsite() {
@@ -62,37 +62,33 @@ function getFeatures() {
 }
 
 function send() {
+    
     // change variables to correct form
     if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)
     }
 
-    // start page
-    content = EXEC.getURL("http://sms.1188.cz", [])
-    
-    // work around javascript protection
-    re = /HTMLElement.prototype.y = '([\w]+)';/
-    match = re.exec(content)
-    y = match[1]
-    
-    re = new RegExp("<input type=\"hidden\" name=\"" + y + "[\\w]+\" id=\"([\\w]+)\" />","g");
-    match = re.exec(content)
-    hidden = match[1]
-
     // download image
-    content = EXEC.getURL("http://sms.1188.cz/captcha/show.png", [])
+    content = EXEC.getURL("http://www.google.com/recaptcha/api/challenge?k=6LfFmc8SAAAAAKZS7BmYx4cEys7zo1y_LYHgxZ5o&ajax=1&cachestop=0.3157223965972662", [])
+    re = /challenge : '(.+)',/
+    match = content.match(re)
+    challenge = match[1]
+    content = EXEC.getURL("http://www.google.com/recaptcha/api/image", 
+                          ["c", challenge])
     
     // show image
     code = EXEC.recognizeImage(content, "")
 
     // send message
-    postData = ["receiver_phone", NUMBER, "captcha", code, 
-                "text", MESSAGE, "smsSubmit", "Odeslat SMS",
-                hidden, "1"]
-    content = EXEC.postURL("http://sms.1188.cz/sms/send", [], postData)
+    postData = ["sms[phone_numbers][]", NUMBER,
+                "sms[text]", MESSAGE,
+                "recaptcha_challenge_field", challenge,
+                "recaptcha_response_field", code,
+               ]
+    content = EXEC.postURL("http://sms.1188.cz/sms", [], postData)
 
     // check if message was successfully sent
-    re = /Vaši zprávu jsme přijali, bude odeslána co nejdříve./
+    re = /SMS přijata/
     match = re.exec(content)
     if (match) {
         // all ok
@@ -100,24 +96,15 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<span class="message wrong">([\s\S]*?)<\/span>/g
+    re = /<div class="error_message">([\s\S]*?)<\/div>/g
     match = content.match(re)
     if (match) {
-        // gateway told us what's wrong
-        // the first error is usually about javascript, display the last one
-        EXEC.setProblem("GATEWAY_MESSAGE", match[match.length-1])
+        // more messages might be present, display them all
+        errors = match.join("")
+        EXEC.setProblem("GATEWAY_MESSAGE", errors)
         return false
     }
     
-    // other type of error, when no captcha code is provided
-    re = /<div class="captchaTitle">([\s\S]*?)<\/div>/
-    match = re.exec(content)
-    if (match) {
-        // gateway told us what's wrong
-        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
-        return false
-    }
-
     // if neither success nor error message was found
     return false
 }

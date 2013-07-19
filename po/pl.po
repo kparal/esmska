@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-08-28 20:38+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
+"PO-Revision-Date: 2011-12-03 18:16+0000\n"
+"Last-Translator: Kamil Páral <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-29 04:36+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:03+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -902,7 +902,7 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
 
 #: ExportManager.vcard_filter
@@ -2112,8 +2112,8 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Daniel https://launchpad.net/~sokoolx\n"
 "  David Směja https://launchpad.net/~david-smeja\n"
-"  Kamil Páral https://launchpad.net/~kamil.paral\n"
-"  leffort https://launchpad.net/~leffort"
+"  leffort https://launchpad.net/~leffort\n"
+"  skrzat https://launchpad.net/~skrzat"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2164,194 +2164,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgid "The password belonging to the username"
-#~ msgstr "Hasło należące do użytkownika"
-
-#~ msgid "Add new contact"
-#~ msgstr "Dodaj nowy kontakt"
-
-#~ msgid "(country:"
-#~ msgstr "(kraj:"
-
-#~ msgid "Pa&ssword:"
-#~ msgstr "&Hasło:"
-
-#~ msgctxt "ConfigFrame.jLabel10.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Brama:"
-
-#~ msgctxt "ConfigFrame.jLabel3.text"
-#~ msgid "&Name:"
-#~ msgstr "&Nazwa:"
-
-#~ msgid "O&perators"
-#~ msgstr "O&peratorzy"
-
-#~ msgid "Show password"
-#~ msgstr "Pokaż hasło"
-
-#~ msgid "Sender number in international format (starting with '+' sign)"
-#~ msgstr "Numer nadawcy w formacie międzynarodowym (znak '+' na początku)"
-
-#~ msgid "Add a sender &signature to the message"
-#~ msgstr "Dodaj podpis nadawcy do wiadomości"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Nazwa:"
-
-#~ msgctxt "EditContactPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Brama:"
-
-#~ msgid "SMS queue to be sent"
-#~ msgstr "Kolejka SMS do wysłania"
-
-#~ msgid "Sent messages history"
-#~ msgstr "Historia wysłanych wiadomości"
-
-#~ msgid "Compress message (Ctrl+K)"
-#~ msgstr "Kompresuj wiadomość (Ctrl+K)"
-
-#~ msgid "&Translate This Application..."
-#~ msgstr "&Przetłumacz tę aplikację..."
-
-#~ msgid "A message from operator:<br>"
-#~ msgstr "Wiadomość od operatora:<br>"
-
-#~ msgid "Unknown operator!"
-#~ msgstr "Nieznany operator!"
-
-#~ msgid "Please enter the code from the picture:"
-#~ msgstr "Wprowadź kod z obrazka:"
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Brama:"
-
-#~ msgid "Unknown operator"
-#~ msgstr "Nieznany operator"
-
-#~ msgid "Delete all usernames and passwords for all operators"
-#~ msgstr ""
-#~ "Skasuj wszystkie nazwy użytkowników i hasła dla wszystkich operatorów"
-
-#~ msgid "Import only contacts with known operator"
-#~ msgstr "Importuj tylko kontakty ze znanego operatora"
-
-#~ msgid "Choose from which application you want to import contacts:"
-#~ msgstr "Wskaż, z której aplikacji chcesz zaimportować kontakty:"
-
-#~ msgid "Directory with program settings can't be created!"
-#~ msgstr "Katalog z ustawieniami programu nie może zostać utworzony!"
-
-#~ msgid "Get &Help Online..."
-#~ msgstr "Otwórz &pomoc online..."
-
-#~ msgid "Report a &Problem..."
-#~ msgstr "Zgłoś &problem..."
-
-#~ msgid "Report a problem or request a feature"
-#~ msgstr "Zgłoś problem lub sugestię"
-
-#~ msgid "<html><h2>Message for ''{0}'' couldn''t be sent!</h2>{1}</html>"
-#~ msgstr "<html><h2>Nie można wysłać wiadomości do {0}!</h2>{1}</html>"
-
-#~ msgid "You have entered incorrect message text. Empty or too long?"
-#~ msgstr "Wpisałeś niepoprawny tekst wiadomości. Pusty lub zbyt długi?"
-
-#~ msgid "You have entered incorrent sender signature (number or name)."
-#~ msgstr "Wpisałeś niepoprawny podpis nadawcy (numer lub nazwę)."
-
-#~ msgid "You have entered incorrect recipient number."
-#~ msgstr "Wpisałeś niepoprawny numer odbiorcy."
-
-#~ msgid "You have entered the wrong security code."
-#~ msgstr "Wpisałeś niepoprawny kod bezpieczeństwa."
-
-#~ msgid "Pause sending of sms in the queue"
-#~ msgstr "Wstrzymaj wysyłanie SMS w kolejce"
-
-#~ msgid "no operator"
-#~ msgstr "brak operatora"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Strona domowa</a></html>"
-
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Sprawdź aktualizacje programu i bramek"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Do you like this project? Help to keep it running...\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Podoba Ci się ten projekt? Pomóż nam go udoskonalać...\n"
-#~ "</html>"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Wspomóż projekt</a></html>"
-
-#~ msgid "2007-2009 Kamil Páral"
-#~ msgstr "2007-2009 Kamil Páral"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Automatycznie sprawdż &aktualizacje dla:"
-
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "* A program restart is neccessary to apply the changes!\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "* Aby zmiany odniosły skutek, wymagany jest restart programu!\n"
-#~ "</i></html>"
-
-#~ msgid "also u&nstable versions"
-#~ msgstr "także wersje niestabilne"
-
-#~ msgid "Contact list"
-#~ msgstr "Lista kontaktów"
-
-#~ msgid "Unpause sending of sms in the queue"
-#~ msgstr "Wznów wysyłanie wiadomości w kolejce"
-
-#~ msgid "Checking..."
-#~ msgstr "Sprawdzanie..."
-
-#~ msgid "Downloading..."
-#~ msgstr "Pobieranie..."
-
-#~ msgid "gateway version: {0}"
-#~ msgstr "wersja bramki: {0}"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Sprawdź &aktualizacje"
-
-#~ msgctxt "Operator.unknown"
-#~ msgid "Unknown gateway"
-#~ msgstr "Nieznana brama"
-
-#~ msgid "A message from the gateway:<br>"
-#~ msgstr "Wiadomość z bramy:<br>"
-
-#~ msgctxt "UnknownGateway"
-#~ msgid "Unknown gateway"
-#~ msgstr "Nieznana brama"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Monitor aktualizacji"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "After program startup perform a check whether a new program version<br>\n"
-#~ "or gateway updates were released and eventually notify the user\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Po uruchomieniu programu sprawdź czy nie istnieje nowa wersja "
-#~ "programu<br>\n"
-#~ "lub czy nie zostały zaktualizowane bramki a potem powiadom użytkownika\n"
-#~ "</html>"

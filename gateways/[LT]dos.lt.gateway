@@ -4,11 +4,11 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2013-03-14"
 }
 
 function getMaintainer() {
-    return "dos.lt komanda <smscentras@gmail.com>"
+    return "SMS PASLAUGOS <info@dos.lt>"
 }
 
 function getMinProgramVersion() {
@@ -56,7 +56,8 @@ function getSupportedLanguages() {
 }
 
 function getFeatures() {
-    return ["LOGIN_ONLY"]
+    return ["LOGIN_ONLY",
+            "SENDER_NUMBER"]
 }
 
 function send() {
@@ -67,7 +68,7 @@ function send() {
     }
 
     // send message
-    getData = ["usr", LOGIN, "psw", PASSWORD, "num", NUMBER, "txt", MESSAGE]
+    getData = ["usr", LOGIN, "psw", PASSWORD, "num", NUMBER, "txt", MESSAGE, "frm", SENDERNUMBER]
     content = EXEC.getURL("http://www.dos.lt/sms.php", getData)
 
     // wrong username/nousername

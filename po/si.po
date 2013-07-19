@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-08-28 20:38+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
+"PO-Revision-Date: 2011-12-03 18:16+0000\n"
+"Last-Translator: Kamil Páral <Unknown>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-29 04:36+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:03+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -882,7 +882,7 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
 
 #: ExportManager.vcard_filter
@@ -2089,7 +2089,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Kamil Páral https://launchpad.net/~kamil.paral"
+"  Manoj Prasanna Handapangoda https://launchpad.net/~hmdmph"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2140,26 +2140,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgid "2007-2010 Kamil Páral"
-#~ msgstr "2007-2010 Kamil Páral"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">මුල් පිටුව</a><html>"
-
-#~ msgctxt "ConfigFrame.jLabel3.text"
-#~ msgid "&Name:"
-#~ msgstr "නම (&N):"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "නම (&N):"
-
-#~ msgid "Checking..."
-#~ msgstr "පිරික්සමින්..."
-
-#~ msgid "Downloading..."
-#~ msgstr "බාගත කරමින්..."
-
-#~ msgid "&Update"
-#~ msgstr "යාවත් කරන්න (&U)"

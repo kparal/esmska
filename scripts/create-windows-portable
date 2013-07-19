@@ -3,7 +3,7 @@
 # Create MS Windows portable package from dist directory
 # in the program root
 
-# Dependencies: 7z, tofrodos
+# Dependencies: 7z, dos2unix
 
 # trap and exit on error
 set -e
@@ -41,7 +41,7 @@ mkdir "$BUILD_DIR"
 # copy dist directory to temp directory
 cp -r ../dist/* ../resources/portable/esmska-portable.exe ../resources/portable/readme-portable.txt "$BUILD_DIR"
 # and convert text files to CRLF
-todos "$BUILD_DIR"/*.txt "$BUILD_DIR"/license/*.txt "$BUILD_DIR"/*.conf
+unix2dos "$BUILD_DIR"/*.txt "$BUILD_DIR"/license/*.txt "$BUILD_DIR"/*.conf
 # delete unnecessary files
 rm "$BUILD_DIR"/esmska.sh "$BUILD_DIR"/esmska.exe
 # extract JRE

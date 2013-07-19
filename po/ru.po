@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-08-28 20:38+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
+"PO-Revision-Date: 2012-05-31 09:29+0000\n"
+"Last-Translator: Eugene Marshal <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-29 04:36+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:03+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -199,7 +199,7 @@ msgstr "&Сжатие"
 
 #: ConfigFrame.Favorite
 msgid "Favorite"
-msgstr ""
+msgstr "Избранное"
 
 #: ConfigFrame.Gateway
 msgid "Gateway"
@@ -207,7 +207,7 @@ msgstr "Шлюз"
 
 #: ConfigFrame.Show
 msgid "Show"
-msgstr ""
+msgstr "Показать"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -288,7 +288,6 @@ msgid "Request a &delivery report"
 msgstr "Запросить сообщение о &доставке"
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message.<br>\n"
@@ -298,10 +297,6 @@ msgid ""
 "by the selected gateway.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Будет запрошен отчёт о доставке сообщения. Отчёт придёт на<br>\n"
-"номер телефона отправителя. Эту возможность поддерживают не все шлюзы.\n"
-"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "Gateway&s"
@@ -477,6 +472,8 @@ msgid ""
 "Do you really want to remove all login credentials for all available "
 "gateways?"
 msgstr ""
+"Вы действительно хотите удалить все реквизиты для выполнения входа, для всех "
+"доступных шлюзов?"
 
 #: ConfigFrame.restartLabel.text
 msgid "A program restart is neccessary to apply the changes."
@@ -513,7 +510,6 @@ msgid "&Number:"
 msgstr "&Номер:"
 
 #: ConfigFrame.senderNumberTextField.toolTipText
-#, fuzzy
 msgid ""
 "<html>Sender number in an international format (starting with '+' sign)."
 "<br>\n"
@@ -521,12 +517,10 @@ msgid ""
 "If this field is disabled then this feature is not supported<br>\n"
 "by the selected gateway.</html>"
 msgstr ""
-"<html>Номер отправителя в международном формате (начинается с '+').<br>\n"
-"Эту функцию поддерживают не все шлюзы.</html>"
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Sho&w password"
-msgstr ""
+msgstr "От&образить пароль"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
@@ -999,10 +993,8 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
-"SMS очередь отправки (имя получателя, номер получателя, шлюз, текст "
-"сообщения, имя отправителя, номер отправителя)"
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
@@ -1108,12 +1100,12 @@ msgstr ""
 
 #: GatewayImageCodeMessage.jLabel2.text
 msgid "Security &code:"
-msgstr ""
+msgstr "Код &безопасности:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
 msgid "Security code required: {0}"
-msgstr ""
+msgstr "Необходим код безопасности: {0}"
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
@@ -1125,13 +1117,15 @@ msgstr "Процесс отправки - Esmska"
 
 #: GatewayProblem.CUSTOM_MESSAGE
 msgid "The gateway maintainer provided following explanation:"
-msgstr ""
+msgstr "Обслуживающий шлюз предоставил следующее объяснение:"
 
 #: GatewayProblem.CUSTOM_MESSAGE.help
 msgid ""
 "Fix the problem described by the gateway maintainer and send the message "
 "again."
 msgstr ""
+"Исправьте неполадку описанную обслуживающим шлюза и отправьте сообщение "
+"снова."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.FIX_IN_PROGRESS
@@ -2407,7 +2401,10 @@ msgstr ""
 "  Alex L. https://launchpad.net/~alexal\n"
 "  Alexey Reztsov https://launchpad.net/~ariafan\n"
 "  AngorSTV https://launchpad.net/~angor\n"
-"  Kamil Páral https://launchpad.net/~kamil.paral\n"
+"  Eugene Marshal https://launchpad.net/~lowrider\n"
+"  Novichkov Alexander https://launchpad.net/~berkut\n"
+"  Pasha Vovk https://launchpad.net/~madwolfa\n"
+"  Sergey Sedov https://launchpad.net/~serg-sedov\n"
 "  Vitaliy Starostin https://launchpad.net/~vvs\n"
 "  shaxter https://launchpad.net/~morskov"
 
@@ -2473,231 +2470,3 @@ msgstr "Шлюз обновлен: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Не удалось установить обновления для некоторых шлюзов."
-
-#~ msgid "Username needed for logging in to the gateway"
-#~ msgstr "Имя пользователя необходимо для авторизации на шлюзе"
-
-#~ msgid "The password belonging to the username"
-#~ msgstr "Пароль, соответствующий имени пользователя"
-
-#~ msgid "Add new contact"
-#~ msgstr "Добавить новый контакт"
-
-#~ msgid "Pa&ssword:"
-#~ msgstr "Па&роль:"
-
-#~ msgctxt "ConfigFrame.jLabel10.text"
-#~ msgid "&Gateway:"
-#~ msgstr "Ш&люз:"
-
-#~ msgctxt "ConfigFrame.jLabel3.text"
-#~ msgid "&Name:"
-#~ msgstr "&Имя:"
-
-#~ msgid "O&perators"
-#~ msgstr "О&ператоры"
-
-#~ msgctxt "EditContactPanel.nameLabel.text"
-#~ msgid "&Name:"
-#~ msgstr "&Имя:"
-
-#~ msgctxt "EditContactPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "Ш&люз:"
-
-#~ msgid "Contact list"
-#~ msgstr "Список контактов"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Домашняя страница</a></html>"
-
-#~ msgid "2007-2009 Kamil Páral"
-#~ msgstr "2007-2009 Kamil Páral"
-
-#~ msgid "Delete all usernames and passwords for all operators"
-#~ msgstr "Удалить все имена пользователей и их пароли для всех операторов"
-
-#~ msgid "Request the &delivery report"
-#~ msgstr "Запрос &сообщения о доставке"
-
-#~ msgid "Click to open an update manager"
-#~ msgstr "Нажмите для того, чтобы открыть менеджер обновлений"
-
-#~ msgid "&Update"
-#~ msgstr "&Обновить"
-
-#~ msgid ""
-#~ "<html><h2>All gateways are up-to-date</h2>At the moment you are using the "
-#~ "latest versions of all the available gateways.</html>"
-#~ msgstr ""
-#~ "<html><h2>Все шлюзы актуальны.</h2>В данный момент вы используете самые "
-#~ "последние версии возможных шлюзов.</html>"
-
-#~ msgid ""
-#~ "<html>There is a new program version ({0}) available on the <a href="
-#~ "\"{1}\">program homepage</a>.</html>"
-#~ msgstr ""
-#~ "<html>Обнаружена новая версия программы ({0}), которая доступна на <a "
-#~ "href=\"{1}\">домашней странице</a>.</html>"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Проверить на &обновления"
-
-#~ msgid "(country:"
-#~ msgstr "(страна:"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Here you can set your login credentials for gateways which require it.\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Здесь вы можете указать логин для тех шлюзов, которые этого требуют.\n"
-#~ "</html>"
-
-#~ msgid ""
-#~ "<html><i>\n"
-#~ "* A program restart is neccessary to apply the changes!\n"
-#~ "</i></html>"
-#~ msgstr ""
-#~ "<html><i>\n"
-#~ "* Необходимо перезапустить программу, чтобы применить изменения!\n"
-#~ "</i></html>"
-
-#~ msgid "Username needed for logging in to the operator web gateway"
-#~ msgstr ""
-#~ "Имя пользователя, которое необходимо для входа на интернет-шлюз оператора"
-
-#~ msgid "&Login credentials"
-#~ msgstr "&Логин"
-
-#~ msgid "Show &only operator gateways with names containing:"
-#~ msgstr "Показывать &только шлюзы оператора с именами содержащими:"
-
-#~ msgid "Do you really like to remove all entered login credentials?"
-#~ msgstr "Вы действительно хотите удалить все ранее введённые логины?"
-
-#~ msgid "Sender number in international format (starting with '+' sign)"
-#~ msgstr "Номер получателя в международном формате (начинаяется со знака '+')"
-
-#~ msgid "Show password"
-#~ msgstr "Показать пароль"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Поддержать проект</a></html>"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Do you like this project? Help to keep it running...\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Вам нравится этот проект? Помогите своим участием...\n"
-#~ "</html>"
-
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Проверить обновления программы и шлюза"
-
-#~ msgid "&Gateways"
-#~ msgstr "&Шлюзы"
-
-#~ msgid "program and gateways"
-#~ msgstr "программа и шлюзы"
-
-#~ msgid "gateways only"
-#~ msgstr "только шлюзы"
-
-#~ msgid "also u&nstable versions"
-#~ msgstr "также &нестабильные версии"
-
-#~ msgid "program only"
-#~ msgstr "только программа"
-
-#~ msgid "Sent messages history"
-#~ msgstr "Архив отправленных сообщений"
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Автоматическая проверка &обновлений:"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Проверка обновлений"
-
-#~ msgid "2007-2010 Kamil Páral"
-#~ msgstr "2007-2010 Kamil Páral"
-
-#~ msgid "Use default form &layout"
-#~ msgstr "Использовать раскладку по умолчанию"
-
-#~ msgid ""
-#~ "<html><h2>Updated gateways found</h2>Some new or updated gateways have "
-#~ "been found. It is recommended to update them now.</html>"
-#~ msgstr ""
-#~ "<html><h2>Обновленные шлюзы найдены.</h2>Некоторые новые или обновленные "
-#~ "шлюзы были найдены. Рекомендуется обновить их сейчас.</html>"
-
-#~ msgid "All gateways have been successfully updated."
-#~ msgstr "Все шлюзы были успешно обновлены."
-
-#~ msgid "gateway version: {0}"
-#~ msgstr "версия шлюза: {0}"
-
-#~ msgctxt "UnknownGateway"
-#~ msgid "Unknown gateway"
-#~ msgstr "Неизвестный шлюз"
-
-#~ msgid ""
-#~ "This tab is for developing purposes only. It will not be visible in the "
-#~ "final release."
-#~ msgstr ""
-#~ "Эта закладка только для разработчиков. Она будет недоступна в финальном "
-#~ "релизе."
-
-#~ msgid "Show &password"
-#~ msgstr "Показать &пароль"
-
-#~ msgid "Add a sender &signature to the message"
-#~ msgstr "Добавить &подпись отправителя в сообщение"
-
-#~ msgid "Import only contacts with known operator"
-#~ msgstr "Импортировать контакты только с известным оператором"
-
-#~ msgid "You have entered incorrect recipient number."
-#~ msgstr "Вы ввели неверный номер получателя"
-
-#~ msgctxt "SMSPanel.gatewayLabel.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Шлюз:"
-
-#~ msgid "Checking..."
-#~ msgstr "Проверка..."
-
-#~ msgid "Show &only gateways with names containing:"
-#~ msgstr "Показывать &только шлюзы с именами, содержащими:"
-
-#~ msgid "<html>User configuration directory:<br>{0}</html>"
-#~ msgstr "<html>Каталог конфигурации пользователя:<br>{0}</html>"
-
-#~ msgid "A message from the gateway:<br>"
-#~ msgstr "Сообщение из шлюза: <br>"
-
-#~ msgctxt "Gateway.unknown"
-#~ msgid "Unknown gateway"
-#~ msgstr "Неизвестный шлюз"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "After program startup perform a check whether a new program version<br>\n"
-#~ "or gateway updates were released and eventually notify the user\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "После запуска, программа проверит наличие новых версий<br>\n"
-#~ "или порталы которые напомнят об этом пользователю\n"
-#~ "</html>"
-
-#~ msgid "Report a &problem or an idea..."
-#~ msgstr "Сообщить о &проблеме или идее..."
-
-#~ msgid "Report a problem or request a feature"
-#~ msgstr ""
-#~ "Сообщить о возникшей проблеме или предложить внедрение новой функции"

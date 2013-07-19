@@ -12,6 +12,8 @@ import esmska.persistence.PersistenceManager;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
@@ -47,6 +50,26 @@ public class LegacyUpdater {
         logger.log(Level.INFO, "Updating from legacy version {0} to current version {1}", 
                 new Object[]{version, Config.getLatestVersion()});
 
+        //changes to 1.4
+        if (Config.compareProgramVersions(version, "1.4") < 0) {
+            //add message ID to queue
+            logger.fine("Updating queue to add message IDs...");
+            try {
+                Field queueFileField = PersistenceManager.class.getDeclaredField("queueFile");
+                queueFileField.setAccessible(true);
+                File queueFile = (File) queueFileField.get(null);
+
+                List<String> lines = FileUtils.readLines(queueFile, "UTF-8");
+                ArrayList<String> newLines = new ArrayList<String>();
+                for (String line : lines) {
+                    newLines.add(line + ",");
+                }
+                FileUtils.writeLines(queueFile, "UTF-8", newLines);
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Updating queue file failed", ex);
+            }
+        }
+        
         //changes to 0.8.0
         if (Config.compareProgramVersions(version, "0.8.0") < 0) {
             //set country prefix from locale

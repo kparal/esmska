@@ -20,4 +20,9 @@
     <version>2011-05-14</version>
     <reason>This gateway became unsupported by its maintainer and was broken anyway.</reason>
   </deprecatedGateway>
+  <deprecatedGateway>
+    <name>[CZ]PoslatSMS.cz</name>
+    <version>2011-06-16</version>
+    <reason>The web gateway is halfway broken for a long time and many people complain about it.</reason>
+  </deprecatedGateway>
 </esmska>

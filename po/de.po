@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-01 20:05+0200\n"
-"PO-Revision-Date: 2011-08-28 20:37+0000\n"
-"Last-Translator: Kamil Páral <kamil.paral@gmail.com>\n"
+"POT-Creation-Date: 2013-06-03 20:46+0200\n"
+"PO-Revision-Date: 2012-04-13 12:29+0000\n"
+"Last-Translator: Dennis Baudys <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-29 04:36+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2013-06-03 06:02+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -206,7 +206,7 @@ msgstr "Gateway"
 
 #: ConfigFrame.Show
 msgid "Show"
-msgstr ""
+msgstr "Anzeigen"
 
 #: ConfigFrame.advancedCheckBox.text
 msgid "A&dvanced settings"
@@ -218,7 +218,7 @@ msgstr "Erweiterte Einstellungen anzeigen"
 
 #: ConfigFrame.advancedControlsCheckBox.text
 msgid "Show a&dvanced controls"
-msgstr ""
+msgstr "Erwei&terte Steuerung anzeigen"
 
 #: ConfigFrame.advancedControlsCheckBox.toolTipText
 msgid ""
@@ -230,7 +230,7 @@ msgstr ""
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.text
 msgid "Announce new program &updates"
-msgstr ""
+msgstr "Auf neue &Aktualisierungen hinweisen"
 
 #: ConfigFrame.announceProgramUpdatesCheckBox.toolTipText
 msgid ""
@@ -280,7 +280,6 @@ msgid "Request a &delivery report"
 msgstr ""
 
 #: ConfigFrame.demandDeliveryReportCheckBox.toolTipText
-#, fuzzy
 msgid ""
 "<html>\n"
 "Will request sending of a delivery report of the message.<br>\n"
@@ -290,17 +289,10 @@ msgid ""
 "by the selected gateway.\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Senden eines Zustellungsberichtes zu der gesendeten Nachricht wird "
-"angefordert. <br>\n"
-"Der Bericht wird zum Telefon des Senders geschickt. Diese Funktion wird nur "
-"bei einigen <br>\n"
-"Gateways unterstützt.\n"
-"</html>"
 
 #: ConfigFrame.gatewayPanel.TabConstraints.tabTitle
 msgid "Gateway&s"
-msgstr ""
+msgstr "Gateway&s"
 
 #: ConfigFrame.generalPanel.TabConstraints.tabTitle
 msgid "&General"
@@ -348,7 +340,7 @@ msgstr "Ben&utzername:"
 
 #: ConfigFrame.jLabel12.text
 msgid "&Password:"
-msgstr ""
+msgstr "&Passwort:"
 
 #: ConfigFrame.jLabel14.text
 msgid "H&TTP proxy:"
@@ -375,7 +367,7 @@ msgstr ""
 
 #: ConfigFrame.jLabel2.text
 msgid "&Signature:"
-msgstr ""
+msgstr "&Signatur:"
 
 #: ConfigFrame.lafComboBox.toolTipText
 msgid ""
@@ -407,7 +399,7 @@ msgstr "Multi-Plattform"
 
 #: ConfigFrame.notificationAreaCheckBox.text
 msgid "Show icon in the &notification area"
-msgstr ""
+msgstr "Symbol im Be&nachrichtigungsbereich zeigen"
 
 #: ConfigFrame.notificationAreaCheckBox.toolTipText
 msgid ""
@@ -487,7 +479,7 @@ msgstr "Die Adresse des HTTP-Proxyservers wird auch für HTTPS-Proxy verwendet"
 
 #: ConfigFrame.senderNameLabel.text
 msgid "N&ame:"
-msgstr ""
+msgstr "N&ame:"
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid ""
@@ -515,15 +507,15 @@ msgstr ""
 
 #: ConfigFrame.showPasswordCheckBox.text
 msgid "Sho&w password"
-msgstr ""
+msgstr "Pass&wort anzeigen"
 
 #: ConfigFrame.showPasswordCheckBox.toolTipText
 msgid "Set the password to be shown or hidden"
-msgstr ""
+msgstr "Festlegen, ob das Passwort angezeigt oder versteckt wird"
 
 #: ConfigFrame.sigDelButton.toolTipText
 msgid "Remove the signature"
-msgstr ""
+msgstr "Signatur entfernen"
 
 #: ConfigFrame.socksProxyTextField.toolTipText
 msgid ""
@@ -612,7 +604,7 @@ msgstr "Unbekannt"
 
 #: ConfigFrame.unstableUpdatesCheckBox.text
 msgid "Also u&nstable versions"
-msgstr ""
+msgstr "Auch E&ntwicklungsversionen (unstable)"
 
 #: ConfigFrame.unstableUpdatesCheckBox.toolTipText
 msgid ""
@@ -626,15 +618,15 @@ msgstr ""
 
 #: ConfigFrame.useProxyCheckBox.text
 msgid "Use pro&xy server *"
-msgstr ""
+msgstr "Pro&xy-Server verwenden *"
 
 #: ConfigFrame.useProxyCheckBox.toolTipText
 msgid "Whether a proxy server should be used for connections"
-msgstr ""
+msgstr "Legt fest, ob ein Proxy-Server für Verbindungen genutzt wird"
 
 #: ConfigFrame.windowCenteredCheckBox.text
 msgid "Start program &centered on the screen"
-msgstr ""
+msgstr "Programm auf dem Bildschirm &zentriert starten"
 
 #: ConfigFrame.windowCenteredCheckBox.toolTipText
 msgid ""
@@ -653,30 +645,30 @@ msgstr ""
 
 #: Contact
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.addedContact
 msgid "Added new contact: {0}"
-msgstr ""
+msgstr "Neuer Kontakt hinzugefügt: {0}"
 
 #: ContactPanel.border.title
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakte"
 
 #: ContactPanel.contactList.toolTipText
 msgid "Contact list (Alt+K)"
-msgstr ""
+msgstr "Kontaktliste (Alt+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContact
 msgid "Contact {0} modified"
-msgstr ""
+msgstr "Kontakt {0} geändert"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.editedContacts
 msgid "{0} contacts modified"
-msgstr ""
+msgstr "{0} Kontakte geändert"
 
 #: ContactPanel.new_contact_hint
 msgid ""
@@ -687,28 +679,28 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContact
 msgid "{0} removed from contacts"
-msgstr ""
+msgstr "{0} von den Kontakten entfernt"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ContactPanel.removeContacts
 msgid "{0} contacts removed"
-msgstr ""
+msgstr "{0} Kontakte entfernt"
 
 #: ContactPanel.remove_following_contacts
 msgid "<html><h3>Really remove following contacts?</h3></html>"
-msgstr ""
+msgstr "<html><h3>Folgende Kontakte wirklich entfernen?</h3></html>"
 
 #: Contact_export_
 msgid "Contact &export"
-msgstr ""
+msgstr "Kontakt &exportieren"
 
 #: Contact_import_
 msgid "Contact &import"
-msgstr ""
+msgstr "Kontakt &importieren"
 
 #: CopyToClipboard_
 msgid "Co&py to clipboard"
-msgstr ""
+msgstr "In Zwischenablage ko&pieren"
 
 #: CountryPrefixPanel.countryCodeComboBox.toolTipText
 msgid "The country code for which you have filled out the prefix number"
@@ -716,7 +708,7 @@ msgstr ""
 
 #: CountryPrefixPanel.countryCodeLabel.text
 msgid "(c&ountry:"
-msgstr ""
+msgstr "(&Land:"
 
 #: CountryPrefixPanel.countryPrefixTextField.toolTipText
 msgid ""
@@ -736,27 +728,27 @@ msgstr ""
 #. #meaning "unknown country"
 #: CountryPrefixPanel.unknown_state
 msgid "unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: Create
 msgid "Create"
-msgstr ""
+msgstr "Erstellen"
 
 #: Credits.authors
 msgid "Written by:"
-msgstr ""
+msgstr "Geschrieben von:"
 
 #: Credits.contributors
 msgid "Contributions from:"
-msgstr ""
+msgstr "Beigetragen haben:"
 
 #: Credits.graphics
 msgid "Graphics:"
-msgstr ""
+msgstr "Grafiken:"
 
 #: Credits.moreDonators
 msgid "and others..."
-msgstr ""
+msgstr "und weitere …"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Credits.packagers
@@ -765,58 +757,58 @@ msgstr ""
 
 #: Credits.sponsors
 msgid "Sponsors:"
-msgstr ""
+msgstr "Sponsoren:"
 
 #: Credits.translators
 msgid "Translated by:"
-msgstr ""
+msgstr "Übersetzt von:"
 
 #: Date
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: Delete
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: Delete_
 msgid "&Delete"
-msgstr ""
+msgstr "&Löschen"
 
 #: Delete_contacts
 msgid "Delete contacts"
-msgstr ""
+msgstr "Kontakte löschen"
 
 #: Delete_messages
 msgid "Delete messages"
-msgstr ""
+msgstr "Nachrichten löschen"
 
 #: Delete_selected_contacts
 msgid "Delete selected contacts"
-msgstr ""
+msgstr "Gewählte Kontakte löschen"
 
 #: Delete_selected_messages
 msgid "Delete selected messages"
-msgstr ""
+msgstr "Gewählte Nachrichten löschen"
 
 #: Delete_selected_messages_from_history
 msgid "Delete selected messages from history"
-msgstr ""
+msgstr "Gewählte Nachrichten aus dem Verlauf löschen"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.comment
 msgid "Send SMS over the Internet"
-msgstr ""
+msgstr "Eine SMS über das Internet senden"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.genericName
 msgid "SMS Sender"
-msgstr ""
+msgstr "SMS-Absender"
 
 #. #This string is located in the operating-system menu item
 #: DesktopFile.name
 msgid "Esmska"
-msgstr ""
+msgstr "Esmska"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: EditContactPanel.countryInfoLabel.text
@@ -838,19 +830,19 @@ msgstr ""
 
 #: EditContactPanel.gatewayLabel.text
 msgid "Default &gateway:"
-msgstr ""
+msgstr "Vorgabe-&Gateway:"
 
 #: EditContactPanel.nameLabel.text
 msgid "&Name:"
-msgstr ""
+msgstr "&Name:"
 
 #: EditContactPanel.nameTextField.toolTipText
 msgid "Contact name"
-msgstr ""
+msgstr "Name des Kontakts"
 
 #: EditContactPanel.numberLabel.text
 msgid "Nu&mber:"
-msgstr ""
+msgstr "Nu&mmer:"
 
 #: EditContactPanel.numberTextField.toolTipText
 msgid ""
@@ -862,27 +854,27 @@ msgstr ""
 
 #: Edit_contact
 msgid "Edit contact"
-msgstr ""
+msgstr "Kontakt bearbeiten"
 
 #: Edit_contacts
 msgid "Edit contacts"
-msgstr ""
+msgstr "Kontakte bearbeiten"
 
 #: Edit_contacts_collectively
 msgid "Edit contacts collectively"
-msgstr ""
+msgstr "Massenbearbeitung von Kontakten"
 
 #: Edit_message
 msgid "Edit message"
-msgstr ""
+msgstr "Nachricht bearbeiten"
 
 #: Edit_selected_contacts
 msgid "Edit selected contacts"
-msgstr ""
+msgstr "Gewählte Kontakte bearbeiten"
 
 #: Edit_selected_message
 msgid "Edit selected message"
-msgstr ""
+msgstr "Gewählte Nachricht bearbeiten"
 
 #: ExceptionDialog.copyButton.toolTipText
 msgid "Copy the detailed exception message to the system clipboard"
@@ -890,7 +882,7 @@ msgstr ""
 
 #: ExceptionDialog.detailsLabel.text
 msgid "Details:"
-msgstr ""
+msgstr "Details:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ExportManager.cant_write
@@ -903,20 +895,20 @@ msgstr ""
 
 #: ExportManager.contact_export
 msgid "Contact export"
-msgstr ""
+msgstr "Kontakt-Export"
 
 #: ExportManager.contact_list
 msgid "Contact list (contact name, telephone number, default gateway)"
-msgstr ""
+msgstr "Kontaktliste (Name des Kontakts, Telefonnummer, Vorgabe-Gateway)"
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "CSV-Dateien (*.csv)"
 
 #: ExportManager.export_failed
 msgid "Contact export failed!"
-msgstr ""
+msgstr "Kontakt-Export gescheitert!"
 
 #: ExportManager.export_info
 msgid ""
@@ -935,11 +927,11 @@ msgstr ""
 
 #: ExportManager.export_ok
 msgid "Contact export finished successfully"
-msgstr ""
+msgstr "Kontakt-Export erfolgreich abgeschlossen"
 
 #: ExportManager.export_ok!
 msgid "Contact export finished successfully!"
-msgstr ""
+msgstr "Kontakt-Export erfolgreich abgeschlossen!"
 
 #: ExportManager.history
 msgid ""
@@ -956,27 +948,27 @@ msgstr ""
 #: ExportManager.sms_queue
 msgid ""
 "SMS queue to be sent (recipient name, recipient number, gateway, message "
-"text, sender name, sender number)"
+"text, message ID)"
 msgstr ""
 
 #: ExportManager.vcard_filter
 msgctxt "ExportManager.vcard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "vCard-Dateien (*.vcard, *.vcf)"
 
 #: Finish_
 msgid "&Finish"
-msgstr ""
+msgstr "&Fertigstellen"
 
 #. #Action to resend message
 #: Forward_
 msgctxt "Forward_"
 msgid "&Forward"
-msgstr ""
+msgstr "&Weiterleiten"
 
 #: Gateway.unknown
 msgid "Unknown gateway"
-msgstr ""
+msgstr "Unbekanntes Gateway"
 
 #: GatewayComboBox.Choose_suitable_gateway_for_provided_number
 msgid "Guess a suitable gateway for the provided number"
@@ -998,28 +990,28 @@ msgstr ""
 
 #: GatewayComboBox.international
 msgid "Can be used internationally."
-msgstr ""
+msgstr "Kann international genutzt werden."
 
 #: GatewayComboBox.needRegistration
 msgid "Requires registration on the website."
-msgstr ""
+msgstr "Erfordert Registrierung auf der Website."
 
 #: GatewayComboBox.noRegistration
 msgid "Does not require registration."
-msgstr ""
+msgstr "Erfordert keine Registrierung."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayComboBox.onlyCountry
 msgid "Mainly usable for country: {0}"
-msgstr ""
+msgstr "Hauptsächlich geeignet für das Land: {0}"
 
 #: GatewayErrorMessage.helpLabel.text
 msgid "Help:"
-msgstr ""
+msgstr "Hilfe:"
 
 #: GatewayErrorMessage.retryButton.text
 msgid "&Send again"
-msgstr ""
+msgstr "Erneut &senden"
 
 #: GatewayErrorMessage.retryButton.toolTipText
 msgid ""
@@ -1030,19 +1022,19 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayErrorMessage.smsFailed
 msgid "Sending failed: {0}"
-msgstr ""
+msgstr "Senden gescheitert: {0}"
 
 #: GatewayErrorMessage.smsTextLabel.text
 msgid "Original message:"
-msgstr ""
+msgstr "Original-Nachricht:"
 
 #: GatewayExecutor.INFO_CREDIT_REMAINING
 msgid "Remaining credit:"
-msgstr ""
+msgstr "Guthaben verbleibend:"
 
 #: GatewayExecutor.INFO_FREE_SMS_REMAINING
 msgid "Free SMS remaining:"
-msgstr ""
+msgstr "Kostenlose SMS verbleibend:"
 
 #: GatewayExecutor.INFO_STATUS_NOT_PROVIDED
 msgid ""
@@ -1052,20 +1044,20 @@ msgstr ""
 
 #: GatewayImageCodeMessage.jLabel2.text
 msgid "Security &code:"
-msgstr ""
+msgstr "Sicherheits-&Code:"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayImageCodeMessage.securityImage
 msgid "Security code required: {0}"
-msgstr ""
+msgstr "Sicherheits-Code erforderlich: {0}"
 
 #: GatewayInterpreter.unknown_gateway
 msgid "Unknown gateway!"
-msgstr ""
+msgstr "Unbekanntes Gateway!"
 
 #: GatewayMessageFrame.title
 msgid "Sending process - Esmska"
-msgstr ""
+msgstr "Sendevorgang – Esmska"
 
 #: GatewayProblem.CUSTOM_MESSAGE
 msgid "The gateway maintainer provided following explanation:"
@@ -1138,7 +1130,7 @@ msgstr ""
 
 #: GatewayProblem.NO_CREDIT
 msgid "You don't have enough credit to send this message."
-msgstr ""
+msgstr "Ihr Guthaben reicht nicht aus, um die Nachricht zu senden."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.NO_CREDIT.help
@@ -1217,6 +1209,8 @@ msgstr ""
 msgid ""
 "You have entered a wrong security code. Please try to send the message again."
 msgstr ""
+"Sie haben den falschen Sicherheits-Code eingegeben. Bitte versuchen Sie, die "
+"Nachricht erneut zu senden."
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: GatewayProblem.WRONG_NUMBER
@@ -1253,45 +1247,45 @@ msgstr ""
 
 #: Hide_program
 msgid "Hide program"
-msgstr ""
+msgstr "Anwendung verstecken"
 
 #: History
 msgid "History"
-msgstr ""
+msgstr "Verlauf"
 
 #: HistoryFrame.clearButton.toolTipText
 msgid "Clear search term (Alt+R, Escape)"
-msgstr ""
+msgstr "Suchfeld leeren (Alt+R, ESC)"
 
 #: HistoryFrame.jLabel1.text
 msgid "Number:"
-msgstr ""
+msgstr "Nummer:"
 
 #: HistoryFrame.jLabel2.text
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 #: HistoryFrame.jLabel3.text
 msgid "Date:"
-msgstr ""
+msgstr "Datum:"
 
 #: HistoryFrame.jLabel4.text
 msgid "Gateway:"
-msgstr ""
+msgstr "Gateway:"
 
 #. #Write it short!
 #: HistoryFrame.jLabel5.text
 msgid "Sender number:"
-msgstr ""
+msgstr "Absendernr.:"
 
 #. #Write it short!
 #: HistoryFrame.jLabel6.text
 msgid "Sender name:"
-msgstr ""
+msgstr "Absender:"
 
 #: HistoryFrame.remove_selected
 msgid "Really remove all selected messages from history?"
-msgstr ""
+msgstr "Wirklich alle gewählten Nachrichten aus dem Verlauf löschen?"
 
 #: HistoryFrame.resend_message
 msgid "Resend message to someone else"
@@ -1303,41 +1297,42 @@ msgstr ""
 
 #: HistoryFrame.searchLabel.text
 msgid "&Search:"
-msgstr ""
+msgstr "&Suchen:"
 
 #: HistoryFrame.title
 msgid "Sent messages history - Esmska"
-msgstr ""
+msgstr "Verlauf gesendeter Nachrichten – Esmska"
 
 #: ImportFrame.CSV_filter
 msgctxt "ImportFrame.CSV_filter"
 msgid "CSV files (*.csv)"
-msgstr ""
+msgstr "CSV-Dateien (*.csv)"
 
 #: ImportFrame.Select
 msgctxt "ImportFrame.Select"
 msgid "Select"
-msgstr ""
+msgstr "Auswählen"
 
 #: ImportFrame.backButton.text
 msgid "&Back"
-msgstr ""
+msgstr "&Zurück"
 
 #: ImportFrame.browseButton.text
 msgid "B&rowse..."
-msgstr ""
+msgstr "Du&rchsuchen …"
 
 #: ImportFrame.browseButton.toolTipText
 msgid "Find contacts file using dialog"
-msgstr ""
+msgstr "Datei mit Kontakten mittels Dialog finden"
 
 #: ImportFrame.choose_export_file
 msgid "Choose the file with exported contacts"
-msgstr ""
+msgstr "Wählen Sie die Datei mit exportierten Kontakten"
 
 #: ImportFrame.doImportLabel.text
 msgid "If you want to import these contacts press Import."
 msgstr ""
+"Wenn Sie diese Kontakte importieren möchten, klicken Sie auf »Importieren«."
 
 #: ImportFrame.encodingUTF8
 msgid "<html>The program expects the file to be in the UTF-8 encoding.</html>"
@@ -1351,30 +1346,30 @@ msgstr ""
 
 #: ImportFrame.fileLabel.text
 msgid "Choose input file:"
-msgstr ""
+msgstr "Eingabedatei wählen:"
 
 #: ImportFrame.fileTextField.toolTipText
 msgid "The path to contacts file"
-msgstr ""
+msgstr "Der Pfad zur Datei mit den Kontakten"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.file_cant_be_read
 msgid "The file {0} can''t be read!"
-msgstr ""
+msgstr "Die Datei {0} kann nicht gelesen werden!"
 
 #: ImportFrame.forwardButton.text
 msgctxt "ImportFrame.forwardButton.text"
 msgid "&Forward"
-msgstr ""
+msgstr "&Vor"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: ImportFrame.foundContacts
 msgid "Following {0} new contacts were found:"
-msgstr ""
+msgstr "Folgende {0} neue Kontakte wurden gefunden:"
 
 #: ImportFrame.foundContactsLabel.text
 msgid "No new contacts were found."
-msgstr ""
+msgstr "Keine neuen Kontakte gefunden."
 
 #: ImportFrame.infoDreamComSE
 msgid ""
@@ -1429,10 +1424,11 @@ msgstr ""
 #: ImportFrame.jLabel3.text
 msgid "Or choose the application you want to import contacts from:"
 msgstr ""
+"Oder wählen Sie die Anwendung, von der Sie Kontakte importieren möchten:"
 
 #: ImportFrame.jLabel4.text
 msgid "Choose the file format you have your contacts stored in:"
-msgstr ""
+msgstr "Wählen Sie das Format der Datei mit den Kontakten:"
 
 #: ImportFrame.problemLabel.text
 msgid ""
@@ -1445,20 +1441,20 @@ msgstr ""
 #: ImportFrame.progressBar.string
 msgctxt "ImportFrame.progressBar.string"
 msgid "Please wait..."
-msgstr ""
+msgstr "Bitte warten …"
 
 #: ImportFrame.title
 msgid "Contact import - Esmska"
-msgstr ""
+msgstr "Kontakt-Import – Esmska"
 
 #: ImportFrame.vCard_filter
 msgctxt "ImportFrame.vCard_filter"
 msgid "vCard files (*.vcard, *.vcf)"
-msgstr ""
+msgstr "vCard-Dateien (*.vcard, *.vcf)"
 
 #: Import_
 msgid "Im&port"
-msgstr ""
+msgstr "Im&portieren"
 
 #: InitWizardDialog.jLabel1.text
 msgid ""
@@ -1470,23 +1466,23 @@ msgstr ""
 
 #: LogFrame.clearButton.text
 msgid "Clea&r"
-msgstr ""
+msgstr "Lee&ren"
 
 #: LogFrame.clearButton.toolTipText
 msgid "Clears current log"
-msgstr ""
+msgstr "Leert das aktuelle Protokoll"
 
 #: LogFrame.copyButton.toolTipText
 msgid "Copy the whole log contents to the system clipboard"
-msgstr ""
+msgstr "Gesamten Inhalt des Protokolls in die Zwischenablage kopieren"
 
 #: LogFrame.title
 msgid "Log - Esmska"
-msgstr ""
+msgstr "Protokoll – Esmska"
 
 #: Log_
 msgid "&Log"
-msgstr ""
+msgstr "Protoko&ll"
 
 #: Main.already_running
 msgid ""
@@ -1522,7 +1518,7 @@ msgstr ""
 
 #: Main.choose_config_files
 msgid "Choose the location of the configuration files"
-msgstr ""
+msgstr "Wählen Sie den Ort der Konfigurationsdateien"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.configsNewer
@@ -1543,35 +1539,35 @@ msgstr ""
 
 #: Main.run_anyway
 msgid "Run anyway"
-msgstr ""
+msgstr "Weglaufen"
 
 #: MainFrame.Quit_program
 msgid "Quit program"
-msgstr ""
+msgstr "Programm beenden"
 
 #: MainFrame.cant_save_config
 msgid "Some of the configuration files couldn't be saved!"
-msgstr ""
+msgstr "Einige der Konfigurationsdateien konnten nicht gespeichert werden!"
 
 #: MainFrame.configure_program_behaviour
 msgid "Configure program behaviour"
-msgstr ""
+msgstr "Programmverhalten konfigurieren"
 
 #: MainFrame.donateButton.text
 msgid "Donate"
-msgstr ""
+msgstr "Spenden"
 
 #: MainFrame.donateMenuItem.text
 msgid "&Support this project!"
-msgstr ""
+msgstr "Dieses Projekt unter&stützen!"
 
 #: MainFrame.export_contacts_to_file
 msgid "Export contacts to file"
-msgstr ""
+msgstr "Kontakte in Datei exportieren"
 
 #: MainFrame.faqMenuItem.text
 msgid "Frequently Asked &Questions"
-msgstr ""
+msgstr "Häufig gestellte &Fragen"
 
 #: MainFrame.faqMenuItem.toolTipText
 msgid "See the most frequently asked questions (online)"
@@ -1579,7 +1575,7 @@ msgstr ""
 
 #: MainFrame.getHelpMenuItem.text
 msgid "&Ask the authors..."
-msgstr ""
+msgstr "Die Autoren fr&agen …"
 
 #: MainFrame.getHelpMenuItem.toolTipText
 msgid "Ask a question in a support forum"
@@ -1587,24 +1583,25 @@ msgstr ""
 
 #: MainFrame.helpMenu.text
 msgid "&Help"
-msgstr ""
+msgstr "&Hilfe"
 
 #: MainFrame.import_complete
 msgid "Contact import successfully finished"
-msgstr ""
+msgstr "Kontakt-Import erfolgreich abgeschlossen"
 
 #: MainFrame.import_contacts_from_other_applications
 msgid "Import contacts from other applications"
-msgstr ""
+msgstr "Kontakte von anderen Anwendungen importieren"
 
 #: MainFrame.messageMenu.text
 msgid "&Message"
-msgstr ""
+msgstr "&Nachricht"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.new_program_version
 msgid "A <a href=\"\">new program version</a> ({0}) has been released!"
 msgstr ""
+"Eine <a href=\"\">neue Version des Programms</a> ({0}) wurde veröffentlicht!"
 
 #: MainFrame.no_gateways
 msgid ""
@@ -1627,7 +1624,7 @@ msgstr ""
 
 #: MainFrame.problemMenuItem.text
 msgid "Report a &problem..."
-msgstr ""
+msgstr "Einen &Fehler melden …"
 
 #: MainFrame.problemMenuItem.toolTipText
 msgid "Report a broken program behavior"
@@ -1635,41 +1632,41 @@ msgstr ""
 
 #: MainFrame.programMenu.text
 msgid "P&rogram"
-msgstr ""
+msgstr "P&rogramm"
 
 #: MainFrame.redoButton.toolTipText
 msgid "Redo (Ctrl+Y)"
-msgstr ""
+msgstr "Wiederholen (Strg+Y)"
 
 #: MainFrame.show_history_of_sent_messages
 msgid "Show history of sent messages"
-msgstr ""
+msgstr "Verlauf gesendeter Nachrichten anzeigen"
 
 #: MainFrame.show_information_about_program
 msgid "Show program information"
-msgstr ""
+msgstr "Programminformationen anzeigen"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_failed
 msgid "Message for {0} couldn''t be sent!"
-msgstr ""
+msgstr "Nachricht für {0} konnte nicht gesendet werden!"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: MainFrame.sms_sent
 msgid "Message for {0} sent."
-msgstr ""
+msgstr "Nachricht für {0} wurde gesendet."
 
 #: MainFrame.tip
 msgid "Tip:"
-msgstr ""
+msgstr "Tipp:"
 
 #: MainFrame.toolsMenu.text
 msgid "&Tools"
-msgstr ""
+msgstr "&Werkzeuge"
 
 #: MainFrame.translateMenuItem.text
 msgid "&Translate this application..."
-msgstr ""
+msgstr "Diese Anwendung &übersetzen …"
 
 #: MainFrame.translateMenuItem.toolTipText
 msgid "Help to translate this application into your native language"
@@ -1677,11 +1674,11 @@ msgstr ""
 
 #: MainFrame.undoButton.toolTipText
 msgid "Undo (Ctrl+Z)"
-msgstr ""
+msgstr "Rückgängig (Strg+Z)"
 
 #: Message_history_
 msgid "Message &history"
-msgstr ""
+msgstr "Nac&hrichtenverlauf"
 
 #: Move_down
 msgid "Move down"
@@ -1697,39 +1694,39 @@ msgstr ""
 
 #: New_contact
 msgid "New contact"
-msgstr ""
+msgstr "Neuer Kontakt"
 
 #: NotificationIcon.Pause/unpause_sending
 msgid "Pause/unpause sending"
-msgstr ""
+msgstr "Senden unterbrechen/fortsetzen"
 
 #: OK_
 msgid "&OK"
-msgstr ""
+msgstr "&Ok"
 
 #: Pause
 msgid "Pause"
-msgstr ""
+msgstr "Anhalten"
 
 #: Pause_queue
 msgid "Pause queue"
-msgstr ""
+msgstr "Warteschlange anhalten"
 
 #: Pause_sms_queue
 msgid "Pause sms queue"
-msgstr ""
+msgstr "SMS-Warteschlange anhalten"
 
 #: Preferences
 msgid "Preferences"
-msgstr ""
+msgstr "Einstellungen"
 
 #: Preferences_
 msgid "&Preferences"
-msgstr ""
+msgstr "&Einstellungen"
 
 #: Program_start
 msgid "Program start"
-msgstr ""
+msgstr "Programmstart"
 
 #: QueuePanel.Move_sms_down_in_the_queue
 msgid "Move sms down in the queue"
@@ -1749,11 +1746,11 @@ msgstr ""
 
 #: QueuePanel.border.title
 msgid "Queue"
-msgstr ""
+msgstr "Warteschlange"
 
 #: QueuePanel.confirmDelete
 msgid "Really remove all selected messages from the queue?"
-msgstr ""
+msgstr "Wirklich alle gewählten Nachrichten aus der Warteschlange entfernen?"
 
 #. #Shortcut for "hour"
 #: QueuePanel.hour_shortcut
@@ -1767,7 +1764,7 @@ msgstr ""
 
 #: QueuePanel.pausedLabel.text
 msgid "The queue is now PAUSED."
-msgstr ""
+msgstr "Die Warteschlange ist ANGEHALTEN."
 
 #: QueuePanel.replaceSms
 msgid ""
@@ -1786,43 +1783,43 @@ msgstr ""
 
 #: Quit
 msgid "Quit"
-msgstr ""
+msgstr "Beenden"
 
 #: Quit_
 msgid "&Quit"
-msgstr ""
+msgstr "&Beenden"
 
 #: Recipient
 msgid "Recipient"
-msgstr ""
+msgstr "Empfänger"
 
 #: Redo_
 msgid "&Redo"
-msgstr ""
+msgstr "Wiede&rholen"
 
 #: Replace
 msgid "Replace"
-msgstr ""
+msgstr "Ersetzen"
 
 #: SMSPanel.Redo_change_in_message_text
 msgid "Redo undone change in message text"
-msgstr ""
+msgstr "Rückgängig gemachte Änderung im Nachrichtentext wiederherstellen"
 
 #: SMSPanel.Text_is_too_long!
 msgid "Text is too long!"
-msgstr ""
+msgstr "Der Text ist zu lang!"
 
 #: SMSPanel.Undo_change_in_message_text
 msgid "Undo change in message text"
-msgstr ""
+msgstr "Änderung im Nachrichtentext rückgängig machen"
 
 #: SMSPanel.border.title
 msgid "Message"
-msgstr ""
+msgstr "Nachricht"
 
 #: SMSPanel.compress
 msgid "Compress the message or currently selected text (Ctrl+K)"
-msgstr ""
+msgstr "Die Nachricht oder den gewählten Text packen (Strg+K)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.countryInfoLabel.text
@@ -1849,7 +1846,7 @@ msgstr ""
 
 #: SMSPanel.gatewayLabel.text
 msgid "&Gateway:"
-msgstr ""
+msgstr "&Gateway:"
 
 #: SMSPanel.numberInfoLabel.text
 msgid "<html>Number is not in a valid international format.</html>"
@@ -1857,7 +1854,7 @@ msgstr ""
 
 #: SMSPanel.recipientLabel.text
 msgid "R&ecipient:"
-msgstr ""
+msgstr "&Empfänger:"
 
 #: SMSPanel.recipientTextField.tooltip
 msgid ""
@@ -1876,7 +1873,7 @@ msgstr ""
 
 #: SMSPanel.sendButton.toolTipText
 msgid "Send message (Ctrl+Enter)"
-msgstr ""
+msgstr "Nachricht senden (Strg+Eingabe)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.singleProgressBar
@@ -1887,25 +1884,25 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.1
 msgid "{0} chars ({1} sms)"
-msgstr ""
+msgstr "{0} Zeichen ({1} SMS)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
-msgstr ""
+msgstr "{0} Zeichen (kann nicht gesendet werden!)"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.3
 msgid "{0} chars"
-msgstr ""
+msgstr "{0} Zeichen"
 
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
-msgstr ""
+msgstr "0 Zeichen (0 SMS)"
 
 #: SMSPanel.textLabel.text
 msgid "Te&xt:"
-msgstr ""
+msgstr "Te&xt:"
 
 #: SMSPanel.textLabel.toolTipText
 msgid ""
@@ -1913,6 +1910,9 @@ msgid ""
 "The very message text\n"
 "</html>"
 msgstr ""
+"<html>\n"
+"Der eigentliche Nachrichtentext\n"
+"</html>"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.SENDING_CRASHED_ERROR
@@ -1924,57 +1924,57 @@ msgstr ""
 
 #: SMSSender.no_gateway
 msgid "no gateway"
-msgstr ""
+msgstr "Kein Gateway"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSSender.sending_message
 msgid "Sending message to {0} ({1}) ..."
-msgstr ""
+msgstr "Nachricht wird an {0} gesendet ({1}) …"
 
 #: Save
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: Select
 msgctxt "Select"
 msgid "Select"
-msgstr ""
+msgstr "Auswählen"
 
 #: Send_
 msgid "&Send"
-msgstr ""
+msgstr "&Senden"
 
 #: Send_message
 msgid "Send message"
-msgstr ""
+msgstr "Nachricht senden"
 
 #: Show/hide_program
 msgid "Show/hide program"
-msgstr ""
+msgstr "Programm anzeigen/verstecken"
 
 #: Show_application_log
 msgid "Show application log"
-msgstr ""
+msgstr "Protokoll des Programms anzeigen"
 
 #: Show_program
 msgid "Show program"
-msgstr ""
+msgstr "Programm anzeigen"
 
 #: Signature.confirmRemove
 msgid "Do you want to remove selected signature?"
-msgstr ""
+msgstr "Möchten Sie die gewählte Signatur entfernen?"
 
 #: Signature.default
 msgid "Default"
-msgstr ""
+msgstr "Vorgabe"
 
 #: Signature.new
 msgid "<html><i>New signature...</i></html>"
-msgstr ""
+msgstr "<html><i>Neue Signatur …</i></html>"
 
 #: Signature.new.desc
 msgid "Name of the new signature:"
-msgstr ""
+msgstr "Name der neuen Signatur:"
 
 #: Signature.none
 msgid "None"
@@ -1987,23 +1987,23 @@ msgstr ""
 #: StatusPanel.progressBar.string
 msgctxt "StatusPanel.progressBar.string"
 msgid "Please wait..."
-msgstr ""
+msgstr "Bitte warten …"
 
 #: StatusPanel.statusMessageLabel.text
 msgid "Welcome"
-msgstr ""
+msgstr "Willkommen"
 
 #: StatusPanel.statusMessageLabel.toolTipText
 msgid "Click to show application log"
-msgstr ""
+msgstr "Anklicken, um das Protokoll des Programms anzuzeigen"
 
 #: Suggest_
 msgid "&Suggest"
-msgstr ""
+msgstr "Vor&schlagen"
 
 #: Text
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #. #Write the tip as short as possible
 #: Tip.1
@@ -2163,10 +2163,12 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Dennis Baudys https://launchpad.net/~thecondordb\n"
 "  Fabian Affolter https://launchpad.net/~fab-fedoraproject\n"
-"  Kamil Páral https://launchpad.net/~kamil.paral\n"
 "  Lukas Bögelein https://launchpad.net/~lukas-boegelein\n"
-"  Samuel Creshal https://launchpad.net/~samuel-creshal"
+"  Samuel Creshal https://launchpad.net/~samuel-creshal\n"
+"  Tomas Ruzicka https://launchpad.net/~tr3027\n"
+"  jiri4711 https://launchpad.net/~jwprojekt"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
@@ -2187,19 +2189,19 @@ msgstr ""
 
 #: Undo_
 msgid "&Undo"
-msgstr ""
+msgstr "&Rückgängig"
 
 #: Unpause
 msgid "Unpause"
-msgstr ""
+msgstr "Fortsetzen"
 
 #: Unpause_queue
 msgid "Unpause queue"
-msgstr ""
+msgstr "Warteschlange fortsetzen"
 
 #: Unpause_sms_queue
 msgid "Unpause sms queue"
-msgstr ""
+msgstr "SMS-Warteschlange fortsetzen"
 
 #: Update.browseDownloads
 msgid "Click to open program downloads page"
@@ -2217,111 +2219,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgid "Username needed for logging in to the gateway"
-#~ msgstr "Benutzername wird zur Gatewayanmeldung benötigt"
-
-#~ msgid "The password belonging to the username"
-#~ msgstr "Das Passwort gehört zum Benutzernamen"
-
-#~ msgid "<html><a href=\"\">Homepage</a></html>"
-#~ msgstr "<html><a href=\"\">Homepage</a></html>"
-
-#~ msgid "2007-2009 Kamil Páral"
-#~ msgstr "2007-2009 Kamil Páral"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Do you like this project? Help to keep it running...\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Dir gefällt dieses Projekt? Deine Hilfe ist uns willkommen...\n"
-#~ "</html>"
-
-#~ msgid "Add new contact"
-#~ msgstr "Neuen Kontakt hinzufügen"
-
-#~ msgid ""
-#~ "Print debugging output. Possible modes are:\n"
-#~ "* {0} - program and web content debugging. Default choice when no mode "
-#~ "specified.\n"
-#~ "* {1} - network only debugging (but with more detail). Prints HTTP "
-#~ "headers, all redirects, web content, etc.\n"
-#~ "* {2} - {0} and {1} modes combined."
-#~ msgstr ""
-#~ "Drucken der Debug-Informationen. Mögliche Modi sind: \n"
-#~ "* (0) - Programm und Web-Content-Debugging. Dies ist die Standard-Wahl, "
-#~ "wenn kein Modus angegeben ist. \n"
-#~ "* (1) - Nur Netzwerk Debugging (aber mit mehr Details). Druckt HTTP-"
-#~ "Header, alle Umleitungen, Web-Inhalte, etc. \n"
-#~ "* (2) - (0) und (1) Modi sind kombiniert."
-
-#~ msgid "Automatically check for &updates of:"
-#~ msgstr "Automatische Update-Überprüfung"
-
-#~ msgid "<html><a href=\"\">Support project</a></html>"
-#~ msgstr "<html><a href=\"\">Unterstütze das Projekt</a></html>"
-
-#~ msgid "(country:"
-#~ msgstr "(Land:"
-
-#~ msgid "Pa&ssword:"
-#~ msgstr "Pa&sswort:"
-
-#~ msgctxt "ConfigFrame.jLabel10.text"
-#~ msgid "&Gateway:"
-#~ msgstr "&Gateway:"
-
-#~ msgctxt "ConfigFrame.jLabel3.text"
-#~ msgid "&Name:"
-#~ msgstr "&Name:"
-
-#~ msgid "&Gateways"
-#~ msgstr "&Gateways"
-
-#~ msgid "Check for &updates"
-#~ msgstr "Auf Aktualisierungen prüfen"
-
-#~ msgid "Check for program and gateway updates"
-#~ msgstr "Nach Program- und Gatewayaktualisierungen suchen"
-
-#~ msgid "&Updates checker"
-#~ msgstr "&Aktualisieren"
-
-#~ msgid "Request the &delivery report"
-#~ msgstr "Zustellungsbericht verlangen"
-
-#~ msgid "Show &password"
-#~ msgstr "Kennwort anzeigen"
-
-#~ msgid "Sender number in international format (starting with '+' sign)"
-#~ msgstr "Absendernummer im internationalen Format (beginnend mit '+')"
-
-#~ msgid "gateways only"
-#~ msgstr "Nur Gateways"
-
-#~ msgid "program and gateways"
-#~ msgstr "Programm und Gateways"
-
-#~ msgid "also u&nstable versions"
-#~ msgstr "auch Testversionen"
-
-#~ msgid ""
-#~ "<html>\n"
-#~ "Notify also also about unstable versions.<br>\n"
-#~ "<br>\n"
-#~ "<b>Warning: Unstable versions are meant only for experienced users<br>\n"
-#~ "not afraid of potentially losing their program data.</b>\n"
-#~ "</html>"
-#~ msgstr ""
-#~ "<html>\n"
-#~ "Info auch über Testversionverfügbarkeit anzeigen.<br>\n"
-#~ "<br>\n"
-#~ "<b>Warnung: Testversionen sind nur auf erfahrene Benutzer ausgerichtet,"
-#~ "<br>\n"
-#~ "welche keine Angst vor Datenverlust haben.</b>\n"
-#~ "</html>"
-
-#~ msgid "program only"
-#~ msgstr "Nur Programm"

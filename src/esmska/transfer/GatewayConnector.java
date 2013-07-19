@@ -73,6 +73,8 @@ public class GatewayConnector {
 
         //set UTF-8 as default charset
         client.getParams().setParameter(HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8");
+        client.getParams().setParameter(HttpClientParams.HTTP_ELEMENT_CHARSET, "UTF-8");
+        client.getParams().setParameter(HttpClientParams.HTTP_URI_CHARSET, "UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
@@ -373,6 +375,14 @@ public class GatewayConnector {
             }
             if (!isAbsoluteURL(newURL) && !newURL.startsWith("/")) {
                 newURL = computeRedirect(newURL, method.getURI());
+            }
+            //sometimes websites send us binary mess instead of properly urlencoded address
+            //see http://code.google.com/p/esmska/issues/detail?id=436
+            //we need to convert it in that case
+            if (!StringUtils.isAsciiPrintable(newURL)) {
+                logger.log(Level.FINE, "Received invalidly encoded redirect URL: {0}", newURL);
+                String[] parts = StringUtils.split(newURL, "?", 2);
+                newURL = parts[0] + "?" + URLEncoder.encode(parts[1], "UTF-8");
             }
             //redirect to new url
             logger.log(Level.FINE, "Following http redirect to: {0}", newURL);

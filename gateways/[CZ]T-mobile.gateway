@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2013-03-17"
 }
 
 function getMaintainer() {
@@ -50,8 +50,7 @@ function getSignatureExtraLength() {
 }
 
 function getDelayBetweenMessages() {
-    // the delay is 30s, but the second 15s is forced during sending
-    return 15
+    return 0
 }
 
 function getSupportedLanguages() {
@@ -63,37 +62,51 @@ function getFeatures() {
 }
 
 function send() {
+    
     // logout just to be sure
-    EXEC.getURL("https://login.client.tmo.cz/um/cs/logout.jsp", []);
+    EXEC.getURL("https://www.t-mobile.cz/.gang/logout/tzones", []);
 
     // sms sending page
+    content = EXEC.getURL("http://sms.t-zones.cz/open.jsp", [])
+    // we have to open this page twice, because they have some cookies problem
+    // and we don't get the correct cookies on the first attempt
     content = EXEC.getURL("http://sms.t-zones.cz/open.jsp", [])
     var time = new Date().getTime()
    
     // find counter
     re = /<input type="hidden" name="counter" value="(.*)" \/>/
-    match = re.exec(content);
+    match = re.exec(content)
     var counter = match[1]
-
+    
+    // find send delay
+    re = /\$\("#submit"\)\[0\]\.disabled = 0;[^}]+}, 1000\*(\d+)\);/
+    match = re.exec(content)
+    var delay = match[1]
+    delay = parseInt(delay)
+    // if web page claims it is shorter than 15 seconds, don't trust it
+    // see http://code.google.com/p/esmska/issues/detail?id=438#c3
+    if (delay < 15) {
+        delay = 15
+    }
+    // convert to milliseconds
+    delay = delay * 1000
+    
     // download image
     content = EXEC.getURL("http://sms.t-zones.cz/open/captcha.jpg", [])
     
     // show image
     var captcha = EXEC.recognizeImage(content, "")
 
-    // gateway forces us to sleep 15s before sending (add +1s to be sure)
-    //exact 15s delay maybe causes exception by server refusing connection
+    // sleep until we're allowed to send the message
     var now = new Date().getTime()
-    if (time + 16000 > now) {
-        EXEC.sleep(time + 16000 - now)
-    }
+    EXEC.sleep(time + delay - now)
 
     // send sms
     postData = ["counter", counter,
                 "recipient", NUMBER, "text", MESSAGE,
-                "send", "Odeslat", "mtype", "0",
+                "sms-template", "0", "mtype", "0",
                 "captcha", captcha]
-    content = EXEC.postURL("http://sms.t-zones.cz/open.jsp?site=1", [], postData)
+    content = EXEC.postURL("http://sms.t-zones.cz/open.jsp", [], postData)
 
     // check if message was successfully sent
     re = /(SMS zpr.va byl. odeslán.|SMS was sent)/
@@ -104,7 +117,7 @@ function send() {
     }
     
     // look for possible error messages
-    re = /<div id="gt-errorWindow">([^]*?)<\/div>/
+    re = /<p class="text-red.*?">(.*?)<\/p>/
     match = re.exec(content)
     if (match) {
         // gateway told us what's wrong
