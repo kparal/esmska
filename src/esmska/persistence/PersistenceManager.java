@@ -688,7 +688,7 @@ public class PersistenceManager {
         }
 
         //file.canWrite() does not work on Windows
-        boolean success = false;
+        boolean success;
         try {
             if (file.exists()) {
                 if (file.isDirectory()) {
