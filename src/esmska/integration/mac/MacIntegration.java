@@ -20,11 +20,9 @@ import java.awt.Container;
 import java.awt.PopupMenu;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import org.openide.util.Exceptions;
 
 /**
  * Integration for Mac OS X.
@@ -74,20 +72,10 @@ public class MacIntegration extends IntegrationAdapter {
         app.addAppEventListener(new MacUserSessionListener());
         app.addAppEventListener(new MacSystemSleepListener());
 
-<<<<<<< HEAD
-        // set application menubar
-        try {
+        // set application menubar - only works at Apple Java 6
+        if (RuntimeUtils.isAppleJava()) {
             app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
         }
-        catch (java.awt.IllegalComponentStateException ex) {
-            // Oracle Java 7 is still bugged as hell on OS X
-        }
-=======
-        // set application menubar - only works at Apple Java 6
-		if (RuntimeUtils.isAppleJava()) {
-			app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
-		}
->>>>>>> upstream/master
     }
 
     /**
@@ -219,27 +207,14 @@ public class MacIntegration extends IntegrationAdapter {
     public void setActionBean(ActionBean bean) {
         super.setActionBean(bean);
 
-<<<<<<< HEAD
-        NotificationIcon icon = NotificationIcon.getInstance();
-        if (icon != null) {
-            PopupMenu menu = icon.getPopup();
-            try {
+        // only works at Apple Java 6
+        if (RuntimeUtils.isAppleJava()) {
+            NotificationIcon icon = NotificationIcon.getInstance();
+            if (icon != null) {
+                PopupMenu menu = icon.getPopup();
                 Application.getApplication().setDockMenu(menu);
             }
-            catch (java.lang.InternalError error) {
-                // Oracle Java 7 is still bugged as hell on OS X
-            }
         }
-=======
-		// only works at Apple Java 6
-		if (RuntimeUtils.isAppleJava()) {
-			NotificationIcon icon = NotificationIcon.getInstance();
-			if (icon != null) {
-				PopupMenu menu = icon.getPopup();
-				Application.getApplication().setDockMenu(menu);
-			}
-		}
->>>>>>> upstream/master
     }
 
     @Override
