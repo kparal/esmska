@@ -1,160 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="esmska" default="default" basedir=".">
+<project name="ButtonDemo" default="make-bundle" basedir=".">
 
-    <property name="application.name" value="Esmska"/>
-    <property name="esmska-app-version" value="1.1.0" />
-    <property name="dropbox.location" value="${user.home}/Dropbox/Public" />
+	<property name="esmska-dist-dir" value="${basedir}/dist/"/>
+	<property name="app.resources" value="dist/Esmska.app/Contents/Resources/" />
 
-    <property name="esmska-dist-dir" value="${basedir}/dist" />
-    <property name="dmg-product-path" value="${esmska-dist-dir}/${application.name}-${esmska-app-version}.dmg" />
+	<taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="lib/appbundler-1.0.jar"/>
 
-    <!--
-        Default target. Makes app, dmg and copy to Dropbox.
-    -->
-    <target name="default" description="Build all dependencies.">
-      <antcall target="build-mac-app" />
-      <antcall target="build-mac-dmg" />
-      <antcall target="copy-to-dropbox" />
-    </target>
+	<target name="make-bundle">
+		<bundleapp outputdirectory="dist"
+				   name="Esmska"
+				   displayname="Esmska"
+				   identifier="cz.paral.Esmska"
+				   mainclassname="esmska.Main"
+				   shortversion="1.4.0"
+				   icon="${basedir}/resources/icons/esmska.icns">
 
-    <!--
-        Build application bundle from dist/ directory.
-    -->
-    <target name="build-mac-app" description="Build Esmska.app from distribution.">
-      <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" />
+			<option value="-Dapple.laf.useScreenMenuBar=true"/>
+			<option value="-Dfile.encoding=UTF8"/>
+			<option value="-Duser.dir=$APP_ROOT/Contents/Resources"/>
 
-      <jarbundler
-        dir="${esmska-dist-dir}"
-        name="Esmska"
-        mainclass="esmska.Main"
-        icon="${basedir}/resources/icons/esmska.icns"
-        workingdirectory="$APP_PACKAGE/Contents/Resources"
-        splashfile="$APP_PACKAGE/Contents/Resources/Esmska.png"
-        jvmversion="1.6*"
-        version="${esmska-app-version}"
-        bundleid="cz.paral.Esmska"
-        stubfile="Esmska"
-        >
+			<classpath file="dist/esmska.jar"/>
 
-        <javaproperty name="file.encoding" value="UTF8" />
-        <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
+			<classpath dir="${esmska-dist-dir}/lib">
+				<include name="*.jar"/>
+			</classpath>
+		</bundleapp>
 
-        <documenttype
-          name="VCard"
-          extensions="vcard vcf"
-          role="Viewer"
-          />
+		<!-- create i18n directories in /Contents/Resources -->
+		<exec executable="bash" os="Mac OS X" failonerror="true">
+			<arg value="-c"/>
+			<arg value="for PO in po/*.po; do LP=`basename $$PO`; LP=$${LP%.po}.lproj; mkdir ${app.resources}/$${LP}; done"/>
+		</exec>
 
-        <jarfileset dir="${esmska-dist-dir}">
-          <include name="esmska.jar" />
-        </jarfileset>
+		<!-- copy gateways and licence to /Contents/Resources -->
+		<copy todir="${app.resources}">
+			<fileset dir="${esmska-dist-dir}">
+				<include name="gateways/**"/>
+				<include name="license/**"/>
+			</fileset>
+		</copy>
+	</target>
 
-        <jarfileset dir="${esmska-dist-dir}/lib">
-          <include name="*.jar" />
-        </jarfileset>
-
-        <resourcefileset dir="${esmska-dist-dir}">
-          <include name="gateways/**" />
-          <include name="include/license/**" />
-        </resourcefileset>
-
-        <resourcefileset dir="${basedir}/include/icons">
-          <include name="esmska.png" />
-        </resourcefileset>
-
-      </jarbundler>
-
-      <!-- add i18n directories -->
-      <property name="app.resources" value="${esmska-dist-dir}/Esmska.app/Contents/Resources/" />
-      <exec executable="bash" os="Mac OS X" failonerror="true">
-        <arg value="-c"/>
-        <arg value="for PO in po/*.po; do LP=`basename $$PO`; LP=$${LP%.po}.lproj; mkdir ${app.resources}/$${LP}; done"/>
-      </exec>
-    </target>
-
-    <!--
+	<!--
         Build DMG distribution file.
     -->
-    <target name="build-mac-dmg" description="Build dmg distribution file.">
+	<target name="build-mac-dmg" description="Build dmg distribution file.">
+	
+		<!-- Set this property value to a directory where you can
+	 		 mount temporarily your images, for example /tmp -->
+	 	<property name="mountdir" value="/tmp"/>
+	
+		<!-- Delete previously created DMG -->
+		<delete file="${dmg-product-path}" quiet="yes" failonerror="false"/>
+		
+		<!-- Create a temporary Disk Image -->
+		<exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
+			<arg value="create"/>
+			<arg value="-srcfolder"/>
+			<arg value="${esmska-dist-dir}/${application.name}.app"/>
+			<arg value="-volname"/>
+			<arg value="${application.name}"/>
+			<arg value="-ov"/>
+			<arg value="${esmska-dist-dir}/${application.name}-tmp.dmg"/>
+			<arg value="-format"/>
+			<arg value="UDRW"/>
+		</exec>
+	
+		<!-- Attach the temporary image -->
+		<exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
+			<arg value="attach"/>
+			<arg value="${esmska-dist-dir}/${application.name}-tmp.dmg"/>
+			<arg value="-mountroot"/>
+			<arg value="${mountdir}/"/>
+		</exec>
+	
+		<!-- Copy the background, the volume icon and DS_Store files -->
+		<mkdir dir="${mountdir}/${application.name}/.background"/>
+		<copy file="${basedir}/resources/mac/background.png"
+			tofile="${mountdir}/${application.name}/.img/desktop.png"
+				overwrite="true"/>
 
-      <!-- Set this property value to a directory where you can
-         mount temporarily your images, for example /tmp -->
-      <property name="mountdir" value="/tmp"/>
+		<!--copy file="VolumeIcon.icns"
+			tofile="${mountdir}/${application.name}/.VolumeIcon.icns"
+			overwrite="true"/ -->
 
-      <!-- Delete previously created DMG -->
-      <delete file="${dmg-product-path}" quiet="yes" failonerror="false"/>
-
-      <!-- Create a temporary Disk Image -->
-      <exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
-        <arg value="create"/>
-        <arg value="-srcfolder"/>
-        <arg value="${esmska-dist-dir}/${application.name}.app"/>
-        <arg value="-volname"/>
-        <arg value="${application.name}"/>
-        <arg value="-ov"/>
-        <arg value="${esmska-dist-dir}/${application.name}-tmp.dmg"/>
-        <arg value="-format"/>
-        <arg value="UDRW"/>
-      </exec>
-
-      <!-- Attach the temporary image -->
-      <exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
-        <arg value="attach"/>
-        <arg value="${esmska-dist-dir}/${application.name}-tmp.dmg"/>
-        <arg value="-mountroot"/>
-        <arg value="${mountdir}/"/>
-      </exec>
-
-      <!-- Copy the background, the volume icon and DS_Store files -->
-      <mkdir dir="${mountdir}/${application.name}/.background"/>
-      <copy file="${basedir}/resources/mac/background.png"
-          tofile="${mountdir}/${application.name}/.img/desktop.png"
-          overwrite="true"/>
-      <!--copy file="VolumeIcon.icns"
-          tofile="${mountdir}/${application.name}/.VolumeIcon.icns"
-          overwrite="true"/ -->
-      <copy file="${basedir}/resources/mac/DS_Store"
-          tofile="${mountdir}/${application.name}/.DS_Store"
-          overwrite="true"/>
-
-      <!-- Indicate that we want a custom icon
-      <exec executable="/Developer/Tools/SetFile" os="Mac OS X">
-        <arg value="-a"/>
-        <arg value="C"/>
-        <arg value="${mountdir}/${application.name}"/>
-      </exec>
-      -->
-
-      <!-- Add a symbolic link to the Applications directory -->
-      <symlink link="${mountdir}/${application.name}" resource="/Applications"/>
-
-      <!-- Detach the temporary image -->
-      <exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
-        <arg value="detach"/>
-        <arg value="${mountdir}/${application.name}"/>
-      </exec>
-
-      <!-- Compress it to a new image -->
-      <exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
-        <arg value="convert"/>
-        <arg value="${esmska-dist-dir}/${application.name}-tmp.dmg"/>
-        <arg value="-format"/>
-        <arg value="UDZO"/>
-        <arg value="-o"/>
-        <arg value="${dmg-product-path}"/>
-      </exec>
-
-      <!-- Delete the temporary image -->
-      <delete file="${esmska-dist-dir}/${application.name}-tmp.dmg"
-            quiet="yes" failonerror="false"/>
-
-    </target>
-
-    <!--
-        Copy DMG file to Dropbox public folder.
-    -->
-    <target name="copy-to-dropbox" description="Copy dmg distribution file to Dropbox.">
-        <copyfile src="${dmg-product-path}" dest="${dropbox.location}" />
-    </target>
-
+		<copy file="${basedir}/resources/mac/DS_Store"
+				tofile="${mountdir}/${application.name}/.DS_Store"
+				overwrite="true"/>
+	
+		<!-- Indicate that we want a custom icon
+			<exec executable="/Developer/Tools/SetFile" os="Mac OS X">
+			<arg value="-a"/>
+			<arg value="C"/>
+			<arg value="${mountdir}/${application.name}"/>
+			</exec>
+		-->
+	
+		<!-- Add a symbolic link to the Applications directory -->
+		<symlink link="${mountdir}/${application.name}" resource="/Applications"/>
+	
+		<!-- Detach the temporary image -->
+		<exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
+			<arg value="detach"/>
+			<arg value="${mountdir}/${application.name}"/>
+		</exec>
+	
+		<!-- Compress it to a new image -->
+		<exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
+			<arg value="convert"/>
+			<arg value="${esmska-dist-dir}/${application.name}-tmp.dmg"/>
+			<arg value="-format"/>
+			<arg value="UDZO"/>
+			<arg value="-o"/>
+			<arg value="${dmg-product-path}"/>
+		</exec>
+	
+		<!-- Delete the temporary image -->
+		<delete file="${esmska-dist-dir}/${application.name}-tmp.dmg" quiet="yes" failonerror="false"/>
+	</target>
 </project>

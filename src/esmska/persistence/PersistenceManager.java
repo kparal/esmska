@@ -73,7 +73,7 @@ public class PersistenceManager {
             new File(System.getProperty("user.home") + File.separator + ".local" +
             File.separator + "share", PROGRAM_DIRNAME);
 
-    private static File globalGatewayDir = new File(GATEWAY_DIRNAME);
+    private static File globalGatewayDir = new File(GATEWAY_DIRNAME).getAbsoluteFile();
     private static File localGatewayDir = new File(dataDir, GATEWAY_DIRNAME);
     private static File backupDir = new File(configDir, BACKUP_DIRNAME);
     private static File configFile = new File(configDir, CONFIG_FILENAME);
@@ -577,7 +577,7 @@ public class PersistenceManager {
     }
 
     /** Try to obtain an exclusive lock on a File.
-     * @throws if lock can't be obtained
+     * @throws IOException if lock can't be obtained
      */
     private void lock(File file) throws IOException {
         Validate.notNull(file);

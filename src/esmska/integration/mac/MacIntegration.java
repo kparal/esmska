@@ -12,6 +12,8 @@ import esmska.gui.ThemeManager;
 import esmska.integration.ActionBean;
 import esmska.integration.IntegrationAdapter;
 import esmska.integration.mac.handler.*;
+import esmska.utils.RuntimeUtils;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -72,6 +74,7 @@ public class MacIntegration extends IntegrationAdapter {
         app.addAppEventListener(new MacUserSessionListener());
         app.addAppEventListener(new MacSystemSleepListener());
 
+<<<<<<< HEAD
         // set application menubar
         try {
             app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
@@ -79,6 +82,12 @@ public class MacIntegration extends IntegrationAdapter {
         catch (java.awt.IllegalComponentStateException ex) {
             // Oracle Java 7 is still bugged as hell on OS X
         }
+=======
+        // set application menubar - only works at Apple Java 6
+		if (RuntimeUtils.isAppleJava()) {
+			app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
+		}
+>>>>>>> upstream/master
     }
 
     /**
@@ -104,11 +113,6 @@ public class MacIntegration extends IntegrationAdapter {
                     i.setIcon(null);
                     i.setMnemonic(-1);
                     i.setToolTipText(null);
-                } else if (c instanceof JMenu) {
-                    JMenu jm = (JMenu) c;
-                    jm.setIcon(null);
-                    jm.setMnemonic(-1);
-                    jm.setToolTipText(null);
                 }
             }
         }
@@ -215,6 +219,7 @@ public class MacIntegration extends IntegrationAdapter {
     public void setActionBean(ActionBean bean) {
         super.setActionBean(bean);
 
+<<<<<<< HEAD
         NotificationIcon icon = NotificationIcon.getInstance();
         if (icon != null) {
             PopupMenu menu = icon.getPopup();
@@ -225,6 +230,16 @@ public class MacIntegration extends IntegrationAdapter {
                 // Oracle Java 7 is still bugged as hell on OS X
             }
         }
+=======
+		// only works at Apple Java 6
+		if (RuntimeUtils.isAppleJava()) {
+			NotificationIcon icon = NotificationIcon.getInstance();
+			if (icon != null) {
+				PopupMenu menu = icon.getPopup();
+				Application.getApplication().setDockMenu(menu);
+			}
+		}
+>>>>>>> upstream/master
     }
 
     @Override

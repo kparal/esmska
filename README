@@ -58,6 +58,10 @@ Provided by lib/ directory:
    o included in Apple Java
    o optional: see compiling section for information how to build without Mac OS
      support
+ * AppBundler
+   o https://java.net/projects/appbundler
+   o optional: see compiling section for information how to build without Mac OS
+     support
  * all runtime requirements
 
 
