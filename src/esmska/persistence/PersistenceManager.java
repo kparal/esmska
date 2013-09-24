@@ -106,6 +106,9 @@ public class PersistenceManager {
                 setDataDir(new File(datDir, programDir).getAbsolutePath());
             }
             logFile = integration.getLogFile(logFile);
+
+            globalGatewayDir = integration.getGatewayDir(globalGatewayDir);
+            deprecatedGWsFile = new File(globalGatewayDir, DEPRECATED_GWS_FILENAME);
         }
         
         //create config dir if necessary

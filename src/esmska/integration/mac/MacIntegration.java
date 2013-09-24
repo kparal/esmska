@@ -18,9 +18,11 @@ import java.awt.Container;
 import java.awt.PopupMenu;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import org.openide.util.Exceptions;
 
 /**
  * Integration for Mac OS X.
@@ -71,7 +73,12 @@ public class MacIntegration extends IntegrationAdapter {
         app.addAppEventListener(new MacSystemSleepListener());
 
         // set application menubar
-        app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
+        try {
+            app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
+        }
+        catch (java.awt.IllegalComponentStateException ex) {
+            // Oracle Java 7 is still bugged as hell on OS X
+        }
     }
 
     /**
@@ -172,6 +179,18 @@ public class MacIntegration extends IntegrationAdapter {
     }
 
     @Override
+    public File getGatewayDir(File defaultDir) {
+        try {
+            String gatewaysURL = FileManager.getResource("gateways");
+            return new File(gatewaysURL);
+        } catch (FileNotFoundException ex) {
+            // fall back to default
+            logger.log(Level.WARNING, "Could not find gateways directory inside bundle.", ex);
+            return super.getGatewayDir(defaultDir);
+        }
+    }
+
+    @Override
     public File getLogFile(File defaultLogFile) {
         String dir;
         try {
@@ -199,7 +218,12 @@ public class MacIntegration extends IntegrationAdapter {
         NotificationIcon icon = NotificationIcon.getInstance();
         if (icon != null) {
             PopupMenu menu = icon.getPopup();
-            Application.getApplication().setDockMenu(menu);
+            try {
+                Application.getApplication().setDockMenu(menu);
+            }
+            catch (java.lang.InternalError error) {
+                // Oracle Java 7 is still bugged as hell on OS X
+            }
         }
     }
 

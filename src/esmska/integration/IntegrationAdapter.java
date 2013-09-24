@@ -123,6 +123,10 @@ public class IntegrationAdapter {
             return defaultDataDir;
         }
     }
+    
+    public File getGatewayDir(File defaultDir) {
+        return defaultDir;
+    }
 
     /** Get the location of a program log file */
     public File getLogFile(File defaultLogFile) {
