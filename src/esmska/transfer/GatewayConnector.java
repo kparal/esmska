@@ -23,6 +23,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
@@ -55,7 +56,15 @@ public class GatewayConnector {
     private String fullURL;
     // remembers last redirect and number of requests to that URL
     private Tuple<String, Integer> lastRedirect = new Tuple<String, Integer>(null,0);
-
+    
+    static {
+        //trust self-signed certificates, because of frequent gateway issues, like
+        //http://code.google.com/p/esmska/issues/detail?id=454
+        //code from: http://stackoverflow.com/questions/1828775/how-to-handle-invalid-ssl-certificates-with-apache-httpclient
+        Protocol.registerProtocol("https", 
+            new Protocol("https", new EasySSLProtocolSocketFactory(), 443));
+    }
+    
     /** Constructor for GatewayConnector. */
     public GatewayConnector() {
         //set cookie compatibility mode
