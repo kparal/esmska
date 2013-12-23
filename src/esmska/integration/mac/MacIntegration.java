@@ -73,9 +73,9 @@ public class MacIntegration extends IntegrationAdapter {
         app.addAppEventListener(new MacSystemSleepListener());
 
         // set application menubar - only works at Apple Java 6
-		if (RuntimeUtils.isAppleJava()) {
-			app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
-		}
+        if (RuntimeUtils.isAppleJava()) {
+            app.setDefaultMenuBar(Context.mainFrame.getJMenuBar());
+        }
     }
 
     /**
@@ -171,6 +171,18 @@ public class MacIntegration extends IntegrationAdapter {
     }
 
     @Override
+    public File getGatewayDir(File defaultDir) {
+        try {
+            String gatewaysURL = FileManager.getResource("gateways");
+            return new File(gatewaysURL);
+        } catch (FileNotFoundException ex) {
+            // fall back to default
+            logger.log(Level.WARNING, "Could not find gateways directory inside bundle.", ex);
+            return super.getGatewayDir(defaultDir);
+        }
+    }
+
+    @Override
     public File getLogFile(File defaultLogFile) {
         String dir;
         try {
@@ -195,14 +207,14 @@ public class MacIntegration extends IntegrationAdapter {
     public void setActionBean(ActionBean bean) {
         super.setActionBean(bean);
 
-		// only works at Apple Java 6
-		if (RuntimeUtils.isAppleJava()) {
-			NotificationIcon icon = NotificationIcon.getInstance();
-			if (icon != null) {
-				PopupMenu menu = icon.getPopup();
-				Application.getApplication().setDockMenu(menu);
-			}
-		}
+        // only works at Apple Java 6
+        if (RuntimeUtils.isAppleJava()) {
+            NotificationIcon icon = NotificationIcon.getInstance();
+            if (icon != null) {
+                PopupMenu menu = icon.getPopup();
+                Application.getApplication().setDockMenu(menu);
+            }
+        }
     }
 
     @Override
