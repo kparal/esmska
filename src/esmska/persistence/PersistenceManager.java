@@ -92,9 +92,8 @@ public class PersistenceManager {
     /** Creates a new instance of PersistenceManager */
     private PersistenceManager() throws IOException {
         //adjust program dir according to operating system
+        IntegrationAdapter integration = IntegrationAdapter.getInstance();
         if (!customPathSet) {
-            IntegrationAdapter integration = IntegrationAdapter.getInstance();
-
             String programDir = integration.getProgramDirName(PROGRAM_DIRNAME);
             File confDir = integration.getConfigDir(configDir);
             File datDir = integration.getDataDir(dataDir);
@@ -107,7 +106,11 @@ public class PersistenceManager {
             }
             logFile = integration.getLogFile(logFile);
         }
-        
+
+        //adjust gateway dir according to operating system
+        globalGatewayDir = integration.getGatewayDir(globalGatewayDir);
+        deprecatedGWsFile = new File(globalGatewayDir, DEPRECATED_GWS_FILENAME);
+
         //create config dir if necessary
         if (!configDir.exists() && !configDir.mkdirs()) {
             throw new IOException("Can't create config dir '" + configDir.getAbsolutePath() + "'");
