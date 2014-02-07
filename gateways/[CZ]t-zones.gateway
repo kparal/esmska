@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2013-12-15"
+    return "2014-02-07"
 }
 
 function getMaintainer() {
@@ -16,7 +16,7 @@ function getMinProgramVersion() {
 }
 
 function getWebsite() {
-    return "http://sms.t-zones.cz"
+    return "http://sms.t-mobile.cz"
 }
 
 function getDescription() {
@@ -61,10 +61,6 @@ function getFeatures() {
 }
 
 function send() {
-    // == CURRENTLY BROKEN ==
-    EXEC.setProblem("FIX_IN_PROGRESS", "http://code.google.com/p/esmska/issues/detail?id=454#c24")
-    return false
-
 	// message, that actually isn't an error, just a warning
 	var mych5warn_cs = "SMS odeslané na vybraná čísla mimo síť T-Mobile z tarifů Přátelé, Mých5 a Bav Se s Mých5 jsou účtovány jako SMS do ostatních sítí, nikoli výhodnější sazbou z tarifu."
 	var mych5warn_en = "SMS sent to selected numbers outside the network of T-Mobile tariffs Pratele, Mych5 and Bav Se s Mych5 are billed as an SMS to other networks and not favorable rate of tariff."
@@ -79,7 +75,7 @@ function send() {
     var logged = false
 
     // start page
-    content = EXEC.getURL("https://sms.client.tmo.cz/closed.jsp", [])
+    content = EXEC.getURL("https://sms.t-mobile.cz/closed.jsp", [])
 
     // search if we are already logged in (previous logout failed or something)
     re = /\/.gang\/logout/
@@ -116,7 +112,7 @@ function send() {
     }
 
     // sms sending page
-    content = EXEC.getURL("https://sms.client.tmo.cz/closed.jsp", [])
+    content = EXEC.getURL("https://sms.t-mobile.cz/closed.jsp", [])
 
     // seach for errors, sometimes overload errors are displayed here
     re = /<p class="text-orange.*?">([^]*?)<\/p>/
@@ -141,7 +137,7 @@ function send() {
                 "confirmation", RECEIPT ? "1" : "0",
                 "history", "on",
                 "TMCZcheck", "on"]
-    content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
+    content = EXEC.postURL("https://sms.t-mobile.cz/closed.jsp", [], postData)
 
     // if some SMS is paid, there will be one more confirmation form
     re = /Tito adresáti jsou mimo síť T-Mobile|Recipients out of T-Mobile CZ network/
@@ -155,7 +151,7 @@ function send() {
         postData = ["counter", counter,
                     "tmcz", "1",
                     "rcpt1", NUMBER]
-        content = EXEC.postURL("https://sms.client.tmo.cz/closed.jsp", [], postData)
+        content = EXEC.postURL("https://sms.t-mobile.cz/closed.jsp", [], postData)
     }
     
     // check if message was successfully sent
