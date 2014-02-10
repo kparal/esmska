@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-02-07"
+    return "2014-02-10"
 }
 
 function getMaintainer() {
@@ -63,9 +63,6 @@ function getFeatures() {
 
 function send() {
     
-    // logout just to be sure
-    EXEC.getURL("https://www.t-mobile.cz/.gang/logout/tzones", []);
-
     // sms sending page
     content = EXEC.getURL("http://sms.t-mobile.cz/open.jsp", [])
     // we have to open this page twice, because they have some cookies problem
