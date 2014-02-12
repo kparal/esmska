@@ -971,13 +971,14 @@ infoPanelLayout.setHorizontalGroup(
         /** color parts of sms */
         private void colorDocument(int from, int length) {
             int smsLength = envelope.getSMSLength();
+            int prefixLength = envelope.getPrefixLength();
             while (from < length) {
                 int to = 0;
                 if (smsLength <= 0) {
                     //unspecified sms length, color it all with same color
                     to = length - 1;
                 } else {
-                    to = ((from / smsLength) + 1) * smsLength - 1;
+                    to = (((from + prefixLength) / smsLength) + 1) * smsLength - 1 - prefixLength;
                 }
                 to = to < length-1 ? to : length-1;
                 doc.setCharacterAttributes(from,to-from+1,getStyle(from),false);
@@ -990,7 +991,7 @@ infoPanelLayout.setHorizontalGroup(
                 //unspecified sms length
                 return regular;
             }
-            if ((offset / envelope.getSMSLength()) % 2 == 0) {
+            if (((offset + envelope.getPrefixLength()) / envelope.getSMSLength()) % 2 == 0) {
                 //even sms
                 return regular;
             } else {

@@ -409,6 +409,7 @@ public class ImportManager {
                 Signature defSig = (Signature) JSONObject.toBean(jsonDefSig, Signature.class);
                 Signature.DEFAULT.setUserName(defSig.getUserName());
                 Signature.DEFAULT.setUserNumber(defSig.getUserNumber());
+                Signature.DEFAULT.setPrepend(defSig.isPrepend());
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Could not load default signature", ex);
             }

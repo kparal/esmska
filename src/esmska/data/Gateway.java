@@ -161,13 +161,26 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         this.config = config;
     }
     
-    /** Get sender name signature suffix that should be appended to the message
-     * before it is sent.
-     * @return empty string if gateway appends the name signature automatically
-     *  or user does not want any signature to be appended; otherwise user name 
-     *  signature prepended with a newline character
-     */
+    /** Shorthand for getSenderNameAddition(true) */
+    public String getSenderNamePrefix() {
+        return getSenderNameAddition(true);
+    }
+    
+    /** Shorthand for getSenderNameAddition(false) */
     public String getSenderNameSuffix() {
+        return getSenderNameAddition(false);
+    }
+    
+    /** Get sender name signature prefix or suffix that should be appended to the message
+     * before it is sent.
+     * @param prefix indicates whether the prefix (true) or suffix (false) should be returned
+     * @return empty string if gateway appends the name signature automatically
+     *  or user does not want any signature to be appended
+     *  or the prefix parameter does not correspond to the signature settings;
+     *  otherwise user name signature prepended with a newline character
+     *  or appended with a space
+     */
+    public String getSenderNameAddition(boolean prefix) {
         if (hasFeature(Feature.SENDER_NAME)) {
             // gateway will append sender name signature automatically
             return "";
@@ -175,14 +188,14 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         // gateway does not support SENDER_NAME feature, we have to add it by hand
         
         Signature signature = Signatures.getInstance().get(getConfig().getSignature());
-        if (signature == null || StringUtils.isEmpty(signature.getUserName())) {
+        if (signature == null || StringUtils.isEmpty(signature.getUserName()) || signature.isPrepend() != prefix) {
             // user doesn't want to add any name signature
             return "";
         }
         
         // user wants to append his name signature
-        // prepend it with a single space to separate it from text content
-        String suffix = "\n" + signature.getUserName();
+        // prepend or append to it a single space to separate it from text content
+        String suffix = prefix ? signature.getUserName() + " " : "\n" + signature.getUserName();
         // remove accents if required
         if (Config.getInstance().isRemoveAccents()) {
             suffix = MiscUtils.removeAccents(suffix);

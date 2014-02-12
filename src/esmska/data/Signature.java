@@ -6,13 +6,14 @@ import org.apache.commons.lang.Validate;
  */
 public class Signature implements Comparable<Signature> {
     /** Special NONE signature */
-    public static final Signature NONE = new Signature("None", null, null);
+    public static final Signature NONE = new Signature("None", null, null, false);
     /** Special DEFAULT signature */
-    public static final Signature DEFAULT = new Signature("Default", null, null);
+    public static final Signature DEFAULT = new Signature("Default", null, null, false);
 
     private String profileName;
     private String userName;
     private String userNumber;
+    private boolean prepend;
 
     /** Required for JavaBean support. */
     private Signature() {
@@ -21,12 +22,13 @@ public class Signature implements Comparable<Signature> {
     /** Create new signature.
      * @param profileName name of the profile, must not be empty
      */
-    public Signature(String profileName, String userName, String userNumber) {
+    public Signature(String profileName, String userName, String userNumber, boolean prepend) {
         Validate.notEmpty(profileName);
         
         this.profileName = profileName;
         this.userName = userName;
         this.userNumber = userNumber;
+        this.prepend = prepend;
     }
 
     /** Get name of this signature profile. */
@@ -55,6 +57,15 @@ public class Signature implements Comparable<Signature> {
 
     public void setUserNumber(String userNumber) {
         this.userNumber = userNumber;
+    }
+
+    /** Get value indicating whether the sender name should be prepended (true) or appended (false) to the message. */
+    public boolean isPrepend() {
+        return prepend;
+    }
+
+    public void setPrepend(boolean prepend) {
+        this.prepend = prepend;
     }
 
     @Override
