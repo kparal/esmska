@@ -7,6 +7,8 @@
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="Config.getInstance()"/>
       </AuxValues>
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="signaturePositionButtonGroup">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -576,6 +578,13 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="senderNameTextField" pref="128" max="32767" attributes="2"/>
                                       </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="appendSignatureRadioButton" min="-2" max="-2" attributes="0"/>
+                                              <Component id="prependSignatureRadioButton" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <Component id="demandDeliveryReportCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -615,6 +624,10 @@
                               <Component id="senderNameLabel" alignment="2" min="-2" max="-2" attributes="0"/>
                               <Component id="senderNameTextField" alignment="2" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="prependSignatureRadioButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="appendSignatureRadioButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="demandDeliveryReportCheckBox" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
@@ -794,6 +807,38 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="senderNumberWarnLabel.setVisible(false);"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="prependSignatureRadioButton">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="signaturePositionButtonGroup"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.prependSignatureRadioButton.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.prependSignatureRadioButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prependSignatureRadioButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="appendSignatureRadioButton">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="signaturePositionButtonGroup"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.appendSignatureRadioButton.text" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.appendSignatureRadioButton.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="appendSignatureRadioButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
