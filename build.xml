@@ -79,8 +79,7 @@
     </target>
 
     <!-- overwrite 'jar' target not to create jnlp automatically -->
-    <target name="jar" depends="init,compile,-pre-jar,-do-jar-with-manifest,-do-jar-without-manifest,
-        -do-jar-with-mainclass,-do-jar-with-libraries,-post-jar"
+    <target name="jar" depends="init,compile,-pre-jar,-do-jar,-post-jar"
         description="Build JAR."/>
     
     <!-- overwrite 'jws-run' to depend on 'javaws' target -->
