@@ -198,24 +198,3 @@ By running command:
 a new po/esmska.pot template is generated, all PO message catalogs are updated
 and localized properties files are generated from them.
 
-
-Creating Java WebStart package
-==============================
-
-First of all it is necessary to create a digital key to sign the jars. By using
-'keytool' command create a keystore file with a key alias:
-
- $ keytool -genkeypair -keystore KEYSTORE -alias ALIAS -validity DAYS
-
-Edit file nbproject/project.properties and set variables 'jnlp.signjar.keystore'
-and 'jnlp.signjar.alias' to determine path to your keystore and your key alias.
-
-The key password can be placed into file nbproject/private/private.properties as
-a line 'jnlp.signjar.storepass=PASSWORD'. This way it will not be necessary to
-type password everytime you build it. It supposes that keystore and key have the
-same password.
-
-Now open the project in NetBeans IDE and run the 'javaws' task. It is not
-possible to build WebStart package on the command-line without using NetBeans.
-
-
