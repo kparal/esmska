@@ -58,7 +58,6 @@ public class Statistics {
         info.put("uuid", config.getUUID());
         info.put("version", Config.getLatestVersion());
         info.put("stable", Config.isStableVersion());
-        info.put("webstart", RuntimeUtils.isRunAsWebStart());
         
         // system info
         info.put("os", WordUtils.capitalizeFully(RuntimeUtils.detectOS().name()));

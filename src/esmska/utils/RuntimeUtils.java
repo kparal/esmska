@@ -124,12 +124,6 @@ public class RuntimeUtils {
         return isOracleJava() || isOpenJDK() || isAppleJava();
     }
 
-    /** Whether the program is run as Java WebStart or not */
-    public static boolean isRunAsWebStart() {
-        //property esmska.isWebstart is set in JNLP file
-        return System.getProperty("esmska.isWebstart") != null;
-    }
-
     /** Get basic information about current system. Useful for debugging
      * print-outs.
      */

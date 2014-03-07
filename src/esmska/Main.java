@@ -63,16 +63,6 @@ public class Main {
                     + "The tested Java versions are: Oracle Java 6 and 7, OpenJDK 6 and 7, Apple Java 6 and 7.");
         }
 
-        // halt for Webstart on OpenJDK, it currently doesn't work
-        // see http://code.google.com/p/esmska/issues/detail?id=335
-        // see http://code.google.com/p/esmska/issues/detail?id=357
-        // see http://code.google.com/p/esmska/issues/detail?id=358
-        if (RuntimeUtils.isOpenJDK() && RuntimeUtils.isRunAsWebStart()) {
-            logger.severe("Running as Java WebStart on OpenJDK, that's currently unsupported! Quitting.");
-            JOptionPane.showMessageDialog(null, l10n.getString("Main.brokenWebstart"), "Esmska", JOptionPane.ERROR_MESSAGE);
-            System.exit(99);
-        }
-
         //parse commandline arguments
         CommandLineParser clp = new CommandLineParser();
         if (! clp.parseArgs(args)) {

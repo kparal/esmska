@@ -77,46 +77,7 @@
         <property name="libs.MacUI.classpath" value=""/>
         <echo message="Building without Mac OS support as requested."/>
     </target>
-
-    <!-- overwrite 'jar' target not to create jnlp automatically -->
-    <target name="jar" depends="init,compile,-pre-jar,-do-jar,-post-jar"
-        description="Build JAR."/>
-    
-    <!-- overwrite 'jws-run' to depend on 'javaws' target -->
-    <target name="jws-run" depends="jar,-verify-jnlp-enabled,-verify-codebase,javaws" description="Start javaws execution">
-        <exec executable="${java.home}/bin/javaws">
-            <arg file="${jnlp.dest.dir}/${launch.jnlp.file}"/>
-        </exec>
-    </target>
-    
-    <!-- build java webstart files -->
-    <target name="javaws" depends="jar" description="Build Java WebStart files.">
-        <!-- create gateways.jar file -->
-        <copy todir="dist/tmp/esmska/gateways/scripts">
-            <fileset dir="dist/gateways"/>
-        </copy>
-        <jar destfile="dist/lib/gateways.jar" basedir="dist/tmp"/>
-        <delete dir="dist/tmp"/>
-        <!-- add "gateways.jar" to the Class-Path in jar manifest -->
-        <jar destfile="${dist.jar}" update="true">
-            <manifest>
-                <attribute name="Class-Path" value="${jar.classpath} gateways.jar"/>
-            </manifest>
-        </jar>
-        <!-- add esmska.ico -->
-        <move file="dist/icons/esmska.ico" todir="dist"/>
-        <!-- delete unneeded stuff -->
-        <delete includeemptydirs="true">
-            <fileset dir="dist" includes="**/*">
-                <exclude name="lib/**"/>
-                <exclude name="*.jar"/>
-                <exclude name="esmska.ico"/>
-            </fileset>
-        </delete>
-        <!-- call 'jnlp' target -->
-        <antcall target="jnlp"/>
-    </target>
-    
+   
     <!-- called after jar building -->
     <target name="-post-jar">
         <!-- delete unneeded stuff -->
