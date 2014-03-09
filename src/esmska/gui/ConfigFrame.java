@@ -78,10 +78,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import javax.swing.AbstractAction;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
@@ -384,6 +386,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         String name = senderNameTextField.getText();
         signature.setUserName(name);
         signature.setUserNumber(number);
+        signature.setPrepend(prependSignatureRadioButton.isSelected());
+    }
+    
+    private void updateSignaturePositionVisibility() {
+        boolean visible = advancedCheckBox.isSelected() && signatureComboBox.isEditableSelected();
+        prependSignatureRadioButton.setVisible(visible);
+        appendSignatureRadioButton.setVisible(visible);
     }
     
     /** This method is called from within the constructor to
@@ -397,6 +406,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         bindingGroup = new BindingGroup();
 
         config = Config.getInstance();
+        signaturePositionButtonGroup = new ButtonGroup();
         tabbedPane = new JTabbedPane();
         generalPanel = new JPanel();
         removeAccentsCheckBox = new JCheckBox();
@@ -446,6 +456,8 @@ public class ConfigFrame extends javax.swing.JFrame {
         senderNumberLabel = new JLabel();
         senderNameLabel = new JLabel();
         senderNumberWarnLabel = new JLabel();
+        prependSignatureRadioButton = new JRadioButton();
+        appendSignatureRadioButton = new JRadioButton();
         privacyPanel = new JPanel();
         reducedHistoryCheckBox = new JCheckBox();
         reducedHistorySpinner = new JSpinner();
@@ -789,6 +801,24 @@ public class ConfigFrame extends javax.swing.JFrame {
     senderNumberWarnLabel.setToolTipText(senderNumberTextField.getToolTipText());
     senderNumberWarnLabel.setVisible(false);
 
+    signaturePositionButtonGroup.add(prependSignatureRadioButton);
+    Mnemonics.setLocalizedText(prependSignatureRadioButton, l10n.getString("ConfigFrame.prependSignatureRadioButton.text"));
+    prependSignatureRadioButton.setToolTipText(l10n.getString("ConfigFrame.prependSignatureRadioButton.toolTipText")); // NOI18N
+    prependSignatureRadioButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            prependSignatureRadioButtonActionPerformed(evt);
+        }
+    });
+
+    signaturePositionButtonGroup.add(appendSignatureRadioButton);
+        Mnemonics.setLocalizedText(appendSignatureRadioButton, l10n.getString("ConfigFrame.appendSignatureRadioButton.text"));
+    appendSignatureRadioButton.setToolTipText(l10n.getString("ConfigFrame.appendSignatureRadioButton.toolTipText")); // NOI18N
+    appendSignatureRadioButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            appendSignatureRadioButtonActionPerformed(evt);
+        }
+    });
+
         GroupLayout gwDetailsPanelLayout = new GroupLayout(gwDetailsPanel);
     gwDetailsPanel.setLayout(gwDetailsPanelLayout);
     gwDetailsPanelLayout.setHorizontalGroup(
@@ -824,7 +854,12 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addGroup(gwDetailsPanelLayout.createSequentialGroup()
                             .addComponent(senderNameLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(senderNameTextField, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))))
+                            .addComponent(senderNameTextField, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                        .addGroup(gwDetailsPanelLayout.createSequentialGroup()
+                            .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.LEADING)
+                                .addComponent(appendSignatureRadioButton)
+                                .addComponent(prependSignatureRadioButton))
+                            .addGap(0, 42, Short.MAX_VALUE))))
                 .addComponent(demandDeliveryReportCheckBox))
             .addContainerGap())
     );
@@ -859,6 +894,10 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(gwDetailsPanelLayout.createParallelGroup(Alignment.CENTER)
                 .addComponent(senderNameLabel)
                 .addComponent(senderNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(prependSignatureRadioButton)
+            .addPreferredGap(ComponentPlacement.RELATED)
+            .addComponent(appendSignatureRadioButton)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(demandDeliveryReportCheckBox)
             .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1243,6 +1282,7 @@ private void advancedCheckBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event
     debugCheckBox.setVisible(showAdvanced);
     advancedControlsCheckBox.setVisible(showAdvanced);
     toolbarVisibleCheckBox.setVisible(showAdvanced);
+    updateSignaturePositionVisibility();
     
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(privacyPanel), showAdvanced);
     tabbedPane.setEnabledAt(tabbedPane.indexOfComponent(connectionPanel), showAdvanced);
@@ -1313,10 +1353,12 @@ private void signatureComboBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:even
     Signature signature = signatureComboBox.getSelectedSignature();
     String number = signature != null ? signature.getUserNumber() : null;
     String name = signature != null ? signature.getUserName() : null;
+    boolean prepend = signature != null ? signature.isPrepend() : false;
 
     //fill properties into fields
     senderNumberTextField.setText(number);
     senderNameTextField.setText(name);
+    (prepend ? prependSignatureRadioButton : appendSignatureRadioButton).setSelected(true);
 
     // update component visibility
     boolean editable = signatureComboBox.isEditableSelected();
@@ -1324,6 +1366,7 @@ private void signatureComboBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:even
     senderNumberTextField.setVisible(editable);
     senderNameLabel.setVisible(editable);
     senderNameTextField.setVisible(editable);
+    updateSignaturePositionVisibility();
     
     sigDelButton.setVisible(signatureComboBox.isRemovableSelected());
 
@@ -1379,6 +1422,14 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
     gateway.getConfig().setReceipt(demandDeliveryReportCheckBox.isSelected());
 }//GEN-LAST:event_demandDeliveryReportCheckBoxActionPerformed
     
+private void prependSignatureRadioButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_prependSignatureRadioButtonActionPerformed
+    updateSignature();
+}//GEN-LAST:event_prependSignatureRadioButtonActionPerformed
+
+private void appendSignatureRadioButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_appendSignatureRadioButtonActionPerformed
+    updateSignature();
+}//GEN-LAST:event_appendSignatureRadioButtonActionPerformed
+
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
         private final String LAF_SYSTEM = l10n.getString("ConfigFrame.system_look");
@@ -1641,6 +1692,8 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
             passwordField.setEnabled(login);
 
             senderNumberTextField.setEnabled(gateway.hasFeature(Feature.SENDER_NUMBER));
+            prependSignatureRadioButton.setEnabled(!gateway.hasFeature(Feature.SENDER_NAME));
+            appendSignatureRadioButton.setEnabled(!gateway.hasFeature(Feature.SENDER_NAME));
             signatureComboBox.setSelectedSignature(gateway.getConfig().getSignature());
 
             boolean receipt = gateway.hasFeature(Feature.RECEIPT);
@@ -1674,6 +1727,7 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
     private JCheckBox advancedControlsCheckBox;
     private JCheckBox announceProgramUpdatesCheckBox;
     private JPanel appearancePanel;
+    private JRadioButton appendSignatureRadioButton;
     private JButton clearKeyringButton;
     private JButton closeButton;
     private Config config;
@@ -1703,6 +1757,7 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
     private JLabel lookLabel;
     private JCheckBox notificationAreaCheckBox;
     private JPasswordField passwordField;
+    private JRadioButton prependSignatureRadioButton;
     private JPanel privacyPanel;
     private JCheckBox reducedHistoryCheckBox;
     private JSpinner reducedHistorySpinner;
@@ -1717,6 +1772,7 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
     private JCheckBox showPasswordCheckBox;
     private JButton sigDelButton;
     private SignatureComboBox signatureComboBox;
+    private ButtonGroup signaturePositionButtonGroup;
     private JTextField socksProxyTextField;
     private JCheckBox startMinimizedCheckBox;
     private JTabbedPane tabbedPane;

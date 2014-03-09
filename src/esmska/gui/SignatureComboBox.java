@@ -82,7 +82,7 @@ public final class SignatureComboBox extends JComboBox {
                 super.setSelectedItem(Signature.DEFAULT);
                 return;
             }
-            Signature sig = new Signature(name, null, null);
+            Signature sig = new Signature(name, null, null, false);
             boolean added = signatures.add(sig);
             if (!added) {
                 // signature of this name already exists
