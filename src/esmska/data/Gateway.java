@@ -161,13 +161,13 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         this.config = config;
     }
     
-    /** Get sender name signature suffix that should be appended to the message
+    /** Get sender name signature that should be prepended to the message
      * before it is sent.
-     * @return empty string if gateway appends the name signature automatically
-     *  or user does not want any signature to be appended; otherwise user name 
-     *  signature prepended with a newline character
+     * @return empty string if gateway adds the name signature automatically
+     *  or user does not want any signature to be added; otherwise user name 
+     *  signature
      */
-    public String getSenderNameSuffix() {
+    public String getSenderName() {
         if (hasFeature(Feature.SENDER_NAME)) {
             // gateway will append sender name signature automatically
             return "";
@@ -181,13 +181,12 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         }
         
         // user wants to append his name signature
-        // prepend it with a single space to separate it from text content
-        String suffix = "\n" + signature.getUserName();
+        String result = signature.getUserName();
         // remove accents if required
         if (Config.getInstance().isRemoveAccents()) {
-            suffix = MiscUtils.removeAccents(suffix);
+            result = MiscUtils.removeAccents(result);
         }
-        return suffix;
+        return result;
     }
 
     @Override
@@ -278,8 +277,8 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
             // gateway will append its own string
             return signatureExtraLength;
         } else {
-            // we will append a newline character before the sender name
-            return 1;
+            // we will not insert anything between signature and message
+            return 0;
         }
     }
 
