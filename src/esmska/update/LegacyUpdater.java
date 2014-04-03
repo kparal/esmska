@@ -1,6 +1,7 @@
 package esmska.update;
 
 import com.csvreader.CsvReader;
+import esmska.Context;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
@@ -147,6 +148,22 @@ public class LegacyUpdater {
             if (StringUtils.isNotEmpty(senderNumber)) {
                 defaultSig.setUserNumber(senderNumber);
             }
+        }
+        
+        //changes to 1.7: Append a colon to signatures
+        if (Config.compareProgramVersions(version, "1.6") <= 0) {
+            Context.persistenceManager.loadGateways();
+            Context.persistenceManager.loadGatewayProperties();
+            ArrayList<Signature> sigList = new ArrayList<Signature>();
+            sigList.addAll(Signatures.getInstance().getAll());
+            sigList.addAll(Signatures.getInstance().getSpecial());
+            for (Signature signature : sigList) {
+                String userName = signature.getUserName();
+                if (StringUtils.isNotEmpty(userName)) {
+                    signature.setUserName(userName + ":");
+                }
+            }
+            Context.persistenceManager.saveGatewayProperties();
         }
     }
 }

@@ -77,6 +77,21 @@ public class Envelope {
         return min;
     }
     
+    /** How many characters at the message start are occupied by the prefix
+     * (i.e. sender name)
+     */
+    public int getPrefixLength() {
+        int max = 0;
+        for (Contact c : contacts) {
+            Gateway gateway = gateways.get(c.getGateway());
+            if (gateway == null) {
+                continue;
+            }
+            max = Math.max(max, gateway.getSenderName().length());
+        }
+        return max;
+    }
+    
     /** get length of one sms
      * @return length of one sms or -1 when sms length is unspecified
      */
@@ -143,10 +158,10 @@ public class Envelope {
             String msgText = text;
             // add user signature to the message
             if (gateway != null) {
-                String signature = gateway.getSenderNameSuffix();
+                String signature = gateway.getSenderName();
                 // only if signature is not already added
-                if (!msgText.trim().toLowerCase().endsWith(signature.trim().toLowerCase())) {
-                    msgText += signature;
+                if (!msgText.trim().toLowerCase().startsWith(signature.trim().toLowerCase())) {
+                    msgText = signature + msgText;
                 }
             }
             String messageId = SMS.generateID();
