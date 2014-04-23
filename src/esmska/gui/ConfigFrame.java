@@ -24,7 +24,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -69,6 +68,10 @@ import esmska.utils.RuntimeUtils;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -82,8 +85,11 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JToolTip;
 import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
@@ -117,11 +123,17 @@ public class ConfigFrame extends javax.swing.JFrame {
     private static final HashMap<String, Object> originalSettings = new HashMap<String, Object>();
     private final GatewayTableModel gwTableModel =  new GatewayTableModel();
     private final GatewaySelectionListener gwSelectionListener = new GatewaySelectionListener();
+    private Popup senderNamePopup;
 
     public enum Tabs {
         GENERAL, APPEARANCE, GATEWAYS, PRIVACY, CONNECTION
     }
 
+    /** Used for senderNamePopup */
+    private enum PopupUpdateType {
+        SHOW, UPDATE, HIDE
+    }
+    
     /** Creates new form ConfigFrame */
     public ConfigFrame() {
         initComponents();
@@ -205,6 +217,12 @@ public class ConfigFrame extends javax.swing.JFrame {
             @Override
             public void onUpdate(DocumentEvent e) {
                 updateSenderNumberWarnLabel();
+            }
+        });
+        senderNameTextField.getDocument().addDocumentListener(new AbstractDocumentListener() {
+            @Override
+            public void onUpdate(DocumentEvent e) {
+                updateSenderNamePopup(PopupUpdateType.UPDATE);
             }
         });
         DocumentListener keyringListener = new AbstractDocumentListener() {
@@ -371,6 +389,37 @@ public class ConfigFrame extends javax.swing.JFrame {
         }
     }
 
+    /** Update the text in senderNamePopup and its visibility */
+    private void updateSenderNamePopup(PopupUpdateType updateType) {
+        if (senderNamePopup != null) {
+            senderNamePopup.hide();
+        }
+        
+        if (updateType == PopupUpdateType.SHOW ||
+                (updateType == PopupUpdateType.UPDATE && senderNamePopup != null)) {
+            String signature = MiscUtils.escapeHtml(senderNameTextField.getText());
+            JToolTip toolTip = new JToolTip();
+            toolTip.setTipText(MessageFormat.format(
+                    l10n.getString("ConfigFrame.senderNamePopup.exampleText"),
+                    signature));
+            toolTip.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (senderNamePopup != null) {
+                        senderNamePopup.hide();
+                    }
+                }
+            });
+            int x = senderNameLabel.getLocationOnScreen().x + senderNameTextField.getHeight() / 2;
+            int y = senderNameTextField.getLocationOnScreen().y + senderNameTextField.getHeight() - 2;
+            senderNamePopup = PopupFactory.getSharedInstance().getPopup(
+                    senderNameTextField, toolTip, x, y);
+            senderNamePopup.show();
+        } else {
+            senderNamePopup = null;
+        }
+    }
+    
     /** Save all properties of the currently selected signature. */
     private void updateSignature() {
         if (!fullyInicialized) {
@@ -466,19 +515,18 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(l10n.getString("ConfigFrame.title")); // NOI18N
-        addWindowFocusListener(new WindowFocusListener() {
-            public void windowGainedFocus(WindowEvent evt) {
-                formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(WindowEvent evt) {
-            }
-        });
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
         Mnemonics.setLocalizedText(removeAccentsCheckBox, l10n.getString("ConfigFrame.removeAccentsCheckBox.text"));
+        addComponentListener(new ComponentAdapter() {
+            public void componentShown(ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+
         removeAccentsCheckBox.setToolTipText(l10n.getString("ConfigFrame.removeAccentsCheckBox.toolTipText")); // NOI18N
 
         Binding binding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, config, ELProperty.create("${removeAccents}"), removeAccentsCheckBox, BeanProperty.create("selected"));
@@ -767,6 +815,20 @@ public class ConfigFrame extends javax.swing.JFrame {
     senderNameTextField.setColumns(12);
     senderNameTextField.setToolTipText(l10n.getString("ConfigFrame.senderNameTextField.toolTipText")); // NOI18N
     Mnemonics.setLocalizedText(demandDeliveryReportCheckBox, l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.text"));
+    senderNameTextField.addFocusListener(new FocusAdapter() {
+        public void focusGained(FocusEvent evt) {
+            senderNameTextFieldFocusGained(evt);
+        }
+        public void focusLost(FocusEvent evt) {
+            senderNameTextFieldFocusLost(evt);
+        }
+    });
+    senderNameTextField.addKeyListener(new KeyAdapter() {
+        public void keyTyped(KeyEvent evt) {
+            senderNameTextFieldKeyTyped(evt);
+        }
+    });
+
     demandDeliveryReportCheckBox.setToolTipText(l10n.getString("ConfigFrame.demandDeliveryReportCheckBox.toolTipText")); // NOI18N
     demandDeliveryReportCheckBox.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
@@ -1302,9 +1364,9 @@ private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClo
     }
 }//GEN-LAST:event_formWindowClosing
 
-private void formWindowGainedFocus(WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+private void formComponentShown(ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
     closeButton.requestFocusInWindow();
-}//GEN-LAST:event_formWindowGainedFocus
+}//GEN-LAST:event_formComponentShown
 
 private void signatureComboBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_signatureComboBoxActionPerformed
     boolean oldInit = fullyInicialized;
@@ -1378,6 +1440,37 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
     Gateway gateway = gwTableModel.getGateway(row);
     gateway.getConfig().setReceipt(demandDeliveryReportCheckBox.isSelected());
 }//GEN-LAST:event_demandDeliveryReportCheckBoxActionPerformed
+
+    private void senderNameTextFieldFocusGained(FocusEvent evt) {//GEN-FIRST:event_senderNameTextFieldFocusGained
+        updateSenderNamePopup(PopupUpdateType.SHOW);
+    }//GEN-LAST:event_senderNameTextFieldFocusGained
+
+    private void senderNameTextFieldFocusLost(FocusEvent evt) {//GEN-FIRST:event_senderNameTextFieldFocusLost
+        updateSenderNamePopup(PopupUpdateType.HIDE);
+    }//GEN-LAST:event_senderNameTextFieldFocusLost
+
+    /** Adds a colon to the end of senderNameTextField
+     * if the first characted has just been typed. */
+    private void senderNameTextFieldKeyTyped(KeyEvent evt) {//GEN-FIRST:event_senderNameTextFieldKeyTyped
+        char c = evt.getKeyChar();
+        if (c < ' ' || c == KeyEvent.CHAR_UNDEFINED) {
+            return;
+        }
+        if (senderNameTextField.getText().length() != 0) {
+            return;
+        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (senderNameTextField.getText().length() == 0) {
+                    return;
+                }
+                String typed = senderNameTextField.getText();
+                senderNameTextField.setText(typed + ":");
+                senderNameTextField.setCaretPosition(typed.length());
+            }
+        });
+    }//GEN-LAST:event_senderNameTextFieldKeyTyped
     
     private class LaFComboRenderer extends DefaultListCellRenderer {
         private final ListCellRenderer lafRenderer = new JList().getCellRenderer();
@@ -1729,5 +1822,5 @@ private void demandDeliveryReportCheckBoxActionPerformed(ActionEvent evt) {//GEN
     private JCheckBox windowCenteredCheckBox;
     private BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-    
+
 }

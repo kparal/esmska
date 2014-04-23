@@ -1,6 +1,7 @@
 package esmska.update;
 
 import com.csvreader.CsvReader;
+import esmska.Context;
 import esmska.data.Config;
 import esmska.data.CountryPrefix;
 import esmska.data.Keyring;
@@ -50,26 +51,6 @@ public class LegacyUpdater {
         logger.log(Level.INFO, "Updating from legacy version {0} to current version {1}", 
                 new Object[]{version, Config.getLatestVersion()});
 
-        //changes to 1.4
-        if (Config.compareProgramVersions(version, "1.4") < 0) {
-            //add message ID to queue
-            logger.fine("Updating queue to add message IDs...");
-            try {
-                Field queueFileField = PersistenceManager.class.getDeclaredField("queueFile");
-                queueFileField.setAccessible(true);
-                File queueFile = (File) queueFileField.get(null);
-
-                List<String> lines = FileUtils.readLines(queueFile, "UTF-8");
-                ArrayList<String> newLines = new ArrayList<String>();
-                for (String line : lines) {
-                    newLines.add(line + ",");
-                }
-                FileUtils.writeLines(queueFile, "UTF-8", newLines);
-            } catch (Exception ex) {
-                logger.log(Level.SEVERE, "Updating queue file failed", ex);
-            }
-        }
-        
         //changes to 0.8.0
         if (Config.compareProgramVersions(version, "0.8.0") < 0) {
             //set country prefix from locale
@@ -147,6 +128,44 @@ public class LegacyUpdater {
             if (StringUtils.isNotEmpty(senderNumber)) {
                 defaultSig.setUserNumber(senderNumber);
             }
+        }
+        
+        //changes to 1.4
+        if (Config.compareProgramVersions(version, "1.4") < 0) {
+            //add message ID to queue
+            logger.fine("Updating queue to add message IDs...");
+            try {
+                Field queueFileField = PersistenceManager.class.getDeclaredField("queueFile");
+                queueFileField.setAccessible(true);
+                File queueFile = (File) queueFileField.get(null);
+
+                List<String> lines = FileUtils.readLines(queueFile, "UTF-8");
+                ArrayList<String> newLines = new ArrayList<String>();
+                for (String line : lines) {
+                    newLines.add(line + ",");
+                }
+                FileUtils.writeLines(queueFile, "UTF-8", newLines);
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Updating queue file failed", ex);
+            }
+        }
+        
+        //changes to 1.7
+        if (Config.compareProgramVersions(version, "1.6") <= 0) {
+            // change signature suffix to signature prefix -> append a colon
+            // to the signature
+            Context.persistenceManager.loadGateways();
+            Context.persistenceManager.loadGatewayProperties();
+            ArrayList<Signature> sigList = new ArrayList<Signature>();
+            sigList.addAll(Signatures.getInstance().getAll());
+            sigList.addAll(Signatures.getInstance().getSpecial());
+            for (Signature signature : sigList) {
+                String userName = signature.getUserName();
+                if (StringUtils.isNotEmpty(userName)) {
+                    signature.setUserName(userName + ":");
+                }
+            }
+            Context.persistenceManager.saveGatewayProperties();
         }
     }
 }

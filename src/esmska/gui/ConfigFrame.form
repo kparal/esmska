@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.6" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
@@ -16,10 +16,11 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <Events>
-    <EventHandler event="windowGainedFocus" listener="java.awt.event.WindowFocusListener" parameters="java.awt.event.WindowEvent" handler="formWindowGainedFocus"/>
     <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
+    <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentShown"/>
   </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
@@ -40,13 +41,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="tabbedPane" alignment="1" pref="724" max="32767" attributes="0"/>
+                  <Component id="tabbedPane" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="advancedCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="498" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="restartLabel" alignment="0" pref="724" max="32767" attributes="0"/>
+                  <Component id="restartLabel" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -56,7 +57,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabbedPane" pref="415" max="32767" attributes="0"/>
+              <Component id="tabbedPane" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="restartLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -95,17 +96,16 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="countryPrefixPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="22" pref="22" max="22" attributes="0"/>
-                              <Component id="unstableUpdatesCheckBox" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="22" pref="22" max="22" attributes="0"/>
-                              <Component id="logLocationLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="removeAccentsCheckBox" min="-2" max="-2" attributes="0"/>
                           <Component id="announceProgramUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="debugCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="unstableUpdatesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="logLocationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace pref="363" max="32767" attributes="0"/>
                   </Group>
@@ -544,20 +544,20 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel11" linkSize="4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="loginField" pref="119" max="32767" attributes="0"/>
+                                  <Component id="loginField" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel12" linkSize="4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="showPasswordCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="passwordField" alignment="0" pref="119" max="32767" attributes="0"/>
+                                      <Component id="passwordField" alignment="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="signatureComboBox" pref="72" max="32767" attributes="0"/>
+                                  <Component id="signatureComboBox" pref="0" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="sigDelButton" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -567,14 +567,14 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="senderNumberLabel" linkSize="10" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="senderNumberTextField" pref="106" max="32767" attributes="1"/>
+                                          <Component id="senderNumberTextField" pref="0" max="32767" attributes="1"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="senderNumberWarnLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="senderNameLabel" linkSize="10" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="senderNameTextField" pref="128" max="32767" attributes="2"/>
+                                          <Component id="senderNameTextField" pref="0" max="32767" attributes="2"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -739,6 +739,11 @@
                       <ResourceString bundle="esmska/resources/l10n.properties" key="ConfigFrame.senderNameTextField.toolTipText" replaceFormat="l10n.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="senderNameTextFieldFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="senderNameTextFieldFocusLost"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="senderNameTextFieldKeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="demandDeliveryReportCheckBox">
                   <Properties>

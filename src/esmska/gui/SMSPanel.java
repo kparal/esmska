@@ -336,55 +336,52 @@ public class SMSPanel extends javax.swing.JPanel {
     private void updateProgressBars() {
         int currentLength = smsTextPane.getText().length();
         int smsLength = envelope.getSMSLength();
+        int maxTextLength = envelope.getMaxTextLength();
         
-        //set maximums
-        singleProgressBar.setMaximum(Math.max(smsLength, 0));
-        fullProgressBar.setMaximum(envelope.getMaxTextLength());
+        //set limits
+        fullProgressBar.setMaximum(maxTextLength);
         
-        //if we are at the end of the whole message, the current message length
-        //can be lesser than usual
         if (smsLength > 0) {
-            int remainder = envelope.getMaxTextLength() % smsLength;
-            if (envelope.getMaxTextLength() - currentLength < remainder) {
-                //we have crossed the remainder border, let's update maximum on progress bar
-                singleProgressBar.setMaximum(remainder);
-            }
+            int prefixLength = envelope.getPrefixLength();
+            int min = (currentLength + prefixLength - 1) / smsLength * smsLength - prefixLength;
+            int max = min + smsLength;
+            
+            if (min < 0) min = 0;
+            while (max <= 0) max += smsLength;
+            if (max > maxTextLength) max = maxTextLength;
+            
+            singleProgressBar.setMinimum(min);
+            singleProgressBar.setMaximum(max);
+        } else {
+            singleProgressBar.setMinimum(0);
+            singleProgressBar.setMaximum(maxTextLength);
         }
         
         //set values
         fullProgressBar.setValue(currentLength);
-        singleProgressBar.setValue(smsLength > 0 ? currentLength % smsLength : 0);
-        //on the border counts we want progress bar full instead of empty
-        if (singleProgressBar.getValue() == 0 && currentLength > 0) {
-            singleProgressBar.setValue(singleProgressBar.getMaximum());
-        }
+        singleProgressBar.setValue(currentLength);
         
         //set tooltips
-        int current = singleProgressBar.getValue();
-        int max = singleProgressBar.getMaximum();
-        boolean infinite = (max == Integer.MAX_VALUE);
-        if (infinite) {
+        updateProgressBarToolTip(fullProgressBar, "SMSPanel.fullProgressBar");
+        updateProgressBarToolTip(singleProgressBar, "SMSPanel.singleProgressBar");
+    }
+
+    /** Updates the tooltip for the progress bar according to its current value and limits
+     * @param bar The progress bar
+     * @param resourceId The localization string name
+     */
+    private void updateProgressBarToolTip(JProgressBar bar, String resourceId)
+    {
+        int used = bar.getValue() - bar.getMinimum();
+        if (bar.getMaximum() == Integer.MAX_VALUE) {
             //don't show really big numbers when there is no limit on characters
-            singleProgressBar.setToolTipText(MessageFormat.format(
-                    l10n.getString("SMSPanel.singleProgressBar"),
-                    current, "∞", "∞"));
+            bar.setToolTipText(MessageFormat.format(l10n.getString(resourceId),
+                    used, "∞", "∞"));
         } else {
-            singleProgressBar.setToolTipText(MessageFormat.format(
-                    l10n.getString("SMSPanel.singleProgressBar"),
-                    current, max, (max - current)));
-        }
-        current = fullProgressBar.getValue();
-        max = fullProgressBar.getMaximum();
-        infinite = (max == Integer.MAX_VALUE);
-        if (infinite) {
-            //don't show really big numbers when there is no limit on characters
-            fullProgressBar.setToolTipText(MessageFormat.format(
-                    l10n.getString("SMSPanel.fullProgressBar"),
-                    current, "∞", "∞"));
-        } else {
-            fullProgressBar.setToolTipText(MessageFormat.format(
-                    l10n.getString("SMSPanel.fullProgressBar"),
-                    current, max, (max - current)));
+            int capacity = bar.getMaximum() - bar.getMinimum();
+            int remaining = bar.getMaximum() - bar.getValue();
+            bar.setToolTipText(MessageFormat.format(l10n.getString(resourceId),
+                    used, capacity, remaining));
         }
     }
 
@@ -971,13 +968,14 @@ infoPanelLayout.setHorizontalGroup(
         /** color parts of sms */
         private void colorDocument(int from, int length) {
             int smsLength = envelope.getSMSLength();
+            int prefixLength = envelope.getPrefixLength();
             while (from < length) {
                 int to = 0;
                 if (smsLength <= 0) {
                     //unspecified sms length, color it all with same color
                     to = length - 1;
                 } else {
-                    to = ((from / smsLength) + 1) * smsLength - 1;
+                    to = (((from + prefixLength) / smsLength) + 1) * smsLength - 1 - prefixLength;
                 }
                 to = to < length-1 ? to : length-1;
                 doc.setCharacterAttributes(from,to-from+1,getStyle(from),false);
@@ -990,7 +988,7 @@ infoPanelLayout.setHorizontalGroup(
                 //unspecified sms length
                 return regular;
             }
-            if ((offset / envelope.getSMSLength()) % 2 == 0) {
+            if (((offset + envelope.getPrefixLength()) / envelope.getSMSLength()) % 2 == 0) {
                 //even sms
                 return regular;
             } else {
