@@ -153,7 +153,7 @@ public class Envelope {
             // cut out the messages
             for (int i=0;i<msgText.length();i+=limit) {
                 String cutText = msgText.substring(i,Math.min(i+limit,msgText.length()));
-                SMS sms = new SMS(c.getNumber(), cutText, c.getGateway(), c.getName(), messageId);
+                SMS sms = new SMS(c.getNumber(), msgText, cutText, c.getGateway(), c.getName(), messageId);
                 list.add(sms);
             }
         }

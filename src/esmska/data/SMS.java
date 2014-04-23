@@ -18,7 +18,8 @@ public class SMS {
 
     private String number; //recipient number
     private String name; //recipient name
-    private String text; //message text
+    private String text; //message cut text
+    private String wholeText; //message text
     private ImageIcon image; //security image
     private String imageCode = ""; //security image code
     private String imageHint; //hint from gateway where to find security image (eg. sent to cell)
@@ -27,7 +28,8 @@ public class SMS {
     private String supplMsg = ""; //supplemental message from gateway about remaining credit, etc
     private Tuple<Problem, String> problem; //problem enum, string param
     private String id; //message ID, useful when splitting/joining message parts
-    
+
+        
     /** Status of SMS */
     public static enum Status {
         /** newly created, still not in the queue */
@@ -46,20 +48,27 @@ public class SMS {
     public SMS(String number, String text, String gateway) {
         this(number, text, gateway, null, null);
     }
-
+    
     /** Constructs new SMS. For detailed parameters restrictions see individual setter methods.
      * @param number not null nor empty
+     * @param wholeText not null
      * @param text not null
      * @param gateway not null nor empty
      * @param name
      * @param id
      */
-    public SMS(String number, String text, String gateway, String name, String id) {
+    public SMS(String number, String wholeText, String text, String gateway, String name, String id) {
         setNumber(number);
+        setWholeText(wholeText);
         setText(text);
         setGateway(gateway);
         setName(name);
         setId(id);
+    }
+
+    /** Shortcut for SMS(number, text, text, gateway, name, id). */
+    public SMS(String number, String text, String gateway, String name, String id) {
+        this(number, text, text, gateway, name, id);
     }
     
     /** Generate a new random message ID and return it. */
@@ -100,9 +109,14 @@ public class SMS {
         return number;
     }
 
-    /** Text of the message. Never null. */
+    /** Cut text of the message. Never null. */
     public String getText() {
         return text;
+    }
+    
+    /** Whole text of the message. Never null. */
+    public String getWholeText() {
+        return wholeText;
     }
 
     /** Sender number. Never null. */
@@ -174,7 +188,13 @@ public class SMS {
         this.number = number;
     }
 
-    /** Text of the message. Not null. */
+    /** Whole text of the message. Not null. */
+    public void setWholeText(String text) {
+        Validate.notNull(text);
+        this.wholeText = text;
+    }
+    
+    /** Cut text of the message. Not null. */
     public void setText(String text) {
         Validate.notNull(text);
         this.text = text;
