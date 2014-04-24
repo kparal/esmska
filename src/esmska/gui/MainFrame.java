@@ -712,10 +712,18 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Saves history of sent sms */
     private void createHistory(SMS sms) {
-        History.Record record = new History.Record(sms.getNumber(), sms.getText(),
+        History.Record record = new History.Record(sms.getNumber(), sms.getWholeText(),
                 sms.getGateway(), sms.getName(), sms.getSenderNumber(),
                 sms.getSenderName(), null);
-        history.addRecord(record);
+        if(history.getRecords().isEmpty()){
+            history.addRecord(record);
+        }else{
+            History.Record r = history.getRecord(history.getRecords().size()-1);
+            if(!(r.getNumber().equals(sms.getNumber()) && r.getText().equals(sms.getWholeText()) 
+                    && r.getGateway().equals(sms.getGateway()) && r.getName().equals(sms.getName()))){
+                history.addRecord(record);
+            }
+        }
     }
     
     /** save program configuration
