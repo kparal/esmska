@@ -50,6 +50,7 @@ import esmska.update.UpdateChecker;
 import esmska.data.Config;
 import esmska.data.Gateways;
 import esmska.data.History;
+import esmska.data.History.Record;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.Queue;
@@ -710,15 +711,29 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
-    /** Saves history of sent sms */
+    /**
+     * Saves history of sent sms
+     */
     private void createHistory(SMS sms) {
-        History.Record record = new History.Record(sms.getNumber(), sms.getText(),
+
+        Record record = new Record(sms.getNumber(), sms.getText(),
                 sms.getGateway(), sms.getName(), sms.getSenderNumber(),
-                sms.getSenderName(), null);
-        history.addRecord(record);
+                sms.getSenderName(), sms.getId(), null);
+        if (history.getRecords().isEmpty()) {
+            history.addRecord(record);
+        } else {
+            Record last = history.getRecord(history.getRecords().size() - 1);
+            if (last.getId().equals(sms.getId())) {
+                last.setText(last.getText() + sms.getText());
+            } else {
+                history.addRecord(record);
+            }
+        }
     }
-    
-    /** save program configuration
+
+    /**
+     * save program configuration
+     *
      * @return true if saved ok; false otherwise
      */
     private boolean saveConfig() {
