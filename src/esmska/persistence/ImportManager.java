@@ -125,11 +125,12 @@ public class ImportManager {
                     String text = reader.get(4);
                     String senderName = reader.get(5);
                     String senderNumber = reader.get(6);
+                    String id = reader.get(7);
 
                     Date date = df.parse(dateString);
 
                     History.Record record = new History.Record(number, text, gateway,
-                            name, senderNumber, senderName, date);
+                            name, senderNumber, senderName, id, date);
                     history.add(record);
                 } catch (Exception e) {
                     logger.severe("Invalid history record: " + reader.getRawRecord());
