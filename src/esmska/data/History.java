@@ -148,8 +148,15 @@ public class History {
         private String senderNumber;
         private String senderName;
         private String gateway;
+        private String id;
         private Date date;
 
+        /** Shortcut for this(number, text, gateway, name, senderNumber, senderName, null, date);*/
+        public Record(String number, String text, String gateway,
+                String name, String senderNumber, String senderName, Date date) {
+            this(number, text, gateway, name, senderNumber, senderName, null, date);
+        }
+        
         /** Create new Record. For detailed parameters restrictions see individual setter methods.
          * @param number not null nor empty
          * @param text not null
@@ -157,16 +164,18 @@ public class History {
          * @param name
          * @param senderNumber
          * @param senderName
+         * @param id
          * @param date null for current time
          */
-        public Record(String number, String text, String gateway,
-                String name, String senderNumber, String senderName, Date date) {
+        public Record(String number, String text, String gateway, String name, 
+                String senderNumber, String senderName, String id, Date date) {
             setName(name);
             setNumber(number);
             setText(text);
             setSenderNumber(senderNumber);
             setSenderName(senderName);
             setGateway(gateway);
+            setId(id);
             setDate(date);
         }
 
@@ -202,6 +211,11 @@ public class History {
             return gateway;
         }
 
+        /** Message id **/
+        public String getId() {
+            return id;
+        }
+        
         /** Date of the sending. Never null. */
         public Date getDate() {
             return date;
@@ -245,6 +259,11 @@ public class History {
         public void setGateway(String gateway) {
             Validate.notEmpty(gateway);
             this.gateway = gateway;
+        }
+
+        /** Message id */
+        public void setId(String id) {
+            this.id = id;
         }
 
         /** Date of the sending. Null value is inicialized with current time. */
