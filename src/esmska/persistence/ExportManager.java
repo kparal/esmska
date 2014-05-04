@@ -144,7 +144,7 @@ public class ExportManager {
                 record.getText(),
                 record.getSenderName(),
                 record.getSenderNumber(),
-                record.getId()
+                record.getSmsId()
             });
         }
         writer.flush();

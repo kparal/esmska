@@ -130,7 +130,7 @@ public class ImportManager {
                     Date date = df.parse(dateString);
 
                     History.Record record = new History.Record(number, text, gateway,
-                            name, senderNumber, senderName, id, date);
+                            name, senderNumber, senderName, date, id);
                     history.add(record);
                 } catch (Exception e) {
                     logger.severe("Invalid history record: " + reader.getRawRecord());

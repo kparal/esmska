@@ -716,18 +716,29 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void createHistory(SMS sms) {
 
-        Record record = new Record(sms.getNumber(), sms.getText(),
-                sms.getGateway(), sms.getName(), sms.getSenderNumber(),
-                sms.getSenderName(), sms.getId(), null);
-        if (history.getRecords().isEmpty()) {
-            history.addRecord(record);
-        } else {
-            Record last = history.getRecord(history.getRecords().size() - 1);
-            if (last.getId().equals(sms.getId())) {
-                last.setText(last.getText() + sms.getText());
-            } else {
-                history.addRecord(record);
+        boolean match = false;
+        Record toConcat = null;
+        for(Record r: history.getRecords()){
+            if(sms.getId().equals(r.getSmsId()) ){
+                if(toConcat == null){
+                    toConcat = r;
+                    match = true;
+                }else{
+                    logger.log(Level.WARNING, "Mulitple sms match during creating history of sent sms.");
+                    if(r.getDate().after(toConcat.getDate())){
+                        toConcat = r;
+                    }
+                }
             }
+        }
+        if(match){
+            toConcat.setText(toConcat.getText() + sms.getText());
+            toConcat.setDate(null);
+        }else{
+            Record record = new Record(sms.getNumber(), sms.getText(),
+                sms.getGateway(), sms.getName(), sms.getSenderNumber(),
+                sms.getSenderName(), null, sms.getId());
+            history.addRecord(record);
         }
     }
 

@@ -148,13 +148,13 @@ public class History {
         private String senderNumber;
         private String senderName;
         private String gateway;
-        private String id;
         private Date date;
+        private String smsId;
 
-        /** Shortcut for this(number, text, gateway, name, senderNumber, senderName, null, date);*/
+        /** Shortcut for this(number, text, gateway, name, senderNumber, senderName, date, null);*/
         public Record(String number, String text, String gateway,
                 String name, String senderNumber, String senderName, Date date) {
-            this(number, text, gateway, name, senderNumber, senderName, null, date);
+            this(number, text, gateway, name, senderNumber, senderName, date, null);
         }
         
         /** Create new Record. For detailed parameters restrictions see individual setter methods.
@@ -164,19 +164,19 @@ public class History {
          * @param name
          * @param senderNumber
          * @param senderName
-         * @param id
          * @param date null for current time
+         * @param smsId
          */
         public Record(String number, String text, String gateway, String name, 
-                String senderNumber, String senderName, String id, Date date) {
+                String senderNumber, String senderName, Date date, String smsId) {
             setName(name);
             setNumber(number);
             setText(text);
             setSenderNumber(senderNumber);
             setSenderName(senderName);
             setGateway(gateway);
-            setId(id);
             setDate(date);
+            setSmsId(smsId);
         }
 
         // <editor-fold defaultstate="collapsed" desc="Get Methods">
@@ -211,9 +211,9 @@ public class History {
             return gateway;
         }
 
-        /** Message id **/
-        public String getId() {
-            return id;
+        /** Message smsId **/
+        public String getSmsId() {
+            return smsId;
         }
         
         /** Date of the sending. Never null. */
@@ -261,9 +261,9 @@ public class History {
             this.gateway = gateway;
         }
 
-        /** Message id */
-        public void setId(String id) {
-            this.id = id;
+        /** Message smsId */
+        public void setSmsId(String smsId) {
+            this.smsId = smsId;
         }
 
         /** Date of the sending. Null value is inicialized with current time. */
