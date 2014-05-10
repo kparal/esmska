@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
@@ -37,12 +37,14 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="recipientLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="recipientTextField" pref="310" max="32767" attributes="0"/>
+                              <Component id="recipientTextField" pref="301" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="addContactButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="gatewayLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="gatewayComboBox" pref="276" max="32767" attributes="0"/>
+                              <Component id="gatewayComboBox" pref="301" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -57,11 +59,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="smsCounterLabel" pref="286" max="32767" attributes="0"/>
+                                      <Component id="smsCounterLabel" pref="317" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" pref="310" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="354" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -81,6 +83,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="recipientLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="recipientTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="addContactButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -96,7 +99,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane1" pref="24" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="infoPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -220,9 +223,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="credentialsInfoLabel" alignment="0" pref="328" max="32767" attributes="0"/>
-              <Component id="numberInfoLabel" alignment="0" pref="328" max="32767" attributes="0"/>
-              <Component id="countryInfoLabel" alignment="0" pref="328" max="32767" attributes="0"/>
+              <Component id="credentialsInfoLabel" alignment="0" pref="344" max="32767" attributes="0"/>
+              <Component id="numberInfoLabel" alignment="0" pref="344" max="32767" attributes="0"/>
+              <Component id="countryInfoLabel" alignment="0" pref="344" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -284,6 +287,19 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
+    </Component>
+    <Component class="javax.swing.JButton" name="addContactButton">
+      <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="showAddContactDialogAction" type="code"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/esmska/resources/add-16.png"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="addContactButton.setText(null);&#xd;&#xa;addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
