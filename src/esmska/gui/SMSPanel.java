@@ -196,6 +196,18 @@ public class SMSPanel extends javax.swing.JPanel {
     private Contact lookupContact(boolean onlyFullMatch) {
         String number = recipientField.getNumber();
         String id = recipientTextField.getText(); //name or number
+
+//        if recipientTextField is in the from "name (number)"
+        if (id.charAt(id.length() - 1) == ')') {
+//            find position of left parentheses
+            for (int i = (id.length()-2); i > 0; i--) {
+                if (id.charAt(i) == '(') {
+//                    change recipientTextField to form "name"
+                    id = id.substring(0, i-1);
+                }
+            }
+        }
+        
         String gatewayName = gatewayComboBox.getSelectedGatewayName();
         
         if (StringUtils.isEmpty(id)) {
