@@ -166,15 +166,74 @@ public class Envelope {
             }
             String messageId = SMS.generateID();
             // cut out the messages
-            for (int i=0;i<msgText.length();i+=limit) {
-                String cutText = msgText.substring(i,Math.min(i+limit,msgText.length()));
-                SMS sms = new SMS(c.getNumber(), cutText, c.getGateway(), c.getName(), messageId);
-                list.add(sms);
-            }
+            cutOutMessages(msgText, limit, c, messageId, list);
         }
         logger.log(Level.FINE, "Envelope specified for {0} contact(s) generated {1} SMS(s)", 
                 new Object[]{contacts.size(), list.size()});
         return list;
+    }
+    
+    /**
+     * generate sms's by limit for c and messageId into list
+     */
+    void cutOutMessages(String msgText, int limit, Contact c, String messageId, ArrayList<SMS> list) {
+
+        int currentLengthOfSMS = msgText.length(); //initial length of sms
+
+        //cutting msgText into sms's
+        for (int i = 0; i < msgText.length(); i += currentLengthOfSMS) {
+            int indexOfCut = findIndexOfCut(msgText, i, limit);
+
+            String cutText = msgText.substring(i, indexOfCut);
+            currentLengthOfSMS = cutText.length(); //lenght of cutText
+
+            //generate sms
+            SMS sms = new SMS(c.getNumber(), cutText, c.getGateway(), c.getName(), messageId);
+
+            //add sms into list
+            list.add(sms);
+        }
+    }
+
+    /**
+     * generate index of cut, time complexity: O(n), n ... max. length of sms
+     */
+    int findIndexOfCut(String msgText, int i, int limit) {
+        //initial index of cut
+        //meanwhile, cut message is in interval <i, i+limit)
+        int indexOfCut = i + limit;
+
+        //last part of the text, equal or shorter than the limit
+        //return index of cut, cut message is in interval <i, msgText.length)
+        if (indexOfCut >= msgText.length()) {
+            return msgText.length();
+        }
+
+        //when the index of cut is in the middle of continuous text,
+        //try to find white space
+        if (!(Character.isWhitespace(msgText.charAt(indexOfCut)))
+                && !(Character.isWhitespace(msgText.charAt(indexOfCut - 1)))) {
+
+            //searching separator between words with 20% deviation from intial index of cut
+            int minIndexOfCut = i + ((int) (limit * (0.80)));
+            while ((!Character.isWhitespace(msgText.charAt(indexOfCut)))
+                    && (indexOfCut > minIndexOfCut)) {
+
+                indexOfCut--;
+            }
+
+            //separator not found in the specified deviation 
+            //return index of cut, cut message is in interval <i, i+limit)
+            if (indexOfCut <= minIndexOfCut) {
+                return (i + limit);
+            }
+
+            //inclusion gap into (left) message
+            indexOfCut++;
+        }
+
+        //return index of cut, cut message is in interval <i, indexOfCut)
+        return indexOfCut;
     }
     
     /** get length of signature needed to be subtracted from message length */
