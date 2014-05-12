@@ -684,6 +684,8 @@ infoPanelLayout.setHorizontalGroup(
 
     layout.linkSize(SwingConstants.VERTICAL, new Component[] {fullProgressBar, singleProgressBar});
 
+    layout.linkSize(SwingConstants.VERTICAL, new Component[] {addContactButton, recipientTextField});
+
     }// </editor-fold>//GEN-END:initComponents
     
     private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
