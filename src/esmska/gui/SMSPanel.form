@@ -9,6 +9,9 @@
         </TitledBorder>
       </Border>
     </Property>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[5, 5]"/>
+    </Property>
   </Properties>
   <Events>
     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="formFocusGained"/>
@@ -37,14 +40,14 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="recipientLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="recipientTextField" pref="301" max="32767" attributes="0"/>
+                              <Component id="recipientTextField" pref="325" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="addContactButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="gatewayLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="gatewayComboBox" pref="301" max="32767" attributes="0"/>
+                              <Component id="gatewayComboBox" pref="325" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -59,11 +62,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="smsCounterLabel" pref="317" max="32767" attributes="0"/>
+                                      <Component id="smsCounterLabel" pref="341" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" pref="354" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="378" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -73,7 +76,7 @@
                       <Component id="infoPanel" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,7 +102,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="65" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="infoPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -223,9 +226,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="credentialsInfoLabel" alignment="0" pref="344" max="32767" attributes="0"/>
-              <Component id="numberInfoLabel" alignment="0" pref="344" max="32767" attributes="0"/>
-              <Component id="countryInfoLabel" alignment="0" pref="344" max="32767" attributes="0"/>
+              <Component id="credentialsInfoLabel" alignment="0" pref="368" max="32767" attributes="0"/>
+              <Component id="numberInfoLabel" alignment="0" max="32767" attributes="0"/>
+              <Component id="countryInfoLabel" alignment="0" pref="368" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

@@ -20,6 +20,7 @@ import esmska.utils.L10N;
 import esmska.utils.MiscUtils;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -285,6 +286,7 @@ public class SMSPanel extends javax.swing.JPanel {
         smsTextPaneDocumentFilter.requestUpdate();
         updateNumberInfoLabel();
         updateSuggestGatewayButton();
+        updateAddContactButton();
         revalidate();
         disableContactListeners = false;
     }
@@ -436,15 +438,21 @@ public class SMSPanel extends javax.swing.JPanel {
         }
     }
 
+    private void updateAddContactButton() {
+        RecipientTextField field = (RecipientTextField) recipientTextField;
+        if(field.getContact() == null && field.getNumber() != null) {
+             addContactButton.setVisible(true);
+        }else{
+             addContactButton.setVisible(false);
+        }
+    }
+    
     /** Show or hide suggest button */
     private void updateSuggestGatewayButton() {
         RecipientTextField field = (RecipientTextField) recipientTextField;
         ArrayList<Gateway> gws = new ArrayList<Gateway>();
         if (field.getContact() == null && field.getNumber() != null) {
-             addContactButton.setVisible(true);
              gws = Gateways.getInstance().suggestGateway(field.getNumber()).get1();
-        }else{
-             addContactButton.setVisible(false);
         }
         boolean visible = false;
         if (gws.size() > 1) {
@@ -484,6 +492,7 @@ public class SMSPanel extends javax.swing.JPanel {
         addContactButton = new JButton();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
+        setMinimumSize(new Dimension(5, 5));
         addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
                 formFocusGained(evt);
@@ -570,9 +579,9 @@ countryInfoLabel.setVisible(false);
 infoPanel.setLayout(infoPanelLayout);
 infoPanelLayout.setHorizontalGroup(
     infoPanelLayout.createParallelGroup(Alignment.LEADING)
-    .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-    .addComponent(numberInfoLabel, GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-    .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+    .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+    .addComponent(numberInfoLabel)
+    .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
     );
     infoPanelLayout.setVerticalGroup(
         infoPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -606,13 +615,13 @@ infoPanelLayout.setHorizontalGroup(
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(recipientLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                            .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(addContactButton))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(gatewayLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(suggestGatewayButton)
                             .addGap(0, 0, 0)
@@ -625,14 +634,14 @@ infoPanelLayout.setHorizontalGroup(
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                                    .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                                     .addPreferredGap(ComponentPlacement.RELATED)
                                     .addComponent(sendButton))
-                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)))))
+                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))))
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(74, 74, 74)
                     .addComponent(infoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addContainerGap())
+            .addGap(10, 10, 10))
     );
 
     layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {fullProgressBar, singleProgressBar});
@@ -657,7 +666,7 @@ infoPanelLayout.setHorizontalGroup(
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(infoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
@@ -839,21 +848,21 @@ infoPanelLayout.setHorizontalGroup(
         }
     }
     
-          /** Call action addContactAction from ContactPanel to add contact with number to contact list */
+    /** Call action addContactAction from ContactPanel to add contact with number to contact list */
     private class ShowAddContactDialogAction extends AbstractAction {
 
         private Contact skeleton;
 
         public ShowAddContactDialogAction() {
-            this.putValue(SHORT_DESCRIPTION,l10n.getString("Add_contact"));
+            this.putValue(SHORT_DESCRIPTION, l10n.getString("Add_contact"));
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
-                skeleton=new Contact("", recipientTextField.getText(), "");
-               Context.mainFrame.getContactPanel().showAddContactDialog(skeleton);
+            skeleton = new Contact(null, recipientTextField.getText(), null);
+            Context.mainFrame.getContactPanel().showAddContactDialog(skeleton);
         }
-    }  
+    } 
 
     /** Another gateway selected */
     private class GatewayComboBoxActionListener implements ActionListener {
@@ -1230,6 +1239,7 @@ infoPanelLayout.setHorizontalGroup(
                 updateNumberInfoLabel();
                 gatewayComboBox.setFilter(getNumber());
                 updateSuggestGatewayButton();
+                updateAddContactButton();
                 SMSPanel.this.revalidate();
             }
         }
