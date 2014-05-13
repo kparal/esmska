@@ -181,7 +181,7 @@ public class Envelope {
      * Take a full message text and cut it out into pieces depending on max SMS
      * length limit. The pieces will be split by word boundaries, unless it
      * would take away more than 10% of the text - in that case it will be split
-     * by characters (splitting the word).
+     * by characters (splitting the word). 
      *
      * @param msgText full message text
      * @param limit max SMS length limit
