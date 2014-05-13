@@ -11,18 +11,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.StringUtils;
 
-/** Class for preparing attributes of sms (single or multiple)
+/**
+ * Class for preparing attributes of sms (single or multiple)
  *
  * @author ripper
  */
 public class Envelope {
+
     private static final Config config = Config.getInstance();
     private static final Logger logger = Logger.getLogger(Envelope.class.getName());
     private static final Gateways gateways = Gateways.getInstance();
     private static final Signatures signatures = Signatures.getInstance();
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
-
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
@@ -34,13 +35,17 @@ public class Envelope {
         changeSupport.removePropertyChangeListener(listener);
     }
     // </editor-fold>
-    
-    /** get text of sms */
+
+    /**
+     * get text of sms
+     */
     public String getText() {
         return text;
     }
-    
-    /** set text of sms */
+
+    /**
+     * set text of sms
+     */
     public void setText(String text) {
         String oldText = this.text;
         if (config.isRemoveAccents()) {
@@ -49,20 +54,26 @@ public class Envelope {
         this.text = text;
         changeSupport.firePropertyChange("text", oldText, text);
     }
-    
-    /** get all recipients */
+
+    /**
+     * get all recipients
+     */
     public Set<Contact> getContacts() {
         return Collections.unmodifiableSet(contacts);
     }
-    
-    /** set all recipients */
+
+    /**
+     * set all recipients
+     */
     public void setContacts(Set<Contact> contacts) {
         Set<Contact> oldContacts = this.contacts;
         this.contacts = contacts;
         changeSupport.firePropertyChange("contacts", oldContacts, contacts);
     }
-    
-    /** get maximum length of sendable message */
+
+    /**
+     * get maximum length of sendable message
+     */
     public int getMaxTextLength() {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
@@ -72,27 +83,14 @@ public class Envelope {
             }
             int value = gateway.getMaxChars() * gateway.getMaxParts();
             value -= getSignatureLength(c); //subtract signature length
-            min = Math.min(min,value);
+            min = Math.min(min, value);
         }
         return min;
     }
-    
-    /** How many characters at the message start are occupied by the prefix
-     * (i.e. sender name)
-     */
-    public int getPrefixLength() {
-        int max = 0;
-        for (Contact c : contacts) {
-            Gateway gateway = gateways.get(c.getGateway());
-            if (gateway == null) {
-                continue;
-            }
-            max = Math.max(max, gateway.getSenderName().length());
-        }
-        return max;
-    }
-    
-    /** get length of one sms
+
+    /**
+     * get length of one sms
+     *
      * @return length of one sms or -1 when sms length is unspecified
      */
     public int getSMSLength() {
@@ -110,8 +108,10 @@ public class Envelope {
         }
         return min;
     }
-    
-    /** get number of sms from these characters 
+
+    /**
+     * get number of sms from these characters
+     *
      * @return resulting number of sms or -1 when length of sms is unspecified
      */
     public int getSMSCount(int chars) {
@@ -137,8 +137,10 @@ public class Envelope {
         }
         return count;
     }
-    
-    /** Get maximum signature length of the contact gateways in the envelope */
+
+    /**
+     * Get maximum signature length of the contact gateways in the envelope
+     */
     public int getSignatureLength() {
         int worstSignature = 0;
         //find maximum signature length
@@ -148,8 +150,10 @@ public class Envelope {
         }
         return worstSignature;
     }
-    
-    /** generate list of sms's to send */
+
+    /**
+     * generate list of sms's to send
+     */
     public ArrayList<SMS> generate() {
         ArrayList<SMS> list = new ArrayList<SMS>();
         for (Contact c : contacts) {
@@ -158,45 +162,70 @@ public class Envelope {
             String msgText = text;
             // add user signature to the message
             if (gateway != null) {
-                String signature = gateway.getSenderName();
+                String signature = gateway.getSenderNameSuffix();
                 // only if signature is not already added
-                if (!msgText.trim().toLowerCase().startsWith(signature.trim().toLowerCase())) {
-                    msgText = signature + msgText;
+                if (!msgText.trim().toLowerCase().endsWith(signature.trim().toLowerCase())) {
+                    msgText += signature;
                 }
             }
             String messageId = SMS.generateID();
+
             // cut out the messages
-            cutOutMessages(msgText, limit, c, messageId, list);
+            ArrayList<String> messages = cutOutMessages(msgText, limit);
+            for (String cutText : messages) {
+                SMS sms = new SMS(c.getNumber(), cutText, c.getGateway(), c.getName(), messageId);
+                list.add(sms);
+            }
+
         }
-        logger.log(Level.FINE, "Envelope specified for {0} contact(s) generated {1} SMS(s)", 
+        logger.log(Level.FINE, "Envelope specified for {0} contact(s) generated {1} SMS(s)",
                 new Object[]{contacts.size(), list.size()});
         return list;
     }
-    
-    /**
-     * generate sms's by limit for c and messageId into list
-     */
-    void cutOutMessages(String msgText, int limit, Contact c, String messageId, ArrayList<SMS> list) {
 
-        int currentLengthOfSMS = msgText.length(); //initial length of sms
+    /**
+     * Take a full message text and cut it out into pieces depending on max SMS
+     * length limit. The pieces will be split by word boundaries, unless it
+     * would take away more than 20% of the text - in that case it will be split
+     * by characters (splitting the word).
+     *
+     * @param msgText full message text
+     * @param limit max SMS length limit
+     * @return pieces of msgText, sequence of pieces corresponds to the order of
+     * pieces in the msgText
+     */
+    ArrayList<String> cutOutMessages(String msgText, int limit) {
+        ArrayList<String> list = new ArrayList<String>();
 
         //cutting msgText into sms's
+        int currentLengthOfSMS = msgText.length(); //initial length of sms
         for (int i = 0; i < msgText.length(); i += currentLengthOfSMS) {
             int indexOfCut = findIndexOfCut(msgText, i, limit);
 
             String cutText = msgText.substring(i, indexOfCut);
             currentLengthOfSMS = cutText.length(); //lenght of cutText
 
-            //generate sms
-            SMS sms = new SMS(c.getNumber(), cutText, c.getGateway(), c.getName(), messageId);
+            if (currentLengthOfSMS <= 0) {
+                throw new IllegalStateException("Current lenght of message is <= 0, loop is infinite!");
+            }
 
-            //add sms into list
-            list.add(sms);
+            //add cutText into list
+            list.add(cutText);
         }
+
+        return list;
     }
 
     /**
-     * generate index of cut, time complexity: O(n), n ... max. length of sms
+     * From beginnig index i(which is inclusive) find the ending index(which is
+     * exclusive) depending on max SMS length limit. Index will be searched by
+     * word boundaries, unless it would take away more than 20% of the text - in
+     * that case it will be searched by characters (splitting the word).
+     *
+     * @param msgText full message text
+     * @param i the beginning index, inclusive
+     * @param limit max SMS length limit
+     * @return the ending index, exclusive
      */
     int findIndexOfCut(String msgText, int i, int limit) {
         //initial index of cut
@@ -235,17 +264,18 @@ public class Envelope {
         //return index of cut, cut message is in interval <i, indexOfCut)
         return indexOfCut;
     }
-    
-    /** get length of signature needed to be subtracted from message length */
+
+    /**
+     * get length of signature needed to be subtracted from message length
+     */
     private int getSignatureLength(Contact c) {
         Gateway gateway = gateways.get(c.getGateway());
         if (gateway != null) {
-             Signature signature = signatures.get(gateway.getConfig().getSignature());
-             if (signature != null && StringUtils.length(signature.getUserName()) > 0) {
-                 return gateway.getSignatureExtraLength() + signature.getUserName().length();
-             }
+            Signature signature = signatures.get(gateway.getConfig().getSignature());
+            if (signature != null && StringUtils.length(signature.getUserName()) > 0) {
+                return gateway.getSignatureExtraLength() + signature.getUserName().length();
+            }
         }
         return 0;
     }
-    
 }
