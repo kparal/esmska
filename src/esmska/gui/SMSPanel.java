@@ -438,11 +438,12 @@ public class SMSPanel extends javax.swing.JPanel {
         }
     }
 
+    /** Show or hide addContactButton, depending whether recipientTextField contains an unknown number */
     private void updateAddContactButton() {
         RecipientTextField field = (RecipientTextField) recipientTextField;
-        if(field.getContact() == null && field.getNumber() != null) {
+        if (field.getContact() == null && field.getNumber() != null) {
              addContactButton.setVisible(true);
-        }else{
+        } else {
              addContactButton.setVisible(false);
         }
     }
