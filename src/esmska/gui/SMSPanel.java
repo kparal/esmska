@@ -20,6 +20,7 @@ import esmska.utils.L10N;
 import esmska.utils.MiscUtils;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -105,6 +106,7 @@ public class SMSPanel extends javax.swing.JPanel {
     
     private UndoAction undoAction = new UndoAction();
     private RedoAction redoAction = new RedoAction();
+    private Action showAddContactDialogAction = new ShowAddContactDialogAction();
     private CompressAction compressAction = null;
     private SendAction sendAction = new SendAction();
     private SMSTextPaneListener smsTextPaneListener = new SMSTextPaneListener();
@@ -284,6 +286,7 @@ public class SMSPanel extends javax.swing.JPanel {
         smsTextPaneDocumentFilter.requestUpdate();
         updateNumberInfoLabel();
         updateSuggestGatewayButton();
+        updateAddContactButton();
         revalidate();
         disableContactListeners = false;
     }
@@ -435,6 +438,16 @@ public class SMSPanel extends javax.swing.JPanel {
         }
     }
 
+    /** Show or hide addContactButton, depending whether recipientTextField contains an unknown number */
+    private void updateAddContactButton() {
+        RecipientTextField field = (RecipientTextField) recipientTextField;
+        if (field.getContact() == null && field.getNumber() != null) {
+             addContactButton.setVisible(true);
+        } else {
+             addContactButton.setVisible(false);
+        }
+    }
+
     /** Show or hide suggest button */
     private void updateSuggestGatewayButton() {
         RecipientTextField field = (RecipientTextField) recipientTextField;
@@ -477,8 +490,10 @@ public class SMSPanel extends javax.swing.JPanel {
         countryInfoLabel = new InfoLabel();
         suggestGatewayButton = new JButton();
         jLabel1 = new JLabel();
+        addContactButton = new JButton();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
+        setMinimumSize(new Dimension(5, 5));
         addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
                 formFocusGained(evt);
@@ -507,6 +522,7 @@ public class SMSPanel extends javax.swing.JPanel {
                 smsTextUndoManager.addEdit(e.getEdit());
             }
         });
+
         int menuMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
         String command = "undo";
         smsTextPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, menuMask), command);
@@ -524,7 +540,7 @@ public class SMSPanel extends javax.swing.JPanel {
     jScrollPane1.setViewportView(smsTextPane);
 
     textLabel.setLabelFor(smsTextPane);
-    Mnemonics.setLocalizedText(textLabel,l10n.getString("SMSPanel.textLabel.text")); // NOI18N
+        Mnemonics.setLocalizedText(textLabel, l10n.getString("SMSPanel.textLabel.text")); // NOI18N
     textLabel.setToolTipText(l10n.getString("SMSPanel.textLabel.toolTipText")); // NOI18N
 
     sendButton.setAction(sendAction);
@@ -547,8 +563,8 @@ public class SMSPanel extends javax.swing.JPanel {
             infoPanelComponentResized(evt);
         }
     });
-    Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
-        "SMSPanel.credentialsInfoLabel.text"));
+
+        Mnemonics.setLocalizedText(credentialsInfoLabel, l10n.getString("SMSPanel.credentialsInfoLabel.text")); // NOI18N
     credentialsInfoLabel.setText(MessageFormat.format(
         l10n.getString("SMSPanel.credentialsInfoLabel.text"), Links.CONFIG_GATEWAYS));
 credentialsInfoLabel.setVisible(false);
@@ -563,9 +579,9 @@ countryInfoLabel.setVisible(false);
 infoPanel.setLayout(infoPanelLayout);
 infoPanelLayout.setHorizontalGroup(
     infoPanelLayout.createParallelGroup(Alignment.LEADING)
-    .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-    .addComponent(numberInfoLabel, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-    .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+    .addComponent(credentialsInfoLabel, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+    .addComponent(numberInfoLabel)
+    .addComponent(countryInfoLabel, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
     );
     infoPanelLayout.setVerticalGroup(
         infoPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -582,6 +598,11 @@ infoPanelLayout.setHorizontalGroup(
     suggestGatewayButton.setText(null);
     suggestGatewayButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
+    addContactButton.setAction(showAddContactDialogAction);
+    addContactButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/add-16.png"))); // NOI18N
+    addContactButton.setText(null);
+    addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+
         GroupLayout layout = new GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -594,11 +615,13 @@ infoPanelLayout.setHorizontalGroup(
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(recipientLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                            .addComponent(recipientTextField, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(addContactButton))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(gatewayLabel)
                             .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(suggestGatewayButton)
                             .addGap(0, 0, 0)
@@ -611,14 +634,14 @@ infoPanelLayout.setHorizontalGroup(
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                                    .addComponent(smsCounterLabel, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                                     .addPreferredGap(ComponentPlacement.RELATED)
                                     .addComponent(sendButton))
-                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)))))
+                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))))
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(74, 74, 74)
                     .addComponent(infoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addContainerGap())
+            .addGap(10, 10, 10))
     );
 
     layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {fullProgressBar, singleProgressBar});
@@ -630,7 +653,8 @@ infoPanelLayout.setHorizontalGroup(
         .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                 .addComponent(recipientLabel)
-                .addComponent(recipientTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(recipientTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(addContactButton))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
@@ -642,7 +666,7 @@ infoPanelLayout.setHorizontalGroup(
             .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addComponent(infoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
@@ -659,6 +683,8 @@ infoPanelLayout.setHorizontalGroup(
     );
 
     layout.linkSize(SwingConstants.VERTICAL, new Component[] {fullProgressBar, singleProgressBar});
+
+    layout.linkSize(SwingConstants.VERTICAL, new Component[] {addContactButton, recipientTextField});
 
     }// </editor-fold>//GEN-END:initComponents
     
@@ -821,6 +847,19 @@ infoPanelLayout.setHorizontalGroup(
         /** update status according to current conditions */
         public void updateStatus() {
             setEnabled(getText().length() > 0);
+        }
+    }
+    
+    /** Show a dialog to add a new contact with unknown number from recipientTextField */
+    private class ShowAddContactDialogAction extends AbstractAction {
+        private Contact skeleton;
+        public ShowAddContactDialogAction() {
+            this.putValue(SHORT_DESCRIPTION, l10n.getString("Add_contact"));
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            skeleton = new Contact(null, recipientTextField.getText(), null);
+            Context.mainFrame.getContactPanel().showAddContactDialog(skeleton);
         }
     }
 
@@ -1199,12 +1238,14 @@ infoPanelLayout.setHorizontalGroup(
                 updateNumberInfoLabel();
                 gatewayComboBox.setFilter(getNumber());
                 updateSuggestGatewayButton();
+                updateAddContactButton();
                 SMSPanel.this.revalidate();
             }
         }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JButton addContactButton;
     private InfoLabel countryInfoLabel;
     private InfoLabel credentialsInfoLabel;
     private JProgressBar fullProgressBar;
