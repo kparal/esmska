@@ -50,8 +50,8 @@ public class LegacyUpdater {
         logger.log(Level.INFO, "Updating from legacy version {0} to current version {1}", 
                 new Object[]{version, Config.getLatestVersion()});
 
-        //changes to 1.7
-        if (Config.compareProgramVersions(version, "1.7") < 0) {
+        //changes to 1.6.99
+        if (Config.compareProgramVersions(version, "1.6.99") < 0) {
             //add record ID to history
             logger.fine("Updating history to add sms IDs...");
             try {
