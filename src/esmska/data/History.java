@@ -150,13 +150,7 @@ public class History {
         private String gateway;
         private Date date;
         private String smsId;
-
-        /** Shortcut for this(number, text, gateway, name, senderNumber, senderName, date, null);*/
-        public Record(String number, String text, String gateway,
-                String name, String senderNumber, String senderName, Date date) {
-            this(number, text, gateway, name, senderNumber, senderName, date, null);
-        }
-        
+               
         /** Create new Record. For detailed parameters restrictions see individual setter methods.
          * @param number not null nor empty
          * @param text not null
