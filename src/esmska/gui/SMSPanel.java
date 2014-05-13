@@ -686,6 +686,8 @@ infoPanelLayout.setHorizontalGroup(
 
     layout.linkSize(SwingConstants.VERTICAL, new Component[] {addContactButton, recipientTextField});
 
+    layout.linkSize(SwingConstants.VERTICAL, new Component[] {gatewayComboBox, suggestGatewayButton});
+
     }// </editor-fold>//GEN-END:initComponents
     
     private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained

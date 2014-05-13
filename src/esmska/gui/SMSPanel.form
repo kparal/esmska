@@ -93,9 +93,9 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="gatewayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="gatewayComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="gatewayComboBox" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="suggestGatewayButton" linkSize="7" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel1" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
