@@ -77,6 +77,7 @@ import java.beans.PropertyChangeListener;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.JComponent;
@@ -717,10 +718,11 @@ public class MainFrame extends javax.swing.JFrame {
     private void createHistory(SMS sms) {
 
         boolean match = false;
-        List<Record> records = history.getRecords();
-        for(int i = records.size()-1; i >= 0; i--){
-            Record r = records.get(i);
-            if (sms.getId() != null) {
+        if(sms.getId() != null){
+            List<Record> records = history.getRecords();
+            ListIterator<Record> li = records.listIterator(records.size());
+            while (li.hasPrevious()) {
+                Record r = li.previous();
                 if (sms.getId().equals(r.getSmsId())) {
                     r.setText(r.getText() + sms.getText());
                     r.setDate(null);

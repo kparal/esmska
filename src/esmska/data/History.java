@@ -256,6 +256,10 @@ public class History {
         }
 
         /** Message smsId */
+        /** smsId is used for matching fragments of the same SMS. 
+         * If there already is a record in the history with the same smsId, 
+         * the text of the new record is appended to the text of the 
+         * previous record, and no new record is created */
         public void setSmsId(String smsId) {
             this.smsId = smsId;
         }
