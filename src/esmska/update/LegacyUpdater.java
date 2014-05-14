@@ -51,7 +51,7 @@ public class LegacyUpdater {
                 new Object[]{version, Config.getLatestVersion()});
 
         //changes to 1.6.99
-        if (Config.compareProgramVersions(version, "1.6.99") < 0) {
+        if (Config.compareProgramVersions(version, "1.6.99") <= 0) {
             //add record ID to history
             logger.fine("Updating history to add sms IDs...");
             try {
