@@ -880,9 +880,11 @@ infoPanelLayout.setHorizontalGroup(
     /** Listener for sms text pane */
     private class SMSTextPaneListener extends AbstractDocumentListener {
         /** count number of chars in sms and take action */
-        private void countChars(DocumentEvent e) {
-            int chars = e.getDocument().getLength();
-            int smsCount = envelope.getSMSCount(chars);
+        private void countChars(DocumentEvent e) throws BadLocationException {
+            int chars = e.getDocument().getLength(); //the length of the written text
+            //the written text with prefix compensation
+            String msgText = envelope.getPrefixCompensation()+e.getDocument().getText(0, chars);
+            int smsCount = envelope.getSMSCount(msgText); //num of sms
             if (smsCount < 0) {
                 //don't count messages
                 smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.3"),
@@ -912,8 +914,12 @@ infoPanelLayout.setHorizontalGroup(
         }
         @Override
         public void onUpdate(DocumentEvent e) {
-            countChars(e);
-            updateUI(e);
+            try {
+                countChars(e);
+                updateUI(e);
+            } catch (BadLocationException ex) {
+                logger.log(Level.SEVERE, "Error getting sms text", ex);
+            }
         }
     }
     
@@ -926,8 +932,13 @@ infoPanelLayout.setHorizontalGroup(
         private Timer timer = new Timer(100, new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {           
-                colorDocument(0,doc.getLength());
-                updateUI();
+                try {
+                    //color the text according the written text with prefix
+                    colorDocument(0,doc.getLength(), (envelope.getPrefixCompensation()+doc.getText(0, doc.getLength())));
+                    updateUI();
+                } catch (BadLocationException ex) {
+                    logger.log(Level.SEVERE, "Error getting sms text", ex);
+                }
             }
         });
         public SMSTextPaneDocumentFilter() {
@@ -965,30 +976,37 @@ infoPanelLayout.setHorizontalGroup(
             sendAction.updateStatus();
             updateProgressBars();
         }
+        
         /** color parts of sms */
-        private void colorDocument(int from, int length) {
+        private void colorDocument(int from, int length, String msgText) {
+            ArrayList<Integer> cutIndexes = envelope.getIndicisOfCuts(msgText);
             int smsLength = envelope.getSMSLength();
             int prefixLength = envelope.getPrefixLength();
+            
+            int smsNum=0;
             while (from < length) {
                 int to = 0;
                 if (smsLength <= 0) {
                     //unspecified sms length, color it all with same color
                     to = length - 1;
+                    smsNum=0;
                 } else {
-                    to = (((from + prefixLength) / smsLength) + 1) * smsLength - 1 - prefixLength;
+                    to = cutIndexes.get(smsNum)-1-prefixLength;
+                    smsNum++;
                 }
+                
                 to = to < length-1 ? to : length-1;
-                doc.setCharacterAttributes(from,to-from+1,getStyle(from),false);
+                doc.setCharacterAttributes(from,to-from+1,getStyle(smsNum),false);
                 from = to + 1;
             }
         }
         /** calculate which style is appropriate for given position */
-        private Style getStyle(int offset) {
+        private Style getStyle(int smsNum) {
             if (envelope.getSMSLength() <= 0) {
                 //unspecified sms length
                 return regular;
             }
-            if (((offset + envelope.getPrefixLength()) / envelope.getSMSLength()) % 2 == 0) {
+            if ((smsNum % 2) == 1) {
                 //even sms
                 return regular;
             } else {

@@ -34,12 +34,12 @@ public class Envelope {
         changeSupport.removePropertyChangeListener(listener);
     }
     // </editor-fold>
-    
+
     /** get text of sms */
     public String getText() {
         return text;
     }
-    
+
     /** set text of sms */
     public void setText(String text) {
         String oldText = this.text;
@@ -49,19 +49,19 @@ public class Envelope {
         this.text = text;
         changeSupport.firePropertyChange("text", oldText, text);
     }
-    
+
     /** get all recipients */
     public Set<Contact> getContacts() {
         return Collections.unmodifiableSet(contacts);
     }
-    
+
     /** set all recipients */
     public void setContacts(Set<Contact> contacts) {
         Set<Contact> oldContacts = this.contacts;
         this.contacts = contacts;
         changeSupport.firePropertyChange("contacts", oldContacts, contacts);
     }
-    
+
     /** get maximum length of sendable message */
     public int getMaxTextLength() {
         int min = Integer.MAX_VALUE;
@@ -76,7 +76,7 @@ public class Envelope {
         }
         return min;
     }
-    
+
     /** How many characters at the message start are occupied by the prefix
      * (i.e. sender name)
      */
@@ -90,6 +90,23 @@ public class Envelope {
             max = Math.max(max, gateway.getSenderName().length());
         }
         return max;
+    }
+    
+    /**
+     * Generate string consist of sequence character 'x'which is same length 
+     * like the prefix.
+     * 
+     * @return String consist of sequence character 'x', which is same length 
+     * like the prefix.
+     */
+    public String getPrefixCompensation() {
+        int prefixLength = getPrefixLength();
+        
+        StringBuilder prefixCompensation = new StringBuilder();
+        for (int i = 0; i < prefixLength; i++) {
+            prefixCompensation.append('x');
+        }
+        return prefixCompensation.toString();
     }
     
     /** get length of one sms
@@ -110,7 +127,7 @@ public class Envelope {
         }
         return min;
     }
-    
+
     /** get number of sms from these characters 
      * @return resulting number of sms or -1 when length of sms is unspecified
      */
@@ -137,6 +154,56 @@ public class Envelope {
         }
         return count;
     }
+
+    /**
+     * Generate list in which are indicis of cuts according sms pieces cutting 
+     * from msgText depending on max SMS length limit. The pieces will be split 
+     * by word boundaries, unless it would take away more than 10% of 
+     * the text - in that case it will be split by characters (splitting 
+     * the word).
+     * 
+     * @param msgText full message text
+     * @return List in which are indexes of cuts. Indicis are sorted in ascending order.
+     */
+    public ArrayList<Integer> getIndicisOfCuts(String msgText) {
+        ArrayList<Integer> list = new ArrayList<Integer>(); //list which includes indicis of cuts
+
+        int limit = getSMSLength(); //max length of one sms through all contacts gateway
+        if (limit <= 0) {
+            //sms lenght is unspecified
+            throw new IllegalStateException("SMS length is unspecified.");
+        }
+
+        int currentLengthOfSMS = msgText.length(); //initial length of sms
+        double deviation = 0.1; //deviation 10% from limit
+        for (int i = 0; i < msgText.length(); i += currentLengthOfSMS) {
+            int indexOfCut = findIndexOfCut(msgText, i, limit, deviation);
+
+            currentLengthOfSMS = indexOfCut - i; //lenght of cutText
+
+            if (currentLengthOfSMS <= 0) {
+                throw new IllegalStateException("Current lenght of message is <= 0, loop is infinite!");
+            }
+
+            list.add(indexOfCut); //add index into list
+        }
+        
+        //return list, which includes indicis of cuts
+        return list;
+    }
+
+    /**
+     * Get number of sms pieces cutting from msgText depending on max SMS length 
+     * limit. The pieces will be split by word boundaries, unless it would take 
+     * away more than 10% of the text - in that case it will be split 
+     * by characters (splitting the word).
+     * 
+     * @param msgText full message text
+     * @return resulting number of sms cutting from msgText
+     */
+    public int getSMSCount(String msgText) {
+        return getIndicisOfCuts(msgText).size();
+    }
     
     /** Get maximum signature length of the contact gateways in the envelope */
     public int getSignatureLength() {
@@ -148,7 +215,7 @@ public class Envelope {
         }
         return worstSignature;
     }
-    
+
     /** generate list of sms's to send */
     public ArrayList<SMS> generate() {
         ArrayList<SMS> list = new ArrayList<SMS>();
@@ -172,16 +239,16 @@ public class Envelope {
                 list.add(sms);
             }
         }
-        logger.log(Level.FINE, "Envelope specified for {0} contact(s) generated {1} SMS(s)", 
+        logger.log(Level.FINE, "Envelope specified for {0} contact(s) generated {1} SMS(s)",
                 new Object[]{contacts.size(), list.size()});
         return list;
     }
-    
+
     /**
      * Take a full message text and cut it out into pieces depending on max SMS
      * length limit. The pieces will be split by word boundaries, unless it
      * would take away more than 10% of the text - in that case it will be split
-     * by characters (splitting the word). 
+     * by characters (splitting the word).
      *
      * @param msgText full message text
      * @param limit max SMS length limit
@@ -261,15 +328,15 @@ public class Envelope {
         //return index of cut, cut message is in interval <i, indexOfCut)
         return indexOfCut;
     }
-    
+
     /** get length of signature needed to be subtracted from message length */
     private int getSignatureLength(Contact c) {
         Gateway gateway = gateways.get(c.getGateway());
         if (gateway != null) {
-             Signature signature = signatures.get(gateway.getConfig().getSignature());
-             if (signature != null && StringUtils.length(signature.getUserName()) > 0) {
-                 return gateway.getSignatureExtraLength() + signature.getUserName().length();
-             }
+            Signature signature = signatures.get(gateway.getConfig().getSignature());
+            if (signature != null && StringUtils.length(signature.getUserName()) > 0) {
+                return gateway.getSignatureExtraLength() + signature.getUserName().length();
+            }
         }
         return 0;
     }
