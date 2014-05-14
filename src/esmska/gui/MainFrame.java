@@ -50,6 +50,7 @@ import esmska.update.UpdateChecker;
 import esmska.data.Config;
 import esmska.data.Gateways;
 import esmska.data.History;
+import esmska.data.History.Record;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.Queue;
@@ -76,6 +77,7 @@ import java.beans.PropertyChangeListener;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.JComponent;
@@ -712,12 +714,33 @@ public class MainFrame extends javax.swing.JFrame {
     
     /** Saves history of sent sms */
     private void createHistory(SMS sms) {
-        History.Record record = new History.Record(sms.getNumber(), sms.getText(),
+
+        boolean match = false;
+        if (sms.getId() != null) {
+            // there can be a previous SMS fragment
+            List<Record> records = history.getRecords();
+            ListIterator<Record> li = records.listIterator(records.size());
+            while (li.hasPrevious()) {
+                Record r = li.previous();
+                if (sms.getId().equals(r.getSmsId())) {
+                    // find the first one with matching ID and append text to it
+                    r.setText(r.getText() + sms.getText());
+                    r.setDate(null); // update timestamp to current time
+                    match = true;
+                    break;
+                }
+            }
+        }
+        
+        if (!match) {
+            // no previous fragment, create a usual record
+            Record record = new Record(sms.getNumber(), sms.getText(),
                 sms.getGateway(), sms.getName(), sms.getSenderNumber(),
-                sms.getSenderName(), null);
-        history.addRecord(record);
+                sms.getSenderName(), null, sms.getId());
+            history.addRecord(record);
+        }      
     }
-    
+
     /** save program configuration
      * @return true if saved ok; false otherwise
      */

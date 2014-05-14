@@ -149,7 +149,8 @@ public class History {
         private String senderName;
         private String gateway;
         private Date date;
-
+        private String smsId; //message ID from SMS
+               
         /** Create new Record. For detailed parameters restrictions see individual setter methods.
          * @param number not null nor empty
          * @param text not null
@@ -158,9 +159,10 @@ public class History {
          * @param senderNumber
          * @param senderName
          * @param date null for current time
+         * @param smsId
          */
-        public Record(String number, String text, String gateway,
-                String name, String senderNumber, String senderName, Date date) {
+        public Record(String number, String text, String gateway, String name, 
+                String senderNumber, String senderName, Date date, String smsId) {
             setName(name);
             setNumber(number);
             setText(text);
@@ -168,6 +170,7 @@ public class History {
             setSenderName(senderName);
             setGateway(gateway);
             setDate(date);
+            setSmsId(smsId);
         }
 
         // <editor-fold defaultstate="collapsed" desc="Get Methods">
@@ -202,6 +205,11 @@ public class History {
             return gateway;
         }
 
+        /** SMS ID **/
+        public String getSmsId() {
+            return smsId;
+        }
+        
         /** Date of the sending. Never null. */
         public Date getDate() {
             return date;
@@ -245,6 +253,17 @@ public class History {
         public void setGateway(String gateway) {
             Validate.notEmpty(gateway);
             this.gateway = gateway;
+        }
+
+        /** SMS ID.
+         * This is used for matching fragments of the same SMS. 
+         * If there already is a record in the history with the same smsId, 
+         * the text of the new record is appended to the text of the 
+         * previous record, and no new record is created. Can be null for
+         * no ID.
+         */
+        public void setSmsId(String smsId) {
+            this.smsId = smsId;
         }
 
         /** Date of the sending. Null value is inicialized with current time. */

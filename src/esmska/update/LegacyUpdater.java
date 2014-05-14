@@ -107,7 +107,6 @@ public class LegacyUpdater {
         //changes to 0.22.0
         if (Config.compareProgramVersions(version, "0.21") <= 0) {
             //transfer senderName and senderNumber settings
-            
             Field configFileField = PersistenceManager.class.getDeclaredField("configFile");
             configFileField.setAccessible(true);
             File configFile = (File) configFileField.get(null);
@@ -149,11 +148,12 @@ public class LegacyUpdater {
                 logger.log(Level.SEVERE, "Updating queue file failed", ex);
             }
         }
-        
+
         //changes to 1.7
         if (Config.compareProgramVersions(version, "1.6") <= 0) {
             // change signature suffix to signature prefix -> append a colon
             // to the signature
+            logger.fine("Updating signature suffix to prefix...");
             Context.persistenceManager.loadGateways();
             Context.persistenceManager.loadGatewayProperties();
             ArrayList<Signature> sigList = new ArrayList<Signature>();
@@ -166,6 +166,23 @@ public class LegacyUpdater {
                 }
             }
             Context.persistenceManager.saveGatewayProperties();
+        }
+        if (Config.compareProgramVersions(version, "1.6.99") <= 0) {
+            //add message ID to history
+            logger.fine("Updating history to add sms IDs...");
+            try {
+                Field queueFileField = PersistenceManager.class.getDeclaredField("historyFile");
+                queueFileField.setAccessible(true);
+                File queueFile = (File) queueFileField.get(null);
+                List<String> lines = FileUtils.readLines(queueFile, "UTF-8");
+                ArrayList<String> newLines = new ArrayList<String>();
+                for (String line : lines) {
+                    newLines.add(line + ",");
+                }
+                FileUtils.writeLines(queueFile, "UTF-8", newLines);
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, "Updating history file failed", ex);
+            }
         }
     }
 }
