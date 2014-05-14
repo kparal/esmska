@@ -712,9 +712,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
-    /**
-     * Saves history of sent sms
-     */
+    /** Saves history of sent sms */
     private void createHistory(SMS sms) {
 
         boolean match = false;
@@ -739,9 +737,7 @@ public class MainFrame extends javax.swing.JFrame {
         }      
     }
 
-    /**
-     * save program configuration
-     *
+    /** save program configuration
      * @return true if saved ok; false otherwise
      */
     private boolean saveConfig() {
