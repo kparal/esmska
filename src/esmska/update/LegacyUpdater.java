@@ -149,7 +149,7 @@ public class LegacyUpdater {
                 logger.log(Level.SEVERE, "Updating queue file failed", ex);
             }
         }
- 
+
         //changes to 1.6.99
         if (Config.compareProgramVersions(version, "1.6.99") <= 0) {
             //add record ID to history
@@ -169,7 +169,7 @@ public class LegacyUpdater {
                 logger.log(Level.SEVERE, "Updating history file failed", ex);
             }
         }
- 
+
         //changes to 1.7
         if (Config.compareProgramVersions(version, "1.6") <= 0) {
             // change signature suffix to signature prefix -> append a colon
