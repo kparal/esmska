@@ -22,7 +22,7 @@ public class Envelope {
     private static final Signatures signatures = Signatures.getInstance();
     private String text;
     private Set<Contact> contacts = new HashSet<Contact>();
-
+    
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
@@ -63,7 +63,7 @@ public class Envelope {
     }
 
     /** get maximum length of sendable message */
-    public int getMaxTextLength() {
+    public int getMaxTextLength(String msgText) {
         int min = Integer.MAX_VALUE;
         for (Contact c : contacts) {
             Gateway gateway = gateways.get(c.getGateway());
@@ -72,6 +72,10 @@ public class Envelope {
             }
             int value = gateway.getMaxChars() * gateway.getMaxParts();
             value -= getSignatureLength(c); //subtract signature length
+            //subtract white spaces created by splitting msgText by word boundaries
+            int compensation=getWhiteSpaceCompensation(msgText, gateway.getSMSLength());
+            value -= compensation;
+            
             min = Math.min(min,value);
         }
         return min;
@@ -91,24 +95,51 @@ public class Envelope {
         }
         return max;
     }
-    
+
     /**
-     * Generate string consist of sequence character 'x'which is same length 
+     * String consist of sequence character 'x', which is same length
      * like the prefix.
      * 
-     * @return String consist of sequence character 'x', which is same length 
-     * like the prefix.
+     * @return sequence character 'x'
      */
     public String getPrefixCompensation() {
-        int prefixLength = getPrefixLength();
-        
-        StringBuilder prefixCompensation = new StringBuilder();
-        for (int i = 0; i < prefixLength; i++) {
-            prefixCompensation.append('x');
-        }
-        return prefixCompensation.toString();
+        return StringUtils.repeat("x", getPrefixLength());
     }
     
+    /**
+     * If exists penultimate index of cut msgText to SMS pieces, find it,
+     * other return 0;
+     * 
+     * @param msgText full message text
+     * @param limit max length of SMS
+     * @return penultimate index of cut or 0
+     */
+    public int getPenultimateIndexOfCut(String msgText, int limit){
+        ArrayList<Integer> indicesOfCuts = getIndicisOfCuts(msgText, limit);
+        if (indicesOfCuts.size() <= 1) {
+            return 0;
+        }
+        return  (indicesOfCuts.get(indicesOfCuts.size() - 2));
+    }
+
+    /**
+     * This function calculates the number of white spaces resulting by splitting 
+     * of msgText to the pieces by word boundaries.
+     * 
+     * @param msgText full message text
+     * @param limit max length of SMS
+     * @return the number of white spaces
+     */
+    private int getWhiteSpaceCompensation(String msgText, int limit) {
+        int result = ((getSMSCount(msgText,limit) - 1) * getSMSLength())
+                - getPenultimateIndexOfCut(msgText, limit);
+        if (result<=0) {
+            return 0;
+        }
+        return result;
+        
+    }
+
     /** get length of one sms
      * @return length of one sms or -1 when sms length is unspecified
      */
@@ -156,55 +187,57 @@ public class Envelope {
     }
 
     /**
-     * Generate list in which are indicis of cuts according sms pieces cutting 
-     * from msgText depending on max SMS length limit. The pieces will be split 
+     * Generate list in which are indicis of cuts according sms pieces cutting
+     * from msgText depending on max SMS length limit. The pieces will be split
      * by word boundaries, unless it would take away more than 10% of 
      * the text - in that case it will be split by characters (splitting 
      * the word).
-     * 
+     *
      * @param msgText full message text
      * @return List in which are indexes of cuts. Indicis are sorted in ascending order.
      */
-    public ArrayList<Integer> getIndicisOfCuts(String msgText) {
-        ArrayList<Integer> list = new ArrayList<Integer>(); //list which includes indicis of cuts
-
-        int limit = getSMSLength(); //max length of one sms through all contacts gateway
-        if (limit <= 0) {
+    public ArrayList<Integer> getIndicisOfCuts(String msgText, int limit) {
+        if (limit == 0) {
+            limit = getSMSLength(); //max length of one sms through all contacts gateway
+        }
+        if (limit < 0) {
             //sms lenght is unspecified
             throw new IllegalStateException("SMS length is unspecified.");
         }
-
+        
+        ArrayList<Integer> list = new ArrayList<Integer>(); //list which includes indicis of cuts
+        
         int currentLengthOfSMS = msgText.length(); //initial length of sms
         double deviation = 0.1; //deviation 10% from limit
         for (int i = 0; i < msgText.length(); i += currentLengthOfSMS) {
             int indexOfCut = findIndexOfCut(msgText, i, limit, deviation);
-
+           
             currentLengthOfSMS = indexOfCut - i; //lenght of cutText
-
+            
             if (currentLengthOfSMS <= 0) {
                 throw new IllegalStateException("Current lenght of message is <= 0, loop is infinite!");
             }
-
+            
             list.add(indexOfCut); //add index into list
         }
-        
+
         //return list, which includes indicis of cuts
         return list;
     }
 
     /**
-     * Get number of sms pieces cutting from msgText depending on max SMS length 
-     * limit. The pieces will be split by word boundaries, unless it would take 
+     * Get number of sms pieces cutting from msgText depending on max SMS length
+     * limit. The pieces will be split by word boundaries, unless it would take
      * away more than 10% of the text - in that case it will be split 
      * by characters (splitting the word).
-     * 
+     *
      * @param msgText full message text
      * @return resulting number of sms cutting from msgText
      */
-    public int getSMSCount(String msgText) {
-        return getIndicisOfCuts(msgText).size();
+    public int getSMSCount(String msgText, int limit) {
+        return getIndicisOfCuts(msgText,limit).size();
     }
-    
+
     /** Get maximum signature length of the contact gateways in the envelope */
     public int getSignatureLength() {
         int worstSignature = 0;
@@ -256,23 +289,16 @@ public class Envelope {
      * pieces in the msgText
      */
     private ArrayList<String> cutOutMessages(String msgText, int limit) {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<String>(); //cut pieces list
 
-        //cutting msgText into sms's
-        int currentLengthOfSMS = msgText.length(); //initial length of sms
-        double deviation = 0.1; //deviation 10% from limit
-        for (int i = 0; i < msgText.length(); i += currentLengthOfSMS) {
-            int indexOfCut = findIndexOfCut(msgText, i, limit, deviation);
-
-            String cutText = msgText.substring(i, indexOfCut);
-            currentLengthOfSMS = cutText.length(); //lenght of cutText
-
-            if (currentLengthOfSMS <= 0) {
-                throw new IllegalStateException("Current lenght of message is <= 0, loop is infinite!");
-            }
-
-            //add cutText into list
+        ArrayList<Integer> indicesOfCuts = getIndicisOfCuts(msgText, limit); //indices of cuts list
+        
+        int from = 0; //start index of cut, inclusive
+        //to - ending index, exclusive
+        for (Integer to : indicesOfCuts) {
+            String cutText = msgText.substring(from, to);
             list.add(cutText);
+            from = to;
         }
 
         return list;
