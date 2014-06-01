@@ -108,14 +108,6 @@ public interface GatewayInfo {
      */
     int getMaxParts();
     
-    /** Number of extra characters used to display signature.
-     * Some gateways allow to add signature at the end of the message.
-     * This is the number of characters used for "From: " label or something similar.
-     * This number will be subtracted from the maximum message length.
-     * If your gateway doesn't support signatures, declare '0' here.
-     */
-    int getSignatureExtraLength();
-    
     /** The delay in seconds that must be kept between sending messages. The program
      * will wait for at least this number of seconds before attempting to send
      * another message. If there are no gateway restrictions, use '0'.

@@ -183,7 +183,7 @@ public class Envelope {
         if (gateway != null) {
              Signature signature = signatures.get(gateway.getConfig().getSignature());
              if (signature != null && StringUtils.length(signature.getUserName()) > 0) {
-                 return gateway.getSignatureExtraLength() + signature.getUserName().length();
+                 return signature.getUserName().length();
              }
         }
         return 0;

@@ -32,8 +32,6 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         /** The gateway is able to send a message as if it was coming from the
          * specified sender's cell number. */
         SENDER_NUMBER,
-        /** The gateway will append sender's name into the message if provided. */
-        SENDER_NAME,
         /** The gateway will send a delivery report upon request. This usually
          * means sending an SMS back to the sender as soon as the message reaches
          * the recipient. */
@@ -49,8 +47,7 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
     private URL script;
     private String name, version, maintainer, website, description, minProgramVersion;
     private String[] supportedPrefixes, preferredPrefixes, supportedLanguages, features;
-    private int smsLength,  maxParts,  maxChars,  signatureExtraLength,
-            delayBetweenMessages;
+    private int smsLength, maxParts, maxChars, delayBetweenMessages;
     private Icon icon;
     private boolean favorite, hidden;
     private GatewayConfig config = new GatewayConfig();
@@ -94,7 +91,6 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         smsLength = info.getSMSLength();
         maxParts = info.getMaxParts();
         maxChars = info.getMaxChars();
-        signatureExtraLength = info.getSignatureExtraLength();
         delayBetweenMessages = info.getDelayBetweenMessages();
         supportedLanguages = info.getSupportedLanguages();
         features = info.getFeatures();
@@ -163,17 +159,10 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
     
     /** Get sender name signature that should be prepended to the message
      * before it is sent.
-     * @return empty string if gateway adds the name signature automatically
-     *  or user does not want any signature to be added; otherwise user name 
-     *  signature
+     * @return empty string if user does not want any signature to be added; 
+     *  otherwise user name signature
      */
     public String getSenderName() {
-        if (hasFeature(Feature.SENDER_NAME)) {
-            // gateway will append sender name signature automatically
-            return "";
-        }
-        // gateway does not support SENDER_NAME feature, we have to add it by hand
-        
         Signature signature = Signatures.getInstance().get(getConfig().getSignature());
         if (signature == null || StringUtils.isEmpty(signature.getUserName())) {
             // user doesn't want to add any name signature
@@ -269,17 +258,6 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
     @Override
     public int getMaxChars() {
         return maxChars;
-    }
-
-    @Override
-    public int getSignatureExtraLength() {
-        if (hasFeature(Feature.SENDER_NAME)) {
-            // gateway will append its own string
-            return signatureExtraLength;
-        } else {
-            // we will not insert anything between signature and message
-            return 0;
-        }
     }
 
     @Override

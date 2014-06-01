@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-06-16"
+    return "2014-06-01"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.22"
+    return "1.6.99.3"
 }
 
 function getWebsite() {
@@ -41,10 +41,6 @@ function getMaxChars() {
 
 function getMaxParts() {
     return 2
-}
-
-function getSignatureExtraLength() {
-    return 0
 }
 
 function getDelayBetweenMessages() {

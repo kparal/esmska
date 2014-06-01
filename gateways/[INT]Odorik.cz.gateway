@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2011-11-29"
+    return "2014-06-01"
 }
 
 function getMaintainer() {
@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "0.22"
+    return "1.6.99.3"
 }
 
 function getWebsite() {
@@ -43,10 +43,6 @@ function getMaxParts() {
     return 1
 }
 
-function getSignatureExtraLength() {
-    return 0
-}
-
 function getDelayBetweenMessages() {
     return 0
 }
@@ -56,7 +52,7 @@ function getSupportedLanguages() {
 }
 
 function getFeatures() {
-    return ["LOGIN_ONLY", "SENDER_NAME", "SENDER_NUMBER"]
+    return ["LOGIN_ONLY", "SENDER_NUMBER"]
 }
 
 function send() {
