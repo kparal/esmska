@@ -149,6 +149,19 @@ public class Envelope {
         return worstSignature;
     }
     
+    /** get length of signature needed to be subtracted from message length */
+    private int getSignatureLength(Contact c) {
+        Gateway gateway = gateways.get(c.getGateway());
+        if (gateway == null) {
+            return 0;
+        }
+        Signature signature = signatures.get(gateway.getConfig().getSignature());
+        if (signature == null) {
+            return 0;
+        }
+        return StringUtils.length(signature.getUserName());
+    }
+    
     /** generate list of sms's to send */
     public ArrayList<SMS> generate() {
         ArrayList<SMS> list = new ArrayList<SMS>();
@@ -175,18 +188,6 @@ public class Envelope {
         logger.log(Level.FINE, "Envelope specified for {0} contact(s) generated {1} SMS(s)", 
                 new Object[]{contacts.size(), list.size()});
         return list;
-    }
-    
-    /** get length of signature needed to be subtracted from message length */
-    private int getSignatureLength(Contact c) {
-        Gateway gateway = gateways.get(c.getGateway());
-        if (gateway != null) {
-             Signature signature = signatures.get(gateway.getConfig().getSignature());
-             if (signature != null && StringUtils.length(signature.getUserName()) > 0) {
-                 return signature.getUserName().length();
-             }
-        }
-        return 0;
     }
     
 }

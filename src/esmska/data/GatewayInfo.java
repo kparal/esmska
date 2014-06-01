@@ -97,17 +97,6 @@ public interface GatewayInfo {
      */
     int getMaxChars();
     
-    /** Number of allowed messages which user can send at once.
-     * This is a multiplier of the getMaxChars() number. Some gateways offer only
-     * very short crippled messages (eg. max 60 chars, rest with advertisement).
-     * You can allow user to write a multiple of this number. The message will be
-     * split in the program and send as separate standard messages. Be judicius when
-     * specifying this number. Eg. in case of forementioned 60 chars max, multiplier
-     * of 5 (therefore writing up to 300 chars) should be absolutely sufficient.
-     * For "non-crippled" gateways, you should declare '1' here.
-     */
-    int getMaxParts();
-    
     /** The delay in seconds that must be kept between sending messages. The program
      * will wait for at least this number of seconds before attempting to send
      * another message. If there are no gateway restrictions, use '0'.

@@ -12,7 +12,7 @@ function getMaintainer() {
 }
 
 function getMinProgramVersion() {
-    return "1.6.99.3"
+    return "1.6.99.4"
 }
 
 function getWebsite() {
@@ -38,10 +38,6 @@ function getSMSLength() {
 
 function getMaxChars() {
     return 143
-}
-
-function getMaxParts() {
-    return 5
 }
 
 function getDelayBetweenMessages() {

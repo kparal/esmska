@@ -44,6 +44,10 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
     public static final String UNKNOWN = L10N.l10nBundle.getString("Gateway.unknown");
 
     private static final Logger logger = Logger.getLogger(Gateway.class.getName());
+    // maximum number of characters the user can send at once
+    private static final int maxMessageLength = 1000;
+    // maximum multiplier of messages
+    private static final int maxMaxParts = 5;
     private URL script;
     private String name, version, maintainer, website, description, minProgramVersion;
     private String[] supportedPrefixes, preferredPrefixes, supportedLanguages, features;
@@ -89,7 +93,6 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         supportedPrefixes = info.getSupportedPrefixes();
         preferredPrefixes = info.getPreferredPrefixes();
         smsLength = info.getSMSLength();
-        maxParts = info.getMaxParts();
         maxChars = info.getMaxChars();
         delayBetweenMessages = info.getDelayBetweenMessages();
         supportedLanguages = info.getSupportedLanguages();
@@ -102,6 +105,10 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         if (icon.getIconWidth() <= 0) { //non-existing icon, zero-sized image
             icon = Icons.GATEWAY_DEFAULT;
         }
+        
+        // compute maxParts
+        maxParts = maxMessageLength / maxChars;
+        maxParts = Math.min(maxParts, maxMaxParts);
 
         logger.log(Level.FINER, "Created new gateway: {0}", toString());
     }
@@ -147,6 +154,21 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
             }
         }
         return false;
+    }
+    
+    /** Number of allowed messages which user can send at once.
+     * This is a multiplier of the getMaxChars() number. Some gateways offer only
+     * very short crippled messages (eg. max 60 chars, rest with advertisement).
+     * To alleviate this problem, the user can write a longer text (a multiple
+     * of the allowed messages) and it will be split into separate messages
+     * automatically.
+     * 
+     * This number will get computed dynamically. It will be the highest 
+     * multiplier of getMaxChars() which doesn't exceed maxMessageLength chars 
+     * message length and simmultaneously a maximum multiplier maxMaxParts.
+     */
+    public int getMaxParts() {
+        return maxParts;
     }
 
     public GatewayConfig getConfig() {
@@ -248,11 +270,6 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
     @Override
     public int getSMSLength() {
         return smsLength;
-    }
-
-    @Override
-    public int getMaxParts() {
-        return maxParts;
     }
 
     @Override
