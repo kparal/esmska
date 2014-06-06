@@ -1195,7 +1195,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         layout.createParallelGroup(Alignment.LEADING)
         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+            .addComponent(tabbedPane)
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(restartLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(ComponentPlacement.RELATED)

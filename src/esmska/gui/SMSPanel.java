@@ -254,6 +254,7 @@ public class SMSPanel extends javax.swing.JPanel {
         Validate.notNull(contacts);
 
         disableContactListeners = true;
+        stripSignature();
         int count = contacts.size();
         
         if (count == 1) {
@@ -267,6 +268,7 @@ public class SMSPanel extends javax.swing.JPanel {
             recipientTextField.setText(l10n.getString("Multiple_sending"));
             gatewayComboBox.setSelectedGateway(null);
         }
+        
         recipientTextField.setEnabled(! multiSendMode);
         gatewayComboBox.setEnabled(! multiSendMode);
         
@@ -282,6 +284,7 @@ public class SMSPanel extends javax.swing.JPanel {
         envelope.setContacts(set);
         
         // update components
+        updateSignature();
         sendAction.updateStatus();
         smsTextPaneDocumentFilter.requestUpdate();
         updateNumberInfoLabel();
@@ -335,6 +338,31 @@ public class SMSPanel extends javax.swing.JPanel {
         return sendAction;
     }
     
+    /* Remove current sender name from message text */
+    private void stripSignature() {
+        String signatureName = envelope.getSenderName();
+        if (StringUtils.isEmpty(signatureName)) {
+            return;
+        }
+        String text = smsTextPane.getText();
+        if (text.startsWith(signatureName)) {
+            smsTextPane.setText(StringUtils.removeStart(text, signatureName));
+        }
+    }
+    
+    /* Add sender name to the message text if appropriate */
+    private void updateSignature() {
+        String signatureName = envelope.getSenderName();
+        if (StringUtils.isEmpty(signatureName)) {
+            return;
+        }
+        String text = smsTextPane.getText();
+        if (text.startsWith(signatureName)) {
+            return;
+        }
+        smsTextPane.setText(signatureName + text);
+    }
+    
     /** updates values on progress bars according to currently written message chars*/
     private void updateProgressBars() {
         int currentLength = smsTextPane.getText().length();
@@ -344,21 +372,17 @@ public class SMSPanel extends javax.swing.JPanel {
         //set limits
         fullProgressBar.setMaximum(maxTextLength);
         
-        if (smsLength > 0) {
-            int prefixLength = envelope.getPrefixLength();
-            int min = (currentLength + prefixLength - 1) / smsLength * smsLength - prefixLength;
-            int max = min + smsLength;
-            
-            if (min < 0) min = 0;
-            while (max <= 0) max += smsLength;
-            if (max > maxTextLength) max = maxTextLength;
-            
-            singleProgressBar.setMinimum(min);
-            singleProgressBar.setMaximum(max);
-        } else {
-            singleProgressBar.setMinimum(0);
-            singleProgressBar.setMaximum(maxTextLength);
+        int min = (currentLength - 1) / smsLength * smsLength;
+        int max = min + smsLength;
+        
+        min = Math.max(min, 0);
+        while (max <= 0) {
+            max += smsLength;
         }
+        max = Math.min(max, maxTextLength);
+
+        singleProgressBar.setMinimum(min);
+        singleProgressBar.setMaximum(max);
         
         //set values
         fullProgressBar.setValue(currentLength);
@@ -873,6 +897,8 @@ infoPanelLayout.setHorizontalGroup(
                 return;
             }
             
+            stripSignature();
+            
             //update text editor listeners
             DocumentEvent event = new DocumentEvent() {
                 @Override
@@ -914,6 +940,7 @@ infoPanelLayout.setHorizontalGroup(
             envelope.setContacts(set);
             
             //update components
+            updateSignature();
             smsTextPaneDocumentFilter.requestUpdate();
         }
     }
@@ -924,15 +951,8 @@ infoPanelLayout.setHorizontalGroup(
         private void countChars(DocumentEvent e) {
             int chars = e.getDocument().getLength();
             int smsCount = envelope.getSMSCount(chars);
-            if (smsCount < 0) {
-                //don't count messages
-                smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.3"),
-                    chars, smsCount));
-            } else {
-                //count messags
-                smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.1"),
-                    chars, smsCount));
-            }
+            smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.1"),
+                chars, smsCount));
             if (chars > envelope.getMaxTextLength()) {
                 //chars more than max
                 smsCounterLabel.setForeground(Color.RED);
@@ -1009,15 +1029,8 @@ infoPanelLayout.setHorizontalGroup(
         /** color parts of sms */
         private void colorDocument(int from, int length) {
             int smsLength = envelope.getSMSLength();
-            int prefixLength = envelope.getPrefixLength();
             while (from < length) {
-                int to = 0;
-                if (smsLength <= 0) {
-                    //unspecified sms length, color it all with same color
-                    to = length - 1;
-                } else {
-                    to = (((from + prefixLength) / smsLength) + 1) * smsLength - 1 - prefixLength;
-                }
+                int to = ((from / smsLength) + 1) * smsLength - 1;
                 to = to < length-1 ? to : length-1;
                 doc.setCharacterAttributes(from,to-from+1,getStyle(from),false);
                 from = to + 1;
@@ -1025,11 +1038,7 @@ infoPanelLayout.setHorizontalGroup(
         }
         /** calculate which style is appropriate for given position */
         private Style getStyle(int offset) {
-            if (envelope.getSMSLength() <= 0) {
-                //unspecified sms length
-                return regular;
-            }
-            if (((offset + envelope.getPrefixLength()) / envelope.getSMSLength()) % 2 == 0) {
+            if ((offset / envelope.getSMSLength()) % 2 == 0) {
                 //even sms
                 return regular;
             } else {
