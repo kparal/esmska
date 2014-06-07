@@ -198,6 +198,18 @@ public class SMSPanel extends javax.swing.JPanel {
     private Contact lookupContact(boolean onlyFullMatch) {
         String number = recipientField.getNumber();
         String id = recipientTextField.getText(); //name or number
+
+//        if recipientTextField is in the from "name (number)"
+        if (id.charAt(id.length() - 1) == ')') {
+//            find position of left parentheses
+            for (int i = (id.length()-2); i > 0; i--) {
+                if (id.charAt(i) == '(') {
+//                    change recipientTextField to form "name"
+                    id = id.substring(0, i-1);
+                }
+            }
+        }
+        
         String gatewayName = gatewayComboBox.getSelectedGatewayName();
         
         if (StringUtils.isEmpty(id)) {
@@ -1148,7 +1160,7 @@ infoPanelLayout.setHorizontalGroup(
         public void setContact(Contact contact) {
             this.contact = contact;
             if (!hasFocus()) {
-                super.setText(contact != null ? contact.getName() : null);
+                super.setText(contact != null ? contact.getName() + " (" + contact.getNumber() + ")" : null);
             }
         }
         
@@ -1194,7 +1206,7 @@ infoPanelLayout.setHorizontalGroup(
             boolean old = disableContactListeners;
             disableContactListeners = true;
            
-            super.setText(contact.getName());
+            super.setText(contact.getName()+" (" + contact.getNumber() + ")");
            
             disableContactListeners = old;
         }
