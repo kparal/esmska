@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 14:02+0200\n"
+"POT-Creation-Date: 2014-06-23 00:23+0200\n"
 "PO-Revision-Date: 2011-09-05 13:20+0000\n"
 "Last-Translator: Martin Miklanek <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -493,23 +493,17 @@ msgstr "Adresa v poli „HTTP proxy“ sa použije aj v poli „HTTPS proxy“"
 msgid "N&ame:"
 msgstr "M&eno:"
 
-#: ConfigFrame.senderNameTextField.toolTipText
-msgid ""
-"<html>\n"
-"Sender name to append to the message.<br>\n"
-"<br>\n"
-"The name occupies space in the message but is not visible,<br>\n"
-"therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match.\n"
-"</html>"
+#: ConfigFrame.senderNamePopup.exampleText
+#, fuzzy
+msgid "<html><i>Preview:</i><br>{0}&lt;message text&gt;</html>"
 msgstr ""
 "<html>\n"
-" Meno odosielateľa, ktoré sa pripojí ku správe.<br>\n"
-" <br>\n"
-" Meno zaberá miesto v správe, ale v editore nie je viditeľné,<br>\n"
-" preto sa bude zdať, že počítadlo znakov a ofarbenie textu<br>\n"
-" nebudú súhlasiť.\n"
-" </html>"
+"Vlastný text správy\n"
+"</html>"
+
+#: ConfigFrame.senderNameTextField.toolTipText
+msgid "Sender name to prepend to the message."
+msgstr ""
 
 #: ConfigFrame.senderNumberLabel.text
 msgid "&Number:"
@@ -998,9 +992,10 @@ msgid "Contact export finished successfully!"
 msgstr "Export kontaktov prebehol úspešne!"
 
 #: ExportManager.history
+#, fuzzy
 msgid ""
 "Sent messages history (date, recipient name, recipient number, gateway, "
-"message text, sender name, sender number)"
+"message text, sender name, sender number, message id)"
 msgstr ""
 "Poslať históriu správ (dátum, meno príjemcu, číslo príjemcu, brána, text "
 "správy, meno odosielateľa, číslo odosielateľa)"
@@ -1663,22 +1658,6 @@ msgstr ""
 "<html><h2>Program Esmska je už spustený!</h2>Nemôžete spustiť viacero "
 "instancií programu Esmska a táto preto skončí.</html>"
 
-#: Main.brokenWebstart
-msgid ""
-"You're currently running Esmska using OpenJDK and Java WebStart.\n"
-"Unfortunatelly this combination is currently broken and doesn't work.\n"
-"Either install Sun Java and use Java WebStart, or download Esmska to your "
-"computer\n"
-"and run it the common way.\n"
-"\n"
-"Esmska will now quit."
-msgstr ""
-"Momentálne spúšťate Esmsku použitím OpenJDK a Java WebStart.\n"
-"Bohužiaľ, táto kombinácia momentálne nefunguje správne.\n"
-"Buď si nainštalujte Sun Java a použite Java WebStart, alebo stiahnite "
-"program Esmska \n"
-"na váš počítač a spustite ho štandardným spôsobom."
-
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
@@ -2121,11 +2100,6 @@ msgstr "{0} znakov ({1} SMS)"
 msgid "{0} chars (can''t be sent!)"
 msgstr "{0} znakov (nemožno odoslať!)"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: SMSPanel.smsCounterLabel.3
-msgid "{0} chars"
-msgstr "{0} znakov"
-
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
 msgstr "0 znakov (0 sms)"
@@ -2489,3 +2463,38 @@ msgstr "Aktualizovaná brána: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "Niektoré aktualizácie brán nemohli byť nainštalované"
+
+#~ msgid ""
+#~ "<html>\n"
+#~ "Sender name to append to the message.<br>\n"
+#~ "<br>\n"
+#~ "The name occupies space in the message but is not visible,<br>\n"
+#~ "therefore the message text coloring and message counter indicator<br>\n"
+#~ "may seem not to match.\n"
+#~ "</html>"
+#~ msgstr ""
+#~ "<html>\n"
+#~ " Meno odosielateľa, ktoré sa pripojí ku správe.<br>\n"
+#~ " <br>\n"
+#~ " Meno zaberá miesto v správe, ale v editore nie je viditeľné,<br>\n"
+#~ " preto sa bude zdať, že počítadlo znakov a ofarbenie textu<br>\n"
+#~ " nebudú súhlasiť.\n"
+#~ " </html>"
+
+#~ msgid ""
+#~ "You're currently running Esmska using OpenJDK and Java WebStart.\n"
+#~ "Unfortunatelly this combination is currently broken and doesn't work.\n"
+#~ "Either install Sun Java and use Java WebStart, or download Esmska to your "
+#~ "computer\n"
+#~ "and run it the common way.\n"
+#~ "\n"
+#~ "Esmska will now quit."
+#~ msgstr ""
+#~ "Momentálne spúšťate Esmsku použitím OpenJDK a Java WebStart.\n"
+#~ "Bohužiaľ, táto kombinácia momentálne nefunguje správne.\n"
+#~ "Buď si nainštalujte Sun Java a použite Java WebStart, alebo stiahnite "
+#~ "program Esmska \n"
+#~ "na váš počítač a spustite ho štandardným spôsobom."
+
+#~ msgid "{0} chars"
+#~ msgstr "{0} znakov"

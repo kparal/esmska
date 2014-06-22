@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 14:02+0200\n"
+"POT-Creation-Date: 2014-06-23 00:23+0200\n"
 "PO-Revision-Date: 2012-04-13 12:29+0000\n"
 "Last-Translator: Dennis Baudys <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -481,15 +481,16 @@ msgstr "Die Adresse des HTTP-Proxyservers wird auch für HTTPS-Proxy verwendet"
 msgid "N&ame:"
 msgstr "N&ame:"
 
-#: ConfigFrame.senderNameTextField.toolTipText
-msgid ""
+#: ConfigFrame.senderNamePopup.exampleText
+#, fuzzy
+msgid "<html><i>Preview:</i><br>{0}&lt;message text&gt;</html>"
+msgstr ""
 "<html>\n"
-"Sender name to append to the message.<br>\n"
-"<br>\n"
-"The name occupies space in the message but is not visible,<br>\n"
-"therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match.\n"
+"Der eigentliche Nachrichtentext\n"
 "</html>"
+
+#: ConfigFrame.senderNameTextField.toolTipText
+msgid "Sender name to prepend to the message."
 msgstr ""
 
 #: ConfigFrame.senderNumberLabel.text
@@ -936,7 +937,7 @@ msgstr "Kontakt-Export erfolgreich abgeschlossen!"
 #: ExportManager.history
 msgid ""
 "Sent messages history (date, recipient name, recipient number, gateway, "
-"message text, sender name, sender number)"
+"message text, sender name, sender number, message id)"
 msgstr ""
 
 #: ExportManager.login
@@ -1490,17 +1491,6 @@ msgid ""
 "can't run multiple program instances.<br>This one will now quit.</html>"
 msgstr ""
 
-#: Main.brokenWebstart
-msgid ""
-"You're currently running Esmska using OpenJDK and Java WebStart.\n"
-"Unfortunatelly this combination is currently broken and doesn't work.\n"
-"Either install Sun Java and use Java WebStart, or download Esmska to your "
-"computer\n"
-"and run it the common way.\n"
-"\n"
-"Esmska will now quit."
-msgstr ""
-
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
@@ -1891,11 +1881,6 @@ msgstr "{0} Zeichen ({1} SMS)"
 msgid "{0} chars (can''t be sent!)"
 msgstr "{0} Zeichen (kann nicht gesendet werden!)"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: SMSPanel.smsCounterLabel.3
-msgid "{0} chars"
-msgstr "{0} Zeichen"
-
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
 msgstr "0 Zeichen (0 SMS)"
@@ -2219,3 +2204,6 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
+
+#~ msgid "{0} chars"
+#~ msgstr "{0} Zeichen"

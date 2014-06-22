@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 14:02+0200\n"
+"POT-Creation-Date: 2014-06-23 00:23+0200\n"
 "PO-Revision-Date: 2013-01-09 19:22+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -503,15 +503,16 @@ msgstr ""
 msgid "N&ame:"
 msgstr "N&ombre:"
 
-#: ConfigFrame.senderNameTextField.toolTipText
-msgid ""
+#: ConfigFrame.senderNamePopup.exampleText
+#, fuzzy
+msgid "<html><i>Preview:</i><br>{0}&lt;message text&gt;</html>"
+msgstr ""
 "<html>\n"
-"Sender name to append to the message.<br>\n"
-"<br>\n"
-"The name occupies space in the message but is not visible,<br>\n"
-"therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match.\n"
+"El verdadero texto del mensaje\n"
 "</html>"
+
+#: ConfigFrame.senderNameTextField.toolTipText
+msgid "Sender name to prepend to the message."
 msgstr ""
 
 #: ConfigFrame.senderNumberLabel.text
@@ -1009,9 +1010,10 @@ msgid "Contact export finished successfully!"
 msgstr "Exportación de contactos finalizada exitosamente."
 
 #: ExportManager.history
+#, fuzzy
 msgid ""
 "Sent messages history (date, recipient name, recipient number, gateway, "
-"message text, sender name, sender number)"
+"message text, sender name, sender number, message id)"
 msgstr ""
 "Historial de mensajes enviados (fecha, nombre del destinatario, número del "
 "destinatario, operador, texto del mensaje, nombre del remitente, número del "
@@ -1665,23 +1667,6 @@ msgstr ""
 "puede ejecutar múltiples instancias a la vez.<br>Ésta se cerrará ahora.</"
 "html>"
 
-#: Main.brokenWebstart
-msgid ""
-"You're currently running Esmska using OpenJDK and Java WebStart.\n"
-"Unfortunatelly this combination is currently broken and doesn't work.\n"
-"Either install Sun Java and use Java WebStart, or download Esmska to your "
-"computer\n"
-"and run it the common way.\n"
-"\n"
-"Esmska will now quit."
-msgstr ""
-"Está ejecutando Esmska utilizando OpenJDK y Java WebStart.\n"
-"Desafortunadamente, esta combinación no funciona actualmente.\n"
-"Instale Sun Java y use Java WebStart, o bien descargue Esmska a su equipo\n"
-"y ejecútelo de la manera usual.\n"
-"\n"
-"Esmska se cerrará ahora."
-
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
@@ -2116,11 +2101,6 @@ msgstr "{0} caracteres ({1} SMS)"
 msgid "{0} chars (can''t be sent!)"
 msgstr "{0} caracteres (¡no se pueden enviar!)"
 
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: SMSPanel.smsCounterLabel.3
-msgid "{0} chars"
-msgstr "{0} caracteres"
-
 #: SMSPanel.smsCounterLabel.text
 msgid "0 chars (0 sms)"
 msgstr "0 caracteres (0 sms)"
@@ -2499,3 +2479,23 @@ msgstr "Operador actualizado: {0}"
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr "No se pudieron instalar algunas actualizaciones de operadores."
+
+#~ msgid ""
+#~ "You're currently running Esmska using OpenJDK and Java WebStart.\n"
+#~ "Unfortunatelly this combination is currently broken and doesn't work.\n"
+#~ "Either install Sun Java and use Java WebStart, or download Esmska to your "
+#~ "computer\n"
+#~ "and run it the common way.\n"
+#~ "\n"
+#~ "Esmska will now quit."
+#~ msgstr ""
+#~ "Está ejecutando Esmska utilizando OpenJDK y Java WebStart.\n"
+#~ "Desafortunadamente, esta combinación no funciona actualmente.\n"
+#~ "Instale Sun Java y use Java WebStart, o bien descargue Esmska a su "
+#~ "equipo\n"
+#~ "y ejecútelo de la manera usual.\n"
+#~ "\n"
+#~ "Esmska se cerrará ahora."
+
+#~ msgid "{0} chars"
+#~ msgstr "{0} caracteres"

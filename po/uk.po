@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 14:02+0200\n"
+"POT-Creation-Date: 2014-06-23 00:23+0200\n"
 "PO-Revision-Date: 2011-12-03 18:15+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -485,15 +485,12 @@ msgstr ""
 msgid "N&ame:"
 msgstr ""
 
+#: ConfigFrame.senderNamePopup.exampleText
+msgid "<html><i>Preview:</i><br>{0}&lt;message text&gt;</html>"
+msgstr ""
+
 #: ConfigFrame.senderNameTextField.toolTipText
-msgid ""
-"<html>\n"
-"Sender name to append to the message.<br>\n"
-"<br>\n"
-"The name occupies space in the message but is not visible,<br>\n"
-"therefore the message text coloring and message counter indicator<br>\n"
-"may seem not to match.\n"
-"</html>"
+msgid "Sender name to prepend to the message."
 msgstr ""
 
 #: ConfigFrame.senderNumberLabel.text
@@ -959,7 +956,7 @@ msgstr "Експорт контакту завершено успішно!"
 #: ExportManager.history
 msgid ""
 "Sent messages history (date, recipient name, recipient number, gateway, "
-"message text, sender name, sender number)"
+"message text, sender name, sender number, message id)"
 msgstr ""
 
 #: ExportManager.login
@@ -1518,17 +1515,6 @@ msgid ""
 "can't run multiple program instances.<br>This one will now quit.</html>"
 msgstr ""
 
-#: Main.brokenWebstart
-msgid ""
-"You're currently running Esmska using OpenJDK and Java WebStart.\n"
-"Unfortunatelly this combination is currently broken and doesn't work.\n"
-"Either install Sun Java and use Java WebStart, or download Esmska to your "
-"computer\n"
-"and run it the common way.\n"
-"\n"
-"Esmska will now quit."
-msgstr ""
-
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: Main.cant_read_config
 msgid ""
@@ -1916,11 +1902,6 @@ msgstr ""
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: SMSPanel.smsCounterLabel.2
 msgid "{0} chars (can''t be sent!)"
-msgstr ""
-
-#. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
-#: SMSPanel.smsCounterLabel.3
-msgid "{0} chars"
 msgstr ""
 
 #: SMSPanel.smsCounterLabel.text
