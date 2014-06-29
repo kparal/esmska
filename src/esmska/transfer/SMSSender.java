@@ -91,6 +91,10 @@ public class SMSSender {
         if (success) {
             queue.setSMSSent(sms);
         } else {
+            if (sms.getProblem() == null) {
+                logger.log(Level.SEVERE, "SMS sending failed, but no problem is set: {0}", sms);
+                sms.setProblem(new Tuple<Problem, String>(Problem.UNKNOWN, null));
+            }
             queue.setSMSFailed(sms);
         }
         //look for another sms to send
@@ -128,6 +132,9 @@ public class SMSSender {
             } catch (Exception ex) {
                 logger.log(Level.WARNING, "Error while sending sms", ex);
                 success = false;
+                if (sms.getProblem() == null) {
+                    sms.setProblem(new Tuple<Problem, String>(Problem.UNKNOWN, null));
+                }
             }
             return success;
         }

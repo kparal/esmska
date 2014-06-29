@@ -64,6 +64,14 @@ public class GatewayExecutor {
         WRONG_SIGNATURE,
     }
     
+    private static final Problem[] needParams = new Problem[]{
+        Problem.CUSTOM_MESSAGE,
+        Problem.FIX_IN_PROGRESS,
+        Problem.GATEWAY_MESSAGE,
+        Problem.INTERNAL_MESSAGE,
+        Problem.UNUSABLE,
+    };
+    
     private static final ResourceBundle l10n = L10N.l10nBundle;
     private static final Logger logger = Logger.getLogger(GatewayExecutor.class.getName());
     
@@ -77,9 +85,9 @@ public class GatewayExecutor {
     public static final String INFO_STATUS_NOT_PROVIDED = 
             l10n.getString("GatewayExecutor.INFO_STATUS_NOT_PROVIDED");
     
-    private GatewayConnector connector = new GatewayConnector();
+    private final GatewayConnector connector = new GatewayConnector();
+    private final SMS sms;
     private String referer;
-    private SMS sms;
     private String lastTextContent;
 
     public GatewayExecutor(SMS sms) {
@@ -203,19 +211,13 @@ public class GatewayExecutor {
      * @param param some problems require additional string parameter, see their description
      */
     public void setProblem(Object problem, String param) {
-        Problem prob = null;
+        Problem prob;
         if (problem instanceof String) {
             prob = Problem.valueOf((String)problem);
         } else {
             prob = (Problem) problem;
         }
         //process additional params
-        Problem[] needParams = new Problem[] {
-            Problem.CUSTOM_MESSAGE,
-            Problem.FIX_IN_PROGRESS,
-            Problem.UNUSABLE,
-            Problem.GATEWAY_MESSAGE
-        };
         if (ArrayUtils.contains(needParams, prob)) {
             if (StringUtils.isEmpty(param)) {
                 throw new IllegalArgumentException("Missing additional parameter " +
