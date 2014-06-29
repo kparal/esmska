@@ -157,10 +157,15 @@ public class Envelope {
         for (Contact c : contacts) {
             Gateway gateway = gateways.get(c.getGateway());
             int limit = (gateway != null ? gateway.getMaxChars() : Gateway.maxMessageLength);
+            String msgText = text;
             // fix user signature in multisend mode
-            String msgText = StringUtils.removeStart(text, senderName);
-            if (gateway != null) {
-                msgText = gateway.getSenderName() + msgText;
+            if (contacts.size() > 1 && gateway != null) {
+                // in this mode the user can't control the sender signature
+                // per recipient, so we use the default one for each recipient
+                msgText = StringUtils.removeStart(text, senderName);
+                if (!StringUtils.startsWith(msgText, gateway.getSenderName())) {
+                    msgText = gateway.getSenderName() + msgText;
+                }
             }
             String messageId = SMS.generateID();
             // cut out the messages
