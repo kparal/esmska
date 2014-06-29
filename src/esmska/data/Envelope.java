@@ -143,10 +143,12 @@ public class Envelope {
      * by characters (splitting the word).
      *
      * @param msgText full message text
-     * @return resulting number of sms cutting from msgText
+     * @param limit max SMS length limit
+     * @return resulting number of sms cutting from msgText; the number is 0
+     * if @param limit is zero or negative
      */
     public int getSMSCount(String msgText, int limit) {
-        return getIndicesOfCuts(msgText,limit).size();
+        return getIndicesOfCuts(msgText, limit).size();
     }
 
     /** generate list of sms's to send */
@@ -198,12 +200,14 @@ public class Envelope {
      * 
      * @param msgText full message text
      * @param limit max single piece length
-     * @return list containing indices of cuts (in ascending order)
+     * @return list containing indices of cuts (in ascending order). The list
+     * is empty if @param limit is zero or negative.
      */
     public ArrayList<Integer> getIndicesOfCuts(String msgText, int limit) {
-        Validate.isTrue(limit > 0, "Can't have zero or negative length limit");
-        
         ArrayList<Integer> listOfCuts = new ArrayList<Integer>();
+        if (limit <= 0) {
+            return listOfCuts;
+        }
         
         int cutLength;
         for (int from = 0; from < msgText.length(); from += cutLength) {

@@ -894,10 +894,25 @@ infoPanelLayout.setHorizontalGroup(
             
             stripSignature();
             
+            //select contact only if full match found
+            Contact contact = lookupContact(true);
+            if (contact != null) {
+                requestSelectContact(contact);
+            }
+
+            //update envelope
+            Set<Contact> set = new HashSet<Contact>();
+
+            Contact c = recipientField.getContact();
+            set.add(new Contact(c != null ? c.getName() : null,
+                    recipientField.getNumber(),
+                    gatewayComboBox.getSelectedGatewayName()));
+            envelope.setContacts(set);
+            
             //update text editor listeners
             DocumentEvent event = new DocumentEvent() {
                 @Override
-                public ElementChange getChange(Element elem) {
+                public DocumentEvent.ElementChange getChange(Element elem) {
                     return null;
                 }
                 @Override
@@ -913,26 +928,11 @@ infoPanelLayout.setHorizontalGroup(
                     return 0;
                 }
                 @Override
-                public EventType getType() {
-                    return EventType.INSERT;
+                public DocumentEvent.EventType getType() {
+                    return DocumentEvent.EventType.INSERT;
                 }
             };
             smsTextPaneListener.onUpdate(event);
-
-            //select contact only if full match found
-            Contact contact = lookupContact(true);
-            if (contact != null) {
-                requestSelectContact(contact);
-            }
-
-            //update envelope
-            Set<Contact> set = new HashSet<Contact>();
-
-            Contact c = recipientField.getContact();
-            set.add(new Contact(c != null ? c.getName() : null,
-                    recipientField.getNumber(),
-                    gatewayComboBox.getSelectedGatewayName()));
-            envelope.setContacts(set);
 
             //update components
             updateSignature();
@@ -945,9 +945,16 @@ infoPanelLayout.setHorizontalGroup(
         /** count number of chars in sms and take action */
         private void countChars(DocumentEvent e) {
             String msgText = envelope.getText();
-            int smsCount = envelope.getSMSCount(msgText, envelope.getSMSLength()); //num of sms
-            smsCounterLabel.setText(MessageFormat.format(l10n.getString("SMSPanel.smsCounterLabel.1"),
-                    msgText.length(), smsCount));
+            if (envelope.getSMSLength() > 0) {
+                int smsCount = envelope.getSMSCount(msgText, envelope.getSMSLength()); //num of sms
+                smsCounterLabel.setText(MessageFormat.format(
+                        l10n.getString("SMSPanel.smsCounterLabel.1"),
+                        msgText.length(), smsCount));
+            } else {
+                smsCounterLabel.setText(MessageFormat.format(
+                        l10n.getString("SMSPanel.smsCounterLabel.1"),
+                        msgText.length(), "?"));
+            }
             if (msgText.length() > envelope.getMaxTextLength()) {
                 //chars more than max
                 smsCounterLabel.setForeground(Color.RED);
@@ -1027,6 +1034,11 @@ infoPanelLayout.setHorizontalGroup(
             String msgText = envelope.getText();
             ArrayList<Integer> cutIndexes = envelope.getIndicesOfCuts(msgText, 
                     envelope.getSMSLength());
+            
+            // if empty cutIndexes, the whole text should be black
+            if (cutIndexes.isEmpty()) {
+                cutIndexes.add(msgText.length());
+            }
 
             int from = 0;
             for (int i = 0; i < cutIndexes.size(); i++) {
