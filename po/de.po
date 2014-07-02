@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-23 00:23+0200\n"
-"PO-Revision-Date: 2012-04-13 12:29+0000\n"
-"Last-Translator: Dennis Baudys <Unknown>\n"
+"POT-Creation-Date: 2014-07-02 20:14+0200\n"
+"PO-Revision-Date: 2014-06-23 11:13+0000\n"
+"Last-Translator: Kamil Páral <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-03 06:02+0000\n"
-"X-Generator: Launchpad (build 16660)\n"
+"X-Launchpad-Export-Date: 2014-06-24 05:51+0000\n"
+"X-Generator: Launchpad (build 17065)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
@@ -482,12 +482,8 @@ msgid "N&ame:"
 msgstr "N&ame:"
 
 #: ConfigFrame.senderNamePopup.exampleText
-#, fuzzy
 msgid "<html><i>Preview:</i><br>{0}&lt;message text&gt;</html>"
 msgstr ""
-"<html>\n"
-"Der eigentliche Nachrichtentext\n"
-"</html>"
 
 #: ConfigFrame.senderNameTextField.toolTipText
 msgid "Sender name to prepend to the message."
@@ -2204,6 +2200,3 @@ msgstr ""
 #: Update.installFailed
 msgid "Some of gateway updates couldn't be installed."
 msgstr ""
-
-#~ msgid "{0} chars"
-#~ msgstr "{0} Zeichen"
