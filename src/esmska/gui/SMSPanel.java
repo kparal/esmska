@@ -526,7 +526,7 @@ public class SMSPanel extends javax.swing.JPanel {
             }
         });
 
-        fullProgressBar.setMaximum(1000);
+        fullProgressBar.setMaximum(Gateway.maxMessageLength);
 
         smsTextPane.getDocument().addDocumentListener(smsTextPaneListener);
         smsTextPaneDocumentFilter = new SMSTextPaneDocumentFilter();
@@ -567,7 +567,7 @@ public class SMSPanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(smsCounterLabel, l10n.getString("SMSPanel.smsCounterLabel.text")); // NOI18N
 
-    singleProgressBar.setMaximum(1000);
+    singleProgressBar.setMaximum(Gateway.maxMessageLength);
 
     gatewayLabel.setLabelFor(gatewayComboBox);
         Mnemonics.setLocalizedText(gatewayLabel, l10n.getString("SMSPanel.gatewayLabel.text")); // NOI18N

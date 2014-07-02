@@ -135,7 +135,9 @@
     </Component>
     <Component class="javax.swing.JProgressBar" name="fullProgressBar">
       <Properties>
-        <Property name="maximum" type="int" value="1000"/>
+        <Property name="maximum" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Gateway.maxMessageLength" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -184,7 +186,9 @@
     </Component>
     <Component class="javax.swing.JProgressBar" name="singleProgressBar">
       <Properties>
-        <Property name="maximum" type="int" value="1000"/>
+        <Property name="maximum" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Gateway.maxMessageLength" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="gatewayLabel">
