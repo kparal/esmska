@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-06-23"
+    return "2014-09-02"
 }
 
 function getMaintainer() {
@@ -170,7 +170,7 @@ function logout() {
 function isPaid(content) {
     re_paid = /Dle Vašeho tarifu jsme Vám zaúčtovali \d+ SMS [^\.]+\./
     match_paid = re_paid.exec(content)
-    re_free = /vše bylo zdarma/
+    re_free = /vše bylo zdarma/i
     match_free = re_free.exec(content)
     if ((match_paid && match_free) || (!match_paid && !match_free)) {
         print("WARN: " + getName() + ": Can't decide whether SMS was free or paid\n")
