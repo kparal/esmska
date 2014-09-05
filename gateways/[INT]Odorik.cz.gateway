@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-06-01"
+    return "2014-09-05"
 }
 
 function getMaintainer() {
@@ -32,7 +32,7 @@ function getPreferredPrefixes() {
 }
 
 function getSMSLength() {
-    return -1
+    return 153
 }
 
 function getMaxChars() {
