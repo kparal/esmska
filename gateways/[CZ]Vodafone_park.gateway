@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-09-02"
+    return "2014-09-07"
 }
 
 function getMaintainer() {
@@ -96,6 +96,11 @@ function send() {
         
         // we should be logged in now
     }
+    
+    // download css definitions, to be used for proof:field computation
+    // (done before we get the main content, so that it is properly logged in
+    // case of crash)
+    cssDefs = EXEC.getURL("https://park.vodafone.cz/css/theme-vodafone/default.full.opt.css", [])
 
     // get sms sending page
     content = EXEC.getURL("https://park.vodafone.cz/gateway", [])
@@ -108,18 +113,28 @@ function send() {
     // == compute proof:field ==
     re = /<script type="text\/javascript">(for\(var a=eval,b=.*?)a\(b\);<\/script>/
     match = re.exec(content)
-    script = match[1]
-    eval(script)
-    // 'b' now contains the de-obfuscated code
+    if (match) {
+        script = match[1]
+        eval(script)
+    } else {
+        // there are two versions of proof:field secret, see
+        // https://code.google.com/p/esmska/issues/detail?id=467
+        // if the previous one wasn't found, let's try the second one
+        re = /<script>eval\((function\(p,a,c,k,e,d\).*?)\);<\/script>/
+        match = re.exec(content)
+        script = ('b = ' + match[1]).toString()
+        eval(script)
+    }
+    // 'b' now contains the de-obfuscated code (from both cases)
     // we need to replace css selectors with color values
-    b = stripCSSselectors(b, content)
+    b = stripCSSselectors(b, content, cssDefs)
     // we need to evaluate all of 'b' except for the last value assignment
     separator = b.indexOf("$(\"#")
     functions = b.substring(0, separator)
     eval(functions)
     // the remnant of 'b' is the assignment we need
     assignment = b.substring(separator)
-    re = /\$\(".+?"\).val\((.*)\);/
+    re = /\$\(".+?"\).val\((.*)\);?/
     match = re.exec(assignment)
     value = match[1]
     // now compute the final proof code
@@ -153,6 +168,16 @@ function send() {
         isPaid(content)
         logout()
         return true
+    }
+    
+    // check for special notes in "popup" boxes - probably errors
+    re = /<div class="popup-block-inside3">[\s\S]*?<h2>([^<]*?)<\/h2>/
+    match = re.exec(content)
+    if (match) {
+        // gateway told us what's wrong
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+        logout()
+        return false
     }
     
     // if neither success nor error message was found
@@ -196,14 +221,17 @@ function hex2rgb(hex) {
 }
 
 // in the code (to be evaluated later) replace $(var).css("color") with the
-// real variable color extracted from the page source
-function stripCSSselectors(code, page_source) {
+// real variable color extracted from the page source, or static css definitions
+function stripCSSselectors(code, page_source, cssDefs) {
     re = /\$\("([^\"]+?)"\)\.css\("color"\)/g
     while ((match = re.exec(code)) != null) {
         // find out the value
         name = match[1]
         re2 = new RegExp(name + "\\{color:(#\\w{6});")
         match2 = re2.exec(page_source)
+        if (!match2) {
+            match2 = re2.exec(cssDefs)
+        }
         color = match2[1]
         color = hex2rgb(color)
         // replace the selector
