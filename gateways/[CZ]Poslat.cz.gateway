@@ -1,0 +1,105 @@
+function getName() {
+    return "[CZ]Poslat.cz"
+}
+
+function getVersion() {
+    return "2014-09-26"
+}
+
+function getMaintainer() {
+    return "František Mizera <mizerafranta@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.8"
+}
+
+function getWebsite() {
+    return "http://www.poslat.cz/sms"
+}
+
+function getDescription() {
+    return "Odesílání do operátorů T-mobile, Vodafone, O2, Mobil.cz, Tesco. Nutnost opisovat kódy."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 116
+}
+
+function getMaxChars() {
+    return 116
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function getFeatures() {
+    return ["CAPTCHA",
+            "SENDER_NUMBER",
+           ]
+}
+
+function send() {
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+     
+    content = EXEC.getURL("http://www.poslat.cz/sms/", []) 
+    re = /name="hash" value="(.+)"/
+    match = re.exec(content)
+    if (!match){
+        re = /<p><strong>([^]*?)<\/strong><\/p>/
+        match = re.exec(content)  
+        if (match){
+            EXEC.setProblem("GATEWAY_MESSAGE", match[0])
+            return false
+        }   
+    }
+    var hash = match[1]  
+    // download image
+    content = EXEC.getURL("http://captcha.seznam.cz/captcha.getImage", 
+                          ["hash", hash])  
+                                                                        
+    code = EXEC.recognizeImage(content, "") 
+     
+    postData = ["odesilatel_jmeno", SENDERNAME,
+                "odesilatel_email", "",
+                "odesilatel_cislo", SENDERNUMBER,
+                "prijemce_cislo", NUMBER,
+                "zprava", MESSAGE,
+                "action", "check",
+                "hash", hash,
+                "code", code,
+                "sender", "Odeslat",
+               ]
+    content = EXEC.postURL("http://www.poslat.cz/sms/", [], postData)
+    re = /<p class='success'>(.*?)<\/p>/
+    match = re.exec(content)
+    if (match) {
+        // all ok
+        return true
+    } 
+    //error
+    re = /<p class='fail'>(.+)<\/p>/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("GATEWAY_MESSAGE", match[0])
+        return false
+    }
+    // if neither success nor error message was found   
+    return false
+}
