@@ -383,6 +383,16 @@ public class GatewayConnector {
                 logger.log(Level.FINE, "Received invalidly encoded redirect URL: {0}", newURL);
                 String[] parts = StringUtils.split(newURL, "?", 2);
                 newURL = parts[0] + "?" + URLEncoder.encode(parts[1], "UTF-8");
+                logger.log(Level.FINE, "URL converted to: {0}", newURL);
+            }
+            //some characters are not allowed in URI spec, but websites still use them
+            //and browsers tolerate them, e.g. `|`
+            //see https://code.google.com/p/esmska/issues/detail?id=469
+            //we need to convert those
+            if (newURL.contains("|")) {
+                logger.log(Level.FINE, "URL contains invalid character `|`: {0}", newURL);
+                newURL = newURL.replace("|", "%7C");
+                logger.log(Level.FINE, "URL converted to: {0}", newURL);
             }
             //redirect to new url
             logger.log(Level.FINE, "Following http redirect to: {0}", newURL);
