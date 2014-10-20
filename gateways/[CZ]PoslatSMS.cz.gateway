@@ -1,0 +1,172 @@
+function getName() {
+    return "[CZ]PoslatSMS.cz"
+}
+
+function getVersion() {
+    return "2014-10-20"
+}
+
+function getMaintainer() {
+    return "František Mizera <mizerafranta@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.8.99"
+}
+
+function getWebsite() {
+    return "http://www.poslatsms.cz"
+}
+
+function getDescription() {
+    return "Odesílání SMS zpráv zdarma bez opisování kódů do českých mobilních sítí."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return ["+420601","+420602","+420606","+420607","+420720","+420721",
+            "+420722","+420723","+420724","+420725","+420726","+420727",
+            "+420728","+420729","+420702","+420603","+420604","+420605","+420730",
+            "+420731","+420732","+420733","+420734","+420735","+420736",
+            "+420737","+420738","+420739","+420790","+420799","+420771","+420608","+420772",
+            "+420773","+420774","+420775","+420776","+420777","+420778","+420779"]
+}
+
+function getSMSLength() {
+    return 125
+}
+
+function getMaxChars() {
+    return 125
+}
+
+function getDelayBetweenMessages() {
+    return 15
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function getFeatures() {
+    return ["SENDER_NUMBER"] 
+}
+
+function send() {
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+
+    // check whether there is a supplied sender number
+    if (SENDERNUMBER.length == 0) {
+        EXEC.setProblem("SIGNATURE_NEEDED")
+        return false
+    }
+    
+    // sender number must start with +420
+    if (SENDERNUMBER.indexOf("+420") != 0) {
+        EXEC.setProblem("CUSTOM_MESSAGE", "Číslo odesilatele musí pocházet z \
+České republiky (začínat na +420). Aktuální číslo odesilatele: " + SENDERNUMBER)
+        return false
+    }
+
+    // start page
+    content = EXEC.getURL("http://www.poslatsms.cz/", [])
+    var timestart = new Date().getTime()
+    pause = 3000
+    
+    // timestamp
+    ts = 0
+    re = /name="timestamp" value="(.+)"/
+    match = re.exec(content)
+    ts = match[1]
+    
+    // send message
+    postData = ["timestamp", ts,
+                "sendingProfile1", "13",
+                "sendingProfile2", "23",
+                "sendingProfile3", "33",
+                "textsms", MESSAGE,
+                "cislo-prijemce", NUMBER,
+                "cislo-odesilatele", "",
+                ]     
+      
+    content = EXEC.postURL("http://www.poslatsms.cz/Send", [], postData)
+    
+    // pokud pošlu stejnou zprávu hned znovu, brána blokuje
+    re = /Zprávy nebyly odeslány!<\/h2>\s*(.+)\s*/
+    match = re.exec(content)
+    if (match) {
+        //zpráva brány při chybě (blokaci)
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+        return false
+    }
+    
+    re = /var queueId = "(.+)";\/\//
+    match = re.exec(content)
+    ID = match[1]
+    var i
+    
+    for (i=0; i<10; i++) {
+
+        EXEC.sleep(pause)
+        
+        content = EXEC.getURL("http://www.poslatsms.cz/Completed", ["id", ID])
+        re = /<span class="status-(.+)">/
+        match = re.exec(content)
+        
+        if (match) {
+            if (match[1] == "sending") {
+                var time = new Date().getTime()
+                delay = time - timestart 
+                delay = delay/1000
+                if (delay > 20) {
+                    pause = 5000
+                }
+            } else {
+                status = match[1]
+                break
+            } 
+        } else {
+            msg = "Stav odeslání zprávy se nepodařilo zjistit. Pro kontrolu \
+můžete navštívit stránku http://www.poslatsms.cz/Completed?id=" + ID
+            EXEC.setProblem("GATEWAY_MESSAGE", msg)
+            return false
+        }
+    }
+    
+    //kontrola statusu odeslání     
+    switch (status) {
+        case "sent":
+            return true
+        case "not-sent":
+            //chyba - odesílání nedostupné
+            re = /Zprávy nebyly odeslány!<\/h2>\s*(.+)\s*/
+            match = re.exec(content)
+            if (match) {
+                msg = match[1] + ". Později můžete také zkontrolovat stav sms \
+na http://www.poslatsms.cz/Completed?id=" + ID
+                EXEC.setProblem("GATEWAY_MESSAGE", msg)
+                return false
+            } else {
+                //když je match něco jiného nebo chybí
+                msg = "Zpráva nebyla z neznámého důvodu odeslána. Pro další \
+kontrolu můžete navštívit stránku http://www.poslatsms.cz/Completed?id=" + ID
+                EXEC.setProblem("GATEWAY_MESSAGE", msg)
+                return false               
+            }
+        default:
+            msg = "Stav odeslání zprávy se nepodařilo zjistit. Pro kontrolu \
+můžete navštívit stránku http://www.poslatsms.cz/Completed?id=" + ID
+            EXEC.setProblem("GATEWAY_MESSAGE", msg)
+            return false 
+    }
+                                  
+    //pokud nastane jiná chyba (zatím neošetřená)
+    return false
+}
+
