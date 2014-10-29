@@ -3,6 +3,14 @@ README for Esmska
 
 Esmska is a program for sending SMS over the Internet.
 
+******************** Esmska is not maintained aymore ************************
+* There are currently no developers available who would have enough time to *
+* work on Esmska. I'll still accept reasonable patches, but won't work on   *
+* them myself. If you want to have something fixed, you need to provide a   *
+* patch yourself, or wait until someone does that for you. If you feel like *
+* taking over Esmska maintenance, you are very welcome, contact me.         *
+*****************************************************************************
+
 Program links:
 Esmska homepage . . . . . . http://esmska.googlecode.com/
 Documentation . . . . . . . http://code.google.com/p/esmska/w/list
