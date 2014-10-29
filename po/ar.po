@@ -1,7 +1,7 @@
-# Latvian translation for esmska
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Arabic translation for esmska
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the esmska package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
 #. extracted from ../src/esmska/resources/l10n.properties
 msgid ""
@@ -9,39 +9,39 @@ msgstr ""
 "Project-Id-Version: esmska\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-29 18:39+0200\n"
-"PO-Revision-Date: 2011-12-03 18:16+0000\n"
-"Last-Translator: Kristaps <retail@inbox.lv>\n"
-"Language-Team: Latvian <lv@li.org>\n"
-"Language: lv\n"
+"PO-Revision-Date: 2014-08-18 13:54+0000\n"
+"Last-Translator: Ahmad R. Musa <bzu.ahmad@gmail.com>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-23 05:40+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
+"X-Launchpad-Export-Date: 2014-08-19 06:08+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: AboutFrame.Acknowledge
 msgid "I acknowledge that"
-msgstr ""
+msgstr "أنا أقرّ بأنه"
 
 #: AboutFrame.Credits
 msgid "Credits"
-msgstr "Izstrādātāji"
+msgstr "النقاط المعتمده"
 
 #: AboutFrame.License
 msgid "License"
-msgstr "Licence"
+msgstr "رخصة"
 
 #: AboutFrame.Thank_you
 msgid "Thank you"
-msgstr "Paldies"
+msgstr "شكراً لك"
 
 #: AboutFrame.creditsButton.text
 msgid "C&redits"
-msgstr "Veidotāji"
+msgstr "النقاط المعتمده"
 
 #: AboutFrame.homeHyperlink.text
 msgid "Homepage"
-msgstr ""
+msgstr "الصفحه الرئيسيه"
 
 #: AboutFrame.homeHyperlink.toolTipText
 msgid ""
@@ -49,21 +49,18 @@ msgid ""
 "Show program home page\n"
 "</html>"
 msgstr ""
-"<html>\n"
-"Parādīt programmas mājas lapu\n"
-"</html>"
 
 #: AboutFrame.jLabel3.text
 msgid "Sending SMS over Internet."
-msgstr "Sūtīt SMS caur Internetu."
+msgstr "ارسال الرسائل القصيرة عبر شيكة الانترنت"
 
 #: AboutFrame.jLabel5.text
 msgid "2007-2011 Kamil Páral"
-msgstr ""
+msgstr "2007-2011 كاميل بارال"
 
 #: AboutFrame.licenseButton.text
 msgid "&License"
-msgstr "&Licence"
+msgstr "و الرخصة"
 
 #: AboutFrame.supportHyperlink.text
 msgid "Support project"
@@ -83,7 +80,7 @@ msgstr ""
 
 #: About_
 msgid "&About"
-msgstr "&Par"
+msgstr ""
 
 #: Add
 msgid "Add"
@@ -99,7 +96,7 @@ msgstr ""
 
 #: Cancel
 msgid "Cancel"
-msgstr "Atcelt"
+msgstr ""
 
 #: Cancel_
 msgid "&Cancel"
@@ -107,19 +104,19 @@ msgstr ""
 
 #: ClipboardPopupMenu.Copy
 msgid "Copy"
-msgstr "Kopēt"
+msgstr ""
 
 #: ClipboardPopupMenu.Cut
 msgid "Cut"
-msgstr "Izgriezt"
+msgstr ""
 
 #: ClipboardPopupMenu.Paste
 msgid "Paste"
-msgstr "Ielīmēt"
+msgstr ""
 
 #: Close_
 msgid "&Close"
-msgstr "&Aizvērt"
+msgstr ""
 
 #: CommandLineParser.available_options
 msgid "Available options:"
@@ -152,7 +149,7 @@ msgstr ""
 
 #: CommandLineParser.options
 msgid "OPTIONS"
-msgstr "OPCIJAS"
+msgstr ""
 
 #: CommandLineParser.path
 msgid "path"
@@ -2073,7 +2070,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Kristaps https://launchpad.net/~retail"
+"  Ahmad R. Musa https://launchpad.net/~bzu-ahmad"
 
 #. #If you want to use single quotes (') in this translation, you must write them doubled ('')!
 #: UncaughtExceptionDialog.errorLabel
