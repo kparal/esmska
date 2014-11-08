@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-06-01"
+    return "2014-11-08"
 }
 
 function getMaintainer() {
@@ -119,6 +119,15 @@ function send() {
     re = /<input type="hidden" name="counter" value="(.*)" \/>/
     match = re.exec(content);
     counter = match[1]
+    
+    // captcha may be present
+    re =  /<span class="captcha">/
+    match = re.exec(content)
+    if (match) {
+        content = EXEC.getURL("http://sms.t-mobile.cz/open/captcha.jpg", [])
+        // show image
+        var captcha = EXEC.recognizeImage(content, "")
+    }
 
     // send sms
     postData = ["counter", counter,
@@ -129,6 +138,9 @@ function send() {
                 "confirmation", RECEIPT ? "1" : "0",
                 "history", "on",
                 "TMCZcheck", "on"]
+    if (captcha) {
+        postData.concat(["captcha", captcha])
+    }
     content = EXEC.postURL("https://sms.t-mobile.cz/closed.jsp", [], postData)
 
     // if some SMS is paid, there will be one more confirmation form
