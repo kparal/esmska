@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-11-08"
+    return "2014-11-15"
 }
 
 function getMaintainer() {
@@ -139,7 +139,7 @@ function send() {
                 "history", "on",
                 "TMCZcheck", "on"]
     if (captcha) {
-        postData.concat(["captcha", captcha])
+        postData = postData.concat(["captcha", captcha])
     }
     content = EXEC.postURL("https://sms.t-mobile.cz/closed.jsp", [], postData)
 
