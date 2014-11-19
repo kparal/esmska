@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-09-07"
+    return "2014-11-20"
 }
 
 function getMaintainer() {
@@ -120,7 +120,7 @@ function send() {
         // there are two versions of proof:field secret, see
         // https://code.google.com/p/esmska/issues/detail?id=467
         // if the previous one wasn't found, let's try the second one
-        re = /<script>eval\((function\(p,a,c,k,e,d\).*?)\);<\/script>/
+        re = /<script[^>]*>eval\((function\(p,a,c,k,e,d\).*?)\);<\/script>/
         match = re.exec(content)
         script = ('b = ' + match[1]).toString()
         eval(script)
