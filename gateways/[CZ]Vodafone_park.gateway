@@ -227,12 +227,28 @@ function stripCSSselectors(code, page_source, cssDefs) {
     while ((match = re.exec(code)) != null) {
         // find out the value
         name = match[1]
-        re2 = new RegExp(name + "\\{color:(#\\w{6});")
-        match2 = re2.exec(page_source)
-        if (!match2) {
-            match2 = re2.exec(cssDefs)
+
+        // match for a CSS definition of the color
+        regexString = name + "\\{color:\\s*(#\\w{6})"
+
+        // remember the last definition
+        var lastMatch
+
+        // match for the last occurence in page body
+        re2 = new RegExp(regexString, "g")
+        var match2
+        while ( (match2 = re2.exec(page_source)) !== null) {
+            lastMatch = match2
         }
-        color = match2[1]
+
+        // match for the last occurence in included CSS file
+        re3 = new RegExp(regexString, "g")
+        var match3
+        while ( (match3 = re3.exec(cssDefs)) !== null) {
+            lastMatch = match3
+        }
+
+        color = lastMatch[1]
         color = hex2rgb(color)
         // replace the selector
         code = code.replace("$(\"" + name + "\").css(\"color\")", "\"" + color + "\"")
