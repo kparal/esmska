@@ -179,7 +179,12 @@ public class Main {
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Could not load keyring file", ex);
         }
-
+        try {
+            pm.loadTemplates();
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Could not load templates file", ex);
+        }
+        
         //initialize logging if set from Config
         if (Config.getInstance().isDebugMode()) {
             //set "full" logging, but don't log to console
