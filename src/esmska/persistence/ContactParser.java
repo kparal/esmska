@@ -96,6 +96,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     String name = "";
                     String number = "";
                     String gateway = "";
+<<<<<<< HEAD
                     String group = "";
                     //read record items
                     switch (type) {
@@ -247,6 +248,158 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
 
             //create contact
             contacts.add(new Contact(name, number, gatewayName,"skupina"));
+=======
+
+                    //read record items
+                    switch (type) {
+                        case KUBIK_DREAMCOM_FILE:
+                            name = reader.get(5);
+                            number = reader.get(6);
+                            gateway = reader.get(20).equals("") ? reader.get(21) : reader.get(20);
+                            break;
+                        case DREAMCOM_SE_FILE:
+                        case ESMSKA_FILE:
+                            name = reader.get(0);
+                            number = reader.get(1);
+                            gateway = reader.get(2);
+                    }
+
+                    if (StringUtils.isEmpty(name)) {
+                        continue;
+                    }
+                    if (!Contact.isValidNumber(number)) {
+                        continue;
+                    }
+
+                    //convert known gateways to our gateways
+                    switch (type) {
+                        case KUBIK_DREAMCOM_FILE:
+                            if (gateway.startsWith("Oskar") || gateway.startsWith("Vodafone")) {
+                                gateway = "[CZ]Vodafone";
+                            } else if (gateway.startsWith("Eurotel") || gateway.startsWith("O2")) {
+                                gateway = "[CZ]O2";
+                            } else if (gateway.startsWith("T-Mobile")) {
+                                gateway = "[CZ]T-mobile";
+                            }
+                            break;
+                        case DREAMCOM_SE_FILE:
+                            if (gateway.startsWith("O2")) {
+                                gateway = "[CZ]O2";
+                            } else if (gateway.startsWith("Vodafone")) {
+                                gateway = "[CZ]Vodafone";
+                            } else if (gateway.startsWith("T-Zones")) {
+                                gateway = "[CZ]t-zones";
+                            }
+                            break;
+                    }
+
+                    contacts.add(new Contact(name, number, gateway));
+                } catch (Exception e) {
+                    logger.severe("Invalid contact record: " + reader.getRawRecord());
+                    throw e;
+                }
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+
+        logger.finer("Parsed " + contacts.size() + " contacts");
+        return contacts;
+    }
+    
+    /** parse vcard file and return contacts */
+    private ArrayList<Contact> parseVCARD() throws IOException, VCardException {
+        logger.finer("Parsing vCard file '" + file + "' as type " + type);
+        contacts.clear();
+
+        VCardParser parser = new VCardParser();
+        VDataBuilder builder = new VDataBuilder();
+
+        //read whole file to string
+        String vcardString = FileUtils.readFileToString(file, "UTF-8");
+
+        boolean parsed = parser.parse(vcardString, "UTF-8", builder);
+        if (!parsed) {
+            throw new VCardException("Could not parse vCard file: " + file);
+        }
+
+        //get all parsed contacts
+        List<VNode> pimContacts = builder.vNodeList;
+
+        for (VNode contact : pimContacts) {
+            ArrayList<PropertyNode> props = contact.propList;
+
+            //contact name - FN property
+            String name = null;
+            for (PropertyNode prop : props) {
+                if ("FN".equals(prop.propName)) {
+                    name = prop.propValue;
+                    break;
+                }
+            }
+            //contact name - N property (in case FN wasn't present)
+            if (name == null) {
+                for (PropertyNode prop : props) {
+                    if ("N".equals(prop.propName)) {
+                        //replace separators as spaces between name parts
+                        name = StringUtils.replace(prop.propValue, ";", " ");
+                        break;
+                    }
+                }
+            }
+            //contact name - ORG property (in case FN and N wasn't present)
+            if (name == null) {
+                for (PropertyNode prop : props) {
+                    if ("ORG".equals(prop.propName)) {
+                        name = prop.propValue;
+                        break;
+                    }
+                }
+            }
+            //skip contact without name
+            if (StringUtils.isEmpty(name)) {
+                continue;
+            }
+
+            //phone number - TEL property
+            String number = null;
+            boolean preferred = false, cellular = false;
+            for (PropertyNode prop : props) {
+                if ("TEL".equals(prop.propName)) {
+                    Set<String> types = prop.paramMap_TYPE;
+                    if (StringUtils.isEmpty(number)) {
+                        //first number
+                        number = prop.propValue;
+                    }
+                    if (!preferred && containsIgnoreCase(types, "PREF")) {
+                        //found first preferred number
+                        number = prop.propValue;
+                        preferred = true;
+                    }
+                    if (!preferred && !cellular && containsIgnoreCase(types, "CELL")) {
+                        //found first cellular and there was no previously preferred number
+                        number = prop.propValue;
+                        cellular = true;
+                    }
+                }
+            }
+            //convert number to valid format (or null)
+            number = Contact.parseNumber(number);
+            //skip contact without valid number
+            if (number == null) {
+                continue;
+            }
+
+            //guess gateway
+            ArrayList<Gateway> gateways = Gateways.getInstance().suggestGateway(number).get1();
+            String gatewayName = gateways.isEmpty() ? null :
+                gateways.get(RandomUtils.nextInt(gateways.size())).getName();
+
+            //create contact
+            contacts.add(new Contact(name, number, gatewayName));
+>>>>>>> origin/work
         }
 
         logger.finer("Parsed " + contacts.size() + " contacts");

@@ -113,7 +113,11 @@ public class ImportContactsTransferHandler extends TransferHandler {
                     name = data;
                 }
 
+<<<<<<< HEAD
                 Contact skeleton = new Contact(name, number, null,"fff");
+=======
+                Contact skeleton = new Contact(name, number, null);
+>>>>>>> origin/work
                 Context.mainFrame.getContactPanel().showAddContactDialog(skeleton);
             } else {
                 String msg = "Unknown supported DnD flavor: " + Arrays.toString(support.getDataFlavors());
