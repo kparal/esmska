@@ -1,0 +1,164 @@
+
+function getName() {
+    return "[CZ]KlikniAVolej"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Jakub Vít <jakub.vit@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "http://www.klikniavolej.cz/"
+}
+
+function getDescription() {
+    return "Placená SMS brána. Umožnuje odesílat sms pod stejným číslem, jako má váš telefon."
+}
+
+function getSupportedPrefixes() {
+    return []
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 765
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function isLoginRequired() {
+    return true
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY"]
+}
+
+function send() {
+
+    // Kontrola prihlasovacich udaju
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // Urceni predcisli
+    var prefix = EXEC.extractCountryPrefix(NUMBER)
+    if (prefix == "") {
+        EXEC.setProblem("CUSTOM_MESSAGE", "Špatné číslo příjemce, nelze určit předčíslí země.")
+        return false;
+    }
+    NUMBER = NUMBER.replace(prefix,'');
+
+    // Je prihlasen?
+    content = EXEC.getURL("http://www.klikniavolej.cz/", [])
+    logged = check_login(content)
+
+    // Pokud ne tak prihlasit
+    if (!logged) {
+        postData = ["user-name", LOGIN, "user-pass", PASSWORD]
+        content = EXEC.postURL("http://www.klikniavolej.cz/_login.asp", [], postData)
+        if (!check_login(content)) {
+            EXEC.setProblem("WRONG_AUTH")
+            logout()
+            return false
+        }
+    }
+
+    // Zjisteni cisla odesilatele (prvni v seznamu)
+    content = EXEC.getURL("http://www.klikniavolej.cz/sms.asp", [])
+    re = /<input\stype="radio"\sname="number-from"\sid="volba1"\svalue="(\d+)"/
+    match = re.exec(content)
+    if (!match) {
+        EXEC.setProblem("CUSTOM_MESSAGE", "Není zaregistrováno číslo!")
+        logout()
+        return false
+    }
+    numberFrom = match[1]
+
+    // Zkontrolovani kreditu
+    kredit = get_credit(content)
+    if (!kredit) {
+        EXEC.setProblem("CUSTOM_MESSAGE", "Nepodařilo se načíst kredit")
+        logout()
+        return false
+    }
+    if (kredit<1) {
+        EXEC.setProblem("NO_CREDIT")
+        logout()
+        return false
+    }
+
+    // Odeslani SMS
+    postData = ["mf-suffix", NUMBER, "mf-prefix", prefix, "sendsms-text", MESSAGE,
+                "us-countries", prefix, "sms-send", "send","number-from", numberFrom]
+    content = EXEC.postURL("http://www.klikniavolej.cz/sms.asp", [], postData)
+
+    // Podarilo se
+    re = /SMS\sbyla\sodesl.{1,6}na/
+    match = re.exec(content);
+    if (match) {
+        // Urceni kreditu
+        kredit = get_credit(content)
+        if (!kredit) {
+            EXEC.setSupplementalMessage("Nepodařilo se načíst kredit, ale zpráva byla odeslána")
+        } else {
+            EXEC.setSupplementalMessage(EXEC.INFO_CREDIT_REMAINING + kredit.toFixed(2) +' Kč')
+        }
+        logout()
+        return true
+    }
+
+    // Zjisteni chybove hlasky
+    re = /class="infopanelerror"><ul>(.[^<]+)</
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+        logout()
+        return false
+    }
+
+    // Stalo se neco divneho
+    return false
+}
+
+function logout() {
+    EXEC.getURL("http://www.klikniavolej.cz/_logout.asp", [])
+}
+
+// search through webpage content and return whether we are logged in or not
+function check_login(content) {
+    return !/action="\/_login\.asp">/.test(content)
+}
+
+// search through webpage content and return remaining credit (if possible, otherwise null)
+function get_credit(content) {
+    re = /<span\sclass="kredit">(\d+,\d{2}).+<\/span>/
+    match = re.exec(content)
+    if (!match) {
+        return null
+    }
+    credit = parseFloat(match[1].replace(',','.'))
+    return credit
+}

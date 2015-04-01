@@ -1,0 +1,143 @@
+
+function getName() {
+    return "[CZ]O2 (registrace)"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "http://sms.1188.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána O2 pro registrované uživatele. Registrace je dostupná pro každého. Zdarma odesílá zprávy do sítě O2 a nevyžaduje opsání bezpečnostního kódu."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return ["+420601","+420602","+420606","+420607","+420720","+420721",
+            "+420722","+420723","+420724","+420725","+420726","+420727",
+            "+420728","+420729"]
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 160
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY"]
+}
+
+function send() {
+    
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+    
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // start page
+    content = EXEC.getURL("http://sms.1188.cz", [])
+
+    // find if we are logged in
+    logged = false
+    re = /<a href="\/logout">/
+    match = re.exec(content)
+    if (match) {
+        logged = true
+    }
+
+    // log in if needed
+    if (!logged) {
+        postData = ["user_session[login]", LOGIN, 
+                    "user_session[password]", PASSWORD,
+                    "user_session[remember_me]", "1"]
+        content = EXEC.postURL("http://sms.1188.cz/signup", [], postData)
+        
+        // check log in errors
+        re = /Nesprávně zadané přihlašovací údaje/
+        match = re.exec(content)
+        if (match) {
+            // login credentials are incorrect
+            EXEC.setProblem("WRONG_AUTH")
+            logout()
+            return false
+        }
+        re = /<div class="error_message">([^<]*)<\/div>/
+        match = re.exec(content)
+        if (match) {
+            // some other problem
+            EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+            logout()
+            return false
+        }
+        
+        // we should be logged in now
+    }
+
+    // send message
+    postData = ["sms[phone_numbers][]", NUMBER,
+                "sms[text]", MESSAGE,
+               ]
+    content = EXEC.postURL("http://sms.1188.cz/sms", [], postData)
+
+    // check if message was successfully sent
+    re = /SMS přijata/
+    match = re.exec(content)
+    if (match) {
+        // all ok
+        logout()
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<div class="error_message">([\s\S]*?)<\/div>/g
+    match = content.match(re)
+    if (match) {
+        // more messages might be present, display them all
+        errors = match.join("")
+        EXEC.setProblem("GATEWAY_MESSAGE", errors)
+        logout()
+        return false
+    }
+    
+    // if neither success nor error message was found
+    logout()
+    return false
+}
+
+// custom function for logging out
+function logout() {
+    EXEC.getURL("http://sms.1188.cz/logout", [])
+}
+

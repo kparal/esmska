@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Updates POT file from properties file,
+# updates PO files to be up to date,
+# updates properties files from PO files.
+
+# Dependencies: translate-toolkit, gettext, tofrodos, native2ascii
+
+# trap and exit on error 
+set -e
+trap "echo Updating PO files failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+echo "Updating PO translations..."
+# update POT template
+prop2po --progress none --personality java-utf8 -P ../src/esmska/resources/l10n.properties ../po/esmska.pot
+# sort entries by location
+msgattrib -F ../po/esmska.pot -o ../po/esmska.pot
+
+# update PO files
+pushd ../po >/dev/null
+if ls *.po >/dev/null; then
+    for PO in *.po; do
+        # remove CR linefeeds which may be present even though they should not be
+        if od -c "$PO" | grep -q '\\r'; then
+            echo "$PO contains forbidden CR linefeeds, removing..."
+            fromdos -a "$PO"
+        fi
+        # merge
+        msgmerge -U -q --backup=none "$PO" esmska.pot
+    done
+fi
+
+echo "Generating properties translations..."
+# generate properties files
+if ls *.po >/dev/null; then
+    for PO in *.po; do
+        LOCALE=${PO%.po}
+        po2prop --progress none -t ../src/esmska/resources/l10n.properties \
+        "$PO" ../src/esmska/resources/l10n_${LOCALE}.properties
+    done
+fi
+
+# workaround for change of some locales
+pushd ../src/esmska/resources/ >/dev/null
+# Hebrew is in Java under old code 'iw'
+if [ -f l10n_he.properties ]; then
+    cp l10n_he.properties l10n_iw.properties 
+fi
+#Jiddish is in Java under old code 'ji'
+if [ -f l10n_yi.properties ]; then
+    cp l10n_yi.properties l10n_ji.properties
+fi
+#Indonesian is in Java under old code 'in'
+if [ -f l10n_id.properties ]; then
+    cp l10n_id.properties l10n_in.properties
+fi
+
+popd >/dev/null
+popd >/dev/null
+
+# update desktop file
+./update-desktop-file
+
+# check for bad translations
+./check-translations

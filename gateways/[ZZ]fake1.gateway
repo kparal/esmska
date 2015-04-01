@@ -1,0 +1,60 @@
+
+function getName() {
+    return "[ZZ]fake1"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "fake1"
+}
+
+function getDescription() {
+    return "Fake gateway used just for development. End users shouldn't see it, please report this."
+}
+
+function getSupportedPrefixes() {
+    return []
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 30
+}
+
+function getMaxChars() {
+    return 60
+}
+
+function getDelayBetweenMessages() {
+    return 10
+}
+
+function getSupportedLanguages() {
+    return []
+}
+
+function getFeatures() {
+    return ["LOGIN",
+            "SENDER_NUMBER",
+            "RECEIPT",
+            "CAPTCHA"]
+}
+
+function send() {
+    return true
+}
+

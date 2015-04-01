@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# Update desktop file localization strings from properties files.
+
+# Dependencies: native2ascii
+
+# trap and exit on error
+set -e
+trap "echo Updating desktop file failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+DESKTOP="../resources/esmska.desktop"
+L10N="../src/esmska/resources"
+
+echo "Updating desktop file..."
+
+# delete old lines
+sed -i -r '/^Name|^GenericName|^Comment/d' "$DESKTOP"
+
+# add Name line
+TRANS=`grep ^DesktopFile.name= "$L10N"/l10n.properties | cut -d = -f 2- |
+    native2ascii -reverse`
+echo "Name=$TRANS" >> "$DESKTOP"
+
+# add GenericName line
+TRANS=`grep ^DesktopFile.genericName= "$L10N"/l10n.properties | cut -d = -f 2- |
+    native2ascii -reverse`
+echo "GenericName=$TRANS" >> "$DESKTOP"
+
+# add Comment line
+TRANS=`grep ^DesktopFile.comment= "$L10N"/l10n.properties | cut -d = -f 2- |
+    native2ascii -reverse`
+echo "Comment=$TRANS" >> "$DESKTOP"
+
+TMPFILE=`mktemp -t esmska-desktop.XXXX`
+
+# add localized lines
+for FILE in `find "$L10N" -type f -name 'l10n_*.properties'`; do
+    BASEFILE=`basename "$FILE"`
+    LOCALE=${BASEFILE%.properties}
+    LOCALE=${LOCALE#l10n_}
+
+    # add Name line
+    TRANS=`grep ^DesktopFile.name= "$FILE" | cut -d = -f 2- |
+        native2ascii -reverse`
+    if [ -n "$TRANS" ]; then
+	    echo "Name[$LOCALE]=$TRANS" >> "$TMPFILE"
+    fi
+    # add GenericName line
+    TRANS=`grep ^DesktopFile.genericName= "$FILE" | cut -d = -f 2- |
+        native2ascii -reverse`
+    if [ -n "$TRANS" ]; then
+	    echo "GenericName[$LOCALE]=$TRANS" >> "$TMPFILE"
+    fi
+    # add Comment line
+    TRANS=`grep ^DesktopFile.comment= "$FILE" | cut -d = -f 2- |
+        native2ascii -reverse`
+    if [ -n "$TRANS" ]; then
+	    echo "Comment[$LOCALE]=$TRANS" >> "$TMPFILE"
+    fi
+done
+
+# append localized files
+sort "$TMPFILE" >> "$DESKTOP"
+rm "$TMPFILE"
+
+# validate desktop file
+desktop-file-validate "$DESKTOP"
+

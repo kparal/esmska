@@ -1,0 +1,132 @@
+
+function getName() {
+    return "[SK]Orange"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Tomáš Kováčik <tomas.kovacik@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "https://www.orangeportal.sk"
+}
+
+function getDescription() {
+    return "Oficiálna brána Orange pre neplatenú službu Môj Asistent."
+}
+
+function getSupportedPrefixes() {
+    return ["+421"]
+}
+
+function getPreferredPrefixes() {
+    return ["+421905","+412906","+421907","+421908","+421915",
+            "+421916","+421917","+421918","+421919"]
+}
+
+function getSMSLength() {
+    return 143
+}
+
+function getMaxChars() {
+    return 143
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["sk"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY"]
+}
+
+function send() {
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // start page
+    logout()
+    postData = ["login", LOGIN, "pwd", PASSWORD, "page", "/comm/sms/message.dwp"]
+    content = EXEC.postURL("https://www.orangeportal.sk/portal/do_login.dwp", [], postData)
+
+    // login sucesesfull?
+    re = /Zadali ste nespr.vne meno alebo heslo/
+    match = re.exec(content)
+    if (match) {
+        logout()
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // check that user account matches this gateway type
+    re = /<a class="maintitle" href="\/wportal\/d_show;jsessionid=(.*)\?type=sms_compose">/
+    match = re.exec(content)
+    if (match) {
+        logout()
+        EXEC.setProblem("CUSTOM_MESSAGE", "Vaše konto patrí k platenej službe Môj Asistent, pre posielanie sms použite platenú verziu brány.")
+    	return false
+    }
+    
+    // send message
+    postData = ["f_TelNumber", NUMBER, "f_slot_num", "", "f_Redirect", 
+                "/sms/sms.php3", "f_SMSBody", MESSAGE, "f_MaxLength", 
+                "0", "action", "send"]
+    content = EXEC.postURL("https://www.orangeportal.sk/comm/sms/do_sms_send.dwp", [], postData)
+    
+    // reached limit of 10sms/month
+    re = /SMS spr.vu je mo.n. odosla. maxim.lne na 10 ..astn.ckych ..siel mesa.ne v r.mci siete Orange Slovensko./
+    match = re.exec(content)
+    if (match) {
+        logout()
+        EXEC.setProblem("GATEWAY_MESSAGE", match[0])
+        return false
+    }
+
+    // wrong number
+    re = /Zadan. ..slo nie je platn.m ..slom Orange Slovensko!/
+    match = re.exec(content)
+    if (match) {
+        logout()
+        EXEC.setProblem("GATEWAY_MESSAGE", match[0])
+        return false
+    }
+   
+    // check if message was successfully sent
+    re = /Spr.va bola uspe.ne odoslan. do SMS centra!/
+    match = re.exec(content)
+	if (match) {
+		// get number of remaining free sms and display it
+    	content = EXEC.getURL("https://www.orangeportal.sk/comm/sms/message.dwp", [])
+    	re = /M..ete odosla. e.te <span class="orange bold">([0-9]+)<\/span> spr.v/
+    	match2 = re.exec(content);
+    	if (match2) { // if found
+        	EXEC.setSupplementalMessage(EXEC.INFO_FREE_SMS_REMAINING + match2[1])
+    	} 
+        logout()
+        return true;
+    }
+
+    // if neither success nor error message was found
+    logout()
+    return false
+}
+
+function logout() {
+    EXEC.getURL("https://www.orangeportal.sk/portal/do_logout.dwp", [])
+}
+

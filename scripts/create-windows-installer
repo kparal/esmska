@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Create MS Windows installer from dist directory
+# in the program root
+
+# Dependencies: installjammer, dos2unix
+
+# trap and exit on error
+set -e
+trap "echo Creating installer failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+JRE="../resources/portable/jre-win.7z"
+
+# check dependency
+if [ ! `which installjammer` ]; then
+    echo "'installjammer' command not found. MS Windows installer will not be created."
+    exit 0
+fi
+JRE=`readlink -f "$JRE"`
+if [ ! -f "$JRE" ]; then
+    echo "JRE not found in $JRE. MS Windows installer will not be created."
+    exit 0
+fi
+
+# usage
+if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0 version"
+    echo "Example: $0 0.1.0"
+    exit 1
+fi
+
+VERSION="$1"
+PROJECT_DIR="${PWD}/../installjammer"
+PROJECT_FILE="${PROJECT_DIR}/Esmska.mpi"
+OUTPUT_DIR="${PWD}/.."
+DIST_DIR="${PWD}/../dist-win"
+
+# create temp dir
+BUILD_DIR=`mktemp -d -t esmska-packaging.XXXX`
+
+# copy dist directory to dist-win directory
+cp -r ../dist "$DIST_DIR"
+# and convert text files to CRLF
+unix2dos "$DIST_DIR"/*.txt "$DIST_DIR"/license/*.txt "$DIST_DIR"/*.conf
+# delete unnecessary files
+rm "$DIST_DIR"/esmska.sh
+# extract JRE
+7z x -o"$DIST_DIR" "$JRE" >/dev/null
+
+# build installer
+installjammer --build-for-release --quiet --build-dir "$BUILD_DIR" \
+--output-dir "$OUTPUT_DIR" -DVersion "$VERSION" -- "$PROJECT_FILE"
+
+# delete temp files
+rm -rf "$BUILD_DIR"
+rm -rf "$DIST_DIR"
+rm "${PROJECT_DIR}/build.log"
+

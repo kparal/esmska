@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Create distribution packages from dist directory
+# in the program root
+
+# trap and exit on error
+set -e
+trap "echo Packaging failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+# usage
+if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0 version"
+    echo "Example: $0 0.1.0"
+    exit 1
+fi
+
+VERSION="$1"
+FINALNAME="esmska-$1"
+OUTPUT_DIR="${PWD}/.."
+
+# create temp dirs
+TMPDIR=`mktemp -d -t esmska-packaging.XXXX`
+mkdir "$TMPDIR/$FINALNAME"
+
+# copy files
+cp -r ../dist/* "$TMPDIR/$FINALNAME/"
+
+# create os-independent package
+cd "$TMPDIR"
+tar c "$FINALNAME" | gzip -9 > "$FINALNAME.tar.gz"
+
+# move package to current directory
+cd "$OUTPUT_DIR"
+mv "$TMPDIR/$FINALNAME.tar.gz" .
+
+# delete temp dirs
+rm -rf "$TMPDIR"
+
+# create windows installer
+cd "`dirname "$0"`"
+./create-windows-installer "$VERSION"
+

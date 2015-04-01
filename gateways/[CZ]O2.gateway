@@ -1,0 +1,102 @@
+
+function getName() {
+    return "[CZ]O2"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "http://sms.1188.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána O2 pro neregistrované uživatele. Zdarma odesílá velmi krátké zprávy do sítě O2, vyžaduje však opsání bezpečnostního kódu."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return ["+420601","+420602","+420606","+420607","+420720","+420721",
+            "+420722","+420723","+420724","+420725","+420726","+420727",
+            "+420728","+420729"]
+}
+
+function getSMSLength() {
+    return 60
+}
+
+function getMaxChars() {
+    return 60
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function getFeatures() {
+    return ["CAPTCHA"]
+}
+
+function send() {
+    
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+
+    // download image
+    content = EXEC.getURL("http://www.google.com/recaptcha/api/challenge?k=6LfFmc8SAAAAAKZS7BmYx4cEys7zo1y_LYHgxZ5o&ajax=1&cachestop=0.3157223965972662", [])
+    re = /challenge : '(.+)',/
+    match = content.match(re)
+    challenge = match[1]
+    content = EXEC.getURL("http://www.google.com/recaptcha/api/image", 
+                          ["c", challenge])
+    
+    // show image
+    code = EXEC.recognizeImage(content, "")
+
+    // send message
+    postData = ["sms[phone_numbers][]", NUMBER,
+                "sms[text]", MESSAGE,
+                "recaptcha_challenge_field", challenge,
+                "recaptcha_response_field", code,
+               ]
+    content = EXEC.postURL("http://sms.1188.cz/sms", [], postData)
+
+    // check if message was successfully sent
+    re = /SMS přijata/
+    match = re.exec(content)
+    if (match) {
+        // all ok
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<div class="error_message">([\s\S]*?)<\/div>/g
+    match = content.match(re)
+    if (match) {
+        // more messages might be present, display them all
+        errors = match.join("")
+        EXEC.setProblem("GATEWAY_MESSAGE", errors)
+        return false
+    }
+    
+    // if neither success nor error message was found
+    return false
+}

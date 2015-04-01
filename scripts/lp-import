@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Imports PO files exported from Launchpad to a Bazaar branch
+
+# Dependencies: translate-toolkit, gettext, tofrodos, native2ascii, bzr
+
+# trap and exit on error
+set -e
+trap "echo Import failed." ERR
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+# usage
+if [ $# != 0 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0"
+    echo "Example: $0"
+    exit 1
+fi
+
+PODIR="$PWD/../po"
+BZRDIR="$PWD/../../translations/import"
+
+# update bazaar branch
+echo "Updating bazaar checkout..."
+bzr update "$BZRDIR"
+
+# copy
+echo "Copying files..."
+cd "$BZRDIR"
+for PO in `find . -name '*.po'`; do
+    FILE=`basename "$PO"`
+    LOCALE=${FILE%.po}
+    if [ "$LOCALE" = "cs" ]; then
+        # don't update czech locale from LP, it is managed internally
+        continue
+    fi
+    cp "$PO" "$PODIR/$LOCALE.po"
+done
+
+# update translations
+cd "$OLDPWD"
+./update-translations

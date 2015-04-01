@@ -1,0 +1,117 @@
+
+function getName() {
+    return "[LT]dos.lt"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "SMS PASLAUGOS <info@dos.lt>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "http://www.dos.lt"
+}
+
+function getDescription() {
+    return "SMS į visus Lietuvos tinklus."
+}
+
+function getSupportedPrefixes() {
+    return ["+370"]
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 800
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["lt"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY",
+            "SENDER_NUMBER"]
+}
+
+function send() {
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // send message
+    getData = ["usr", LOGIN, "psw", PASSWORD, "num", NUMBER, "txt", MESSAGE, "frm", SENDERNUMBER]
+    content = EXEC.getURL("http://www.dos.lt/sms.php", getData)
+
+    // wrong username/nousername
+    re = /ERR:1/
+    match = re.exec(content)
+    if (match) {
+	    EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+    
+    // wrong password/nopassword 
+    re = /ERR:2/
+    match = re.exec(content)
+    if (match) {
+	    EXEC.setProblem("WRONG_AUTH")
+        return false
+    }    
+   
+    // invalid number   
+    re=/ERR:3/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("WRONG_NUMBER")
+        return false
+    }
+    
+    // invalid text   
+    re=/ERR:4/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("LONG_TEXT")
+        return false
+    }    
+
+    // insufficient credit 
+    re=/ERR:5/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("NO_CREDIT")
+        return false
+    }
+
+
+    // check if message was successfully sent
+    re = /OK:/
+    match = re.exec(content)
+    if (match) {
+    	return true
+    }
+
+    // if neither success nor error message was found
+    return false
+}
+

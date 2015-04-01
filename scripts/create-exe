@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Create exe launcher for MS Windows
+
+# Dependencies: launch4j
+
+# trap and exit on error
+set -e
+trap "echo Creating exe failed." ERR
+
+# check dependency
+if [ ! `which launch4j` ]; then
+    echo "'launch4j' command not found. Exiting."
+    exit 1
+fi
+
+# go to the program directory
+cd "`dirname "$0"`"
+
+# run launch4j
+launch4j "${PWD}/../launch4j/esmska.xml"
+launch4j "${PWD}/../launch4j/esmska-portable.xml"
+

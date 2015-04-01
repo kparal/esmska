@@ -1,0 +1,99 @@
+
+function getName() {
+    return "[INT]Odorik.cz"
+}
+
+function getVersion() {
+    return "2014-09-05"
+}
+
+function getMaintainer() {
+    return "Odorik.cz <kontakt@odorik.cz>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "http://www.odorik.cz"
+}
+
+function getDescription() {
+    return "Placená SMS brána s doručenkami, levné telefonování do celého světa. Podpora pro Esmsku popsána na <a&nbsp;href=\"http://www.odorik.cz/wiki/Esmska\">http://www.odorik.cz/wiki/Esmska</a>."
+}
+
+function getSupportedPrefixes() {
+    return []
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 153
+}
+
+function getMaxChars() {
+    return 765
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return []
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY", "SENDER_NUMBER"]
+}
+
+function send() {
+    var sms = [ "sender", getSender(), "recipient", NUMBER.replace("+", "00"), 
+                "message", MESSAGE, "user", LOGIN, "password", PASSWORD, 
+                "user_agent", "Esmska " + getVersion()]
+    var response = EXEC.postURL("https://www.odorik.cz/api/v1/sms", [], sms)
+
+    if (response.search(/successfully_sent/) != -1) {
+      var credit = response.split(" ")[1]
+      EXEC.setSupplementalMessage(EXEC.INFO_CREDIT_REMAINING + credit + " Kč")
+      return true
+    }
+
+    if (response.search(/error/) != -1) {
+      var error_message = response.split(" ")[1]
+
+      var auth = 'Zadali jste nesprávné přihlašovací údaje.<br>Navštivte <a href="http://www.odorik.cz/wiki/Esmska">http://www.odorik.cz/wiki/Esmska</a> pro více informací.'
+
+      if (error_message == "authentication_required") {
+        EXEC.setProblem("CUSTOM_MESSAGE", auth)
+      } else if (error_message == "authentication_failed") {
+        EXEC.setProblem("CUSTOM_MESSAGE", auth)
+      } else if (error_message == "low_balance") {
+        EXEC.setProblem("NO_CREDIT")
+      } else if (error_message == "forbidden_sender") {
+        EXEC.setProblem("WRONG_SIGNATURE")
+      } else if (error_message == "unsupported_recipient") {
+        EXEC.setProblem("WRONG_NUMBER")
+      } else if (error_message == "gateway_failed") {
+        EXEC.setProblem("NO_REASON")
+      } else {
+        EXEC.setProblem("GATEWAY_MESSAGE", response)
+      }
+    }
+
+    return false
+}
+
+function getSender() {
+  if (SENDERNUMBER.length > 0) {
+    return SENDERNUMBER.replace("+", "00")
+  } else if (SENDERNAME.length > 0) {
+    return SENDERNAME
+  } else {
+    return "Odorik.cz"
+  }
+}

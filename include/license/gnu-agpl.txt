@@ -1,0 +1,1 @@
+../../src/esmska/resources/gnu-agpl.txt

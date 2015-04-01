@@ -1,0 +1,108 @@
+
+function getName() {
+    return "[INT]SMSpoint"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Julius Bartkus <julius.bartkus@smspoint.co.uk>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "http://www.smspoint.co.uk"
+}
+
+function getDescription() {
+    return "Paid gateway allowing to send SMS almost to any country in the world."
+}
+
+function getSupportedPrefixes() {
+    return []
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 800
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["en","lt","ru","dk"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY",
+            "SENDER_NUMBER"]
+}
+
+function send() {
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+    
+    // send message
+    getData = ["id", LOGIN, "pass", PASSWORD, "number", NUMBER, "sender", SENDERNUMBER, "message", MESSAGE]
+    content = EXEC.getURL("https://service.sms4you.lt/sendsms.php", getData)
+
+    // wrong username/password/nousername/nopassword 
+    re = /err:1/
+    match = re.exec(content)
+    if (match) {
+	    EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+   
+    // invalid number   
+    re=/err:2/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("WRONG_NUMBER")
+        return false
+    }
+
+    // insufficient credit 
+    re=/err:3/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("NO_CREDIT")
+        return false
+    }
+
+    // invalid text   
+    re=/err:4/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("LONG_TEXT")
+        return false
+    }
+
+    // check if message was successfully sent
+    re = /sent:/
+    match = re.exec(content)
+    if (match) {
+    	return true
+    }
+
+    // if neither success nor error message was found
+    return false
+}
+

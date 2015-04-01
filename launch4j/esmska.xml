@@ -1,0 +1,26 @@
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>esmska.jar</jar>
+  <outfile>../include/esmska.exe</outfile>
+  <errTitle>Esmska</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl>http://code.google.com/p/esmska/wiki/FAQ</supportUrl>
+  <customProcName>true</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest>uac.exe.manifest</manifest>
+  <icon>../include/icons/esmska.ico</icon>
+  <singleInstance>
+    <mutexName>esmska</mutexName>
+    <windowTitle>Esmska</windowTitle>
+  </singleInstance>
+  <jre>
+    <path>jre</path>
+    <minVersion>1.6.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+  </jre>
+</launch4jConfig>

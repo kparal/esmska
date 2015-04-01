@@ -1,0 +1,85 @@
+function getName() {
+    return "[CZ]Go SMS Go"
+}
+
+function getVersion() {
+    return "2014-09-26"
+}
+
+function getMaintainer() {
+    return "František Mizera <mizerafranta@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.8"
+}
+
+function getWebsite() {
+    return "http://gosmsgo.cz/"
+}
+
+function getDescription() {
+    return "Odesílání do operátorů T-mobile, Vodafone, O2 bez nutnosti opisovat kódy."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 290
+}
+
+function getMaxChars() {
+    return 290
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function getFeatures() {
+    return []
+}
+
+function send() {
+    
+    // change variables to correct form
+    if (NUMBER.indexOf("+420") == 0) {
+        NUMBER = NUMBER.substring(4)
+    }
+     
+    content = EXEC.getURL("http://gosmsgo.cz/", []) 
+    
+     
+    postData = [
+                "recipient", NUMBER,
+                "message", MESSAGE,
+                "odeslat_sms", "Odeslat",
+               ]
+    content = EXEC.postURL("http://gosmsgo.cz/", [], postData)                      
+    re = /<p class="odeslano">(.*?)<\/p>/
+    match = re.exec(content)
+    if (match) {
+        // all ok
+        msg = match[1]
+        EXEC.setSupplementalMessage(msg)
+        return true
+    } 
+    re = /<p class="chyba">(.*?)<\/p>/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+        return false
+    } 
+    // if neither success nor error message was found   
+    return false
+}

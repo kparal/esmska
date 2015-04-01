@@ -1,0 +1,143 @@
+
+function getName() {
+    return "[INT]SMSdiscount"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Tomáš Kováčik <tomas.kovacik@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "http://www.smsdiscount.com"
+}
+
+function getDescription() {
+    return "Paid gateway allowing to send SMS almost to any country in the world."
+}
+
+function getSupportedPrefixes() {
+    return []
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 160
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["en"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY",
+            "SENDER_NUMBER"]
+}
+
+function send() {
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // send message
+    getData = ["username", LOGIN, "password", PASSWORD, "from", SENDERNUMBER, "to", NUMBER, "text", MESSAGE]
+    content = EXEC.getURL("https://www.smsdiscount.com/myaccount/sendsms.php", getData)
+
+    // wrong username/password/nousername/nopassword 
+    re = /<description>error<\/description>/
+    match = re.exec(content)
+    if (match) {
+	    EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+    re = /<description>The parameter password is missing<\/description>/
+    match = re.exec(content)
+    if (match) {
+	    EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+    re = /<description>The parameter username is missing<\/description>/
+    match = re.exec(content)
+    if (match) {
+	    EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+    re = /<description>Wrong Username\/password combination<\/description>/
+    match = re.exec(content)
+    if (match) {
+	    EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // invalid number   
+    re=/<description>(Invalid Number)<\/description>/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("WRONG_NUMBER")
+        return false
+    }
+    
+    // too long text
+    re=/<description>The text message you are trying to send is larger than 160 characters, please shorten your message.<\/description>/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("LONG_TEXT")
+        return false
+    }    
+
+    //insufficient credit
+    re=/<description>Sorry, you do not have enough credit to send this sms. Go to your accountpage to buy credit!<\/description>/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("NO_CREDIT")
+        return false
+    }
+
+    // check if message was successfully sent
+    re = /<resultstring>success<\/resultstring>/
+    match = re.exec(content)
+    if (match) {
+    	//get remanining credit and display it
+	    postData = ["user", LOGIN, "pass", PASSWORD]
+    	content = EXEC.postURL("https://www.smsdiscount.com/myaccount/index.php?part=tplogin", [], postData)
+    	re = /<span id="balanceid">[\s\S]*?<b>[\s\S]*?&euro;&nbsp;([0-9\.]*)[\s\S]*?<\/b>/
+    	match = re.exec(content);
+    	if (match) { // if found
+    		EXEC.setSupplementalMessage(EXEC.INFO_CREDIT_REMAINING + "€" + match[1])
+    	}
+        return true
+    }
+    
+    // check for descibed error
+    re = /<resultstring>failure<\/resultstring>/
+    re2 = /<description>(.*)<\/description>/
+    match = re.exec(content)
+    match2 =re.exec(content)
+    if (match && match2) {
+        EXEC.setProblem("GATEWAY_MESSAGE", match2[1])
+        return false
+    }
+
+    // if neither success nor error message was found
+    return false
+}

@@ -1,0 +1,153 @@
+
+function getName() {
+    return "[CZ]O2 SMSender"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "https://smsender.o2.cz"
+}
+
+function getDescription() {
+    return "Placená brána aplikace O2 SMSender určené pro zákazníky O2."
+}
+
+function getSupportedPrefixes() {
+    return []
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 760
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["cs"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY",
+            "CAPTCHA"]
+}
+
+function send() {
+    // check that login and password are supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // login page
+    content = EXEC.getURL("https://smsender.o2.cz/web/default.aspx", ["lang","cs"])
+    
+    // log in
+    hiddens = extractHiddens(content)
+    postData = ["txtUserName", LOGIN, "txtPassword", PASSWORD, 
+                "btnLogon", "Přihlásit"]
+    postData = postData.concat(hiddens)
+    content = EXEC.postURL("https://smsender.o2.cz/web/Logon.aspx", [], postData)    
+
+    // is SMS code verification needed?
+    re = /<input name="txtSmsCode"/
+    match = re.exec(content)
+    if (match) {
+        // SMS code verification is needed
+        code = EXEC.recognizeImage(null, "<b>Opište kontrolní kód, který vám dojde \
+na váš mobil.</b><br><br> Poznámka: Tuto bezpečnostní kontrolu lze vypnout v \
+<a href=\"https://smsender.o2.cz/web/\">nastavení vašeho účtu</a>.")
+        hiddens = extractHiddens(content)
+        postData = ["txtUserName", LOGIN, "txtSmsCode", code, 
+                    "btnSmsCode", "Přihlásit"]
+        postData = postData.concat(hiddens)
+        content = EXEC.postURL("https://smsender.o2.cz/web/Logon.aspx", [], postData)
+    }
+    
+    // get gateway page
+    content = EXEC.getURL("https://smsender.o2.cz/web/Gate.aspx", [])
+
+    // post sms
+    hiddens = extractHiddens(content)
+    postData = ["ctl00$data$mobilenum", NUMBER, "ctl00$data$sms_text", MESSAGE,
+                "ctl00$data$submit_sms", "Odeslat"]
+    postData = postData.concat(hiddens)
+    content = EXEC.postURL("https://smsender.o2.cz/web/Gate.aspx", [], postData)
+    
+    // check if message was successfully sent
+    // user can see czech or english messages, depending on his account settings
+    re = /Zpráva byla úspěšně odeslána|Message was successfully sent/
+    match = re.exec(content)
+    if (match) {
+        // all ok
+        logout(content)
+        return true
+    }
+
+    // if the message was not sent, let's find error messages
+    // this <div> generally contains even the success message, but that would be
+    // caught by the previous check
+    re = /<div id="ctl00_data_pnlResult" class="formdata">([\s\S]*?)<\/div>/
+    match = re.exec(content)
+    if (match) {
+        // gateway told us what's wrong
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+        logout(content)
+        return false
+    }
+
+    // if neither success nor error message was found
+    logout(content)
+    return false
+}
+
+// get hidden fields from web page
+function extractHiddens(content) {
+    hiddens = []
+    
+    re = /<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="(.*?)" \/>/
+    match = re.exec(content)
+    hiddens.push("__VIEWSTATE")
+    hiddens.push(match[1])
+    
+    re = /<input type="hidden" name="__PREVIOUSPAGE" id="__PREVIOUSPAGE" value="(.*?)" \/>/
+    match = re.exec(content)
+    hiddens.push("__PREVIOUSPAGE")
+    hiddens.push(match[1])
+    
+    re = /<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="(.*?)" \/>/
+    match = re.exec(content)
+    hiddens.push("__EVENTVALIDATION")
+    hiddens.push(match[1])
+    
+    return hiddens
+}
+
+// log out
+function logout(content) {
+    hiddens = extractHiddens(content)
+    postData = ["__EVENTTARGET", "ctl00$MenuLogOff"]
+    postData = postData.concat(hiddens)
+    content = EXEC.postURL("https://smsender.o2.cz/web/Gate.aspx", [], postData)
+}
+

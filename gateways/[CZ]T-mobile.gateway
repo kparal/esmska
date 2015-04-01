@@ -1,0 +1,121 @@
+
+function getName() {
+    return "[CZ]T-mobile"
+}
+
+function getVersion() {
+    return "2014-06-01"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.6.99.4"
+}
+
+function getWebsite() {
+    return "http://sms.t-mobile.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána T-mobile určená pro veřejnost. Zdarma odesílá zprávy do sítě T-mobile, vyžaduje však opsání bezpečnostního kódu."
+}
+
+function getSupportedPrefixes() {
+    return ["+420"]
+}
+
+function getPreferredPrefixes() {
+    return ["+420603","+420604","+420605","+420730","+420731","+420732",
+            "+420733","+420734","+420735","+420736","+420737","+420738",
+            "+420739"]
+}
+
+function getSMSLength() {
+    return 160
+}
+
+function getMaxChars() {
+    return 160
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["en", "cs"]
+}
+
+function getFeatures() {
+    return ["CAPTCHA"]
+}
+
+function send() {
+    
+    // sms sending page
+    content = EXEC.getURL("http://sms.t-mobile.cz/open.jsp", [])
+    // we have to open this page twice, because they have some cookies problem
+    // and we don't get the correct cookies on the first attempt
+    content = EXEC.getURL("http://sms.t-mobile.cz/open.jsp", [])
+    var time = new Date().getTime()
+   
+    // find counter
+    re = /<input type="hidden" name="counter" value="(.*)" \/>/
+    match = re.exec(content)
+    var counter = match[1]
+    
+    // find send delay
+    re = /\$\("#submit"\)\[0\]\.disabled = 0;[^}]+}, 1000\*(\d+)\);/
+    match = re.exec(content)
+    var delay = match[1]
+    delay = parseInt(delay)
+    // if web page claims it is shorter than 15 seconds, don't trust it
+    // see http://code.google.com/p/esmska/issues/detail?id=438#c3
+    if (delay < 15) {
+        delay = 15
+    }
+    // convert to milliseconds
+    delay = delay * 1000
+    
+    // download image
+    content = EXEC.getURL("http://sms.t-mobile.cz/open/captcha.jpg", [])
+    
+    // show image
+    var captcha = EXEC.recognizeImage(content, "")
+
+    // sleep until we're allowed to send the message
+    var now = new Date().getTime()
+    EXEC.sleep(time + delay - now)
+
+    // send sms
+    postData = ["counter", counter,
+                "recipient", NUMBER, "text", MESSAGE,
+                "sms-template", "0", "mtype", "0",
+                "captcha", captcha]
+    content = EXEC.postURL("http://sms.t-mobile.cz/open.jsp", [], postData)
+
+    // check if message was successfully sent
+    re = /(SMS zpr.va byl. odeslán.|SMS was sent)/
+    match = re.exec(content)
+    if (match) {
+        // all ok
+        return true
+    }
+    
+    // look for possible error messages
+    re = /<p class="text-red.*?">(.*?)<\/p>/
+    match = re.exec(content)
+    if (match) {
+        // gateway told us what's wrong
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+        return false
+    }
+    
+    // if neither success nor error message was found
+    return false
+}
+
+
