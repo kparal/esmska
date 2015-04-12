@@ -23,17 +23,11 @@ import esmska.data.History;
 import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.data.Signature;
-import esmska.data.Template;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
 import esmska.data.Temp;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -90,7 +84,7 @@ public class ExportManager {
         
         logger.finer("Exporting templates of " + templates.size() + " templates");
                  
-            OutputStreamWriter osr = new OutputStreamWriter(out);
+            OutputStreamWriter osr = new OutputStreamWriter(out,Charset.forName("UTF-8"));
             BufferedWriter writer = new BufferedWriter(osr);
         
             for (Temp temp : templates) {
