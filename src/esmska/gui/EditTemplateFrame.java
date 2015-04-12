@@ -73,7 +73,12 @@ public class EditTemplateFrame extends javax.swing.JFrame {
         closeButton = new javax.swing.JButton();
         new_editLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(templateLabel, l10n.getString( "EditTemplateFrame.templateLabel.text")); // NOI18N
 
@@ -173,6 +178,7 @@ public class EditTemplateFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        SaveTemplaveExit();
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
@@ -187,6 +193,10 @@ public class EditTemplateFrame extends javax.swing.JFrame {
         templates.removeTemplate(t);
         editTemplateButton.setEnabled(false);
     }//GEN-LAST:event_editTemplateButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        SaveTemplaveExit();
+    }//GEN-LAST:event_formWindowClosing
 
     /** Add template to template list */
     private class AddTemplateAction extends AbstractAction {        
@@ -264,6 +274,15 @@ public class EditTemplateFrame extends javax.swing.JFrame {
                 message = MessageFormat.format(l10n.getString("EditTemplateFrame.removeTemplate"),
                         t.getTemplate());            
             log.addRecord(new Log.Record(message, null, Icons.STATUS_INFO));
+        }
+    }
+    
+    private void SaveTemplaveExit() {
+         if (!"".equals(editTemplateTextField.getText())){
+            String t = editTemplateTextField.getText();
+            Temp p = new Temp(t);        
+            templates.addTemplate(p);
+            templateList.setSelectedValue(p, true);
         }
     }
     
