@@ -7,16 +7,20 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-/** SMS Contact entity
+/**
+ * SMS Contact entity
+ *
  * @author ripper
  */
 public class Contact extends Object implements Comparable<Contact> {
-    
+
     private String name;
-    /** full phone number including the country code (starting with "+") */
+    /**
+     * full phone number including the country code (starting with "+")
+     */
     private String number;
     private String gateway;
-    
+    private String group;
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
@@ -29,45 +33,76 @@ public class Contact extends Object implements Comparable<Contact> {
     }
     // </editor-fold>
 
-    /** Create new contact with properties copied from provided contact */
+    /**
+     * Create new contact with properties copied from provided contact
+     */
     public Contact(Contact c) {
-        this(c.getName(), c.getNumber(), c.getGateway());
+        this(c.getName(), c.getNumber(), c.getGateway(), c.getGroup());
     }
 
-    /** Create new contact. For detailed parameters restrictions see individual setter methods. */
-    public Contact(String name, String number, String gateway) {
+    /**
+     * Create new contact. For detailed parameters restrictions see individual
+     * setter methods.
+     */
+      public Contact(String name, String number, String gateway) {
         setName(name);
         setNumber(number);
         setGateway(gateway);
     }
+      
+    public Contact(String name, String number, String gateway, String group) {
+        setName(name);
+        setNumber(number);
+        setGateway(gateway);
+        setGroup(group);
+    }
 
-    /** Copy all contact properties from provided contact to current contact */
+    /**
+     * Copy all contact properties from provided contact to current contact
+     */
     public void copyFrom(Contact c) {
         setName(c.getName());
         setNumber(c.getNumber());
         setGateway(c.getGateway());
+        setGroup(c.getGroup());
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
-    /** Get contact name. Never null. */
+    /**
+     * Get contact name. Never null.
+     */
     public String getName() {
         return this.name;
     }
 
-    /** Get valid full phone number including the country code (starting with "+")
-     or empty string. Never null. */
+    /**
+     * Get valid full phone number including the country code (starting with
+     * "+") or empty string. Never null.
+     */
     public String getNumber() {
         return this.number;
     }
 
-    /** Get gateway. Never null. */
+    /**
+     * Get gateway. Never null.
+     */
     public String getGateway() {
         return this.gateway;
     }
     // </editor-fold>
-    
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Set Methods">
-    /** Set contact name.
+    /**
+     * Set contact name.
+     *
      * @param name contact name. Null value is changed to empty string.
      */
     public void setName(String name) {
@@ -80,9 +115,12 @@ public class Contact extends Object implements Comparable<Contact> {
         changeSupport.firePropertyChange("name", oldName, name);
     }
 
-    /** Set full phone number.
-     * @param number new contact number. Must be valid (see {@link #isValidNumber})
-     * or an empty string. Null value is changed to an empty string.
+    /**
+     * Set full phone number.
+     *
+     * @param number new contact number. Must be valid (see
+     * {@link #isValidNumber}) or an empty string. Null value is changed to an
+     * empty string.
      */
     public void setNumber(String number) {
         if (number == null) {
@@ -97,7 +135,9 @@ public class Contact extends Object implements Comparable<Contact> {
         changeSupport.firePropertyChange("number", oldNumber, number);
     }
 
-    /** Set contact gateway
+    /**
+     * Set contact gateway
+     *
      * @param gateway new gateway. Null value is changed to "unknown" gateway.
      */
     public void setGateway(String gateway) {
@@ -111,7 +151,9 @@ public class Contact extends Object implements Comparable<Contact> {
     }
     // </editor-fold>
 
-    /** Check validity of phone number
+    /**
+     * Check validity of phone number
+     *
      * @return true if number is in form +[0-9]{2,15} with valid country prefix,
      * false otherwise
      */
@@ -135,7 +177,9 @@ public class Contact extends Object implements Comparable<Contact> {
         return true;
     }
 
-    /** Modify (phone) number into anonymous one
+    /**
+     * Modify (phone) number into anonymous one
+     *
      * @param number (phone) number, may be null
      * @return the same string with all the numbers replaced by 'N'
      */
@@ -147,8 +191,10 @@ public class Contact extends Object implements Comparable<Contact> {
         }
     }
 
-    /** Try to extract valid number from some local format (like "(1) 222 333")
-     *  and convert it into international number.
+    /**
+     * Try to extract valid number from some local format (like "(1) 222 333")
+     * and convert it into international number.
+     *
      * @param number number in non-standard format; may be null
      * @return parsed valid (international) number or null
      */
@@ -179,12 +225,12 @@ public class Contact extends Object implements Comparable<Contact> {
                 append(number, c.number, collator).
                 append(gateway, c.gateway, collator).toComparison();
     }
-    
+
     @Override
     public String toString() {
         return getName();
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -198,11 +244,11 @@ public class Contact extends Object implements Comparable<Contact> {
         return new EqualsBuilder().append(name, c.name).append(number, c.number).
                 append(gateway, c.gateway).isEquals();
     }
-    
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder(337, 139).append(name).append(number).
                 append(gateway).toHashCode();
     }
-    
+
 }
