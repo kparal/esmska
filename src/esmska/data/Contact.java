@@ -16,6 +16,7 @@ public class Contact extends Object implements Comparable<Contact> {
     /** full phone number including the country code (starting with "+") */
     private String number;
     private String gateway;
+    private String group;
     
     // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -31,7 +32,7 @@ public class Contact extends Object implements Comparable<Contact> {
 
     /** Create new contact with properties copied from provided contact */
     public Contact(Contact c) {
-        this(c.getName(), c.getNumber(), c.getGateway());
+        this(c.getName(), c.getNumber(), c.getGateway(), c.getGroup());
     }
 
     /** Create new contact. For detailed parameters restrictions see individual setter methods. */
@@ -40,14 +41,22 @@ public class Contact extends Object implements Comparable<Contact> {
         setNumber(number);
         setGateway(gateway);
     }
+    
+    public Contact(String name, String number, String gateway, String group) {
+        setName(name);
+        setNumber(number);
+        setGateway(gateway);
+        setGroup(group);
+    }
 
     /** Copy all contact properties from provided contact to current contact */
     public void copyFrom(Contact c) {
         setName(c.getName());
         setNumber(c.getNumber());
         setGateway(c.getGateway());
+        setGroup(c.getGroup());
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
     /** Get contact name. Never null. */
     public String getName() {
@@ -111,6 +120,14 @@ public class Contact extends Object implements Comparable<Contact> {
     }
     // </editor-fold>
 
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+    
     /** Check validity of phone number
      * @return true if number is in form +[0-9]{2,15} with valid country prefix,
      * false otherwise

@@ -6,7 +6,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
@@ -30,6 +32,9 @@ public class Contacts {
     private final SortedSet<Contact> contacts = Collections.synchronizedSortedSet(new TreeSet<Contact>());
     private ContactChangeListener contactChangeListener = new ContactChangeListener();
 
+     private static final Map<String, Integer> groupMap = new TreeMap<String, Integer>();
+    private static boolean changeGroup = false;
+    
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
     public void addActionListener(ActionListener actionListener) {
@@ -54,6 +59,18 @@ public class Contacts {
     public SortedSet<Contact> getAll() {
         return Collections.unmodifiableSortedSet(contacts);
     }
+    
+    public static Map<String, Integer> getMap() {
+        return groupMap;
+    }
+
+    public static boolean isChangeGroup() {
+        return changeGroup;
+    }
+
+    public static void setChangeGroup(boolean changeGroup) {
+        Contacts.changeGroup = changeGroup;
+    }
 
     /** Add new contact
      * @param contact new contact, not null
@@ -68,6 +85,7 @@ public class Contacts {
 
         synchronized(contacts) {
             added = contacts.add(contact);
+            addGroup(contact.getGroup());
             if (added) {
                 contact.addPropertyChangeListener(contactChangeListener);
             }
@@ -92,6 +110,7 @@ public class Contacts {
 
         synchronized(this.contacts) {
             for (Contact contact : contacts) {
+                addGroup(contact.getGroup());
                 if (!this.contacts.contains(contact)) {
                     contact.addPropertyChangeListener(contactChangeListener);
                 }
@@ -118,6 +137,7 @@ public class Contacts {
 
         synchronized(contacts) {
             removed = contacts.remove(contact);
+            removeGroup(contact.getGroup());
             if (removed) {
                 contact.removePropertyChangeListener(contactChangeListener);
             }
@@ -142,6 +162,7 @@ public class Contacts {
 
         synchronized(this.contacts) {
             for (Contact contact : contacts) {
+                removeGroup(contact.getGroup());
                 if (this.contacts.contains(contact)) {
                     contact.removePropertyChangeListener(contactChangeListener);
                 }
@@ -161,6 +182,7 @@ public class Contacts {
 
         synchronized(contacts) {
             for (Contact contact : contacts) {
+                removeGroup(contact.getGroup());
                 contact.removePropertyChangeListener(contactChangeListener);
             }
             contacts.clear();
@@ -201,6 +223,37 @@ public class Contacts {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             actionSupport.fireActionPerformed(ACTION_CHANGE_CONTACT, null);
+        }
+    }
+    
+    public void editGroup(String oldGroup, String newGroup) {
+        if (!oldGroup.equals(newGroup)) {
+            addGroup(newGroup);
+            removeGroup(oldGroup);
+        }
+    }
+
+    private void addGroup(String group) {
+        if (!group.equals("")) {
+            changeGroup = true;
+            Integer value = (Integer) groupMap.get(group);
+            if (value == null) {
+                groupMap.put(group, 1);
+            } else {
+                groupMap.replace(group, value + 1);
+            }
+        }
+    }
+
+    private void removeGroup(String group) {
+        if (!group.equals("")) {
+            changeGroup = true;
+            Integer value = (Integer) groupMap.get(group) - 1;
+            if (value == 0) {
+                groupMap.remove(group);
+            } else {
+                groupMap.replace(group, value);
+            }
         }
     }
 }

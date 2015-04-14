@@ -3,7 +3,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-09-26"
+    return "2015-04-12"
 }
 
 function getMaintainer() {
@@ -62,7 +62,7 @@ function send() {
     re = /name="hash" value="(.+)"/
     match = re.exec(content)
     if (!match){
-        re = /<p><strong>([^]*?)<\/strong><\/p>/
+        re = /Omlouváme se, ale limit pro odesílání SMS zdarma byl vyčerpán./
         match = re.exec(content)  
         if (match){
             EXEC.setProblem("GATEWAY_MESSAGE", match[0])

@@ -50,7 +50,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -259,7 +258,6 @@ public class ContactPanel extends javax.swing.JPanel {
         jScrollPane4 = new JScrollPane();
         contactList = new ContactList();
         editContactButton = new JButton();
-        groupsComboBox = new JComboBox();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("ContactPanel.border.title"))); // NOI18N
         addFocusListener(new FocusAdapter() {
@@ -312,12 +310,6 @@ public class ContactPanel extends javax.swing.JPanel {
         editContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
         editContactButton.setText("");
 
-        groupsComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                groupsComboBoxActionPerformed(evt);
-            }
-        });
-
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -331,18 +323,14 @@ public class ContactPanel extends javax.swing.JPanel {
                         .addComponent(editContactButton)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(removeContactButton))
-                    .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                    .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(groupsComboBox, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(groupsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                     .addComponent(addContactButton)
@@ -444,10 +432,6 @@ public class ContactPanel extends javax.swing.JPanel {
             return;
         }
     }//GEN-LAST:event_contactListKeyPressed
-
-    private void groupsComboBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_groupsComboBoxActionPerformed
-        contactListModel.changeList();
-    }//GEN-LAST:event_groupsComboBoxActionPerformed
     
     /** Add contact to contact list */
     private class AddContactAction extends AbstractAction {
@@ -529,7 +513,6 @@ public class ContactPanel extends javax.swing.JPanel {
                 if (edited == null) {
                     return;
                 }
-                contacts.editGroup(contact.getGroup(), edited.getGroup());
                 contact.copyFrom(edited);
                 contactList.setSelectedValue(contact, true);
                 log.addRecord(new Log.Record(
@@ -1093,7 +1076,6 @@ public class ContactPanel extends javax.swing.JPanel {
     private JButton addContactButton;
     private JList contactList;
     private JButton editContactButton;
-    private JComboBox groupsComboBox;
     private JScrollPane jScrollPane4;
     private JButton removeContactButton;
     // End of variables declaration//GEN-END:variables
