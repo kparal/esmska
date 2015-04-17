@@ -14,7 +14,7 @@ import esmska.data.SMS;
 import esmska.data.SMSTemplates;
 import esmska.data.Signature;
 import esmska.data.Signatures;
-import esmska.data.Temp;
+import esmska.data.SMSTemplate;
 import esmska.integration.IntegrationAdapter;
 import esmska.utils.RuntimeUtils;
 import java.beans.IntrospectionException;
@@ -301,7 +301,7 @@ public class PersistenceManager {
         logger.fine("Loading templates...");
         
         if (templatesFile.exists()) {
-            ArrayList<Temp> newTemplates = ImportManager.importTemplate(templatesFile);
+            ArrayList<SMSTemplate> newTemplates = ImportManager.importTemplate(templatesFile);
             ContinuousSaveManager.disableTemplates();
             SMSTemplates.getInstance().clear();
             SMSTemplates.getInstance().addTemplates(newTemplates);

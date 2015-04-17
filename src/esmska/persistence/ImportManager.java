@@ -13,7 +13,7 @@ import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.data.Signature;
 import esmska.data.Signatures;
-import esmska.data.Temp;
+import esmska.data.SMSTemplate;
 import esmska.data.Tuple;
 import esmska.update.VersionFile;
 import java.beans.IntrospectionException;
@@ -79,9 +79,9 @@ public class ImportManager {
     }
     
     /** Import templates from file */
-    public static ArrayList<Temp> importTemplate(File file) throws Exception {
+    public static ArrayList<SMSTemplate> importTemplate(File file) throws Exception {
         logger.finer("Importing templates from file: " + file.getAbsolutePath());
-        ArrayList<Temp> templates = new ArrayList<Temp>();
+        ArrayList<SMSTemplate> templates = new ArrayList<SMSTemplate>();
         CsvReader reader = null;
         
         try {
@@ -92,7 +92,7 @@ public class ImportManager {
                     String template = reader.get(0);
                     
                     
-                    Temp templateSMS = new Temp(template);
+                    SMSTemplate templateSMS = new SMSTemplate(template);
                     templates.add(templateSMS);
                 } catch (Exception e) {
                     logger.severe("Invalid template record: " + reader.getRawRecord());

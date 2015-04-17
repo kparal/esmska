@@ -12,7 +12,7 @@ import esmska.data.History;
 import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.data.Signature;
-import esmska.data.Temp;
+import esmska.data.SMSTemplate;
 import esmska.data.Tuple;
 import esmska.utils.L10N;
 import java.io.IOException;
@@ -73,7 +73,7 @@ public class ExportManager {
     * @param templates templates, not null
     * @param out output stream, not null
     */
-     public static void exportTemplates(List<Temp> templates, OutputStream out) throws IOException {
+     public static void exportTemplates(List<SMSTemplate> templates, OutputStream out) throws IOException {
         Validate.notNull(templates);
         Validate.notNull(out);
         
@@ -81,7 +81,7 @@ public class ExportManager {
         CsvWriter writer = new CsvWriter(out, ',', Charset.forName("UTF-8"));
 
         writer.writeComment(l10n.getString("ExportManager.templates"));
-        for (Temp template : templates) {
+        for (SMSTemplate template : templates) {
             writer.writeRecord(new String[] {
                template.getTemplate()
             });

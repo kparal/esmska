@@ -5,7 +5,7 @@
  */
 package esmska.gui;
 
-import esmska.data.Temp;
+import esmska.data.SMSTemplate;
 import esmska.data.Template;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
@@ -33,14 +33,14 @@ public class AddTemplateFrame extends javax.swing.JFrame {
     private Template templates = Template.getInstance();
     private TemplateModel templateModel = new TemplateModel();
     private Action insertTemplateAction = new InsertTemplateAction();
-    private Temp selectedTemplate;
+    private SMSTemplate selectedTemplate;
         
         // <editor-fold defaultstate="collapsed" desc="ValuedEvent support">
-    private ValuedEventSupport<Events, Temp> valuedSupport = new ValuedEventSupport<Events, Temp>(this);
-    public void addValuedListener(ValuedListener<Events, Temp> valuedListener) {
+    private ValuedEventSupport<Events, SMSTemplate> valuedSupport = new ValuedEventSupport<Events, SMSTemplate>(this);
+    public void addValuedListener(ValuedListener<Events, SMSTemplate> valuedListener) {
         valuedSupport.addValuedListener(valuedListener);
     }
-    public void removeValuedListener(ValuedListener<Events, Temp> valuedListener) {
+    public void removeValuedListener(ValuedListener<Events, SMSTemplate> valuedListener) {
         valuedSupport.removeValuedListener(valuedListener);
     }
     // </editor-fold>
@@ -179,7 +179,7 @@ public class AddTemplateFrame extends javax.swing.JFrame {
             boolean selected = (index >= 0);
             insertTemplateAction.setEnabled(selected);
 
-            Temp temp = null;
+            SMSTemplate temp = null;
             if (selected) {
                 index = templateList.getSelectedIndex();
                 temp = templates.getTemplate(index);

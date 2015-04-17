@@ -14,7 +14,7 @@ import java.beans.PropertyChangeSupport;
  */
 
  
-public class Temp {
+public class SMSTemplate {
         private String template;
          // <editor-fold defaultstate="collapsed" desc="PropertyChange support">
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -28,15 +28,15 @@ public class Temp {
     }
     // </editor-fold>
         
-        public Temp (String template) {
+        public SMSTemplate (String template) {
             setTemplate(template);
         }
         
-        public Temp (Temp template){
+        public SMSTemplate (SMSTemplate template){
             setTemplate(template.toString());
         }
 
-        public void copyFrom(Temp t) {
+        public void copyFrom(SMSTemplate t) {
         setTemplate(t.getTemplate());
         }
         

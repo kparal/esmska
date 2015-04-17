@@ -9,7 +9,7 @@ import esmska.Context;
 import esmska.data.Icons;
 import esmska.data.Log;
 import esmska.data.SMSTemplates;
-import esmska.data.Temp;
+import esmska.data.SMSTemplate;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import static esmska.gui.GatewayMessage.l10n;
@@ -51,14 +51,14 @@ public class EditTemplateFrame extends javax.swing.JFrame {
     private Action insertTemplateAction = new InsertTemplateAction();
     private Action newTemplateAction = new NewTemplateAction();
     private Action editTemplateAction = new EditTemplateAction();
-    private Temp selectedTemplate;
+    private SMSTemplate selectedTemplate;
     
     
-    private ValuedEventSupport<EditTemplateFrame.Events, Temp> valuedSupport = new ValuedEventSupport<EditTemplateFrame.Events, Temp>(this);
-    public void addValuedListener(ValuedListener<EditTemplateFrame.Events, Temp> valuedListener) {
+    private ValuedEventSupport<EditTemplateFrame.Events, SMSTemplate> valuedSupport = new ValuedEventSupport<EditTemplateFrame.Events, SMSTemplate>(this);
+    public void addValuedListener(ValuedListener<EditTemplateFrame.Events, SMSTemplate> valuedListener) {
         valuedSupport.addValuedListener(valuedListener);
     }
-    public void removeValuedListener(ValuedListener<EditTemplateFrame.Events, Temp> valuedListener) {
+    public void removeValuedListener(ValuedListener<EditTemplateFrame.Events, SMSTemplate> valuedListener) {
         valuedSupport.removeValuedListener(valuedListener);
     }
     
@@ -235,7 +235,7 @@ public class EditTemplateFrame extends javax.swing.JFrame {
             if (templateText.equals("")) {
                 return;
             }
-            Temp p = new Temp(templateText);        
+            SMSTemplate p = new SMSTemplate(templateText);        
             templates.addTemplate(p);
             templateList.setSelectedValue(p, true);
             log.addRecord(new Log.Record(
@@ -260,11 +260,11 @@ public class EditTemplateFrame extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             templateList.requestFocusInWindow(); //always transfer focus 
-            Temp template = (Temp)templateList.getSelectedValue();
+            SMSTemplate template = (SMSTemplate)templateList.getSelectedValue();
             if  (template==null){
                 return;
             }
-            Temp editedTemplate = new Temp(template);
+            SMSTemplate editedTemplate = new SMSTemplate(template);
             //create Dialog 
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());                    
@@ -336,7 +336,7 @@ public class EditTemplateFrame extends javax.swing.JFrame {
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
             
-            Temp t = (Temp)templateList.getSelectedValue();
+            SMSTemplate t = (SMSTemplate)templateList.getSelectedValue();
             if  (t==null){
                  return;
             }
@@ -393,7 +393,7 @@ public class EditTemplateFrame extends javax.swing.JFrame {
             editTemplateAction.setEnabled(selected);
             removeTemplateAction.setEnabled(selected);
 
-            Temp temp = null;
+            SMSTemplate temp = null;
             if (selected) {
                 index = templateList.getSelectedIndex();
                 temp = templates.getTemplate(index);

@@ -11,7 +11,7 @@ import esmska.data.Log;
 import esmska.data.Queue;
 import esmska.data.Queue.Events;
 import esmska.data.SMS;
-import esmska.data.Temp;
+import esmska.data.SMSTemplate;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import esmska.persistence.ExportManager;
@@ -590,12 +590,12 @@ public class Actions {
     }
     
      /** Listens for events from template list */
-    private static class TemplateListener implements ValuedListener<EditTemplateFrame.Events, Temp> {
+    private static class TemplateListener implements ValuedListener<EditTemplateFrame.Events, SMSTemplate> {
         @Override
-        public void eventOccured(ValuedEvent<EditTemplateFrame.Events, Temp> e) {
+        public void eventOccured(ValuedEvent<EditTemplateFrame.Events, SMSTemplate> e) {
             switch (e.getEvent()) {
                 case INSERT_TEMPLATE:
-                    Temp template = e.getValue();
+                    SMSTemplate template = e.getValue();
                     if (template == null) {
                         return;
                     }

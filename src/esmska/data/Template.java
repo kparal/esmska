@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class Template {
     
     private static final Template instance = new Template();
-    private final List<Temp> templates = Collections.synchronizedList(new ArrayList<Temp>());
+    private final List<SMSTemplate> templates = Collections.synchronizedList(new ArrayList<SMSTemplate>());
     private static final Logger logger = Logger.getLogger(Template.class.getName());
     private TemplateChangeListener templateChangeListener = new TemplateChangeListener();
     /** new template added */
@@ -56,26 +56,26 @@ public class Template {
         return instance;
     }
     /** get all template */
-    public List<Temp> getTemplates() {
+    public List<SMSTemplate> getTemplates() {
         return Collections.unmodifiableList(templates);
     }
     
     /** get template at index */
-    public Temp getTemplate(int index) {
+    public SMSTemplate getTemplate(int index) {
         return templates.get(index);
     }
     
     /** add new template
      * @param temp added template*/
-    public void addTemplate(Temp temp) {
+    public void addTemplate(SMSTemplate temp) {
         templates.add(temp);
         actionSupport.fireActionPerformed(ACTION_ADD_TEMPLATE, null);
         logger.finer("New template added: " + temp);
     }
     
      /** add new templates */
-    public void addTemplates(Collection<Temp> templates) {
-        for (Temp temp : templates) {
+    public void addTemplates(Collection<SMSTemplate> templates) {
+        for (SMSTemplate temp : templates) {
             this.templates.add(temp);
         }
         
@@ -84,7 +84,7 @@ public class Template {
     }
     
     /** remove existing template */
-    public boolean removeTemplate(Temp temp) {
+    public boolean removeTemplate(SMSTemplate temp) {
         if (temp == null) {
             throw new IllegalArgumentException("template");
         }
