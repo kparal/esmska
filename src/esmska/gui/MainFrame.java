@@ -425,15 +425,15 @@ public class MainFrame extends javax.swing.JFrame {
         jSeparator1 = new JSeparator();
         toolBar = new JToolBar();
         compressButton = new JButton();
+        editTemplateButton = new JButton();
         undoButton = new JButton();
         redoButton = new JButton();
-        jSeparator2 = new Separator();
         historyButton = new JButton();
-        jSeparator3 = new Separator();
+        jSeparator2 = new Separator();
         configButton = new JButton();
-        jSeparator6 = new Separator();
-        editTemplateButton = new JButton();
+        jSeparator3 = new Separator();
         exitButton = new JButton();
+        jSeparator6 = new Separator();
         donateButton = new JButton();
         menuBar = new JMenuBar();
         programMenu = new JMenu();
@@ -444,6 +444,7 @@ public class MainFrame extends javax.swing.JFrame {
         redoMenuItem = new JMenuItem();
         jSeparator5 = new JSeparator();
         compressMenuItem = new JMenuItem();
+        addMenuItem = new JMenuItem();
         sendMenuItem = new JMenuItem();
         toolsMenu = new JMenu();
         historyMenuItem = new JMenuItem();
@@ -511,6 +512,17 @@ public class MainFrame extends javax.swing.JFrame {
         compressButton.setHideActionText(true);
         toolBar.add(compressButton);
 
+        editTemplateButton.setAction(Actions.getShowEditTemplateAction());
+        editTemplateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/edit-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(editTemplateButton, "");
+        editTemplateButton.setToolTipText(l10n.getString( "MainFrame.editTemplateButton.toolTipText")); // NOI18N
+        editTemplateButton.setFocusable(false);
+        editTemplateButton.setHideActionText(true);
+        editTemplateButton.setMaximumSize(new Dimension(39, 39));
+        editTemplateButton.setMinimumSize(new Dimension(39, 39));
+        editTemplateButton.setPreferredSize(new Dimension(39, 39));
+        toolBar.add(editTemplateButton);
+
         undoButton.setAction(smsPanel.getUndoAction());
         undoButton.setToolTipText(l10n.getString("MainFrame.undoButton.toolTipText")); // NOI18N
         undoButton.setFocusable(false);
@@ -522,7 +534,6 @@ public class MainFrame extends javax.swing.JFrame {
         redoButton.setFocusable(false);
         redoButton.setHideActionText(true);
         toolBar.add(redoButton);
-        toolBar.add(jSeparator2);
 
         historyButton.setAction(Actions.getHistoryAction());
         historyButton.setFocusable(false);
@@ -530,7 +541,7 @@ public class MainFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(historyButton, l10n.getString("History"));
         historyButton.setToolTipText(historyButton.getToolTipText() + " (Ctrl+T)");
         toolBar.add(historyButton);
-        toolBar.add(jSeparator3);
+        toolBar.add(jSeparator2);
 
         configButton.setAction(Actions.getConfigAction());
         configButton.setToolTipText(Actions.getConfigAction().getValue(Action.NAME).toString());
@@ -542,23 +553,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         toolBar.add(configButton);
-        toolBar.add(jSeparator6);
-
-        editTemplateButton.setAction(Actions.getShowEditTemplateAction());
-        editTemplateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/edit-22.png"))); // NOI18N
-        Mnemonics.setLocalizedText(editTemplateButton, l10n.getString( "MainFrame.editTemplateButton.text")); // NOI18N
-        editTemplateButton.setToolTipText(l10n.getString( "MainFrame.editTemplateButton.toolTipText")); // NOI18N
-        editTemplateButton.setFocusable(false);
-        editTemplateButton.setMaximumSize(new Dimension(125, 39));
-        editTemplateButton.setMinimumSize(new Dimension(125, 39));
-        editTemplateButton.setPreferredSize(new Dimension(125, 39));
-        toolBar.add(editTemplateButton);
+        toolBar.add(jSeparator3);
 
         exitButton.setAction(Actions.getQuitAction());
         exitButton.setToolTipText(Actions.getQuitAction().getValue(Action.NAME).toString() + " (Ctrl+Q)");
         exitButton.setFocusable(false);
         exitButton.setHideActionText(true);
         toolBar.add(exitButton);
+        toolBar.add(jSeparator6);
 
         donateButton.setAction(Actions.getBrowseAction(Links.DONATE));
         donateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/donate-32.png"))); // NOI18N
@@ -599,6 +601,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         compressMenuItem.setAction(smsPanel.getCompressAction());
         messageMenu.add(compressMenuItem);
+
+        addMenuItem.setAction(Actions.getShowEditTemplateAction());
+        addMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/edit-16.png"))); // NOI18N
+        Mnemonics.setLocalizedText(addMenuItem, l10n.getString( "MainFrame.addMenuItem.text")); // NOI18N
+        messageMenu.add(addMenuItem);
 
         sendMenuItem.setAction(smsPanel.getSendAction());
         messageMenu.add(sendMenuItem);
@@ -674,7 +681,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -1084,6 +1091,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JMenuItem aboutMenuItem;
+    private JMenuItem addMenuItem;
     private JButton compressButton;
     private JMenuItem compressMenuItem;
     private JButton configButton;

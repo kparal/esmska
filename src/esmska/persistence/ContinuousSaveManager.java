@@ -7,7 +7,7 @@ import esmska.data.Keyring;
 import esmska.data.Queue;
 import esmska.data.Queue.Events;
 import esmska.data.SMS;
-import esmska.data.Template;
+import esmska.data.SMSTemplates;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import java.awt.event.ActionEvent;
@@ -101,7 +101,7 @@ public class ContinuousSaveManager {
     
     /** Enable automatic saving of templates when changed */
     public static void enableTemplates() {
-        Template.getInstance().addActionListener(templatesSaveListener);
+        SMSTemplates.getInstance().addActionListener(templatesSaveListener);
     }
 
     /** Enable automatic saving of queue when changed */
@@ -116,7 +116,7 @@ public class ContinuousSaveManager {
     
     /** Disable automatic saving of templates when changed */
     public static void disableTemplates() {
-        Template.getInstance().removeActionListener(templatesSaveListener);
+        SMSTemplates.getInstance().removeActionListener(templatesSaveListener);
     }
 
     /** Disable automatic saving of keyring when changed */

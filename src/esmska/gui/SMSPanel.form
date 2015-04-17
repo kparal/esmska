@@ -63,9 +63,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="smsCounterLabel" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <EmptySpace pref="80" max="32767" attributes="0"/>
-                                      <Component id="addTemplateButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -111,7 +109,6 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                           <Component id="smsCounterLabel" alignment="0" min="-2" max="-2" attributes="1"/>
-                          <Component id="addTemplateButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -310,16 +307,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="addContactButton.setText(null);&#xd;&#xa;addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="addTemplateButton">
-      <Properties>
-        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="Actions.getShowAddTemplateAction()" type="code"/>
-        </Property>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Show add Template Dialog"/>
-      </AccessibilityProperties>
     </Component>
   </SubComponents>
 </Form>

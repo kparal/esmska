@@ -1,6 +1,22 @@
 package esmska.persistence;
 
 import esmska.Context;
+import esmska.data.Config;
+import esmska.data.Contact;
+import esmska.data.Contacts;
+import esmska.data.DeprecatedGateway;
+import esmska.data.Gateway;
+import esmska.data.Gateways;
+import esmska.data.History;
+import esmska.data.Keyring;
+import esmska.data.Queue;
+import esmska.data.SMS;
+import esmska.data.SMSTemplates;
+import esmska.data.Signature;
+import esmska.data.Signatures;
+import esmska.data.Temp;
+import esmska.integration.IntegrationAdapter;
+import esmska.utils.RuntimeUtils;
 import java.beans.IntrospectionException;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -9,38 +25,20 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.apache.commons.io.FileUtils;
-
-import esmska.data.Config;
-import esmska.data.Contact;
-import esmska.data.Contacts;
-import esmska.data.DeprecatedGateway;
-import esmska.data.History;
-import esmska.data.Keyring;
-import esmska.data.Gateways;
-import esmska.data.Queue;
-import esmska.data.SMS;
-import esmska.data.Gateway;
-import esmska.data.Signature;
-import esmska.data.Signatures;
-import esmska.data.Template;
-import esmska.data.Temp;
-import esmska.integration.IntegrationAdapter;
-import esmska.utils.RuntimeUtils;
-import java.io.FilenameFilter;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.Validate;
 import org.xml.sax.SAXException;
 
@@ -65,7 +63,7 @@ public class PersistenceManager {
     private static final String LOG_FILENAME = "console.log";
     private static final String DEPRECATED_GWS_FILENAME = "deprecated.xml";
     private static final String GATEWAY_PROPS_FILENAME = "gateways.json";
-    private static final String TEMPLATES_FILENAME = "templates.txt";
+    private static final String TEMPLATES_FILENAME = "templates.csv";
     
     private static File configDir =
             new File(System.getProperty("user.home") + File.separator + ".config",
@@ -289,7 +287,7 @@ public class PersistenceManager {
 
         File temp = createTempFile();
         FileOutputStream out = new FileOutputStream(temp);
-        ExportManager.exportTemplates(Template.getInstance().getTemplates(), out);
+        ExportManager.exportTemplates(SMSTemplates.getInstance().getTemplates(), out);
         out.flush();
         out.getChannel().force(false);
         out.close();
@@ -305,8 +303,8 @@ public class PersistenceManager {
         if (templatesFile.exists()) {
             ArrayList<Temp> newTemplates = ImportManager.importTemplate(templatesFile);
             ContinuousSaveManager.disableTemplates();
-            Template.getInstance().clear();
-            Template.getInstance().addTemplates(newTemplates);
+            SMSTemplates.getInstance().clear();
+            SMSTemplates.getInstance().addTemplates(newTemplates);
             ContinuousSaveManager.enableTemplates();
         }
     }

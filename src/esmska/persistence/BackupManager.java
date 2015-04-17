@@ -47,7 +47,7 @@ public class BackupManager {
      */
     public boolean backupFiles(Collection<File> files, boolean overwrite) throws IOException {
         Validate.notNull(files);
-
+        
         String today = dateFormat.format(new Date());
         File backupDir = new File(backupRoot, today);
 
@@ -61,8 +61,9 @@ public class BackupManager {
             FileUtils.forceMkdir(backupDir);
         }
 
-        //copy files
+        //copy files       
         for (File file : files) {
+            
             if (!file.exists()) {
                 //ignore non-existent files
                 continue;

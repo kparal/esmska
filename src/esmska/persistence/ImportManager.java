@@ -1,36 +1,38 @@
 package esmska.persistence;
 
 import com.csvreader.CsvReader;
-import esmska.data.*;
+import esmska.data.Config;
 import esmska.data.Config.GlobalConfig;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import esmska.data.Contact;
-import esmska.data.SMS;
+import esmska.data.DeprecatedGateway;
 import esmska.data.Gateway;
+import esmska.data.GatewayConfig;
+import esmska.data.Gateways;
+import esmska.data.History;
+import esmska.data.Keyring;
+import esmska.data.SMS;
+import esmska.data.Signature;
+import esmska.data.Signatures;
+import esmska.data.Temp;
 import esmska.data.Tuple;
 import esmska.update.VersionFile;
 import java.beans.IntrospectionException;
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.InputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.JarURLConnection;
 import java.net.URL;
-import static java.sql.DriverManager.println;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -80,18 +82,20 @@ public class ImportManager {
     public static ArrayList<Temp> importTemplate(File file) throws Exception {
         logger.finer("Importing templates from file: " + file.getAbsolutePath());
         ArrayList<Temp> templates = new ArrayList<Temp>();
-        BufferedReader reader = null;
+        CsvReader reader = null;
+        
         try {
-            InputStream is = new FileInputStream(file.getPath());
-            InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-            reader = new BufferedReader(isr);
-            String template;
-            while ((template = reader.readLine()) != null) {
+            reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
+            reader.setUseComments(true);
+            while (reader.readRecord()) {
                 try {
-                    Temp temp = new Temp(template);
-                    templates.add(temp);
+                    String template = reader.get(0);
+                    
+                    
+                    Temp templateSMS = new Temp(template);
+                    templates.add(templateSMS);
                 } catch (Exception e) {
-                    logger.severe("Invalid templates record");
+                    logger.severe("Invalid template record: " + reader.getRawRecord());
                     throw e;
                 }
             }

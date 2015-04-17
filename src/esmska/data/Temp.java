@@ -31,7 +31,15 @@ public class Temp {
         public Temp (String template) {
             setTemplate(template);
         }
+        
+        public Temp (Temp template){
+            setTemplate(template.toString());
+        }
 
+        public void copyFrom(Temp t) {
+        setTemplate(t.getTemplate());
+        }
+        
         public void setTemplate(String template) {
             this.template = template;
         }

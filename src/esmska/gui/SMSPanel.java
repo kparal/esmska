@@ -6,12 +6,12 @@ import esmska.data.Contact;
 import esmska.data.Contacts;
 import esmska.data.CountryPrefix;
 import esmska.data.Envelope;
-import esmska.data.Keyring;
-import esmska.data.Links;
 import esmska.data.Gateway;
 import esmska.data.Gateway.Feature;
 import esmska.data.Gateways;
 import esmska.data.Icons;
+import esmska.data.Keyring;
+import esmska.data.Links;
 import esmska.data.Queue;
 import esmska.data.SMS;
 import esmska.data.event.AbstractDocumentListener;
@@ -310,7 +310,7 @@ public class SMSPanel extends javax.swing.JPanel {
         });
     }
     /** připojí text ze šablony */
-    public void setText(String text) {
+    public void appendText(String text) {
         smsTextPane.setText(smsTextPane.getText() + text);       
     }
 
@@ -514,7 +514,6 @@ public class SMSPanel extends javax.swing.JPanel {
         suggestGatewayButton = new JButton();
         jLabel1 = new JLabel();
         addContactButton = new JButton();
-        addTemplateButton = new JButton();
 
         setBorder(BorderFactory.createTitledBorder(l10n.getString("SMSPanel.border.title"))); // NOI18N
         setMinimumSize(new Dimension(5, 5));
@@ -625,8 +624,6 @@ infoPanelLayout.setHorizontalGroup(infoPanelLayout.createParallelGroup(Alignment
     addContactButton.setText(null);
     addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
 
-    addTemplateButton.setAction(Actions.getShowAddTemplateAction());
-
         GroupLayout layout = new GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING)
@@ -658,9 +655,7 @@ infoPanelLayout.setHorizontalGroup(infoPanelLayout.createParallelGroup(Alignment
                             .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(smsCounterLabel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                                    .addComponent(addTemplateButton)
-                                    .addPreferredGap(ComponentPlacement.RELATED)
+                                    .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(sendButton))
                                 .addComponent(jScrollPane1)))))
                 .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
@@ -696,8 +691,7 @@ infoPanelLayout.setHorizontalGroup(infoPanelLayout.createParallelGroup(Alignment
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING, false)
                         .addComponent(sendButton)
-                        .addComponent(smsCounterLabel)
-                        .addComponent(addTemplateButton)))
+                        .addComponent(smsCounterLabel)))
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(textLabel)
                     .addPreferredGap(ComponentPlacement.RELATED)
@@ -713,7 +707,6 @@ infoPanelLayout.setHorizontalGroup(infoPanelLayout.createParallelGroup(Alignment
 
     layout.linkSize(SwingConstants.VERTICAL, new Component[] {gatewayComboBox, suggestGatewayButton});
 
-    addTemplateButton.getAccessibleContext().setAccessibleDescription("Show add Template Dialog");
     }// </editor-fold>//GEN-END:initComponents
 
     private void formFocusGained(FocusEvent evt) {//GEN-FIRST:event_formFocusGained
@@ -1284,7 +1277,6 @@ infoPanelLayout.setHorizontalGroup(infoPanelLayout.createParallelGroup(Alignment
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton addContactButton;
-    private JButton addTemplateButton;
     private InfoLabel countryInfoLabel;
     private InfoLabel credentialsInfoLabel;
     private JProgressBar fullProgressBar;

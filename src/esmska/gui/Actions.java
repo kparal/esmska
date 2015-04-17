@@ -61,7 +61,7 @@ public class Actions {
     private static Action importAction;
     private static Action exportAction;
     private static Action logAction;
-    private static Action showAddTemplateAction;
+//    private static Action showAddTemplateAction;
     private static Action showEditTemplateAction;
 
     /** Show about frame */
@@ -121,12 +121,12 @@ public class Actions {
     }
     
     /** Show add Template frame */
-    public static Action getShowAddTemplateAction() {
-        if (showAddTemplateAction == null) {
-            showAddTemplateAction = new ShowAddTemplateAction();
-        }
-        return showAddTemplateAction;
-    } 
+//    public static Action getShowAddTemplateAction() {
+//        if (showAddTemplateAction == null) {
+//            showAddTemplateAction = new ShowAddTemplateAction();
+//        }
+//        return showAddTemplateAction;
+//    } 
     
      /** Show edit Template frame */
     public static Action getShowEditTemplateAction() {
@@ -540,52 +540,37 @@ public class Actions {
     }
     
     /** Show the addTemplate frame */
-    private static class ShowAddTemplateAction extends AbstractAction {
-        private AddTemplateFrame templateFrame;        
-        public ShowAddTemplateAction() {           
-            L10N.setLocalizedText(this, l10n.getString("AddTemplate_"));
-            putValue(SMALL_ICON, Icons.get("add-16.png"));
-            putValue(LARGE_ICON_KEY, Icons.get("add-22.png"));
-            putValue(SHORT_DESCRIPTION,l10n.getString("Add_Template_message"));
-        }        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            logger.fine("Showing  Template frame...");
-            if (templateFrame != null && templateFrame.isVisible()) {
-                templateFrame.requestFocus();
-                templateFrame.toFront();
-            } else {
-                templateFrame = new AddTemplateFrame();
-                templateFrame.setLocationRelativeTo(Context.mainFrame);
-                templateFrame.addValuedListener(new TemplateListener());
-                templateFrame.setVisible(true);
-            }
-        }   
-    }
+//    private static class ShowAddTemplateAction extends AbstractAction {
+//        private AddTemplateFrame templateFrame;        
+//        public ShowAddTemplateAction() {           
+//            L10N.setLocalizedText(this, l10n.getString("AddTemplate_"));
+//            putValue(SMALL_ICON, Icons.get("add-16.png"));
+//            putValue(LARGE_ICON_KEY, Icons.get("add-22.png"));
+//            putValue(SHORT_DESCRIPTION,l10n.getString("Add_Template_message"));
+//        }        
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            logger.fine("Showing  Template frame...");
+//            if (templateFrame != null && templateFrame.isVisible()) {
+//                templateFrame.requestFocus();
+//                templateFrame.toFront();
+//            } else {
+//                templateFrame = new AddTemplateFrame();
+//                templateFrame.setLocationRelativeTo(Context.mainFrame);
+//                templateFrame.addValuedListener(new TemplateListener());
+//                templateFrame.setVisible(true);
+//            }
+//        }   
+//    }
     
-    /** Listens for events from template list */
-    private static class TemplateListener implements ValuedListener<AddTemplateFrame.Events, Temp> {
-        @Override
-        public void eventOccured(ValuedEvent<AddTemplateFrame.Events, Temp> e) {
-            switch (e.getEvent()) {
-                case INSERT_TEMPLATE:
-                    Temp template = e.getValue();
-                    if (template == null) {
-                        return;
-                    }
-                   
-                    Context.mainFrame.getContactPanel().clearSelection();
-                    Context.mainFrame.getSMSPanel().setText(template.getTemplate());
-            }
-        }
-    }
+   
     
     /** Show the editTemplate frame */
     private static class ShowEditTemplateAction extends AbstractAction {        
         private EditTemplateFrame editTemplateFrame;        
         public ShowEditTemplateAction() {           
             L10N.setLocalizedText(this, l10n.getString("EditTemplate_"));
-            putValue(SMALL_ICON, Icons.get("add-16.png"));
+//            putValue(SMALL_ICON, Icons.get("add-16.png"));
             putValue(LARGE_ICON_KEY, Icons.get("add-22.png"));
             putValue(SHORT_DESCRIPTION,l10n.getString("Edit_Template_message"));
         }        
@@ -598,8 +583,25 @@ public class Actions {
             } else {
                 editTemplateFrame = new EditTemplateFrame();
                 editTemplateFrame.setLocationRelativeTo(Context.mainFrame);
+                editTemplateFrame.addValuedListener(new TemplateListener());
                 editTemplateFrame.setVisible(true);                
             }
         }   
+    }
+    
+     /** Listens for events from template list */
+    private static class TemplateListener implements ValuedListener<EditTemplateFrame.Events, Temp> {
+        @Override
+        public void eventOccured(ValuedEvent<EditTemplateFrame.Events, Temp> e) {
+            switch (e.getEvent()) {
+                case INSERT_TEMPLATE:
+                    Temp template = e.getValue();
+                    if (template == null) {
+                        return;
+                    }
+                   
+                    Context.mainFrame.getSMSPanel().appendText(template.getTemplate());
+            }
+        }
     }
 }
