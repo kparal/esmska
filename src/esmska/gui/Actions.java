@@ -120,14 +120,6 @@ public class Actions {
         return logAction;
     }
     
-    /** Show add Template frame */
-//    public static Action getShowAddTemplateAction() {
-//        if (showAddTemplateAction == null) {
-//            showAddTemplateAction = new ShowAddTemplateAction();
-//        }
-//        return showAddTemplateAction;
-//    } 
-    
      /** Show edit Template frame */
     public static Action getShowEditTemplateAction() {
         if (showEditTemplateAction == null) {
@@ -538,33 +530,7 @@ public class Actions {
             this.setEnabled(Context.everythingLoaded());
         }
     }
-    
-    /** Show the addTemplate frame */
-//    private static class ShowAddTemplateAction extends AbstractAction {
-//        private AddTemplateFrame templateFrame;        
-//        public ShowAddTemplateAction() {           
-//            L10N.setLocalizedText(this, l10n.getString("AddTemplate_"));
-//            putValue(SMALL_ICON, Icons.get("add-16.png"));
-//            putValue(LARGE_ICON_KEY, Icons.get("add-22.png"));
-//            putValue(SHORT_DESCRIPTION,l10n.getString("Add_Template_message"));
-//        }        
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            logger.fine("Showing  Template frame...");
-//            if (templateFrame != null && templateFrame.isVisible()) {
-//                templateFrame.requestFocus();
-//                templateFrame.toFront();
-//            } else {
-//                templateFrame = new AddTemplateFrame();
-//                templateFrame.setLocationRelativeTo(Context.mainFrame);
-//                templateFrame.addValuedListener(new TemplateListener());
-//                templateFrame.setVisible(true);
-//            }
-//        }   
-//    }
-    
-   
-    
+       
     /** Show the editTemplate frame */
     private static class ShowEditTemplateAction extends AbstractAction {        
         private EditTemplateFrame editTemplateFrame;        
