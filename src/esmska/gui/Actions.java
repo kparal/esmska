@@ -61,7 +61,6 @@ public class Actions {
     private static Action importAction;
     private static Action exportAction;
     private static Action logAction;
-//    private static Action showAddTemplateAction;
     private static Action showEditTemplateAction;
 
     /** Show about frame */
@@ -120,7 +119,7 @@ public class Actions {
         return logAction;
     }
     
-     /** Show edit Template frame */
+     /** Show edit templates frame */
     public static Action getShowEditTemplateAction() {
         if (showEditTemplateAction == null) {
             showEditTemplateAction = new ShowEditTemplateAction();
@@ -536,7 +535,7 @@ public class Actions {
         private EditTemplateFrame editTemplateFrame;        
         public ShowEditTemplateAction() {           
             L10N.setLocalizedText(this, l10n.getString("EditTemplate_"));
-//            putValue(SMALL_ICON, Icons.get("add-16.png"));
+            putValue(SMALL_ICON, Icons.get("add-16.png"));
             putValue(LARGE_ICON_KEY, Icons.get("add-22.png"));
             putValue(SHORT_DESCRIPTION,l10n.getString("Edit_Template_message"));
         }        

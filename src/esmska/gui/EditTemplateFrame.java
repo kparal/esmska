@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package esmska.gui;
 
 import esmska.Context;
 import esmska.data.Icons;
 import esmska.data.Log;
-import esmska.data.SMSTemplates;
 import esmska.data.SMSTemplate;
+import esmska.data.SMSTemplates;
 import esmska.data.event.ValuedEventSupport;
 import esmska.data.event.ValuedListener;
 import static esmska.gui.GatewayMessage.l10n;
@@ -47,7 +42,6 @@ public class EditTemplateFrame extends javax.swing.JFrame {
     private static final Logger logger = Logger.getLogger(EditTemplateFrame.class.getName());
     private static final Log log = Log.getInstance();
     private Action removeTemplateAction = new RemoveTemplateAction();
-//    private Action addTemplateAction = new AddTemplateAction();
     private Action insertTemplateAction = new InsertTemplateAction();
     private Action newTemplateAction = new NewTemplateAction();
     private Action editTemplateAction = new EditTemplateAction();
