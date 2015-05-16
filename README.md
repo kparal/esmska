@@ -1,7 +1,8 @@
 Esmska
 ======
 
-Esmska is a program for sending SMS over the Internet.
+Esmska is a program for sending SMS over the Internet using one of many
+[supported gateways](https://github.com/kparal/esmska/wiki/Gateways).
 
 ---------------------------------------------------------------------
 
