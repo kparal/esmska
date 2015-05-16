@@ -3,6 +3,8 @@ Esmska
 
 Esmska is a program for sending SMS over the Internet.
 
+---------------------------------------------------------------------
+
 ### Esmska is not maintained aymore!
 
 **I do no longer have time to developer nor maintain this project. The only
@@ -10,6 +12,8 @@ patches I accept are gateway updates. Apart from that, please fork my
 repository and develop the patches in your space. If your version becomes
 significantly improved over this original version, please contact me and
 I'll happily forward visitors to your program.**
+
+---------------------------------------------------------------------
 
 ### Program links
 * Project page: http://esmska.googlecode.com/
