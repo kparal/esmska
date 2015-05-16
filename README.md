@@ -17,7 +17,8 @@ I'll happily forward visitors to your program.**
 ---------------------------------------------------------------------
 
 ### Program links
-* Project page: http://esmska.googlecode.com/
+* Project page: https://github.com/kparal/esmska
+* Downloads: https://github.com/kparal/esmska/wiki/Download
 * Documentation: https://github.com/kparal/esmska/wiki
 * Translations: https://translations.launchpad.net/esmska
 * Old forums: https://answers.launchpad.net/esmska
