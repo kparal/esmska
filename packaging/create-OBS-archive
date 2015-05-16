@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Checks-out specified version of esmska and creates an archive from the sources
+# to the current directory. To be used for OpenSUSE Build Service.
+
+# Dependencies: wget
+
+# trap and exit on error
+set -e
+trap "echo Update failed." ERR
+
+# usage
+if [ $# != 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    echo "Usage: $0 program_version"
+    echo "Example: $0 0.1.0"
+    exit 1
+fi
+
+DIR=`pwd`
+TMPDIR=`mktemp -t -d esmska-obs.XXXXXXXX`
+VERSION="$1"
+TARBALL_URL="https://github.com/kparal/esmska/tarball/v$VERSION"
+TARBALL="esmska-${VERSION}.tgz"
+TOPDIR="esmska-$VERSION"
+ARCHIVE="esmska-$VERSION.tar.bz2"
+
+cd "$TMPDIR"
+
+# download
+echo "Downloading..."
+wget "$TARBALL_URL" -O "$TARBALL"
+
+# extract
+echo "Extracting..."
+mkdir "$TOPDIR"
+tar xzf "$TARBALL" -C "$TOPDIR" --strip-components 1
+
+# create archive
+echo "Archiving..."
+tar c  "$TOPDIR" | bzip2 --best -v -c > "$ARCHIVE"
+
+# copy
+echo "Copying..."
+mv "$ARCHIVE" "${DIR}/"
+
+# clean up
+echo "Cleaning up..."
+rm -rf "$TMPDIR"
+
+# exit
+echo "OK"
+

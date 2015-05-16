@@ -35,6 +35,7 @@ po/             - Localization files.
 resources/      - Various resource files.
 scripts/        - Various scripts for managing building process.
 src/            - Program sources.
+packaging/      - Files related to Linux packaging and OpenSUSE Build Service.
 ```
 
 Program license is GNU AGPL v3+, see `include/license/` for more details.

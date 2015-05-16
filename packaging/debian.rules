@@ -1,0 +1,113 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper. 
+# This file is public domain software, originally written by Joey Hess.
+#
+# This version is for packages that are architecture independent.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This is the debhelper compatibility version to use.
+export DH_COMPAT=4
+
+BUILD_PATH=`pwd`
+INSTALL_PATH=`pwd`/debian/esmska
+PACKAGE_NAME=`dh_listpackages`
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+
+	# Add here commands to compile the package.
+	
+	LC_ALL="en_US.UTF-8" ant -DnoMac=true clean jar
+	
+	# don't announce program updates
+	sed -i -r 's/^#?\s*announceProgramUpdates.*/announceProgramUpdates = no/' dist/esmska.conf
+	
+	# --- end custom part for compiling
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+
+	# Add here commands to clean up after the build process.
+	
+	ant clean
+	
+	# --- end custom part for cleaning up
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+	# Add here commands to install the package into debian/<packagename>.
+	#$(MAKE) prefix=${BUILD_PATH}/debian/${PACKAGE_NAME}/usr install
+	
+	# all data files
+	install -d -m 0755 ${INSTALL_PATH}/usr/share/esmska
+	cp -R dist/* ${INSTALL_PATH}/usr/share/esmska
+	
+	# config file
+	install -d -m 0755 ${INSTALL_PATH}/etc/esmska
+	ln -sf /usr/share/esmska/esmska.conf ${INSTALL_PATH}/etc/esmska/esmska.conf
+	
+	# binary executable
+	install -d -m 0755 ${INSTALL_PATH}/usr/bin
+	ln -sf /usr/share/esmska/esmska.sh ${INSTALL_PATH}/usr/bin/esmska
+	
+	# desktop file
+	install -d -m 0755 ${INSTALL_PATH}/usr/share/applications/
+	cp resources/esmska.desktop ${INSTALL_PATH}/usr/share/applications/esmska.desktop
+	
+	# icon
+	install -d -m 0755 ${INSTALL_PATH}/usr/share/pixmaps/
+	cp dist/icons/esmska.svg ${INSTALL_PATH}/usr/share/pixmaps/esmska.svg
+	
+	# --- end custom part for installing
+
+# Build architecture-independent files here.
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs
+	dh_installexamples
+#	dh_installmenu
+#	dh_installdebconf
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installcatalogs
+#	dh_installpam
+#	dh_installmime
+#	dh_installinit
+#	dh_installcron
+#	dh_installinfo
+#	dh_installwm
+#	dh_installudev
+#	dh_lintian
+#	dh_bugfiles
+#	dh_undocumented
+	dh_installman
+	dh_link
+	dh_compress
+	dh_fixperms
+#	dh_perl
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture-dependent files here.
+binary-arch: build install
+# We have nothing to do by default.
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

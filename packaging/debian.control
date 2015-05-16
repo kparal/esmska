@@ -1,0 +1,15 @@
+Source: esmska
+Section: net
+Priority: optional
+Maintainer: Kamil Páral
+Build-Depends: debhelper (>= 7.0.50~), default-jdk (>= 1.6~), ant (>= 1.8~), ant-optional (>= 1.8~)
+Standards-Version: 3.9.2
+Homepage: https://github.com/kparal/esmska
+
+Package: esmska
+Architecture: all
+Depends: openjdk-7-jre
+Conflicts: 
+Provides: esmska
+Replaces: esmska
+Description: Application for sending SMS over the Internet using various mobile operator web gateways.
