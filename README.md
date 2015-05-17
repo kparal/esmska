@@ -16,9 +16,11 @@ I'll happily forward visitors to your program.**
 
 ---------------------------------------------------------------------
 
+[![](https://github.com/kparal/esmska/wiki/esmska.png)](https://github.com/kparal/esmska/wiki/Gallery)
+
 ### Program links
 * Project page: https://github.com/kparal/esmska
-* Downloads: https://github.com/kparal/esmska/wiki/Download
+* **Downloads: https://github.com/kparal/esmska/wiki/Download**
 * Documentation: https://github.com/kparal/esmska/wiki
 * Translations: https://translations.launchpad.net/esmska
 * Old forums: https://answers.launchpad.net/esmska
