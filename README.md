@@ -25,6 +25,7 @@ I'll happily forward visitors to your program.**
 * Translations: https://translations.launchpad.net/esmska
 * Old forums: https://answers.launchpad.net/esmska
 * Old project page: http://esmska.googlecode.com/
+* Old announcements: https://launchpad.net/esmska/+announcements
 
 ### Program files
 ```
