@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-11-24"
+    return "2015-05-30"
 }
 
 function getMaintainer() {
@@ -56,7 +56,7 @@ function send() {
     if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)
     }
-    
+
     // check that login and password supplied
     if (LOGIN.length == 0 || PASSWORD.length == 0) {
         EXEC.setProblem("WRONG_AUTH")
@@ -83,7 +83,7 @@ function send() {
         // post credentials
         postData = ["email", LOGIN, "password", PASSWORD]
         content = EXEC.postURL("https://park.vodafone.cz/login", [], postData)
-        
+
         // search if we are logged in
         re = /<a class="logout"/
         match = re.exec(content)
@@ -93,10 +93,10 @@ function send() {
             logout()
             return false
         }
-        
+
         // we should be logged in now
     }
-    
+
     // download css definitions, to be used for proof:field computation
     // (done before we get the main content, so that it is properly logged in
     // case of crash)
@@ -104,7 +104,7 @@ function send() {
 
     // get sms sending page
     content = EXEC.getURL("https://park.vodafone.cz/gateway", [])
-    
+
     // parse url token of sending form
     re = /name="sendButton"[^>]+?'\?x=(.+?)',/
     match = re.exec(content)
@@ -149,15 +149,19 @@ function send() {
                 "sendButton", "1"
                ]
     content = EXEC.postURL("https://park.vodafone.cz/gateway", urlData, postData)
-    
+
     // search for errors
-    re = /<ul class="feedbackul">[\s\S]*?error[\s\S]*?<\/ul>/
+    re = /<ul class="feedbackul">([\s\S]*?)<\/ul>/
     match = re.exec(content)
     if (match) {
-        // gateway told us what's wrong
-        EXEC.setProblem("GATEWAY_MESSAGE", match[0])
-        logout()
-        return false
+        re = /[\s\S]*error[\s\S]*/
+        match2 = re.exec(match[1])
+        if (match2) {
+            // gateway told us what's wrong
+            EXEC.setProblem("GATEWAY_MESSAGE", match2[0])
+            logout()
+            return false
+        }
     }
 
     // check if message was successfully sent
@@ -169,7 +173,7 @@ function send() {
         logout()
         return true
     }
-    
+
     // check for special notes in "popup" boxes - probably errors
     re = /<div class="popup-block-inside3">[\s\S]*?<h2>([^<]*?)<\/h2>/
     match = re.exec(content)
@@ -179,7 +183,7 @@ function send() {
         logout()
         return false
     }
-    
+
     // if neither success nor error message was found
     logout()
     return false
