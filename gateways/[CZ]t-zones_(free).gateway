@@ -1,10 +1,11 @@
 
+
 function getName() {
     return "[CZ]t-zones (free)"
 }
 
 function getVersion() {
-    return "2014-11-15"
+    return "2015-08-24"
 }
 
 function getMaintainer() {
@@ -16,7 +17,7 @@ function getMinProgramVersion() {
 }
 
 function getWebsite() {
-    return "http://sms.t-mobile.cz"
+    return "https://www.t-mobile.cz"
 }
 
 function getDescription() {
@@ -67,10 +68,10 @@ function send() {
     var logged = false
 
     // start page
-    content = EXEC.getURL("https://sms.t-mobile.cz/closed.jsp", [])
+    content = EXEC.getURL("https://www.t-mobile.cz/sms/closed.jsp", [])
 
     // search if we are already logged in (previous logout failed or something)
-    re = /\/.gang\/logout/
+    re = /\/.gang\/logout-url/
     match = re.exec(content)
     if (match) { // if found
             // we are already logged in
@@ -82,8 +83,9 @@ function send() {
         // post credentials
         postData = ["nextURL", "checkStatus.jsp", "errURL", "clickError.jsp",
                     "username", LOGIN, "password", PASSWORD,
-                    "submit", "Přihlásit"]
-        content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
+                    "submit", "Přihlásit"
+                    ]
+        content = EXEC.postURL("https://www.t-mobile.cz/.gang/login", [], postData)
 
         // seach for errors
         re = /<p class="text-orange.*?">([^]*?)<\/p>/
@@ -104,7 +106,7 @@ function send() {
     }
 
     // sms sending page
-    content = EXEC.getURL("https://sms.t-mobile.cz/closed.jsp", [])
+    content = EXEC.getURL("https://www.t-mobile.cz/sms/closed.jsp", [])
 
     // seach for errors, sometimes overload errors are displayed here
     re = /<p class="text-orange.*?">([^]*?)<\/p>/
@@ -124,7 +126,7 @@ function send() {
     re =  /<span class="captcha">/
     match = re.exec(content)
     if (match) {
-        content = EXEC.getURL("http://sms.t-mobile.cz/open/captcha.jpg", [])
+        content = EXEC.getURL("https://www.t-mobile.cz/sms/open/captcha.jpg", [])
         // show image
         var captcha = EXEC.recognizeImage(content, "")
     }
@@ -135,13 +137,14 @@ function send() {
                 "text", MESSAGE,
                 "send", "Odeslat",
                 "mtype", "0",
+                "email", "",
+                "sms-template", "",
                 "confirmation", RECEIPT ? "1" : "0",
-                "history", "on",
                 "TMCZcheck", "on"]
     if (captcha) {
         postData = postData.concat(["captcha", captcha])
     }
-    content = EXEC.postURL("https://sms.t-mobile.cz/closed.jsp", [], postData)
+    content = EXEC.postURL("https://www.t-mobile.cz/sms/closed.jsp", [], postData)
 
     // if some SMS is paid, there will be one more confirmation form
     re = /Tito adresáti jsou mimo síť T-Mobile|Recipients out of T-Mobile CZ network/
@@ -182,5 +185,5 @@ function send() {
 // custom function for logging out
 function logout() {
     // visit logout page
-    EXEC.getURL("https://www.t-mobile.cz/.gang/logout/tzones", []);
+    EXEC.getURL("https://www.t-mobile.cz/.gang/logout-url?nexturl=/sms", []);
 }
