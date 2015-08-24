@@ -1,4 +1,5 @@
 
+
 function getName() {
     return "[CZ]T-mobile"
 }
@@ -16,7 +17,7 @@ function getMinProgramVersion() {
 }
 
 function getWebsite() {
-    return "http://sms.t-mobile.cz"
+    return "https://www.t-mobile.cz/sms/"
 }
 
 function getDescription() {
@@ -56,10 +57,10 @@ function getFeatures() {
 function send() {
     
     // sms sending page
-    content = EXEC.getURL("http://sms.t-mobile.cz/open.jsp", [])
+    content = EXEC.getURL("https://www.t-mobile.cz/sms/open.jsp", [])
     // we have to open this page twice, because they have some cookies problem
     // and we don't get the correct cookies on the first attempt
-    content = EXEC.getURL("http://sms.t-mobile.cz/open.jsp", [])
+    content = EXEC.getURL("https://www.t-mobile.cz/sms/open.jsp", [])
     var time = new Date().getTime()
    
     // find counter
@@ -81,7 +82,7 @@ function send() {
     delay = delay * 1000
     
     // download image
-    content = EXEC.getURL("http://sms.t-mobile.cz/open/captcha.jpg", [])
+    content = EXEC.getURL("https://www.t-mobile.cz/sms/open/captcha.jpg", [])
     
     // show image
     var captcha = EXEC.recognizeImage(content, "")
@@ -95,7 +96,7 @@ function send() {
                 "recipient", NUMBER, "text", MESSAGE,
                 "sms-template", "0", "mtype", "0",
                 "captcha", captcha]
-    content = EXEC.postURL("http://sms.t-mobile.cz/open.jsp", [], postData)
+    content = EXEC.postURL("https://www.t-mobile.cz/sms/open.jsp", [], postData)
 
     // check if message was successfully sent
     re = /(SMS zpr.va byl. odeslán.|SMS was sent)/
