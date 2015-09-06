@@ -106,7 +106,7 @@ function send() {
     }
 
     // sms sending page
-    content = EXEC.getURL("https://www.t-mobile.cz/sms/closed.jsp", [])
+    content = EXEC.getURL("https://www.t-mobile.cz/.gang/firstlogin-finish", [])
 
     // seach for errors, sometimes overload errors are displayed here
     re = /<p class="text-orange.*?">([^]*?)<\/p>/
