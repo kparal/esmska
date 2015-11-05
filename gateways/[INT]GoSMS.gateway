@@ -36,7 +36,7 @@ function getSMSLength() {
 }
 
 function getMaxChars() {
-    return 1404
+    return 1000
 }
 
 function getDelayBetweenMessages() {
@@ -48,7 +48,7 @@ function getSupportedLanguages() {
 }
 
 function getFeatures() {
-    return ["LOGIN_ONLY"]
+    return ["LOGIN_ONLY","SENDER_NUMBER"]
 }
 
 function send() {
@@ -62,7 +62,7 @@ function send() {
     getData = ["login", LOGIN]
     content = EXEC.getURL("http://www.gosms.sk/sms/sendsms", getData)
     auth = MD5("send_external" + content + PASSWORD + "md5_authentification")
-    getData = ["login", LOGIN, "auth", auth, "number", NUMBER, "message", MESSAGE]
+    getData = ["login", LOGIN, "auth", auth, "number", NUMBER, "message", MESSAGE, "command", "send", "sender", SENDERNUMBER]
     content = EXEC.getURL("http://www.gosms.sk/sms/sendsms", getData)
     
     // wrong username/password/nousername/nopassword 
@@ -78,6 +78,7 @@ function send() {
     match = re.exec(content)
     if (match) {
 	    EXEC.setProblem("NO_CREDIT")
+	check_credit();
         return false
     }
 
@@ -123,6 +124,38 @@ function send() {
 
     // if neither success nor error message was found
     return false
+}
+
+function check_credit() {
+    getData = ["login", LOGIN]
+    content = EXEC.getURL("http://www.gosms.sk/sms/sendsms", getData)
+    auth = MD5("send_external" + content + PASSWORD + "md5_authentification")
+    getData = ["login", LOGIN, "auth", auth, "number", NUMBER, "message", MESSAGE, "command", "credit"]
+    content = EXEC.getURL("http://www.gosms.sk/sms/sendsms", getData)
+
+    // wrong username/password/nousername/nopassword
+    re = /ERR_AUTH/
+    match = re.exec(content)
+    if (match) {
+            EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    re = /OK/
+    match = re.exec(content)
+    if (match) {
+        //get remanining credit and display it
+        re = /CREDIT=([0-9\.]*)/
+        credit_match = re.exec(content)
+        re = /CURRENCY=(.*)/
+        currency_match = re.exec(content)
+        if (credit_match && currency_match) {
+            EXEC.setSupplementalMessage(EXEC.INFO_CREDIT_REMAINING + currency_match[1] +
+            " " + credit_match[1])
+        }
+        return true
+    }
+
 }
 
 /**
