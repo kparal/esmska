@@ -93,7 +93,7 @@ public class Gateway implements GatewayInfo, Comparable<Gateway> {
         supportedPrefixes = info.getSupportedPrefixes();
         preferredPrefixes = info.getPreferredPrefixes();
         smsLength = info.getSMSLength();
-        maxChars = info.getMaxChars();
+        maxChars = Math.min(info.getMaxChars(), maxMessageLength);
         delayBetweenMessages = info.getDelayBetweenMessages();
         supportedLanguages = info.getSupportedLanguages();
         features = info.getFeatures();
