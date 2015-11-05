@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-06-01"
+    return "2015-11-06"
 }
 
 function getMaintainer() {
@@ -90,7 +90,6 @@ function send() {
         if (match) {
             // login credentials are incorrect
             EXEC.setProblem("WRONG_AUTH")
-            logout()
             return false
         }
         re = /<div class="error_message">([^<]*)<\/div>/
@@ -98,7 +97,6 @@ function send() {
         if (match) {
             // some other problem
             EXEC.setProblem("GATEWAY_MESSAGE", match[1])
-            logout()
             return false
         }
         
@@ -116,7 +114,6 @@ function send() {
     match = re.exec(content)
     if (match) {
         // all ok
-        logout()
         return true
     }
     
@@ -127,17 +124,10 @@ function send() {
         // more messages might be present, display them all
         errors = match.join("")
         EXEC.setProblem("GATEWAY_MESSAGE", errors)
-        logout()
         return false
     }
     
     // if neither success nor error message was found
-    logout()
     return false
-}
-
-// custom function for logging out
-function logout() {
-    EXEC.getURL("http://sms.1188.cz/logout", [])
 }
 
