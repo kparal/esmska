@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2015-05-30"
+    return "2017-05-01"
 }
 
 function getMaintainer() {
@@ -20,7 +20,7 @@ function getWebsite() {
 }
 
 function getDescription() {
-    return "Oficiální portál Vodafone umožňující registrovaným uživatelům odesílat SMS do sítě Vodafone zdarma. Zaregistrovat se může kdokoliv, odesílání nevyžaduje opisování bezpečnostního kódu a podporovány jsou dlouhé zprávy."
+    return "Bývalá oficiální brána Vodafone. Byla zrušena 30. 4. 2017."
 }
 
 function getSupportedPrefixes() {
@@ -51,211 +51,7 @@ function getFeatures() {
     return ["LOGIN_ONLY"]
 }
 
-function send() {
-    // change variables to correct form
-    if (NUMBER.indexOf("+420") == 0) {
-        NUMBER = NUMBER.substring(4)
-    }
-
-    // check that login and password supplied
-    if (LOGIN.length == 0 || PASSWORD.length == 0) {
-        EXEC.setProblem("WRONG_AUTH")
-        return false
-    }
-
-    // not logged in yet
-    var logged = false
-
-    // start page
-    content = EXEC.getURL("https://park.vodafone.cz/", [])
-
-    // search if we are already logged in
-    logged = false
-    re = /<a class="logout"/
-    match = re.exec(content)
-    if (match) {
-        // we are already logged in
-        logged = true
-    }
-
-    // if not logged in, do it
-    if (!logged) {
-        // post credentials
-        postData = ["email", LOGIN, "password", PASSWORD]
-        content = EXEC.postURL("https://park.vodafone.cz/login", [], postData)
-
-        // search if we are logged in
-        re = /<a class="logout"/
-        match = re.exec(content)
-        if (!match) {
-            // login was not successfull
-            EXEC.setProblem("WRONG_AUTH")
-            logout()
-            return false
-        }
-
-        // we should be logged in now
-    }
-
-    // download css definitions, to be used for proof:field computation
-    // (done before we get the main content, so that it is properly logged in
-    // case of crash)
-    cssDefs = EXEC.getURL("https://park.vodafone.cz/css/theme-vodafone/default.full.opt.css", [])
-
-    // get sms sending page
-    content = EXEC.getURL("https://park.vodafone.cz/gateway", [])
-
-    // parse url token of sending form
-    re = /name="sendButton"[^>]+?'\?x=(.+?)',/
-    match = re.exec(content)
-    token = match[1]
-
-    // == compute proof:field ==
-    re = /<script type="text\/javascript">(for\(var a=eval,b=.*?)a\(b\);<\/script>/
-    match = re.exec(content)
-    if (match) {
-        script = match[1]
-        eval(script)
-    } else {
-        // there are two versions of proof:field secret, see
-        // https://code.google.com/p/esmska/issues/detail?id=467
-        // if the previous one wasn't found, let's try the second one
-        re = /<script[^>]*>eval\((function\(p,a,c,k,e,d\).*?)\);<\/script>/
-        match = re.exec(content)
-        script = ('b = ' + match[1]).toString()
-        eval(script)
-    }
-    // 'b' now contains the de-obfuscated code (from both cases)
-    // we need to replace css selectors with color values
-    b = stripCSSselectors(b, content, cssDefs)
-    // we need to evaluate all of 'b' except for the last value assignment
-    separator = b.indexOf("$(\"#")
-    functions = b.substring(0, separator)
-    eval(functions)
-    // the remnant of 'b' is the assignment we need
-    assignment = b.substring(separator)
-    re = /\$\(".+?"\).val\((.*)\);?/
-    match = re.exec(assignment)
-    value = match[1]
-    // now compute the final proof code
-    proof = eval(value)
-    // =========================
-
-    // send sms
-    urlData = ["x", token]
-    postData = ["recipients:recipientInput", NUMBER,
-                "text", MESSAGE,
-                "proof:field", proof,
-                "sendButton", "1"
-               ]
-    content = EXEC.postURL("https://park.vodafone.cz/gateway", urlData, postData)
-
-    // search for errors
-    re = /<ul class="feedbackul">([\s\S]*?)<\/ul>/
-    match = re.exec(content)
-    if (match) {
-        re = /[\s\S]*error[\s\S]*/
-        match2 = re.exec(match[1])
-        if (match2) {
-            // gateway told us what's wrong
-            EXEC.setProblem("GATEWAY_MESSAGE", match2[0])
-            logout()
-            return false
-        }
-    }
-
-    // check if message was successfully sent
-    re = /Zpráva byla úspěšně odeslána/
-    match = re.exec(content)
-    if (match) {
-        // all ok
-        isPaid(content)
-        logout()
-        return true
-    }
-
-    // check for special notes in "popup" boxes - probably errors
-    re = /<div class="popup-block-inside3">[\s\S]*?<h2>([^<]*?)<\/h2>/
-    match = re.exec(content)
-    if (match) {
-        // gateway told us what's wrong
-        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
-        logout()
-        return false
-    }
-
-    // if neither success nor error message was found
-    logout()
-    return false
-}
-
-// custom function for logging out
-function logout() {
-    // visit logout page
-    EXEC.getURL("https://park.vodafone.cz/logout", []);
-}
-
-// decide whether message was paid and if it was, fill SupplementalMessage
-function isPaid(content) {
-    re_paid = /Dle Vašeho tarifu jsme Vám zaúčtovali \d+ SMS [^\.]+\./
-    match_paid = re_paid.exec(content)
-    re_free = /vše bylo zdarma/i
-    match_free = re_free.exec(content)
-    if ((match_paid && match_free) || (!match_paid && !match_free)) {
-        print("WARN: " + getName() + ": Can't decide whether SMS was free or paid\n")
-        return
-    }
-    if (match_paid) {
-        EXEC.setSupplementalMessage(match_paid[0])
-    }
-}
-
-// transform hex color notation to css selectors color output
-function hex2rgb(hex) {
-    function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
-    function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
-    function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
-    function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
-
-    R = hexToR(hex);
-    G = hexToG(hex);
-    B = hexToB(hex);
-
-    return "rgb(" + R + ", " + G + ", " + B + ")"
-}
-
-// in the code (to be evaluated later) replace $(var).css("color") with the
-// real variable color extracted from the page source, or static css definitions
-function stripCSSselectors(code, page_source, cssDefs) {
-    re = /\$\("([^\"]+?)"\)\.css\("color"\)/g
-    while ((match = re.exec(code)) != null) {
-        // find out the value
-        name = match[1]
-
-        // match for a CSS definition of the color
-        regexString = name + "\\{color:\\s*(#\\w{6})"
-
-        // remember the last definition
-        var lastMatch
-
-        // match for the last occurence in page body
-        re2 = new RegExp(regexString, "g")
-        var match2
-        while ( (match2 = re2.exec(page_source)) !== null) {
-            lastMatch = match2
-        }
-
-        // match for the last occurence in included CSS file
-        re3 = new RegExp(regexString, "g")
-        var match3
-        while ( (match3 = re3.exec(cssDefs)) !== null) {
-            lastMatch = match3
-        }
-
-        color = lastMatch[1]
-        color = hex2rgb(color)
-        // replace the selector
-        code = code.replace("$(\"" + name + "\").css(\"color\")", "\"" + color + "\"")
-    }
-    return code
+function send() {    
+    EXEC.setProblem("GATEWAY_MESSAGE", "Brána Vodafone Park byla zrušena. Použijte např. gosmsgo.cz")
+    return false     
 }
