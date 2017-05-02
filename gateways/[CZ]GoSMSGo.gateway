@@ -3,7 +3,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-09-26"
+    return "2017-05-01"
 }
 
 function getMaintainer() {
@@ -31,11 +31,11 @@ function getPreferredPrefixes() {
 }
 
 function getSMSLength() {
-    return 290
+    return 140
 }
 
 function getMaxChars() {
-    return 290
+    return 140
 }
 
 function getDelayBetweenMessages() {
@@ -56,29 +56,34 @@ function send() {
     if (NUMBER.indexOf("+420") == 0) {
         NUMBER = NUMBER.substring(4)
     }
+
+    num = NUMBER
+    NUMBER = NUMBER.substring(0, 3) + "+" + NUMBER.substring(3, 6) + "+" + NUMBER.substring(6, 9)
      
     content = EXEC.getURL("http://gosmsgo.cz/", []) 
     
      
     postData = [
-                "recipient", NUMBER,
-                "message", MESSAGE,
-                "odeslat_sms", "Odeslat",
+                "telefon", NUMBER,
+                "text", MESSAGE,
+                "send", "1",
                ]
-    content = EXEC.postURL("http://gosmsgo.cz/", [], postData)                      
-    re = /<p class="odeslano">(.*?)<\/p>/
+    content = EXEC.postURL("http://gosmsgo.cz/", ["send", "+420" + num], postData)                      
+
+    re = /<div class="[^>]*alert-danger[^>]*">\s*<button.*\/button>(.*?)<\/div>/
+    match = re.exec(content)
+    if (match) {
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+        return false
+    } 
+
+    re = /<div class="[^>]*alert-success[^>]*">\s*<button.*\/button>(.*?)<\/div>/
     match = re.exec(content)
     if (match) {
         // all ok
         msg = match[1]
         EXEC.setSupplementalMessage(msg)
         return true
-    } 
-    re = /<p class="chyba">(.*?)<\/p>/
-    match = re.exec(content)
-    if (match) {
-        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
-        return false
     } 
     // if neither success nor error message was found   
     return false
