@@ -1,23 +1,56 @@
 package esmska.gui;
 
 import esmska.Context;
+import esmska.data.Config;
+import esmska.data.Gateways;
+import esmska.data.History;
+import esmska.data.History.Record;
+import esmska.data.Icons;
+import esmska.data.Links;
+import esmska.data.Log;
+import esmska.data.Queue;
 import esmska.data.Queue.Events;
+import esmska.data.SMS;
+import esmska.data.event.ActionEventSupport;
 import esmska.data.event.ValuedEvent;
+import esmska.data.event.ValuedListener;
+import esmska.integration.ActionBean;
+import esmska.integration.IntegrationAdapter;
+import esmska.transfer.ImageCodeManager;
+import esmska.transfer.SMSSender;
+import esmska.update.Statistics;
+import esmska.update.UpdateChecker;
+import esmska.update.UpdateInstaller;
+import esmska.utils.L10N;
+import esmska.utils.MiscUtils;
+import esmska.utils.RuntimeUtils;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.SplashScreen;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.beans.Beans;
+import java.beans.IntrospectionException;
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
+import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -25,6 +58,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -36,55 +70,18 @@ import javax.swing.JToolBar;
 import javax.swing.JToolBar.Separator;
 import javax.swing.KeyStroke;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.ToolTipManager;
-
 import javax.swing.WindowConstants;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-
-import esmska.update.UpdateChecker;
-import esmska.data.Config;
-import esmska.data.Gateways;
-import esmska.data.History;
-import esmska.data.History.Record;
-import esmska.data.Icons;
-import esmska.data.Log;
-import esmska.data.Queue;
-import esmska.data.SMS;
-import esmska.integration.ActionBean;
-import esmska.integration.IntegrationAdapter;
-import esmska.transfer.SMSSender;
-import esmska.utils.L10N;
-import esmska.data.event.ValuedListener;
-import esmska.data.Links;
-import esmska.data.event.ActionEventSupport;
-import esmska.transfer.ImageCodeManager;
-import esmska.update.Statistics;
-import esmska.update.UpdateInstaller;
-import esmska.utils.MiscUtils;
-import esmska.utils.RuntimeUtils;
-import java.awt.Image;
-import java.awt.SplashScreen;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
-import java.beans.Beans;
-import java.beans.IntrospectionException;
-import java.beans.PropertyChangeListener;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.ListIterator;
-import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicBoolean;
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 
@@ -428,13 +425,15 @@ public class MainFrame extends javax.swing.JFrame {
         jSeparator1 = new JSeparator();
         toolBar = new JToolBar();
         compressButton = new JButton();
+        editTemplateButton = new JButton();
         undoButton = new JButton();
         redoButton = new JButton();
-        jSeparator2 = new Separator();
         historyButton = new JButton();
-        jSeparator3 = new Separator();
+        jSeparator2 = new Separator();
         configButton = new JButton();
+        jSeparator3 = new Separator();
         exitButton = new JButton();
+        jSeparator6 = new Separator();
         donateButton = new JButton();
         menuBar = new JMenuBar();
         programMenu = new JMenu();
@@ -445,6 +444,7 @@ public class MainFrame extends javax.swing.JFrame {
         redoMenuItem = new JMenuItem();
         jSeparator5 = new JSeparator();
         compressMenuItem = new JMenuItem();
+        addMenuItem = new JMenuItem();
         sendMenuItem = new JMenuItem();
         toolsMenu = new JMenu();
         historyMenuItem = new JMenuItem();
@@ -512,6 +512,17 @@ public class MainFrame extends javax.swing.JFrame {
         compressButton.setHideActionText(true);
         toolBar.add(compressButton);
 
+        editTemplateButton.setAction(Actions.getShowEditTemplateAction());
+        editTemplateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/edit-22.png"))); // NOI18N
+        Mnemonics.setLocalizedText(editTemplateButton, "");
+        editTemplateButton.setToolTipText(l10n.getString( "MainFrame.editTemplateButton.toolTipText")); // NOI18N
+        editTemplateButton.setFocusable(false);
+        editTemplateButton.setHideActionText(true);
+        editTemplateButton.setMaximumSize(new Dimension(39, 39));
+        editTemplateButton.setMinimumSize(new Dimension(39, 39));
+        editTemplateButton.setPreferredSize(new Dimension(39, 39));
+        toolBar.add(editTemplateButton);
+
         undoButton.setAction(smsPanel.getUndoAction());
         undoButton.setToolTipText(l10n.getString("MainFrame.undoButton.toolTipText")); // NOI18N
         undoButton.setFocusable(false);
@@ -523,7 +534,6 @@ public class MainFrame extends javax.swing.JFrame {
         redoButton.setFocusable(false);
         redoButton.setHideActionText(true);
         toolBar.add(redoButton);
-        toolBar.add(jSeparator2);
 
         historyButton.setAction(Actions.getHistoryAction());
         historyButton.setFocusable(false);
@@ -531,36 +541,46 @@ public class MainFrame extends javax.swing.JFrame {
         Mnemonics.setLocalizedText(historyButton, l10n.getString("History"));
         historyButton.setToolTipText(historyButton.getToolTipText() + " (Ctrl+T)");
         toolBar.add(historyButton);
-        toolBar.add(jSeparator3);
+        toolBar.add(jSeparator2);
 
         configButton.setAction(Actions.getConfigAction());
         configButton.setToolTipText(Actions.getConfigAction().getValue(Action.NAME).toString());
         configButton.setFocusable(false);
         configButton.setHideActionText(true);
+        configButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                configButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(configButton);
+        toolBar.add(jSeparator3);
 
         exitButton.setAction(Actions.getQuitAction());
         exitButton.setToolTipText(Actions.getQuitAction().getValue(Action.NAME).toString() + " (Ctrl+Q)");
         exitButton.setFocusable(false);
         exitButton.setHideActionText(true);
         toolBar.add(exitButton);
+        toolBar.add(jSeparator6);
 
         donateButton.setAction(Actions.getBrowseAction(Links.DONATE));
         donateButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/donate-32.png"))); // NOI18N
-        Mnemonics.setLocalizedText(donateButton,l10n.getString("MainFrame.donateButton.text")); // NOI18N
+        Mnemonics.setLocalizedText(donateButton, l10n.getString("MainFrame.donateButton.text")); // NOI18N
         donateButton.setToolTipText(l10n.getString("AboutFrame.supportHyperlink.toolTipText")); // NOI18N
         donateButton.setFocusable(false);
         toolBar.add(Box.createHorizontalGlue());
         toolBar.add(donateButton);
+
         for (Component comp : toolBar.getComponents()) {
             if (comp instanceof JButton) {
                 JButton button = (JButton) comp;
+                //disable mnemonics for buttons
                 button.setMnemonic(0);
+                //make icons prettier on Mac OS X
                 button.putClientProperty("JButton.buttonType", "gradient");
             }
         }
 
-        Mnemonics.setLocalizedText(programMenu,l10n.getString("MainFrame.programMenu.text"));
+        Mnemonics.setLocalizedText(programMenu, l10n.getString("MainFrame.programMenu.text")); // NOI18N
 
         configMenuItem.setAction(Actions.getConfigAction());
         programMenu.add(configMenuItem);
@@ -582,12 +602,17 @@ public class MainFrame extends javax.swing.JFrame {
         compressMenuItem.setAction(smsPanel.getCompressAction());
         messageMenu.add(compressMenuItem);
 
+        addMenuItem.setAction(Actions.getShowEditTemplateAction());
+        addMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/edit-16.png"))); // NOI18N
+        Mnemonics.setLocalizedText(addMenuItem, l10n.getString( "MainFrame.addMenuItem.text")); // NOI18N
+        messageMenu.add(addMenuItem);
+
         sendMenuItem.setAction(smsPanel.getSendAction());
         messageMenu.add(sendMenuItem);
 
         menuBar.add(messageMenu);
 
-        Mnemonics.setLocalizedText(toolsMenu,l10n.getString("MainFrame.toolsMenu.text"));
+        Mnemonics.setLocalizedText(toolsMenu, l10n.getString("MainFrame.toolsMenu.text")); // NOI18N
 
         historyMenuItem.setAction(Actions.getHistoryAction());
         toolsMenu.add(historyMenuItem);
@@ -603,32 +628,33 @@ public class MainFrame extends javax.swing.JFrame {
         toolsMenu.add(exportMenuItem);
 
         menuBar.add(toolsMenu);
-        Mnemonics.setLocalizedText(helpMenu,l10n.getString("MainFrame.helpMenu.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(helpMenu, l10n.getString("MainFrame.helpMenu.text")); // NOI18N
 
         faqMenuItem.setAction(Actions.getBrowseAction(Links.FAQ));
-        Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text"));
+        Mnemonics.setLocalizedText(faqMenuItem, l10n.getString("MainFrame.faqMenuItem.text")); // NOI18N
         faqMenuItem.setToolTipText(l10n.getString("MainFrame.faqMenuItem.toolTipText")); // NOI18N
         helpMenu.add(faqMenuItem);
 
         getHelpMenuItem.setAction(Actions.getBrowseAction(Links.FORUM));
         getHelpMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/getHelp-16.png"))); // NOI18N
-        Mnemonics.setLocalizedText(getHelpMenuItem,l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(getHelpMenuItem, l10n.getString("MainFrame.getHelpMenuItem.text")); // NOI18N
         getHelpMenuItem.setToolTipText(l10n.getString("MainFrame.getHelpMenuItem.toolTipText")); // NOI18N
         helpMenu.add(getHelpMenuItem);
 
         problemMenuItem.setAction(Actions.getBrowseAction(Links.ISSUES));
-        Mnemonics.setLocalizedText(problemMenuItem,l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(problemMenuItem, l10n.getString("MainFrame.problemMenuItem.text")); // NOI18N
         problemMenuItem.setToolTipText(l10n.getString("MainFrame.problemMenuItem.toolTipText")); // NOI18N
         helpMenu.add(problemMenuItem);
 
         translateMenuItem.setAction(Actions.getBrowseAction(Links.TRANSLATE));
-        Mnemonics.setLocalizedText(translateMenuItem,l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(translateMenuItem, l10n.getString("MainFrame.translateMenuItem.text")); // NOI18N
         translateMenuItem.setToolTipText(l10n.getString("MainFrame.translateMenuItem.toolTipText")); // NOI18N
         helpMenu.add(translateMenuItem);
 
         donateMenuItem.setAction(Actions.getBrowseAction(Links.DONATE));
         donateMenuItem.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/donate-16.png"))); // NOI18N
-        Mnemonics.setLocalizedText(donateMenuItem,l10n.getString("MainFrame.donateMenuItem.text")); // NOI18N
+        Mnemonics.setLocalizedText(donateMenuItem, l10n.getString("MainFrame.donateMenuItem.text")); // NOI18N
         donateMenuItem.setToolTipText(l10n.getString("AboutFrame.supportHyperlink.toolTipText")); // NOI18N
         helpMenu.add(donateMenuItem);
         helpMenu.add(helpSeparator);
@@ -642,8 +668,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
+        layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING)
             .addComponent(statusPanel, GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
             .addComponent(jSeparator1, GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
@@ -652,12 +677,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
+        layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addComponent(horizontalSplitPane, GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -691,6 +715,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void configButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_configButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_configButtonActionPerformed
+
     /** Save all user data
      * @return true if all saved ok; false otherwise
      */
@@ -704,6 +732,7 @@ public class MainFrame extends javax.swing.JFrame {
             saveOk = saveQueue() && saveOk;
             saveOk = saveHistory() && saveOk;
             saveOk = saveKeyring() && saveOk;
+            saveOk = saveTemplates() && saveOk; 
             saveOk = saveGatewayProperties() && saveOk;
             return saveOk;
         } catch (Throwable t) {
@@ -808,6 +837,19 @@ public class MainFrame extends javax.swing.JFrame {
             return true;
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Could not save contacts", ex);
+            return false;
+        }
+    }
+    
+    /** save templates
+     * @return true if saved ok; false otherwise
+     */
+    private boolean saveTemplates() {
+        try {
+            Context.persistenceManager.saveTemplates();
+            return true;
+        } catch (Exception ex) {
+            logger.log(Level.WARNING, "Could not save templates", ex);
             return false;
         }
     }
@@ -1049,6 +1091,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JMenuItem aboutMenuItem;
+    private JMenuItem addMenuItem;
     private JButton compressButton;
     private JMenuItem compressMenuItem;
     private JButton configButton;
@@ -1056,6 +1099,7 @@ public class MainFrame extends javax.swing.JFrame {
     private ContactPanel contactPanel;
     private JButton donateButton;
     private JMenuItem donateMenuItem;
+    private JButton editTemplateButton;
     private JButton exitButton;
     private JMenuItem exitMenuItem;
     private JMenuItem exportMenuItem;
@@ -1072,6 +1116,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Separator jSeparator3;
     private JSeparator jSeparator4;
     private JSeparator jSeparator5;
+    private Separator jSeparator6;
     private JMenuItem logMenuItem;
     private JMenuBar menuBar;
     private JMenu messageMenu;

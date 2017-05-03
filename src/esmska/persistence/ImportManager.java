@@ -1,32 +1,38 @@
 package esmska.persistence;
 
 import com.csvreader.CsvReader;
-import esmska.data.*;
+import esmska.data.Config;
 import esmska.data.Config.GlobalConfig;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import esmska.data.Contact;
-import esmska.data.SMS;
+import esmska.data.DeprecatedGateway;
 import esmska.data.Gateway;
+import esmska.data.GatewayConfig;
+import esmska.data.Gateways;
+import esmska.data.History;
+import esmska.data.Keyring;
+import esmska.data.SMS;
+import esmska.data.Signature;
+import esmska.data.Signatures;
+import esmska.data.SMSTemplate;
 import esmska.data.Tuple;
 import esmska.update.VersionFile;
 import java.beans.IntrospectionException;
+import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.JarURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -55,6 +61,8 @@ public class ImportManager {
 
     private static final Logger logger = Logger.getLogger(ImportManager.class.getName());
 
+    
+
     /** Disabled constructor */
     private ImportManager() {
     }
@@ -68,6 +76,35 @@ public class ImportManager {
         ArrayList<Contact> contacts = parser.get();
         logger.finer("Imported " + contacts.size() + " contacts");
         return parser.get();
+    }
+    
+    /** Import templates from file */
+    public static ArrayList<SMSTemplate> importTemplate(File file) throws Exception {
+        logger.finer("Importing templates from file: " + file.getAbsolutePath());
+        ArrayList<SMSTemplate> templates = new ArrayList<SMSTemplate>();
+        CsvReader reader = null;
+        
+        try {
+            reader = new CsvReader(file.getPath(), ',', Charset.forName("UTF-8"));
+            reader.setUseComments(true);
+            while (reader.readRecord()) {
+                try {
+                    String template = reader.get(0);
+                    
+                    
+                    SMSTemplate templateSMS = new SMSTemplate(template);
+                    templates.add(templateSMS);
+                } catch (Exception e) {
+                    logger.severe("Invalid template record: " + reader.getRawRecord());
+                    throw e;
+                }
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+        return templates;
     }
 
     /** Import sms queue from file */
@@ -143,7 +180,8 @@ public class ImportManager {
             }
         }
 
-        logger.finer("Imported " + history.size() + " history records");
+        logger.finer("Imported         } finally {\n" +
+"" + history.size() + " history records");
         return history;
     }
 

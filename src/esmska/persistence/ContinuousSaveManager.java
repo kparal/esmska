@@ -7,6 +7,7 @@ import esmska.data.Keyring;
 import esmska.data.Queue;
 import esmska.data.Queue.Events;
 import esmska.data.SMS;
+import esmska.data.SMSTemplates;
 import esmska.data.event.ValuedEvent;
 import esmska.data.event.ValuedListener;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,17 @@ public class ContinuousSaveManager {
                 Context.persistenceManager.saveHistory();
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "Could not save history", ex);
+            }
+        }
+    };
+    
+    private static ActionListener templatesSaveListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                Context.persistenceManager.saveTemplates();
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, "Could not save templates", ex);
             }
         }
     };
@@ -86,6 +98,11 @@ public class ContinuousSaveManager {
     public static void enableContacts() {
         Contacts.getInstance().addActionListener(contactsSaveListener);
     }
+    
+    /** Enable automatic saving of templates when changed */
+    public static void enableTemplates() {
+        SMSTemplates.getInstance().addActionListener(templatesSaveListener);
+    }
 
     /** Enable automatic saving of queue when changed */
     public static void enableQueue() {
@@ -95,6 +112,11 @@ public class ContinuousSaveManager {
     /** Disable automatic saving of history when changed */
     public static void disableHistory() {
         History.getInstance().removeActionListener(historySaveListener);
+    }
+    
+    /** Disable automatic saving of templates when changed */
+    public static void disableTemplates() {
+        SMSTemplates.getInstance().removeActionListener(templatesSaveListener);
     }
 
     /** Disable automatic saving of keyring when changed */

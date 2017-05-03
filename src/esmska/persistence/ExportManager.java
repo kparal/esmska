@@ -4,18 +4,7 @@ import a_vcard.android.provider.Contacts;
 import a_vcard.android.syncml.pim.vcard.ContactStruct;
 import a_vcard.android.syncml.pim.vcard.VCardComposer;
 import a_vcard.android.syncml.pim.vcard.VCardException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
-import java.security.GeneralSecurityException;
-import java.text.DateFormat;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.logging.Logger;
-
-
 import com.csvreader.CsvWriter;
-
 import esmska.data.Contact;
 import esmska.data.Gateway;
 import esmska.data.GatewayConfig;
@@ -23,11 +12,21 @@ import esmska.data.History;
 import esmska.data.Keyring;
 import esmska.data.SMS;
 import esmska.data.Signature;
-import esmska.utils.L10N;
+import esmska.data.SMSTemplate;
 import esmska.data.Tuple;
+import esmska.utils.L10N;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
+import java.text.DateFormat;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.IOUtils;
@@ -40,6 +39,8 @@ import org.apache.commons.lang.Validate;
 public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
+
+   
 
     /** Disabled constructor */
     private ExportManager() {
@@ -63,6 +64,26 @@ public class ExportManager {
                 contact.getName(),
                 contact.getNumber(),
                 contact.getGateway()
+            });
+        }
+        writer.flush();
+    }
+    
+    /** Export templates to csv format
+    * @param templates templates, not null
+    * @param out output stream, not null
+    */
+     public static void exportTemplates(List<SMSTemplate> templates, OutputStream out) throws IOException {
+        Validate.notNull(templates);
+        Validate.notNull(out);
+        
+        logger.finer("Exporting templates of " + templates.size() + " templates");       
+        CsvWriter writer = new CsvWriter(out, ',', Charset.forName("UTF-8"));
+
+        writer.writeComment(l10n.getString("ExportManager.templates"));
+        for (SMSTemplate template : templates) {
+            writer.writeRecord(new String[] {
+               template.getTemplate()
             });
         }
         writer.flush();
