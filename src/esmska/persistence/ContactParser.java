@@ -96,7 +96,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                     String name = "";
                     String number = "";
                     String gateway = "";
-
+                    String group = "";
                     //read record items
                     switch (type) {
                         case KUBIK_DREAMCOM_FILE:
@@ -109,6 +109,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                             name = reader.get(0);
                             number = reader.get(1);
                             gateway = reader.get(2);
+                            group= reader.get(3);
                     }
 
                     if (StringUtils.isEmpty(name)) {
@@ -140,7 +141,7 @@ public class ContactParser extends SwingWorker<ArrayList<Contact>, Void> {
                             break;
                     }
 
-                    contacts.add(new Contact(name, number, gateway));
+                    contacts.add(new Contact(name, number, gateway,group));
                 } catch (Exception e) {
                     logger.severe("Invalid contact record: " + reader.getRawRecord());
                     throw e;

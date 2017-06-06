@@ -279,7 +279,7 @@ public class SMSPanel extends javax.swing.JPanel {
             Contact contact = recipientField.getContact();
             set.add(new Contact(contact != null ? contact.getName() : null,
                     recipientField.getNumber(),
-                    gatewayComboBox.getSelectedGatewayName()));
+                    gatewayComboBox.getSelectedGatewayName(), contact != null ? contact.getGroup(): null));
         }
         envelope.setContacts(set);
 
@@ -879,7 +879,7 @@ infoPanelLayout.setHorizontalGroup(
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            skeleton = new Contact(null, recipientTextField.getText(), null);
+            skeleton = new Contact(null, recipientTextField.getText(), null,null);
             Context.mainFrame.getContactPanel().showAddContactDialog(skeleton);
         }
     }
@@ -906,7 +906,7 @@ infoPanelLayout.setHorizontalGroup(
             Contact c = recipientField.getContact();
             set.add(new Contact(c != null ? c.getName() : null,
                     recipientField.getNumber(),
-                    gatewayComboBox.getSelectedGatewayName()));
+                    gatewayComboBox.getSelectedGatewayName(),c != null ? c.getGroup() : null));
             envelope.setContacts(set);
             
             //update text editor listeners
@@ -1260,7 +1260,7 @@ infoPanelLayout.setHorizontalGroup(
                 //update envelope
                 Set<Contact> set = new HashSet<Contact>();
                 set.add(new Contact(contact != null ? contact.getName() : null,
-                        getNumber(), gatewayComboBox.getSelectedGatewayName()));
+                        getNumber(), gatewayComboBox.getSelectedGatewayName(),contact.getGroup()));
                 envelope.setContacts(set);
 
                 //update components
