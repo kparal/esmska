@@ -13,12 +13,16 @@ import esmska.data.Gateway;
 import esmska.data.Tuple;
 import esmska.update.VersionFile;
 import java.beans.IntrospectionException;
+import java.io.BufferedReader;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.JarURLConnection;
 import java.net.URL;
+import static java.sql.DriverManager.println;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -55,6 +59,8 @@ public class ImportManager {
 
     private static final Logger logger = Logger.getLogger(ImportManager.class.getName());
 
+    
+
     /** Disabled constructor */
     private ImportManager() {
     }
@@ -68,6 +74,33 @@ public class ImportManager {
         ArrayList<Contact> contacts = parser.get();
         logger.finer("Imported " + contacts.size() + " contacts");
         return parser.get();
+    }
+    
+    /** Import templates from file */
+    public static ArrayList<Temp> importTemplate(File file) throws Exception {
+        logger.finer("Importing templates from file: " + file.getAbsolutePath());
+        ArrayList<Temp> templates = new ArrayList<Temp>();
+        BufferedReader reader = null;
+        try {
+            InputStream is = new FileInputStream(file.getPath());
+            InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+            reader = new BufferedReader(isr);
+            String template;
+            while ((template = reader.readLine()) != null) {
+                try {
+                    Temp temp = new Temp(template);
+                    templates.add(temp);
+                } catch (Exception e) {
+                    logger.severe("Invalid templates record");
+                    throw e;
+                }
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+        return templates;
     }
 
     /** Import sms queue from file */
@@ -143,7 +176,8 @@ public class ImportManager {
             }
         }
 
-        logger.finer("Imported " + history.size() + " history records");
+        logger.finer("Imported         } finally {\n" +
+"" + history.size() + " history records");
         return history;
     }
 

@@ -25,6 +25,10 @@ import esmska.data.SMS;
 import esmska.data.Signature;
 import esmska.utils.L10N;
 import esmska.data.Tuple;
+import esmska.data.Temp;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -40,6 +44,8 @@ import org.apache.commons.lang.Validate;
 public class ExportManager {
     private static final Logger logger = Logger.getLogger(ExportManager.class.getName());
     private static final ResourceBundle l10n = L10N.l10nBundle;
+
+   
 
     /** Disabled constructor */
     private ExportManager() {
@@ -66,6 +72,26 @@ public class ExportManager {
             });
         }
         writer.flush();
+    }
+    
+    /** Export templates to txt format
+    * @param templates templates, not null
+    * @param out output stream, not null
+    */
+     public static void exportTemplates(List<Temp> templates, OutputStream out) throws IOException {
+        Validate.notNull(templates);
+        Validate.notNull(out);
+        
+        logger.finer("Exporting templates of " + templates.size() + " templates");
+                 
+            OutputStreamWriter osr = new OutputStreamWriter(out,Charset.forName("UTF-8"));
+            BufferedWriter writer = new BufferedWriter(osr);
+        
+            for (Temp temp : templates) {
+                writer.write(temp.getTemplate());
+                writer.newLine();
+            }           
+        writer.flush();        
     }
     
     /** Export contacts to vCard format
