@@ -40,14 +40,14 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="recipientLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="recipientTextField" pref="325" max="32767" attributes="0"/>
+                              <Component id="recipientTextField" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="addContactButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="gatewayLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="gatewayComboBox" pref="325" max="32767" attributes="0"/>
+                              <Component id="gatewayComboBox" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -62,11 +62,13 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="smsCounterLabel" pref="341" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="smsCounterLabel" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace pref="80" max="32767" attributes="0"/>
+                                      <Component id="addTemplateButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" pref="378" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -109,6 +111,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                           <Component id="smsCounterLabel" alignment="0" min="-2" max="-2" attributes="1"/>
+                          <Component id="addTemplateButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -230,9 +233,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="credentialsInfoLabel" alignment="0" pref="368" max="32767" attributes="0"/>
-              <Component id="numberInfoLabel" alignment="0" max="32767" attributes="0"/>
-              <Component id="countryInfoLabel" alignment="0" pref="368" max="32767" attributes="0"/>
+              <Component id="credentialsInfoLabel" alignment="0" pref="242" max="32767" attributes="0"/>
+              <Component id="numberInfoLabel" alignment="0" pref="242" max="32767" attributes="0"/>
+              <Component id="countryInfoLabel" alignment="0" pref="242" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -307,6 +310,16 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="addContactButton.setText(null);&#xd;&#xa;addContactButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="addTemplateButton">
+      <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Actions.getShowAddTemplateAction()" type="code"/>
+        </Property>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Show add Template Dialog"/>
+      </AccessibilityProperties>
     </Component>
   </SubComponents>
 </Form>

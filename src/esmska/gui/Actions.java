@@ -6,16 +6,17 @@ import esmska.data.Contacts;
 import esmska.data.History;
 import esmska.data.History.Record;
 import esmska.data.Icons;
+import esmska.data.Links;
 import esmska.data.Log;
 import esmska.data.Queue;
 import esmska.data.Queue.Events;
 import esmska.data.SMS;
+import esmska.data.Temp;
+import esmska.data.event.ValuedEvent;
+import esmska.data.event.ValuedListener;
 import esmska.persistence.ExportManager;
 import esmska.utils.ConfirmingFileChooser;
 import esmska.utils.L10N;
-import esmska.data.event.ValuedEvent;
-import esmska.data.event.ValuedListener;
-import esmska.data.Links;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -32,6 +33,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import static javax.swing.Action.LARGE_ICON_KEY;
+import static javax.swing.Action.SMALL_ICON;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -58,6 +61,8 @@ public class Actions {
     private static Action importAction;
     private static Action exportAction;
     private static Action logAction;
+    private static Action showAddTemplateAction;
+    private static Action showEditTemplateAction;
 
     /** Show about frame */
     public static Action getAboutAction() {
@@ -114,6 +119,22 @@ public class Actions {
         }
         return logAction;
     }
+    
+    /** Show add Template frame */
+    public static Action getShowAddTemplateAction() {
+        if (showAddTemplateAction == null) {
+            showAddTemplateAction = new ShowAddTemplateAction();
+        }
+        return showAddTemplateAction;
+    } 
+    
+     /** Show edit Template frame */
+    public static Action getShowEditTemplateAction() {
+        if (showEditTemplateAction == null) {
+            showEditTemplateAction = new ShowEditTemplateAction();
+        }
+        return showEditTemplateAction;
+    } 
 
     /** Pause/unpause the sms queue
      * @param showName show name of the action (in button text etc)
@@ -516,5 +537,69 @@ public class Actions {
         private void updateStatus() {
             this.setEnabled(Context.everythingLoaded());
         }
+    }
+    
+    /** Show the addTemplate frame */
+    private static class ShowAddTemplateAction extends AbstractAction {
+        private AddTemplateFrame templateFrame;        
+        public ShowAddTemplateAction() {           
+            L10N.setLocalizedText(this, l10n.getString("AddTemplate_"));
+            putValue(SMALL_ICON, Icons.get("add-16.png"));
+            putValue(LARGE_ICON_KEY, Icons.get("add-22.png"));
+            putValue(SHORT_DESCRIPTION,l10n.getString("Add_Template_message"));
+        }        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            logger.fine("Showing  Template frame...");
+            if (templateFrame != null && templateFrame.isVisible()) {
+                templateFrame.requestFocus();
+                templateFrame.toFront();
+            } else {
+                templateFrame = new AddTemplateFrame();
+                templateFrame.setLocationRelativeTo(Context.mainFrame);
+                templateFrame.addValuedListener(new TemplateListener());
+                templateFrame.setVisible(true);
+            }
+        }   
+    }
+    
+    /** Listens for events from template list */
+    private static class TemplateListener implements ValuedListener<AddTemplateFrame.Events, Temp> {
+        @Override
+        public void eventOccured(ValuedEvent<AddTemplateFrame.Events, Temp> e) {
+            switch (e.getEvent()) {
+                case INSERT_TEMPLATE:
+                    Temp template = e.getValue();
+                    if (template == null) {
+                        return;
+                    }
+                   
+                    Context.mainFrame.getContactPanel().clearSelection();
+                    Context.mainFrame.getSMSPanel().setText(template.getTemplate());
+            }
+        }
+    }
+    
+    /** Show the editTemplate frame */
+    private static class ShowEditTemplateAction extends AbstractAction {        
+        private EditTemplateFrame editTemplateFrame;        
+        public ShowEditTemplateAction() {           
+            L10N.setLocalizedText(this, l10n.getString("EditTemplate_"));
+            putValue(SMALL_ICON, Icons.get("add-16.png"));
+            putValue(LARGE_ICON_KEY, Icons.get("add-22.png"));
+            putValue(SHORT_DESCRIPTION,l10n.getString("Edit_Template_message"));
+        }        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            logger.fine("Showing edit Template frame...");
+            if (editTemplateFrame != null && editTemplateFrame.isVisible()) {
+                editTemplateFrame.requestFocus();
+                editTemplateFrame.toFront();
+            } else {
+                editTemplateFrame = new EditTemplateFrame();
+                editTemplateFrame.setLocationRelativeTo(Context.mainFrame);
+                editTemplateFrame.setVisible(true);                
+            }
+        }   
     }
 }
