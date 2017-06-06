@@ -1,0 +1,182 @@
+
+function getName() {
+    return "[CZ]t-zones-free"
+}
+
+function getVersion() {
+    return "2014-02-10"
+}
+
+function getMaintainer() {
+    return "Kamil Páral <kamil.paral@gmail.com>"
+}
+
+function getMinProgramVersion() {
+    return "1.5.99"
+}
+
+function getWebsite() {
+    return "http://sms.t-mobile.cz"
+}
+
+function getDescription() {
+    return "Oficiální brána T-mobile určená pro registrované zákazníky. Zdarma odesílá zprávy do sítě T-mobile, zprávy do ostatních sítí jsou blokovány. Nevyžaduje opsání bezpečnostního kódu."
+}
+
+function getSupportedPrefixes() {
+    return []
+}
+
+function getPreferredPrefixes() {
+    return []
+}
+
+function getSMSLength() {
+    return 153
+}
+
+function getMaxChars() {
+    return 765
+}
+
+function getMaxParts() {
+    return 1
+}
+
+function getSignatureExtraLength() {
+    return 0
+}
+
+function getDelayBetweenMessages() {
+    return 0
+}
+
+function getSupportedLanguages() {
+    return ["cs", "en"]
+}
+
+function getFeatures() {
+    return ["LOGIN_ONLY",
+            "RECEIPT"]
+}
+
+function send() {
+	// message, that actually isn't an error, just a warning
+	var mych5warn_cs = "SMS odeslané na vybraná čísla mimo síť T-Mobile z tarifů Přátelé, Mých5 a Bav Se s Mých5 jsou účtovány jako SMS do ostatních sítí, nikoli výhodnější sazbou z tarifu."
+	var mych5warn_en = "SMS sent to selected numbers outside the network of T-Mobile tariffs Pratele, Mych5 and Bav Se s Mych5 are billed as an SMS to other networks and not favorable rate of tariff."
+
+    // check that login and password supplied
+    if (LOGIN.length == 0 || PASSWORD.length == 0) {
+        EXEC.setProblem("WRONG_AUTH")
+        return false
+    }
+
+    // not logged in yet
+    var logged = false
+
+    // start page
+    content = EXEC.getURL("https://sms.t-mobile.cz/closed.jsp", [])
+
+    // search if we are already logged in (previous logout failed or something)
+    re = /\/.gang\/logout/
+    match = re.exec(content)
+    if (match) { // if found
+            // we are already logged in
+            logged = true
+    }
+
+    // if not logged in, do it
+    if (!logged) {
+        // post credentials
+        postData = ["nextURL", "checkStatus.jsp", "errURL", "clickError.jsp",
+                    "username", LOGIN, "password", PASSWORD,
+                    "submit", "Přihlásit"]
+        content = EXEC.postURL("https://www.t-mobile.cz/.gang/login/tzones", [], postData)
+
+        // seach for errors
+        re = /<p class="text-orange.*?">([^]*?)<\/p>/
+        match = re.exec(content)
+        if (match) {
+            re = /Uživatel je již přihlášen/
+            match2 = re.exec(content)
+            if (!match2 && match[1] != mych5warn_en && match[1] != mych5warn_cs) {
+	            // login was not successfull
+	            EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+	            logout()
+	            return false
+            }
+            // we are already logged in
+        }
+        // no error message, we are logged in now
+        logged = true
+    }
+
+    // sms sending page
+    content = EXEC.getURL("https://sms.t-mobile.cz/closed.jsp", [])
+
+    // seach for errors, sometimes overload errors are displayed here
+    re = /<p class="text-orange.*?">([^]*?)<\/p>/
+    match = re.exec(content)
+    if (match && match[1] != mych5warn_en && match[1] != mych5warn_cs) {
+	    EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+	    logout()
+	    return false
+    }
+
+    // find counter
+    re = /<input type="hidden" name="counter" value="(.*)" \/>/
+    match = re.exec(content);
+    counter = match[1]
+
+    // send sms
+    postData = ["counter", counter,
+                "recipients", NUMBER,
+                "text", MESSAGE,
+                "send", "Odeslat",
+                "mtype", "0",
+                "confirmation", RECEIPT ? "1" : "0",
+                "history", "on",
+                "TMCZcheck", "on"]
+    content = EXEC.postURL("https://sms.t-mobile.cz/closed.jsp", [], postData)
+
+    // if some SMS is paid, there will be one more confirmation form
+    re = /Tito adresáti jsou mimo síť T-Mobile|Recipients out of T-Mobile CZ network/
+    paid = re.exec(content)
+    if (paid) {
+        msg = match_cs ? 'Tato SMS by byla placená, proto bylo odeslání zrušeno.' : 'Send of this SMS was cancelled, because it would be sent as paid.'
+        EXEC.setProblem("GATEWAY_MESSAGE", msg)
+        logout()
+        return false
+    }
+
+    // check if message was successfully sent
+    re_cs = /SMS zpr.v. byl. odeslán./
+    re_en = /SMS was sent|All SMS messages were sent/
+    match_cs = re_cs.exec(content)
+    match_en = re_en.exec(content)
+    if (match_cs || match_en) {
+        // all ok
+        logout()
+        return true
+    }
+
+    // look for possible error messages
+    re = /<p class="text-red.*?">([^]*?)<\/p>/
+    match = re.exec(content)
+    if (match) {
+        // gateway told us what's wrong
+        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
+        logout()
+        return false
+    }
+
+    // if neither success nor error message was found
+    logout()
+    return false
+}
+
+// custom function for logging out
+function logout() {
+    // visit logout page
+    EXEC.getURL("https://www.t-mobile.cz/.gang/logout/tzones", []);
+}
