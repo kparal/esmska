@@ -960,8 +960,13 @@ msgid "Contact export"
 msgstr "Export kontaktů"
 
 #: ExportManager.contact_list
+<<<<<<< HEAD
+msgid "Contact list (contact name, telephone number, default gateway,selected group)"
+msgstr "Seznam kontaktů (jméno kontaktu, telefonní číslo, výchozí brány,zvolená skupina)"
+=======
 msgid "Contact list (contact name, telephone number, default gateway)"
 msgstr "Seznam kontaktů (jméno kontaktu, telefonní číslo, výchozí brána)"
+>>>>>>> origin/work
 
 #: ExportManager.csv_filter
 msgctxt "ExportManager.csv_filter"

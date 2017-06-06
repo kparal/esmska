@@ -62,7 +62,12 @@ public class ExportManager {
             writer.writeRecord(new String[] {
                 contact.getName(),
                 contact.getNumber(),
+<<<<<<< HEAD
+                contact.getGateway(),
+                contact.getGroup()
+=======
                 contact.getGateway()
+>>>>>>> origin/work
             });
         }
         writer.flush();
