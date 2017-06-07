@@ -3,7 +3,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2014-10-20"
+    return "2017-06-07"
 }
 
 function getMaintainer() {
@@ -96,44 +96,57 @@ function send() {
                 ]     
       
     content = EXEC.postURL("http://www.poslatsms.cz/Send", [], postData)
-    
-    // pokud pošlu stejnou zprávu hned znovu, brána blokuje
-    re = /Zprávy nebyly odeslány!<\/h2>\s*(.+)\s*/
-    match = re.exec(content)
-    if (match) {
-        //zpráva brány při chybě (blokaci)
-        EXEC.setProblem("GATEWAY_MESSAGE", match[1])
-        return false
-    }
-    
+        
     re = /var queueId = "(.+)";\/\//
     match = re.exec(content)
-    ID = match[1]
-    var i
-    
-    for (i=0; i<10; i++) {
+    var ID = match[1]
+    var status = -1
+
+    for (var i=0; i<30; i++) {
 
         EXEC.sleep(pause)
         
-        content = EXEC.getURL("http://www.poslatsms.cz/Completed", ["id", ID])
-        re = /<span class="status-(.+)">/
-        match = re.exec(content)
-        
-        if (match) {
-            if (match[1] == "sending") {
+        content = EXEC.getURL("http://www.poslatsms.cz/", 
+                ["action", "GetResultState", "id", ID])
+
+        var resultState = -1;
+        // returns a JSON object, but from Java it returns encoded as byte[], 
+        // so we decode it here
+        try {
+            // content is now of a non-array type, but it provides all 
+            // array-like functions and operators
+            var contentBytes = [];
+            for (var j = 0; j < content.length; j++) {
+                contentBytes.push(content[j]);
+            }
+
+            // for some reason, JSON.parse is not available
+            eval('json=' + String.fromCharCode.apply(String, contentBytes))
+            resultState = json['state']
+        } catch (e) {
+            EXEC.setProblem("GATEWAY_MESSAGE", e)
+        }
+
+        if (resultState != -1) {
+            //   waiting to send || sending
+            if (resultState == 0 || resultState == 1) {
                 var time = new Date().getTime()
-                delay = time - timestart 
+                delay = time - timestart
                 delay = delay/1000
                 if (delay > 20) {
                     pause = 5000
                 }
+                EXEC.setProblem("GATEWAY_MESSAGE", "pause")
             } else {
-                status = match[1]
+                status = resultState
+                EXEC.setProblem("GATEWAY_MESSAGE", "return")
                 break
-            } 
+            }
         } else {
-            msg = "Stav odeslání zprávy se nepodařilo zjistit. Pro kontrolu \
-můžete navštívit stránku http://www.poslatsms.cz/Completed?id=" + ID
+            EXEC.setProblem("GATEWAY_MESSAGE", "error")
+            msg = "Stav odeslání zprávy se nepodařilo zjistit. Pro \
+kontrolu můžete navštívit stránku \
+http://www.poslatsms.cz/Completed?id=" + ID
             EXEC.setProblem("GATEWAY_MESSAGE", msg)
             return false
         }
@@ -141,29 +154,48 @@ můžete navštívit stránku http://www.poslatsms.cz/Completed?id=" + ID
     
     //kontrola statusu odeslání     
     switch (status) {
-        case "sent":
+         case 2: // sent
             return true
-        case "not-sent":
-            //chyba - odesílání nedostupné
-            re = /Zprávy nebyly odeslány!<\/h2>\s*(.+)\s*/
-            match = re.exec(content)
-            if (match) {
-                msg = match[1] + ". Později můžete také zkontrolovat stav sms \
-na http://www.poslatsms.cz/Completed?id=" + ID
-                EXEC.setProblem("GATEWAY_MESSAGE", msg)
-                return false
-            } else {
-                //když je match něco jiného nebo chybí
-                msg = "Zpráva nebyla z neznámého důvodu odeslána. Pro další \
-kontrolu můžete navštívit stránku http://www.poslatsms.cz/Completed?id=" + ID
-                EXEC.setProblem("GATEWAY_MESSAGE", msg)
-                return false               
-            }
         default:
-            msg = "Stav odeslání zprávy se nepodařilo zjistit. Pro kontrolu \
-můžete navštívit stránku http://www.poslatsms.cz/Completed?id=" + ID
+            // copied from result.js on poslatsms.cz
+            var states = {
+                0 : "čeká na odeslání", // shouldn't match here
+                1 : "odesílá se", // shouldn't match here
+                2 : "odesláno",
+                3 : "neodesláno",
+                4 : "neodesláno",
+                5 : "neodesláno",
+                51: "zpráva nebyla odeslána z důvodu překročení limitu \
+na počet odeslaných zpráv. Nemyslíme to zle, ale chápejte, chceme aby se \
+dostalo na všechny. Pokud máte pocit, že jsou limity moc přísné, napište\
+nám na pomoc@poslatsms.cz.",
+                52: "zpráva nebyla odeslána, protože úplně stejnou zprávu\
+ příjemce obdržel právě před chvilkou. Nechceme nikoho rozzlobit \
+ stejnými zprávami.",
+                53: "zpráva nebyla odeslána, protože příjemce vyčerpal \
+počet zpráv, které může dnes dostat. Pro přihlášené uživatele jsou \
+limity méně přísné.",
+                54: "zpráva nebyla odeslána, protože úplně stejnou \
+zprávu teď posílá hodně lidí. Naše služba není určena pro komerční \
+použití. Nebo jste možná jen málo originální :) více informací \
+na pomoc@poslatsms.cz",
+                10: "bohužel, dnes již byly SMS zdarma do sítě \
+Vodafone vyčerpány. Odesílání bude fungovat zase zítra.",
+                20: "bohužel, dnes již byly SMS zdarma do sítě \
+O2 vyčerpány. Odesílání bude fungovat zase zítra.",
+                30: "bohužel, dnes již byly SMS zdarma do sítě \
+T-Mobile vyčerpány. Odesílání bude fungovat zase zítra."
+            };
+
+            if (status in states) {
+                msg = states[status]
+            } else {
+                msg = "Stav odeslání zprávy se nepodařilo zjistit. Pro \
+kontrolu můžete navštívit stránku \
+http://www.poslatsms.cz/Completed?id=" + ID
+            }
             EXEC.setProblem("GATEWAY_MESSAGE", msg)
-            return false 
+            return false
     }
                                   
     //pokud nastane jiná chyba (zatím neošetřená)
