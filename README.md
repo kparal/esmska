@@ -6,6 +6,8 @@ Esmska
 
 ---------------------------------------------------------------------
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 ### Esmska is not maintained aymore!
 
 **I do no longer have time to developer nor maintain this project. The only
