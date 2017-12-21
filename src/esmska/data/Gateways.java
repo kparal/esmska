@@ -254,7 +254,7 @@ public class Gateways {
 
     /** Guess gateway according to phone number or phone number prefix.
      * Searches through all visible (non-hidden) gateways and finds the best
-     * suited ones (one or many) supporting this phone number. <br/><br/>
+     * suited ones (one or many) supporting this phone number. <br><br>
      *
      * Algorithm:
      * <ol>

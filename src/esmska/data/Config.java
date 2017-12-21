@@ -88,7 +88,7 @@ public class Config extends Object implements Serializable {
     /** Compares two program versions. Handles if some of them is marked as beta.
      * @param version1 first version. Null means lowest possible version.
      * @param version2 second version. Null means lowest possible version.
-     * @return positive number if version1 > version2, zero if version1 == version2,
+     * @return positive number if version1 &gt; version2, zero if version1 == version2,
      *         negative number otherwise
      */
     public static int compareProgramVersions(String version1, String version2) {

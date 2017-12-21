@@ -10,12 +10,12 @@ public interface GatewayInfo {
      * This name will be visible in the list od available gateways.
      * The name must be in the form "[CC]Gateway", where CC is country code as defined
      * in <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> 
-     * and Gateway is the very name of the gateway.<br/>
+     * and Gateway is the very name of the gateway.<br>
      * Country code should denote which country is the main interest of the gateway, for example:
      * <ul><li>The gateway is only available in the language of that country.</li>
      * <li>The gateway sends messages only to customers of that country's operator.</li>
      * <li>The gateway requires a SIM card bought from that country's operator.</li></ul>
-     * For international gateways, allowing to send SMS to multiple countries, use [INT]Gateway.<br/>
+     * For international gateways, allowing to send SMS to multiple countries, use [INT]Gateway.<br>
      * This name must be unique amongst other gateway names.
      */
     String getName();
@@ -54,10 +54,10 @@ public interface GatewayInfo {
      * For example for a gateway that can send messages only to numbers originating
      * from Czech Republic (country prefix: +420), and nowhere else, the value is
      * ["+420"]. (The gateway doesn't have to support all numbers starting with +420,
-     * but it certainly doesn't support any other prefix.)<br/>
+     * but it certainly doesn't support any other prefix.)<br>
      * The supported prefixes will usually map to country codes. The prefix always
      * starts with "+" sign and is 1-3 digits long. List of country calling codes is on
-     * <a href="http://en.wikipedia.org/wiki/Country_calling_codes">Wikipedia</a>.<br/>
+     * <a href="http://en.wikipedia.org/wiki/Country_calling_codes">Wikipedia</a>.<br>
      * If the gateway works internationally, allowing to send SMS to multiple countries,
      * this will be an empty array.
      *
@@ -70,10 +70,10 @@ public interface GatewayInfo {
      * gateway will be able to send message to a phone number with that prefix. Sometimes
      * a gateway support just a certain set of customers (of a single cell operator
      * for example) and this is a way how to mark them. It usually concerns just
-     * free gateway, paid ones usually send everywhere.<br/>
+     * free gateway, paid ones usually send everywhere.<br>
      * If the gateway sends messages to any phone number within the supported
      * prefixes (see {@link #getSupportedPrefixes}) then this will be an empty
-     * array.<br/><br/>
+     * array.<br><br>
      * Example: When the supported prefix is ["+420"] and this gateway allows sending
      * messages to an operator who owns prefixes "606" and "777", then the resulting
      * array of preferred prefixes is ["+420606", "+420777"].

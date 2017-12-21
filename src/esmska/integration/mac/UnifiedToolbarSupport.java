@@ -19,7 +19,7 @@ public class UnifiedToolbarSupport {
     }
 
     /**
-     * Install support for main frame. It will add unified l&f for toolbar,
+     * Install support for main frame. It will add unified L&amp;F for toolbar,
      * drag support for it and removes text from buttons.
      */
     public static void installSupport() {

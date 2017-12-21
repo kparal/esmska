@@ -25,7 +25,7 @@ public class MiscUtils {
      *  Fixes bug in OpenJDK where scaron entity is not replaced by 'š' and
      *  euro by '€'.
      *
-     * @see ​StringEscapeUtils#escapeHtml(String)
+     *  @see StringEscapeUtils#escapeHtml(String)
      */
     public static String escapeHtml(String input) {
         if (input == null) {
