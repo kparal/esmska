@@ -16,7 +16,7 @@ function getMinProgramVersion() {
 }
 
 function getWebsite() {
-    return "http://www.gosms.sk"
+    return "http://www.smsdoor.net"
 }
 
 function getDescription() {
