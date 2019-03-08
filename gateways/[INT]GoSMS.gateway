@@ -4,7 +4,7 @@ function getName() {
 }
 
 function getVersion() {
-    return "2015-11-06"
+    return "2019-03-08"
 }
 
 function getMaintainer() {
@@ -16,7 +16,7 @@ function getMinProgramVersion() {
 }
 
 function getWebsite() {
-    return "http://www.gosms.sk"
+    return "http://www.smsdoor.net"
 }
 
 function getDescription() {
@@ -60,10 +60,10 @@ function send() {
 
     // send message
     getData = ["login", LOGIN]
-    content = EXEC.getURL("http://www.gosms.sk/sms/sendsms", getData)
+    content = EXEC.getURL("http://www.smsdoor.net/sms/sendsms", getData)
     auth = MD5("send_external" + content + PASSWORD + "md5_authentification")
     getData = ["login", LOGIN, "auth", auth, "number", NUMBER, "message", MESSAGE, "command", "send", "sender", SENDERNUMBER]
-    content = EXEC.getURL("http://www.gosms.sk/sms/sendsms", getData)
+    content = EXEC.getURL("http://www.smsdoor.net/sms/sendsms", getData)
     
     // wrong username/password/nousername/nopassword 
     re = /ERR_AUTH/
@@ -128,10 +128,10 @@ function send() {
 
 function check_credit() {
     getData = ["login", LOGIN]
-    content = EXEC.getURL("http://www.gosms.sk/sms/sendsms", getData)
+    content = EXEC.getURL("http://www.smsdoor.net/sms/sendsms", getData)
     auth = MD5("send_external" + content + PASSWORD + "md5_authentification")
     getData = ["login", LOGIN, "auth", auth, "number", NUMBER, "message", MESSAGE, "command", "credit"]
-    content = EXEC.getURL("http://www.gosms.sk/sms/sendsms", getData)
+    content = EXEC.getURL("http://www.smsdoor.net/sms/sendsms", getData)
 
     // wrong username/password/nousername/nopassword
     re = /ERR_AUTH/
