@@ -10,11 +10,10 @@ Esmska
 
 ### Esmska is not maintained anymore!
 
-**I do no longer have time to developer nor maintain this project. The only
-patches I accept are gateway updates. Apart from that, please fork my
-repository and develop the patches in your space. If your version becomes
-significantly improved over this original version, please contact me and
-I'll happily forward visitors to your program.**
+**I do no longer have time to develop nor maintain this project. Please 
+fork my repository and develop the patches in your space. If your version
+becomes significantly improved over this original version, feel free to
+contact me and I'll happily forward visitors to your version.**
 
 ---------------------------------------------------------------------
 
