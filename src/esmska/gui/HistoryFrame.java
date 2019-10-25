@@ -1,7 +1,17 @@
 package esmska.gui;
 
+import esmska.data.Config;
+import esmska.data.History;
+import esmska.data.Icons;
+import esmska.data.event.AbstractDocumentListener;
+import esmska.data.event.ValuedEventSupport;
+import esmska.data.event.ValuedListener;
+import esmska.utils.L10N;
+import esmska.utils.RuntimeUtils;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -16,6 +26,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -23,6 +34,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,11 +44,13 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
@@ -43,21 +58,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
-import esmska.data.Config;
-import esmska.data.History;
-import esmska.data.Icons;
-import esmska.data.event.AbstractDocumentListener;
-import esmska.data.event.ValuedEventSupport;
-import esmska.data.event.ValuedListener;
-import esmska.utils.L10N;
-import esmska.utils.RuntimeUtils;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.util.ResourceBundle;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import org.openide.awt.Mnemonics;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 import org.pushingpixels.substance.api.renderers.SubstanceDefaultTableCellRenderer;
@@ -126,6 +126,10 @@ public class HistoryFrame extends javax.swing.JFrame {
             historyTable.getSelectionModel().setSelectionInterval(0, 0);
         }
         history.addActionListener(new HistoryActionListener());
+        historyTable.getColumnModel().getColumn(0).setMaxWidth(130);
+        historyTable.getColumnModel().getColumn(0).setMinWidth(130);
+        historyTable.getColumnModel().getColumn(1).setMaxWidth(150);
+        historyTable.getColumnModel().getColumn(1).setMinWidth(150);
     }
 
     /** This method is called from within the constructor to
@@ -176,7 +180,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         resendButton.setAction(resendAction);
 
         closeButton.setIcon(new ImageIcon(getClass().getResource("/esmska/resources/close-22.png"))); // NOI18N
-        Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_"));
+        Mnemonics.setLocalizedText(closeButton, l10n.getString("Close_")); // NOI18N
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 closeButtonActionPerformed(evt);
@@ -194,6 +198,8 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         //on Mac OS X this will create a native search field with inline icons
         searchField.putClientProperty("JTextField.variant", "search");
+
+        //clear text on escape
         String command = "clear";
         searchField.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), command);
         searchField.getActionMap().put(command, new AbstractAction() {
@@ -234,6 +240,8 @@ public class HistoryFrame extends javax.swing.JFrame {
         clearButton.setMnemonic('r');
         clearButton.setToolTipText(l10n.getString("HistoryFrame.clearButton.toolTipText")); // NOI18N
         clearButton.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
+        // on Mac OS X the search field has native look and feel with inline icons, clear
+        // button is not neeeded
         if (RuntimeUtils.isMac() && config.getLookAndFeel().equals(ThemeManager.LAF.SYSTEM)) {
             clearButton.setVisible(false);
         }
@@ -250,6 +258,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         historyTable.setModel(historyTableModel);
         historyTable.setDefaultRenderer(Date.class, new TableDateRenderer());
         historyTable.getSelectionModel().addListSelectionListener(new HistoryTableListener());
+
         List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
         sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
         historyTableSorter.setSortKeys(sortKeys);
@@ -268,29 +277,30 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jScrollPane1);
 
-
-
-
-
-
-
-
-
-
-
         Mnemonics.setLocalizedText(jLabel2, l10n.getString("HistoryFrame.jLabel2.text")); // NOI18N
-        Mnemonics.setLocalizedText(jLabel1, l10n.getString("HistoryFrame.jLabel1.text"));
-        Mnemonics.setLocalizedText(jLabel3, l10n.getString("HistoryFrame.jLabel3.text"));
-        Mnemonics.setLocalizedText(jLabel4, l10n.getString("HistoryFrame.jLabel4.text"));
-        Mnemonics.setLocalizedText(jLabel5, l10n.getString("HistoryFrame.jLabel5.text"));
-        Mnemonics.setLocalizedText(jLabel6, l10n.getString("HistoryFrame.jLabel6.text"));
-        Mnemonics.setLocalizedText(dateLabel, "    ");
+
+        Mnemonics.setLocalizedText(jLabel1, l10n.getString("HistoryFrame.jLabel1.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(jLabel3, l10n.getString("HistoryFrame.jLabel3.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(jLabel4, l10n.getString("HistoryFrame.jLabel4.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(jLabel5, l10n.getString("HistoryFrame.jLabel5.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(jLabel6, l10n.getString("HistoryFrame.jLabel6.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(dateLabel, "    "); // NOI18N
+
         nameLabel.setFont(nameLabel.getFont().deriveFont(nameLabel.getFont().getStyle() | Font.BOLD));
-        Mnemonics.setLocalizedText(nameLabel, "    ");
-        Mnemonics.setLocalizedText(numberLabel, "    ");
-        Mnemonics.setLocalizedText(gatewayLabel, "    ");
-        Mnemonics.setLocalizedText(senderNumberLabel, "    ");
-        Mnemonics.setLocalizedText(senderNameLabel, "    ");
+        Mnemonics.setLocalizedText(nameLabel, "    "); // NOI18N
+
+        Mnemonics.setLocalizedText(numberLabel, "    "); // NOI18N
+
+        Mnemonics.setLocalizedText(gatewayLabel, "    "); // NOI18N
+
+        Mnemonics.setLocalizedText(senderNumberLabel, "    "); // NOI18N
+
+        Mnemonics.setLocalizedText(senderNameLabel, "    "); // NOI18N
 
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
@@ -298,8 +308,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -327,15 +336,14 @@ public class HistoryFrame extends javax.swing.JFrame {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(senderNameLabel)))
                 .addPreferredGap(ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
+                .addComponent(jScrollPane2))
         );
 
         jPanel1Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6});
 
         jPanel1Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {dateLabel, gatewayLabel, nameLabel, numberLabel, senderNameLabel, senderNumberLabel});
 
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -360,15 +368,14 @@ public class HistoryFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(senderNameLabel)))
-            .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
 
         jSplitPane1.setRightComponent(jPanel1);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
+        layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(Alignment.LEADING)
@@ -390,8 +397,7 @@ public class HistoryFrame extends javax.swing.JFrame {
 
         layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {closeButton, deleteButton, resendButton});
 
-        layout.setVerticalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
+        layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING)
             .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(Alignment.TRAILING)

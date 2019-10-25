@@ -31,6 +31,8 @@ import esmska.data.SMS;
 import esmska.data.Gateway;
 import esmska.data.Signature;
 import esmska.data.Signatures;
+import esmska.data.Template;
+import esmska.data.Temp;
 import esmska.integration.IntegrationAdapter;
 import esmska.utils.RuntimeUtils;
 import java.io.FilenameFilter;
@@ -63,6 +65,7 @@ public class PersistenceManager {
     private static final String LOG_FILENAME = "console.log";
     private static final String DEPRECATED_GWS_FILENAME = "deprecated.xml";
     private static final String GATEWAY_PROPS_FILENAME = "gateways.json";
+    private static final String TEMPLATES_FILENAME = "templates.txt";
     
     private static File configDir =
             new File(System.getProperty("user.home") + File.separator + ".config",
@@ -84,6 +87,7 @@ public class PersistenceManager {
     private static File logFile = new File(configDir, LOG_FILENAME);
     private static File deprecatedGWsFile = new File(globalGatewayDir, DEPRECATED_GWS_FILENAME);
     private static File gatewayPropsFile = new File(configDir, GATEWAY_PROPS_FILENAME);
+    private static File templatesFile = new File(configDir, TEMPLATES_FILENAME);
     
     private static boolean customPathSet;
     
@@ -150,6 +154,7 @@ public class PersistenceManager {
         lockFile = new File(configDir, LOCK_FILENAME);
         logFile = new File(configDir, LOG_FILENAME);
         gatewayPropsFile = new File(configDir, GATEWAY_PROPS_FILENAME);
+        templatesFile = new File(configDir, TEMPLATES_FILENAME);
     }
     
     /** Get configuration directory */
@@ -275,6 +280,34 @@ public class PersistenceManager {
             Contacts.getInstance().clear();
             Contacts.getInstance().addAll(newContacts);
             ContinuousSaveManager.enableContacts();
+        }
+    }
+    
+    /** Save templates */
+    public void saveTemplates() throws IOException {
+        logger.fine("Saving templates...");
+
+        File temp = createTempFile();
+        FileOutputStream out = new FileOutputStream(temp);
+        ExportManager.exportTemplates(Template.getInstance().getTemplates(), out);
+        out.flush();
+        out.getChannel().force(false);
+        out.close();
+
+        moveFileSafely(temp, templatesFile);
+        logger.finer("Saved templates into file: " + templatesFile.getAbsolutePath());
+    }
+       
+    /** Load templates */
+    public void loadTemplates() throws Exception {
+        logger.fine("Loading templates...");
+        
+        if (templatesFile.exists()) {
+            ArrayList<Temp> newTemplates = ImportManager.importTemplate(templatesFile);
+            ContinuousSaveManager.disableTemplates();
+            Template.getInstance().clear();
+            Template.getInstance().addTemplates(newTemplates);
+            ContinuousSaveManager.enableTemplates();
         }
     }
     
@@ -589,7 +622,7 @@ public class PersistenceManager {
         BackupManager bm = new BackupManager(backupDir);
         File[] list = new File[] {
             configFile, contactsFile, historyFile,
-            keyringFile, queueFile, logFile
+            keyringFile, queueFile, logFile, templatesFile
         };
         boolean backed = bm.backupFiles(Arrays.asList(list), false);
         if (backed) {
