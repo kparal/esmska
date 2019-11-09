@@ -2,11 +2,14 @@ package esmska.gui;
 
 import esmska.data.Config;
 import esmska.data.Contact;
-import esmska.data.Keyring;
-import esmska.data.Links;
+import esmska.data.Contacts;
 import esmska.data.Gateway;
 import esmska.data.Gateway.Feature;
 import esmska.data.Gateways;
+import esmska.data.Icons;
+import esmska.data.Keyring;
+import esmska.data.Links;
+import esmska.data.Log;
 import esmska.data.event.AbstractDocumentListener;
 import esmska.data.event.ActionEventSupport;
 import esmska.utils.L10N;
@@ -21,13 +24,20 @@ import java.awt.event.FocusEvent;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -35,6 +45,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import org.apache.commons.lang.StringUtils;
 import org.openide.awt.Mnemonics;
+import org.openide.util.NbBundle;
 
 /** Add new or edit current contact
  *
@@ -48,6 +59,8 @@ public class EditContactPanel extends javax.swing.JPanel {
     private boolean multiMode; //edit multiple contacts
     private boolean userSet; //whether gateway was set by user or by program
 
+    private int previousIndex = 0;
+    private static final Log log = Log.getInstance();
     // <editor-fold defaultstate="collapsed" desc="ActionEvent support">
     private ActionEventSupport actionSupport = new ActionEventSupport(this);
     public void addActionListener(ActionListener actionListener) {
@@ -115,6 +128,7 @@ public class EditContactPanel extends javax.swing.JPanel {
 
         //update components
         gatewayComboBoxActionPerformed(null);
+        groupsComboBoxCreate();
     }
 
     /** Show or hide suggest gateway button */
@@ -160,6 +174,8 @@ public class EditContactPanel extends javax.swing.JPanel {
         credentialsInfoLabel = new InfoLabel();
         nameWarnLabel = new JLabel();
         numberWarnLabel = new JLabel();
+        groupsComboBox = new JComboBox();
+        groupsLabel = new JLabel();
 
         nameTextField.setToolTipText(l10n.getString("EditContactPanel.nameTextField.toolTipText")); // NOI18N
         nameTextField.addFocusListener(new FocusAdapter() {
@@ -198,8 +214,8 @@ public class EditContactPanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(countryInfoLabel, l10n.getString("EditContactPanel.countryInfoLabel.text")); // NOI18N
         countryInfoLabel.setVisible(false);
-        Mnemonics.setLocalizedText(credentialsInfoLabel,l10n.getString(
-            "EditContactPanel.credentialsInfoLabel.text"));
+
+        Mnemonics.setLocalizedText(credentialsInfoLabel, l10n.getString("EditContactPanel.credentialsInfoLabel.text")); // NOI18N
         credentialsInfoLabel.setText(MessageFormat.format(
             l10n.getString("EditContactPanel.credentialsInfoLabel.text"), Links.CONFIG_GATEWAYS));
     credentialsInfoLabel.setVisible(false);
@@ -227,6 +243,11 @@ public class EditContactPanel extends javax.swing.JPanel {
     numberWarnLabel.setToolTipText(numberTextField.getToolTipText());
     numberWarnLabel.setVisible(false);
 
+    groupsComboBox.setSelectedIndex(-1);
+    groupsComboBox.setToolTipText(l10n.getString("EditContactPanel.groupsLabel.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(groupsLabel, l10n.getString("EditContactPanel.groupsLabel.text")); // NOI18N
+
         GroupLayout layout = new GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -239,17 +260,19 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addComponent(numberLabel)
                         .addComponent(nameLabel)
-                        .addComponent(gatewayLabel))
+                        .addComponent(gatewayLabel)
+                        .addComponent(groupsLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addPreferredGap(ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                            .addComponent(gatewayComboBox, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addComponent(suggestGatewayButton))
                         .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                                .addComponent(numberTextField, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                                .addComponent(nameTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                                .addComponent(groupsComboBox, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(numberTextField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
                             .addPreferredGap(ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(Alignment.LEADING)
                                 .addComponent(nameWarnLabel, Alignment.TRAILING)
@@ -275,6 +298,10 @@ public class EditContactPanel extends javax.swing.JPanel {
                     .addComponent(numberTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addComponent(numberWarnLabel))
             .addPreferredGap(ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                .addComponent(groupsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(groupsLabel))
+            .addPreferredGap(ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                 .addGroup(layout.createParallelGroup(Alignment.BASELINE)
                     .addComponent(gatewayLabel)
@@ -282,7 +309,7 @@ public class EditContactPanel extends javax.swing.JPanel {
                 .addComponent(suggestGatewayButton))
             .addPreferredGap(ComponentPlacement.RELATED)
             .addComponent(infoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(26, 26, 26))
     );
 
     layout.linkSize(SwingConstants.VERTICAL, new Component[] {nameTextField, nameWarnLabel, numberTextField, numberWarnLabel});
@@ -390,10 +417,13 @@ public class EditContactPanel extends javax.swing.JPanel {
         if (contact == null) {
             nameTextField.setText(null);
             numberTextField.setText(config.getCountryPrefix());
+            groupsComboBox.setSelectedIndex(0);
         } else {
             nameTextField.setText(contact.getName());
             numberTextField.setText(contact.getNumber());
             gatewayComboBox.setSelectedGateway(contact.getGateway());
+            groupsComboBox.setSelectedItem(contact.getGroup() + " [" + Contacts.getMap().get(contact.getGroup()) + "]");
+            previousIndex = groupsComboBox.getSelectedIndex();
         }
         userSet = false;
     }
@@ -412,13 +442,18 @@ public class EditContactPanel extends javax.swing.JPanel {
     public Contact getContact() {
         String name = nameTextField.getText();
         String number = numberTextField.getText();
-        String gateway = gatewayComboBox.getSelectedGatewayName();
-        
-        if (!multiMode && (StringUtils.isEmpty(name) || StringUtils.isEmpty(number) ||
-                StringUtils.isEmpty(gateway))) {
+        String gateway = gatewayComboBox.getSelectedGatewayName();        
+        String group = group_without_number((String) groupsComboBox.getSelectedItem());
+       
+        if (group.equals(l10n.getString("EditContactPanel.groupsComboBox.item.without_group"))) {
+            group = "";
+        }
+        if (!multiMode && (StringUtils.isEmpty(name) || StringUtils.isEmpty(number)
+                || StringUtils.isEmpty(gateway))) {
             return null;
         } else {
-            return new Contact(name, number, gateway);
+
+            return new Contact(name, number, gateway, group);
         }
     }
 
@@ -431,6 +466,110 @@ public class EditContactPanel extends javax.swing.JPanel {
             nameTextField.requestFocusInWindow();
             nameTextField.selectAll();
         }
+    }
+
+    
+    private void groupsComboBoxCreate() {
+
+        groupsComboBox.addItem(l10n.getString("EditContactPanel.groupsComboBox.item.without_group"));
+
+        Iterator iterator = Contacts.getMap().entrySet().iterator();
+        Map.Entry pairs;
+        while (iterator.hasNext()) {
+            pairs = (Map.Entry) iterator.next();
+            groupsComboBox.addItem(pairs.getKey() + " [" + pairs.getValue() + "]");
+        }
+
+        groupsComboBox.addItem(l10n.getString("EditContactPanel.groupsComboBox.item.create_new_group"));
+        groupsComboBox.setSelectedIndex(0);
+        groupsComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                groupsComboBoxActionPerformed(evt);
+            }
+        });
+    }
+
+    private void groupsComboBoxActionPerformed(ActionEvent evt) {
+        String group = (String) groupsComboBox.getSelectedItem();
+
+        if (group.equals(l10n.getString("EditContactPanel.groupsComboBox.item.create_new_group"))) {
+            groupDialog();
+        }
+    }
+
+    private void groupDialog() {
+
+        String[] options = {l10n.getString("EditContactPanel.MessageDialog.YES"),
+            l10n.getString("EditContactPanel.MessageDialog.NO")};
+
+        JPanel panel = new JPanel();
+        panel.add(new JLabel(l10n.getString("EditContactPanel.MessageDialog.Label")));
+        JTextField textField = new JTextField(15);
+        panel.add(textField);
+
+        int result = JOptionPane.showOptionDialog(null, panel, l10n.getString("EditContactPanel.groupsComboBox.item.create_new_group"),
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+
+        if (result == JOptionPane.YES_OPTION) {
+            if (textField.getText().equals("")
+                    || textField.getText().equals(l10n.getString("EditContactPanel.groupsComboBox.item.create_new_group"))
+                    || textField.getText().equals(l10n.getString("EditContactPanel.groupsComboBox.item.without_group"))) {
+
+                log.addRecord(new Log.Record(l10n.getString("EditContactPanel.MessageDialog.message.part1") + " '"
+                        + textField.getText() + "' " + l10n.getString("EditContactPanel.MessageDialog.message.part2.notcreate"),
+                        null, Icons.STATUS_INFO));
+
+                groupsComboBox.setSelectedIndex(previousIndex);
+            } else {
+
+                List<String> values = new ArrayList<String>(groupsComboBox.getItemCount() - 2);
+                for (int i = 1; i < groupsComboBox.getItemCount() - 1; i++) {
+                    values.add((String) groupsComboBox.getItemAt(i));
+
+                    if (group_without_number(values.get(i - 1)).equals(group_without_number(textField.getText()))) {
+
+                        log.addRecord(new Log.Record(l10n.getString("EditContactPanel.MessageDialog.message.part1") + " '"
+                                + textField.getText() + "' " + l10n.getString("EditContactPanel.MessageDialog.message.part2.exists"),
+                                null, Icons.STATUS_INFO));
+
+                        groupsComboBox.setSelectedIndex(i);
+                        previousIndex = i;
+                        return;
+                    }
+                }
+
+                log.addRecord(new Log.Record(l10n.getString("EditContactPanel.MessageDialog.message.part1") + " '"
+                        + textField.getText() + "' " + l10n.getString("EditContactPanel.MessageDialog.message.part2.create"),
+                        null, Icons.STATUS_INFO));
+
+                values.add(textField.getText());
+
+                groupsComboBox.removeAllItems();
+                Collections.sort(values);
+
+                DefaultComboBoxModel model = new DefaultComboBoxModel(values.toArray(new String[values.size()]));
+
+                groupsComboBox.setModel(model);
+                groupsComboBox.insertItemAt(l10n.getString("EditContactPanel.groupsComboBox.item.without_group"), 0);
+                groupsComboBox.addItem(l10n.getString("EditContactPanel.groupsComboBox.item.create_new_group"));
+
+                groupsComboBox.setSelectedItem(textField.getText());
+                previousIndex = groupsComboBox.getSelectedIndex();
+            }
+        } else {
+            groupsComboBox.setSelectedIndex(previousIndex);
+        }
+    }
+
+    private String group_without_number(String group) {
+        int withoutNumber = 0;
+        for (int i = group.length() - 1; i != 0; i--) {
+            if (group.charAt(i) == '[') {
+                withoutNumber = i - 1;
+                return group.substring(0, withoutNumber);
+            }
+        }
+        return group;
     }
 
     /** Action for suggesting new gateway */
@@ -452,6 +591,8 @@ public class EditContactPanel extends javax.swing.JPanel {
     private InfoLabel credentialsInfoLabel;
     private GatewayComboBox gatewayComboBox;
     private JLabel gatewayLabel;
+    private JComboBox groupsComboBox;
+    private JLabel groupsLabel;
     private JPanel infoPanel;
     private JLabel nameLabel;
     private JTextField nameTextField;

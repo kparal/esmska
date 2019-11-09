@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
@@ -26,17 +26,19 @@
                           <Component id="numberLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="nameLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="gatewayLabel" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="groupsLabel" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="gatewayComboBox" pref="266" max="32767" attributes="0"/>
+                              <Component id="gatewayComboBox" pref="288" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="suggestGatewayButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="numberTextField" pref="278" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="groupsComboBox" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="numberTextField" alignment="0" pref="278" max="32767" attributes="0"/>
                                   <Component id="nameTextField" alignment="1" pref="278" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -72,6 +74,11 @@
                   <Component id="numberWarnLabel" linkSize="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="groupsComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="groupsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="gatewayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -81,7 +88,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="infoPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -231,6 +238,27 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="numberWarnLabel.setVisible(false);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="groupsComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.groupsComboBox.toolTipText" replaceFormat="l10n.getString(&quot;EditContactPanel.groupsLabel.text&quot;)"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="groupsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="esmska/resources/l10n.properties" key="EditContactPanel.groupsLabel.text" replaceFormat="l10n.getString(&quot;EditContactPanel.groupsLabel.text&quot;)"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="EditContactPanel_groupsLabel"/>
       </AuxValues>
     </Component>
   </SubComponents>
